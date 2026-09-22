@@ -84,9 +84,47 @@ const DEFAULT_SKILL = COURSE.skills[0].id;
 function skillOf(q){ return SKILL_IDS.has(q.skill) ? q.skill : DEFAULT_SKILL; }
 
 /* ==========================================================================
+   CONCEPTS AND CALCULATIONS
+   ==========================================================================
+   Which of the two a question is, derived rather than written on it, so a
+   label can never disagree with what the question actually asks.
+
+   A question is a calculation when answering it means producing a number.
+   Every numeric question is one. A matching question is one only where a
+   calculation skill is matched to computed values, which is what separates
+   a battery of clearances worked out from a vignette (a calculation) from a
+   table of body-compartment percentages that is simply recalled (a concept).
+   Everything else, including reading an order off a plot and reasoning about
+   what a doubled dose does, is a concept.
+   ========================================================================== */
+const SKILL_KIND = Object.fromEntries(
+  COURSE.skills.map(s => [s.id, s.kind === 'calc' ? 'calc' : 'concept']));
+const QUANTITY = /^[<>\u2248~]?\s*-?[\d.]/;
+function kindOf(q){
+  if(qType(q) === 'numeric') return 'calc';
+  if(qType(q) === 'match' && SKILL_KIND[skillOf(q)] === 'calc'
+     && (q.pairs || []).length && q.pairs.every(p => QUANTITY.test(String(p.r).trim())))
+    return 'calc';
+  return 'concept';
+}
+const KINDS = [
+  {id: 'concept', label: 'Concepts',
+   blurb: 'Definitions, what a plot shows, and what happens when something changes'},
+  {id: 'calc', label: 'Calculations',
+   blurb: 'Questions answered with a number, worked step by step'},
+];
+const KIND_LABEL = Object.fromEntries(KINDS.map(k => [k.id, k.label]));
+/* How a set of questions divides, as {concept, calc}. */
+function kindCounts(pool){
+  const n = {concept: 0, calc: 0};
+  pool.forEach(q => n[kindOf(q)]++);
+  return n;
+}
+
+/* ==========================================================================
    FILTERS + VIEW ROUTING
    ========================================================================== */
-const FILTER = {prof:'all', tier:'all', skill:'all'};
+const FILTER = {prof:'all', tier:'all', skill:'all', kind:'all'};
 let VIEW = 'topics';
 
 /* Tiers actually present in the bank, so the weighting chips describe this
@@ -97,6 +135,7 @@ function matchesFilter(q){
   if(FILTER.prof  !== 'all' && q.prof !== FILTER.prof) return false;
   if(FILTER.tier  !== 'all' && q.tier !== FILTER.tier) return false;
   if(FILTER.skill !== 'all' && skillOf(q) !== FILTER.skill) return false;
+  if(FILTER.kind  !== 'all' && kindOf(q)  !== FILTER.kind) return false;
   return true;
 }
 function poolFor(topicId, subId){
@@ -122,6 +161,8 @@ function show(v){
 function filterBar(){
   const chip=(g,v,l)=>`<button class="chip" data-f="${g}" data-v="${v}" aria-pressed="${FILTER[g]===v}">${l}</button>`;
   let h = `<div class="filters">`;
+  h += `<div class="frow"><label>What to review</label>
+    ${chip('kind','all','Everything')}${KINDS.map(k=>chip('kind',k.id,esc(k.label))).join('')}</div>`;
   // one professor means the chips would only ever say "both" and one name
   if(COURSE.professors.length > 1){
     h += `<div class="frow"><label>Professor</label>
@@ -161,15 +202,12 @@ function topicCard(t){
     const spct = sm.total ? Math.round(100*sm.mastered/sm.total) : 0;
     const done = sm.total && sm.mastered === sm.total;
     h += `<div class="subrow">
-      <span class="sname">${esc(s.name)}<small>${sp.length} questions · ${esc(s.cite||'')}</small></span>
+      <span class="sname">${esc(s.name)}<small>${splitNote(sp)} · ${esc(s.cite||'')}</small></span>
       <span class="meter"><i style="width:${spct}%"></i></span>
-      <button data-t="${t.id}" data-s="${s.id}" class="${done?'done':''}">${done?'Review':'Start'}</button>
+      <button data-t="${t.id}" data-s="${s.id}" data-k="" class="${done?'done':''}">${done?'Review':'Start'}</button>
     </div>`;
   }
-  h += `<div class="subrow" style="border-top:1px solid var(--line-soft);margin-top:4px;padding-top:11px">
-      <span class="sname"><b>Everything in ${esc(t.name)}</b><small>${pool.length} questions, mixed order</small></span>
-      <button data-t="${t.id}" data-s="">Start</button>
-    </div>`;
+  h += `<div class="ksplit">${startRows(pool, t.name, `data-t="${t.id}" data-s=""`)}</div>`;
   return h + `</div></details>`;
 }
 
@@ -195,6 +233,53 @@ function outline(){
     ? Object.assign({topics: TOPICS.filter(t => mod.get(t) === m.module)}, m) : m);
 }
 const examQuestions = id => poolFor(null, null).filter(q => q.exam === id);
+const ofKind = (pool, kind) => pool.filter(q => kindOf(q) === kind);
+/* How many questions a set holds, and how they divide, for a row's caption.
+   With a kind already chosen in the filter bar the division is not stated,
+   because everything on the page is then of that one kind. */
+function splitNote(pool){
+  const n = `${pool.length} question${pool.length === 1 ? '' : 's'}`;
+  if(FILTER.kind !== 'all') return n;
+  const k = kindCounts(pool);
+  if(!k.concept || !k.calc) return n + (k.calc ? ', all calculations' : ', all concepts');
+  return `${n} — ${k.concept} concept${k.concept === 1 ? '' : 's'}, ${k.calc} calculation${k.calc === 1 ? '' : 's'}`;
+}
+
+/* The start rows for one set of questions. With no kind chosen in the filter
+   bar, concepts and calculations are offered separately and together, so the
+   choice can be made per topic without changing what the rest of the page
+   shows. With a kind already chosen, that choice has been made and one row is
+   offered. `attr` is what the button carries so the caller can route it. */
+/* The adaptive rows for an exam recap, split the same way a topic's are. */
+function examRows(pool, id){
+  const row = (title, sub, k) =>
+    `<div class="subrow"><span class="sname"><b>${title}</b><small>${sub}</small></span>
+      <button data-exam="${id}" data-how="adaptive" data-k="${k}">Start</button></div>`;
+  const due = 'missed concepts first; stops when nothing is due';
+  if(FILTER.kind !== 'all')
+    return row('Everything on this exam, adaptive',
+               `${pool.length} questions, ${esc(KIND_LABEL[FILTER.kind].toLowerCase())} only — ${due}`, '');
+  const c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
+  if(!c || !m) return row('Everything on this exam, adaptive', `${pool.length} questions — ${due}`, '');
+  return row('Concepts on this exam, adaptive', `${c} questions, no arithmetic — ${due}`, 'concept')
+       + row('Calculations on this exam, adaptive', `${m} questions, each worked to a number — ${due}`, 'calc')
+       + row('Everything on this exam, adaptive', `${pool.length} questions — ${due}`, '');
+}
+
+function startRows(pool, name, attr){
+  const label = n => `${n} question${n === 1 ? '' : 's'}`;
+  const row = (title, sub, k, ghost) =>
+    `<div class="subrow"><span class="sname"><b>${title}</b><small>${sub}</small></span>
+      <button ${attr} data-k="${k}"${ghost ? ' class="ghost"' : ''}>Start</button></div>`;
+  if(FILTER.kind !== 'all')
+    return row(`Everything in ${esc(name)}`,
+               `${label(pool.length)}, ${esc(KIND_LABEL[FILTER.kind].toLowerCase())} only`, '');
+  const c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
+  if(!c || !m) return row(`Everything in ${esc(name)}`, `${label(pool.length)}, mixed order`, '');
+  return row(`Concepts in ${esc(name)}`, `${label(c)}, no arithmetic`, 'concept')
+       + row(`Calculations in ${esc(name)}`, `${label(m)}, each worked to a number`, 'calc')
+       + row(`Everything in ${esc(name)}`, `${label(pool.length)}, the two mixed`, '', true);
+}
 
 function renderTopics(){
   const shares = poolShares();
@@ -242,15 +327,13 @@ function renderTopics(){
       if(!pool.length) continue;
       const em = masteryOf(pool), epct = em.total ? Math.round(100*em.mastered/em.total) : 0;
       h += `<details class="module"><summary>
-          <span class="mname">${esc(m.name)}<small>${pool.length} questions${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
+          <span class="mname">${esc(m.name)}<small>${splitNote(pool)}${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
           <span class="meter"><i style="width:${epct}%"></i></span><span class="counts">${em.mastered}/${em.total}</span>
         </summary><div class="mfoot">
-        <div class="subrow"><span class="sname"><b>Everything on ${ex ? esc(ex.name) : 'this exam'}, adaptive</b>
-          <small>Missed concepts first; stops when nothing is due</small></span>
-          <button data-exam="${m.exam}" data-how="adaptive">Start</button></div>
+        ${examRows(pool, m.exam)}
         <div class="subrow"><span class="sname"><b>Straight pass</b>
           <small>Every question once, shuffled, nothing held back by scheduling</small></span>
-          <button data-exam="${m.exam}" data-how="sweep">Start</button></div>
+          <button data-exam="${m.exam}" data-how="sweep" data-k="" class="ghost">Start</button></div>
         ${ex ? `<div class="subrow"><span class="sname"><b>Sit a practice paper</b>
           <small>${ex.questions} questions in ${ex.minutes} minutes at the blueprint, no feedback until you submit</small></span>
           <button data-exam="${m.exam}" data-how="paper">Open</button></div>` : ''}
@@ -263,12 +346,12 @@ function renderTopics(){
     if(!mpool.length) continue;
     const mm = masteryOf(mpool), mpct = mm.total ? Math.round(100*mm.mastered/mm.total) : 0;
     h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
-        <span class="mname">${esc(m.name)}<small>${mpool.length} questions · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
+        <span class="mname">${esc(m.name)}<small>${splitNote(mpool)} · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
         <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
       </summary>
       ${ts.map(topicCard).join('')}
-      <div class="mfoot"><div class="subrow"><span class="sname"><b>Everything in ${esc(m.name)}</b><small>${mpool.length} questions, mixed order</small></span>
-        <button data-module="${m.module}">Start</button></div></div></details>`;
+      ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
+      </details>`;
   }
 
   h += `<h3>Mixed drills</h3>
@@ -290,19 +373,22 @@ function renderTopics(){
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });
   el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
-    startQuiz(b.dataset.t || null, b.dataset.s || null);
+    startQuiz(b.dataset.t || null, b.dataset.s || null, b.dataset.k || null);
   });
   el.querySelectorAll('button[data-view]').forEach(b => b.onclick = () => show(b.dataset.view));
   el.querySelectorAll('button[data-module]').forEach(b => b.onclick = () => {
     const m = outline().find(o => o.module === +b.dataset.module);
-    if(m) startPool((m.topics || []).flatMap(t => poolFor(t.id, null)), m.name);
+    if(!m) return;
+    const k = b.dataset.k || null;
+    startPool(narrow((m.topics || []).flatMap(t => poolFor(t.id, null)), k), kindLabel(m.name, k));
   });
   el.querySelectorAll('button[data-exam]').forEach(b => b.onclick = () => {
     const id = +b.dataset.exam, ex = COURSE.exams.find(e => e.id === id);
-    const label = (ex ? ex.name : 'Exam') + ' recap';
+    const k = b.dataset.k || null;
+    const label = kindLabel((ex ? ex.name : 'Exam') + ' recap', k);
     if(b.dataset.how === 'paper'){ chooseExam(id); show('exam'); return; }
-    if(b.dataset.how === 'sweep') startSweepOf(examQuestions(id), label);
-    else startPool(examQuestions(id), label);
+    if(b.dataset.how === 'sweep') startSweepOf(narrow(examQuestions(id), k), label);
+    else startPool(narrow(examQuestions(id), k), label);
   });
   const sa = document.getElementById('sweepAll');
   const sw = document.getElementById('sweepWeighted'); if(sw) sw.onclick = () => startSweep('weighted');
@@ -316,11 +402,16 @@ function renderTopics(){
    ========================================================================== */
 let Q = null;     // {pool, label, current, order, answered, lastId, examMode}
 
-function startQuiz(topicId, subId){
+function startQuiz(topicId, subId, kind){
   const t = TOPICS.find(x=>x.id===topicId);
   const s = t && (t.subs||[]).find(x=>x.id===subId);
-  startPool(poolFor(topicId, subId), s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything'));
+  const name = s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything');
+  startPool(narrow(poolFor(topicId, subId), kind), kindLabel(name, kind));
 }
+/* A drill started from a split row carries its kind in the pool and in the
+   label, so what is being drilled is stated on the quiz screen as well. */
+const narrow = (pool, kind) => kind ? ofKind(pool, kind) : pool;
+const kindLabel = (name, kind) => kind ? `${name} — ${KIND_LABEL[kind].toLowerCase()}` : name;
 /* An adaptive drill over any set of questions: the scheduler picks, missed
    concepts return first, and it stops when nothing is due. */
 function startPool(pool, label){

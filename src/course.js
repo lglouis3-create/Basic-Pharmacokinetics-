@@ -138,28 +138,33 @@ const COURSE = {
 
   activeExam: 2,
 
-  /* What a question asks you to DO. The four conceptual skills come first,
-     then the calculation types, which follow how Dr. Mosley's own practice
-     sets are organised (see STYLE.md). Weak spots reports accuracy per skill,
-     so a student who can state every definition but keeps losing marks on
-     unit conversion sees exactly that. */
+  /* What a question asks you to DO. `kind` is 'concept' where the skill is a
+     way of understanding and 'calc' where it is a way of computing; the drill
+     reads it to offer concepts and calculations as separate drills, since
+     which of the two a student needs to review is rarely the same on a given
+     evening. The kind is not the whole story on its own: a question is a
+     calculation when answering it means producing a number, so a numeric
+     question is one whatever its skill, and a matching question is one only
+     where a calculation skill is matched to computed values. Weak spots
+     reports accuracy per skill, so a student who can state every definition
+     but keeps losing marks on unit conversion sees exactly that. */
   skills: [
-    {id: 'recall',    label: 'Recall a definition or fact',            short: 'Recall'},
-    {id: 'tell',      label: 'Tell two similar things apart',          short: 'Tell apart'},
-    {id: 'read',      label: 'Read a graph, table or equation',        short: 'Read'},
-    {id: 'apply',     label: 'Reason about a patient or a change',     short: 'Apply'},
+    {id: 'recall',    label: 'Recall a definition or fact',            short: 'Recall',    kind: 'concept'},
+    {id: 'tell',      label: 'Tell two similar things apart',          short: 'Tell apart', kind: 'concept'},
+    {id: 'read',      label: 'Read a graph, table or equation',        short: 'Read',      kind: 'concept'},
+    {id: 'apply',     label: 'Reason about a patient or a change',     short: 'Apply',     kind: 'concept'},
 
-    {id: 'order',     label: 'Decide the order from a data set',       short: 'Order'},
-    {id: 'krate',     label: 'Rate constant and half-life',            short: 'k and t½'},
-    {id: 'conctime',  label: 'Concentration or amount at a time',      short: 'C at t'},
-    {id: 'vddose',    label: 'Volume of distribution and dose',        short: 'Vd, dose'},
-    {id: 'auc',       label: 'AUC and the trapezoidal rule',           short: 'AUC'},
-    {id: 'multicpt',  label: 'Two-compartment parameters',             short: '2-cpt'},
-    {id: 'infusion',  label: 'Infusion rate and steady state',         short: 'Infusion'},
-    {id: 'loading',   label: 'Loading dose',                           short: 'Loading'},
-    {id: 'clearance', label: 'Clearance — total, renal and hepatic',   short: 'Clearance'},
-    {id: 'crcl',      label: 'Creatinine clearance and ideal weight',  short: 'CrCl'},
-    {id: 'oral',      label: 'Oral absorption — Cmax, tmax, ka',       short: 'Oral'},
+    {id: 'order',     label: 'Decide the order from a data set',       short: 'Order',     kind: 'calc'},
+    {id: 'krate',     label: 'Rate constant and half-life',            short: 'k and t½',  kind: 'calc'},
+    {id: 'conctime',  label: 'Concentration or amount at a time',      short: 'C at t',    kind: 'calc'},
+    {id: 'vddose',    label: 'Volume of distribution and dose',        short: 'Vd, dose',  kind: 'calc'},
+    {id: 'auc',       label: 'AUC and the trapezoidal rule',           short: 'AUC',       kind: 'calc'},
+    {id: 'multicpt',  label: 'Two-compartment parameters',             short: '2-cpt',     kind: 'calc'},
+    {id: 'infusion',  label: 'Infusion rate and steady state',         short: 'Infusion',  kind: 'calc'},
+    {id: 'loading',   label: 'Loading dose',                           short: 'Loading',   kind: 'calc'},
+    {id: 'clearance', label: 'Clearance — total, renal and hepatic',   short: 'Clearance', kind: 'calc'},
+    {id: 'crcl',      label: 'Creatinine clearance and ideal weight',  short: 'CrCl',      kind: 'calc'},
+    {id: 'oral',      label: 'Oral absorption — Cmax, tmax, ka',       short: 'Oral',      kind: 'calc'},
   ],
 
   paceDefault: 'weekly',
