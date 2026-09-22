@@ -82,7 +82,7 @@ const Q_FIGURES = [
   {t:'It is zero order', correct:false,
    why:'This is the answer the figure is built to catch. It comes from reading the line as straight without reading the axis, and the axis is not evenly spaced: 1 to 10 covers the same distance as 100 to 1000. Her instruction is to look at the scale before judging the line.'},
   {t:'It is first order only if the axis is labelled as logarithmic', correct:false,
-   why:'The word is usually absent, which she flags directly, so waiting for it means never classifying the graph. The tick values are the evidence: 1, 10, 100, 1000 is a decade scale whether or not anything on the figure says so.'},
+   why:'The word is usually absent, which she flags directly, so this answer means waiting for a label that never arrives and classifying nothing. The tick values are the evidence: 1, 10, 100, 1000 is a decade scale whether or not anything on the figure says so.'},
   {t:'The order cannot be decided from a graph alone', correct:false,
    why:'The shape on a stated axis is exactly what settles it, and she says a data set or a curve will be given for this purpose. Picking this treats the graph as decoration rather than as the evidence, when the axis and the line together carry the answer.'}],
  teach:[

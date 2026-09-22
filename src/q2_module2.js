@@ -913,7 +913,7 @@ const Q_MODULE2 = [
   {k:'algebra', t:'Cp0 = 10.21 mg/L + 8.53 mg/L = 18.74 mg/L',
    why:'Both intercepts are already in milligrams per litre, so they add directly with no conversion. Only quantities in the same units may be added, which is the check that the intercepts and not the exponents are being summed.'},
   {k:'round', t:'Cp0 = 18.74 mg/L',
-   why:'Her key prints 18.74 mg/L, two decimal places, matching the precision the two intercepts were given to.'}],
+   why:'Her key prints 18.74 mg/L, to two decimal places, matching the precision the two intercepts were given to. No rounding happens before this line, because adding two exact figures introduces none. The unit is a concentration, not a rate, since both intercepts are concentrations and adding them cannot change what is being measured.'}],
  teach:[
  {t:'The initial plasma concentration of a two-compartment drug is the sum of the intercepts, because at time zero every exponential term equals one. The result is a concentration, so it carries the units of A and B and not of alpha or beta. This same sum is what the dose is divided by to obtain the volume of the central compartment.'},
   {h:'How the variables relate', list:[

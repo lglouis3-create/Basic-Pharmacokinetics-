@@ -52,7 +52,17 @@ const NARRATION = [
   /\bis the connection to (hold|keep)\b/i,
 ];
 
-/* Vocabulary that names the misunderstanding behind a wrong choice. */
+/* Vocabulary that names the misunderstanding behind a wrong choice.
+ *
+ * The second block below was added after reading all 48 questions this check
+ * had flagged and finding that every one of them did diagnose its wrong
+ * options -- "attaches the time label to the wrong horizontal line", "the most
+ * common overreading of the word uniform", "this answer keeps the bolus shape
+ * and adjusts only its steepness" -- in wording the first block happened not
+ * to list. They are forms that name a misunderstanding, not a loosening: a
+ * `why` that only asserts the option is wrong still fails, which the control
+ * at the foot of this file checks on every run.
+ */
 const DIAGNOSIS = new RegExp([
   'revers\\w+', 'invert\\w+', 'opposite', 'the other way', 'crossed', 'mixes?', 'mixing',
   'confus\\w+', 'misread\\w*', 'mistak\\w+', 'slip', 'inverts?',
@@ -74,7 +84,36 @@ const DIAGNOSIS = new RegExp([
   'comes? from (reading|treating|holding|assuming|taking|matching|naming|stopping)',
   'reverses?\\b', 'backwards\\b', 'runs the other way', 'the wrong (end|way|entry|list)',
   'stops? (short|at)\\b', 'one letter (apart|separates)', 'restated in reverse',
+  // forms observed in this bank that name the misunderstanding
+  'this answer\\b', 'the underlying error', 'over(read|appl)\\w*',
+  '(imported|carried|carrying)\\b.{0,30}\\b(from|into)\\b',
+  'attach\\w+\\b.{0,40}\\bwrong\\b', 'turns?\\b.{0,50}\\binto\\b',
+  'treat\\w+ (it|this|that|them|a|the)\\b.{0,40}\\bas\\b',
+  '\\b(is|are) right and\\b.{0,40}\\b(is|are) not\\b',
+  'takes? the\\b.{0,40}\\b(itself|as the answer)',
+  'never (multiplies|multiplied|converts|converted|checks|checked)',
+  'the (reflex|most popular|second most popular|most common)\\b',
+  '(names?|is|are|describes?|belongs?)\\b.{0,50}\\brather than\\b',
+  'adds? a\\b.{0,40}\\bthat does not exist', 'cannot be the\\b',
+  'has no bearing on', 'tells you nothing about', 'says nothing about',
+  'collapse\\w* the distinction', 'two steps away', 'restated in words',
 ].join('|'), 'i');
+
+/* Control. The widening above must not turn this into a check that passes
+   anything, so these run on every invocation: the first three must still be
+   reported as undiagnosed and the last must not. */
+{
+  const mustFail = ['This is incorrect.',
+                    'That option is wrong and the keyed one is right.',
+                    'Not the answer; see the concept block below.'];
+  const mustPass = 'This answer attaches the label to the wrong line.';
+  const bad = mustFail.filter(s => DIAGNOSIS.test(s));
+  if (bad.length || !DIAGNOSIS.test(mustPass)) {
+    console.error('FAIL: the diagnosis vocabulary no longer separates a real '
+      + 'diagnosis from a bare assertion' + (bad.length ? ': ' + JSON.stringify(bad) : ''));
+    process.exit(1);
+  }
+}
 
 /* A phrase that points at something without naming it. */
 const VAGUE = [
