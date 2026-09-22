@@ -95,7 +95,7 @@ def load_questions(out):
         setTimeout:()=>0,clearTimeout(){},Date,Math,JSON,Object,Array,String,Number,
         Boolean,RegExp,Error,isNaN,parseInt,parseFloat};
       sb.globalThis=sb;vm.createContext(sb);vm.runInContext(c,sb);
-      const tt=t=>Array.isArray(t)?t.map(p=>[p.h,p.t].filter(Boolean).join('. ')).join(' '):(t||'');
+      const tt=t=>Array.isArray(t)?t.map(p=>[p.h,p.t,...(p.list||[])].filter(Boolean).join('. ')).join(' '):(t||'');
       process.stdout.write(JSON.stringify(sb.__Q.map(q=>({
         id:q.id, cite:q.cite||'', teach:tt(q.teach), note:q.note||'',
         whys:[...(q.options||[]).map(o=>o.why||''),

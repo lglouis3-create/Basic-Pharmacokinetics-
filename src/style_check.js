@@ -62,7 +62,7 @@ console.log(stemHits ? `  ${stemHits} stems refer to the course material\n` : ` 
 hits += stemHits;
 
 console.log('=== Style check (questions carrying a concept block) ===');
-const teachText = t => Array.isArray(t) ? t.map(p=>[p.h,p.t].filter(Boolean).join('. ')).join(' ') : (t||'');
+const teachText = t => Array.isArray(t) ? t.map(p=>[p.h,p.t,...(p.list||[])].filter(Boolean).join('. ')).join(' ') : (t||'');
 const rebuilt = Q.filter(q=>q.teach);
 for(const q of rebuilt){
   scan(teachText(q.teach), q.id+' · concept block');

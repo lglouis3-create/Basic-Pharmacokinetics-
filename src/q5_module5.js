@@ -36,7 +36,15 @@ const Q_MODULE5 = [
    why:'Choosing this treats the moment of swallowing as the moment of arrival, which carries the intravenous bolus description across to the oral route. A bolus puts the whole dose into the circulation at once, so there is no input process left to describe and the concentration is highest at time zero. An oral dose has to disintegrate, dissolve, cross the gut wall and survive the liver before any of it counts as being in the body, and the time that takes is what the absorption rate constant measures. An oral curve therefore starts at zero and has a rising limb, which an instantaneous input cannot produce.'},
   {t:'Second order', correct:false,
    why:'Second-order kinetics would need the rate to depend on the square of an amount or on two concentrations at once, and nothing in this model does. The course uses only zero and first order for both input and output. Reaching for a higher order usually means counting the two rate constants in the model and attaching that count to the order.'}],
- teach:'The three routes covered so far differ only in how drug enters. An intravenous bolus puts the entire dose in at once, so input is instantaneous. An intravenous infusion delivers a fixed amount per unit time, so input is zero order. An oral dose delivers at a rate proportional to what is still in the gastrointestinal tract, so input is first order, and it is described by its own rate constant ka. Elimination is first order in all three, so the oral case is the only one with first order on both sides.',
+ teach:[
+ {t:'The three routes covered so far differ only in how drug enters. An intravenous bolus puts the entire dose in at once, so input is instantaneous. An intravenous infusion delivers a fixed amount per unit time, so input is zero order. An oral dose delivers at a rate proportional to what is still in the gastrointestinal tract, so input is first order, and it is described by its own rate constant ka. Elimination is first order in all three, so the oral case is the only one with first order on both sides.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "First-Order Absorption Model"; 09.21 lecture',
  quote:'today we will move into our 1st order. So, up to this point, we have not had 1st order input, OK? It\'s all been either instantaneous or zero order'},
 
@@ -53,7 +61,15 @@ const Q_MODULE5 = [
    why:'Picking this imports the absorption, distribution, metabolism and excretion list into an equation that has only two boxes. The model moves drug from the gastrointestinal tract into a single body compartment of volume VD and then eliminates it, so distribution is not a separate term and has no rate of its own here. Metabolism is one of the processes inside elimination rather than an alternative to it, so naming it splits elimination and drops excretion out of the equation. The two terms on the right are the rate in and the rate out.'},
   {t:'The dose absorbed minus the dose eliminated', correct:false,
    why:'Each term carries a d over dt, so each is a rate rather than an amount, and the units are milligrams per hour rather than milligrams. Amounts and rates are the commonest pair to confuse here because the amounts DGI and DE appear inside the derivatives. Integrating the equation would give amounts; reading it as written gives rates.'}],
- teach:'The oral model is two arrows in a row: drug leaves the gastrointestinal tract at the absorption rate, enters the body compartment of volume VD, and leaves it at the elimination rate. The amount in the body at any instant is whatever the balance of those two rates has accumulated, so the equation is nothing more than rate in minus rate out. Everything else in the module, including the peak and its timing, follows from when those two rates are equal.',
+ teach:[
+ {t:'The oral model is two arrows in a row: drug leaves the gastrointestinal tract at the absorption rate, enters the body compartment of volume VD, and leaves it at the elimination rate. The amount in the body at any instant is whatever the balance of those two rates has accumulated, so the equation is nothing more than rate in minus rate out. Everything else in the module, including the peak and its timing, follows from when those two rates are equal.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Drug in the Body"',
  quote:'= rate in − rate out'},
 
@@ -70,7 +86,15 @@ const Q_MODULE5 = [
    why:'Picking this imports the distribution phase from the two-compartment intravenous model into a one-compartment oral one. Distribution here is treated as immediate and is carried by the apparent volume of distribution rather than by a rate constant, so there is nothing about it for ka to collect. The rising limb of an oral curve is absorption, created by drug still arriving from the gastrointestinal tract, not a distribution phase. Reading the rise as a distribution phase is what makes this answer look reasonable.'},
   {t:'Protein binding in the plasma', correct:false,
    why:'Protein binding affects how much drug is free once the drug is in the plasma and has nothing to do with the rate at which it arrives there. No binding term appears anywhere in the single oral dose equation. Selecting this attaches a plasma process to a gastrointestinal rate constant.'}],
- teach:'ka is a single first-order rate constant standing for a whole chain of events, from the tablet breaking up to the fraction that survives the liver reaching the circulation. Because it is first order, its size can be expressed as an absorption half-life, and because it is a property of the formulation as much as of the drug, two products of the same drug can differ in ka while sharing the same k.',
+ teach:[
+ {t:'ka is a single first-order rate constant standing for a whole chain of events, from the tablet breaking up to the fraction that survives the liver reaching the circulation. Because it is first order, its size can be expressed as an absorption half-life, and because it is a property of the formulation as much as of the drug, two products of the same drug can differ in ka while sharing the same k.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'09.21 lecture',
  quote:'all of those pieces give us our case of A, first order rate constant for absorption'},
 
@@ -87,7 +111,15 @@ const Q_MODULE5 = [
    why:'Choosing this means carrying the release description across to elimination, applying to the body what was engineered into the dosage form. A zero-order output would mean a fixed number of milligrams removed each hour whatever the plasma concentration, which describes a saturated pathway rather than the first-order elimination assumed throughout this module. Nothing a formulation does can change how the body handles drug that has already reached the circulation, because elimination is a property of the patient and the drug. The product changes the input side only, so the pairing is zero-order in and first-order out.'},
   {t:'Instantaneous input with first-order output', correct:false,
    why:'Instantaneous input is the intravenous bolus, and a dosage form that releases over hours is the opposite of that. The whole point of the formulation is to spread the input over time. This answer describes the fastest possible input for a product designed to give the slowest.'}],
- teach:'Oral administration is described as usually first order because that describes an immediate-release product. A modified-release product that meters drug out at a constant rate replaces the first-order input with a zero-order one while leaving elimination untouched, so its plasma profile takes the shape of an intravenous infusion instead of a peak. The word usually in the summary of oral kinetics is there to leave room for exactly this case.',
+ teach:[
+ {t:'Oral administration is described as usually first order because that describes an immediate-release product. A modified-release product that meters drug out at a constant rate replaces the first-order input with a zero-order one while leaving elimination untouched, so its plasma profile takes the shape of an intravenous infusion instead of a peak. The word usually in the summary of oral kinetics is there to leave room for exactly this case.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Summary"; 09.21 lecture',
  quote:'if we have a truly modified zero solid dosage form that is releasing drug at a zero order rate … Looks like IV infusion'},
 
@@ -106,7 +138,15 @@ const Q_MODULE5 = [
    why:'That fraction describes elimination and is used in clearance calculations, not in the input term of an oral model. If F were an excreted fraction, increasing it would lower the plasma concentration rather than raise it, which is the opposite of how it behaves in the equation. The two are easy to swap because both are fractions attached to a dose.'},
   {t:'The fraction of the absorption rate constant contributed by dissolution', correct:false,
    why:'There is no such split in this model; the whole absorption process is compressed into the single constant ka. F is a fraction of the dose, so it carries no units and is not part of any rate. Reaching for this answer means trying to attach F to the neighbouring ka rather than to the dose.'}],
- teach:'F is the oral bioavailability factor, the proportion of an administered dose that reaches the systemic circulation. It appears only as a multiplier of the dose, so its effect is identical to giving a smaller dose completely: the peak and the area under the curve scale with it, while the timing of the peak does not. The presence of a capital F in an equation is itself the signal that the route is oral.',
+ teach:[
+ {t:'F is the oral bioavailability factor, the proportion of an administered dose that reaches the systemic circulation. It appears only as a multiplier of the dose, so its effect is identical to giving a smaller dose completely: the peak and the area under the curve scale with it, while the timing of the peak does not. The presence of a capital F in an equation is itself the signal that the route is oral.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Concentration of Drug in Plasma Following a Single Oral Dose"; 09.21 lecture',
  quote:'what fraction of this oral dose do we expect to be absorbed by the body and available for the body to use, right? When we give a drug IV, then that F is assumed to be one.'},
 
@@ -123,7 +163,15 @@ const Q_MODULE5 = [
    why:'Taking the leading number as the peak stops one step short of the calculation being asked for. The 75 is the whole constant prefactor, and the concentration at any time is that prefactor multiplied by the bracket, which is always less than one, so the peak must be smaller than 75. Here the peak is about 55 mcg/mL against a prefactor of 75. Reaching it means finding the time to peak first and then evaluating the full equation at that time.'},
   {t:'The dose in milligrams', correct:false,
    why:'The prefactor has already been divided by a volume of distribution, so it is a concentration and not an amount. The dose is inside it, multiplied by F and ka, and cannot be read off without knowing the other three quantities. This answer reads the largest number in the equation as the dose.'}],
- teach:'When an oral problem is handed over as a two-exponential equation, three separate pieces of information are in it. The two rate constants are read straight out of the exponents. The leading coefficient is the entire constant prefactor, F times the dose times ka, divided by the volume of distribution times the difference of the rate constants. Nothing in the equation is the starting concentration, because an oral curve starts at zero.',
+ teach:[
+ {t:'When an oral problem is handed over as a two-exponential equation, three separate pieces of information are in it. The two rate constants are read straight out of the exponents. The leading coefficient is the entire constant prefactor, F times the dose times ka, divided by the volume of distribution times the difference of the rate constants. Nothing in the equation is the starting concentration, because an oral curve starts at zero.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'this big portion right here does not represent C0'},
 
@@ -140,7 +188,15 @@ const Q_MODULE5 = [
    why:'This reads a subtracted pair of exponentials as the added pair belonging to the two-compartment intravenous model, where the two terms are the distribution and elimination phases. The sign between the terms is what separates the two models on sight: added terms mean two output phases, subtracted terms mean one input and one output. The stem also states a one-compartment model, which leaves no second compartment for a second elimination phase to sit in. The second exponential here is the absorption term, and it is what makes the concentration start at zero.'},
   {t:'The two constants cannot be told apart without more information', correct:false,
    why:'Declining to assign them stops at the observation that the equation does not label its constants, when the ordering is fixed by the description of ordinary oral absorption. For an ordinary oral product drug is taken up far faster than it is removed, so the larger constant is ka and the smaller is k. More information would be needed only to establish the unusual case in which absorption is the slower process, and the stem rules that out. Leaving both unassigned also makes the time to peak and the peak itself uncomputable, since each expression needs to know which constant is which.'}],
- teach:'A subtracted pair of exponentials identifies an oral dose, and the two rate constants in it are told apart by size. In the ordinary case absorption is much faster than elimination, so the larger constant is ka and the smaller is k. That ordering also means the second exponential dies away quickly, leaving the tail of the curve to be governed by k alone.',
+ teach:[
+ {t:'A subtracted pair of exponentials identifies an oral dose, and the two rate constants in it are told apart by size. In the ordinary case absorption is much faster than elimination, so the larger constant is ka and the smaller is k. That ordering also means the second exponential dies away quickly, leaving the tail of the curve to be governed by k alone.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'Most of the time we\'re gonna be looking at disposition rate limiting, where our KA is gonna be significantly faster or larger than our K'},
 
@@ -157,7 +213,15 @@ const Q_MODULE5 = [
    why:'This matches the rising limb and stops short of what happens at the top. A zero-order infusion drives the concentration up towards a plateau and holds it there, so the curve flattens into a level line rather than turning over, and it falls only once the infusion is stopped. A peak partway along a curve needs the input to fade while elimination continues, which is what a first-order input does as the gastrointestinal tract empties of drug. First order in and first order out is the oral case.'},
   {t:'Any route, since the shape depends only on the dose', correct:false,
    why:'Attributing shape to dose confuses a scale factor with the kinetics. The dose sits in the constant prefactor and multiplies every point on the curve equally, so it moves the curve up and down without moving the turning point. What decides the shape is how drug enters: instantaneous for a bolus, zero order for an infusion, first order by mouth. Expecting a larger dose to move the peak in time is the same error stated a second way.'}],
- teach:'The shape of a concentration against time curve identifies the input. A curve that starts at its highest value and falls is an instantaneous input. A curve that climbs to a plateau is a constant input. A curve that climbs to a peak and then falls has first-order input and first-order output, which is the oral case, and the peak itself is the moment the two rates are equal.',
+ teach:[
+ {t:'The shape of a concentration against time curve identifies the input. A curve that starts at its highest value and falls is an instantaneous input. A curve that climbs to a plateau is a constant input. A curve that climbs to a peak and then falls has first-order input and first-order output, which is the oral case, and the peak itself is the moment the two rates are equal.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'09.21 lecture',
  quote:'if I give you a curve on the exam and it looks like this. Right, where there is a clear peak. Right, we go up, we peak, we come back down, then you, I want you to identify that as an oral input. Right? First order in, first order out.'},
 
@@ -179,7 +243,15 @@ const Q_MODULE5 = [
    why:'After the peak the falling amount left in the gut can no longer keep pace with elimination, so the concentration declines, but absorption has not stopped. Both processes are still running, which is why this phase is named separately from the one that follows.'},
   {l:'Complete elimination phase', r:'Absorption is finished and only elimination is occurring',
    why:'Once the gastrointestinal tract has given up all the drug it is going to give up, the only remaining process is first-order elimination, and the curve becomes an ordinary decay governed by k alone.'}],
- teach:'The oral curve has three named phases separated by two events. Before the peak, absorption outruns elimination. At the peak the two rates are equal. After the peak elimination is the faster of the two while absorption continues, and once absorption is complete the curve is pure elimination. Which phase a question is asking about decides whether both rate constants matter or only k.',
+ teach:[
+ {t:'The oral curve has three named phases separated by two events. Before the peak, absorption outruns elimination. At the peak the two rates are equal. After the peak elimination is the faster of the two while absorption continues, and once absorption is complete the curve is pure elimination. Which phase a question is asking about decides whether both rate constants matter or only k.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example of a concentration-time profile following extravascular administration"; 09.21 lecture',
  quote:'once all the drug has been absorbed, Then we are fully into the complete elimination phase',
  note:'The printed slide labels only the absorption phase and the post-absorption phase on the figure. In the 09.21 lecture she found this slide missing from her own copy and taught it from the students\' copies, so her spoken treatment is the only full treatment of the four descriptions used here; the complete elimination phase and the equality of rates at the peak come from the captions rather than from printed slide text.'},
@@ -199,7 +271,14 @@ const Q_MODULE5 = [
    why:'F and the dose enter as a product multiplying the whole equation, so this answer mistakes the amount of drug for the speed of the processes. Raising bioavailability raises the height of the peak without moving it, in exactly the way a larger dose does. How much drug arrives has no bearing on when absorption stops outrunning elimination, and that crossing is what the time to peak is. Only ka and k appear in the expression.'},
   {t:'The clearance and the apparent volume of distribution of the drug', correct:false,
    why:'This names the elimination side alone and leaves out the input that creates the peak. Clearance and the volume of distribution do fix k between them, so the answer is not unrelated, but the dependence runs through k alongside ka rather than through either of those two directly. The time to peak is the natural logarithm of ka divided by k, over the difference between them, so clearance moves it only insofar as it moves k. Quoting clearance and volume in place of the two rate constants stops one step short of the quantities the expression contains.'}],
- teach:'The time to peak depends solely on the relationship between the two rate constants. Everything that scales the size of the curve, meaning F, the dose and the volume of distribution, cancels when the derivative is set to zero, which is why they do not appear in the expression. That makes tmax the natural measure of how fast a formulation is absorbed, independent of how much was given.',
+ teach:[
+ {t:'The time to peak depends solely on the relationship between the two rate constants. Everything that scales the size of the curve, meaning F, the dose and the volume of distribution, cancels when the derivative is set to zero, which is why they do not appear in the expression. That makes tmax the natural measure of how fast a formulation is absorbed, independent of how much was given.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Cp vs. Time for a Single Oral Dose"; 09.21 lecture',
  quote:'T-Max depends solely on the relationship between K and KA Drug going in, drug going out.'},
 
@@ -216,7 +295,14 @@ const Q_MODULE5 = [
    why:'Picking this treats the peak as a level that has to be filled up to, so twice the drug is expected to take twice as long to reach it. The peak is not a fixed target; it is the moment at which the elimination rate overtakes the absorption rate. Both rates are proportional to an amount, so doubling the dose doubles both of them and leaves the moment they cross exactly where it was. The curve is taller, with its peak at the same time.'},
   {t:'It cannot be predicted without the volume of distribution', correct:false,
    why:'Asking for the volume of distribution means treating a quantity that cancels as though the calculation needed it. The volume sits in the constant prefactor and cancels out of the time to peak entirely, so supplying its value would change nothing. Only ka and k appear in the expression, and the stem changes neither, so the answer is settled without any further information. What the larger dose does change is every concentration on the curve, in proportion.'}],
- teach:'Increasing the dose produces a proportional increase in the plasma concentration and in the area under the curve, and no change at all in the time to peak. The rates of absorption and elimination both increase, because each is proportional to an amount that is now larger, but the rate constants ka and k are properties of the drug and the patient and do not move. Every parameter question of this kind is settled by asking which quantities appear in the expression being asked about.',
+ teach:[
+ {t:'Increasing the dose produces a proportional increase in the plasma concentration and in the area under the curve, and no change at all in the time to peak. The rates of absorption and elimination both increase, because each is proportional to an amount that is now larger, but the rate constants ka and k are properties of the drug and the patient and do not move. Every parameter question of this kind is settled by asking which quantities appear in the expression being asked about.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Changing Dose"; 09.21 lecture',
  quote:'If I increase the dose, what happens to T-Max? Nothing, right? … T-Max is independent or dependent of dose. Independent'},
 
@@ -233,7 +319,14 @@ const Q_MODULE5 = [
    why:'Reaching for it here means substituting another named parameter for the missing piece of the equation being used. The area under the curve describes total exposure across the whole profile and is not an intermediate in the peak calculation; nothing in the concentration equation calls for it. The maximum concentration is the concentration at one particular moment, so the moment is what has to be found first. Every quantity in the stem is supplied except the time.'},
   {t:'The absorption half-life', correct:false,
    why:'Like the elimination half-life, this restates a rate constant that has already been given, so it produces no new information. It is needed only in the other direction, when a problem states an absorption half-life and the rate constant must be recovered from it. Here the rate constants are already in hand and only the time is missing.'}],
- teach:'The maximum concentration is the concentration at one particular moment, so the moment must be identified first. The time to peak comes from the two rate constants alone; the peak concentration then comes from putting that time into the full single oral dose equation, which is where F, the dose and the volume of distribution finally enter. The order cannot be reversed, and the peak time is worth finding even when the question does not ask for it.',
+ teach:[
+ {t:'The maximum concentration is the concentration at one particular moment, so the moment must be identified first. The time to peak comes from the two rate constants alone; the peak concentration then comes from putting that time into the full single oral dose equation, which is where F, the dose and the volume of distribution finally enter. The order cannot be reversed, and the peak time is worth finding even when the question does not ask for it.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'09.21 lecture',
  quote:'if you are asked for C-Max, and I will ask you for CMax, you must find TMax first. Find T-Max before you find CMax'},
 
@@ -250,7 +343,14 @@ const Q_MODULE5 = [
    why:'Choosing this means treating a property of a process as a property of a curve. Half-lives belong to first-order processes and are computed as 0.693 divided by that process\'s rate constant, so in this model there is an absorption half-life and an elimination half-life and nothing else. The time to peak is a single moment at which the two rates are equal, not a process that decays, so it has no rate constant and therefore no half-life. An unqualified t half is the elimination half-life, 0.693 divided by k.'},
   {t:'Both, since the two are equal for a one-compartment model', correct:false,
    why:'Picking this treats the one-compartment assumption as though it forced the two rate constants to coincide, when the compartment count describes distribution rather than the relation between input and output. The two half-lives are equal only if ka and k happen to be identical, and that case would leave the standard oral equation undefined, because the difference between them sits in its denominator. For an ordinary oral drug the absorption half-life is much the shorter of the two. An unqualified t half means the elimination one.'}],
- teach:'Two first-order processes run in an oral model, so two half-lives exist, each computed as 0.693 divided by its own rate constant. The convention is that an unqualified half-life is the elimination one, since it is the property of the drug in the patient rather than of the formulation. The absorption half-life is named explicitly whenever it is meant.',
+ teach:[
+ {t:'Two first-order processes run in an oral model, so two half-lives exist, each computed as 0.693 divided by its own rate constant. The convention is that an unqualified half-life is the elimination one, since it is the property of the drug in the patient rather than of the formulation. The absorption half-life is named explicitly whenever it is meant.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'09.21 lecture',
  quote:'If it\'s just T1/2, then your assumption is that I\'m looking for the half-life of elimination, right?'},
 
@@ -271,7 +371,14 @@ const Q_MODULE5 = [
    why:'Filtration is a renal elimination process and is estimated from creatinine clearance, which has nothing to do with how fast an oral dose is absorbed. None of these three parameters carries information about the kidney. Selecting it imports a quantity from the elimination and clearance material into a list about input.'},
   {t:'Deciding whether the drug follows zero-order rather than first-order elimination', correct:false,
    why:'Selecting this means treating the absorption parameters as though they reported on the output side. The order of elimination is judged from the shape of the terminal decline, which is governed by k, not by ka, the time to peak or the peak concentration. First-order elimination is assumed throughout this module, so it is not something these three parameters are used to establish. What they are used for is predicting peaks and troughs in repeated dosing, comparing products for bioequivalence, assessing onset of action, and choosing a route and dosage form.'}],
- teach:'The absorption rate constant, the time to peak and the peak concentration are the quantities that describe how quickly and how completely a formulation delivers its drug. They are used to predict peaks and troughs in repeated dosing, to compare products for bioequivalence, to choose a route and a dosage form, to assess onset of action, and to relate the concentration to the pharmacological effect. Everything on that list is about input and its consequences, not about elimination.',
+ teach:[
+ {t:'The absorption rate constant, the time to peak and the peak concentration are the quantities that describe how quickly and how completely a formulation delivers its drug. They are used to predict peaks and troughs in repeated dosing, to compare products for bioequivalence, to choose a route and a dosage form, to assess onset of action, and to relate the concentration to the pharmacological effect. Everything on that list is about input and its consequences, not about elimination.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Significance of Absorption Rate Constants, tmax, and Cmax"',
  quote:'Bioequivalence studies – comparing rates of absorption from chemically equivalent products'},
 
@@ -292,7 +399,15 @@ const Q_MODULE5 = [
    why:'The rate constants are properties of the formulation, the drug and the patient, and no amount of drug changes them. What rises is the rate, which is the constant multiplied by an amount. Failing to separate a rate from its rate constant is the error that makes this option attractive.'},
   {t:'A later time to peak', correct:false,
    why:'Picking this treats the peak as a target that has to be filled up to, so a larger dose is expected to take longer to reach it. The time to peak is fixed by ka and k alone, and increasing the dose changes neither, so the peak arrives at exactly the same moment. Both the absorption rate and the elimination rate rise in proportion with the larger amount present, which leaves the moment they cross in place. The curve is taller, not slower.'}],
- teach:'Changing the dose scales the curve vertically and does nothing else. Concentrations and the area under the curve rise in proportion, the absolute rates of absorption and elimination rise in proportion, and the rate constants, the time to peak and the half-lives are untouched. Every dose-change question reduces to asking whether the quantity concerned is a scale or a shape.',
+ teach:[
+ {t:'Changing the dose scales the curve vertically and does nothing else. Concentrations and the area under the curve rise in proportion, the absolute rates of absorption and elimination rise in proportion, and the rate constants, the time to peak and the half-lives are untouched. Every dose-change question reduces to asking whether the quantity concerned is a scale or a shape.'},
+  {h:'How the variables relate', list:[
+    'Doubling the dose: Cmax and AUC double, tmax unchanged, ka and k unchanged.',
+    'Raising ka with k fixed: Cmax higher, tmax earlier, AUC unchanged, because clearance has not moved.',
+    'Raising k with ka fixed: Cmax lower, tmax earlier, AUC lower, because clearance has risen.',
+    'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
+    'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Changing Dose"; 09.21 lecture',
  quote:'we increase the dose, we expect a proportional increase in concentration and AUC. We do not expect a change in TMAX'},
 
@@ -309,7 +424,15 @@ const Q_MODULE5 = [
    why:'Holding the peak height fixed while moving it earlier is the error here, and no change in ka produces that. Delivering the same amount of drug more quickly means less of it has been eliminated by the time absorption and elimination balance, so the peak must be higher as well as earlier. The area again cannot rise, because it is set by the amount absorbed and by clearance, and the formulation change leaves both alone. The pattern for an increase in ka is higher, earlier, and the same area.'},
   {t:'Cmax lower, tmax earlier, AUC decreased', correct:false,
    why:'A lower peak is what happens when elimination is speeded up, not absorption. This answer applies the consequences of increasing k to a change in ka. The two rate constants pull the peak height in opposite directions even though both pull the peak time earlier.'}],
- teach:'Increasing ka with k held constant changes how fast the drug gets in but not how much gets in or how fast it is removed. The peak is therefore higher and earlier while the area under the curve is relatively unchanged, since area depends on the amount absorbed and on clearance. This is the pattern that separates two formulations of the same drug in a bioequivalence comparison.',
+ teach:[
+ {t:'Increasing ka with k held constant changes how fast the drug gets in but not how much gets in or how fast it is removed. The peak is therefore higher and earlier while the area under the curve is relatively unchanged, since area depends on the amount absorbed and on clearance. This is the pattern that separates two formulations of the same drug in a bioequivalence comparison.'},
+  {h:'How the variables relate', list:[
+    'Doubling the dose: Cmax and AUC double, tmax unchanged, ka and k unchanged.',
+    'Raising ka with k fixed: Cmax higher, tmax earlier, AUC unchanged, because clearance has not moved.',
+    'Raising k with ka fixed: Cmax lower, tmax earlier, AUC lower, because clearance has risen.',
+    'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
+    'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Effect of ka and k on Cmax, tmax, and AUC"; 09.21 lecture',
  quote:'if we\'re just changing KA we\'re not changing the clearance at all, right? So then our AUC is unchanged here.',
  note:'The slide shows the two figures with printed captions giving a dose of 100 mg and a volume of distribution of 10 L, and fixing the constant that is not being varied at 0.1 hr⁻¹ in each panel. The statement that the area under the curve is relatively unchanged when ka is varied is not readable from the figure, and she says so in the 09.21 lecture: "looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the AUC is relatively unchanged."'},
@@ -327,7 +450,15 @@ const Q_MODULE5 = [
    why:'The area is unchanged when ka alone is altered, because clearance is untouched, but raising k raises clearance directly. That is the whole difference between the two panels of this comparison. Carrying the unchanged-area result across from the absorption case is the specific confusion here.'},
   {t:'Cmax higher, tmax earlier, AUC unchanged', correct:false,
    why:'Picking this means applying the absorption-change answer to an elimination change. A higher peak with faster elimination would mean that removing drug more quickly leaves more of it in the body, which cannot be; faster removal means the concentration builds to less. The area is unchanged only when ka alone moves, because clearance is untouched in that case, whereas raising k raises clearance and lowers exposure. Both the height and the area have been carried across from the wrong case.'}],
- teach:'Changing k changes the output side, so all three quantities respond. The peak is lower because drug is leaving faster while it is still arriving, the peak is earlier because elimination overtakes absorption sooner, and the area falls because area is the absorbed amount divided by clearance and clearance has risen. An increase in either rate constant brings the peak forward, so only the height and the area distinguish which one was changed.',
+ teach:[
+ {t:'Changing k changes the output side, so all three quantities respond. The peak is lower because drug is leaving faster while it is still arriving, the peak is earlier because elimination overtakes absorption sooner, and the area falls because area is the absorbed amount divided by clearance and clearance has risen. An increase in either rate constant brings the peak forward, so only the height and the area distinguish which one was changed.'},
+  {h:'How the variables relate', list:[
+    'Doubling the dose: Cmax and AUC double, tmax unchanged, ka and k unchanged.',
+    'Raising ka with k fixed: Cmax higher, tmax earlier, AUC unchanged, because clearance has not moved.',
+    'Raising k with ka fixed: Cmax lower, tmax earlier, AUC lower, because clearance has risen.',
+    'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
+    'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Effect of ka and k on Cmax, tmax, and AUC"; 09.21 lecture',
  quote:'if we change the K, we are effectively changing the clearance, so we are getting this drug out of the body a whole lot faster … So we\'re not building to as high a level'},
 
@@ -344,7 +475,15 @@ const Q_MODULE5 = [
    why:'Picking this avoids choosing between the two terms rather than reading either definition. Neither describes equal half-lives: disposition rate limiting means the absorption half-life is much the shorter, and absorption rate limiting means it is much the longer. Equal rate constants are also the one case the standard oral equation cannot be evaluated in, because the difference between ka and k sits in its denominator and would be zero. Both terms describe a marked difference between the two processes.'},
   {t:'The elimination half-life cannot be determined from the absorption one', correct:false,
    why:'This reads a naming convention as a statement about what can be measured. The two terms say which of the two processes is the slower one; they say nothing about whether a parameter is obtainable. The elimination half-life is 0.693 divided by k in either case, and under disposition rate limiting it is the longer of the two and governs the tail of the curve. Which term applies is settled by comparing the two half-lives, not by asking whether one can be found.'}],
- teach:'The two terms name whichever process is rate limiting for what is seen in the plasma. Disposition rate limiting means elimination is the slower process, so the absorption half-life is much the shorter and ka is much the larger. Absorption rate limiting is the reverse. Working out which applies is done by comparing the two half-lives directly, and the longer half-life always belongs to the rate-limiting process.',
+ teach:[
+ {t:'The two terms name whichever process is rate limiting for what is seen in the plasma. Disposition rate limiting means elimination is the slower process, so the absorption half-life is much the shorter and ka is much the larger. Absorption rate limiting is the reverse. Working out which applies is done by comparing the two half-lives directly, and the longer half-life always belongs to the rate-limiting process.'},
+  {h:'How the variables relate', list:[
+    'Doubling the dose: Cmax and AUC double, tmax unchanged, ka and k unchanged.',
+    'Raising ka with k fixed: Cmax higher, tmax earlier, AUC unchanged, because clearance has not moved.',
+    'Raising k with ka fixed: Cmax lower, tmax earlier, AUC lower, because clearance has risen.',
+    'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
+    'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Absorption Kinetics Terminology"',
  quote:'Disposition Rate Limiting: absorption half-life is much shorter than elimination half-life'},
 
@@ -361,7 +500,15 @@ const Q_MODULE5 = [
    why:'The label is right and the frequency is reversed. Disposition rate limiting is what most oral products do, because a drug absorbed more slowly than it is eliminated peaks too late to be of much use, and it is the case the single oral dose treatment assumes unless a problem says otherwise. The unusual situation is the one in which absorption is the slower process. An absorption half-life of 0.25 hour against an elimination half-life of 3.15 hours is the ordinary pattern rather than an exception.'},
   {t:'Absorption rate limiting, and it is the unusual case', correct:false,
    why:'Both halves are wrong. The shorter absorption half-life rules out absorption being rate limiting, and the description that does apply is the common one. This answer follows from comparing the two rate constants in the wrong direction and then attaching the frequency to that mistaken label.'}],
- teach:'Deciding which term applies is a direct comparison of the two half-lives, and the process with the longer half-life is the rate-limiting one. With an absorption half-life of a quarter of an hour against an elimination half-life of more than three hours, absorption is far the faster process, so disposition is rate limiting. That is the situation for most oral products and the one the single-dose treatment assumes unless a problem says otherwise.',
+ teach:[
+ {t:'Deciding which term applies is a direct comparison of the two half-lives, and the process with the longer half-life is the rate-limiting one. With an absorption half-life of a quarter of an hour against an elimination half-life of more than three hours, absorption is far the faster process, so disposition is rate limiting. That is the situation for most oral products and the one the single-dose treatment assumes unless a problem says otherwise.'},
+  {h:'How the variables relate', list:[
+    'Doubling the dose: Cmax and AUC double, tmax unchanged, ka and k unchanged.',
+    'Raising ka with k fixed: Cmax higher, tmax earlier, AUC unchanged, because clearance has not moved.',
+    'Raising k with ka fixed: Cmax lower, tmax earlier, AUC lower, because clearance has risen.',
+    'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
+    'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Absorption Kinetics Terminology"; slide "Example 2"; 09.21 lecture',
  quote:'Most of the time, we\'re gonna be looking at disposition rate limiting, where our KA is gonna be significantly faster or larger than our K'},
 
@@ -378,7 +525,15 @@ const Q_MODULE5 = [
    why:'The absorption term is the one that disappears first whenever absorption is fast, which is the common case, so it cannot be what the tail shows in general. This reverses the usual situation. It would also imply that a drug with very rapid absorption has a very slow terminal decline, which is the opposite of what is observed.'},
   {t:'Neither, since the terminal slope reflects both constants together', correct:false,
    why:'The two exponentials decay at different rates, so at long times one is overwhelmingly larger than the other and the decline is effectively single exponential. That is why a terminal slope can be read off a straight line on semi-logarithmic axes at all. Treating the tail as a mixture ignores that the faster term has already gone.'}],
- teach:'At late times only one of the two exponentials in the oral equation still matters, and it is the one with the smaller rate constant. In the ordinary case that is the elimination constant, so the terminal half-life is the elimination half-life. Where absorption is slower than elimination the roles exchange, the terminal slope reflects absorption, and the profile is called flip-flop.',
+ teach:[
+ {t:'At late times only one of the two exponentials in the oral equation still matters, and it is the one with the smaller rate constant. In the ordinary case that is the elimination constant, so the terminal half-life is the elimination half-life. Where absorption is slower than elimination the roles exchange, the terminal slope reflects absorption, and the profile is called flip-flop.'},
+  {h:'How the variables relate', list:[
+    'Doubling the dose: Cmax and AUC double, tmax unchanged, ka and k unchanged.',
+    'Raising ka with k fixed: Cmax higher, tmax earlier, AUC unchanged, because clearance has not moved.',
+    'Raising k with ka fixed: Cmax lower, tmax earlier, AUC lower, because clearance has risen.',
+    'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
+    'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Absorption Kinetics Terminology"; Chapter 15_ Pharmacokinetic Calculations for Drug Elimination and Clearance.pdf',
  quote:'If the drug exhibits a "flip-flop" profile because the absorption of the drug is much slower than the elimination process (eg, often the case with modified-release formulations), then the terminal rate constant, λz, will be reflective of the absorption rate constant and not the elimination rate constant.',
  note:'The deck\'s rate-limiting slide defines disposition rate limiting and absorption rate limiting only as a comparison of the two half-lives, and neither the slide nor the 09.21 captions mention the terminal slope or use the term flip-flop; her treatment of this slide in the lecture goes no further than which half-life is shorter. The terminal-slope reading quoted here is from the assigned chapter in the course project, Chapter 15, which states it verbatim. An exam written from these lectures would key only the half-life comparison, which is why this question is marked low yield and the slide-only comparison is asked separately in m5-c25 and m5-c26.'},
@@ -401,7 +556,15 @@ const Q_MODULE5 = [
    why:'Dividing a pure number by a time in hours leaves reciprocal hours, which is the unit every first-order rate constant must carry. The arithmetic is 0.693 divided by 0.75.'},
   {k:'round', t:'ka = 0.924 hr⁻¹',
    why:'Her worked value is 0.924 per hour, carried to three decimal places, which is the precision she uses for rate constants throughout this example.'}],
- teach:'A stated absorption half-life is not usable in the oral equations as it stands; it must be turned into ka first, and it must be in the same time unit as everything else before that conversion is made. Doing the unit conversion before the division rather than after avoids carrying a rate constant in reciprocal minutes into an equation where the time is in hours.',
+ teach:[
+ {t:'A stated absorption half-life is not usable in the oral equations as it stands; it must be turned into ka first, and it must be in the same time unit as everything else before that conversion is made. Doing the unit conversion before the division rather than after avoids carrying a rate constant in reciprocal minutes into an equation where the time is in hours.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'recognize that 45 minutes is 3/4 of an hour or 0.75 hour'},
 
@@ -419,7 +582,15 @@ const Q_MODULE5 = [
    why:'The half-life is already in hours, so no conversion is needed and the division can be done directly. A pure number over hours leaves reciprocal hours.'},
   {k:'round', t:'k = 0.231 hr⁻¹',
    why:'Her worked value is 0.231 per hour, to three decimal places, matching the precision she uses for the absorption constant in the same problem.'}],
- teach:'Both rate constants in an oral problem are recovered the same way, by dividing 0.693 by the corresponding half-life. Which one comes out depends entirely on which half-life was supplied, so the label on the half-life in the stem has to be read before the arithmetic. The rate constants, not the half-lives, are what the oral equations use.',
+ teach:[
+ {t:'Both rate constants in an oral problem are recovered the same way, by dividing 0.693 by the corresponding half-life. Which one comes out depends entirely on which half-life was supplied, so the label on the half-life in the stem has to be read before the arithmetic. The rate constants, not the half-lives, are what the oral equations use.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'our K is 0.231.'},
 
@@ -443,7 +614,14 @@ const Q_MODULE5 = [
    why:'A dimensionless logarithm divided by a quantity in reciprocal hours leaves hours, which is what a time to peak must be. The ratio of the two rate constants is exactly 4 here, so the numerator is the natural logarithm of 4 and the arithmetic comes out very close to a whole number.'},
   {k:'round', t:'tmax = 2 hours',
    why:'Her worked value is 2 hours, and the unrounded 2.0004 rounds to it. The time to peak depends only on the two rate constants, so the 22 L volume, the 500 mg dose and the 85 per cent bioavailability given in the stem play no part in this particular answer.'}],
- teach:'The time to peak is found from the two rate constants alone. Its expression divides the logarithm of their ratio by their difference, so both must be in the same reciprocal time unit and any half-life given in minutes has to be converted before it is used. Neither the dose nor the volume of distribution appears, which is why the same drug peaks at the same moment whatever dose is given.',
+ teach:[
+ {t:'The time to peak is found from the two rate constants alone. Its expression divides the logarithm of their ratio by their difference, so both must be in the same reciprocal time unit and any half-life given in minutes has to be converted before it is used. Neither the dose nor the volume of distribution appears, which is why the same drug peaks at the same moment whatever dose is given.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'our team Max. It\'s gonna be equal to the natural log of KA divided by K … OK, so I\'m getting 2 hours.'},
 
@@ -469,7 +647,14 @@ const Q_MODULE5 = [
    why:'Multiplying a concentration by a dimensionless fraction leaves a concentration. The bracket is well below one because the two exponentials partly cancel, which is why the peak is far lower than the prefactor on its own would suggest.'},
   {k:'round', t:'Cmax = 12.17 mg/L',
    why:'Her worked value is 12.17 milligrams per litre, to two decimal places, obtained by entering the whole expression in one pass. Entering it stepwise with the rounded intermediates shown here gives the same figure, so the order of the keystrokes does not matter.'}],
- teach:'A peak concentration is calculated in two stages: find the time at which the curve turns over from the two rate constants, then evaluate the full concentration equation at that time. The prefactor supplies the scale, using the bioavailable dose and the volume of distribution, and the bracket supplies the fraction of that scale the curve actually reaches. Leaving the volume of distribution out of the prefactor is the commonest way this calculation fails.',
+ teach:[
+ {t:'A peak concentration is calculated in two stages: find the time at which the curve turns over from the two rate constants, then evaluate the full concentration equation at that time. The prefactor supplies the scale, using the bioavailable dose and the volume of distribution, and the bracket supplies the fraction of that scale the curve actually reaches. Leaving the volume of distribution out of the prefactor is the commonest way this calculation fails.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'0.85 times 500 times 0.924 divided by 22, divided by left parentheses 0.924 minus 0.231 … And I am getting 12.17. Milligrams per liter.'},
 
@@ -489,7 +674,15 @@ const Q_MODULE5 = [
    why:'Elimination is first order, so its half-life is 0.693 divided by its rate constant. Dividing a pure number by reciprocal hours leaves hours.'},
   {k:'round', t:'t½ = 3.15 hr',
    why:'The division gives exactly 3.15 hours at the two decimal places she reports half-lives to in this module. The 70 kg weight in the stem plays no part in this calculation.'}],
- teach:'When an oral problem is handed over as an equation, the rate constants are read straight from the exponents and identified by size, the larger being absorption. An unqualified half-life is always the elimination half-life, so it is the smaller constant that goes under the 0.693. The weight of the patient is stated in problems of this kind and is often not used.',
+ teach:[
+ {t:'When an oral problem is handed over as an equation, the rate constants are read straight from the exponents and identified by size, the larger being absorption. An unqualified half-life is always the elimination half-life, so it is the smaller constant that goes under the 0.693. The weight of the patient is stated in problems of this kind and is often not used.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'0.693 over 0.22.'},
 
@@ -507,7 +700,15 @@ const Q_MODULE5 = [
    why:'Absorption is first order, so its half-life is 0.693 divided by its own rate constant, exactly as on the elimination side. Dividing a pure number by reciprocal hours leaves hours.'},
   {k:'round', t:'t½a = 0.252 hr',
    why:'The division gives 0.252 hour, which is about 15 minutes. She states the working aloud as 0.693 over 2.75 without giving the value, so the figure here is that division carried out.'}],
- teach:'Two half-lives can be read from a single oral equation, one for each rate constant, and they are computed identically. The absorption half-life of a quarter of an hour against an elimination half-life of over three hours is the ordinary ordering, in which disposition is rate limiting. Which half-life is wanted is decided entirely by whether the word absorption appears in the question.',
+ teach:[
+ {t:'Two half-lives can be read from a single oral equation, one for each rate constant, and they are computed identically. The absorption half-life of a quarter of an hour against an elimination half-life of over three hours is the ordinary ordering, in which disposition is rate limiting. Which half-life is wanted is decided entirely by whether the word absorption appears in the question.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'09.21 lecture',
  quote:'if you wanted to find the half-life for absorption, you do 0.693 over 2.75.'},
 
@@ -529,7 +730,14 @@ const Q_MODULE5 = [
    why:'The ratio of the two rate constants is 12.5 and its natural logarithm is 2.5257, which is then divided by their difference of 2.53 reciprocal hours. That the numerator and denominator are so nearly equal here is a coincidence of these particular constants, not a general result.'},
   {k:'round', t:'tmax = 1 hour',
    why:'Her worked value is one hour, and the unrounded figure of 0.9983 hour rounds to it. The peak therefore occurs about one hour after the dose, which is early because absorption is more than twelve times faster than elimination for this drug.'}],
- teach:'When an oral problem arrives as an equation, the time to peak needs nothing but the two exponents. The larger goes on top of the ratio and the difference goes underneath. Because the logarithm of the ratio grows only slowly while the difference grows quickly, a drug absorbed far faster than it is eliminated peaks early, which is the ordinary case.',
+ teach:[
+ {t:'When an oral problem arrives as an equation, the time to peak needs nothing but the two exponents. The larger goes on top of the ratio and the difference goes underneath. Because the logarithm of the ratio grows only slowly while the difference grows quickly, a drug absorbed far faster than it is eliminated peaks early, which is the ordinary case.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'it looks like the max is going to occur. One hour after the dose was administered.'},
 
@@ -553,7 +761,14 @@ const Q_MODULE5 = [
    why:'The intercept of 75 multiplies a dimensionless bracket, so the result keeps the concentration units of the equation. Evaluating at the unrounded time to peak of 0.9983 hour rather than at exactly 1 hour gives the same figure to one decimal place.'},
   {k:'round', t:'Cmax = 55.4 mg/L',
    why:'Her spoken value is 55.4 milligrams per litre. The handwritten annotation of 53.4 on that copy of the slide does not follow from her own equation at any time near the peak and is not used here, which is why the tolerance is set narrowly enough to exclude it.'}],
- teach:'With the prefactor already collected into a single number, a peak calculation from an equation is two exponentials and a subtraction, once the time to peak is known. The result must always be smaller than the leading coefficient, since the bracket cannot reach one, and that comparison is a quick check on the arithmetic.',
+ teach:[
+ {t:'With the prefactor already collected into a single number, a peak calculation from an equation is two exponentials and a subtraction, once the time to peak is known. The result must always be smaller than the leading coefficient, since the bracket cannot reach one, and that comparison is a quick check on the arithmetic.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'75. E -0.22 times 1. E to -2.75 times 1 … 55.4. Milligrams per liter.',
  note:'The printed stem gives units of mcg/mL for the concentration; she states the answer aloud in mg/L, which is numerically the same. Her spoken value is 55.4 and an independent evaluation of her own equation at one hour gives 55.39. The handwritten annotation on this copy of the slide reads 53.4, which does not follow from the equation and is not used.'},
@@ -574,7 +789,15 @@ const Q_MODULE5 = [
    why:'Milligrams multiplied by reciprocal hours, divided by milligrams per litre multiplied by reciprocal hours, cancels both the milligrams and the reciprocal hours and leaves litres. The 2.53 per hour is the difference between the two rate constants.'},
   {k:'round', t:'VD = 6.30 L',
    why:'Her confirmed answer is 6.3, and the unrounded division gives 6.3043 litres. She never states the unit aloud; litres is the only unit the arithmetic produces.'}],
- teach:'A biexponential oral equation contains the volume of distribution inside its leading coefficient, so the coefficient can be taken apart whenever the dose and the bioavailability are supplied. The same rearrangement recovers F if the volume is given instead, or the dose if both are. The step that has to be got right is keeping the difference of the rate constants with the volume of distribution in the denominator.',
+ teach:[
+ {t:'A biexponential oral equation contains the volume of distribution inside its leading coefficient, so the coefficient can be taken apart whenever the dose and the bioavailability are supplied. The same rearrangement recovers F if the volume is given instead, or the dose if both are. The step that has to be got right is keeping the difference of the rate constants with the volume of distribution in the denominator.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'you\'re just gonna rearrange, you\'re gonna pull this volume and distribution piece over here, and you\'re gonna divide by 75 down here, and you should get 6.3',
  note:'She confirms 6.3 after polling several wrong student answers, and no unit is spoken; litres is the only unit consistent with a volume of distribution and with the arithmetic. The printed stem for this example gives concentration units of mcg/mL, which are numerically identical to mg/L, so the volume comes out the same either way.'},
@@ -595,7 +818,15 @@ const Q_MODULE5 = [
    why:'The difference of the two exponentials is again a pure fraction, so multiplying by the prefactor keeps the units of the prefactor. At this time the absorption term subtracts almost nothing.'},
   {k:'round', t:'Cp = 31.11 mg/L',
    why:'Two decimal places matches the precision her worked concentrations carry in this module. The value is well below the peak of 55.4 mg/L, as it must be four hours after a peak at one hour.'}],
- teach:'Away from the peak, an oral concentration is a straight substitution into the equation. Once several absorption half-lives have passed, the absorption exponential has effectively vanished and the concentration is governed by the elimination term alone, which is the complete elimination phase of the curve. That is why the tail of an oral curve behaves like an ordinary first-order decay.',
+ teach:[
+ {t:'Away from the peak, an oral concentration is a straight substitution into the equation. Once several absorption half-lives have passed, the absorption exponential has effectively vanished and the concentration is governed by the elimination term alone, which is the complete elimination phase of the curve. That is why the tail of an oral curve behaves like an ordinary first-order decay.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"',
  quote:'Calculate tmax, Cmax and t½ for this drug in this patient.',
  note:'The four-hour time point is not one she asks for. The equation, both rate constants and the coefficient are hers as printed on the slide; only the substitution time is chosen here, to give a question on the deck objective of calculating the plasma concentration at any time after an oral dose.'},
@@ -618,7 +849,15 @@ const Q_MODULE5 = [
    why:'Dividing 0.693 by a half-life expressed in hours gives a rate constant in reciprocal hours, because a pure number divided by hours leaves reciprocal hours. Carrying the 90 minutes into this line instead of the 1.5 hours would give 0.0077, a constant per minute rather than per hour, which is the arithmetic the conversion in the first line prevents. The rate constant is larger than the reciprocal of the half-life would suggest because 0.693 is the natural logarithm of 2.'},
   {k:'round', t:'ka = 0.462 hr⁻¹',
    why:'Her worked value is 0.462 per hour, to three decimal places, the same precision she uses for rate constants elsewhere in this lecture.'}],
- teach:'A half-life stated in minutes has to be converted to hours before it is turned into a rate constant, because every oral equation in this module works in hours. The second trap in the same line is using the half-life itself where the rate constant belongs, which gives an absorption that is slower than the real one by a factor of more than two here.',
+ teach:[
+ {t:'A half-life stated in minutes has to be converted to hours before it is turned into a rate constant, because every oral equation in this module works in hours. The second trap in the same line is using the half-life itself where the rate constant belongs, which gives an absorption that is slower than the real one by a factor of more than two here.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'09.21 lecture',
  quote:'when you change your times, recognize. That 1.5 here, that is the half-life. So you still need to divide that by 0.693.',
  note:'The captions record the instruction as dividing 1.5 by 0.693, with the operands reversed; her own arithmetic in the same passage is 0.693 divided by 1.5, which gives the 0.462 per hour she then uses. The keyed answer follows her arithmetic.'},
@@ -643,7 +882,14 @@ const Q_MODULE5 = [
    why:'The numerator is the natural logarithm of 3.3333, which is 1.2040, and dividing it by 0.3234 reciprocal hours leaves hours. Rounding the logarithm early to 1.20 would give 3.7105 hours, the same figure to one decimal place, so the point at which the rounding is done does not move the reported answer.'},
   {k:'round', t:'tmax = 3.72 hours',
    why:'Her worked value is 3.7 hours, to one decimal place, and 3.72 is the same number carried one place further. This peak is much later than the one-hour peak of the earlier antibiotic because absorption here is only about three times faster than elimination rather than twelve.'}],
- teach:'Where both half-lives are stated, the time to peak takes three lines: convert the time units, convert each half-life to its rate constant, then divide the logarithm of their ratio by their difference. The dose, the bioavailability and the volume of distribution are supplied for the peak concentration that follows and play no part here.',
+ teach:[
+ {t:'Where both half-lives are stated, the time to peak takes three lines: convert the time units, convert each half-life to its rate constant, then divide the logarithm of their ratio by their difference. The dose, the bioavailability and the volume of distribution are supplied for the peak concentration that follows and play no part here.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 1; 09.21 lecture',
  quote:'And then in the denominator, we\'ve got 0.462 minus 0.1386 … 3.7, 3.7. OK. So 3.7 hours'},
 
@@ -669,7 +915,14 @@ const Q_MODULE5 = [
    why:'Multiplying the prefactor by the dimensionless bracket leaves a concentration in milligrams per litre. Evaluating at the unrounded time to peak of 3.7229 hours instead of 3.7 gives the same figure, so the earlier rounding of tmax costs nothing here.'},
   {k:'round', t:'Cmax = 13.13 mg/L',
    why:'Her spoken value is about 13 milligrams per litre, and two decimal places is the precision the parameters support. The peak sits well below the 22 mg/L the dose and volume would give on instant absorption, because elimination is already removing drug while absorption is still going on.'}],
- teach:'The peak concentration calculation always uses every parameter in the problem: the two rate constants set the time and the denominator, and F, the dose and the volume of distribution set the scale. Because the volume of distribution plays no part in finding the time to peak, it is the parameter most often dropped when moving to the second stage.',
+ teach:[
+ {t:'The peak concentration calculation always uses every parameter in the problem: the two rate constants set the time and the denominator, and F, the dose and the volume of distribution set the scale. Because the volume of distribution plays no part in finding the time to peak, it is the parameter most often dropped when moving to the second stage.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 1; 09.21 lecture',
  quote:'Do not forget the volume of distribution. Our volume distribution is 20 L … And I\'m getting 13-ish milligrams per liter.',
  note:'The printed practice sheet gives the apparent volume of distribution as 40 L. In the 09.21 lecture she changed it aloud to 20 L before working the problem and every figure she then quotes uses 20 L, so 20 L is used here. With the printed 40 L the same working gives 6.57 mg/L.'},
@@ -694,7 +947,15 @@ const Q_MODULE5 = [
    why:'The bracket is unchanged from the 20 L version because it depends only on the rate constants and the time, so only the prefactor has halved. Multiplying a concentration by a dimensionless fraction leaves a concentration.'},
   {k:'round', t:'Cmax = 6.57 mg/L',
    why:'This is exactly half the 13.13 mg/L obtained with a 20 L volume, as it must be when the only change is a doubling of the volume in the denominator. Doubling the volume of distribution halves every concentration on the curve without moving the time at which the peak occurs.'}],
- teach:'The volume of distribution enters the oral equation only through the constant prefactor, so it scales every concentration on the curve and moves nothing in time. Doubling it halves the peak and leaves the time to peak exactly where it was, which is the same behaviour the dose shows in the opposite direction.',
+ teach:[
+ {t:'The volume of distribution enters the oral equation only through the constant prefactor, so it scales every concentration on the curve and moves nothing in time. Doubling it halves the peak and leaves the time to peak exactly where it was, which is the same behaviour the dose shows in the opposite direction.'},
+  {h:'How the variables relate', list:[
+    'Doubling the dose: Cmax and AUC double, tmax unchanged, ka and k unchanged.',
+    'Raising ka with k fixed: Cmax higher, tmax earlier, AUC unchanged, because clearance has not moved.',
+    'Raising k with ka fixed: Cmax lower, tmax earlier, AUC lower, because clearance has risen.',
+    'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
+    'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 1; 09.21 lecture',
  quote:'first thing we\'re gonna do is we\'re gonna change our volume, apparent volume of distribution from 40 L. Let\'s change that to 20 L.',
  note:'The printed practice sheet gives 40 L and she replaced it with 20 L in class, so this question keys the printed value and m5-n13 keys the value she worked with. No answer for the 40 L version is spoken in the lecture; the 6.57 mg/L here is her own working repeated with the printed volume.'},
@@ -717,7 +978,15 @@ const Q_MODULE5 = [
    why:'The difference of the rate constants is 0.872 minus 0.182, which is 0.690 per hour. Milligrams times reciprocal hours divided by milligrams per litre times reciprocal hours leaves litres.'},
   {k:'round', t:'VD = 34.32 L, reported as 34.3 L',
    why:'Her worked value is 34.3 litres, and the handwriting on the practice sheet carries the same figure to two decimal places. The unrounded division gives 34.3178 litres.'}],
- teach:'Back-solving for the volume of distribution from a biexponential oral equation is one rearrangement of the prefactor, and it needs the bioavailability and the dose to be supplied. The two places it goes wrong are misidentifying which exponent is ka and dropping the difference of the rate constants from the denominator.',
+ teach:[
+ {t:'Back-solving for the volume of distribution from a biexponential oral equation is one rearrangement of the prefactor, and it needs the bioavailability and the dose to be supplied. The two places it goes wrong are misidentifying which exponent is ka and dropping the difference of the rate constants from the denominator.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 2; 09.21 lecture',
  quote:'our Weime of distribution is going to be our F, which is 0.84 times our dose, which is 750 mg. Times RKA which is 0.872 per hour. Divided by 23.2 mg per liter … 34.3. Thank you. 34.3 L.'},
 
@@ -735,7 +1004,15 @@ const Q_MODULE5 = [
    why:'First-order half-life is 0.693 divided by the rate constant, and this relation is not supplied on the equation sheet. A pure number over reciprocal hours leaves hours.'},
   {k:'round', t:'t½ = 3.8077 hr, reported as 3.8 hours',
    why:'Her spoken value is 3.8 hours and the handwriting on the practice sheet records 3.80. The unrounded division gives 3.8077 hours.'}],
- teach:'The elimination half-life of a drug given orally is obtained from the elimination rate constant only, so the first decision is which of the two constants in the equation that is. The smaller one belongs to elimination whenever absorption is the faster process, which is the ordinary case and the one assumed unless a problem states otherwise.',
+ teach:[
+ {t:'The elimination half-life of a drug given orally is obtained from the elimination rate constant only, so the first decision is which of the two constants in the equation that is. The smaller one belongs to elimination whenever absorption is the faster process, which is the ordinary case and the one assumed unless a problem states otherwise.'},
+  {h:'How the variables relate', list:[
+    'C = (F x D x ka)/(VD(ka - k)) x (e^(-kt) - e^(-ka t)).',
+    'The prefactor scales the curve; the bracket sets its shape. The prefactor is not C0.',
+    'ka is the absorption rate constant and k the elimination rate constant, both in reciprocal time.',
+    'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
+    'An unqualified t1/2 means the elimination half-life.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 2; 09.21 lecture',
  quote:'our T one half is gonna be 0.693 over R K 0.182 per hour … 3.8 hours?'},
 
@@ -757,7 +1034,14 @@ const Q_MODULE5 = [
    why:'The ratio of the two rate constants is 4.7912 and its natural logarithm is 1.5667, divided by their difference of 0.690 reciprocal hours. Reciprocal hours in the denominator invert to give hours, which is what a time to peak must carry.'},
   {k:'round', t:'tmax = 2.27 hours',
    why:'Her worked value is 2.27 hours, to two decimal places. This peak is later than the one-hour peak of the earlier antibiotic because here the two rate constants are much closer together, so absorption and elimination stay in competition for longer.'}],
- teach:'The closer the two rate constants are to one another, the later the peak occurs, because absorption takes longer to lose its advantage over elimination. A drug absorbed nearly five times faster than it is eliminated peaks at about 2.3 hours, while one absorbed twelve and a half times faster peaks at about one hour. The whole comparison is contained in the ratio and the difference of the two constants.',
+ teach:[
+ {t:'The closer the two rate constants are to one another, the later the peak occurs, because absorption takes longer to lose its advantage over elimination. A drug absorbed nearly five times faster than it is eliminated peaks at about 2.3 hours, while one absorbed twelve and a half times faster peaks at about one hour. The whole comparison is contained in the ratio and the difference of the two constants.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 2; 09.21 lecture',
  quote:'T max is gonna be natural log of 0.872 divided by 0.182. Divided by the differences, 0.872 minus 0.182 … 2.27 hours.'},
 
@@ -781,7 +1065,14 @@ const Q_MODULE5 = [
    why:'The intercept of 23.2 multiplies a dimensionless bracket, so the result keeps the concentration units of the equation. Evaluating at the unrounded time to peak gives the same figure, so the rounding of tmax to two decimals costs nothing.'},
   {k:'round', t:'Cmax = 12.14 mg/L',
    why:'Her worked value is 12.14 milligrams per litre, which she also states as micrograms per millilitre, the two being numerically identical. Two decimal places matches the precision of the coefficients printed in the equation she supplies.'}],
- teach:'When the prefactor is supplied as a number, the peak concentration is the time to peak substituted into two exponentials. The result must be below the leading coefficient, and it is always worth checking that the elimination exponential is the larger of the two at the peak, because the reverse would mean the rate constants had been swapped.',
+ teach:[
+ {t:'When the prefactor is supplied as a number, the peak concentration is the time to peak substituted into two exponentials. The result must be below the leading coefficient, and it is always worth checking that the elimination exponential is the larger of the two at the peak, because the reverse would mean the rate constants had been swapped.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 2; 09.21 lecture',
  quote:'we\'re gonna take that 2.27 and plug it in up here for the T\'s … what do you expect the max to be? 12.14 mg per liter or micrograms per mL.'},
 
@@ -803,7 +1094,14 @@ const Q_MODULE5 = [
    why:'The ratio of the doses is a pure number, so multiplying the old peak by it gives the new peak in the same units. This is quicker and less error-prone than re-evaluating the whole equation.'},
   {k:'round', t:'Cmax = 24.34 mg/L',
    why:'Recomputing the full equation with a 1000 mg dose gives 24.339 mg/L, which confirms the proportional route. Two decimal places matches the precision of the 12.17 mg/L she reports for the original dose.'}],
- teach:'Linear pharmacokinetics means every concentration is proportional to the dose, so a dose change needs no recalculation of the exponentials at all. The peak scales with the dose, the area under the curve scales with the dose, and the time to peak does not move. Recognising this converts a long substitution into a single multiplication.',
+ teach:[
+ {t:'Linear pharmacokinetics means every concentration is proportional to the dose, so a dose change needs no recalculation of the exponentials at all. The peak scales with the dose, the area under the curve scales with the dose, and the time to peak does not move. Recognising this converts a long substitution into a single multiplication.'},
+  {h:'How the variables relate', list:[
+    'tmax = ln(ka/k)/(ka - k): the two rate constants and nothing else.',
+    'Cmax is found by substituting tmax back into the concentration equation, so tmax comes first every time.',
+    'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
+    'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; slide "Changing Dose"; 09.21 lecture',
  quote:'we increase the dose, we expect a proportional increase in concentration and AUC. We do not expect a change in TMAX',
  note:'The 500 mg dose, the parameters and the 12.17 mg/L peak are hers from Example 1; the doubling is the change described on her Changing Dose slide applied to that example. She does not work a doubled version of Example 1 aloud.'},
@@ -824,7 +1122,15 @@ const Q_MODULE5 = [
    why:'Dividing one time by another cancels the hours and leaves a pure number, so the answer carries no units. The 0.693 cancels as well, which is why the ratio of the half-lives is just the ratio of the rate constants the other way up.'},
   {k:'round', t:'Ratio = 12.5',
    why:'The same figure comes from dividing 2.75 by 0.22 directly, which is the ratio that appears inside the logarithm in the time to peak. The absorption half-life is twelve and a half times the shorter.'}],
- teach:'Comparing the two half-lives is the same comparison as ranking the two rate constants, because each half-life is 0.693 over its constant and the 0.693 cancels in the ratio. A much shorter absorption half-life means disposition is rate limiting, which is the ordinary situation, and the same ratio is what sits inside the logarithm when the time to peak is computed.',
+ teach:[
+ {t:'Comparing the two half-lives is the same comparison as ranking the two rate constants, because each half-life is 0.693 over its constant and the 0.693 cancels in the ratio. A much shorter absorption half-life means disposition is rate limiting, which is the ordinary situation, and the same ratio is what sits inside the logarithm when the time to peak is computed.'},
+  {h:'How the variables relate', list:[
+    'Extravascular means the dose is placed outside the vascular system, so it must be absorbed first.',
+    'Both processes are first order: first order in with ka, first order out with k.',
+    'F is the fraction reaching the circulation, between 0 and 1; for an intravenous dose F = 1.',
+    'A capital F in a problem is the signal that the route is extravascular.',
+    'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; slide "Absorption Kinetics Terminology"; 09.21 lecture',
  quote:'Disposition Rate Limiting: absorption half-life is much shorter than elimination half-life'},
 

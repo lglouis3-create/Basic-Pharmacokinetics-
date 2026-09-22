@@ -27,15 +27,23 @@ const GLOSS = [
    question whose concept splits into distinct parts carries them as named
    sections instead. Both forms render, so no question has to be rewritten.
    ========================================================================== */
+/* A section is {h, t} for prose, {h, list:[...]} for bullets, or both. Bullets
+   are how a set of relations between the same few quantities is read: as a
+   list of separate statements rather than one sentence carrying all of them. */
 const teachParts = t => Array.isArray(t)
-  ? t.filter(p => p && p.t).map(p => ({h: p.h, t: String(p.t)}))
-  : (t ? [{t: String(t)}] : []);
-const teachText  = t => teachParts(t).map(p => p.t).join(' ');
+  ? t.filter(p => p && (p.t || (p.list && p.list.length)))
+      .map(p => ({h: p.h, t: p.t ? String(p.t) : '', list: (p.list || []).map(String)}))
+  : (t ? [{t: String(t), list: []}] : []);
+/* Everything a concept block says, as one string: each section's prose and its
+   bullets, so the term glosser and every check see the whole of it. */
+const teachText  = t => teachParts(t).map(p => [p.t, ...p.list].filter(Boolean).join(' ')).join(' ');
 
 function renderTeach(t, seen, self){
+  const gl = s => seen ? glossify(esc(s), seen, self) : esc(s);
   return teachParts(t).map(p =>
     (p.h ? `<h5 class="tsec">${esc(p.h)}</h5>` : '') +
-    `<p class="prose">${seen ? glossify(esc(p.t), seen, self) : esc(p.t)}</p>`
+    (p.t ? `<p class="prose">${gl(p.t)}</p>` : '') +
+    (p.list.length ? `<ul class="tlist">${p.list.map(li => `<li>${gl(li)}</li>`).join('')}</ul>` : '')
   ).join('');
 }
 

@@ -35,7 +35,13 @@ const Q_MODULE4 = [
    why:'Movement to and from tissue is distribution, and the giveaway is that it runs in both directions. Elimination only runs one way, out. A drug that leaves the plasma for fat and comes back later has not been eliminated, even though the plasma concentration fell while it was away.'},
   {t:'Removal of drug from the plasma compartment', correct:false,
    why:'Picking this substitutes the sampled compartment for the body as a whole. Drug can leave the plasma without leaving the body at all, because distribution into tissue lowers the plasma concentration while every milligram is still present. Elimination is defined against the body, so only irreversible loss by excretion or biotransformation counts. Reading it as a plasma event turns the distribution phase into an elimination event, and a drug that returned from tissue would then have to be described as un-eliminated.'}],
- teach:'Elimination names the permanent loss of drug from the body and nothing else. It splits into two mechanisms: excretion, where the drug leaves chemically unchanged, and biotransformation, where it is converted into something else first. Both end with the parent drug gone, which is why both count as elimination and why the overall rate constant k contains both.',
+ teach:[
+ {t:'Elimination names the permanent loss of drug from the body and nothing else. It splits into two mechanisms: excretion, where the drug leaves chemically unchanged, and biotransformation, where it is converted into something else first. Both end with the parent drug gone, which is why both count as elimination and why the overall rate constant k contains both.'},
+  {h:'How the variables relate', list:[
+    'ClT = ClR + ClH, total clearance being the sum over every route.',
+    'Hepatic clearance is obtained by difference: ClH = ClT - ClR, because the liver cannot be sampled.',
+    'A bare Cl with no subscript means total body clearance.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 3',
  quote:'Irreversible removal of drug from the body by all routes of elimination'},
 
@@ -52,7 +58,13 @@ const Q_MODULE4 = [
    why:'This has the two organs the right way round for nothing: the kidney is the main site of excretion and the liver the main site of biotransformation, so the option reverses them. The two major elimination organs are the kidney and the liver, and matching each to its characteristic process is exactly what this distractor tests.'},
   {t:'Excretion applies to metabolites only; biotransformation applies to parent drug', correct:false,
    why:'Choosing this reads excretion as though it applied only to what biotransformation has already produced, which restricts it to the second half of elimination. Excretion covers removal of intact drug or of metabolite; the defining feature is that the molecule leaves the body unaltered at the point of removal, not which species is being removed. The error matters numerically: if excretion could not remove parent drug, the fraction excreted unchanged would be zero for every drug and renal clearance taken as fe times total clearance would collapse to zero with it. What separates the two mechanisms is whether the molecule is chemically converted first.'}],
- teach:'The two elimination mechanisms differ in whether the molecule survives. Excretion physically removes drug from the body without altering it. Biotransformation alters it first, usually into something the body can then eliminate more readily. The distinction matters numerically because the fraction excreted unchanged is measured by collecting the parent drug in urine, and everything not recovered that way is attributed to metabolism.',
+ teach:[
+ {t:'The two elimination mechanisms differ in whether the molecule survives. Excretion physically removes drug from the body without altering it. Biotransformation alters it first, usually into something the body can then eliminate more readily. The distinction matters numerically because the fraction excreted unchanged is measured by collecting the parent drug in urine, and everything not recovered that way is attributed to metabolism.'},
+  {h:'How the variables relate', list:[
+    'ClT = ClR + ClH, total clearance being the sum over every route.',
+    'Hepatic clearance is obtained by difference: ClH = ClT - ClR, because the liver cannot be sampled.',
+    'A bare Cl with no subscript means total body clearance.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 3, and slide 24',
  quote:'Biotransformation or drug metabolism—drug is chemically converted in the body to a metabolite'},
 
@@ -69,7 +81,13 @@ const Q_MODULE4 = [
    why:'Picking the gut wall substitutes a site of absorption loss for an organ of elimination. Loss at the gut wall reduces how much drug arrives in the circulation, which is a bioavailability matter, and it removes nothing that is already there. Dropping the kidney also removes the only organ whose clearance can be obtained from a urine collection, and without that measurement hepatic clearance could not be reached by subtraction from the total. The two elimination organs are the kidney and the liver.'},
   {t:'The kidney and the spleen', correct:false,
    why:'This keeps the kidney, which is the half most students are sure of, and substitutes a guess for the metabolic organ rather than recalling that it is the liver. The spleen has no assigned role as an organ of drug elimination in this course. The pair is fixed by the two mechanisms: one organ excretes intact drug and the other biotransforms it, which is what makes total clearance the sum of a renal and a hepatic part. With the spleen in the liver\'s place there is no organ left for hepatic clearance to come from.'}],
- teach:'Two organs and two mechanisms line up with each other. The kidney is where intact drug is excreted, and its contribution is renal clearance. The liver is where drug is biotransformed, and its contribution is hepatic clearance. Total body clearance is their sum, so naming the organs and writing ClT = ClR + ClH are the same statement made twice.',
+ teach:[
+ {t:'Two organs and two mechanisms line up with each other. The kidney is where intact drug is excreted, and its contribution is renal clearance. The liver is where drug is biotransformed, and its contribution is hepatic clearance. Total body clearance is their sum, so naming the organs and writing ClT = ClR + ClH are the same statement made twice.'},
+  {h:'How the variables relate', list:[
+    'ClT = ClR + ClH, total clearance being the sum over every route.',
+    'Hepatic clearance is obtained by difference: ClH = ClT - ClR, because the liver cannot be sampled.',
+    'A bare Cl with no subscript means total body clearance.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 3',
  quote:'Kidney and liver are the two major drug elimination organs in the body'},
 
@@ -88,7 +106,15 @@ const Q_MODULE4 = [
    why:'A fraction per unit time is the elimination rate constant k, so this substitutes k for clearance and loses the volume. Clearance is k multiplied by the apparent volume of distribution, which is why clearance carries a volume in its units and k carries reciprocal time only. Reading the definition as a fraction keeps the time part and discards the volume part, so the answer describes how fast a proportion of the drug is lost but not what volume of fluid that corresponds to. Two constants stand behind clearance and this option retains one of them.'},
   {t:'The time required to remove half of the drug present', correct:false,
    why:'That is the half-life, and reaching for it here means answering a question about a volume per unit time with a quantity measured in time alone. Clearance and half-life are connected through the volume of distribution, so knowing one does not turn it into the other. A stated half-life says nothing on its own about how many litres are cleared each hour, because that depends on the volume the drug occupies as well. The unit check settles it: hours cannot be litres per hour.'}],
- teach:'Clearance is a volume of fluid completely cleared of drug in each unit of time. The definition deliberately says nothing about how the drug is removed, which is what lets one number stand for filtration, secretion, metabolism and everything else at once. Because it is a volume per time, it can be attached to the whole body or to a single organ, and organ clearances add up to the total.',
+ teach:[
+ {t:'Clearance is a volume of fluid completely cleared of drug in each unit of time. The definition deliberately says nothing about how the drug is removed, which is what lets one number stand for filtration, secretion, metabolism and everything else at once. Because it is a volume per time, it can be attached to the whole body or to a single organ, and organ clearances add up to the total.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 4',
  quote:'Volume of fluid removed of drug from the body per unit time'},
 
@@ -105,7 +131,15 @@ const Q_MODULE4 = [
    why:'Picking this pairs two quantities that no proportionality factor connects, because in a linear first-order system the half-life does not move when the dose changes. The error is to read proportionality factor as meaning any two quantities that appear together in dosing, rather than the specific pair one constant sits between. Clearance sits between a rate and a concentration, so doubling the dose doubles the concentration and the rate together and leaves the half-life exactly where it was. Nothing on this point relates dose to half-life at all.'},
   {t:'The renal and hepatic clearances', correct:false,
    why:'Renal and hepatic clearance add rather than sit in proportion, and their relationship is ClT = ClR + ClH. This answer takes a true statement from the next slide and misreads addition as proportionality.'}],
- teach:'Clearance appears in three descriptions on these slides and all three are the same quantity. It is a volume of fluid cleared per unit time. It is the proportionality factor between the rate of elimination and the plasma concentration, written rate of elimination equals Cl times Cp. And it is the loss of drug across an organ of elimination, which is what allows renal and hepatic clearance to be quoted separately and then added.',
+ teach:[
+ {t:'Clearance appears in three descriptions on these slides and all three are the same quantity. It is a volume of fluid cleared per unit time. It is the proportionality factor between the rate of elimination and the plasma concentration, written rate of elimination equals Cl times Cp. And it is the loss of drug across an organ of elimination, which is what allows renal and hepatic clearance to be quoted separately and then added.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 5',
  quote:'Clearance can be defined as the proportionality factor that relates rate of drug elimination to the plasma (drug) concentration.'},
 
@@ -122,7 +156,15 @@ const Q_MODULE4 = [
    why:'This attaches a protein-binding idea to a term that measures arrival, so the error is reading F as a fraction of drug rather than as a fraction of dose. Giving a drug intravenously places all of it in the circulation but does nothing to stop it binding to plasma protein, so a free fraction of 1 does not follow from the route. The route decides how much drug arrives; binding decides how much of what arrived is unbound. Bioavailability is settled at the point of entry, before any binding question arises.'},
   {t:'The fraction of drug metabolised, taken as 1 for an intravenous dose', correct:false,
    why:'Choosing this runs the same arithmetic on the complement, substituting the fraction metabolised for the fraction that reached the circulation. A metabolised fraction of 1 would mean nothing at all is excreted unchanged, so renal clearance taken as fe times total clearance would be zero for every intravenous drug. The worked 500-mg example has 300 mg recovered unchanged in the urine, which contradicts that reading directly. Capital F counts what arrived, not what happened to it afterwards.'}],
- teach:'Clearance ties the dose to the total systemic exposure. The area under the concentration-time curve measures how much drug the body actually saw, and the dose measures how much was given, so their ratio measures how efficiently the body removes it. The bioavailability factor sits in the numerator because only the part of the dose that reached the circulation contributed to the area, and for an intravenous dose that is all of it.',
+ teach:[
+ {t:'Clearance ties the dose to the total systemic exposure. The area under the concentration-time curve measures how much drug the body actually saw, and the dose measures how much was given, so their ratio measures how efficiently the body removes it. The bioavailability factor sits in the numerator because only the part of the dose that reached the circulation contributed to the area, and for an intravenous dose that is all of it.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 7',
  quote:'Clearance is directly related to the dose administered and to the overall systemic exposure achieved'},
 
@@ -139,7 +181,15 @@ const Q_MODULE4 = [
    why:'This swaps the two symbols while keeping both meanings, so the error is one of pairing rather than of recall. The consequence is numerical: renal clearance would be computed as bioavailability times total clearance, and for an intravenous dose, where the bioavailability factor is 1, renal clearance would come out equal to total clearance and hepatic clearance zero. Lowercase fe is the fraction of the dose recovered unchanged in the urine; capital F is the fraction of the dose that reached the circulation. The subscript is what keeps them apart.'},
   {t:'fe is the fraction metabolised; F is the fraction eliminated', correct:false,
    why:'The fraction metabolised is one minus fe, not fe itself, so this reverses the quantity that urine collection actually measures. Calling F a fraction eliminated also confuses input with output, since bioavailability is settled before any elimination has happened.'}],
- teach:'Two fractions bracket the drug journey. Capital F asks how much of what was given arrived in the circulation, which for an intravenous dose is all of it. Lowercase fe asks how much of what arrived left again unchanged in the urine. The first scales the dose in the clearance-area relationship; the second splits total clearance into its renal and hepatic parts.',
+ teach:[
+ {t:'Two fractions bracket the drug journey. Capital F asks how much of what was given arrived in the circulation, which for an intravenous dose is all of it. Lowercase fe asks how much of what arrived left again unchanged in the urine. The first scales the dose in the clearance-area relationship; the second splits total clearance into its renal and hepatic parts.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 10',
  quote:'lowercase fe is our fraction excreted, capital F is our bioavailability factor'},
 
@@ -156,7 +206,15 @@ const Q_MODULE4 = [
    why:'This substitutes the rate of elimination for the clearance: the rate does fall from moment to moment as the concentration falls, but clearance is treated as a constant throughout this course. Because clearance does not move during a first-order decline, there is nothing rapid to chase and speed is not what blocks the measurement. What blocks it is access, since no sample captures everything the liver did to the drug. The hepatic part is therefore taken as the remainder once the measurable renal part is subtracted from the total.'},
   {t:'The liver eliminates drug only after the kidney has finished with it', correct:false,
    why:'This reads the additivity of clearance as though the two organs acted one after the other, when they act on the drug at the same time. Simultaneous action is why the contributions add, with total clearance equal to the renal plus the hepatic part at every instant. A sequential picture would make total clearance depend on timing rather than on a sum, and the subtraction that yields hepatic clearance would have no basis. The reason hepatic clearance is obtained by difference is that the rate and extent of metabolism can rarely be measured directly, not that it happens later.'}],
- teach:'Additivity is what makes the subtraction legitimate. Total body clearance is the sum of the renal and hepatic contributions, so knowing any two of the three fixes the third. Renal clearance is the measurable one, from urine collection or from fe times total clearance, so hepatic clearance is taken as the remainder. The same reasoning gives the alternative form, hepatic clearance equals one minus fe, times total clearance.',
+ teach:[
+ {t:'Additivity is what makes the subtraction legitimate. Total body clearance is the sum of the renal and hepatic contributions, so knowing any two of the three fixes the third. Renal clearance is the measurable one, from urine collection or from fe times total clearance, so hepatic clearance is taken as the remainder. The same reasoning gives the alternative form, hepatic clearance equals one minus fe, times total clearance.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 11',
  quote:'Rate and extent of metabolism can rarely be measured directly, but by taking advantage of the additivity of clearance, hepatic clearance is readily estimated as the difference between total and renal clearance'},
 
@@ -176,7 +234,15 @@ const Q_MODULE4 = [
    why:'Millilitres per minute multiplied by micrograms per millilitre cancels the millilitres and leaves micrograms per minute, which is an amount per unit time and therefore a rate. The arithmetic is 15 times 5.'},
   {k:'round', t:'Rate of elimination = 75 mcg/min',
    why:'Both inputs are exact as given, so the product is exact and no rounding is involved. Her worked answer aloud is 75 micrograms per minute.'}],
- teach:'The rate of elimination is not a fixed property of a drug; it depends on how much drug is present. Clearance is the fixed part, and multiplying it by the current plasma concentration gives the rate at that moment. As the concentration falls the rate falls with it, in exact proportion, which is what first-order elimination means stated in clearance language.',
+ teach:[
+ {t:'The rate of elimination is not a fixed property of a drug; it depends on how much drug is present. Clearance is the fixed part, and multiplying it by the current plasma concentration gives the rate at that moment. As the concentration falls the rate falls with it, in exact proportion, which is what first-order elimination means stated in clearance language.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 6',
  quote:'Penicillin has a ClT of 15 mL/min. What is the elimination rate of penicillin when the plasma drug concentration is 5 mcg/mL?'},
 
@@ -198,7 +264,15 @@ const Q_MODULE4 = [
    why:'Litres per hour multiplied by milligrams per litre cancels the litres and leaves milligrams per hour. The clearance and the concentration now share the litre as their volume unit, which is what makes the cancellation possible.'},
   {k:'round', t:'Rate of elimination = 4.5 mg/hr',
    why:'The value carries a leading zero nowhere and needs one decimal place. As a check, her answer of 75 mcg/min multiplied by 60 minutes is 4500 mcg/hr, which is the same 4.5 mg/hr.'}],
- teach:'A clearance and a concentration can only be multiplied once they share a volume unit, and the time unit of the answer is whatever time unit the clearance carries. Converting the clearance rather than the concentration is usually less work, because the concentration identity of micrograms per millilitre with milligrams per litre means the concentration often needs no arithmetic at all.',
+ teach:[
+ {t:'A clearance and a concentration can only be multiplied once they share a volume unit, and the time unit of the answer is whatever time unit the clearance carries. Converting the clearance rather than the concentration is usually less work, because the concentration identity of micrograms per millilitre with milligrams per litre means the concentration often needs no arithmetic at all.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 6, with the unit identity from the 24 August lecture',
  quote:'Milligrams per liter equals micrograms per mL.',
  note:'The conversion to milligrams per hour is not on the slide; the slide answers in micrograms per minute. The unit identity used here is the one she states in the 24 August lecture and repeats in the 9 September review. An exam written from these lectures would key 75 mcg/min for the slide question and would accept either unit pair where it asks for a rate.'},
@@ -219,7 +293,15 @@ const Q_MODULE4 = [
    why:'Both quantities are amounts in milligrams, so the milligrams cancel and the result is a pure number. The volume of distribution and the half-life are not used in this part; they belong to the later parts of the same question.'},
   {k:'round', t:'fe = 0.6, dimensionless',
    why:'Dr. Mosley asks the class directly what the units of fe are and confirms there are none, because an amount has been divided by an amount. Reporting 0.6 rather than .6 also satisfies her rule that a number smaller than one must carry a leading zero.'}],
- teach:'The fraction excreted unchanged is the share of the dose that left the body as the parent molecule. It is measured by collecting urine long enough for the cumulative amount to stop rising, then dividing by the dose. Everything not recovered that way is attributed to the other elimination routes, so one minus fe is the fraction handled by metabolism, and the two fractions split total clearance between the kidney and the liver.',
+ teach:[
+ {t:'The fraction excreted unchanged is the share of the dose that left the body as the parent molecule. It is measured by collecting urine long enough for the cumulative amount to stop rising, then dividing by the dose. Everything not recovered that way is attributed to the other elimination routes, so one minus fe is the fraction handled by metabolism, and the two fractions split total clearance between the kidney and the liver.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 22',
  quote:'What fraction of the dose is excreted unchanged in the urine?'},
 
@@ -237,7 +319,15 @@ const Q_MODULE4 = [
    why:'A dimensionless fraction multiplied by an amount in milligrams leaves milligrams, which is what a cumulative urinary amount must be. The arithmetic is six tenths of 500.'},
   {k:'round', t:'Du∞ = 300 mg',
    why:'The figure matches the 300 mg her own example states was recovered, which is the check that the rearrangement was made correctly. The remaining 200 mg of the dose left the body by routes other than unchanged urinary excretion.'}],
- teach:'The fraction excreted unchanged converts between a dose and the amount of parent drug that will appear in urine, in either direction. Given a collection it yields the fraction; given the fraction it predicts the collection. The amount not accounted for is the amount biotransformed, which is why the same fraction also splits clearance into its renal and hepatic parts.',
+ teach:[
+ {t:'The fraction excreted unchanged converts between a dose and the amount of parent drug that will appear in urine, in either direction. Given a collection it yields the fraction; given the fraction it predicts the collection. The amount not accounted for is the amount biotransformed, which is why the same fraction also splits clearance into its renal and hepatic parts.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 10 and 22',
  quote:'D k f FD k 0 u e e = ='},
 
@@ -255,7 +345,15 @@ const Q_MODULE4 = [
    why:'A dimensionless constant divided by a time in hours leaves reciprocal hours, which is the unit a first-order rate constant must carry. The division is carried at full precision here because k feeds the two clearance parts that follow.'},
   {k:'round', t:'k = 0.0866 hr⁻¹',
    why:'She reports it aloud as 0.0866, which is the four-decimal-place convention she asks for on rate constants so that the whole class carries the same value forward. The leading zero is required.'}],
- teach:'Every clearance calculation in this example starts from the rate constant, because clearance is k multiplied by the volume of distribution and the excretion rate constant is a fraction of k. Converting the stated half-life first, and keeping four decimal places, prevents the rounding drift she warns about when k is truncated early.',
+ teach:[
+ {t:'Every clearance calculation in this example starts from the rate constant, because clearance is k multiplied by the volume of distribution and the excretion rate constant is a fraction of k. Converting the stated half-life first, and keeping four decimal places, prevents the rounding drift she warns about when k is truncated early.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 22',
  quote:'Calculate k, ke, ClT, ClR and ClH.'},
 
@@ -275,7 +373,15 @@ const Q_MODULE4 = [
    why:'A dimensionless fraction multiplied by a reciprocal-hour constant leaves reciprocal hours, so ke has the same units as k. It must be smaller than k, because excretion is only part of the total elimination.'},
   {k:'round', t:'ke = 0.052 hr⁻¹',
    why:'Her worked value is 0.052 per hour, rounded from 0.051975. The remaining 0.03465 per hour of the overall constant belongs to the routes other than unchanged excretion.'}],
- teach:'The overall elimination rate constant is a sum of route-specific constants, and the fraction excreted unchanged is exactly the share that the excretion route takes. So ke equals fe times k, and the metabolic remainder is one minus fe, times k. The same split applied to clearance instead of to the rate constant gives renal and hepatic clearance.',
+ teach:[
+ {t:'The overall elimination rate constant is a sum of route-specific constants, and the fraction excreted unchanged is exactly the share that the excretion route takes. So ke equals fe times k, and the metabolic remainder is one minus fe, times k. The same split applied to clearance instead of to the rate constant gives renal and hepatic clearance.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 10 and 22',
  quote:'we can take our FE which we said was 0.6 times R K. And I\'m getting 0.052.'},
 
@@ -295,7 +401,15 @@ const Q_MODULE4 = [
    why:'Reciprocal hours multiplied by litres leaves litres per hour, which is the unit a clearance must carry. The 300 mg of urinary drug plays no part in this line; it enters only when the total is split.'},
   {k:'round', t:'ClT = 1.3 L/hr',
    why:'Her worked value is 1.3 litres per hour, and she carries that rounded figure into the renal and hepatic parts that follow. Keeping her rounding is what reproduces her 0.78 and 0.52 exactly.'}],
- teach:'Total body clearance can be built from either of two pairs. From k and the volume of distribution, as here, or from the dose and the area under the curve. Both give the volume of fluid cleared of drug per unit time for the whole body, without separating which organ did the clearing. Splitting it into organ contributions is the next step, and it needs the fraction excreted unchanged.',
+ teach:[
+ {t:'Total body clearance can be built from either of two pairs. From k and the volume of distribution, as here, or from the dose and the area under the curve. Both give the volume of fluid cleared of drug per unit time for the whole body, without separating which organ did the clearing. Splitting it into organ contributions is the next step, and it needs the fraction excreted unchanged.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 22, with the relationship from slide 21',
  quote:'15 L. N R K You get 1.3 L, something like that.'},
 
@@ -315,7 +429,15 @@ const Q_MODULE4 = [
    why:'A dimensionless fraction multiplied by litres per hour leaves litres per hour, so renal clearance carries the same units as total clearance and must be smaller than it. The arithmetic is six tenths of 1.3.'},
   {k:'round', t:'ClR = 0.78 L/hr',
    why:'This is her printed value, obtained from her rounded total clearance of 1.3 L/hr. Carrying the unrounded 1.299375 L/hr instead gives 0.7796 L/hr, which rounds to the same 0.78.'}],
- teach:'Renal clearance is total clearance scaled by the fraction of the dose that leaves unchanged in urine. The logic is that clearance and rate constant split the same way, because both are proportional to the same set of elimination routes. That is why the identical fraction converts k into ke and total clearance into renal clearance.',
+ teach:[
+ {t:'Renal clearance is total clearance scaled by the fraction of the dose that leaves unchanged in urine. The logic is that clearance and rate constant split the same way, because both are proportional to the same set of elimination routes. That is why the identical fraction converts k into ke and total clearance into renal clearance.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 9 and 22',
  quote:'0.6 or FE times 1 L per hour, 1.3 L per hour. OK. So I\'m getting 0.78 L per hour.'},
 
@@ -335,7 +457,15 @@ const Q_MODULE4 = [
    why:'Subtracting two quantities in litres per hour leaves litres per hour. The result must be positive and smaller than the total, which is a quick check that the renal part was not computed larger than the whole.'},
   {k:'round', t:'ClH = 0.52 L/hr',
    why:'Her worked value is 0.52 litres per hour, set up aloud as 1.3 minus 0.78. Using unrounded values throughout gives 0.51975 L/hr, which rounds to the same figure.'}],
- teach:'Hepatic clearance is reached by difference because it is the one part of the total that cannot be measured. The additivity of clearance is what licenses the subtraction: total body clearance is the sum of the organ clearances, so two known values fix the third. The same result follows from one minus the fraction excreted unchanged, multiplied by the total.',
+ teach:[
+ {t:'Hepatic clearance is reached by difference because it is the one part of the total that cannot be measured. The additivity of clearance is what licenses the subtraction: total body clearance is the sum of the organ clearances, so two known values fix the third. The same result follows from one minus the fraction excreted unchanged, multiplied by the total.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 11 and 22',
  quote:'total, which was 1.3. Minus 0.78.'},
 
@@ -355,7 +485,15 @@ const Q_MODULE4 = [
    why:'A dimensionless fraction multiplied by litres per hour leaves litres per hour. The arithmetic is four tenths of 1.3, and the answer agrees with the subtraction route, which gives 1.3 minus 0.78.'},
   {k:'round', t:'ClH = 0.52 L/hr',
    why:'Two decimal places matches the precision of the clearance it came from. Agreement between the two routes is the built-in check that the fraction was applied to the correct organ.'}],
- teach:'The two hepatic clearance formulas are the same statement of additivity written differently. Subtracting renal from total says the remainder is hepatic. Multiplying by one minus fe says the same thing before the renal part has been computed at all. Use whichever avoids an extra step: if renal clearance is already known, subtract; if only the fraction and the total are given, use the complement.',
+ teach:[
+ {t:'The two hepatic clearance formulas are the same statement of additivity written differently. Subtracting renal from total says the remainder is hepatic. Multiplying by one minus fe says the same thing before the renal part has been computed at all. Use whichever avoids an extra step: if renal clearance is already known, subtract; if only the fraction and the total are given, use the complement.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 11',
  quote:'��� = 1 − �� ���'},
 
@@ -377,7 +515,15 @@ const Q_MODULE4 = [
    why:'Litres per hour multiplied by milligrams per litre cancels the litres and leaves milligrams per hour, an amount per unit time. As a check, the rate of elimination immediately after a bolus is also k times the dose, which is 0.086625 per hour multiplied by 500 mg, giving the same figure.'},
   {k:'round', t:'Rate = 43.3 mg/hr',
    why:'One decimal place follows the precision of the 1.3 L/hr clearance the rate was built from. This is the fastest the drug is ever eliminated, because the concentration is at its highest immediately after the injection and falls from there.'}],
- teach:'A rate of elimination is always tied to a concentration, so a question asking for one has to establish that concentration first. After a bolus the initial concentration is the dose divided by the volume of distribution, and multiplying it by total body clearance gives the rate at that instant. Because the concentration falls from then on, so does the rate, while the clearance that links them stays constant.',
+ teach:[
+ {t:'A rate of elimination is always tied to a concentration, so a question asking for one has to establish that concentration first. After a bolus the initial concentration is the dose divided by the volume of distribution, and multiplying it by total body clearance gives the rate at that instant. Because the concentration falls from then on, so does the rate, while the clearance that links them stays constant.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 5 and 22',
  quote:'Cl Cp Rate of elimination = •',
  note:'Slide 22 asks only for fe, k, ke, ClT, ClR and ClH from these parameters. This question applies the relationship printed on slide 5 to the same data, so the 43.3 mg/hr figure is computed here and is not printed on either slide.'},
@@ -396,7 +542,15 @@ const Q_MODULE4 = [
    why:'The litres in the numerator and the litres in the denominator cancel, and dividing by a reciprocal hour leaves hours. That unit check is what confirms the relationship has been written the right way up, since clearance in the numerator would return reciprocal hours instead.'},
   {k:'round', t:'t½ = 8.0 hours',
    why:'The answer returns the 8-hour half-life the same drug was given in the worked example, which is the check that the three parameters are mutually consistent. Half-life is reported in units of time only, never reciprocal time.'}],
- teach:'Clearance, half-life and volume of distribution are three views of one first-order system, and any two fix the third. Clearance equals k times the volume of distribution, and k equals 0.693 over the half-life, so the half-life equals 0.693 times the volume of distribution divided by clearance. That form shows directly why a fall in clearance lengthens the half-life while the volume of distribution is unchanged.',
+ teach:[
+ {t:'Clearance, half-life and volume of distribution are three views of one first-order system, and any two fix the third. Clearance equals k times the volume of distribution, and k equals 0.693 over the half-life, so the half-life equals 0.693 times the volume of distribution divided by clearance. That form shows directly why a fall in clearance lengthens the half-life while the volume of distribution is unchanged.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 21',
  quote:'Clearance, Elimination Half-Life, and Volume of Distribution'},
 
@@ -419,7 +573,15 @@ const Q_MODULE4 = [
    why:'Renal clearance is the fraction excreted unchanged multiplied by total clearance, 0.6 times 1.3 litres per hour. The same fraction that converted k to ke converts the total clearance to the renal clearance.'},
   {l:'ClH', r:'0.52 L/hr',
    why:'Hepatic clearance is the total minus the renal part, 1.3 minus 0.78 litres per hour, or equivalently 0.4 times 1.3. It is obtained by difference because metabolism cannot be sampled directly.'}],
- teach:'The six quantities form one chain and each link uses the one before it. The urine collection gives fe. The half-life gives k. Together they give ke. The rate constant and the volume of distribution give total clearance. The fraction then splits that total into a renal part, and the remainder is hepatic. Units separate the two halves of the chain: rate constants are reciprocal hours, clearances are litres per hour.',
+ teach:[
+ {t:'The six quantities form one chain and each link uses the one before it. The urine collection gives fe. The half-life gives k. Together they give ke. The rate constant and the volume of distribution give total clearance. The fraction then splits that total into a renal part, and the remainder is hepatic. Units separate the two halves of the chain: rate constants are reciprocal hours, clearances are litres per hour.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 22',
  quote:'Calculate k, ke, ClT, ClR and ClH.'},
 
@@ -440,7 +602,15 @@ const Q_MODULE4 = [
    why:'Metabolism belongs to the hepatic side of the clearance split, not to the three renal mechanisms listed on this slide. Adding it here confuses the two organs and would break the arithmetic that treats renal clearance as filtration plus secretion minus reabsorption.'},
   {t:'Biliary excretion', correct:false,
    why:'Selecting this reads the question as asking for every route by which drug leaves the body rather than for the processes that decide what appears in the urine. Biliary excretion is an elimination route, but it is not a process occurring in the nephron and it puts no drug into urine. The three that do are filtration, secretion and reabsorption, and renal clearance is the net of those three. Counting a non-renal route among them would attribute drug to the kidney that a urine collection never recovers.'}],
- teach:'Three processes decide how much drug reaches the urine, and they do not all push the same way. Filtration and secretion add drug to the lumen in the proximal nephron. Reabsorption takes drug back out of the lumen into the bloodstream. Renal clearance is the net of the three, which is why comparing it to the filtration rate reveals which of the other two is dominant.',
+ teach:[
+ {t:'Three processes decide how much drug reaches the urine, and they do not all push the same way. Filtration and secretion add drug to the lumen in the proximal nephron. Reabsorption takes drug back out of the lumen into the bloodstream. Renal clearance is the net of the three, which is why comparing it to the filtration rate reveals which of the other two is dominant.'},
+  {h:'How the variables relate', list:[
+    'Renal clearance is the net of three processes: filtration + secretion - reabsorption.',
+    'Filtration alone averages about 120 mL/min.',
+    'ClR above about 120 mL/min means active secretion is adding to filtration.',
+    'ClR below about 120 mL/min means some drug is being reabsorbed.',
+    'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 12 and 13',
  quote:'Appearance of drug in the urine is the net result of filtration, secretion, and reabsorption.'},
 
@@ -459,7 +629,15 @@ const Q_MODULE4 = [
    why:'Secretion also adds drug to the lumen, but it requires energy and a transporter, so it can move drug against a gradient. That is why a secreted drug leaves the body faster than filtration alone would allow, and why its renal clearance can exceed 120 mL/min.'},
   {l:'Tubular reabsorption', r:'Removes drug from the lumen back to the blood',
    why:'Reabsorption runs in the opposite direction to the other two, returning drug from the urine to the bloodstream. Drug that is reabsorbed never leaves the body, so it lowers renal clearance below what filtration alone would produce.'}],
- teach:'The three processes differ on two axes: direction and whether energy is required. Filtration adds passively, secretion adds actively, reabsorption removes. Because two add and one subtracts, renal clearance can land above or below the filtration rate, and which side it lands on is what identifies the dominant process for a given drug.',
+ teach:[
+ {t:'The three processes differ on two axes: direction and whether energy is required. Filtration adds passively, secretion adds actively, reabsorption removes. Because two add and one subtracts, renal clearance can land above or below the filtration rate, and which side it lands on is what identifies the dominant process for a given drug.'},
+  {h:'How the variables relate', list:[
+    'Renal clearance is the net of three processes: filtration + secretion - reabsorption.',
+    'Filtration alone averages about 120 mL/min.',
+    'ClR above about 120 mL/min means active secretion is adding to filtration.',
+    'ClR below about 120 mL/min means some drug is being reabsorbed.',
+    'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 12 and 13',
  quote:'The first two processes add drug to the lumen in the proximal part of the nephron; the last process involves the movement of drug from the lumen back into the bloodstream.'},
 
@@ -476,7 +654,15 @@ const Q_MODULE4 = [
    why:'Choosing this means stopping at the word filtration without setting the measured number against the reference value of about 120 mL/min. Filtration alone puts renal clearance at or near that figure, and Dr. Mosley allows only a narrow tolerance around it, a value like 119 or 121. At 350 mL/min the measurement is nearly three times the filtration rate, so some process must be adding drug to the lumen beyond what is filtered. That process is active tubular secretion.'},
   {t:'It is neither filtered nor secreted', correct:false,
    why:'A drug handled by no renal process at all would have a renal clearance of zero, so the measurement itself rules this out before any comparison is made. Any positive renal clearance means drug is arriving in the urine. The error is to treat renal clearance as a label for the drug\'s route rather than as a measured number that has to be read against the filtration rate of about 120 mL/min. Read that way, 350 mL/min points at filtration plus secretion.'}],
- teach:'Renal clearance is read against the filtration rate of about 120 mL/min. Above it means something is adding drug to the lumen beyond filtration, which is active tubular secretion. Below it means something is taking drug back out, which is tubular reabsorption. At it, within a small tolerance, means filtration alone accounts for the handling. One comparison identifies the dominant mechanism.',
+ teach:[
+ {t:'Renal clearance is read against the filtration rate of about 120 mL/min. Above it means something is adding drug to the lumen beyond filtration, which is active tubular secretion. Below it means something is taking drug back out, which is tubular reabsorption. At it, within a small tolerance, means filtration alone accounts for the handling. One comparison identifies the dominant mechanism.'},
+  {h:'How the variables relate', list:[
+    'Renal clearance is the net of three processes: filtration + secretion - reabsorption.',
+    'Filtration alone averages about 120 mL/min.',
+    'ClR above about 120 mL/min means active secretion is adding to filtration.',
+    'ClR below about 120 mL/min means some drug is being reabsorbed.',
+    'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 18, with the 120 mL/min figure from slide 13',
  quote:'Secretion is inferred when rate of excretion exceeds the rate of filtration. Stated differently, secretion is apparent when renal clearance is greater than the GFR.'},
 
@@ -493,7 +679,15 @@ const Q_MODULE4 = [
    why:'This reaches for a change in the reference value instead of a process acting on the drug, and it moves that value in the direction that widens the discrepancy rather than explaining it. A higher filtration rate would deliver more drug into the lumen and so raise renal clearance, not lower it. It also cannot account for a renal clearance below the clearance calculated by filtration, because that comparison is made against the filtration figure itself. What pulls renal clearance below it is filtered drug returning to the blood, which is reabsorption.'},
   {t:'Increased hepatic metabolism', correct:false,
    why:'Picking this answers a question about the kidney with a process belonging to the liver, so it moves hepatic clearance and leaves renal clearance untouched. Faster metabolism lowers the fraction excreted unchanged, but the drug that does reach the nephron is still filtered, secreted and reabsorbed exactly as before. The comparison being made is between renal clearance and the clearance expected from filtration, and only a renal process can shift one relative to the other. A value below it means filtered drug is being taken back into the blood.'}],
- teach:'Two inferences sit either side of the same comparison. If renal clearance exceeds the clearance calculated from filtration, drug is being added to the lumen actively, so secretion is present. If it falls short, drug is being returned to the blood, so reabsorption is present. Both are inferences from a single measured number set against a known reference value, not direct observations of the process itself.',
+ teach:[
+ {t:'Two inferences sit either side of the same comparison. If renal clearance exceeds the clearance calculated from filtration, drug is being added to the lumen actively, so secretion is present. If it falls short, drug is being returned to the blood, so reabsorption is present. Both are inferences from a single measured number set against a known reference value, not direct observations of the process itself.'},
+  {h:'How the variables relate', list:[
+    'Renal clearance is the net of three processes: filtration + secretion - reabsorption.',
+    'Filtration alone averages about 120 mL/min.',
+    'ClR above about 120 mL/min means active secretion is adding to filtration.',
+    'ClR below about 120 mL/min means some drug is being reabsorbed.',
+    'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 19',
  quote:'Reabsorption occurs if the renal clearance is less than the calculated clearance by filtration.'},
 
@@ -512,7 +706,16 @@ const Q_MODULE4 = [
    why:'Choosing this means treating any single consistent renal process as good enough, when the one process has to be filtration. A secreted marker reaches the urine by two routes at once, so its clearance exceeds the filtration rate and overstates renal function. That is the defect in creatinine, which is filtered and also secreted, and it is why creatinine clearance estimates the filtration rate rather than measuring it. An ideal marker is neither secreted nor reabsorbed.'},
   {t:'One that is extensively metabolised before excretion', correct:false,
    why:'This confuses a requirement about handling in the nephron with a requirement about the rest of the body, and picks the one property that destroys the marker before it can be counted. A metabolised marker would be converted before reaching the urine, so the amount recovered would understate what the glomerulus filtered. The method depends on the substance surviving intact from blood to urine collection. A filtration marker has to be neither reabsorbed nor secreted, and it also has to remain the same molecule throughout.'}],
- teach:'A filtration marker works because its clearance has only one contributing process. Filter it, do not secrete it, do not reabsorb it, and whatever clearance is measured is the glomerular filtration rate. Any additional process contaminates the estimate, upward if the substance is secreted and downward if it is reabsorbed, which is why the choice of marker is the whole of the method.',
+ teach:[
+ {t:'A filtration marker works because its clearance has only one contributing process. Filter it, do not secrete it, do not reabsorb it, and whatever clearance is measured is the glomerular filtration rate. Any additional process contaminates the estimate, upward if the substance is secreted and downward if it is reabsorbed, which is why the choice of marker is the whole of the method.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 14',
  quote:'GFR is measured by using a drug that is eliminated primarily by filtration only – the drug is neither reabsorbed nor secreted.'},
 
@@ -529,7 +732,16 @@ const Q_MODULE4 = [
    why:'This reads creatinine as an ideal filtration marker, which is the claim the word primarily exists to soften. Creatinine is filtered and also secreted, and that secretion is why creatinine clearance slightly overstates the filtration rate. Treating it as pure filtration removes the reason creatinine clearance is called an estimate of the glomerular filtration rate rather than a measurement of it. It is also not why creatinine is preferred: it is preferred because it is already in the body while inulin has to be given.'},
   {t:'Inulin is reabsorbed in the proximal tubule of the nephron', correct:false,
    why:'Picking this invents a defect in the way the nephron handles inulin to explain a choice that was made on practical grounds. Inulin is almost completely filtered and is not appreciably secreted, so its handling is the better of the two on kinetic grounds. What rules it out clinically is that it is not native to the body, so it has to be administered and measured under a longer procedure. Creatinine is preferred on availability, not on how the nephron treats it.'}],
- teach:'The marker actually used is a compromise between fidelity and practicality. Inulin behaves better in the nephron but has to be administered and measured under controlled conditions. Creatinine is endogenous and measurable from a routine serum sample, and the small error introduced by its secretion is accepted in exchange. That is why creatinine clearance is described as an estimate of glomerular filtration rate rather than a measurement of it.',
+ teach:[
+ {t:'The marker actually used is a compromise between fidelity and practicality. Inulin behaves better in the nephron but has to be administered and measured under controlled conditions. Creatinine is endogenous and measurable from a routine serum sample, and the small error introduced by its secretion is accepted in exchange. That is why creatinine clearance is described as an estimate of glomerular filtration rate rather than a measurement of it.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 14',
  quote:'Creatinine and inulin are used clinically to measure GFR, even though creatinine is also secreted.',
  note:'Slide 14 pairs creatinine with inulin as markers used clinically. The transcript is narrower: she says inulin is a better marker but has to be added to the body and is a whole more complicated process, and she poses the question of why creatinine rather than inulin is used. An exam written from these lectures would key the practical reason given here, while still expecting the slide sentence that creatinine is also secreted.'},
@@ -547,7 +759,16 @@ const Q_MODULE4 = [
    why:'Picking this treats a relationship that is on the equation sheet as though it were missing from it. Rate of elimination equals clearance times plasma concentration is supplied, so the work in a question using it is deciding that it applies and making the units cancel, not reproducing its form. The relationships that are absent from the sheet are the Cockcroft-Gault equation and the ideal body weight formulas, and both are needed for the same creatinine clearance calculation. The distinction being drawn is between selecting a relationship and reproducing one.'},
   {t:'The fraction excreted unchanged as the cumulative urinary amount over the dose', correct:false,
    why:'The chain giving fe from the urinary amount and from the ratio of rate constants is printed on the equation sheet. Confusing what must be memorised with what merely has to be selected wastes memory on the wrong items.'}],
- teach:'The equation sheet decides where effort goes. Anything on it has to be recognised and applied, so the work is selecting the right relationship and handling the units. Anything off it has to be reproduced exactly before the calculation can start. For this module the memorised items are the Cockcroft-Gault equation and the ideal body weight formulas, which join the first-order half-life equation and clearance as k times the volume of distribution from earlier modules.',
+ teach:[
+ {t:'The equation sheet decides where effort goes. Anything on it has to be recognised and applied, so the work is selecting the right relationship and handling the units. Anything off it has to be reproduced exactly before the calculation can start. For this module the memorised items are the Cockcroft-Gault equation and the ideal body weight formulas, which join the first-order half-life equation and clearance as k times the volume of distribution from earlier modules.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 15 and 16, and the 14 September lecture',
  quote:'this is an equation that I want you to know, to memorize. I\'ve given you the equation sheet, this one is not there. You need to know this one, OK.'},
 
@@ -564,7 +785,16 @@ const Q_MODULE4 = [
    why:'Picking this means carrying a unit across from total body clearance, where litres per hour is the convention, to a quantity reported in millilitres per minute. Both are legitimate volume-per-time units, so the answer is not dimensionally wrong; it is wrong by convention and by usefulness. The 120 to 130 mL/min reference range and the filtration rate of about 120 mL/min are both quoted in millilitres per minute, so a figure in litres per hour has to be converted before it can be read against either. Dr. Mosley asks specifically for millilitres per minute.'},
   {t:'Millilitres', correct:false,
    why:'Dropping the per minute means treating a clearance as a volume rather than as a volume per unit time. Every clearance carries a time in its units, because the definition is a volume of fluid cleared of drug in each unit of time. A bare volume cannot be set against the 120 to 130 mL/min range, which is a rate. The same unit check that rules this out is the one that rules out reporting a half-life in reciprocal time.'}],
- teach:'The arithmetic of the Cockcroft-Gault expression does not produce interpretable units, because the relationship is an empirical estimate rather than a dimensional derivation. The output is nevertheless a clearance and is reported in millilitres per minute, which is what lets it be set against the 120 to 130 mL/min normal range and against the roughly 120 mL/min glomerular filtration rate.',
+ teach:[
+ {t:'The arithmetic of the Cockcroft-Gault expression does not produce interpretable units, because the relationship is an empirical estimate rather than a dimensional derivation. The output is nevertheless a clearance and is reported in millilitres per minute, which is what lets it be set against the 120 to 130 mL/min normal range and against the roughly 120 mL/min glomerular filtration rate.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 16',
  quote:'I also want you to recognize that the units of creatinine clearance should be in milliliters per minute, OK. So don\'t give me kilograms per milligram per deciliter.',
  note:'The slide prints the formula without stating its units and the handwritten annotation on this copy is not used as a source. The units requirement is hers from the 14 September lecture, where she also points out that the units in the formula do not cancel.'},
@@ -582,7 +812,16 @@ const Q_MODULE4 = [
    why:'This reads a renal function estimate as though it reported hepatic function. Creatinine clearance estimates how much fluid the kidney clears of drug each minute and carries no information about metabolic capacity. A patient with a creatinine clearance of 30 mL/min may have an entirely normal liver, in which case hepatic clearance is unchanged and only the renal part of total clearance has fallen. What the low value does predict is slower excretion of a renally eliminated drug and accumulation.'},
   {t:'The apparent volume of distribution will be reduced in this patient', correct:false,
    why:'The volume of distribution is a property of how the drug distributes between plasma and tissue and is not what a creatinine clearance measures. Treating a clearance result as a statement about volume confuses the two constants that are multiplied together to give clearance in the first place.'}],
- teach:'Creatinine clearance is a renal function estimate, and it is read against the 120 to 130 mL/min normal range. A value well below that range means less drug is removed by the kidney each minute, so a renally eliminated drug accumulates and its half-life lengthens. Whether a dose needs changing depends on the drug as well as the number, since a drug cleared mainly by the liver is far less affected.',
+ teach:[
+ {t:'Creatinine clearance is a renal function estimate, and it is read against the 120 to 130 mL/min normal range. A value well below that range means less drug is removed by the kidney each minute, so a renally eliminated drug accumulates and its half-life lengthens. Whether a dose needs changing depends on the drug as well as the number, since a drug cleared mainly by the liver is far less affected.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 15',
  quote:'that says that she\'s got maybe something going on. So we, depending on her situation, she might, or and depending on the drug, it might or might not need to be adjusted to accommodate for her renal function.'},
 
@@ -602,7 +841,16 @@ const Q_MODULE4 = [
    why:'Dividing centimetres by centimetres per inch cancels the centimetres and leaves inches. Dividing rather than multiplying is what makes the number smaller, which is the expected direction since an inch is larger than a centimetre.'},
   {k:'round', t:'64.96 inches, called 65 inches',
    why:'Her worked value is 64.96 inches, which she rounds to 65 inches for the ideal body weight step. She warns separately that 64.5 inches means sixty-four and a half inches, not sixty-four feet and five inches, because students handle that figure inconsistently.'}],
- teach:'Height enters the ideal body weight formula as whole inches above five feet, so the conversion is the first step of any creatinine clearance calculation given a metric height. Five feet is sixty inches, so the number that goes into the formula is the converted height minus sixty. Rounding to the nearest inch before subtracting is what her worked example does.',
+ teach:[
+ {t:'Height enters the ideal body weight formula as whole inches above five feet, so the conversion is the first step of any creatinine clearance calculation given a metric height. Five feet is sixty inches, so the number that goes into the formula is the converted height minus sixty. Rounding to the nearest inch before subtracting is what her worked example does.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 17',
  quote:'if you don\'t remember, 1 inch is equal to 2.54 centimeters … I am getting 64.96 inches. So, let\'s call that 65 inches.'},
 
@@ -622,7 +870,16 @@ const Q_MODULE4 = [
    why:'Five inches above five feet multiplied by 2.3 kilograms per inch adds 11.5 kg to the baseline. The result is in kilograms, which is what the creatinine clearance expression requires for the weight term.'},
   {k:'round', t:'IBW = 57 kg',
    why:'Her worked value is 57 kg for this patient. The actual body weight of 61 kg given in the same question is deliberately not used, because the calculation was specified to use ideal body weight.'}],
- teach:'Ideal body weight is computed from sex and height alone, never from the weight the patient actually is. Both formulas add 2.3 kg for each inch above five feet and differ only in the baseline, 50 kg for men and 45.5 kg for women. Dr. Mosley keeps every patient at five feet or taller so that the inches term is never negative, and says that no adjusted or actual body weight decisions will be asked.',
+ teach:[
+ {t:'Ideal body weight is computed from sex and height alone, never from the weight the patient actually is. Both formulas add 2.3 kg for each inch above five feet and differ only in the baseline, 50 kg for men and 45.5 kg for women. Dr. Mosley keeps every patient at five feet or taller so that the inches term is never negative, and says that no adjusted or actual body weight decisions will be asked.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 16 and 17',
  quote:'female IBW = 45.5 + 2.3 (inches over 5 ft)'},
 
@@ -642,7 +899,16 @@ const Q_MODULE4 = [
    why:'The baseline and the height increment are added, with the increment formed from 2.3 kg per inch over five feet. Both terms are in kilograms, so they add directly, and the excess height term is the only part that varies from patient to patient.'},
   {k:'round', t:'IBW = 61.5 kg',
    why:'The result is in kilograms and carries one decimal place, which is as far as the 2.3 kg per inch supports. A female patient of the same height would come out at 57 kg, a difference of exactly the 4.5 kg between the two baselines.'}],
- teach:'The two ideal body weight formulas differ by a fixed 4.5 kg at every height, because they share the 2.3 kg per inch slope and differ only in the intercept. That means using the wrong formula shifts the weight, and therefore the creatinine clearance, by a constant proportion rather than a variable one. Reading the sex of the patient out of the stem is the first thing the calculation depends on.',
+ teach:[
+ {t:'The two ideal body weight formulas differ by a fixed 4.5 kg at every height, because they share the 2.3 kg per inch slope and differ only in the intercept. That means using the wrong formula shifts the weight, and therefore the creatinine clearance, by a constant proportion rather than a variable one. Reading the sex of the patient out of the stem is the first thing the calculation depends on.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 16',
  quote:'male IBW = 50 + 2.3 (inches over 5 ft)'},
 
@@ -668,7 +934,16 @@ const Q_MODULE4 = [
    why:'Applying the female factor reduces the estimate by 15 per cent, on the assumption built into the equation that women carry less muscle for the same height and age. The factor is dimensionless, so the units are unchanged by it.'},
   {k:'round', t:'CrCl = 58.1 mL/min',
    why:'Her worked answer is about 58 millilitres per minute, and she corrects a student who reports 54, so 58.1 mL/min is the figure to carry. Creatinine clearance is always reported in millilitres per minute, not litres per hour, because that is the unit dosing tables are written against.'}],
- teach:'The Cockcroft-Gault calculation runs in a fixed order: convert the height, compute the ideal body weight from sex and height, then substitute age, that weight and the serum creatinine, and apply the 0.85 factor only if the patient is female. Every input except the serum creatinine raises the estimate; the serum creatinine sits in the denominator and lowers it. The result is compared against 120 to 130 mL/min, and 58 mL/min is well below that.',
+ teach:[
+ {t:'The Cockcroft-Gault calculation runs in a fixed order: convert the height, compute the ideal body weight from sex and height, then substitute age, that weight and the serum creatinine, and apply the 0.85 factor only if the patient is female. Every input except the serum creatinine raises the estimate; the serum creatinine sits in the denominator and lowers it. The result is compared against 120 to 130 mL/min, and 58 mL/min is well below that.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 17',
  quote:'Estimate (using the ideal body weight) the CrCl of a 45-year-old female who weighs 61 kg, SCr =1.1 mg/dL, and is 165 cm tall.'},
 
@@ -688,7 +963,16 @@ const Q_MODULE4 = [
    why:'The constant 72 and the serum creatinine in milligrams per decilitre form the denominator. Nothing further is applied, because the patient is male.'},
   {k:'round', t:'CrCl = 68.4 mL/min',
    why:'Reported in millilitres per minute, as she requires for every creatinine clearance. The same patient treated as female gives 58.1 mL/min, and the ratio between the two is exactly the 0.85 factor.'}],
- teach:'The female factor is a single multiplication applied at the end, and it is the only place sex enters the Cockcroft-Gault equation itself. Sex enters a second time, earlier, through the ideal body weight formula, where the baseline is 50 kg for men and 45.5 kg for women. A question that supplies the ideal body weight directly has removed the first of those two, so only the 0.85 decision remains.',
+ teach:[
+ {t:'The female factor is a single multiplication applied at the end, and it is the only place sex enters the Cockcroft-Gault equation itself. Sex enters a second time, earlier, through the ideal body weight formula, where the baseline is 50 kg for men and 45.5 kg for women. A question that supplies the ideal body weight directly has removed the first of those two, so only the 0.85 decision remains.'},
+  {h:'How the variables relate', list:[
+    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
+    'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
+    '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
+    'Neither this equation nor the ideal body weight equation is on the equation sheet.',
+    'The result is compared against about 120 mL/min to place the patient.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 15 and 16',
  quote:'(x 0.85 if female) 72 SCr (140 age)(IBW) CrCl',
  note:'Her worked example is female and keys 58.1 mL/min. This question holds every other input of that example fixed and changes only the sex, so the 68.4 mL/min figure is the same calculation without the 0.85 factor. It is not a value printed on the slide.'},
@@ -711,7 +995,15 @@ const Q_MODULE4 = [
    why:'Litres per hour divided by litres cancels the litres and leaves reciprocal hours, which is what a first-order rate constant must be. Dividing in the other order would give hours, which is a half-life unit and would signal the error immediately.'},
   {k:'round', t:'k = 1.8 hr⁻¹',
    why:'One decimal place is what the two-figure inputs support. A rate constant this large corresponds to a half-life well under an hour, which is consistent with a drug whose clearance of 45 L/hr is far larger than its 25 L volume of distribution.'}],
- teach:'Clearance, the rate constant and the volume of distribution form a single product relationship, so any one of them follows from the other two. The only real work is unit agreement: the volume in the clearance must be the same volume unit as the volume of distribution, and the time in the clearance becomes the time in the rate constant. A clearance in millilitres per minute against a volume of distribution in litres always needs converting first.',
+ teach:[
+ {t:'Clearance, the rate constant and the volume of distribution form a single product relationship, so any one of them follows from the other two. The only real work is unit agreement: the volume in the clearance must be the same volume unit as the volume of distribution, and the time in the clearance becomes the time in the rate constant. A clearance in millilitres per minute against a volume of distribution in litres always needs converting first.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'A new antibiotic is actively secreted by the kidney; VD is 25 L in the normal adult. The clearance of this drug is 750 mL/min.'},
 
@@ -731,7 +1023,15 @@ const Q_MODULE4 = [
    why:'The litres cancel and dividing by a volume per minute leaves minutes, which is what a half-life must be. The answer is a time, never a reciprocal time.'},
   {k:'round', t:'t½ = 23.1 minutes, which is 0.385 hours',
    why:'One decimal place matches the precision of the inputs. Expressed in hours the same figure is 0.385 hr, and the equivalent route through the rate constant gives 0.693 divided by 1.8 per hour, which is the same 0.385 hr.'}],
- teach:'When clearance and volume of distribution are the parameters given, the half-life follows directly as 0.693 times the volume divided by the clearance. The time unit of the answer is inherited from the clearance, so a clearance per minute gives a half-life in minutes. A drug that is actively secreted has a clearance well above the glomerular filtration rate, and a large clearance against a modest volume of distribution is what makes this half-life so short.',
+ teach:[
+ {t:'When clearance and volume of distribution are the parameters given, the half-life follows directly as 0.693 times the volume divided by the clearance. The time unit of the answer is inherited from the clearance, so a clearance per minute gives a half-life in minutes. A drug that is actively secreted has a clearance well above the glomerular filtration rate, and a large clearance against a modest volume of distribution is what makes this half-life so short.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'What is the usual t½ for this drug?',
  note:'The slide prints this example as a question with no worked answer, and the 14 September transcript does not record her working it aloud. The 23.1 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
@@ -752,7 +1052,15 @@ const Q_MODULE4 = [
    why:'The litres cancel and the division leaves minutes. The clearance has fallen to one fifth of its normal 750 mL/min, so the half-life is five times longer, which is the check that the inverse relationship was applied rather than a direct one.'},
   {k:'round', t:'t½ = 115.5 minutes, which is 1.925 hours',
    why:'One decimal place matches the inputs. The answer is a time, and it is longer than the normal 23.1 minutes, which is the direction impaired elimination must move the half-life in.'}],
- teach:'Half-life is inversely proportional to clearance when the volume of distribution is unchanged. A patient whose clearance falls to a fifth of normal has a half-life five times normal, and the drug takes five times as long to reach any given fraction remaining. This is why a reduced creatinine clearance matters clinically for a renally eliminated drug, and it is the same reasoning as the renal failure part of her infusion problems, where the loading dose was unchanged because the volume of distribution was unchanged.',
+ teach:[
+ {t:'Half-life is inversely proportional to clearance when the volume of distribution is unchanged. A patient whose clearance falls to a fifth of normal has a half-life five times normal, and the drug takes five times as long to reach any given fraction remaining. This is why a reduced creatinine clearance matters clinically for a renally eliminated drug, and it is the same reasoning as the renal failure part of her infusion problems, where the loading dose was unchanged because the volume of distribution was unchanged.'},
+  {h:'How the variables relate', list:[
+    'ClT = k x VD = D0/AUC.',
+    'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'ClR = fe x ClT, and ClH = ClT - ClR.',
+    'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'What would be the new t½ for this drug in an adult with partial renal failure whose clearance of the antibiotic was 150 mL/min?',
  note:'As with the normal-function part, the slide prints the question without a worked answer and the transcript does not record her working it aloud. The 115.5 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
@@ -772,7 +1080,14 @@ const Q_MODULE4 = [
    why:'This keeps the correct drug property and substitutes delivery for the fluid property that governs reabsorption. The filtration rate decides how much drug is carried into the lumen; it does not decide how much of what arrives crosses back into the blood. That is set by how much of the drug in the lumen is non-ionized, which follows from the tubular pH read against the pKa. Changing the urine pH changes reabsorption without changing the filtration rate at all.'},
   {t:'The rate of urine flow and the plasma protein binding of the drug', correct:false,
    why:'Neither quantity enters the ionization calculation that governs reabsorption. Protein binding acts earlier, deciding how much free drug is available to be filtered, rather than what becomes of filtered drug in the lumen. Picking this answers a question about the tubular fluid with one plasma property and one flow property, and it leaves the pKa out altogether. Reabsorption of weak acids and weak bases is influenced by the pH of the fluid in the renal tubule and the pKa of the drug.'}],
- teach:'Reabsorption from the tubule depends on how much of the drug in the lumen is in its non-ionized form, because that is the form that crosses membranes back into the blood. The degree of ionization is set by the relationship between the pH of the tubular fluid and the pKa of the drug, which is what the Henderson-Hasselbalch expressions state. Shifting the urine pH therefore shifts how much of the drug is reabsorbed and so shifts the renal clearance.',
+ teach:[
+ {t:'Reabsorption from the tubule depends on how much of the drug in the lumen is in its non-ionized form, because that is the form that crosses membranes back into the blood. The degree of ionization is set by the relationship between the pH of the tubular fluid and the pKa of the drug, which is what the Henderson-Hasselbalch expressions state. Shifting the urine pH therefore shifts how much of the drug is reabsorbed and so shifts the renal clearance.'},
+  {h:'How the variables relate', list:[
+    'Filtration is passive and does not depend on urine pH.',
+    'Reabsorption acts on the un-ionized form, which is the form that crosses membranes.',
+    'Raising the ionized fraction traps drug in the tubule, lowers reabsorption and raises renal clearance.',
+    'A weak acid is more ionized in alkaline urine; a weak base is more ionized in acidic urine.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slides 20 and 25',
  quote:'Reabsorption of weak acids and weak bases is influenced by the pH of the fluid in the renal tubule and the pka of the drug',
  note:'This appears on slide 20 and again on the summary slide, but the 14 September lecture did not complete this objective. She posed the questions of what impact pH has on filtration and on active secretion and the recording ends mid-discussion, so there is no spoken treatment of the ionization objective to check the slide against. This question is written from the slide alone.'},
@@ -790,7 +1105,14 @@ const Q_MODULE4 = [
    why:'These are the values at which a compound is a strong acid or a strong base, so the answer reads the word weak as though it meant extreme. The ranges that apply are roughly 3 to 8 for weak acids and 7.5 to 10.5 for weak bases, in the middle of the scale. Those are the values paired with the two Henderson-Hasselbalch expressions, because it is the degree of ionization at the prevailing tubular pH that decides how much drug is reabsorbed. Reading the extremes as the weak ranges also leaves no range at all for the strong acids and bases.'},
   {t:'Weak acids 3 to 8, weak bases 3 to 8', correct:false,
    why:'Giving both the same range removes the distinction the two ranges exist to draw. They do overlap, between 7.5 and 8, and that partial overlap is what makes this answer plausible, but overlapping is not the same as identical. Weak acids run from 3 to 8 and weak bases from 7.5 to 10.5, so bases sit higher on the scale. With the two collapsed together, a pKa would no longer indicate which of the two Henderson-Hasselbalch forms applies to the drug.'}],
- teach:'One Henderson-Hasselbalch form is printed for weak acids, with the ionized over non-ionized ratio, and one for weak bases, with the ratio inverted. The pKa ranges tell you which form applies to a given drug: roughly 3 to 8 for weak acids and 7.5 to 10.5 for weak bases. Whichever form applies, the output is the degree of ionization at the prevailing tubular pH, and that determines how much drug is available to diffuse back into the blood.',
+ teach:[
+ {t:'One Henderson-Hasselbalch form is printed for weak acids, with the ionized over non-ionized ratio, and one for weak bases, with the ratio inverted. The pKa ranges tell you which form applies to a given drug: roughly 3 to 8 for weak acids and 7.5 to 10.5 for weak bases. Whichever form applies, the output is the degree of ionization at the prevailing tubular pH, and that determines how much drug is available to diffuse back into the blood.'},
+  {h:'How the variables relate', list:[
+    'Filtration is passive and does not depend on urine pH.',
+    'Reabsorption acts on the un-ionized form, which is the form that crosses membranes.',
+    'Raising the ionized fraction traps drug in the tubule, lowers reabsorption and raises renal clearance.',
+    'A weak acid is more ionized in alkaline urine; a weak base is more ionized in acidic urine.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
  cite:'4---Clearance-and-Elimination.pdf slide 20',
  quote:'Weak acids pka values 3 - 8 Weak bases pka values 7.5 – 10.5',
  note:'This is the slide she did not reach. The 14 September recording cuts off during her introduction to this objective, so the pKa ranges and the two Henderson-Hasselbalch forms have no spoken treatment to check against. Written from the slide alone; an exam drawn from these lectures could key it, since the objectives slide lists the effect of degree of ionization on renal excretion and the summary slide repeats it.'},

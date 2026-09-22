@@ -131,7 +131,13 @@ const Q_MODULE1 = [
    why:'Pharmacodynamics is the relationship between drug concentration at the site of action and pharmacological response, so its two variables are concentration and effect. The definition in the question names dosage form and route, which are formulation variables, and never mentions a response. This was the second most popular answer when the class was polled.'},
   {t:'Pharmacology', correct:false,
    why:'Pharmacology is the broader study of drug action, and picking it means answering at the level of the whole field rather than the specific discipline named. The definition is narrow and formulation-centred, so a general term cannot be the best match. One student in the class poll chose this.'}],
- teach:'The related disciplines divide by which two quantities they relate. Biopharmaceutics relates the drug product to the rate and extent of absorption. Pharmacokinetics relates concentration to time. Pharmacodynamics relates concentration to response. Clinical toxicology deals with adverse effects, and toxicokinetics applies pharmacokinetic principles to drug safety evaluation studies. Identifying the pair of quantities in a stem settles which discipline is being described.',
+ teach:[
+ {t:'The related disciplines divide by which two quantities they relate. Biopharmaceutics relates the drug product to the rate and extent of absorption. Pharmacokinetics relates concentration to time. Pharmacodynamics relates concentration to response. Clinical toxicology deals with adverse effects, and toxicokinetics applies pharmacokinetic principles to drug safety evaluation studies. Identifying the pair of quantities in a stem settles which discipline is being described.'},
+  {h:'How the variables relate', list:[
+    'Pharmacokinetics relates concentration to time; pharmacodynamics relates concentration to response.',
+    'Biopharmaceutics relates the drug, the dosage form and the route to the rate and extent of absorption.',
+    'ADME is the sequence pharmacokinetics describes: absorption, distribution, metabolism, excretion.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 6, and the poll slide following slide 10',
  quote:'The interrelationship of the physicochemical drug properties, dosage form and route of administration on the rate and extent of systemic drug absorption'},
 
@@ -148,7 +154,13 @@ const Q_MODULE1 = [
    why:'Concentration against dosage form belongs to biopharmaceutics, which relates the drug product and its route to the rate and extent of absorption. Picking this attaches a formulation variable to a discipline that does not deal with formulation. Pharmacodynamics begins after the drug has reached its site of action, so how it was formulated is already behind it.'},
   {t:'Population group', correct:false,
    why:'Differences between population groups are the subject of population pharmacokinetics, which Dr. Mosley lists as a subdivision of clinical pharmacokinetics. That is still a concentration-and-time discipline; it simply asks how the time course differs from one group to another. Nothing about it concerns response.'}],
- teach:'Pharmacokinetics and pharmacodynamics both start from concentration and differ in what they pair it with. Pharmacokinetics asks what the concentration is at a given time, which is what every equation in this course computes. Pharmacodynamics asks what response that concentration produces. Clinical pharmacokinetics is the application of pharmacokinetic methods to drug therapy for specific drugs, and toxicokinetics is the same set of methods applied to drug safety evaluation studies.',
+ teach:[
+ {t:'Pharmacokinetics and pharmacodynamics both start from concentration and differ in what they pair it with. Pharmacokinetics asks what the concentration is at a given time, which is what every equation in this course computes. Pharmacodynamics asks what response that concentration produces. Clinical pharmacokinetics is the application of pharmacokinetic methods to drug therapy for specific drugs, and toxicokinetics is the same set of methods applied to drug safety evaluation studies.'},
+  {h:'How the variables relate', list:[
+    'Pharmacokinetics relates concentration to time; pharmacodynamics relates concentration to response.',
+    'Biopharmaceutics relates the drug, the dosage form and the route to the rate and extent of absorption.',
+    'ADME is the sequence pharmacokinetics describes: absorption, distribution, metabolism, excretion.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 8',
  quote:'pharmacodynamics, concentration. And Response. OK, pharmacokinetics, concentration and time.'},
 
@@ -176,7 +188,14 @@ const Q_MODULE1 = [
    why:'Elimination is the term that contains both metabolism and excretion, which is why Dr. Mosley calls it the catch-all. The word irreversible separates it from distribution, where drug that leaves the plasma can come back.'},
   {l:'Disposition', r:'All kinetic processes occurring after systemic absorption',
    why:'Disposition is distribution plus elimination, that is, everything that happens to the drug once it has been absorbed. It is the only term of the six that is a sum of other terms rather than a single process, and it excludes absorption by definition.'}],
- teach:'The four ADME processes describe single steps, and two further terms group them. Elimination groups metabolism and excretion, because both remove drug irreversibly. Disposition groups distribution and elimination, because both happen after absorption. Placing a new term correctly is a matter of asking whether it names one step or a set of steps, and where absorption falls relative to it.',
+ teach:[
+ {t:'The four ADME processes describe single steps, and two further terms group them. Elimination groups metabolism and excretion, because both remove drug irreversibly. Disposition groups distribution and elimination, because both happen after absorption. Placing a new term correctly is a matter of asking whether it names one step or a set of steps, and where absorption falls relative to it.'},
+  {h:'How the variables relate', list:[
+    'Elimination = excretion + biotransformation. Both remove the parent drug irreversibly.',
+    'Disposition = distribution + elimination, that is, everything after absorption.',
+    'First-pass metabolism lowers F, the fraction of an oral dose reaching the circulation.',
+    'Subscripts name the fluid: Cp is plasma, Cs is serum, a bare C is either.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slides 4–5',
  quote:'Elimination refers to the irreversible loss of drugs from the body by all routes'},
 
@@ -193,7 +212,14 @@ const Q_MODULE1 = [
    why:'Half-life is set by the elimination rate constant, which describes the fraction of drug removed per unit time once the drug is in the body. A single metabolic loss at the point of entry removes a quantity of drug without changing that fraction, so the curve starts lower and falls at the same relative rate. This answer confuses how much arrives with how fast it leaves.'},
   {t:'Its route of administration becomes parenteral', correct:false,
    why:'The route is how the drug was given, which does not change because of what the liver does to it afterwards. The drug in this stem was administered orally and remains an oral administration. First-pass effect is a reason to consider a different route, not a description of one.'}],
- teach:'First-pass effect is the rapid metabolism of an orally administered drug before it reaches the general circulation. It is the main reason an oral dose and an intravenous dose of the same size do not produce the same systemic exposure. Bioavailability is the measure of how much of the administered dose becomes systemically available, and in this course it is quantified later as the ratio of the area under the curve after an oral dose to the area under the curve after an intravenous dose.',
+ teach:[
+ {t:'First-pass effect is the rapid metabolism of an orally administered drug before it reaches the general circulation. It is the main reason an oral dose and an intravenous dose of the same size do not produce the same systemic exposure. Bioavailability is the measure of how much of the administered dose becomes systemically available, and in this course it is quantified later as the ratio of the area under the curve after an oral dose to the area under the curve after an intravenous dose.'},
+  {h:'How the variables relate', list:[
+    'Elimination = excretion + biotransformation. Both remove the parent drug irreversibly.',
+    'Disposition = distribution + elimination, that is, everything after absorption.',
+    'First-pass metabolism lowers F, the fraction of an oral dose reaching the circulation.',
+    'Subscripts name the fluid: Cp is plasma, Cs is serum, a bare C is either.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 5',
  quote:'First-Pass Effect – rapid metabolism of an orally administered drug before reaching the general circulation'},
 
@@ -210,7 +236,9 @@ const Q_MODULE1 = [
    why:'Whole blood is the sample as drawn by venous puncture with an anticoagulant such as heparin or EDTA, and it contains all the cellular and protein elements. Nothing has been removed from it. Choosing it means stopping at the sample rather than at the fraction the description asks for.'},
   {t:'Urine', correct:false,
    why:'Urine is not a blood component at all, and it appears as an option in this material only as a measurement site that is used less often than serum or plasma. Nothing about clotting applies to it.'}],
- teach:'The three blood fractions differ by what has been taken out. Whole blood keeps everything and is collected with an anticoagulant. Plasma is whole blood with the cells spun out and the anticoagulant still preventing clotting, so the clotting proteins remain. Serum is whole blood that has been allowed to clot, so both the cells and the clotting proteins are gone. Which fraction was assayed is recorded in the symbol, with Cp for plasma and Cs for serum, and a plain C when the fraction is not specified.',
+ teach:[
+ {t:'The three blood fractions differ by what has been taken out. Whole blood keeps everything and is collected with an anticoagulant. Plasma is whole blood with the cells spun out and the anticoagulant still preventing clotting, so the clotting proteins remain. Serum is whole blood that has been allowed to clot, so both the cells and the clotting proteins are gone. Which fraction was assayed is recorded in the symbol, with Cp for plasma and Cs for serum, and a plain C when the fraction is not specified.'},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 10',
  quote:'Obtained from whole blood after the blood is allowed to clot and the clot is removed'},
 
@@ -227,7 +255,9 @@ const Q_MODULE1 = [
    why:'Urine is used, and it becomes important later for renal clearance, but it reports drug that has already left the body rather than the concentration circulating now. A concentration-versus-time curve in this course is a plasma or serum curve. Selecting urine confuses an excretion measurement with a systemic one.'},
   {t:'Saliva', correct:false,
    why:'Saliva appears in the same list of possible sampling sites and is the least used of the four. It is offered as a distractor precisely because it is a genuine option somewhere rather than an absurd one. Nothing in this course computes a parameter from a saliva concentration.'}],
- teach:'A pharmacokinetic concentration is only defined once the fluid it was measured in is named. Serum and plasma are the routine fluids because stripping out the cells reduces interactions between the drug and other blood components, which makes the assay a cleaner report of what is circulating. That choice is carried through the notation for the rest of the course.',
+ teach:[
+ {t:'A pharmacokinetic concentration is only defined once the fluid it was measured in is named. Serum and plasma are the routine fluids because stripping out the cells reduces interactions between the drug and other blood components, which makes the assay a cleaner report of what is circulating. That choice is carried through the notation for the rest of the course.'},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf, poll slide following slide 15',
  quote:'We mostly use serum and plasma because remember we try to minimize the interactions of drug with anything else that might be in that um sample'},
 
@@ -244,7 +274,9 @@ const Q_MODULE1 = [
    why:'Physiologic models, also called blood flow or perfusion models, are built from known anatomic and physiologic data rather than from abstract boxes. They are not described by a chain of compartments at all. Dr. Mosley notes they require more input than this course wants to supply, which is why compartmental modelling is used instead.'},
   {t:'Catenary and mammillary are the same arrangement', correct:false,
    why:'They are the two distinct compartment arrangements presented side by side, distinguished by which compartments connect to which. Treating them as interchangeable removes the only thing the question turns on. The rate constant subscripts on the diagram show the difference: a chain in one case, a hub in the other.'}],
- teach:'Compartmental models treat the body as a set of boxes with rate constants between them. In a mammillary model every peripheral compartment connects to a single central compartment, which is where drug enters and is measured. In a catenary model the compartments are linked end to end, so drug must pass through each in turn. Physiologic or perfusion models are a different approach again, built on real blood flows and organ volumes.',
+ teach:[
+ {t:'Compartmental models treat the body as a set of boxes with rate constants between them. In a mammillary model every peripheral compartment connects to a single central compartment, which is where drug enters and is measured. In a catenary model the compartments are linked end to end, so drug must pass through each in turn. Physiologic or perfusion models are a different approach again, built on real blood flows and organ volumes.'},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 13, and the poll slide following slide 15',
  quote:'compartments joined together like compartments, uh, of a, of a, a train'},
 
@@ -265,7 +297,9 @@ const Q_MODULE1 = [
    why:'A pharmacokinetic model works with amounts, concentrations and rates, and carries no information about molecular structure. Identifying a metabolite chemically is an analytical chemistry task. Choosing this extends the model beyond the quantities it contains.'},
   {t:'Replace the need to measure plasma concentrations', correct:false,
    why:'A model is fitted to measured concentrations and its parameters come from them, so measurement is what makes the model possible rather than what the model removes. Clinical pharmacokinetics applies these methods to specific drugs in specific patients, which requires samples. This option inverts the relationship between data and model.'}],
- teach:'A model is a set of assumptions that turns a handful of measured concentrations into a continuous description. Everything listed as a use follows from that: predicting levels at unsampled times, choosing regimens, estimating accumulation, comparing formulations, correlating concentrations with pharmacologic or toxicologic activity, describing how physiology or disease alters the kinetics, and explaining drug interactions. What a model cannot supply is information of a different kind from the data it was built on.',
+ teach:[
+ {t:'A model is a set of assumptions that turns a handful of measured concentrations into a continuous description. Everything listed as a use follows from that: predicting levels at unsampled times, choosing regimens, estimating accumulation, comparing formulations, correlating concentrations with pharmacologic or toxicologic activity, describing how physiology or disease alters the kinetics, and explaining drug interactions. What a model cannot supply is information of a different kind from the data it was built on.'},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 11'},
 
 {id:'m1-int-09', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -282,7 +316,13 @@ const Q_MODULE1 = [
   {t:'Minimum inhibitory concentration', correct:false,
    why:'The minimum inhibitory concentration is the concentration needed to kill or inhibit an organism, which is a specific biochemical endpoint used with antibiotics. It is a particular case rather than the general term the question asks for. Some of the class selected it because the wording of the two definitions is close.'}],
  note:'Printed slide 9 carries only the title "Concentration versus Time Curve" and the curve itself; the minimum effective and minimum toxic concentration lines were drawn and named in the lecture, and the four options here are the options from her own poll. An exam written from these lectures would key the minimum effective concentration.',
- teach:'A single-dose concentration-versus-time curve rises to a peak and then falls. Two horizontal lines give that curve its clinical meaning. The minimum effective concentration is the level that must be met or exceeded for the desired response. The minimum toxic concentration is the level above which adverse effects appear. The interval between the two is where the concentration is meant to stay, and the shape of the curve decides for how long it does.',
+ teach:[
+ {t:'A single-dose concentration-versus-time curve rises to a peak and then falls. Two horizontal lines give that curve its clinical meaning. The minimum effective concentration is the level that must be met or exceeded for the desired response. The minimum toxic concentration is the level above which adverse effects appear. The interval between the two is where the concentration is meant to stay, and the shape of the curve decides for how long it does.'},
+  {h:'How the variables relate', list:[
+    'The therapeutic window lies between the minimum effective concentration and the minimum toxic concentration.',
+    'Onset is when C first rises above the minimum effective concentration; duration is how long it stays above it.',
+    'Intensity tracks how far C sits above the minimum effective concentration.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 9',
  quote:'What concentration must be met or exceeded? In order for the desired pharmacologic response to result.'},
 
@@ -300,7 +340,13 @@ const Q_MODULE1 = [
   {t:'The time at which the concentration exceeds the minimum toxic concentration', correct:false,
    why:'A curve kept inside the intended range never crosses the minimum toxic concentration at all, so this would be undefined for most doses. Even where a curve does cross it, that crossing is not the peak. This confuses a safety threshold with the shape of the curve.'}],
  note:'Printed slide 9 shows the curve with no labels; Cmax, tmax and the two threshold lines were supplied in the lecture. An exam written from these lectures would key the time of the peak.',
- teach:'Four landmarks describe a single-dose curve. Cmax is the highest concentration reached and tmax is the time at which it occurs. The minimum effective concentration and the minimum toxic concentration are horizontal lines that bracket the range the curve is meant to stay within. Cmax and tmax are properties of the drug and the dose; the two thresholds are properties of the drug and the patient, and what counts as toxic differs from drug to drug.',
+ teach:[
+ {t:'Four landmarks describe a single-dose curve. Cmax is the highest concentration reached and tmax is the time at which it occurs. The minimum effective concentration and the minimum toxic concentration are horizontal lines that bracket the range the curve is meant to stay within. Cmax and tmax are properties of the drug and the dose; the two thresholds are properties of the drug and the patient, and what counts as toxic differs from drug to drug.'},
+  {h:'How the variables relate', list:[
+    'The therapeutic window lies between the minimum effective concentration and the minimum toxic concentration.',
+    'Onset is when C first rises above the minimum effective concentration; duration is how long it stays above it.',
+    'Intensity tracks how far C sits above the minimum effective concentration.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 9',
  quote:'our goal is. That we want to stay in between these two lines.'},
 
@@ -317,7 +363,14 @@ const Q_MODULE1 = [
    why:'Bioavailability is a measure of how much of a dose becomes systemically available rather than a process in a sequence, so it is not a step that could be added to the letters. It is a result of absorption and first-pass metabolism taken together.'},
   {t:'Disposition', correct:false,
    why:'Disposition is a grouping term for distribution and elimination, so it names steps that come after absorption rather than before it. Adding it to the front would reverse the order of the sequence it summarises.'}],
- teach:'ADME is the sequence used in this course: absorption, distribution, metabolism and excretion. Other courses extend it at either end, adding liberation at the front for release from the dosage form or toxicology at the end. The extensions do not change any of the four definitions; they only widen the span of the acronym.',
+ teach:[
+ {t:'ADME is the sequence used in this course: absorption, distribution, metabolism and excretion. Other courses extend it at either end, adding liberation at the front for release from the dosage form or toxicology at the end. The extensions do not change any of the four definitions; they only widen the span of the acronym.'},
+  {h:'How the variables relate', list:[
+    'Elimination = excretion + biotransformation. Both remove the parent drug irreversibly.',
+    'Disposition = distribution + elimination, that is, everything after absorption.',
+    'First-pass metabolism lowers F, the fraction of an oral dose reaching the circulation.',
+    'Subscripts name the fluid: Cp is plasma, Cs is serum, a bare C is either.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 4',
  quote:'Doctor Smith … she will add um a T to our ADM, right? So A D M E and then she will add a T for toxicology. Doctor Yendaalli will add an L at the beginning for liberation.'},
 
@@ -336,7 +389,14 @@ const Q_MODULE1 = [
    why:'A constant fraction per unit time is the first-order behaviour restated in words rather than symbols. For a zero-order process the fraction lost per hour grows as the concentration falls, because the quantity removed stays fixed while the amount present shrinks. Fraction and quantity are what separate the two orders.'},
   {t:'At a rate proportional to the square of the amount remaining', correct:false,
    why:'A rate proportional to concentration squared would be second order, which is two steps away from the definition asked for. The exponent on the concentration term is what names the order, and zero order means that exponent is zero, so the term disappears entirely.'}],
- teach:'The order of a reaction is the power to which the concentration is raised in the rate law. Zero order means the concentration appears to the power zero, so it drops out and the rate is a fixed quantity per unit time: dC/dt = −k, integrating to C = C0 − kt. The rate constant therefore carries units of concentration or amount per unit time, and a plot of concentration against time on linear axes is a straight line whose slope is the negative of the rate constant.',
+ teach:[
+ {t:'The order of a reaction is the power to which the concentration is raised in the rate law. Zero order means the concentration appears to the power zero, so it drops out and the rate is a fixed quantity per unit time: dC/dt = −k, integrating to C = C0 − kt. The rate constant therefore carries units of concentration or amount per unit time, and a plot of concentration against time on linear axes is a straight line whose slope is the negative of the rate constant.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -k0, a rate that does not depend on how much drug is present.',
+    'Integrated: C = C0 - k0t, a straight line on an evenly spaced concentration axis.',
+    'k0 carries concentration per time, such as mg/L per hour.',
+    'Half-life: t1/2 = C0/2k0, so it changes with the starting concentration.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 17',
  quote:'Amount or concentration of drug decreases at a constant rate'},
 
@@ -353,7 +413,14 @@ const Q_MODULE1 = [
    why:'Nothing in either rate law makes the rate depend on how long the process has been running. Time enters only through the amount of drug that has already been lost. This answer reads the horizontal axis of the graph as a cause rather than as a coordinate.'},
   {t:'Equal to the half-life divided by the rate constant', correct:false,
    why:'That expression is not a rate at all; it has units of time squared and cannot describe how fast a concentration falls. The relationship between half-life and rate constant for a first-order process is t½ = 0.693 ÷ k, which is a division the other way round. This option assembles two familiar symbols into a quantity that has no meaning.'}],
- teach:'First order means the rate depends on the concentration present, so dC/dt = −kC. The rate constant is a proportion removed per unit time rather than a quantity, which makes its units reciprocal time. Because a fixed proportion is removed in each interval, the time taken to lose half of whatever is present is the same at every concentration, which is why a first-order half-life is a single number for a drug. The integrated form ln C = ln C0 − kt is what makes a plot of the natural logarithm of concentration against time a straight line.',
+ teach:[
+ {t:'First order means the rate depends on the concentration present, so dC/dt = −kC. The rate constant is a proportion removed per unit time rather than a quantity, which makes its units reciprocal time. Because a fixed proportion is removed in each interval, the time taken to lose half of whatever is present is the same at every concentration, which is why a first-order half-life is a single number for a drug. The integrated form ln C = ln C0 − kt is what makes a plot of the natural logarithm of concentration against time a straight line.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'k carries reciprocal time, such as hr^-1, and is never negative.',
+    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 18',
  quote:'Amount or concentration of drug decreases at a rate that is proportional to the amount of drug remaining'},
 
@@ -370,7 +437,14 @@ const Q_MODULE1 = [
    why:'This expression has no concentration term on the right-hand side, which is precisely what makes it the zero-order rate law. The first-order form is dC/dt = −kC. Recognising the order from the differential equation means checking whether a concentration appears beside the rate constant.'},
   {t:'Units of k of concentration or amount per unit time', correct:false,
    why:'Concentration or amount per unit time are the units of a zero-order rate constant, because a zero-order constant is itself a rate. A first-order rate constant multiplies a concentration to produce a rate, so its units are reciprocal time, written as hours to the minus one or days to the minus one. This was the most popular wrong answer in the class poll at 44 per cent.'}],
- teach:'Every property of a first-order process follows from the rate being proportional to the concentration. Because the proportion removed per unit time is fixed, the rate constant has units of reciprocal time and the half-life is fixed at 0.693 divided by that constant. Because the quantity removed per unit time is not fixed, the rate of elimination falls as the concentration falls. A statement that fixes a quantity rather than a proportion belongs to zero order, and that is true of both remaining options here.',
+ teach:[
+ {t:'Every property of a first-order process follows from the rate being proportional to the concentration. Because the proportion removed per unit time is fixed, the rate constant has units of reciprocal time and the half-life is fixed at 0.693 divided by that constant. Because the quantity removed per unit time is not fixed, the rate of elimination falls as the concentration falls. A statement that fixes a quantity rather than a proportion belongs to zero order, and that is true of both remaining options here.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'k carries reciprocal time, such as hr^-1, and is never negative.',
+    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf, poll slide following slide 21',
  quote:'first order processes, constant half-life, constant half-life, OK. The rate of elimination … the rate is constantly changing'},
 
@@ -387,7 +461,14 @@ const Q_MODULE1 = [
    why:'A constant half-life is a genuine first-order property, but it describes the time to lose a fixed proportion, not the quantity lost per unit time. Half of a large concentration is a larger quantity than half of a small one, taken over the same interval, so the rate has clearly changed. This reasons from a true statement to the wrong conclusion.'},
   {t:'False, because zero-order processes have no rate constant', correct:false,
    why:'Zero-order processes do have a rate constant; it simply carries units of concentration or amount per unit time rather than reciprocal time. The conclusion is right but the reason given for it is not, and a reason that is not true cannot support it. Dr. Mosley states plainly that neither order has a negative rate constant and both have one.'}],
- teach:'For a first-order process the rate and the rate constant behave differently as the concentration falls. The rate constant is fixed: it is the proportion of what is present that is removed per unit time. The rate is that constant multiplied by the current concentration, so it is largest at the start and falls continuously. For a zero-order process the situation reverses: the rate is fixed and the proportion removed per unit time grows.',
+ teach:[
+ {t:'For a first-order process the rate and the rate constant behave differently as the concentration falls. The rate constant is fixed: it is the proportion of what is present that is removed per unit time. The rate is that constant multiplied by the current concentration, so it is largest at the start and falls continuously. For a zero-order process the situation reverses: the rate is fixed and the proportion removed per unit time grows.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'k carries reciprocal time, such as hr^-1, and is never negative.',
+    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf, poll slide following slide 21',
  quote:'the rate depends on the concentration that’s there'},
 
@@ -404,7 +485,14 @@ const Q_MODULE1 = [
    why:'A straight line on either scale indicates a constant rate constant, because a changing constant would bend the line. Nothing in this course has a rate constant that varies with time. This answer treats the straightness as evidence of change rather than of constancy.'},
   {t:'Nothing, because the axis is not labelled as a logarithm', correct:false,
    why:'The absence of the word log on the axis is why the spacing has to be read instead. Dr. Mosley notes that the word will usually not be there, and that a scale increasing by a function of ten is logarithmic whatever it says. Treating an unlabelled axis as uninterpretable discards the information the spacing already gives.'}],
- teach:'Two plots of the same concentrations answer different questions. Linear axes show what the concentration actually is, and a zero-order decline is straight on them because C = C0 − kt. Semi-logarithmic axes compress the concentration scale so that equal factors occupy equal distances, and a first-order decline is straight on them because ln C = ln C0 − kt. Deciding which plot is in front of you comes before deciding the order, and it is settled by whether the concentration gridlines go up by equal additions or by equal multiples.',
+ teach:[
+ {t:'Two plots of the same concentrations answer different questions. Linear axes show what the concentration actually is, and a zero-order decline is straight on them because C = C0 − kt. Semi-logarithmic axes compress the concentration scale so that equal factors occupy equal distances, and a first-order decline is straight on them because ln C = ln C0 − kt. Deciding which plot is in front of you comes before deciding the order, and it is settled by whether the concentration gridlines go up by equal additions or by equal multiples.'},
+  {h:'How the variables relate', list:[
+    'An evenly spaced concentration axis: a straight line means zero order.',
+    'An axis stepping 1, 10, 100, 1000: a straight line means first order.',
+    'On a base-ten decade axis the slope is -k/2.3; on a natural-log axis it is -k.',
+    'Read the tick values before the line. The word "log" is usually not printed.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 21',
  quote:'even if the scale does not say log C, if you look at that scale and you see that it is not changing by regular one infinite, or it’s increasing by a func- uh, a function of 10, then that tells you that it is a logarithmic scale'},
 
@@ -422,7 +510,15 @@ const Q_MODULE1 = [
   {t:'It cannot be found without the starting concentration', correct:false,
    why:'For a first-order process the half-life is 0.693 divided by the rate constant and the starting concentration does not appear, which is why the half-life is constant. It is for a zero-order process that the starting concentration is needed, since there t½ = C0 ÷ 2k. Asking for the starting concentration means applying the zero-order relation to a first-order problem.'}],
  note:'The transcript of 19 August renders her definition of half-life as "decrease by 15"; the printed slide reads "decrease by one-half", and her worked examples immediately after are all at 50 per cent. An exam written from these lectures would key one-half. The first-order half-life relation is also not printed on BasicPharmacokineticsEquations.pdf, which is why she says it has to be held without the sheet.',
- teach:'Half-life is the time required for the amount or concentration of a drug to decrease by one-half. The word that decides its units is time. For a first-order process it is 0.693 divided by the rate constant, and because both of those are constants the half-life is constant and does not depend on where the concentration started. For a zero-order process it is the starting concentration divided by twice the rate constant, so it changes whenever the starting concentration changes.',
+ teach:[
+ {t:'Half-life is the time required for the amount or concentration of a drug to decrease by one-half. The word that decides its units is time. For a first-order process it is 0.693 divided by the rate constant, and because both of those are constants the half-life is constant and does not depend on where the concentration started. For a zero-order process it is the starting concentration divided by twice the rate constant, so it changes whenever the starting concentration changes.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slide 19',
  quote:'It is a time, so it is not days to the minus one. It is just days.'},
 
@@ -441,7 +537,14 @@ const Q_MODULE1 = [
    why:'Whether the dependent variable is an amount or a concentration has no bearing on the order; both orders are defined for either. Dr. Mosley writes the definitions as amount or concentration precisely so that this choice of variable does not decide anything. Here the variable is an amount and the process is zero order.'},
   {t:'Neither, because the intervals between time points are unequal', correct:false,
    why:'Unequal spacing makes the arithmetic slightly more work but does not prevent classification; the difference or the ratio is taken over whatever interval separates the two points chosen. Picking two points 20 minutes apart twice, as above, settles the question immediately. Discarding a data set for uneven spacing throws away a solvable problem.'}],
- teach:'Deciding the order from a data set is a test of what stays constant between successive points. Take two points separated by a known interval and find the difference in amount and the ratio of amounts. Repeat over a second interval of the same length. If the differences match, the process is zero order and a plot on linear axes is a straight line. If the ratios match, the process is first order and a plot of the natural logarithm of amount against time is a straight line. Dr. Mosley has stated that a data set will be supplied on the exam and the order will have to be decided from it.',
+ teach:[
+ {t:'Deciding the order from a data set is a test of what stays constant between successive points. Take two points separated by a known interval and find the difference in amount and the ratio of amounts. Repeat over a second interval of the same length. If the differences match, the process is zero order and a plot on linear axes is a straight line. If the ratios match, the process is first order and a plot of the natural logarithm of amount against time is a straight line. Dr. Mosley has stated that a data set will be supplied on the exam and the order will have to be decided from it.'},
+  {h:'How the variables relate', list:[
+    'Equal amount lost per equal time interval means zero order: C = C0 - k0t.',
+    'Equal fraction lost per equal time interval means first order: C = C0e^(-kt).',
+    'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
+    'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReview3Solutions.pdf, problem 1a; Introduction.pdf slide 17',
  quote:'Zero-order — the drug is decreasing at a constant amount per unit time'},
 
@@ -458,7 +561,14 @@ const Q_MODULE1 = [
    why:'Spacing of the sampling times is a feature of the experiment rather than of the kinetics, and either order can be sampled at any times. Choosing pairs that are equally separated, such as 4 to 8 hours and 8 to 12 hours, removes the difficulty entirely. Nothing about uneven spacing points towards one order or the other.'},
   {t:'First order, because the drug was dissolved in water rather than given to a patient', correct:false,
    why:'The medium tells you nothing about the order; these decomposition problems are set in solution precisely so that the order has to come from the numbers. Dr. Mosley reserves the assumption of first order for a stated intravenous bolus dose, and states that where a data set is supplied the order must be determined from the data. The conclusion is right but the reasoning would fail on a zero-order data set in the same medium.'}],
- teach:'When a table supplies a column of natural logarithms, that column is the test. If the logarithm falls by the same amount over equal time intervals, the process is first order, because ln C = ln C0 − kt makes the logarithm linear in time. If instead the concentrations themselves fall by the same amount over equal intervals, the process is zero order, because C = C0 − kt makes the concentration linear in time. Working with whichever column is linear then gives the rate constant directly from its slope.',
+ teach:[
+ {t:'When a table supplies a column of natural logarithms, that column is the test. If the logarithm falls by the same amount over equal time intervals, the process is first order, because ln C = ln C0 − kt makes the logarithm linear in time. If instead the concentrations themselves fall by the same amount over equal intervals, the process is zero order, because C = C0 − kt makes the concentration linear in time. Working with whichever column is linear then gives the rate constant directly from its slope.'},
+  {h:'How the variables relate', list:[
+    'Equal amount lost per equal time interval means zero order: C = C0 - k0t.',
+    'Equal fraction lost per equal time interval means first order: C = C0e^(-kt).',
+    'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
+    'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'PHAR_4221_Homework_1.md, problem 1a; Introduction.pdf slide 18',
  quote:'Plotting the natural logarithm of concentration (ln C) vs. time (t) yields a straight line with a correlation coefficient of r = −1.0000'},
 
@@ -480,7 +590,14 @@ const Q_MODULE1 = [
    why:'These are the two points Dr. Mosley selects in her own key, and the pair is a good choice because the 18-hour separation spans most of the decline and reduces the effect of measurement scatter. The concentration units cancel inside the logarithm, leaving a pure number divided by hours. That division is what produces reciprocal hours.'},
   {k:'round', t:'k = 0.08658 hr⁻¹, reported as 0.0866 hr⁻¹.',
    why:'Dividing a dimensionless logarithm by a time gives reciprocal time, which is the unit a first-order rate constant must carry. Dr. Mosley reports rate constants to four decimal places throughout this course, and her key for this problem prints 0.0866 per hour. A leading decimal with no digit before it loses half the marks on her paper.'}],
- teach:'A first-order rate constant taken from a table is the slope of the natural logarithm of concentration against time, with the sign reversed. Working from two points rather than a full regression gives the same quantity because the relation is exactly linear, and subtracting the two integrated equations eliminates the starting concentration. Different pairs of points from the same clean data set give the same constant to the precision the data support, so the choice of pair is a matter of spanning a useful interval rather than of getting a different answer.',
+ teach:[
+ {t:'A first-order rate constant taken from a table is the slope of the natural logarithm of concentration against time, with the sign reversed. Working from two points rather than a full regression gives the same quantity because the relation is exactly linear, and subtracting the two integrated equations eliminates the starting concentration. Different pairs of points from the same clean data set give the same constant to the precision the data support, so the choice of pair is a matter of spanning a useful interval rather than of getting a different answer.'},
+  {h:'How the variables relate', list:[
+    'Equal amount lost per equal time interval means zero order: C = C0 - k0t.',
+    'Equal fraction lost per equal time interval means first order: C = C0e^(-kt).',
+    'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
+    'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1a; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n02', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -499,7 +616,14 @@ const Q_MODULE1 = [
    why:'The exponential factor e^1.0392 is 2.8270, which is greater than one because the exponent is positive, so the answer is larger than the measured concentration, as it must be for a concentration that has been falling for 12 hours. Milligrams per litre multiplied by a pure number stay milligrams per litre.'},
   {k:'round', t:'C0 = 350 mg/L.',
    why:'Dr. Mosley reports this value as 350 mg/L, to three significant figures, which matches the precision of the tabulated concentrations. The computed 349.98 rounds to that value without any further adjustment.'}],
- teach:'Back-extrapolation recovers the concentration at time zero from a measurement made later, and it is the same integrated equation used with the sign of the exponent reversed. The sign is the whole of the difficulty: a positive exponent moves back towards the start and must give a larger number, a negative exponent moves forward and must give a smaller one. Checking the direction of the answer against the direction of the question catches the error before the arithmetic is trusted.',
+ teach:[
+ {t:'Back-extrapolation recovers the concentration at time zero from a measurement made later, and it is the same integrated equation used with the sign of the exponent reversed. The sign is the whole of the difficulty: a positive exponent moves back towards the start and must give a larger number, a negative exponent moves forward and must give a smaller one. Checking the direction of the answer against the direction of the question catches the error before the arithmetic is trusted.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'k carries reciprocal time, such as hr^-1, and is never negative.',
+    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1b; Introduction.pdf slide 18',
  quote:'If you get a number that is lower than 475.6 SC0, you’ve done something wrong. Punch it again.'},
 
@@ -517,7 +641,15 @@ const Q_MODULE1 = [
    why:'Dividing a pure number by a quantity in reciprocal hours gives hours, which is the unit a half-life must have. The rate constant sits in the denominator because a faster process has a shorter half-life, so the two quantities move in opposite directions.'},
   {k:'round', t:'t½ = 8 hr.',
    why:'Dr. Mosley reports this as 8 hours, to the whole hour, which is as far as a four-figure rate constant justifies. The answer is a time and carries no reciprocal unit; hours to the minus one belongs to the rate constant that was given, not to the half-life that was asked for.'}],
- teach:'Half-life and rate constant are two ways of stating the same first-order decline, joined by the natural logarithm of two. Either can be quoted and converting between them is one division. Because the relation contains no concentration term, the half-life is a single number for the process and does not change as the solution decomposes, which is what allows a drug to be described by one half-life across all its doses.',
+ teach:[
+ {t:'Half-life and rate constant are two ways of stating the same first-order decline, joined by the natural logarithm of two. Either can be quoted and converting between them is one division. Because the relation contains no concentration term, the half-life is a single number for the process and does not change as the solution decomposes, which is what allows a drug to be described by one half-life across all its doses.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1c; Introduction.pdf slide 19',
  quote:'this is one that I want you to know. So that will not be on your equation sheet. This is the one that you take to your grave with you, OK? 0.693 over K.'},
 
@@ -537,7 +669,14 @@ const Q_MODULE1 = [
    why:'The logarithm of ten is a pure number, and dividing it by a quantity in reciprocal hours leaves hours. The fraction remaining is not a clean power of one half here, so half-life counting will not reach the answer exactly and the logarithmic route is needed.'},
   {k:'round', t:'t = 26.589 hr, reported as 26.6 hr.',
    why:'Dr. Mosley reports this to one decimal place, as 26.6 hours. As a check, 90 per cent decomposition is a little more than three half-lives, which for an 8-hour half-life would be 24 hours, and the answer sits just above that.'}],
- teach:'Percentage questions for a first-order process never need a concentration, because the starting value cancels. Convert the stated percentage into the fraction remaining, take the natural logarithm of its reciprocal, and divide by the rate constant. Where the fraction remaining is a power of one half, counting half-lives gives the same answer more quickly, and Dr. Mosley prints both routes when both are available.',
+ teach:[
+ {t:'Percentage questions for a first-order process never need a concentration, because the starting value cancels. Convert the stated percentage into the fraction remaining, take the natural logarithm of its reciprocal, and divide by the rate constant. Where the fraction remaining is a power of one half, counting half-lives gives the same answer more quickly, and Dr. Mosley prints both routes when both are available.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'k carries reciprocal time, such as hr^-1, and is never negative.',
+    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1d; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n05', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -556,7 +695,14 @@ const Q_MODULE1 = [
    why:'These are the two points Dr. Mosley takes in her key. Milligrams per millilitre divided by hours gives milligrams per millilitre per hour, which is concentration per unit time, the unit a zero-order rate constant must carry.'},
   {k:'round', t:'k = 6 (mg/mL)/hr.',
    why:'The division is exact at 6, and her key prints 6 mg/mL per hour with no further rounding. Because the process is zero order, this number is the quantity lost every hour, unchanged from the first hour to the last.'}],
- teach:'A zero-order rate constant is a rate, so it carries units of concentration or amount per unit time and it is found from the slope of a plot of concentration against time on linear axes. That makes it arithmetically simpler than its first-order counterpart, since no logarithm is involved. It also means the same stem can be set twice with different numbers, once giving a zero-order data set and once a first-order one, and only the arithmetic on the points tells them apart.',
+ teach:[
+ {t:'A zero-order rate constant is a rate, so it carries units of concentration or amount per unit time and it is found from the slope of a plot of concentration against time on linear axes. That makes it arithmetically simpler than its first-order counterpart, since no logarithm is involved. It also means the same stem can be set twice with different numbers, once giving a zero-order data set and once a first-order one, and only the arithmetic on the points tells them apart.'},
+  {h:'How the variables relate', list:[
+    'Equal amount lost per equal time interval means zero order: C = C0 - k0t.',
+    'Equal fraction lost per equal time interval means first order: C = C0e^(-kt).',
+    'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
+    'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReviewSolutions.pdf, problem 2a; Introduction.pdf slide 17'},
 
 {id:'m1-ord-n06', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -573,7 +719,15 @@ const Q_MODULE1 = [
    why:'Milligrams per millilitre divided by milligrams per millilitre per hour leaves hours, since the concentration units cancel and the reciprocal hour inverts. The factor of two appears because only half of the starting concentration has to be removed.'},
   {k:'round', t:'t½ = 29.167 hr, reported as 29.2 hr.',
    why:'Dr. Mosley reports this to one decimal place, as 29.2 hours. As a check, the table for this solution reads 206 mg/mL at 24 hours and 134 mg/mL at 36 hours, so the concentration passes 175 mg/mL between those two times, which brackets the answer.'}],
- teach:'The two half-life relations look similar and behave differently. The first-order half-life, 0.693 divided by the rate constant, contains no concentration, so it is constant. The zero-order half-life, the starting concentration divided by twice the rate constant, is proportional to the starting concentration, so doubling the initial concentration doubles it. Deciding the order therefore has to come before either relation is used, and using the wrong one is not a small error but a different functional dependence.',
+ teach:[
+ {t:'The two half-life relations look similar and behave differently. The first-order half-life, 0.693 divided by the rate constant, contains no concentration, so it is constant. The zero-order half-life, the starting concentration divided by twice the rate constant, is proportional to the starting concentration, so doubling the initial concentration doubles it. Deciding the order therefore has to come before either relation is used, and using the wrong one is not a small error but a different functional dependence.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReviewSolutions.pdf, problem 2, part c; Introduction.pdf slide 19'},
 
 {id:'m1-ord-n08', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -594,7 +748,15 @@ const Q_MODULE1 = [
    why:'Milligrams divided by milligrams per minute leaves minutes, so the result is a time in the same time unit the rate constant was quoted in. Half of the 105 mg starting amount is 52.5 mg, and at 0.8 mg per minute that removal takes 65.625 minutes, which is what dividing by twice the rate constant computes in a single move.'},
   {k:'round', t:'t½ = 65.6 min.',
    why:'Dr. Mosley reports this half-life to one decimal place, as 65.6 minutes, which is as far as a rate constant quoted to one decimal place will justify. The answer is a time and carries no reciprocal unit; per minute belongs to the rate constant that was given, not to the half-life that was asked for.'}],
- teach:'A zero-order half-life is computed in two stages because it needs a starting value that the table usually does not contain. First recover the starting amount or concentration by adding back what has already been lost, which is the rate constant multiplied by the elapsed time. Then divide half of that starting value by the rate constant. Both stages use the same linear relation, and neither involves a logarithm.',
+ teach:[
+ {t:'A zero-order half-life is computed in two stages because it needs a starting value that the table usually does not contain. First recover the starting amount or concentration by adding back what has already been lost, which is the rate constant multiplied by the elapsed time. Then divide half of that starting value by the rate constant. Both stages use the same linear relation, and neither involves a logarithm.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReview3Solutions.pdf, problem 1c; Introduction.pdf slide 19'},
 
 {id:'m1-ord-n09', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -611,7 +773,14 @@ const Q_MODULE1 = [
    why:'A difference of natural logarithms is a pure number, and dividing it by a span of hours gives reciprocal hours. The 15-hour separation is the widest the table allows, which uses the data most efficiently.'},
   {k:'round', t:'k = 0.13863 hr⁻¹, reported as 0.1386 hr⁻¹.',
    why:'Dr. Mosley reports first-order rate constants to four decimal places, and her key prints 0.1386 per hour while carrying 0.13863 into the next parts of the problem. Rounding at the end rather than at each step keeps the later answers consistent with hers.'}],
- teach:'When a table already carries a column of natural logarithms, a first-order rate constant is a subtraction and a division with no exponentials at all. The difference between two logarithms over the time that separates them is the slope of the straight line, and the rate constant is that slope with its sign reversed. Where the logarithms are not supplied, the same calculation is written as the logarithm of the ratio of the two concentrations, which is the form Dr. Mosley prefers.',
+ teach:[
+ {t:'When a table already carries a column of natural logarithms, a first-order rate constant is a subtraction and a division with no exponentials at all. The difference between two logarithms over the time that separates them is the slope of the straight line, and the rate constant is that slope with its sign reversed. Where the logarithms are not supplied, the same calculation is written as the logarithm of the ratio of the two concentrations, which is the form Dr. Mosley prefers.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'k carries reciprocal time, such as hr^-1, and is never negative.',
+    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'PHAR_4221_Homework_1.md, problem 1b; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n10', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -630,7 +799,14 @@ const Q_MODULE1 = [
    why:'A concentration is an amount per unit volume, so rearranging it for volume puts the amount on top. The whole 200 mg was dissolved and none had decomposed at time zero, so the amount to use is the full dose.'},
   {k:'round', t:'V = 200,000 mcg ÷ 250.0 mcg/mL = 800 mL.',
    why:'Micrograms divided by micrograms per millilitre leaves millilitres, and the microgram units cancel only because the dose was converted from 200 mg first. Her key prints 800 mL, which is exact at the precision of the data.'}],
- teach:'Backing out a preparation volume joins two separate ideas. The kinetics supply the concentration at time zero, which no sample measured directly, and the definition of concentration turns that into a volume. The same two-stage structure appears throughout the course whenever a volume of distribution is found from a dose and an extrapolated concentration. Getting the units to agree before dividing is where the work is, since the dose is quoted in milligrams and the concentration in micrograms per millilitre.',
+ teach:[
+ {t:'Backing out a preparation volume joins two separate ideas. The kinetics supply the concentration at time zero, which no sample measured directly, and the definition of concentration turns that into a volume. The same two-stage structure appears throughout the course whenever a volume of distribution is found from a dose and an extrapolated concentration. Getting the units to agree before dividing is where the work is, since the dose is quoted in milligrams and the concentration in micrograms per millilitre.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'k carries reciprocal time, such as hr^-1, and is never negative.',
+    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'PHAR_4221_Homework_1.md, problem 1d; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n11', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -651,7 +827,14 @@ const Q_MODULE1 = [
    why:'Milligrams divided by milligrams per millilitre leaves millilitres, and no unit conversion was needed because the dose and the concentration were both quoted in milligrams. The volume is larger than 300 mL because the starting concentration is below 1 mg per millilitre.'},
   {k:'round', t:'V = 600 mL.',
    why:'Her key prints 600 mL with no rounding shown, because every number in the chain divides exactly and no logarithm or exponential was evaluated anywhere in it. Millilitres are the unit the 1.0 mL assay samples were quoted in, so the answer is reported in the same measure.'}],
- teach:'This is the same two-stage calculation as the first-order version with one substitution: the starting concentration is recovered by adding back a fixed quantity rather than by multiplying by an exponential factor. Deciding which of the two recoveries applies is the only place the order enters, and the stem states it here rather than leaving it to be inferred. The final division is the definition of concentration rearranged for volume in both cases.',
+ teach:[
+ {t:'This is the same two-stage calculation as the first-order version with one substitution: the starting concentration is recovered by adding back a fixed quantity rather than by multiplying by an exponential factor. Deciding which of the two recoveries applies is the only place the order enters, and the stem states it here rather than leaving it to be inferred. The final division is the definition of concentration rearranged for volume in both cases.'},
+  {h:'How the variables relate', list:[
+    'Rate: dC/dt = -k0, a rate that does not depend on how much drug is present.',
+    'Integrated: C = C0 - k0t, a straight line on an evenly spaced concentration axis.',
+    'k0 carries concentration per time, such as mg/L per hour.',
+    'Half-life: t1/2 = C0/2k0, so it changes with the starting concentration.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReview2Solutions.pdf, problem 3; Introduction.pdf slide 17'},
 
 {id:'m1-ord-n12', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -670,7 +853,15 @@ const Q_MODULE1 = [
    why:'Multiplying a count of half-lives by the length of one half-life gives a time in hours. The 750 mg stated in the question is never used, because for a first-order process the time to reach a given percentage does not depend on the starting amount.'},
   {k:'round', t:'t = 24 hr.',
    why:'The answer is exact rather than rounded, because 87.5 per cent corresponds to a whole number of half-lives and no logarithm had to be evaluated. Dr. Mosley prints 24 hours and reaches it by this same three-step count rather than by an equation.'}],
- teach:'Where the fraction remaining is a power of one half, counting half-lives answers the question without any logarithm. Fifty per cent decomposed is one half-life, 75 per cent is two, 87.5 per cent is three, and the pattern continues to 99.9 per cent at ten. The same count works for amounts, concentrations and percentages alike, because for a first-order process all three fall by the same factor in the same time. Where the fraction is not a power of one half, the logarithmic route is needed instead.',
+ teach:[
+ {t:'Where the fraction remaining is a power of one half, counting half-lives answers the question without any logarithm. Fifty per cent decomposed is one half-life, 75 per cent is two, 87.5 per cent is three, and the pattern continues to 99.9 per cent at ten. The same count works for amounts, concentrations and percentages alike, because for a first-order process all three fall by the same factor in the same time. Where the fraction is not a power of one half, the logarithmic route is needed instead.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReviewSolutions.pdf, problem 3; Introduction.pdf slide 19',
  quote:'First-order process with a 8 hour half-life, 50% of drug should be decomposed in one half-life (8 hours), 75% should be decomposed in two half-lives (16 hours), and 87.5% decomposed in 3 half-lives (24 hours).'},
 
@@ -693,7 +884,15 @@ const Q_MODULE1 = [
   {k:'round', t:'t½ = 15.7 days.',
    why:'Her worked answer prints 15.7 days, to one decimal place, which matches the precision of a rate constant she reports as 0.044 per day. Carrying the unrounded rate constant instead gives 15.73 days, a difference far too small to change any conclusion drawn from it.'}],
  note:'The transcript of the exam review renders the rate constant once as "0.044 per hour" and once as "0.0044"; the elapsed time of 30 days and her own printed half-life of 15.7 days are both consistent only with 0.044 per day. An exam written from these lectures would key 15.7 days.',
- teach:'This stem is one Dr. Mosley reuses, always with two parts that work the same two concentrations first as a first-order process and then as a zero-order one. The first-order half-life comes from the rate constant alone and is independent of where the concentration started. Because the question asks when the concentration declines to one half of the original, and the original concentration is the one at time zero, the half-life answers it directly with no further step.',
+ teach:[
+ {t:'This stem is one Dr. Mosley reuses, always with two parts that work the same two concentrations first as a first-order process and then as a zero-order one. The first-order half-life comes from the rate constant alone and is independent of where the concentration started. Because the question asks when the concentration declines to one half of the original, and the original concentration is the one at time zero, the half-life answers it directly with no further step.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'RecapExam1.pdf, slide "Practice" (Module 1); Introduction.pdf slide 19',
  quote:'Assuming first-order kinetics, when will the drug decline to one-half of the original concentration?'},
 
@@ -716,7 +915,15 @@ const Q_MODULE1 = [
   {k:'round', t:'t½ = 20.45 days.',
    why:'Dr. Mosley reports 20.45 days, to two decimal places, worked from the unrounded rate constant. The zero-order half-life is far longer than the first-order one for the same pair of points, because a zero-order process removes a fixed amount per day rather than a fixed fraction.'}],
  note:'Her handwriting on the RecapExam1 slide records 20.463 days, which follows from the rounded rate constant of 7.33; she says 20.45 days aloud in the exam review, which follows from the unrounded 7.3333. The printed slide gives no answer. Both readings are within the tolerance set here, and an exam written from these lectures would accept either.',
- teach:'The paired stem works the same two measurements under both assumptions so that the two half-life relations can be compared side by side. The zero-order answer is the larger of the two here, and it would change if the starting concentration changed, whereas the first-order answer would not. Nothing in the data itself selects an order in this problem, because two points lie on both a straight line and an exponential; the stem states which assumption to make.',
+ teach:[
+ {t:'The paired stem works the same two measurements under both assumptions so that the two half-life relations can be compared side by side. The zero-order answer is the larger of the two here, and it would change if the starting concentration changed, whereas the first-order answer would not. Nothing in the data itself selects an order in this problem, because two points lie on both a straight line and an exponential; the stem states which assumption to make.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'RecapExam1.pdf, slide "Practice" (Module 1); Introduction.pdf slide 19'},
 
 {id:'m1-ord-n16', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -735,7 +942,15 @@ const Q_MODULE1 = [
    why:'Both quantities are pure numbers, so the result is a pure count of half-lives with no time unit attached. Her key prints 9.97 and takes it as 10.'},
   {k:'round', t:'t = 10 half-lives.',
    why:'Her table confirms the same answer without the logarithm: after 10 half-lives 0.1 per cent remains, which is 99.9 per cent decomposed. She uses this figure repeatedly, since a question asking for the time for 99.9 per cent of a drug to be eliminated always resolves to ten half-lives.'}],
- teach:'Ten half-lives is the standard count for practical completion of a first-order process, and it can be reached two ways. The logarithmic route gives 9.97 half-lives, and the halving table reaches 99.9 per cent decomposed at the tenth step. Dr. Mosley prints both, which is her habit whenever two independent routes to the same answer exist. The count is independent of the starting concentration, so the same ten half-lives applies to any dose.',
+ teach:[
+ {t:'Ten half-lives is the standard count for practical completion of a first-order process, and it can be reached two ways. The logarithmic route gives 9.97 half-lives, and the halving table reaches 99.9 per cent decomposed at the tenth step. Dr. Mosley prints both, which is her habit whenever two independent routes to the same answer exist. The count is independent of the starting concentration, so the same ten half-lives applies to any dose.'},
+  {h:'How the variables relate', list:[
+    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
+    'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
+    '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
+    'A half-life is reported in units of time, never in reciprocal time.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'IntroductionandMathReview2Solutions.pdf, problem 1; Introduction.pdf slide 19'},
 
 /* ══════════════════ AUC ═══════════════════════════════════════════════ */
@@ -753,7 +968,13 @@ const Q_MODULE1 = [
    why:'Half-life comes from the slope of the declining portion of the curve on semi-logarithmic axes, which is a separate reading from the area. A drug with a long half-life will usually have a large area, but the two are not the same quantity and neither can be computed from the other alone. This answer substitutes a related property for the one asked about.'},
   {t:'The minimum toxic concentration of the drug', correct:false,
    why:'The minimum toxic concentration is a threshold level fixed by the drug and the patient, drawn as a horizontal line across the curve, and it does not come from the area. An area is a total, not a level. Nothing about integrating the curve produces a safety limit.'}],
- teach:'Area under the curve measures total exposure: the concentration integrated over time. That makes it the quantity for comparing how much drug the body actually received by two different routes or from two different formulations. Dividing the area after an oral dose by the area after an intravenous dose gives the bioavailability factor F, the fraction of the oral dose that enters the plasma. The total area is the sum of the areas of the individual segments the curve is broken into.',
+ teach:[
+ {t:'Area under the curve measures total exposure: the concentration integrated over time. That makes it the quantity for comparing how much drug the body actually received by two different routes or from two different formulations. Dividing the area after an oral dose by the area after an intravenous dose gives the bioavailability factor F, the fraction of the oral dose that enters the plasma. The total area is the sum of the areas of the individual segments the curve is broken into.'},
+  {h:'How the variables relate', list:[
+    'AUC measures the extent of drug available to the body.',
+    'Its units are concentration multiplied by time, such as mg/L x hr or mcg/mL x hr.',
+    'Clearance ties dose to exposure: Cl = D0/AUC.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slides 22–23',
  quote:'for us, that tells us about the extent of drug that is available for the body to use'},
 
@@ -777,7 +998,13 @@ const Q_MODULE1 = [
    why:'The two segment areas are in the same unit and add directly, because each was already reduced to a concentration multiplied by a time. Adding rather than averaging is what the trapezoidal rule requires, since the segments sit side by side under the curve rather than overlapping.'},
   {k:'round', t:'AUC = 23.7 mcg·hr/mL.',
    why:'Dr. Mosley reports 23.7 for this interval, to three significant figures, which matches the precision of the tabulated concentrations. The unit is a concentration multiplied by a time, which is why it reads as micrograms times hours per millilitre rather than as a concentration.'}],
- teach:'The trapezoidal rule estimates the area beneath a set of measured points by joining neighbouring points with straight lines and adding the areas of the resulting trapezia. Each segment is the average of its two concentrations multiplied by the time between them. Because the true curve between two points is usually concave rather than straight, the estimate is approximate, and it improves as the sampling times get closer together. The unit of the result is always concentration multiplied by time.',
+ teach:[
+ {t:'The trapezoidal rule estimates the area beneath a set of measured points by joining neighbouring points with straight lines and adding the areas of the resulting trapezia. Each segment is the average of its two concentrations multiplied by the time between them. Because the true curve between two points is usually concave rather than straight, the estimate is approximate, and it improves as the sampling times get closer together. The unit of the result is always concentration multiplied by time.'},
+  {h:'How the variables relate', list:[
+    'One trapezoid = (1/2)(C1 + C2)(t2 - t1), which is one half base times height.',
+    'Total AUC is the sum of the segments, so unequal time intervals are handled one segment at a time.',
+    'The width of a segment is the time interval, not the number of samples.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slides 24–25',
  quote:'it is basically the calculations from, I’m gonna say math 0.5, like fifth grade math when you had geometry, where it’s one half base times height'},
 
@@ -799,7 +1026,13 @@ const Q_MODULE1 = [
    why:'The segment areas share a unit and add directly. The result is larger than the area from hours 2 to 4 because the concentrations over this earlier interval are higher, which is the expected direction for a curve that is declining throughout.'},
   {k:'round', t:'AUC = 41.65 mcg·hr/mL.',
    why:'The value is reported to two decimal places, which is what the half-hour and one-hour segment widths support without inventing precision. The unit is again a concentration multiplied by a time, unchanged by the unequal segment widths used over this earlier stretch of the curve.'}],
- teach:'Nothing in the trapezoidal rule requires evenly spaced samples; each segment simply uses the interval between its own two points. That makes the rule usable on any sampling schedule, which matters because pharmacokinetic sampling is usually dense early and sparse late. Assuming a uniform width is the error that unevenly spaced tables are set to catch, and it changes the answer by whatever the mismatched intervals amount to.',
+ teach:[
+ {t:'Nothing in the trapezoidal rule requires evenly spaced samples; each segment simply uses the interval between its own two points. That makes the rule usable on any sampling schedule, which matters because pharmacokinetic sampling is usually dense early and sparse late. Assuming a uniform width is the error that unevenly spaced tables are set to catch, and it changes the answer by whatever the mismatched intervals amount to.'},
+  {h:'How the variables relate', list:[
+    'One trapezoid = (1/2)(C1 + C2)(t2 - t1), which is one half base times height.',
+    'Total AUC is the sum of the segments, so unequal time intervals are handled one segment at a time.',
+    'The width of a segment is the time interval, not the number of samples.']},
+  {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  cite:'Introduction.pdf slides 24–25'},
 
 ];

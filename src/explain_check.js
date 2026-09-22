@@ -112,7 +112,7 @@ for (const q of Q) {
   const weight = pl ? (pl.marks || 1) : 1;
   const issues = [];
   const teach = Array.isArray(q.teach)
-    ? q.teach.map(p => [p.h, p.t].filter(Boolean).join('. ')).join(' ')
+    ? q.teach.map(p => [p.h, p.t, ...(p.list || [])].filter(Boolean).join('. ')).join(' ')
     : (q.teach || '');
   const whys = [
     ...(q.options || []).map((o, i) => ['option ' + 'ABCDEFGHIJ'[i], o.why || '', !!o.correct]),
