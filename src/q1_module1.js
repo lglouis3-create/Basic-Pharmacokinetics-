@@ -114,6 +114,108 @@ const TOPICS = [
 ];
 
 
+/* ==========================================================================
+   PROBLEM SETS
+   ==========================================================================
+   Dr. Mosley sets most of her calculations as one vignette asked in parts,
+   where a part uses what the part before it produced: the rate constant found
+   in (a) becomes the half-life in (b), the half-life feeds the time for 99.9
+   per cent in (h), and she flags the dependency in words — "at the rate you
+   determined above", "the drug in question #1" (STYLE.md, habit 7). Working a
+   set straight through is a different exercise from meeting one part cold,
+   because a wrong answer early carries into every part after it.
+
+   Each part is still written to stand on its own, restating the value it
+   needs, so the scheduler can ask any one of them in isolation and a student
+   who missed (a) is not blocked from (f). This table only records the order
+   she asks them in and the vignette they share.
+
+   `parts` is question ids in her order. `name` is what the set is, `setup` is
+   the vignette in one line, and `module` places it in the Topics view.
+   test.js checks that every id here exists and that no part is listed twice.
+   ========================================================================== */
+const CHAINS = [
+ {id:'m1-first', module:1, name:'Decomposition of a drug solution, first order',
+  setup:'One table of six samples over 48 hours, worked through to the time for 90 per cent',
+  parts:['m1-ord-n01','m1-ord-n02','m1-ord-n03','m1-ord-n04']},
+
+ {id:'m1-zero', module:1, name:'The same experiment, zero order',
+  setup:'Her identical stem with numbers that make the decomposition zero order, in four parts',
+  parts:['m1-ord-n05','m1-ord-n17','m1-ord-n06','m1-ord-n18']},
+
+ {id:'m1-antibiotic', module:1, name:'An antibiotic dissolved in purified water',
+  setup:'Aliquots assayed over 16 hours, ending in the volume the solution was made up to',
+  parts:['m1-ord-n09','m1-ord-n10']},
+
+ {id:'m1-30days', module:1, name:'A solution assayed after 30 days, read both ways',
+  setup:'The same two concentrations taken first as first order and then as zero order',
+  parts:['m1-ord-n14','m1-ord-n15']},
+
+ {id:'m1-auc', module:1, name:'Area under the curve from one table of plasma levels',
+  setup:'Six plasma levels, with the trapezoidal rule applied over two different intervals',
+  parts:['m1-auc-n02','m1-auc-n01']},
+
+ {id:'m2-table', module:2, name:'IV bolus from a concentration–time table (a–h)',
+  setup:'50 mg to a 70-kg patient, six samples over 3 hours, her eight-part battery in her order',
+  parts:['m2-n-k1','m2-n-t1','m2-n-c0a','m2-n-c15','m2-n-vd1','m2-n-cl1','m2-n-d3a','m2-n-999a']},
+
+ {id:'m2-points', module:2, name:'IV bolus from two plasma points (a–h)',
+  setup:'250 mg of an antibiotic, two concentrations in prose, the same eight parts',
+  parts:['m2-n-k2','m2-n-t2','m2-n-c0b','m2-n-c15b','m2-n-vd2','m2-n-cl3','m2-n-d3b','m2-n-999b']},
+
+ {id:'m3-theophylline', module:3, name:'Theophylline by continuous infusion',
+  setup:'The plateau at 50 mg/hr, then the rate that would reach a different plateau',
+  parts:['inf-n1','inf-n2']},
+
+ {id:'m3-150mg', module:3, name:'150 mg infused over 6 hours',
+  setup:'The concentration at the end of the infusion, then 3 hours after it stops',
+  parts:['inf-n6','inf-n7']},
+
+ {id:'m3-agent24', module:3, name:'An agent targeted at 24 mg/L',
+  setup:'Rate, loading dose, the climb at 10 hours and the decay after an early stop',
+  parts:['inf-n10','inf-n12','inf-n11','inf-n13']},
+
+ {id:'m3-inclass', module:3, name:'Recommend a rate and a loading dose, then four scenarios',
+  setup:'Css 20 mg/L, t½ 5 hr, VD 16 L — with the loading dose and without it, side by side',
+  parts:['inf-n14','inf-n19','inf-n20','inf-n21','inf-n15']},
+
+ {id:'m3-3days', module:3, name:'A loading dose with a 75 mg/hr infusion for 3 days',
+  setup:'Where the 500 mg loading dose in her stem is not the appropriate one',
+  parts:['inf-n22','inf-n23','inf-n24','inf-n25','inf-n26']},
+
+ {id:'m3-female', module:3, name:'A 35-year-old, 65-kg patient on infusion',
+  setup:'The rate from a volume stated as a percentage of body weight, then the time to 95 per cent',
+  parts:['inf-n17','inf-n16']},
+
+ {id:'m4-battery', module:4, name:'500 mg IV bolus with a 48-hour urine collection',
+  setup:'Her six-part battery: fe, k, ke, then total, renal and hepatic clearance',
+  parts:['m4-n-fe','m4-n-k','m4-n-ke','m4-n-clt','m4-n-clr','m4-n-clh']},
+
+ {id:'m4-antibiotic', module:4, name:'An antibiotic secreted by the kidney, before and after renal failure',
+  setup:'k and half-life at a clearance of 750 mL/min, then the half-life at 150 mL/min',
+  parts:['m4-n-abk','m4-n-ab1','m4-n-ab2']},
+
+ {id:'m4-crcl', module:4, name:'Creatinine clearance for a 45-year-old female',
+  setup:'Height in centimetres to inches, then ideal body weight, then Cockcroft–Gault',
+  parts:['m4-n-inches','m4-n-ibwf','m4-n-crcl']},
+
+ {id:'m5-investigational', module:5, name:'An investigational drug given as a 500-mg oral dose',
+  setup:'The two rate constants, then tmax and Cmax, then Cmax when the dose is doubled',
+  parts:['m5-n01','m5-n02','m5-n03','m5-n04','m5-n19']},
+
+ {id:'m5-antibiotic', module:5, name:'An oral antibiotic given by its two-exponential equation',
+  setup:'Cp = 75(e^(−0.22t) − e^(−2.75t)), read for both half-lives, the peak, the volume and a later point',
+  parts:['m5-n05','m5-n06','m5-n07','m5-n08','m5-n09','m5-n10']},
+
+ {id:'m5-750', module:5, name:'A 750-mg oral dose given by its equation',
+  setup:'Cp = 23.2(e^(−0.182t) − e^(−0.872t)), read for the half-life, the peak and the volume',
+  parts:['m5-n16','m5-n17','m5-n18','m5-n15']},
+
+ {id:'m5-500', module:5, name:'A 500-mg oral dose, 88 per cent bioavailable',
+  setup:'The absorption rate constant, tmax and Cmax, then Cmax when the volume doubles',
+  parts:['m5-n11','m5-n12','m5-n13','m5-n14']},
+];
+
 const Q_MODULE1 = [
 
 /* ══════════════════ INTRO — disciplines, terms, matrix, models, curve ═══ */
@@ -1070,5 +1172,63 @@ const Q_MODULE1 = [
   {h:'What the chapter adds', t:'Chapter 2 states the assumption the method rests on: a straight line between consecutive points. Accuracy therefore follows the spacing, since widely spaced points let the real curvature depart from the chord and inflate the error, and the estimate improves as points are added. That is the reason a segment is taken between neighbouring samples rather than across a long gap.'}],
  teachImg:'slide_Introduction_p28',
  cite:'Introduction.pdf slides 24–25'},
+
+
+/* ---------- L01 numeric: the two parts of her zero-order table problem that
+   sit between the rate constant and the half-life, so the set can be worked
+   through the way she sets it (a: k, b: C0, then t½ and 90%). ---------- */
+{id:'m1-ord-n17', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
+ topic:'orders', sub:'zero', concept:'zero-order-c0-back-extrapolation', skill:'krate',
+ source:'slide',
+ stem:'A drug solution decomposes by a zero-order process at 6 (mg/mL)/hr, and the sample taken at 2 hours measured 338 mg/mL. What was the initial starting concentration of the solution?',
+ units:'mg/mL',
+ answer:350,
+ tol:2,
+ steps:[
+  {k:'setup', t:'C = C0 − kt, so C0 = C + kt',
+   why:'The zero-order integrated equation is a straight line, and the initial concentration is its intercept. Rearranging to put C0 on its own adds back what was lost, so the sign in front of the rate constant flips from minus to plus.'},
+  {k:'algebra', t:'C0 = 338 mg/mL + (6 (mg/mL)/hr)(2 hr) = 338 + 12 = 350 mg/mL',
+   why:'Milligrams per millilitre per hour multiplied by hours leaves milligrams per millilitre, so the two terms can be added. Six milligrams per millilitre disappear in each of the first two hours, which is the 12 added back.'},
+  {k:'round', t:'C0 = 350 mg/mL',
+   why:'Her key prints 350 mg/mL. The value is exact, so no rounding is involved, and it is the number the half-life part of this problem then uses.'}],
+ teach:[
+ {t:'Recovering the intercept from a later sample is the same move in both orders, and only the arithmetic differs. A zero-order process adds back a fixed amount per hour, so the correction is additive; a first-order process kept a fixed fraction per hour, so its correction multiplies. Getting the order wrong here would give 338 multiplied by e^(6 × 2), which is not a concentration any solution could hold.'},
+  {h:'How the variables relate', list:[
+    'Zero order: C = C0 - k0t, so C0 = C + k0t, with the correction added.',
+    'First order: C = C0e^(-kt), so C0 = Ce^(+kt), with the correction multiplied.',
+    'A zero-order rate constant carries concentration per time; a first-order one carries reciprocal time.',
+    'C0 matters here because the zero-order half-life, C0/2k0, depends on it.',
+    'Any point on a zero-order line recovers the same intercept when its own t is used.']}],
+ teachImg:'slide_Introduction_p20',
+ cite:'IntroductionandMathReviewSolutions.pdf, problem 2, part b; Introduction.pdf slide 17',
+ quote:'C₀ = 338 mg/mL + (6 (mg/mL)/hr)(2 hr) = 350 mg/mL'},
+
+{id:'m1-ord-n18', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
+ topic:'orders', sub:'zero', concept:'zero-order-time-for-percent', skill:'krate',
+ source:'slide',
+ stem:'A drug solution with an initial concentration of 350 mg/mL decomposes by a zero-order process at 6 (mg/mL)/hr. How much time is required for the original solution to decompose by 90%?',
+ units:'hr',
+ answer:52.5,
+ tol:0.8,
+ steps:[
+  {k:'setup', t:'90 per cent decomposed leaves 10 per cent, so C = 0.10 × 350 mg/mL = 35 mg/mL',
+   why:'The question names what has gone and the equation is written in terms of what is left, so the percentage has to be turned round before anything is substituted. A tenth of 350 is 35, and that is the concentration the solution has to fall to.'},
+  {k:'setup', t:'C = C0 − kt, so t = (C0 − C) / k',
+   why:'Rearranging the zero-order line puts the time on its own. The numerator is the amount of concentration that has to disappear and the denominator is how much disappears each hour, so the quotient is a number of hours.'},
+  {k:'algebra', t:'t = (350 − 35) mg/mL ÷ (6 (mg/mL)/hr) = 315 ÷ 6 = 52.5 hr',
+   why:'Milligrams per millilitre divided by milligrams per millilitre per hour leaves hours. The 315 is what must be lost, and at 6 per hour that takes 52.5 hours.'},
+  {k:'round', t:'t = 52.5 hr',
+   why:'Her key prints 52.5 hr, to one decimal place. As a check, the table for this solution reads 62 mg/mL at 48 hours, so 35 mg/mL is reached a few hours after the last sample, which brackets the answer.'}],
+ teach:[
+ {t:'The zero-order answer is not a multiple of the half-life. Here the half-life is 29.2 hours and 90 per cent decomposed takes 52.5 hours, which is 1.8 half-lives rather than the 3.32 that a first-order process would need. The reason is that the second half of the solution takes exactly as long to decompose as the first, so a zero-order process runs out of drug at a predictable time instead of approaching zero.'},
+  {h:'How the variables relate', list:[
+    'Zero order: t = (C0 - C)/k0, linear in the amount to be removed.',
+    'First order: t = ln(C0/C)/k, so 90 per cent is always ln(10)/k, or 3.32 half-lives.',
+    'A zero-order half-life is C0/2k0, and the second half takes the same time as the first.',
+    'The solution reaches zero concentration at t = C0/k0, which is 58.3 hours here.',
+    'Deciding the order has to come before either relation is used.']}],
+ teachImg:'slide_Introduction_p20',
+ cite:'IntroductionandMathReviewSolutions.pdf, problem 2, final part; Introduction.pdf slide 17',
+ quote:'t = (350 − 35) mg/mL / (6 mg/mL/hr) = 52.5 hr'},
 
 ];

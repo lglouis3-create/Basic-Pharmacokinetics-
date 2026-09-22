@@ -45,6 +45,7 @@ where the last good one was. The output path is
 | `explain_check.js` | Scores how well each question explains itself, worst-first by severity × exam weight. **Report only, always exits 0.** |
 | `cite_check.py` | Checks every cited slide number against the real deck. **Skips** when no PDFs are present. |
 | `browser_test.py` | Drives the built file in Chromium: answers every question through the real controls, walks the sweep, runs a paper, denies localStorage. **Gate.** |
+| `problemset_test.py` | Works one of her problem sets through in Chromium and checks the parts arrive in her order. **Gate.** |
 | `harvest.py` | Crops the figure out of each slide of a lecture PDF and encodes it for `images.json`. Standalone; not part of the build. |
 
 ---
@@ -56,6 +57,7 @@ python3 build.py && node test.js && node style_check.js && node render_test.js
 node explain_check.js
 python3 cite_check.py
 python3 browser_test.py
+python3 problemset_test.py
 ```
 
 The first line is the gate: it must be clean before the file goes anywhere. The

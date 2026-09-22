@@ -127,4 +127,26 @@ since half of Dr. Mosley's paper is calculation.
 ## Before you finish
 
 `node --check <yourfile>.js` must pass. The file declares one `const` array and
-nothing else, except that the first question file also declares `TOPICS`.
+nothing else, except that the first question file also declares `TOPICS` and
+`CHAINS`.
+
+## Problem sets
+
+Dr. Mosley sets most of her calculations as one vignette asked in parts, where
+a part uses what the part before it produced, and she says so in words: *"at
+the rate you determined above"*, *"the drug in question #1"*. Write each part
+so that it stands on its own, restating the value it needs — *"a drug with an
+elimination rate constant of 0.91 hr⁻¹, what is its half-life?"* — so the
+scheduler can ask any one of them cold and a student who missed (a) is not
+locked out of (f).
+
+`CHAINS`, in the first question file, is what puts the parts back in her order:
+
+```
+{id, module, name, setup, parts:['<question id>', ...]}
+```
+
+`parts` is her part order, `name` is what the set is and `setup` is the shared
+vignette in one line, shown above the stem of every part. `test.js` checks that
+every id exists, appears in no other set, carries the set's module number and
+is answered with a number, so a set cannot drift across two problems.

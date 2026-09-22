@@ -250,6 +250,25 @@ function splitNote(pool){
    choice can be made per topic without changing what the rest of the page
    shows. With a kind already chosen, that choice has been made and one row is
    offered. `attr` is what the button carries so the caller can route it. */
+/* The problem sets a module holds, each worked straight through in her part
+   order. Listed under the topics rather than inside one, because a set draws
+   on several of them: her eight-part battery moves from the rate constant to
+   the volume of distribution to clearance. */
+function chainRows(module){
+  const cs = chainsInModule(module);
+  if(!cs.length) return '';
+  return `<div class="mfoot"><p class="setnote">Her calculations are usually set as
+    one vignette asked in parts, where a part uses what the part before it produced.
+    These work through in her order.</p>` + cs.map(c => {
+      const parts = c.parts.map(byId).filter(Boolean);
+      const m = masteryOf(parts), pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
+      return `<div class="subrow"><span class="sname"><b>${esc(c.name)}</b>
+        <small>${parts.length} parts · ${esc(c.setup)}</small></span>
+        <span class="meter"><i style="width:${pct}%"></i></span>
+        <button data-chain="${esc(c.id)}">Work it</button></div>`;
+    }).join('') + `</div>`;
+}
+
 /* The adaptive rows for an exam recap, split the same way a topic's are. */
 function examRows(pool, id){
   const row = (title, sub, k) =>
@@ -350,6 +369,7 @@ function renderTopics(){
         <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
       </summary>
       ${ts.map(topicCard).join('')}
+      ${chainRows(m.module)}
       ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
       </details>`;
   }
@@ -375,6 +395,7 @@ function renderTopics(){
   el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
     startQuiz(b.dataset.t || null, b.dataset.s || null, b.dataset.k || null);
   });
+  el.querySelectorAll('button[data-chain]').forEach(b => b.onclick = () => startChain(b.dataset.chain));
   el.querySelectorAll('button[data-view]').forEach(b => b.onclick = () => show(b.dataset.view));
   el.querySelectorAll('button[data-module]').forEach(b => b.onclick = () => {
     const m = outline().find(o => o.module === +b.dataset.module);
@@ -429,6 +450,31 @@ function startSweepOf(pool, label, scope){
   nextQuestion();
   show('quiz');
 }
+
+/* One of her problem sets, worked straight through in the order she asks it.
+   Shaped like a sweep, but the queue is her part order rather than a shuffle,
+   because the point of the set is that each part is fed by the one before it.
+   A part that has been answered before is still asked: the set is a single
+   piece of work and dropping (c) out of it leaves (d) unexplained. */
+function startChain(id){
+  const c = CHAINS.find(x => x.id === id);
+  if(!c) return;
+  const parts = c.parts.map(byId).filter(Boolean);
+  if(!parts.length){ alert('That problem set has no questions yet.'); return; }
+  Q = {pool: parts, label: c.name, chain: c, sweep: parts.map(q => q.id), i: 0,
+       current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
+  nextQuestion();
+  show('quiz');
+}
+/* Every problem set a module holds, and the set a question belongs to. */
+const chainsInModule = m => (typeof CHAINS === 'undefined' ? [] : CHAINS)
+  .filter(c => c.module === m && c.parts.some(id => byId(id)));
+const CHAIN_OF = (() => {
+  const m = {};
+  (typeof CHAINS === 'undefined' ? [] : CHAINS).forEach(c =>
+    c.parts.forEach((id, i) => { m[id] = {chain: c, step: i + 1}; }));
+  return m;
+})();
 
 /* The pool for the exam-weighted pass: the heaviest pool whole, and every
    other pool sampled so the set sits in the blueprint's own proportion.
@@ -527,7 +573,8 @@ function renderQuiz(){
   if(!Q){ el.innerHTML = `<div class="empty">Choose a topic to begin.</div>`; return; }
   if(!Q.current && Q.sweep){
     el.innerHTML = `<div class="empty">
-      <p><b>That is every question in this set — all ${Q.sweep.length} of them.</b></p>
+      <p><b>${Q.chain ? `That is every part of ${esc(Q.chain.name)} — all ${Q.sweep.length}.`
+                      : `That is every question in this set — all ${Q.sweep.length} of them.`}</b></p>
       <p style="margin:10px 0 16px">Everything you answered is recorded, so Weak spots now
         reflects the whole bank and the adaptive runner will bring the missed concepts back first.</p>
       <p style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
@@ -576,11 +623,13 @@ function renderQuiz(){
       seenBefore   ? '<span>review</span>' : '<span>new</span>'}
   </div>
   <div class="qprog">
-    <span>${Q.sweep ? `question ${Q.i} of ${Q.sweep.length}` : `${Q.answered} answered`}</span>
+    <span>${Q.chain ? `part ${Q.i} of ${Q.sweep.length}`
+           : Q.sweep ? `question ${Q.i} of ${Q.sweep.length}` : `${Q.answered} answered`}</span>
     <span class="pbar"><i style="width:${Q.sweep ? Math.round(100*Q.i/Q.sweep.length) : pctDone}%"></i></span>
     <span>${Q.sweep ? `${Q.sweep.length - Q.i} to go` : `${left} concept${left===1?'':'s'} to go`}</span>
   </div>
   <div class="qbody">
+    ${Q.chain ? `<p class="cset">${esc(Q.chain.setup)}</p>` : ''}
     <p class="stem">${esc(q.stem)}</p>`;
 
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -668,6 +717,12 @@ function renderQuiz(){
         q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${
         renderTeach(q.teach, seen, self)}</div>`;
     if(q.note) h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">${esc(q.note)}</p>`;
+    const inSet = CHAIN_OF[q.id];
+    if(inSet && !Q.chain)
+      h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">She sets this as part
+        ${inSet.step} of ${inSet.chain.parts.length} of one problem: ${esc(inSet.chain.name)}.
+        <button class="linkish" id="btnChain" data-c="${esc(inSet.chain.id)}">Work the whole set
+        from the start</button></p>`;
     h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${
         srcFlag(q)}${esc(q.cite)}</div>`;
     h += `</div>`;
@@ -689,6 +744,8 @@ function renderQuiz(){
   h += `</div></div>`;
   el.innerHTML = h;
 
+  const setBtn = document.getElementById('btnChain');
+  if(setBtn) setBtn.onclick = () => startChain(setBtn.dataset.c);
   el.querySelectorAll('.opt').forEach(b => b.onclick = () => multi ? toggleOption(+b.dataset.o) : answer(+b.dataset.o));
   const ni = document.getElementById('numIn');
   if(ni && !Q.revealed){

@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -415,6 +415,38 @@ console.log('\n=== 5b. Choosing another paper ===');
     else console.log(`  ok    ${e.name}: ${shares.length} pools share ${want} places; the bank can fill ${drawn}`);
   }
   X.setActiveExam(was);
+}
+
+console.log('\n=== 5c. Problem sets ===');
+{
+  const byId = Object.fromEntries(X.QUESTIONS.map(q => [q.id, q]));
+  const seen = new Map();
+  for (const c of X.CHAINS) {
+    const miss = c.parts.filter(id => !byId[id]);
+    if (miss.length) bad(`problem set "${c.id}" names ${miss.length} question(s) that do not exist: ${miss.join(', ')}`);
+    if (c.parts.length < 2) bad(`problem set "${c.id}" has ${c.parts.length} part(s); a set she asks in parts needs at least two`);
+    for (const id of c.parts) {
+      if (seen.has(id)) bad(`question ${id} is listed in both "${seen.get(id)}" and "${c.id}"`);
+      seen.set(id, c.id);
+      const q = byId[id];
+      if (!q) continue;
+      /* A set is one vignette worked through, so its parts must come from the
+         one module, and each must be answered with a number: a set whose parts
+         drift across modules is two problems filed as one. */
+      if (q.module !== c.module) bad(`${id} is module ${q.module} but sits in problem set "${c.id}", declared module ${c.module}`);
+      if (X.kindOf(q) !== 'calc') bad(`${id} is a concept question and cannot be a part of problem set "${c.id}"`);
+    }
+    if (!c.name || !c.setup) bad(`problem set "${c.id}" is missing a name or its vignette line`);
+  }
+  const calcs = X.ofKind(X.QUESTIONS, 'calc').length;
+  console.log(`  ok    ${X.CHAINS.length} problem sets, ${seen.size} of ${calcs} calculations in one`);
+  const sizes = X.CHAINS.map(c => c.parts.length);
+  console.log(`  ok    every part resolves, appears once, and shares its set's module (${Math.min(...sizes)} to ${Math.max(...sizes)} parts each)`);
+  /* CHAIN_OF is what lets a part met on its own name the set it came from. */
+  const wrong = X.CHAINS.filter(c => c.parts.some((id, i) =>
+    !X.CHAIN_OF[id] || X.CHAIN_OF[id].chain.id !== c.id || X.CHAIN_OF[id].step !== i + 1));
+  if (wrong.length) bad(`${wrong.length} problem set(s) disagree with the part index built from them`);
+  else console.log('  ok    every part knows which set it belongs to and its place in it');
 }
 
 console.log('\n=== 6. Storage isolation ===');
