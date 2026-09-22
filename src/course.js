@@ -74,7 +74,7 @@ const COURSE = {
      questions: 40,          // stated by Louis: 40 questions, 20 conceptual + 20 math
      minutes: 120,           // syllabus: Friday 11 September, 10:00–12:00
      sata: 4,                // ASSUMED. Select-all questions appear; the count is not published.
-     blurb: 'Sat 11 September. Modules 1–3: kinetic orders and the maths, ' +
+     blurb: 'Fri 11 September. Modules 1–3: kinetic orders and the maths, ' +
             'one- and multi-compartment IV bolus, IV infusion. Half the paper ' +
             'is calculation. The mark split across the three modules is not ' +
             'published — this drill weights it by lecture time (2 : 2 : 1).',

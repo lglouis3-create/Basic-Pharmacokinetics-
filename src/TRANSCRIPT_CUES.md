@@ -208,7 +208,7 @@ Correct: constant half-life. > "first order processes, constant half-life, const
 ### 2.6 Exam format
 
 - Equation-sheet carve-out: first-order half-life is not on it (cue 1).
-- In-class recap quiz on Canvas, password-protected: > "5 easy questions of what we've talked about that you should be able to answer" ; password: > "First week, the number one ST week." `[likely: 1stweek]`
+- In-class recap quiz on Canvas, password-protected.
 
 ---
 

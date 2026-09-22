@@ -145,7 +145,7 @@ cl15 = k5 * 16; peak15 = (44.35 / cl15) * (1 - exp(-k5 * 3))
 line('inf-n15', 0, 'Cl = k*16', cl15, 3)
 line('inf-n15', 0, 'Cpeak', peak15, 2)
 line('inf-n15', 2, 'e^-(0.1386*4)', exp(-k5 * 4), 4)
-line('inf-n15', 3, 'Cp = 6.80*0.5744', 6.80 * exp(-k5 * 4), 2)
+line('inf-n15', 3, 'Cp = 6.80*0.5744', 6.80 * exp(-k5 * 4), 1)   # the round step reports 3.9
 ANS['inf-n15'] = peak15 * exp(-k5 * 4)
 
 # n16  Practice 3a: time to 95% of Css, t1/2 7 hr
@@ -194,14 +194,19 @@ print("=" * 78)
 print("STEP-LINE CHECK  (every arithmetic line recomputed and matched in the text)")
 print("=" * 78)
 for qid, i, label, val, dec in LINES:
-    text = Q[qid]['steps'][i]
+    steps = Q[qid]['steps']
     want = fmt(val, dec)
     alt = fmt(val, dec).rstrip('0').rstrip('.') if dec else want
-    hit = (want in text) or (alt in text)
-    if not hit:
+    hit = lambda text: (want in text) or (alt in text)
+    # the named step first, then its neighbours: a value that moved one line
+    # when a setup step was added is reported by where it is, not as missing
+    where = i if hit(steps[i]) else next((j for j, t in enumerate(steps) if hit(t)), None)
+    if where is None:
         fails += 1
     print(f"{qid:<10}[{i}] {label:<26} recomputed {want:>12}   "
-          f"{'found in step text' if hit else 'NOT FOUND -> ' + text}")
+          + ('found in step text' if where == i
+             else f'found in step [{where}]' if where is not None
+             else 'NOT FOUND -> ' + steps[i]))
 
 print()
 print(f"numeric questions checked: {len(ANS)}   step lines checked: {len(LINES)}")

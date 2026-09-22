@@ -2,9 +2,12 @@
 """Independent recomputation of every numeric answer and every arithmetic line
 in q2_module2.js. Nothing is read from the bank except the keyed values that
 are being checked; all right-hand sides are computed here from the source data."""
-import json, math, sys
+import json, math, subprocess, sys
 
-B = {q['id']: q for q in json.load(open('bank.json', encoding='utf-8'))}
+# ---- pull the bank out of the JS file ------------------------------------
+_js = open('q2_module2.js', encoding='utf-8').read() + "\nconsole.log(JSON.stringify(Q_MODULE2));"
+B = {q['id']: q for q in json.loads(subprocess.run(['node', '-e', _js], capture_output=True,
+                                                    text=True, check=True).stdout)}
 E, N = math.exp, math.log
 fails = []
 

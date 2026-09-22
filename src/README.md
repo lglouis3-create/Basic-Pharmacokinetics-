@@ -63,7 +63,10 @@ last three are run separately because two of them are reports rather than
 pass/fail, and `cite_check.py` prints `SKIP` with its reason wherever the
 lecture decks are not on hand.
 
-`browser_test.py` needs Chromium and `PLAYWRIGHT_BROWSERS_PATH` pointing at it.
+`browser_test.py` needs Chromium and `PLAYWRIGHT_BROWSERS_PATH` pointing at it,
+with a `playwright` Python package whose pinned Chromium build is the one
+installed there: a newer package looks for a build it does not have and refuses
+to launch, so pin it (`pip install playwright==<version>`) to match.
 Every check reads the built filename out of `course.js`; none of them names the
 course.
 
@@ -78,10 +81,11 @@ course.
     prof:'Mosley', exam:2, module:2},
    ```
 
-2. **Write the questions** into a new `q<N>_<name>.js`. The first question file
-   declares `const TOPICS = [...]` and then `const QUESTIONS = [...]`; every
-   later one opens with `QUESTIONS.push(` and closes with `);`. Add the new file
-   to `DATA_FILES` in `build.py`, after the first.
+2. **Write the questions** into a new `q<N>_module<N>.js` that declares its
+   own `const Q_MODULE<N> = [...]`. The first question file also declares
+   `const TOPICS = [...]` at the top. Add the filename to `DATA_FILES` in
+   `build.py` before `qz_all.js`, and add the array to the concat in
+   `qz_all.js`, which is what builds the single `QUESTIONS` array.
 
    A question must carry `id`, `prof`, `tier`, `topic`, `sub`, `concept`,
    `skill`, `stem` and `cite`, plus whatever its type needs, plus the fields the
