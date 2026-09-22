@@ -19,5 +19,6 @@ const QUESTIONS = [].concat(
   Q_MODULE2,   // Module 2 — IV bolus, one- and multi-compartment       (Exam 1)
   Q_MODULE3,   // Module 3 — Intravenous infusion                       (Exam 1)
   Q_MODULE4,   // Module 4 — Elimination, clearance, renal clearance    (Exam 2)
-  Q_MODULE5    // Module 5 — Oral absorption, single dose               (Exam 2)
+  Q_MODULE5,   // Module 5 — Oral absorption, single dose               (Exam 2)
+  Q_FIGURES    // Figure reading, every module, drawn by figures.py    (Exams 1, 2)
 );

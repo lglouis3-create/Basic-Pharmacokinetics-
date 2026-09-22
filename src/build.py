@@ -29,6 +29,7 @@ DATA_FILES = ['course.js',
               'q3_module3.js',
               'q4_module4.js',
               'q5_module5.js',
+              'q6_figures.js',   # figure-reading questions, every module
               'qz_all.js']       # must stay last: builds QUESTIONS
 
 # Everything that has to parse before a build is allowed to proceed. Derived
