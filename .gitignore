@@ -3,3 +3,5 @@
 src/decks/
 src/.slide_refs.json
 src/.bank_tmp.js
+__pycache__/
+*.pyc
