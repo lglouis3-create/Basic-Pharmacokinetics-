@@ -1,5 +1,7 @@
-# The lecture decks are Dr. Mosley's own files. They are kept locally so
-# slides.py and cite_check.py can run, and are never committed or published.
+# The lecture PDFs themselves stay out of the repository: they are large and
+# they are the course's own files. The slide images rendered from them by
+# slides.py are committed, because the annotations on them are the course
+# owner's own handwritten notes and the drill is meant to show them.
 src/decks/
 src/.slide_refs.json
 src/.bank_tmp.js
