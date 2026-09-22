@@ -48,7 +48,8 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'Integrating dC/dt = −k0 gives C = C0 − k0t, a straight line whose intercept is C0 and whose slope is −k0. Because k0 is an amount per unit time, its units are concentration per time, such as mg/L per hour, and the half-life C0/2k0 depends on where you start.'},
   {h:'The one thing to check first', t:'This shape means zero order only because the axis is evenly spaced. The same straight line on an axis marked 1, 10, 100, 1000 would mean first order instead, which is why the axis is read before the line.'}],
  quote:'if you look at that scale and you see that it is not changing by regular one infinite, or it’s increasing by a a function of 10, then that tells you that it is a logarithmic scale',
- note:'The figure is drawn for this drill, on the evenly spaced axis the zero-order slide uses.',
+ note:'Redrawn on the evenly spaced axis of the zero-order slide.',
+ teachImg:'slide_Introduction_p20',
  cite:'Introduction.pdf slide 17'},
 
 {id:'fig-ord-2', skill:'order', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -69,7 +70,8 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'First order sets the rate proportional to what is present, dC/dt = −kC. The constant k is a fraction removed per unit time, so its units are reciprocal time, such as hr⁻¹, and it never carries a concentration unit.'},
   {h:'Why the half-life is one number', t:'Because a fixed fraction goes in every interval, the time to lose half is the same at every starting concentration. That is why a first-order half-life is quoted as a single value for a drug, t½ = 0.693/k, while a zero-order half-life, C0/2k0, changes with the starting concentration.'},
   {h:'Straightening it out', t:'Plotting the natural logarithm of the same concentrations against time gives ln C = ln C0 − kt, a straight line of slope −k. That is the reason concentration data are so often shown on a decade axis.'}],
- note:'The figure is drawn for this drill, on the evenly spaced axis the first-order slide uses.',
+ note:'Redrawn on the evenly spaced axis of the first-order slide.',
+ teachImg:'slide_Introduction_p21',
  cite:'Introduction.pdf slide 18'},
 
 {id:'fig-ord-3', skill:'read', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -80,7 +82,7 @@ const Q_FIGURES = [
   {t:'It is first order', correct:true,
    why:'The concentration axis runs 1, 10, 100, 1000, so each equal step up the axis multiplies the concentration by ten. A straight line on a multiplying axis means a constant fraction is lost per hour, which is first order.'},
   {t:'It is zero order', correct:false,
-   why:'This is the answer the figure is built to catch. It comes from reading the line as straight without reading the axis, and the axis is not evenly spaced: 1 to 10 covers the same distance as 100 to 1000. Her instruction is to look at the scale before judging the line.'},
+   why:'This comes from reading the line as straight without reading the axis, and the axis is not evenly spaced: 1 to 10 covers the same distance as 100 to 1000. Her instruction is to look at the scale before judging the line.'},
   {t:'It is first order only if the axis is labelled as logarithmic', correct:false,
    why:'The word is usually absent, which she flags directly, so this answer means waiting for a label that never arrives and classifying nothing. The tick values are the evidence: 1, 10, 100, 1000 is a decade scale whether or not anything on the figure says so.'},
   {t:'The order cannot be decided from a graph alone', correct:false,
@@ -91,7 +93,8 @@ const Q_FIGURES = [
   {h:'How the slope relates to k', t:'On an axis of base-ten decades the relation is log C = log C0 − kt/2.3, so the slope read off the figure is −k/2.3 rather than −k. Multiplying that slope by 2.3 recovers the elimination rate constant.'},
   {h:'The instruction she repeats', t:'A straight line means first order on a decade axis and zero order on an evenly spaced axis. The line alone settles nothing, which is why the axis is read first every time.'}],
  quote:'I expect for you, because you will see graphs like this, and this word will not be over here most of the time. you’ve got to pay attention to the axis',
- note:'The figure is drawn for this drill from the points on her semi-logarithmic slide: 200, 93, 44, 21, 10, 4.9 and 2.3 at hours 0 to 6.',
+ note:'Redrawn from the points on her semi-logarithmic slide: 200, 93, 44, 21, 10, 4.9 and 2.3 at hours 0 to 6.',
+ teachImg:'slide_Introduction_p24',
  cite:'Introduction.pdf slide 21'},
 
 {id:'fig-ord-4', skill:'order', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -112,7 +115,8 @@ const Q_FIGURES = [
   {h:'Why zero order plunges at the end', t:'Under C = C0 − k0t the same amount leaves every hour, so the last of the drug disappears over the same time as the first of it. Near the bottom of the axis that fixed amount is a huge fraction of what is left, and on a multiplying axis a huge fraction is a long way down.'},
   {h:'How the variables relate', t:'Zero order: C = C0 − k0t, with k0 in concentration per time, and a half-life C0/2k0 that depends on the starting concentration. First order: C = C0e−kt, with k in reciprocal time, and a half-life 0.693/k that does not.'},
   {h:'The two-step test', t:'Read the axis, then read the line. Evenly spaced axis plus straight line means zero order. Decade axis plus straight line means first order. Either axis with a bend means the other order.'}],
- note:'The figure is drawn for this drill: a constant-rate decline placed on the same decade axis as the previous figure, so the two can be compared directly.',
+ note:'A constant-rate decline on the same decade axis as the straight-line figure.',
+ teachImg:'slide_Introduction_p20',
  cite:'Introduction.pdf slides 17–21'},
 
 {id:'fig-ord-5', skill:'read', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -126,7 +130,7 @@ const Q_FIGURES = [
   {t:'A straight line on this axis indicates a first-order process', correct:true,
    why:'First order gives ln C = ln C0 − kt, so the logarithm of concentration falls by equal amounts in equal times. An axis that plots that logarithm turns the decline into a straight line.'},
   {t:'The axis is evenly spaced in concentration', correct:false,
-   why:'The distance from 1 to 10 covers nine units and the distance from 100 to 1000 covers nine hundred, yet the two are drawn the same length. Selecting this reads the evenly spaced tick marks as evenly spaced values, which is the confusion the figure is built around.'},
+   why:'The distance from 1 to 10 covers nine units and the distance from 100 to 1000 covers nine hundred, yet the two are drawn the same length. Selecting this reads the evenly spaced tick marks as evenly spaced values, when it is the values that multiply and the marks that are evenly spaced.'},
   {t:'The axis cannot be treated as logarithmic unless it is labelled as such', correct:false,
    why:'She warns that the word is usually missing from the figure, so the tick values have to carry the decision. Holding out for a label means treating an unlabelled decade axis as linear and classifying every such graph the wrong way round.'}],
  teach:[
@@ -134,7 +138,8 @@ const Q_FIGURES = [
   {h:'Why the label is usually missing', t:'She states plainly that the word will not be printed on most figures and that the axis has to be read instead. The tick values are always there, so they are the reliable evidence.'},
   {h:'What follows once it is recognised', t:'On a decade axis a straight line means first order, and the slope is −k/2.3 for base-ten decades. On an evenly spaced axis a straight line means zero order, and the slope is −k0 directly.'}],
  quote:'Notice that it doesn’t say. Log',
- note:'The figure is drawn for this drill and carries no axis label, which is the case described.',
+ note:'Drawn with no axis label, the case she describes.',
+ teachImg:'slide_Introduction_p23',
  cite:'Introduction.pdf slides 20–21'},
 
 /* ───────────────── Module 2 — one compartment or two ───────────────── */
@@ -157,7 +162,8 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'From this one line everything else follows: C0 is the intercept at time zero, k is read from the slope, t½ = 0.693/k, the apparent volume of distribution is VD = dose/C0, and total body clearance is Cl = k × VD.'},
   {h:'What to look for instead', t:'Her instruction is that the model has to be stated or shown. Given a semi-logarithmic plot after a bolus, one straight line points to one compartment and a bend to two.'}],
  quote:'If I gave you a graph on a log scale that looks just like the blue line all by itself, that tells you it’s an IV bolus dose one compartment model.',
- note:'The figure is drawn for this drill as the single-phase decline she describes.',
+ note:'Drawn as the single-phase decline she describes.',
+ teachImg:'slide_2IVBolusAdministra_p13',
  cite:'2IVBolusAdministration.pdf, slide "Why Multicompartment Models?"'},
 
 {id:'fig-cpt-2', skill:'read', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L03',
@@ -179,7 +185,8 @@ const Q_FIGURES = [
   {h:'Which half-life is wanted', t:'The half-life asked for is the elimination half-life, t½ = 0.693/β, taken straight from the terminal slope. She says she will name it as the beta half-life or the elimination half-life so there is no ambiguity, and that solving for an overall k first is unnecessary work.'},
   {h:'The volume this figure gives', t:'The volume of the central compartment is the dose divided by the concentration at time zero, and that concentration is A + B, the two intercepts added together.'}],
  quote:'if I give you a graph that looks something like this without the red and blue and just a log scale and I’m telling you that it is an IV bolus dose, and I just give you a line that looks like this one, the black line. That should say to you that this is a two compartment model.',
- note:'The figure is drawn for this drill from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t, with the terminal line extrapolated back so both phases are visible.',
+ note:'Redrawn from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t, with the terminal line extrapolated back.',
+ teachImg:'slide_2IVBolusAdministra_p13',
  cite:'2IVBolusAdministration.pdf, slide "Why Multicompartment Models?"'},
 
 {id:'fig-cpt-3', skill:'read', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L03',
@@ -201,7 +208,8 @@ const Q_FIGURES = [
   {h:'The relations that follow', t:'Elimination half-life is 0.693/β. The concentration at time zero is A + B, and the volume of the central compartment is the dose divided by A + B.'},
   {h:'What she does and does not ask', t:'She states that feathering and the method of residuals are to be understood but not performed, and that A, B, α and β will be supplied. What is asked is what they represent and what follows from them.'}],
  quote:'I am pretty much gonna give you A, B, alpha, beta I want you to know what they represent and why we use them.',
- note:'The figure is drawn for this drill from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t.',
+ note:'Redrawn from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t.',
+ teachImg:'slide_2IVBolusAdministra_p13',
  cite:'2IVBolusAdministration.pdf, slide "Why Multicompartment Models?"'},
 
 /* ───────────────── Module 3 — infusion ───────────────── */
@@ -224,7 +232,8 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'The plateau is Css = R/Cl, and since Cl = k × VD it can also be written R/(k × VD). Raising R raises the plateau in proportion; it does not change how long the plateau takes to arrive.'},
   {h:'How long it takes', t:'The approach depends only on the half-life, so the short answer is three to five half-lives. Each half-life closes half the remaining gap: one gets to 50% of Css, two to 75%, three to 87.5%.'}],
  quote:'Our input is zero order, constant in, first order out. When we stop the in, then it’s just out.',
- note:'The figure is drawn for this drill for a drug with a five-hour half-life reaching a plateau of 20 mg/L.',
+ note:'Drawn for a drug with a five-hour half-life reaching a plateau of 20 mg/L.',
+ teachImg:'slide_3IntravenousInfusi_p3',
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"'},
 
 {id:'fig-inf-2', skill:'infusion', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
@@ -247,7 +256,8 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'Css = R/Cl fixes the height; t½ = 0.693/k fixes the timing. R appears in the first relation and not in the second, which is the entire reason changing the rate cannot change the time.'},
   {h:'When the wait is unacceptable', t:'If the plateau is needed sooner than three to five half-lives, raising the rate does not help. A loading dose does, because it puts the steady-state amount into the body immediately: DL = Css × VD.'}],
  quote:'changing the rate changes our steady state concentration with me. I feel like I’ve said it 5 times, and I’ve said it 5 times because this is one of those things that I want you to take with you. so I’ve said it 5 times. I’m gonna ask it of you 10 times.',
- note:'The figure is drawn for this drill for one drug with a five-hour half-life at two rates, the second twice the first.',
+ note:'Drawn for one drug with a five-hour half-life at two rates, the second twice the first.',
+ teachImg:'slide_3IntravenousInfusi_p3',
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"'},
 
 /* ───────────────── Module 4 — order from the elimination rate ───────────────── */
@@ -270,7 +280,8 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'The relation is rate of elimination = Cl × Cp. Rearranged, Cl = rate/Cp, so the slope is the clearance. Its units work out as amount per time divided by amount per volume, which leaves volume per time, such as L/hr.'},
   {h:'Why clearance is treated as a constant', t:'Clearance is k × VD, and both are properties of the drug in that patient rather than of the dose. A constant times a constant is a constant, which is why one slope serves every concentration on the figure.'}],
  quote:'our rate of elimination. Is our clearance times the concentration of drug in the plasma… 15 mL. Per minute. Times. 5 mcg per mL… So 75 mcg per minute.',
- note:'The figure is drawn for this drill for a drug of clearance 2 L/hr, plotted over the concentration range she works with.',
+ note:'Drawn for a drug of clearance 2 L/hr, over the concentration range she works with.',
+ teachImg:'slide_4ClearanceandElimi_p4',
  cite:'4---Clearance-and-Elimination.pdf, slide "Clearance"'},
 
 {id:'fig-elim-2', skill:'order', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
@@ -291,7 +302,8 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'Zero order gives C = C0 − k0t, with k0 an amount per unit time. Because the rate is fixed, the half-life C0/2k0 depends on the starting concentration, so a zero-order drug has no single half-life.'},
   {h:'What this does to clearance', t:'Clearance is defined as rate divided by concentration. With the rate fixed, that ratio falls as concentration rises, so clearance is no longer one number for the drug and the relation Cl = k × VD stops being usable.'},
   {h:'The contrast to hold', t:'On these axes, a line rising from the origin means first order and its slope is the clearance. A horizontal line means zero order and there is no single clearance to read.'}],
- note:'The figure is drawn for this drill on the same axes as the previous one, so the two shapes can be compared directly.',
+ note:'Drawn on the same axes as the rising-line figure.',
+ teachImg:'slide_4ClearanceandElimi_p4',
  cite:'4---Clearance-and-Elimination.pdf, slide "Clearance"'},
 
 /* ───────────────── Module 5 — a single oral dose ───────────────── */
@@ -314,7 +326,7 @@ const Q_FIGURES = [
   {h:'What sets the time of the peak', t:'tmax = ln(ka/k)/(ka − k). Only the two rate constants appear, so the time of the peak does not move when the dose changes. She requires tmax to be found before Cmax every time, whether or not it is asked for.'},
   {h:'The one letter that flags this route', t:'A capital F in a problem means an extravascular dose, because a fraction less than one has reached the circulation. For an intravenous dose F is taken as one, since all of it is already there.'}],
  quote:'if I give you a curve on the exam and it looks like this. where there is a clear peak. we go up, we peak, we come back down, then you, I want you to identify that as an oral input. First order in, first order out.',
- note:'The figure is drawn for this drill from the parameters she works through in class: F = 0.85, dose 500 mg, VD 22 L, ka 0.924 hr⁻¹, k 0.231 hr⁻¹, which put the peak at 2.0 hours and 12.17 mg/L.',
+ note:'Drawn from the parameters she works through in class: F = 0.85, dose 500 mg, VD 22 L, ka 0.924 hr⁻¹, k 0.231 hr⁻¹, which put the peak at 2.0 hours and 12.17 mg/L.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
 {id:'fig-oral-2', skill:'read', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
@@ -336,7 +348,7 @@ const Q_FIGURES = [
   {h:'Which half-life is meant', t:'She states that an unqualified t½ means the half-life of elimination. The absorption half-life exists but is asked for by name.'},
   {h:'What the rising part needs', t:'The absorption rate constant cannot be read directly from the figure, because the early points contain both processes at once. Separating them is the method of residuals, which she asks to be understood rather than performed.'}],
  quote:'If it’s just T1/2, then your assumption is that I’m looking for the half-life of elimination',
- note:'The figure is drawn for this drill from the same parameters as the previous one, replotted on a decade axis.',
+ note:'The same parameters as the peak figure, replotted on a decade axis.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
 {id:'fig-oral-3', skill:'apply', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
@@ -358,7 +370,7 @@ const Q_FIGURES = [
   {h:'The order she requires', t:'Cmax is found by substituting tmax back into the concentration equation, so tmax must be calculated first. She states that this holds even when tmax is not itself asked for.'},
   {h:'What moves the peak', t:'Only a change in ka or k moves tmax. Speeding absorption relative to elimination brings the peak earlier and higher; speeding elimination brings it earlier and lower.'}],
  quote:'Right at CMax, the rate N is going to be equal to the rate out.',
- note:'The figure is drawn for this drill from her worked parameters, with the peak at 2.0 hours and 12.17 mg/L.',
+ note:'Drawn from her worked parameters, with the peak at 2.0 hours and 12.17 mg/L.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
 ];

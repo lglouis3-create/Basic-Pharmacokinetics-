@@ -129,7 +129,13 @@ for (const q of QUESTIONS) {
   if (!q.skill) bad(`${q.id}: no skill field (falls back to "${COURSE.skills[0].id}")`);
   else if (!skillIds.has(q.skill)) bad(`${q.id}: skill "${q.skill}" is not in COURSE.skills`);
   if (!['mc','numeric','match'].includes(kind)) bad(`${q.id}: unknown type "${q.type}"`);
-  if (q.teachImg && !IMAGES[q.teachImg]) bad(`${q.id}: references missing teachImg "${q.teachImg}"`);
+  // A slide_* image is rendered by slides.py from the decks, which are not in
+  // the repository. Its absence means the build was made without them, not
+  // that the bank is wrong; any other missing figure is a fault.
+  if (q.teachImg && !IMAGES[q.teachImg]) {
+    if (/^slide_/.test(q.teachImg)) warn(`${q.id}: slide image "${q.teachImg}" not in this build`);
+    else bad(`${q.id}: references missing teachImg "${q.teachImg}"`);
+  }
   if (q.img && !IMAGES[q.img]) bad(`${q.id}: references missing image "${q.img}"`);
 
   if (kind === 'mc') {

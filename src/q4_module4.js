@@ -42,6 +42,7 @@ const Q_MODULE4 = [
     'Hepatic clearance is obtained by difference: ClH = ClT - ClR, because the liver cannot be sampled.',
     'A bare Cl with no subscript means total body clearance.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p3',
  cite:'4---Clearance-and-Elimination.pdf slide 3',
  quote:'Irreversible removal of drug from the body by all routes of elimination'},
 
@@ -65,6 +66,7 @@ const Q_MODULE4 = [
     'Hepatic clearance is obtained by difference: ClH = ClT - ClR, because the liver cannot be sampled.',
     'A bare Cl with no subscript means total body clearance.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p3',
  cite:'4---Clearance-and-Elimination.pdf slide 3, and slide 24',
  quote:'Biotransformation or drug metabolism—drug is chemically converted in the body to a metabolite'},
 
@@ -76,7 +78,7 @@ const Q_MODULE4 = [
   {t:'The kidney and the liver', correct:true,
    why:'The kidney excretes drug into urine and the liver biotransforms it, so between them they cover both elimination mechanisms. This pairing is what makes total body clearance separable into a renal part and a hepatic part, which is the arithmetic the rest of the module runs on. Dr. Mosley states it plainly as our main organs of elimination, the kidneys and the liver.'},
   {t:'The kidney and the lung', correct:false,
-   why:'The lung matters for volatile agents but it is not one of the two organs the additivity of clearance is built around here. Choosing it leaves the liver out, and with it every metabolic route, so hepatic clearance would have nowhere to come from.'},
+   why:'The lung matters for volatile agents but it is not one of the two organs clearance is split between here. Choosing it leaves the liver out, and with it every metabolic route, so hepatic clearance would have nowhere to come from.'},
   {t:'The liver and the gut wall', correct:false,
    why:'Picking the gut wall substitutes a site of absorption loss for an organ of elimination. Loss at the gut wall reduces how much drug arrives in the circulation, which is a bioavailability matter, and it removes nothing that is already there. Dropping the kidney also removes the only organ whose clearance can be obtained from a urine collection, and without that measurement hepatic clearance could not be reached by subtraction from the total. The two elimination organs are the kidney and the liver.'},
   {t:'The kidney and the spleen', correct:false,
@@ -88,6 +90,7 @@ const Q_MODULE4 = [
     'Hepatic clearance is obtained by difference: ClH = ClT - ClR, because the liver cannot be sampled.',
     'A bare Cl with no subscript means total body clearance.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p3',
  cite:'4---Clearance-and-Elimination.pdf slide 3',
  quote:'Kidney and liver are the two major drug elimination organs in the body'},
 
@@ -115,6 +118,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p4',
  cite:'4---Clearance-and-Elimination.pdf slide 4',
  quote:'Volume of fluid removed of drug from the body per unit time'},
 
@@ -140,6 +144,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p5',
  cite:'4---Clearance-and-Elimination.pdf slide 5',
  quote:'Clearance can be defined as the proportionality factor that relates rate of drug elimination to the plasma (drug) concentration.'},
 
@@ -165,6 +170,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p7',
  cite:'4---Clearance-and-Elimination.pdf slide 7',
  quote:'Clearance is directly related to the dose administered and to the overall systemic exposure achieved'},
 
@@ -190,6 +196,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p10',
  cite:'4---Clearance-and-Elimination.pdf slide 10',
  quote:'lowercase fe is our fraction excreted, capital F is our bioavailability factor'},
 
@@ -215,6 +222,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p11',
  cite:'4---Clearance-and-Elimination.pdf slide 11',
  quote:'Rate and extent of metabolism can rarely be measured directly, but by taking advantage of the additivity of clearance, hepatic clearance is readily estimated as the difference between total and renal clearance'},
 
@@ -243,6 +251,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p6',
  cite:'4---Clearance-and-Elimination.pdf slide 6',
  quote:'Penicillin has a ClT of 15 mL/min. What is the elimination rate of penicillin when the plasma drug concentration is 5 mcg/mL?'},
 
@@ -273,6 +282,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p6',
  cite:'4---Clearance-and-Elimination.pdf slide 6, with the unit identity from the 24 August lecture',
  quote:'Milligrams per liter equals micrograms per mL.',
  note:'The conversion to milligrams per hour is not on the slide; the slide answers in micrograms per minute. The unit identity used here is the one she states in the 24 August lecture and repeats in the 9 September review. An exam written from these lectures would key 75 mcg/min for the slide question and would accept either unit pair where it asks for a rate.'},
@@ -302,6 +312,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p12',
  cite:'4---Clearance-and-Elimination.pdf slide 22',
  quote:'What fraction of the dose is excreted unchanged in the urine?'},
 
@@ -328,6 +339,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p10',
  cite:'4---Clearance-and-Elimination.pdf slides 10 and 22',
  quote:'D k f FD k 0 u e e = ='},
 
@@ -354,6 +366,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p12',
  cite:'4---Clearance-and-Elimination.pdf slide 22',
  quote:'Calculate k, ke, ClT, ClR and ClH.'},
 
@@ -382,6 +395,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p10',
  cite:'4---Clearance-and-Elimination.pdf slides 10 and 22',
  quote:'we can take our FE which we said was 0.6 times R K. And I\'m getting 0.052.'},
 
@@ -410,6 +424,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p12',
  cite:'4---Clearance-and-Elimination.pdf slide 22, with the relationship from slide 21',
  quote:'15 L. N R K You get 1.3 L, something like that.'},
 
@@ -438,6 +453,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p9',
  cite:'4---Clearance-and-Elimination.pdf slides 9 and 22',
  quote:'0.6 or FE times 1 L per hour, 1.3 L per hour. OK. So I\'m getting 0.78 L per hour.'},
 
@@ -466,6 +482,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p11',
  cite:'4---Clearance-and-Elimination.pdf slides 11 and 22',
  quote:'total, which was 1.3. Minus 0.78.'},
 
@@ -494,6 +511,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p11',
  cite:'4---Clearance-and-Elimination.pdf slide 11',
  quote:'��� = 1 − �� ���'},
 
@@ -524,9 +542,10 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p5',
  cite:'4---Clearance-and-Elimination.pdf slides 5 and 22',
  quote:'Cl Cp Rate of elimination = •',
- note:'Slide 22 asks only for fe, k, ke, ClT, ClR and ClH from these parameters. This question applies the relationship printed on slide 5 to the same data, so the 43.3 mg/hr figure is computed here and is not printed on either slide.'},
+ note:'Slide 22 asks only for fe, k, ke, ClT, ClR and ClH from these parameters. The relationship printed on slide 5 is applied to the same data, so the 43.3 mg/hr figure is computed here and is not printed on either slide.'},
 
 {id:'m4-n-tcheck', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'clcalc', concept:'cl-t-half-vd', skill:'krate',
@@ -551,6 +570,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p23',
  cite:'4---Clearance-and-Elimination.pdf slide 21',
  quote:'Clearance, Elimination Half-Life, and Volume of Distribution'},
 
@@ -582,6 +602,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p12',
  cite:'4---Clearance-and-Elimination.pdf slide 22',
  quote:'Calculate k, ke, ClT, ClR and ClH.'},
 
@@ -611,6 +632,7 @@ const Q_MODULE4 = [
     'ClR below about 120 mL/min means some drug is being reabsorbed.',
     'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p14',
  cite:'4---Clearance-and-Elimination.pdf slides 12 and 13',
  quote:'Appearance of drug in the urine is the net result of filtration, secretion, and reabsorption.'},
 
@@ -638,6 +660,7 @@ const Q_MODULE4 = [
     'ClR below about 120 mL/min means some drug is being reabsorbed.',
     'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p14',
  cite:'4---Clearance-and-Elimination.pdf slides 12 and 13',
  quote:'The first two processes add drug to the lumen in the proximal part of the nephron; the last process involves the movement of drug from the lumen back into the bloodstream.'},
 
@@ -663,6 +686,7 @@ const Q_MODULE4 = [
     'ClR below about 120 mL/min means some drug is being reabsorbed.',
     'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p20',
  cite:'4---Clearance-and-Elimination.pdf slide 18, with the 120 mL/min figure from slide 13',
  quote:'Secretion is inferred when rate of excretion exceeds the rate of filtration. Stated differently, secretion is apparent when renal clearance is greater than the GFR.'},
 
@@ -688,6 +712,7 @@ const Q_MODULE4 = [
     'ClR below about 120 mL/min means some drug is being reabsorbed.',
     'Her tolerance: 119 or 121 counts as filtration; 250 or 350 means secretion.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p21',
  cite:'4---Clearance-and-Elimination.pdf slide 19',
  quote:'Reabsorption occurs if the renal clearance is less than the calculated clearance by filtration.'},
 
@@ -716,6 +741,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p16',
  cite:'4---Clearance-and-Elimination.pdf slide 14',
  quote:'GFR is measured by using a drug that is eliminated primarily by filtration only – the drug is neither reabsorbed nor secreted.'},
 
@@ -742,6 +768,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p16',
  cite:'4---Clearance-and-Elimination.pdf slide 14',
  quote:'Creatinine and inulin are used clinically to measure GFR, even though creatinine is also secreted.',
  note:'Slide 14 pairs creatinine with inulin as markers used clinically. The transcript is narrower: she says inulin is a better marker but has to be added to the body and is a whole more complicated process, and she poses the question of why creatinine rather than inulin is used. An exam written from these lectures would key the practical reason given here, while still expecting the slide sentence that creatinine is also secreted.'},
@@ -769,6 +796,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p17',
  cite:'4---Clearance-and-Elimination.pdf slides 15 and 16, and the 14 September lecture',
  quote:'this is an equation that I want you to know, to memorize. I\'ve given you the equation sheet, this one is not there. You need to know this one, OK.'},
 
@@ -795,6 +823,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p18',
  cite:'4---Clearance-and-Elimination.pdf slide 16',
  quote:'I also want you to recognize that the units of creatinine clearance should be in milliliters per minute, OK. So don\'t give me kilograms per milligram per deciliter.',
  note:'The slide prints the formula without stating its units and the handwritten annotation on this copy is not used as a source. The units requirement is hers from the 14 September lecture, where she also points out that the units in the formula do not cancel.'},
@@ -822,6 +851,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p17',
  cite:'4---Clearance-and-Elimination.pdf slide 15',
  quote:'that says that she\'s got maybe something going on. So we, depending on her situation, she might, or and depending on the drug, it might or might not need to be adjusted to accommodate for her renal function.'},
 
@@ -851,6 +881,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p19',
  cite:'4---Clearance-and-Elimination.pdf slide 17',
  quote:'if you don\'t remember, 1 inch is equal to 2.54 centimeters … I am getting 64.96 inches. So, let\'s call that 65 inches.'},
 
@@ -880,6 +911,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p18',
  cite:'4---Clearance-and-Elimination.pdf slides 16 and 17',
  quote:'female IBW = 45.5 + 2.3 (inches over 5 ft)'},
 
@@ -909,6 +941,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p18',
  cite:'4---Clearance-and-Elimination.pdf slide 16',
  quote:'male IBW = 50 + 2.3 (inches over 5 ft)'},
 
@@ -944,6 +977,7 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p19',
  cite:'4---Clearance-and-Elimination.pdf slide 17',
  quote:'Estimate (using the ideal body weight) the CrCl of a 45-year-old female who weighs 61 kg, SCr =1.1 mg/dL, and is 165 cm tall.'},
 
@@ -973,9 +1007,10 @@ const Q_MODULE4 = [
     'Neither this equation nor the ideal body weight equation is on the equation sheet.',
     'The result is compared against about 120 mL/min to place the patient.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p17',
  cite:'4---Clearance-and-Elimination.pdf slides 15 and 16',
  quote:'(x 0.85 if female) 72 SCr (140 age)(IBW) CrCl',
- note:'Her worked example is female and keys 58.1 mL/min. This question holds every other input of that example fixed and changes only the sex, so the 68.4 mL/min figure is the same calculation without the 0.85 factor. It is not a value printed on the slide.'},
+ note:'Her worked example is female and keys 58.1 mL/min. Every other input of that example is held fixed and only the sex changes, so the 68.4 mL/min figure is the same calculation without the 0.85 factor. It is not a value printed on the slide.'},
 
 /* ════════════════ NUMERIC — ACTIVELY SECRETED ANTIBIOTIC ════════════════ */
 
@@ -1004,6 +1039,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p23',
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'A new antibiotic is actively secreted by the kidney; VD is 25 L in the normal adult. The clearance of this drug is 750 mL/min.'},
 
@@ -1032,6 +1068,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p23',
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'What is the usual t½ for this drug?',
  note:'The slide prints this example as a question with no worked answer, and the 14 September transcript does not record her working it aloud. The 23.1 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
@@ -1061,6 +1098,7 @@ const Q_MODULE4 = [
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p23',
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'What would be the new t½ for this drug in an adult with partial renal failure whose clearance of the antibiotic was 150 mL/min?',
  note:'As with the normal-function part, the slide prints the question without a worked answer and the transcript does not record her working it aloud. The 115.5 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
@@ -1088,9 +1126,10 @@ const Q_MODULE4 = [
     'Raising the ionized fraction traps drug in the tubule, lowers reabsorption and raises renal clearance.',
     'A weak acid is more ionized in alkaline urine; a weak base is more ionized in acidic urine.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p22',
  cite:'4---Clearance-and-Elimination.pdf slides 20 and 25',
  quote:'Reabsorption of weak acids and weak bases is influenced by the pH of the fluid in the renal tubule and the pka of the drug',
- note:'This appears on slide 20 and again on the summary slide, but the 14 September lecture did not complete this objective. She posed the questions of what impact pH has on filtration and on active secretion and the recording ends mid-discussion, so there is no spoken treatment of the ionization objective to check the slide against. This question is written from the slide alone.'},
+ note:'This appears on slide 20 and again on the summary slide, but the 14 September lecture did not complete this objective. She posed the questions of what impact pH has on filtration and on active secretion and the recording ends mid-discussion, so there is no spoken treatment of the ionization objective to check the slide against. It is written from the slide alone.'},
 
 {id:'m4-io-2', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'ionization', concept:'henderson-hasselbalch-forms', skill:'read',
@@ -1113,6 +1152,7 @@ const Q_MODULE4 = [
     'Raising the ionized fraction traps drug in the tubule, lowers reabsorption and raises renal clearance.',
     'A weak acid is more ionized in alkaline urine; a weak base is more ionized in acidic urine.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Physiology of Drug Elimination) and chapter 15 (Pharmacokinetic Calculations for Drug Elimination and Clearance).'}],
+ teachImg:'slide_4ClearanceandElimi_p22',
  cite:'4---Clearance-and-Elimination.pdf slide 20',
  quote:'Weak acids pka values 3 - 8 Weak bases pka values 7.5 – 10.5',
  note:'This is the slide she did not reach. The 14 September recording cuts off during her introduction to this objective, so the pKa ranges and the two Henderson-Hasselbalch forms have no spoken treatment to check against. Written from the slide alone; an exam drawn from these lectures could key it, since the objectives slide lists the effect of degree of ionization on renal excretion and the summary slide repeats it.'},

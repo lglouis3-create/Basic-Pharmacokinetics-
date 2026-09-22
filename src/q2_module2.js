@@ -33,6 +33,7 @@ const Q_MODULE2 = [
     'C0 = D0/VD, so the curve starts at its highest point and only falls.',
     'An IV bolus with no model stated is treated as one compartment, first order.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p3',
  cite:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration"',
  quote:'the drug goes into the body all at once, like instantly all the drug is into the body and all the drug is instantly uniformly distributed throughout the body. Assumptions, simplifications, this does not happen.'},
 
@@ -58,6 +59,7 @@ const Q_MODULE2 = [
     'C0 = D0/VD, so the curve starts at its highest point and only falls.',
     'An IV bolus with no model stated is treated as one compartment, first order.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p3',
  cite:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration"',
  quote:'Assumes that the drug can enter and leave the body. Body acts like a single, uniform compartment'},
 
@@ -81,6 +83,7 @@ const Q_MODULE2 = [
     'C0 = D0/VD, so the curve starts at its highest point and only falls.',
     'An IV bolus with no model stated is treated as one compartment, first order.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p3',
  cite:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration"',
  quote:'KM is a rate constant for metabolism, KE is the rate constant for excretion … If you see K with no subscript, that is our overall rate constant for elimination.'},
 
@@ -104,6 +107,7 @@ const Q_MODULE2 = [
     'C0 = D0/VD, so the curve starts at its highest point and only falls.',
     'An IV bolus with no model stated is treated as one compartment, first order.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p21',
  cite:'2IVBolusAdministration.pdf, slide "Concentration of Drug in the Plasma, Cp"',
  quote:'this is my preferred equations down here with natural log, but either one gets you there.',
  note:'The slide itself prints all three forms without marking a preference; the annotation "Dr. Mosley prefers this equation" on this copy of the deck is handwritten and is not used as the source here. The preference is taken from the 19 August transcript, where she says it about the same set of equations. An exam written from these lectures would accept any of the three forms, since the base-ten and exponential forms are both on the equation sheet.'},
@@ -130,6 +134,7 @@ const Q_MODULE2 = [
     'The amount in the body at any time is A = VD x C.',
     'In kinetics body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution"',
  quote:'The volume of distribution is a hypothetical volume of body fluid that would be required to dissolve the total amount of drug at the same concentration as that found in the blood.'},
 
@@ -154,6 +159,7 @@ const Q_MODULE2 = [
     'The amount in the body at any time is A = VD x C.',
     'In kinetics body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution"',
  quote:'we are talking about the volume distribution being a proportionality constant which relates the amount of drug into the in the body to whatever concentration we measure.'},
 
@@ -178,6 +184,7 @@ const Q_MODULE2 = [
     'The amount in the body at any time is A = VD x C.',
     'In kinetics body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution" (second slide of that title)',
  quote:'Large VD → more concentrated in extravascular tissues and less concentrated intravascularly. Drug highly bound to plasma proteins or remaining in the vascular region → higher Cp and smaller VD'},
 
@@ -202,6 +209,7 @@ const Q_MODULE2 = [
     'The amount in the body at any time is A = VD x C.',
     'In kinetics body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution" (second slide of that title)',
  quote:'In expressing the apparent VD in terms of percent body weight, a 1-L volume is assumed to be equal to the weight of 1 kg.'},
 
@@ -227,6 +235,7 @@ const Q_MODULE2 = [
     'It is constant for most drugs because k and VD are both constants.',
     'Rate of elimination = Cl x Cp.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p8',
  cite:'2IVBolusAdministration.pdf, slide "Clearance"',
  quote:'Volume of plasma that is cleared of drug per unit time'},
 
@@ -276,6 +285,7 @@ const Q_MODULE2 = [
     'It is constant for most drugs because k and VD are both constants.',
     'Rate of elimination = Cl x Cp.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p8',
  cite:'2IVBolusAdministration.pdf, slide "Clearance"',
  quote:'what we like about clearance is that clearance. For most drugs in most situations, it is going to be a constant … a constant times a constant is a constant.'},
 
@@ -590,9 +600,10 @@ const Q_MODULE2 = [
     'Work in amounts or in concentrations throughout, never one against the other.',
     'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p7',
  cite:'2IVBolusAdministration.pdf, slide "Practice" (one-compartment section)',
  quote:'estimate the amount of drug in the body after 12 hours',
- note:'She reports the half-life of this drug as 8.15 hr in class, which follows from k rounded to 0.085 hr⁻¹. Carrying k unrounded at 0.085138 hr⁻¹ gives 8.14 hr. The 12-hour amount is 72 mg either way, so this question keys the amount rather than the half-life.'},
+ note:'She reports the half-life of this drug as 8.15 hr in class, which follows from k rounded to 0.085 hr⁻¹. Carrying k unrounded at 0.085138 hr⁻¹ gives 8.14 hr. The 12-hour amount is 72 mg either way, so the amount is keyed here rather than the half-life.'},
 
 /* ════════════════ L03 — MULTICOMPARTMENT IV BOLUS ════════════════ */
 
@@ -616,6 +627,7 @@ const Q_MODULE2 = [
     'On a semi-logarithmic plot, one straight line means one compartment and a bend means two.',
     'Drug is eliminated from the central compartment only.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p14',
  cite:'2IVBolusAdministration.pdf, slide "One- versus Two-Compartment Models"',
  quote:'Multi-compartment models describe the observation of some drugs that distribute at various rates into different tissue groups'},
 
@@ -668,6 +680,7 @@ const Q_MODULE2 = [
     'On a semi-logarithmic plot, one straight line means one compartment and a bend means two.',
     'Drug is eliminated from the central compartment only.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p15',
  cite:'2IVBolusAdministration.pdf, slide "General Grouping of Tissues According to Blood Supply"',
  note:'Dr. Mosley tells the class not to memorise tables unless she says otherwise, and on this table specifically she says "general grouping of tissues, table, don\'t panic". She also adds a qualification that is not on the slide: the brain is listed as highly perfused, but the blood-brain barrier keeps many drugs out, so the brain is not necessarily seen in the distribution phase. An exam written from these lectures would test the perfusion ordering rather than the exact percentages.'},
 
@@ -693,6 +706,7 @@ const Q_MODULE2 = [
     'Elimination half-life = 0.693/beta. Do not solve for an overall k first.',
     'C0 = A + B, and the central compartment volume is Vc = D0/(A + B).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p17',
  cite:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)"',
  quote:'if we have got a central compartment, it is going to and from that tissue compartment … and then that the drug is being eliminated from the central compartment only.'},
 
@@ -718,6 +732,7 @@ const Q_MODULE2 = [
     'Elimination half-life = 0.693/beta. Do not solve for an overall k first.',
     'C0 = A + B, and the central compartment volume is Vc = D0/(A + B).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p17',
  cite:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)"',
  quote:'dCp/dt = k21·Ct − k12·Cp − k·Cp'},
 
@@ -743,6 +758,7 @@ const Q_MODULE2 = [
     'Elimination half-life = 0.693/beta. Do not solve for an overall k first.',
     'C0 = A + B, and the central compartment volume is Vc = D0/(A + B).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p17',
  cite:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)"',
  quote:'our K12 and our K21. Remember, those are our transfer constants, so how fast is the drug going from one compartment or the central compartment to the peripheral compartment and back and forth.'},
 
@@ -770,7 +786,7 @@ const Q_MODULE2 = [
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
  cite:'2IVBolusAdministration.pdf, slide "Method of Residuals"',
  quote:'Residual plasma concentration (rapidly distributed a phase) is obtained by subtracting the extrapolated line from observed data',
- note:'The slide presents the method as a procedure to be carried out. Dr. Mosley says in the 26 August lecture that she wants the concept known but will not ask students to perform it, and that she will supply A, B, alpha and beta instead. This question therefore tests the definition only; an exam written from these lectures would not ask for a feathered fit.'},
+ note:'The slide presents the method as a procedure to be carried out. Dr. Mosley says in the 26 August lecture that she wants the concept known but will not ask students to perform it, and that she will supply A, B, alpha and beta instead. The definition alone is what is examinable here; an exam written from these lectures would not ask for a feathered fit.'},
 
 {id:'m2-mc-8', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L03',
  topic:'bolus2', sub:'params', concept:'abab-meaning', skill:'read',
@@ -794,6 +810,7 @@ const Q_MODULE2 = [
     'Elimination half-life = 0.693/beta. Do not solve for an overall k first.',
     'C0 = A + B, and the central compartment volume is Vc = D0/(A + B).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p21',
  cite:'2IVBolusAdministration.pdf, slide "Concentration of Drug in the Central Compartment"',
  quote:'Is our B intercept. And The slope here is going to be our beta or our lowercase b. And the intercept here is going to be capital A and the slope is going to be A or alpha.'},
 
@@ -819,6 +836,7 @@ const Q_MODULE2 = [
     'Elimination half-life = 0.693/beta. Do not solve for an overall k first.',
     'C0 = A + B, and the central compartment volume is Vc = D0/(A + B).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p21',
  cite:'2IVBolusAdministration.pdf, slide "Concentration of Drug in the Central Compartment"',
  quote:'Alpha bigger because the, the distribution phase is gonna happen a lot faster than an elimination phase'},
 
@@ -871,6 +889,7 @@ const Q_MODULE2 = [
     'Elimination half-life = 0.693/beta. Do not solve for an overall k first.',
     'C0 = A + B, and the central compartment volume is Vc = D0/(A + B).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p25',
  cite:'2IVBolusAdministration.pdf, slide "Apparent Volumes of Distribution"',
  quote:'Can calculate several different volumes of distribution for multi-compartment models'},
 
@@ -974,6 +993,7 @@ const Q_MODULE2 = [
     'Vc = D0/(A + B), using the concentration at time zero.',
     'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p7',
  cite:'2IVBolusAdministration.pdf, slide "Practice" (multicompartment section, theophylline)',
  quote:'The equation below describes theophylline kinetics in nine human volunteers. What is the plasma level of theophylline 3 hours after an IV bolus dose?'},
 
@@ -1003,6 +1023,7 @@ const Q_MODULE2 = [
     'Vc = D0/(A + B), using the concentration at time zero.',
     'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p24',
  cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; in-class two-compartment practice sheet problem 1, answers read aloud in Basic Pharmacokinetics - 08-26 Lecture.txt',
  quote:'I got for the overall rate constant K 0.272 per hour.',
  note:'The A, B, alpha and beta values for this practice sheet appear on this copy of the deck as handwriting, which is not on its own a source. They are used here only because every answer Dr. Mosley reads aloud in the 26 August lecture reproduces from them exactly: beta half-life six-ish hours, initial concentration 13.8 mg/L, concentration at 4 hours 3.4 mg/L, central volume 18-ish litres, k 0.272 per hour, k12 1.1 per hour and k21 0.9 per hour.'},
@@ -1031,6 +1052,7 @@ const Q_MODULE2 = [
     'Vc = D0/(A + B), using the concentration at time zero.',
     'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p24',
  cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; in-class two-compartment practice sheet problem 1, answers read aloud in Basic Pharmacokinetics - 08-26 Lecture.txt',
  quote:'And then from 2 to 1, 0.9 per hour.',
  note:'As with the overall k for this sheet, the parameter values are handwritten on this copy of the deck and are used only because every answer she reads aloud on 26 August reproduces from them exactly. She reports k21 to one decimal place as 0.9 per hour.'},
@@ -1061,6 +1083,7 @@ const Q_MODULE2 = [
     'Vc = D0/(A + B), using the concentration at time zero.',
     'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 12 (One-Compartment Open Model: Intravenous Bolus Administration) and 13 (Multicompartment Models: Intravenous Bolus Administration); chapter 5 (Drug Distribution and Protein Binding) for the volume of distribution.'}],
+ teachImg:'slide_2IVBolusAdministra_p24',
  cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; in-class two-compartment practice sheet problem 1, answers read aloud in Basic Pharmacokinetics - 08-26 Lecture.txt',
  quote:'And then transfer from 1 to 2, 1.1 per hour.',
  note:'As with the other two rate constants for this sheet, the parameter values are handwritten on this copy of the deck and are used only because her spoken answers reproduce from them exactly. She reports k12 to one decimal place as 1.1 per hour.'},

@@ -138,6 +138,7 @@ const Q_MODULE1 = [
     'Biopharmaceutics relates the drug, the dosage form and the route to the rate and extent of absorption.',
     'ADME is the sequence pharmacokinetics describes: absorption, distribution, metabolism, excretion.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p6',
  cite:'Introduction.pdf slide 6, and the poll slide following slide 10',
  quote:'The interrelationship of the physicochemical drug properties, dosage form and route of administration on the rate and extent of systemic drug absorption'},
 
@@ -161,6 +162,7 @@ const Q_MODULE1 = [
     'Biopharmaceutics relates the drug, the dosage form and the route to the rate and extent of absorption.',
     'ADME is the sequence pharmacokinetics describes: absorption, distribution, metabolism, excretion.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p8',
  cite:'Introduction.pdf slide 8',
  quote:'pharmacodynamics, concentration. And Response. OK, pharmacokinetics, concentration and time.'},
 
@@ -196,6 +198,7 @@ const Q_MODULE1 = [
     'First-pass metabolism lowers F, the fraction of an oral dose reaching the circulation.',
     'Subscripts name the fluid: Cp is plasma, Cs is serum, a bare C is either.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p4',
  cite:'Introduction.pdf slides 4–5',
  quote:'Elimination refers to the irreversible loss of drugs from the body by all routes'},
 
@@ -220,6 +223,7 @@ const Q_MODULE1 = [
     'First-pass metabolism lowers F, the fraction of an oral dose reaching the circulation.',
     'Subscripts name the fluid: Cp is plasma, Cs is serum, a bare C is either.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p5',
  cite:'Introduction.pdf slide 5',
  quote:'First-Pass Effect – rapid metabolism of an orally administered drug before reaching the general circulation'},
 
@@ -239,6 +243,7 @@ const Q_MODULE1 = [
  teach:[
  {t:'The three blood fractions differ by what has been taken out. Whole blood keeps everything and is collected with an anticoagulant. Plasma is whole blood with the cells spun out and the anticoagulant still preventing clotting, so the clotting proteins remain. Serum is whole blood that has been allowed to clot, so both the cells and the clotting proteins are gone. Which fraction was assayed is recorded in the symbol, with Cp for plasma and Cs for serum, and a plain C when the fraction is not specified.'},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p11',
  cite:'Introduction.pdf slide 10',
  quote:'Obtained from whole blood after the blood is allowed to clot and the clot is removed'},
 
@@ -254,10 +259,11 @@ const Q_MODULE1 = [
   {t:'Urine', correct:false,
    why:'Urine is used, and it becomes important later for renal clearance, but it reports drug that has already left the body rather than the concentration circulating now. A concentration-versus-time curve in this course is a plasma or serum curve. Selecting urine confuses an excretion measurement with a systemic one.'},
   {t:'Saliva', correct:false,
-   why:'Saliva appears in the same list of possible sampling sites and is the least used of the four. It is offered as a distractor precisely because it is a genuine option somewhere rather than an absurd one. Nothing in this course computes a parameter from a saliva concentration.'}],
+   why:'Saliva appears in the same list of possible sampling sites and is the least used of the four. It is a genuine sampling site elsewhere rather than an absurd one, which is what makes it tempting here. Nothing in this course computes a parameter from a saliva concentration.'}],
  teach:[
  {t:'A pharmacokinetic concentration is only defined once the fluid it was measured in is named. Serum and plasma are the routine fluids because stripping out the cells reduces interactions between the drug and other blood components, which makes the assay a cleaner report of what is circulating. That choice is carried through the notation for the rest of the course.'},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p17',
  cite:'Introduction.pdf, poll slide following slide 15',
  quote:'We mostly use serum and plasma because remember we try to minimize the interactions of drug with anything else that might be in that um sample'},
 
@@ -277,6 +283,7 @@ const Q_MODULE1 = [
  teach:[
  {t:'Compartmental models treat the body as a set of boxes with rate constants between them. In a mammillary model every peripheral compartment connects to a single central compartment, which is where drug enters and is measured. In a catenary model the compartments are linked end to end, so drug must pass through each in turn. Physiologic or perfusion models are a different approach again, built on real blood flows and organ volumes.'},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p15',
  cite:'Introduction.pdf slide 13, and the poll slide following slide 15',
  quote:'compartments joined together like compartments, uh, of a, of a, a train'},
 
@@ -300,6 +307,7 @@ const Q_MODULE1 = [
  teach:[
  {t:'A model is a set of assumptions that turns a handful of measured concentrations into a continuous description. Everything listed as a use follows from that: predicting levels at unsampled times, choosing regimens, estimating accumulation, comparing formulations, correlating concentrations with pharmacologic or toxicologic activity, describing how physiology or disease alters the kinetics, and explaining drug interactions. What a model cannot supply is information of a different kind from the data it was built on.'},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p13',
  cite:'Introduction.pdf slide 11'},
 
 {id:'m1-int-09', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -323,6 +331,7 @@ const Q_MODULE1 = [
     'Onset is when C first rises above the minimum effective concentration; duration is how long it stays above it.',
     'Intensity tracks how far C sits above the minimum effective concentration.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p9',
  cite:'Introduction.pdf slide 9',
  quote:'What concentration must be met or exceeded? In order for the desired pharmacologic response to result.'},
 
@@ -347,6 +356,7 @@ const Q_MODULE1 = [
     'Onset is when C first rises above the minimum effective concentration; duration is how long it stays above it.',
     'Intensity tracks how far C sits above the minimum effective concentration.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p9',
  cite:'Introduction.pdf slide 9',
  quote:'our goal is. That we want to stay in between these two lines.'},
 
@@ -371,6 +381,7 @@ const Q_MODULE1 = [
     'First-pass metabolism lowers F, the fraction of an oral dose reaching the circulation.',
     'Subscripts name the fluid: Cp is plasma, Cs is serum, a bare C is either.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p4',
  cite:'Introduction.pdf slide 4',
  quote:'Doctor Smith … she will add um a T to our ADM, right? So A D M E and then she will add a T for toxicology. Doctor Yendaalli will add an L at the beginning for liberation.'},
 
@@ -397,6 +408,7 @@ const Q_MODULE1 = [
     'k0 carries concentration per time, such as mg/L per hour.',
     'Half-life: t1/2 = C0/2k0, so it changes with the starting concentration.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p20',
  cite:'Introduction.pdf slide 17',
  quote:'Amount or concentration of drug decreases at a constant rate'},
 
@@ -421,6 +433,7 @@ const Q_MODULE1 = [
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p21',
  cite:'Introduction.pdf slide 18',
  quote:'Amount or concentration of drug decreases at a rate that is proportional to the amount of drug remaining'},
 
@@ -445,6 +458,7 @@ const Q_MODULE1 = [
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p24',
  cite:'Introduction.pdf, poll slide following slide 21',
  quote:'first order processes, constant half-life, constant half-life, OK. The rate of elimination … the rate is constantly changing'},
 
@@ -469,6 +483,7 @@ const Q_MODULE1 = [
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p24',
  cite:'Introduction.pdf, poll slide following slide 21',
  quote:'the rate depends on the concentration that’s there'},
 
@@ -493,6 +508,7 @@ const Q_MODULE1 = [
     'On a base-ten decade axis the slope is -k/2.3; on a natural-log axis it is -k.',
     'Read the tick values before the line. The word "log" is usually not printed.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p24',
  cite:'Introduction.pdf slide 21',
  quote:'even if the scale does not say log C, if you look at that scale and you see that it is not changing by regular one infinite, or it’s increasing by a func- uh, a function of 10, then that tells you that it is a logarithmic scale'},
 
@@ -519,6 +535,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'Introduction.pdf slide 19',
  quote:'It is a time, so it is not days to the minus one. It is just days.'},
 
@@ -545,6 +562,7 @@ const Q_MODULE1 = [
     'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
     'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p20',
  cite:'IntroductionandMathReview3Solutions.pdf, problem 1a; Introduction.pdf slide 17',
  quote:'Zero-order — the drug is decreasing at a constant amount per unit time'},
 
@@ -569,6 +587,7 @@ const Q_MODULE1 = [
     'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
     'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p21',
  cite:'PHAR_4221_Homework_1.md, problem 1a; Introduction.pdf slide 18',
  quote:'Plotting the natural logarithm of concentration (ln C) vs. time (t) yields a straight line with a correlation coefficient of r = −1.0000'},
 
@@ -598,6 +617,7 @@ const Q_MODULE1 = [
     'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
     'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p21',
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1a; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n02', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -624,6 +644,7 @@ const Q_MODULE1 = [
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p21',
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1b; Introduction.pdf slide 18',
  quote:'If you get a number that is lower than 475.6 SC0, you’ve done something wrong. Punch it again.'},
 
@@ -650,6 +671,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1c; Introduction.pdf slide 19',
  quote:'this is one that I want you to know. So that will not be on your equation sheet. This is the one that you take to your grave with you, OK? 0.693 over K.'},
 
@@ -677,6 +699,7 @@ const Q_MODULE1 = [
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p21',
  cite:'IntroductionandMathReviewSolutions.pdf, problem 1d; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n05', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -703,6 +726,7 @@ const Q_MODULE1 = [
     'Test a data set by taking successive ratios and successive differences: whichever is constant names the order.',
     'From two points, first order gives k = ln(C1/C2)/(t2 - t1); zero order gives k0 = (C1 - C2)/(t2 - t1).']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p20',
  cite:'IntroductionandMathReviewSolutions.pdf, problem 2a; Introduction.pdf slide 17'},
 
 {id:'m1-ord-n06', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -728,6 +752,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'IntroductionandMathReviewSolutions.pdf, problem 2, part c; Introduction.pdf slide 19'},
 
 {id:'m1-ord-n08', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -757,6 +782,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'IntroductionandMathReview3Solutions.pdf, problem 1c; Introduction.pdf slide 19'},
 
 {id:'m1-ord-n09', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -781,6 +807,7 @@ const Q_MODULE1 = [
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p21',
  cite:'PHAR_4221_Homework_1.md, problem 1b; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n10', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -807,6 +834,7 @@ const Q_MODULE1 = [
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p21',
  cite:'PHAR_4221_Homework_1.md, problem 1d; Introduction.pdf slide 18'},
 
 {id:'m1-ord-n11', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -835,6 +863,7 @@ const Q_MODULE1 = [
     'k0 carries concentration per time, such as mg/L per hour.',
     'Half-life: t1/2 = C0/2k0, so it changes with the starting concentration.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p20',
  cite:'IntroductionandMathReview2Solutions.pdf, problem 3; Introduction.pdf slide 17'},
 
 {id:'m1-ord-n12', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -862,6 +891,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'IntroductionandMathReviewSolutions.pdf, problem 3; Introduction.pdf slide 19',
  quote:'First-order process with a 8 hour half-life, 50% of drug should be decomposed in one half-life (8 hours), 75% should be decomposed in two half-lives (16 hours), and 87.5% decomposed in 3 half-lives (24 hours).'},
 
@@ -893,6 +923,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'RecapExam1.pdf, slide "Practice" (Module 1); Introduction.pdf slide 19',
  quote:'Assuming first-order kinetics, when will the drug decline to one-half of the original concentration?'},
 
@@ -924,6 +955,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'RecapExam1.pdf, slide "Practice" (Module 1); Introduction.pdf slide 19'},
 
 {id:'m1-ord-n16', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
@@ -951,6 +983,7 @@ const Q_MODULE1 = [
     '99.9% is gone after 10 half-lives; the long route is t = ln(1000)/k.',
     'A half-life is reported in units of time, never in reciprocal time.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p22',
  cite:'IntroductionandMathReview2Solutions.pdf, problem 1; Introduction.pdf slide 19'},
 
 /* ══════════════════ AUC ═══════════════════════════════════════════════ */
@@ -975,6 +1008,7 @@ const Q_MODULE1 = [
     'Its units are concentration multiplied by time, such as mg/L x hr or mcg/mL x hr.',
     'Clearance ties dose to exposure: Cl = D0/AUC.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p26',
  cite:'Introduction.pdf slides 22–23',
  quote:'for us, that tells us about the extent of drug that is available for the body to use'},
 
@@ -1005,6 +1039,7 @@ const Q_MODULE1 = [
     'Total AUC is the sum of the segments, so unequal time intervals are handled one segment at a time.',
     'The width of a segment is the time interval, not the number of samples.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p28',
  cite:'Introduction.pdf slides 24–25',
  quote:'it is basically the calculations from, I’m gonna say math 0.5, like fifth grade math when you had geometry, where it’s one half base times height'},
 
@@ -1033,6 +1068,7 @@ const Q_MODULE1 = [
     'Total AUC is the sum of the segments, so unequal time intervals are handled one segment at a time.',
     'The width of a segment is the time interval, not the number of samples.']},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
+ teachImg:'slide_Introduction_p28',
  cite:'Introduction.pdf slides 24–25'},
 
 ];

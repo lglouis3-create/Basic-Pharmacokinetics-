@@ -34,6 +34,7 @@ const Q_MODULE3 = [
     'R carries amount per time, most often mg/hr.',
     'The concentration starts at zero and climbs, because nothing is in the body when the infusion starts.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p3',
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"',
  quote:'Allows for precise control of plasma drug concentration'},
 
@@ -57,6 +58,7 @@ const Q_MODULE3 = [
     'R carries amount per time, most often mg/hr.',
     'The concentration starts at zero and climbs, because nothing is in the body when the infusion starts.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p3',
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"',
  quote:'Our input is zero order, constant in, first order out. When we stop the in, then it’s just out.'},
 
@@ -82,6 +84,7 @@ const Q_MODULE3 = [
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p4',
  cite:'3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State"',
  quote:'Steady-state is achieved when: rate in = rate out'},
 
@@ -107,6 +110,7 @@ const Q_MODULE3 = [
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p4',
  cite:'3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State"; 09-02 lecture',
  quote:'if I ask you how long it takes to get steady state following IV infusion, the simplest answer. Is 3 to 5 half-lives'},
 
@@ -132,6 +136,7 @@ const Q_MODULE3 = [
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p4',
  cite:'3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State"; 09-02 and 09-09 lectures',
  quote:'changing the rate changes our steady state concentration … it has no impact, right? Because it is three to five half-lives'},
 
@@ -156,6 +161,7 @@ const Q_MODULE3 = [
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; the count is faster when the time is a whole multiple.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p9',
  cite:'3IntravenousInfusions.pdf, slide "Drug Concentration Prior to Reaching Steady-State"',
  quote:'The term (1-e-kt) gives the fraction of steady-state concentration achieved after infusing the drug for an amount of time t.'},
 
@@ -182,9 +188,10 @@ const Q_MODULE3 = [
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; the count is faster when the time is a whole multiple.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p9',
  cite:'3IntravenousInfusions.pdf, slide "Drug Concentration Prior to Reaching Steady-State"; 09-02 lecture',
  quote:'one half-life. Gets us maybe 50% of the steady-state concentration',
- note:'The captions record the four-half-life figure as "93.25" in the 09-02 lecture and "93" in the 09-09 review; one minus one sixteenth is 93.75 per cent. The four-half-life row is left out of this question for that reason.'},
+ note:'The captions record the four-half-life figure as "93.25" in the 09-02 lecture and "93" in the 09-09 review; one minus one sixteenth is 93.75 per cent. The four-half-life row is left out for that reason.'},
 
 {id:'inf-c8', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'css', concept:'time-to-css', skill:'recall', dupOf:'inf-c4',
@@ -380,6 +387,7 @@ const Q_MODULE3 = [
     'R carries amount per time, most often mg/hr.',
     'The concentration starts at zero and climbs, because nothing is in the body when the infusion starts.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p3',
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"; 09-02 lecture',
  quote:'IV infusion, we’re starting low and we’re building.'},
 
@@ -435,6 +443,7 @@ const Q_MODULE3 = [
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p7',
  cite:'3IntravenousInfusions.pdf, slide "Example 1"',
  quote:'What is the expected steady-state concentration of theophylline in a patient?'},
 
@@ -462,6 +471,7 @@ const Q_MODULE3 = [
     'Doubling the target concentration doubles the required rate.',
     'Changing R moves the plateau only; it leaves the time to reach it untouched.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p8',
  cite:'3IntravenousInfusions.pdf, slide "Example 2"',
  quote:'How would we alter the infusion rate to achieve a steady-state concentration of 20 mg/L?'},
 
@@ -491,6 +501,7 @@ const Q_MODULE3 = [
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; the count is faster when the time is a whole multiple.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p10',
  cite:'3IntravenousInfusions.pdf, slide "Example 3"',
  quote:'Calculate the Cp 8 hrs after an infusion of 50 mg/hr has been started.',
  note:'The slide poses this example and her working records only the fraction, 0.698; no final concentration is printed on the slide or spoken in the 09-02 captions. The 7.76 mg/L keyed here is computed from her own stated values of R, ClT and k.'},
@@ -518,6 +529,7 @@ const Q_MODULE3 = [
     '90% of Css takes 3.32 half-lives; 95% takes 4.32; 99% takes 6.64.',
     'None of these depends on R, the dose or the volume of distribution.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p11',
  cite:'3IntravenousInfusions.pdf, slide "Example 4"',
  quote:'How long will the infusion have to be continued to achieve 90% steady-state?'},
 
@@ -545,6 +557,7 @@ const Q_MODULE3 = [
     'Read the stem for whether steady state was reached; that is what decides which Cpeak to use.',
     'Where the elapsed time is a whole number of half-lives, halving repeatedly gives the same answer.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p13',
  cite:'3IntravenousInfusions.pdf, slide "Example 5"',
  quote:'What is the expected plasma concentration 12 hours following the cessation of a continuous intravenous infusion of a medicinal agent (half-life = 5 hr) that yielded a steady-state concentration of 15 mg/L?',
  note:'The slide asks for 12 hours. In the 09-02 lecture she changed the time to 10 hours to make it exactly two half-lives, and then took 0.25 of 15 mg/L, giving 3.75 mg/L; her slide annotation shows the same 0.25 route. The keyed 2.84 mg/L is the 12-hour value the slide actually asks for, and 3.75 mg/L is the answer to the 10-hour version she substituted in class.'},
@@ -579,6 +592,7 @@ const Q_MODULE3 = [
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; the count is faster when the time is a whole multiple.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p14',
  cite:'3IntravenousInfusions.pdf, slide "Example 6"',
  quote:'A patient received an intravenous infusion of 150 mg over a period of 6 hours.'},
 
@@ -610,6 +624,7 @@ const Q_MODULE3 = [
     'Read the stem for whether steady state was reached; that is what decides which Cpeak to use.',
     'Where the elapsed time is a whole number of half-lives, halving repeatedly gives the same answer.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p14',
  cite:'3IntravenousInfusions.pdf, slide "Example 6"',
  quote:'we expect the concentration 3 hours after a cessation of the 6 hour infusion. To be 2.7 mg per liter.'},
 
@@ -640,6 +655,7 @@ const Q_MODULE3 = [
     'The two terms are the bolus decaying and the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p17',
  cite:'3IntravenousInfusions.pdf, slide "Example 7"',
  quote:'What loading dose should be recommended if the doctor wants the drug level to reach 12.5 mcg/mL immediately?',
  note:'The slide states the infusion rate as 20 mg/hr. The 09-02 captions read the rate as "2 mg per hour" when the problem is posed but as 20 mg/hr twice in the solution, and only 20 mg/hr reproduces her stated answer of 125 mg, so the slide value is used.'},
@@ -673,6 +689,7 @@ const Q_MODULE3 = [
     'The two terms are the bolus decaying and the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 6 (Intravenous Infusion).'}],
+ teachImg:'slide_3IntravenousInfusi_p18',
  cite:'3IntravenousInfusions.pdf, slide "Example 8"',
  quote:'What is the concentration of drug in the plasma at 2 hours after the start of the therapy?',
  note:'The slide states the infusion as 50 mg/hr with a 4-hour half-life. The 09-02 captions once read the rate as "150 mg per hour" and once give the half-life as 5 hours, but her calculator narration uses 50 divided by 12 and k = 0.1733, both of which match the slide.'},

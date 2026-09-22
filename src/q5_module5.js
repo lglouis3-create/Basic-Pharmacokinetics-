@@ -45,6 +45,7 @@ const Q_MODULE5 = [
     'A capital F in a problem is the signal that the route is extravascular.',
     'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p7',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "First-Order Absorption Model"; 09.21 lecture',
  quote:'today we will move into our 1st order. So, up to this point, we have not had 1st order input, OK? It\'s all been either instantaneous or zero order'},
 
@@ -70,6 +71,7 @@ const Q_MODULE5 = [
     'A capital F in a problem is the signal that the route is extravascular.',
     'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p5',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Drug in the Body"',
  quote:'= rate in − rate out'},
 
@@ -172,6 +174,7 @@ const Q_MODULE5 = [
     'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
     'An unqualified t1/2 means the elimination half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'this big portion right here does not represent C0'},
 
@@ -197,6 +200,7 @@ const Q_MODULE5 = [
     'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
     'An unqualified t1/2 means the elimination half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'Most of the time we\'re gonna be looking at disposition rate limiting, where our KA is gonna be significantly faster or larger than our K'},
 
@@ -252,6 +256,7 @@ const Q_MODULE5 = [
     'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
     'An unqualified t1/2 means the elimination half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p8',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example of a concentration-time profile following extravascular administration"; 09.21 lecture',
  quote:'once all the drug has been absorbed, Then we are fully into the complete elimination phase',
  note:'The printed slide labels only the absorption phase and the post-absorption phase on the figure. In the 09.21 lecture she found this slide missing from her own copy and taught it from the students\' copies, so her spoken treatment is the only full treatment of the four descriptions used here; the complete elimination phase and the equality of rates at the peak come from the captions rather than from printed slide text.'},
@@ -279,6 +284,7 @@ const Q_MODULE5 = [
     'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
     'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p12',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Cp vs. Time for a Single Oral Dose"; 09.21 lecture',
  quote:'T-Max depends solely on the relationship between K and KA Drug going in, drug going out.'},
 
@@ -303,6 +309,7 @@ const Q_MODULE5 = [
     'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
     'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p18',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Changing Dose"; 09.21 lecture',
  quote:'If I increase the dose, what happens to T-Max? Nothing, right? … T-Max is independent or dependent of dose. Independent'},
 
@@ -408,6 +415,7 @@ const Q_MODULE5 = [
     'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
     'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p18',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Changing Dose"; 09.21 lecture',
  quote:'we increase the dose, we expect a proportional increase in concentration and AUC. We do not expect a change in TMAX'},
 
@@ -433,6 +441,7 @@ const Q_MODULE5 = [
     'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
     'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p19',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Effect of ka and k on Cmax, tmax, and AUC"; 09.21 lecture',
  quote:'if we\'re just changing KA we\'re not changing the clearance at all, right? So then our AUC is unchanged here.',
  note:'The slide shows the two figures with printed captions giving a dose of 100 mg and a volume of distribution of 10 L, and fixing the constant that is not being varied at 0.1 hr⁻¹ in each panel. The statement that the area under the curve is relatively unchanged when ka is varied is not readable from the figure, and she says so in the 09.21 lecture: "looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the AUC is relatively unchanged."'},
@@ -459,6 +468,7 @@ const Q_MODULE5 = [
     'AUC = F x D/Cl, so only a change in F, the dose or clearance moves it.',
     'Disposition rate limited is the usual case, ka much larger than k; the reverse is absorption rate limited.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p19',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Effect of ka and k on Cmax, tmax, and AUC"; 09.21 lecture',
  quote:'if we change the K, we are effectively changing the clearance, so we are getting this drug out of the body a whole lot faster … So we\'re not building to as high a level'},
 
@@ -536,7 +546,7 @@ const Q_MODULE5 = [
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Absorption Kinetics Terminology"; Chapter 15_ Pharmacokinetic Calculations for Drug Elimination and Clearance.pdf',
  quote:'If the drug exhibits a "flip-flop" profile because the absorption of the drug is much slower than the elimination process (eg, often the case with modified-release formulations), then the terminal rate constant, λz, will be reflective of the absorption rate constant and not the elimination rate constant.',
- note:'The deck\'s rate-limiting slide defines disposition rate limiting and absorption rate limiting only as a comparison of the two half-lives, and neither the slide nor the 09.21 captions mention the terminal slope or use the term flip-flop; her treatment of this slide in the lecture goes no further than which half-life is shorter. The terminal-slope reading quoted here is from the assigned chapter in the course project, Chapter 15, which states it verbatim. An exam written from these lectures would key only the half-life comparison, which is why this question is marked low yield and the slide-only comparison is asked separately in m5-c25 and m5-c26.'},
+ note:'The deck\'s rate-limiting slide defines disposition rate limiting and absorption rate limiting only as a comparison of the two half-lives, and neither the slide nor the 09.21 captions mention the terminal slope or use the term flip-flop; her treatment of this slide in the lecture goes no further than which half-life is shorter. The terminal-slope reading quoted here is from the assigned chapter in the course project, Chapter 15, which states it verbatim. An exam written from these lectures would key only the half-life comparison, which is why it is marked low yield and the slide-only comparison is asked separately in m5-c25 and m5-c26.'},
 
 /* ═══════════ NUMERIC — EXAMPLE 1, THE INVESTIGATIONAL DRUG ═════════════ */
 
@@ -565,6 +575,7 @@ const Q_MODULE5 = [
     'A capital F in a problem is the signal that the route is extravascular.',
     'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p13',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'recognize that 45 minutes is 3/4 of an hour or 0.75 hour'},
 
@@ -591,6 +602,7 @@ const Q_MODULE5 = [
     'A capital F in a problem is the signal that the route is extravascular.',
     'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p13',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'our K is 0.231.'},
 
@@ -622,6 +634,7 @@ const Q_MODULE5 = [
     'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
     'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p13',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'our team Max. It\'s gonna be equal to the natural log of KA divided by K … OK, so I\'m getting 2 hours.'},
 
@@ -655,6 +668,7 @@ const Q_MODULE5 = [
     'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
     'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p13',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; 09.21 lecture',
  quote:'0.85 times 500 times 0.924 divided by 22, divided by left parentheses 0.924 minus 0.231 … And I am getting 12.17. Milligrams per liter.'},
 
@@ -683,6 +697,7 @@ const Q_MODULE5 = [
     'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
     'An unqualified t1/2 means the elimination half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'0.693 over 0.22.'},
 
@@ -738,6 +753,7 @@ const Q_MODULE5 = [
     'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
     'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'it looks like the max is going to occur. One hour after the dose was administered.'},
 
@@ -769,6 +785,7 @@ const Q_MODULE5 = [
     'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
     'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'75. E -0.22 times 1. E to -2.75 times 1 … 55.4. Milligrams per liter.',
  note:'The printed stem gives units of mcg/mL for the concentration; she states the answer aloud in mg/L, which is numerically the same. Her spoken value is 55.4 and an independent evaluation of her own equation at one hour gives 55.39. The handwritten annotation on this copy of the slide reads 53.4, which does not follow from the equation and is not used.'},
@@ -798,6 +815,7 @@ const Q_MODULE5 = [
     'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
     'An unqualified t1/2 means the elimination half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; 09.21 lecture',
  quote:'you\'re just gonna rearrange, you\'re gonna pull this volume and distribution piece over here, and you\'re gonna divide by 75 down here, and you should get 6.3',
  note:'She confirms 6.3 after polling several wrong student answers, and no unit is spoken; litres is the only unit consistent with a volume of distribution and with the arithmetic. The printed stem for this example gives concentration units of mcg/mL, which are numerically identical to mg/L, so the volume comes out the same either way.'},
@@ -827,6 +845,7 @@ const Q_MODULE5 = [
     'Convert every time to the same unit before substituting, and turn any half-life into a rate constant with 0.693/t1/2.',
     'An unqualified t1/2 means the elimination half-life.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"',
  quote:'Calculate tmax, Cmax and t½ for this drug in this patient.',
  note:'The four-hour time point is not one she asks for. The equation, both rate constants and the coefficient are hers as printed on the slide; only the substitution time is chosen here, to give a question on the deck objective of calculating the plasma concentration at any time after an oral dose.'},
@@ -958,7 +977,7 @@ const Q_MODULE5 = [
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "In-Class Practice", problem 1; 09.21 lecture',
  quote:'first thing we\'re gonna do is we\'re gonna change our volume, apparent volume of distribution from 40 L. Let\'s change that to 20 L.',
- note:'The printed practice sheet gives 40 L and she replaced it with 20 L in class, so this question keys the printed value and m5-n13 keys the value she worked with. No answer for the 40 L version is spoken in the lecture; the 6.57 mg/L here is her own working repeated with the printed volume.'},
+ note:'The printed practice sheet gives 40 L and she replaced it with 20 L in class, so the printed value is keyed here and m5-n13 keys the value she worked with. No answer for the 40 L version is spoken in the lecture; the 6.57 mg/L here is her own working repeated with the printed volume.'},
 
 /* ═══════════ NUMERIC — IN-CLASS PRACTICE 2 ═══════════════════════════ */
 
@@ -1102,6 +1121,7 @@ const Q_MODULE5 = [
     'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.',
     'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p13',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; slide "Changing Dose"; 09.21 lecture',
  quote:'we increase the dose, we expect a proportional increase in concentration and AUC. We do not expect a change in TMAX',
  note:'The 500 mg dose, the parameters and the 12.17 mg/L peak are hers from Example 1; the doubling is the change described on her Changing Dose slide applied to that example. She does not work a doubled version of Example 1 aloud.'},
@@ -1131,6 +1151,7 @@ const Q_MODULE5 = [
     'A capital F in a problem is the signal that the route is extravascular.',
     'A curve that rises to a peak and then falls is the shape of an extravascular dose.']},
   {h:'Where to read more', t:'Shargel & Yu, chapter 16 (Pharmacokinetics of Drug Absorption) and chapter 4 (Physiologic Factors Related to Drug Absorption).'}],
+ teachImg:'slide_5Pharmacokineticso_p15',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"; slide "Absorption Kinetics Terminology"; 09.21 lecture',
  quote:'Disposition Rate Limiting: absorption half-life is much shorter than elimination half-life'},
 

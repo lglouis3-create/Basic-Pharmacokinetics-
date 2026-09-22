@@ -1,0 +1,5 @@
+# The lecture decks are Dr. Mosley's own files. They are kept locally so
+# slides.py and cite_check.py can run, and are never committed or published.
+src/decks/
+src/.slide_refs.json
+src/.bank_tmp.js
