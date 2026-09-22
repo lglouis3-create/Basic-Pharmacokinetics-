@@ -28,6 +28,20 @@ const COURSE = {
 
   professors: ['Mosley'],
 
+  /* The Topics view lists the course the way the Canvas course page does
+     (module names as Canvas prints them). A module entry gathers the topics
+     whose questions carry its number; an exam entry drills that exam's
+     material and opens its practice paper; a view entry opens another tab. */
+  topicsMenu: [
+    {module: 1, name: 'Module 1 - Introduction & Math Review'},
+    {module: 2, name: 'Module 2 - IV Bolus Administration'},
+    {module: 3, name: 'Module 3 - Intravenous Infusions'},
+    {exam: 1,   name: 'Exam 1 Recap'},
+    {module: 4, name: 'Module 4 - Drug Elimination and Clearance'},
+    {module: 5, name: 'Module 5 - Single Oral Administration'},
+    {view: 'ref', name: 'Equations'},
+  ],
+
   /* One entry per lecture. `deck` is the PDF as a citation spells it. */
   lectures: [
     {id: 'L01', deck: 'Introduction.pdf',

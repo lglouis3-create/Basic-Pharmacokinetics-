@@ -1179,6 +1179,117 @@ Ranked by how often it is the thing asked for across these files:
 
 ---
 
+# Canvas quizzes — her graded items
+
+## Source: `Basic_Pharmacokinetics_Questions_1-8_plus_Quiz_1.pdf`
+
+Two sets in one file. Pages 1–8 are screenshots of a graded Canvas quiz, one
+question per page, 12.5 points each, with the keyed answer shown as marked
+correct (numeric items show the key beside a stated margin of error). Pages
+9–10 are the printed text of Quiz 1; **no key is present for Quiz 1** and none
+has been supplied here.
+
+### Canvas graded set, questions 1–8 (12.5 pts each, keys as marked)
+
+**Q1 — multiple choice, definition.**
+> Which of the following best describes the volume of distribution?
+> - estimate of the time course of drug absorption, distribution, metabolism, and elimination
+> - hypothetical volume of body fluid that would be required to dissolve the total amount of drug at the same concentration as that found in the blood ✔
+> - proportionality constant relating the rate of drug absorption to the rate of drug elimination
+> - physiological measure of the volume occupied by the peripheral compartments
+
+The key is the slide's definition word for word (2IVBolusAdministration.pdf, "Volume of Distribution"). Two distractors reuse the slide's own phrase "proportionality constant" attached to the wrong quantities.
+
+**Q2 — numeric, two-compartment, half-life.**
+> A 250-mg IV bolus dose of a drug was administered to six healthy volunteers. The parameters below best describe the pharmacokinetics of the drug.
+> A = 10.16 mg/L   B = 5.65 mg/L   α = 3.59 hr⁻¹   β = 0.15 hr⁻¹
+> What is the elimination half-life of this agent? ______ hr
+> Round to the nearest hundredth (two decimal places)
+
+Key: **4.62** (margin of error ±2%). Recomputed: 0.693 / 0.15 = 4.62 hr.
+
+**Q3 — numeric, two-compartment, concentration at a time.**
+> A 250-mg IV bolus dose of a drug was administered to six healthy volunteers. The parameters below best describe the pharmacokinetics of the drug.
+> A = 10.68 mg/L   B = 3.13 mg/L   α = 3.55 hr⁻¹   β = 0.15 hr⁻¹
+> What is the concentration of the drug in the plasma 4 hours following administration of the dose? ______ mg/L
+> Round to the nearest hundredth (two decimal places)
+
+Key: **1.72** (margin of error ±3%). Recomputed: 10.68·e^(−3.55×4) + 3.13·e^(−0.15×4) = 0.0000 + 1.7178 = 1.72 mg/L.
+
+**Q4 — multiple choice, purpose.**
+> Why is a loading dose used?
+> - To reduce the adverse effects associated with the drug
+> - To improve patient adherence
+> - To immediately obtain a therapeutic plasma concentration ✔
+> - To reduce the elimination half-life
+
+**Q5 — numeric, post-infusion decay from steady state.**
+> An antibacterial agent with a volume of distribution of 22 L and a clearance of 3.2 L/hr was infused intravenously until a concentration of 14 mg/L was reached. What was the concentration of drug in the plasma 5 hours following cessation of the infusion? ______ mg/L
+> Round to the nearest tenth (one decimal place)
+
+Key: **6.8** (margin of error ±2%). Recomputed: k = Cl/V_D = 3.2/22 = 0.14545 hr⁻¹; C = 14·e^(−0.14545×5) = 6.77 → 6.8 mg/L. Note the model is not named and k is not given: k has to be assembled from Cl and V_D.
+
+**Q6 — multiple choice, conceptual.**
+> Which of the following results when the rate of infusion is increased?
+> - The time to reach steady-state increases
+> - Steady-state concentration decreases
+> - Steady-state concentration increases ✔
+> - The time to reach steady-state decreases
+
+This is the poll from the 09-02 lecture in graded form (TRANSCRIPT_CUES.md: "changing the rate changes our steady state concentration").
+
+**Q7 — numeric, infusion rate for a target Css.**
+> Recommend an infusion rate to achieve a steady-state concentration of 23 mcg/mL for a agent with an apparent volume of distribution of 15 L and half-life of 4 hr. ______ mg/hr
+> Round to the nearest whole number
+
+Key: **60** (margin of error ±2%). Recomputed: R = Css·k·V_D = 23 mg/L × (0.693/4 hr) × 15 L = 59.77 → 60 mg/hr. The stem gives mcg/mL and asks for mg/hr; the mcg/mL = mg/L equivalence is assumed, as in her lectures. "for a agent" as printed.
+
+**Q8 — numeric, Css from rate, weight in pounds and V_D per kilogram.**
+> An analgesic drug is to be administered by continuous intravenous infusion at a rate of 38 mg/hr to a 60 year-old, 154 pound female patient. The drug has a half-life of 4 hours and an apparent volume of distribution of 0.21 L/kg. What is the expected steady-state concentration? ______ mg/L
+> Round to the nearest tenth (one decimal place)
+
+Key: **14.9** (margin of error ±2%). Recomputed: 154 lb / 2.2 = 70 kg; V_D = 0.21 × 70 = 14.7 L; k = 0.693/4 = 0.17325 hr⁻¹; Cl = 2.5468 L/hr; Css = 38 / 2.5468 = 14.92 → 14.9 mg/L. Age and sex are stated and not used.
+
+### Quiz 1 (printed text; no key in the file)
+
+**Quiz 1, Q1 — select all that apply.**
+> Which of the following is true about a process in which the rate depends on the concentration? (Select all that apply)
+> a. The half-life depends on the concentration of the drug present.
+> b. The half-life is independent of concentration.
+> c. The rate equation is dC/dt = -kC.
+> d. The rate equation is dC/dt = -k.
+
+**Quiz 1, Q2 — multiple choice.**
+> Which of the following is true about a zero-order process?
+> a. The elimination rate is at its highest when the amount of drug in the body is at its highest.
+> b. The elimination rate is at its highest when the amount of drug in the body is at its lowest.
+> c. The elimination rate is independent of the amount of drug in the body.
+> d. The elimination rate increases as a function of time.
+
+**Quiz 1, Q3 — data table, IV bolus, three parts.**
+> A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. Blood samples were collected at various time intervals. The elimination of drug seems to follow a first-order model best described by the equation C = C₀e⁻ᵏᵗ. The concentration of the drug (Cₚ) was determined in the plasma fraction of each blood sample and the following data were obtained:
+>
+> | t (hr) | Cₚ (mcg/mL) |
+> |---|---|
+> | 0.5 | 112 |
+> | 2 | 90.9 |
+> | 4 | 68.9 |
+> | 8 | 39.6 |
+> | 16 | 13.1 |
+>
+> a. What is the half-life of this agent in this patient?
+> b. What is the volume of distribution of this agent in this patient?
+> c. How much time following administration of the dose is required for 75% of the dose to be eliminated?
+
+### What the graded items add to the formats above
+
+- **Numeric entry with a stated rounding rule and margin of error.** Every calculation is a blank with its unit printed after it ("______ hr", "______ mg/L", "______ mg/hr"), an explicit rounding instruction ("Round to the nearest hundredth", "nearest tenth", "nearest whole number") and a tolerance of ±2–3%. The drill's numeric items match this shape.
+- **Conceptual items are word-only.** None of the eleven items carries a graph, a table to read off, or a figure; the one table (Quiz 1 Q3) is a data set to calculate from. The conceptual items are definitions (Q1), purpose (Q4) and a direction-of-change question (Q6).
+- **Two-compartment items give A, B, α, β and never name the model** (Q2, Q3), exactly as in IV Bolus Practice 4 and Homework 2.
+- **Select-all appears on a quiz** (Quiz 1 Q1), asked on the properties of a first-order process.
+
+---
+
 ## Files that could not be fully used
 
 - **`Homework2.pdf`** — readable, and both problems transcribed above in full, but the file contains **questions only**. No worked solutions, no answer key, no final answers are present anywhere in it. Nothing has been supplied in their place.

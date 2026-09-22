@@ -1,10 +1,11 @@
 # PHAR 4221 — Basic Pharmacokinetics drill
 
 A single self-contained HTML file: the question bank, the spaced-repetition
-scheduler, an exam simulator that follows the blueprint, weak-spot analytics by
-topic and by kind of calculation error, the equation reference, the tell-apart
-tables and a guide per course objective. It runs offline and keeps progress in
-the browser it is opened in.
+scheduler, an exam simulator that follows the blueprint of whichever paper is
+chosen (Exam 1, Exam 2 or the final), weak-spot analytics by topic and by kind
+of calculation error, the equation reference, the tell-apart tables and a guide
+per course objective. It runs offline and keeps progress in the browser it is
+opened in.
 
 Live at <https://lglouis3-create.github.io/Basic-Pharmacokinetics-/>
 

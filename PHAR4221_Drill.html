@@ -76,7 +76,7 @@ h3{font-size:16px;margin:22px 0 8px}
 .subrow:hover{background:var(--surface)}
 .subrow .sname{flex:1;min-width:0;font-size:14.5px}
 .subrow .sname small{display:block;color:var(--text-dim);font-size:12px}
-.subrow button{
+.subrow button,.mrow button{
   background:var(--accent);color:#fff;border:0;border-radius:7px;padding:7px 13px;font-size:13px;font-weight:500
 }
 .subrow button.done{background:var(--ok)}
@@ -205,6 +205,25 @@ table.gap tr:last-child td{border-bottom:0}
 .reftab th,.reftab td{border:1px solid var(--line-soft);padding:8px 10px;text-align:left;vertical-align:top}
 .reftab th{background:var(--surface);font-size:12.5px;font-weight:600}
 .sweepcard{border-color:var(--accent);background:var(--accent-bg)}
+/* ---------- topics: module groups ---------- */
+.module{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px}
+.module>summary{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;list-style:none;font-size:16px;font-weight:700}
+.module>summary::-webkit-details-marker{display:none}
+.module>summary::before{content:"\25BE";color:var(--text-dim);font-size:13px;transition:transform .15s}
+.module:not([open])>summary::before{transform:rotate(-90deg)}
+.module .mname{flex:1;min-width:0}
+.module .mname small{display:block;font-weight:400;color:var(--text-dim);font-size:12.5px;margin-top:2px}
+.module .topic{margin:0 10px 10px;border-radius:8px}
+.module .mfoot{border-top:1px solid var(--line-soft);padding:6px 8px 10px;margin:0 10px 4px}
+.module .mrow{display:flex;align-items:center;gap:10px;padding:13px 14px;font-size:16px;font-weight:700}
+/* ---------- guides: what she said ---------- */
+ul.saidlist{list-style:none;margin:6px 0 0;padding:0}
+.said{margin:0 0 12px;padding:0}
+.said .lead{display:block;font-weight:600;font-size:13.5px;margin-bottom:3px}
+.said q{display:block;quotes:none;font-family:Georgia,"Iowan Old Style","Source Serif 4",serif;font-size:14.5px;line-height:1.55;
+  margin:4px 0;padding:6px 12px;border-left:3px solid var(--accent);background:var(--accent-bg);border-radius:0 6px 6px 0}
+.said q.para{border-left-style:dashed}
+.said .when{display:block;font-size:11.5px;color:var(--text-dim);letter-spacing:.02em;margin-top:2px}
 .sweepcard .subs{border-top:0}
 .sweepcard .subrow:hover{background:rgba(255,255,255,.5)}
 /* objective guides */
@@ -367,6 +386,20 @@ const COURSE = {
   output: 'PHAR4221_Drill.html',
 
   professors: ['Mosley'],
+
+  /* The Topics view lists the course the way the Canvas course page does
+     (module names as Canvas prints them). A module entry gathers the topics
+     whose questions carry its number; an exam entry drills that exam's
+     material and opens its practice paper; a view entry opens another tab. */
+  topicsMenu: [
+    {module: 1, name: 'Module 1 - Introduction & Math Review'},
+    {module: 2, name: 'Module 2 - IV Bolus Administration'},
+    {module: 3, name: 'Module 3 - Intravenous Infusions'},
+    {exam: 1,   name: 'Exam 1 Recap'},
+    {module: 4, name: 'Module 4 - Drug Elimination and Clearance'},
+    {module: 5, name: 'Module 5 - Single Oral Administration'},
+    {view: 'ref', name: 'Equations'},
+  ],
 
   /* One entry per lecture. `deck` is the PDF as a citation spells it. */
   lectures: [
@@ -4985,8 +5018,11 @@ const TELL_HTML = `
    SOURCES. Every line is traceable to a printed slide in one of the five
    lectured decks, to Dr. Mosley's spoken words recorded in
    TRANSCRIPT_CUES.md, or to one of her own worked solutions recorded in
-   STYLE.md or printed in a deck. Bullets marked (T) are transcript, quoted
-   verbatim. OCR'd handwriting on the annotated decks is not used as a source.
+   STYLE.md or printed in a deck. Bullets under "What she said about it" are
+   transcript, rendered as <q>: her words with the auto-caption fillers
+   removed, or, as <q class="para">, a passage the captions garbled,
+   restated in plain words. Each says which it is and on what date.
+   OCR'd handwriting on the annotated decks is not used as a source.
    Where slide and transcript differ, both are stated.
 
    Objective counts: Module 1 five, Module 2 six (three on each of the deck's
@@ -4995,13 +5031,16 @@ const TELL_HTML = `
    ========================================================================== */
 const GUIDE_HTML = `
 <h2>Objective guides</h2>
-<p class="sub">One section per objective from Dr. Mosley's own objectives slides, in her wording and her order: what the slides carry, what she added out loud, her own question on it, and the form the question takes when she sets it. Nothing here is scored.</p>
+<p class="sub">One section per objective from Dr. Mosley's own objectives slides, in her wording and her order: what the slides carry, what she added out loud, her own question on it, and the form the question takes when she sets it. Nothing here is scored. Under <i>What she said about it</i>, a solid bar carries her own words with the auto-caption fillers removed, and a dashed bar carries a passage the captions garbled, restated in plain words; the line under each quote says which it is, and the lecture date.</p>
 
-<h2>Module 1 &mdash; Introduction, kinetic orders and AUC</h2>
-<p class="prose">Five objectives, printed on Introduction.pdf slide 2 and reprinted unchanged on RecapExam1.pdf slide 2. (T) On what those slides are for: <i>"the first slide there after the title slide is, um, our objectives. I put this here because this is what I want you to know for the exam."</i></p>
+<h2>Module 1 - Introduction &amp; Math Review</h2>
+<p class="prose">Five objectives, printed on Introduction.pdf slide 2 and reprinted unchanged on RecapExam1.pdf slide 2.</p>
+<ul class="saidlist">
+<li class="said"><span class="lead">On what those slides are for</span><q>the first slide there after the title slide is our objectives. I put this here because this is what I want you to know for the exam.</q><span class="when">her words, caption fillers removed</span></li>
+</ul>
 
 <section class="gobj" id="gobj-m1-1">
-<h3>Module 1, objective 1 &mdash; Define pharmacokinetics and discuss some related disciplines</h3>
+<h3 data-nav="Module 1, objective 1 &mdash; Define pharmacokinetics and discuss some related disciplines">Module 1 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Define pharmacokinetics and discuss some related disciplines</b><i>Introduction.pdf slides 3&ndash;8</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5015,12 +5054,12 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The two-word contrast that separates the two disciplines, which the slide does not put side by side: <i>"pharmacodynamics, concentration. And Response. OK, pharmacokinetics, concentration and time."</i> (08-17)</li>
-<li>(T) On the slide 7 table: <i>"If you see a table, no, I do not expect you to to memorize the table. Right? This is to help clarify in your brain how the pieces fit."</i> (08-17), and of that table specifically, <i>"this is for your information"</i>.</li>
-<li>(T) Which of these are examinable, from the Exam 1 review: <i>"there are some definitions that I expect you to know, um, and some related disciplines. Remember, we talked about, um, clinical pharmacokinetics. We talked about toxicology. We talked about pharmacodynamics, um, pharmacology."</i> (09-09)</li>
-<li>(T) Her own wording of biopharmaceutics, closer to the exam's likely phrasing than the slide's: <i>"biopharmaceutics basically is the kind of the relation tying the physical chemical drug properties, so, um, thinking about the drug itself, um, the dosage form, and the route of administration, how those pieces tie into the rate and effect or extent of systemic absorption"</i> (08-17).</li>
-<li>(T) ADME is lettered differently by other faculty, which is why she fixes the four letters here: <i>"Doctor Smith &hellip; she will add um a T to our ADM, right? So A D M E and then she will add a T for toxicology. Doctor Yendaalli will add an L at the beginning for liberation."</i> (08-17)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The two-word contrast that separates the two disciplines, which the slide does not put side by side</span><q class="para">Pharmacodynamics is concentration and response; pharmacokinetics is concentration and time.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">On the slide 7 table</span><q>If you see a table, no, I do not expect you to memorize the table. This is to help clarify in your brain how the pieces fit.</q> and of that table specifically, <q>this is for your information</q><span class="when">08-17 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Which of these are examinable, from the Exam 1 review</span><q class="para">There are some definitions that I expect you to know, and some related disciplines. Remember, we talked about clinical pharmacokinetics, toxicology, pharmacodynamics, pharmacology.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her own wording of biopharmaceutics, closer to the exam's likely phrasing than the slide's</span><q class="para">Biopharmaceutics is the relation tying the physicochemical drug properties, the drug itself, the dosage form and the route of administration to the rate and extent of systemic absorption.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">ADME is lettered differently by other faculty, which is why she fixes the four letters here</span><q class="para">Dr. Smith adds a T to ADME for toxicology; Dr. Yendaalli adds an L at the beginning for liberation.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question &mdash; poll slide, Introduction.pdf</b>
@@ -5035,7 +5074,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m1-2">
-<h3>Module 1, objective 2 &mdash; Describe the types of pharmacokinetic modeling</h3>
+<h3 data-nav="Module 1, objective 2 &mdash; Describe the types of pharmacokinetic modeling">Module 1 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Describe the types of pharmacokinetic modeling</b><i>Introduction.pdf slides 11&ndash;15</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5048,10 +5087,10 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Which kind this course actually uses, and what the box means: <i>"we primarily do compartmental modeling. That means that we treat our bodies as just a little box. We put all of the drug into the box and then determine, uh, depending on how the &hellip; depending on how the drug behaves in the body is kind of, uh, what it helps us, helps us decide which model to use."</i> (09-09)</li>
-<li>(T) Why the physiologic model is on the slide but not used: <i>"our physiology, physiological models that we don't use quite as much. Those require a little bit more input than what we want to do."</i> (09-09)</li>
-<li>(T) The catenary model described as a chain rather than as a diagram: <i>"compartments joined together like compartments, uh, of a, of a, a train. Remember that's one car, next car, next car. You don't get to the third car without going through the second car. So that's our catenary system."</i> (08-19)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Which kind this course actually uses, and what the box means</span><q class="para">We primarily do compartmental modeling: we treat the body as a little box, put all of the drug into the box, and how the drug behaves in the body decides which model to use.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Why the physiologic model is on the slide but not used</span><q class="para">Physiological models we do not use quite as much; those require more input than we want to do.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The catenary model described as a chain rather than as a diagram</span><q class="para">Compartments joined together like the compartments of a train: one car, next car, next car. You do not get to the third car without going through the second car. That is our catenary system.</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question &mdash; poll slide, Introduction.pdf</b>
@@ -5066,7 +5105,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m1-3">
-<h3>Module 1, objective 3 &mdash; Define some fundamental pharmacokinetics terms</h3>
+<h3 data-nav="Module 1, objective 3 &mdash; Define some fundamental pharmacokinetics terms">Module 1 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Define some fundamental pharmacokinetics terms</b><i>Introduction.pdf slides 5, 9, 10</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5077,13 +5116,13 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Elimination as the catch-all, which the slide's one-line definition does not say: <i>"Elimination refers to the irreversible loss of drugs from the body by all routes, right? So, Metabolism and excretion are both elimination terms, right? Elimination is kind of our catch-all."</i> (08-17)</li>
-<li>(T) Disposition in her own compressed form: <i>"Disposition is the processes that occur to a drug after it's absorbed, so distribution and elimination"</i> (08-17).</li>
-<li>(T) First-pass effect tied to the number it changes: <i>"often when we take oral medications, they hit the liver first before they get to that systemic circulation &hellip; Liver eats them up, eats up half the drug, and then you have a lower what we call a bioavailability"</i> (08-17).</li>
-<li>(T) The subscript convention, which no slide states: <i>"if you see CP, we're looking at concentration of drug in the plasma, CS we're looking at concentration of drug in the serum, or if you just see a C, you can assume whatever."</i> (08-17)</li>
-<li>(T) Two lines she draws on the slide 9 curve that are not printed on it &mdash; a minimum toxic concentration above and a minimum effective concentration below: <i>"our goal is. That we want to stay in between these two lines."</i> On the upper line: <i>"Remember that's the top, right? Top of that curve, right there is where we start to see problems, and toxic can be different things for different drugs."</i> (08-17). Slide and speech differ here: the printed slide carries a plain curve, and an exam written from these lectures would key the spoken thresholds, because that is the only place they are defined.</li>
-<li>(T) Why serum or plasma rather than whole blood: <i>"We mostly use serum and plasma because remember we try to minimize the interactions of drug with anything else that might be in that um sample"</i> (08-19).</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Elimination as the catch-all, which the slide's one-line definition does not say</span><q class="para">Elimination refers to the irreversible loss of drugs from the body by all routes. Metabolism and excretion are both elimination terms; elimination is our catch-all.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Disposition in her own compressed form</span><q>Disposition is the processes that occur to a drug after it's absorbed, so distribution and elimination</q><span class="when">08-17 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">First-pass effect tied to the number it changes</span><q>often when we take oral medications, they hit the liver first before they get to that systemic circulation… Liver eats them up, eats up half the drug, and then you have a lower what we call a bioavailability</q><span class="when">08-17 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The subscript convention, which no slide states</span><q>if you see CP, we're looking at concentration of drug in the plasma, CS we're looking at concentration of drug in the serum, or if you just see a C, you can assume whatever.</q><span class="when">08-17 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Two lines she draws on the slide 9 curve that are not printed on it &mdash; a minimum toxic concentration above and a minimum effective concentration below</span><q class="para">Our goal is to stay in between these two lines.</q> On the upper line: <q>Remember that's the top of that curve, right there is where we start to see problems, and toxic can be different things for different drugs.</q>. Slide and speech differ here: the printed slide carries a plain curve, and an exam written from these lectures would key the spoken thresholds, because that is the only place they are defined.<span class="when">08-17 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Why serum or plasma rather than whole blood</span><q>We mostly use serum and plasma because remember we try to minimize the interactions of drug with anything else that might be in that sample</q><span class="when">08-19 &middot; her words, caption fillers removed</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; two polls</b>
@@ -5098,7 +5137,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m1-4">
-<h3>Module 1, objective 4 &mdash; Differentiate between orders of reaction and calculate basic parameters given a data set</h3>
+<h3 data-nav="Module 1, objective 4 &mdash; Differentiate between orders of reaction and calculate basic parameters given a data set">Module 1 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Differentiate between orders of reaction and calculate basic parameters given a data set</b><i>Introduction.pdf slides 17&ndash;21, 26</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5111,16 +5150,16 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The single affirmative statement in any lecture about a specific exam item: <i>"here is the secret. I'm going to&hellip; On this exam, I am going to give you a data set, and I expect you to figure out if it's zero or first. The rest of the time, if I tell you that it is an IV bolus dose that is ad- administered, your expectation is what? First. First one. &hellip; But if I give you a data set, expect that I expect you to tell me if it's zero or first."</i> (09-09)</li>
-<li>(T) The first-order half-life is not supplied: <i>"first order half-life &hellip; that will not be on your equation sheet. This is the one that you take to your grave with you, OK? 0.693 over K."</i> (08-19), and again at the review: <i>"That one is not on your equation sheet."</i> (09-09)</li>
-<li>(T) Half-life is a time, and the units are scored: <i>"I expect you to give me half-life in units of time."</i> (08-19); <i>"It is a time, so it is not days to the minus one. It is just days."</i> (09-09)</li>
-<li>(T) Why the first-order half-life does not move: <i>"0.693 that you're gonna take with you is 0.693. It is a constant. So, a constant divided by a constant is A constant"</i> (08-19).</li>
-<li>(T) Units decide the order of a rate constant: zero order is <i>"either going to be concentration per unit time. Or amount per unit time"</i>, first order is <i>"Is it time? One over time. We call that reciprocal time."</i> (08-19). And, either way, <i>"our rate constant is never going to be a negative"</i>.</li>
-<li>(T) The axis trap, flagged three separate times: <i>"Notice that it doesn't say. Log, right?"</i> (08-19); <i>"I expect for you, because you will see graphs like this, and this word will not be over here most of the time. But you've got to pay attention to the axis."</i> (08-19); <i>"if you look at that scale and you see that it is not changing by regular one infinite, or it's increasing by a func- uh, a function of 10, then that tells you that it is a logarithmic scale. So, don't just look at that straight line and assume &hellip; that it is zero order. Look at the scale."</i> (09-09)</li>
-<li>(T) A rounding error she says will change your answer: <i>"don't truncate that to 0.2 early on because if you put that as 0.2, your number is gonna be very different than our numbers"</i>, with the instruction to <i>"keep, you know, 3 to 4 decimal places for that K"</i> (08-24).</li>
-<li>(T) A sign error she makes on purpose and then names: solving backwards for C<sub>0</sub>, <i>"if I punch C0E or CE to the minus KT because I always throw in that minus there, what's gonna happen to my number? If it's minus KT, then that number is going to be lower than where I started"</i> (08-19). On the zero-order version she catches the same thing: <i>"What is wrong with the way I've set that up? &hellip; It is going to be a lower concentration, so this should be plus, right?"</i></li>
-<li>(T) The half-life counting table she builds live, which no slide carries: one half-life leaves 50% and eliminates 50%; two half-lives, <i>"you said 75%. Right, so 25% remains."</i>; three, <i>"Three Half-Lives 12.5 87.5."</i> (08-19). And <i>"First order processes, it's gonna take 10 half-lives for 99.9% of the drug to be eliminated from the body."</i> (08-24)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The single affirmative statement in any lecture about a specific exam item</span><q class="para">Here is the secret. On this exam, I am going to give you a data set, and I expect you to figure out if it is zero or first. The rest of the time, if I tell you that it is an IV bolus dose, your expectation is first order. But if I give you a data set, expect that I expect you to tell me if it is zero or first.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The first-order half-life is not supplied</span><q class="para">First-order half-life will not be on your equation sheet. This is the one that you take to your grave with you: 0.693 over k.</q> and again at the review: <q>That one is not on your equation sheet.</q><span class="when">08-19, 09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Half-life is a time, and the units are scored</span><q>I expect you to give me half-life in units of time.</q> <q>It is a time, so it is not days to the minus one. It is just days.</q><span class="when">08-19, 09-09 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Why the first-order half-life does not move</span><q class="para">0.693 over k is the one you take with you: a constant divided by a constant is a constant.</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Units decide the order of a rate constant: zero order is</span><q class="para">Either concentration per unit time or amount per unit time.</q>, first order is <q>Is it time? One over time. We call that reciprocal time.</q>. And, either way, <q>our rate constant is never going to be a negative</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The axis trap, flagged three separate times</span><q class="para">Notice that it does not say log.</q> <q class="para">You will see graphs like this, and this word will not be over here most of the time. You have got to pay attention to the axis.</q> <q class="para">If you look at that scale and it is not changing by a regular step but by a factor of 10, that tells you it is a logarithmic scale. Do not just look at that straight line and assume it is zero order. Look at the scale.</q><span class="when">08-19, 09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">A rounding error she says will change your answer</span><q>don't truncate that to 0.2 early on because if you put that as 0.2, your number is gonna be very different than our numbers</q>, with the instruction to <q>keep, 3 to 4 decimal places for that K</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">A sign error she makes on purpose and then names: solving backwards for C<sub>0</sub></span><q>if I punch C0E or CE to the minus KT because I always throw in that minus there, what's gonna happen to my number? If it's minus KT, then that number is going to be lower than where I started</q>. On the zero-order version she catches the same thing: <q>What is wrong with the way I've set that up?… It is going to be a lower concentration, so this should be plus</q><span class="when">08-19 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The half-life counting table she builds live, which no slide carries: one half-life leaves 50% and eliminates 50%; two half-lives</span><q class="para">You said 75%, so 25% remains.</q>; three, <q class="para">Three half-lives: 12.5% remains, 87.5% gone.</q>. And <q>First order processes, it's gonna take 10 half-lives for 99.9% of the drug to be eliminated from the body.</q><span class="when">08-19, 08-24 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; three polls and a practice set</b>
@@ -5139,7 +5178,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m1-5">
-<h3>Module 1, objective 5 &mdash; Determine the area under the curve for a provided data set using the trapezoidal rule</h3>
+<h3 data-nav="Module 1, objective 5 &mdash; Determine the area under the curve for a provided data set using the trapezoidal rule">Module 1 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Determine the area under the curve for a provided data set using the trapezoidal rule</b><i>Introduction.pdf slides 22&ndash;26</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5152,11 +5191,11 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) What AUC is for, in her words: <i>"for us, that tells us about the extent of drug that is available for the body to use"</i> (08-19), repeated at the review as <i>"area under the curve is a concept that tells us something about the extent of drug that's available for the body to use"</i> (09-09).</li>
-<li>(T) The printed formula reduced to the geometry: <i>"trapezoidal rule says we take our curve, we break it up into little segments, and then we determine the area of each of those little segments, and then we just use this long what looks like a complicated calculation, but it is basically the calculations from, I'm gonna say math 0.5, like fifth grade math when you had geometry, where it's one half base times height"</i> (08-19).</li>
-<li>(T) The units, which she flags as unfamiliar: <i>"Micrograms per mil times hour, kind of funky units."</i> (08-19)</li>
-<li>(T) The other reason AUC recurs, stated in two later modules: <i>"Another reason that we like clearance. Is that it directly relates the dose to that area under the curve."</i> (08-24, repeated 09-09)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">What AUC is for, in her words</span><q>for us, that tells us about the extent of drug that is available for the body to use</q>, repeated at the review as <q>area under the curve is a concept that tells us something about the extent of drug that's available for the body to use</q><span class="when">08-19, 09-09 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The printed formula reduced to the geometry</span><q class="para">The trapezoidal rule says we take our curve, break it up into little segments, and determine the area of each segment. It looks like a complicated calculation, but it is fifth-grade geometry: one half base times height.</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The units, which she flags as unfamiliar</span><q>Micrograms per mil times hour, kind of funky units.</q><span class="when">08-19 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The other reason AUC recurs, stated in two later modules</span><q class="para">Another reason that we like clearance is that it directly relates the dose to that area under the curve.</q> (08-24, repeated 09-09)<span class="when">restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question &mdash; worked example slide, Introduction.pdf slide 25</b>
@@ -5171,11 +5210,11 @@ const GUIDE_HTML = `
 </ul></div>
 </section>
 
-<h2>Module 2 &mdash; IV bolus, one and multi-compartment</h2>
+<h2>Module 2 - IV Bolus Administration</h2>
 <p class="prose">Six objectives, printed on the two "Lecture Objectives" slides of 2IVBolusAdministration.pdf &mdash; three for the one-compartment lecture of 24 August and three for the multicompartment lecture of 26 August. Both sets are reprinted unchanged on RecapExam1.pdf.</p>
 
 <section class="gobj" id="gobj-m2-1">
-<h3>Module 2, objective 1 &mdash; Describe a one-compartment model, IV bolus injection</h3>
+<h3 data-nav="Module 2, objective 1 &mdash; Describe a one-compartment model, IV bolus injection">Module 2 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Describe a one-compartment model, IV bolus injection</b><i>2IVBolusAdministration.pdf, slides "One-Compartment Open Model" and "Concentration of Drug in the Plasma, Cp"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5186,13 +5225,13 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The two assumptions together, and that they are assumptions: <i>"the drug goes into the body all at once, like instantly all the drug is into the body and all the drug is instantly uniformly distributed throughout the body. Assumptions, simplifications, this does not happen."</i> (08-24)</li>
-<li>(T) Elimination starts at once: <i>"all the drug goes in, all the drug goes out. As soon as that drug is in the body, it starts immediately being eliminated as well."</i> (08-24). The name for the input: <i>"We call that instantaneous input of drug into the body."</i></li>
-<li>(T) What the phrase "IV bolus" is meant to trigger: <i>"if I tell you that we are administering a drug via IV bolus injection. Then you should think. Whichever form of this equation you like."</i> (08-24) &mdash; and the order that goes with it, from the review: <i>"if I tell you that it is an IV bolus dose that is ad- administered, your expectation is what? First."</i> (09-09)</li>
-<li>(T) What an unsubscripted k means: <i>"KM is a rate constant for metabolism, KE is the rate constant for excretion &hellip; If you see K with no subscript, that is our overall rate constant for elimination. So, all the process is wrapped up into there."</i> (08-24)</li>
-<li>(T) Which of the three printed forms she works in, which the slide does not settle: <i>"this is my preferred equations down here with natural log, but either one gets you there."</i> (08-19)</li>
-<li>(T) A drawing step she recommends before calculating: <i>"when you see the question that says IV bolus administration, your brain, even on the side of your paper, draw your little curve that starts up high, comes down low."</i> (09-02)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The two assumptions together, and that they are assumptions</span><q>the drug goes into the body all at once, like instantly all the drug is into the body and all the drug is instantly uniformly distributed throughout the body. Assumptions, simplifications, this does not happen.</q><span class="when">08-24 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Elimination starts at once</span><q>all the drug goes in, all the drug goes out. As soon as that drug is in the body, it starts immediately being eliminated as well.</q>. The name for the input: <q>We call that instantaneous input of drug into the body.</q><span class="when">08-24 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">What the phrase "IV bolus" is meant to trigger</span><q class="para">If I tell you that we are administering a drug via IV bolus injection, then you should think: whichever form of this equation you like.</q> &mdash; and the order that goes with it, from the review: <q class="para">If I tell you that it is an IV bolus dose that is administered, your expectation is first order.</q><span class="when">08-24, 09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">What an unsubscripted k means</span><q>KM is a rate constant for metabolism, KE is the rate constant for excretion… If you see K with no subscript, that is our overall rate constant for elimination. all the process is wrapped up into there.</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Which of the three printed forms she works in, which the slide does not settle</span><q>this is my preferred equations down here with natural log, but either one gets you there.</q><span class="when">08-19 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">A drawing step she recommends before calculating</span><q>when you see the question that says IV bolus administration, your brain, even on the side of your paper, draw your little curve that starts up high, comes down low.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5206,7 +5245,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m2-2">
-<h3>Module 2, objective 2 &mdash; Define key pharmacokinetic parameters &ndash; clearance and volume of distribution</h3>
+<h3 data-nav="Module 2, objective 2 &mdash; Define key pharmacokinetic parameters &ndash; clearance and volume of distribution">Module 2 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Define key pharmacokinetic parameters &ndash; clearance and volume of distribution</b><i>2IVBolusAdministration.pdf, slides "Volume of Distribution" (two) and "Clearance"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5218,14 +5257,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The word "apparent" and why it is there: <i>"this volume of distribution. Is hypothetical, right? It's not an actual volume, it depends on the drug."</i> and <i>"you will often see apparent volume of distribution just kind of to remember that, you know what, it is a proportionality, it's not a real number"</i> (08-24).</li>
-<li>(T) The kilogram-to-litre convention stated as a rule: <i>"in kinetics, our body weight is always in kilograms &hellip; So, 1 L volume is equal to 1 kg of, of body weight"</i> (08-24). Her check on the answer's unit: <i>"I hear 14. 14 apples, 14 L, OK? Not 14 kg 14 L"</i>.</li>
-<li>(T) The clearance equation is not supplied: <i>"this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd."</i> (08-24)</li>
-<li>(T) Why she prefers clearance to the elimination rate: <i>"what we like about clearance is that clearance. For most drugs in most situations, it's going to be a constant &hellip; a constant times a constant is a constant."</i> (08-24), and <i>"our volume of distribution is going to be a constant &hellip; and our rate constant K is going to be a constant."</i></li>
-<li>(T) The second reason: <i>"Another reason that we like clearance. Is that it directly relates the dose to that area under the curve."</i> (08-24)</li>
-<li>(T) Three volumes she narrates against the same dose, which the slide does not print: <i>"if we inject 100 mg into a volume of distribution that is 1 L, then we expect 100 mg per liter as our concentration. Next 1 100 mg 10 L, we inject. OK. Then we are getting a concentration of 10 mg per liter. And then this one, when we have the largest volume distribution, same 100 mg into 100 L, now we're at 1 mg per liter"</i> &mdash; with the caveat <i>"same amount of drugs, but here, we would be looking at different drugs"</i> (08-24).</li>
-<li>(T) On the fish tank slide, she limits it: <i>"This little model, I like it, but it goes into a little bit more detail than what we're gonna cover."</i> The part she does use: <i>"Only the free drugs, so only the free fish. are able to be swept swept up into this net. The ones that are tied up with the little um algae down there, they're bound, so they can't be swept up"</i> (08-24).</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The word "apparent" and why it is there</span><q class="para">This volume of distribution is hypothetical. It is not an actual volume; it depends on the drug.</q> and <q class="para">You will often see "apparent volume of distribution", to remember that it is a proportionality, not a real number.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The kilogram-to-litre convention stated as a rule</span><q>in kinetics, our body weight is always in kilograms… So, 1 L volume is equal to 1 kg of body weight</q>. Her check on the answer's unit: <q class="para">I hear 14 apples: 14 L. Not 14 kg, 14 L.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The clearance equation is not supplied</span><q>this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd.</q><span class="when">08-24 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Why she prefers clearance to the elimination rate</span><q class="para">What we like about clearance is that, for most drugs in most situations, it is going to be a constant: a constant times a constant is a constant.</q> and <q>our volume of distribution is going to be a constant… and our rate constant K is going to be a constant.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The second reason</span><q class="para">Another reason that we like clearance is that it directly relates the dose to that area under the curve.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Three volumes she narrates against the same dose, which the slide does not print</span><q class="para">If we inject 100 mg into a volume of distribution of 1 L, we expect 100 mg per liter as our concentration. 100 mg into 10 L gives 10 mg per liter. With the largest volume of distribution, the same 100 mg into 100 L, now we are at 1 mg per liter.</q> &mdash; with the caveat <q>same amount of drugs, but here, we would be looking at different drugs</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">On the fish tank slide, she limits it</span><q>This little model, I like it, but it goes into a little bit more detail than what we're gonna cover.</q> The part she does use: <q>Only the free drugs, so only the free fish. are able to be swept up into this net. The ones that are tied up with the little algae down there, they're bound, so they can't be swept up</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; three polls</b>
@@ -5242,7 +5281,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m2-3">
-<h3>Module 2, objective 3 &mdash; Calculate pharmacokinetic parameters from concentration versus time data</h3>
+<h3 data-nav="Module 2, objective 3 &mdash; Calculate pharmacokinetic parameters from concentration versus time data">Module 2 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Calculate pharmacokinetic parameters from concentration versus time data</b><i>2IVBolusAdministration.pdf, slide "Practice"</i></div>
 
 <h4>What the slides carry</h4>
@@ -5252,13 +5291,13 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Her worked answer, step by step (08-24): V<sub>D</sub> &mdash; <i>"did we all get a volume of distribution of 8 L?"</i>; amount at 6 hr &mdash; <i>"8 L times 15 mg per liter"</i>, giving 120 mg; the rate constant &mdash; <i>"natural log D0 over D. Divided by T is going to give us a rate constant K &hellip; So we've got 200/120. And our time is 6 hours"</i>, giving 0.085; amount at 12 hr &mdash; <i>"D 0 is 200. I'm gonna write my milligrams. E minus 0.085 times 12. And I'm getting 72-ish milligrams"</i>; half-life &mdash; <i>"what's the Half-Life? 8. 8.15 hours."</i></li>
-<li>(T) The trap in this specific problem: <i>"You have a dose. Of 200 mg and then you are given a concentration. Of 15 mg per liter, right? So you gotta be apples to apples here, right? You can either go with amount. Or concentration, but you got, you can't do the 200 and the 15."</i> (08-24)</li>
-<li>(T) She separates the printed question from her own addition: <i>"my question on the slide, estimate the amount of drug in the body after 12 hours. So the amount of drug in the body after 12 hours should be about 72 mg. Then, impromptu, I added, what's the concentration? That's not on the slide."</i> The added answer: <i>"you take that 72 &hellip; divided by the volume of distribution, which we said was 8 L. And you should get 9 mg per liter"</i> (08-24).</li>
-<li>(T) A check on C<sub>0</sub> when it comes from a data set: <i>"remember, C0 should be the highest point of the sample"</i> (08-24).</li>
-<li>(T) The conversion she hands over to save time: <i>"Milligrams per liter equals micrograms per mL. OK. I am telling you this because I don't want you to spend 10 minutes doing the conversion and then being off by a magnitude of 10"</i> (08-24, repeated 08-26 and 09-09).</li>
-<li>(T) Answers are scored for form as well as value: <i>"There should never be a leading decimal &hellip; If you give me that as your final answer, you will lose half the points for this answer."</i> and <i>"If there are units. Then you should give me units."</i> (08-17)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Her worked answer, step by step: V<sub>D</sub> &mdash;</span><q>did we all get a volume of distribution of 8 L?</q>; amount at 6 hr &mdash; <q>8 L times 15 mg per liter</q>, giving 120 mg; the rate constant &mdash; <q class="para">Natural log of D0 over D, divided by t, gives us the rate constant k: we have 200 over 120, and our time is 6 hours.</q>, giving 0.085; amount at 12 hr &mdash; <q class="para">D0 is 200 mg, e to the minus 0.085 times 12: I am getting 72-ish milligrams.</q>; half-life &mdash; <q>what's the Half-Life? 8.15 hours.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The trap in this specific problem</span><q class="para">You have a dose of 200 mg and you are given a concentration of 15 mg per liter. You have to be apples to apples: either amount or concentration, but you cannot mix the 200 and the 15.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">She separates the printed question from her own addition</span><q>my question on the slide, estimate the amount of drug in the body after 12 hours. the amount of drug in the body after 12 hours should be about 72 mg. Then, impromptu, I added, what's the concentration? That's not on the slide.</q> The added answer: <q>you take that 72… divided by the volume of distribution, which we said was 8 L. you should get 9 mg per liter</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">A check on C<sub>0</sub> when it comes from a data set</span><q>remember, C0 should be the highest point of the sample</q><span class="when">08-24 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The conversion she hands over to save time</span><q>Milligrams per liter equals micrograms per mL. I am telling you this because I don't want you to spend 10 minutes doing the conversion and then being off by a magnitude of 10</q> (08-24, repeated 08-26 and 09-09).<span class="when">her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Answers are scored for form as well as value</span><q>There should never be a leading decimal… If you give me that as your final answer, you will lose half the points for this answer.</q> and <q class="para">If there are units, then you should give me units.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; the deck example and the standard battery</b>
@@ -5276,7 +5315,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m2-4">
-<h3>Module 2, objective 4 &mdash; Differentiate between single and multiple-compartment pharmacokinetic models</h3>
+<h3 data-nav="Module 2, objective 4 &mdash; Differentiate between single and multiple-compartment pharmacokinetic models">Module 2 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Differentiate between single and multiple-compartment pharmacokinetic models</b><i>2IVBolusAdministration.pdf, slides "Why Multicompartment Models?" through "Plasma Level&ndash;Time Curve"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5288,13 +5327,13 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The graph-reading rule, stated as an exam instruction: <i>"if I give you a graph that looks something like this without the red and blue and just a log scale and I'm telling you that it is an IV bolus dose, and I just give you a, a line that looks like this one, the black line. That should say to you that this is a two compartment model. If I gave you a graph on a log scale that looks just like the blue line all by itself, that tells you it's an IV bolus dose one compartment model."</i> (08-26)</li>
-<li>(T) Otherwise she has to say which it is: <i>"if I tell you that we're giving an IV bolus dose, now what do I have to tell you? I, I, I have to tell you that it follows a one compartment model or a two compartment"</i> (08-26).</li>
-<li>(T) Names for the two segments: <i>"This handle piece up top is what we would call our distribution phase"</i> and <i>"once the drug is distributed uniformly throughout the body &hellip; Then we call this blue phase our elimination phase"</i> (08-26).</li>
-<li>(T) The one-compartment contrast restated at the review: <i>"that two compartment model has got that distribution step, so it doesn't uniformly distribute &hellip; all at once."</i> (09-09)</li>
-<li>(T) Feathering is conceptual only, and she says so plainly: <i>"we talked about um feathering. Um, the methods of residual and all that good stuff, I want you to conceptually know what that is, but I'm not gonna ask you to do that. I am pretty much gonna give you A, B, alpha, beta, OK? I want you to know what they represent and why we use them."</i> (08-26)</li>
-<li>(T) The log axis again, on this deck's graphs: <i>"Even though it doesn't say log, you realize that it is on a log scale, right?"</i> (08-26)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The graph-reading rule, stated as an exam instruction</span><q>if I give you a graph that looks something like this without the red and blue and just a log scale and I'm telling you that it is an IV bolus dose, and I just give you a line that looks like this one, the black line. That should say to you that this is a two compartment model. If I gave you a graph on a log scale that looks just like the blue line all by itself, that tells you it's an IV bolus dose one compartment model.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Otherwise she has to say which it is</span><q>if I tell you that we're giving an IV bolus dose, now what do I have to tell you? I have to tell you that it follows a one compartment model or a two compartment</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Names for the two segments</span><q>This handle piece up top is what we would call our distribution phase</q> and <q>once the drug is distributed uniformly throughout the body… Then we call this blue phase our elimination phase</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The one-compartment contrast restated at the review</span><q>that two compartment model has got that distribution step, so it doesn't uniformly distribute… all at once.</q><span class="when">09-09 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Feathering is conceptual only, and she says so plainly</span><q>we talked about feathering. the methods of residual and all that good stuff, I want you to conceptually know what that is, but I'm not gonna ask you to do that. I am pretty much gonna give you A, B, alpha, beta I want you to know what they represent and why we use them.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The log axis again, on this deck's graphs</span><q>Even though it doesn't say log, you realize that it is on a log scale</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5308,7 +5347,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m2-5">
-<h3>Module 2, objective 5 &mdash; Explain why some drugs best fit a multi-compartment model</h3>
+<h3 data-nav="Module 2, objective 5 &mdash; Explain why some drugs best fit a multi-compartment model">Module 2 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Explain why some drugs best fit a multi-compartment model</b><i>2IVBolusAdministration.pdf, slides "General Grouping of Tissues" through "Relationship between Tissue and Plasma Concentrations"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5321,14 +5360,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The reason in one sentence: <i>"the drug is going to go preferentially to some organs before it is widely distributed uniformly throughout the body"</i> (08-26).</li>
-<li>(T) Which of the three printed wirings the course uses: <i>"if we've got a central compartment, it's going to and from that tissue compartment, so equilibrating within whatever peripheral compartment makes up the secondary compartment, and then that the drug is being eliminated from the central compartment only."</i> (08-26)</li>
-<li>(T) What k<sub>12</sub> and k<sub>21</sub> are: <i>"Remember, those are our transfer constants, so how fast is the drug going from one compartment or the central compartment to the peripheral compartment and back and forth."</i> (08-26)</li>
-<li>(T) An exception to the perfusion table that is not printed on it: <i>"we've also got the brain, and what you know about the brain is that the brain works really hard to keep things out &hellip; So, even though it is a highly profuse organ &hellip; not necessarily one of those that is going to be, um, Usually seen in that distribution phase."</i> (08-26). The slide lists brain among the highly perfused tissues; she removes it from the distribution phase out loud. An exam written from these lectures would key the slide's grouping for a tissue-perfusion question and her caveat for a question about what appears in the distribution phase.</li>
-<li>(T) On the tissue-versus-plasma figure, a limit the slide does not state: <i>"this is a theoretical graph &hellip; because remember, we sample the plasma, right? We don't sample tissue to see how much drug is there."</i> (08-26)</li>
-<li>(T) On the perfusion table: <i>"general grouping of tissues, um, table, don't panic"</i> (08-26), consistent with her standing rule that tables are not memorised.</li>
-<li>(T) Why the distribution phase has to be faster than elimination: <i>"If the elimination phase is significantly fast relative to the distribution phase, then you're not going to build up appreciable levels. You're not gonna reach the concentration that you need for the drug to be effective"</i> (08-26).</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The reason in one sentence</span><q>the drug is going to go preferentially to some organs before it is widely distributed uniformly throughout the body</q><span class="when">08-26 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Which of the three printed wirings the course uses</span><q>if we've got a central compartment, it's going to and from that tissue compartment, so equilibrating within whatever peripheral compartment makes up the secondary compartment, and then that the drug is being eliminated from the central compartment only.</q><span class="when">08-26 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">What k<sub>12</sub> and k<sub>21</sub> are</span><q>Remember, those are our transfer constants, so how fast is the drug going from one compartment or the central compartment to the peripheral compartment and back and forth.</q><span class="when">08-26 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">An exception to the perfusion table that is not printed on it</span><q class="para">The brain works really hard to keep things out, so even though it is a highly perfused organ, it is not usually one of those seen in that distribution phase.</q>. The slide lists brain among the highly perfused tissues; she removes it from the distribution phase out loud. An exam written from these lectures would key the slide's grouping for a tissue-perfusion question and her caveat for a question about what appears in the distribution phase.<span class="when">08-26 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">On the tissue-versus-plasma figure, a limit the slide does not state</span><q>this is a theoretical graph… because remember, we sample the plasma We don't sample tissue to see how much drug is there.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">On the perfusion table</span><q>general grouping of tissues, table, don't panic</q>, consistent with her standing rule that tables are not memorised.<span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Why the distribution phase has to be faster than elimination</span><q>If the elimination phase is significantly fast relative to the distribution phase, then you're not going to build up appreciable levels. You're not gonna reach the concentration that you need for the drug to be effective</q><span class="when">08-26 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5342,7 +5381,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m2-6">
-<h3>Module 2, objective 6 &mdash; Predict drug concentration following IV bolus administration in a multi-compartment model</h3>
+<h3 data-nav="Module 2, objective 6 &mdash; Predict drug concentration following IV bolus administration in a multi-compartment model">Module 2 - Objective 6</h3>
 <div class="gbar"><span>Objective</span><b>Predict drug concentration following IV bolus administration in a multi-compartment model</b><i>2IVBolusAdministration.pdf, slides "Concentration of Drug in the Central Compartment" through "Apparent Volumes of Distribution"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5355,14 +5394,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) What the four parameters are: <i>"Our A and our B are our intercepts, right? So we've done some extrapolation to get the intercepts, and then our lowercase A and B are the slopes. That tells us about the rates of both processes."</i> (09-09)</li>
-<li>(T) Which of alpha and beta is larger, and why: <i>"Alpha bigger because the, the distribution phase is gonna happen a lot faster than an elimination phase"</i> (08-26). Her check on the theophylline equation: <i>"your, your 5.8 is significantly bigger than your 0.16"</i>.</li>
-<li>(T) Which half-life is wanted, and what it is called on the paper: <i>"we don't really care about the half-life of the distribution phase. We care about the half-life of the elimination phase &hellip; 0.693 over B or beta"</i>, and <i>"it will be written as beta Half-Life, OK? Cause that's what I'm, I'm gonna ask you for either the beta Half-Life or the elimination half-life so that there's no confusion"</i> (08-26).</li>
-<li>(T) How not to do it: <i>"Don't get all complicated. Don't solve for K and then 0.693 over K. You've, you've done too much work"</i> (08-26); at the review, <i>"You take your 0.693 and you divide by lowercase b."</i> (09-09)</li>
-<li>(T) Her worked theophylline answers (08-26): concentration at time zero <i>"30, 30, and since I didn't give you units, my bad"</i>; at three hours <i>"I'm hearing eleven-ish milligrams per liter"</i>; beta half-life <i>"0.693. Of a 0.16. 4.33. 4.33 hours."</i></li>
-<li>(T) Her in-class sheet answers, read aloud (08-26): <i>"Did you get the half-life, beta Half-Life, six-ish hours? &hellip; And initial concentration, 13.8 mg per liter? &hellip; Concentration, 4 hours after administration of the dose, 3.4 mg per liter. &hellip; Volume distribution, central compartment, 18-ish liters. &hellip; I got for the overall rate constant K 0.272 per hour. &hellip; And then transfer from 1 to 2, 1.1 per hour. &hellip; And then from 2 to 1, 0.9 per hour."</i></li>
-<li>(T) How much of this she will set: <i>"We don't do a lot of this kind of manipulation, but we'll do a little practice today just so that you can get a feel for what it looks like and what the numbers look like"</i> (08-26).</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">What the four parameters are</span><q>Our A and our B are our intercepts So we've done some extrapolation to get the intercepts, and then our lowercase A and B are the slopes. That tells us about the rates of both processes.</q><span class="when">09-09 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Which of alpha and beta is larger, and why</span><q>Alpha bigger because the distribution phase is gonna happen a lot faster than an elimination phase</q>. Her check on the theophylline equation: <q>your 5.8 is significantly bigger than your 0.16</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Which half-life is wanted, and what it is called on the paper</span><q>we don't really care about the half-life of the distribution phase. We care about the half-life of the elimination phase… 0.693 over B or beta</q> and <q class="para">It will be written as beta half-life, because I am going to ask you for either the beta half-life or the elimination half-life, so that there is no confusion.</q><span class="when">08-26 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">How not to do it</span><q class="para">Do not get all complicated. Do not solve for k and then 0.693 over k; you have done too much work.</q>; at the review, <q>You take your 0.693 and you divide by lowercase b.</q><span class="when">08-26, 09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her worked theophylline answers: concentration at time zero</span><q>30, and since I didn't give you units, my bad</q>; at three hours <q>I'm hearing eleven-ish milligrams per liter</q>; beta half-life <q class="para">0.693 over 0.16: 4.33 hours.</q><span class="when">08-26 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her in-class sheet answers, read aloud</span><q>Did you get the half-life, beta Half-Life, six-ish hours?… initial concentration, 13.8 mg per liter?… Concentration, 4 hours after administration of the dose, 3.4 mg per liter.… Volume distribution, central compartment, 18-ish liters.… I got for the overall rate constant K 0.272 per hour.… then transfer from 1 to 2, 1.1 per hour.… then from 2 to 1, 0.9 per hour.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">How much of this she will set</span><q>We don't do a lot of this kind of manipulation, but we'll do a little practice today just so that you can get a feel for what it looks like and what the numbers look like</q><span class="when">08-26 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; the deck example and the review practice</b>
@@ -5379,11 +5418,11 @@ const GUIDE_HTML = `
 </ul></div>
 </section>
 
-<h2>Module 3 &mdash; Intravenous infusion</h2>
+<h2>Module 3 - Intravenous Infusions</h2>
 <p class="prose">Seven objectives, printed on the "Objectives" slide of 3IntravenousInfusions.pdf and reprinted unchanged on RecapExam1.pdf.</p>
 
 <section class="gobj" id="gobj-m3-1">
-<h3>Module 3, objective 1 &mdash; Discuss and describe the pharmacokinetics of a medicinal agent following administration by IV infusion</h3>
+<h3 data-nav="Module 3, objective 1 &mdash; Discuss and describe the pharmacokinetics of a medicinal agent following administration by IV infusion">Module 3 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Discuss and describe the pharmacokinetics of a medicinal agent following administration by IV infusion</b><i>3IntravenousInfusions.pdf, slide "Intravenous Infusion"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5393,13 +5432,13 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) What "constant rate" is meant to trigger, which the slide leaves unsaid: <i>"Constant rate in pharmacokinetics. What does that say to us? So we've talked about two types of processes, right? Zero order, right? So when we see constant rate, we're talking about a zero order."</i> (09-02)</li>
-<li>(T) The two orders in one sentence: <i>"Our input is zero order, constant in, first order out. When we stop the in, then it's just out."</i> (09-02)</li>
-<li>(T) What has and has not changed from the previous module: <i>"the only thing we've changed here, we haven't changed the drug, we've changed the manner that we put the drug in the body."</i> (09-02)</li>
-<li>(T) Why infuse at all: <i>"we do the infusion because it allows us to control, to to really control the plasma concentration of drug"</i> (09-02).</li>
-<li>(T) The shape to draw before calculating: <i>"IV infusion, we're starting low and we're building."</i> (09-02)</li>
-<li>(T) Units of the infusion rate, flagged as a thing to know: <i>"what I want you to know about this one, this are. The units of r. Are going to be a mount. Per time. So most often milligrams per hour."</i> (09-02)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">What "constant rate" is meant to trigger, which the slide leaves unsaid</span><q class="para">Constant rate in pharmacokinetics: what does that say to us? We have talked about two types of processes. When we see constant rate, we are talking about zero order.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The two orders in one sentence</span><q>Our input is zero order, constant in, first order out. When we stop the in, then it's just out.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">What has and has not changed from the previous module</span><q>the only thing we've changed here, we haven't changed the drug, we've changed the manner that we put the drug in the body.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Why infuse at all</span><q>we do the infusion because it allows us to control, to really control the plasma concentration of drug</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The shape to draw before calculating</span><q>IV infusion, we're starting low and we're building.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Units of the infusion rate, flagged as a thing to know</span><q class="para">What I want you to know about this one: the units of R are going to be amount per time, most often milligrams per hour.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5413,7 +5452,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m3-2">
-<h3>Module 3, objective 2 &mdash; Describe the concept of steady state and how it relates to continuous dosing</h3>
+<h3 data-nav="Module 3, objective 2 &mdash; Describe the concept of steady state and how it relates to continuous dosing">Module 3 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Describe the concept of steady state and how it relates to continuous dosing</b><i>3IntravenousInfusions.pdf, slides "Drug Concentration at Steady-State" and "Drug Concentration Prior to Reaching Steady-State"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5425,14 +5464,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The answer she wants memorised word for word: <i>"I want you to hear me, hear my voice in your head. So if I ask you how long it takes to get steady state following IV infusion, the simplest answer. Is 3 to 5 half-lives, OK?"</i> (09-02) &mdash; with the boundary on when that answer is not enough: <i>"3 to 5 half-lives is a short answer. If I ask you more specific, if I ask you how long does it take to get to 95% steady state, then that's a different calculation."</i></li>
-<li>(T) Steady state defined: <i>"steady state we say is achieved when the rate of drug in the body is equal to the rate of drug out of the body"</i>, and <i>"the rate out will continue to increase until we reach this steady-state concentration or steady state kind of plateau"</i> (09-02).</li>
-<li>(T) The plateau is never actually reached: <i>"remember, this is an asymptotic curve, so we're never actually going to reach steady state, we're gonna get close. So, 10 gets us 99.9, 11 gets us 99.99"</i> (09-02).</li>
-<li>(T) The fraction table she builds live, which no slide carries: one half-life <i>"So I'm getting 0.5"</i>; two, <i>"we should be at 75%"</i>; three, <i>"87.5"</i>; four, 93.25 (at the review she gives 93 for the same step); ten, <i>"99.9% of the steady-state concentration"</i> (09-02). Her link back to the previous module: <i>"Does this look familiar? &hellip; Now we're seeing the same thing. But this time we're going this way"</i>, restated at the review as <i>"One half-life is the time for 50% of whatever you've got to be eliminated. If we're now going this way, then one half-life is 50, the time it'll take to get to 50% of our steady state concentration."</i></li>
-<li>(T) The point she repeats on purpose: <i>"changing the rate changes our steady state concentration with me. OK, I feel like I've said it 5 times, and I've said it 5 times because this is one of those things that I want you to take with you. OK, so I've said it 5 times. I'm gonna ask it of you 10 times."</i> (09-02)</li>
-<li>(T) The matching exam item shape: <i>"if you get a question that says, 'Increasing the rate of infusion will decrease or ha- double or do whatever funkiness to the time that it takes to get to steady state,' we are clear that it has no impact, right? Because it is three to five half-lives. Depends on the half-life, that rate constant K."</i> (09-09)</li>
-<li>(T) A rule of thumb she gives and then withdraws: <i>"3.32. Times the half-life, 3.32 half-lives gets us at 90%. You don't have to remember that, it's in my head"</i> (09-02).</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The answer she wants memorised word for word</span><q class="para">I want you to hear my voice in your head: if I ask you how long it takes to get to steady state following IV infusion, the simplest answer is 3 to 5 half-lives.</q> &mdash; with the boundary on when that answer is not enough: <q>3 to 5 half-lives is a short answer. If I ask you more specific, if I ask you how long does it take to get to 95% steady state, then that's a different calculation.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Steady state defined</span><q>steady state we say is achieved when the rate of drug in the body is equal to the rate of drug out of the body</q> and <q>the rate out will continue to increase until we reach this steady-state concentration or steady state kind of plateau</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The plateau is never actually reached</span><q>remember, this is an asymptotic curve, so we're never actually going to reach steady state, we're gonna get close. So, 10 gets us 99.9, 11 gets us 99.99</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The fraction table she builds live, which no slide carries: one half-life</span><q>I'm getting 0.5</q>; two, <q>we should be at 75%</q>; three, <q>87.5</q>; four, 93.25 (at the review she gives 93 for the same step); ten, <q>99.9% of the steady-state concentration</q>. Her link back to the previous module: <q class="para">Does this look familiar? We are seeing the same thing; this time we are going this way.</q>, restated at the review as <q>One half-life is the time for 50% of whatever you've got to be eliminated. If we're now going this way, then one half-life is 50, the time it'll take to get to 50% of our steady state concentration.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The point she repeats on purpose</span><q>changing the rate changes our steady state concentration with me. I feel like I've said it 5 times, and I've said it 5 times because this is one of those things that I want you to take with you. so I've said it 5 times. I'm gonna ask it of you 10 times.</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The matching exam item shape</span><q>if you get a question that says, 'Increasing the rate of infusion will decrease or double or do whatever funkiness to the time that it takes to get to steady state,' we are clear that it has no impact Because it is three to five half-lives. Depends on the half-life, that rate constant K.</q><span class="when">09-09 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">A rule of thumb she gives and then withdraws</span><q>3.32. Times the half-life, 3.32 half-lives gets us at 90%. You don't have to remember that, it's in my head</q><span class="when">09-02 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; worked examples</b>
@@ -5448,7 +5487,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m3-3">
-<h3>Module 3, objective 3 &mdash; Determine optimum dosing for an infused drug by calculating pharmacokinetic parameters</h3>
+<h3 data-nav="Module 3, objective 3 &mdash; Determine optimum dosing for an infused drug by calculating pharmacokinetic parameters">Module 3 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Determine optimum dosing for an infused drug by calculating pharmacokinetic parameters</b><i>3IntravenousInfusions.pdf, slides "Example 1" through "Example 4"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5459,11 +5498,11 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Her Example 1 working: <i>"So our seasteady state. Rate over clearance. 50 mg per hour. Our clearance is 30 L"</i>, with the half-life converted to k, giving <i>"So I'm hearing 14. &hellip; it's still a concentration, so milligrams per liter"</i> (09-02). She later draws the same curve as <i>"our curve for 14.4"</i>, so the value she works with is 14.4 mg/L.</li>
-<li>(T) Her Example 4 steady-state answer: <i>"if we continued infusing indefinitely. What's the steady-state concentration? 11.11 &hellip; And then our units, it's a concentration, milligrams per liter."</i> (09-02). The eight-hour concentration of Example 3 is never stated aloud.</li>
-<li>(T) Reading before calculating: <i>"I want you to. Step back and look at this question and think about it before you plug it into your calculator. Look at the question and understand what's being, what's being asked."</i> (09-02), and <i>"yes, I want you to be able to punch the numbers, but I want you to think through. What's going on, right? Because they're gonna get bigger and uglier looking."</i></li>
-<li>(T) On exam time for these: <i>"I heard somebody say you're gonna run out of time on the exam. No, you won't."</i> and <i>"this won't be like one question on the exam. This is gonna be broken up into little bitty pieces, OK? So don't panic."</i> (09-02)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Her Example 1 working</span><q>our seasteady state. Rate over clearance. 50 mg per hour. Our clearance is 30 L</q>, with the half-life converted to k, giving <q>I'm hearing 14.… it's still a concentration, so milligrams per liter</q>. She later draws the same curve as <q>our curve for 14.4</q>, so the value she works with is 14.4 mg/L.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Her Example 4 steady-state answer</span><q>if we continued infusing indefinitely. What's the steady-state concentration? 11.11… then our units, it's a concentration, milligrams per liter.</q>. The eight-hour concentration of Example 3 is never stated aloud.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Reading before calculating</span><q class="para">Step back and look at this question and think about it before you plug it into your calculator. Look at the question and understand what is being asked.</q> and <q>yes, I want you to be able to punch the numbers, but I want you to think through. What's going on Because they're gonna get bigger and uglier looking.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">On exam time for these</span><q>I heard somebody say you're gonna run out of time on the exam. No, you won't.</q> and <q class="para">This will not be one question on the exam. This is going to be broken up into little pieces, so do not panic.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; the practice batteries</b>
@@ -5479,7 +5518,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m3-4">
-<h3>Module 3, objective 4 &mdash; Calculate loading doses to be used with an intravenous infusion</h3>
+<h3 data-nav="Module 3, objective 4 &mdash; Calculate loading doses to be used with an intravenous infusion">Module 3 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Calculate loading doses to be used with an intravenous infusion</b><i>3IntravenousInfusions.pdf, slides "IV Bolus Loading Dose and Continuous IV Infusion" and "Example 7"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5490,12 +5529,12 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The second route to the loading dose, which the slide does not print: <i>"another way to think about this loading dose. Concentration of drug in the body at steady-state times the volume and distribution"</i> (09-02), restated at the review as <i>"If we know we want a certain steady-state concentration, C steady-state times our volume of distribution &hellip; Another way to calculate it is rate over K."</i> (09-09)</li>
-<li>(T) The condition on the printed equation: <i>"this equation. Is one way to calculate a loading dose, and this works, but remember the one thing that we can change. We can change the rate. So this works if you have chosen a rate, an appropriate rate of an infusion &hellip; If you just pick a number out of the air, then you're probably not gonna pick the the best loading dose"</i> (09-02). Slide and speech differ here: the slide carries D<sub>L</sub> = R/k alone, and an exam written from these lectures would accept either route, because she works both.</li>
-<li>(T) Her Example 7 answer and both routes: <i>"125 mg"</i>, from <i>"if you said 20 mg per hour divided by 0.16, or if you said 12.5 times 10, you should get 125 mg"</i> (09-02).</li>
-<li>(T) Her Example 8 answer at two hours: <i>"I hear 24 mg per liter"</i>, built as the bolus part plus the infusion part &mdash; <i>"So 7 mg per liter for the infusion &hellip; And then for the bolus, that 288 mg &hellip; divided by that volume distribution that gives us that C0 dose of volume distribution. Times E to the minus KT. And then &hellip; 7 plus 18 gets us 25, or 7 + 17 gets us to 24."</i> At four hours: <i>"4 hours, I'm getting 12 mg per liter for the bolus"</i> and the infusion part also about 12 (09-02).</li>
-<li>(T) The superposition rule that makes the two parts additive: <i>"at any point on the curve, then the concentration here plus the concentration here should equal the concentration there."</i> (09-02)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The second route to the loading dose, which the slide does not print</span><q class="para">Another way to think about this loading dose: concentration of drug in the body at steady state times the volume of distribution.</q>, restated at the review as <q>If we know we want a certain steady-state concentration, C steady-state times our volume of distribution… Another way to calculate it is rate over K.</q><span class="when">09-02, 09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The condition on the printed equation</span><q>this equation. Is one way to calculate a loading dose, and this works, but remember the one thing that we can change. We can change the rate. this works if you have chosen a rate, an appropriate rate of an infusion… If you just pick a number out of the air, then you're probably not gonna pick the best loading dose</q>. Slide and speech differ here: the slide carries D<sub>L</sub> = R/k alone, and an exam written from these lectures would accept either route, because she works both.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Her Example 7 answer and both routes</span><q>125 mg</q>, from <q>if you said 20 mg per hour divided by 0.16, or if you said 12.5 times 10, you should get 125 mg</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Her Example 8 answer at two hours</span><q>I hear 24 mg per liter</q>, built as the bolus part plus the infusion part &mdash; <q>So 7 mg per liter for the infusion… then for the bolus, that 288 mg… divided by that volume distribution that gives us that C0 dose of volume distribution. Times E to the minus KT. then… 7 plus 18 gets us 25, or 7 + 17 gets us to 24.</q> At four hours: <q>4 hours, I'm getting 12 mg per liter for the bolus</q> and the infusion part also about 12.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The superposition rule that makes the two parts additive</span><q>at any point on the curve, then the concentration here plus the concentration here should equal the concentration there.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; the deck examples and the review practice</b>
@@ -5513,7 +5552,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m3-5">
-<h3>Module 3, objective 5 &mdash; Describe the purpose of a loading dose</h3>
+<h3 data-nav="Module 3, objective 5 &mdash; Describe the purpose of a loading dose">Module 3 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Describe the purpose of a loading dose</b><i>3IntravenousInfusions.pdf, second slide "IV Bolus Loading Dose and Continuous IV Infusion"</i></div>
 
 <h4>What the slides carry</h4>
@@ -5522,11 +5561,11 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The purpose in one sentence: <i>"the loading dose helps us to reach that steady state concentration, like almost immediately. But you got to choose wisely on the loading dose"</i> (09-02).</li>
-<li>(T) What a correctly chosen loading dose is: <i>"We want the loading dose to look like the amount of drug that's in the body at steady state."</i> (09-02)</li>
-<li>(T) What follows if it is chosen correctly: <i>"if you choose an appropriate loading dose, you should be able to be at that concentration at any time throughout the therapy"</i> (09-09).</li>
-<li>(T) The figure read out: the combined concentration is flat only when the bolus matches what the infusion will hold, and a bolus that is too large or too small produces a peak or a dip before the plateau &mdash; her version of the same point is the superposition rule, <i>"at any point on the curve, then the concentration here plus the concentration here should equal the concentration there."</i> (09-02)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The purpose in one sentence</span><q>the loading dose helps us to reach that steady state concentration, like almost immediately. you got to choose wisely on the loading dose</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">What a correctly chosen loading dose is</span><q>We want the loading dose to look like the amount of drug that's in the body at steady state.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">What follows if it is chosen correctly</span><q>if you choose an appropriate loading dose, you should be able to be at that concentration at any time throughout the therapy</q><span class="when">09-09 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The figure read out: the combined concentration is flat only when the bolus matches what the infusion will hold, and a bolus that is too large or too small produces a peak or a dip before the plateau &mdash; her version of the same point is the superposition rule</span><q>at any point on the curve, then the concentration here plus the concentration here should equal the concentration there.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5540,7 +5579,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m3-6">
-<h3>Module 3, objective 6 &mdash; Determine an appropriate infusion rate to achieve a desired steady-state plasma concentration</h3>
+<h3 data-nav="Module 3, objective 6 &mdash; Determine an appropriate infusion rate to achieve a desired steady-state plasma concentration">Module 3 - Objective 6</h3>
 <div class="gbar"><span>Objective</span><b>Determine an appropriate infusion rate to achieve a desired steady-state plasma concentration</b><i>3IntravenousInfusions.pdf, slide "Example 2"</i></div>
 
 <h4>What the slides carry</h4>
@@ -5550,11 +5589,11 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Her Example 2 working and answer: <i>"our rate. It's gonna be a 20. Milligrams per liter, which is the sea steady state that we are trying to achieve times our clearance. 30 L &hellip; So we have milligrams per hour. And then what are we increasing it to? I hear 69.3 mg per hour."</i> (09-02)</li>
-<li>(T) What changing the rate does and does not do, said five times on purpose: <i>"changing the rate changes our steady state concentration"</i>, while on the two-curve slide, <i>"All we're doing is shifting that curve upward &hellip; If This is our plateau at steady state, then it occurs at the same time."</i> (09-02)</li>
-<li>(T) The unit of the answer: <i>"The units of r. Are going to be a mount. Per time. So most often milligrams per hour."</i> (09-02)</li>
-<li>(T) Her review working of the same shape: <i>"rate is equal to steady-state. I think I said 24 milligrams per liter. That's our desired steady-state. And our clearance is our BDK, 22 liters. 0.693. Five hours."</i> (09-09), giving 73 mg/hr.</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Her Example 2 working and answer</span><q class="para">Our rate is going to be 20 mg per liter, the steady state we are trying to achieve, times our clearance, 30 L, which gives milligrams per hour. What are we increasing it to? I hear 69.3 mg per hour.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">What changing the rate does and does not do, said five times on purpose</span><q>changing the rate changes our steady state concentration</q>, while on the two-curve slide, <q>All we're doing is shifting that curve upward… If This is our plateau at steady state, then it occurs at the same time.</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The unit of the answer</span><q class="para">The units of R are going to be amount per time, most often milligrams per hour.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her review working of the same shape</span><q class="para">Rate is equal to steady state, 24 milligrams per liter, our desired steady state, times our clearance, which is our volume of distribution times k: 22 liters, 0.693, five hours.</q>, giving 73 mg/hr.<span class="when">09-09 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; the deck example and the review practice</b>
@@ -5571,7 +5610,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m3-7">
-<h3>Module 3, objective 7 &mdash; Determine the plasma concentration given pharmacokinetic parameters at any time</h3>
+<h3 data-nav="Module 3, objective 7 &mdash; Determine the plasma concentration given pharmacokinetic parameters at any time">Module 3 - Objective 7</h3>
 <div class="gbar"><span>Objective</span><b>Determine the plasma concentration given pharmacokinetic parameters at any time</b><i>3IntravenousInfusions.pdf, slides "Drug Concentration after an IV Infusion has Ended", "Example 5", "Example 6"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5583,11 +5622,11 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The step that comes first after an infusion stops: <i>"you have to know the concentration when you stop that infusion, cause when you stop the infusion, then it goes back to that C is equal to C0 E minus KT that we've already talked about"</i>, and <i>"Think of that C peak as your C0 as your starting point."</i> (09-02)</li>
-<li>(T) What cessation means: <i>"Cessation means stopping of a continuous IV infusion"</i> (09-02); and after it, <i>"there is no more drug going in. It is just drug going out. It is just elimination now. No more in, just out."</i> (09-09)</li>
-<li>(T) Her Example 5 route, which replaces the exponential with half-life counting: <i>"To make our math a little easier, let's change our 12 to 10. &hellip; Why did I change from 12 to 10? Because 10 is two half-lives. What happens in two half-lives? &hellip; 75% Of drug is eliminated, so 25% of drug remains in the body &hellip; 0.25 times what? 15."</i> (09-02). She does not state the product aloud; the slide's own figure for the answer is 3.75 mg/L, which is 0.25 of 15 mg/L at ten hours.</li>
-<li>(T) Her Example 6 reasoning and answer: the rate is <i>"150 mg divided by 6 hours"</i>; the half-life is 3 hours so six hours of infusion is two half-lives and the concentration at the end is 75% of steady state; then <i>"we expect the concentration 3 hours after a cessation of the 6 hour infusion. To be 2.7 mg per liter."</i> Her cross-check: <i>"I put 0.5 times 5.41 &hellip; And I got the exactly the same thing as plugging it into the full equation. Because our half-life is 3 hours, and in one half-life, we should have 50% eliminated"</i> (09-02).</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The step that comes first after an infusion stops</span><q>you have to know the concentration when you stop that infusion, cause when you stop the infusion, then it goes back to that C is equal to C0 E minus KT that we've already talked about</q> and <q>Think of that C peak as your C0 as your starting point.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">What cessation means</span><q>Cessation means stopping of a continuous IV infusion</q>; and after it, <q class="para">There is no more drug going in. It is just drug going out; it is just elimination now. No more in, just out.</q><span class="when">09-02, 09-09 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her Example 5 route, which replaces the exponential with half-life counting</span><q>To make our math a little easier, let's change our 12 to 10.… Why did I change from 12 to 10? Because 10 is two half-lives. What happens in two half-lives?… 75% Of drug is eliminated, so 25% of drug remains in the body… 0.25 times what? 15.</q>. She does not state the product aloud; the slide's own figure for the answer is 3.75 mg/L, which is 0.25 of 15 mg/L at ten hours.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Her Example 6 reasoning and answer: the rate is</span><q>150 mg divided by 6 hours</q>; the half-life is 3 hours so six hours of infusion is two half-lives and the concentration at the end is 75% of steady state; then <q>we expect the concentration 3 hours after a cessation of the 6 hour infusion. To be 2.7 mg per liter.</q> Her cross-check: <q>I put 0.5 times 5.41… I got the exactly the same thing as plugging it into the full equation. Because our half-life is 3 hours, and in one half-life, we should have 50% eliminated</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; the deck examples and the review practice</b>
@@ -5603,11 +5642,11 @@ const GUIDE_HTML = `
 </ul></div>
 </section>
 
-<h2>Module 4 &mdash; Drug elimination and clearance</h2>
+<h2>Module 4 - Drug Elimination and Clearance</h2>
 <p class="prose">Five objectives, printed on 4---Clearance-and-Elimination.pdf slide 2.</p>
 
 <section class="gobj" id="gobj-m4-1">
-<h3>Module 4, objective 1 &mdash; Describe the main routes of drug elimination from the body &ndash; renal and hepatic</h3>
+<h3 data-nav="Module 4, objective 1 &mdash; Describe the main routes of drug elimination from the body &ndash; renal and hepatic">Module 4 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Describe the main routes of drug elimination from the body &ndash; renal and hepatic</b><i>4---Clearance-and-Elimination.pdf slides 3, 8, 11, 24</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5619,12 +5658,12 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Elimination as the whole set: <i>"elimination refers to all the processes, all the irreversible processes or irreversible removal of drugs by all routes of elimination"</i> (09-14).</li>
-<li>(T) Excretion, with the chemistry explicitly absent: <i>"Excretion means we're talking about removal of intact drug or metabolite. Excretion just says that we're not changing this drug at this point, we're just removing it from the body."</i> (09-14)</li>
-<li>(T) Biotransformation, with its usual consequence: <i>"Biotransformation definitionally is we're chemically converting that um drug in the body to some metabolite. Most often, it's gonna result in a drug that is going to be eliminated from the body more readily."</i> (09-14)</li>
-<li>(T) The two organs: <i>"our main organs of elimination. Our kidneys and the liver"</i> (09-14).</li>
-<li>(T) Why the hepatic route is always got by subtraction: <i>"hepatic clearance is a different story. Because we don't have a direct way, like we can't just collect &hellip; we're not gonna sample the liver &hellip; we calculate renal because that's the, we can, pretty straightforward, right? We can calculate renal, and then we subtract renal from total to give us hepatic clearance."</i> (09-14)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Elimination as the whole set</span><q>elimination refers to all the processes, all the irreversible processes or irreversible removal of drugs by all routes of elimination</q><span class="when">09-14 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Excretion, with the chemistry explicitly absent</span><q>Excretion means we're talking about removal of intact drug or metabolite. Excretion just says that we're not changing this drug at this point, we're just removing it from the body.</q><span class="when">09-14 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Biotransformation, with its usual consequence</span><q>Biotransformation definitionally is we're chemically converting that drug in the body to some metabolite. Most often, it's gonna result in a drug that is going to be eliminated from the body more readily.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The two organs</span><q>our main organs of elimination. Our kidneys and the liver</q><span class="when">09-14 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Why the hepatic route is always got by subtraction</span><q class="para">Hepatic clearance is a different story, because we do not have a direct way: we are not going to sample the liver. We calculate renal because that is straightforward, and then we subtract renal from total to give us hepatic clearance.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5638,7 +5677,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m4-2">
-<h3>Module 4, objective 2 &mdash; Define glomerular filtration, tubular secretion, and tubular reabsorption</h3>
+<h3 data-nav="Module 4, objective 2 &mdash; Define glomerular filtration, tubular secretion, and tubular reabsorption">Module 4 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Define glomerular filtration, tubular secretion, and tubular reabsorption</b><i>4---Clearance-and-Elimination.pdf slides 12, 13, 18, 19, 24</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5651,12 +5690,12 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Filtration as movement with no work done: <i>"glomerular filtration is just passive diffusion, right? Drug is just easing on down that concentration gradient and sliding on out of the body. Passive diffusion, no big deal. 120 mL per minute if things are working like they should"</i> (09-14).</li>
-<li>(T) What "active" adds: <i>"it it means it requires energy &hellip; The drug is moving because we've got something that's pulling that drug out of the body, some transporter, some mechanism, other than just passive diffusion to get the drug out of the body."</i> (09-14)</li>
-<li>(T) The inference worked in the direction she will ask it: <i>"if it's, let's say 350 mL per minute. That says that we've got the filtration, but we've also got some transporters, something else to help get this drug out of the body faster than 120 mL per minute."</i> And the other direction: <i>"If it's reabsorbed It's going back in &hellip; So, we got 120 minus this drug that's going back up. So then we would expect that our renal clearance is going to be less than 120 mL per minute."</i> (09-14)</li>
-<li>(T) The tolerance around 120, which no slide states: <i>"And I'm saying 120. If it's 119, 121, OK, let's call that filtration. If it's 250, then let's assume that we've got some active secretion going on."</i> (09-14)</li>
-<li>(T) She asks students to reason to the rule before showing the slide that states it: <i>"You can skip ahead if you want to, but let's think about this before we go to the next slide."</i> (09-14)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Filtration as movement with no work done</span><q>glomerular filtration is just passive diffusion Drug is just easing on down that concentration gradient and sliding on out of the body. Passive diffusion, no big deal. 120 mL per minute if things are working like they should</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">What "active" adds</span><q>it means it requires energy… The drug is moving because we've got something that's pulling that drug out of the body, some transporter, some mechanism, other than just passive diffusion to get the drug out of the body.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The inference worked in the direction she will ask it</span><q>if it's, let's say 350 mL per minute. That says that we've got the filtration, but we've also got some transporters, something else to help get this drug out of the body faster than 120 mL per minute.</q> And the other direction: <q class="para">If it is reabsorbed, it is going back in: 120 minus the drug that is going back up. Then we would expect our renal clearance to be less than 120 mL per minute.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The tolerance around 120, which no slide states</span><q>I'm saying 120. If it's 119, 121 let's call that filtration. If it's 250, then let's assume that we've got some active secretion going on.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">She asks students to reason to the rule before showing the slide that states it</span><q>You can skip ahead if you want to, but let's think about this before we go to the next slide.</q><span class="when">09-14 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5670,7 +5709,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m4-3">
-<h3>Module 4, objective 3 &mdash; Calculate creatinine clearance and discuss significance</h3>
+<h3 data-nav="Module 4, objective 3 &mdash; Calculate creatinine clearance and discuss significance">Module 4 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Calculate creatinine clearance and discuss significance</b><i>4---Clearance-and-Elimination.pdf slides 14&ndash;17, 25</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5683,17 +5722,17 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Both equations are outside the equation sheet: <i>"this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one, OK."</i> and <i>"the ideal body weight, again, you need to know this one."</i> (09-14)</li>
-<li>(T) What she will not ask: <i>"By simple, that means I'm not gonna ask you to think about whether we need to use the adjusted or the actual or ideal body weight, whether our patient is 4 ft 2, whether our patient is an amputee. All of our patients are going to be 5 ft tall. And all, and we're just gonna use ideal body weight."</i> (09-14)</li>
-<li>(T) The required units, named as an error: <i>"I also want you to recognize that the units of creatinine clearance should be in milliliters per minute, OK. So don't give me kilograms per milligram per deciliter. Milliliters per minute."</i> (09-14), with the admission that the algebra does not produce them: <i>"if you're like me, I like for the units to cross off. The units don't cross off."</i> Slide and speech differ here: the printed formula yields kg divided by mg/dL, and an exam written from this lecture would key mL/min regardless.</li>
-<li>(T) The conversion she expects: <i>"You should also know how to convert inches to centimeters and back and forth."</i> and, in the worked example, <i>"1 inch is equal to 2.54 centimeters &hellip; I am getting 64.96 inches. So, let's call that 65 inches."</i> (09-14)</li>
-<li>(T) How to read a decimal height: <i>"64.5 is like 64.5 inches tall. It's not 64 and then another 5 inches or people do different things with that."</i> (09-14)</li>
-<li>(T) What the number is for: <i>"this is a a a GFR estimator. So what are we estimating here? The patient's renal function"</i>, and <i>"yes, clearance is a volume per unit time, but we are specifically going to compare to 120 mL per minute to see where that individual patient is."</i> (09-14)</li>
-<li>(T) The confusion she flags by name: <i>"things get a little blurry when we're talking about renal clearance, and then I'm gonna ask you to calculate creatinine clearance, and I want you to think about the, the what I'm asking you each time."</i> (09-14)</li>
-<li>(T) Creatinine against inulin: <i>"creatinine comes from the breakdown of muscle"</i>; <i>"Inulin is not just hanging out in our bodies &hellip; inulin is almost completely filtered, right? So, a, a better marker than creatinine. But inulin, you have to add to somebody's body, and they sit down and they take tests, and it's a whole more complicated process."</i> (09-14)</li>
-<li>(T) The 0.85 factor's assumption, and its limits: <i>"The assumption is that women are smaller than men, less muscular than men."</i> and <i>"for little old ladies and guys that lift a lot of weight, that um serum creatinine value might not truly be indicative of who and what they are"</i> (09-14).</li>
-<li>(T) Serum creatinine units, asked and answered twice in the same lecture: <i>"serum creatinine is gonna be um presented as milligrams per deciliter."</i> (09-14)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Both equations are outside the equation sheet</span><q>this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one</q> and <q>the ideal body weight, again, you need to know this one.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">What she will not ask</span><q>By simple, that means I'm not gonna ask you to think about whether we need to use the adjusted or the actual or ideal body weight, whether our patient is 4 ft 2, whether our patient is an amputee. All of our patients are going to be 5 ft tall. all, and we're just gonna use ideal body weight.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The required units, named as an error</span><q>I also want you to recognize that the units of creatinine clearance should be in milliliters per minute So don't give me kilograms per milligram per deciliter. Milliliters per minute.</q>, with the admission that the algebra does not produce them: <q>if you're like me, I like for the units to cross off. The units don't cross off.</q> Slide and speech differ here: the printed formula yields kg divided by mg/dL, and an exam written from this lecture would key mL/min regardless.<span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The conversion she expects</span><q>You should also know how to convert inches to centimeters and back and forth.</q> and, in the worked example, <q>1 inch is equal to 2.54 centimeters… I am getting 64.96 inches. let's call that 65 inches.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">How to read a decimal height</span><q class="para">64.5 is 64.5 inches tall. It is not 64 and then another 5 inches; people do different things with that.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">What the number is for</span><q>this is a GFR estimator. what are we estimating here? The patient's renal function</q> and <q>yes, clearance is a volume per unit time, but we are specifically going to compare to 120 mL per minute to see where that individual patient is.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">The confusion she flags by name</span><q class="para">Things get a little blurry when we are talking about renal clearance and then I ask you to calculate creatinine clearance. I want you to think about what I am asking you each time.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Creatinine against inulin</span><q>creatinine comes from the breakdown of muscle</q> <q class="para">Inulin is not just hanging out in our bodies. Inulin is almost completely filtered, so it is a better marker than creatinine. But inulin you have to add to somebody&rsquo;s body, they sit down and take tests, and it is a whole more complicated process.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The 0.85 factor's assumption, and its limits</span><q>The assumption is that women are smaller than men, less muscular than men.</q> and <q>for little old ladies and guys that lift a lot of weight, that serum creatinine value might not truly be indicative of who and what they are</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Serum creatinine units, asked and answered twice in the same lecture</span><q>serum creatinine is gonna be presented as milligrams per deciliter.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question &mdash; worked example slide, 4---Clearance-and-Elimination.pdf slide 17</b>
@@ -5708,7 +5747,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m4-4">
-<h3>Module 4, objective 4 &mdash; Discuss the effect of degree of ionization on the renal excretion of drugs</h3>
+<h3 data-nav="Module 4, objective 4 &mdash; Discuss the effect of degree of ionization on the renal excretion of drugs">Module 4 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Discuss the effect of degree of ionization on the renal excretion of drugs</b><i>4---Clearance-and-Elimination.pdf slides 20, 25</i></div>
 
 <div class="note"><b>The lecture did not finish this objective.</b> The 09-14 recording reaches slide 20, she poses two questions on it &mdash; <i>"what impact does pH have on filtration of drugs?"</i> and <i>"What impact does pH have on our active secretion?"</i> &mdash; and the recording ends mid-discussion at <i>"Oh, it's just passing."</i> No answer to either question is captured, and no worked example, poll or practice problem on urine pH or degree of ionization exists in any of the collected sources. What follows is what the slides carry and nothing more.</div>
@@ -5722,9 +5761,9 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The two questions she put to the room, which are the only spoken content on this objective: <i>"what impact does pH have on filtration of drugs?"</i> and <i>"What impact does pH have on our active secretion?"</i> (09-14). Neither is answered before the recording ends.</li>
-<li>(T) The surrounding fact the slide's process depends on, from the same lecture: reabsorption is <i>"going back in, right? &hellip; So then we would expect that our renal clearance is going to be less than 120 mL per minute."</i> (09-14)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The two questions she put to the room, which are the only spoken content on this objective</span><q>what impact does pH have on filtration of drugs?</q> and <q>What impact does pH have on our active secretion?</q>. Neither is answered before the recording ends.<span class="when">09-14 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The surrounding fact the slide's process depends on, from the same lecture: reabsorption is</span><q class="para">Going back in: then we would expect our renal clearance to be less than 120 mL per minute.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5737,7 +5776,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m4-5">
-<h3>Module 4, objective 5 &mdash; Calculate total, renal and hepatic clearance</h3>
+<h3 data-nav="Module 4, objective 5 &mdash; Calculate total, renal and hepatic clearance">Module 4 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Calculate total, renal and hepatic clearance</b><i>4---Clearance-and-Elimination.pdf slides 4&ndash;11, 21&ndash;23, 25</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5757,14 +5796,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) What an unsubscripted Cl means: <i>"if there is no subscript, you should assume that we're talking about total body clearance is the result of all the method or different clearances or the ways that the drug is leaving the body."</i> (09-14)</li>
-<li>(T) The cumulative urinary amount: <i>"that DU infinity is the cumulative amount of drug that appears in the urine following dosing"</i>, and the fraction, <i>"that FE says how much drug appeared in the urine divided by the dose of drug that was administered"</i> (09-14).</li>
-<li>(T) The two F's, kept apart by hand: <i>"lowercase fe is our fraction excreted, capital F is our bioavailability factor"</i>, and <i>"for our IV administered doses, that capital F is assumed to be 1"</i> (09-14).</li>
-<li>(T) The units of the fraction, asked as a question: <i>"What are the units of FE? No units, right?"</i> (09-14)</li>
-<li>(T) Her penicillin working: <i>"our rate of elimination. Is our clearance times the concentration of drug in the plasma &hellip; 15 mL. Per minute. Times. 5 mcg per mL &hellip; So 75 mcg per minute."</i> (09-14)</li>
-<li>(T) Her slide 22 working, part by part: f<sub>e</sub> = 300 mg over the 500 mg dose; k <i>"0.0866"</i> from 0.693 divided by 8; k<sub>e</sub> <i>"we can take our FE which we said was 0.6 times R K. And I'm getting 0.052"</i>; total clearance <i>"15 L. N R K You get 1.3 L, something like that"</i>; renal clearance <i>"0.6 or FE times 1 L per hour, 1.3 L per hour. OK. So I'm getting 0.78 L per hour"</i>; hepatic clearance set up as <i>"total, which was 1.3. Minus 0.78"</i>, the difference not spoken aloud (09-14).</li>
-<li>(T) The third reason she likes clearance, added to the two from Module 2: <i>"It serves as a proportionality factor between our rate of elimination &hellip; as well as this concentration of drug in the plasma."</i> (09-14)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">What an unsubscripted Cl means</span><q class="para">If there is no subscript, you should assume we are talking about total body clearance: the result of all the different clearances, the ways that the drug is leaving the body.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The cumulative urinary amount</span><q>that DU infinity is the cumulative amount of drug that appears in the urine following dosing</q> and the fraction, <q>that FE says how much drug appeared in the urine divided by the dose of drug that was administered</q><span class="when">09-14 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The two F's, kept apart by hand</span><q>lowercase fe is our fraction excreted, capital F is our bioavailability factor</q> and <q>for our IV administered doses, that capital F is assumed to be 1</q><span class="when">09-14 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The units of the fraction, asked as a question</span><q>What are the units of FE? No units</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">Her penicillin working</span><q class="para">Our rate of elimination is our clearance times the concentration of drug in the plasma: 15 mL per minute times 5 mcg per mL, so 75 mcg per minute.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her slide 22 working, part by part: f<sub>e</sub> = 300 mg over the 500 mg dose; k</span><q>0.0866</q> from 0.693 divided by 8; k<sub>e</sub> <q class="para">We can take our fe, which we said was 0.6, times k: I am getting 0.052.</q>; total clearance <q class="para">15 L times k: you get 1.3 L per hour, something like that.</q>; renal clearance <q class="para">0.6, or fe, times 1.3 L per hour: I am getting 0.78 L per hour.</q>; hepatic clearance set up as <q class="para">Total, which was 1.3, minus 0.78.</q>, the difference not spoken aloud.<span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The third reason she likes clearance, added to the two from Module 2</span><q>It serves as a proportionality factor between our rate of elimination… as well as this concentration of drug in the plasma.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; three worked example slides</b>
@@ -5781,11 +5820,11 @@ const GUIDE_HTML = `
 </ul></div>
 </section>
 
-<h2>Module 5 &mdash; Pharmacokinetics of oral absorption</h2>
+<h2>Module 5 - Single Oral Administration</h2>
 <p class="prose">Four objectives, printed on the "Objectives" slide of 5---Pharmacokinetics-of-Oral-Absorption.pdf. Her framing of the module: <i>"today we will move into our 1st order. So, up to this point, we have not had 1st order input, OK? It's all been either instantaneous or zero order"</i> (09-21).</p>
 
 <section class="gobj" id="gobj-m5-1">
-<h3>Module 5, objective 1 &mdash; Describe the kinetics of a drug following extravascular administration</h3>
+<h3 data-nav="Module 5, objective 1 &mdash; Describe the kinetics of a drug following extravascular administration">Module 5 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Describe the kinetics of a drug following extravascular administration</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "IV Bolus vs. Oral Administration" through "Example of a concentration-time profile"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5799,14 +5838,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The three input types lined up: <i>"IV bolus input, which means that we put all of the drug into the body all at once. And then we talked about IV infusion, which meant that we put the drug into the body at a constant rate of input, right? So that's our zero order. And today &hellip; we will move into our 1st order."</i> (09-21)</li>
-<li>(T) What "extravascular" means here: <i>"extravascular, also known as oral"</i>, against <i>"Intravascular, we've got our IV bolus, our IV infusion that's into the vascular system"</i> (09-21).</li>
-<li>(T) The curve-identification rule, stated as an exam instruction: <i>"if I give you a curve on the exam and it looks like this. Right, where there is a clear peak. Right, we go up, we peak, we come back down, then you, I want you to identify that as an oral input. Right? First order in, first order out."</i> (09-21)</li>
-<li>(T) What k<sub>a</sub> physically contains: <i>"the first thing is it needs to disintegrate, right? It needs to break up, needs to dissolve &hellip; but it has to have enough polarity that it can cross into membranes before it can get into the body. And then it's gonna get into the body, and then it's gonna hit the liver &hellip; So, all of those pieces give us our case of A, first order rate constant for absorption."</i> (09-21)</li>
-<li>(T) The three phases of the curve. She was missing this slide and taught it from the students' copies: <i>"I feel like I'm missing a slide. Oh, I'm missing a very important slide"</i>. Her account is the only one there is: the absorption phase is where <i>"we've got more drug going in to the body than there is drug going out &hellip; absorption rate is gonna be greater than the elimination rate on the left side"</i>; the post-absorption phase is <i>"where it says that the elimination rate is greater than the absorption rate, that means that we still have some drug that's available to be absorbed there"</i>; and <i>"once all the drug has been absorbed, Then we are fully into the complete elimination phase"</i>. At the peak, <i>"Right at CMax, the rate N is going to be equal to the rate out."</i> (09-21)</li>
-<li>(T) Why the summary slide says "usually": <i>"if we have a truly modified zero solid dosage form that is releasing drug at a zero order rate &hellip; what does it look like? &hellip; Looks like IV infusion, right? So, zero-order release or controlled release. And that looks like our IV infusion."</i> (09-21)</li>
-<li>(T) A one-letter trigger: <i>"when you see a capital F, You should think oral."</i> (09-21)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The three input types lined up</span><q class="para">IV bolus input means we put all of the drug into the body all at once. Then we talked about IV infusion, which meant we put the drug into the body at a constant rate of input, so that is our zero order. Today we move into our first order.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">What "extravascular" means here</span><q>extravascular, also known as oral</q>, against <q>Intravascular, we've got our IV bolus, our IV infusion that's into the vascular system</q><span class="when">09-21 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The curve-identification rule, stated as an exam instruction</span><q class="para">If I give you a curve on the exam and it looks like this, where there is a clear peak (we go up, we peak, we come back down), I want you to identify that as an oral input. First order in, first order out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">What k<sub>a</sub> physically contains</span><q class="para">First it needs to disintegrate, it needs to dissolve, and it has to have enough polarity to cross membranes before it can get into the body. Then it gets into the body and hits the liver. All of those pieces give us ka, the first-order rate constant for absorption.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The three phases of the curve. She was missing this slide and taught it from the students' copies</span><q>I feel like I'm missing a slide. Oh, I'm missing a very important slide</q>. Her account is the only one there is: the absorption phase is where <q>we've got more drug going in to the body than there is drug going out… absorption rate is gonna be greater than the elimination rate on the left side</q>; the post-absorption phase is <q>where it says that the elimination rate is greater than the absorption rate, that means that we still have some drug that's available to be absorbed there</q>; and <q>once all the drug has been absorbed, Then we are fully into the complete elimination phase</q>. At the peak, <q class="para">Right at Cmax, the rate in is going to be equal to the rate out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Why the summary slide says "usually"</span><q class="para">If we have a modified-release solid dosage form releasing drug at a zero-order rate, what does it look like? It looks like IV infusion. Zero-order release, or controlled release, looks like our IV infusion.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">A one-letter trigger</span><q>when you see a capital F, You should think oral.</q><span class="when">09-21 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question on it</b>
@@ -5820,7 +5859,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m5-2">
-<h3>Module 5, objective 2 &mdash; Calculate plasma drug concentration following extravascular administration of a single dose</h3>
+<h3 data-nav="Module 5, objective 2 &mdash; Calculate plasma drug concentration following extravascular administration of a single dose">Module 5 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Calculate plasma drug concentration following extravascular administration of a single dose</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Concentration of Drug in Plasma Following a Single Oral Dose"</i></div>
 
 <h4>What the slides carry</h4>
@@ -5830,12 +5869,12 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) How she reads the two exponentials: <i>"we've got, we'll break this down a little bit. All of this stuff. Times This is drug out, and then this is drug in, right? Drug in minus drug out."</i> (09-21)</li>
-<li>(T) What the lumped prefactor is not, said twice: <i>"this big portion right here does not represent C0"</i> and <i>"That is not our C0. That is all of that wrapped up into that one. One concentration."</i> (09-21)</li>
-<li>(T) What F is: <i>"Oral bioavailabilityability factor. So, what fraction of this oral dose do we expect to be absorbed by the body and available for the body to use, right? When we give a drug IV, then that F is assumed to be one."</i> and the reason it is below one, <i>"a portion of that dose is going to be um eliminated by the body before it even becomes available for the body to use"</i> (09-21).</li>
-<li>(T) How she enters it on the calculator, narrated so students can copy the keystroke order: <i>"0.85 times 500 times 0.924 divided by 22, divided by left parentheses 0.924 minus 0.231, right left parenthesis, I'm over here now. E to the minus 0.231 times 2, closing that parenthesis minus E to the 0.924 times 2, and closing this parenthesis and closing that parenthesis."</i> (09-21)</li>
-<li>(T) Which half-life is meant when no qualifier is given: <i>"If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination, right?"</i> (09-21)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">How she reads the two exponentials</span><q class="para">We will break this down: this piece is drug out, and this piece is drug in minus drug out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">What the lumped prefactor is not, said twice</span><q>this big portion right here does not represent C0</q> and <q>That is not our C0. That is all of that wrapped up into that one concentration.</q><span class="when">09-21 &middot; her words, caption fillers removed</span></li>
+<li class="said"><span class="lead">What F is</span><q class="para">Oral bioavailability factor: what fraction of this oral dose do we expect to be absorbed by the body and available for the body to use? When we give a drug IV, that F is assumed to be one.</q> and the reason it is below one, <q>a portion of that dose is going to be eliminated by the body before it even becomes available for the body to use</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">How she enters it on the calculator, narrated so students can copy the keystroke order</span><q>0.85 times 500 times 0.924 divided by 22, divided by left parentheses 0.924 minus 0.231, right left parenthesis, I'm over here now. E to the minus 0.231 times 2, closing that parenthesis minus E to the 0.924 times 2, and closing this parenthesis and closing that parenthesis.</q><span class="when">09-21 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Which half-life is meant when no qualifier is given</span><q>If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination</q><span class="when">09-21 &middot; her words, caption fillers removed</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; back-solving the equation</b>
@@ -5851,7 +5890,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m5-3">
-<h3>Module 5, objective 3 &mdash; Calculate peak plasma concentration and the time to peak following extravascular administration of a single dose</h3>
+<h3 data-nav="Module 5, objective 3 &mdash; Calculate peak plasma concentration and the time to peak following extravascular administration of a single dose">Module 5 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Calculate peak plasma concentration and the time to peak following extravascular administration of a single dose</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Cp vs. Time for a Single Oral Dose"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5862,14 +5901,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) The order of operations, stated three separate times: <i>"if you are asked for C-Max, and I will ask you for CMax, you must find TMax first. Find T-Max before you find CMax, OK? Even if I don't ask you to specifically find uh uh T-Max, you must find T-Max before you can find CMax"</i> (09-21).</li>
-<li>(T) What t<sub>max</sub> is and what it depends on: <i>"TMAX is the time that it takes to reach the maximum plasma concentration of that drug in that patient"</i> and <i>"T-Max depends solely on the relationship between K and KA Drug going in, drug going out."</i> (09-21)</li>
-<li>(T) Three errors she names in advance. Mixed time units: <i>"when you are calculating um T max, do not forget to change your times to out to the same unit, usually hours"</i>. A half-life used as a rate constant: <i>"when you change your times, recognize. That 1.5 here, that is the half-life. So you still need to divide that by 0.693"</i> &mdash; in her own arithmetic she divides 0.693 by 1.5, and the captions have the operands reversed. And a dropped volume: <i>"Do not forget the volume of distribution."</i> (09-21)</li>
-<li>(T) Her Example 1 working: 45 minutes is <i>"3/4 of an hour or 0.75 hour"</i>; k<sub>a</sub> = 0.693/0.75 = 0.924 hr<sup>&minus;1</sup>; <i>"our K is 0.231"</i>; <i>"our team Max. It's gonna be equal to the natural log of KA divided by K &hellip; OK, so I'm getting 2 hours"</i>; and C<sub>max</sub> <i>"I am getting 12.17. Milligrams per liter."</i> (09-21)</li>
-<li>(T) Her Example 2 working: <i>"it looks like the max is going to occur. One hour after the dose was administered"</i>, then C<sub>max</sub> <i>"75. E -0.22 times 1. E to -2.75 times 1 &hellip; 55.4. Milligrams per liter."</i> (09-21)</li>
-<li>(T) Her in-class practice 1 working, with the printed volume of distribution changed live from 40 L to 20 L: k<sub>a</sub> <i>"0.693 divided by 1.5. 0.462"</i>; k <i>"0.693 divided by 5. 0.1386"</i>; t<sub>max</sub> <i>"3.7, 3.7. OK. So 3.7 hours"</i>; C<sub>max</sub> <i>"I'm getting 13-ish milligrams per liter."</i> (09-21)</li>
-<li>(T) Her in-class practice 2 working: t<sub>max</sub> <i>"natural log of 0.872 divided by 0.182. Divided by the differences, 0.872 minus 0.182 &hellip; 2.27 hours"</i>; C<sub>max</sub> <i>"we're gonna take that 2.27 and plug it in up here for the T's &hellip; 12.14 mg per liter or micrograms per mL."</i> (09-21)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">The order of operations, stated three separate times</span><q class="para">If you are asked for Cmax, and I will ask you for Cmax, you must find tmax first. Even if I do not specifically ask you to find tmax, you must find tmax before you can find Cmax.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">What t<sub>max</sub> is and what it depends on</span><q>TMAX is the time that it takes to reach the maximum plasma concentration of that drug in that patient</q> and <q class="para">tmax depends solely on the relationship between k and ka: drug going in, drug going out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Three errors she names in advance. Mixed time units</span><q class="para">When you are calculating tmax, do not forget to change your times to the same unit, usually hours.</q>. A half-life used as a rate constant: <q class="para">When you change your times, recognize that the 1.5 here is the half-life: you still need 0.693 divided by that.</q> &mdash; in her own arithmetic she divides 0.693 by 1.5, and the captions have the operands reversed. And a dropped volume: <q>Do not forget the volume of distribution.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her Example 1 working: 45 minutes is</span><q>3/4 of an hour or 0.75 hour</q>; k<sub>a</sub> = 0.693/0.75 = 0.924 hr<sup>&minus;1</sup>; <q>our K is 0.231</q> <q class="para">Our tmax is going to be equal to the natural log of ka divided by k, so I am getting 2 hours.</q>; and C<sub>max</sub> <q class="para">I am getting 12.17 milligrams per liter.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her Example 2 working</span><q class="para">It looks like the max is going to occur one hour after the dose was administered.</q>, then C<sub>max</sub> <q class="para">75 e to the minus 0.22 times 1, e to the minus 2.75 times 1: 55.4 milligrams per liter.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her in-class practice 1 working, with the printed volume of distribution changed live from 40 L to 20 L: k<sub>a</sub></span><q>0.693 divided by 1.5. 0.462</q>; k <q>0.693 divided by 5. 0.1386</q>; t<sub>max</sub> <q class="para">3.7 hours.</q>; C<sub>max</sub> <q>I'm getting 13-ish milligrams per liter.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Her in-class practice 2 working: t<sub>max</sub></span><q class="para">Natural log of 0.872 divided by 0.182, divided by the difference, 0.872 minus 0.182: 2.27 hours.</q>; C<sub>max</sub> <q class="para">We take that 2.27 and plug it in for the t values: 12.14 mg per liter, or micrograms per mL.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own questions &mdash; the deck examples and the in-class sheet</b>
@@ -5887,7 +5926,7 @@ const GUIDE_HTML = `
 </section>
 
 <section class="gobj" id="gobj-m5-4">
-<h3>Module 5, objective 4 &mdash; Discuss the effects of changing various parameters on the pharmacokinetics following extravascular administration</h3>
+<h3 data-nav="Module 5, objective 4 &mdash; Discuss the effects of changing various parameters on the pharmacokinetics following extravascular administration">Module 5 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Discuss the effects of changing various parameters on the pharmacokinetics following extravascular administration</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "Changing Dose" through "Significance of Absorption Rate Constants"</i></div>
 
 <h4>What the slides carry, in slide order</h4>
@@ -5899,14 +5938,14 @@ const GUIDE_HTML = `
 </ul>
 
 <h4>What she said about it</h4>
-<ul>
-<li>(T) Increasing the dose: <i>"we increase the dose, we expect a proportional increase in concentration and AUC. We do not expect a change in TMAX, and the rates of absorption and elimination increase because we've got more drug, but there are rate constants K and KA do not change, but because the rate depends on how much is there. It would make sense that those two would increase"</i> (09-21).</li>
-<li>(T) Increasing k<sub>a</sub> relative to k: <i>"if we increase KA relative to K, we're getting the drug into the body a little bit faster &hellip; we get a higher. C-Max &hellip; We also get a TMAx that occurs earlier &hellip; And then the AUC is relatively unchanged"</i>, with her reason, <i>"if we're just changing KA we're not changing the clearance at all, right? So then our AUC is unchanged here."</i> (09-21)</li>
-<li>(T) Increasing k: <i>"we're getting that drug out of the body a lot faster &hellip; Notice that we're not able to build to as high &hellip; So, we're getting an earlier T-Max. Either way, cause remember, T-Max is just a relationship of K and KA &hellip; if we change the K, we are effectively changing the clearance, so we are getting this drug out of the body a whole lot faster."</i> The k values compared on that slide are 0.5, 0.3 and 0.2 per hour (09-21).</li>
-<li>(T) The AUC claim is not readable off the figure and she says where it comes from: <i>"looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the AUC is relatively unchanged."</i> (09-21) Slide and speech differ here: the figure does not show it, and the spoken statement is the one to hold.</li>
-<li>(T) Which rate-limiting case is normal: <i>"Most of the time we're gonna be looking at disposition rate limiting, where our KA is gonna be significantly faster or larger than our K"</i> (09-21). In the same lecture she also calls this <i>"distribution limited"</i> once, while the slide's term is disposition rate limiting; the slide's term is the one to key.</li>
-<li>(T) How she reads the rate-limiting case off an equation: <i>"notice that this is E -0.18, and then this is, this is E -0.87. So, that absorption is gonna happen a lot faster than elimination &hellip; We've got &hellip; absorption is gonna happen a lot faster than elimination."</i> (09-21)</li>
-<li>(T) Onset of action, from the significance slide: <i>"when does the drug reach a therapeutic concentration? That's our onset."</i> (09-21)</li>
+<ul class="saidlist">
+<li class="said"><span class="lead">Increasing the dose</span><q class="para">If we increase the dose, we expect a proportional increase in concentration and AUC. We do not expect a change in tmax. The rates of absorption and elimination increase because there is more drug, but the rate constants k and ka do not change; the rate depends on how much is there.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Increasing k<sub>a</sub> relative to k</span><q class="para">If we increase ka relative to k, we get the drug into the body faster: a higher Cmax, a tmax that occurs earlier, and the AUC is relatively unchanged.</q>, with her reason, <q class="para">If we are just changing ka, we are not changing the clearance at all, so our AUC is unchanged.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Increasing k</span><q class="para">We are getting that drug out of the body a lot faster. Notice that we are not able to build to as high, and we are getting an earlier tmax either way, because tmax is just a relationship of k and ka. If we change k, we are effectively changing the clearance, so we are getting this drug out of the body a whole lot faster.</q> The k values compared on that slide are 0.5, 0.3 and 0.2 per hour.<span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The AUC claim is not readable off the figure and she says where it comes from</span><q>looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the AUC is relatively unchanged.</q> Slide and speech differ here: the figure does not show it, and the spoken statement is the one to hold.<span class="when">09-21 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Which rate-limiting case is normal</span><q class="para">Most of the time we are going to be looking at disposition rate limiting, where our ka is significantly faster, or larger, than our k.</q>. In the same lecture she also calls this <q>distribution limited</q> once, while the slide's term is disposition rate limiting; the slide's term is the one to key.<span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">How she reads the rate-limiting case off an equation</span><q class="para">Notice that this is e to the minus 0.18 and this is e to the minus 0.87: absorption is going to happen a lot faster than elimination.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">Onset of action, from the significance slide</span><q>when does the drug reach a therapeutic concentration? That's our onset.</q><span class="when">09-21 &middot; her words, verbatim</span></li>
 </ul>
 
 <div class="gpoll"><b>Her own question &mdash; posed aloud, 09-21</b>
@@ -5940,9 +5979,18 @@ try {
    matched against question fields. Every key must match; an array value means
    "one of". Nothing here knows what a professor, a module or a tier is.
    ========================================================================== */
-const EXAM = COURSE.exams.find(e => e.id === COURSE.activeExam) || COURSE.exams[0];
-const POOLS = (EXAM && EXAM.pools) || [];
-const TOTAL_MARKS = POOLS.reduce((s, p) => s + (p.marks || 0), 0);
+let EXAM = null, POOLS = [], TOTAL_MARKS = 0, EXAM_SATA = 0;
+/* Which paper the drill is preparing for. COURSE.activeExam is the default;
+   a student can choose another (Exam view or Settings), and the choice is
+   kept with their progress. Every pool, weight and draw below follows it. */
+function setActiveExam(id){
+  EXAM = COURSE.exams.find(e => e.id === id)
+      || COURSE.exams.find(e => e.id === COURSE.activeExam) || COURSE.exams[0];
+  POOLS = (EXAM && EXAM.pools) || [];
+  TOTAL_MARKS = POOLS.reduce((s, p) => s + (p.marks || 0), 0);
+  EXAM_SATA = (EXAM && EXAM.sata) || 0;
+  invalidatePools();
+}
 
 function matchesPoolFilter(q, f){
   for(const k in (f || {})){
@@ -5967,6 +6015,7 @@ function poolQuestions(p){
   return _poolCache.get(p);
 }
 function invalidatePools(){ _poolCache = null; }
+setActiveExam(COURSE.activeExam);
 const poolKey = q => { const p = poolOf(q); return p ? p.key : '(off blueprint)'; };
 
 /* What one question in a pool is worth on the paper: the pool's share of the
@@ -6152,6 +6201,7 @@ function load(){
     const raw = LS.get(keyFor(PROFILE));
     DB = raw ? Object.assign(BLANK(), JSON.parse(raw)) : BLANK();
   }catch(e){ DB = BLANK(); }
+  setActiveExam(DB.settings.exam || COURSE.activeExam);
 }
 let saveTimer=null;
 function save(){
@@ -6495,6 +6545,64 @@ function filterBar(){
   return h + `</div>`;
 }
 
+/* One topic's card: its subtopics, each with a Start button, then the whole
+   topic. Used on its own when the course has no outline, and inside a module
+   group when it has. */
+function topicCard(t){
+  const pool = poolFor(t.id, null);
+  if(!pool.length) return '';
+  const m = masteryOf(pool);
+  const pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
+  let h = `<details class="topic"${t.open?' open':''}>
+    <summary>
+      <span class="tname">${esc(t.name)}<small>${esc(t.cite||'')}</small></span>
+      ${profTag(t.prof)}
+      <span class="meter"><i style="width:${pct}%"></i></span>
+      <span class="counts">${m.mastered}/${m.total}</span>
+    </summary>
+    <div class="subs">`;
+  for(const s of (t.subs||[])){
+    const sp = poolFor(t.id, s.id);
+    if(!sp.length) continue;
+    const sm = masteryOf(sp);
+    const spct = sm.total ? Math.round(100*sm.mastered/sm.total) : 0;
+    const done = sm.total && sm.mastered === sm.total;
+    h += `<div class="subrow">
+      <span class="sname">${esc(s.name)}<small>${sp.length} questions · ${esc(s.cite||'')}</small></span>
+      <span class="meter"><i style="width:${spct}%"></i></span>
+      <button data-t="${t.id}" data-s="${s.id}" class="${done?'done':''}">${done?'Review':'Start'}</button>
+    </div>`;
+  }
+  h += `<div class="subrow" style="border-top:1px solid var(--line-soft);margin-top:4px;padding-top:11px">
+      <span class="sname"><b>Everything in ${esc(t.name)}</b><small>${pool.length} questions, mixed order</small></span>
+      <button data-t="${t.id}" data-s="">Start</button>
+    </div>`;
+  return h + `</div></details>`;
+}
+
+/* Which module a topic belongs to: the module most of its questions carry.
+   Read off the bank rather than written on the topic, so a topic cannot say
+   one module while its questions say another. */
+function moduleOfTopic(t){
+  const n = {};
+  QUESTIONS.forEach(q => { if(q.topic === t.id && q.module != null) n[q.module] = (n[q.module] || 0) + 1; });
+  const best = Object.keys(n).sort((a, b) => n[b] - n[a])[0];
+  return best === undefined ? null : +best;
+}
+
+/* The course outline the Topics view follows, from COURSE.topicsMenu. A module
+   entry gathers the topics whose questions carry its number; an exam entry and
+   a view entry pass through as they are. A course with no outline lists its
+   topics one after another. */
+function outline(){
+  if(!Array.isArray(COURSE.topicsMenu) || !COURSE.topicsMenu.length)
+    return TOPICS.map(t => ({topic: t}));
+  const mod = new Map(TOPICS.map(t => [t, moduleOfTopic(t)]));
+  return COURSE.topicsMenu.map(m => m.module != null
+    ? Object.assign({topics: TOPICS.filter(t => mod.get(t) === m.module)}, m) : m);
+}
+const examQuestions = id => poolFor(null, null).filter(q => q.exam === id);
+
 function renderTopics(){
   const shares = poolShares();
   const covered = shares.reduce((s,o)=> s + Math.min(o.want, poolQuestions(o.pool).length), 0);
@@ -6503,7 +6611,8 @@ function renderTopics(){
   <p class="sub">${esc(EXAM.name)} is ${EXAM.questions} questions in ${EXAM.minutes} minutes${
       EXAM.date ? ` on ${esc(EXAM.date)}` : ''}.
     ${EXAM.blurb ? esc(EXAM.blurb) + ' ' : ''}
-    Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.</p>`;
+    Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
+    COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
 
   h += filterBar();
 
@@ -6524,37 +6633,49 @@ function renderTopics(){
       <button id="sweepFiltered" class="ghost">Start</button></div>` : ''}
   </div></div>`;
 
-  for(const t of TOPICS){
-    const pool = poolFor(t.id, null);
-    if(!pool.length) continue;
-    const m = masteryOf(pool);
-    const pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
-    h += `<details class="topic"${t.open?' open':''}>
-      <summary>
-        <span class="tname">${esc(t.name)}<small>${esc(t.cite||'')}</small></span>
-        ${profTag(t.prof)}
-        <span class="meter"><i style="width:${pct}%"></i></span>
-        <span class="counts">${m.mastered}/${m.total}</span>
-      </summary>
-      <div class="subs">`;
+  for(const m of outline()){
+    if(m.topic){ h += topicCard(m.topic); continue; }
 
-    for(const s of (t.subs||[])){
-      const sp = poolFor(t.id, s.id);
-      if(!sp.length) continue;
-      const sm = masteryOf(sp);
-      const spct = sm.total ? Math.round(100*sm.mastered/sm.total) : 0;
-      const done = sm.total && sm.mastered === sm.total;
-      h += `<div class="subrow">
-        <span class="sname">${esc(s.name)}<small>${sp.length} questions · ${esc(s.cite||'')}</small></span>
-        <span class="meter"><i style="width:${spct}%"></i></span>
-        <button data-t="${t.id}" data-s="${s.id}" class="${done?'done':''}">${done?'Review':'Start'}</button>
-      </div>`;
+    if(m.view){
+      h += `<div class="module"><div class="mrow">
+        <span class="mname">${esc(m.name)}<small>${m.view === 'ref' ? 'Every equation with its symbols, units and when it applies' : ''}</small></span>
+        <button data-view="${esc(m.view)}">Open</button></div></div>`;
+      continue;
     }
-    h += `<div class="subrow" style="border-top:1px solid var(--line-soft);margin-top:4px;padding-top:11px">
-        <span class="sname"><b>Everything in ${esc(t.name)}</b><small>${pool.length} questions, mixed order</small></span>
-        <button data-t="${t.id}" data-s="">Start</button>
-      </div>`;
-    h += `</div></details>`;
+
+    if(m.exam != null){
+      const ex = COURSE.exams.find(e => e.id === m.exam);
+      const pool = examQuestions(m.exam);
+      if(!pool.length) continue;
+      const em = masteryOf(pool), epct = em.total ? Math.round(100*em.mastered/em.total) : 0;
+      h += `<details class="module"><summary>
+          <span class="mname">${esc(m.name)}<small>${pool.length} questions${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
+          <span class="meter"><i style="width:${epct}%"></i></span><span class="counts">${em.mastered}/${em.total}</span>
+        </summary><div class="mfoot">
+        <div class="subrow"><span class="sname"><b>Everything on ${ex ? esc(ex.name) : 'this exam'}, adaptive</b>
+          <small>Missed concepts first; stops when nothing is due</small></span>
+          <button data-exam="${m.exam}" data-how="adaptive">Start</button></div>
+        <div class="subrow"><span class="sname"><b>Straight pass</b>
+          <small>Every question once, shuffled, nothing held back by scheduling</small></span>
+          <button data-exam="${m.exam}" data-how="sweep">Start</button></div>
+        ${ex ? `<div class="subrow"><span class="sname"><b>Sit a practice paper</b>
+          <small>${ex.questions} questions in ${ex.minutes} minutes at the blueprint, no feedback until you submit</small></span>
+          <button data-exam="${m.exam}" data-how="paper">Open</button></div>` : ''}
+        </div></details>`;
+      continue;
+    }
+
+    const ts = m.topics || [];
+    const mpool = ts.flatMap(t => poolFor(t.id, null));
+    if(!mpool.length) continue;
+    const mm = masteryOf(mpool), mpct = mm.total ? Math.round(100*mm.mastered/mm.total) : 0;
+    h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
+        <span class="mname">${esc(m.name)}<small>${mpool.length} questions · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
+        <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
+      </summary>
+      ${ts.map(topicCard).join('')}
+      <div class="mfoot"><div class="subrow"><span class="sname"><b>Everything in ${esc(m.name)}</b><small>${mpool.length} questions, mixed order</small></span>
+        <button data-module="${m.module}">Start</button></div></div></details>`;
   }
 
   h += `<h3>Mixed drills</h3>
@@ -6569,13 +6690,26 @@ function renderTopics(){
       ${EXAM.questions} questions on the blueprint. The exam simulator says which pools are short.</p>`;
   }
 
-  $('#v-topics').innerHTML = h;
+  const el = $('#v-topics');
+  el.innerHTML = h;
 
-  $('#v-topics').querySelectorAll('.chip').forEach(b => b.onclick = () => {
+  el.querySelectorAll('.chip').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });
-  $('#v-topics').querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
+  el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
     startQuiz(b.dataset.t || null, b.dataset.s || null);
+  });
+  el.querySelectorAll('button[data-view]').forEach(b => b.onclick = () => show(b.dataset.view));
+  el.querySelectorAll('button[data-module]').forEach(b => b.onclick = () => {
+    const m = outline().find(o => o.module === +b.dataset.module);
+    if(m) startPool((m.topics || []).flatMap(t => poolFor(t.id, null)), m.name);
+  });
+  el.querySelectorAll('button[data-exam]').forEach(b => b.onclick = () => {
+    const id = +b.dataset.exam, ex = COURSE.exams.find(e => e.id === id);
+    const label = (ex ? ex.name : 'Exam') + ' recap';
+    if(b.dataset.how === 'paper'){ chooseExam(id); show('exam'); return; }
+    if(b.dataset.how === 'sweep') startSweepOf(examQuestions(id), label);
+    else startPool(examQuestions(id), label);
   });
   const sa = document.getElementById('sweepAll');
   const sw = document.getElementById('sweepWeighted'); if(sw) sw.onclick = () => startSweep('weighted');
@@ -6590,11 +6724,23 @@ function renderTopics(){
 let Q = null;     // {pool, label, current, order, answered, lastId, examMode}
 
 function startQuiz(topicId, subId){
-  const pool = poolFor(topicId, subId);
-  if(!pool.length){ alert('No questions match those filters.'); return; }
   const t = TOPICS.find(x=>x.id===topicId);
   const s = t && (t.subs||[]).find(x=>x.id===subId);
-  Q = {pool, label: s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything'),
+  startPool(poolFor(topicId, subId), s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything'));
+}
+/* An adaptive drill over any set of questions: the scheduler picks, missed
+   concepts return first, and it stops when nothing is due. */
+function startPool(pool, label){
+  if(!pool.length){ alert('No questions match those filters.'); return; }
+  Q = {pool, label, current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
+  nextQuestion();
+  show('quiz');
+}
+/* A fixed queue over any set of questions: each asked once, shuffled, with
+   no scheduling gate. `scope` names a startSweep scope that can be repeated. */
+function startSweepOf(pool, label, scope){
+  if(!pool.length){ alert('No questions match those filters.'); return; }
+  Q = {pool, label, scope, sweep: shuffle(pool.map(q => q.id)), i: 0,
        current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
@@ -6626,14 +6772,8 @@ function startSweep(scope){
   const pool = scope === 'filtered' ? poolFor(null, null)
              : scope === 'weighted' ? weightedPool()
              : QUESTIONS.slice();
-  if(!pool.length){ alert('No questions match those filters.'); return; }
-  Q = {pool, scope,
-       label: scope === 'filtered' ? 'Every question under these filters'
-            : scope === 'weighted' ? 'Exam-weighted pass' : 'Every question',
-       sweep: shuffle(pool.map(q => q.id)), i: 0,
-       current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
-  nextQuestion();
-  show('quiz');
+  startSweepOf(pool, scope === 'filtered' ? 'Every question under these filters'
+                   : scope === 'weighted' ? 'Exam-weighted pass' : 'Every question', scope);
 }
 
 function nextQuestion(){
@@ -7237,6 +7377,19 @@ function shortfallNote(cov){
     The missing marks are left off the paper rather than filled from another pool.</div>`;
 }
 
+/* Which paper to prepare for. Kept with the student's progress, so it survives
+   a reload; everything weighted by the blueprint follows it at once. */
+function chooseExam(id){
+  if(!COURSE.exams.some(e => e.id === id) || (EX && EX.running)) return;
+  DB.settings.exam = id; save();
+  setActiveExam(id);
+}
+function examPicker(note){
+  if(COURSE.exams.length < 2) return '';
+  return `<div class="filters"><div class="frow"><label>Paper</label>${COURSE.exams.map(e =>
+    `<button class="chip" data-exam="${e.id}" aria-pressed="${e.id === EXAM.id}">${esc(e.name)}</button>`).join('')}</div>
+    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">${note}</p></div>`;
+}
 function renderExam(){
   const el = $('#v-exam');
   if(EX && EX.running){ renderExamQ(); return; }
@@ -7250,6 +7403,7 @@ function renderExam(){
       ? `${EXAM_SATA} are select-all, marked all-or-nothing. `
       : `The blueprint asks for ${EXAM_SATA} select-all items and the bank holds ${sata.drawn}, so the paper carries ${sata.drawn}. `;
   el.innerHTML = `<h2>Exam simulation</h2>
+  ${examPicker('A paper from an earlier exam is drawn the same way, so Exam 1 can be sat again for the final. Weak spots and the exam-weighted pass follow this choice too.')}
   <p class="sub">${esc(EXAM.name)}: ${EXAM.questions} questions in ${EXAM.minutes} minutes, drawn at the
   blueprint — ${POOLS.map(p=>`${esc(p.name)} ${p.marks}`).join(' · ')} marks.
   ${sataLine}No explanations until you finish, same as the real thing.</p>
@@ -7259,6 +7413,7 @@ function renderExam(){
   <p><button class="btn" id="startExam">Start the ${EXAM.minutes}-minute paper${
     nPaper < EXAM.questions ? ` (${nPaper} questions available)` : ''}</button></p>`;
   $('#startExam').onclick = beginExam;
+  el.querySelectorAll('.chip[data-exam]').forEach(b => b.onclick = () => { chooseExam(+b.dataset.exam); renderExam(); });
 }
 /* A question marked dupOf:'x' tests the same fact as question x, so a paper
    never carries both: taking either one blocks the other. */
@@ -7279,9 +7434,6 @@ function drawN(pool, n, blocked){
   }
   return picked.slice(0,n);
 }
-/* How many of the paper are select-all, from the manifest. */
-const EXAM_SATA = EXAM.sata || 0;
-
 /* Draw n from a pool with a target number of select-all items in it. Select-all
    questions are drawn first so they are never crowded out, then the rest fill
    in, one concept each before any concept repeats. If the single-answer side
@@ -7461,8 +7613,11 @@ function refFigures(html){
 
 function renderDoc(el, html, prefix){
   // a jump list, built from the section headings that are actually present
-  const heads = [...html.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/g)]
-    .map(m => deEnt(m[1].replace(/<[^>]+>/g, '')).trim());
+  // a heading may carry data-nav with a fuller label for the jump list, so a
+  // short heading such as "Module 1 - Objective 1" still navigates by name
+  const heads = [...html.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>/g)]
+    .map(m => { const nav = /data-nav="([^"]*)"/.exec(m[1]);
+                return deEnt((nav ? nav[1] : m[2]).replace(/<[^>]+>/g, '')).trim(); });
   let i = 0;
   const body = html.replace(/<h3([^>]*)>/g, (m, attrs) => `<h3 id="${prefix}-${i++}"${attrs}>`);
   const nav = heads.length
@@ -7488,6 +7643,9 @@ function renderSettings(){
   const mode = DB.settings.mode || DEFAULT_MODE;
   $('#v-settings').innerHTML = `<h2>Settings</h2>
   <p class="sub">Progress is stored in this browser only, under the name “${esc(PROFILE)}”.</p>
+
+  ${COURSE.exams.length > 1 ? `<h3>Exam you are preparing for</h3>
+  ${examPicker('The exam simulator, Weak spots and the exam-weighted pass all follow this choice.')}` : ''}
 
   <h3>Review schedule</h3>
   <div class="filters">
@@ -7531,8 +7689,11 @@ function renderSettings(){
     right to keep profiles apart. Private/incognito windows and “clear site data” erase progress.
   </div>`;
 
-  $('#v-settings').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+  $('#v-settings').querySelectorAll('.chip[data-m]').forEach(b=>b.onclick=()=>{
     DB.settings.mode = b.dataset.m; save(); renderSettings();
+  });
+  $('#v-settings').querySelectorAll('.chip[data-exam]').forEach(b=>b.onclick=()=>{
+    chooseExam(+b.dataset.exam); renderSettings();
   });
   $('#btnExport').onclick = ()=>{
     const blob = new Blob([JSON.stringify({profile:PROFILE, db:DB}, null, 1)], {type:'application/json'});

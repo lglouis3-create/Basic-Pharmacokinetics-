@@ -76,7 +76,7 @@ h3{font-size:16px;margin:22px 0 8px}
 .subrow:hover{background:var(--surface)}
 .subrow .sname{flex:1;min-width:0;font-size:14.5px}
 .subrow .sname small{display:block;color:var(--text-dim);font-size:12px}
-.subrow button{
+.subrow button,.mrow button{
   background:var(--accent);color:#fff;border:0;border-radius:7px;padding:7px 13px;font-size:13px;font-weight:500
 }
 .subrow button.done{background:var(--ok)}
@@ -205,6 +205,25 @@ table.gap tr:last-child td{border-bottom:0}
 .reftab th,.reftab td{border:1px solid var(--line-soft);padding:8px 10px;text-align:left;vertical-align:top}
 .reftab th{background:var(--surface);font-size:12.5px;font-weight:600}
 .sweepcard{border-color:var(--accent);background:var(--accent-bg)}
+/* ---------- topics: module groups ---------- */
+.module{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px}
+.module>summary{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;list-style:none;font-size:16px;font-weight:700}
+.module>summary::-webkit-details-marker{display:none}
+.module>summary::before{content:"\25BE";color:var(--text-dim);font-size:13px;transition:transform .15s}
+.module:not([open])>summary::before{transform:rotate(-90deg)}
+.module .mname{flex:1;min-width:0}
+.module .mname small{display:block;font-weight:400;color:var(--text-dim);font-size:12.5px;margin-top:2px}
+.module .topic{margin:0 10px 10px;border-radius:8px}
+.module .mfoot{border-top:1px solid var(--line-soft);padding:6px 8px 10px;margin:0 10px 4px}
+.module .mrow{display:flex;align-items:center;gap:10px;padding:13px 14px;font-size:16px;font-weight:700}
+/* ---------- guides: what she said ---------- */
+ul.saidlist{list-style:none;margin:6px 0 0;padding:0}
+.said{margin:0 0 12px;padding:0}
+.said .lead{display:block;font-weight:600;font-size:13.5px;margin-bottom:3px}
+.said q{display:block;quotes:none;font-family:Georgia,"Iowan Old Style","Source Serif 4",serif;font-size:14.5px;line-height:1.55;
+  margin:4px 0;padding:6px 12px;border-left:3px solid var(--accent);background:var(--accent-bg);border-radius:0 6px 6px 0}
+.said q.para{border-left-style:dashed}
+.said .when{display:block;font-size:11.5px;color:var(--text-dim);letter-spacing:.02em;margin-top:2px}
 .sweepcard .subs{border-top:0}
 .sweepcard .subrow:hover{background:rgba(255,255,255,.5)}
 /* objective guides */
@@ -357,9 +376,18 @@ try {
    matched against question fields. Every key must match; an array value means
    "one of". Nothing here knows what a professor, a module or a tier is.
    ========================================================================== */
-const EXAM = COURSE.exams.find(e => e.id === COURSE.activeExam) || COURSE.exams[0];
-const POOLS = (EXAM && EXAM.pools) || [];
-const TOTAL_MARKS = POOLS.reduce((s, p) => s + (p.marks || 0), 0);
+let EXAM = null, POOLS = [], TOTAL_MARKS = 0, EXAM_SATA = 0;
+/* Which paper the drill is preparing for. COURSE.activeExam is the default;
+   a student can choose another (Exam view or Settings), and the choice is
+   kept with their progress. Every pool, weight and draw below follows it. */
+function setActiveExam(id){
+  EXAM = COURSE.exams.find(e => e.id === id)
+      || COURSE.exams.find(e => e.id === COURSE.activeExam) || COURSE.exams[0];
+  POOLS = (EXAM && EXAM.pools) || [];
+  TOTAL_MARKS = POOLS.reduce((s, p) => s + (p.marks || 0), 0);
+  EXAM_SATA = (EXAM && EXAM.sata) || 0;
+  invalidatePools();
+}
 
 function matchesPoolFilter(q, f){
   for(const k in (f || {})){
@@ -384,6 +412,7 @@ function poolQuestions(p){
   return _poolCache.get(p);
 }
 function invalidatePools(){ _poolCache = null; }
+setActiveExam(COURSE.activeExam);
 const poolKey = q => { const p = poolOf(q); return p ? p.key : '(off blueprint)'; };
 
 /* What one question in a pool is worth on the paper: the pool's share of the
@@ -569,6 +598,7 @@ function load(){
     const raw = LS.get(keyFor(PROFILE));
     DB = raw ? Object.assign(BLANK(), JSON.parse(raw)) : BLANK();
   }catch(e){ DB = BLANK(); }
+  setActiveExam(DB.settings.exam || COURSE.activeExam);
 }
 let saveTimer=null;
 function save(){

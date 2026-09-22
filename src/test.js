@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -73,6 +73,13 @@ else {
   }
   const keys = POOLS.map(p => p.key);
   if (new Set(keys).size !== keys.length) bad('two pools share a key');
+}
+/* Every exam can be chosen as the paper, so every blueprint has to add up,
+   not only the default one. */
+for (const e of COURSE.exams) {
+  const sum = (e.pools || []).reduce((s, p) => s + (p.marks || 0), 0);
+  if (sum !== e.questions) bad(`${e.name}: pool marks add to ${sum}, not its ${e.questions} questions`);
+  else console.log(`  ok    ${e.name}: ${e.pools.length} pools, ${sum} marks = ${e.questions} questions`);
 }
 
 console.log('\n=== 0b. Pool filter resolver ===');
@@ -385,6 +392,20 @@ console.log('\n=== 5. Exam simulation draw ===');
     console.log(`  ok    the paper carries all ${nSata} select-all items the bank holds; the blueprint asks for ${X.EXAM_SATA}, so ${X.EXAM_SATA - possible} cannot be drawn until more are written`);
   else
     console.log('  ok    the paper carries every select-all item the blueprint asks for');
+}
+
+console.log('\n=== 5b. Choosing another paper ===');
+{
+  const was = EXAM.id;
+  for (const e of COURSE.exams) {
+    X.setActiveExam(e.id);
+    const shares = X.poolShares();
+    const want = shares.reduce((s, o) => s + o.want, 0);
+    const drawn = shares.reduce((s, o) => s + Math.min(o.want, X.poolDrawable(o.pool).length), 0);
+    if (want !== e.questions) bad(`${e.name}: shares add to ${want}, not ${e.questions}`);
+    else console.log(`  ok    ${e.name}: ${shares.length} pools share ${want} places; the bank can fill ${drawn}`);
+  }
+  X.setActiveExam(was);
 }
 
 console.log('\n=== 6. Storage isolation ===');

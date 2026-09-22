@@ -129,6 +129,64 @@ function filterBar(){
   return h + `</div>`;
 }
 
+/* One topic's card: its subtopics, each with a Start button, then the whole
+   topic. Used on its own when the course has no outline, and inside a module
+   group when it has. */
+function topicCard(t){
+  const pool = poolFor(t.id, null);
+  if(!pool.length) return '';
+  const m = masteryOf(pool);
+  const pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
+  let h = `<details class="topic"${t.open?' open':''}>
+    <summary>
+      <span class="tname">${esc(t.name)}<small>${esc(t.cite||'')}</small></span>
+      ${profTag(t.prof)}
+      <span class="meter"><i style="width:${pct}%"></i></span>
+      <span class="counts">${m.mastered}/${m.total}</span>
+    </summary>
+    <div class="subs">`;
+  for(const s of (t.subs||[])){
+    const sp = poolFor(t.id, s.id);
+    if(!sp.length) continue;
+    const sm = masteryOf(sp);
+    const spct = sm.total ? Math.round(100*sm.mastered/sm.total) : 0;
+    const done = sm.total && sm.mastered === sm.total;
+    h += `<div class="subrow">
+      <span class="sname">${esc(s.name)}<small>${sp.length} questions · ${esc(s.cite||'')}</small></span>
+      <span class="meter"><i style="width:${spct}%"></i></span>
+      <button data-t="${t.id}" data-s="${s.id}" class="${done?'done':''}">${done?'Review':'Start'}</button>
+    </div>`;
+  }
+  h += `<div class="subrow" style="border-top:1px solid var(--line-soft);margin-top:4px;padding-top:11px">
+      <span class="sname"><b>Everything in ${esc(t.name)}</b><small>${pool.length} questions, mixed order</small></span>
+      <button data-t="${t.id}" data-s="">Start</button>
+    </div>`;
+  return h + `</div></details>`;
+}
+
+/* Which module a topic belongs to: the module most of its questions carry.
+   Read off the bank rather than written on the topic, so a topic cannot say
+   one module while its questions say another. */
+function moduleOfTopic(t){
+  const n = {};
+  QUESTIONS.forEach(q => { if(q.topic === t.id && q.module != null) n[q.module] = (n[q.module] || 0) + 1; });
+  const best = Object.keys(n).sort((a, b) => n[b] - n[a])[0];
+  return best === undefined ? null : +best;
+}
+
+/* The course outline the Topics view follows, from COURSE.topicsMenu. A module
+   entry gathers the topics whose questions carry its number; an exam entry and
+   a view entry pass through as they are. A course with no outline lists its
+   topics one after another. */
+function outline(){
+  if(!Array.isArray(COURSE.topicsMenu) || !COURSE.topicsMenu.length)
+    return TOPICS.map(t => ({topic: t}));
+  const mod = new Map(TOPICS.map(t => [t, moduleOfTopic(t)]));
+  return COURSE.topicsMenu.map(m => m.module != null
+    ? Object.assign({topics: TOPICS.filter(t => mod.get(t) === m.module)}, m) : m);
+}
+const examQuestions = id => poolFor(null, null).filter(q => q.exam === id);
+
 function renderTopics(){
   const shares = poolShares();
   const covered = shares.reduce((s,o)=> s + Math.min(o.want, poolQuestions(o.pool).length), 0);
@@ -137,7 +195,8 @@ function renderTopics(){
   <p class="sub">${esc(EXAM.name)} is ${EXAM.questions} questions in ${EXAM.minutes} minutes${
       EXAM.date ? ` on ${esc(EXAM.date)}` : ''}.
     ${EXAM.blurb ? esc(EXAM.blurb) + ' ' : ''}
-    Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.</p>`;
+    Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
+    COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
 
   h += filterBar();
 
@@ -158,37 +217,49 @@ function renderTopics(){
       <button id="sweepFiltered" class="ghost">Start</button></div>` : ''}
   </div></div>`;
 
-  for(const t of TOPICS){
-    const pool = poolFor(t.id, null);
-    if(!pool.length) continue;
-    const m = masteryOf(pool);
-    const pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
-    h += `<details class="topic"${t.open?' open':''}>
-      <summary>
-        <span class="tname">${esc(t.name)}<small>${esc(t.cite||'')}</small></span>
-        ${profTag(t.prof)}
-        <span class="meter"><i style="width:${pct}%"></i></span>
-        <span class="counts">${m.mastered}/${m.total}</span>
-      </summary>
-      <div class="subs">`;
+  for(const m of outline()){
+    if(m.topic){ h += topicCard(m.topic); continue; }
 
-    for(const s of (t.subs||[])){
-      const sp = poolFor(t.id, s.id);
-      if(!sp.length) continue;
-      const sm = masteryOf(sp);
-      const spct = sm.total ? Math.round(100*sm.mastered/sm.total) : 0;
-      const done = sm.total && sm.mastered === sm.total;
-      h += `<div class="subrow">
-        <span class="sname">${esc(s.name)}<small>${sp.length} questions · ${esc(s.cite||'')}</small></span>
-        <span class="meter"><i style="width:${spct}%"></i></span>
-        <button data-t="${t.id}" data-s="${s.id}" class="${done?'done':''}">${done?'Review':'Start'}</button>
-      </div>`;
+    if(m.view){
+      h += `<div class="module"><div class="mrow">
+        <span class="mname">${esc(m.name)}<small>${m.view === 'ref' ? 'Every equation with its symbols, units and when it applies' : ''}</small></span>
+        <button data-view="${esc(m.view)}">Open</button></div></div>`;
+      continue;
     }
-    h += `<div class="subrow" style="border-top:1px solid var(--line-soft);margin-top:4px;padding-top:11px">
-        <span class="sname"><b>Everything in ${esc(t.name)}</b><small>${pool.length} questions, mixed order</small></span>
-        <button data-t="${t.id}" data-s="">Start</button>
-      </div>`;
-    h += `</div></details>`;
+
+    if(m.exam != null){
+      const ex = COURSE.exams.find(e => e.id === m.exam);
+      const pool = examQuestions(m.exam);
+      if(!pool.length) continue;
+      const em = masteryOf(pool), epct = em.total ? Math.round(100*em.mastered/em.total) : 0;
+      h += `<details class="module"><summary>
+          <span class="mname">${esc(m.name)}<small>${pool.length} questions${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
+          <span class="meter"><i style="width:${epct}%"></i></span><span class="counts">${em.mastered}/${em.total}</span>
+        </summary><div class="mfoot">
+        <div class="subrow"><span class="sname"><b>Everything on ${ex ? esc(ex.name) : 'this exam'}, adaptive</b>
+          <small>Missed concepts first; stops when nothing is due</small></span>
+          <button data-exam="${m.exam}" data-how="adaptive">Start</button></div>
+        <div class="subrow"><span class="sname"><b>Straight pass</b>
+          <small>Every question once, shuffled, nothing held back by scheduling</small></span>
+          <button data-exam="${m.exam}" data-how="sweep">Start</button></div>
+        ${ex ? `<div class="subrow"><span class="sname"><b>Sit a practice paper</b>
+          <small>${ex.questions} questions in ${ex.minutes} minutes at the blueprint, no feedback until you submit</small></span>
+          <button data-exam="${m.exam}" data-how="paper">Open</button></div>` : ''}
+        </div></details>`;
+      continue;
+    }
+
+    const ts = m.topics || [];
+    const mpool = ts.flatMap(t => poolFor(t.id, null));
+    if(!mpool.length) continue;
+    const mm = masteryOf(mpool), mpct = mm.total ? Math.round(100*mm.mastered/mm.total) : 0;
+    h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
+        <span class="mname">${esc(m.name)}<small>${mpool.length} questions · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
+        <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
+      </summary>
+      ${ts.map(topicCard).join('')}
+      <div class="mfoot"><div class="subrow"><span class="sname"><b>Everything in ${esc(m.name)}</b><small>${mpool.length} questions, mixed order</small></span>
+        <button data-module="${m.module}">Start</button></div></div></details>`;
   }
 
   h += `<h3>Mixed drills</h3>
@@ -203,13 +274,26 @@ function renderTopics(){
       ${EXAM.questions} questions on the blueprint. The exam simulator says which pools are short.</p>`;
   }
 
-  $('#v-topics').innerHTML = h;
+  const el = $('#v-topics');
+  el.innerHTML = h;
 
-  $('#v-topics').querySelectorAll('.chip').forEach(b => b.onclick = () => {
+  el.querySelectorAll('.chip').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });
-  $('#v-topics').querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
+  el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
     startQuiz(b.dataset.t || null, b.dataset.s || null);
+  });
+  el.querySelectorAll('button[data-view]').forEach(b => b.onclick = () => show(b.dataset.view));
+  el.querySelectorAll('button[data-module]').forEach(b => b.onclick = () => {
+    const m = outline().find(o => o.module === +b.dataset.module);
+    if(m) startPool((m.topics || []).flatMap(t => poolFor(t.id, null)), m.name);
+  });
+  el.querySelectorAll('button[data-exam]').forEach(b => b.onclick = () => {
+    const id = +b.dataset.exam, ex = COURSE.exams.find(e => e.id === id);
+    const label = (ex ? ex.name : 'Exam') + ' recap';
+    if(b.dataset.how === 'paper'){ chooseExam(id); show('exam'); return; }
+    if(b.dataset.how === 'sweep') startSweepOf(examQuestions(id), label);
+    else startPool(examQuestions(id), label);
   });
   const sa = document.getElementById('sweepAll');
   const sw = document.getElementById('sweepWeighted'); if(sw) sw.onclick = () => startSweep('weighted');
@@ -224,11 +308,23 @@ function renderTopics(){
 let Q = null;     // {pool, label, current, order, answered, lastId, examMode}
 
 function startQuiz(topicId, subId){
-  const pool = poolFor(topicId, subId);
-  if(!pool.length){ alert('No questions match those filters.'); return; }
   const t = TOPICS.find(x=>x.id===topicId);
   const s = t && (t.subs||[]).find(x=>x.id===subId);
-  Q = {pool, label: s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything'),
+  startPool(poolFor(topicId, subId), s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything'));
+}
+/* An adaptive drill over any set of questions: the scheduler picks, missed
+   concepts return first, and it stops when nothing is due. */
+function startPool(pool, label){
+  if(!pool.length){ alert('No questions match those filters.'); return; }
+  Q = {pool, label, current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
+  nextQuestion();
+  show('quiz');
+}
+/* A fixed queue over any set of questions: each asked once, shuffled, with
+   no scheduling gate. `scope` names a startSweep scope that can be repeated. */
+function startSweepOf(pool, label, scope){
+  if(!pool.length){ alert('No questions match those filters.'); return; }
+  Q = {pool, label, scope, sweep: shuffle(pool.map(q => q.id)), i: 0,
        current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
@@ -260,14 +356,8 @@ function startSweep(scope){
   const pool = scope === 'filtered' ? poolFor(null, null)
              : scope === 'weighted' ? weightedPool()
              : QUESTIONS.slice();
-  if(!pool.length){ alert('No questions match those filters.'); return; }
-  Q = {pool, scope,
-       label: scope === 'filtered' ? 'Every question under these filters'
-            : scope === 'weighted' ? 'Exam-weighted pass' : 'Every question',
-       sweep: shuffle(pool.map(q => q.id)), i: 0,
-       current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
-  nextQuestion();
-  show('quiz');
+  startSweepOf(pool, scope === 'filtered' ? 'Every question under these filters'
+                   : scope === 'weighted' ? 'Exam-weighted pass' : 'Every question', scope);
 }
 
 function nextQuestion(){
@@ -871,6 +961,19 @@ function shortfallNote(cov){
     The missing marks are left off the paper rather than filled from another pool.</div>`;
 }
 
+/* Which paper to prepare for. Kept with the student's progress, so it survives
+   a reload; everything weighted by the blueprint follows it at once. */
+function chooseExam(id){
+  if(!COURSE.exams.some(e => e.id === id) || (EX && EX.running)) return;
+  DB.settings.exam = id; save();
+  setActiveExam(id);
+}
+function examPicker(note){
+  if(COURSE.exams.length < 2) return '';
+  return `<div class="filters"><div class="frow"><label>Paper</label>${COURSE.exams.map(e =>
+    `<button class="chip" data-exam="${e.id}" aria-pressed="${e.id === EXAM.id}">${esc(e.name)}</button>`).join('')}</div>
+    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">${note}</p></div>`;
+}
 function renderExam(){
   const el = $('#v-exam');
   if(EX && EX.running){ renderExamQ(); return; }
@@ -884,6 +987,7 @@ function renderExam(){
       ? `${EXAM_SATA} are select-all, marked all-or-nothing. `
       : `The blueprint asks for ${EXAM_SATA} select-all items and the bank holds ${sata.drawn}, so the paper carries ${sata.drawn}. `;
   el.innerHTML = `<h2>Exam simulation</h2>
+  ${examPicker('A paper from an earlier exam is drawn the same way, so Exam 1 can be sat again for the final. Weak spots and the exam-weighted pass follow this choice too.')}
   <p class="sub">${esc(EXAM.name)}: ${EXAM.questions} questions in ${EXAM.minutes} minutes, drawn at the
   blueprint — ${POOLS.map(p=>`${esc(p.name)} ${p.marks}`).join(' · ')} marks.
   ${sataLine}No explanations until you finish, same as the real thing.</p>
@@ -893,6 +997,7 @@ function renderExam(){
   <p><button class="btn" id="startExam">Start the ${EXAM.minutes}-minute paper${
     nPaper < EXAM.questions ? ` (${nPaper} questions available)` : ''}</button></p>`;
   $('#startExam').onclick = beginExam;
+  el.querySelectorAll('.chip[data-exam]').forEach(b => b.onclick = () => { chooseExam(+b.dataset.exam); renderExam(); });
 }
 /* A question marked dupOf:'x' tests the same fact as question x, so a paper
    never carries both: taking either one blocks the other. */
@@ -913,9 +1018,6 @@ function drawN(pool, n, blocked){
   }
   return picked.slice(0,n);
 }
-/* How many of the paper are select-all, from the manifest. */
-const EXAM_SATA = EXAM.sata || 0;
-
 /* Draw n from a pool with a target number of select-all items in it. Select-all
    questions are drawn first so they are never crowded out, then the rest fill
    in, one concept each before any concept repeats. If the single-answer side
@@ -1095,8 +1197,11 @@ function refFigures(html){
 
 function renderDoc(el, html, prefix){
   // a jump list, built from the section headings that are actually present
-  const heads = [...html.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/g)]
-    .map(m => deEnt(m[1].replace(/<[^>]+>/g, '')).trim());
+  // a heading may carry data-nav with a fuller label for the jump list, so a
+  // short heading such as "Module 1 - Objective 1" still navigates by name
+  const heads = [...html.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>/g)]
+    .map(m => { const nav = /data-nav="([^"]*)"/.exec(m[1]);
+                return deEnt((nav ? nav[1] : m[2]).replace(/<[^>]+>/g, '')).trim(); });
   let i = 0;
   const body = html.replace(/<h3([^>]*)>/g, (m, attrs) => `<h3 id="${prefix}-${i++}"${attrs}>`);
   const nav = heads.length
@@ -1122,6 +1227,9 @@ function renderSettings(){
   const mode = DB.settings.mode || DEFAULT_MODE;
   $('#v-settings').innerHTML = `<h2>Settings</h2>
   <p class="sub">Progress is stored in this browser only, under the name “${esc(PROFILE)}”.</p>
+
+  ${COURSE.exams.length > 1 ? `<h3>Exam you are preparing for</h3>
+  ${examPicker('The exam simulator, Weak spots and the exam-weighted pass all follow this choice.')}` : ''}
 
   <h3>Review schedule</h3>
   <div class="filters">
@@ -1165,8 +1273,11 @@ function renderSettings(){
     right to keep profiles apart. Private/incognito windows and “clear site data” erase progress.
   </div>`;
 
-  $('#v-settings').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+  $('#v-settings').querySelectorAll('.chip[data-m]').forEach(b=>b.onclick=()=>{
     DB.settings.mode = b.dataset.m; save(); renderSettings();
+  });
+  $('#v-settings').querySelectorAll('.chip[data-exam]').forEach(b=>b.onclick=()=>{
+    chooseExam(+b.dataset.exam); renderSettings();
   });
   $('#btnExport').onclick = ()=>{
     const blob = new Blob([JSON.stringify({profile:PROFILE, db:DB}, null, 1)], {type:'application/json'});
