@@ -53,15 +53,19 @@ class Plot:
     """A single panel with linear x and either a linear or a decade y axis."""
 
     def __init__(self, xmax, yticks, log=False, xlabel='Time (hours)',
-                 ylabel='Plasma drug concentration', xticks=None):
+                 ylabel='Plasma drug concentration', xticks=None,
+                 w=W, h=H, l=L, r=R, t=T, b=B, fs=1.0):
         self.xmax, self.log, self.yticks = xmax, log, yticks
         self.xlabel, self.ylabel = xlabel, ylabel
         self.xticks = xticks if xticks is not None else yticks and None
         self.ymin, self.ymax = min(yticks), max(yticks)
+        self.W, self.H, self.L, self.R, self.T, self.B = w, h, l, r, t, b
+        self.PW, self.PH = w - l - r, h - t - b
+        self.fs = fs                      # type scale, so a tall figure reads on a phone
         self.parts = []
 
     def px(self, x):
-        return L + PW * x / self.xmax
+        return self.L + self.PW * x / self.xmax
 
     def py(self, y):
         if self.log:
@@ -70,29 +74,29 @@ class Plot:
             f = (math.log10(y) - lo) / (hi - lo)
         else:
             f = (y - self.ymin) / (self.ymax - self.ymin)
-        return T + PH * (1 - f)
+        return self.T + self.PH * (1 - f)
 
     def frame(self, xticks):
         p = []
         for y in self.yticks:                      # recessive horizontal grid
             yy = self.py(y)
-            p.append(f'<line x1="{L}" y1="{yy:.1f}" x2="{L+PW}" y2="{yy:.1f}" '
+            p.append(f'<line x1="{self.L}" y1="{yy:.1f}" x2="{self.L+self.PW}" y2="{yy:.1f}" '
                      f'stroke="{GRID}" stroke-width="1"/>')
             lab = ('%g' % y)
-            p.append(f'<text x="{L-11}" y="{yy+4:.1f}" text-anchor="end" '
-                     f'font-size="13" fill="{DIM}">{lab}</text>')
+            p.append(f'<text x="{self.L-11}" y="{yy+4:.1f}" text-anchor="end" '
+                     f'font-size="{13*self.fs:.1f}" fill="{DIM}">{lab}</text>')
         for x in xticks:
             xx = self.px(x)
-            p.append(f'<line x1="{xx:.1f}" y1="{T+PH}" x2="{xx:.1f}" y2="{T+PH+6}" '
+            p.append(f'<line x1="{xx:.1f}" y1="{self.T+self.PH}" x2="{xx:.1f}" y2="{self.T+self.PH+6}" '
                      f'stroke="{AXIS}" stroke-width="1"/>')
-            p.append(f'<text x="{xx:.1f}" y="{T+PH+24}" text-anchor="middle" '
-                     f'font-size="13" fill="{DIM}">{"%g" % x}</text>')
-        p.append(f'<line x1="{L}" y1="{T}" x2="{L}" y2="{T+PH}" stroke="{AXIS}" stroke-width="1.5"/>')
-        p.append(f'<line x1="{L}" y1="{T+PH}" x2="{L+PW}" y2="{T+PH}" stroke="{AXIS}" stroke-width="1.5"/>')
-        p.append(f'<text x="{L+PW/2:.0f}" y="{H-14}" text-anchor="middle" '
-                 f'font-size="14" fill="{INK}">{esc(self.xlabel)}</text>')
-        p.append(f'<text x="18" y="{T+PH/2:.0f}" text-anchor="middle" font-size="14" '
-                 f'fill="{INK}" transform="rotate(-90 18 {T+PH/2:.0f})">{esc(self.ylabel)}</text>')
+            p.append(f'<text x="{xx:.1f}" y="{self.T+self.PH+24}" text-anchor="middle" '
+                     f'font-size="{13*self.fs:.1f}" fill="{DIM}">{"%g" % x}</text>')
+        p.append(f'<line x1="{self.L}" y1="{self.T}" x2="{self.L}" y2="{self.T+self.PH}" stroke="{AXIS}" stroke-width="1.5"/>')
+        p.append(f'<line x1="{self.L}" y1="{self.T+self.PH}" x2="{self.L+self.PW}" y2="{self.T+self.PH}" stroke="{AXIS}" stroke-width="1.5"/>')
+        p.append(f'<text x="{self.L+self.PW/2:.0f}" y="{self.H-14}" text-anchor="middle" '
+                 f'font-size="{14*self.fs:.1f}" fill="{INK}">{esc(self.xlabel)}</text>')
+        p.append(f'<text x="18" y="{self.T+self.PH/2:.0f}" text-anchor="middle" font-size="{14*self.fs:.1f}" '
+                 f'fill="{INK}" transform="rotate(-90 18 {self.T+self.PH/2:.0f})">{esc(self.ylabel)}</text>')
         self.parts = p + self.parts
         return self
 
@@ -119,14 +123,14 @@ class Plot:
 
     def hline(self, y, color=DIM, dash='5 4'):
         yy = self.py(y)
-        self.parts.append(f'<line x1="{L}" y1="{yy:.1f}" x2="{L+PW}" y2="{yy:.1f}" '
+        self.parts.append(f'<line x1="{self.L}" y1="{yy:.1f}" x2="{self.L+self.PW}" y2="{yy:.1f}" '
                           f'stroke="{color}" stroke-width="1.5" stroke-dasharray="{dash}"/>')
         return self
 
     def vline(self, x, y, color=DIM, dash='5 4'):
         xx = self.px(x)
         self.parts.append(f'<line x1="{xx:.1f}" y1="{self.py(y):.1f}" x2="{xx:.1f}" '
-                          f'y2="{T+PH}" stroke="{color}" stroke-width="1.5" stroke-dasharray="{dash}"/>')
+                          f'y2="{self.T+self.PH}" stroke="{color}" stroke-width="1.5" stroke-dasharray="{dash}"/>')
         return self
 
     def label(self, x, y, text, color=None, anchor='start', dy=0, swatch=False):
@@ -139,19 +143,19 @@ class Plot:
                               f'y2="{yy-4:.1f}" stroke="{color}" stroke-width="3" stroke-linecap="round"/>')
             tx = xx + 25
         self.parts.append(f'<text x="{tx:.1f}" y="{yy:.1f}" text-anchor="{anchor}" '
-                          f'font-size="13.5" fill="{INK}">{esc(text)}</text>')
+                          f'font-size="{13.5*self.fs:.1f}" fill="{INK}">{esc(text)}</text>')
         return self
 
     def note(self, text):
-        self.parts.append(f'<text x="{L}" y="{T-6}" font-size="12.5" fill="{DIM}">{esc(text)}</text>')
+        self.parts.append(f'<text x="{self.L}" y="{self.T-6}" font-size="{12.5*self.fs:.1f}" fill="{DIM}">{esc(text)}</text>')
         return self
 
     def svg(self, title):
         body = '\n'.join(self.parts)
-        return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
-                f'width="{W}" height="{H}" role="img" aria-label="{esc(title)}">'
+        return (f'<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 {self.W} {self.H}" '
+                f'width="{self.W}" height="{self.H}" role="img" aria-label="{esc(title)}">'
                 f'<title>{esc(title)}</title>'
-                f'<rect width="{W}" height="{H}" fill="#FFFFFF"/>\n{body}\n</svg>')
+                f'<rect width="{self.W}" height="{self.H}" fill="#FFFFFF"/>\n{body}\n</svg>')
 
 
 # --------------------------------------------------------------------------
@@ -278,6 +282,102 @@ p = Plot(24, [0.1, 1, 10, 100], log=True)
 p.frame([0, 4, 8, 12, 16, 20, 24]).curve(oral, x0=0.05)
 fig('oral_semilog', 'Concentration after a single oral dose on an axis marked 0.1, 1, 10, 100',
     p.svg('Semi-logarithmic plot after a single oral dose'))
+
+
+# ---- what a rate constant is, against what a rate is ---------------------
+# The amount in the body against time for two doses of the same drug. The
+# dotted segment at a point is the slope there, which is the rate leaving at
+# that moment. Doubling the dose doubles that rate and leaves the constant
+# alone, and the proof sits on the figure: once the larger dose has decayed to
+# the smaller one's starting amount, it is losing drug at the smaller one's
+# starting rate.
+KEL = 0.2
+p = Plot(14, [0, 50, 100, 150, 200], xlabel='Time (hours)',
+         ylabel='Amount of drug in the body (mg)', w=760, h=500, l=96, r=30, t=86, b=70, fs=1.2)
+p.frame([0, 2, 4, 6, 8, 10, 12, 14])
+
+
+def tangent(pl, a0, t0, color, span=2.6):
+    """A segment carrying the slope the curve has at t0. Drawn forward only, so
+    it never runs off the top of the panel at time zero."""
+    a = a0 * math.exp(-KEL * t0)
+    slope = -KEL * a
+    x2, y2 = t0 + span, a + slope * span
+    pl.parts.append(f'<line x1="{pl.px(t0):.1f}" y1="{pl.py(a):.1f}" x2="{pl.px(x2):.1f}" '
+                    f'y2="{pl.py(y2):.1f}" stroke="{color}" stroke-width="2.5" '
+                    f'stroke-linecap="round" stroke-dasharray="1 5"/>')
+    pl.parts.append(f'<circle cx="{pl.px(t0):.1f}" cy="{pl.py(a):.1f}" r="6" fill="{color}" '
+                    f'stroke="#FFFFFF" stroke-width="2"/>')
+
+
+p.curve(lambda t: 200 * math.exp(-KEL * t), color=AMBER)
+p.curve(lambda t: 100 * math.exp(-KEL * t), color=BLUE)
+tangent(p, 200, 0, AMBER)
+tangent(p, 200, math.log(2) / KEL, AMBER)
+tangent(p, 100, 0, BLUE)
+p.label(9.4, 62, '200 mg dose', color=AMBER, swatch=True)
+p.label(9.4, 34, '100 mg dose', color=BLUE, swatch=True)
+p.label(2.9, 176, '40 mg/hr leaving')
+p.label(4.5, 108, '20 mg/hr leaving')
+p.label(2.5, 74, '20 mg/hr leaving')
+p.parts.append(f'<text x="96" y="30" font-size="17.5" font-weight="600" fill="{INK}">'
+               f'The same drug at two doses</text>')
+p.parts.append(f'<text x="96" y="52" font-size="15.5" fill="{DIM}">Each dotted segment is how fast '
+               f'drug is leaving at that moment: the rate, in mg/hr.</text>')
+p.parts.append(f'<text x="96" y="72" font-size="15.5" fill="{DIM}">At all three marked points '
+               f'rate \u00f7 amount = 0.2 per hour. That unchanging ratio is k.</text>')
+fig('rate_vs_constant', 'Amount in the body against time for two doses, with the rate of loss marked at three points',
+    p.svg('Amount against time for two doses with the rate of loss marked at three points'))
+
+# ---- what each constant does to the curve --------------------------------
+# Three panels, each holding the unchanged drug as a faint reference, so one
+# change is compared at a time rather than four curves at once.
+FB, DB, VB, KAB, KB = 1.0, 100.0, 20.0, 1.0, 0.2
+
+
+def oral_of(F, D, V, ka, k):
+    pre = F * D * ka / (V * (ka - k))
+    return (lambda t: pre * (math.exp(-k * t) - math.exp(-ka * t)),
+            math.log(ka / k) / (ka - k), F * D / (V * k))
+
+
+base_fn, base_tmax, base_auc = oral_of(FB, DB, VB, KAB, KB)
+base_cmax = base_fn(base_tmax)
+PANEL = [('Dose doubled, k\u2090 and k unchanged', (FB, 2 * DB, VB, KAB, KB),
+          'Twice the drug, same two constants'),
+         ('Absorption constant k\u2090 doubled', (FB, DB, VB, 2 * KAB, KB),
+          'Drug goes in twice as fast, leaves at the same constant'),
+         ('Elimination constant k doubled', (FB, DB, VB, KAB, 2 * KB),
+          'Drug goes in at the same constant, leaves twice as fast')]
+PH_, PW_ = 350, 760
+parts = [f'<rect width="{PW_}" height="{PH_*3}" fill="#FFFFFF"/>']
+for i, (title, args, caption) in enumerate(PANEL):
+    fn, tmax, auc = oral_of(*args)
+    cmax = fn(tmax)
+    pan = Plot(12, [0, 2, 4, 6, 8], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+               w=PW_, h=PH_, l=90, r=26, t=84, b=62, fs=1.1)
+    pan.frame([0, 2, 4, 6, 8, 10, 12])
+    pan.curve(base_fn, color=DIM, dash='5 5')          # the unchanged drug, recessive
+    pan.curve(fn, color=BLUE)
+    pan.vline(tmax, cmax)
+    pan.points([tmax], [cmax])
+    pan.label(7.0, 7.3, 'unchanged drug', color=DIM, swatch=True)
+    pan.parts.append(f'<text x="90" y="26" font-size="18" font-weight="600" fill="{INK}">{esc(title)}</text>')
+    pan.parts.append(f'<text x="90" y="46" font-size="15" fill="{DIM}">{esc(caption)}</text>')
+    pan.parts.append(
+        f'<text x="90" y="68" font-size="15" fill="{INK}">'
+        f'C\u2098\u2090\u2093 {cmax:.1f} mg/L (was {base_cmax:.1f}) \u00b7 '
+        f't\u2098\u2090\u2093 {tmax:.1f} hr (was {base_tmax:.1f}) \u00b7 '
+        f'AUC {auc:g} (was {base_auc:g})</text>')
+    inner = '\n'.join(pan.parts)
+    parts.append(f'<g transform="translate(0,{i*PH_})">{inner}</g>')
+body = '\n'.join(parts)
+FIGS['ka_k_effects'] = (
+    'Three panels: doubling the dose, doubling the absorption rate constant, and doubling the elimination rate constant',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {PW_} {PH_*3}" width="{PW_}" '
+    f'height="{PH_*3}" role="img" aria-label="Effect of dose, absorption rate constant and '
+    f'elimination rate constant on the oral curve"><title>Effect of dose, ka and k on the oral '
+    f'concentration curve</title>{body}</svg>')
 
 
 def main():

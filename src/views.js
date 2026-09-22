@@ -31,9 +31,9 @@ const GLOSS = [
    are how a set of relations between the same few quantities is read: as a
    list of separate statements rather than one sentence carrying all of them. */
 const teachParts = t => Array.isArray(t)
-  ? t.filter(p => p && (p.t || (p.list && p.list.length)))
-      .map(p => ({h: p.h, t: p.t ? String(p.t) : '', list: (p.list || []).map(String)}))
-  : (t ? [{t: String(t), list: []}] : []);
+  ? t.filter(p => p && (p.t || p.fig || (p.list && p.list.length)))
+      .map(p => ({h: p.h, t: p.t ? String(p.t) : '', list: (p.list || []).map(String), fig: p.fig || ''}))
+  : (t ? [{t: String(t), list: [], fig: ''}] : []);
 /* Everything a concept block says, as one string: each section's prose and its
    bullets, so the term glosser and every check see the whole of it. */
 const teachText  = t => teachParts(t).map(p => [p.t, ...p.list].filter(Boolean).join(' ')).join(' ');
@@ -43,7 +43,8 @@ function renderTeach(t, seen, self){
   return teachParts(t).map(p =>
     (p.h ? `<h5 class="tsec">${esc(p.h)}</h5>` : '') +
     (p.t ? `<p class="prose">${gl(p.t)}</p>` : '') +
-    (p.list.length ? `<ul class="tlist">${p.list.map(li => `<li>${gl(li)}</li>`).join('')}</ul>` : '')
+    (p.list.length ? `<ul class="tlist">${p.list.map(li => `<li>${gl(li)}</li>`).join('')}</ul>` : '') +
+    (p.fig && IMAGES[p.fig] ? `<img class="qimg tdimg" src="${IMAGES[p.fig]}" alt="Figure for this explanation">` : '')
   ).join('');
 }
 

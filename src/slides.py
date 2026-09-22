@@ -37,6 +37,18 @@ WIDTH = 880           # rendered width in pixels
 QUALITY = 62          # WebP quality
 MAX_PRINTED = 60      # a footer number larger than this is a date or a stray
 
+# Regions painted out of a rendered slide, as fractions of the page
+# (left, top, right, bottom). Used where a handwritten note on the slide
+# contradicts what the question keys, which would leave a reader holding two
+# answers with nothing to choose between them. Nothing else on the slide is
+# touched, and a note on the question says what was covered and why.
+MASKS = {
+    # "Changing Dose": the third bullet of the handwritten block reads "rate
+    # constant increases". Raising the dose raises the rates of absorption and
+    # elimination; ka and k do not move. m5-c22 keys exactly that distinction.
+    ('5---Pharmacokinetics-of-Oral-Absorption.pdf', 18): [(0.706, 0.383, 0.851, 0.428)],
+}
+
 QUESTION_FILES = ['q1_module1.js', 'q2_module2.js', 'q3_module3.js',
                   'q4_module4.js', 'q5_module5.js', 'q6_figures.js']
 ARRAYS = ['Q_MODULE1', 'Q_MODULE2', 'Q_MODULE3', 'Q_MODULE4', 'Q_MODULE5', 'Q_FIGURES']
@@ -140,6 +152,7 @@ def main():
 
     import pymupdf
     import PIL.Image
+    import PIL.ImageDraw
 
     files = sorted(f for f in os.listdir(DECKS) if f.lower().endswith('.pdf'))
     index = {f: deck_index(os.path.join(DECKS, f)) for f in files}
@@ -184,6 +197,10 @@ def main():
         s = WIDTH / pg.rect.width
         pix = pg.get_pixmap(matrix=pymupdf.Matrix(s, s))
         img = PIL.Image.frombytes('RGB', (pix.width, pix.height), pix.samples)
+        for x0, y0, x1, y1 in MASKS.get((deck, page), []):
+            PIL.ImageDraw.Draw(img).rectangle(
+                [int(x0 * img.width), int(y0 * img.height),
+                 int(x1 * img.width), int(y1 * img.height)], fill='white')
         buf = io.BytesIO()
         img.save(buf, 'WEBP', quality=QUALITY, method=6)
         raw = buf.getvalue()

@@ -132,6 +132,9 @@ for (const q of QUESTIONS) {
   // A slide_* image is rendered by slides.py from the decks, which are not in
   // the repository. Its absence means the build was made without them, not
   // that the bank is wrong; any other missing figure is a fault.
+  for (const p of (Array.isArray(q.teach) ? q.teach : [])) {
+    if (p && p.fig && !IMAGES[p.fig]) bad(`${q.id}: concept block names missing figure "${p.fig}"`);
+  }
   if (q.teachImg && !IMAGES[q.teachImg]) {
     if (/^slide_/.test(q.teachImg)) warn(`${q.id}: slide image "${q.teachImg}" not in this build`);
     else bad(`${q.id}: references missing teachImg "${q.teachImg}"`);
