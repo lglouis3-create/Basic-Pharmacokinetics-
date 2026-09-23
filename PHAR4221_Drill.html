@@ -83,6 +83,18 @@ h3{font-size:16px;margin:22px 0 8px}
   background:var(--accent);color:#fff;border:0;border-radius:7px;padding:7px 13px;font-size:13px;font-weight:500
 }
 .subrow button.done{background:var(--ok)}
+/* A start row whose kind is the mixed one: present, but not the first choice */
+.subrow button.ghost{background:var(--paper);color:var(--text);border:1px solid var(--line)}
+/* The concepts / calculations / everything rows at the foot of a topic */
+.ksplit{border-top:1px solid var(--line-soft);margin-top:4px;padding-top:5px}
+/* The problem-set rows inside a module, and their one-line heading */
+.setnote{font-size:12.5px;color:var(--text-dim);margin:4px 8px 2px;line-height:1.45}
+/* The vignette a problem set shares, above the stem of each of its parts */
+.cset{font-size:13.5px;color:var(--text-dim);margin:0 0 9px;padding-left:9px;
+  border-left:3px solid var(--line)}
+/* A sentence that carries an action: styled as text, not as a control */
+.linkish{background:0;border:0;padding:0;color:var(--accent);font:inherit;
+  text-decoration:underline;cursor:pointer}
 .meter{height:5px;background:var(--line-soft);border-radius:3px;overflow:hidden;width:64px;flex:none}
 .meter i{display:block;height:100%;background:var(--ok)}
 .counts{font-size:11.5px;color:var(--text-dim);white-space:nowrap;min-width:52px;text-align:right}
@@ -500,28 +512,33 @@ const COURSE = {
 
   activeExam: 2,
 
-  /* What a question asks you to DO. The four conceptual skills come first,
-     then the calculation types, which follow how Dr. Mosley's own practice
-     sets are organised (see STYLE.md). Weak spots reports accuracy per skill,
-     so a student who can state every definition but keeps losing marks on
-     unit conversion sees exactly that. */
+  /* What a question asks you to DO. `kind` is 'concept' where the skill is a
+     way of understanding and 'calc' where it is a way of computing; the drill
+     reads it to offer concepts and calculations as separate drills, since
+     which of the two a student needs to review is rarely the same on a given
+     evening. The kind is not the whole story on its own: a question is a
+     calculation when answering it means producing a number, so a numeric
+     question is one whatever its skill, and a matching question is one only
+     where a calculation skill is matched to computed values. Weak spots
+     reports accuracy per skill, so a student who can state every definition
+     but keeps losing marks on unit conversion sees exactly that. */
   skills: [
-    {id: 'recall',    label: 'Recall a definition or fact',            short: 'Recall'},
-    {id: 'tell',      label: 'Tell two similar things apart',          short: 'Tell apart'},
-    {id: 'read',      label: 'Read a graph, table or equation',        short: 'Read'},
-    {id: 'apply',     label: 'Reason about a patient or a change',     short: 'Apply'},
+    {id: 'recall',    label: 'Recall a definition or fact',            short: 'Recall',    kind: 'concept'},
+    {id: 'tell',      label: 'Tell two similar things apart',          short: 'Tell apart', kind: 'concept'},
+    {id: 'read',      label: 'Read a graph, table or equation',        short: 'Read',      kind: 'concept'},
+    {id: 'apply',     label: 'Reason about a patient or a change',     short: 'Apply',     kind: 'concept'},
 
-    {id: 'order',     label: 'Decide the order from a data set',       short: 'Order'},
-    {id: 'krate',     label: 'Rate constant and half-life',            short: 'k and t½'},
-    {id: 'conctime',  label: 'Concentration or amount at a time',      short: 'C at t'},
-    {id: 'vddose',    label: 'Volume of distribution and dose',        short: 'Vd, dose'},
-    {id: 'auc',       label: 'AUC and the trapezoidal rule',           short: 'AUC'},
-    {id: 'multicpt',  label: 'Two-compartment parameters',             short: '2-cpt'},
-    {id: 'infusion',  label: 'Infusion rate and steady state',         short: 'Infusion'},
-    {id: 'loading',   label: 'Loading dose',                           short: 'Loading'},
-    {id: 'clearance', label: 'Clearance — total, renal and hepatic',   short: 'Clearance'},
-    {id: 'crcl',      label: 'Creatinine clearance and ideal weight',  short: 'CrCl'},
-    {id: 'oral',      label: 'Oral absorption — Cmax, tmax, ka',       short: 'Oral'},
+    {id: 'order',     label: 'Decide the order from a data set',       short: 'Order',     kind: 'calc'},
+    {id: 'krate',     label: 'Rate constant and half-life',            short: 'k and t½',  kind: 'calc'},
+    {id: 'conctime',  label: 'Concentration or amount at a time',      short: 'C at t',    kind: 'calc'},
+    {id: 'vddose',    label: 'Volume of distribution and dose',        short: 'Vd, dose',  kind: 'calc'},
+    {id: 'auc',       label: 'AUC and the trapezoidal rule',           short: 'AUC',       kind: 'calc'},
+    {id: 'multicpt',  label: 'Two-compartment parameters',             short: '2-cpt',     kind: 'calc'},
+    {id: 'infusion',  label: 'Infusion rate and steady state',         short: 'Infusion',  kind: 'calc'},
+    {id: 'loading',   label: 'Loading dose',                           short: 'Loading',   kind: 'calc'},
+    {id: 'clearance', label: 'Clearance — total, renal and hepatic',   short: 'Clearance', kind: 'calc'},
+    {id: 'crcl',      label: 'Creatinine clearance and ideal weight',  short: 'CrCl',      kind: 'calc'},
+    {id: 'oral',      label: 'Oral absorption — Cmax, tmax, ka',       short: 'Oral',      kind: 'calc'},
   ],
 
   paceDefault: 'weekly',
@@ -642,6 +659,108 @@ const TOPICS = [
     cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf slide 2, bullet 4'}]},
 ];
 
+
+/* ==========================================================================
+   PROBLEM SETS
+   ==========================================================================
+   Dr. Mosley sets most of her calculations as one vignette asked in parts,
+   where a part uses what the part before it produced: the rate constant found
+   in (a) becomes the half-life in (b), the half-life feeds the time for 99.9
+   per cent in (h), and she flags the dependency in words — "at the rate you
+   determined above", "the drug in question #1" (STYLE.md, habit 7). Working a
+   set straight through is a different exercise from meeting one part cold,
+   because a wrong answer early carries into every part after it.
+
+   Each part is still written to stand on its own, restating the value it
+   needs, so the scheduler can ask any one of them in isolation and a student
+   who missed (a) is not blocked from (f). This table only records the order
+   she asks them in and the vignette they share.
+
+   `parts` is question ids in her order. `name` is what the set is, `setup` is
+   the vignette in one line, and `module` places it in the Topics view.
+   test.js checks that every id here exists and that no part is listed twice.
+   ========================================================================== */
+const CHAINS = [
+ {id:'m1-first', module:1, name:'Decomposition of a drug solution, first order',
+  setup:'One table of six samples over 48 hours, worked through to the time for 90 per cent',
+  parts:['m1-ord-n01','m1-ord-n02','m1-ord-n03','m1-ord-n04']},
+
+ {id:'m1-zero', module:1, name:'The same experiment, zero order',
+  setup:'Her identical stem with numbers that make the decomposition zero order, in four parts',
+  parts:['m1-ord-n05','m1-ord-n17','m1-ord-n06','m1-ord-n18']},
+
+ {id:'m1-antibiotic', module:1, name:'An antibiotic dissolved in purified water',
+  setup:'Aliquots assayed over 16 hours, ending in the volume the solution was made up to',
+  parts:['m1-ord-n09','m1-ord-n10']},
+
+ {id:'m1-30days', module:1, name:'A solution assayed after 30 days, read both ways',
+  setup:'The same two concentrations taken first as first order and then as zero order',
+  parts:['m1-ord-n14','m1-ord-n15']},
+
+ {id:'m1-auc', module:1, name:'Area under the curve from one table of plasma levels',
+  setup:'Six plasma levels, with the trapezoidal rule applied over two different intervals',
+  parts:['m1-auc-n02','m1-auc-n01']},
+
+ {id:'m2-table', module:2, name:'IV bolus from a concentration–time table (a–h)',
+  setup:'50 mg to a 70-kg patient, six samples over 3 hours, her eight-part battery in her order',
+  parts:['m2-n-k1','m2-n-t1','m2-n-c0a','m2-n-c15','m2-n-vd1','m2-n-cl1','m2-n-d3a','m2-n-999a']},
+
+ {id:'m2-points', module:2, name:'IV bolus from two plasma points (a–h)',
+  setup:'250 mg of an antibiotic, two concentrations in prose, the same eight parts',
+  parts:['m2-n-k2','m2-n-t2','m2-n-c0b','m2-n-c15b','m2-n-vd2','m2-n-cl3','m2-n-d3b','m2-n-999b']},
+
+ {id:'m3-theophylline', module:3, name:'Theophylline by continuous infusion',
+  setup:'The plateau at 50 mg/hr, then the rate that would reach a different plateau',
+  parts:['inf-n1','inf-n2']},
+
+ {id:'m3-150mg', module:3, name:'150 mg infused over 6 hours',
+  setup:'The concentration at the end of the infusion, then 3 hours after it stops',
+  parts:['inf-n6','inf-n7']},
+
+ {id:'m3-agent24', module:3, name:'An agent targeted at 24 mg/L',
+  setup:'Rate, loading dose, the climb at 10 hours and the decay after an early stop',
+  parts:['inf-n10','inf-n12','inf-n11','inf-n13']},
+
+ {id:'m3-inclass', module:3, name:'Recommend a rate and a loading dose, then four scenarios',
+  setup:'Css 20 mg/L, t½ 5 hr, VD 16 L — with the loading dose and without it, side by side',
+  parts:['inf-n14','inf-n19','inf-n20','inf-n21','inf-n15']},
+
+ {id:'m3-3days', module:3, name:'A loading dose with a 75 mg/hr infusion for 3 days',
+  setup:'Where the 500 mg loading dose in her stem is not the appropriate one',
+  parts:['inf-n22','inf-n23','inf-n24','inf-n25','inf-n26']},
+
+ {id:'m3-female', module:3, name:'A 35-year-old, 65-kg patient on infusion',
+  setup:'The rate from a volume stated as a percentage of body weight, then the time to 95 per cent',
+  parts:['inf-n17','inf-n16']},
+
+ {id:'m4-battery', module:4, name:'500 mg IV bolus with a 48-hour urine collection',
+  setup:'Her six-part battery: fe, k, ke, then total, renal and hepatic clearance',
+  parts:['m4-n-fe','m4-n-k','m4-n-ke','m4-n-clt','m4-n-clr','m4-n-clh']},
+
+ {id:'m4-antibiotic', module:4, name:'An antibiotic secreted by the kidney, before and after renal failure',
+  setup:'k and half-life at a clearance of 750 mL/min, then the half-life at 150 mL/min',
+  parts:['m4-n-abk','m4-n-ab1','m4-n-ab2']},
+
+ {id:'m4-crcl', module:4, name:'Creatinine clearance for a 45-year-old female',
+  setup:'Height in centimetres to inches, then ideal body weight, then Cockcroft–Gault',
+  parts:['m4-n-inches','m4-n-ibwf','m4-n-crcl']},
+
+ {id:'m5-investigational', module:5, name:'An investigational drug given as a 500-mg oral dose',
+  setup:'The two rate constants, then tmax and Cmax, then Cmax when the dose is doubled',
+  parts:['m5-n01','m5-n02','m5-n03','m5-n04','m5-n19']},
+
+ {id:'m5-antibiotic', module:5, name:'An oral antibiotic given by its two-exponential equation',
+  setup:'Cp = 75(e^(−0.22t) − e^(−2.75t)), read for both half-lives, the peak, the volume and a later point',
+  parts:['m5-n05','m5-n06','m5-n07','m5-n08','m5-n09','m5-n10']},
+
+ {id:'m5-750', module:5, name:'A 750-mg oral dose given by its equation',
+  setup:'Cp = 23.2(e^(−0.182t) − e^(−0.872t)), read for the half-life, the peak and the volume',
+  parts:['m5-n16','m5-n17','m5-n18','m5-n15']},
+
+ {id:'m5-500', module:5, name:'A 500-mg oral dose, 88 per cent bioavailable',
+  setup:'The absorption rate constant, tmax and Cmax, then Cmax when the volume doubles',
+  parts:['m5-n11','m5-n12','m5-n13','m5-n14']},
+];
 
 const Q_MODULE1 = [
 
@@ -1599,6 +1718,64 @@ const Q_MODULE1 = [
   {h:'What the chapter adds', t:'Chapter 2 states the assumption the method rests on: a straight line between consecutive points. Accuracy therefore follows the spacing, since widely spaced points let the real curvature depart from the chord and inflate the error, and the estimate improves as points are added. That is the reason a segment is taken between neighbouring samples rather than across a long gap.'}],
  teachImg:'slide_Introduction_p28',
  cite:'Introduction.pdf slides 24–25'},
+
+
+/* ---------- L01 numeric: the two parts of her zero-order table problem that
+   sit between the rate constant and the half-life, so the set can be worked
+   through the way she sets it (a: k, b: C0, then t½ and 90%). ---------- */
+{id:'m1-ord-n17', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
+ topic:'orders', sub:'zero', concept:'zero-order-c0-back-extrapolation', skill:'krate',
+ source:'slide',
+ stem:'A drug solution decomposes by a zero-order process at 6 (mg/mL)/hr, and the sample taken at 2 hours measured 338 mg/mL. What was the initial starting concentration of the solution?',
+ units:'mg/mL',
+ answer:350,
+ tol:2,
+ steps:[
+  {k:'setup', t:'C = C0 − kt, so C0 = C + kt',
+   why:'The zero-order integrated equation is a straight line, and the initial concentration is its intercept. Rearranging to put C0 on its own adds back what was lost, so the sign in front of the rate constant flips from minus to plus.'},
+  {k:'algebra', t:'C0 = 338 mg/mL + (6 (mg/mL)/hr)(2 hr) = 338 + 12 = 350 mg/mL',
+   why:'Milligrams per millilitre per hour multiplied by hours leaves milligrams per millilitre, so the two terms can be added. Six milligrams per millilitre disappear in each of the first two hours, which is the 12 added back.'},
+  {k:'round', t:'C0 = 350 mg/mL',
+   why:'Her key prints 350 mg/mL. The value is exact, so no rounding is involved, and it is the number the half-life part of this problem then uses.'}],
+ teach:[
+ {t:'Recovering the intercept from a later sample is the same move in both orders, and only the arithmetic differs. A zero-order process adds back a fixed amount per hour, so the correction is additive; a first-order process kept a fixed fraction per hour, so its correction multiplies. Getting the order wrong here would give 338 multiplied by e^(6 × 2), which is not a concentration any solution could hold.'},
+  {h:'How the variables relate', list:[
+    'Zero order: C = C0 - k0t, so C0 = C + k0t, with the correction added.',
+    'First order: C = C0e^(-kt), so C0 = Ce^(+kt), with the correction multiplied.',
+    'A zero-order rate constant carries concentration per time; a first-order one carries reciprocal time.',
+    'C0 matters here because the zero-order half-life, C0/2k0, depends on it.',
+    'Any point on a zero-order line recovers the same intercept when its own t is used.']}],
+ teachImg:'slide_Introduction_p20',
+ cite:'IntroductionandMathReviewSolutions.pdf, problem 2, part b; Introduction.pdf slide 17',
+ quote:'C₀ = 338 mg/mL + (6 (mg/mL)/hr)(2 hr) = 350 mg/mL'},
+
+{id:'m1-ord-n18', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
+ topic:'orders', sub:'zero', concept:'zero-order-time-for-percent', skill:'krate',
+ source:'slide',
+ stem:'A drug solution with an initial concentration of 350 mg/mL decomposes by a zero-order process at 6 (mg/mL)/hr. How much time is required for the original solution to decompose by 90%?',
+ units:'hr',
+ answer:52.5,
+ tol:0.8,
+ steps:[
+  {k:'setup', t:'90 per cent decomposed leaves 10 per cent, so C = 0.10 × 350 mg/mL = 35 mg/mL',
+   why:'The question names what has gone and the equation is written in terms of what is left, so the percentage has to be turned round before anything is substituted. A tenth of 350 is 35, and that is the concentration the solution has to fall to.'},
+  {k:'setup', t:'C = C0 − kt, so t = (C0 − C) / k',
+   why:'Rearranging the zero-order line puts the time on its own. The numerator is the amount of concentration that has to disappear and the denominator is how much disappears each hour, so the quotient is a number of hours.'},
+  {k:'algebra', t:'t = (350 − 35) mg/mL ÷ (6 (mg/mL)/hr) = 315 ÷ 6 = 52.5 hr',
+   why:'Milligrams per millilitre divided by milligrams per millilitre per hour leaves hours. The 315 is what must be lost, and at 6 per hour that takes 52.5 hours.'},
+  {k:'round', t:'t = 52.5 hr',
+   why:'Her key prints 52.5 hr, to one decimal place. As a check, the table for this solution reads 62 mg/mL at 48 hours, so 35 mg/mL is reached a few hours after the last sample, which brackets the answer.'}],
+ teach:[
+ {t:'The zero-order answer is not a multiple of the half-life. Here the half-life is 29.2 hours and 90 per cent decomposed takes 52.5 hours, which is 1.8 half-lives rather than the 3.32 that a first-order process would need. The reason is that the second half of the solution takes exactly as long to decompose as the first, so a zero-order process runs out of drug at a predictable time instead of approaching zero.'},
+  {h:'How the variables relate', list:[
+    'Zero order: t = (C0 - C)/k0, linear in the amount to be removed.',
+    'First order: t = ln(C0/C)/k, so 90 per cent is always ln(10)/k, or 3.32 half-lives.',
+    'A zero-order half-life is C0/2k0, and the second half takes the same time as the first.',
+    'The solution reaches zero concentration at t = C0/k0, which is 58.3 hours here.',
+    'Deciding the order has to come before either relation is used.']}],
+ teachImg:'slide_Introduction_p20',
+ cite:'IntroductionandMathReviewSolutions.pdf, problem 2, final part; Introduction.pdf slide 17',
+ quote:'t = (350 − 35) mg/mL / (6 mg/mL/hr) = 52.5 hr'},
 
 ];
 
@@ -2692,6 +2869,191 @@ const Q_MODULE2 = [
  quote:'And then transfer from 1 to 2, 1.1 per hour.',
  note:'As with the other two rate constants for this sheet, the parameter values are handwritten on this copy of the deck and are used only because her spoken answers reproduce from them exactly. She reports k12 to one decimal place as 1.1 per hour.'},
 
+
+/* ---------- L02 numeric: the rest of her a–h battery from two plasma points.
+   Part a is m2-n-k2 above; these are b to h, each fed by the part before it,
+   exactly as IV-Bolus-Practice-2---Solutions.pdf works them. ---------- */
+{id:'m2-n-t2', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'t-half-from-k', skill:'krate',
+ source:'slide', dupOf:'m2-n-t1',
+ stem:'An antibiotic given as a 250 mg IV bolus injection has an elimination rate constant of 0.2769 hr⁻¹. What is its half-life of elimination?',
+ units:'hr',
+ answer:2.5,
+ tol:0.08,
+ steps:[
+  {k:'setup', t:'t½ = 0.693 / k',
+   why:'Half-life is the time for the concentration to fall by half, and for a first-order process that time is fixed by the rate constant alone. The 0.693 is the natural logarithm of 2, which is what falls out of solving Ct = C0e^(−kt) for Ct equal to half of C0.'},
+  {k:'algebra', t:'t½ = 0.693 / (0.2769 hr⁻¹) = 2.5027 hr',
+   why:'Dividing a dimensionless number by reciprocal hours leaves hours, which is what a half-life must carry. The dose does not enter: a first-order half-life is the same whether 250 mg or 25 mg was given.'},
+  {k:'round', t:'t½ = 2.5 hr',
+   why:'Her key prints 2.5 hr, to one decimal place. The later parts of this problem use 2.5 hr where a half-life is needed, so rounding here and rounding at the end give the same answers.'}],
+ teach:[
+ {t:'The half-life and the rate constant carry the same information in two forms, and every part of this battery that names one can be worked from the other. The rate constant is the fraction of what is present that leaves per hour; the half-life is how long that fraction takes to remove half of it. Neither depends on the dose, which is why doubling a dose leaves both unchanged.'},
+  {h:'How the variables relate', list:[
+    't½ = 0.693/k, and k = 0.693/t½.',
+    'k is a fraction per unit time; t½ is a time, so the two are reciprocal in character.',
+    'Neither changes with dose, so the same half-life describes 250 mg and 25 mg.',
+    'A larger k means a shorter half-life and faster elimination.',
+    '99.9 per cent of the dose is gone after 10 half-lives, which is part h of this set.']}],
+ cite:'IV-Bolus-Practice-2---Solutions.pdf, part b',
+ quote:'t½ = 0.693 / 0.2769 hr⁻¹ = 2.5 hr'},
+
+{id:'m2-n-c0b', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'c0-back-extrapolation', skill:'conctime',
+ source:'slide', dupOf:'m2-n-c0a',
+ stem:'An antibiotic given as a 250 mg IV bolus injection has an elimination rate constant of 0.2769 hr⁻¹ and a plasma concentration of 2.18 mcg/mL at 8 hours. What is the initial plasma concentration?',
+ units:'mg/L',
+ answer:20,
+ tol:0.5,
+ steps:[
+  {k:'setup', t:'C0 = Ct·e^(+kt), with t the time of the measured sample',
+   why:'No sample can be drawn at the instant of the injection, so the initial concentration has to be recovered from a later one. Running the decay backwards makes the exponent positive, which is the one sign change the step turns on.'},
+  {k:'unit', t:'2.18 mcg/mL = 2.18 mg/L',
+   why:'A microgram per millilitre and a milligram per litre are the same number, so nothing has to be converted. The switch of label matters here because the volume of distribution in the next part pairs this concentration with a dose in milligrams, and litres is what makes that division come out in litres.'},
+  {k:'algebra', t:'C0 = (2.18 mg/L)e^((0.2769 hr⁻¹)(8 hr)) = (2.18 mg/L)(9.1632) = 19.98 mg/L',
+   why:'Eight hours is about 3.2 half-lives, so the concentration at 8 hours is roughly a ninth of the starting value, and multiplying back by that factor recovers it. Reciprocal hours times hours leaves the exponent dimensionless.'},
+  {k:'round', t:'C0 = 20 mg/L',
+   why:'Her key prints 20 mg/L. She writes the working with the mcg/mL figure and the answer in mg/L without comment, because the two units carry the same number.'}],
+ teach:[
+ {t:'Every part that follows in this battery runs off the initial concentration, so an error here propagates into the volume of distribution, the clearance and the amount remaining. The back-extrapolation uses one measured point and the rate constant, and either of the two given points recovers the same intercept: from the 4-hour point, 6.6 multiplied by e^(0.2769 × 4) is also 20 mg/L.'},
+  {h:'How the variables relate', list:[
+    'Forward in time: Ct = C0e^(-kt). Backward to the intercept: C0 = Cte^(+kt).',
+    'The exponent is positive going back to time zero and negative going forward from it.',
+    'Any measured point on the line recovers the same C0 when the right t is used.',
+    'C0 is what pairs with the dose to give VD, so it is the hinge of the whole battery.',
+    'mg/L and mcg/mL are the same number, so the units need no arithmetic.']}],
+ cite:'IV-Bolus-Practice-2---Solutions.pdf, part c',
+ quote:'C₀ = (2.18 mg/L)e^(0.2769)(8) = 20 mg/L'},
+
+{id:'m2-n-c15b', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'cp-at-time', skill:'conctime',
+ source:'slide', dupOf:'m2-n-c15',
+ stem:'An antibiotic given as a 250 mg IV bolus injection has an initial plasma concentration of 20 mg/L and an elimination rate constant of 0.2769 hr⁻¹. What is the concentration of drug in the plasma 15 minutes after the dose was given?',
+ units:'mg/L',
+ answer:18.66,
+ tol:0.3,
+ steps:[
+  {k:'setup', t:'Ct = C0·e^(−kt)',
+   why:'The concentration at any time after a bolus is the intercept decayed for the elapsed time, and the whole of the dose is in the body at time zero. Nothing else is needed once C0 and k are in hand.'},
+  {k:'unit', t:'15 minutes = 15/60 hr = 0.25 hr',
+   why:'The rate constant is in reciprocal hours, so the time has to be in hours for the exponent to come out dimensionless. She gives the interval in minutes every time this part appears and converts it silently, which is where the mark is usually lost.'},
+  {k:'algebra', t:'Ct = (20 mg/L)e^(−(0.2769 hr⁻¹)(0.25 hr)) = (20 mg/L)(0.93312) = 18.66 mg/L',
+   why:'A quarter of an hour is a tenth of a half-life, so barely any drug has left and the concentration is still 93 per cent of the intercept. That closeness to C0 is the check that the minutes were converted rather than used raw.'},
+  {k:'round', t:'Ct = 18.66 mg/L',
+   why:'Her key prints 18.66 mg/L, to two decimal places, matching the precision she carries on concentrations throughout this sheet.'}],
+ teach:[
+ {t:'Using 15 where 0.25 belongs gives e^(−4.15), which is 0.32 mg/L rather than 18.66 mg/L, so the error is large enough to be caught by asking whether the answer is plausible. Fifteen minutes after a bolus, almost all of the dose is still in the body, and any answer well below the intercept is wrong on its face.'},
+  {h:'How the variables relate', list:[
+    'Ct = C0e^(-kt), with t and k in matching units of time.',
+    'Minutes have to become hours whenever k is in reciprocal hours.',
+    'A short t relative to the half-life leaves Ct close to C0.',
+    'The amount in the body at that time is VD x Ct.',
+    'The fraction remaining, e^(-kt), does not depend on the dose.']}],
+ cite:'IV-Bolus-Practice-2---Solutions.pdf, part d',
+ quote:'C₀.₂₅ = (20 mg/L)e^−(0.2769)(0.25) = 18.66 mg/L'},
+
+{id:'m2-n-vd2', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'vd-from-dose-c0', skill:'vddose',
+ source:'slide', dupOf:'m2-n-vd1',
+ stem:'A 250 mg intravenous bolus dose of an antibiotic produces an initial plasma concentration of 20 mg/L in a 70-kg patient. What is the apparent volume of distribution?',
+ units:'L',
+ answer:12.5,
+ tol:0.3,
+ steps:[
+  {k:'setup', t:'VD = D0 / C0',
+   why:'The volume of distribution is the volume that would have to hold the whole dose to give the measured plasma concentration, so it is the dose divided by the concentration at the moment the whole dose is still in the body. That moment is time zero, which is why the back-extrapolated intercept and not a later sample belongs in the denominator.'},
+  {k:'algebra', t:'VD = (250 mg) / (20 mg/L) = 12.5 L',
+   why:'Milligrams divided by milligrams per litre leaves litres. Using a later concentration, such as the 6.6 mg/L at 4 hours, would give 37.9 L, because by then part of the dose has gone.'},
+  {k:'round', t:'VD = 12.5 L',
+   why:'Her key prints 12.5 L. The 70-kg weight is stated in the stem and never used in her solution, since the volume is asked for in litres rather than per kilogram.'}],
+ teach:[
+ {t:'The apparent volume of distribution is a proportionality constant between the amount in the body and the plasma concentration, not an anatomical volume. At 12.5 L it is well under total body water for a 70-kg adult, which describes a drug that stays largely in plasma and extracellular fluid rather than one that concentrates in tissue.'},
+  {h:'How the variables relate', list:[
+    'VD = D0/C0 at time zero, and A = VD x C at any later time.',
+    'A larger VD gives a lower C0 for the same dose.',
+    'Cl = k x VD, so the volume feeds the next part of this battery.',
+    'VD is apparent: it can exceed any real body volume when a drug leaves plasma for tissue.',
+    'The stated body weight is used only when the question asks for the volume per kilogram.']}],
+ cite:'IV-Bolus-Practice-2---Solutions.pdf, part e',
+ quote:'V_D = 250 mg / (20 mg/L) = 12.5 L'},
+
+{id:'m2-n-cl3', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'cl-from-k-vd', skill:'clearance',
+ source:'slide', dupOf:'m2-n-cl1',
+ stem:'An antibiotic has an apparent volume of distribution of 12.5 L and an elimination rate constant of 0.2769 hr⁻¹ in a patient. What is the total body clearance of this drug in this patient?',
+ units:'L/hr',
+ answer:3.46,
+ tol:0.1,
+ steps:[
+  {k:'setup', t:'Cl = k · VD',
+   why:'Clearance is the volume of plasma cleared of drug per unit time, and it is the fraction removed per hour multiplied by the volume that fraction is taken from. Both quantities are already in hand from the earlier parts, so no new data are needed.'},
+  {k:'algebra', t:'Cl = (0.2769 hr⁻¹)(12.5 L) = 3.4613 L/hr',
+   why:'Reciprocal hours multiplied by litres leaves litres per hour, which is what a clearance must carry. Each hour the equivalent of 3.46 L of plasma is stripped of drug, out of the 12.5 L the drug occupies.'},
+  {k:'round', t:'Cl = 3.46 L/hr',
+   why:'Her key prints 3.46 L/hr, to two decimal places, which is the precision she carries on clearances throughout this sheet. As a check, dividing the clearance by the volume returns the 0.2769 hr⁻¹ the set started from, so nothing has drifted through the six parts that lead here.'}],
+ teach:[
+ {t:'Clearance and the rate constant describe the same elimination from two directions. The rate constant is a fraction per hour and says nothing about how much drug that fraction represents; clearance multiplies it by the volume and so carries the size of the patient as well as the speed of removal. That is why two patients with the same half-life can need different doses.'},
+  {h:'How the variables relate', list:[
+    'Cl = k x VD, and k = Cl/VD.',
+    'Clearance is in volume per time; k is per time alone.',
+    'The rate of elimination at any moment is Cl x C, so it falls as the concentration falls while Cl stays fixed.',
+    'A change in body size moves VD and Cl together and leaves k roughly where it was.',
+    'Cl x t½/0.693 recovers VD, which is a useful check on this part.']}],
+ cite:'IV-Bolus-Practice-2---Solutions.pdf, part f',
+ quote:'Cl = (12.5 L)(0.2769 hr⁻¹) = 3.46 L/hr'},
+
+{id:'m2-n-d3b', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'amount-at-time', skill:'conctime',
+ source:'slide', dupOf:'m2-n-d3a',
+ stem:'An antibiotic was given as a 250 mg IV bolus injection and has an elimination rate constant of 0.2769 hr⁻¹. What is the amount of drug in the body 3 hours after the drug was administered?',
+ units:'mg',
+ answer:108.9,
+ tol:2.0,
+ steps:[
+  {k:'setup', t:'Dt = D0·e^(−kt)',
+   why:'Amounts decay by the same first-order law as concentrations, with the same rate constant, because the two differ only by the fixed volume of distribution. Working in amounts here avoids computing a concentration and multiplying it back by 12.5 L.'},
+  {k:'algebra', t:'Dt = (250 mg)e^(−(0.2769 hr⁻¹)(3 hr)) = (250 mg)(0.43574) = 108.9 mg',
+   why:'Three hours is slightly more than one half-life of 2.5 hours, so slightly less than half the dose remains, which is what 108.9 mg out of 250 mg is. Reciprocal hours multiplied by hours leaves the exponent dimensionless.'},
+  {k:'round', t:'Dt = 108.9 mg',
+   why:'Her key prints 108.9 mg, to one decimal place, which is the precision she carries on amounts throughout this sheet. Three hours is 1.2 half-lives, so a shade under half the 250 mg should remain, and 108.9 mg is that shade under 125 mg.'}],
+ teach:[
+ {t:'The same exponential governs the amount in the body and the plasma concentration, so a question can be answered in whichever the stem supplies. Here the dose is given directly, so the amount route is one line; going through the concentration would give 0.4357 times 20 mg/L, which is 8.71 mg/L, and multiplying by the 12.5 L volume returns the same 108.9 mg.'},
+  {h:'How the variables relate', list:[
+    'Dt = D0e^(-kt) and Ct = C0e^(-kt) share the same exponent.',
+    'A = VD x C converts between the two at any time.',
+    'After one half-life half the dose is left; after two, a quarter.',
+    'The fraction remaining depends only on k and t, never on the dose.',
+    'Answering in amounts avoids one multiplication when the dose is the quantity given.']}],
+ cite:'IV-Bolus-Practice-2---Solutions.pdf, part g',
+ quote:'D₃ = (250 mg)e^−(0.2769)(3) = 108.9 mg'},
+
+{id:'m2-n-999b', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'time-for-999-percent', skill:'krate',
+ source:'slide', dupOf:'m2-n-999a',
+ stem:'An antibiotic given by intravenous bolus injection has an elimination half-life of 2.5 hours. How much time is required for 99.9% of the drug to be eliminated from the body?',
+ units:'hr',
+ answer:25,
+ tol:0.8,
+ steps:[
+  {k:'setup', t:'99.9 per cent eliminated leaves 0.1 per cent, and a tenth of a per cent is reached after 10 half-lives',
+   why:'Each half-life halves what is left, so the fraction remaining after n half-lives is one over two to the n. Ten halvings give 1/1024, which is 0.098 per cent, just under the tenth of a per cent asked for. This is the count she uses every time this part appears.'},
+  {k:'algebra', t:'t = 10 t½ = 10(2.5 hr) = 25 hr',
+   why:'Multiplying the half-life by the number of halvings gives the elapsed time directly. No logarithm is needed once the count is recognised.'},
+  {k:'algebra', t:'By the equation: t = ln(100/0.1) / (0.2769 hr⁻¹) = 6.9078 / 0.2769 hr⁻¹ = 24.95 hr',
+   why:'The general route divides the logarithm of the ratio of starting to remaining amount by the rate constant. It agrees with the half-life count to within the rounding, which is what confirms the shortcut.'},
+  {k:'round', t:'t = 25 hr',
+   why:'Her key prints 25 hr and offers both routes, the equation and the ten half-lives. The 0.05 hr difference between them is the rounding in 2.5 hr.'}],
+ teach:[
+ {t:'The ten-half-life count turns up twice in this course. It is the time to eliminate 99.9 per cent of a dose, and, read the other way, the time an infusion needs to come within a tenth of a per cent of its steady-state concentration. The practical line is drawn earlier, at five to seven half-lives, where less than 5 and less than 1 per cent remain.'},
+  {h:'How the variables relate', list:[
+    'The fraction remaining after n half-lives is (1/2)^n, independent of the dose.',
+    '1 half-life leaves 50 per cent, 2 leaves 25, 3 leaves 12.5, 7 leaves 0.78, 10 leaves 0.098.',
+    'By equation: t = ln(A0/At)/k, which for 99.9 per cent is ln(1000)/k.',
+    'Larger k means a shorter half-life and a shorter time to the same percentage.',
+    'The same count governs the approach to steady state during an infusion.']}],
+ cite:'IV-Bolus-Practice-2---Solutions.pdf, part h',
+ quote:'t = ln(100/0.1) / 0.2769 hr⁻¹ = 25 hr'},
+
 ];
 
 /* ==========================================================================
@@ -3649,6 +4011,231 @@ const Q_MODULE3 = [
   {h:'What the chapter adds', t:'Chapter 6 shows algebraically why a matched loading dose holds the level flat. Giving a bolus DL and starting the infusion at once makes the concentration the sum of a decaying bolus term and a building infusion term. Substituting DL = R/k cancels the bracket the two share, and what is left is Css itself, with no time in it. The bolus falls at exactly the rate the infusion builds, so the concentration sits at the plateau from the first minute.'}],
  cite:'IV-Infusions-Practice-4-Solutions.pdf, part a',
  quote:'Determine an IV bolus loading dose and infusion rate to achieve the desired steady-state plasma level of 10 mg/L.'},
+
+
+/* ---------- L04 numeric: the rest of her In-Class set. Question 1 is inf-n14
+   (the rate) and question 4 is inf-n15 (decay after cessation); these fill in
+   the loading dose and questions 2 and 3, each fed by the rate recommended in
+   question 1. ---------- */
+{id:'inf-n19', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'load', concept:'loading-dose-for-css', skill:'loading',
+ source:'slide', dupOf:'inf-n12',
+ stem:'You are asked to recommend an IV loading dose that will rapidly achieve a steady-state concentration of 20 mg/L. The half-life of the drug is 5 hours and the volume of distribution is 16 L. What loading dose do you recommend?',
+ units:'mg',
+ answer:320,
+ tol:8,
+ steps:[
+  {k:'setup', t:'DL = Css · VD',
+   why:'A loading dose has to put into the body, in one go, the amount that the target concentration corresponds to. That amount is the concentration multiplied by the volume the drug will occupy, which is the definition of the volume of distribution read in the other direction.'},
+  {k:'algebra', t:'DL = (20 mg/L)(16 L) = 320 mg',
+   why:'Milligrams per litre multiplied by litres leaves milligrams. The half-life plays no part: how fast the drug leaves does not change how much is needed to fill the volume at the start.'},
+  {k:'algebra', t:'The same answer through the rate: DL = R / k = (44.35 mg/hr) / (0.1386 hr⁻¹) = 320 mg',
+   why:'Her key gives both routes. Dividing the infusion rate by the rate constant is algebraically the same product, since R is itself Css times k times VD, and the k cancels. Milligrams per hour divided by reciprocal hours leaves milligrams.'},
+  {k:'round', t:'DL = 320 mg',
+   why:'Her printed answer is 320 mg, a whole number, as a dose that could actually be drawn up. The two routes differ by 0.014 mg, which is the rounding in her 0.1386 hr⁻¹, so either working reaches the same recommendation.'}],
+ teach:[
+ {t:'The loading dose and the infusion rate answer two different questions about the same target. The loading dose fills the volume immediately, so it depends on the volume of distribution and the target concentration. The rate replaces what is lost each hour, so it depends on clearance. Giving the loading dose without the infusion means the concentration starts at the target and then falls; giving the infusion without the loading dose means it climbs to the target over three to five half-lives.'},
+  {h:'How the variables relate', list:[
+    'DL = Css x VD, and equivalently DL = R/k.',
+    'DL depends on the volume of distribution, not on the half-life.',
+    'R depends on clearance, so it carries both k and VD.',
+    'The loading dose changes when the target is reached; it does not change what the plateau is.',
+    'Together they hold the concentration flat at Css from the first minute.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 1',
+ quote:'You are also asked to recommend an IV loading dose to rapidly achieve the desired steady-state concentration.'},
+
+{id:'inf-n20', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'load', concept:'loading-plus-infusion-at-t', skill:'loading',
+ source:'slide', dupOf:'inf-n9',
+ stem:'A drug with a half-life of 5 hours and a volume of distribution of 16 L is administered at 44.35 mg/hr WITH a 320 mg loading dose. What is the expected concentration of drug 3 hours after the start of the infusion?',
+ units:'mg/L',
+ answer:20,
+ tol:0.6,
+ steps:[
+  {k:'setup', t:'Cp = (DL/VD)e^(−kt) + (R/Cl)(1 − e^(−kt)), the decaying bolus plus the climbing infusion',
+   why:'Two inputs are running at once and first-order kinetics allows their contributions to be added. The bolus term starts at its full height and decays; the infusion term starts at zero and climbs. Writing both before substituting is what keeps the two exponentials from being confused with each other.'},
+  {k:'algebra', t:'k = 0.693 / 5 hr = 0.1386 hr⁻¹, and Cl = kVD = (0.1386 hr⁻¹)(16 L) = 2.218 L/hr',
+   why:'Both terms need the rate constant, and the infusion term needs the clearance built from it. Doing the two conversions once, before either term, keeps the rest of the working to substitution.'},
+  {k:'algebra', t:'Bolus term = (320 mg / 16 L)e^(−(0.1386)(3)) = (20 mg/L)(0.6598) = 13.2 mg/L',
+   why:'The loading dose puts the concentration at 20 mg/L immediately, and three hours later 66 per cent of it remains. Three hours is a little over half a half-life, so a little under half has gone.'},
+  {k:'algebra', t:'Infusion term = (44.35 mg/hr / 2.218 L/hr)(1 − e^(−(0.1386)(3))) = (20 mg/L)(0.3402) = 6.8 mg/L',
+   why:'The infusion alone would be 34 per cent of the way to its 20 mg/L plateau after three hours. The fraction climbing, 1 − e^(−kt), is exactly one minus the fraction the bolus term has kept.'},
+  {k:'round', t:'Cp = 13.2 + 6.8 = 20 mg/L',
+   why:'Her key prints 20 mg/L and marks it as Css. The two fractions sum to one because both terms have the same 20 mg/L coefficient, which is what a correctly sized loading dose produces: the concentration never moves off the target.'}],
+ teach:[
+ {t:'When the loading dose is DL = Css × VD and the rate is R = Css × Cl, the two terms carry the same coefficient and their fractions add to one at every time, so the concentration sits flat at Css from the first minute. Any answer other than 20 mg/L here means one of the two terms was mis-sized, and the flatness is the check rather than the arithmetic.'},
+  {h:'How the variables relate', list:[
+    'Cp = (DL/VD)e^(-kt) + (R/Cl)(1 - e^(-kt)).',
+    'The bolus term keeps the fraction e^(-kt); the infusion term has gained 1 - e^(-kt).',
+    'With DL = Css x VD and R = Css x Cl the two coefficients are equal and the sum is Css at every t.',
+    'An undersized loading dose leaves a trough before the plateau; an oversized one leaves a peak that decays down to it.',
+    'Neither the loading dose nor its size changes what the plateau is; only R and Cl do.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 2',
+ quote:'If the drug in question #1 were administered at the rate you recommended WITH THE LOADING DOSE, what is the expected concentration of drug 3 hours after the start of the infusion?'},
+
+{id:'inf-n21', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'pre', concept:'cp-before-steady-state', skill:'infusion',
+ source:'slide', dupOf:'inf-n3',
+ stem:'A drug with a half-life of 5 hours and a volume of distribution of 16 L is infused at 44.35 mg/hr WITHOUT a loading dose for 3 hours. What is the expected concentration of drug at the end of the infusion?',
+ units:'mg/L',
+ answer:6.8,
+ tol:0.2,
+ steps:[
+  {k:'setup', t:'Cp = (R/Cl)(1 − e^(−kt))',
+   why:'With no loading dose the concentration starts at zero and climbs towards the plateau, and the bracket is the fraction of the plateau reached after t hours. The plateau itself, R over clearance, is the ceiling the climb is heading for and not the answer to this question.'},
+  {k:'algebra', t:'k = 0.693 / 5 hr = 0.1386 hr⁻¹, and Cl = (0.1386 hr⁻¹)(16 L) = 2.218 L/hr',
+   why:'The plateau needs a clearance and the exponent needs a rate constant, so both come from the half-life and the volume before anything is substituted.'},
+  {k:'algebra', t:'R/Cl = (44.35 mg/hr)/(2.218 L/hr) = 20 mg/L, the plateau this infusion is climbing to',
+   why:'Milligrams per hour divided by litres per hour leaves milligrams per litre. This recovers the 20 mg/L target the rate was chosen for, which confirms the rate before the fraction is applied.'},
+  {k:'algebra', t:'Cp = (20 mg/L)(1 − e^(−(0.1386 hr⁻¹)(3 hr))) = (20 mg/L)(0.3402) = 6.80 mg/L',
+   why:'Three hours is 0.6 of a half-life, so the climb is only about a third of the way up. Steady state would need three to five half-lives, which is 15 to 25 hours here.'},
+  {k:'round', t:'Cp = 6.8 mg/L',
+   why:'Her printed answer is 6.8 mg/L, to one decimal place. The next question in her set decays this figure for a further four hours, so it is the starting concentration for that part as well as the answer to this one.'}],
+ teach:[
+ {t:'This is the same 44.35 mg/hr and the same three hours as the question with the loading dose, and the answer is 6.8 mg/L instead of 20 mg/L. The difference is the whole point of a loading dose: without it the patient spends three to five half-lives below the target, and for a drug with a 5-hour half-life that is most of a day.'},
+  {h:'How the variables relate', list:[
+    'Cp = (R/Cl)(1 - e^(-kt)), which starts at zero and approaches R/Cl.',
+    'The fraction of the plateau reached depends only on k and t, never on R.',
+    'Raising R raises the plateau and every point on the climb in proportion, but not the time to get there.',
+    '1 half-life reaches 50 per cent of Css, 2 reaches 75, 3 reaches 87.5, and 3 to 5 is called steady state.',
+    'A loading dose is what removes the wait; it does not move the plateau.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 3',
+ quote:'If the drug in question #1 were administered at the rate you recommended WITHOUT THE LOADING DOSE for 3 hours, what is the expected concentration of drug at the end of the infusion?'},
+
+
+/* ---------- L04 numeric: her five-part loading-dose-plus-infusion problem,
+   where the 500 mg loading dose in the stem is deliberately the wrong one and
+   part c makes the student find the right one. ---------- */
+{id:'inf-n22', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'css', concept:'css-from-rate', skill:'infusion',
+ source:'slide', dupOf:'inf-n1',
+ stem:'A patient received a medication as a 500 mg IV loading dose and a simultaneous IV infusion of 75 mg/hr for 3 days. The half-life of the medication was 4 hours and the volume of distribution was 12 L. What is the expected steady-state concentration of the infusion?',
+ units:'mg/L',
+ answer:36.08,
+ tol:0.6,
+ steps:[
+  {k:'setup', t:'Css = R / Cl = R / (k · VD)',
+   why:'The plateau is set by how much goes in each hour against how much the patient can clear each hour, so only the rate and the clearance enter it. The loading dose and the three days are in the stem for the parts that follow and play no part here.'},
+  {k:'algebra', t:'k = 0.693 / 4 hr = 0.1733 hr⁻¹',
+   why:'The clearance has to be assembled from the half-life and the volume before the division can be done. Her key carries k to four decimal places as 0.1733.'},
+  {k:'algebra', t:'Css = (75 mg/hr) / [(12 L)(0.1733 hr⁻¹)] = (75 mg/hr) / (2.0796 L/hr) = 36.08 mg/L',
+   why:'Litres multiplied by reciprocal hours gives the clearance in litres per hour, and milligrams per hour divided by that leaves milligrams per litre. Three days is 18 half-lives, so the plateau has certainly been reached.'},
+  {k:'round', t:'Css = 36.08 mg/L, printed as 36.1 mg/L',
+   why:'Her working gives 36.08 mg/L and her answer line prints 36.1 mg/L. Carrying k unrounded gives 36.06 mg/L, which is the 0.02 difference between the two and is inside the tolerance set here.'}],
+ teach:[
+ {t:'A plateau exists because elimination is proportional to concentration: as the concentration rises the amount removed per hour rises with it, until the amount removed equals the amount given. Where that balance sits depends only on the rate and the clearance, which is why the loading dose in this stem does not appear in the calculation.'},
+  {h:'How the variables relate', list:[
+    'Css = R/Cl = R/(k x VD).',
+    'Doubling R doubles Css; halving clearance doubles it too.',
+    'The loading dose changes how quickly Css is reached, never what it is.',
+    'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
+    '3 days at a 4-hour half-life is 18 half-lives, so the plateau is long since reached.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 5, part a',
+ quote:'Css = 75 mg/hr / [(12 L)(0.1733/hr)] = 36.08 mg/L'},
+
+{id:'inf-n23', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'load', concept:'loading-dose-does-not-move-css', skill:'infusion',
+ source:'slide',
+ stem:'The same patient is given a 750 mg loading dose rather than 500 mg, simultaneously with the same 75 mg/hr infusion. The half-life is 4 hours and the volume of distribution is 12 L. What is the steady-state concentration?',
+ units:'mg/L',
+ answer:36.08,
+ tol:0.6,
+ steps:[
+  {k:'setup', t:'Css = R / Cl, which contains no loading-dose term',
+   why:'The steady-state concentration is fixed by the balance between the infusion rate and clearance. A loading dose is a single amount given once, and once the plateau is reached whatever it contributed has been eliminated along with everything else.'},
+  {k:'algebra', t:'Css = (75 mg/hr) / [(12 L)(0.1733 hr⁻¹)] = 36.08 mg/L, unchanged',
+   why:'The same two numbers are divided as in the previous part, because neither of them has changed. Raising the loading dose from 500 mg to 750 mg changes the first few hours and nothing after that.'},
+  {k:'round', t:'Css = 36.08 mg/L, printed as 36.1 mg/L',
+   why:'Her key prints the same 36.1 mg/L for this part and shows no working, because the point of the part is that there is nothing new to compute.'}],
+ teach:[
+ {t:'A loading dose sets where the concentration starts; the infusion rate and clearance set where it ends. With a 750 mg loading dose the concentration begins at 62.5 mg/L, which is above the 36.08 mg/L plateau, so it falls towards the plateau instead of climbing to it. The appropriate loading dose, worked out in the next part, is the one that starts it exactly at the plateau.'},
+  {h:'How the variables relate', list:[
+    'Css = R/Cl, with no DL term anywhere in it.',
+    'DL/VD is the concentration immediately after the loading dose: 750/12 = 62.5 mg/L here.',
+    'Too large a loading dose gives a peak that decays down to Css; too small gives a trough that climbs up to it.',
+    'Only R and Cl move the plateau.',
+    'The right loading dose is Css x VD, which makes the starting concentration and the plateau the same number.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 5, part b',
+ quote:'What is the steady-state concentration if a loading dose of 750 mg were administered simultaneously with the 75 mg/hr infusion?'},
+
+{id:'inf-n24', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'load', concept:'loading-dose-for-css', skill:'loading',
+ source:'slide', dupOf:'inf-n19',
+ stem:'A medication is infused at 75 mg/hr, giving a steady-state concentration of 36.1 mg/L. Its half-life is 4 hours and its volume of distribution is 12 L. What is an appropriate loading dose to achieve that steady-state concentration immediately?',
+ units:'mg',
+ answer:433,
+ tol:10,
+ steps:[
+  {k:'setup', t:'DL = Css · VD, or equivalently DL = R / k',
+   why:'The appropriate loading dose is the amount that fills the volume of distribution to the plateau concentration in one go. Her key gives both forms because they are the same product: R is Css times k times VD, so dividing by k leaves Css times VD.'},
+  {k:'algebra', t:'DL = (75 mg/hr) / (0.1733 hr⁻¹) = 432.8 mg',
+   why:'Milligrams per hour divided by reciprocal hours leaves milligrams. This route uses the rate given in the stem without needing the plateau to be computed first.'},
+  {k:'algebra', t:'DL = (36.1 mg/L)(12 L) = 433.2 mg',
+   why:'The other route multiplies the plateau by the volume. The 0.4 mg difference between the two is the rounding of 36.08 to 36.1, not a difference of method.'},
+  {k:'round', t:'DL = 433 mg',
+   why:'Her printed answer is 433 mg, a whole number. The 500 mg given in the stem is larger than this, which is why that patient starts above the plateau rather than at it.'}],
+ teach:[
+ {t:'The loading dose stated at the top of this problem, 500 mg, is not the appropriate one, and this part is what exposes it. At 500 mg the concentration starts at 41.7 mg/L, above the 36.08 mg/L plateau, and falls towards it over the next few hours. At the appropriate 433 mg it starts at 36.1 mg/L and stays there.'},
+  {h:'How the variables relate', list:[
+    'DL = Css x VD = R/k.',
+    'DL depends on the volume of distribution; R depends on clearance.',
+    'DL/VD is the concentration immediately after the dose, which should equal Css.',
+    '500 mg gives 500/12 = 41.7 mg/L, above the plateau; 433 mg gives 36.1 mg/L, at it.',
+    'Changing DL never changes Css, only the path taken to it.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 5, part c',
+ quote:'D_L = 75 mg/hr / (0.1733/hr) = 433 mg'},
+
+{id:'inf-n25', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'time', concept:'time-to-fraction-of-css', skill:'infusion',
+ source:'slide', dupOf:'inf-n4',
+ stem:'A medication with a half-life of 4 hours is infused at a constant rate with no loading dose. How long would it take to reach 90% of the desired steady-state concentration?',
+ units:'hr',
+ answer:13.29,
+ tol:0.4,
+ steps:[
+  {k:'setup', t:'0.90 = 1 − e^(−kt), so e^(−kt) = 0.10 and t = −ln(0.10)/k',
+   why:'The fraction of steady state reached is the bracket in Cp = (R/Cl)(1 − e^(−kt)), so setting that bracket to 0.90 leaves the remaining tenth in the exponential. Taking logarithms of both sides puts the time on its own. The infusion rate never enters, because it cancels out of the fraction.'},
+  {k:'algebra', t:'k = 0.693 / 4 hr = 0.1733 hr⁻¹',
+   why:'The time comes out of dividing by the rate constant, so the half-life is converted first. This is the same k as every other part of this problem.'},
+  {k:'algebra', t:'t = 2.302585 / (0.1733 hr⁻¹) = 13.287 hr',
+   why:'The natural logarithm of 10 is 2.302585, and dividing a dimensionless number by reciprocal hours leaves hours. As a check, 13.29 hours is 3.32 half-lives, which is the standard count for 90 per cent.'},
+  {k:'round', t:'t = 13.29 hr, printed as 13.3 hr',
+   why:'Her working carries 13.29 hr and her answer line prints 13.3 hr, to one decimal place. Carrying k unrounded gives 13.288 hr, so her four-figure rate constant costs nothing at this precision.'}],
+ teach:[
+ {t:'How long an infusion takes to approach its plateau depends on the half-life and nothing else. Doubling the rate doubles the plateau and every concentration along the way, so the fraction of the plateau reached at any time is unchanged. This is why a loading dose, and not a faster infusion, is what shortens the wait.'},
+  {h:'How the variables relate', list:[
+    'Fraction of Css reached = 1 - e^(-kt), which contains neither R nor VD.',
+    't = -ln(1 - fraction)/k, so 90 per cent is ln(10)/k and 95 per cent is ln(20)/k.',
+    '90 per cent is 3.32 half-lives, 95 per cent is 4.32, and 99 per cent is 6.64.',
+    'A longer half-life means a longer wait, whatever the rate.',
+    'Only a loading dose shortens the approach.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 5, part d',
+ quote:'t = −ln 0.1 / (0.1733/hr) = 13.29 hr'},
+
+{id:'inf-n26', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
+ topic:'infusion', sub:'css', concept:'css-proportional-to-rate', skill:'infusion',
+ source:'slide', dupOf:'inf-n22',
+ stem:'The same medication, with a half-life of 4 hours and a volume of distribution of 12 L, is infused at 150 mg/hr rather than 75 mg/hr. What steady-state concentration is expected?',
+ units:'mg/L',
+ answer:72.15,
+ tol:1.2,
+ steps:[
+  {k:'setup', t:'Css = R / Cl, with the clearance unchanged',
+   why:'Nothing about the patient has changed, so the clearance assembled in the earlier parts still applies. Only the numerator moves.'},
+  {k:'algebra', t:'Css = (150 mg/hr) / [(12 L)(0.1733 hr⁻¹)] = (150 mg/hr) / (2.0796 L/hr) = 72.15 mg/L',
+   why:'The same division as the first part with twice the rate. Milligrams per hour divided by litres per hour leaves milligrams per litre.'},
+  {k:'round', t:'Css = 72.15 mg/L, printed as 72.2 mg/L',
+   why:'Her working carries 72.15 mg/L and her answer line prints 72.2 mg/L, which is twice the 36.08 mg/L of part a to within her rounding.'}],
+ teach:[
+ {t:'Steady-state concentration and infusion rate are strictly proportional, because clearance is a constant for the patient and the drug. Doubling the rate doubles the plateau and leaves the time to reach it exactly where it was, at three to five half-lives. That separation is what makes the rate the lever for where the concentration sits and the loading dose the lever for how soon it gets there.'},
+  {h:'How the variables relate', list:[
+    'Css = R/Cl, so Css and R rise and fall together.',
+    'Doubling R doubles Css: 75 mg/hr gives 36.08 mg/L and 150 mg/hr gives 72.15 mg/L.',
+    'The time to reach the plateau is unchanged, since it depends only on k.',
+    'A patient with half the clearance reaches twice the plateau on the same rate.',
+    'Where a therapeutic range is stated, it is the rate that is adjusted to sit inside it.']}],
+ cite:'In-Class IV Infusions - Solutions.pdf, question 5, part e',
+ quote:'Css = 150 mg/hr / [(12 L)(0.1733/hr)] = 72.15 mg/L'},
 
 ];
 
@@ -8434,9 +9021,47 @@ const DEFAULT_SKILL = COURSE.skills[0].id;
 function skillOf(q){ return SKILL_IDS.has(q.skill) ? q.skill : DEFAULT_SKILL; }
 
 /* ==========================================================================
+   CONCEPTS AND CALCULATIONS
+   ==========================================================================
+   Which of the two a question is, derived rather than written on it, so a
+   label can never disagree with what the question actually asks.
+
+   A question is a calculation when answering it means producing a number.
+   Every numeric question is one. A matching question is one only where a
+   calculation skill is matched to computed values, which is what separates
+   a battery of clearances worked out from a vignette (a calculation) from a
+   table of body-compartment percentages that is simply recalled (a concept).
+   Everything else, including reading an order off a plot and reasoning about
+   what a doubled dose does, is a concept.
+   ========================================================================== */
+const SKILL_KIND = Object.fromEntries(
+  COURSE.skills.map(s => [s.id, s.kind === 'calc' ? 'calc' : 'concept']));
+const QUANTITY = /^[<>\u2248~]?\s*-?[\d.]/;
+function kindOf(q){
+  if(qType(q) === 'numeric') return 'calc';
+  if(qType(q) === 'match' && SKILL_KIND[skillOf(q)] === 'calc'
+     && (q.pairs || []).length && q.pairs.every(p => QUANTITY.test(String(p.r).trim())))
+    return 'calc';
+  return 'concept';
+}
+const KINDS = [
+  {id: 'concept', label: 'Concepts',
+   blurb: 'Definitions, what a plot shows, and what happens when something changes'},
+  {id: 'calc', label: 'Calculations',
+   blurb: 'Questions answered with a number, worked step by step'},
+];
+const KIND_LABEL = Object.fromEntries(KINDS.map(k => [k.id, k.label]));
+/* How a set of questions divides, as {concept, calc}. */
+function kindCounts(pool){
+  const n = {concept: 0, calc: 0};
+  pool.forEach(q => n[kindOf(q)]++);
+  return n;
+}
+
+/* ==========================================================================
    FILTERS + VIEW ROUTING
    ========================================================================== */
-const FILTER = {prof:'all', tier:'all', skill:'all'};
+const FILTER = {prof:'all', tier:'all', skill:'all', kind:'all'};
 let VIEW = 'topics';
 
 /* Tiers actually present in the bank, so the weighting chips describe this
@@ -8447,6 +9072,7 @@ function matchesFilter(q){
   if(FILTER.prof  !== 'all' && q.prof !== FILTER.prof) return false;
   if(FILTER.tier  !== 'all' && q.tier !== FILTER.tier) return false;
   if(FILTER.skill !== 'all' && skillOf(q) !== FILTER.skill) return false;
+  if(FILTER.kind  !== 'all' && kindOf(q)  !== FILTER.kind) return false;
   return true;
 }
 function poolFor(topicId, subId){
@@ -8472,6 +9098,8 @@ function show(v){
 function filterBar(){
   const chip=(g,v,l)=>`<button class="chip" data-f="${g}" data-v="${v}" aria-pressed="${FILTER[g]===v}">${l}</button>`;
   let h = `<div class="filters">`;
+  h += `<div class="frow"><label>What to review</label>
+    ${chip('kind','all','Everything')}${KINDS.map(k=>chip('kind',k.id,esc(k.label))).join('')}</div>`;
   // one professor means the chips would only ever say "both" and one name
   if(COURSE.professors.length > 1){
     h += `<div class="frow"><label>Professor</label>
@@ -8511,15 +9139,12 @@ function topicCard(t){
     const spct = sm.total ? Math.round(100*sm.mastered/sm.total) : 0;
     const done = sm.total && sm.mastered === sm.total;
     h += `<div class="subrow">
-      <span class="sname">${esc(s.name)}<small>${sp.length} questions · ${esc(s.cite||'')}</small></span>
+      <span class="sname">${esc(s.name)}<small>${splitNote(sp)} · ${esc(s.cite||'')}</small></span>
       <span class="meter"><i style="width:${spct}%"></i></span>
-      <button data-t="${t.id}" data-s="${s.id}" class="${done?'done':''}">${done?'Review':'Start'}</button>
+      <button data-t="${t.id}" data-s="${s.id}" data-k="" class="${done?'done':''}">${done?'Review':'Start'}</button>
     </div>`;
   }
-  h += `<div class="subrow" style="border-top:1px solid var(--line-soft);margin-top:4px;padding-top:11px">
-      <span class="sname"><b>Everything in ${esc(t.name)}</b><small>${pool.length} questions, mixed order</small></span>
-      <button data-t="${t.id}" data-s="">Start</button>
-    </div>`;
+  h += `<div class="ksplit">${startRows(pool, t.name, `data-t="${t.id}" data-s=""`)}</div>`;
   return h + `</div></details>`;
 }
 
@@ -8545,6 +9170,72 @@ function outline(){
     ? Object.assign({topics: TOPICS.filter(t => mod.get(t) === m.module)}, m) : m);
 }
 const examQuestions = id => poolFor(null, null).filter(q => q.exam === id);
+const ofKind = (pool, kind) => pool.filter(q => kindOf(q) === kind);
+/* How many questions a set holds, and how they divide, for a row's caption.
+   With a kind already chosen in the filter bar the division is not stated,
+   because everything on the page is then of that one kind. */
+function splitNote(pool){
+  const n = `${pool.length} question${pool.length === 1 ? '' : 's'}`;
+  if(FILTER.kind !== 'all') return n;
+  const k = kindCounts(pool);
+  if(!k.concept || !k.calc) return n + (k.calc ? ', all calculations' : ', all concepts');
+  return `${n} — ${k.concept} concept${k.concept === 1 ? '' : 's'}, ${k.calc} calculation${k.calc === 1 ? '' : 's'}`;
+}
+
+/* The start rows for one set of questions. With no kind chosen in the filter
+   bar, concepts and calculations are offered separately and together, so the
+   choice can be made per topic without changing what the rest of the page
+   shows. With a kind already chosen, that choice has been made and one row is
+   offered. `attr` is what the button carries so the caller can route it. */
+/* The problem sets a module holds, each worked straight through in her part
+   order. Listed under the topics rather than inside one, because a set draws
+   on several of them: her eight-part battery moves from the rate constant to
+   the volume of distribution to clearance. */
+function chainRows(module){
+  const cs = chainsInModule(module);
+  if(!cs.length) return '';
+  return `<div class="mfoot"><p class="setnote">Her calculations are usually set as
+    one vignette asked in parts, where a part uses what the part before it produced.
+    These work through in her order.</p>` + cs.map(c => {
+      const parts = c.parts.map(byId).filter(Boolean);
+      const m = masteryOf(parts), pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
+      return `<div class="subrow"><span class="sname"><b>${esc(c.name)}</b>
+        <small>${parts.length} parts · ${esc(c.setup)}</small></span>
+        <span class="meter"><i style="width:${pct}%"></i></span>
+        <button data-chain="${esc(c.id)}">Work it</button></div>`;
+    }).join('') + `</div>`;
+}
+
+/* The adaptive rows for an exam recap, split the same way a topic's are. */
+function examRows(pool, id){
+  const row = (title, sub, k) =>
+    `<div class="subrow"><span class="sname"><b>${title}</b><small>${sub}</small></span>
+      <button data-exam="${id}" data-how="adaptive" data-k="${k}">Start</button></div>`;
+  const due = 'missed concepts first; stops when nothing is due';
+  if(FILTER.kind !== 'all')
+    return row('Everything on this exam, adaptive',
+               `${pool.length} questions, ${esc(KIND_LABEL[FILTER.kind].toLowerCase())} only — ${due}`, '');
+  const c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
+  if(!c || !m) return row('Everything on this exam, adaptive', `${pool.length} questions — ${due}`, '');
+  return row('Concepts on this exam, adaptive', `${c} questions, no arithmetic — ${due}`, 'concept')
+       + row('Calculations on this exam, adaptive', `${m} questions, each worked to a number — ${due}`, 'calc')
+       + row('Everything on this exam, adaptive', `${pool.length} questions — ${due}`, '');
+}
+
+function startRows(pool, name, attr){
+  const label = n => `${n} question${n === 1 ? '' : 's'}`;
+  const row = (title, sub, k, ghost) =>
+    `<div class="subrow"><span class="sname"><b>${title}</b><small>${sub}</small></span>
+      <button ${attr} data-k="${k}"${ghost ? ' class="ghost"' : ''}>Start</button></div>`;
+  if(FILTER.kind !== 'all')
+    return row(`Everything in ${esc(name)}`,
+               `${label(pool.length)}, ${esc(KIND_LABEL[FILTER.kind].toLowerCase())} only`, '');
+  const c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
+  if(!c || !m) return row(`Everything in ${esc(name)}`, `${label(pool.length)}, mixed order`, '');
+  return row(`Concepts in ${esc(name)}`, `${label(c)}, no arithmetic`, 'concept')
+       + row(`Calculations in ${esc(name)}`, `${label(m)}, each worked to a number`, 'calc')
+       + row(`Everything in ${esc(name)}`, `${label(pool.length)}, the two mixed`, '', true);
+}
 
 function renderTopics(){
   const shares = poolShares();
@@ -8592,15 +9283,13 @@ function renderTopics(){
       if(!pool.length) continue;
       const em = masteryOf(pool), epct = em.total ? Math.round(100*em.mastered/em.total) : 0;
       h += `<details class="module"><summary>
-          <span class="mname">${esc(m.name)}<small>${pool.length} questions${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
+          <span class="mname">${esc(m.name)}<small>${splitNote(pool)}${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
           <span class="meter"><i style="width:${epct}%"></i></span><span class="counts">${em.mastered}/${em.total}</span>
         </summary><div class="mfoot">
-        <div class="subrow"><span class="sname"><b>Everything on ${ex ? esc(ex.name) : 'this exam'}, adaptive</b>
-          <small>Missed concepts first; stops when nothing is due</small></span>
-          <button data-exam="${m.exam}" data-how="adaptive">Start</button></div>
+        ${examRows(pool, m.exam)}
         <div class="subrow"><span class="sname"><b>Straight pass</b>
           <small>Every question once, shuffled, nothing held back by scheduling</small></span>
-          <button data-exam="${m.exam}" data-how="sweep">Start</button></div>
+          <button data-exam="${m.exam}" data-how="sweep" data-k="" class="ghost">Start</button></div>
         ${ex ? `<div class="subrow"><span class="sname"><b>Sit a practice paper</b>
           <small>${ex.questions} questions in ${ex.minutes} minutes at the blueprint, no feedback until you submit</small></span>
           <button data-exam="${m.exam}" data-how="paper">Open</button></div>` : ''}
@@ -8613,12 +9302,13 @@ function renderTopics(){
     if(!mpool.length) continue;
     const mm = masteryOf(mpool), mpct = mm.total ? Math.round(100*mm.mastered/mm.total) : 0;
     h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
-        <span class="mname">${esc(m.name)}<small>${mpool.length} questions · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
+        <span class="mname">${esc(m.name)}<small>${splitNote(mpool)} · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
         <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
       </summary>
       ${ts.map(topicCard).join('')}
-      <div class="mfoot"><div class="subrow"><span class="sname"><b>Everything in ${esc(m.name)}</b><small>${mpool.length} questions, mixed order</small></span>
-        <button data-module="${m.module}">Start</button></div></div></details>`;
+      ${chainRows(m.module)}
+      ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
+      </details>`;
   }
 
   h += `<h3>Mixed drills</h3>
@@ -8640,19 +9330,23 @@ function renderTopics(){
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });
   el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
-    startQuiz(b.dataset.t || null, b.dataset.s || null);
+    startQuiz(b.dataset.t || null, b.dataset.s || null, b.dataset.k || null);
   });
+  el.querySelectorAll('button[data-chain]').forEach(b => b.onclick = () => startChain(b.dataset.chain));
   el.querySelectorAll('button[data-view]').forEach(b => b.onclick = () => show(b.dataset.view));
   el.querySelectorAll('button[data-module]').forEach(b => b.onclick = () => {
     const m = outline().find(o => o.module === +b.dataset.module);
-    if(m) startPool((m.topics || []).flatMap(t => poolFor(t.id, null)), m.name);
+    if(!m) return;
+    const k = b.dataset.k || null;
+    startPool(narrow((m.topics || []).flatMap(t => poolFor(t.id, null)), k), kindLabel(m.name, k));
   });
   el.querySelectorAll('button[data-exam]').forEach(b => b.onclick = () => {
     const id = +b.dataset.exam, ex = COURSE.exams.find(e => e.id === id);
-    const label = (ex ? ex.name : 'Exam') + ' recap';
+    const k = b.dataset.k || null;
+    const label = kindLabel((ex ? ex.name : 'Exam') + ' recap', k);
     if(b.dataset.how === 'paper'){ chooseExam(id); show('exam'); return; }
-    if(b.dataset.how === 'sweep') startSweepOf(examQuestions(id), label);
-    else startPool(examQuestions(id), label);
+    if(b.dataset.how === 'sweep') startSweepOf(narrow(examQuestions(id), k), label);
+    else startPool(narrow(examQuestions(id), k), label);
   });
   const sa = document.getElementById('sweepAll');
   const sw = document.getElementById('sweepWeighted'); if(sw) sw.onclick = () => startSweep('weighted');
@@ -8666,11 +9360,16 @@ function renderTopics(){
    ========================================================================== */
 let Q = null;     // {pool, label, current, order, answered, lastId, examMode}
 
-function startQuiz(topicId, subId){
+function startQuiz(topicId, subId, kind){
   const t = TOPICS.find(x=>x.id===topicId);
   const s = t && (t.subs||[]).find(x=>x.id===subId);
-  startPool(poolFor(topicId, subId), s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything'));
+  const name = s ? `${t.name} — ${s.name}` : (t ? t.name : 'Everything');
+  startPool(narrow(poolFor(topicId, subId), kind), kindLabel(name, kind));
 }
+/* A drill started from a split row carries its kind in the pool and in the
+   label, so what is being drilled is stated on the quiz screen as well. */
+const narrow = (pool, kind) => kind ? ofKind(pool, kind) : pool;
+const kindLabel = (name, kind) => kind ? `${name} — ${KIND_LABEL[kind].toLowerCase()}` : name;
 /* An adaptive drill over any set of questions: the scheduler picks, missed
    concepts return first, and it stops when nothing is due. */
 function startPool(pool, label){
@@ -8688,6 +9387,31 @@ function startSweepOf(pool, label, scope){
   nextQuestion();
   show('quiz');
 }
+
+/* One of her problem sets, worked straight through in the order she asks it.
+   Shaped like a sweep, but the queue is her part order rather than a shuffle,
+   because the point of the set is that each part is fed by the one before it.
+   A part that has been answered before is still asked: the set is a single
+   piece of work and dropping (c) out of it leaves (d) unexplained. */
+function startChain(id){
+  const c = CHAINS.find(x => x.id === id);
+  if(!c) return;
+  const parts = c.parts.map(byId).filter(Boolean);
+  if(!parts.length){ alert('That problem set has no questions yet.'); return; }
+  Q = {pool: parts, label: c.name, chain: c, sweep: parts.map(q => q.id), i: 0,
+       current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
+  nextQuestion();
+  show('quiz');
+}
+/* Every problem set a module holds, and the set a question belongs to. */
+const chainsInModule = m => (typeof CHAINS === 'undefined' ? [] : CHAINS)
+  .filter(c => c.module === m && c.parts.some(id => byId(id)));
+const CHAIN_OF = (() => {
+  const m = {};
+  (typeof CHAINS === 'undefined' ? [] : CHAINS).forEach(c =>
+    c.parts.forEach((id, i) => { m[id] = {chain: c, step: i + 1}; }));
+  return m;
+})();
 
 /* The pool for the exam-weighted pass: the heaviest pool whole, and every
    other pool sampled so the set sits in the blueprint's own proportion.
@@ -8786,7 +9510,8 @@ function renderQuiz(){
   if(!Q){ el.innerHTML = `<div class="empty">Choose a topic to begin.</div>`; return; }
   if(!Q.current && Q.sweep){
     el.innerHTML = `<div class="empty">
-      <p><b>That is every question in this set — all ${Q.sweep.length} of them.</b></p>
+      <p><b>${Q.chain ? `That is every part of ${esc(Q.chain.name)} — all ${Q.sweep.length}.`
+                      : `That is every question in this set — all ${Q.sweep.length} of them.`}</b></p>
       <p style="margin:10px 0 16px">Everything you answered is recorded, so Weak spots now
         reflects the whole bank and the adaptive runner will bring the missed concepts back first.</p>
       <p style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
@@ -8835,11 +9560,13 @@ function renderQuiz(){
       seenBefore   ? '<span>review</span>' : '<span>new</span>'}
   </div>
   <div class="qprog">
-    <span>${Q.sweep ? `question ${Q.i} of ${Q.sweep.length}` : `${Q.answered} answered`}</span>
+    <span>${Q.chain ? `part ${Q.i} of ${Q.sweep.length}`
+           : Q.sweep ? `question ${Q.i} of ${Q.sweep.length}` : `${Q.answered} answered`}</span>
     <span class="pbar"><i style="width:${Q.sweep ? Math.round(100*Q.i/Q.sweep.length) : pctDone}%"></i></span>
     <span>${Q.sweep ? `${Q.sweep.length - Q.i} to go` : `${left} concept${left===1?'':'s'} to go`}</span>
   </div>
   <div class="qbody">
+    ${Q.chain ? `<p class="cset">${esc(Q.chain.setup)}</p>` : ''}
     <p class="stem">${esc(q.stem)}</p>`;
 
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -8927,6 +9654,12 @@ function renderQuiz(){
         q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${
         renderTeach(q.teach, seen, self)}</div>`;
     if(q.note) h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">${esc(q.note)}</p>`;
+    const inSet = CHAIN_OF[q.id];
+    if(inSet && !Q.chain)
+      h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">She sets this as part
+        ${inSet.step} of ${inSet.chain.parts.length} of one problem: ${esc(inSet.chain.name)}.
+        <button class="linkish" id="btnChain" data-c="${esc(inSet.chain.id)}">Work the whole set
+        from the start</button></p>`;
     h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${
         srcFlag(q)}${esc(q.cite)}</div>`;
     h += `</div>`;
@@ -8948,6 +9681,8 @@ function renderQuiz(){
   h += `</div></div>`;
   el.innerHTML = h;
 
+  const setBtn = document.getElementById('btnChain');
+  if(setBtn) setBtn.onclick = () => startChain(setBtn.dataset.c);
   el.querySelectorAll('.opt').forEach(b => b.onclick = () => multi ? toggleOption(+b.dataset.o) : answer(+b.dataset.o));
   const ni = document.getElementById('numIn');
   if(ni && !Q.revealed){

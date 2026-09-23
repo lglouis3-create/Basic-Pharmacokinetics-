@@ -8,6 +8,24 @@ const OUT=(()=>{const s=fs.readFileSync(path.join(__dirname,'course.js'),'utf8')
   if(!m){console.error('FAIL: course.js declares no output');process.exit(1);}
   return '/mnt/user-data/outputs/'+m[1];})();
 const html=fs.readFileSync(OUT,'utf8');
+/* The pushed copy at the repository root is what a reader actually opens, so a
+ * build that refreshed only the outputs directory would leave GitHub serving an
+ * older drill than the source beside it. Compare the two before anything else:
+ * every other check in this file reads the outputs copy, and none of them would
+ * notice the root copy going stale. */
+{
+  const root = path.join(__dirname, '..', path.basename(OUT));
+  if(!fs.existsSync(root)){
+    console.error(`FAIL: ${root} is missing. The repository serves that copy; run build.py.`);
+    process.exit(1);
+  }
+  if(fs.readFileSync(root,'utf8') !== html){
+    console.error(`FAIL: ${root} differs from ${OUT}.`);
+    console.error('       The copy the repository serves is out of date. Run build.py and commit it.');
+    process.exit(1);
+  }
+  console.log('  ok    the copy at the repository root matches this build');
+}
 let code=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)][0][1];
 const b=code.lastIndexOf('   BOOT'); code=code.slice(0,code.lastIndexOf('/* ===',b));
 code+="\nglobalThis.__X={COURSE,QUESTIONS,TOPICS,startQuiz,startSweep,renderTopics,renderQuiz,renderGaps,renderRef,renderTell,renderGuide,renderSettings,renderExam,answer,submitNumeric,submitMatch,submitMulti,qType,isMulti,correctSet,Qref:()=>Q,askProfile,record,beginExam,renderExamQ,finishExam,EXref:()=>EX};\n";

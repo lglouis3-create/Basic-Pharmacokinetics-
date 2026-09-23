@@ -109,15 +109,20 @@ const TOPICS = /*__TOPICS__*/[];"""
         os.unlink(tmp_js)
     print('  assembled script parses cleanly')
 
-    # write to a temporary file first, so a failed build never leaves a half-written
-    # or truncated HTML in place of the last good one
-    out = course_output()
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    tmp_out = out + '.tmp'
-    with open(tmp_out, 'w', encoding='utf-8') as fh:
-        fh.write(shell)
-    os.replace(tmp_out, out)
-    print(f'wrote {out}  ({len(shell)/1024/1024:.2f} MB)')
+    # Two destinations, written together so they cannot drift apart. The
+    # outputs directory is what this session hands back; the repository root is
+    # what the pushed copy serves, so a build that updated only the first would
+    # leave the page on GitHub showing an older drill than the source it sits
+    # beside. Each is written to a temporary file first, so a failed build never
+    # leaves a half-written or truncated HTML in place of the last good one.
+    name = os.path.basename(course_output())
+    for out in (course_output(), os.path.join(os.path.dirname(HERE), name)):
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        tmp_out = out + '.tmp'
+        with open(tmp_out, 'w', encoding='utf-8') as fh:
+            fh.write(shell)
+        os.replace(tmp_out, out)
+        print(f'wrote {out}  ({len(shell)/1024/1024:.2f} MB)')
 
 
 if __name__ == '__main__':
