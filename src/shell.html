@@ -87,8 +87,24 @@ h3{font-size:16px;margin:22px 0 8px}
 .subrow button.ghost{background:var(--paper);color:var(--text);border:1px solid var(--line)}
 /* The concepts / calculations / everything rows at the foot of a topic */
 .ksplit{border-top:1px solid var(--line-soft);margin-top:4px;padding-top:5px}
-/* The problem-set rows inside a module, and their one-line heading */
-.setnote{font-size:12.5px;color:var(--text-dim);margin:4px 8px 2px;line-height:1.45}
+/* The review switch: four modes of one page, so they read as one control */
+.review{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0 0 14px;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rtab{border:0;border-right:1px solid var(--line);background:var(--paper);color:var(--text);
+  padding:11px 8px;font-size:14.5px;font-weight:600;text-align:center;line-height:1.25}
+.rtab:last-child{border-right:0}
+.rtab small{display:block;font-weight:400;font-size:11.5px;color:var(--text-dim);margin-top:2px}
+.rtab[aria-pressed="true"]{background:var(--ink);color:#fff}
+.rtab[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
+@media (max-width:560px){
+  .review{grid-template-columns:1fr 1fr}
+  .rtab:nth-child(2){border-right:0}
+  .rtab:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+/* The stepwise problem sets inside a module, under their own heading */
+.stepwise{background:var(--accent-bg);border-radius:8px;margin:6px 10px 10px;padding:10px 8px 8px;border-top:0}
+.sethead{margin:2px 8px 2px;font-size:14.5px}
+.setnote{font-size:12.5px;color:var(--text-dim);margin:2px 8px 4px;line-height:1.45}
 /* The vignette a problem set shares, above the stem of each of its parts */
 .cset{font-size:13.5px;color:var(--text-dim);margin:0 0 9px;padding-left:9px;
   border-left:3px solid var(--line)}
@@ -108,6 +124,48 @@ h3{font-size:16px;margin:22px 0 8px}
   border:1px solid var(--line);background:var(--paper);border-radius:20px;padding:5px 12px;font-size:13px;color:var(--text)
 }
 .chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ---------- stacked fractions, as the slides print them ---------- */
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;
+  margin:0 .18em;line-height:1.25}
+.frac>.fn{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>.fd{padding:.1em .25em 0}
+.reftab td:first-child b{display:inline-block;line-height:1.9;margin:3px 0}
+.nw{white-space:nowrap}
+.stepwise .meter{background:var(--paper)}
+
+/* ---------- equations ---------- */
+#v-eq .eqrow{align-items:flex-start;gap:8px}
+#v-eq .eqpick{display:flex;gap:9px;align-items:flex-start;flex:1;min-width:0;cursor:pointer}
+#v-eq .eqpick input{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--accent)}
+#v-eq .eqline{display:block;font-size:14px;margin:2px 0 1px;color:var(--text)}
+#v-eq .must{color:var(--yen)}
+#v-eq .eqdone{font-size:11.5px;color:var(--ok);white-space:nowrap;font-weight:600}
+#v-eq .module>summary .chip{flex:none}
+.eqask{font-size:13.5px;color:var(--text-dim);margin:0 0 12px}
+.eqlhs{font-weight:700;white-space:nowrap}
+/* the built equation: a row of slots after the left-hand side */
+.eqbuild{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:4px 0 14px;font-size:16px}
+.eqslot{min-width:52px;min-height:40px;border:2px dashed var(--line);background:var(--surface);
+  border-radius:8px;padding:6px 10px;font-size:15px;color:var(--text)}
+.eqslot.full{border-style:solid;border-color:var(--accent);background:var(--paper)}
+.eqslot.ok{border-color:var(--ok);background:var(--ok-bg)}
+.eqslot.bad{border-color:var(--bad);background:var(--bad-bg)}
+/* the pieces on offer, correct ones and wrong ones together */
+.eqtray{display:flex;flex-wrap:wrap;gap:7px;padding:11px;border:1px solid var(--line-soft);
+  border-radius:10px;background:var(--surface)}
+.eqtile{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;
+  font-size:15px;color:var(--text);cursor:grab}
+.eqtile.used{opacity:.32;cursor:default}
+.eqtype{display:flex;align-items:center;gap:9px;margin:4px 0 6px;flex-wrap:wrap}
+.eqtype input{flex:1;min-width:190px;padding:11px 12px;font-size:16px;border:1px solid var(--line);
+  border-radius:8px;background:var(--paper);color:var(--text);font-family:ui-monospace,Menlo,Consolas,monospace}
+.eqtype input.ok{border-color:var(--ok)}
+.eqtype input.bad{border-color:var(--bad)}
+.eqhint{margin:0 0 6px}
+.eqhint code,.why code{background:var(--surface);border:1px solid var(--line-soft);border-radius:4px;
+  padding:1px 5px;font-size:13px}
+.eqanswer{font-size:16px;margin:0 0 12px}
 
 /* ---------- quiz ---------- */
 .qcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
@@ -347,6 +405,7 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
   <button data-v="exam">Exam sim</button>
   <button data-v="guide">Guides</button>
   <button data-v="tell">Tell apart</button>
+  <button data-v="eq">Equations</button>
   <button data-v="ref">Reference</button>
   <button data-v="settings">Settings</button>
 </nav>
@@ -358,6 +417,7 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
   <section id="v-exam" class="hide"></section>
   <section id="v-guide" class="hide"></section>
   <section id="v-tell" class="hide"></section>
+  <section id="v-eq" class="hide"></section>
   <section id="v-ref" class="hide"></section>
   <section id="v-settings" class="hide"></section>
 </main>
@@ -601,6 +661,7 @@ const BLANK = () => ({
                       //   select-all question, the string entered for a numeric
                       //   one, or the left->right map for a match.
                       //   missKind: which kind of slip a missed numeric was.
+  eq:{},              // equationId -> {seen,right,wrong,streak,mode,at} for the equation drill
   qn:0,               // questions answered counter (drives cram scheduling)
   settings:{mode:DEFAULT_MODE},
   created:Date.now()

@@ -24,7 +24,7 @@ const REFERENCE_HTML = `
 <table class="reftab"><thead><tr>
 <th style="width:26%">Relation</th><th style="width:34%">What she said</th><th>Where it is needed, and the state of the equation sheet</th></tr></thead><tbody>
 
-<tr><td><b>First-order half-life</b><br>t&frac12; = 0.693 / k</td>
+<tr><td><b>First-order half-life</b><br>t&frac12; = {{frac:0.693|k}}</td>
 <td><i>"first order half-life &hellip; that will not be on your equation sheet. This is the one that you take to your grave with you, OK? 0.693 over K."</i> (08-19). Repeated 08-24, 08-26 and in the 09-09 exam review: <i>"That one is not on your equation sheet."</i></td>
 <td>Needed in every module. It is also how the two-compartment beta half-life and the absorption half-life are obtained, since both are first-order half-lives of a different rate constant. No line of the readable equation-sheet extract carries 0.693 divided by a rate constant.</td></tr>
 
@@ -32,11 +32,11 @@ const REFERENCE_HTML = `
 <td><i>"this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd."</i> (08-24)</td>
 <td>Needed for total body clearance, for the infusion rate R = C<sub>ss</sub>&middot;Cl and for every renal/hepatic split. The deck slide that states it, 2IVBolusAdministration.pdf slide "Clearance", carries the handwritten note that the equation will not be given on the exam. No line of the readable extract carries it.</td></tr>
 
-<tr><td><b>Volume, dose and concentration</b><br>C<sub>p</sub> = D<sub>B</sub> / V<sub>D</sub>, so V<sub>D</sub> = D<sub>B</sub> / C<sub>p</sub></td>
+<tr><td><b>Volume, dose and concentration</b><br>C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}, so V<sub>D</sub> = {{frac:D<sub>B</sub>|C<sub>p</sub>}}</td>
 <td><i>"The other one, the relationship between volume of distribution, concentration, and dose, that one is in, in, in you as well"</i> (08-26)</td>
 <td><b>Two sources differ here.</b> She names this as one to hold without the sheet, but the equation sheet extract does carry the line C<sub>p</sub> = D<sub>B</sub>/V<sub>D</sub>, readable and unambiguous, on page 1. Both readings are stated because neither cancels the other: the line is on the sheet, and she still expects it known.</td></tr>
 
-<tr><td><b>Cockcroft-Gault</b><br>CrCl = (140 &minus; age)(IBW) / (72 &times; S<sub>Cr</sub>), &times; 0.85 if female</td>
+<tr><td><b>Cockcroft-Gault</b><br>CrCl = {{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}, &times; 0.85 if female</td>
 <td><i>"this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one, OK."</i> (09-14)</td>
 <td>Module 4. Her answer must come out in mL/min: <i>"don't give me kilograms per milligram per deciliter. Milliliters per minute."</i> No line of the readable extract carries it.</td></tr>
 
@@ -51,9 +51,9 @@ const REFERENCE_HTML = `
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Relation</th><th style="width:26%">Source that states it</th><th>Status on the sheet</th></tr></thead><tbody>
-<tr><td><b>Zero-order half-life</b><br>t&frac12; = C<sub>0</sub> / 2k</td><td>Introduction.pdf slide 19, printed</td><td>Not in the readable extract. She never said whether it is supplied. Unreadable line (1) is in a plausible position for a zero-order relation, so absence cannot be asserted.</td></tr>
-<tr><td><b>Beta half-life</b><br>t&frac12;<sub>&beta;</sub> = 0.693 / b</td><td>2IVBolusAdministration.pdf slide "Beta Half-life", printed</td><td>Not in the readable extract. It is the first-order half-life relation applied to the slope b, so her carve-out for first-order half-life covers it: <i>"You take your 0.693 and you divide by lowercase b."</i></td></tr>
-<tr><td><b>Absorption half-life</b><br>t&frac12;<sub>a</sub> = 0.693 / k<sub>a</sub></td><td>5---Pharmacokinetics-of-Oral-Absorption.pdf slide "Kinetics of Absorption", printed</td><td>Not in the readable extract. Same first-order half-life relation, applied to k<sub>a</sub>.</td></tr>
+<tr><td><b>Zero-order half-life</b><br>t&frac12; = {{frac:C<sub>0</sub>|2k}}</td><td>Introduction.pdf slide 19, printed</td><td>Not in the readable extract. She never said whether it is supplied. Unreadable line (1) is in a plausible position for a zero-order relation, so absence cannot be asserted.</td></tr>
+<tr><td><b>Beta half-life</b><br>t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}</td><td>2IVBolusAdministration.pdf slide "Beta Half-life", printed</td><td>Not in the readable extract. It is the first-order half-life relation applied to the slope b, so her carve-out for first-order half-life covers it: <i>"You take your 0.693 and you divide by lowercase b."</i></td></tr>
+<tr><td><b>Absorption half-life</b><br>t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}</td><td>5---Pharmacokinetics-of-Oral-Absorption.pdf slide "Kinetics of Absorption", printed</td><td>Not in the readable extract. Same first-order half-life relation, applied to k<sub>a</sub>.</td></tr>
 </tbody></table>
 
 <h3>Units, and the conversions this course keeps needing</h3>
@@ -90,7 +90,7 @@ const REFERENCE_HTML = `
 <p>The two orders are the pair most often confused, so they are set out together. The 09-09 review names the one item guaranteed to appear: <i>"On this exam, I am going to give you a data set, and I expect you to figure out if it's zero or first."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
 <tr><td><b>dC/dt = &minus;k</b><br>C = C<sub>0</sub> &minus; kt</td>
 <td>C, C<sub>0</sub> concentration (mg/mL, mg/L); k zero-order rate constant, amount or concentration per time (mg/mL per day); t time</td>
@@ -98,37 +98,37 @@ const REFERENCE_HTML = `
 <td>k<sub>0</sub> from two points, C<sub>0</sub> by back-extrapolation, time to a stated percent decomposed.</td>
 <td>Not in the readable extract; unreadable line (1) is in a plausible position for this form.</td></tr>
 
-<tr><td><b>dC/dt = &minus;kC</b><br>ln C = ln C<sub>0</sub> &minus; kt &rarr; C = C<sub>0</sub>e<sup>&minus;kt</sup><br>log C = log C<sub>0</sub> &minus; kt/2.3 &rarr; C = C<sub>0</sub>10<sup>&minus;kt/2.3</sup></td>
+<tr><td><b>dC/dt = &minus;kC</b><br>ln C = ln C<sub>0</sub> &minus; kt &rarr; C = C<sub>0</sub>e<sup>&minus;kt</sup><br>log C = log C<sub>0</sub> &minus; {{frac:kt|2.3}} &rarr; C = C<sub>0</sub>10<sup>&minus;kt/2.3</sup></td>
 <td>Same symbols, but k is reciprocal time (hr<sup>&minus;1</sup>, day<sup>&minus;1</sup>). The 2.3 is the conversion between natural and base-10 logs: <i>"It's just a conversion factor to get you down to this natural log piece."</i></td>
 <td>First-order loss. The rate is proportional to what remains, so the rate falls as concentration falls. A curve on linear axes and a straight line on semi-logarithmic axes.</td>
 <td>k from two points as ln(C<sub>1</sub>/C<sub>2</sub>)/&Delta;t; C<sub>0</sub> as C<sub>t</sub>e<sup>+kt</sup>; C at a stated time; time to a stated percent.</td>
 <td>Yes &mdash; all three forms, twice: once in C and once in D.</td></tr>
 
-<tr><td><b>D = D<sub>0</sub>e<sup>&minus;kt</sup></b><br>ln D = ln D<sub>0</sub> &minus; kt<br>log D = log D<sub>0</sub> &minus; kt/2.3</td>
+<tr><td><b>D = D<sub>0</sub>e<sup>&minus;kt</sup></b><br>ln D = ln D<sub>0</sub> &minus; kt<br>log D = log D<sub>0</sub> &minus; {{frac:kt|2.3}}</td>
 <td>D amount of drug remaining (mg); D<sub>0</sub> the dose (mg); k reciprocal time</td>
 <td>The same first-order relation written in amount rather than concentration. She insists the two are not mixed: <i>"you gotta be apples to apples here &hellip; you can't do the 200 and the 15."</i></td>
 <td>Amount in the body at a stated time. She shows it both ways, as V<sub>D</sub>&middot;C<sub>t</sub> and as D<sub>0</sub>e<sup>&minus;kt</sup>.</td>
 <td>Yes, all three forms.</td></tr>
 
-<tr><td><b>t&frac12; = C<sub>0</sub> / 2k</b></td>
+<tr><td><b>t&frac12; = {{frac:C<sub>0</sub>|2k}}</b></td>
 <td>C<sub>0</sub> starting concentration; k zero-order rate constant; result in time</td>
 <td>Zero order only. It depends on C<sub>0</sub>, so it is not a fixed property of the drug: start lower and the half-life is shorter.</td>
 <td>Asked beside the first-order half-life on the same data, in her paired stem <i>"Assuming first-order kinetics &hellip; Assuming zero-order kinetics &hellip;"</i></td>
 <td>Not in the readable extract; she never said either way.</td></tr>
 
-<tr><td><b>t&frac12; = 0.693 / k</b></td>
+<tr><td><b>t&frac12; = {{frac:0.693|k}}</b></td>
 <td>k first-order elimination rate constant (hr<sup>&minus;1</sup>); result in time, never reciprocal time</td>
 <td>First order only. Constant at every concentration, because <i>"a constant divided by a constant is A constant."</i></td>
 <td>Asked in essentially every problem, usually as part a or b. Also run backwards to get k from a stated half-life.</td>
 <td>No &mdash; named by her, three times.</td></tr>
 
-<tr><td><b>AUC over one segment</b><br>[(C<sub>n&minus;1</sub> + C<sub>n</sub>)/2] &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)</td>
+<tr><td><b>AUC over one segment</b><br>{{frac:C<sub>n&minus;1</sub> + C<sub>n</sub>|2}} &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)</td>
 <td>C<sub>n&minus;1</sub>, C<sub>n</sub> the two concentrations bounding the segment; t in hours; result in concentration &times; time</td>
 <td>Any concentration-time data set, any route. The total AUC is the sum of the segments. She reduces the printed formula to <i>"one half base times height."</i></td>
 <td>AUC between two stated hours, from a table.</td>
 <td>Yes, page 1, first line.</td></tr>
 
-<tr><td><b>F = AUC<sub>oral</sub> / AUC<sub>IV</sub></b></td>
+<tr><td><b>F = {{frac:AUC<sub>oral</sub>|AUC<sub>IV</sub>}}</b></td>
 <td>F fraction of the oral dose reaching plasma, no units</td>
 <td>Comparing two routes. Printed on Introduction.pdf slide 23 in this bare form; the equation sheet carries the dose-corrected version, F = (AUC<sub>po</sub>/AUC<sub>IV</sub>)(D<sub>IV</sub>/D<sub>po</sub>).</td>
 <td>Bioavailability. Module 9, not yet lectured.</td>
@@ -141,9 +141,9 @@ const REFERENCE_HTML = `
 <p>What the words "IV bolus" are meant to trigger: <i>"if I tell you that we are administering a drug via IV bolus injection. Then you should think. Whichever form of this equation you like."</i> Input is instantaneous, elimination is first order, and she must tell you the compartment count: <i>"I have to tell you that it follows a one compartment model or a two compartment."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
-<tr><td><b>C<sub>p</sub> = D<sub>B</sub> / V<sub>D</sub></b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}</b></td>
 <td>C<sub>p</sub> plasma concentration (mg/L); D<sub>B</sub> amount of drug in the body at that time (mg); V<sub>D</sub> apparent volume of distribution (L)</td>
 <td>One compartment, at any time. At time zero D<sub>B</sub> is the dose and C<sub>p</sub> is C<sub>0</sub>, which gives V<sub>D</sub> = D<sub>0</sub>/C<sub>0</sub>.</td>
 <td>V<sub>D</sub>, or the amount in the body from a measured concentration.</td>
@@ -155,19 +155,19 @@ const REFERENCE_HTML = `
 <td>Rarely the unknown directly; it fixes what an unsubscripted k means.</td>
 <td>No line of the extract carries this sum.</td></tr>
 
-<tr><td><b>dD<sub>B</sub>/dt = &minus;kD<sub>B</sub></b><br>C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup><br>ln C<sub>p</sub> = ln C<sub>p</sub><sup>0</sup> &minus; kt<br>log C<sub>p</sub> = log C<sub>p</sub><sup>0</sup> &minus; kt/2.3</td>
+<tr><td><b>dD<sub>B</sub>/dt = &minus;kD<sub>B</sub></b><br>C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup><br>ln C<sub>p</sub> = ln C<sub>p</sub><sup>0</sup> &minus; kt<br>log C<sub>p</sub> = log C<sub>p</sub><sup>0</sup> &minus; {{frac:kt|2.3}}</td>
 <td>C<sub>p</sub><sup>0</sup> the concentration extrapolated back to time zero (mg/L); k hr<sup>&minus;1</sup></td>
 <td>One compartment, IV bolus, first-order elimination. The deck marks the natural-log form as the one she prefers.</td>
 <td>k from two plasma points; C<sub>0</sub> by back-extrapolation; C at a stated time; time to 99.9% eliminated. She warns that C<sub>0</sub> must exceed every sampled point and that the exponent sign flips when solving backwards.</td>
 <td>Yes.</td></tr>
 
-<tr><td><b>Cl<sub>T</sub> = k &times; V<sub>D</sub></b><br><b>Cl = D<sub>0</sub> / AUC<sub>0&rarr;&infin;</sub></b></td>
+<tr><td><b>Cl<sub>T</sub> = k &times; V<sub>D</sub></b><br><b>Cl = {{frac:D<sub>0</sub>|AUC<sub>0&rarr;&infin;</sub>}}</b></td>
 <td>Cl<sub>T</sub> total body clearance (L/hr); k hr<sup>&minus;1</sup>; V<sub>D</sub> L; D<sub>0</sub> dose (mg); AUC in mg&middot;hr/L</td>
 <td>First-order elimination. Clearance is the volume of plasma cleared of drug per unit time, and it is a constant: <i>"a constant times a constant is a constant."</i> Changing the concentration does not change it.</td>
 <td>Cl<sub>T</sub> as part f of her standard battery; and Cl as the bridge from dose to exposure.</td>
 <td>Cl = kV<sub>D</sub>: no, named by her. Cl = FD<sub>0</sub>/AUC: yes, page 1.</td></tr>
 
-<tr><td><b>t&frac12; = 0.693 V<sub>D</sub> / Cl<sub>T</sub></b></td>
+<tr><td><b>t&frac12; = {{frac:0.693 V<sub>D</sub>|Cl<sub>T</sub>}}</b></td>
 <td>Half-life in time, from V<sub>D</sub> in L and Cl<sub>T</sub> in L/hr</td>
 <td>The two relations above combined, printed on 4---Clearance-and-Elimination.pdf slide 21. It says which way a half-life moves when clearance falls and volume does not.</td>
 <td>The new half-life in renal failure, where clearance drops and V<sub>D</sub> is unchanged.</td>
@@ -179,19 +179,19 @@ const REFERENCE_HTML = `
 <td>Concentration at a stated time; C<sub>0</sub> as A + B.</td>
 <td>Yes, page 1.</td></tr>
 
-<tr><td><b>t&frac12;<sub>&beta;</sub> = 0.693 / b</b></td>
+<tr><td><b>t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}</b></td>
 <td>b the terminal slope, hr<sup>&minus;1</sup>; result in time</td>
 <td>Two compartment. The distribution half-life is not asked: <i>"we don't really care about the half-life of the distribution phase. We care about the half-life of the elimination phase."</i> She names the quantity explicitly on the paper so there is no ambiguity.</td>
 <td>The elimination half-life. She warns against the long route: <i>"Don't solve for K and then 0.693 over K. You've, you've done too much work."</i></td>
 <td>Not in the readable extract; covered by her first-order half-life carve-out.</td></tr>
 
-<tr><td><b>k = (A + B)ab / (Ab + Ba)</b><br><b>k<sub>12</sub> = AB(b &minus; a)<sup>2</sup> / [(A + B)(Ab + Ba)]</b><br><b>k<sub>21</sub> = (Ab + Ba) / (A + B)</b></td>
+<tr><td><b>k = {{frac:(A + B)ab|Ab + Ba}}</b><br><b>k<sub>12</sub> = {{frac:AB(b &minus; a)<sup>2</sup>|(A + B)(Ab + Ba)}}</b><br><b>k<sub>21</sub> = {{frac:Ab + Ba|A + B}}</b></td>
 <td>k overall elimination from the central compartment; k<sub>12</sub> transfer central to tissue; k<sub>21</sub> transfer tissue to central. All reciprocal time.</td>
 <td>Two-compartment IV bolus, model A: drug moves to and from the tissue compartment and leaves the body from the central compartment only.</td>
 <td>Read straight off the given A, B, alpha, beta. Her in-class sheet asked for all three: k 0.272 hr<sup>&minus;1</sup>, k<sub>12</sub> 1.1 hr<sup>&minus;1</sup>, k<sub>21</sub> 0.9 hr<sup>&minus;1</sup>.</td>
 <td>Yes, all three.</td></tr>
 
-<tr><td><b>V<sub>p</sub> = D<sub>0</sub> / (A + B)</b><br><b>V<sub>p</sub> = D<sub>0</sub> / (k &times; AUC<sub>0&rarr;&infin;</sub>)</b><br><b>V<sub>t</sub> = V<sub>p</sub>k<sub>12</sub> / k<sub>21</sub></b></td>
+<tr><td><b>V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}}</b><br><b>V<sub>p</sub> = {{frac:D<sub>0</sub>|k &times; AUC<sub>0&rarr;&infin;</sub>}}</b><br><b>V<sub>t</sub> = {{frac:V<sub>p</sub>k<sub>12</sub>|k<sub>21</sub>}}</b></td>
 <td>V<sub>p</sub> volume of the central compartment (L); V<sub>t</sub> volume of the tissue compartment (L)</td>
 <td>Two compartment. The two routes to V<sub>p</sub> answer different data: use the intercepts when A and B are supplied, the second when a dose and an AUC are supplied.</td>
 <td>The volume of distribution of the central compartment, by dose divided by A + B.</td>
@@ -204,15 +204,15 @@ const REFERENCE_HTML = `
 <p>The input changes and nothing else does: <i>"the only thing we've changed here, we haven't changed the drug, we've changed the manner that we put the drug in the body."</i> A constant rate in is zero order; elimination out stays first order. <i>"Our input is zero order, constant in, first order out. When we stop the in, then it's just out."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
-<tr><td><b>C<sub>ss</sub> = R / Cl = R / (kV<sub>D</sub>)</b></td>
+<tr><td><b>C<sub>ss</sub> = {{frac:R|Cl}} = {{frac:R|kV<sub>D</sub>}}</b></td>
 <td>C<sub>ss</sub> steady-state concentration (mg/L); R infusion rate (mg/hr); Cl (L/hr)</td>
 <td>At steady state only, where rate in equals rate out. It never contains t, so it says nothing about when steady state arrives.</td>
 <td>C<sub>ss</sub> from a rate, or, rearranged, the rate R = C<sub>ss</sub>&middot;Cl needed to reach a target C<sub>ss</sub>. Her recommendation stems ask for the rate.</td>
 <td>Yes, as C<sub>ss</sub> = R/Cl.</td></tr>
 
-<tr><td><b>C<sub>p</sub> = (R/Cl)(1 &minus; e<sup>&minus;kt</sup>)</b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)</b></td>
 <td>Same symbols plus t, the time since the infusion started (hr)</td>
 <td>During an infusion, before steady state. She splits it in two out loud: the first factor is C<sub>ss</sub>, and <i>"this 1 minus E to the minus KT tells us what fraction of steady state we've achieved."</i></td>
 <td>Concentration at a stated time into the infusion; concentration at the end of a stated infusion; and, rearranged, the time to a stated percentage of C<sub>ss</sub>.</td>
@@ -224,13 +224,13 @@ const REFERENCE_HTML = `
 <td>Concentration a stated number of hours after cessation. C<sub>peak</sub> is C<sub>ss</sub> only if the infusion actually ran to steady state; otherwise it must be computed from the line above.</td>
 <td>Yes, as the first-order C block.</td></tr>
 
-<tr><td><b>D<sub>L</sub> = R / k</b><br><b>D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub></b></td>
+<tr><td><b>D<sub>L</sub> = {{frac:R|k}}</b><br><b>D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub></b></td>
 <td>D<sub>L</sub> loading dose (mg); R mg/hr; k hr<sup>&minus;1</sup>; V<sub>D</sub> L</td>
 <td>An IV bolus given at the same moment an infusion starts. <i>"We want the loading dose to look like the amount of drug that's in the body at steady state."</i> The first form is only as good as the rate already chosen: <i>"If you just pick a number out of the air, then you're probably not gonna pick the the best loading dose."</i></td>
 <td>The loading dose. She prints both routes side by side whenever both inputs are available.</td>
 <td>D<sub>L</sub> = R/k: yes. D<sub>L</sub> = C<sub>ss</sub>V<sub>D</sub>: she added it aloud and wrote it on the slide; it is not identifiable in the readable extract, and unreadable line (2) sits directly after D<sub>L</sub> = R/k.</td></tr>
 
-<tr><td><b>C<sub>p</sub> = (D<sub>L</sub>/V<sub>D</sub>)e<sup>&minus;kt</sup> + (R/kV<sub>D</sub>)(1 &minus; e<sup>&minus;kt</sup>)</b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>&minus;kt</sup> + <span class="nw">{{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)</span></b></td>
 <td>Both terms in mg/L; t measured from the start of therapy</td>
 <td>Loading dose and infusion running together. The two contributions are added: <i>"at any point on the curve, then the concentration here plus the concentration here should equal the concentration there."</i></td>
 <td>Concentration at 2, 4 or 6 hours after the start of combined therapy. If D<sub>L</sub> was chosen correctly the sum stays flat at C<sub>ss</sub>.</td>
@@ -255,7 +255,7 @@ const REFERENCE_HTML = `
 <p>The elimination words nest inside one another, and she keeps them distinct: elimination is <i>"all the irreversible processes or irreversible removal of drugs by all routes"</i>; excretion is <i>"removal of intact drug or metabolite"</i>; biotransformation is <i>"chemically converting that um drug in the body to some metabolite."</i> The kidney and the liver are the two major elimination organs.</p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
 <tr><td><b>Rate of elimination = Cl &times; C<sub>p</sub></b></td>
 <td>Rate in amount per time (mcg/min, mg/hr); Cl in volume per time; C<sub>p</sub> in amount per volume</td>
@@ -263,7 +263,7 @@ const REFERENCE_HTML = `
 <td>The elimination rate at a stated plasma concentration. Her worked example: 15 mL/min &times; 5 mcg/mL = 75 mcg/min.</td>
 <td>Yes.</td></tr>
 
-<tr><td><b>Cl = FD<sub>0</sub> / AUC<sub>0&rarr;&infin;</sub></b></td>
+<tr><td><b>Cl = {{frac:FD<sub>0</sub>|AUC<sub>0&rarr;&infin;</sub>}}</b></td>
 <td>F bioavailability factor, no units, taken as 1 for an IV dose; D<sub>0</sub> dose (mg); AUC in mg&middot;hr/L</td>
 <td>Any route, provided F is known. <i>"Another reason that we like clearance. Is that it directly relates the dose to that area under the curve."</i></td>
 <td>Clearance from an AUC, or a dose from a clearance and an AUC.</td>
@@ -275,7 +275,7 @@ const REFERENCE_HTML = `
 <td>Hepatic clearance, by subtraction. There is no direct measurement: <i>"we're not gonna sample the liver &hellip; we calculate renal &hellip; and then we subtract renal from total to give us hepatic clearance."</i></td>
 <td>Yes, page 1, last line.</td></tr>
 
-<tr><td><b>f<sub>e</sub> = D<sub>u</sub><sup>&infin;</sup> / FD<sub>0</sub> = k<sub>e</sub> / k</b><br>so k<sub>e</sub> = f<sub>e</sub>k</td>
+<tr><td><b>f<sub>e</sub> = {{frac:D<sub>u</sub><sup>&infin;</sup>|FD<sub>0</sub>}} = {{frac:k<sub>e</sub>|k}}</b><br>so k<sub>e</sub> = f<sub>e</sub>k</td>
 <td>f<sub>e</sub> fraction excreted unchanged, no units; D<sub>u</sub><sup>&infin;</sup> cumulative amount of unchanged drug recovered in urine (mg); k<sub>e</sub> excretion rate constant (hr<sup>&minus;1</sup>)</td>
 <td>A complete urine collection. Lower-case f<sub>e</sub> is the fraction excreted; capital F is bioavailability. They are different quantities that share a letter.</td>
 <td>f<sub>e</sub> from a urine recovery, then k<sub>e</sub> from f<sub>e</sub> and k. Her worked example: 300 mg recovered from a 500 mg IV dose gives f<sub>e</sub> = 0.6, and k<sub>e</sub> = 0.6 &times; 0.0866 = 0.052 hr<sup>&minus;1</sup>.</td>
@@ -287,7 +287,7 @@ const REFERENCE_HTML = `
 <td>Cl<sub>R</sub> and Cl<sub>H</sub>, as the closing parts of her five-part clearance problem.</td>
 <td>Yes, all three.</td></tr>
 
-<tr><td><b>CrCl = (140 &minus; age)(IBW) / (72 &times; S<sub>Cr</sub>)</b><br>&times; 0.85 if female</td>
+<tr><td><b>CrCl = {{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}</b><br>&times; 0.85 if female</td>
 <td>age in years; IBW ideal body weight in kg; S<sub>Cr</sub> serum creatinine in mg/dL; answer reported in mL/min</td>
 <td>Estimating a patient's renal function. Normal on the deck slide is 120&ndash;130 mL/min. The 0.85 factor rests on an assumption she states: <i>"The assumption is that women are smaller than men, less muscular than men."</i></td>
 <td>CrCl for a patient vignette, then whether the patient's renal function is reduced. Her worked example: a 45-year-old female, 165 cm, S<sub>Cr</sub> 1.1 mg/dL gives 58 mL/min. The stated actual weight of 61 kg is deliberately unused.</td>
@@ -299,7 +299,7 @@ const REFERENCE_HTML = `
 <td>The IBW that feeds Cockcroft-Gault. Her worked example: a female 65 inches tall gives 45.5 + 2.3(5) = 57 kg.</td>
 <td>No &mdash; named by her.</td></tr>
 
-<tr><td><b>pH = pKa + log(ionized / nonionized)</b><br><b>pH = pKa + log(nonionized / ionized)</b></td>
+<tr><td><b>pH = pKa + log {{frac:ionized|nonionized}}</b><br><b>pH = pKa + log {{frac:nonionized|ionized}}</b></td>
 <td>pKa of the drug; weak acids have pKa values 3&ndash;8 and weak bases 7.5&ndash;10.5, per the slide</td>
 <td>Reabsorption of weak acids and weak bases from the renal tubule, which depends on urine pH and on the drug's pKa.</td>
 <td>Nothing yet. She posed the two questions and the recording ends mid-answer.</td>
@@ -312,21 +312,21 @@ const REFERENCE_HTML = `
 <p>The third input type: <i>"we have not had 1st order input, OK? It's all been either instantaneous or zero order &hellip; today we will talk about The kinetics of following oral administration."</i> First order in and first order out, so the curve rises to a peak and then falls. <i>"if I give you a curve on the exam and it looks like this &hellip; where there is a clear peak &hellip; I want you to identify that as an oral input."</i> A capital F in a stem is the signal: <i>"when you see a capital F, You should think oral."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
-<tr><td><b>C<sub>p</sub> = [Fk<sub>a</sub>D<sub>0</sub> / V<sub>D</sub>(k<sub>a</sub> &minus; k)] &times; (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)</b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}} &times; <span class="nw">(e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)</span></b></td>
 <td>F oral bioavailability fraction, no units; k<sub>a</sub> first-order absorption rate constant (hr<sup>&minus;1</sup>); k elimination rate constant (hr<sup>&minus;1</sup>); D<sub>0</sub> oral dose (mg); V<sub>D</sub> (L); C<sub>p</sub> (mg/L or mcg/mL)</td>
 <td>Single oral dose, one compartment, first-order absorption and first-order elimination. The bracket is drug in minus drug out. The lumped prefactor is <b>not</b> C<sub>0</sub>: <i>"this big portion right here does not represent C0."</i></td>
 <td>Concentration at any stated time; C<sub>max</sub> once t<sub>max</sub> is known; and, rearranged, V<sub>D</sub> back-solved from a given prefactor. Named error: <i>"Do not forget the volume of distribution."</i></td>
 <td>Yes, page 1.</td></tr>
 
-<tr><td><b>t<sub>max</sub> = ln(k<sub>a</sub>/k) / (k<sub>a</sub> &minus; k)</b></td>
+<tr><td><b>t<sub>max</sub> = {{frac:ln(k<sub>a</sub>/k)|k<sub>a</sub> &minus; k}}</b></td>
 <td>Both rate constants in the same reciprocal time unit; result in time</td>
 <td>Single oral dose. It contains no dose and no volume, so t<sub>max</sub> depends only on the two rate constants: <i>"T-Max depends solely on the relationship between K and KA."</i> Doubling the dose does not move it.</td>
 <td>t<sub>max</sub>, always, and always before C<sub>max</sub>: <i>"if you are asked for C-Max, and I will ask you for CMax, you must find TMax first."</i> Named errors: mixing time units, and using a half-life where a rate constant belongs.</td>
 <td>Yes, page 1.</td></tr>
 
-<tr><td><b>t&frac12;<sub>a</sub> = 0.693 / k<sub>a</sub></b></td>
+<tr><td><b>t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}</b></td>
 <td>k<sub>a</sub> hr<sup>&minus;1</sup>; result in time</td>
 <td>The absorption half-life, and the usual way k<sub>a</sub> is handed over: stems give "half-life of absorption is 45 minutes" and the conversion to k<sub>a</sub> = 0.693/0.75 = 0.924 hr<sup>&minus;1</sup> is the first step.</td>
 <td>k<sub>a</sub> from a stated absorption half-life, or the absorption half-life from a k<sub>a</sub> read off a given equation. An unqualified t&frac12; means elimination: <i>"If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination."</i></td>

@@ -39,7 +39,7 @@ const COURSE = {
     {exam: 1,   name: 'Exam 1 Recap'},
     {module: 4, name: 'Module 4 - Drug Elimination and Clearance'},
     {module: 5, name: 'Module 5 - Single Oral Administration'},
-    {view: 'ref', name: 'Equations'},
+    {view: 'eq',  name: 'Equations'},
   ],
 
   /* One entry per lecture. `deck` is the PDF as a citation spells it. */

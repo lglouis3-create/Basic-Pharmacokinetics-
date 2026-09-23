@@ -131,7 +131,8 @@ const TOPICS = [
    she asks them in and the vignette they share.
 
    `parts` is question ids in her order. `name` is what the set is, `setup` is
-   the vignette in one line, and `module` places it in the Topics view.
+   the vignette in one line, written as HTML so an equation in it can carry real
+   subscripts and superscripts, and `module` places it in the Topics view.
    test.js checks that every id here exists and that no part is listed twice.
    ========================================================================== */
 const CHAINS = [
@@ -176,7 +177,7 @@ const CHAINS = [
   parts:['inf-n10','inf-n12','inf-n11','inf-n13']},
 
  {id:'m3-inclass', module:3, name:'Recommend a rate and a loading dose, then four scenarios',
-  setup:'Css 20 mg/L, t½ 5 hr, VD 16 L — with the loading dose and without it, side by side',
+  setup:'C<sub>ss</sub> 20 mg/L, t&frac12; 5 hr, V<sub>D</sub> 16 L &mdash; with the loading dose and without it, side by side',
   parts:['inf-n14','inf-n19','inf-n20','inf-n21','inf-n15']},
 
  {id:'m3-3days', module:3, name:'A loading dose with a 75 mg/hr infusion for 3 days',
@@ -188,7 +189,7 @@ const CHAINS = [
   parts:['inf-n17','inf-n16']},
 
  {id:'m4-battery', module:4, name:'500 mg IV bolus with a 48-hour urine collection',
-  setup:'Her six-part battery: fe, k, ke, then total, renal and hepatic clearance',
+  setup:'Her six-part battery: f<sub>e</sub>, k, k<sub>e</sub>, then total, renal and hepatic clearance',
   parts:['m4-n-fe','m4-n-k','m4-n-ke','m4-n-clt','m4-n-clr','m4-n-clh']},
 
  {id:'m4-antibiotic', module:4, name:'An antibiotic secreted by the kidney, before and after renal failure',
@@ -200,19 +201,19 @@ const CHAINS = [
   parts:['m4-n-inches','m4-n-ibwf','m4-n-crcl']},
 
  {id:'m5-investigational', module:5, name:'An investigational drug given as a 500-mg oral dose',
-  setup:'The two rate constants, then tmax and Cmax, then Cmax when the dose is doubled',
+  setup:'The two rate constants, then t<sub>max</sub> and C<sub>max</sub>, then C<sub>max</sub> when the dose is doubled',
   parts:['m5-n01','m5-n02','m5-n03','m5-n04','m5-n19']},
 
  {id:'m5-antibiotic', module:5, name:'An oral antibiotic given by its two-exponential equation',
-  setup:'Cp = 75(e^(−0.22t) − e^(−2.75t)), read for both half-lives, the peak, the volume and a later point',
+  setup:'C<sub>p</sub> = 75(e<sup>&minus;0.22t</sup> &minus; e<sup>&minus;2.75t</sup>), read for both half-lives, the peak, the volume and a later point',
   parts:['m5-n05','m5-n06','m5-n07','m5-n08','m5-n09','m5-n10']},
 
  {id:'m5-750', module:5, name:'A 750-mg oral dose given by its equation',
-  setup:'Cp = 23.2(e^(−0.182t) − e^(−0.872t)), read for the half-life, the peak and the volume',
+  setup:'C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>), read for the half-life, the peak and the volume',
   parts:['m5-n16','m5-n17','m5-n18','m5-n15']},
 
  {id:'m5-500', module:5, name:'A 500-mg oral dose, 88 per cent bioavailable',
-  setup:'The absorption rate constant, tmax and Cmax, then Cmax when the volume doubles',
+  setup:'The absorption rate constant, t<sub>max</sub> and C<sub>max</sub>, then C<sub>max</sub> when the volume doubles',
   parts:['m5-n11','m5-n12','m5-n13','m5-n14']},
 ];
 

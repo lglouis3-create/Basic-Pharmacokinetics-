@@ -32,10 +32,18 @@ DATA_FILES = ['course.js',
               'q6_figures.js',   # figure-reading questions, every module
               'qz_all.js']       # must stay last: builds QUESTIONS
 
+# The content files: data the engine reads, but not questions. They are
+# concatenated after the banks and before the views.
+CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
+                 'reference.js',
+                 'tell.js',
+                 'guide.js']
+
 # Everything that has to parse before a build is allowed to proceed. Derived
-# from DATA_FILES rather than listed again, so adding a question file cannot
-# leave it syntax-checked in one place and unchecked in the other.
-SOURCES = DATA_FILES + ['reference.js', 'tell.js', 'guide.js', 'views.js']
+# from the two lists above rather than named again, so adding a file cannot
+# leave it syntax-checked in one place and unchecked -- or unbuilt -- in the
+# other. The assembly below walks the same lists for the same reason.
+SOURCES = DATA_FILES + CONTENT_FILES + ['views.js']
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -76,9 +84,8 @@ def main():
     parts.append('const IMAGES = ' + json.dumps(images) + ';\n')
     for f in DATA_FILES:
         parts.append(open(f, encoding='utf-8').read() + '\n')
-    parts.append(open('reference.js', encoding='utf-8').read() + '\n')
-    parts.append(open('tell.js', encoding='utf-8').read() + '\n')
-    parts.append(open('guide.js', encoding='utf-8').read() + '\n')
+    for f in CONTENT_FILES:
+        parts.append(open(f, encoding='utf-8').read() + '\n')
     DATA = ''.join(parts)
 
     # replace the three placeholder declarations in the shell with the real data

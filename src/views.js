@@ -113,7 +113,36 @@ const KINDS = [
   {id: 'calc', label: 'Calculations',
    blurb: 'Questions answered with a number, worked step by step'},
 ];
-const KIND_LABEL = Object.fromEntries(KINDS.map(k => [k.id, k.label]));
+const KIND_LABEL = Object.assign(Object.fromEntries(KINDS.map(k => [k.id, k.label])),
+                                 {chain: 'Stepwise calculations'});
+
+/* What the Topics page is showing. Four answers to one question, so they sit
+   together as one switch at the top of the page rather than as a filter chip
+   among others:
+
+     Everything             every question, each topic split three ways
+     Concepts               no arithmetic anywhere on the page
+     Calculations           single calculations, and the stepwise sets below
+                            them, each under its own heading
+     Stepwise calculations  only her problems asked in parts, where each part
+                            uses the answer to the one before it
+
+   Two kinds of calculation exist and they are drilled differently: a single
+   calculation can be asked in any order, and a stepwise one only in hers. */
+function reviewSwitch(){
+  const base = QUESTIONS.filter(q => matchesFilter(q, true));
+  const k = kindCounts(base);
+  const sets = (typeof CHAINS === 'undefined' ? [] : CHAINS)
+    .filter(c => c.parts.some(id => base.some(q => q.id === id)));
+  const tab = (v, label, sub) =>
+    `<button class="rtab" data-review="${v}" aria-pressed="${FILTER.kind === v}">${label}<small>${sub}</small></button>`;
+  return `<div class="review" role="group" aria-label="What to review">
+    ${tab('all', 'Everything', base.length + ' questions')}
+    ${tab('concept', 'Concepts', k.concept + ' questions')}
+    ${tab('calc', 'Calculations', k.calc + ' questions')}
+    ${tab('chain', 'Stepwise calculations', sets.length + ' problems in parts')}
+  </div>`;
+}
 /* How a set of questions divides, as {concept, calc}. */
 function kindCounts(pool){
   const n = {concept: 0, calc: 0};
@@ -131,11 +160,14 @@ let VIEW = 'topics';
    course rather than a remembered one. */
 const ALL_TIERS = [...new Set(QUESTIONS.map(q => q.tier).filter(Boolean))].sort();
 
-function matchesFilter(q){
+function matchesFilter(q, ignoreKind){
   if(FILTER.prof  !== 'all' && q.prof !== FILTER.prof) return false;
   if(FILTER.tier  !== 'all' && q.tier !== FILTER.tier) return false;
   if(FILTER.skill !== 'all' && skillOf(q) !== FILTER.skill) return false;
-  if(FILTER.kind  !== 'all' && kindOf(q)  !== FILTER.kind) return false;
+  if(!ignoreKind){
+    if(FILTER.kind === 'chain'){ if(!CHAIN_OF[q.id]) return false; }
+    else if(FILTER.kind !== 'all' && kindOf(q) !== FILTER.kind) return false;
+  }
   return true;
 }
 function poolFor(topicId, subId){
@@ -145,14 +177,14 @@ function poolFor(topicId, subId){
     matchesFilter(q));
 }
 
-const VIEWS = ['topics','quiz','gaps','exam','guide','tell','ref','settings'];
+const VIEWS = ['topics','quiz','gaps','exam','guide','tell','eq','ref','settings'];
 function show(v){
   VIEW = v;
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.v===v));
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
   ({topics:renderTopics, quiz:renderQuiz, gaps:renderGaps, exam:renderExam,
-    guide:renderGuide, tell:renderTell, ref:renderRef, settings:renderSettings}[v])();
+    guide:renderGuide, tell:renderTell, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
 }
 
 /* ==========================================================================
@@ -161,8 +193,6 @@ function show(v){
 function filterBar(){
   const chip=(g,v,l)=>`<button class="chip" data-f="${g}" data-v="${v}" aria-pressed="${FILTER[g]===v}">${l}</button>`;
   let h = `<div class="filters">`;
-  h += `<div class="frow"><label>What to review</label>
-    ${chip('kind','all','Everything')}${KINDS.map(k=>chip('kind',k.id,esc(k.label))).join('')}</div>`;
   // one professor means the chips would only ever say "both" and one name
   if(COURSE.professors.length > 1){
     h += `<div class="frow"><label>Professor</label>
@@ -172,10 +202,19 @@ function filterBar(){
     h += `<div class="frow"><label>Weighting</label>
       ${chip('tier','all','All')}${ALL_TIERS.map(t=>chip('tier',t,esc(t))).join('')}</div>`;
   }
-  h += `<div class="frow"><label>What it asks</label>
-    ${chip('skill','all','Any')}${COURSE.skills
-      .filter(s => QUESTIONS.some(q => skillOf(q) === s.id))
-      .map(s=>chip('skill',s.id,esc(s.label))).join('')}</div>`;
+  /* Only the skills present under the review mode chosen above, so reviewing
+     concepts does not offer a row of calculation types to pick from. A skill
+     chosen earlier that the new mode does not hold is let go. */
+  const inMode = QUESTIONS.filter(q => {
+    if(FILTER.kind === 'chain') return !!CHAIN_OF[q.id];
+    return FILTER.kind === 'all' || kindOf(q) === FILTER.kind;
+  });
+  const skills = COURSE.skills.filter(s => inMode.some(q => skillOf(q) === s.id));
+  if(FILTER.skill !== 'all' && !skills.some(s => s.id === FILTER.skill)) FILTER.skill = 'all';
+  if(skills.length > 1 && FILTER.kind !== 'chain')
+    h += `<div class="frow"><label>What it asks</label>
+      ${chip('skill','all','Any')}${skills.map(s=>chip('skill',s.id,esc(s.label))).join('')}</div>`;
+  if(h === `<div class="filters">`) return '';
   return h + `</div>`;
 }
 
@@ -257,15 +296,15 @@ function splitNote(pool){
 function chainRows(module){
   const cs = chainsInModule(module);
   if(!cs.length) return '';
-  return `<div class="mfoot"><p class="setnote">Her calculations are usually set as
-    one vignette asked in parts, where a part uses what the part before it produced.
-    These work through in her order.</p>` + cs.map(c => {
+  return `<div class="mfoot stepwise"><h4 class="sethead">Stepwise calculations</h4>
+    <p class="setnote">Her problems asked in parts, where each part uses the answer to the
+    part before it. Worked straight through in her order.</p>` + cs.map(c => {
       const parts = c.parts.map(byId).filter(Boolean);
       const m = masteryOf(parts), pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
       return `<div class="subrow"><span class="sname"><b>${esc(c.name)}</b>
-        <small>${parts.length} parts · ${esc(c.setup)}</small></span>
+        <small>${parts.length} parts \u00b7 ${c.setup}</small></span>
         <span class="meter"><i style="width:${pct}%"></i></span>
-        <button data-chain="${esc(c.id)}">Work it</button></div>`;
+        <button data-chain="${esc(c.id)}">Start</button></div>`;
     }).join('') + `</div>`;
 }
 
@@ -296,8 +335,8 @@ function startRows(pool, name, attr){
   const c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
   if(!c || !m) return row(`Everything in ${esc(name)}`, `${label(pool.length)}, mixed order`, '');
   return row(`Concepts in ${esc(name)}`, `${label(c)}, no arithmetic`, 'concept')
-       + row(`Calculations in ${esc(name)}`, `${label(m)}, each worked to a number`, 'calc')
-       + row(`Everything in ${esc(name)}`, `${label(pool.length)}, the two mixed`, '', true);
+       + row(`Calculations in ${esc(name)}`, `${label(m)}, each one on its own, in any order`, 'calc')
+       + row(`Everything in ${esc(name)}`, `${label(pool.length)}, concepts and calculations mixed`, '', true);
 }
 
 function renderTopics(){
@@ -311,22 +350,28 @@ function renderTopics(){
     Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
     COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
 
+  h += reviewSwitch();
   h += filterBar();
+  const stepwiseOnly = FILTER.kind === 'chain';
 
   // The featured pass follows the paper rather than the bank: a straight pass
   // through everything spends most of its time wherever the most questions
   // happen to have been written, which is not where the marks are.
   const nAll = QUESTIONS.length, nFiltered = poolFor(null, null).length;
-  const wp = weightedPool();
-  h += `<div class="topic sweepcard"><div class="subs">
-    <div class="subrow"><span class="sname"><b>Exam-weighted pass — ${wp.length} questions</b>
+  const byKind = FILTER.kind === 'concept' || FILTER.kind === 'calc';
+  const noun = byKind ? KIND_LABEL[FILTER.kind].toLowerCase() : 'questions';
+  const wp = weightedPool().filter(q => !byKind || kindOf(q) === FILTER.kind);
+  if(!stepwiseOnly) h += `<div class="topic sweepcard"><div class="subs">
+    <div class="subrow"><span class="sname"><b>Exam-weighted pass — ${wp.length} ${noun}</b>
       <small>The pools sampled in the blueprint's own proportion. Shuffled, each once.</small></span>
       <button id="sweepWeighted">Start</button></div>
-    <div class="subrow"><span class="sname"><b>All ${nAll} questions, one pass</b>
+    ${byKind ? '' : `<div class="subrow"><span class="sname"><b>All ${nAll} questions, one pass</b>
       <small>Everything in the bank, shuffled, each asked once, nothing held back by scheduling</small></span>
-      <button id="sweepAll" class="ghost">Start</button></div>
-    ${nFiltered < nAll ? `<div class="subrow"><span class="sname"><b>All ${nFiltered} under the current filters</b>
-      <small>The same straight pass, limited to what the chips above select</small></span>
+      <button id="sweepAll" class="ghost">Start</button></div>`}
+    ${nFiltered < nAll ? `<div class="subrow"><span class="sname"><b>All ${nFiltered} ${
+        byKind && FILTER.skill === 'all' && FILTER.prof === 'all' && FILTER.tier === 'all'
+          ? noun + ', one pass' : 'under the current filters'}</b>
+      <small>Shuffled, each asked once, nothing held back by scheduling</small></span>
       <button id="sweepFiltered" class="ghost">Start</button></div>` : ''}
   </div></div>`;
 
@@ -335,12 +380,15 @@ function renderTopics(){
 
     if(m.view){
       h += `<div class="module"><div class="mrow">
-        <span class="mname">${esc(m.name)}<small>${m.view === 'ref' ? 'Every equation with its symbols, units and when it applies' : ''}</small></span>
+        <span class="mname">${esc(m.name)}<small>${
+          m.view === 'eq'  ? 'Type them out or build them from pieces; the full table with symbols and units is under Reference'
+        : m.view === 'ref' ? 'Every equation with its symbols, units and when it applies' : ''}</small></span>
         <button data-view="${esc(m.view)}">Open</button></div></div>`;
       continue;
     }
 
     if(m.exam != null){
+      if(stepwiseOnly) continue;          // a recap is a mixed drill, not a problem set
       const ex = COURSE.exams.find(e => e.id === m.exam);
       const pool = examQuestions(m.exam);
       if(!pool.length) continue;
@@ -364,17 +412,29 @@ function renderTopics(){
     const mpool = ts.flatMap(t => poolFor(t.id, null));
     if(!mpool.length) continue;
     const mm = masteryOf(mpool), mpct = mm.total ? Math.round(100*mm.mastered/mm.total) : 0;
+    /* Stepwise mode shows the module's problem sets and nothing else. Concept
+       mode leaves them out, since every one of them is arithmetic. The other two
+       modes show them after the topics, under their own heading. */
+    if(stepwiseOnly){
+      const sets = chainRows(m.module);
+      if(!sets) continue;
+      const n = chainsInModule(m.module).length;
+      h += `<details class="module" open><summary>
+          <span class="mname">${esc(m.name)}<small>${n} problem${n === 1 ? '' : 's'} in parts</small></span>
+        </summary>${sets}</details>`;
+      continue;
+    }
     h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
         <span class="mname">${esc(m.name)}<small>${splitNote(mpool)} · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
         <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
       </summary>
       ${ts.map(topicCard).join('')}
-      ${chainRows(m.module)}
       ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
+      ${FILTER.kind === 'concept' ? '' : chainRows(m.module)}
       </details>`;
   }
 
-  h += `<h3>Mixed drills</h3>
+  if(!stepwiseOnly) h += `<h3>Mixed drills</h3>
   <div class="topic"><div class="subs">
     <div class="subrow"><span class="sname"><b>Everything, adaptive</b>
       <small>Whole bank under the current filters — missed concepts first, and it stops when nothing is due</small></span>
@@ -391,6 +451,9 @@ function renderTopics(){
 
   el.querySelectorAll('.chip').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
+  });
+  el.querySelectorAll('.rtab').forEach(b => b.onclick = () => {
+    FILTER.kind = b.dataset.review; renderTopics();
   });
   el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
     startQuiz(b.dataset.t || null, b.dataset.s || null, b.dataset.k || null);
@@ -500,7 +563,8 @@ function weightedPool(){
    record, so Weak spots stays accurate. */
 function startSweep(scope){
   const pool = scope === 'filtered' ? poolFor(null, null)
-             : scope === 'weighted' ? weightedPool()
+             : scope === 'weighted' ? weightedPool().filter(q =>
+                 !(FILTER.kind === 'concept' || FILTER.kind === 'calc') || kindOf(q) === FILTER.kind)
              : QUESTIONS.slice();
   startSweepOf(pool, scope === 'filtered' ? 'Every question under these filters'
                    : scope === 'weighted' ? 'Exam-weighted pass' : 'Every question', scope);
@@ -629,7 +693,7 @@ function renderQuiz(){
     <span>${Q.sweep ? `${Q.sweep.length - Q.i} to go` : `${left} concept${left===1?'':'s'} to go`}</span>
   </div>
   <div class="qbody">
-    ${Q.chain ? `<p class="cset">${esc(Q.chain.setup)}</p>` : ''}
+    ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}
     <p class="stem">${esc(q.stem)}</p>`;
 
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -1343,7 +1407,18 @@ const deEnt = t => String(t)
   .replace(/&[a-z]+;/gi, e => ENT[e] !== undefined ? ENT[e] : e)
   .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n));
 
+/* Stacked fractions. Written {{frac:numerator|denominator}} in the source,
+   in the same token style as {{fig:...}}, so a long ratio reads the way the
+   slides print it rather than as a slash buried in a line. Neither part may
+   contain a | or a closing brace pair; none of the course's equations need one.
+   eqPlain reads the same token back as (numerator)/(denominator), which is how
+   the checks confirm a displayed equation says what its typed form says. */
+const FRAC_RE = /\{\{frac:([^|}]*)\|([^}]*)\}\}/g;
+const mathHTML = h => String(h).replace(FRAC_RE,
+  '<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');
+
 function refFigures(html){
+  html = mathHTML(html);
   return html.replace(/\{\{fig:([a-z0-9_]+)\|([^}]*)\}\}/gi, (_, key, cap) => {
     if(!IMAGES[key]) return '';
     const c = esc(deEnt(cap));
@@ -1467,6 +1542,403 @@ function renderSettings(){
 /* "Ask everything" mode short-circuits the due check */
 const _isDue = isDue;
 isDue = function(s){ return (DB.settings.mode === 'all') ? true : _isDue(s); };
+
+/* ==========================================================================
+   EQUATIONS — memorising them
+   ==========================================================================
+   Two exercises over the same data. Typing one out is what an exam asks for,
+   since the equation sheet does not carry the six she told the class to know.
+   Building one from pieces is the easier direction, and it is what to fall
+   back on when typing keeps failing, because it separates remembering which
+   quantities appear from remembering how they are arranged.
+
+   A typed answer is compared after both sides are folded to a canonical form:
+   case, spacing, the several dashes, implicit against explicit multiplication,
+   and Unicode subscripts and superscripts all stop mattering. What does not
+   stop mattering is which quantity sits above the line, the sign in an
+   exponent, and where a bracket closes.
+   ========================================================================== */
+const EQ_ENT = {'&minus;':'-', '&times;':'*', '&frac12;':'½', '&infin;':'∞',
+                '&beta;':'beta', '&middot;':'*', '&amp;':'&', '&nbsp;':' ', '&rarr;':'\u2192'};
+/* Display HTML to plain text. Subscripts resolve before superscripts, because
+   a superscript can contain one: e^(-ka*t) is written with ka inside the sup. */
+const eqPlain = h => String(h)
+  .replace(FRAC_RE, '(($1)/($2))')
+  .replace(/<sub>([^<]*)<\/sub>/g, '$1')
+  .replace(/<sup>([^<]*)<\/sup>/g, '^($1)')
+  .replace(/<[^>]+>/g, '')
+  .replace(/&[a-z0-9]+;/gi, m => EQ_ENT[m] !== undefined ? EQ_ENT[m] : m);
+
+const EQ_SUBS = {'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5',
+  '₆':'6','₇':'7','₈':'8','₉':'9','ₐ':'a','ₑ':'e','ₕ':'h',
+  'ᵢ':'i','ₖ':'k','ₗ':'l','ₘ':'m','ₙ':'n','ₒ':'o','ₚ':'p',
+  'ᵣ':'r','ₛ':'s','ₜ':'t','ᵤ':'u','ᵥ':'v','ₓ':'x'};
+const EQ_SUPS = {'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5',
+  '⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+','ⁿ':'n',
+  'ᵃ':'a','ᵇ':'b','ᵗ':'t','ᵏ':'k','ᵉ':'e','ᵖ':'p'};
+const EQ_SUP_RE = new RegExp('[' + Object.keys(EQ_SUPS).join('') + ']+', 'g');
+const EQ_SUB_RE = new RegExp('[' + Object.keys(EQ_SUBS).join('') + ']', 'g');
+
+function normEq(s){
+  let t = String(s == null ? '' : s);
+  t = t.replace(EQ_SUP_RE, m => '^' + [...m].map(c => EQ_SUPS[c]).join(''));
+  t = t.replace(EQ_SUB_RE, c => EQ_SUBS[c]);
+  t = t.replace(/½/g, '1/2').toLowerCase();
+  t = t.replace(/[−–—‐‑]/g, '-');  // every dash is a minus
+  t = t.replace(/÷/g, '/');
+  t = t.replace(/\*\*/g, '^');                              // before the star is dropped
+  t = t.replace(/[×·⋅*]/g, '');              // multiplication is implicit
+  t = t.replace(/∞/g, 'inf').replace(/→/g, 'to');
+  t = t.replace(/[‘’“”]/g, '');
+  t = t.replace(/[\s_,]/g, '');                             // V_D and VD are one thing
+  t = t.replace(/thalf|t-half/g, 't1/2');
+  t = t.replace(/[\[\{]/g, '(').replace(/[\]\}]/g, ')');
+  t = t.replace(/(^|[^0-9])\.(\d)/g, '$10.$2');             // .693 -> 0.693
+  t = t.replace(/log10/g, 'log');
+  for(let i = 0; i < 8; i++) t = t.replace(/\^\(([^()]*)\)/g, '^$1');
+  return t.replace(/\.$/, '');
+}
+/* Every spelling that counts as right, with and without the left side, since
+   an answer typed as just the right-hand side answers the question asked. */
+function eqAccepts(e){
+  const out = new Set();
+  for(const form of [e.typed, ...(e.also || []), eqPlain(e.lhs) + '=' + eqPlain(e.tokens.join(' '))]){
+    const n = normEq(form);
+    out.add(n);
+    const i = n.indexOf('=');
+    if(i > 0) out.add(n.slice(i + 1));
+  }
+  return out;
+}
+const eqRhs = e => e.tokens.join(' ');
+/* How an equation is shown to be read: stacked as the slides print it where a
+   display form exists, and as its pieces joined up where it does not. */
+const eqShow = e => `<span class="eqshow">${e.lhs} = ${mathHTML(e.disp || eqRhs(e))}</span>`;
+const eqCorrect = (e, typed) => eqAccepts(e).has(normEq(typed));
+
+/* ---------- which equations are being worked on ---------- */
+const EQ_BY_ID = Object.fromEntries(EQUATIONS.map(e => [e.id, e]));
+const EQ_MUST = EQUATIONS.filter(e => e.must).map(e => e.id);
+function eqChosen(){
+  const s = DB.settings.eqPick;
+  const valid = Array.isArray(s) ? s.filter(id => EQ_BY_ID[id]) : null;
+  return valid && valid.length ? valid : EQ_MUST.slice();
+}
+function eqSetChosen(ids){
+  DB.settings.eqPick = ids.filter(id => EQ_BY_ID[id]);
+  save();
+}
+/* How many correct answers in a row an equation is held to before it counts as
+   learned. Typing one out once is recall with the question still on screen;
+   the point of the drill is to be able to do it again cold. */
+const EQ_STREAK = 3;
+function eqStat(id){
+  const s = (DB.eq || {})[id];
+  return s || {seen:0, right:0, wrong:0, streak:0, mode:{}};
+}
+function eqRecord(id, mode, ok){
+  if(!DB.eq) DB.eq = {};
+  const s = DB.eq[id] || (DB.eq[id] = {seen:0, right:0, wrong:0, streak:0, mode:{}});
+  s.seen++;
+  if(ok){ s.right++; s.streak++; } else { s.wrong++; s.streak = 0; }
+  s.mode[mode] = (s.mode[mode] || 0) + (ok ? 1 : 0);
+  s.at = Date.now();
+  save();
+}
+const eqLearned = id => eqStat(id).streak >= EQ_STREAK;
+
+/* ---------- the view ---------- */
+let EQ = null;   /* {queue:[id], i, mode:'type'|'build', slots:[], tray:[], revealed, ok} */
+
+const SHEET_TAG = {
+  no:      ['not on the sheet', 'She said out loud she does not supply this one'],
+  yes:     ['on the sheet', 'The equation sheet carries it'],
+  unknown: ['sheet unclear',  'That part of the equation-sheet extract cannot be read, and she never said either way'],
+};
+
+function renderEq(){
+  const el = $('#v-eq');
+  if(EQ){ el.innerHTML = eqDrillHTML(); eqDrillWire(el); return; }
+  el.innerHTML = eqPickerHTML();
+  eqPickerWire(el);
+}
+
+function eqPickerHTML(){
+  const chosen = new Set(eqChosen());
+  const learned = [...chosen].filter(eqLearned).length;
+  let h = `<h2>Equations</h2>
+  <p class="sub">Type an equation out, or build it from its pieces. Tick the ones to work on;
+    the drill asks only those. An equation counts as learned after ${EQ_STREAK} correct answers in a row,
+    and one wrong answer puts it back to nothing. Nothing here is scored against the question bank.</p>`;
+
+  h += `<div class="topic sweepcard"><div class="subs">
+    <div class="subrow"><span class="sname"><b>Type them out</b>
+      <small>The equation is named and you write it. This is what the exam asks for.</small></span>
+      <button data-start="type"${chosen.size ? '' : ' disabled'}>Start</button></div>
+    <div class="subrow"><span class="sname"><b>Build them from pieces</b>
+      <small>The pieces are given, some of them wrong, and you place them in order</small></span>
+      <button data-start="build"${chosen.size ? '' : ' disabled'} class="ghost">Start</button></div>
+    <div class="subrow"><span class="sname"><b>Both, alternating</b>
+      <small>Builds first, then types the same equation, which is the order that makes typing possible</small></span>
+      <button data-start="mix"${chosen.size ? '' : ' disabled'} class="ghost">Start</button></div>
+  </div></div>`;
+
+  h += `<div class="filters"><div class="frow"><label>Choose</label>
+    <button class="chip" data-pick="must">The ${EQ_MUST.length} she said to memorise</button>
+    <button class="chip" data-pick="all">All ${EQUATIONS.length}</button>
+    <button class="chip" data-pick="none">None</button>
+    <button class="chip" data-pick="unlearned">Only the ones not yet learned</button>
+    </div><div class="frow"><label>Selected</label>
+    <span class="sub" style="margin:0">${chosen.size} equation${chosen.size===1?'':'s'}${
+      chosen.size ? `, ${learned} learned` : ''}</span></div></div>`;
+
+  const mods = [...new Set(EQUATIONS.map(e => e.module))].sort((a,b) => a-b);
+  const modName = m => (COURSE.topicsMenu.find(t => t.module === m) || {}).name || ('Module ' + m);
+  for(const m of mods){
+    const es = EQUATIONS.filter(e => e.module === m);
+    h += `<details class="module" open><summary>
+      <span class="mname">${esc(modName(m))}<small>${es.length} equations ·
+        ${es.filter(e => chosen.has(e.id)).length} selected</small></span>
+      <button class="chip" data-modpick="${m}">Select all</button></summary><div class="mfoot">`;
+    for(const e of es){
+      const st = eqStat(e.id), done = eqLearned(e.id);
+      const tag = SHEET_TAG[e.sheet] || SHEET_TAG.unknown;
+      h += `<div class="subrow eqrow">
+        <label class="eqpick"><input type="checkbox" data-eq="${esc(e.id)}"${chosen.has(e.id)?' checked':''}>
+          <span class="sname"><b>${esc(e.name)}</b>
+            <span class="eqline">${eqShow(e)}</span>
+            <small>${e.must ? '<b class="must">she said to memorise this one</b> · ' : ''}<span title="${esc(tag[1])}">${tag[0]}</span>${
+              st.seen ? ` · ${st.right} right of ${st.seen}` : ''}</small></span></label>
+        ${done ? '<span class="eqdone">learned</span>'
+               : st.streak ? `<span class="counts">${st.streak}/${EQ_STREAK}</span>` : ''}
+      </div>`;
+    }
+    h += `</div></details>`;
+  }
+  h += `<p class="sub">Every equation here, with its symbols, its units and the condition it holds
+    under, is set out under Reference.</p>`;
+  return h;
+}
+
+function eqPickerWire(el){
+  el.querySelectorAll('input[data-eq]').forEach(b => b.onchange = () => {
+    const set = new Set(eqChosen());
+    b.checked ? set.add(b.dataset.eq) : set.delete(b.dataset.eq);
+    eqSetChosen([...set]);
+    renderEq();
+  });
+  el.querySelectorAll('button[data-pick]').forEach(b => b.onclick = () => {
+    const p = b.dataset.pick;
+    eqSetChosen(p === 'must' ? EQ_MUST
+              : p === 'all'  ? EQUATIONS.map(e => e.id)
+              : p === 'none' ? []
+              : EQUATIONS.filter(e => !eqLearned(e.id)).map(e => e.id));
+    renderEq();
+  });
+  el.querySelectorAll('button[data-modpick]').forEach(b => b.onclick = ev => {
+    ev.preventDefault();
+    const set = new Set(eqChosen());
+    EQUATIONS.filter(e => e.module === +b.dataset.modpick).forEach(e => set.add(e.id));
+    eqSetChosen([...set]);
+    renderEq();
+  });
+  el.querySelectorAll('button[data-start]').forEach(b => b.onclick = () => eqStart(b.dataset.start));
+}
+
+/* A pass over the chosen equations. The queue is shuffled so the order they
+   were ticked in is not the order they are asked in, which is the whole point
+   of drilling a list rather than reading it. */
+function eqStart(mode){
+  const ids = shuffle(eqChosen().slice());
+  if(!ids.length) return;
+  EQ = {queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
+        slots: [], tray: [], revealed: false, ok: false, typed: '', right: 0, asked: 0};
+  eqLoad();
+}
+function eqLoad(){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  EQ.revealed = false; EQ.ok = false; EQ.typed = '';
+  if(e && EQ.step === 'build'){
+    EQ.slots = e.tokens.map(() => null);
+    EQ.tray  = shuffle([...e.tokens, ...(e.lures || [])].map((t, i) => ({t, i})));
+  }
+  renderEq();
+}
+
+function eqDrillHTML(){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  if(!e) return eqDoneHTML();
+  const st = eqStat(e.id);
+  const building = EQ.step === 'build';
+  let h = `<div class="qcard"><div class="qhead">
+    <span>${esc(building ? 'Build it' : 'Type it out')}</span>
+    <span class="spacer"></span>
+    <span>${eqLearned(e.id) ? 'learned' : st.streak ? st.streak + ' of ' + EQ_STREAK + ' in a row' : 'not yet'}</span>
+  </div>
+  <div class="qprog">
+    <span>equation ${EQ.i + 1} of ${EQ.queue.length}</span>
+    <span class="pbar"><i style="width:${Math.round(100 * EQ.i / EQ.queue.length)}%"></i></span>
+    <span>${EQ.asked ? EQ.right + ' right of ' + EQ.asked : 'nothing asked yet'}</span>
+  </div>
+  <div class="qbody">
+    <p class="stem">${esc(e.name)}</p>
+    <p class="eqask">${building
+      ? 'Place the pieces to the right of the equals sign. Some of them do not belong.'
+      : 'Write it out. Capitals, spaces and how you write the multiplication do not matter.'}</p>`;
+
+  if(building){
+    h += `<div class="eqbuild"><span class="eqlhs">${e.lhs} =</span>`;
+    EQ.slots.forEach((s, i) => {
+      const cls = EQ.revealed ? (normEq(eqPlain(s || '')) === normEq(eqPlain(e.tokens[i])) ? ' ok' : ' bad') : '';
+      h += `<button class="eqslot${cls}${s ? ' full' : ''}" data-slot="${i}"${EQ.revealed ? ' disabled' : ''}
+        aria-label="Position ${i + 1} of ${EQ.slots.length}">${s || '&nbsp;'}</button>`;
+    });
+    h += `</div>`;
+    if(!EQ.revealed){
+      const placed = new Set(EQ.slots.map((_, i) => EQ.trayOf && EQ.trayOf[i]).filter(x => x != null));
+      h += `<div class="eqtray">${EQ.tray.map(t =>
+        `<button class="eqtile${placed.has(t.i) ? ' used' : ''}" data-tile="${t.i}"${
+          placed.has(t.i) ? ' disabled' : ''}>${t.t}</button>`).join('')}</div>`;
+    }
+  }else{
+    h += `<div class="eqtype"><span class="eqlhs">${e.lhs} =</span>
+      <input id="eqIn" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+        value="${esc(EQ.typed)}"${EQ.revealed ? ' disabled' : ''}
+        class="${EQ.revealed ? (EQ.ok ? 'ok' : 'bad') : ''}"
+        aria-label="The right-hand side of ${esc(e.name)}" placeholder="the right-hand side"></div>
+    <p class="sub eqhint">Type <code>*</code> or nothing at all for multiplication, <code>/</code> for a division,
+      <code>^</code> for a power, and plain letters for subscripts: <code>VD</code>, <code>ka</code>, <code>Cp</code>.</p>`;
+  }
+
+  if(EQ.revealed){
+    h += `<div class="why"><p class="verdict ${EQ.ok ? 'ok' : 'bad'}">${
+      EQ.ok ? '✓ Correct' : '✗ Not correct'}</p>
+      <p class="eqanswer"><b>${eqShow(e)}</b></p>`;
+    if(!EQ.ok && !building && EQ.typed.trim())
+      h += `<p class="prose">You wrote <code>${esc(EQ.typed.trim())}</code>, which reads as
+        <code>${esc(normEq(EQ.typed))}</code> once capitals and spacing are set aside.</p>`;
+    if(e.symbols && e.symbols.length)
+      h += `<h5 class="tsec">What each symbol is</h5><ul class="tlist">${
+        e.symbols.map(s => `<li><b>${s[0]}</b> — ${s[1]}</li>`).join('')}</ul>`;
+    if(e.holds) h += `<h5 class="tsec">When it holds</h5><p class="prose">${esc(e.holds)}</p>`;
+    if(e.must) h += `<p class="prose"><b>She said to memorise this one.</b> It is not on the equation sheet.</p>`;
+    h += `<div class="cite">${esc(e.cite)}</div></div>`;
+  }
+  h += `</div><div class="qfoot">`;
+  if(!EQ.revealed){
+    const ready = building ? EQ.slots.every(s => s !== null) : true;
+    h += `<button class="btn" id="eqCheck"${ready ? '' : ' disabled'}>Check</button>`;
+    if(building) h += `<button class="btn ghost" id="eqClear">Clear</button>`;
+    h += `<button class="btn ghost" id="eqShow">Show me</button>`;
+  }else{
+    h += `<button class="btn" id="eqNext">Next</button>`;
+  }
+  h += `<button class="btn ghost" id="eqStop">Choose equations</button></div></div>`;
+  return h;
+}
+
+function eqDoneHTML(){
+  const learned = eqChosen().filter(eqLearned).length;
+  return `<div class="empty">
+    <p><b>That is every equation in this set — ${EQ.right} right of ${EQ.asked}.</b></p>
+    <p style="margin:10px 0 16px">${learned} of ${eqChosen().length} selected
+      ${learned === 1 ? 'equation is' : 'equations are'} learned, meaning ${EQ_STREAK} correct
+      answers in a row. Going round again is what turns the rest over.</p>
+    <p style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
+      <button class="btn" id="eqAgain">Go round again</button>
+      <button class="btn ghost" id="eqStop">Choose equations</button>
+    </p></div>`;
+}
+
+function eqDrillWire(el){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  const stop = () => { EQ = null; renderEq(); };
+  const byId = i => document.getElementById(i);
+  if(byId('eqStop')) byId('eqStop').onclick = stop;
+  if(byId('eqAgain')) byId('eqAgain').onclick = () => eqStart(EQ.mode);
+  if(!e) return;
+
+  /* Tap a slot to select it, then tap a piece; or tap a piece to drop it into
+     the first empty slot. Dragging works too where a mouse is present, but
+     tapping is what has to work, since this is read on a phone. */
+  el.querySelectorAll('.eqslot').forEach(b => b.onclick = () => {
+    const i = +b.dataset.slot;
+    if(EQ.slots[i] !== null){                     // tapping a filled slot empties it
+      EQ.slots[i] = null;
+      if(EQ.trayOf) delete EQ.trayOf[i];
+    }else{
+      EQ.sel = EQ.sel === i ? null : i;
+    }
+    renderEq();
+  });
+  el.querySelectorAll('.eqtile').forEach(b => {
+    b.onclick = () => eqPlace(+b.dataset.tile);
+    b.draggable = true;
+    b.ondragstart = ev => { ev.dataTransfer.setData('text/plain', b.dataset.tile); };
+  });
+  el.querySelectorAll('.eqslot').forEach(b => {
+    b.ondragover = ev => ev.preventDefault();
+    b.ondrop = ev => {
+      ev.preventDefault();
+      const t = +ev.dataTransfer.getData('text/plain');
+      if(!isNaN(t)) eqPlace(t, +b.dataset.slot);
+    };
+  });
+
+  const inp = byId('eqIn');
+  if(inp && !EQ.revealed){
+    inp.oninput = ev => { EQ.typed = ev.target.value; };
+    inp.onkeydown = ev => { if(ev.key === 'Enter'){ ev.preventDefault(); eqCheck(); } };
+    if(typeof inp.focus === 'function') inp.focus();
+  }
+  if(byId('eqCheck')) byId('eqCheck').onclick = eqCheck;
+  if(byId('eqClear')) byId('eqClear').onclick = () => {
+    EQ.slots = EQ.slots.map(() => null); EQ.trayOf = {}; EQ.sel = null; renderEq();
+  };
+  if(byId('eqShow')) byId('eqShow').onclick = () => {
+    EQ.revealed = true; EQ.ok = false;
+    eqRecord(e.id, EQ.step, false);
+    renderEq();
+  };
+  if(byId('eqNext')) byId('eqNext').onclick = () => {
+    /* In the alternating mode the same equation is typed straight after it has
+       been built, so the piece order is still in mind when the typing is asked
+       for. Only then does the queue move on. */
+    if(EQ.mode === 'mix' && EQ.step === 'build'){ EQ.step = 'type'; eqLoad(); return; }
+    if(EQ.mode === 'mix') EQ.step = 'build';
+    EQ.i++; eqLoad();
+  };
+}
+
+function eqPlace(tileIndex, slot){
+  const tile = EQ.tray.find(t => t.i === tileIndex);
+  if(!tile) return;
+  if(!EQ.trayOf) EQ.trayOf = {};
+  if(Object.values(EQ.trayOf).includes(tileIndex)) return;   // already placed
+  let i = slot != null ? slot : (EQ.sel != null ? EQ.sel : EQ.slots.indexOf(null));
+  if(i == null || i < 0 || i >= EQ.slots.length) return;
+  if(EQ.slots[i] !== null) delete EQ.trayOf[i];              // replacing what was there
+  EQ.slots[i] = tile.t;
+  EQ.trayOf[i] = tileIndex;
+  EQ.sel = null;
+  renderEq();
+}
+
+function eqCheck(){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  if(!e) return;
+  if(EQ.step === 'build'){
+    if(EQ.slots.some(s => s === null)) return;
+    EQ.ok = eqCorrect(e, eqPlain(e.lhs) + '=' + eqPlain(EQ.slots.join(' ')));
+  }else{
+    if(!EQ.typed.trim()) return;
+    EQ.ok = eqCorrect(e, EQ.typed) || eqCorrect(e, eqPlain(e.lhs) + '=' + EQ.typed);
+  }
+  EQ.revealed = true;
+  EQ.asked++; if(EQ.ok) EQ.right++;
+  eqRecord(e.id, EQ.step, EQ.ok);
+  renderEq();
+}
 
 /* ==========================================================================
    BOOT

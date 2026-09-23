@@ -87,8 +87,24 @@ h3{font-size:16px;margin:22px 0 8px}
 .subrow button.ghost{background:var(--paper);color:var(--text);border:1px solid var(--line)}
 /* The concepts / calculations / everything rows at the foot of a topic */
 .ksplit{border-top:1px solid var(--line-soft);margin-top:4px;padding-top:5px}
-/* The problem-set rows inside a module, and their one-line heading */
-.setnote{font-size:12.5px;color:var(--text-dim);margin:4px 8px 2px;line-height:1.45}
+/* The review switch: four modes of one page, so they read as one control */
+.review{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0 0 14px;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rtab{border:0;border-right:1px solid var(--line);background:var(--paper);color:var(--text);
+  padding:11px 8px;font-size:14.5px;font-weight:600;text-align:center;line-height:1.25}
+.rtab:last-child{border-right:0}
+.rtab small{display:block;font-weight:400;font-size:11.5px;color:var(--text-dim);margin-top:2px}
+.rtab[aria-pressed="true"]{background:var(--ink);color:#fff}
+.rtab[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
+@media (max-width:560px){
+  .review{grid-template-columns:1fr 1fr}
+  .rtab:nth-child(2){border-right:0}
+  .rtab:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+/* The stepwise problem sets inside a module, under their own heading */
+.stepwise{background:var(--accent-bg);border-radius:8px;margin:6px 10px 10px;padding:10px 8px 8px;border-top:0}
+.sethead{margin:2px 8px 2px;font-size:14.5px}
+.setnote{font-size:12.5px;color:var(--text-dim);margin:2px 8px 4px;line-height:1.45}
 /* The vignette a problem set shares, above the stem of each of its parts */
 .cset{font-size:13.5px;color:var(--text-dim);margin:0 0 9px;padding-left:9px;
   border-left:3px solid var(--line)}
@@ -108,6 +124,48 @@ h3{font-size:16px;margin:22px 0 8px}
   border:1px solid var(--line);background:var(--paper);border-radius:20px;padding:5px 12px;font-size:13px;color:var(--text)
 }
 .chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ---------- stacked fractions, as the slides print them ---------- */
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;
+  margin:0 .18em;line-height:1.25}
+.frac>.fn{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>.fd{padding:.1em .25em 0}
+.reftab td:first-child b{display:inline-block;line-height:1.9;margin:3px 0}
+.nw{white-space:nowrap}
+.stepwise .meter{background:var(--paper)}
+
+/* ---------- equations ---------- */
+#v-eq .eqrow{align-items:flex-start;gap:8px}
+#v-eq .eqpick{display:flex;gap:9px;align-items:flex-start;flex:1;min-width:0;cursor:pointer}
+#v-eq .eqpick input{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--accent)}
+#v-eq .eqline{display:block;font-size:14px;margin:2px 0 1px;color:var(--text)}
+#v-eq .must{color:var(--yen)}
+#v-eq .eqdone{font-size:11.5px;color:var(--ok);white-space:nowrap;font-weight:600}
+#v-eq .module>summary .chip{flex:none}
+.eqask{font-size:13.5px;color:var(--text-dim);margin:0 0 12px}
+.eqlhs{font-weight:700;white-space:nowrap}
+/* the built equation: a row of slots after the left-hand side */
+.eqbuild{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:4px 0 14px;font-size:16px}
+.eqslot{min-width:52px;min-height:40px;border:2px dashed var(--line);background:var(--surface);
+  border-radius:8px;padding:6px 10px;font-size:15px;color:var(--text)}
+.eqslot.full{border-style:solid;border-color:var(--accent);background:var(--paper)}
+.eqslot.ok{border-color:var(--ok);background:var(--ok-bg)}
+.eqslot.bad{border-color:var(--bad);background:var(--bad-bg)}
+/* the pieces on offer, correct ones and wrong ones together */
+.eqtray{display:flex;flex-wrap:wrap;gap:7px;padding:11px;border:1px solid var(--line-soft);
+  border-radius:10px;background:var(--surface)}
+.eqtile{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;
+  font-size:15px;color:var(--text);cursor:grab}
+.eqtile.used{opacity:.32;cursor:default}
+.eqtype{display:flex;align-items:center;gap:9px;margin:4px 0 6px;flex-wrap:wrap}
+.eqtype input{flex:1;min-width:190px;padding:11px 12px;font-size:16px;border:1px solid var(--line);
+  border-radius:8px;background:var(--paper);color:var(--text);font-family:ui-monospace,Menlo,Consolas,monospace}
+.eqtype input.ok{border-color:var(--ok)}
+.eqtype input.bad{border-color:var(--bad)}
+.eqhint{margin:0 0 6px}
+.eqhint code,.why code{background:var(--surface);border:1px solid var(--line-soft);border-radius:4px;
+  padding:1px 5px;font-size:13px}
+.eqanswer{font-size:16px;margin:0 0 12px}
 
 /* ---------- quiz ---------- */
 .qcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
@@ -347,6 +405,7 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
   <button data-v="exam">Exam sim</button>
   <button data-v="guide">Guides</button>
   <button data-v="tell">Tell apart</button>
+  <button data-v="eq">Equations</button>
   <button data-v="ref">Reference</button>
   <button data-v="settings">Settings</button>
 </nav>
@@ -358,6 +417,7 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
   <section id="v-exam" class="hide"></section>
   <section id="v-guide" class="hide"></section>
   <section id="v-tell" class="hide"></section>
+  <section id="v-eq" class="hide"></section>
   <section id="v-ref" class="hide"></section>
   <section id="v-settings" class="hide"></section>
 </main>
@@ -413,7 +473,7 @@ const COURSE = {
     {exam: 1,   name: 'Exam 1 Recap'},
     {module: 4, name: 'Module 4 - Drug Elimination and Clearance'},
     {module: 5, name: 'Module 5 - Single Oral Administration'},
-    {view: 'ref', name: 'Equations'},
+    {view: 'eq',  name: 'Equations'},
   ],
 
   /* One entry per lecture. `deck` is the PDF as a citation spells it. */
@@ -677,7 +737,8 @@ const TOPICS = [
    she asks them in and the vignette they share.
 
    `parts` is question ids in her order. `name` is what the set is, `setup` is
-   the vignette in one line, and `module` places it in the Topics view.
+   the vignette in one line, written as HTML so an equation in it can carry real
+   subscripts and superscripts, and `module` places it in the Topics view.
    test.js checks that every id here exists and that no part is listed twice.
    ========================================================================== */
 const CHAINS = [
@@ -722,7 +783,7 @@ const CHAINS = [
   parts:['inf-n10','inf-n12','inf-n11','inf-n13']},
 
  {id:'m3-inclass', module:3, name:'Recommend a rate and a loading dose, then four scenarios',
-  setup:'Css 20 mg/L, t½ 5 hr, VD 16 L — with the loading dose and without it, side by side',
+  setup:'C<sub>ss</sub> 20 mg/L, t&frac12; 5 hr, V<sub>D</sub> 16 L &mdash; with the loading dose and without it, side by side',
   parts:['inf-n14','inf-n19','inf-n20','inf-n21','inf-n15']},
 
  {id:'m3-3days', module:3, name:'A loading dose with a 75 mg/hr infusion for 3 days',
@@ -734,7 +795,7 @@ const CHAINS = [
   parts:['inf-n17','inf-n16']},
 
  {id:'m4-battery', module:4, name:'500 mg IV bolus with a 48-hour urine collection',
-  setup:'Her six-part battery: fe, k, ke, then total, renal and hepatic clearance',
+  setup:'Her six-part battery: f<sub>e</sub>, k, k<sub>e</sub>, then total, renal and hepatic clearance',
   parts:['m4-n-fe','m4-n-k','m4-n-ke','m4-n-clt','m4-n-clr','m4-n-clh']},
 
  {id:'m4-antibiotic', module:4, name:'An antibiotic secreted by the kidney, before and after renal failure',
@@ -746,19 +807,19 @@ const CHAINS = [
   parts:['m4-n-inches','m4-n-ibwf','m4-n-crcl']},
 
  {id:'m5-investigational', module:5, name:'An investigational drug given as a 500-mg oral dose',
-  setup:'The two rate constants, then tmax and Cmax, then Cmax when the dose is doubled',
+  setup:'The two rate constants, then t<sub>max</sub> and C<sub>max</sub>, then C<sub>max</sub> when the dose is doubled',
   parts:['m5-n01','m5-n02','m5-n03','m5-n04','m5-n19']},
 
  {id:'m5-antibiotic', module:5, name:'An oral antibiotic given by its two-exponential equation',
-  setup:'Cp = 75(e^(−0.22t) − e^(−2.75t)), read for both half-lives, the peak, the volume and a later point',
+  setup:'C<sub>p</sub> = 75(e<sup>&minus;0.22t</sup> &minus; e<sup>&minus;2.75t</sup>), read for both half-lives, the peak, the volume and a later point',
   parts:['m5-n05','m5-n06','m5-n07','m5-n08','m5-n09','m5-n10']},
 
  {id:'m5-750', module:5, name:'A 750-mg oral dose given by its equation',
-  setup:'Cp = 23.2(e^(−0.182t) − e^(−0.872t)), read for the half-life, the peak and the volume',
+  setup:'C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>), read for the half-life, the peak and the volume',
   parts:['m5-n16','m5-n17','m5-n18','m5-n15']},
 
  {id:'m5-500', module:5, name:'A 500-mg oral dose, 88 per cent bioavailable',
-  setup:'The absorption rate constant, tmax and Cmax, then Cmax when the volume doubles',
+  setup:'The absorption rate constant, t<sub>max</sub> and C<sub>max</sub>, then C<sub>max</sub> when the volume doubles',
   parts:['m5-n11','m5-n12','m5-n13','m5-n14']},
 ];
 
@@ -6982,6 +7043,407 @@ const QUESTIONS = [].concat(
 );
 
 /* ==========================================================================
+   EQUATIONS
+   ==========================================================================
+   The equations this course uses, as structured data, so they can be drilled
+   rather than only read. The Reference view is the prose account of the same
+   material; this is the same equations in the form a check can be run against.
+
+   SOURCES. Every equation, symbol, unit and condition below is already carried
+   by reference.js, which sources each one to BasicPharmacokineticsEquations.pdf
+   (the exam equation sheet), one of the five lectured decks, Dr. Mosley's own
+   worked solutions in STYLE.md, or her spoken words in TRANSCRIPT_CUES.md.
+   Nothing new is asserted here.
+
+   `must` marks the five she said out loud she does not put on the equation
+   sheet, plus the second ideal-body-weight form. `sheet` records what the
+   readable extract of the sheet carries: 'yes', 'no' where she said so, and
+   'unknown' where the extract cannot be read and she never said either way.
+
+   THE SHAPE OF AN ENTRY
+
+     lhs     the left side, as display HTML
+     tokens  the right side in the pieces it is built from, in order. The
+             right side IS tokens.join(' '), so the reading exercise and the
+             building exercise cannot come apart.
+     disp    optional: the right side as the slides print it, with a ratio
+             written {{frac:numerator|denominator}} so it stacks. Shown in
+             the list and after an answer. Where it is absent the right side
+             is shown as the pieces joined up. test.js checks it carries the
+             same symbols and operators, in the same order, as typed.
+     typed   the canonical answer in plain ASCII, which is what a typed answer
+             is compared against after both are normalised
+     also    other answers that are equally right, not near misses
+     lures   wrong pieces for the tray in the building exercise. Each is a
+             mistake a student actually makes: an inverted ratio, the rate
+             constant where the half-life belongs, the wrong sign.
+
+   test.js checks that lhs and tokens agree with typed under the normaliser, so
+   an entry cannot key one thing to a typist and another to a builder, and that
+   no lure matches a token of its own equation.
+
+   OMITTED ON PURPOSE. The two Henderson-Hasselbalch forms on
+   4---Clearance-and-Elimination.pdf slide 20 are not here. The slide prints
+   both, but its text extract interleaves the numerators and denominators, so
+   which form is labelled for weak acids and which for weak bases cannot be
+   read off it. Drilling one of them would be drilling a guess.
+   ========================================================================== */
+const EQUATIONS = [
+
+/* ───────── The ones she said to memorise ───────── */
+{id:'thalf-first', module:1, name:'First-order half-life', must:true, sheet:'no',
+ lhs:'t&frac12;', tokens:['0.693', '/', 'k'], disp:'{{frac:0.693|k}}', typed:'t1/2 = 0.693/k',
+ lures:['&times;', '2.303', '2k'],
+ symbols:[['k', 'first-order elimination rate constant, hr&minus;1'],
+          ['t&frac12;', 'half-life, a time and never a reciprocal time']],
+ holds:'First order only. Constant at every concentration, so it does not depend on the dose or on where the concentration started.',
+ cite:'Introduction.pdf slide 19; she names it three times as not on the sheet'},
+
+{id:'cl-k-vd', module:2, name:'Clearance from k and volume of distribution', must:true, sheet:'no',
+ lhs:'Cl', tokens:['k', '&times;', 'V<sub>D</sub>'], typed:'Cl = k*VD',
+ also:['ClT = k*VD'],
+ lures:['/', '0.693', 'C<sub>p</sub>', 'AUC', 'D<sub>0</sub>'],
+ symbols:[['Cl', 'clearance, L/hr'], ['k', 'hr&minus;1'], ['V<sub>D</sub>', 'apparent volume of distribution, L']],
+ holds:'First-order elimination. Clearance is the volume of plasma cleared of drug per unit time, and it stays constant while the elimination rate does not.',
+ cite:'2IVBolusAdministration.pdf, slide "Clearance"; she names it as not on the sheet'},
+
+{id:'cp-db-vd', module:2, name:'Concentration, amount and volume', must:true, sheet:'yes',
+ lhs:'C<sub>p</sub>', tokens:['D<sub>B</sub>', '/', 'V<sub>D</sub>'], disp:'{{frac:D<sub>B</sub>|V<sub>D</sub>}}', typed:'Cp = DB/VD',
+ also:['Cp = D/VD'],
+ lures:['&times;', 'k', 'AUC'],
+ symbols:[['C<sub>p</sub>', 'plasma concentration, mg/L'],
+          ['D<sub>B</sub>', 'amount of drug in the body at that time, mg'],
+          ['V<sub>D</sub>', 'L']],
+ holds:'One compartment, at any time. At time zero the amount is the dose and the concentration is C0, which is what gives VD = D0/C0.',
+ cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution". She names it as one to know; the sheet carries it too, and both readings stand.'},
+
+{id:'crcl', module:4, name:'Cockcroft-Gault creatinine clearance', must:true, sheet:'no',
+ lhs:'CrCl', tokens:['(140 &minus; age)', '(IBW)', '/', '(72', '&times;', 'S<sub>Cr</sub>)'],
+ disp:'{{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}', typed:'CrCl = (140-age)(IBW)/(72*SCr)',
+ also:['CrCl = (140-age)(IBW)/(72*SCr)*0.85', 'CrCl = ((140-age)(IBW)/(72*SCr))*0.85'],
+ lures:['(140 + age)', 'age)', '(S<sub>Cr</sub>)', '0.85'],
+ symbols:[['age', 'years'], ['IBW', 'ideal body weight, kg'],
+          ['S<sub>Cr</sub>', 'serum creatinine, mg/dL'], ['CrCl', 'reported in mL/min']],
+ holds:'Multiply by 0.85 for a female patient. The answer is reported in mL/min even though the units do not cancel algebraically.',
+ cite:'4---Clearance-and-Elimination.pdf slide 2; "this one is not there. You need to know this one."'},
+
+{id:'ibw-male', module:4, name:'Ideal body weight, male', must:true, sheet:'no',
+ lhs:'IBW<sub>male</sub>', tokens:['50', '+', '2.3', '&times;', '(inches over 5 ft)'],
+ typed:'IBWmale = 50 + 2.3*(inches over 5 ft)',
+ also:['IBW = 50 + 2.3*(height in inches - 60)', 'IBWmale = 50 + 2.3(inches over 5 ft)'],
+ lures:['45.5', '&minus;', '2.54', '60', '/'],
+ symbols:[['IBW', 'kg'], ['inches over 5 ft', 'height in inches minus 60']],
+ holds:'Every patient in this course is 5 ft or taller, and ideal body weight is always the weight used.',
+ cite:'4---Clearance-and-Elimination.pdf slide 2; "again, you need to know this one."'},
+
+{id:'ibw-female', module:4, name:'Ideal body weight, female', must:true, sheet:'no',
+ lhs:'IBW<sub>female</sub>', tokens:['45.5', '+', '2.3', '&times;', '(inches over 5 ft)'],
+ typed:'IBWfemale = 45.5 + 2.3*(inches over 5 ft)',
+ also:['IBW = 45.5 + 2.3*(height in inches - 60)', 'IBWfemale = 45.5 + 2.3(inches over 5 ft)'],
+ lures:['50', '&minus;', '2.54', '60', '0.85'],
+ symbols:[['IBW', 'kg'], ['inches over 5 ft', 'height in inches minus 60']],
+ holds:'The male form with a different constant. 45.5 is the only difference.',
+ cite:'4---Clearance-and-Elimination.pdf slide 2'},
+
+/* ───────── Module 1 ───────── */
+{id:'zero-line', module:1, name:'Zero-order decline', sheet:'unknown',
+ lhs:'C', tokens:['C<sub>0</sub>', '&minus;', 'kt'], typed:'C = C0 - kt',
+ also:['C = C0 - k0t'],
+ lures:['+', 'e<sup>&minus;kt</sup>', '&times;', 'ln', '/'],
+ symbols:[['k', 'zero-order rate constant, amount or concentration per time'],
+          ['C<sub>0</sub>', 'starting concentration']],
+ holds:'The amount lost per unit time is constant and does not depend on how much is present. A straight line on linear axes.',
+ cite:'Introduction.pdf slide 17'},
+
+{id:'first-exp', module:1, name:'First-order decline, exponential form', sheet:'yes',
+ lhs:'C', tokens:['C<sub>0</sub>', 'e<sup>&minus;kt</sup>'], typed:'C = C0*e^(-kt)',
+ also:['Cp = Cp0*e^(-kt)', 'C = C0e^-kt'],
+ lures:['&minus;', 'e<sup>+kt</sup>', 'kt', '/', 'ln'],
+ symbols:[['k', 'first-order rate constant, hr&minus;1'], ['t', 'elapsed time, hr']],
+ holds:'First-order loss. The rate is proportional to what remains. A curve on linear axes and a straight line on semi-logarithmic axes.',
+ cite:'Introduction.pdf slide 18; equation sheet page 1'},
+
+{id:'first-ln', module:1, name:'First-order decline, natural-log form', sheet:'yes',
+ lhs:'ln C', tokens:['ln C<sub>0</sub>', '&minus;', 'kt'], typed:'ln C = ln C0 - kt',
+ also:['lnC = lnC0 - kt'],
+ lures:['+', 'log C<sub>0</sub>', 'kt/2.3', 'e<sup>&minus;kt</sup>'],
+ symbols:[['ln', 'natural logarithm'], ['k', 'hr&minus;1']],
+ holds:'The exponential form with logarithms taken of both sides. This is the line whose slope is minus k, which is what the two-point calculation reads.',
+ cite:'Introduction.pdf slide 18; equation sheet page 1'},
+
+{id:'first-log', module:1, name:'First-order decline, base-10 log form', sheet:'yes',
+ lhs:'log C', tokens:['log C<sub>0</sub>', '&minus;', 'kt', '/', '2.3'], disp:'log C<sub>0</sub> &minus; {{frac:kt|2.3}}', typed:'log C = log C0 - kt/2.3',
+ also:['logC = logC0 - kt/2.3', 'log C = log C0 - (k/2.3)t'],
+ lures:['ln C<sub>0</sub>', '+', '0.693', '2.303t'],
+ symbols:[['2.3', 'the conversion between natural and base-10 logarithms']],
+ holds:'The same line plotted on base-10 axes, which is what semi-log graph paper uses. The 2.3 is only a conversion factor.',
+ cite:'Introduction.pdf slide 18; equation sheet page 1'},
+
+{id:'amount-exp', module:1, name:'First-order decline in amount', sheet:'yes',
+ lhs:'D', tokens:['D<sub>0</sub>', 'e<sup>&minus;kt</sup>'], typed:'D = D0*e^(-kt)',
+ also:['DB = D0*e^(-kt)', 'D = D0e^-kt'],
+ lures:['C<sub>0</sub>', 'V<sub>D</sub>', '/', 'e<sup>+kt</sup>'],
+ symbols:[['D', 'amount remaining, mg'], ['D<sub>0</sub>', 'the dose, mg']],
+ holds:'The same relation written in amount rather than concentration. The two are not mixed in one calculation.',
+ cite:'Introduction.pdf slide 18; equation sheet page 1'},
+
+{id:'thalf-zero', module:1, name:'Zero-order half-life', sheet:'unknown',
+ lhs:'t&frac12;', tokens:['C<sub>0</sub>', '/', '2k'], disp:'{{frac:C<sub>0</sub>|2k}}', typed:'t1/2 = C0/2k',
+ also:['t1/2 = C0/(2*k)'],
+ lures:['0.693', '&times;', '2C<sub>0</sub>', 'k'],
+ symbols:[['C<sub>0</sub>', 'starting concentration'], ['k', 'zero-order rate constant']],
+ holds:'Zero order only. It depends on C0, so it is not a fixed property of the drug: start lower and the half-life is shorter.',
+ cite:'Introduction.pdf slide 19'},
+
+{id:'auc-trap', module:1, name:'Trapezoidal rule, one segment', sheet:'yes',
+ lhs:'AUC',
+ tokens:['[(C<sub>n&minus;1</sub> + C<sub>n</sub>)', '/', '2]', '&times;', '(t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)'],
+ disp:'{{frac:C<sub>n&minus;1</sub> + C<sub>n</sub>|2}} &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)', typed:'AUC = [(Cn-1 + Cn)/2]*(tn - tn-1)',
+ also:['AUC = ((Cn-1+Cn)/2)*(tn-tn-1)'],
+ lures:['(C<sub>n</sub> &minus; C<sub>n&minus;1</sub>)', '(t<sub>n</sub> + t<sub>n&minus;1</sub>)', '2'],
+ symbols:[['C<sub>n&minus;1</sub>, C<sub>n</sub>', 'the two concentrations bounding the segment'],
+          ['AUC', 'concentration &times; time, e.g. mcg&middot;hr/mL']],
+ holds:'Any concentration-time data set, any route. The total area is the sum of the segments. Her shorter statement of it is one half base times height.',
+ cite:'Introduction.pdf slides 24-25; equation sheet page 1, first line'},
+
+{id:'f-auc', module:1, name:'Bioavailability from two areas', sheet:'yes',
+ lhs:'F', tokens:['AUC<sub>oral</sub>', '/', 'AUC<sub>IV</sub>'], disp:'{{frac:AUC<sub>oral</sub>|AUC<sub>IV</sub>}}', typed:'F = AUCoral/AUCiv',
+ also:['F = AUCpo/AUCiv'],
+ lures:['&times;', 'D<sub>IV</sub>', 'D<sub>po</sub>'],
+ symbols:[['F', 'fraction of the oral dose reaching plasma, no units']],
+ holds:'Comparing two routes at the same dose. Where the doses differ the sheet carries the dose-corrected form, F = (AUCpo/AUCiv)(Div/Dpo).',
+ cite:'Introduction.pdf slide 23'},
+
+/* ───────── Module 2 ───────── */
+{id:'k-sum', module:2, name:'Elimination as metabolism plus excretion', sheet:'no',
+ lhs:'k', tokens:['k<sub>m</sub>', '+', 'k<sub>e</sub>'], typed:'k = km + ke',
+ lures:['&minus;', '&times;', 'f<sub>e</sub>', 'k<sub>a</sub>'],
+ symbols:[['k<sub>m</sub>', 'rate constant for metabolism'], ['k<sub>e</sub>', 'rate constant for excretion']],
+ holds:'Any first-order elimination. An unsubscripted k is the overall constant with every route wrapped into it.',
+ cite:'2IVBolusAdministration.pdf; her words on what an unsubscripted k means'},
+
+{id:'cl-auc', module:2, name:'Clearance from dose and area', sheet:'yes',
+ lhs:'Cl', tokens:['D<sub>0</sub>', '/', 'AUC'], disp:'{{frac:D<sub>0</sub>|AUC}}', typed:'Cl = D0/AUC',
+ also:['Cl = FD0/AUC', 'Cl = F*D0/AUC'],
+ lures:['&times;', 'k', 'V<sub>D</sub>'],
+ symbols:[['D<sub>0</sub>', 'dose, mg'], ['AUC', 'area from zero to infinity, mg&middot;hr/L']],
+ holds:'Any route, provided F is known; F is 1 for an intravenous dose. This is what relates the dose directly to the exposure.',
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet page 1'},
+
+{id:'thalf-cl-vd', module:2, name:'Half-life from volume and clearance', sheet:'unknown',
+ lhs:'t&frac12;', tokens:['0.693', 'V<sub>D</sub>', '/', 'Cl<sub>T</sub>'], disp:'{{frac:0.693 V<sub>D</sub>|Cl<sub>T</sub>}}', typed:'t1/2 = 0.693*VD/ClT',
+ also:['t1/2 = 0.693VD/Cl'],
+ lures:['&times;', 'k', '2.3', 'Cl<sub>R</sub>'],
+ symbols:[['V<sub>D</sub>', 'L'], ['Cl<sub>T</sub>', 'L/hr']],
+ holds:'Clearance from k and VD combined with the first-order half-life. It says which way the half-life moves when clearance falls and the volume does not, which is the renal-failure question.',
+ cite:'4---Clearance-and-Elimination.pdf slide 21'},
+
+{id:'biexp', module:2, name:'Two-compartment concentration', sheet:'yes',
+ lhs:'C<sub>p</sub>', tokens:['Ae<sup>&minus;at</sup>', '+', 'Be<sup>&minus;bt</sup>'], typed:'Cp = A*e^(-at) + B*e^(-bt)',
+ also:['Cp = Ae^-at + Be^-bt'],
+ lures:['&minus;', 'Ae<sup>&minus;bt</sup>', 'Be<sup>&minus;at</sup>', '&times;'],
+ symbols:[['A, B', 'intercepts, in concentration units'],
+          ['a, b', 'the two slopes, hr&minus;1, with a the larger']],
+ holds:'Two compartment, IV bolus. Alpha is larger because distribution happens faster than elimination.',
+ cite:'2IVBolusAdministration.pdf; equation sheet page 1'},
+
+{id:'c0-ab', module:2, name:'Two-compartment initial concentration', sheet:'yes',
+ lhs:'C<sub>p</sub><sup>0</sup>', tokens:['A', '+', 'B'], typed:'Cp0 = A + B',
+ also:['C0 = A + B', 'Cp^0 = A + B'],
+ lures:['&minus;', '&times;', '/'],
+ symbols:[['A, B', 'the two intercepts']],
+ holds:'Two compartment, at time zero. Both exponentials are 1 at t = 0, so the concentration is the sum of the intercepts.',
+ cite:'2IVBolusAdministration.pdf'},
+
+{id:'thalf-beta', module:2, name:'Beta half-life', sheet:'unknown',
+ lhs:'t&frac12;<sub>&beta;</sub>', tokens:['0.693', '/', 'b'], disp:'{{frac:0.693|b}}', typed:'t1/2beta = 0.693/b',
+ also:['t1/2 = 0.693/b'],
+ lures:['a', '&times;', 'k', 'A'],
+ symbols:[['b', 'the terminal slope, hr&minus;1']],
+ holds:'Two compartment. It is the first-order half-life applied to the terminal slope, so solving for k first is more work than the question needs.',
+ cite:'2IVBolusAdministration.pdf, slide "Beta Half-life"'},
+
+{id:'k-overall', module:2, name:'Overall elimination constant from the intercepts and slopes', sheet:'yes',
+ lhs:'k', tokens:['(A + B)ab', '/', '(Ab + Ba)'], disp:'{{frac:(A + B)ab|Ab + Ba}}', typed:'k = (A+B)ab/(Ab+Ba)',
+ lures:['(Ab &minus; Ba)', '(A &minus; B)', '&times;', '(A + B)'],
+ symbols:[['A, B', 'intercepts'], ['a, b', 'slopes']],
+ holds:'Two-compartment IV bolus, model A: drug moves to and from the tissue compartment and leaves the body from the central compartment only.',
+ cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; equation sheet'},
+
+{id:'k12', module:2, name:'Transfer constant, central to tissue', sheet:'yes',
+ lhs:'k<sub>12</sub>', tokens:['AB(b &minus; a)<sup>2</sup>', '/', '[(A + B)(Ab + Ba)]'],
+ disp:'{{frac:AB(b &minus; a)<sup>2</sup>|(A + B)(Ab + Ba)}}', typed:'k12 = AB(b-a)^2/[(A+B)(Ab+Ba)]',
+ also:['k12 = AB(b-a)^2/((A+B)(Ab+Ba))'],
+ lures:['(Ab + Ba)', '(A + B)', 'AB(b + a)<sup>2</sup>', '&times;'],
+ symbols:[['k<sub>12</sub>', 'central to tissue, hr&minus;1']],
+ holds:'Two-compartment IV bolus. Read straight off the A, B, alpha and beta she supplies.',
+ cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; equation sheet'},
+
+{id:'k21', module:2, name:'Transfer constant, tissue to central', sheet:'yes',
+ lhs:'k<sub>21</sub>', tokens:['(Ab + Ba)', '/', '(A + B)'], disp:'{{frac:Ab + Ba|A + B}}', typed:'k21 = (Ab+Ba)/(A+B)',
+ lures:['(Ab &minus; Ba)', 'ab', '&times;'],
+ symbols:[['k<sub>21</sub>', 'tissue to central, hr&minus;1']],
+ holds:'Two-compartment IV bolus. It is the reciprocal arrangement of the k equation, which is the pair most often swapped.',
+ cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; equation sheet'},
+
+{id:'vp-ab', module:2, name:'Central compartment volume from the intercepts', sheet:'yes',
+ lhs:'V<sub>p</sub>', tokens:['D<sub>0</sub>', '/', '(A + B)'], disp:'{{frac:D<sub>0</sub>|A + B}}', typed:'Vp = D0/(A+B)',
+ lures:['&times;', '(A &minus; B)', 'k', 'AUC'],
+ symbols:[['V<sub>p</sub>', 'volume of the central compartment, L']],
+ holds:'Two compartment, when A and B are supplied. It is the one-compartment dose-over-C0 relation with A + B standing in for C0.',
+ cite:'2IVBolusAdministration.pdf, slide "Apparent Volumes of Distribution"'},
+
+{id:'vp-auc', module:2, name:'Central compartment volume from the area', sheet:'yes',
+ lhs:'V<sub>p</sub>', tokens:['D<sub>0</sub>', '/', '(k', '&times;', 'AUC)'], disp:'{{frac:D<sub>0</sub>|k &times; AUC}}', typed:'Vp = D0/(k*AUC)',
+ lures:['(A + B)', 'b', 'Cl'],
+ symbols:[['AUC', 'area from zero to infinity']],
+ holds:'Two compartment, when a dose and an area are supplied rather than the intercepts.',
+ cite:'2IVBolusAdministration.pdf, slide "Apparent Volumes of Distribution"'},
+
+{id:'vt', module:2, name:'Tissue compartment volume', sheet:'yes',
+ lhs:'V<sub>t</sub>', tokens:['V<sub>p</sub>', 'k<sub>12</sub>', '/', 'k<sub>21</sub>'], disp:'{{frac:V<sub>p</sub>k<sub>12</sub>|k<sub>21</sub>}}', typed:'Vt = Vp*k12/k21',
+ lures:['&times;', 'D<sub>0</sub>', '+', 'k'],
+ symbols:[['V<sub>t</sub>', 'volume of the tissue compartment, L']],
+ holds:'Two compartment. The central volume scaled by the ratio of the two transfer constants.',
+ cite:'2IVBolusAdministration.pdf, slide "Apparent Volumes of Distribution"'},
+
+/* ───────── Module 3 ───────── */
+{id:'css', module:3, name:'Steady-state concentration', sheet:'yes',
+ lhs:'C<sub>ss</sub>', tokens:['R', '/', 'Cl'], disp:'{{frac:R|Cl}}', typed:'Css = R/Cl',
+ also:['Css = R/(k*VD)', 'Css = R/kVD'],
+ lures:['&times;', 'k', '(1 &minus; e<sup>&minus;kt</sup>)'],
+ symbols:[['C<sub>ss</sub>', 'steady-state concentration, mg/L'], ['R', 'infusion rate, mg/hr'],
+          ['Cl', 'L/hr']],
+ holds:'At steady state only, where rate in equals rate out. It carries no t, so it says nothing about when steady state arrives.',
+ cite:'3IntravenousInfusions.pdf; equation sheet page 1'},
+
+{id:'cp-infusing', module:3, name:'Concentration during an infusion', sheet:'yes',
+ lhs:'C<sub>p</sub>', tokens:['(R/Cl)', '(1 &minus; e<sup>&minus;kt</sup>)'], disp:'{{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)', typed:'Cp = (R/Cl)(1 - e^(-kt))',
+ also:['Cp = (R/(k*VD))(1 - e^(-kt))', 'Cp = (R/Cl)*(1-e^-kt)'],
+ lures:['(1 + e<sup>&minus;kt</sup>)', 'e<sup>&minus;kt</sup>', '(Cl/R)', '&times;'],
+ symbols:[['t', 'time since the infusion started, hr'],
+          ['(1 &minus; e<sup>&minus;kt</sup>)', 'the fraction of steady state reached']],
+ holds:'During an infusion, before steady state. The first factor is the plateau and the bracket is how much of it has been reached.',
+ cite:'3IntravenousInfusions.pdf; equation sheet page 1'},
+
+{id:'cp-after-stop', module:3, name:'Concentration after an infusion stops', sheet:'yes',
+ lhs:'C<sub>p</sub>', tokens:['C<sub>peak</sub>', 'e<sup>&minus;kt</sup>'], typed:'Cp = Cpeak*e^(-kt)',
+ also:['Cp = Css*e^(-kt)', 'Cp = Cpeak e^-kt'],
+ lures:['(1 &minus; e<sup>&minus;kt</sup>)', 'R/Cl', '+', 'e<sup>+kt</sup>'],
+ symbols:[['C<sub>peak</sub>', 'the concentration at the moment the infusion stopped'],
+          ['t', 'time since cessation, hr']],
+ holds:'After cessation. Ordinary first-order decay from a new starting point. Cpeak is Css only if the infusion actually ran to steady state.',
+ cite:'3IntravenousInfusions.pdf, slide "Drug Concentration after an IV Infusion has Ended"'},
+
+{id:'dl-rk', module:3, name:'Loading dose from the rate', sheet:'yes',
+ lhs:'D<sub>L</sub>', tokens:['R', '/', 'k'], disp:'{{frac:R|k}}', typed:'DL = R/k',
+ lures:['&times;', 'Cl', 'V<sub>D</sub>'],
+ symbols:[['D<sub>L</sub>', 'loading dose, mg'], ['R', 'mg/hr'], ['k', 'hr&minus;1']],
+ holds:'An IV bolus given at the moment an infusion starts. It is only as good as the rate already chosen.',
+ cite:'3IntravenousInfusions.pdf; equation sheet page 1'},
+
+{id:'dl-css-vd', module:3, name:'Loading dose from the target', sheet:'unknown',
+ lhs:'D<sub>L</sub>', tokens:['C<sub>ss</sub>', '&times;', 'V<sub>D</sub>'], typed:'DL = Css*VD',
+ also:['DL = Css VD'],
+ lures:['/', 'k', 'Cl', 'R'],
+ symbols:[['C<sub>ss</sub>', 'the target concentration, mg/L'], ['V<sub>D</sub>', 'L']],
+ holds:'The amount that fills the volume of distribution to the target in one go. It depends on the volume, not on the half-life.',
+ cite:'3IntravenousInfusions.pdf, slide "IV Bolus Loading Dose and Continuous IV Infusion"'},
+
+{id:'load-plus-infusion', module:3, name:'Loading dose and infusion together', sheet:'yes',
+ lhs:'C<sub>p</sub>',
+ tokens:['(D<sub>L</sub>/V<sub>D</sub>)', 'e<sup>&minus;kt</sup>', '+', '(R/kV<sub>D</sub>)', '(1 &minus; e<sup>&minus;kt</sup>)'],
+ disp:'{{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>&minus;kt</sup> + {{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)', typed:'Cp = (DL/VD)*e^(-kt) + (R/(k*VD))*(1 - e^(-kt))',
+ also:['Cp = (DL/VD)e^-kt + (R/kVD)(1-e^-kt)'],
+ lures:['&minus;', '(V<sub>D</sub>/D<sub>L</sub>)', '(1 + e<sup>&minus;kt</sup>)', 'C<sub>ss</sub>'],
+ symbols:[['t', 'measured from the start of therapy']],
+ holds:'Both running at once, so the two contributions add: a decaying bolus term and a climbing infusion term. With the right loading dose the sum stays flat at Css.',
+ cite:'3IntravenousInfusions.pdf, slide "IV Bolus Loading Dose and Continuous IV Infusion"'},
+
+/* ───────── Module 4 ───────── */
+{id:'rate-elim', module:4, name:'Rate of elimination', sheet:'yes',
+ lhs:'Rate of elimination', tokens:['Cl', '&times;', 'C<sub>p</sub>'], typed:'rate of elimination = Cl*Cp',
+ also:['rate = Cl*Cp'],
+ lures:['/', 'k', 'V<sub>D</sub>', 'AUC'],
+ symbols:[['Rate', 'amount per time, mcg/min or mg/hr'], ['Cl', 'volume per time'],
+          ['C<sub>p</sub>', 'amount per volume']],
+ holds:'First-order elimination, any route. Clearance is the factor between the rate and the concentration, which is why clearance stays constant while the rate does not.',
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet'},
+
+{id:'clt-sum', module:4, name:'Total clearance as its parts', sheet:'yes',
+ lhs:'Cl<sub>T</sub>', tokens:['Cl<sub>R</sub>', '+', 'Cl<sub>H</sub>'], typed:'ClT = ClR + ClH',
+ lures:['&minus;', '&times;', 'f<sub>e</sub>', '(1 &minus; f<sub>e</sub>)'],
+ symbols:[['Cl<sub>R</sub>', 'renal clearance, L/hr'], ['Cl<sub>H</sub>', 'hepatic clearance, L/hr']],
+ holds:'Clearances add. Hepatic clearance is obtained by subtraction, because the liver is not sampled directly.',
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet page 1, last line'},
+
+{id:'fe', module:4, name:'Fraction excreted unchanged', sheet:'yes',
+ lhs:'f<sub>e</sub>', tokens:['D<sub>u</sub>', '/', 'FD<sub>0</sub>'], disp:'{{frac:D<sub>u</sub>|FD<sub>0</sub>}}', typed:'fe = Du/(F*D0)',
+ also:['fe = Du/FD0', 'fe = Du/D0'],
+ lures:['&times;', 'k', 'k<sub>e</sub>', 'Cl<sub>T</sub>'],
+ symbols:[['f<sub>e</sub>', 'fraction excreted unchanged, no units'],
+          ['D<sub>u</sub>', 'cumulative unchanged drug recovered in urine over the whole collection, mg']],
+ holds:'A complete urine collection. Lower-case fe is the fraction excreted; capital F is bioavailability. They are different quantities sharing a letter.',
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet'},
+
+{id:'fe-k', module:4, name:'Excretion rate constant from the fraction', sheet:'yes',
+ lhs:'k<sub>e</sub>', tokens:['f<sub>e</sub>', '&times;', 'k'], typed:'ke = fe*k',
+ also:['ke = fek'],
+ lures:['/', 'k<sub>m</sub>', 'Cl<sub>T</sub>', 'D<sub>u</sub>'],
+ symbols:[['k<sub>e</sub>', 'excretion rate constant, hr&minus;1'], ['k', 'overall, hr&minus;1']],
+ holds:'The same fraction that splits the dose splits the rate constant, since fe is also ke over k.',
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet'},
+
+{id:'clr', module:4, name:'Renal clearance from the fraction', sheet:'yes',
+ lhs:'Cl<sub>R</sub>', tokens:['f<sub>e</sub>', '&times;', 'Cl<sub>T</sub>'], typed:'ClR = fe*ClT',
+ also:['ClR = feClT'],
+ lures:['(1 &minus; f<sub>e</sub>)', '/', 'Cl<sub>H</sub>', 'k'],
+ symbols:[['Cl<sub>R</sub>', 'L/hr'], ['f<sub>e</sub>', 'dimensionless']],
+ holds:'Splitting a total clearance once fe is known. The renal share is the excreted fraction of the whole.',
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet'},
+
+{id:'clh', module:4, name:'Hepatic clearance from the fraction', sheet:'yes',
+ lhs:'Cl<sub>H</sub>', tokens:['(1 &minus; f<sub>e</sub>)', '&times;', 'Cl<sub>T</sub>'], typed:'ClH = (1-fe)*ClT',
+ also:['ClH = ClT - ClR', 'ClH = (1-fe)ClT'],
+ lures:['f<sub>e</sub>', '+', 'Cl<sub>R</sub>', '/'],
+ symbols:[['Cl<sub>H</sub>', 'L/hr']],
+ holds:'The remainder after the renal share. Equivalently total clearance minus renal clearance; the two forms are one statement.',
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet'},
+
+/* ───────── Module 5 ───────── */
+{id:'oral-cp', module:5, name:'Concentration after a single oral dose', sheet:'yes',
+ lhs:'C<sub>p</sub>',
+ tokens:['[Fk<sub>a</sub>D<sub>0</sub>', '/', 'V<sub>D</sub>(k<sub>a</sub> &minus; k)]',
+         '&times;', '(e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)'],
+ disp:'{{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}} (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)', typed:'Cp = [F*ka*D0/(VD(ka-k))]*(e^(-kt) - e^(-ka*t))',
+ also:['Cp = (F*ka*D0/(VD*(ka-k)))*(e^(-kt)-e^(-ka*t))',
+       'Cp = [F*ka*D0/VD(ka-k)]*(e^(-kt) - e^(-ka*t))'],
+ lures:['(e<sup>&minus;k<sub>a</sub>t</sup> &minus; e<sup>&minus;kt</sup>)', '(k &minus; k<sub>a</sub>)',
+        '+', 'V<sub>D</sub>'],
+ symbols:[['F', 'oral bioavailability fraction, no units'],
+          ['k<sub>a</sub>', 'absorption rate constant, hr&minus;1'],
+          ['k', 'elimination rate constant, hr&minus;1'], ['D<sub>0</sub>', 'oral dose, mg']],
+ holds:'Single oral dose, one compartment, first order in and first order out. The bracket is drug in minus drug out, and the lumped prefactor is not C0.',
+ cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf; equation sheet page 1'},
+
+{id:'tmax', module:5, name:'Time to peak concentration', sheet:'yes',
+ lhs:'t<sub>max</sub>', tokens:['ln(k<sub>a</sub>/k)', '/', '(k<sub>a</sub> &minus; k)'], disp:'{{frac:ln(k<sub>a</sub>/k)|k<sub>a</sub> &minus; k}}', typed:'tmax = ln(ka/k)/(ka-k)',
+ also:['tmax = (ln(ka/k))/(ka-k)'],
+ lures:['ln(k/k<sub>a</sub>)', '(k &minus; k<sub>a</sub>)', '&times;', '0.693', 'D<sub>0</sub>'],
+ symbols:[['k<sub>a</sub>, k', 'both in the same reciprocal time unit'], ['t<sub>max</sub>', 'a time']],
+ holds:'Single oral dose. It carries no dose and no volume, so tmax depends only on the two rate constants and doubling the dose does not move it. It is always found before Cmax.',
+ cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf; equation sheet page 1'},
+
+{id:'thalf-abs', module:5, name:'Absorption half-life', sheet:'unknown',
+ lhs:'t&frac12;<sub>a</sub>', tokens:['0.693', '/', 'k<sub>a</sub>'], disp:'{{frac:0.693|k<sub>a</sub>}}', typed:'t1/2a = 0.693/ka',
+ also:['t1/2 = 0.693/ka'],
+ lures:['k', '&times;', '2.3'],
+ symbols:[['k<sub>a</sub>', 'absorption rate constant, hr&minus;1']],
+ holds:'The first-order half-life applied to absorption. Stems usually give the absorption half-life in minutes, so converting it to ka is the first step. An unqualified half-life means elimination.',
+ cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Kinetics of Absorption"'},
+];
+
+/* ==========================================================================
    REFERENCE
    ==========================================================================
    Static HTML document: the equation tables the questions keep returning to.
@@ -7007,7 +7469,7 @@ const REFERENCE_HTML = `
 <table class="reftab"><thead><tr>
 <th style="width:26%">Relation</th><th style="width:34%">What she said</th><th>Where it is needed, and the state of the equation sheet</th></tr></thead><tbody>
 
-<tr><td><b>First-order half-life</b><br>t&frac12; = 0.693 / k</td>
+<tr><td><b>First-order half-life</b><br>t&frac12; = {{frac:0.693|k}}</td>
 <td><i>"first order half-life &hellip; that will not be on your equation sheet. This is the one that you take to your grave with you, OK? 0.693 over K."</i> (08-19). Repeated 08-24, 08-26 and in the 09-09 exam review: <i>"That one is not on your equation sheet."</i></td>
 <td>Needed in every module. It is also how the two-compartment beta half-life and the absorption half-life are obtained, since both are first-order half-lives of a different rate constant. No line of the readable equation-sheet extract carries 0.693 divided by a rate constant.</td></tr>
 
@@ -7015,11 +7477,11 @@ const REFERENCE_HTML = `
 <td><i>"this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd."</i> (08-24)</td>
 <td>Needed for total body clearance, for the infusion rate R = C<sub>ss</sub>&middot;Cl and for every renal/hepatic split. The deck slide that states it, 2IVBolusAdministration.pdf slide "Clearance", carries the handwritten note that the equation will not be given on the exam. No line of the readable extract carries it.</td></tr>
 
-<tr><td><b>Volume, dose and concentration</b><br>C<sub>p</sub> = D<sub>B</sub> / V<sub>D</sub>, so V<sub>D</sub> = D<sub>B</sub> / C<sub>p</sub></td>
+<tr><td><b>Volume, dose and concentration</b><br>C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}, so V<sub>D</sub> = {{frac:D<sub>B</sub>|C<sub>p</sub>}}</td>
 <td><i>"The other one, the relationship between volume of distribution, concentration, and dose, that one is in, in, in you as well"</i> (08-26)</td>
 <td><b>Two sources differ here.</b> She names this as one to hold without the sheet, but the equation sheet extract does carry the line C<sub>p</sub> = D<sub>B</sub>/V<sub>D</sub>, readable and unambiguous, on page 1. Both readings are stated because neither cancels the other: the line is on the sheet, and she still expects it known.</td></tr>
 
-<tr><td><b>Cockcroft-Gault</b><br>CrCl = (140 &minus; age)(IBW) / (72 &times; S<sub>Cr</sub>), &times; 0.85 if female</td>
+<tr><td><b>Cockcroft-Gault</b><br>CrCl = {{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}, &times; 0.85 if female</td>
 <td><i>"this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one, OK."</i> (09-14)</td>
 <td>Module 4. Her answer must come out in mL/min: <i>"don't give me kilograms per milligram per deciliter. Milliliters per minute."</i> No line of the readable extract carries it.</td></tr>
 
@@ -7034,9 +7496,9 @@ const REFERENCE_HTML = `
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Relation</th><th style="width:26%">Source that states it</th><th>Status on the sheet</th></tr></thead><tbody>
-<tr><td><b>Zero-order half-life</b><br>t&frac12; = C<sub>0</sub> / 2k</td><td>Introduction.pdf slide 19, printed</td><td>Not in the readable extract. She never said whether it is supplied. Unreadable line (1) is in a plausible position for a zero-order relation, so absence cannot be asserted.</td></tr>
-<tr><td><b>Beta half-life</b><br>t&frac12;<sub>&beta;</sub> = 0.693 / b</td><td>2IVBolusAdministration.pdf slide "Beta Half-life", printed</td><td>Not in the readable extract. It is the first-order half-life relation applied to the slope b, so her carve-out for first-order half-life covers it: <i>"You take your 0.693 and you divide by lowercase b."</i></td></tr>
-<tr><td><b>Absorption half-life</b><br>t&frac12;<sub>a</sub> = 0.693 / k<sub>a</sub></td><td>5---Pharmacokinetics-of-Oral-Absorption.pdf slide "Kinetics of Absorption", printed</td><td>Not in the readable extract. Same first-order half-life relation, applied to k<sub>a</sub>.</td></tr>
+<tr><td><b>Zero-order half-life</b><br>t&frac12; = {{frac:C<sub>0</sub>|2k}}</td><td>Introduction.pdf slide 19, printed</td><td>Not in the readable extract. She never said whether it is supplied. Unreadable line (1) is in a plausible position for a zero-order relation, so absence cannot be asserted.</td></tr>
+<tr><td><b>Beta half-life</b><br>t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}</td><td>2IVBolusAdministration.pdf slide "Beta Half-life", printed</td><td>Not in the readable extract. It is the first-order half-life relation applied to the slope b, so her carve-out for first-order half-life covers it: <i>"You take your 0.693 and you divide by lowercase b."</i></td></tr>
+<tr><td><b>Absorption half-life</b><br>t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}</td><td>5---Pharmacokinetics-of-Oral-Absorption.pdf slide "Kinetics of Absorption", printed</td><td>Not in the readable extract. Same first-order half-life relation, applied to k<sub>a</sub>.</td></tr>
 </tbody></table>
 
 <h3>Units, and the conversions this course keeps needing</h3>
@@ -7073,7 +7535,7 @@ const REFERENCE_HTML = `
 <p>The two orders are the pair most often confused, so they are set out together. The 09-09 review names the one item guaranteed to appear: <i>"On this exam, I am going to give you a data set, and I expect you to figure out if it's zero or first."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
 <tr><td><b>dC/dt = &minus;k</b><br>C = C<sub>0</sub> &minus; kt</td>
 <td>C, C<sub>0</sub> concentration (mg/mL, mg/L); k zero-order rate constant, amount or concentration per time (mg/mL per day); t time</td>
@@ -7081,37 +7543,37 @@ const REFERENCE_HTML = `
 <td>k<sub>0</sub> from two points, C<sub>0</sub> by back-extrapolation, time to a stated percent decomposed.</td>
 <td>Not in the readable extract; unreadable line (1) is in a plausible position for this form.</td></tr>
 
-<tr><td><b>dC/dt = &minus;kC</b><br>ln C = ln C<sub>0</sub> &minus; kt &rarr; C = C<sub>0</sub>e<sup>&minus;kt</sup><br>log C = log C<sub>0</sub> &minus; kt/2.3 &rarr; C = C<sub>0</sub>10<sup>&minus;kt/2.3</sup></td>
+<tr><td><b>dC/dt = &minus;kC</b><br>ln C = ln C<sub>0</sub> &minus; kt &rarr; C = C<sub>0</sub>e<sup>&minus;kt</sup><br>log C = log C<sub>0</sub> &minus; {{frac:kt|2.3}} &rarr; C = C<sub>0</sub>10<sup>&minus;kt/2.3</sup></td>
 <td>Same symbols, but k is reciprocal time (hr<sup>&minus;1</sup>, day<sup>&minus;1</sup>). The 2.3 is the conversion between natural and base-10 logs: <i>"It's just a conversion factor to get you down to this natural log piece."</i></td>
 <td>First-order loss. The rate is proportional to what remains, so the rate falls as concentration falls. A curve on linear axes and a straight line on semi-logarithmic axes.</td>
 <td>k from two points as ln(C<sub>1</sub>/C<sub>2</sub>)/&Delta;t; C<sub>0</sub> as C<sub>t</sub>e<sup>+kt</sup>; C at a stated time; time to a stated percent.</td>
 <td>Yes &mdash; all three forms, twice: once in C and once in D.</td></tr>
 
-<tr><td><b>D = D<sub>0</sub>e<sup>&minus;kt</sup></b><br>ln D = ln D<sub>0</sub> &minus; kt<br>log D = log D<sub>0</sub> &minus; kt/2.3</td>
+<tr><td><b>D = D<sub>0</sub>e<sup>&minus;kt</sup></b><br>ln D = ln D<sub>0</sub> &minus; kt<br>log D = log D<sub>0</sub> &minus; {{frac:kt|2.3}}</td>
 <td>D amount of drug remaining (mg); D<sub>0</sub> the dose (mg); k reciprocal time</td>
 <td>The same first-order relation written in amount rather than concentration. She insists the two are not mixed: <i>"you gotta be apples to apples here &hellip; you can't do the 200 and the 15."</i></td>
 <td>Amount in the body at a stated time. She shows it both ways, as V<sub>D</sub>&middot;C<sub>t</sub> and as D<sub>0</sub>e<sup>&minus;kt</sup>.</td>
 <td>Yes, all three forms.</td></tr>
 
-<tr><td><b>t&frac12; = C<sub>0</sub> / 2k</b></td>
+<tr><td><b>t&frac12; = {{frac:C<sub>0</sub>|2k}}</b></td>
 <td>C<sub>0</sub> starting concentration; k zero-order rate constant; result in time</td>
 <td>Zero order only. It depends on C<sub>0</sub>, so it is not a fixed property of the drug: start lower and the half-life is shorter.</td>
 <td>Asked beside the first-order half-life on the same data, in her paired stem <i>"Assuming first-order kinetics &hellip; Assuming zero-order kinetics &hellip;"</i></td>
 <td>Not in the readable extract; she never said either way.</td></tr>
 
-<tr><td><b>t&frac12; = 0.693 / k</b></td>
+<tr><td><b>t&frac12; = {{frac:0.693|k}}</b></td>
 <td>k first-order elimination rate constant (hr<sup>&minus;1</sup>); result in time, never reciprocal time</td>
 <td>First order only. Constant at every concentration, because <i>"a constant divided by a constant is A constant."</i></td>
 <td>Asked in essentially every problem, usually as part a or b. Also run backwards to get k from a stated half-life.</td>
 <td>No &mdash; named by her, three times.</td></tr>
 
-<tr><td><b>AUC over one segment</b><br>[(C<sub>n&minus;1</sub> + C<sub>n</sub>)/2] &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)</td>
+<tr><td><b>AUC over one segment</b><br>{{frac:C<sub>n&minus;1</sub> + C<sub>n</sub>|2}} &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)</td>
 <td>C<sub>n&minus;1</sub>, C<sub>n</sub> the two concentrations bounding the segment; t in hours; result in concentration &times; time</td>
 <td>Any concentration-time data set, any route. The total AUC is the sum of the segments. She reduces the printed formula to <i>"one half base times height."</i></td>
 <td>AUC between two stated hours, from a table.</td>
 <td>Yes, page 1, first line.</td></tr>
 
-<tr><td><b>F = AUC<sub>oral</sub> / AUC<sub>IV</sub></b></td>
+<tr><td><b>F = {{frac:AUC<sub>oral</sub>|AUC<sub>IV</sub>}}</b></td>
 <td>F fraction of the oral dose reaching plasma, no units</td>
 <td>Comparing two routes. Printed on Introduction.pdf slide 23 in this bare form; the equation sheet carries the dose-corrected version, F = (AUC<sub>po</sub>/AUC<sub>IV</sub>)(D<sub>IV</sub>/D<sub>po</sub>).</td>
 <td>Bioavailability. Module 9, not yet lectured.</td>
@@ -7124,9 +7586,9 @@ const REFERENCE_HTML = `
 <p>What the words "IV bolus" are meant to trigger: <i>"if I tell you that we are administering a drug via IV bolus injection. Then you should think. Whichever form of this equation you like."</i> Input is instantaneous, elimination is first order, and she must tell you the compartment count: <i>"I have to tell you that it follows a one compartment model or a two compartment."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
-<tr><td><b>C<sub>p</sub> = D<sub>B</sub> / V<sub>D</sub></b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}</b></td>
 <td>C<sub>p</sub> plasma concentration (mg/L); D<sub>B</sub> amount of drug in the body at that time (mg); V<sub>D</sub> apparent volume of distribution (L)</td>
 <td>One compartment, at any time. At time zero D<sub>B</sub> is the dose and C<sub>p</sub> is C<sub>0</sub>, which gives V<sub>D</sub> = D<sub>0</sub>/C<sub>0</sub>.</td>
 <td>V<sub>D</sub>, or the amount in the body from a measured concentration.</td>
@@ -7138,19 +7600,19 @@ const REFERENCE_HTML = `
 <td>Rarely the unknown directly; it fixes what an unsubscripted k means.</td>
 <td>No line of the extract carries this sum.</td></tr>
 
-<tr><td><b>dD<sub>B</sub>/dt = &minus;kD<sub>B</sub></b><br>C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup><br>ln C<sub>p</sub> = ln C<sub>p</sub><sup>0</sup> &minus; kt<br>log C<sub>p</sub> = log C<sub>p</sub><sup>0</sup> &minus; kt/2.3</td>
+<tr><td><b>dD<sub>B</sub>/dt = &minus;kD<sub>B</sub></b><br>C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup><br>ln C<sub>p</sub> = ln C<sub>p</sub><sup>0</sup> &minus; kt<br>log C<sub>p</sub> = log C<sub>p</sub><sup>0</sup> &minus; {{frac:kt|2.3}}</td>
 <td>C<sub>p</sub><sup>0</sup> the concentration extrapolated back to time zero (mg/L); k hr<sup>&minus;1</sup></td>
 <td>One compartment, IV bolus, first-order elimination. The deck marks the natural-log form as the one she prefers.</td>
 <td>k from two plasma points; C<sub>0</sub> by back-extrapolation; C at a stated time; time to 99.9% eliminated. She warns that C<sub>0</sub> must exceed every sampled point and that the exponent sign flips when solving backwards.</td>
 <td>Yes.</td></tr>
 
-<tr><td><b>Cl<sub>T</sub> = k &times; V<sub>D</sub></b><br><b>Cl = D<sub>0</sub> / AUC<sub>0&rarr;&infin;</sub></b></td>
+<tr><td><b>Cl<sub>T</sub> = k &times; V<sub>D</sub></b><br><b>Cl = {{frac:D<sub>0</sub>|AUC<sub>0&rarr;&infin;</sub>}}</b></td>
 <td>Cl<sub>T</sub> total body clearance (L/hr); k hr<sup>&minus;1</sup>; V<sub>D</sub> L; D<sub>0</sub> dose (mg); AUC in mg&middot;hr/L</td>
 <td>First-order elimination. Clearance is the volume of plasma cleared of drug per unit time, and it is a constant: <i>"a constant times a constant is a constant."</i> Changing the concentration does not change it.</td>
 <td>Cl<sub>T</sub> as part f of her standard battery; and Cl as the bridge from dose to exposure.</td>
 <td>Cl = kV<sub>D</sub>: no, named by her. Cl = FD<sub>0</sub>/AUC: yes, page 1.</td></tr>
 
-<tr><td><b>t&frac12; = 0.693 V<sub>D</sub> / Cl<sub>T</sub></b></td>
+<tr><td><b>t&frac12; = {{frac:0.693 V<sub>D</sub>|Cl<sub>T</sub>}}</b></td>
 <td>Half-life in time, from V<sub>D</sub> in L and Cl<sub>T</sub> in L/hr</td>
 <td>The two relations above combined, printed on 4---Clearance-and-Elimination.pdf slide 21. It says which way a half-life moves when clearance falls and volume does not.</td>
 <td>The new half-life in renal failure, where clearance drops and V<sub>D</sub> is unchanged.</td>
@@ -7162,19 +7624,19 @@ const REFERENCE_HTML = `
 <td>Concentration at a stated time; C<sub>0</sub> as A + B.</td>
 <td>Yes, page 1.</td></tr>
 
-<tr><td><b>t&frac12;<sub>&beta;</sub> = 0.693 / b</b></td>
+<tr><td><b>t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}</b></td>
 <td>b the terminal slope, hr<sup>&minus;1</sup>; result in time</td>
 <td>Two compartment. The distribution half-life is not asked: <i>"we don't really care about the half-life of the distribution phase. We care about the half-life of the elimination phase."</i> She names the quantity explicitly on the paper so there is no ambiguity.</td>
 <td>The elimination half-life. She warns against the long route: <i>"Don't solve for K and then 0.693 over K. You've, you've done too much work."</i></td>
 <td>Not in the readable extract; covered by her first-order half-life carve-out.</td></tr>
 
-<tr><td><b>k = (A + B)ab / (Ab + Ba)</b><br><b>k<sub>12</sub> = AB(b &minus; a)<sup>2</sup> / [(A + B)(Ab + Ba)]</b><br><b>k<sub>21</sub> = (Ab + Ba) / (A + B)</b></td>
+<tr><td><b>k = {{frac:(A + B)ab|Ab + Ba}}</b><br><b>k<sub>12</sub> = {{frac:AB(b &minus; a)<sup>2</sup>|(A + B)(Ab + Ba)}}</b><br><b>k<sub>21</sub> = {{frac:Ab + Ba|A + B}}</b></td>
 <td>k overall elimination from the central compartment; k<sub>12</sub> transfer central to tissue; k<sub>21</sub> transfer tissue to central. All reciprocal time.</td>
 <td>Two-compartment IV bolus, model A: drug moves to and from the tissue compartment and leaves the body from the central compartment only.</td>
 <td>Read straight off the given A, B, alpha, beta. Her in-class sheet asked for all three: k 0.272 hr<sup>&minus;1</sup>, k<sub>12</sub> 1.1 hr<sup>&minus;1</sup>, k<sub>21</sub> 0.9 hr<sup>&minus;1</sup>.</td>
 <td>Yes, all three.</td></tr>
 
-<tr><td><b>V<sub>p</sub> = D<sub>0</sub> / (A + B)</b><br><b>V<sub>p</sub> = D<sub>0</sub> / (k &times; AUC<sub>0&rarr;&infin;</sub>)</b><br><b>V<sub>t</sub> = V<sub>p</sub>k<sub>12</sub> / k<sub>21</sub></b></td>
+<tr><td><b>V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}}</b><br><b>V<sub>p</sub> = {{frac:D<sub>0</sub>|k &times; AUC<sub>0&rarr;&infin;</sub>}}</b><br><b>V<sub>t</sub> = {{frac:V<sub>p</sub>k<sub>12</sub>|k<sub>21</sub>}}</b></td>
 <td>V<sub>p</sub> volume of the central compartment (L); V<sub>t</sub> volume of the tissue compartment (L)</td>
 <td>Two compartment. The two routes to V<sub>p</sub> answer different data: use the intercepts when A and B are supplied, the second when a dose and an AUC are supplied.</td>
 <td>The volume of distribution of the central compartment, by dose divided by A + B.</td>
@@ -7187,15 +7649,15 @@ const REFERENCE_HTML = `
 <p>The input changes and nothing else does: <i>"the only thing we've changed here, we haven't changed the drug, we've changed the manner that we put the drug in the body."</i> A constant rate in is zero order; elimination out stays first order. <i>"Our input is zero order, constant in, first order out. When we stop the in, then it's just out."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
-<tr><td><b>C<sub>ss</sub> = R / Cl = R / (kV<sub>D</sub>)</b></td>
+<tr><td><b>C<sub>ss</sub> = {{frac:R|Cl}} = {{frac:R|kV<sub>D</sub>}}</b></td>
 <td>C<sub>ss</sub> steady-state concentration (mg/L); R infusion rate (mg/hr); Cl (L/hr)</td>
 <td>At steady state only, where rate in equals rate out. It never contains t, so it says nothing about when steady state arrives.</td>
 <td>C<sub>ss</sub> from a rate, or, rearranged, the rate R = C<sub>ss</sub>&middot;Cl needed to reach a target C<sub>ss</sub>. Her recommendation stems ask for the rate.</td>
 <td>Yes, as C<sub>ss</sub> = R/Cl.</td></tr>
 
-<tr><td><b>C<sub>p</sub> = (R/Cl)(1 &minus; e<sup>&minus;kt</sup>)</b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)</b></td>
 <td>Same symbols plus t, the time since the infusion started (hr)</td>
 <td>During an infusion, before steady state. She splits it in two out loud: the first factor is C<sub>ss</sub>, and <i>"this 1 minus E to the minus KT tells us what fraction of steady state we've achieved."</i></td>
 <td>Concentration at a stated time into the infusion; concentration at the end of a stated infusion; and, rearranged, the time to a stated percentage of C<sub>ss</sub>.</td>
@@ -7207,13 +7669,13 @@ const REFERENCE_HTML = `
 <td>Concentration a stated number of hours after cessation. C<sub>peak</sub> is C<sub>ss</sub> only if the infusion actually ran to steady state; otherwise it must be computed from the line above.</td>
 <td>Yes, as the first-order C block.</td></tr>
 
-<tr><td><b>D<sub>L</sub> = R / k</b><br><b>D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub></b></td>
+<tr><td><b>D<sub>L</sub> = {{frac:R|k}}</b><br><b>D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub></b></td>
 <td>D<sub>L</sub> loading dose (mg); R mg/hr; k hr<sup>&minus;1</sup>; V<sub>D</sub> L</td>
 <td>An IV bolus given at the same moment an infusion starts. <i>"We want the loading dose to look like the amount of drug that's in the body at steady state."</i> The first form is only as good as the rate already chosen: <i>"If you just pick a number out of the air, then you're probably not gonna pick the the best loading dose."</i></td>
 <td>The loading dose. She prints both routes side by side whenever both inputs are available.</td>
 <td>D<sub>L</sub> = R/k: yes. D<sub>L</sub> = C<sub>ss</sub>V<sub>D</sub>: she added it aloud and wrote it on the slide; it is not identifiable in the readable extract, and unreadable line (2) sits directly after D<sub>L</sub> = R/k.</td></tr>
 
-<tr><td><b>C<sub>p</sub> = (D<sub>L</sub>/V<sub>D</sub>)e<sup>&minus;kt</sup> + (R/kV<sub>D</sub>)(1 &minus; e<sup>&minus;kt</sup>)</b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>&minus;kt</sup> + <span class="nw">{{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)</span></b></td>
 <td>Both terms in mg/L; t measured from the start of therapy</td>
 <td>Loading dose and infusion running together. The two contributions are added: <i>"at any point on the curve, then the concentration here plus the concentration here should equal the concentration there."</i></td>
 <td>Concentration at 2, 4 or 6 hours after the start of combined therapy. If D<sub>L</sub> was chosen correctly the sum stays flat at C<sub>ss</sub>.</td>
@@ -7238,7 +7700,7 @@ const REFERENCE_HTML = `
 <p>The elimination words nest inside one another, and she keeps them distinct: elimination is <i>"all the irreversible processes or irreversible removal of drugs by all routes"</i>; excretion is <i>"removal of intact drug or metabolite"</i>; biotransformation is <i>"chemically converting that um drug in the body to some metabolite."</i> The kidney and the liver are the two major elimination organs.</p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
 <tr><td><b>Rate of elimination = Cl &times; C<sub>p</sub></b></td>
 <td>Rate in amount per time (mcg/min, mg/hr); Cl in volume per time; C<sub>p</sub> in amount per volume</td>
@@ -7246,7 +7708,7 @@ const REFERENCE_HTML = `
 <td>The elimination rate at a stated plasma concentration. Her worked example: 15 mL/min &times; 5 mcg/mL = 75 mcg/min.</td>
 <td>Yes.</td></tr>
 
-<tr><td><b>Cl = FD<sub>0</sub> / AUC<sub>0&rarr;&infin;</sub></b></td>
+<tr><td><b>Cl = {{frac:FD<sub>0</sub>|AUC<sub>0&rarr;&infin;</sub>}}</b></td>
 <td>F bioavailability factor, no units, taken as 1 for an IV dose; D<sub>0</sub> dose (mg); AUC in mg&middot;hr/L</td>
 <td>Any route, provided F is known. <i>"Another reason that we like clearance. Is that it directly relates the dose to that area under the curve."</i></td>
 <td>Clearance from an AUC, or a dose from a clearance and an AUC.</td>
@@ -7258,7 +7720,7 @@ const REFERENCE_HTML = `
 <td>Hepatic clearance, by subtraction. There is no direct measurement: <i>"we're not gonna sample the liver &hellip; we calculate renal &hellip; and then we subtract renal from total to give us hepatic clearance."</i></td>
 <td>Yes, page 1, last line.</td></tr>
 
-<tr><td><b>f<sub>e</sub> = D<sub>u</sub><sup>&infin;</sup> / FD<sub>0</sub> = k<sub>e</sub> / k</b><br>so k<sub>e</sub> = f<sub>e</sub>k</td>
+<tr><td><b>f<sub>e</sub> = {{frac:D<sub>u</sub><sup>&infin;</sup>|FD<sub>0</sub>}} = {{frac:k<sub>e</sub>|k}}</b><br>so k<sub>e</sub> = f<sub>e</sub>k</td>
 <td>f<sub>e</sub> fraction excreted unchanged, no units; D<sub>u</sub><sup>&infin;</sup> cumulative amount of unchanged drug recovered in urine (mg); k<sub>e</sub> excretion rate constant (hr<sup>&minus;1</sup>)</td>
 <td>A complete urine collection. Lower-case f<sub>e</sub> is the fraction excreted; capital F is bioavailability. They are different quantities that share a letter.</td>
 <td>f<sub>e</sub> from a urine recovery, then k<sub>e</sub> from f<sub>e</sub> and k. Her worked example: 300 mg recovered from a 500 mg IV dose gives f<sub>e</sub> = 0.6, and k<sub>e</sub> = 0.6 &times; 0.0866 = 0.052 hr<sup>&minus;1</sup>.</td>
@@ -7270,7 +7732,7 @@ const REFERENCE_HTML = `
 <td>Cl<sub>R</sub> and Cl<sub>H</sub>, as the closing parts of her five-part clearance problem.</td>
 <td>Yes, all three.</td></tr>
 
-<tr><td><b>CrCl = (140 &minus; age)(IBW) / (72 &times; S<sub>Cr</sub>)</b><br>&times; 0.85 if female</td>
+<tr><td><b>CrCl = {{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}</b><br>&times; 0.85 if female</td>
 <td>age in years; IBW ideal body weight in kg; S<sub>Cr</sub> serum creatinine in mg/dL; answer reported in mL/min</td>
 <td>Estimating a patient's renal function. Normal on the deck slide is 120&ndash;130 mL/min. The 0.85 factor rests on an assumption she states: <i>"The assumption is that women are smaller than men, less muscular than men."</i></td>
 <td>CrCl for a patient vignette, then whether the patient's renal function is reduced. Her worked example: a 45-year-old female, 165 cm, S<sub>Cr</sub> 1.1 mg/dL gives 58 mL/min. The stated actual weight of 61 kg is deliberately unused.</td>
@@ -7282,7 +7744,7 @@ const REFERENCE_HTML = `
 <td>The IBW that feeds Cockcroft-Gault. Her worked example: a female 65 inches tall gives 45.5 + 2.3(5) = 57 kg.</td>
 <td>No &mdash; named by her.</td></tr>
 
-<tr><td><b>pH = pKa + log(ionized / nonionized)</b><br><b>pH = pKa + log(nonionized / ionized)</b></td>
+<tr><td><b>pH = pKa + log {{frac:ionized|nonionized}}</b><br><b>pH = pKa + log {{frac:nonionized|ionized}}</b></td>
 <td>pKa of the drug; weak acids have pKa values 3&ndash;8 and weak bases 7.5&ndash;10.5, per the slide</td>
 <td>Reabsorption of weak acids and weak bases from the renal tubule, which depends on urine pH and on the drug's pKa.</td>
 <td>Nothing yet. She posed the two questions and the recording ends mid-answer.</td>
@@ -7295,21 +7757,21 @@ const REFERENCE_HTML = `
 <p>The third input type: <i>"we have not had 1st order input, OK? It's all been either instantaneous or zero order &hellip; today we will talk about The kinetics of following oral administration."</i> First order in and first order out, so the curve rises to a peak and then falls. <i>"if I give you a curve on the exam and it looks like this &hellip; where there is a clear peak &hellip; I want you to identify that as an oral input."</i> A capital F in a stem is the signal: <i>"when you see a capital F, You should think oral."</i></p>
 
 <table class="reftab"><thead><tr>
-<th style="width:22%">Equation, as she writes it</th><th style="width:24%">Symbols and units</th><th style="width:22%">Applies when</th><th style="width:20%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
-<tr><td><b>C<sub>p</sub> = [Fk<sub>a</sub>D<sub>0</sub> / V<sub>D</sub>(k<sub>a</sub> &minus; k)] &times; (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)</b></td>
+<tr><td><b>C<sub>p</sub> = {{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}} &times; <span class="nw">(e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)</span></b></td>
 <td>F oral bioavailability fraction, no units; k<sub>a</sub> first-order absorption rate constant (hr<sup>&minus;1</sup>); k elimination rate constant (hr<sup>&minus;1</sup>); D<sub>0</sub> oral dose (mg); V<sub>D</sub> (L); C<sub>p</sub> (mg/L or mcg/mL)</td>
 <td>Single oral dose, one compartment, first-order absorption and first-order elimination. The bracket is drug in minus drug out. The lumped prefactor is <b>not</b> C<sub>0</sub>: <i>"this big portion right here does not represent C0."</i></td>
 <td>Concentration at any stated time; C<sub>max</sub> once t<sub>max</sub> is known; and, rearranged, V<sub>D</sub> back-solved from a given prefactor. Named error: <i>"Do not forget the volume of distribution."</i></td>
 <td>Yes, page 1.</td></tr>
 
-<tr><td><b>t<sub>max</sub> = ln(k<sub>a</sub>/k) / (k<sub>a</sub> &minus; k)</b></td>
+<tr><td><b>t<sub>max</sub> = {{frac:ln(k<sub>a</sub>/k)|k<sub>a</sub> &minus; k}}</b></td>
 <td>Both rate constants in the same reciprocal time unit; result in time</td>
 <td>Single oral dose. It contains no dose and no volume, so t<sub>max</sub> depends only on the two rate constants: <i>"T-Max depends solely on the relationship between K and KA."</i> Doubling the dose does not move it.</td>
 <td>t<sub>max</sub>, always, and always before C<sub>max</sub>: <i>"if you are asked for C-Max, and I will ask you for CMax, you must find TMax first."</i> Named errors: mixing time units, and using a half-life where a rate constant belongs.</td>
 <td>Yes, page 1.</td></tr>
 
-<tr><td><b>t&frac12;<sub>a</sub> = 0.693 / k<sub>a</sub></b></td>
+<tr><td><b>t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}</b></td>
 <td>k<sub>a</sub> hr<sup>&minus;1</sup>; result in time</td>
 <td>The absorption half-life, and the usual way k<sub>a</sub> is handed over: stems give "half-life of absorption is 45 minutes" and the conversion to k<sub>a</sub> = 0.693/0.75 = 0.924 hr<sup>&minus;1</sup> is the first step.</td>
 <td>k<sub>a</sub> from a stated absorption half-life, or the absorption half-life from a k<sub>a</sub> read off a given equation. An unqualified t&frac12; means elimination: <i>"If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination."</i></td>
@@ -8710,6 +9172,7 @@ const BLANK = () => ({
                       //   select-all question, the string entered for a numeric
                       //   one, or the left->right map for a match.
                       //   missKind: which kind of slip a missed numeric was.
+  eq:{},              // equationId -> {seen,right,wrong,streak,mode,at} for the equation drill
   qn:0,               // questions answered counter (drives cram scheduling)
   settings:{mode:DEFAULT_MODE},
   created:Date.now()
@@ -9050,7 +9513,36 @@ const KINDS = [
   {id: 'calc', label: 'Calculations',
    blurb: 'Questions answered with a number, worked step by step'},
 ];
-const KIND_LABEL = Object.fromEntries(KINDS.map(k => [k.id, k.label]));
+const KIND_LABEL = Object.assign(Object.fromEntries(KINDS.map(k => [k.id, k.label])),
+                                 {chain: 'Stepwise calculations'});
+
+/* What the Topics page is showing. Four answers to one question, so they sit
+   together as one switch at the top of the page rather than as a filter chip
+   among others:
+
+     Everything             every question, each topic split three ways
+     Concepts               no arithmetic anywhere on the page
+     Calculations           single calculations, and the stepwise sets below
+                            them, each under its own heading
+     Stepwise calculations  only her problems asked in parts, where each part
+                            uses the answer to the one before it
+
+   Two kinds of calculation exist and they are drilled differently: a single
+   calculation can be asked in any order, and a stepwise one only in hers. */
+function reviewSwitch(){
+  const base = QUESTIONS.filter(q => matchesFilter(q, true));
+  const k = kindCounts(base);
+  const sets = (typeof CHAINS === 'undefined' ? [] : CHAINS)
+    .filter(c => c.parts.some(id => base.some(q => q.id === id)));
+  const tab = (v, label, sub) =>
+    `<button class="rtab" data-review="${v}" aria-pressed="${FILTER.kind === v}">${label}<small>${sub}</small></button>`;
+  return `<div class="review" role="group" aria-label="What to review">
+    ${tab('all', 'Everything', base.length + ' questions')}
+    ${tab('concept', 'Concepts', k.concept + ' questions')}
+    ${tab('calc', 'Calculations', k.calc + ' questions')}
+    ${tab('chain', 'Stepwise calculations', sets.length + ' problems in parts')}
+  </div>`;
+}
 /* How a set of questions divides, as {concept, calc}. */
 function kindCounts(pool){
   const n = {concept: 0, calc: 0};
@@ -9068,11 +9560,14 @@ let VIEW = 'topics';
    course rather than a remembered one. */
 const ALL_TIERS = [...new Set(QUESTIONS.map(q => q.tier).filter(Boolean))].sort();
 
-function matchesFilter(q){
+function matchesFilter(q, ignoreKind){
   if(FILTER.prof  !== 'all' && q.prof !== FILTER.prof) return false;
   if(FILTER.tier  !== 'all' && q.tier !== FILTER.tier) return false;
   if(FILTER.skill !== 'all' && skillOf(q) !== FILTER.skill) return false;
-  if(FILTER.kind  !== 'all' && kindOf(q)  !== FILTER.kind) return false;
+  if(!ignoreKind){
+    if(FILTER.kind === 'chain'){ if(!CHAIN_OF[q.id]) return false; }
+    else if(FILTER.kind !== 'all' && kindOf(q) !== FILTER.kind) return false;
+  }
   return true;
 }
 function poolFor(topicId, subId){
@@ -9082,14 +9577,14 @@ function poolFor(topicId, subId){
     matchesFilter(q));
 }
 
-const VIEWS = ['topics','quiz','gaps','exam','guide','tell','ref','settings'];
+const VIEWS = ['topics','quiz','gaps','exam','guide','tell','eq','ref','settings'];
 function show(v){
   VIEW = v;
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.v===v));
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
   ({topics:renderTopics, quiz:renderQuiz, gaps:renderGaps, exam:renderExam,
-    guide:renderGuide, tell:renderTell, ref:renderRef, settings:renderSettings}[v])();
+    guide:renderGuide, tell:renderTell, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
 }
 
 /* ==========================================================================
@@ -9098,8 +9593,6 @@ function show(v){
 function filterBar(){
   const chip=(g,v,l)=>`<button class="chip" data-f="${g}" data-v="${v}" aria-pressed="${FILTER[g]===v}">${l}</button>`;
   let h = `<div class="filters">`;
-  h += `<div class="frow"><label>What to review</label>
-    ${chip('kind','all','Everything')}${KINDS.map(k=>chip('kind',k.id,esc(k.label))).join('')}</div>`;
   // one professor means the chips would only ever say "both" and one name
   if(COURSE.professors.length > 1){
     h += `<div class="frow"><label>Professor</label>
@@ -9109,10 +9602,19 @@ function filterBar(){
     h += `<div class="frow"><label>Weighting</label>
       ${chip('tier','all','All')}${ALL_TIERS.map(t=>chip('tier',t,esc(t))).join('')}</div>`;
   }
-  h += `<div class="frow"><label>What it asks</label>
-    ${chip('skill','all','Any')}${COURSE.skills
-      .filter(s => QUESTIONS.some(q => skillOf(q) === s.id))
-      .map(s=>chip('skill',s.id,esc(s.label))).join('')}</div>`;
+  /* Only the skills present under the review mode chosen above, so reviewing
+     concepts does not offer a row of calculation types to pick from. A skill
+     chosen earlier that the new mode does not hold is let go. */
+  const inMode = QUESTIONS.filter(q => {
+    if(FILTER.kind === 'chain') return !!CHAIN_OF[q.id];
+    return FILTER.kind === 'all' || kindOf(q) === FILTER.kind;
+  });
+  const skills = COURSE.skills.filter(s => inMode.some(q => skillOf(q) === s.id));
+  if(FILTER.skill !== 'all' && !skills.some(s => s.id === FILTER.skill)) FILTER.skill = 'all';
+  if(skills.length > 1 && FILTER.kind !== 'chain')
+    h += `<div class="frow"><label>What it asks</label>
+      ${chip('skill','all','Any')}${skills.map(s=>chip('skill',s.id,esc(s.label))).join('')}</div>`;
+  if(h === `<div class="filters">`) return '';
   return h + `</div>`;
 }
 
@@ -9194,15 +9696,15 @@ function splitNote(pool){
 function chainRows(module){
   const cs = chainsInModule(module);
   if(!cs.length) return '';
-  return `<div class="mfoot"><p class="setnote">Her calculations are usually set as
-    one vignette asked in parts, where a part uses what the part before it produced.
-    These work through in her order.</p>` + cs.map(c => {
+  return `<div class="mfoot stepwise"><h4 class="sethead">Stepwise calculations</h4>
+    <p class="setnote">Her problems asked in parts, where each part uses the answer to the
+    part before it. Worked straight through in her order.</p>` + cs.map(c => {
       const parts = c.parts.map(byId).filter(Boolean);
       const m = masteryOf(parts), pct = m.total ? Math.round(100*m.mastered/m.total) : 0;
       return `<div class="subrow"><span class="sname"><b>${esc(c.name)}</b>
-        <small>${parts.length} parts · ${esc(c.setup)}</small></span>
+        <small>${parts.length} parts \u00b7 ${c.setup}</small></span>
         <span class="meter"><i style="width:${pct}%"></i></span>
-        <button data-chain="${esc(c.id)}">Work it</button></div>`;
+        <button data-chain="${esc(c.id)}">Start</button></div>`;
     }).join('') + `</div>`;
 }
 
@@ -9233,8 +9735,8 @@ function startRows(pool, name, attr){
   const c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
   if(!c || !m) return row(`Everything in ${esc(name)}`, `${label(pool.length)}, mixed order`, '');
   return row(`Concepts in ${esc(name)}`, `${label(c)}, no arithmetic`, 'concept')
-       + row(`Calculations in ${esc(name)}`, `${label(m)}, each worked to a number`, 'calc')
-       + row(`Everything in ${esc(name)}`, `${label(pool.length)}, the two mixed`, '', true);
+       + row(`Calculations in ${esc(name)}`, `${label(m)}, each one on its own, in any order`, 'calc')
+       + row(`Everything in ${esc(name)}`, `${label(pool.length)}, concepts and calculations mixed`, '', true);
 }
 
 function renderTopics(){
@@ -9248,22 +9750,28 @@ function renderTopics(){
     Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
     COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
 
+  h += reviewSwitch();
   h += filterBar();
+  const stepwiseOnly = FILTER.kind === 'chain';
 
   // The featured pass follows the paper rather than the bank: a straight pass
   // through everything spends most of its time wherever the most questions
   // happen to have been written, which is not where the marks are.
   const nAll = QUESTIONS.length, nFiltered = poolFor(null, null).length;
-  const wp = weightedPool();
-  h += `<div class="topic sweepcard"><div class="subs">
-    <div class="subrow"><span class="sname"><b>Exam-weighted pass — ${wp.length} questions</b>
+  const byKind = FILTER.kind === 'concept' || FILTER.kind === 'calc';
+  const noun = byKind ? KIND_LABEL[FILTER.kind].toLowerCase() : 'questions';
+  const wp = weightedPool().filter(q => !byKind || kindOf(q) === FILTER.kind);
+  if(!stepwiseOnly) h += `<div class="topic sweepcard"><div class="subs">
+    <div class="subrow"><span class="sname"><b>Exam-weighted pass — ${wp.length} ${noun}</b>
       <small>The pools sampled in the blueprint's own proportion. Shuffled, each once.</small></span>
       <button id="sweepWeighted">Start</button></div>
-    <div class="subrow"><span class="sname"><b>All ${nAll} questions, one pass</b>
+    ${byKind ? '' : `<div class="subrow"><span class="sname"><b>All ${nAll} questions, one pass</b>
       <small>Everything in the bank, shuffled, each asked once, nothing held back by scheduling</small></span>
-      <button id="sweepAll" class="ghost">Start</button></div>
-    ${nFiltered < nAll ? `<div class="subrow"><span class="sname"><b>All ${nFiltered} under the current filters</b>
-      <small>The same straight pass, limited to what the chips above select</small></span>
+      <button id="sweepAll" class="ghost">Start</button></div>`}
+    ${nFiltered < nAll ? `<div class="subrow"><span class="sname"><b>All ${nFiltered} ${
+        byKind && FILTER.skill === 'all' && FILTER.prof === 'all' && FILTER.tier === 'all'
+          ? noun + ', one pass' : 'under the current filters'}</b>
+      <small>Shuffled, each asked once, nothing held back by scheduling</small></span>
       <button id="sweepFiltered" class="ghost">Start</button></div>` : ''}
   </div></div>`;
 
@@ -9272,12 +9780,15 @@ function renderTopics(){
 
     if(m.view){
       h += `<div class="module"><div class="mrow">
-        <span class="mname">${esc(m.name)}<small>${m.view === 'ref' ? 'Every equation with its symbols, units and when it applies' : ''}</small></span>
+        <span class="mname">${esc(m.name)}<small>${
+          m.view === 'eq'  ? 'Type them out or build them from pieces; the full table with symbols and units is under Reference'
+        : m.view === 'ref' ? 'Every equation with its symbols, units and when it applies' : ''}</small></span>
         <button data-view="${esc(m.view)}">Open</button></div></div>`;
       continue;
     }
 
     if(m.exam != null){
+      if(stepwiseOnly) continue;          // a recap is a mixed drill, not a problem set
       const ex = COURSE.exams.find(e => e.id === m.exam);
       const pool = examQuestions(m.exam);
       if(!pool.length) continue;
@@ -9301,17 +9812,29 @@ function renderTopics(){
     const mpool = ts.flatMap(t => poolFor(t.id, null));
     if(!mpool.length) continue;
     const mm = masteryOf(mpool), mpct = mm.total ? Math.round(100*mm.mastered/mm.total) : 0;
+    /* Stepwise mode shows the module's problem sets and nothing else. Concept
+       mode leaves them out, since every one of them is arithmetic. The other two
+       modes show them after the topics, under their own heading. */
+    if(stepwiseOnly){
+      const sets = chainRows(m.module);
+      if(!sets) continue;
+      const n = chainsInModule(m.module).length;
+      h += `<details class="module" open><summary>
+          <span class="mname">${esc(m.name)}<small>${n} problem${n === 1 ? '' : 's'} in parts</small></span>
+        </summary>${sets}</details>`;
+      continue;
+    }
     h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
         <span class="mname">${esc(m.name)}<small>${splitNote(mpool)} · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
         <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
       </summary>
       ${ts.map(topicCard).join('')}
-      ${chainRows(m.module)}
       ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
+      ${FILTER.kind === 'concept' ? '' : chainRows(m.module)}
       </details>`;
   }
 
-  h += `<h3>Mixed drills</h3>
+  if(!stepwiseOnly) h += `<h3>Mixed drills</h3>
   <div class="topic"><div class="subs">
     <div class="subrow"><span class="sname"><b>Everything, adaptive</b>
       <small>Whole bank under the current filters — missed concepts first, and it stops when nothing is due</small></span>
@@ -9328,6 +9851,9 @@ function renderTopics(){
 
   el.querySelectorAll('.chip').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
+  });
+  el.querySelectorAll('.rtab').forEach(b => b.onclick = () => {
+    FILTER.kind = b.dataset.review; renderTopics();
   });
   el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
     startQuiz(b.dataset.t || null, b.dataset.s || null, b.dataset.k || null);
@@ -9437,7 +9963,8 @@ function weightedPool(){
    record, so Weak spots stays accurate. */
 function startSweep(scope){
   const pool = scope === 'filtered' ? poolFor(null, null)
-             : scope === 'weighted' ? weightedPool()
+             : scope === 'weighted' ? weightedPool().filter(q =>
+                 !(FILTER.kind === 'concept' || FILTER.kind === 'calc') || kindOf(q) === FILTER.kind)
              : QUESTIONS.slice();
   startSweepOf(pool, scope === 'filtered' ? 'Every question under these filters'
                    : scope === 'weighted' ? 'Exam-weighted pass' : 'Every question', scope);
@@ -9566,7 +10093,7 @@ function renderQuiz(){
     <span>${Q.sweep ? `${Q.sweep.length - Q.i} to go` : `${left} concept${left===1?'':'s'} to go`}</span>
   </div>
   <div class="qbody">
-    ${Q.chain ? `<p class="cset">${esc(Q.chain.setup)}</p>` : ''}
+    ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}
     <p class="stem">${esc(q.stem)}</p>`;
 
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -10280,7 +10807,18 @@ const deEnt = t => String(t)
   .replace(/&[a-z]+;/gi, e => ENT[e] !== undefined ? ENT[e] : e)
   .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n));
 
+/* Stacked fractions. Written {{frac:numerator|denominator}} in the source,
+   in the same token style as {{fig:...}}, so a long ratio reads the way the
+   slides print it rather than as a slash buried in a line. Neither part may
+   contain a | or a closing brace pair; none of the course's equations need one.
+   eqPlain reads the same token back as (numerator)/(denominator), which is how
+   the checks confirm a displayed equation says what its typed form says. */
+const FRAC_RE = /\{\{frac:([^|}]*)\|([^}]*)\}\}/g;
+const mathHTML = h => String(h).replace(FRAC_RE,
+  '<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');
+
 function refFigures(html){
+  html = mathHTML(html);
   return html.replace(/\{\{fig:([a-z0-9_]+)\|([^}]*)\}\}/gi, (_, key, cap) => {
     if(!IMAGES[key]) return '';
     const c = esc(deEnt(cap));
@@ -10404,6 +10942,403 @@ function renderSettings(){
 /* "Ask everything" mode short-circuits the due check */
 const _isDue = isDue;
 isDue = function(s){ return (DB.settings.mode === 'all') ? true : _isDue(s); };
+
+/* ==========================================================================
+   EQUATIONS — memorising them
+   ==========================================================================
+   Two exercises over the same data. Typing one out is what an exam asks for,
+   since the equation sheet does not carry the six she told the class to know.
+   Building one from pieces is the easier direction, and it is what to fall
+   back on when typing keeps failing, because it separates remembering which
+   quantities appear from remembering how they are arranged.
+
+   A typed answer is compared after both sides are folded to a canonical form:
+   case, spacing, the several dashes, implicit against explicit multiplication,
+   and Unicode subscripts and superscripts all stop mattering. What does not
+   stop mattering is which quantity sits above the line, the sign in an
+   exponent, and where a bracket closes.
+   ========================================================================== */
+const EQ_ENT = {'&minus;':'-', '&times;':'*', '&frac12;':'½', '&infin;':'∞',
+                '&beta;':'beta', '&middot;':'*', '&amp;':'&', '&nbsp;':' ', '&rarr;':'\u2192'};
+/* Display HTML to plain text. Subscripts resolve before superscripts, because
+   a superscript can contain one: e^(-ka*t) is written with ka inside the sup. */
+const eqPlain = h => String(h)
+  .replace(FRAC_RE, '(($1)/($2))')
+  .replace(/<sub>([^<]*)<\/sub>/g, '$1')
+  .replace(/<sup>([^<]*)<\/sup>/g, '^($1)')
+  .replace(/<[^>]+>/g, '')
+  .replace(/&[a-z0-9]+;/gi, m => EQ_ENT[m] !== undefined ? EQ_ENT[m] : m);
+
+const EQ_SUBS = {'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5',
+  '₆':'6','₇':'7','₈':'8','₉':'9','ₐ':'a','ₑ':'e','ₕ':'h',
+  'ᵢ':'i','ₖ':'k','ₗ':'l','ₘ':'m','ₙ':'n','ₒ':'o','ₚ':'p',
+  'ᵣ':'r','ₛ':'s','ₜ':'t','ᵤ':'u','ᵥ':'v','ₓ':'x'};
+const EQ_SUPS = {'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5',
+  '⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+','ⁿ':'n',
+  'ᵃ':'a','ᵇ':'b','ᵗ':'t','ᵏ':'k','ᵉ':'e','ᵖ':'p'};
+const EQ_SUP_RE = new RegExp('[' + Object.keys(EQ_SUPS).join('') + ']+', 'g');
+const EQ_SUB_RE = new RegExp('[' + Object.keys(EQ_SUBS).join('') + ']', 'g');
+
+function normEq(s){
+  let t = String(s == null ? '' : s);
+  t = t.replace(EQ_SUP_RE, m => '^' + [...m].map(c => EQ_SUPS[c]).join(''));
+  t = t.replace(EQ_SUB_RE, c => EQ_SUBS[c]);
+  t = t.replace(/½/g, '1/2').toLowerCase();
+  t = t.replace(/[−–—‐‑]/g, '-');  // every dash is a minus
+  t = t.replace(/÷/g, '/');
+  t = t.replace(/\*\*/g, '^');                              // before the star is dropped
+  t = t.replace(/[×·⋅*]/g, '');              // multiplication is implicit
+  t = t.replace(/∞/g, 'inf').replace(/→/g, 'to');
+  t = t.replace(/[‘’“”]/g, '');
+  t = t.replace(/[\s_,]/g, '');                             // V_D and VD are one thing
+  t = t.replace(/thalf|t-half/g, 't1/2');
+  t = t.replace(/[\[\{]/g, '(').replace(/[\]\}]/g, ')');
+  t = t.replace(/(^|[^0-9])\.(\d)/g, '$10.$2');             // .693 -> 0.693
+  t = t.replace(/log10/g, 'log');
+  for(let i = 0; i < 8; i++) t = t.replace(/\^\(([^()]*)\)/g, '^$1');
+  return t.replace(/\.$/, '');
+}
+/* Every spelling that counts as right, with and without the left side, since
+   an answer typed as just the right-hand side answers the question asked. */
+function eqAccepts(e){
+  const out = new Set();
+  for(const form of [e.typed, ...(e.also || []), eqPlain(e.lhs) + '=' + eqPlain(e.tokens.join(' '))]){
+    const n = normEq(form);
+    out.add(n);
+    const i = n.indexOf('=');
+    if(i > 0) out.add(n.slice(i + 1));
+  }
+  return out;
+}
+const eqRhs = e => e.tokens.join(' ');
+/* How an equation is shown to be read: stacked as the slides print it where a
+   display form exists, and as its pieces joined up where it does not. */
+const eqShow = e => `<span class="eqshow">${e.lhs} = ${mathHTML(e.disp || eqRhs(e))}</span>`;
+const eqCorrect = (e, typed) => eqAccepts(e).has(normEq(typed));
+
+/* ---------- which equations are being worked on ---------- */
+const EQ_BY_ID = Object.fromEntries(EQUATIONS.map(e => [e.id, e]));
+const EQ_MUST = EQUATIONS.filter(e => e.must).map(e => e.id);
+function eqChosen(){
+  const s = DB.settings.eqPick;
+  const valid = Array.isArray(s) ? s.filter(id => EQ_BY_ID[id]) : null;
+  return valid && valid.length ? valid : EQ_MUST.slice();
+}
+function eqSetChosen(ids){
+  DB.settings.eqPick = ids.filter(id => EQ_BY_ID[id]);
+  save();
+}
+/* How many correct answers in a row an equation is held to before it counts as
+   learned. Typing one out once is recall with the question still on screen;
+   the point of the drill is to be able to do it again cold. */
+const EQ_STREAK = 3;
+function eqStat(id){
+  const s = (DB.eq || {})[id];
+  return s || {seen:0, right:0, wrong:0, streak:0, mode:{}};
+}
+function eqRecord(id, mode, ok){
+  if(!DB.eq) DB.eq = {};
+  const s = DB.eq[id] || (DB.eq[id] = {seen:0, right:0, wrong:0, streak:0, mode:{}});
+  s.seen++;
+  if(ok){ s.right++; s.streak++; } else { s.wrong++; s.streak = 0; }
+  s.mode[mode] = (s.mode[mode] || 0) + (ok ? 1 : 0);
+  s.at = Date.now();
+  save();
+}
+const eqLearned = id => eqStat(id).streak >= EQ_STREAK;
+
+/* ---------- the view ---------- */
+let EQ = null;   /* {queue:[id], i, mode:'type'|'build', slots:[], tray:[], revealed, ok} */
+
+const SHEET_TAG = {
+  no:      ['not on the sheet', 'She said out loud she does not supply this one'],
+  yes:     ['on the sheet', 'The equation sheet carries it'],
+  unknown: ['sheet unclear',  'That part of the equation-sheet extract cannot be read, and she never said either way'],
+};
+
+function renderEq(){
+  const el = $('#v-eq');
+  if(EQ){ el.innerHTML = eqDrillHTML(); eqDrillWire(el); return; }
+  el.innerHTML = eqPickerHTML();
+  eqPickerWire(el);
+}
+
+function eqPickerHTML(){
+  const chosen = new Set(eqChosen());
+  const learned = [...chosen].filter(eqLearned).length;
+  let h = `<h2>Equations</h2>
+  <p class="sub">Type an equation out, or build it from its pieces. Tick the ones to work on;
+    the drill asks only those. An equation counts as learned after ${EQ_STREAK} correct answers in a row,
+    and one wrong answer puts it back to nothing. Nothing here is scored against the question bank.</p>`;
+
+  h += `<div class="topic sweepcard"><div class="subs">
+    <div class="subrow"><span class="sname"><b>Type them out</b>
+      <small>The equation is named and you write it. This is what the exam asks for.</small></span>
+      <button data-start="type"${chosen.size ? '' : ' disabled'}>Start</button></div>
+    <div class="subrow"><span class="sname"><b>Build them from pieces</b>
+      <small>The pieces are given, some of them wrong, and you place them in order</small></span>
+      <button data-start="build"${chosen.size ? '' : ' disabled'} class="ghost">Start</button></div>
+    <div class="subrow"><span class="sname"><b>Both, alternating</b>
+      <small>Builds first, then types the same equation, which is the order that makes typing possible</small></span>
+      <button data-start="mix"${chosen.size ? '' : ' disabled'} class="ghost">Start</button></div>
+  </div></div>`;
+
+  h += `<div class="filters"><div class="frow"><label>Choose</label>
+    <button class="chip" data-pick="must">The ${EQ_MUST.length} she said to memorise</button>
+    <button class="chip" data-pick="all">All ${EQUATIONS.length}</button>
+    <button class="chip" data-pick="none">None</button>
+    <button class="chip" data-pick="unlearned">Only the ones not yet learned</button>
+    </div><div class="frow"><label>Selected</label>
+    <span class="sub" style="margin:0">${chosen.size} equation${chosen.size===1?'':'s'}${
+      chosen.size ? `, ${learned} learned` : ''}</span></div></div>`;
+
+  const mods = [...new Set(EQUATIONS.map(e => e.module))].sort((a,b) => a-b);
+  const modName = m => (COURSE.topicsMenu.find(t => t.module === m) || {}).name || ('Module ' + m);
+  for(const m of mods){
+    const es = EQUATIONS.filter(e => e.module === m);
+    h += `<details class="module" open><summary>
+      <span class="mname">${esc(modName(m))}<small>${es.length} equations ·
+        ${es.filter(e => chosen.has(e.id)).length} selected</small></span>
+      <button class="chip" data-modpick="${m}">Select all</button></summary><div class="mfoot">`;
+    for(const e of es){
+      const st = eqStat(e.id), done = eqLearned(e.id);
+      const tag = SHEET_TAG[e.sheet] || SHEET_TAG.unknown;
+      h += `<div class="subrow eqrow">
+        <label class="eqpick"><input type="checkbox" data-eq="${esc(e.id)}"${chosen.has(e.id)?' checked':''}>
+          <span class="sname"><b>${esc(e.name)}</b>
+            <span class="eqline">${eqShow(e)}</span>
+            <small>${e.must ? '<b class="must">she said to memorise this one</b> · ' : ''}<span title="${esc(tag[1])}">${tag[0]}</span>${
+              st.seen ? ` · ${st.right} right of ${st.seen}` : ''}</small></span></label>
+        ${done ? '<span class="eqdone">learned</span>'
+               : st.streak ? `<span class="counts">${st.streak}/${EQ_STREAK}</span>` : ''}
+      </div>`;
+    }
+    h += `</div></details>`;
+  }
+  h += `<p class="sub">Every equation here, with its symbols, its units and the condition it holds
+    under, is set out under Reference.</p>`;
+  return h;
+}
+
+function eqPickerWire(el){
+  el.querySelectorAll('input[data-eq]').forEach(b => b.onchange = () => {
+    const set = new Set(eqChosen());
+    b.checked ? set.add(b.dataset.eq) : set.delete(b.dataset.eq);
+    eqSetChosen([...set]);
+    renderEq();
+  });
+  el.querySelectorAll('button[data-pick]').forEach(b => b.onclick = () => {
+    const p = b.dataset.pick;
+    eqSetChosen(p === 'must' ? EQ_MUST
+              : p === 'all'  ? EQUATIONS.map(e => e.id)
+              : p === 'none' ? []
+              : EQUATIONS.filter(e => !eqLearned(e.id)).map(e => e.id));
+    renderEq();
+  });
+  el.querySelectorAll('button[data-modpick]').forEach(b => b.onclick = ev => {
+    ev.preventDefault();
+    const set = new Set(eqChosen());
+    EQUATIONS.filter(e => e.module === +b.dataset.modpick).forEach(e => set.add(e.id));
+    eqSetChosen([...set]);
+    renderEq();
+  });
+  el.querySelectorAll('button[data-start]').forEach(b => b.onclick = () => eqStart(b.dataset.start));
+}
+
+/* A pass over the chosen equations. The queue is shuffled so the order they
+   were ticked in is not the order they are asked in, which is the whole point
+   of drilling a list rather than reading it. */
+function eqStart(mode){
+  const ids = shuffle(eqChosen().slice());
+  if(!ids.length) return;
+  EQ = {queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
+        slots: [], tray: [], revealed: false, ok: false, typed: '', right: 0, asked: 0};
+  eqLoad();
+}
+function eqLoad(){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  EQ.revealed = false; EQ.ok = false; EQ.typed = '';
+  if(e && EQ.step === 'build'){
+    EQ.slots = e.tokens.map(() => null);
+    EQ.tray  = shuffle([...e.tokens, ...(e.lures || [])].map((t, i) => ({t, i})));
+  }
+  renderEq();
+}
+
+function eqDrillHTML(){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  if(!e) return eqDoneHTML();
+  const st = eqStat(e.id);
+  const building = EQ.step === 'build';
+  let h = `<div class="qcard"><div class="qhead">
+    <span>${esc(building ? 'Build it' : 'Type it out')}</span>
+    <span class="spacer"></span>
+    <span>${eqLearned(e.id) ? 'learned' : st.streak ? st.streak + ' of ' + EQ_STREAK + ' in a row' : 'not yet'}</span>
+  </div>
+  <div class="qprog">
+    <span>equation ${EQ.i + 1} of ${EQ.queue.length}</span>
+    <span class="pbar"><i style="width:${Math.round(100 * EQ.i / EQ.queue.length)}%"></i></span>
+    <span>${EQ.asked ? EQ.right + ' right of ' + EQ.asked : 'nothing asked yet'}</span>
+  </div>
+  <div class="qbody">
+    <p class="stem">${esc(e.name)}</p>
+    <p class="eqask">${building
+      ? 'Place the pieces to the right of the equals sign. Some of them do not belong.'
+      : 'Write it out. Capitals, spaces and how you write the multiplication do not matter.'}</p>`;
+
+  if(building){
+    h += `<div class="eqbuild"><span class="eqlhs">${e.lhs} =</span>`;
+    EQ.slots.forEach((s, i) => {
+      const cls = EQ.revealed ? (normEq(eqPlain(s || '')) === normEq(eqPlain(e.tokens[i])) ? ' ok' : ' bad') : '';
+      h += `<button class="eqslot${cls}${s ? ' full' : ''}" data-slot="${i}"${EQ.revealed ? ' disabled' : ''}
+        aria-label="Position ${i + 1} of ${EQ.slots.length}">${s || '&nbsp;'}</button>`;
+    });
+    h += `</div>`;
+    if(!EQ.revealed){
+      const placed = new Set(EQ.slots.map((_, i) => EQ.trayOf && EQ.trayOf[i]).filter(x => x != null));
+      h += `<div class="eqtray">${EQ.tray.map(t =>
+        `<button class="eqtile${placed.has(t.i) ? ' used' : ''}" data-tile="${t.i}"${
+          placed.has(t.i) ? ' disabled' : ''}>${t.t}</button>`).join('')}</div>`;
+    }
+  }else{
+    h += `<div class="eqtype"><span class="eqlhs">${e.lhs} =</span>
+      <input id="eqIn" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+        value="${esc(EQ.typed)}"${EQ.revealed ? ' disabled' : ''}
+        class="${EQ.revealed ? (EQ.ok ? 'ok' : 'bad') : ''}"
+        aria-label="The right-hand side of ${esc(e.name)}" placeholder="the right-hand side"></div>
+    <p class="sub eqhint">Type <code>*</code> or nothing at all for multiplication, <code>/</code> for a division,
+      <code>^</code> for a power, and plain letters for subscripts: <code>VD</code>, <code>ka</code>, <code>Cp</code>.</p>`;
+  }
+
+  if(EQ.revealed){
+    h += `<div class="why"><p class="verdict ${EQ.ok ? 'ok' : 'bad'}">${
+      EQ.ok ? '✓ Correct' : '✗ Not correct'}</p>
+      <p class="eqanswer"><b>${eqShow(e)}</b></p>`;
+    if(!EQ.ok && !building && EQ.typed.trim())
+      h += `<p class="prose">You wrote <code>${esc(EQ.typed.trim())}</code>, which reads as
+        <code>${esc(normEq(EQ.typed))}</code> once capitals and spacing are set aside.</p>`;
+    if(e.symbols && e.symbols.length)
+      h += `<h5 class="tsec">What each symbol is</h5><ul class="tlist">${
+        e.symbols.map(s => `<li><b>${s[0]}</b> — ${s[1]}</li>`).join('')}</ul>`;
+    if(e.holds) h += `<h5 class="tsec">When it holds</h5><p class="prose">${esc(e.holds)}</p>`;
+    if(e.must) h += `<p class="prose"><b>She said to memorise this one.</b> It is not on the equation sheet.</p>`;
+    h += `<div class="cite">${esc(e.cite)}</div></div>`;
+  }
+  h += `</div><div class="qfoot">`;
+  if(!EQ.revealed){
+    const ready = building ? EQ.slots.every(s => s !== null) : true;
+    h += `<button class="btn" id="eqCheck"${ready ? '' : ' disabled'}>Check</button>`;
+    if(building) h += `<button class="btn ghost" id="eqClear">Clear</button>`;
+    h += `<button class="btn ghost" id="eqShow">Show me</button>`;
+  }else{
+    h += `<button class="btn" id="eqNext">Next</button>`;
+  }
+  h += `<button class="btn ghost" id="eqStop">Choose equations</button></div></div>`;
+  return h;
+}
+
+function eqDoneHTML(){
+  const learned = eqChosen().filter(eqLearned).length;
+  return `<div class="empty">
+    <p><b>That is every equation in this set — ${EQ.right} right of ${EQ.asked}.</b></p>
+    <p style="margin:10px 0 16px">${learned} of ${eqChosen().length} selected
+      ${learned === 1 ? 'equation is' : 'equations are'} learned, meaning ${EQ_STREAK} correct
+      answers in a row. Going round again is what turns the rest over.</p>
+    <p style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
+      <button class="btn" id="eqAgain">Go round again</button>
+      <button class="btn ghost" id="eqStop">Choose equations</button>
+    </p></div>`;
+}
+
+function eqDrillWire(el){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  const stop = () => { EQ = null; renderEq(); };
+  const byId = i => document.getElementById(i);
+  if(byId('eqStop')) byId('eqStop').onclick = stop;
+  if(byId('eqAgain')) byId('eqAgain').onclick = () => eqStart(EQ.mode);
+  if(!e) return;
+
+  /* Tap a slot to select it, then tap a piece; or tap a piece to drop it into
+     the first empty slot. Dragging works too where a mouse is present, but
+     tapping is what has to work, since this is read on a phone. */
+  el.querySelectorAll('.eqslot').forEach(b => b.onclick = () => {
+    const i = +b.dataset.slot;
+    if(EQ.slots[i] !== null){                     // tapping a filled slot empties it
+      EQ.slots[i] = null;
+      if(EQ.trayOf) delete EQ.trayOf[i];
+    }else{
+      EQ.sel = EQ.sel === i ? null : i;
+    }
+    renderEq();
+  });
+  el.querySelectorAll('.eqtile').forEach(b => {
+    b.onclick = () => eqPlace(+b.dataset.tile);
+    b.draggable = true;
+    b.ondragstart = ev => { ev.dataTransfer.setData('text/plain', b.dataset.tile); };
+  });
+  el.querySelectorAll('.eqslot').forEach(b => {
+    b.ondragover = ev => ev.preventDefault();
+    b.ondrop = ev => {
+      ev.preventDefault();
+      const t = +ev.dataTransfer.getData('text/plain');
+      if(!isNaN(t)) eqPlace(t, +b.dataset.slot);
+    };
+  });
+
+  const inp = byId('eqIn');
+  if(inp && !EQ.revealed){
+    inp.oninput = ev => { EQ.typed = ev.target.value; };
+    inp.onkeydown = ev => { if(ev.key === 'Enter'){ ev.preventDefault(); eqCheck(); } };
+    if(typeof inp.focus === 'function') inp.focus();
+  }
+  if(byId('eqCheck')) byId('eqCheck').onclick = eqCheck;
+  if(byId('eqClear')) byId('eqClear').onclick = () => {
+    EQ.slots = EQ.slots.map(() => null); EQ.trayOf = {}; EQ.sel = null; renderEq();
+  };
+  if(byId('eqShow')) byId('eqShow').onclick = () => {
+    EQ.revealed = true; EQ.ok = false;
+    eqRecord(e.id, EQ.step, false);
+    renderEq();
+  };
+  if(byId('eqNext')) byId('eqNext').onclick = () => {
+    /* In the alternating mode the same equation is typed straight after it has
+       been built, so the piece order is still in mind when the typing is asked
+       for. Only then does the queue move on. */
+    if(EQ.mode === 'mix' && EQ.step === 'build'){ EQ.step = 'type'; eqLoad(); return; }
+    if(EQ.mode === 'mix') EQ.step = 'build';
+    EQ.i++; eqLoad();
+  };
+}
+
+function eqPlace(tileIndex, slot){
+  const tile = EQ.tray.find(t => t.i === tileIndex);
+  if(!tile) return;
+  if(!EQ.trayOf) EQ.trayOf = {};
+  if(Object.values(EQ.trayOf).includes(tileIndex)) return;   // already placed
+  let i = slot != null ? slot : (EQ.sel != null ? EQ.sel : EQ.slots.indexOf(null));
+  if(i == null || i < 0 || i >= EQ.slots.length) return;
+  if(EQ.slots[i] !== null) delete EQ.trayOf[i];              // replacing what was there
+  EQ.slots[i] = tile.t;
+  EQ.trayOf[i] = tileIndex;
+  EQ.sel = null;
+  renderEq();
+}
+
+function eqCheck(){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  if(!e) return;
+  if(EQ.step === 'build'){
+    if(EQ.slots.some(s => s === null)) return;
+    EQ.ok = eqCorrect(e, eqPlain(e.lhs) + '=' + eqPlain(EQ.slots.join(' ')));
+  }else{
+    if(!EQ.typed.trim()) return;
+    EQ.ok = eqCorrect(e, EQ.typed) || eqCorrect(e, eqPlain(e.lhs) + '=' + EQ.typed);
+  }
+  EQ.revealed = true;
+  EQ.asked++; if(EQ.ok) EQ.right++;
+  eqRecord(e.id, EQ.step, EQ.ok);
+  renderEq();
+}
 
 /* ==========================================================================
    BOOT

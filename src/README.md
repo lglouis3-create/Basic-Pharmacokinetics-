@@ -36,6 +36,7 @@ where the last good one was. The output path is
 | `shell.html` | The page: CSS, the markup skeleton, and the engine core — storage, the spaced-repetition scheduler, the pool resolver, the grading for all three question types. |
 | `views.js` | Every rendered view: topics, quiz, weak spots, exam simulator, reference, tell apart, guides, settings. Appended last, ending in the BOOT block. |
 | `q1_sample.js` | A six-question placeholder bank, and `TOPICS` at the top. Exercises every question type so the checks have something to run against. Replace or delete. |
+| `equations.js` | The course's equations as structured data for the equation drill: the pieces each is built from, its typed form, the wrong pieces offered beside it, and a stacked display written `{{frac:numerator|denominator}}`. |
 | `reference.js`, `tell.js`, `guide.js` | The three static documents, authored as HTML in a template literal. One stub entry each. |
 | `images.json` | `{key: "data:image/jpeg;base64,..."}`. Currently `{}`. |
 | `build.py` | The assembler. `DATA_FILES` at the top is the concatenation order. |
@@ -46,6 +47,8 @@ where the last good one was. The output path is
 | `cite_check.py` | Checks every cited slide number against the real deck. **Skips** when no PDFs are present. |
 | `browser_test.py` | Drives the built file in Chromium: answers every question through the real controls, walks the sweep, runs a paper, denies localStorage. **Gate.** |
 | `problemset_test.py` | Works one of her problem sets through in Chromium and checks the parts arrive in her order. **Gate.** |
+| `equation_test.py` | Drives the equation drill in Chromium: what the typed-answer checker accepts and refuses, building an equation from pieces by tapping, and the chosen set surviving a reload. **Gate.** |
+| `review_test.py` | Checks the four review modes on the Topics page: reviewing concepts shows no calculation anywhere, and every split drill can only draw its own kind. **Gate.** |
 | `harvest.py` | Crops the figure out of each slide of a lecture PDF and encodes it for `images.json`. Standalone; not part of the build. |
 
 ---
@@ -58,6 +61,8 @@ node explain_check.js
 python3 cite_check.py
 python3 browser_test.py
 python3 problemset_test.py
+python3 equation_test.py
+python3 review_test.py
 ```
 
 The first line is the gate: it must be clean before the file goes anywhere. The

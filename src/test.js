@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqRhs,mathHTML,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -447,6 +447,88 @@ console.log('\n=== 5c. Problem sets ===');
     !X.CHAIN_OF[id] || X.CHAIN_OF[id].chain.id !== c.id || X.CHAIN_OF[id].step !== i + 1));
   if (wrong.length) bad(`${wrong.length} problem set(s) disagree with the part index built from them`);
   else console.log('  ok    every part knows which set it belongs to and its place in it');
+}
+
+console.log('\n=== 5d. Equations ===');
+{
+  const E = X.EQUATIONS;
+  const ids = new Set(E.map(e => e.id));
+  if (ids.size !== E.length) bad('two equations share an id');
+  for (const e of E) {
+    for (const f of ['name', 'lhs', 'typed', 'cite', 'holds'])
+      if (!e[f]) bad(`equation "${e.id}" has no ${f}`);
+    if (!Array.isArray(e.tokens) || !e.tokens.length) bad(`equation "${e.id}" has no pieces to build from`);
+    if (!Array.isArray(e.symbols) || !e.symbols.length) bad(`equation "${e.id}" names no symbols`);
+    if (!['yes', 'no', 'unknown'].includes(e.sheet)) bad(`equation "${e.id}" has sheet "${e.sheet}"`);
+    /* The two exercises must key the same equation. If the pieces joined up do
+       not read as the canonical typed answer, a student who builds it right is
+       told they typed it wrong, or the reverse. */
+    const built = X.eqPlain(e.lhs) + ' = ' + X.eqPlain(e.tokens.join(' '));
+    if (!X.eqCorrect(e, built))
+      bad(`equation "${e.id}": its pieces build ${X.normEq(built)}, which its typed form does not accept`);
+    /* A lure that is one of the equation's own pieces is not a lure: placing it
+       still gives the right answer. */
+    const own = new Set(e.tokens.map(t => X.normEq(X.eqPlain(t))));
+    for (const l of (e.lures || []))
+      if (own.has(X.normEq(X.eqPlain(l))))
+        bad(`equation "${e.id}": the lure ${X.eqPlain(l)} is one of its own pieces`);
+    if ((e.lures || []).length < 2) bad(`equation "${e.id}" offers fewer than two wrong pieces`);
+    /* The stacked display is only a picture of the equation, so it is held to
+       the typed form symbol by symbol. Brackets are set aside, because a
+       fraction bar does the grouping a bracket does on one line. */
+    if (e.disp) {
+      const blind = t => X.normEq(X.eqPlain(t)).replace(/[()]/g, '');
+      const shown = blind(X.eqPlain(e.lhs) + '=' + e.disp);
+      if (![e.typed, ...(e.also || [])].some(f => blind(f) === shown))
+        bad(`equation "${e.id}": its stacked display reads ${shown}, which none of its keyed forms says`);
+      if (!X.mathHTML(e.disp).includes('frac') && e.disp.includes('{{'))
+        bad(`equation "${e.id}": a fraction token in its display did not render`);
+    }
+  }
+  console.log(`  ok    ${E.length} equations, ${E.filter(e => e.must).length} of them ones she said to memorise`);
+  console.log('  ok    every equation builds from its pieces to the form it keys when typed');
+  console.log('  ok    no lure duplicates a piece of its own equation');
+
+  /* A CONTROL ON THE CHECKER. The comparison folds away case, spacing, the
+     several dashes and implicit multiplication, which is what makes it usable.
+     Fold away one thing too many and it starts accepting an inverted ratio or a
+     flipped sign, and the drill would then teach the wrong equation while every
+     other check here still passed. These pairs must stay apart. */
+  const mustDiffer = [
+    ['t1/2 = 0.693/k',  't1/2 = k/0.693'],
+    ['C = C0*e^(-kt)',  'C = C0*e^(kt)'],
+    ['Css = R/Cl',      'Css = Cl/R'],
+    ['tmax = ln(ka/k)/(ka-k)', 'tmax = ln(k/ka)/(ka-k)'],
+    ['ClH = (1-fe)*ClT', 'ClH = fe*ClT'],
+    ['DL = R/k',        'DL = R*k'],
+    ['t1/2 = C0/2k',    't1/2 = 2*C0/k'],
+    ['IBW = 45.5 + 2.3*(h-60)', 'IBW = 50 + 2.3*(h-60)'],
+    /* Implicit multiplication makes this the easiest pair to lose: dividing by
+       72 and then multiplying by SCr is not dividing by their product. */
+    ['CrCl = (140-age)(IBW)/(72*SCr)', 'CrCl = (140-age)(IBW)/72*SCr'],
+    ['Css = R/(k*VD)',  'Css = R/k*VD'],
+  ];
+  for (const [a, b] of mustDiffer)
+    if (X.normEq(a) === X.normEq(b)) bad(`the equation checker cannot tell "${a}" from "${b}"`);
+  /* And the other way: these spellings of one equation must all agree, or a
+     student loses a correct answer to a capital letter. */
+  const mustAgree = [
+    ['t1/2 = 0.693/k', 'T\u00bd = 0.693 \u00f7 K', 't 1/2=.693/k', 'thalf = 0.693/k'],
+    ['Cl = k*VD', 'Cl = kVD', 'CL = K \u00d7 V_D', 'cl=k\u00b7vd'],
+    ['C = C0*e^(-kt)', 'C = C0e^-kt', 'c = c0*e**(\u2212kt)'],
+  ];
+  for (const forms of mustAgree) {
+    const n = new Set(forms.map(X.normEq));
+    if (n.size !== 1) bad(`the equation checker reads these as different: ${forms.join('  |  ')}`);
+  }
+  console.log(`  ok    the checker separates ${mustDiffer.length} pairs it must not confuse, `
+    + `and joins ${mustAgree.reduce((s, f) => s + f.length, 0)} spellings it must not split`);
+
+  /* Every equation, answered in its own canonical form, must be accepted. */
+  const rejected = E.filter(e => !X.eqCorrect(e, e.typed)
+                              || !X.eqCorrect(e, e.typed.split('=').slice(1).join('=')));
+  if (rejected.length) bad(`${rejected.length} equation(s) reject their own keyed answer: ${rejected.map(e => e.id).join(', ')}`);
+  else console.log('  ok    every equation accepts its own answer, with the left side and without it');
 }
 
 console.log('\n=== 6. Storage isolation ===');
