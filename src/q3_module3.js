@@ -79,7 +79,7 @@ const Q_MODULE3 = [
  {t:'Steady state is a statement about rates. Drug arrives at a fixed rate and leaves at a rate proportional to what is present, so the amount in the body rises until the two are equal. The plateau concentration is whatever level makes the first-order output match the zero-order input, which is why it is fixed by the infusion rate and the clearance and by nothing else.'},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css = R/Cl = R/(k x VD).',
+    'Css = {{frac:R|Cl}} = {{frac:R|k x VD}}.',
     'Raising R raises Css in proportion and does not change how long the plateau takes to arrive.',
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
@@ -105,7 +105,7 @@ const Q_MODULE3 = [
  {t:'The fraction of steady state reached after infusing for a time t is one minus e to the minus kt, and writing t as a number of half-lives makes that fraction independent of the drug: one half-life gives 50 per cent, two give 75 per cent, three give 87.5 per cent. Practically the level is called steady after three to five half-lives. Any more precise question, such as the time to 90 or 95 per cent, is a calculation rather than this rule.'},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css = R/Cl = R/(k x VD).',
+    'Css = {{frac:R|Cl}} = {{frac:R|k x VD}}.',
     'Raising R raises Css in proportion and does not change how long the plateau takes to arrive.',
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
@@ -131,7 +131,7 @@ const Q_MODULE3 = [
  {t:'Two different parts of the infusion equation answer two different questions. The factor R over clearance fixes how high the plateau sits, so it responds to the infusion rate. The factor one minus e to the minus kt fixes how far along the climb the concentration has got, so it responds only to the elimination rate constant and therefore to the half-life. Changing the rate moves the ceiling and leaves the clock alone.'},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css = R/Cl = R/(k x VD).',
+    'Css = {{frac:R|Cl}} = {{frac:R|k x VD}}.',
     'Raising R raises Css in proportion and does not change how long the plateau takes to arrive.',
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
@@ -191,7 +191,8 @@ const Q_MODULE3 = [
  teachImg:'slide_3IntravenousInfusi_p9',
  cite:'3IntravenousInfusions.pdf, slide "Drug Concentration Prior to Reaching Steady-State"; 09-02 lecture',
  quote:'one half-life. Gets us maybe 50% of the steady-state concentration',
- note:'The captions record the four-half-life figure as "93.25" in the 09-02 lecture and "93" in the 09-09 review; one minus one sixteenth is 93.75 per cent. The four-half-life row is left out for that reason.'},
+ note:'Four half-lives gives 93.75 per cent, since 1 − 1/16 = 0.9375. The lecture gave the figure as 93.25 per cent; 93.75 is the correct arithmetic.',
+ audit:'The captions record the four-half-life figure as "93.25" in the 09-02 lecture and "93" in the 09-09 review; one minus one sixteenth is 93.75 per cent. The four-half-life row is left out for that reason.'},
 
 {id:'inf-c8', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'css', concept:'time-to-css', skill:'recall', dupOf:'inf-c4',
@@ -210,7 +211,7 @@ const Q_MODULE3 = [
  {t:'Approaching a plateau exponentially means closing a fixed fraction of the remaining gap in each equal interval of time. The gap therefore shrinks without ever closing, which is what asymptotic means. The practical consequence is that steady state is defined by how close is close enough, which is why three to five half-lives is the working answer and ten half-lives gives 99.9 per cent.'},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css = R/Cl = R/(k x VD).',
+    'Css = {{frac:R|Cl}} = {{frac:R|k x VD}}.',
     'Raising R raises Css in proportion and does not change how long the plateau takes to arrive.',
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
@@ -342,7 +343,8 @@ const Q_MODULE3 = [
   {h:'What the chapter adds', t:'Chapter 6 shows algebraically why a matched loading dose holds the level flat. Giving a bolus DL and starting the infusion at once makes the concentration the sum of a decaying bolus term and a building infusion term. Substituting DL = R/k cancels the bracket the two share, and what is left is Css itself, with no time in it. The bolus falls at exactly the rate the infusion builds, so the concentration sits at the plateau from the first minute.'}],
  cite:'09-02 lecture (transcript); 3IntravenousInfusions.pdf, slide "IV Bolus Loading Dose and Continuous IV Infusion"',
  quote:'the loading dose helps us to reach that steady state concentration, like almost immediately. But you got to choose wisely on the loading dose',
- note:'The slide carries only a graph of the too-high and too-low cases with no printed caption, so the described behaviour is taken from the 09-02 transcript, where she recomputes her 288 mg example with 388 mg and gets about 30 mg/L at two hours against a plateau of 24 mg/L.'},
+ note:'In class she reworked the 288 mg example with a 388 mg loading dose: the level two hours in was about 30 mg/L, against a plateau of 24 mg/L.',
+ audit:'The slide carries only a graph of the too-high and too-low cases with no printed caption, so the described behaviour is taken from the 09-02 transcript, where she recomputes her 288 mg example with 388 mg and gets about 30 mg/L at two hours against a plateau of 24 mg/L.'},
 
 {id:'inf-c14', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'basics', concept:'units-of-R', skill:'recall',
@@ -433,12 +435,12 @@ const Q_MODULE3 = [
   {k:'algebra', t:'Css = R / Cl = (50 mg/hr) / (3.465 L/hr) = 14.43 mg/L',
    why:'At steady state the rate in equals the rate out, and the rate out is clearance multiplied by concentration, so the concentration is the infusion rate divided by clearance. Milligrams per hour divided by litres per hour cancels the hours and leaves milligrams per litre.'},
   {k:'round', t:'Css = 14.43 mg/L',
-   why:'Her worked value on the slide is 14.43 mg/L, carried to two decimal places, and the transcript records it aloud as about 14. The two decimal places follow the four-figure rate constant she uses throughout.'}],
+   why:'Report 14.43 mg/L, or about 14 mg/L. The two decimal places follow the four-figure rate constant used throughout.'}],
  teach:[
  {t:'Steady state is the concentration at which first-order removal matches the fixed input, so Css is R divided by clearance. When clearance is not given directly it is built from the half-life and the volume of distribution, since clearance equals k times VD and k equals 0.693 over the half-life. The whole calculation is one division once those two constants are assembled.'},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css = R/Cl = R/(k x VD).',
+    'Css = {{frac:R|Cl}} = {{frac:R|k x VD}}.',
     'Raising R raises Css in proportion and does not change how long the plateau takes to arrive.',
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
     'The approach is asymptotic, so steady state is neared rather than reached.']},
@@ -462,7 +464,7 @@ const Q_MODULE3 = [
   {k:'algebra', t:'R = (20 mg/L)(0.1155 hr⁻¹)(30 L) = 69.3 mg/hr',
    why:'Milligrams per litre multiplied by reciprocal hours multiplied by litres cancels the litres and leaves milligrams per hour, which is the unit an infusion rate must have. The arithmetic is 20 times 3.465.'},
   {k:'round', t:'R = 69.3 mg/hr',
-   why:'Her slide prints 69.3 mg/hr and the transcript records the same figure aloud. One decimal place is what her four-figure rate constant supports.'}],
+   why:'Report 69.3 mg/hr. One decimal place is what the four-figure rate constant supports. As a check, 69.3 divided by the clearance of 3.465 L/hr returns the 20 mg/L target.'}],
  teach:[
  {t:'Choosing an infusion rate is the steady-state relation read backwards. The target concentration multiplied by clearance gives the amount that must be delivered each hour to replace exactly what is removed each hour. Because clearance is a constant for that patient, the rate and the plateau are strictly proportional, so doubling the target doubles the rate.'},
   {h:'How the variables relate', list:[
@@ -504,7 +506,7 @@ const Q_MODULE3 = [
  teachImg:'slide_3IntravenousInfusi_p10',
  cite:'3IntravenousInfusions.pdf, slide "Example 3"',
  quote:'Calculate the Cp 8 hrs after an infusion of 50 mg/hr has been started.',
- note:'The slide poses this example and her working records only the fraction, 0.698; no final concentration is printed on the slide or spoken in the 09-02 captions. The 7.76 mg/L keyed here is computed from her own stated values of R, ClT and k.'},
+ audit:'The slide poses this example and her working records only the fraction, 0.698; no final concentration is printed on the slide or spoken in the 09-02 captions. The 7.76 mg/L keyed here is computed from her own stated values of R, ClT and k.'},
 
 {id:'inf-n4', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'time', concept:'time-to-percent-css', skill:'infusion',
@@ -521,11 +523,11 @@ const Q_MODULE3 = [
   {k:'algebra', t:'t = −ln(0.1) / k = 2.3026 / 0.15 hr⁻¹ = 15.35 hr',
    why:'Taking natural logarithms of both sides brings the exponent down, and dividing by the rate constant isolates t. Dividing a pure number by a quantity in reciprocal hours leaves hours, which is the unit a time must have.'},
   {k:'round', t:'t = 15.35 hr',
-   why:'Her working prints 15.35 hr and the transcript records the answer aloud as 15 hours. Two decimal places follows the precision of the printed rate constant.'}],
+   why:'Report 15.35 hr, or about 15 hours. As a check, that is 3.32 half-lives of 4.62 hr, the number of half-lives that 90 per cent of steady state always takes.'}],
  teach:[
  {t:'Any question that names a percentage of steady state is solved from the bracket alone, because the plateau cancels. Setting one minus e to the minus kt equal to the target fraction, isolating the exponential and taking logarithms gives the time in one line. Where the percentage is a clean power of one half the same answer can be counted off in half-lives instead.'},
   {h:'How the variables relate', list:[
-    'Time to a stated fraction of Css: t = -ln(1 - fraction)/k.',
+    'Time to a stated fraction of Css: t = {{frac:−ln(1 - fraction)|k}}.',
     '90% of Css takes 3.32 half-lives; 95% takes 4.32; 99% takes 6.64.',
     'None of these depends on R, the dose or the volume of distribution.']},
   {h:'What the chapter adds', t:'Chapter 6 tabulates the counts: 90 per cent of the plateau at 3.32 half-lives, 95 per cent at 4.32, and 99 per cent at 6.65. It rounds these to about five half-lives for clinical use, so a drug with a six-hour half-life takes roughly 30 hours to sit within 5 per cent of its plateau.'}],
@@ -560,7 +562,8 @@ const Q_MODULE3 = [
  teachImg:'slide_3IntravenousInfusi_p13',
  cite:'3IntravenousInfusions.pdf, slide "Example 5"',
  quote:'What is the expected plasma concentration 12 hours following the cessation of a continuous intravenous infusion of a medicinal agent (half-life = 5 hr) that yielded a steady-state concentration of 15 mg/L?',
- note:'The slide asks for 12 hours. In the 09-02 lecture she changed the time to 10 hours to make it exactly two half-lives, and then took 0.25 of 15 mg/L, giving 3.75 mg/L; her slide annotation shows the same 0.25 route. The keyed 2.84 mg/L is the 12-hour value the slide actually asks for, and 3.75 mg/L is the answer to the 10-hour version she substituted in class.'},
+ note:'In class she changed the time to 10 hours, exactly two half-lives, and took 0.25 × 15 mg/L = 3.75 mg/L. This question asks for 12 hours, which is 2.84 mg/L.',
+ audit:'The slide asks for 12 hours. In the 09-02 lecture she changed the time to 10 hours to make it exactly two half-lives, and then took 0.25 of 15 mg/L, giving 3.75 mg/L; her slide annotation shows the same 0.25 route. The keyed 2.84 mg/L is the 12-hour value the slide actually asks for, and 3.75 mg/L is the answer to the 10-hour version she substituted in class.'},
 
 {id:'inf-n6', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'pre', concept:'cp-before-steady-state', skill:'conctime', dupOf:'inf-n3',
@@ -615,7 +618,7 @@ const Q_MODULE3 = [
   {k:'algebra', t:'Cp = (5.41 mg/L)e^(−(0.231 hr⁻¹)(3 hr)) = (5.41 mg/L)(0.5) = 2.7058 mg/L',
    why:'Three hours is exactly one half-life for this drug, since 0.693 divided by 0.231 is 3, so the concentration halves and the exponential factor is 0.5. That is the cross-check she uses in the lecture, and it avoids the calculator altogether.'},
   {k:'round', t:'Cp = 2.71 mg/L',
-   why:'Two decimal places follows the precision of the 5.41 mg/L the decay started from. Dr. Mosley states the answer aloud as 2.7 mg/L, a one-decimal rounding of the same number, and either form carries full marks on her paper.'}],
+   why:'Two decimal places follows the precision of the 5.41 mg/L the decay started from. 2.7 mg/L, the same number to one decimal place, also carries full marks on her paper.'}],
  teach:[
  {t:'A post-cessation question is two problems in sequence. First find the concentration at the end of the infusion, which requires the fraction of steady state reached over the infused duration. Then decay that value for the stated time after cessation. Only an infusion long enough to reach steady state allows the first step to be skipped by using Css.'},
   {h:'How the variables relate', list:[
@@ -658,7 +661,7 @@ const Q_MODULE3 = [
  teachImg:'slide_3IntravenousInfusi_p17',
  cite:'3IntravenousInfusions.pdf, slide "Example 7"',
  quote:'What loading dose should be recommended if the doctor wants the drug level to reach 12.5 mcg/mL immediately?',
- note:'The slide states the infusion rate as 20 mg/hr. The 09-02 captions read the rate as "2 mg per hour" when the problem is posed but as 20 mg/hr twice in the solution, and only 20 mg/hr reproduces her stated answer of 125 mg, so the slide value is used.'},
+ audit:'The slide states the infusion rate as 20 mg/hr. The 09-02 captions read the rate as "2 mg per hour" when the problem is posed but as 20 mg/hr twice in the solution, and only 20 mg/hr reproduces her stated answer of 125 mg, so the slide value is used.'},
 
 {id:'inf-n9', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'load', concept:'loading-plus-infusion', skill:'conctime',
@@ -692,7 +695,7 @@ const Q_MODULE3 = [
  teachImg:'slide_3IntravenousInfusi_p18',
  cite:'3IntravenousInfusions.pdf, slide "Example 8"',
  quote:'What is the concentration of drug in the plasma at 2 hours after the start of the therapy?',
- note:'The slide states the infusion as 50 mg/hr with a 4-hour half-life. The 09-02 captions once read the rate as "150 mg per hour" and once give the half-life as 5 hours, but her calculator narration uses 50 divided by 12 and k = 0.1733, both of which match the slide.'},
+ audit:'The slide states the infusion as 50 mg/hr with a 4-hour half-life. The 09-02 captions once read the rate as "150 mg per hour" and once give the half-life as 5 hours, but her calculator narration uses 50 divided by 12 and k = 0.1733, both of which match the slide.'},
 
 {id:'inf-n10', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'rate', concept:'rate-for-target-css', skill:'infusion', dupOf:'inf-n2',
@@ -795,7 +798,7 @@ const Q_MODULE3 = [
   {k:'algebra', t:'Cp = (12 mg/L)e^(−(0.1386 hr⁻¹)(3 hr)) = (12 mg/L)(0.6598) = 7.9170 mg/L',
    why:'The exponent is dimensionless because reciprocal hours multiply hours, and the concentration keeps its own units. Three hours is a little over half a half-life, so the answer should sit between 12 and 8.5 mg/L, which it does.'},
   {k:'round', t:'Cp = 7.92 mg/L',
-   why:'Two decimal places follows the precision carried through the rest of this problem set. Dr. Mosley states the answer aloud as 7.9 mg/L, a one-decimal rounding of the same figure, and either form is accepted on her paper.'}],
+   why:'Two decimal places follows the precision carried through the rest of this problem set. 7.9 mg/L, the same figure to one decimal place, is also accepted on her paper.'}],
  teach:[
  {t:'Two different times appear in this problem and each does a different job. The infusion duration fixes how high the concentration got, through the fraction of steady state achieved. The time since cessation fixes how far it has fallen, through the first-order decay. Using the wrong time in the wrong place is the commonest way this question is lost.'},
   {h:'How the variables relate', list:[
@@ -884,7 +887,7 @@ const Q_MODULE3 = [
  teach:[
  {t:'The time to 95 per cent of steady state is close to three divided by the elimination rate constant, because the natural logarithm of twenty is almost exactly three. Expressed in half-lives it is about 4.32 of them, which is why the practical answer of three to five half-lives brackets it. Nothing about the patient other than the half-life enters the calculation.'},
   {h:'How the variables relate', list:[
-    'Time to a stated fraction of Css: t = -ln(1 - fraction)/k.',
+    'Time to a stated fraction of Css: t = {{frac:−ln(1 - fraction)|k}}.',
     '90% of Css takes 3.32 half-lives; 95% takes 4.32; 99% takes 6.64.',
     'None of these depends on R, the dose or the volume of distribution.']},
   {h:'What the chapter adds', t:'Chapter 6 tabulates the counts: 90 per cent of the plateau at 3.32 half-lives, 95 per cent at 4.32, and 99 per cent at 6.65. It rounds these to about five half-lives for clinical use, so a drug with a six-hour half-life takes roughly 30 hours to sit within 5 per cent of its plateau.'}],
@@ -1067,7 +1070,7 @@ const Q_MODULE3 = [
  teach:[
  {t:'A plateau exists because elimination is proportional to concentration: as the concentration rises the amount removed per hour rises with it, until the amount removed equals the amount given. Where that balance sits depends only on the rate and the clearance, which is why the loading dose in this stem does not appear in the calculation.'},
   {h:'How the variables relate', list:[
-    'Css = R/Cl = R/(k x VD).',
+    'Css = {{frac:R|Cl}} = {{frac:R|k x VD}}.',
     'Doubling R doubles Css; halving clearance doubles it too.',
     'The loading dose changes how quickly Css is reached, never what it is.',
     'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
@@ -1147,7 +1150,7 @@ const Q_MODULE3 = [
  {t:'How long an infusion takes to approach its plateau depends on the half-life and nothing else. Doubling the rate doubles the plateau and every concentration along the way, so the fraction of the plateau reached at any time is unchanged. This is why a loading dose, and not a faster infusion, is what shortens the wait.'},
   {h:'How the variables relate', list:[
     'Fraction of Css reached = 1 - e^(-kt), which contains neither R nor VD.',
-    't = -ln(1 - fraction)/k, so 90 per cent is ln(10)/k and 95 per cent is ln(20)/k.',
+    't = {{frac:−ln(1 - fraction)|k}}, so 90 per cent is {{frac:ln(10)|k}} and 95 per cent is {{frac:ln(20)|k}}.',
     '90 per cent is 3.32 half-lives, 95 per cent is 4.32, and 99 per cent is 6.64.',
     'A longer half-life means a longer wait, whatever the rate.',
     'Only a loading dose shortens the approach.']}],

@@ -54,7 +54,8 @@ class Plot:
 
     def __init__(self, xmax, yticks, log=False, xlabel='Time (hours)',
                  ylabel='Plasma drug concentration', xticks=None,
-                 w=W, h=H, l=L, r=R, t=T, b=B, fs=1.0):
+                 w=W, h=H, l=L, r=R, t=T, b=B, fs=1.0, numbers=True):
+        self.numbers = numbers            # False draws the shape with unnumbered axes
         self.xmax, self.log, self.yticks = xmax, log, yticks
         self.xlabel, self.ylabel = xlabel, ylabel
         self.xticks = xticks if xticks is not None else yticks and None
@@ -83,14 +84,16 @@ class Plot:
             p.append(f'<line x1="{self.L}" y1="{yy:.1f}" x2="{self.L+self.PW}" y2="{yy:.1f}" '
                      f'stroke="{GRID}" stroke-width="1"/>')
             lab = ('%g' % y)
-            p.append(f'<text x="{self.L-11}" y="{yy+4:.1f}" text-anchor="end" '
-                     f'font-size="{13*self.fs:.1f}" fill="{DIM}">{lab}</text>')
+            if self.numbers:
+                p.append(f'<text x="{self.L-11}" y="{yy+4:.1f}" text-anchor="end" '
+                         f'font-size="{13*self.fs:.1f}" fill="{DIM}">{lab}</text>')
         for x in xticks:
             xx = self.px(x)
             p.append(f'<line x1="{xx:.1f}" y1="{self.T+self.PH}" x2="{xx:.1f}" y2="{self.T+self.PH+6}" '
                      f'stroke="{AXIS}" stroke-width="1"/>')
-            p.append(f'<text x="{xx:.1f}" y="{self.T+self.PH+24}" text-anchor="middle" '
-                     f'font-size="{13*self.fs:.1f}" fill="{DIM}">{"%g" % x}</text>')
+            if self.numbers:
+                p.append(f'<text x="{xx:.1f}" y="{self.T+self.PH+24}" text-anchor="middle" '
+                         f'font-size="{13*self.fs:.1f}" fill="{DIM}">{"%g" % x}</text>')
         p.append(f'<line x1="{self.L}" y1="{self.T}" x2="{self.L}" y2="{self.T+self.PH}" stroke="{AXIS}" stroke-width="1.5"/>')
         p.append(f'<line x1="{self.L}" y1="{self.T+self.PH}" x2="{self.L+self.PW}" y2="{self.T+self.PH}" stroke="{AXIS}" stroke-width="1.5"/>')
         p.append(f'<text x="{self.L+self.PW/2:.0f}" y="{self.H-14}" text-anchor="middle" '
@@ -143,7 +146,8 @@ class Plot:
                               f'y2="{yy-4:.1f}" stroke="{color}" stroke-width="3" stroke-linecap="round"/>')
             tx = xx + 25
         self.parts.append(f'<text x="{tx:.1f}" y="{yy:.1f}" text-anchor="{anchor}" '
-                          f'font-size="{13.5*self.fs:.1f}" fill="{INK}">{esc(text)}</text>')
+                          f'font-size="{13.5*self.fs:.1f}" fill="{INK}" stroke="#FFFFFF" '
+                          f'stroke-width="4" paint-order="stroke">{esc(text)}</text>')
         return self
 
     def note(self, text):
@@ -152,7 +156,7 @@ class Plot:
 
     def svg(self, title):
         body = '\n'.join(self.parts)
-        return (f'<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 {self.W} {self.H}" '
+        return (f'<svg xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 {self.W} {self.H}" '
                 f'width="{self.W}" height="{self.H}" role="img" aria-label="{esc(title)}">'
                 f'<title>{esc(title)}</title>'
                 f'<rect width="{self.W}" height="{self.H}" fill="#FFFFFF"/>\n{body}\n</svg>')
@@ -374,11 +378,137 @@ for i, (title, args, caption) in enumerate(PANEL):
 body = '\n'.join(parts)
 FIGS['ka_k_effects'] = (
     'Three panels: doubling the dose, doubling the absorption rate constant, and doubling the elimination rate constant',
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {PW_} {PH_*3}" width="{PW_}" '
+    f'<svg xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 {PW_} {PH_*3}" width="{PW_}" '
     f'height="{PH_*3}" role="img" aria-label="Effect of dose, absorption rate constant and '
     f'elimination rate constant on the oral curve"><title>Effect of dose, ka and k on the oral '
     f'concentration curve</title>{body}</svg>')
 
+
+
+def stack(key, title, panels, pw, ph):
+    """Several Plot panels one above another in a single SVG, so a comparison
+    reads top to bottom on a phone rather than as columns too narrow to read."""
+    parts = [f'<rect width="{pw}" height="{ph*len(panels)}" fill="#FFFFFF"/>']
+    for i, pan in enumerate(panels):
+        parts.append(f'<g transform="translate(0,{i*ph})">' + '\n'.join(pan.parts) + '</g>')
+    FIGS[key] = (title,
+        f'<svg xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 {pw} {ph*len(panels)}" width="{pw}" '
+        f'height="{ph*len(panels)}" role="img" aria-label="{esc(title)}"><title>{esc(title)}</title>'
+        + '\n'.join(parts) + '</svg>')
+
+
+def heading(pan, title, line, big=1.0):
+    pan.parts.append(f'<text x="18" y="{30*big:.0f}" font-size="{21*big:.1f}" font-weight="600" fill="{INK}">{esc(title)}</text>')
+    pan.parts.append(f'<text x="18" y="{58*big:.0f}" font-size="{17*big:.1f}" fill="{DIM}">{esc(line)}</text>')
+
+
+# ---- raising k against raising ka, from the slide's own parameters ---------
+# "Effect of ka and k on Cmax, tmax and AUC": dose 100 mg, VD 10 L, F taken as
+# 1, and the constant that is not varied held at 0.1 hr-1 in each panel. These
+# reproduce the slide's peaks (2.50 at 6.9 hr for k = 0.2; 6.69 at 4.0 hr for
+# ka = 0.5). Every value printed below is computed from them here.
+SD, SV, SFIX = 100.0, 10.0, 0.1
+STYLES = [None, '9 6', '2 5']
+
+
+def slide_curve(ka, k):
+    fn, tmax, auc = oral_of(1.0, SD, SV, ka, k)
+    return fn, tmax, fn(tmax), auc
+
+
+def kk_panel(which):
+    varied = [0.2, 0.3, 0.5]
+    color = BLUE if which == 'k' else AMBER
+    ymax = 3 if which == 'k' else 8
+    pan = Plot(20, list(range(0, ymax + 1, 1 if which == 'k' else 2)),
+               xlabel='Time (hours)', ylabel='Concentration (µg/mL)',
+               w=600, h=480, l=82, r=24, t=128, b=66, fs=1.4)
+    pan.frame([0, 4, 8, 12, 16, 20])
+    rows = []
+    styles = STYLES if which == 'k' else STYLES[::-1]
+    for v, dash in zip(varied, styles):
+        ka, k = (SFIX, v) if which == 'k' else (v, SFIX)
+        fn, tmax, cmax, auc = slide_curve(ka, k)
+        pan.curve(fn, color=color, dash=dash)
+        pan.vline(tmax, cmax, color=color, dash='2 4')
+        pan.points([tmax], [cmax], color=color)
+        pan.label(tmax + 0.35, cmax, f'{v:g}/hr', dy=-10)
+        rows.append((v, tmax, cmax, auc))
+    aucs = ' → '.join(f'{r[3]:.3g}' for r in rows)
+    if which == 'k':
+        heading(pan, 'k raised, kₐ held at 0.1 /hr',
+                f'Peak lower and earlier. AUC {aucs}: falls.', big=1.1)
+    else:
+        heading(pan, 'kₐ raised, k held at 0.1 /hr',
+                f'Peak higher and earlier. AUC {aucs}: same.', big=1.1)
+    pan.parts.append(f'<text x="18" y="98" font-size="17" fill="{DIM}">Dots mark each peak; '
+                     f'the dotted drop marks its tₘₐₓ.</text>')
+    return pan, rows
+
+
+kpan, KROWS = kk_panel('k')
+apan, AROWS = kk_panel('ka')
+stack('k_vs_ka', 'Raising k against raising ka, drawn from the slide parameters', [kpan, apan], 600, 480)
+
+
+# ---- flip-flop: which constant the tail of an oral curve reports ----------
+# A picture of a relationship, so the axes carry no numbers: only the order
+# of the two constants matters. Semi-log, where a first-order fall is a line.
+def flip_panel(ka, title, line, verdict):
+    k, dv = 0.3, 10.0
+    pan = Plot(24, [0.01, 0.1, 1, 10], log=True, xlabel='Time', ylabel='Concentration (log scale)',
+               w=600, h=440, l=60, r=24, t=124, b=46, fs=1.4, numbers=False)
+    pan.frame([0, 6, 12, 18, 24])
+    iv = lambda t: dv * math.exp(-k * t)
+    oral = lambda t: ka * dv / (ka - k) * (math.exp(-k * t) - math.exp(-ka * t))
+    pan.curve(iv, color=DIM, dash='6 5')
+    pan.curve(oral, color=BLUE, x0=0.02)
+    pan.label(3.5, iv(3.5), 'IV dose, same drug', color=DIM, swatch=True, dy=-18)
+    pan.label(14.0, oral(14.0), 'oral dose', color=BLUE, swatch=True, dy=-18)
+    heading(pan, title, line)
+    pan.parts.append(f'<text x="18" y="96" font-size="19" font-weight="600" '
+                     f'fill="{INK}">{esc(verdict)}</text>')
+    return pan
+
+
+stack('flipflop', 'Immediate release against extended release: which constant the tail of the oral curve shows', [
+    flip_panel(1.2, 'Immediate release: kₐ larger than k',
+               'Absorption finishes early, so only elimination is left in the tail.',
+               'Oral tail runs parallel to the IV line → its slope is k.'),
+    flip_panel(0.1, 'Extended release: kₐ smaller than k',
+               'Absorption is still going on in the tail and is now the slower step.',
+               'Oral tail is flatter than the IV line → its slope is kₐ (flip-flop).'),
+], 760, 420)
+
+
+# ---- the three input types -------------------------------------------------
+def input_panel(fn, title, line, stop=None):
+    pan = Plot(16, [0, 5, 10], xlabel='Time', ylabel='Concentration',
+               w=600, h=320, l=60, r=24, t=92, b=42, fs=1.4, numbers=False)
+    pan.frame([0, 4, 8, 12, 16])
+    pan.curve(fn, color=BLUE)
+    if stop is not None:
+        pan.vline(stop, 10, color=DIM)
+        pan.label(stop + 0.2, 9.2, 'release ends')
+    heading(pan, title, line)
+    return pan
+
+
+K3, T3 = 0.3, 8.0
+def zero_in(t):
+    if t <= T3:
+        return 8 * (1 - math.exp(-K3 * t))
+    return 8 * (1 - math.exp(-K3 * T3)) * math.exp(-K3 * (t - T3))
+
+
+stack('input_types', 'Three ways drug can enter, each with first-order elimination', [
+    input_panel(lambda t: 10 * math.exp(-K3 * t), 'Instantaneous in, first-order out',
+                'IV bolus: highest at time zero, then falls.'),
+    input_panel(lambda t: 13.33 * (math.exp(-K3 * t) - math.exp(-1.2 * t)), 'First-order in, first-order out',
+                'Ordinary tablet: rises to a peak, then falls.'),
+    input_panel(zero_in, 'Zero-order in, first-order out',
+                'Infusion or constant-rate product: levels off.', stop=T3),
+], 600, 320)
 
 def main():
     ap = argparse.ArgumentParser()
@@ -393,6 +523,13 @@ def main():
             open(os.path.join(a.dir, key + '.svg'), 'w', encoding='utf-8').write(svg)
         print(f'  {key:24s} {len(svg)/1024:5.1f} KB svg   {title[:58]}')
     path = os.path.join(HERE, 'images.json')
+    # images.json also holds the rendered lecture slides, written by slides.py.
+    # Rewriting only the drawn figures would delete them, so they are carried
+    # across untouched.
+    if os.path.exists(path):
+        kept = {k: v for k, v in json.load(open(path)).items() if k.startswith('slide_')}
+        out.update(kept)
+        print(f'  kept {len(kept)} rendered slides')
     json.dump(out, open(path, 'w'), indent=0, sort_keys=True)
     total = sum(len(v) for v in out.values())
     print(f'\n{len(out)} figures -> {path}  ({total/1024:.1f} KB of data URL)')

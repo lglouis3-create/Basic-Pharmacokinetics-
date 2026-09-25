@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqRhs,mathHTML,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -529,6 +529,65 @@ console.log('\n=== 5d. Equations ===');
                               || !X.eqCorrect(e, e.typed.split('=').slice(1).join('=')));
   if (rejected.length) bad(`${rejected.length} equation(s) reject their own keyed answer: ${rejected.map(e => e.id).join(', ')}`);
   else console.log('  ok    every equation accepts its own answer, with the left side and without it');
+}
+
+console.log('\n=== 5e. What an explanation may say ===');
+{
+  /* Where a fact came from belongs in the citation under the explanation, or in
+     `audit`, which is never shown. It does not belong in the explanation, where
+     it reads as commentary and teaches nothing. "In class" is allowed in a note,
+     because a note exists to say that the class and the printed sheet disagree. */
+  const SOURCING = /transcript|caption|recording|this copy|that copy|handwrit|text extract|printed slide|lecture audio|\baloud\b|out loud|\bOCR\b|not used as the source|computed here|on (19|24|26) August/i;
+  const shown = q => {
+    const t = [];
+    for (const p of X.teachParts(q.teach)) t.push(['concept block', p.t], ['concept block', p.after],
+      ...p.list.map(x => ['concept block', x]), ...(p.table ? p.table.rows.flat().map(x => ['table', x]) : []));
+    (q.options || []).forEach(o => t.push(['option', o.t], ['option explanation', o.why]));
+    (q.steps || []).forEach(x => t.push(['working', x.t], ['working', x.why]));
+    (q.pairs || []).forEach(x => t.push(['pair', x.why]));
+    t.push(['stem', q.stem], ['note', q.note]);
+    return t.filter(([, v]) => v);
+  };
+  let n = 0;
+  for (const q of X.QUESTIONS) for (const [where, v] of shown(q)) {
+    if (SOURCING.test(v)) { bad(`${q.id}: sourcing commentary in its ${where}: "${String(v).match(SOURCING)[0]}"`); n++; }
+    if (where !== 'note' && /\bin class\b/i.test(v)) { bad(`${q.id}: "in class" in its ${where}; only a note may say it`); n++; }
+  }
+  if (!n) console.log('  ok    no explanation, option, step or note says where its facts were heard');
+
+  /* Tables and fractions are markup, so a malformed one shows as raw text. */
+  let tb = 0, fr = 0;
+  for (const q of X.QUESTIONS) for (const p of X.teachParts(q.teach)) {
+    if (p.table) {
+      tb++;
+      const w = p.table.head.length;
+      p.table.rows.forEach((r, i) => { if (r.length !== w) bad(`${q.id}: table row ${i + 1} has ${r.length} cells for ${w} columns`); });
+    }
+    for (const t of [p.t, p.after, ...p.list, ...(p.table ? p.table.rows.flat() : [])]) {
+      if (!t) continue;
+      const open = (t.match(/\{\{frac:/g) || []).length, good = (t.match(X.FRAC_RE) || []).length;
+      fr += open;
+      if (open !== good) bad(`${q.id}: a {{frac:...}} in its concept block is malformed`);
+    }
+  }
+  console.log(`  ok    ${tb} comparison tables have a cell for every column; ${fr} stacked fractions are well formed`);
+
+  /* A CONTROL ON THE FORMULA FORMATTER. It sets typed formulas as the slides
+     print them. Too loose and it subscripts ordinary words; too tight and a
+     formula stays as code. Both directions are held here. */
+  const convert = [
+    ['C = C0e^(-kt)', 'C = C<sub>0</sub>e<sup>−kt</sup>'],
+    ['t1/2 = C0/2k0', 't½ = C<sub>0</sub>/2k<sub>0</sub>'],
+    ['Cl = k x VD', 'Cl = k × V<sub>D</sub>'],
+    ['tmax = ln(ka/k)/(ka - k)', 't<sub>max</sub> = ln(k<sub>a</sub>/k)/(k<sub>a</sub> − k)'],
+    ['t1/2a = 0.693/ka', 't½<sub>a</sub> = 0.693/k<sub>a</sub>'],
+    ['Cp0 = A + B', 'C<sub>p</sub><sup>0</sup> = A + B'],
+  ];
+  const leave = ['kappa, keep, fetch, taken, Access, VDs, first-order, zero-order, 2-compartment',
+                 'the peak and the tail', 'Ke, Cps and CAUC are not symbols here'];
+  for (const [a, want] of convert) if (X.prettyMath(a) !== want) bad(`formula formatter: "${a}" gives "${X.prettyMath(a)}", expected "${want}"`);
+  for (const a of leave) if (X.prettyMath(a) !== a) bad(`formula formatter changed ordinary text: "${a}" -> "${X.prettyMath(a)}"`);
+  console.log(`  ok    the formula formatter sets ${convert.length} formulas and leaves ${leave.length} runs of ordinary text alone`);
 }
 
 console.log('\n=== 6. Storage isolation ===');

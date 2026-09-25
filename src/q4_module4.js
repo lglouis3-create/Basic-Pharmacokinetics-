@@ -114,7 +114,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -140,7 +140,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -166,7 +166,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -192,7 +192,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -218,7 +218,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -241,13 +241,13 @@ const Q_MODULE4 = [
   {k:'algebra', t:'Rate = (15 mL/min)(5 mcg/mL) = 75 mcg/min',
    why:'Millilitres per minute multiplied by micrograms per millilitre cancels the millilitres and leaves micrograms per minute, which is an amount per unit time and therefore a rate. The arithmetic is 15 times 5.'},
   {k:'round', t:'Rate of elimination = 75 mcg/min',
-   why:'Both inputs are exact as given, so the product is exact and no rounding is involved. Her worked answer aloud is 75 micrograms per minute.'}],
+   why:'Both inputs are exact as given, so the product is exact and no rounding is involved: 75 micrograms per minute.'}],
  teach:[
  {t:'The rate of elimination is not a fixed property of a drug; it depends on how much drug is present. Clearance is the fixed part, and multiplying it by the current plasma concentration gives the rate at that moment. As the concentration falls the rate falls with it, in exact proportion, which is what first-order elimination means stated in clearance language.'},
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -278,14 +278,15 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
  teachImg:'slide_4ClearanceandElimi_p6',
  cite:'4---Clearance-and-Elimination.pdf slide 6, with the unit identity from the 24 August lecture',
  quote:'Milligrams per liter equals micrograms per mL.',
- note:'The conversion to milligrams per hour is not on the slide; the slide answers in micrograms per minute. The unit identity used here is the one she states in the 24 August lecture and repeats in the 9 September review. An exam written from these lectures would key 75 mcg/min for the slide question and would accept either unit pair where it asks for a rate.'},
+ note:'The slide gives this rate as 75 mcg/min. This question asks for the same rate in mg/hr.',
+ audit:'The conversion to milligrams per hour is not on the slide; the slide answers in micrograms per minute. The unit identity used here is the one she states in the 24 August lecture and repeats in the 9 September review. An exam written from these lectures would key 75 mcg/min for the slide question and would accept either unit pair where it asks for a rate.'},
 
 /* ════════════════ NUMERIC — THE SIX-PART CLEARANCE BATTERY ════════════════ */
 
@@ -308,7 +309,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -335,7 +336,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -356,13 +357,13 @@ const Q_MODULE4 = [
   {k:'algebra', t:'k = 0.693 ÷ 8 hr = 0.086625 hr⁻¹',
    why:'A dimensionless constant divided by a time in hours leaves reciprocal hours, which is the unit a first-order rate constant must carry. The division is carried at full precision here because k feeds the two clearance parts that follow.'},
   {k:'round', t:'k = 0.0866 hr⁻¹',
-   why:'She reports it aloud as 0.0866, which is the four-decimal-place convention she asks for on rate constants so that the whole class carries the same value forward. The leading zero is required.'}],
+   why:'Report 0.0866, to four decimal places, the precision she asks for on rate constants so that everyone carries the same value forward. The leading zero is required.'}],
  teach:[
  {t:'Every clearance calculation in this example starts from the rate constant, because clearance is k multiplied by the volume of distribution and the excretion rate constant is a fraction of k. Converting the stated half-life first, and keeping four decimal places, prevents the rounding drift she warns about when k is truncated early.'},
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -391,7 +392,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -420,7 +421,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -449,7 +450,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -472,13 +473,13 @@ const Q_MODULE4 = [
   {k:'algebra', t:'ClH = 1.3 L/hr − 0.78 L/hr = 0.52 L/hr',
    why:'Subtracting two quantities in litres per hour leaves litres per hour. The result must be positive and smaller than the total, which is a quick check that the renal part was not computed larger than the whole.'},
   {k:'round', t:'ClH = 0.52 L/hr',
-   why:'Her worked value is 0.52 litres per hour, set up aloud as 1.3 minus 0.78. Using unrounded values throughout gives 0.51975 L/hr, which rounds to the same figure.'}],
+   why:'Her worked value is 0.52 litres per hour, set up as 1.3 minus 0.78. Using unrounded values throughout gives 0.51975 L/hr, which rounds to the same figure.'}],
  teach:[
  {t:'Hepatic clearance is reached by difference because it is the one part of the total that cannot be measured. The additivity of clearance is what licenses the subtraction: total body clearance is the sum of the organ clearances, so two known values fix the third. The same result follows from one minus the fraction excreted unchanged, multiplied by the total.'},
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -507,7 +508,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -538,14 +539,14 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
  teachImg:'slide_4ClearanceandElimi_p5',
  cite:'4---Clearance-and-Elimination.pdf slides 5 and 22',
  quote:'Cl Cp Rate of elimination = •',
- note:'Slide 22 asks only for fe, k, ke, ClT, ClR and ClH from these parameters. The relationship printed on slide 5 is applied to the same data, so the 43.3 mg/hr figure is computed here and is not printed on either slide.'},
+ audit:'Slide 22 asks only for fe, k, ke, ClT, ClR and ClH from these parameters. The relationship printed on slide 5 is applied to the same data, so the 43.3 mg/hr figure is computed here and is not printed on either slide.'},
 
 {id:'m4-n-tcheck', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'clcalc', concept:'cl-t-half-vd', skill:'krate',
@@ -566,7 +567,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -598,7 +599,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -734,7 +735,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'A filtration marker works because its clearance has only one contributing process. Filter it, do not secrete it, do not reabsorb it, and whatever clearance is measured is the glomerular filtration rate. Any additional process contaminates the estimate, upward if the substance is secreted and downward if it is reabsorbed, which is why the choice of marker is the whole of the method.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -761,7 +762,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'The marker actually used is a compromise between fidelity and practicality. Inulin behaves better in the nephron but has to be administered and measured under controlled conditions. Creatinine is endogenous and measurable from a routine serum sample, and the small error introduced by its secretion is accepted in exchange. That is why creatinine clearance is described as an estimate of glomerular filtration rate rather than a measurement of it.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -771,7 +772,8 @@ const Q_MODULE4 = [
  teachImg:'slide_4ClearanceandElimi_p16',
  cite:'4---Clearance-and-Elimination.pdf slide 14',
  quote:'Creatinine and inulin are used clinically to measure GFR, even though creatinine is also secreted.',
- note:'Slide 14 pairs creatinine with inulin as markers used clinically. The transcript is narrower: she says inulin is a better marker but has to be added to the body and is a whole more complicated process, and she poses the question of why creatinine rather than inulin is used. An exam written from these lectures would key the practical reason given here, while still expecting the slide sentence that creatinine is also secreted.'},
+ note:'Inulin is the better marker of filtration but has to be given to the patient. Creatinine is made by the body, which is why it is used, even though some creatinine is also secreted.',
+ audit:'Slide 14 pairs creatinine with inulin as markers used clinically. The transcript is narrower: she says inulin is a better marker but has to be added to the body and is a whole more complicated process, and she poses the question of why creatinine rather than inulin is used. An exam written from these lectures would key the practical reason given here, while still expecting the slide sentence that creatinine is also secreted.'},
 
 {id:'m4-cr-5', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'crclcalc', concept:'equation-sheet-carveout', skill:'recall',
@@ -789,7 +791,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'The equation sheet decides where effort goes. Anything on it has to be recognised and applied, so the work is selecting the right relationship and handling the units. Anything off it has to be reproduced exactly before the calculation can start. For this module the memorised items are the Cockcroft-Gault equation and the ideal body weight formulas, which join the first-order half-life equation and clearance as k times the volume of distribution from earlier modules.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -816,7 +818,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'The arithmetic of the Cockcroft-Gault expression does not produce interpretable units, because the relationship is an empirical estimate rather than a dimensional derivation. The output is nevertheless a clearance and is reported in millilitres per minute, which is what lets it be set against the 120 to 130 mL/min normal range and against the roughly 120 mL/min glomerular filtration rate.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -826,7 +828,7 @@ const Q_MODULE4 = [
  teachImg:'slide_4ClearanceandElimi_p18',
  cite:'4---Clearance-and-Elimination.pdf slide 16',
  quote:'I also want you to recognize that the units of creatinine clearance should be in milliliters per minute, OK. So don\'t give me kilograms per milligram per deciliter.',
- note:'The slide prints the formula without stating its units and the handwritten annotation on this copy is not used as a source. The units requirement is hers from the 14 September lecture, where she also points out that the units in the formula do not cancel.'},
+ audit:'The slide prints the formula without stating its units and the handwritten annotation on this copy is not used as a source. The units requirement is hers from the 14 September lecture, where she also points out that the units in the formula do not cancel.'},
 
 {id:'m4-cr-6', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'crclcalc', concept:'low-crcl-meaning', skill:'apply',
@@ -844,7 +846,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'Creatinine clearance is a renal function estimate, and it is read against the 120 to 130 mL/min normal range. A value well below that range means less drug is removed by the kidney each minute, so a renally eliminated drug accumulates and its half-life lengthens. Whether a dose needs changing depends on the drug as well as the number, since a drug cleared mainly by the liver is far less affected.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -866,7 +868,7 @@ const Q_MODULE4 = [
  tol:0.1,
  steps:[
   {k:'setup', t:'1 inch = 2.54 cm',
-   why:'The ideal body weight formulas count inches above five feet, so a height given in centimetres has to be converted before the weight can be calculated. Dr. Mosley states the conversion factor in class and expects it to be known in both directions.'},
+   why:'The ideal body weight formulas count inches above five feet, so a height given in centimetres has to be converted before the weight can be calculated. Know the conversion, 1 inch = 2.54 cm, in both directions.'},
   {k:'unit', t:'165 cm ÷ 2.54 cm/inch = 64.96 inches',
    why:'Dividing centimetres by centimetres per inch cancels the centimetres and leaves inches. Dividing rather than multiplying is what makes the number smaller, which is the expected direction since an inch is larger than a centimetre.'},
   {k:'round', t:'64.96 inches, called 65 inches',
@@ -874,7 +876,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'Height enters the ideal body weight formula as whole inches above five feet, so the conversion is the first step of any creatinine clearance calculation given a metric height. Five feet is sixty inches, so the number that goes into the formula is the converted height minus sixty. Rounding to the nearest inch before subtracting is what her worked example does.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -904,7 +906,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'Ideal body weight is computed from sex and height alone, never from the weight the patient actually is. Both formulas add 2.3 kg for each inch above five feet and differ only in the baseline, 50 kg for men and 45.5 kg for women. Dr. Mosley keeps every patient at five feet or taller so that the inches term is never negative, and says that no adjusted or actual body weight decisions will be asked.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -934,7 +936,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'The two ideal body weight formulas differ by a fixed 4.5 kg at every height, because they share the 2.3 kg per inch slope and differ only in the intercept. That means using the wrong formula shifts the weight, and therefore the creatinine clearance, by a constant proportion rather than a variable one. Reading the sex of the patient out of the stem is the first thing the calculation depends on.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -962,7 +964,7 @@ const Q_MODULE4 = [
   {k:'algebra', t:'(140 − 45)(57 kg) = (95)(57) = 5415',
    why:'The age term subtracts the patient age from 140 and the product is formed with the ideal body weight. Both terms are inputs to an empirical estimate, so the units do not cancel through the expression.'},
   {k:'algebra', t:'5415 ÷ (72 × 1.1 mg/dL) = 5415 ÷ 79.2 = 68.37',
-   why:'The denominator is the fixed constant 72 multiplied by the serum creatinine in milligrams per decilitre, the unit she confirms twice in class. A higher serum creatinine makes the denominator larger and the estimated clearance smaller, which is the direction renal impairment moves in.'},
+   why:'The denominator is the fixed constant 72 multiplied by the serum creatinine in milligrams per decilitre. A higher serum creatinine makes the denominator larger and the estimated clearance smaller, which is the direction renal impairment moves in.'},
   {k:'algebra', t:'CrCl = (68.37)(0.85) = 58.11 mL/min',
    why:'Applying the female factor reduces the estimate by 15 per cent, on the assumption built into the equation that women carry less muscle for the same height and age. The factor is dimensionless, so the units are unchanged by it.'},
   {k:'round', t:'CrCl = 58.1 mL/min',
@@ -970,7 +972,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'The Cockcroft-Gault calculation runs in a fixed order: convert the height, compute the ideal body weight from sex and height, then substitute age, that weight and the serum creatinine, and apply the 0.85 factor only if the patient is female. Every input except the serum creatinine raises the estimate; the serum creatinine sits in the denominator and lowers it. The result is compared against 120 to 130 mL/min, and 58 mL/min is well below that.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -1000,7 +1002,7 @@ const Q_MODULE4 = [
  teach:[
  {t:'The female factor is a single multiplication applied at the end, and it is the only place sex enters the Cockcroft-Gault equation itself. Sex enters a second time, earlier, through the ideal body weight formula, where the baseline is 50 kg for men and 45.5 kg for women. A question that supplies the ideal body weight directly has removed the first of those two, so only the 0.85 decision remains.'},
   {h:'How the variables relate', list:[
-    'CrCl = (140 - age)(IBW)/(72 x SCr), multiplied by 0.85 for a female patient.',
+    'CrCl = {{frac:(140 - age)(IBW)|72 x SCr}}, multiplied by 0.85 for a female patient.',
     'IBW, male = 50 + 2.3 per inch over 5 feet; female = 45.5 + 2.3 per inch over 5 feet.',
     'Age in years, IBW in kg, SCr in mg/dL, and the answer in mL/min. The units do not cancel.',
     '1 inch = 2.54 cm, so a height in centimetres is converted before IBW is computed.',
@@ -1010,7 +1012,7 @@ const Q_MODULE4 = [
  teachImg:'slide_4ClearanceandElimi_p17',
  cite:'4---Clearance-and-Elimination.pdf slides 15 and 16',
  quote:'(x 0.85 if female) 72 SCr (140 age)(IBW) CrCl',
- note:'Her worked example is female and keys 58.1 mL/min. Every other input of that example is held fixed and only the sex changes, so the 68.4 mL/min figure is the same calculation without the 0.85 factor. It is not a value printed on the slide.'},
+ audit:'Her worked example is female and keys 58.1 mL/min. Every other input of that example is held fixed and only the sex changes, so the 68.4 mL/min figure is the same calculation without the 0.85 factor. It is not a value printed on the slide.'},
 
 /* ════════════════ NUMERIC — ACTIVELY SECRETED ANTIBIOTIC ════════════════ */
 
@@ -1035,7 +1037,7 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
@@ -1064,14 +1066,14 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
  teachImg:'slide_4ClearanceandElimi_p23',
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'What is the usual t½ for this drug?',
- note:'The slide prints this example as a question with no worked answer, and the 14 September transcript does not record her working it aloud. The 23.1 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
+ audit:'The slide prints this example as a question with no worked answer, and the 14 September transcript does not record her working it aloud. The 23.1 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
 
 {id:'m4-n-ab2', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'clcalc', concept:'clearance-change-halflife', skill:'apply',
@@ -1094,14 +1096,14 @@ const Q_MODULE4 = [
   {h:'How the variables relate', list:[
     'ClT = k x VD = D0/AUC.',
     'Rate of elimination = ClT x Cp, so a plot of rate against concentration has slope ClT.',
-    'fe is the fraction of the dose recovered unchanged in urine: fe = Du(infinity)/D0, and it has no units.',
+    'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR = fe x ClT, and ClH = ClT - ClR.',
     'Capital F is bioavailability and is taken as 1 for an intravenous dose; lower-case fe is the fraction excreted.']},
   {h:'What the chapter adds', t:'Chapter 15 attaches a condition to the constancy of clearance: it holds only while elimination is first order. As the concentration falls the elimination rate falls with it, yet the ratio of the two stays fixed, which is what makes clearance a single number for the drug. Where that first-order condition fails, so does the single value.'}],
  teachImg:'slide_4ClearanceandElimi_p23',
  cite:'4---Clearance-and-Elimination.pdf slides 21 and 23',
  quote:'What would be the new t½ for this drug in an adult with partial renal failure whose clearance of the antibiotic was 150 mL/min?',
- note:'As with the normal-function part, the slide prints the question without a worked answer and the transcript does not record her working it aloud. The 115.5 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
+ audit:'As with the normal-function part, the slide prints the question without a worked answer and the transcript does not record her working it aloud. The 115.5 minute figure is computed here from the slide parameters using the relationship printed on slide 21.'},
 
 /* ════════════════ URINE pH AND IONIZATION ════════════════ */
 
@@ -1129,7 +1131,7 @@ const Q_MODULE4 = [
  teachImg:'slide_4ClearanceandElimi_p22',
  cite:'4---Clearance-and-Elimination.pdf slides 20 and 25',
  quote:'Reabsorption of weak acids and weak bases is influenced by the pH of the fluid in the renal tubule and the pka of the drug',
- note:'This appears on slide 20 and again on the summary slide, but the 14 September lecture did not complete this objective. She posed the questions of what impact pH has on filtration and on active secretion and the recording ends mid-discussion, so there is no spoken treatment of the ionization objective to check the slide against. It is written from the slide alone.'},
+ audit:'This appears on slide 20 and again on the summary slide, but the 14 September lecture did not complete this objective. She posed the questions of what impact pH has on filtration and on active secretion and the recording ends mid-discussion, so there is no spoken treatment of the ionization objective to check the slide against. It is written from the slide alone.'},
 
 {id:'m4-io-2', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'ionization', concept:'henderson-hasselbalch-forms', skill:'read',
@@ -1155,6 +1157,6 @@ const Q_MODULE4 = [
  teachImg:'slide_4ClearanceandElimi_p22',
  cite:'4---Clearance-and-Elimination.pdf slide 20',
  quote:'Weak acids pka values 3 - 8 Weak bases pka values 7.5 – 10.5',
- note:'This is the slide she did not reach. The 14 September recording cuts off during her introduction to this objective, so the pKa ranges and the two Henderson-Hasselbalch forms have no spoken treatment to check against. Written from the slide alone; an exam drawn from these lectures could key it, since the objectives slide lists the effect of degree of ionization on renal excretion and the summary slide repeats it.'},
+ audit:'This is the slide she did not reach. The 14 September recording cuts off during her introduction to this objective, so the pKa ranges and the two Henderson-Hasselbalch forms have no spoken treatment to check against. Written from the slide alone; an exam drawn from these lectures could key it, since the objectives slide lists the effect of degree of ionization on renal excretion and the summary slide repeats it.'},
 
 ];

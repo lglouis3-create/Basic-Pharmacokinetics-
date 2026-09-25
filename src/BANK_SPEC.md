@@ -25,9 +25,17 @@ pharmacokinetics knowledge, do not round a number she left unrounded, and do
 not infer a figure the source did not state.
 
 Where the slide, the transcript and her worked solution disagree, write the
-question from the slide, and add a `note` field stating both readings and
-which one an exam written from these lectures would key. Do not adjudicate
-silently.
+question from the slide, and record both readings and the one keyed in an
+`audit` field. Do not adjudicate silently.
+
+`note` and `audit` are different fields. `audit` is for whoever checks the
+bank: where a figure came from, which reading of a garbled caption was used,
+what was computed rather than printed. It is never shown. `note` is shown to
+the student under the explanation, so it carries only what changes what the
+student should do: her printed sheet says 40 L but she worked the problem with
+20 L; her lecture said 93.25 per cent where the arithmetic gives 93.75. Nothing
+shown to the student says where a fact was heard. test.js fails on words such
+as transcript, caption, aloud or handwritten in any displayed field.
 
 The decks are Louis's own annotated copies, so the text extract contains his
 handwriting OCR'd into nonsense alongside the printed slide. **Printed slide
@@ -89,6 +97,17 @@ option it names the specific misunderstanding that leads a student there — not
 "this is incorrect" but what they did instead, which quantity they used, which
 word they attached the wrong idea to. Three to five sentences. This is where
 the drill teaches, so it is where the effort goes.
+
+**Formulas** are typed in plain text, `C0e^(-kt)`, `t1/2 = 0.693/k`,
+`Cl = k x VD`, and the app sets them with subscripts and superscripts when it
+shows them. A ratio worth reading as a ratio is written
+`{{frac:numerator|denominator}}` and stacks, as the slides print it.
+
+**Comparison tables.** Where students run two or three cases together (raising
+k against raising ka; immediate against extended release), give the concept
+block a section with `table:{head:[...], rows:[[...]]}`: the cases as columns,
+the quantities that differ as rows, each cell short with its reason. On a phone
+it becomes one card per row.
 
 **`teach`** explains the concept the question turns on, so that someone who
 missed it can now answer a differently-worded version. Not a restatement of

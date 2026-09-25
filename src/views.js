@@ -1,4 +1,78 @@
 /* ==========================================================================
+   FORMULAS IN TEXT
+   ==========================================================================
+   The bank types its formulas in plain text: C0e^(-kt), t1/2 = 0.693/k,
+   Cl = k x VD. Shown as typed they read as code. This sets them the way the
+   slides print them at the moment they are shown, so no stored text changes
+   and nothing typed differently from before goes wrong: subscripts on the
+   course's symbols (C0, VD, ka, Css, ClT, ...), a superscript for whatever
+   follows a caret, t-half for t1/2, a times sign for a spaced x between
+   factors, and a minus sign for a spaced hyphen. A ratio worth reading as a
+   ratio is written {{frac:numerator|denominator}} and stacks.
+
+   It runs on text already escaped, so the only markup it can produce is the
+   <sub> and <sup> it writes itself.
+   ========================================================================== */
+const SUBSYM = [
+  // longest first, so Cpeak is not read as Cp followed by eak
+  ['kVD','kV<sub>D</sub>'],['FD0','FD<sub>0</sub>'],
+  ['AUCoral','AUC<sub>oral</sub>'],['AUCiv','AUC<sub>IV</sub>'],['AUCpo','AUC<sub>po</sub>'],['AUCIV','AUC<sub>IV</sub>'],
+  ['Cpeak','C<sub>peak</sub>'],['Cmax','C<sub>max</sub>'],['Cmin','C<sub>min</sub>'],['tmax','t<sub>max</sub>'],
+  ['Css','C<sub>ss</sub>'],['ClT','Cl<sub>T</sub>'],['ClR','Cl<sub>R</sub>'],['ClH','Cl<sub>H</sub>'],['SCr','S<sub>Cr</sub>'],
+  ['k12','k<sub>12</sub>'],['k21','k<sub>21</sub>'],['Cp0','C<sub>p</sub><sup>0</sup>'],['Cp','C<sub>p</sub>'],['Cs','C<sub>s</sub>'],
+  ['C0','C<sub>0</sub>'],['D0','D<sub>0</sub>'],['k0','k<sub>0</sub>'],['DB','D<sub>B</sub>'],['DL','D<sub>L</sub>'],['Du','D<sub>u</sub>'],
+  ['VD','V<sub>D</sub>'],['Vp','V<sub>p</sub>'],['Vt','V<sub>t</sub>'],['Vc','V<sub>c</sub>'],
+  ['ka','k<sub>a</sub>'],['ke','k<sub>e</sub>'],['km','k<sub>m</sub>'],['fe','f<sub>e</sub>'],
+  ['C1','C<sub>1</sub>'],['C2','C<sub>2</sub>'],['t1','t<sub>1</sub>'],['t2','t<sub>2</sub>'],['Ct','C<sub>t</sub>'],
+  ['Cn','C<sub>n</sub>'],['tn','t<sub>n</sub>'],
+];
+const SUB_MAP = Object.fromEntries(SUBSYM);
+/* A symbol stands alone: no letter before it (a digit is allowed, as in 2k0),
+   and no letter or digit after it, except the e of a following exponential
+   (C0e^-kt) or, for a rate constant, the t it multiplies (k0t). */
+const RATE = new Set(['k0', 'ka', 'ke', 'km']);
+const SUB_RE = new RegExp('(^|[^A-Za-z])(' + SUBSYM.map(s => s[0]).join('|')
+  + ')(?=(e<sup>|t(?![A-Za-z0-9])|[^A-Za-z0-9]|$))', 'g');
+
+/* the balanced group after a caret: ^(...) with nesting, or ^ and a signed run */
+function sups(s){
+  let out = '', i = 0;
+  while(i < s.length){
+    const j = s.indexOf('^', i);
+    if(j < 0){ out += s.slice(i); break; }
+    out += s.slice(i, j);
+    if(s[j+1] === '('){
+      let d = 0, k = j + 1;
+      for(; k < s.length; k++){ if(s[k] === '(') d++; else if(s[k] === ')'){ d--; if(d === 0) break; } }
+      if(k >= s.length){ out += s.slice(j); break; }
+      out += '<sup>' + s.slice(j + 2, k) + '</sup>'; i = k + 1;
+    }else{
+      const m = s.slice(j + 1).match(/^[-−+]?[A-Za-z0-9.]+/);
+      if(!m){ out += '^'; i = j + 1; continue; }
+      out += '<sup>' + m[0] + '</sup>'; i = j + 1 + m[0].length;
+    }
+  }
+  return out;
+}
+
+function prettyMath(s){
+  let t = String(s);
+  t = t.replace(/\bt1\/2(a|beta|β)?(?![A-Za-z0-9])/g,
+                (m, q) => 't½' + (q ? '<sub>' + (q === 'beta' ? 'β' : q) + '</sub>' : ''));
+  t = t.replace(/(\d|\)|[A-Za-z]|,) x (?=[\dA-Za-z(\[])/g, '$1 × ');    // times, between factors only
+  t = t.replace(/ - (?=[\dA-Za-z(\[])/g, ' − ');                          // a spaced hyphen is a minus
+  t = t.replace(/\(-/g, '(−').replace(/\^-/g, '^−');
+  t = sups(t);
+  t = t.replace(SUB_RE, (m, pre, sym, after) => {
+    if(/^t/.test(after || '') && !RATE.has(sym)) return m;                     // only a rate constant multiplies t
+    return pre + SUB_MAP[sym];
+  });
+  return t;
+}
+const rich = s => mathHTML(prettyMath(esc(s)));
+const richHTML = h => mathHTML(prettyMath(h));
+
+/* ==========================================================================
    TERM GLOSSES
    ==========================================================================
    Terms that carry conceptual weight in a course get a short definition the
@@ -30,21 +104,38 @@ const GLOSS = [
 /* A section is {h, t} for prose, {h, list:[...]} for bullets, or both. Bullets
    are how a set of relations between the same few quantities is read: as a
    list of separate statements rather than one sentence carrying all of them. */
+/* A section may also carry a comparison table, {head:[...], rows:[[...]]}:
+   two things students run together, set side by side against the same rows,
+   so what differs is read across a row rather than hunted for in prose. */
 const teachParts = t => Array.isArray(t)
-  ? t.filter(p => p && (p.t || p.fig || (p.list && p.list.length)))
-      .map(p => ({h: p.h, t: p.t ? String(p.t) : '', list: (p.list || []).map(String), fig: p.fig || ''}))
-  : (t ? [{t: String(t), list: [], fig: ''}] : []);
-/* Everything a concept block says, as one string: each section's prose and its
-   bullets, so the term glosser and every check see the whole of it. */
-const teachText  = t => teachParts(t).map(p => [p.t, ...p.list].filter(Boolean).join(' ')).join(' ');
+  ? t.filter(p => p && (p.t || p.fig || (p.list && p.list.length) || p.table))
+      .map(p => ({h: p.h, t: p.t ? String(p.t) : '', list: (p.list || []).map(String), fig: p.fig || '',
+                  table: p.table || null, after: p.after ? String(p.after) : ''}))
+  : (t ? [{t: String(t), list: [], fig: '', table: null, after: ''}] : []);
+/* Everything a concept block says, as one string: each section's prose, its
+   bullets and its table cells, so the term glosser and every check see all of it. */
+const teachText  = t => teachParts(t).map(p => [p.t, ...p.list, p.after,
+  ...(p.table ? [...p.table.head, ...p.table.rows.flat()] : [])].filter(Boolean).join(' ')).join(' ');
+/* A column heading as plain words, for the label a narrow screen shows above
+   each cell once the table has become one card per row. */
+const eqPlainText = h => String(h).replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '$1/$2')
+  .replace(/\bka\b/g, 'k\u2090').replace(/\btmax\b/g, 't\u2098\u2090\u2093').replace(/\bCmax\b/g, 'C\u2098\u2090\u2093');
+function compareTable(tb){
+  const cell = c => richHTML(esc(String(c)));
+  return `<div class="cmpwrap"><table class="cmp"><thead><tr>${tb.head.map(c => `<th>${cell(c)}</th>`).join('')}</tr></thead>
+    <tbody>${tb.rows.map(r => `<tr><th scope="row">${cell(r[0])}</th>${r.slice(1).map((c, i) =>
+      `<td data-label="${esc(eqPlainText(tb.head[i + 1]))}">${cell(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
 
 function renderTeach(t, seen, self){
   const gl = s => seen ? glossify(esc(s), seen, self) : esc(s);
   return teachParts(t).map(p =>
     (p.h ? `<h5 class="tsec">${esc(p.h)}</h5>` : '') +
-    (p.t ? `<p class="prose">${gl(p.t)}</p>` : '') +
-    (p.list.length ? `<ul class="tlist">${p.list.map(li => `<li>${gl(li)}</li>`).join('')}</ul>` : '') +
-    (p.fig && IMAGES[p.fig] ? `<img class="qimg tdimg" src="${IMAGES[p.fig]}" alt="Figure for this explanation">` : '')
+    (p.t ? `<p class="prose">${richHTML(gl(p.t))}</p>` : '') +
+    (p.list.length ? `<ul class="tlist">${p.list.map(li => `<li>${richHTML(gl(li))}</li>`).join('')}</ul>` : '') +
+    (p.table ? compareTable(p.table) : '') +
+    (p.fig && IMAGES[p.fig] ? `<img class="qimg tdimg" src="${IMAGES[p.fig]}" alt="Figure for this explanation">` : '') +
+    (p.after ? `<p class="prose">${richHTML(gl(p.after))}</p>` : '')
   ).join('');
 }
 
@@ -621,14 +712,14 @@ function stepsBlock(q){
   return `<div class="steps"><h4>The working, one line at a time</h4>` +
     (q.steps||[]).map(s => `<div class="step">
       <span class="stepk">${esc(s.k)}</span>
-      <span class="stept">${esc(s.t)}<span class="stepwhy">${esc(s.why)}</span></span>
+      <span class="stept">${rich(s.t)}<span class="stepwhy">${rich(s.why)}</span></span>
     </div>`).join('') + `</div>`;
 }
 function pairsBlock(q){
   return `<div class="steps"><h4>Each pair, and why</h4>` +
     (q.pairs||[]).map(p => `<div class="pairrow">
       <span class="pl">${esc(p.l)}</span>
-      <span class="pr">${esc(p.r)}<span>${esc(p.why)}</span></span>
+      <span class="pr">${rich(p.r)}<span>${rich(p.why)}</span></span>
     </div>`).join('') + `</div>`;
 }
 
@@ -694,7 +785,7 @@ function renderQuiz(){
   </div>
   <div class="qbody">
     ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}
-    <p class="stem">${esc(q.stem)}</p>`;
+    <p class="stem">${rich(q.stem)}</p>`;
 
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
 
@@ -720,7 +811,7 @@ function renderQuiz(){
         cls += ' on';
       }
       h += `<button class="${cls}" data-o="${oi}"${Q.revealed?' disabled':''} aria-pressed="${chosen}">
-        <span class="k">${multi ? (chosen ? '☑' : '☐') : LETTERS[n]}</span><span>${esc(o.t)}</span></button>`;
+        <span class="k">${multi ? (chosen ? '☑' : '☐') : LETTERS[n]}</span><span>${rich(o.t)}</span></button>`;
     });
   }
 
@@ -772,7 +863,7 @@ function renderQuiz(){
         const chosen = multi ? picks.includes(oi) : (oi === Q.picked);
         h += `<div class="wrow">
           <span class="mark ${o.correct?'y':'n'}">${o.correct?'✓':'✗'}</span>
-          <span class="wtxt"><b>${LETTERS[n]}. ${esc(o.t)}</b>${multi && chosen ? ' <i class="youpicked">you selected this</i>' : ''} — ${glossify(esc(o.why), seen, self)}</span>
+          <span class="wtxt"><b>${LETTERS[n]}. ${rich(o.t)}</b>${multi && chosen ? ' <i class="youpicked">you selected this</i>' : ''} — ${richHTML(glossify(esc(o.why), seen, self))}</span>
           </div>`;
       });
     }
@@ -780,7 +871,7 @@ function renderQuiz(){
     if(q.teach) h += `<div class="teach"><h4>The concept behind this</h4>${
         q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${
         renderTeach(q.teach, seen, self)}</div>`;
-    if(q.note) h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">${esc(q.note)}</p>`;
+    if(q.note) h += `<p class="prose qnote">${rich(q.note)}</p>`;
     const inSet = CHAIN_OF[q.id];
     if(inSet && !Q.chain)
       h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">She sets this as part
@@ -1106,7 +1197,7 @@ function renderGaps(){
               .map(i=>q.options[i] ? q.options[i].t : '').filter(Boolean).join(' · ');
       }
       h += `<div class="missq">
-        <div class="mstem">${esc(q.stem)}</div>
+        <div class="mstem">${rich(q.stem)}</div>
         <div class="mmeta" style="color:var(--ok);margin-bottom:4px">Answer: ${esc(correctTxt)}</div>
         ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${esc(pickedTxt)}</div>` : ''}
         ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as a ${esc((MISS_LABEL[last.missKind]||'').toLowerCase())} miss</div>` : ''}
@@ -1293,7 +1384,7 @@ function renderExamQ(){
     kind==='numeric' ? '<span class="tag">calculation</span>' : ''}${
     kind==='match' ? '<span class="tag">matching</span>' : ''}<span class="spacer"></span>
     <span>no feedback until you submit</span></div>
-  <div class="qbody"><p class="stem">${esc(q.stem)}</p>`;
+  <div class="qbody"><p class="stem">${rich(q.stem)}</p>`;
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
   if(kind === 'numeric'){
     h += numericInput(q, EX.picks[EX.i], false, '');
@@ -1303,7 +1394,7 @@ function renderExamQ(){
     order.forEach((oi,n)=>{
       const sel = multi ? EX.picks[EX.i].includes(oi) : EX.picks[EX.i] === oi;
       h += `<button class="opt${multi?' multi':''}${sel?(multi?' on':' pick-ok'):''}" data-o="${oi}" aria-pressed="${sel}">
-        <span class="k">${multi ? (sel ? '☑' : '☐') : LETTERS[n]}</span><span>${esc(q.options[oi].t)}</span></button>`;
+        <span class="k">${multi ? (sel ? '☑' : '☐') : LETTERS[n]}</span><span>${rich(q.options[oi].t)}</span></button>`;
     });
   }
   h += `</div><div class="qfoot">
@@ -1363,7 +1454,7 @@ function renderExamResult(){
     h += `<div class="qcard" style="margin-bottom:12px"><div class="qhead">
       ${profTag(q.prof)}<span>Q${i+1}</span>${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
       <span style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'correct':(blankQ?'blank':'missed')}</span>
-      </div><div class="qbody"><p class="stem" style="font-size:15.5px">${esc(q.stem)}</p>`;
+      </div><div class="qbody"><p class="stem" style="font-size:15.5px">${rich(q.stem)}</p>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
     if(kind === 'numeric'){
       h += `<p class="verdict ${ok?'ok':'bad'}">Keyed answer ${q.answer.toFixed(4)} ${esc(q.units)}${
@@ -1374,7 +1465,7 @@ function renderExamResult(){
       EX.orders[i].forEach((oi,n)=>{
         const o = q.options[oi];
         h += `<div class="wrow"><span class="mark ${o.correct?'y':'n'}">${o.correct?'✓':'✗'}</span>
-          <span class="wtxt"><b>${LETTERS[n]}. ${esc(o.t)}</b>${chosen(oi)?' &nbsp;<i>(you picked this)</i>':''} — ${esc(o.why)}</span>
+          <span class="wtxt"><b>${LETTERS[n]}. ${rich(o.t)}</b>${chosen(oi)?' &nbsp;<i>(you picked this)</i>':''} — ${rich(o.why)}</span>
           </div>`;
       });
     }

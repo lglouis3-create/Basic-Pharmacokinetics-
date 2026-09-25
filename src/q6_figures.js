@@ -49,7 +49,7 @@ const Q_FIGURES = [
   {h:'The one thing to check first', t:'This shape means zero order only because the axis is evenly spaced. The same straight line on an axis marked 1, 10, 100, 1000 would mean first order instead, which is why the axis is read before the line.'},
   {h:'What the chapter adds', t:'Chapter 2 makes the units the first test. A constant reported in mg/hr or mcg/mL/hr belongs to a zero-order process, and one reported in hr⁻¹ to a first-order process. Where a data set is given instead of a constant, the same split shows up as a constant difference between concentrations for zero order and a constant ratio for first order.'}],
  quote:'if you look at that scale and you see that it is not changing by regular one infinite, or it’s increasing by a a function of 10, then that tells you that it is a logarithmic scale',
- note:'Redrawn on the evenly spaced axis of the zero-order slide.',
+ audit:'Redrawn on the evenly spaced axis of the zero-order slide.',
  teachImg:'slide_Introduction_p20',
  cite:'Introduction.pdf slide 17'},
 
@@ -72,7 +72,7 @@ const Q_FIGURES = [
   {h:'Why the half-life is one number', t:'Because a fixed fraction goes in every interval, the time to lose half is the same at every starting concentration. That is why a first-order half-life is quoted as a single value for a drug, t½ = 0.693/k, while a zero-order half-life, C0/2k0, changes with the starting concentration.'},
   {h:'Straightening it out', t:'Plotting the natural logarithm of the same concentrations against time gives ln C = ln C0 − kt, a straight line of slope −k. That is the reason concentration data are so often shown on a decade axis.'},
   {h:'What the chapter adds', t:'Chapter 2 makes the units the first test. A constant reported in mg/hr or mcg/mL/hr belongs to a zero-order process, and one reported in hr⁻¹ to a first-order process. Where a data set is given instead of a constant, the same split shows up as a constant difference between concentrations for zero order and a constant ratio for first order.'}],
- note:'Redrawn on the evenly spaced axis of the first-order slide.',
+ audit:'Redrawn on the evenly spaced axis of the first-order slide.',
  teachImg:'slide_Introduction_p21',
  cite:'Introduction.pdf slide 18'},
 
@@ -96,7 +96,7 @@ const Q_FIGURES = [
   {h:'The instruction she repeats', t:'A straight line means first order on a decade axis and zero order on an evenly spaced axis. The line alone settles nothing, which is why the axis is read first every time.'},
   {h:'What the chapter adds', t:'Chapter 2 says what semi-logarithmic paper is for: it places the data at logarithmic intervals so the numbers need not be converted to their logarithms before plotting. The paper performs the transformation, which is why the printed tick values step by tens while the plotted numbers stay as measured, and why the axis has to be read rather than assumed.'}],
  quote:'I expect for you, because you will see graphs like this, and this word will not be over here most of the time. you’ve got to pay attention to the axis',
- note:'Redrawn from the points on her semi-logarithmic slide: 200, 93, 44, 21, 10, 4.9 and 2.3 at hours 0 to 6.',
+ audit:'Redrawn from the points on her semi-logarithmic slide: 200, 93, 44, 21, 10, 4.9 and 2.3 at hours 0 to 6.',
  teachImg:'slide_Introduction_p24',
  cite:'Introduction.pdf slide 21'},
 
@@ -119,7 +119,7 @@ const Q_FIGURES = [
   {h:'How the variables relate', t:'Zero order: C = C0 − k0t, with k0 in concentration per time, and a half-life C0/2k0 that depends on the starting concentration. First order: C = C0e−kt, with k in reciprocal time, and a half-life 0.693/k that does not.'},
   {h:'The two-step test', t:'Read the axis, then read the line. Evenly spaced axis plus straight line means zero order. Decade axis plus straight line means first order. Either axis with a bend means the other order.'},
   {h:'What the chapter adds', t:'Chapter 2 says what semi-logarithmic paper is for: it places the data at logarithmic intervals so the numbers need not be converted to their logarithms before plotting. The paper performs the transformation, which is why the printed tick values step by tens while the plotted numbers stay as measured, and why the axis has to be read rather than assumed.'}],
- note:'A constant-rate decline on the same decade axis as the straight-line figure.',
+ audit:'A constant-rate decline on the same decade axis as the straight-line figure.',
  teachImg:'slide_Introduction_p20',
  cite:'Introduction.pdf slides 17–21'},
 
@@ -143,7 +143,7 @@ const Q_FIGURES = [
   {h:'What follows once it is recognised', t:'On a decade axis a straight line means first order, and the slope is −k/2.3 for base-ten decades. On an evenly spaced axis a straight line means zero order, and the slope is −k0 directly.'},
   {h:'What the chapter adds', t:'Chapter 2 says what semi-logarithmic paper is for: it places the data at logarithmic intervals so the numbers need not be converted to their logarithms before plotting. The paper performs the transformation, which is why the printed tick values step by tens while the plotted numbers stay as measured, and why the axis has to be read rather than assumed.'}],
  quote:'Notice that it doesn’t say. Log',
- note:'Drawn with no axis label, the case she describes.',
+ audit:'Drawn with no axis label, the case she describes.',
  teachImg:'slide_Introduction_p23',
  cite:'Introduction.pdf slides 20–21'},
 
@@ -168,7 +168,7 @@ const Q_FIGURES = [
   {h:'What to look for instead', t:'Her instruction is that the model has to be stated or shown. Given a semi-logarithmic plot after a bolus, one straight line points to one compartment and a bend to two.'},
   {h:'What the chapter adds', t:'Chapter 13 says what the steep early stretch is actually reporting. During the distribution phase the fall in plasma concentration mostly reflects drug moving within the body rather than drug leaving it. Elimination and distribution run concurrently throughout, but distribution is the faster of the two, so there is a net transfer out of the central compartment. The central compartment is blood plus the highly perfused organs, and since the kidney and liver are among them, elimination is placed there.'}],
  quote:'If I gave you a graph on a log scale that looks just like the blue line all by itself, that tells you it’s an IV bolus dose one compartment model.',
- note:'Drawn as the single-phase decline she describes.',
+ audit:'Drawn as the single-phase decline she describes.',
  teachImg:'slide_2IVBolusAdministra_p13',
  cite:'2IVBolusAdministration.pdf, slide "Why Multicompartment Models?"'},
 
@@ -192,7 +192,7 @@ const Q_FIGURES = [
   {h:'The volume this figure gives', t:'The volume of the central compartment is the dose divided by the concentration at time zero, and that concentration is A + B, the two intercepts added together.'},
   {h:'What the chapter adds', t:'Chapter 13 says what the steep early stretch is actually reporting. During the distribution phase the fall in plasma concentration mostly reflects drug moving within the body rather than drug leaving it. Elimination and distribution run concurrently throughout, but distribution is the faster of the two, so there is a net transfer out of the central compartment. The central compartment is blood plus the highly perfused organs, and since the kidney and liver are among them, elimination is placed there.'}],
  quote:'if I give you a graph that looks something like this without the red and blue and just a log scale and I’m telling you that it is an IV bolus dose, and I just give you a line that looks like this one, the black line. That should say to you that this is a two compartment model.',
- note:'Redrawn from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t, with the terminal line extrapolated back.',
+ audit:'Redrawn from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t, with the terminal line extrapolated back.',
  teachImg:'slide_2IVBolusAdministra_p13',
  cite:'2IVBolusAdministration.pdf, slide "Why Multicompartment Models?"'},
 
@@ -216,7 +216,7 @@ const Q_FIGURES = [
   {h:'What she does and does not ask', t:'She states that feathering and the method of residuals are to be understood but not performed, and that A, B, α and β will be supplied. What is asked is what they represent and what follows from them.'},
   {h:'What the chapter adds', t:'Chapter 13 explains why one constant suffices once the bend is past. Drug accumulates in the peripheral compartment until its rate in equals its rate out, which is distribution equilibrium; after that the two compartments decline in parallel, and the drug behaves as if it were in one compartment with first-order elimination described by beta alone. That is what makes 0.693/beta the elimination half-life and makes the plasma curve a usable report of the tissue.'}],
  quote:'I am pretty much gonna give you A, B, alpha, beta I want you to know what they represent and why we use them.',
- note:'Redrawn from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t.',
+ audit:'Redrawn from the equation on her recap slide, C = 15e−3.4t + 7e−0.12t.',
  teachImg:'slide_2IVBolusAdministra_p13',
  cite:'2IVBolusAdministration.pdf, slide "Why Multicompartment Models?"'},
 
@@ -241,7 +241,7 @@ const Q_FIGURES = [
   {h:'How long it takes', t:'The approach depends only on the half-life, so the short answer is three to five half-lives. Each half-life closes half the remaining gap: one gets to 50% of Css, two to 75%, three to 87.5%.'},
   {h:'What the chapter adds', t:'Chapter 6 starts from the mass balance rather than the finished formula. The amount in the body changes at dDB/dt = R − kDB: a constant amount arriving each hour, and a first-order amount leaving that grows as the body fills. Every infusion result in the module is that one statement integrated, which is why the input is zero order and the output first order.'}],
  quote:'Our input is zero order, constant in, first order out. When we stop the in, then it’s just out.',
- note:'Drawn for a drug with a five-hour half-life reaching a plateau of 20 mg/L.',
+ audit:'Drawn for a drug with a five-hour half-life reaching a plateau of 20 mg/L.',
  teachImg:'slide_3IntravenousInfusi_p3',
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"'},
 
@@ -266,7 +266,7 @@ const Q_FIGURES = [
   {h:'When the wait is unacceptable', t:'If the plateau is needed sooner than three to five half-lives, raising the rate does not help. A loading dose does, because it puts the steady-state amount into the body immediately: DL = Css × VD.'},
   {h:'What the chapter adds', t:'Chapter 6 derives the plateau rather than asserting it. Steady state is the moment dCp/dt = 0, so R = kDB, and dividing by the volume gives Css = R/kVD = R/Cl. It also names the case where no plateau exists at all: if elimination saturates, so that the input rate exceeds the rate the body can clear, the concentration keeps climbing and never levels off, which the chapter calls a potentially dangerous situation.'}],
  quote:'changing the rate changes our steady state concentration with me. I feel like I’ve said it 5 times, and I’ve said it 5 times because this is one of those things that I want you to take with you. so I’ve said it 5 times. I’m gonna ask it of you 10 times.',
- note:'Drawn for one drug with a five-hour half-life at two rates, the second twice the first.',
+ audit:'Drawn for one drug with a five-hour half-life at two rates, the second twice the first.',
  teachImg:'slide_3IntravenousInfusi_p3',
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"'},
 
@@ -291,7 +291,7 @@ const Q_FIGURES = [
   {h:'Why clearance is treated as a constant', t:'Clearance is k × VD, and both are properties of the drug in that patient rather than of the dose. A constant times a constant is a constant, which is why one slope serves every concentration on the figure.'},
   {h:'What the chapter adds', t:'Chapter 15 gives the condition behind the straight line: clearance stays a single number only while elimination is first order. The elimination rate falls as the concentration falls, but the ratio of the two does not, which is what holds the points on one line through the origin.'}],
  quote:'our rate of elimination. Is our clearance times the concentration of drug in the plasma… 15 mL. Per minute. Times. 5 mcg per mL… So 75 mcg per minute.',
- note:'Drawn for a drug of clearance 2 L/hr, over the concentration range she works with.',
+ audit:'Drawn for a drug of clearance 2 L/hr, over the concentration range she works with.',
  teachImg:'slide_4ClearanceandElimi_p4',
  cite:'4---Clearance-and-Elimination.pdf, slide "Clearance"'},
 
@@ -314,7 +314,7 @@ const Q_FIGURES = [
   {h:'What this does to clearance', t:'Clearance is defined as rate divided by concentration. With the rate fixed, that ratio falls as concentration rises, so clearance is no longer one number for the drug and the relation Cl = k × VD stops being usable.'},
   {h:'The contrast to hold', t:'On these axes, a line rising from the origin means first order and its slope is the clearance. A horizontal line means zero order and there is no single clearance to read.'},
   {h:'What the chapter adds', t:'Chapter 15 explains why no single clearance can be quoted here. Clearance is the rate of elimination divided by the plasma concentration, so with the rate fixed that ratio falls as the concentration rises, and the constancy that first-order elimination provides is gone.'}],
- note:'Drawn on the same axes as the rising-line figure.',
+ audit:'Drawn on the same axes as the rising-line figure.',
  teachImg:'slide_4ClearanceandElimi_p4',
  cite:'4---Clearance-and-Elimination.pdf, slide "Clearance"'},
 
@@ -334,12 +334,12 @@ const Q_FIGURES = [
    why:'Zero-order input delivers drug at a fixed rate, which gives the straight climb and plateau of an infusion rather than a rounded peak. Reaching for this confuses a modified-release product, which she describes as looking like an infusion, with an ordinary oral dose.'}],
  teach:[
   {h:'What the peak is', t:'Before the peak the absorption rate is greater than the elimination rate, so the concentration climbs. After the peak elimination is the larger of the two and it falls. At the peak itself the two rates are equal, which is what makes it the maximum.'},
-  {h:'How the variables relate', t:'The curve is C = (F·D·ka)/(VD(ka − k)) × (e−kt − e−ka·t). F is the fraction of the dose reaching the circulation, ka is the first-order absorption rate constant and k the elimination rate constant.'},
-  {h:'What sets the time of the peak', t:'tmax = ln(ka/k)/(ka − k). Only the two rate constants appear, so the time of the peak does not move when the dose changes. She requires tmax to be found before Cmax every time, whether or not it is asked for.'},
+  {h:'How the variables relate', t:'The curve is Cp = {{frac:F ka D0|VD(ka - k)}} (e^(-kt) - e^(-ka t)). F is the fraction of the dose reaching the circulation, ka is the first-order absorption rate constant and k is the elimination rate constant.'},
+  {h:'What sets the time of the peak', t:'tmax = {{frac:ln(ka/k)|ka - k}}. Only the two rate constants appear, so the time of the peak does not move when the dose changes. She requires tmax to be found before Cmax every time, whether or not it is asked for.'},
   {h:'The one letter that flags this route', t:'A capital F in a problem means an extravascular dose, because a fraction less than one has reached the circulation. For an intravenous dose F is taken as one, since all of it is already there.'},
   {h:'What the chapter adds', t:'Chapter 16 lists what F actually collects. Bioavailability is set by every step between swallowing and the systemic circulation: release from the dosage form, dissolution in gastrointestinal fluid, transporters in the gut, passage through the gut wall, metabolism there, and passage through the liver by way of the hepatic portal vein. A low F does not say which of those failed. The chapter also names the lag time, Tlag: absorption often does not begin at the moment of the dose, because the product still has to disintegrate, dissolve and leave the stomach.'}],
  quote:'if I give you a curve on the exam and it looks like this. where there is a clear peak. we go up, we peak, we come back down, then you, I want you to identify that as an oral input. First order in, first order out.',
- note:'Drawn from the parameters she works through in class: F = 0.85, dose 500 mg, VD 22 L, ka 0.924 hr⁻¹, k 0.231 hr⁻¹, which put the peak at 2.0 hours and 12.17 mg/L.',
+ audit:'Drawn from the parameters she works through in class: F = 0.85, dose 500 mg, VD 22 L, ka 0.924 hr⁻¹, k 0.231 hr⁻¹, which put the peak at 2.0 hours and 12.17 mg/L.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
 {id:'fig-oral-2', skill:'read', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
@@ -357,12 +357,12 @@ const Q_FIGURES = [
    why:'tmax is read on the horizontal axis where the curve turns over, well to the left of the straight tail. Reaching for this takes a feature of the rising part of the curve from the part where the rise is long finished.'}],
  teach:[
   {h:'Why the tail straightens', t:'The curve is the difference of two exponentials. The absorption term dies away faster than the elimination term, so once it has gone only the elimination term is left, and a single exponential is a straight line on a decade axis.'},
-  {h:'How the variables relate', t:'In the tail the concentration behaves as C = (intercept) × e−kt, so ln C falls linearly with time at slope −k. Reading that slope and applying t½ = 0.693/k gives the elimination half-life.'},
-  {h:'Which half-life is meant', t:'She states that an unqualified t½ means the half-life of elimination. The absorption half-life exists but is asked for by name.'},
+  {h:'How the variables relate', t:'In the tail the concentration behaves as C = (intercept) x e^(-kt), so ln C falls in a straight line with time, at slope −k. Reading that slope and applying t1/2 = {{frac:0.693|k}} gives the elimination half-life.'},
+  {h:'Which half-life is meant', t:'A half-life written with no subscript, plain t1/2 or “the half-life”, means the elimination half-life. The absorption half-life is always labelled: t1/2a, or “the half-life of absorption”.'},
   {h:'What the rising part needs', t:'The absorption rate constant cannot be read directly from the figure, because the early points contain both processes at once. Separating them is the method of residuals, which she asks to be understood rather than performed.'},
-  {h:'What the chapter adds', t:'Chapter 16 attaches a condition to this reading. The terminal slope gives the elimination rate constant only while absorption is the faster of the two processes, which is the usual case for an immediate-release product. For an extended-release product whose dissolution is deliberately slow, absorption is the slower process and that same terminal slope reports absorption instead, a reversal called flip-flop. Comparing the oral terminal slope with the slope after an intravenous dose is what separates the two.'}],
+  {h:'What the chapter adds: immediate against extended release', t:'This is about the tail of an oral curve: the last part, after the peak, where the curve becomes a straight line on a log scale. The slope of that straight part is set by whichever of the two rate constants is smaller, because by then the faster process has finished. Chapter 16 uses this to tell two kinds of product apart.', table:{head:['', 'Immediate release', 'Extended release, built to dissolve slowly'], rows:[['Larger constant', 'ka is larger than k', 'ka can be smaller than k'], ['Still happening in the tail', 'Elimination only; absorption has finished', 'Absorption, which is now the slower step'], ['Slope of the tail gives', 'k', 'ka, a reversal called flip-flop'], ['Against an IV dose of the same drug', 'Oral tail runs parallel to the IV line', 'Oral tail is flatter than the IV line']]}, fig:'flipflop', after:'Both tails are straight lines, so an oral curve on its own cannot show which case it is. The IV line falls with k, which makes it the reference: an oral tail parallel to it is falling with k, and one flatter than it is falling with ka. In the flip-flop case a slowly released product can look as if the drug has a long elimination half-life when the slow step is really its absorption.'}],
  quote:'If it’s just T1/2, then your assumption is that I’m looking for the half-life of elimination',
- note:'The same parameters as the peak figure, replotted on a decade axis.',
+ audit:'The same parameters as the peak figure, replotted on a decade axis.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
 {id:'fig-oral-3', skill:'apply', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
@@ -380,12 +380,12 @@ const Q_FIGURES = [
    why:'Absorption is still running at the peak and continues for some time afterwards; what has happened is that elimination has caught up with it. This confuses the rates being equal with the input having stopped, which are different events at different times.'}],
  teach:[
   {h:'Reading the peak as a balance', t:'The curve is the net of two opposing processes. To the left, absorption outpaces elimination and the concentration climbs. To the right, elimination outpaces absorption and it falls. The peak is the single moment when neither is ahead.'},
-  {h:'How the variables relate', t:'Setting the rate of change to zero gives tmax = ln(ka/k)/(ka − k), which contains only the two rate constants. Because the dose does not appear, giving twice the dose doubles Cmax and leaves tmax where it was.'},
+  {h:'How the variables relate', t:'Setting the rate of change to zero gives tmax = {{frac:ln(ka/k)|ka - k}}, which contains only the two rate constants. Because the dose does not appear, giving twice the dose doubles Cmax and leaves tmax where it was.'},
   {h:'The order she requires', t:'Cmax is found by substituting tmax back into the concentration equation, so tmax must be calculated first. She states that this holds even when tmax is not itself asked for.'},
   {h:'What moves the peak', t:'Only a change in ka or k moves tmax. Speeding absorption relative to elimination brings the peak earlier and higher; speeding elimination brings it earlier and lower.'},
   {h:'What the chapter adds', t:'Chapter 16 describes the peak as a balance with no net change: at Cmax the rate of absorption equals the rate of elimination, so the amount in the body is momentarily steady. It also corrects a natural misreading of what follows. Just after tmax there is still drug at the absorption site and absorption is still running; the concentration falls only because elimination has become the faster of the two. The tail becomes elimination alone later, once the site is depleted and the absorption rate reaches zero.'}],
  quote:'Right at CMax, the rate N is going to be equal to the rate out.',
- note:'Drawn from her worked parameters, with the peak at 2.0 hours and 12.17 mg/L.',
+ audit:'Drawn from her worked parameters, with the peak at 2.0 hours and 12.17 mg/L.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
 ];

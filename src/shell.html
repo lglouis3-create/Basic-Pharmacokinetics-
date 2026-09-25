@@ -125,6 +125,28 @@ h3{font-size:16px;margin:22px 0 8px}
 }
 .chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
 
+/* a comparison table in a concept block: the rows are what changes, the columns the cases */
+.cmpwrap{overflow-x:auto;margin:8px 0 12px}
+.cmp{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--paper)}
+.cmp th,.cmp td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left;line-height:1.45}
+.cmp thead th{background:var(--surface);font-size:13.5px}
+.cmp tbody th{background:var(--surface);font-weight:700;min-width:6.5em}
+/* On a phone a table with three or four columns cannot fit, and scrolling it
+   sideways hides the comparison it exists to show. Each row becomes a card
+   instead: its label, then every column's value under that column's name. */
+@media (max-width:640px){
+  .cmp,.cmp thead,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:auto}
+  .cmp{border:0;background:none}
+  .cmp thead{display:none}
+  .cmp tr{border:1px solid var(--line);border-radius:8px;margin:0 0 9px;background:var(--paper);overflow:hidden}
+  .cmp tbody th{border:0;border-bottom:1px solid var(--line);padding:8px 11px}
+  .cmp td{border:0;padding:7px 11px 8px}
+  .cmp td+td{border-top:1px dashed var(--line-soft)}
+  .cmp td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;
+    color:var(--text-dim);text-transform:none;margin-bottom:1px}
+}
+/* a note under an explanation: a fact the student needs that does not fit the concept block */
+.qnote{margin:13px 0 0;font-size:14.5px;padding:9px 12px;border-left:3px solid var(--warn);background:var(--warn-bg);border-radius:0 6px 6px 0}
 /* ---------- stacked fractions, as the slides print them ---------- */
 .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;
   margin:0 .18em;line-height:1.25}
