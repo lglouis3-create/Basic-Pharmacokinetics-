@@ -117,6 +117,29 @@ class Plot:
                           f' stroke-linejoin="round"{d}/>')
         return self
 
+    def band(self, upper, lower, x0, x1, fill, opacity=0.28, n=160):
+        """Shade the region between two curves from x0 to x1: the area one curve
+        has that the other does not."""
+        xs = [x0 + (x1 - x0) * i / n for i in range(n + 1)]
+        top = [f'{self.px(x):.1f},{self.py(upper(x)):.1f}' for x in xs]
+        bot = [f'{self.px(x):.1f},{self.py(lower(x)):.1f}' for x in reversed(xs)]
+        self.parts.append(f'<polygon points="{" ".join(top + bot)}" fill="{fill}" '
+                          f'fill-opacity="{opacity}" stroke="none"/>')
+        return self
+
+    def xband(self, x0, x1, fill='#EEF2F6'):
+        """A full-height band behind the curves, marking a stretch of time."""
+        self.parts.insert(0, f'<rect x="{self.px(x0):.1f}" y="{self.T}" width="{self.px(x1)-self.px(x0):.1f}" '
+                             f'height="{self.PH}" fill="{fill}"/>')
+        return self
+
+    def text(self, x, y, text, size=15, color=INK, anchor='start', weight='400', dy=0):
+        """Free text at data coordinates, with a halo so it reads over lines."""
+        self.parts.append(f'<text x="{self.px(x):.1f}" y="{self.py(y)+dy:.1f}" text-anchor="{anchor}" '
+                          f'font-size="{size}" font-weight="{weight}" fill="{color}" stroke="#FFFFFF" '
+                          f'stroke-width="4" paint-order="stroke">{esc(text)}</text>')
+        return self
+
     def points(self, xs, ys, color=BLUE):
         for x, y in zip(xs, ys):
             # a 2px surface ring keeps a marker legible where it sits on the line
@@ -417,68 +440,80 @@ def slide_curve(ka, k):
 
 
 def kk_panel(which):
-    varied = [0.2, 0.3, 0.5]
+    """Two curves, the constant at 0.2 and at 0.5 /hr, with the area between
+    them shaded: area the raised curve loses, and for ka the area it gains
+    before the curves cross. The AUC difference is the shaded area."""
     color = BLUE if which == 'k' else AMBER
     ymax = 3 if which == 'k' else 8
     pan = Plot(20, list(range(0, ymax + 1, 1 if which == 'k' else 2)),
                xlabel='Time (hours)', ylabel='Concentration (µg/mL)',
-               w=600, h=480, l=82, r=24, t=128, b=66, fs=1.4)
+               w=600, h=500, l=82, r=24, t=112, b=66, fs=1.4)
     pan.frame([0, 4, 8, 12, 16, 20])
-    rows = []
-    styles = STYLES if which == 'k' else STYLES[::-1]
-    for v, dash in zip(varied, styles):
-        ka, k = (SFIX, v) if which == 'k' else (v, SFIX)
-        fn, tmax, cmax, auc = slide_curve(ka, k)
-        pan.curve(fn, color=color, dash=dash)
-        pan.vline(tmax, cmax, color=color, dash='2 4')
-        pan.points([tmax], [cmax], color=color)
-        pan.label(tmax + 0.35, cmax, f'{v:g}/hr', dy=-10)
-        rows.append((v, tmax, cmax, auc))
-    aucs = ' → '.join(f'{r[3]:.3g}' for r in rows)
+    lo = slide_curve(SFIX, 0.2) if which == 'k' else slide_curve(0.2, SFIX)
+    hi = slide_curve(SFIX, 0.5) if which == 'k' else slide_curve(0.5, SFIX)
+    base, raised = lo[0], hi[0]
     if which == 'k':
-        heading(pan, 'k raised, kₐ held at 0.1 /hr',
-                f'Peak lower and earlier. AUC {aucs}: falls.', big=1.1)
+        pan.band(base, raised, 0.02, 20, DIM, 0.22)
+        pan.text(11.0, 1.55, f'total lost: {lo[3] - hi[3]:.0f}', size=17, color=INK, weight='600')
     else:
-        heading(pan, 'kₐ raised, k held at 0.1 /hr',
-                f'Peak higher and earlier. AUC {aucs}: same.', big=1.1)
-    pan.parts.append(f'<text x="18" y="98" font-size="17" fill="{DIM}">Dots mark each peak; '
-                     f'the dotted drop marks its tₘₐₓ.</text>')
-    return pan, rows
+        # where the faster-absorbed curve drops below the slower one
+        lo_t, hi_t = 1.0, 19.0
+        for _ in range(80):
+            mid = (lo_t + hi_t) / 2
+            (lo_t, hi_t) = (mid, hi_t) if raised(mid) > base(mid) else (lo_t, mid)
+        cross = (lo_t + hi_t) / 2
+        gained = sum((raised(x) - base(x)) * 0.001 for x in [i * 0.001 for i in range(1, int(cross * 1000))])
+        pan.band(raised, base, 0.02, cross, AMBER, 0.30)
+        pan.band(base, raised, cross, 20, DIM, 0.22)
+        pan.text(2.2, 5.3, f'gained {gained:.1f}', size=15, weight='600')
+        pan.text(12.6, 4.3, f'total lost later: {gained:.1f}', size=15, weight='600')
+        pan.vline(cross, base(cross), color=DIM, dash='3 4')
+        pan.text(cross, 0.35, f'cross at {cross:.1f} hr', size=14, color=DIM, anchor='middle')
+    pan.curve(base, color=color, dash='9 6')
+    pan.curve(raised, color=color)
+    for fn, tmax, cmax, _ in (lo, hi):
+        pan.points([tmax], [cmax], color=color)
+    name = 'k' if which == 'k' else 'kₐ'
+    pan.label(lo[1] + 0.4, lo[2], f'{name} 0.2', dy=-10)
+    pan.label(hi[1] + 0.4, hi[2], f'{name} 0.5', dy=-10)
+    if which == 'k':
+        heading(pan, 'k raised 0.2 → 0.5 /hr (kₐ held at 0.1)',
+                f'AUC {lo[3]:.0f} → {hi[3]:.0f}: the shaded area is lost.', big=1.1)
+    else:
+        heading(pan, 'kₐ raised 0.2 → 0.5 /hr (k held at 0.1)',
+                f'AUC {lo[3]:.0f} → {hi[3]:.0f}: area gained early = area lost late.', big=1.1)
+    return pan, (lo, hi)
 
 
 kpan, KROWS = kk_panel('k')
 apan, AROWS = kk_panel('ka')
-stack('k_vs_ka', 'Raising k against raising ka, drawn from the slide parameters', [kpan, apan], 600, 480)
+stack('k_vs_ka', 'Raising k against raising ka, with the area each change gains or loses shaded', [kpan, apan], 600, 500)
 
 
-# ---- flip-flop: which constant the tail of an oral curve reports ----------
-# A picture of a relationship, so the axes carry no numbers: only the order
-# of the two constants matters. Semi-log, where a first-order fall is a line.
-def flip_panel(ka, title, line, verdict):
-    k, dv = 0.3, 10.0
-    pan = Plot(24, [0.01, 0.1, 1, 10], log=True, xlabel='Time', ylabel='Concentration (log scale)',
-               w=600, h=440, l=60, r=24, t=124, b=46, fs=1.4, numbers=False)
-    pan.frame([0, 6, 12, 18, 24])
-    iv = lambda t: dv * math.exp(-k * t)
-    oral = lambda t: ka * dv / (ka - k) * (math.exp(-k * t) - math.exp(-ka * t))
-    pan.curve(iv, color=DIM, dash='6 5')
-    pan.curve(oral, color=BLUE, x0=0.02)
-    pan.label(3.5, iv(3.5), 'IV dose, same drug', color=DIM, swatch=True, dy=-18)
-    pan.label(14.0, oral(14.0), 'oral dose', color=BLUE, swatch=True, dy=-18)
-    heading(pan, title, line)
-    pan.parts.append(f'<text x="18" y="96" font-size="19" font-weight="600" '
-                     f'fill="{INK}">{esc(verdict)}</text>')
-    return pan
-
-
-stack('flipflop', 'Immediate release against extended release: which constant the tail of the oral curve shows', [
-    flip_panel(1.2, 'Immediate release: kₐ larger than k',
-               'Absorption finishes early, so only elimination is left in the tail.',
-               'Oral tail runs parallel to the IV line → its slope is k.'),
-    flip_panel(0.1, 'Extended release: kₐ smaller than k',
-               'Absorption is still going on in the tail and is now the slower step.',
-               'Oral tail is flatter than the IV line → its slope is kₐ (flip-flop).'),
-], 760, 420)
+# ---- flip-flop: one drug, two products, one set of axes -----------------
+# A picture of a relationship, so the axes carry no numbers. Same k for both
+# curves; only the release, and so ka, differs. On a log scale a first-order
+# fall is a straight line, and the tail of each curve falls at the smaller of
+# its two constants.
+FK = 0.3
+ir = lambda t: 1.2 * 10 / (1.2 - FK) * (math.exp(-FK * t) - math.exp(-1.2 * t))
+er = lambda t: 0.1 * 10 / (0.1 - FK) * (math.exp(-FK * t) - math.exp(-0.1 * t))
+ff = Plot(24, [0.01, 0.1, 1, 10], log=True, xlabel='Time', ylabel='Concentration (log scale)',
+          w=600, h=560, l=60, r=24, t=112, b=46, fs=1.4, numbers=False)
+ff.frame([0, 6, 12, 18, 24])
+ff.xband(12, 24)
+ff.text(18, 7.5, 'the tail', size=16, color=DIM, anchor='middle', weight='600')
+ff.curve(ir, color=BLUE, x0=0.02)
+ff.curve(er, color=AMBER, x0=0.02)
+ff.text(1.3, ir(1.3), 'Immediate release', size=16, weight='600', dy=-12)
+ff.text(2.4, er(2.4), 'Extended release', size=16, weight='600', dy=28)
+ff.text(12.6, ir(16.5), 'steep: falls with k', size=16, color=BLUE, dy=-8)
+ff.text(12.8, er(12.8), 'shallow: falls with kₐ', size=16, color=AMBER, dy=-14)
+heading(ff, 'One drug, two products: same k', 'The tail falls at the smaller of kₐ and k.', big=1.1)
+ff.parts.append(f'<text x="18" y="96" font-size="17" fill="{DIM}">'
+                + esc('Immediate: kₐ > k, tail shows k.  Extended: kₐ < k, tail shows kₐ.') + '</text>')
+FIGS['flipflop'] = ('One drug given as an immediate-release and an extended-release product: the tail of each curve',
+                    ff.svg('Immediate against extended release: which constant sets the slope of the tail'))
 
 
 # ---- the three input types -------------------------------------------------

@@ -430,11 +430,20 @@ function startRows(pool, name, attr){
        + row(`Everything in ${esc(name)}`, `${label(pool.length)}, concepts and calculations mixed`, '', true);
 }
 
+/* When the page was last built, in the reader's own time zone. */
+function updatedText(){
+  if(typeof BUILD_AT === 'undefined') return '';
+  const d = new Date(BUILD_AT);
+  if(isNaN(d)) return '';
+  return 'Last updated ' + d.toLocaleString(undefined, {weekday: 'short', day: 'numeric', month: 'long',
+    year: 'numeric', hour: 'numeric', minute: '2-digit'});
+}
+
 function renderTopics(){
   const shares = poolShares();
   const covered = shares.reduce((s,o)=> s + Math.min(o.want, poolQuestions(o.pool).length), 0);
 
-  let h = `<h2>Pick a topic</h2>
+  let h = `<h2>Pick a topic</h2>${updatedText() ? `<p class="updated">${esc(updatedText())}</p>` : ''}
   <p class="sub">${esc(EXAM.name)} is ${EXAM.questions} questions in ${EXAM.minutes} minutes${
       EXAM.date ? ` on ${esc(EXAM.date)}` : ''}.
     ${EXAM.blurb ? esc(EXAM.blurb) + ' ' : ''}
@@ -1550,6 +1559,7 @@ function renderSettings(){
   const mode = DB.settings.mode || DEFAULT_MODE;
   $('#v-settings').innerHTML = `<h2>Settings</h2>
   <p class="sub">Progress is stored in this browser only, under the name “${esc(PROFILE)}”.</p>
+  ${updatedText() ? `<p class="sub">${esc(updatedText())}. Reload the page to pick up a newer version.</p>` : ''}
 
   ${COURSE.exams.length > 1 ? `<h3>Exam you are preparing for</h3>
   ${examPicker('The exam simulator, Weak spots and the exam-weighted pass all follow this choice.')}` : ''}

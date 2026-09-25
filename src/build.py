@@ -9,6 +9,7 @@ and line named, instead of producing an HTML file that loads to a blank screen.
 The output filename is not written here: it is read out of course.js, which is
 the only file that knows which course this is.
 """
+import datetime
 import json, re, io, os, subprocess, sys, tempfile
 
 # The data files, in the order they are concatenated into the page.
@@ -82,6 +83,11 @@ def main():
 
     parts = []
     parts.append('const IMAGES = ' + json.dumps(images) + ';\n')
+    # When this page was built, shown on it as "Last updated" so a reader can
+    # tell whether the copy in front of them has the latest changes. UTC here;
+    # the page shows it in the reader's own time zone.
+    built = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    parts.append(f"const BUILD_AT = '{built}';\n")
     for f in DATA_FILES:
         parts.append(open(f, encoding='utf-8').read() + '\n')
     for f in CONTENT_FILES:

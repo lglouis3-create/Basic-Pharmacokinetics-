@@ -26,6 +26,13 @@ const html=fs.readFileSync(OUT,'utf8');
   }
   console.log('  ok    the copy at the repository root matches this build');
 }
+/* The page tells its reader when it was built, so a stale copy can be spotted.
+ * The stamp has to be present and has to be a real time. */
+{
+  const m = html.match(/const BUILD_AT = '([^']+)'/);
+  if(!m || isNaN(new Date(m[1]))){ console.error('FAIL: the page carries no valid build time for "Last updated"'); process.exit(1); }
+  console.log(`  ok    the page carries its build time, ${m[1]}`);
+}
 let code=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)][0][1];
 const b=code.lastIndexOf('   BOOT'); code=code.slice(0,code.lastIndexOf('/* ===',b));
 code+="\nglobalThis.__X={COURSE,QUESTIONS,TOPICS,startQuiz,startSweep,renderTopics,renderQuiz,renderGaps,renderRef,renderTell,renderEq,eqStart,eqSetChosen,EQUATIONS,EQref:()=>EQ,renderGuide,renderSettings,renderExam,answer,submitNumeric,submitMatch,submitMulti,qType,isMulti,correctSet,Qref:()=>Q,askProfile,record,beginExam,renderExamQ,finishExam,EXref:()=>EX};\n";
