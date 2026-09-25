@@ -49,9 +49,23 @@ MASKS = {
     ('5---Pharmacokinetics-of-Oral-Absorption.pdf', 18): [(0.706, 0.383, 0.851, 0.428)],
 }
 
+# Slide titles the extractor cannot read, because an equation on the slide is
+# set in larger type than the title and is taken for it. Checked against the
+# rendered pages. (deck, title as printed) -> PDF page.
+TITLE_PAGES = {
+    ('6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
+     'Drug accumulation with repeated administration'): 3,
+    ('6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
+     'Amount of Drug in the Body Following Repeated IV Bolus Injections'): 6,
+    ('6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
+     'Plasma Drug Concentration at Any Time After n Doses'): 14,
+    ('6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
+     'Plasma Drug Concentration at Steady State'): 17,
+}
+
 QUESTION_FILES = ['q1_module1.js', 'q2_module2.js', 'q3_module3.js',
-                  'q4_module4.js', 'q5_module5.js', 'q6_figures.js']
-ARRAYS = ['Q_MODULE1', 'Q_MODULE2', 'Q_MODULE3', 'Q_MODULE4', 'Q_MODULE5', 'Q_FIGURES']
+                  'q4_module4.js', 'q5_module5.js', 'q7_module6.js', 'q6_figures.js']
+ARRAYS = ['Q_MODULE1', 'Q_MODULE2', 'Q_MODULE3', 'Q_MODULE4', 'Q_MODULE5', 'Q_MODULE6', 'Q_FIGURES']
 
 
 def norm(s):
@@ -83,6 +97,9 @@ def deck_index(path):
                 t = norm(' '.join(w['text'] for w in top))
                 if len(t) > 3:
                     titles.setdefault(t, i)
+    for (deck, title), page in TITLE_PAGES.items():
+        if os.path.basename(path) == deck:
+            titles[norm(title)] = page
     return numbers, titles
 
 

@@ -111,6 +111,19 @@ const TOPICS = [
     cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf slide 2, bullet 3'},
    {id:'changes', name:'Effects of changing ka, k and dose',
     cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf slide 2, bullet 4'}]},
+
+ /* ───────── Module 6 — no questions in this file ───────── */
+ {id:'multi', name:'Multiple dosing: repeated IV bolus', prof:'Mosley',
+  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Objectives"',
+  subs:[
+   {id:'accum', name:'Drug accumulation and steady state',
+    cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Drug accumulation with repeated administration"'},
+   {id:'superpos', name:'The principle of superposition',
+    cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition"'},
+   {id:'ssbolus', name:'Maximum, minimum and average at steady state',
+    cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Amount of Drug in the Body Following Repeated IV Bolus Injections" to "Example 1"'},
+   {id:'ndose', name:'Concentration after n doses and after the last dose',
+    cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Plasma Drug Concentration at Any Time After n Doses" to "Example 3"'}]},
 ];
 
 
@@ -215,6 +228,18 @@ const CHAINS = [
  {id:'m5-500', module:5, name:'A 500-mg oral dose, 88 per cent bioavailable',
   setup:'The absorption rate constant, t<sub>max</sub> and C<sub>max</sub>, then C<sub>max</sub> when the volume doubles',
   parts:['m5-n11','m5-n12','m5-n13','m5-n14']},
+
+ {id:'m6-ex1', module:6, name:'An antibiotic, 10 mg/kg every 8 hours by IV bolus',
+  setup:'t&frac12; 4 hr, V<sub>D</sub> 25% of body weight, a 65-kg female: the first dose, then C<sub>max</sub>, C<sub>min</sub> and C<sub>avg</sub> at steady state',
+  parts:['m6-n01','m6-n02','m6-n03','m6-n04','m6-n05']},
+
+ {id:'m6-ex23', module:6, name:'The same antibiotic before steady state and after the last dose',
+  setup:'3 hours after the 2nd dose, then 3 and 4 hours after the last dose at steady state',
+  parts:['m6-n06','m6-n07','m6-n08']},
+
+ {id:'m6-practice1', module:6, name:'One gram every 8 hours to a 65-kg patient (a&ndash;h)',
+  setup:'V<sub>D</sub> 26.2 L/100 kg, Cl<sub>T</sub> 52.95 mL/min per 70 kg: her parts (a) to (h) in her order; part (i), the renal mechanism, is with the concepts',
+  parts:['m6-p1a','m6-p1b','m6-p1c','m6-p1d','m6-p1e','m6-p1f','m6-p1g','m6-p1h']},
 ];
 
 const Q_MODULE1 = [

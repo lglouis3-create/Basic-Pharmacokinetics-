@@ -39,6 +39,7 @@ const COURSE = {
     {exam: 1,   name: 'Exam 1 Recap'},
     {module: 4, name: 'Module 4 - Drug Elimination and Clearance'},
     {module: 5, name: 'Module 5 - Single Oral Administration'},
+    {module: 6, name: 'Module 6 - Multiple Dosings'},
     {view: 'eq',  name: 'Equations'},
   ],
 
@@ -68,11 +69,15 @@ const COURSE = {
      label: 'Module 5: Pharmacokinetics of oral absorption (16 & 21 Sep)',
      prof: 'Mosley', exam: 2, module: 5},
 
+    /* Part 1 of the Module 6 deck: repeated IV bolus injections. The same
+       deck continues into intermittent IV infusions, which is Part 2. */
+    {id: 'L07', deck: '6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
+     label: 'Module 6: Repetitive IV bolus injections (23 Sep)',
+     prof: 'Mosley', exam: 2, module: 6},
+
     /* Not yet lectured. Listed so the Exam 2 blueprint can name what it cannot
        yet cover; they carry no questions until the lecture happens.
        Chapter map from the syllabus; deck filenames unknown until posted. */
-    {id: 'L07', deck: '', label: 'Module 6: Repetitive IV injections (23 Sep)',
-     prof: 'Mosley', exam: 2, module: 6},
     {id: 'L08', deck: '', label: 'Module 7: Intermittent IV infusion (28 Sep)',
      prof: 'Mosley', exam: 2, module: 7},
     {id: 'L09', deck: '', label: 'Module 8: Multiple oral dosage regimens (28 Sep)',
@@ -105,7 +110,7 @@ const COURSE = {
      minutes: 120,           // syllabus: Thursday 8 October, 7:50–9:50
      sata: 4,                // ASSUMED, as above.
      blurb: 'Thu 8 October, 7:50–9:50. Modules 4–9 per the syllabus. ' +
-            'Modules 4 and 5 are lectured; 6 to 9 are not yet, so the paper ' +
+            'Modules 4 and 5 and the first part of 6 are lectured; the rest are not yet, so the paper ' +
             'draws only what exists and says how much of the blueprint it ' +
             'cannot cover. The per-module mark split is not published — this ' +
             'drill spreads it evenly across the six modules.',
@@ -165,6 +170,7 @@ const COURSE = {
     {id: 'clearance', label: 'Clearance — total, renal and hepatic',   short: 'Clearance', kind: 'calc'},
     {id: 'crcl',      label: 'Creatinine clearance and ideal weight',  short: 'CrCl',      kind: 'calc'},
     {id: 'oral',      label: 'Oral absorption — Cmax, tmax, ka',       short: 'Oral',      kind: 'calc'},
+    {id: 'multidose', label: 'Repeated dosing — peak, trough, average', short: 'Multi-dose', kind: 'calc'},
   ],
 
   paceDefault: 'weekly',

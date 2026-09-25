@@ -1296,3 +1296,49 @@ Key: **14.9** (margin of error ±2%). Recomputed: 154 lb / 2.2 = 70 kg; V_D = 0.
 - **`IVBolusPractice1.pdf`** — the printed stem and part list extract cleanly, but the handwritten working scanned onto the page extracts as near-unusable characters. Everything legible is transcribed above with `[unclear: …]` markers; the reliable worked solution for that problem is the one in `IV-Bolus-Practice-1---Solutions.pdf`.
 
 All other listed source files were read successfully and are fully transcribed above.
+
+---
+
+# Module 6 — Multiple dosing, Part 1: repeated IV bolus
+
+## Source: `6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf`, Examples 1–3 (printed stems)
+
+> **Example 1.** An antibiotic has an average t½ of approximately 4 hours and an apparent VD that is 25% of body weight. The drug is to be administered 10 mg/kg every 8 hours by multiple IV bolus injections to a 65-kg female.
+> (a) What is the expected maximum concentration at steady state?
+> (b) What is the expected minimum concentration at steady state?
+> (c) What is the expected average concentration at steady state?
+
+> **Example 2.** (same stem) (a) What is the expected concentration 3 hours after injection of the 2nd dose?
+
+> **Example 3.** (same stem) (a) What is the expected concentration 3 hours after injection of the last dose (assuming steady state was attained)?
+
+**Her answers, spoken in the 09.23 lecture:** first-dose maximum 40 mg/L and first-dose minimum 10 mg/L (two parts she added aloud, not on the slide); (a) 53.3 mg/L; (b) 13.3 mg/L; (c) 28.9 mg/L; Example 2, 29.7 mg/L. The recording ends during Example 3, after "it should definitely be less than 53.3" and a new question, the concentration 4 hours after the last dose ("4 hours is 1 half-life"). The drill carries 31.7 and 26.7 mg/L for those two, each from 53.3 mg/L and her t½, and says so in the question's audit field.
+
+**Formats observed:** one vignette, parts in the order first dose → steady-state max, min, average → before steady state → after the last dose. Dose and volume both per kilogram, so the weight cancels. She checks answers by direction: the steady-state peak must exceed 40 mg/L; 3 hours after the last dose must be below 53.3.
+
+## Source: `Multiple-IV-Bolus-Practice-1.pdf` and `Multiple-IV-Bolus-Practice-1---Solutions.pdf`
+
+> 1. One gram of a drug was administered by IV bolus injection every 8 hours to a 65-kg patient. The drug has an apparent VD of 26.2L/100 kg. The total body clearance is 52.95 mL/min per 70 kg and renal clearance is 34.72 mL/min per 70 kg. Calculate the following:
+> a. Elimination half-life
+> b. Maximum plasma drug concentration of the first dose
+> c. Minimum plasma drug concentration of the first dose
+> d. Maximum steady-state plasma drug concentration
+> e. Minimum steady-state plasma drug concentration
+> f. Average steady-state plasma drug concentration
+> g. Average amount of drug in the body during steady state
+> h. Plasma level 12 hours after the last dose, assuming steady-state levels are achieved
+> i. What is the probable mechanism of renal clearance in this agent?
+
+**Keyed answers (boxed on the solutions sheet):** (a) ClT = 2.95 L/hr, VD = 17.03 L, k = 0.1732 hr⁻¹, t½ = 4 hr; (b) 58.72 mg/L; (c) 14.69 mg/L; (d) 78.31 mg/L; (e) 19.59 mg/L; (f) 42.37 mg/L, from 1000 mg/((2.95 L/hr)(8 hr)); (g) 721.61 mg, from (42.37 mg/L)(17.03 L); (h) 9.799 mg/L, from (78.31 mg/L)e^−(12)(0.1732); (i) ClR = 34.72 mL/min < GFR 120 mL/min → glomerular filtration with tubular reabsorption.
+
+**Formats observed:** per-70-kg clearance and per-100-kg volume scaled to the patient; a Module 4 renal-mechanism part closes a Module 6 set; the steady-state trough and the post-dose level are both computed from the steady-state peak with e^−kt.
+
+## Source: `Homework-5.pdf` (question sheet only, no key)
+
+> 2. A 78 kg male patient received multiple IV bolus injections of 15 mg/kg every 8 hours for 48 hours. The medication has an elimination half-life of 4 hours and an apparent volume of distribution that is 22% of body weight.
+> a. What is the average concentration of drug in the plasma at steady state?
+> b. What is the maximum concentration of drug in the plasma at steady state?
+> c. What is the minimum concentration of drug in the plasma at steady state?
+> d. What is the expected concentration of drug in the plasma 8 hours after administration of the last dose?
+
+Graded homework with no posted key, so the drill does not work it. Question 1 of the same sheet is a Module 5 single-oral-dose set.

@@ -175,4 +175,34 @@ const TELL_HTML = `
 <td>Converting one half-life to a rate constant and reusing it for both exponentials. That collapses two processes into one and makes k<sub>a</sub> &minus; k zero. Leaving the absorption half-life in minutes while the elimination half-life is in hours is the unit version of the same miss, which she names: change the times to the same unit, usually hours, before calculating t<sub>max</sub>. She also names the error of using a half-life where a rate constant is needed, without dividing 0.693 by it first.</td>
 <td>5---Pharmacokinetics-of-Oral-Absorption.pdf slide "Kinetics of Absorption"; transcript 09-21 cues 4, 5 and 8</td></tr>
 </tbody></table>
+
+<h3>Repeated dosing</h3>
+<table class="reftab"><thead><tr>
+<th style="width:17%">Confused with</th><th style="width:36%">The feature that separates them</th><th style="width:31%">What the wrong pick usually means</th><th style="width:16%">Source</th></tr></thead><tbody>
+
+<tr><td><b>3 to 5 half-lives</b> against <b>3 to 5 doses</b></td>
+<td>What the time to plateau counts. First-order elimination reaches the plateau in 3 to 5 half-lives, whatever the dose. How many doses that is depends on the interval: with a 4-hour half-life dosed every 8 hours, 3 to 5 half-lives is 12 to 20 hours, by which time 2 to 3 doses have been given.</td>
+<td>Counting doses, or making the time depend on the dose. Doubling the dose doubles the plateau level and leaves the time to reach it unchanged.</td>
+<td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Drug accumulation with repeated administration"; transcript 09-23</td></tr>
+
+<tr><td><b>Frequency</b> against <b>dosing interval, &tau;</b></td>
+<td>Frequency is doses per day, as orders are written: BID, TID. The interval is the time between doses in hours, and it is what the equations take. TID is &tau; = 24/3 = 8 hr; BID is &tau; = 12 hr.</td>
+<td>Putting 3 for TID into an exponent that needs hours, which gives e<sup>&minus;3k</sup> instead of e<sup>&minus;8k</sup> and too little decline over the interval.</td>
+<td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body Following Repeated IV Bolus Injections"; transcript 09-23</td></tr>
+
+<tr><td><b>First-dose C<sub>max</sub></b> against <b>C<sub>max</sub><sup>&infin;</sup></b></td>
+<td>Whether drug was already in the body. The first dose enters a body with no drug, so its peak is C<sub>0</sub> = D<sub>0</sub>/V<sub>D</sub>. At steady state each dose is added to drug left from earlier doses, so the peak is C<sub>0</sub>/(1 &minus; e<sup>&minus;k&tau;</sup>), higher by the accumulation factor. Same k, same dose, higher starting point.</td>
+<td>A steady-state peak below C<sub>0</sub>, which means the accumulation factor was multiplied in instead of divided: 40 &times; 0.75 = 30 in place of 40/0.75 = 53.3 in her Example 1. Her check is that the steady-state value must be greater.</td>
+<td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; transcript 09-23</td></tr>
+
+<tr><td><b>C<sub>avg</sub><sup>&infin;</sup></b> against <b>(C<sub>max</sub><sup>&infin;</sup> + C<sub>min</sub><sup>&infin;</sup>)/2</b></td>
+<td>An average over time against the midpoint of two numbers. The level falls exponentially between doses, fast and then slow, so it spends more of each interval near the trough, and the time average FD<sub>0</sub>/(V<sub>D</sub>k&tau;) lies below the midpoint. Her Example 1: 28.9 mg/L against a midpoint of 33.3.</td>
+<td>Averaging the peak and trough. That would be right only for a straight-line decline, which is zero order.</td>
+<td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; transcript 09-23</td></tr>
+
+<tr><td><b>n</b> against <b>t</b> in the n-dose equation</td>
+<td>n is the dose number just given; t is the time since that dose, not since the first. 3 hours after the 2nd dose is n = 2, t = 3 hr. The time before the latest dose is already carried by n and &tau; inside the bracket.</td>
+<td>Using the time since the first dose as t, which counts the earlier intervals twice and gives a value far too low: t = 11 hr in place of 3 hr for her Example 2.</td>
+<td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses"; transcript 09-23</td></tr>
+</tbody></table>
 `;

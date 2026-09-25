@@ -507,6 +507,10 @@ console.log('\n=== 5d. Equations ===');
        72 and then multiplying by SCr is not dividing by their product. */
     ['CrCl = (140-age)(IBW)/(72*SCr)', 'CrCl = (140-age)(IBW)/72*SCr'],
     ['Css = R/(k*VD)',  'Css = R/k*VD'],
+    /* Module 6: the trough carries e^-kτ on top, and the n-dose term carries τ,
+       not the t of the final exponential. */
+    ['Cmin = C0*e^(-k*tau)/(1-e^(-k*tau))', 'Cmin = C0/(1-e^(-k*tau))'],
+    ['Cp = D0/VD*(1-e^(-n*k*tau))/(1-e^(-k*tau))*e^(-kt)', 'Cp = D0/VD*(1-e^(-n*k*t))/(1-e^(-k*tau))*e^(-kt)'],
   ];
   for (const [a, b] of mustDiffer)
     if (X.normEq(a) === X.normEq(b)) bad(`the equation checker cannot tell "${a}" from "${b}"`);
@@ -516,6 +520,7 @@ console.log('\n=== 5d. Equations ===');
     ['t1/2 = 0.693/k', 'T\u00bd = 0.693 \u00f7 K', 't 1/2=.693/k', 'thalf = 0.693/k'],
     ['Cl = k*VD', 'Cl = kVD', 'CL = K \u00d7 V_D', 'cl=k\u00b7vd'],
     ['C = C0*e^(-kt)', 'C = C0e^-kt', 'c = c0*e**(\u2212kt)'],
+    ['Cmax = C0/(1-e^(-k*tau))', 'Cmax = C0/(1 - e^(-k\u03c4))', 'cmax=c0/(1-e^-k tau)'],
   ];
   for (const forms of mustAgree) {
     const n = new Set(forms.map(X.normEq));

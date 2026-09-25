@@ -15,6 +15,10 @@
    ========================================================================== */
 const SUBSYM = [
   // longest first, so Cpeak is not read as Cp followed by eak
+  // the steady-state symbols: the infinity sign is part of the symbol
+  ['Cmax∞','C<sub>max</sub><sup>∞</sup>'],['Cmin∞','C<sub>min</sub><sup>∞</sup>'],['Cavg∞','C<sub>avg</sub><sup>∞</sup>'],
+  ['Cav∞','C<sub>av</sub><sup>∞</sup>'],['Dmax∞','D<sub>max</sub><sup>∞</sup>'],['Dmin∞','D<sub>min</sub><sup>∞</sup>'],
+  ['Davg∞','D<sub>avg</sub><sup>∞</sup>'],
   ['kVD','kV<sub>D</sub>'],['FD0','FD<sub>0</sub>'],
   ['AUCoral','AUC<sub>oral</sub>'],['AUCiv','AUC<sub>IV</sub>'],['AUCpo','AUC<sub>po</sub>'],['AUCIV','AUC<sub>IV</sub>'],
   ['Cpeak','C<sub>peak</sub>'],['Cmax','C<sub>max</sub>'],['Cmin','C<sub>min</sub>'],['tmax','t<sub>max</sub>'],
@@ -1659,7 +1663,7 @@ isDue = function(s){ return (DB.settings.mode === 'all') ? true : _isDue(s); };
    stop mattering is which quantity sits above the line, the sign in an
    exponent, and where a bracket closes.
    ========================================================================== */
-const EQ_ENT = {'&minus;':'-', '&times;':'*', '&frac12;':'½', '&infin;':'∞',
+const EQ_ENT = {'&minus;':'-', '&times;':'*', '&frac12;':'½', '&infin;':'∞', '&tau;':'τ',
                 '&beta;':'beta', '&middot;':'*', '&amp;':'&', '&nbsp;':' ', '&rarr;':'\u2192'};
 /* Display HTML to plain text. Subscripts resolve before superscripts, because
    a superscript can contain one: e^(-ka*t) is written with ka inside the sup. */
@@ -1693,6 +1697,7 @@ function normEq(s){
   t = t.replace(/[‘’“”]/g, '');
   t = t.replace(/[\s_,]/g, '');                             // V_D and VD are one thing
   t = t.replace(/thalf|t-half/g, 't1/2');
+  t = t.replace(/tau/g, 'τ');                                // the dosing interval, typed as a word
   t = t.replace(/[\[\{]/g, '(').replace(/[\]\}]/g, ')');
   t = t.replace(/(^|[^0-9])\.(\d)/g, '$10.$2');             // .693 -> 0.693
   t = t.replace(/log10/g, 'log');

@@ -1037,7 +1037,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 6.8 mg/L',
    why:'Her printed answer is 6.8 mg/L, to one decimal place. The next question in her set decays this figure for a further four hours, so it is the starting concentration for that part as well as the answer to this one.'}],
  teach:[
- {t:'This is the same 44.35 mg/hr and the same three hours as the question with the loading dose, and the answer is 6.8 mg/L instead of 20 mg/L. The difference is the whole point of a loading dose: without it the patient spends three to five half-lives below the target, and for a drug with a 5-hour half-life that is most of a day.'},
+ {t:'This is the same 44.35 mg/hr and the same three hours as the question with the loading dose, and the answer is 6.8 mg/L instead of 20 mg/L. That difference is what a loading dose is for: without it the patient spends three to five half-lives below the target, and for a drug with a 5-hour half-life that is most of a day.'},
   {h:'How the variables relate', list:[
     'Cp = (R/Cl)(1 - e^(-kt)), which starts at zero and approaches R/Cl.',
     'The fraction of the plateau reached depends only on k and t, never on R.',

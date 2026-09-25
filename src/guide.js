@@ -18,8 +18,10 @@
    Where slide and transcript differ, both are stated.
 
    Objective counts: Module 1 five, Module 2 six (three on each of the deck's
-   two objectives slides), Module 3 seven, Module 4 five, Module 5 four.
-   Modules 6 to 9 are not yet lectured and carry no guides.
+   two objectives slides), Module 3 seven, Module 4 five, Module 5 four,
+   Module 6 two of three (the third is Part 2 of the deck, not yet lectured).
+   Modules 7 to 9 are not yet lectured and carry no guides. Module 6 also
+   draws on Chapter 9, Multiple-Dosage Regimens, and says so where it does.
    ========================================================================== */
 const GUIDE_HTML = `
 <h2>Objective guides</h2>
@@ -949,6 +951,80 @@ const GUIDE_HTML = `
 <li>One parameter is changed and the three outputs are asked about in the same order: C<sub>max</sub>, t<sub>max</sub>, AUC. The answers are directions, not numbers.</li>
 <li>Her closing parts of this kind in earlier modules are free-response prose &mdash; <i>"If the dose were doubled, what is the expected change in the half-life of elimination?"</i>, <i>"&hellip;in the clearance?"</i>, <i>"&hellip;in the initial plasma concentration?"</i> &mdash; and this objective is the oral version of the same shape.</li>
 <li>The rate-limiting question comes as two exponents to compare rather than as two half-lives to look up.</li>
+</ul></div>
+</section>
+
+<h2>Module 6 - Multiple Dosings</h2>
+<p class="prose">Three objectives, printed on the "Objectives" slide of 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf. The first two were lectured on 23 September and are below. The third, predicting the concentration after multiple IV infusions, is the second part of the same deck and has not been lectured yet. Her framing: <i>"up to uh till this point, we've been talking about single dose administration. So, today, we're gonna start talking about multiple dosing. We're gonna start with giving multiple IV bolus doses"</i> (09-23).</p>
+
+<section class="gobj" id="gobj-m6-1">
+<h3 data-nav="Module 6, objective 1 &mdash; Explain the principle of superposition and its assumptions in multiple-dose regimens">Module 6 - Objective 1</h3>
+<div class="gbar"><span>Objective</span><b>Explain the principle of superposition and its assumptions in multiple-dose regimens</b><i>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Drug accumulation with repeated administration" and "Superposition"</i></div>
+
+<h4>What the slides carry, in slide order</h4>
+<ul>
+<li>A figure of grams in the body against days under repeated doses, rising to a plateau, captioned "Drug accumulation with repeated administration". Time to plateau will be reached by 3-5 half-lives; this is independent of the dose; if drug input is stopped, most drug will be eliminated in 3-5 half-lives &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Drug accumulation with repeated administration".</li>
+<li>Superposition: drug is eliminated by first-order kinetics; the pharmacokinetics of the drug after a single dose are not altered after multiple doses. The figure marks AUC from 0 to &infin; under the first dose, AUC from t<sub>1</sub> to t<sub>2</sub> over one interval &tau; at steady state, and C<sub>av</sub><sup>&infin;</sup> = [AUC]<sub>t1</sub><sup>t2</sup>/&tau; &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition".</li>
+</ul>
+
+<h4>What she said about it</h4>
+<ul class="saidlist">
+<li class="said"><span class="lead">Peaks, troughs and the plateau</span><q>So with each subsequent dose, it goes to the exactly the same max and min. Right? As you're dosing. This plateau piece. Is also known as our steady state.</q><span class="when">09-23 &middot; her words; "min" where the captions print "men"</span></li>
+<li class="said"><span class="lead">Half-lives, not doses</span><q>3 to 5 half-lives, right? Hear my voice in your head, 3 to 5 half-lives.</q> and <q>not 3 to 5 doses, 3 to 5 half-lives, OK? Cause the 2nd bullet, independent of dose</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Linear means first order</span><q>I'm gonna put this word in your brain right now. First order kinetics equals linear pharmacokinetics.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The second assumption</span><q>that means that the half-life and the clearance don't change after multiple doses</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">What superposition lets her do</span><q class="para">We can take this first curve and place it over the curve at steady state, and the same kinetics apply: C = C0e^-kt from one point to the next on the first curve is the same C = C0e^-kt at steady state. The difference is that at the first dose there is no drug in the body, and at steady state there is drug that has accumulated.</q><span class="when">09-23 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">The infinity sign, and the average</span><q>when you see this little infinity sign, right, see infinity, that says infinity equals steady state. So the average concentration of drug in the plasma at steady state is given by AUC divided by tau.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+</ul>
+
+<div class="gpoll"><b>Her own question on it</b>
+<p class="prose">The 09-23 session opened with a quiz on Modules 4 and 5, and no written poll or practice item in the collected sources asks this objective on its own. Chapter 9 names what breaks superposition: changing pathophysiology in the patient, saturation of a drug carrier system, enzyme induction and enzyme inhibition, and nonlinear pharmacokinetics in general.</p></div>
+
+<div class="gask"><b>How she asks it</b>
+<ul>
+<li>As the two assumptions, first-order elimination and pharmacokinetics unchanged by later doses, where the second is the one with half-life and clearance in it.</li>
+<li>As the time to plateau, where "3 to 5 doses" and "depends on the dose" are the two answers she argues against.</li>
+</ul></div>
+</section>
+
+<section class="gobj" id="gobj-m6-2">
+<h3 data-nav="Module 6, objective 2 &mdash; Predict the concentration of drug in the plasma at any time following multiple IV bolus injections of drug">Module 6 - Objective 2</h3>
+<div class="gbar"><span>Objective</span><b>Predict the concentration of drug in the plasma at any time following multiple IV bolus injections of drug</b><i>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Amount of Drug in the Body Following Repeated IV Bolus Injections" through "Example 3"</i></div>
+
+<h4>What the slides carry, in slide order</h4>
+<ul>
+<li>Drug in the body following a single rapid IV injection is eliminated according to first-order kinetics: D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;k&tau;</sup>, where &tau; is equal to the dosage interval &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body Following Repeated IV Bolus Injections".</li>
+<li>D<sub>max</sub><sup>&infin;</sup> = D<sub>0</sub>/(1 &minus; e<sup>&minus;k&tau;</sup>), D<sub>min</sub><sup>&infin;</sup> = D<sub>0</sub>e<sup>&minus;k&tau;</sup>/(1 &minus; e<sup>&minus;k&tau;</sup>), D<sub>avg</sub><sup>&infin;</sup> = FD<sub>0</sub>/k&tau;: the maximum, minimum and average amounts of drug in the body at steady state &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections".</li>
+<li>C<sub>max</sub><sup>&infin;</sup> = D<sub>max</sub><sup>&infin;</sup>/V<sub>D</sub> = C<sub>0</sub>/(1 &minus; e<sup>&minus;k&tau;</sup>); C<sub>min</sub><sup>&infin;</sup> = D<sub>min</sub><sup>&infin;</sup>/V<sub>D</sub> = C<sub>0</sub>e<sup>&minus;k&tau;</sup>/(1 &minus; e<sup>&minus;k&tau;</sup>); C<sub>avg</sub><sup>&infin;</sup> = D<sub>avg</sub><sup>&infin;</sup>/V<sub>D</sub> = FD<sub>0</sub>/V<sub>D</sub>k&tau; = FD<sub>0</sub>/Cl<sub>T</sub>&tau; &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections".</li>
+<li>Example 1: an antibiotic with an average t&frac12; of approximately 4 hours and an apparent V<sub>D</sub> that is 25% of body weight, 10 mg/kg every 8 hours by multiple IV bolus injections to a 65-kg female; (a) the maximum, (b) the minimum and (c) the average concentration at steady state &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 1".</li>
+<li>C<sub>p</sub> = (D<sub>0</sub>/V<sub>D</sub>)[(1 &minus; e<sup>&minus;nk&tau;</sup>)/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt</sup> &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses".</li>
+<li>Example 2: the same antibiotic, the concentration 3 hours after injection of the 2nd dose &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 2".</li>
+<li>C<sub>p</sub> = (D<sub>0</sub>/V<sub>D</sub>)[1/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt</sup> &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Steady State".</li>
+<li>Example 3: the same antibiotic, the concentration 3 hours after injection of the last dose, assuming steady state was attained &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 3".</li>
+</ul>
+
+<h4>What she said about it</h4>
+<ul class="saidlist">
+<li class="said"><span class="lead">Frequency against interval</span><q>What does TID mean? 3 times a day. That is the frequency that you would give the dose, right? So, the interval would be what?</q> The room answers 8 hours, and she adds <q>as pharmacists, we think TID and BID, right?</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The factor that keeps appearing</span><q>we've got this 1/1 minus E to the -K tau, which will, you will see over and over again, because that tells us how much drug is accumulated in the body at steady state</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Where the minimum is</span><q>the min occurs at the end of the dosing interval</q><span class="when">09-23 &middot; her words; "min" where the captions print "men"</span></li>
+<li class="said"><span class="lead">The average is not the midpoint</span><q>I want you to realize that the average is not the max plus the min divided by 2</q>, because the decline is logarithmic and <q>it is not an, um, algebraic mean</q><span class="when">09-23 &middot; her words; "min" where the captions print "men"</span></li>
+<li class="said"><span class="lead">F in the average</span><q>Bolus dosing, IV dosing, this F is equal to 1. Right? For for IV dosing. For oral, you will have given, provided, or we will calculate a bioavailability factor.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">A check on the steady-state peak</span><q>Anybody get a value greater than 40 mg per liter? OK. What'd you get? Cause if you got a value less than 40 mg per liter, you've done something wrong.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Work from the process, not the sheet</span><q class="para">You have the equation sheet and can find the equation and punch in every variable. But if you think about what is going on from max to min, it is first-order elimination, C = C0e^-kt, and that makes it much easier; you do not spend five minutes looking for the equation.</q><span class="when">09-23 &middot; restated from a garbled caption</span></li>
+<li class="said"><span class="lead">n and t</span><q>the um N is 2, right? Because that's the dose number, the second dose, and the um lowercase t at the end of it is 3, because we're looking at the concentration 3 hours out.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">After the last dose</span><q>Last dose, we're gonna start at 53.3, and then it's just C0E minus KT.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+</ul>
+
+<div class="gpoll"><b>Her own questions, posed aloud on 09-23</b>
+<p class="prose">Before Example 1 she added two first-dose parts that are not on the slide: the maximum concentration of the first dose (her answer 40 mg/L, since 10 mg/kg over 0.25 L/kg cancels the kilograms) and the minimum after the first dose (10 mg/L: <i>"I'm asking you concentration and 2 half-lives"</i>). Then: <i>"Relative to the first dose, what do you expect the maximum concentration at steady state to be?"</i> Higher, because drug has accumulated. Her answers to the slide parts: 53.3, 13.3 and 28.9 mg/L; to Example 2, 29.7 mg/L. The recording ends as she asks for the concentration 4 hours after the last dose, one half-life after the 53.3 mg/L peak.</p>
+<p class="prose">Multiple-IV-Bolus-Practice-1 asks the same battery on one gram every 8 hours to a 65-kg patient, keyed as t&frac12; 4 hr, first-dose C<sub>max</sub> 58.72 and C<sub>min</sub> 14.69 mg/L, C<sub>max</sub><sup>&infin;</sup> 78.31, C<sub>min</sub><sup>&infin;</sup> 19.59, C<sub>avg</sub><sup>&infin;</sup> 42.37 mg/L, D<sub>avg</sub><sup>&infin;</sup> 721.61 mg, 9.799 mg/L 12 hours after the last dose, and a renal mechanism of glomerular filtration with tubular reabsorption.</p></div>
+
+<div class="gask"><b>How she asks it</b>
+<ul>
+<li>One patient vignette asked in parts, in the order first-dose peak, first-dose trough, steady-state maximum, minimum and average, then a time before steady state and a time after the last dose.</li>
+<li>Dose and volume are both given per kilogram, or scaled from a per-70-kg or per-100-kg value, so the first step is putting both on the same basis.</li>
+<li>The steady-state trough, and every time after the last dose, are C = C<sub>0</sub>e<sup>&minus;kt</sup> with the steady-state peak as the starting value.</li>
 </ul></div>
 </section>
 `;

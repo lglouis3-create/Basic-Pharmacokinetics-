@@ -545,6 +545,43 @@ stack('input_types', 'Three ways drug can enter, each with first-order eliminati
                 'Infusion or constant-rate product: levels off.', stop=T3),
 ], 600, 320)
 
+# ---- module 6: repeated IV bolus, her Example 1 -----------------------------
+# 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 1":
+# t1/2 4 hr, VD 25% of body weight, 10 mg/kg every 8 hours, so C0 = 10/0.25 =
+# 40 mg/L. Six doses, then none. Each dose adds its own C0e^-kt on top of what
+# is left of the ones before it, which is superposition drawn out. The values
+# labelled are the ones she works on the Example 1 slides and in the 09-23
+# lecture: 40 and 10 for the first dose, 53.3, 13.3 and 28.9 at steady state.
+MK, MTAU, MC0, MN = 0.693 / 4, 8.0, 40.0, 6
+
+
+def md_curve(t):
+    return sum(MC0 * math.exp(-MK * (t - i * MTAU)) for i in range(MN) if t >= i * MTAU - 1e-9)
+
+
+md = Plot(64, [0, 10, 20, 30, 40, 50, 60], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+          w=720, h=520, l=76, r=24, t=96, b=62, fs=1.15)
+md.frame([0, 8, 16, 24, 32, 40, 48, 56, 64])
+md.xband(12, 20)
+md.text(16, 58, '3 to 5 half-lives', size=14, color=DIM, anchor='middle')
+md.hline(53.3, color=BLUE); md.hline(13.3, color=BLUE)
+md.hline(33.3, color=DIM, dash='2 4'); md.hline(28.9, color=AMBER)
+md.curve(lambda t: MC0 * math.exp(-MK * t), color=AMBER, dash='6 5', n=320)
+md.curve(md_curve, color=BLUE, n=1400)
+md.points([0, 8], [40.0, 10.0], color=AMBER)
+md.text(0.9, 42.5, '40', size=14)
+md.text(9.0, 7.0, '10', size=14)
+md.text(63, 55.3, 'Cmax 53.3', size=14, anchor='end')
+md.text(63, 35.3, 'midpoint 33.3', size=14, color=DIM, anchor='end')
+md.text(63, 24.2, 'Cavg 28.9', size=14, color=AMBER, anchor='end')
+md.text(63, 15.3, 'Cmin 13.3', size=14, anchor='end')
+md.label(20, 4.5, 'the first dose alone', color=AMBER, swatch=True)
+heading(md, 'Six doses of 10 mg/kg every 8 hours, then none',
+        't\u00bd 4 hr, VD 0.25 L/kg, so each dose adds C0 = 40 mg/L.', big=1.0)
+FIGS['md_bolus'] = ('Repeated IV bolus doses every 8 hours rising to a steady state between the same peak and trough',
+                    md.svg('Repeated IV bolus: accumulation to steady state, then decline after the last dose'))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dir', help='also write each figure as a .svg file to look at')

@@ -343,6 +343,54 @@ const REFERENCE_HTML = `
 
 <p><b>Which process sets the terminal slope.</b> Disposition rate limiting is the usual case, where the absorption half-life is much shorter than the elimination half-life, so k<sub>a</sub> is much larger than k and the tail of the curve falls with k. Absorption rate limiting is the other case, where the absorption half-life is longer. A modified-release oral product that releases at a constant rate is zero-order in and first-order out, which is the shape of an IV infusion rather than of an ordinary oral dose &mdash; her reason for the word "usually" on the summary slide.</p>
 
+<h3>Module 6 &mdash; multiple dosing: repeated IV bolus</h3>
+<p>The same dose at the same interval &tau;. Each dose is added to what is left of the doses before it, so the peaks and troughs climb to a plateau, steady state, in 3 to 5 half-lives whatever the dose: <i>"not 3 to 5 doses, 3 to 5 half-lives."</i> Superposition assumes first-order (linear) elimination and pharmacokinetics that later doses do not change, so each dose follows the first-dose curve and the only difference at steady state is the accumulated drug. The &infin; sign means steady state. &tau; is the interval, not the frequency: TID is &tau; = 8 hr.</p>
+
+<table class="reftab"><thead><tr>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+
+<tr><td><b>D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;k&tau;</sup></b></td>
+<td>D<sub>0</sub> the dose (mg); &tau; the dosing interval (hr)</td>
+<td>One IV bolus. D<sub>B</sub>/D<sub>0</sub> = e<sup>&minus;k&tau;</sup> is the fraction of the dose still in the body when the next dose is due.</td>
+<td>The fraction left, which is what accumulates.</td>
+<td>Not confirmed in the readable extract.</td></tr>
+
+<tr><td><b>C<sub>max</sub><sup>&infin;</sup> = {{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}</b> &nbsp; and &nbsp; <b>D<sub>max</sub><sup>&infin;</sup> = {{frac:D<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}</b></td>
+<td>C<sub>0</sub> = D<sub>0</sub>/V<sub>D</sub>, the first-dose peak (mg/L)</td>
+<td>Repeated IV bolus at steady state. 1/(1 &minus; e<sup>&minus;k&tau;</sup>) is the accumulation factor: <i>"that tells us how much drug is accumulated in the body at steady state."</i></td>
+<td>The steady-state peak. Her check: it must be greater than C<sub>0</sub>.</td>
+<td>Yes, in the sheet's multiple-dosing group.</td></tr>
+
+<tr><td><b>C<sub>min</sub><sup>&infin;</sup> = {{frac:C<sub>0</sub>e<sup>&minus;k&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}</b> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;k&tau;</sup></td>
+<td>As above</td>
+<td>Steady state. The minimum is at the end of the dosing interval, one interval of first-order decline after the peak.</td>
+<td>The steady-state trough. Her route: take the peak and apply C = C<sub>0</sub>e<sup>&minus;kt</sup> with t = &tau;.</td>
+<td>Yes, in the sheet's multiple-dosing group.</td></tr>
+
+<tr><td><b>C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>k&tau;}} = {{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}}</b>; also C<sub>av</sub><sup>&infin;</sup> = [AUC]<sub>t1</sub><sup>t2</sup>/&tau;; amount form D<sub>avg</sub><sup>&infin;</sup> = FD<sub>0</sub>/k&tau;</td>
+<td>F = 1 for IV; Cl<sub>T</sub> in L/hr</td>
+<td>Steady state, IV or oral. Not the midpoint of peak and trough: <i>"the average is not the max plus the men divided by 2."</i></td>
+<td>The average concentration or amount at steady state.</td>
+<td>Yes, in the sheet's multiple-dosing group.</td></tr>
+
+<tr><td><b>C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}} ({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt</sup></b></td>
+<td>n the dose number just given; t the time since that dose (hr)</td>
+<td>Before steady state. As n grows the top of the bracket becomes 1 and this becomes the steady-state equation.</td>
+<td>A concentration a stated time after the n-th dose. Her Example 2: 29.7 mg/L 3 hours after the 2nd dose.</td>
+<td>Yes, in the sheet's multiple-dosing group.</td></tr>
+
+<tr><td><b>C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}} ({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt</sup></b> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;kt</sup></td>
+<td>t the time since the most recent dose (hr)</td>
+<td>At steady state, and after the last dose: <i>"Last dose, we're gonna start at 53.3, and then it's just C0E minus KT."</i></td>
+<td>The level a stated time after the last dose.</td>
+<td>Not confirmed in the readable extract.</td></tr>
+</tbody></table>
+
+<p><b>Her Example 1</b>, t&frac12; 4 hr, V<sub>D</sub> 25% of body weight, 10 mg/kg every 8 hours: first dose 40 mg/L falling to 10 mg/L; at steady state 53.3, 13.3 and an average of 28.9 mg/L. The interval is two half-lives, so e<sup>&minus;k&tau;</sup> = 0.25 and the accumulation factor is 1.33.</p>
+{{fig:md_bolus|Her Example 1 regimen: six doses, then none. The dashed curve is the first dose on its own.}}
+
+<p><b>What the chapter adds.</b> The accumulation index R = C<sub>max</sub><sup>&infin;</sup>/C<sub>max</sub> after the first dose = 1/(1 &minus; e<sup>&minus;k&tau;</sup>), which depends on k and &tau; and not on the dose. Time to steady state depends on the elimination half-life only, not on the dose, the interval or the number of doses: 90% at 3.3 half-lives, 95% at 4.32, 99% at 6.6. Superposition fails when repeated dosing changes the pharmacokinetics: changing pathophysiology, saturation of a carrier system, enzyme induction or inhibition, and nonlinear pharmacokinetics.</p>
+
 <h3>The equation sheet as a whole</h3>
 <p>BasicPharmacokineticsEquations.pdf runs to two pages. It is not organised by module, so a line for a module not yet lectured sits beside one from Module 1. Her instruction about using it: <i>"before you grab your calculator, before, for any question, and before you start flipping to the equation sheet, think about what is being asked of you and what you need."</i></p>
 
@@ -355,7 +403,7 @@ const REFERENCE_HTML = `
 <tr><td>Two compartment</td><td>C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup>; k, k<sub>12</sub>, k<sub>21</sub> from A, B, a, b; V<sub>p</sub> two ways; V<sub>t</sub></td><td>Module 2</td></tr>
 <tr><td>Clearance and elimination</td><td>Cl<sub>T</sub> = FD<sub>0</sub>/AUC; f<sub>e</sub> = D<sub>u</sub><sup>&infin;</sup>/FD<sub>0</sub> = k<sub>e</sub>/k; Cl<sub>R</sub> = f<sub>e</sub>Cl<sub>T</sub>; Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>)Cl<sub>T</sub>; rate of elimination = (Cl)(C<sub>p</sub>); Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub></td><td>Module 4</td></tr>
 <tr><td>Single oral dose</td><td>The full C<sub>p</sub> equation and t<sub>max</sub></td><td>Module 5</td></tr>
-<tr><td>Multiple dosing</td><td>D<sub>max</sub>, D<sub>min</sub>, D<sub>avg</sub>, C<sub>max</sub>, C<sub>min</sub>, C<sub>avg</sub>, and C<sub>p</sub> after n doses, all carrying a dosing interval; plus multiple-oral-dose C<sub>max</sub>, C<sub>min</sub> and t<sub>max</sub> on page 2</td><td>Modules 6 to 8, not yet lectured</td></tr>
+<tr><td>Multiple dosing</td><td>D<sub>max</sub>, D<sub>min</sub>, D<sub>avg</sub>, C<sub>max</sub>, C<sub>min</sub>, C<sub>avg</sub>, and C<sub>p</sub> after n doses, all carrying a dosing interval; plus multiple-oral-dose C<sub>max</sub>, C<sub>min</sub> and t<sub>max</sub> on page 2</td><td>Module 6 (repeated IV bolus, lectured) and Modules 7 and 8, not yet lectured</td></tr>
 <tr><td>Bioavailability</td><td>F = (AUC<sub>po</sub>/AUC<sub>IV</sub>)(D<sub>IV</sub>/D<sub>po</sub>); F<sub>rel</sub> = (AUC<sub>A</sub>/AUC<sub>B</sub>)(D<sub>B</sub>/D<sub>A</sub>); D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>)</td><td>Module 9, not yet lectured</td></tr>
 <tr><td>Shelf life and stability</td><td>An E and E<sub>0</sub> log-decline line, and three t<sub>eff</sub> forms including t<sub>eff</sub> = 1.44 t&frac12; ln[D<sub>0</sub>/(C<sub>eff</sub>V<sub>D</sub>)]</td><td>Chemical kinetics; not lectured in Modules 1 to 5</td></tr>
 <tr><td>Nonlinear pharmacokinetics</td><td>R = V<sub>max</sub>C<sub>ss</sub>/(K<sub>M</sub> + C<sub>ss</sub>); K<sub>M</sub> from two rate and concentration pairs; t&frac12; = 0.693(K<sub>M</sub> + C<sub>p</sub>)V<sub>D</sub>/V<sub>max</sub>; Cl<sub>T</sub> = V<sub>max</sub>/(K<sub>M</sub> + C<sub>p</sub>)</td><td>Final exam material</td></tr>
