@@ -23,16 +23,27 @@
    ========================================================================== */
 
 /* Sections several questions share, written once. */
-const B_INF = {h:'Intermittent infusions, step by step', list:[
-  'Each infusion is a zero-order input for its own duration, so its concentration at the end is Cp = {{frac:R|VD k}} (1 - e^(-kt)), the single-infusion equation with t equal to the infusion time. R is the dose divided by the duration, in mg/hr.',
-  'When an infusion stops, only first-order elimination is left: C = C0e^(-kt), with the end-of-infusion concentration as C0.',
-  'The same drug at the same rate for the same duration adds the same end-of-infusion concentration every time. With first-order (linear) kinetics the contributions add.',
-  'Draw the times on a line: when each infusion starts, when it ends, and the time asked for. For each infusion, t in e^(-kt) is the time from the end of that infusion to the time asked for.',
-  'Add the contributions. If the drug were infused continuously at that rate instead, the plateau would be Css = R/Cl.']};
+const B_INF = {h:'What one infusion does, from Module 3', list:[
+  'Drug goes in at a constant rate R (a zero-order input) while the body removes it by first-order elimination. The concentration rises, and the rise slows as it goes, because the rate out, k times the amount in the body, grows as drug builds up.',
+  'During the infusion: Cp = {{frac:R|VD k}} (1 - e^(-kt)). R/(VD k) is R/Cl, the steady-state concentration Css the infusion would reach if it ran forever. (1 - e^(-kt)) is the fraction of Css reached after infusing for a time t, and t here is the infusion time. R is the dose divided by the duration, in mg/hr.',
+  'When the infusion stops, no more drug goes in and only first-order elimination is left: C = Cpeak e^(-kt), with Cpeak the concentration at the moment the infusion ended and t the time since it ended, not since it started.']};
+
+const B_INF_SUM = {h:'Why two infusions can be added', t:'With first-order (linear) kinetics each dose behaves as if the other were not there, and the concentrations add. These are the superposition assumptions from the repeated-bolus slides: first-order elimination, and a half-life and clearance that do not change with more doses. The same drug at the same rate for the same duration therefore reaches the same Cpeak every time.',
+  table:{head:['Time', 'What is happening', 'Equation in force'], rows:[
+    ['0 to 2 hr', 'Dose 1 infusing', '{{frac:R|VD k}} (1 - e^(-kt)), t up to 2 hr'],
+    ['2 to 6 hr', 'Dose 1 declining', 'Cpeak e^(-kt), t from 2 hr'],
+    ['6 to 8 hr', 'Dose 2 infusing while dose 1 keeps declining', 'The infusion equation for dose 2, added to the leftover of dose 1'],
+    ['8 to 12 hr', 'Both declining', 'Cpeak e^(-k(t - 2)) + Cpeak e^(-k(t - 8))']]},
+  after:'Map the time line before any arithmetic: when each infusion starts, when it ends, and the time asked for. Four hours after the second infusion stops is 8 + 4 = 12 hours after the first started. Each dose then gets its own t, measured from the end of that dose. If the same rate ran without stopping, the plateau would be Css = R/Cl.'};
+
+const B_INF_ERR = {h:'Where the working usually goes wrong', list:[
+  'Using 4 hours, or 12, as t for both doses. Each dose\'s t is the time since that dose stopped: 10 hours for dose 1 and 4 hours for dose 2 at the 12-hour mark.',
+  'Using 6 hours in the infusion equation. The (1 - e^(-kt)) term applies only while drug is going in, so its t is the infusion time, 2 hours, for every infusion in the series.',
+  'Dropping dose 1\'s leftover. At 12 hours it still contributes 3.86 of the 13.34 mg/L, about 29 per cent of the total.']};
 
 const B_INF_FIG = {h:'Her Example 4 drawn out', fig:'two_infusions',
-  t:'300 mg over 2 hours, so R = 150 mg/hr; k 0.15 hr⁻¹, VD 15 L. The second infusion starts at 6 hours and runs to 8 hours. Each infusion rises to 17.28 mg/L on its own.',
-  after:'At 12 hours the first infusion has been declining for 10 hours (12 − 2) and contributes 3.86 mg/L; the second has declined for 4 hours (12 − 8) and contributes 9.48 mg/L. The plasma concentration is the sum, 13.3 mg/L.'};
+  t:'300 mg over 2 hours, so R = 150 mg/hr; k 0.15 hr⁻¹, VD 15 L, so Cl = 2.25 L/hr and R/Cl = 66.67 mg/L. The second infusion starts at 6 hours and runs to 8 hours. Each infusion on its own rises to 17.28 mg/L, 26 per cent of the 66.67 mg/L it was heading for.',
+  after:'At 12 hours the first infusion has been declining for 10 hours (12 − 2) and contributes 3.86 mg/L; the second has declined for 4 hours (12 − 8) and contributes 9.48 mg/L. The plasma concentration is the sum, 13.34 mg/L. A check that follows the curve instead: at 6 hours dose 1 is at 17.28 × e^(-0.6) = 9.48 mg/L; over the second infusion that leftover falls to 9.48 × e^(-0.3) = 7.03 mg/L while the new dose adds 17.28, so the curve is at 24.30 mg/L at 8 hours; four hours of elimination then gives 24.30 × e^(-0.6) = 13.34 mg/L. Both routes agree, which is what superposition predicts.'};
 
 const B_ORAL_EQ = {h:'The multiple-oral-dose equations at steady state', list:[
   'tmax∞ = {{frac:1|ka - k}} ln[{{frac:ka(1 - e^(-kτ))|k(1 - e^(-ka τ))}}]. It holds k, ka and τ; the single-dose tmax holds only k and ka.',
@@ -74,7 +85,7 @@ const Q_MODULE6B = [
    why:'This answer confuses the input with the output. The infusion is a zero-order input; elimination stays first order whatever the route, which is what makes the concentration fall as C0e^(-kt) once the infusion stops.'}],
  teach:[
   {t:'Intermittent infusions are the IV bolus regimen with the dose put in slowly. The dose, the interval and the kinetics are the same; only the shape of the input changes, and that is what limits the peak.'},
-  B_INF],
+  B_INF, B_INF_SUM],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Rationale"; 09.28 lecture',
  quote:'some drugs aren\'t are better tolerated when they are infused slowly versus all at once'},
 
@@ -93,7 +104,7 @@ const Q_MODULE6B = [
    why:'Choosing this treats a short infusion as if it had run to steady state. R/Cl is the plateau a continuous infusion would reach after 3 to 5 half-lives; a 2-hour infusion of a drug with a 4.6-hour half-life stops well short of it, which is what the (1 − e^(−kt)) factor measures.'}],
  teach:[
   {t:'Nothing new is needed for the rise: it is the Module 3 infusion equation with t set to the infusion time, and R written as the dose over the duration.'},
-  B_INF],
+  B_INF, B_INF_ERR],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Administering One or More Doses by IV Infusion"; 09.28 lecture',
  quote:'this is the same equation that we had when we talked about our single IV infusion'},
 
@@ -112,7 +123,7 @@ const Q_MODULE6B = [
    why:'This answer confuses the plateau of a continuous infusion with the gap between two short ones. A level holds steady only while rate in equals rate out, and between infusions the rate in is zero.'}],
  teach:[
   {t:'Every intermittent-infusion problem is two Module 3 pieces in turn: the rise during the infusion, then C0e^(-kt) after it, with the end-of-infusion concentration as the starting value.'},
-  B_INF, B_INF_FIG],
+  B_INF, B_INF_SUM, B_INF_FIG],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "What is the plasma drug concentration at the end of the first infusion?"; 09.28 lecture',
  quote:'What happens when we stop the infusion? It\'s only elimination. ... So that C0 is gonna be the concentration at the end of the infusion, right?'},
 
@@ -131,7 +142,7 @@ const Q_MODULE6B = [
    why:'Choosing this reads the gap between the two starts as the decline time. Six hours is when the second infusion began, which has nothing to do with how long the first has been declining at 12 hours.'}],
  teach:[
   {t:'Her number line: mark each start, each end and the time asked for. Each infusion\'s t is measured from its own end, so the two infusions get different values of t at the same clock time.'},
-  B_INF, B_INF_FIG],
+  B_INF_SUM, B_INF_ERR, B_INF_FIG],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "What is the plasma drug concentration 4 hours after the cessation of the second infusion?"; 09.28 lecture',
  quote:'here is the part that you need to pay attention to. We are interested in the concentration from this red infusion where we stop at time 2. All the way out here on our number line at 12 hours later. So, the time that we\'re interested in is going to be the time that we\'re interested 12 minus 2, OK? So, 10 hours.'},
 
@@ -150,7 +161,7 @@ const Q_MODULE6B = [
    why:'Choosing this reads "identical infusions" as identical curves at the same clock time. They produce the same end-of-infusion concentration, 17.3 mg/L each in her example, but at different times, so at any one moment they have declined by different amounts.'}],
  teach:[
   {t:'This is the superposition principle from the repeated-bolus slides applied to infusions: same drug, same kinetics after every dose, so the doses overlay and their concentrations add.'},
-  B_INF],
+  B_INF_SUM, B_INF],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Administering One or More Doses by IV Infusion"; 09.28 lecture',
  quote:'the concentrations from each administration of the dose will be additive over time'},
 
@@ -173,6 +184,25 @@ const Q_MODULE6B = [
   B_INF],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale" and "Administering One or More Doses by IV Infusion"; 09.28 lecture',
  quote:'instead of putting all the drug into the body all at once, we are going to put the drug into the body via a zero order, like we just first, just talked about a zero-order constant process'},
+
+{id:'m6b-c20', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
+ topic:'intermit', sub:'why', concept:'infusion-time-in-rise', skill:'apply',
+ source:'both',
+ stem:'A second 2-hour intravenous (IV) infusion of the same dose starts 6 hours after the first began. What value of t goes into (1 − e^(−kt)) to find the concentration at the end of the second infusion?',
+ options:[
+  {t:'2 hours, the duration of the infusion', correct:true,
+   why:'The (1 − e^(−kt)) term describes the rise while drug is going in, so its t is how long the pump ran. Every infusion in the series runs for 2 hours, so every one reaches the same end-of-infusion concentration, 17.28 mg/L in her Example 4.'},
+  {t:'6 hours, the time since the first infusion started',
+   why:'Choosing this puts the clock time into an equation that only knows how long the drug has been going in. The 6 hours places the second infusion on the time line; it says nothing about how far the second infusion has risen, which depends only on its own 2-hour duration.'},
+  {t:'8 hours, the time the second infusion ends',
+   why:'This answer confuses when the infusion ends with how long it ran. Eight hours is where the second peak sits on the number line; the rise that produces that peak took 2 hours.'},
+  {t:'4 hours, the gap between the first infusion ending and the second starting',
+   why:'Choosing this attaches the gap between the infusions to the rise. The gap is where the first dose declines; it has no part in the rise of the second, which is the same 2-hour climb from zero as the first.'}],
+ teach:[
+  {t:'Two different clocks run in these problems. The rise of each infusion uses its own duration; the decline of each infusion uses the time since its own end. The clock time only serves to work out those two.'},
+  B_INF, B_INF_ERR],
+ cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Administering One or More Doses by IV Infusion"; 09.28 lecture',
+ quote:'1 minus E to the minus KT where this T. Is the infusion time.'},
 
 /* ---- Example 4, in parts ---- */
 
@@ -215,7 +245,7 @@ const Q_MODULE6B = [
   {k:'round', t:'Cp = 17.28 mg/L',
    why:'Her value, 17.28 mg/L, which she carries as 17.3 into part (b). It is the starting value for the decline after the infusion.'}],
  teach:[
-  {t:'The end-of-infusion concentration is the one number every later part depends on, because it is the C0 of the first-order decline that follows.'},
+  {t:'The end-of-infusion concentration is the one number every later part depends on, because it is the C0 of the first-order decline that follows. In 2 hours the infusion reached 26 per cent of the 66.67 mg/L it was heading for.'},
   B_INF, B_INF_FIG],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "What is the plasma drug concentration at the end of the first infusion?"; 09.28 lecture',
  quote:'And I\'m getting 17.28 mg per liter.'},
@@ -242,7 +272,7 @@ const Q_MODULE6B = [
    why:'Her value is 13.33 mg/L, from 17.3 rounded before the exponentials; 17.28 carried through gives 13.34. Both are within the tolerance.'}],
  teach:[
   {t:'One decline per infusion, each with its own t measured from its own end, then a sum. The error she warns about is using 4 hours for both.'},
-  B_INF, B_INF_FIG],
+  B_INF_SUM, B_INF_ERR, B_INF_FIG],
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "What is the plasma drug concentration 4 hours after the cessation of the second infusion?"; 09.28 lecture',
  quote:'The answer that I\'m looking for for this one will be 13.33 mg per liter.'},
 
@@ -268,7 +298,7 @@ const Q_MODULE6B = [
    why:'Her confirmed value: "something like 22.2 mg per liter for the first part for A". It is the C0 for both declines in part (b), since the second infusion is identical.'}],
  teach:[
   {t:'The same first step as her Example 4 with the half-life supplied instead of k. Convert it before anything else.'},
-  B_INF],
+  B_INF, B_INF_SUM, B_INF_ERR],
  audit:'The activity sheet is not posted in Drive. The stem is transcribed from the photograph of the sheet on page 8 of the annotated Part 2 deck, and 22.24 is her confirmed answer in the 09.28 recording ("22.2 mg per liter"); the working here reproduces it from the printed inputs.',
  cite:'In-Class Activity, Multiple IV Infusions (09.28), question 1(a); 09.28 lecture',
  quote:'Did we get something like 22.2 mg per liter for the first part for A?'},
@@ -295,7 +325,7 @@ const Q_MODULE6B = [
    why:'Her confirmed value was "eleven-ish", with rounding differences between students. Carried from 22.24 the sum is 11.04 mg/L.'}],
  teach:[
   {t:'Same number line as Example 4, so the two values of t are 10 and 4 hours again. The 12 comes from the second infusion ending at 8 hours plus the 4 hours asked for.'},
-  B_INF],
+  B_INF, B_INF_SUM, B_INF_ERR],
  audit:'Stem transcribed from the photograph of the sheet on the annotated Part 2 deck. In the recording she confirms "eleven-ish" and walks the class through the 12 − 2 = 10 and the given 4; 11.04 is the sum from her inputs with 22.24 carried.',
  cite:'In-Class Activity, Multiple IV Infusions (09.28), question 1(b); 09.28 lecture',
  quote:'So the 12 comes from part B says the concentration 4 hours after the end of the second infusion. Second infusion ends right here at time 8, so that\'s where the 12 comes from.'},
@@ -349,7 +379,7 @@ const Q_MODULE6B = [
    why:'Computed from her inputs. With k rounded to 0.115 the pieces are 3.14 and 1.25 and the sum 4.39; both lie inside the tolerance.'}],
  teach:[
   {t:'Her number line for this one: 0, 1.5, 8, 9.5, 15.5. The first infusion\'s decline time is 14 hours, which she confirmed against the room\'s 13.'},
-  B_INF],
+  B_INF, B_INF_SUM, B_INF_ERR],
  audit:'She set up both terms aloud (6.26, the 6 hours, and "15.5 minus 1.5 ... 14") but stated no final value in the recording. 4.37 = 6.26 e^(-0.1155 × 6) + 6.26 e^(-0.1155 × 14) from her inputs.',
  cite:'In-Class Activity, Multiple IV Infusions (09.28), question 2(b); 09.28 lecture',
  quote:'So, 15.5 minus 1.5, the time that we\'re interested in, all the way back to when that first infusion ends. OK, so this is gonna be 14.'},
