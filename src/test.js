@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -523,11 +523,52 @@ console.log('\n=== 5d. Equations ===');
     ['Cmax = C0/(1-e^(-k*tau))', 'Cmax = C0/(1 - e^(-k\u03c4))', 'cmax=c0/(1-e^-k tau)'],
   ];
   for (const forms of mustAgree) {
-    const n = new Set(forms.map(X.normEq));
+    const n = new Set(forms.map(f => X.normEq(f)));
     if (n.size !== 1) bad(`the equation checker reads these as different: ${forms.join('  |  ')}`);
   }
   console.log(`  ok    the checker separates ${mustDiffer.length} pairs it must not confuse, `
     + `and joins ${mustAgree.reduce((s, f) => s + f.length, 0)} spellings it must not split`);
+
+  /* The algebraic comparison. Each row is an equation id, spellings a student
+     types that are the same equation, and spellings that are a different one.
+     Both lists are held: loosen the reader until VD*k passes and it must still
+     reject VD/k. */
+  const algebra = [
+    ['cl-k-vd',   ['Cl = VD*k', 'Cl = VDk', 'CL = k x VD', 'clearance = k*VD', 'ClT = VD k'],
+                  ['Cl = k/VD', 'Cl = VD/k', 'Cl = k+VD']],
+    ['thalf-first', ['t1/2 = ln2/k', 'half-life = 0.693/k', 't1/2 = ln(2)/k', 't1/2 = 0.69/k'],
+                  ['t1/2 = k/0.693', 't1/2 = 0.693k', 't1/2 = 0.5/k']],
+    ['crcl',      ['CrCl = (140-age)*IBW/(72*SCr)', 'CrCl = (140-age)(IBW)/72(SCr)', 'CrCl = [(140-age)(IBW)]/(72)(SCr)',
+                   'CrCl = IBW(140-age)/(72 SCr)', 'CrCl = (140 - age) x IBW / (72 x SCr)'],
+                  ['CrCl = (140-age)(IBW)/72*SCr', 'CrCl = (140+age)(IBW)/(72*SCr)', 'CrCl = (140-age)/(72*SCr*IBW)']],
+    ['ibw-male',  ['IBW = 50 + 2.3(h-60)', 'IBW = 50 + 2.3*(inches over 60)', 'IBW = 50 + 2.3 x (height in inches - 60)', 'IBW = 2.3(in-60) + 50'],
+                  ['IBW = 45.5 + 2.3(h-60)', 'IBW = 50 - 2.3(h-60)', 'IBW = 50 + 2.3h - 60']],
+    ['cmax-ss',   ['Cmax = C0/(1-e^(-k*tau))', 'Cmax = (D0/VD)/(1-e^-ktau)', 'Cmax = C0/(1-e^-kT)', 'Cmax = C0 (1-e^-ktau)^-1'],
+                  ['Cmax = C0(1-e^-ktau)', 'Cmax = C0/(1-e^ktau)', 'Cmax = C0/(1+e^-ktau)', 'Cmax = C0e^-ktau/(1-e^-ktau)', 'Cmax = C0/(1-e^-kt)']],
+    ['cavg-ss',   ['Cavg = FD0/(VD k tau)', 'Cavg = F D0 / Cl tau', 'Cavg = FD0/(ClT*tau)', 'Cavg = D0F/(kVDtau)'],
+                  ['Cavg = FD0/(VD tau)', 'Cavg = FD0 k/tau', 'Cavg = (Cmax+Cmin)/2', 'Cavg = D0/(Cl*tau)']],
+    ['tmax',      ['tmax = ln(ka/k)/(ka-k)', 'tmax = 2.3 log(ka/k)/(ka-k)', 'tmax = (ln ka - ln k)/(ka-k)'],
+                  ['tmax = ln(k/ka)/(ka-k)', 'tmax = ln(ka/k)/ka-k', 'tmax = ln(ka/k)/(k-ka)']],
+    ['oral-cp',   ['Cp = FkaD0/(VD(ka-k)) (e^-kt - e^-kat)', 'Cp = (F ka D0)/(Vd(ka-k)) (e^(-kt) - e^(-kat))', 'Cp = F*ka*D0*(e^(-kt)-e^(-ka*t))/(VD*(ka-k))'],
+                  ['Cp = FkaD0/(VD(ka-k)) (e^-kat - e^-kt)', 'Cp = FkaD0/(VD(k-ka)) (e^-kt - e^-kat)', 'Cp = FkaD0/(VD(ka-k)) (e^-kt + e^-kat)']],
+    ['cp-n',      ['Cp = D0/VD * (1-e^-nktau)/(1-e^-ktau) * e^-kt', 'Cp = (D0/VD)[(1-e^(-nkτ))/(1-e^(-kτ))]e^(-kt)'],
+                  ['Cp = D0/VD * (1-e^-ktau)/(1-e^-nktau) * e^-kt', 'Cp = D0/VD * (1-e^-nkt)/(1-e^-ktau) * e^-kt']],
+    ['css',       ['Css = R/Cl', 'Css = R/(k*VD)', 'Css = R/kVD', 'Css = R/(VD k)'],
+                  ['Css = R/k*VD', 'Css = Cl/R', 'Css = R k/VD']],
+  ];
+  let same = 0, diff = 0;
+  for (const [id, yes, no] of algebra) {
+    const e = E.find(x => x.id === id);
+    if (!e) { bad(`algebra control names an unknown equation "${id}"`); continue; }
+    for (const f of yes) { if (!X.eqCorrect(e, f)) bad(`"${id}" rejects the same equation spelled ${f}`); same++; }
+    for (const f of no)  { if (X.eqCorrect(e, f))  bad(`"${id}" accepts a different equation spelled ${f}`); diff++; }
+  }
+  console.log(`  ok    read as algebra: ${same} other spellings accepted, ${diff} different equations refused`);
+  /* Every keyed form must be readable as algebra, or the loosening above
+     silently never applies to that equation. */
+  const unreadable = E.filter(e => [e.typed, ...(e.also || [])].some(f => !X.eqTokens(f.split('=').slice(1).join('='))));
+  if (unreadable.length) bad(`keyed forms the algebra reader cannot read: ${unreadable.map(e => e.id).join(', ')}`);
+  else console.log('  ok    every keyed form reads as algebra');
 
   /* Every equation, answered in its own canonical form, must be accepted. */
   const rejected = E.filter(e => !X.eqCorrect(e, e.typed)

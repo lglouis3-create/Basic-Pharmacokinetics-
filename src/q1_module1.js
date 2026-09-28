@@ -237,7 +237,7 @@ const CHAINS = [
   setup:'3 hours after the 2nd dose, then 3 and 4 hours after the last dose at steady state',
   parts:['m6-n06','m6-n07','m6-n08']},
 
- {id:'m6-practice1', module:6, name:'One gram every 8 hours to a 65-kg patient (a&ndash;h)',
+ {id:'m6-practice1', module:6, name:'One gram every 8 hours to a 65-kg patient (a–h)',
   setup:'V<sub>D</sub> 26.2 L/100 kg, Cl<sub>T</sub> 52.95 mL/min per 70 kg: her parts (a) to (h) in her order; part (i), the renal mechanism, is with the concepts',
   parts:['m6-p1a','m6-p1b','m6-p1c','m6-p1d','m6-p1e','m6-p1f','m6-p1g','m6-p1h']},
 ];

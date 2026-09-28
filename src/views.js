@@ -326,7 +326,7 @@ function topicCard(t){
       <span class="tname">${esc(t.name)}<small>${esc(t.cite||'')}</small></span>
       ${profTag(t.prof)}
       <span class="meter"><i style="width:${pct}%"></i></span>
-      <span class="counts">${m.mastered}/${m.total}</span>
+      ${countsHTML(m, pool)}
     </summary>
     <div class="subs">`;
   for(const s of (t.subs||[])){
@@ -483,10 +483,13 @@ function renderTopics(){
     if(m.topic){ h += topicCard(m.topic); continue; }
 
     if(m.view){
+      const nl = m.view === 'eq' ? EQUATIONS.filter(e => eqLearned(e.id)).length : 0;
       h += `<div class="module"><div class="mrow">
         <span class="mname">${esc(m.name)}<small>${
           m.view === 'eq'  ? 'Type them out or build them from pieces; the full table with symbols and units is under Reference'
         : m.view === 'ref' ? 'Every equation with its symbols, units and when it applies' : ''}</small></span>
+        ${m.view === 'eq' ? `<span class="meter"><i style="width:${Math.round(100 * nl / Math.max(1, EQUATIONS.length))}%"></i></span>
+        <span class="counts" title="Learned means three correct answers in a row in the equation drill">${nl}/${EQUATIONS.length} learned</span>` : ''}
         <button data-view="${esc(m.view)}">Open</button></div></div>`;
       continue;
     }
@@ -499,7 +502,7 @@ function renderTopics(){
       const em = masteryOf(pool), epct = em.total ? Math.round(100*em.mastered/em.total) : 0;
       h += `<details class="module"><summary>
           <span class="mname">${esc(m.name)}<small>${splitNote(pool)}${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
-          <span class="meter"><i style="width:${epct}%"></i></span><span class="counts">${em.mastered}/${em.total}</span>
+          <span class="meter"><i style="width:${epct}%"></i></span>${countsHTML(em, pool)}
         </summary><div class="mfoot">
         ${examRows(pool, m.exam)}
         <div class="subrow"><span class="sname"><b>Straight pass</b>
@@ -530,7 +533,7 @@ function renderTopics(){
     }
     h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
         <span class="mname">${esc(m.name)}<small>${splitNote(mpool)} · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
-        <span class="meter"><i style="width:${mpct}%"></i></span><span class="counts">${mm.mastered}/${mm.total}</span>
+        <span class="meter"><i style="width:${mpct}%"></i></span>${countsHTML(mm, mpool)}
       </summary>
       ${ts.map(topicCard).join('')}
       ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
@@ -604,7 +607,7 @@ const kindLabel = (name, kind) => kind ? `${name} — ${KIND_LABEL[kind].toLower
    concepts return first, and it stops when nothing is due. */
 function startPool(pool, label){
   if(!pool.length){ alert('No questions match those filters.'); return; }
-  Q = {pool, label, current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
+  Q = {pool, label, since:Date.now(), current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
 }
@@ -612,7 +615,7 @@ function startPool(pool, label){
    no scheduling gate. `scope` names a startSweep scope that can be repeated. */
 function startSweepOf(pool, label, scope){
   if(!pool.length){ alert('No questions match those filters.'); return; }
-  Q = {pool, label, scope, sweep: shuffle(pool.map(q => q.id)), i: 0,
+  Q = {pool, label, scope, since:Date.now(), sweep: shuffle(pool.map(q => q.id)), i: 0,
        current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
@@ -628,7 +631,7 @@ function startChain(id){
   if(!c) return;
   const parts = c.parts.map(byId).filter(Boolean);
   if(!parts.length){ alert('That problem set has no questions yet.'); return; }
-  Q = {pool: parts, label: c.name, chain: c, sweep: parts.map(q => q.id), i: 0,
+  Q = {pool: parts, label: c.name, chain: c, since:Date.now(), sweep: parts.map(q => q.id), i: 0,
        current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
@@ -743,6 +746,7 @@ function renderQuiz(){
     el.innerHTML = `<div class="empty">
       <p><b>${Q.chain ? `That is every part of ${esc(Q.chain.name)} — all ${Q.sweep.length}.`
                       : `That is every question in this set — all ${Q.sweep.length} of them.`}</b></p>
+      ${sessionSummary()}
       <p style="margin:10px 0 16px">Everything you answered is recorded, so Weak spots now
         reflects the whole bank and the adaptive runner will bring the missed concepts back first.</p>
       <p style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
@@ -760,6 +764,7 @@ function renderQuiz(){
     const wider = t ? poolFor(t.id, null).length : 0;
     el.innerHTML = `<div class="empty">
       <p><b>You have worked through everything available in this set.</b></p>
+      ${sessionSummary()}
       <p style="margin:10px 0 16px">${Q.pool.length === 1
         ? 'This subtopic currently holds one question, so there is nothing further to draw from here.'
         : 'Every concept here has been answered and is scheduled to return later.'}</p>
@@ -865,7 +870,7 @@ function renderQuiz(){
           <div class="frow">${MISS_KINDS.map(m =>
             `<button data-mk="${m.id}" aria-pressed="false" title="${esc(m.hint)}">${esc(m.label)}</button>`).join('')}</div></div>`;
       }else{
-        if(!ok) h += `<p class="sub" style="margin:0 0 8px">Logged as a ${esc((MISS_LABEL[Q.missKind]||'').toLowerCase())} miss.</p>`;
+        if(!ok) h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[Q.missKind]||'').toLowerCase()))} miss.</p>`;
         h += stepsBlock(q);
       }
     }else if(kind === 'match'){
@@ -977,6 +982,113 @@ function submitMatch(){
 /* ==========================================================================
    WEAK SPOTS
    ========================================================================== */
+/* ==========================================================================
+   PROGRESS OVER TIME
+   ==========================================================================
+   Every logged answer carries the time it was given. These read the log back
+   by day and by week, so a learner can see whether this week is better than
+   the one before it. A lifetime total cannot show that: it moves less with
+   every answer, and a bad first day sits inside it for the rest of the course.
+   ========================================================================== */
+const DAY_MS = 86400000;
+const dayKey = t => { const d = new Date(t); return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime(); };
+const acc = as => { const n = as.length, r = as.filter(a => a.result === 'correct').length; return {n, r, pct: n ? Math.round(100 * r / n) : null}; };
+const answersSince = (t0, t1) => DB.answers.filter(a => a.at >= t0 && (t1 == null || a.at < t1));
+const fmtDay = t => new Date(t).toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric'});
+const fmtWhen = t => new Date(t).toLocaleDateString(undefined, {month: 'short', day: 'numeric'});
+const pctTxt = a => a.pct == null ? '—' : a.pct + '%';
+const pctCol = p => p == null ? 'inherit' : p >= 80 ? 'var(--ok)' : p >= 60 ? 'var(--warn)' : 'var(--bad)';
+const an = w => (/^[aeiou]/i.test(w) ? 'an ' : 'a ') + w;
+/* Answers on the questions of one pool: how many, and how many right. */
+function seenOf(pool){ const ids = new Set(pool.map(q => q.id)); return acc(DB.answers.filter(a => ids.has(a.qid))); }
+/* The counts beside a meter: concepts mastered, and under it what has been
+   answered and how well, which moves from the first answer on. */
+function countsHTML(m, pool){
+  const sn = seenOf(pool);
+  return `<span class="counts" title="Mastered means three correct answers on separate review days. The second line is every answer given on these questions.">${m.mastered}/${m.total} mastered${
+    sn.n ? `<br><em style="color:${pctCol(sn.pct)}">${sn.pct}%</em> of ${sn.n}` : ''}</span>`;
+}
+/* What this drill session produced, against everything before it. */
+function sessionSummary(){
+  if(!Q || !Q.since) return '';
+  const mine = DB.answers.filter(a => a.at >= Q.since);
+  if(!mine.length) return '';
+  const now = acc(mine), prior = acc(DB.answers.filter(a => a.at < Q.since));
+  let cmp = '';
+  if(prior.pct != null)
+    cmp = ` Before this session you were at ${prior.pct}% over ${prior.n} answer${prior.n === 1 ? '' : 's'}; this session is ${
+      now.pct > prior.pct ? 'higher' : now.pct < prior.pct ? 'lower' : 'the same'}.`;
+  return `<p class="session"><b>This session: ${now.r} of ${now.n} correct (${now.pct}%).</b>${cmp}</p>`;
+}
+function progressSection(){
+  const now = Date.now(), today0 = dayKey(now);
+  const t = acc(answersSince(today0)), w = acc(answersSince(now - 7 * DAY_MS)),
+        p = acc(answersSince(now - 14 * DAY_MS, now - 7 * DAY_MS));
+  const delta = w.pct != null && p.pct != null ? w.pct - p.pct : null;
+  let h = `<h3>Your progress over time</h3>
+  <p class="sub">The same answers, read by when you gave them. A week that scores above the week before it is improvement, which a lifetime total cannot show.</p>
+  <div class="stat">
+    <div><b style="color:${pctCol(t.pct)}">${pctTxt(t)}</b><span>today · ${t.n} answered</span></div>
+    <div><b style="color:${pctCol(w.pct)}">${pctTxt(w)}</b><span>last 7 days · ${w.n} answered</span></div>
+    <div><b style="color:${pctCol(p.pct)}">${pctTxt(p)}</b><span>the 7 days before · ${p.n} answered</span></div>
+    <div><b style="color:${delta == null ? 'inherit' : delta > 0 ? 'var(--ok)' : delta < 0 ? 'var(--bad)' : 'inherit'}">${
+      delta == null ? '—' : (delta > 0 ? '+' : '') + delta + ' pts'}</b><span>${delta == null ? 'change, once two weeks are logged' : 'change, week on week'}</span></div>
+  </div>`;
+
+  /* day by day, most recent first */
+  const days = {};
+  for(const a of DB.answers){ const k = dayKey(a.at); (days[k] ||= []).push(a); }
+  const keys = Object.keys(days).map(Number).sort((a, b) => b - a).slice(0, 14);
+  if(keys.length){
+    h += `<table class="gap"><thead><tr><th>Day</th><th>Answered</th><th>Correct</th><th style="width:40%">Accuracy</th></tr></thead><tbody>`;
+    for(const k of keys){
+      const d = acc(days[k]);
+      h += `<tr><td>${k === today0 ? 'Today' : esc(fmtDay(k))}</td><td>${d.n}</td><td>${d.r}</td>
+        <td><div class="bar"><i style="width:${d.pct}%;background:${pctCol(d.pct)}"></i></div><span style="font-size:12px;color:var(--text-dim)">${d.pct}%</span></td></tr>`;
+    }
+    h += `</tbody></table>`;
+  }
+
+  /* each module, this week against everything before it */
+  const rows = [];
+  for(const m of outline()){
+    if(m.module == null || !m.topics) continue;
+    const pool = m.topics.flatMap(x => poolFor(x.id, null));
+    const ids = new Set(pool.map(q => q.id));
+    const mine = DB.answers.filter(a => ids.has(a.qid));
+    if(!mine.length) continue;
+    const before = acc(mine.filter(a => a.at < now - 7 * DAY_MS)), week = acc(mine.filter(a => a.at >= now - 7 * DAY_MS));
+    rows.push({name: m.name, before, week});
+  }
+  if(rows.length){
+    const anyBefore = rows.some(r => r.before.n);
+    h += `<table class="gap"><thead><tr><th>Module</th><th>Before this week</th><th>This week</th><th>Change</th></tr></thead><tbody>`;
+    for(const r of rows){
+      const d = r.before.pct != null && r.week.pct != null ? r.week.pct - r.before.pct : null;
+      h += `<tr><td>${esc(r.name)}</td>
+        <td>${pctTxt(r.before)}${r.before.n ? ` <span style="font-size:12px;color:var(--text-dim)">of ${r.before.n}</span>` : ''}</td>
+        <td style="color:${pctCol(r.week.pct)}">${pctTxt(r.week)}${r.week.n ? ` <span style="font-size:12px;color:var(--text-dim)">of ${r.week.n}</span>` : ''}</td>
+        <td style="color:${d == null ? 'inherit' : d > 0 ? 'var(--ok)' : d < 0 ? 'var(--bad)' : 'inherit'};font-weight:600">${d == null ? '—' : (d > 0 ? '+' : '') + d}</td></tr>`;
+    }
+    h += `</tbody></table>`;
+    if(!anyBefore) h += `<p class="sub">Every answer so far is from this week, so there is nothing yet to compare it with. The Change column fills in from the second week.</p>`;
+  }
+
+  /* practice papers */
+  const papers = (DB.exams || []).slice().reverse().slice(0, 8);
+  if(papers.length){
+    h += `<table class="gap"><thead><tr><th>Practice paper</th><th>When</th><th>Score</th><th style="width:40%">Result</th></tr></thead><tbody>`;
+    for(const x of papers){
+      const ex = COURSE.exams.find(e => e.id === x.exam);
+      const pc = x.total ? Math.round(100 * x.right / x.total) : 0;
+      h += `<tr><td>${esc(ex ? ex.name : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td>
+        <td><div class="bar"><i style="width:${pc}%;background:${pctCol(pc)}"></i></div><span style="font-size:12px;color:var(--text-dim)">${pc}%</span></td></tr>`;
+    }
+    h += `</tbody></table>`;
+  }
+  return h;
+}
+
 function renderGaps(){
   const el = $('#v-gaps');
   const tot = DB.answers.length;
@@ -1000,7 +1112,10 @@ function renderGaps(){
     <div><b style="color:var(--bad)">${wrong}</b><span>missed</span></div>
     <div><b style="color:var(--warn)">${guess}</b><span>guessed</span></div>
     <div><b>${m.mastered}</b><span>of ${m.total} concepts mastered</span></div>
-  </div>`;
+  </div>
+  <p class="sub">A concept counts as mastered after three correct answers on separate review days, so that number stays low in the first week however well you score. The accuracy figures move at once.</p>`;
+
+  h += progressSection();
 
   /* ---- What to do next ------------------------------------------------
      One card per blueprint pool, ranked by marks: concepts never seen, and
@@ -1213,11 +1328,12 @@ function renderGaps(){
         <div class="mstem">${rich(q.stem)}</div>
         <div class="mmeta" style="color:var(--ok);margin-bottom:4px">Answer: ${esc(correctTxt)}</div>
         ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${esc(pickedTxt)}</div>` : ''}
-        ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as a ${esc((MISS_LABEL[last.missKind]||'').toLowerCase())} miss</div>` : ''}
+        ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss</div>` : ''}
         <div class="mmeta">${esc(q.cite)} · missed ${s2.wrong||1}× · ${s2.box>=MASTER_BOX?'now mastered':'still in review'}</div>
       </div>`;
     }
   }
+  h = h.replace(/<table class="gap">/g, '<div class="tw"><table class="gap">').replace(/<\/table>/g, '</table></div>');
   el.innerHTML = h;
 
   el.querySelectorAll('[data-next]').forEach(b => b.onclick = () => {
@@ -1227,7 +1343,7 @@ function renderGaps(){
       ? pool.filter(q => !DB.concepts[q.concept] || !DB.concepts[q.concept].seen)
       : pool.filter(q => { const s2 = DB.concepts[q.concept]; return s2 && s2.seen && s2.box === 0; });
     if(!want.length) return;
-    Q = {pool:want, label:(b.dataset.next==='unseen' ? 'Not yet seen — ' : 'Redrill — ') + pl.name,
+    Q = {pool:want, label:(b.dataset.next==='unseen' ? 'Not yet seen — ' : 'Redrill — ') + pl.name, since:Date.now(),
          sweep: shuffle(want.map(q=>q.id)), i:0,
          current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
     nextQuestion(); show('quiz');
@@ -1239,7 +1355,7 @@ function renderGaps(){
   if(d) d.onclick = () => {
     const pool = QUESTIONS.filter(q => missedIds.includes(q.id) ||
       missedIds.some(id => byId(id) && byId(id).concept === q.concept));
-    Q = {pool, label:'Missed concepts', sweep: shuffle(pool.map(q => q.id)), i:0,
+    Q = {pool, label:'Missed concepts', since:Date.now(), sweep: shuffle(pool.map(q => q.id)), i:0,
          current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
     nextQuestion(); show('quiz');
   };
@@ -1299,6 +1415,19 @@ function examPicker(note){
     `<button class="chip" data-exam="${e.id}" aria-pressed="${e.id === EXAM.id}">${esc(e.name)}</button>`).join('')}</div>
     <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">${note}</p></div>`;
 }
+/* Every paper sat, newest first, so a second paper can be read against the first. */
+function examHistory(){
+  const papers = (DB.exams || []).slice().reverse();
+  if(!papers.length) return '';
+  let h = `<h3>Your papers so far</h3><div class="tw"><table class="gap"><thead><tr><th>Paper</th><th>When</th><th>Score</th><th>Blank</th><th style="width:36%">Result</th></tr></thead><tbody>`;
+  for(const x of papers.slice(0, 12)){
+    const ex = COURSE.exams.find(e => e.id === x.exam);
+    const pc = x.total ? Math.round(100 * x.right / x.total) : 0;
+    h += `<tr><td>${esc(ex ? ex.name : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td><td>${x.blank || 0}</td>
+      <td><div class="bar"><i style="width:${pc}%;background:${pctCol(pc)}"></i></div><span style="font-size:12px;color:var(--text-dim)">${pc}%</span></td></tr>`;
+  }
+  return h + `</tbody></table></div>`;
+}
 function renderExam(){
   const el = $('#v-exam');
   if(EX && EX.running){ renderExamQ(); return; }
@@ -1320,7 +1449,8 @@ function renderExam(){
   <div class="note"><b>This does not feed your spaced-repetition history until you submit.</b>
   Finish the paper, then every answer is logged at once so your weak spots stay accurate.</div>
   <p><button class="btn" id="startExam">Start the ${EXAM.minutes}-minute paper${
-    nPaper < EXAM.questions ? ` (${nPaper} questions available)` : ''}</button></p>`;
+    nPaper < EXAM.questions ? ` (${nPaper} questions available)` : ''}</button></p>
+  ${examHistory()}`;
   $('#startExam').onclick = beginExam;
   el.querySelectorAll('.chip[data-exam]').forEach(b => b.onclick = () => { chooseExam(+b.dataset.exam); renderExam(); });
 }
@@ -1447,6 +1577,11 @@ function finishExam(){
                  : qType(q)==='numeric' ? String(p == null ? '' : p) : p;
     record(q, examRight(q, p) ? 'correct' : 'wrong', picked);
   });
+  const right = EX.qs.filter((q, i) => examRight(q, EX.picks[i])).length;
+  (DB.exams ||= []).push({at: Date.now(), exam: EXAM.id, right, total: EX.qs.length,
+                          blank: EX.qs.filter((q, i) => examBlank(q, EX.picks[i])).length});
+  if(DB.exams.length > 100) DB.exams.splice(0, DB.exams.length - 100);
+  save();
   renderExamResult();
 }
 function renderExamResult(){
@@ -1471,7 +1606,18 @@ function renderExamResult(){
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
     if(kind === 'numeric'){
       h += `<p class="verdict ${ok?'ok':'bad'}">Keyed answer ${q.answer.toFixed(4)} ${esc(q.units)}${
-        blankQ ? ' — left blank' : ` — you entered ${esc(String(p))}`}</p>` + stepsBlock(q);
+        blankQ ? ' — left blank' : ` — you entered ${esc(String(p))}`}</p>`;
+      /* the kind of slip is asked here as it is in the quiz, so a paper's
+         misses count in the miss-kind table like any other */
+      if(!ok && !blankQ){
+        const last = DB.answers.slice().reverse().find(a => a.qid === q.id);
+        if(last && !last.missKind)
+          h += `<div class="misskind"><p><b>Which kind of miss was this?</b></p><div class="frow">${MISS_KINDS.map(m =>
+            `<button data-mk="${m.id}" data-qi="${i}" title="${esc(m.hint)}">${esc(m.label)}</button>`).join('')}</div></div>`;
+        else if(last && last.missKind)
+          h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss.</p>`;
+      }
+      h += stepsBlock(q);
     }else if(kind === 'match'){
       h += pairsBlock(q);
     }else{
@@ -1489,6 +1635,10 @@ function renderExamResult(){
   });
   $('#v-exam').innerHTML = h;
   $('#exAgain').onclick = ()=>{ EX=null; renderExam(); };
+  $('#v-exam').querySelectorAll('button[data-mk]').forEach(b => b.onclick = () => {
+    const q = EX.qs[+b.dataset.qi];
+    if(q && setMissKind(q, b.dataset.mk)) renderExamResult();
+  });
 }
 
 /* ==========================================================================
@@ -1684,24 +1834,30 @@ const EQ_SUPS = {'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5',
 const EQ_SUP_RE = new RegExp('[' + Object.keys(EQ_SUPS).join('') + ']+', 'g');
 const EQ_SUB_RE = new RegExp('[' + Object.keys(EQ_SUBS).join('') + ']', 'g');
 
-function normEq(s){
+function normEq(s, keepCaretGroups){
   let t = String(s == null ? '' : s);
   t = t.replace(EQ_SUP_RE, m => '^' + [...m].map(c => EQ_SUPS[c]).join(''));
   t = t.replace(EQ_SUB_RE, c => EQ_SUBS[c]);
+  t = t.replace(/(\s|\))[x×](\s|\()/g, '$1*$2');            // "k x VD": a spaced x is a times sign
   t = t.replace(/½/g, '1/2').toLowerCase();
   t = t.replace(/[−–—‐‑]/g, '-');  // every dash is a minus
   t = t.replace(/÷/g, '/');
   t = t.replace(/\*\*/g, '^');                              // before the star is dropped
-  t = t.replace(/[×·⋅*]/g, '');              // multiplication is implicit
+  t = t.replace(/[×·⋅*]/g, keepCaretGroups ? '*' : '');   // multiplication is implicit
   t = t.replace(/∞/g, 'inf').replace(/→/g, 'to');
   t = t.replace(/[‘’“”]/g, '');
   t = t.replace(/[\s_,]/g, '');                             // V_D and VD are one thing
-  t = t.replace(/thalf|t-half/g, 't1/2');
+  t = t.replace(/half-?life/g, 't1/2').replace(/thalf|t-half/g, 't1/2');
+  t = t.replace(/clearance/g, 'cl');
   t = t.replace(/tau/g, 'τ');                                // the dosing interval, typed as a word
   t = t.replace(/[\[\{]/g, '(').replace(/[\]\}]/g, ')');
+  /* the height term of ideal body weight, however it is written:
+     (inches over 5 ft), (in over 60), (h - 60), (height in inches - 60) */
+  t = t.replace(/\((?:inches|inch|in|h|ht|height|heightininches|heightinin)(?:over|above|>|-)(?:60|5ft|5feet|five(?:ft|feet))\)/g, '(hx)');
+  t = t.replace(/(?:inches|inch|in|height|heightininches)(?:over|above)(?:60|5ft|5feet|five(?:ft|feet))/g, '(hx)');
   t = t.replace(/(^|[^0-9])\.(\d)/g, '$10.$2');             // .693 -> 0.693
   t = t.replace(/log10/g, 'log');
-  for(let i = 0; i < 8; i++) t = t.replace(/\^\(([^()]*)\)/g, '^$1');
+  if(!keepCaretGroups) for(let i = 0; i < 8; i++) t = t.replace(/\^\(([^()]*)\)/g, '^$1');
   return t.replace(/\.$/, '');
 }
 /* Every spelling that counts as right, with and without the left side, since
@@ -1720,7 +1876,199 @@ const eqRhs = e => e.tokens.join(' ');
 /* How an equation is shown to be read: stacked as the slides print it where a
    display form exists, and as its pieces joined up where it does not. */
 const eqShow = e => `<span class="eqshow">${e.lhs} = ${mathHTML(e.disp || eqRhs(e))}</span>`;
-const eqCorrect = (e, typed) => eqAccepts(e).has(normEq(typed));
+/* ---------- the same equation, spelled another way ----------
+   A student who types VD*k for k*VD, or ln2/k for 0.693/k, or Cmax for
+   Cmax,ss, has the equation. Spelling is compared first; where it differs,
+   both right-hand sides are read as algebra and evaluated at the same random
+   values of every symbol. Two expressions that agree at every point are the
+   same expression. What still counts as different: which quantity is above
+   the line, the sign of an exponent, and where a bracket closes, because
+   those change the value. */
+const EQ_FUNS = {ln: Math.log, log: Math.log10, exp: Math.exp, sqrt: Math.sqrt};
+/* Every symbol the course's equations declare, in the normalised spelling, so
+   a run of letters like kvd or fkad0 can be cut at the right places. */
+const EQ_SYMS = (() => {
+  const out = new Set(['e', 't', 'n', 'τ', 'hx', 'thalf', 'thalfa', 'thalfb', 'thalfbeta',
+                       'age', 'ibw', 'scr', 'auc', 'aucpo', 'auciv', 'aucoral', 'auca', 'aucb',
+                       'div', 'dpo', 'da', 'db', 'cn', 'tn', 'cl', 'clt', 'clr', 'clh',
+                       'a', 'b', 'k', 'ka', 'ke', 'km', 'k0', 'k12', 'k21', 'vd', 'vp', 'vt',
+                       'v', 'd0', 'dl', 'du', 'd', 'c0', 'cp', 'cp0', 'cs', 'c', 'css', 'cpeak',
+                       'cmax', 'cmin', 'cavg', 'cav', 'tmax', 'f', 'fe', 'frel', 'r', 'kel']);
+  const add = x => { const n = normEq(eqPlain(x), true).replace(/t1\/2/g, 'thalf').replace(/(ss|inf)$/, '');
+                     if(/^[a-zτ][a-z0-9τ]*$/.test(n) && !/^(ln|log|exp)/.test(n)) out.add(n); };
+  for(const e of (typeof EQUATIONS === 'undefined' ? [] : EQUATIONS)){
+    add(e.lhs);
+    for(const s of (e.symbols || [])) String(s[0]).split(/,|\band\b/).forEach(add);
+  }
+  return out;
+})();
+const EQ_SYM_LIST = [...EQ_SYMS].sort((a, b) => b.length - a.length);
+
+/* Tokens: numbers, symbols (a letter run cut at known symbols, longest
+   first), functions, operators and brackets. Adjacent atoms multiply, and
+   that written-together product binds tighter than a division sign: a/bc is
+   a/(bc), the way a one-line fraction is meant, while a/b*c with an explicit
+   sign is (a/b)c. */
+function eqTokens(src){
+  const s = normEq(src, true).replace(/t1\/2/g, 'thalf');
+  const out = [];
+  let i = 0;
+  while(i < s.length){
+    const ch = s[i];
+    if(/[0-9.]/.test(ch)){
+      const m = s.slice(i).match(/^\d*\.?\d+|^\d+\.?/);
+      if(!m) return null;
+      out.push({t: 'num', v: parseFloat(m[0])}); i += m[0].length; continue;
+    }
+    if(/[a-zτ]/.test(ch)){
+      const run = s.slice(i).match(/^[a-zτ][a-z0-9τ]*/)[0];
+      let j = 0;
+      while(j < run.length){
+        const rest = run.slice(j);
+        const dm = rest.match(/^\d+\.?\d*/);
+        if(dm){ out.push({t: 'num', v: parseFloat(dm[0])}); j += dm[0].length; continue; }   // ln2, e2
+        const fn = Object.keys(EQ_FUNS).find(f => rest.startsWith(f) && rest.length > f.length);
+        const fnAtEnd = Object.keys(EQ_FUNS).find(f => rest === f) && s[i + run.length] === '(';
+        if(fn || fnAtEnd){ const f = fn || rest; out.push({t: 'fn', v: f}); j += f.length; continue; }
+        const sym = EQ_SYM_LIST.find(y => rest.startsWith(y));
+        if(sym){ out.push({t: 'sym', v: sym === 'clt' ? 'cl' : sym}); j += sym.length; continue; }   // Cl and ClT are one quantity
+        out.push({t: 'sym', v: rest[0]}); j += 1;               // an unknown letter is its own symbol
+      }
+      i += run.length; continue;
+    }
+    if('+-*/^()'.includes(ch)){ out.push({t: ch}); i++; continue; }
+    return null;                                                 // a character algebra cannot read
+  }
+  return out;
+}
+
+/* A recursive-descent evaluator. `env` maps each symbol to a number.
+   Levels, loosest first: sums; division and an explicit times sign, left to
+   right; a written-together product; a power; an atom. An exponent written
+   without brackets, as in e^-kt, runs to the end of the written-together
+   product, which is how the slides and the string comparison both read it. */
+function eqEval(tokens, env, loose){
+  let p = 0;
+  const peek = () => tokens[p], next = () => tokens[p++];
+  const startsAtom = k => k && (k.t === 'num' || k.t === 'sym' || k.t === 'fn' || k.t === '(');
+  function atom(){
+    const k = peek();
+    if(!k) throw 0;
+    if(k.t === 'num'){ next(); return k.v; }
+    if(k.t === 'sym'){ next(); return k.v === 'e' ? Math.E : env(k.v); }
+    if(k.t === 'fn'){ next(); return EQ_FUNS[k.v](peek() && peek().t === '(' ? atom() : power()); }
+    if(k.t === '('){ next(); const v = expr(); if(!peek() || peek().t !== ')') throw 0; next(); return v; }
+    if(k.t === '-'){ next(); return -power(); }
+    if(k.t === '+'){ next(); return power(); }
+    throw 0;
+  }
+  function exponent(){
+    let sign = 1;
+    while(peek() && (peek().t === '-' || peek().t === '+')){ if(next().t === '-') sign = -sign; }
+    if(peek() && peek().t === '(') return sign * atom();
+    let v = atom();
+    while(peek() && (peek().t === 'num' || peek().t === 'sym' || peek().t === 'fn')) v *= atom();
+    return sign * v;
+  }
+  function power(){
+    const base = atom();
+    if(peek() && peek().t === '^'){ next(); return Math.pow(base, exponent()); }
+    return base;
+  }
+  function juxta(){
+    let v = power();
+    while(!loose && startsAtom(peek())) v *= power();
+    return v;
+  }
+  function term(){
+    let v = juxta();
+    for(;;){
+      const k = peek();
+      if(k && k.t === '/'){ next(); v /= juxta(); continue; }
+      if(k && k.t === '*'){ next(); v *= juxta(); continue; }
+      if(loose && startsAtom(k)){ v *= juxta(); continue; }
+      return v;
+    }
+  }
+  function expr(){
+    let v = term();
+    for(;;){
+      const k = peek();
+      if(k && k.t === '+'){ next(); v += term(); continue; }
+      if(k && k.t === '-'){ next(); v -= term(); continue; }
+      return v;
+    }
+  }
+  const v = expr();
+  if(p !== tokens.length) throw 0;
+  return v;
+}
+
+/* Does a typed right-hand side agree with the keyed one at every point?
+   Symbols take the same random values in both, drawn from a fixed sequence so
+   the answer never changes between runs. Half a per cent of tolerance keeps
+   0.693 and ln 2 together. The keyed form is read as written; the typed one
+   is read both ways a one-line fraction can be meant, because "/(72)(SCr)"
+   puts the second bracket under the line and "/(VD(ka - k))(e^-kt - e^-kat)"
+   does not, and nothing in the string says which. */
+function eqEquiv(key, typed){
+  const tk = eqTokens(key), tt = eqTokens(typed);
+  if(!tk || !tt || !tk.length || !tt.length) return false;
+  let seed = 7;
+  const rnd = () => { seed = (seed * 48271) % 2147483647; return 0.3 + 1.4 * (seed / 2147483647); };
+  const same = (x, y) => Math.abs(x - y) <= 0.005 * Math.max(Math.abs(x), Math.abs(y), 1e-9);
+  let tight = true, loose = true, good = 0;
+  for(let trial = 0; trial < 7 && (tight || loose); trial++){
+    const vals = {};
+    const env = name => (name in vals ? vals[name] : (vals[name] = rnd()));
+    let vk, v1, v2;
+    try{ vk = eqEval(tk, env); }catch(_){ return false; }
+    try{ v1 = eqEval(tt, env); }catch(_){ v1 = NaN; }
+    try{ v2 = eqEval(tt, env, true); }catch(_){ v2 = NaN; }
+    if(!isFinite(vk)) continue;
+    if(!isFinite(v1) || !same(vk, v1)) tight = false;
+    if(!isFinite(v2) || !same(vk, v2)) loose = false;
+    good++;
+  }
+  return good >= 3 && (tight || loose);
+}
+/* The left side is the quantity the exercise names, so it is read loosely:
+   Cmax for Cmax,ss, C for Cp, IBW for IBWmale, ClT for Cl. */
+function eqLhsKey(x){
+  return normEq(x, true).replace(/(ss|inf|male|female)$/, '').replace(/^cp$/, 'c');
+}
+const eqLhsMatch = (a, b) => { const x = eqLhsKey(a), y = eqLhsKey(b); return !x || !y || x === y || x.startsWith(y) || y.startsWith(x); };
+function eqSplit(form){
+  const n = String(form == null ? '' : form);
+  const i = n.indexOf('=');
+  return i < 0 ? ['', n] : [n.slice(0, i), n.slice(i + 1)];
+}
+function eqSame(e, typed){
+  const [lt, rt] = eqSplit(typed);
+  if(!rt.trim()) return false;
+  const forms = [e.typed, ...(e.also || []), eqPlain(e.lhs) + '=' + eqPlain(e.tokens.join(' '))];
+  for(const form of forms){
+    const [lk, rk] = eqSplit(form);
+    if(!eqLhsMatch(lk, lt)) continue;
+    if(eqEquiv(rk, rt)) return true;
+  }
+  return false;
+}
+/* A spelling match that the algebra contradicts is not a match: R/k*VD folds
+   to the same string as R/kVD once the star is dropped, but reads as (R/k)VD. */
+function eqRefuted(e, typed){
+  const rt = eqSplit(typed)[1];
+  const forms = [e.typed, ...(e.also || [])];
+  if(!eqTokens(rt) || !eqTokens(eqSplit(e.typed)[1])) return false;
+  return !forms.some(f => eqEquiv(eqSplit(f)[1], rt));
+}
+function eqCorrect(e, typed){
+  if(eqAccepts(e).has(normEq(typed))) return !eqRefuted(e, typed);
+  if(eqSame(e, typed)) return true;
+  /* a capital T on its own is the dosing interval, typed without a Greek keyboard */
+  const asTau = String(typed == null ? '' : typed).replace(/T(?![A-Za-z0-9½\/])/g, 'τ');
+  return asTau !== typed && (eqAccepts(e).has(normEq(asTau)) || eqSame(e, asTau));
+}
 
 /* ---------- which equations are being worked on ---------- */
 const EQ_BY_ID = Object.fromEntries(EQUATIONS.map(e => [e.id, e]));
@@ -1890,7 +2238,7 @@ function eqDrillHTML(){
     <p class="stem">${esc(e.name)}</p>
     <p class="eqask">${building
       ? 'Place the pieces to the right of the equals sign. Some of them do not belong.'
-      : 'Write it out. Capitals, spaces and how you write the multiplication do not matter.'}</p>`;
+      : 'Write it out. Capitals, spaces, the order of the factors and how you write the multiplication do not matter.'}</p>`;
 
   if(building){
     h += `<div class="eqbuild"><span class="eqlhs">${e.lhs} =</span>`;
@@ -1922,7 +2270,13 @@ function eqDrillHTML(){
       <p class="eqanswer"><b>${eqShow(e)}</b></p>`;
     if(!EQ.ok && !building && EQ.typed.trim())
       h += `<p class="prose">You wrote <code>${esc(EQ.typed.trim())}</code>, which reads as
-        <code>${esc(normEq(EQ.typed))}</code> once capitals and spacing are set aside.</p>`;
+        <code>${esc(normEq(EQ.typed))}</code> once capitals and spacing are set aside. Spelling and
+        order do not matter; what is above the line, the sign in an exponent and where a bracket
+        closes do.</p>`;
+    if(EQ.ok && !building && EQ.typed.trim() && !eqAccepts(e).has(normEq(EQ.typed))
+       && !eqAccepts(e).has(normEq(eqPlain(e.lhs) + '=' + EQ.typed)))
+      h += `<p class="prose">You wrote <code>${esc(EQ.typed.trim())}</code>: a different spelling of the
+        same equation.</p>`;
     if(e.symbols && e.symbols.length)
       h += `<h5 class="tsec">What each symbol is</h5><ul class="tlist">${
         e.symbols.map(s => `<li><b>${s[0]}</b> — ${s[1]}</li>`).join('')}</ul>`;
