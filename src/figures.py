@@ -582,6 +582,54 @@ FIGS['md_bolus'] = ('Repeated IV bolus doses every 8 hours rising to a steady st
                     md.svg('Repeated IV bolus: accumulation to steady state, then decline after the last dose'))
 
 
+# ---- module 6, second lecture: two intermittent infusions, her Example 4 ----
+# 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 4":
+# 300 mg over 2 hours (R = 150 mg/hr), the second infusion starting 6 hours
+# after the first started, k 0.15 hr-1, VD 15 L. Each infusion on its own is
+# the Module 3 infusion curve, stopped at 2 hours and then declining. The
+# plasma concentration is their sum. Values labelled are computed here from
+# those inputs: 17.28 at the end of each infusion; at 12 hours 3.86 from the
+# first, 9.48 from the second, 13.34 together.
+IK, IR, IV = 0.15, 150.0, 15.0
+
+
+def one_infusion(t, start, dur):
+    if t < start:
+        return 0.0
+    if t <= start + dur:
+        return IR / (IV * IK) * (1 - math.exp(-IK * (t - start)))
+    end = IR / (IV * IK) * (1 - math.exp(-IK * dur))
+    return end * math.exp(-IK * (t - start - dur))
+
+
+inf1 = lambda t: one_infusion(t, 0.0, 2.0)
+inf2 = lambda t: one_infusion(t, 6.0, 2.0)
+both = lambda t: inf1(t) + inf2(t)
+
+ti = Plot(14, [0, 5, 10, 15, 20, 25, 30], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+          w=720, h=500, l=76, r=24, t=96, b=62, fs=1.15)
+ti.frame([0, 2, 4, 6, 8, 10, 12, 14])
+ti.xband(0, 2); ti.xband(6, 8)
+ti.curve(inf1, color=AMBER, dash='6 5', n=700)
+ti.curve(inf2, color=AMBER, dash='2 5', n=700)
+ti.curve(both, color=BLUE, n=1400)
+ti.vline(12, both(12))
+ti.points([2, 8, 12], [inf1(2), both(8), both(12)], color=BLUE)
+ti.text(2.2, inf1(2) + 1.4, '17.28', size=14)
+ti.text(8.2, both(8) + 1.4, '%.2f' % both(8), size=14)
+ti.text(12.2, both(12) + 1.4, '%.2f at 12 hr' % both(12), size=14)
+ti.text(12.15, inf2(12) - 1.3, 'second: %.2f' % inf2(12), size=13, color=AMBER)
+ti.text(12.15, inf1(12) - 1.3, 'first: %.2f' % inf1(12), size=13, color=AMBER)
+ti.text(1.0, 1.0, 'infusion 1', size=13, color=DIM)
+ti.text(6.1, 1.0, 'infusion 2', size=13, color=DIM)
+ti.label(0.3, 28.6, 'plasma concentration, the sum', color=BLUE, swatch=True)
+ti.label(0.3, 26.4, 'each infusion on its own', color=AMBER, swatch=True)
+heading(ti, 'Two 2-hour infusions of 300 mg, starting at 0 and 6 hours',
+        'k 0.15 hr\u207b\u00b9, VD 15 L. At 12 hr the first has declined 10 hr and the second 4 hr.', big=1.0)
+FIGS['two_infusions'] = ('Two intermittent IV infusions: each curve on its own and their sum, read at 12 hours',
+                         ti.svg('Two intermittent infusions added on a time line'))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dir', help='also write each figure as a .svg file to look at')

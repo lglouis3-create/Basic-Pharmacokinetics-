@@ -204,5 +204,30 @@ const TELL_HTML = `
 <td>n is the dose number just given; t is the time since that dose, not since the first. 3 hours after the 2nd dose is n = 2, t = 3 hr. The time before the latest dose is already carried by n and &tau; inside the bracket.</td>
 <td>Using the time since the first dose as t, which counts the earlier intervals twice and gives a value far too low: t = 11 hr in place of 3 hr for her Example 2.</td>
 <td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses"; transcript 09-23</td></tr>
+<tr><td><b>Intermittent IV infusion</b> against <b>repeated IV bolus</b></td>
+<td>How the dose enters and where the peak sits. A bolus is instantaneous, so its peak is C<sub>0</sub> = D<sub>0</sub>/V<sub>D</sub> at the moment of the dose. An infusion is a zero-order input for its duration, so its peak is at the end of the infusion, {{frac:R|V<sub>D</sub>k}}(1 &minus; e<sup>&minus;kt</sup>) with t the infusion time. Between doses both decline as C<sub>0</sub>e<sup>&minus;kt</sup>. The infusion is chosen because its peak is lower and the drug is better tolerated.</td>
+<td>Using D<sub>0</sub>/V<sub>D</sub> as the peak of an infused dose, or the accumulation factor 1/(1 &minus; e<sup>&minus;k&tau;</sup>) where the question gives two infusions to add. Her method for infusions is a number line and a sum, not the steady-state equations.</td>
+<td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale" and "Administering One or More Doses by IV Infusion"; transcript 09-28</td></tr>
+
+<tr><td><b>t for the first infusion</b> against <b>t for the second</b></td>
+<td>Each infusion declines from its own end. At the time asked for, the first infusion has been declining since it stopped and the second since it stopped, so the two exponents carry different times: 12 &minus; 2 = 10 hr and 12 &minus; 8 = 4 hr in her Example 4.</td>
+<td>Using the "4 hours after the second infusion" for both terms, or measuring the first infusion from its start rather than its end. She names this as the part to pay attention to.</td>
+<td>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "What is the plasma drug concentration 4 hours after the cessation of the second infusion?"; transcript 09-28</td></tr>
+
+<tr><td><b>C<sub>max</sub><sup>&infin;</sup>, oral</b> against <b>C<sub>max</sub><sup>&infin;</sup>, bolus</b></td>
+<td>The F and the t<sub>max</sub>. The oral peak is (FD<sub>0</sub>/V<sub>D</sub>)[1/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt<sub>max</sub>&infin;</sup>; take away F and the exponential in t<sub>max</sub> and the bolus peak, (D<sub>0</sub>/V<sub>D</sub>)/(1 &minus; e<sup>&minus;k&tau;</sup>), is left. A bolus peaks at the moment of the dose, so only an oral peak needs a t<sub>max</sub> found first.</td>
+<td>Picking the bolus line off the equation sheet for an oral regimen because both carry &tau; and the accumulation factor. &tau; does not separate them; F and t<sub>max</sub> do.</td>
+<td>6a---Multiple-Oral-Doses.pdf, slide "Peak, Trough and Average Plasma Concentrations at Steady State"; transcript 09-28</td></tr>
+
+<tr><td><b>t<sub>max</sub></b> against <b>t<sub>max</sub><sup>&infin;</sup></b></td>
+<td>What each depends on and which is shorter. The single-dose t<sub>max</sub> holds k and k<sub>a</sub>; the steady-state t<sub>max</sub><sup>&infin;</sup> holds k, k<sub>a</sub> and &tau;, and is generally shorter, because drug already in the body brings the balance of absorption and elimination forward: 3.1 hr against 2.06 hr for tetracycline every 8 hours.</td>
+<td>Reusing the first-dose t<sub>max</sub> inside C<sub>max</sub><sup>&infin;</sup>, or expecting the steady-state peak later than the first. Changing the interval changes t<sub>max</sub><sup>&infin;</sup> and C<sub>max</sub><sup>&infin;</sup>; changing the dose changes neither t<sub>max</sub>.</td>
+<td>6a---Multiple-Oral-Doses.pdf, slides "Time to Peak at Steady State" and "Example 1"; transcript 09-28</td></tr>
+
+<tr><td><b>Increasing the dose</b> against <b>increasing the dosing interval</b></td>
+<td>Which way the steady-state concentration and the fluctuation move. A larger dose at the same interval raises the concentrations and widens the peak-to-trough swing, with compliance usually unchanged. A longer interval at the same dose lowers the concentrations, widens the swing and improves compliance; a shorter interval does the reverse of each. Neither changes the time to steady state.</td>
+<td>Pairing a higher level with a smaller swing for a larger dose, or expecting a longer interval to raise the level because each dose has longer to be absorbed. Absorption is complete either way; what a longer interval gives each dose is more time to be eliminated.</td>
+<td>6a---Multiple-Oral-Doses.pdf, slides "Altering Dose, second slide" and "Altering Dosing Interval, second slide"; transcript 09-28</td></tr>
 </tbody></table>
+
 `;

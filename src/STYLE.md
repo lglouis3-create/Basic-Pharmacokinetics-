@@ -1342,3 +1342,40 @@ All other listed source files were read successfully and are fully transcribed a
 > d. What is the expected concentration of drug in the plasma 8 hours after administration of the last dose?
 
 Graded homework with no posted key, so the drill does not work it. Question 1 of the same sheet is a Module 5 single-oral-dose set.
+
+## Source: `6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf`, Example 4 (printed stem), 09.28 lecture
+
+> **Example 4.** A 300-mg dose of an antibiotic was administered as an IV infusion over a period of 2 hours. Six hours after the start of the first infusion, a second dose of 300 mg was infused, again over 2 hours. (k = 0.15 h⁻¹, VD = 15 L)
+> (a) What is the plasma drug concentration at the end of the first infusion?
+> (b) What is the plasma drug concentration 4 hours after the cessation of the second infusion?
+
+**Her answers (slides and 09.28 lecture):** (a) 17.28 mg/L; (b) 13.33 mg/L, as 17.3e^−0.15(12−2) + 17.3e^−0.15(12−8) = 3.85 + 9.48.
+
+## Source: In-Class Activity, Multiple IV Infusions (09.28) — sheet not posted; stems read from the photographs on the annotated Part 2 deck
+
+> 1. A patient is to receive multiple IV infusions of 500 mg of a drug administered over a period of two hours. The second 2-hour infusion starts six hours after the start of the previous infusion. The reported elimination half-life of the drug is 3 hours, and the apparent volume of distribution is 18 L.
+> a. What is the expected plasma drug concentration at the end of the first infusion?
+> b. What is the concentration of drug in the plasma four hours after the end of the second infusion?
+
+> 2. 150 mg of a drug (Cl = 2.54 L/hr, VD = 22 L) was infused over 1.5 hours. Exactly eight hours after the start of the first infusion, a second 150-mg dose was again infused over 1.5 hours.
+> a. What is the plasma drug concentration at the end of the first infusion?
+> b. What is the concentration of drug in the plasma six hours after the end of the second infusion?
+> c. If the drug were continuously infused at the rate above, what would the steady-state concentration be?
+
+**Her confirmed answers (09.28 lecture):** 1(a) "something like 22.2 mg per liter"; 1(b) "eleven-ish" (22.24e^−0.231(4) + 22.24e^−0.231(10) = 8.83 + 2.21 = 11.04); 2(a) 6.26 mg/L (k = 2.54/22 = 0.115 hr⁻¹, R = 100 mg/hr); 2(b) set up as 6.26e^−k(6) + 6.26e^−k(14), no value stated (4.37 mg/L from her inputs); 2(c) R/Cl = 39.37 mg/L.
+
+**Formats observed:** each infusion problem gives dose and duration (never R), the second infusion by "starts N hours after the start of the first", and asks the end of the first infusion first, then a time after the end of the second. Elimination arrives as k, as a half-life, or as Cl with VD. Her method is a number line with each infusion's decline measured from its own end.
+
+## Source: `6a---Multiple-Oral-Doses.pdf`, Example 1 (printed stem), 09.28 lecture
+
+> **Example 1.** An adult male (75 kg) received 250 mg tetracycline hydrochloride orally every 8 hours for 2 weeks. The literature reports that tetracycline hydrochloride is about 75% bioavailable and has a VD of 1.5 L/kg. The t½ is about 10 hours and the ka is 0.9 hr⁻¹. Calculate
+> 1. Cmax of the first dose
+> 2. Cmax at steady state
+> 3. Cmin at steady state
+> 4. Cavg at steady state
+
+**Her answers (09.28 lecture):** tmax first dose "3-ish" / 3.1 hr; Cmax first dose 1.35 mg/L; tmax at steady state 2.06 hr; Cmax at steady state "3.3" (3.39 from her inputs); Cmin at steady state "2.4-ish" (2.44); Cavg set up as 0.75 × 250 / (112.5 L × k × 8 hr), value not stated (3.01).
+
+**Poll (attendance question, 09.28, repeated from 09.21):** "Which of the following results when an oral dose is increased? An increase in tmax / A decrease in tmax / No change in the tmax." Her answer: no change, "That is what I was looking for."
+
+**Formats observed:** first-dose and steady-state values asked side by side so the change can be seen; she says she will ask for dosing intervals and oral doses and expects them rounded to a practical interval and an existing strength ("Don't tell me 17.29 mg for an oral dose").

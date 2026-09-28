@@ -75,13 +75,19 @@ const COURSE = {
      label: 'Module 6: Repetitive IV bolus injections (23 Sep)',
      prof: 'Mosley', exam: 2, module: 6},
 
+    /* The 28 September lecture finished the Module 6 deck (intermittent IV
+       infusions) and went straight into the multiple-oral deck, which she
+       files as 6a. Both sit under the one Canvas module. */
+    {id: 'L08', deck: '6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
+     label: 'Module 6: Intermittent IV infusions (28 Sep)',
+     prof: 'Mosley', exam: 2, module: 6},
+    {id: 'L09', deck: '6a---Multiple-Oral-Doses.pdf',
+     label: 'Module 6: Multiple oral doses (28 Sep)',
+     prof: 'Mosley', exam: 2, module: 6},
+
     /* Not yet lectured. Listed so the Exam 2 blueprint can name what it cannot
-       yet cover; they carry no questions until the lecture happens.
-       Chapter map from the syllabus; deck filenames unknown until posted. */
-    {id: 'L08', deck: '', label: 'Module 7: Intermittent IV infusion (28 Sep)',
-     prof: 'Mosley', exam: 2, module: 7},
-    {id: 'L09', deck: '', label: 'Module 8: Multiple oral dosage regimens (28 Sep)',
-     prof: 'Mosley', exam: 2, module: 8},
+       yet cover; it carries no questions until the lecture happens.
+       Chapter map from the syllabus; deck filename unknown until posted. */
     {id: 'L10', deck: '', label: 'Module 9: Bioavailability and bioequivalence (30 Sep)',
      prof: 'Mosley', exam: 2, module: 9},
   ],
@@ -109,18 +115,17 @@ const COURSE = {
      questions: 40,
      minutes: 120,           // syllabus: Thursday 8 October, 7:50–9:50
      sata: 4,                // ASSUMED, as above.
-     blurb: 'Thu 8 October, 7:50–9:50. Modules 4–9 per the syllabus. ' +
-            'Modules 4 and 5 and the first part of 6 are lectured; the rest are not yet, so the paper ' +
-            'draws only what exists and says how much of the blueprint it ' +
-            'cannot cover. The per-module mark split is not published — this ' +
-            'drill spreads it evenly across the six modules.',
+     blurb: 'Thu 8 October, 7:50–9:50. Modules 4–6 are lectured: elimination and ' +
+            'clearance, single oral dosing, and multiple dosing (repeated IV bolus, ' +
+            'intermittent IV infusions, multiple oral doses). Bioavailability is not ' +
+            'yet, so the paper draws only what exists and says how much of the ' +
+            'blueprint it cannot cover. The per-module mark split is not published — ' +
+            'this drill weights it by lecture time.',
      pools: [
-       {key: 'm4', name: 'Module 4 — Elimination, clearance, renal clearance', marks: 7, filter: {module: 4}},
-       {key: 'm5', name: 'Module 5 — Oral absorption, single dose',            marks: 7, filter: {module: 5}},
-       {key: 'm6', name: 'Module 6 — Repetitive IV injections',                marks: 7, filter: {module: 6}},
-       {key: 'm7', name: 'Module 7 — Intermittent IV infusion',                marks: 6, filter: {module: 7}},
-       {key: 'm8', name: 'Module 8 — Multiple oral dosage regimens',           marks: 7, filter: {module: 8}},
-       {key: 'm9', name: 'Module 9 — Bioavailability and bioequivalence',      marks: 6, filter: {module: 9}},
+       {key: 'm4', name: 'Module 4 — Elimination, clearance, renal clearance', marks: 7,  filter: {module: 4}},
+       {key: 'm5', name: 'Module 5 — Oral absorption, single dose',            marks: 7,  filter: {module: 5}},
+       {key: 'm6', name: 'Module 6 — Multiple dosing: IV bolus, intermittent infusion, oral', marks: 20, filter: {module: 6}},
+       {key: 'm9', name: 'Module 9 — Bioavailability and bioequivalence',      marks: 6,  filter: {module: 9}},
      ]},
 
     {id: 3,

@@ -391,6 +391,71 @@ const REFERENCE_HTML = `
 
 <p><b>What the chapter adds.</b> The accumulation index R = C<sub>max</sub><sup>&infin;</sup>/C<sub>max</sub> after the first dose = 1/(1 &minus; e<sup>&minus;k&tau;</sup>), which depends on k and &tau; and not on the dose. Time to steady state depends on the elimination half-life only, not on the dose, the interval or the number of doses: 90% at 3.3 half-lives, 95% at 4.32, 99% at 6.6. Superposition fails when repeated dosing changes the pharmacokinetics: changing pathophysiology, saturation of a carrier system, enzyme induction or inhibition, and nonlinear pharmacokinetics.</p>
 
+<h3>Module 6 &mdash; intermittent IV infusions</h3>
+<p>The repeated-bolus regimen with each dose put in slowly: <i>"instead of putting all the drug into the body all at once, we are going to put the drug into the body via a zero order ... constant process."</i> The reason is tolerance: many drugs are better tolerated infused over time than pushed at once. Nothing new is needed: the rise during each infusion is the Module 3 infusion equation stopped at the infusion time, the fall after it is C<sub>0</sub>e<sup>&minus;kt</sup> from the end-of-infusion value, and with first-order kinetics the infusions add.</p>
+
+<table class="reftab"><thead><tr>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+
+<tr><td><b>C<sub>p</sub> = {{frac:R|V<sub>D</sub>k}} (1 &minus; e<sup>&minus;kt</sup>)</b></td>
+<td>R = dose / infusion time (mg/hr); V<sub>D</sub>k = Cl (L/hr); t the infusion time (hr)</td>
+<td>During any one infusion of the series. <i>"the same equation that we had when we talked about our single IV infusion."</i></td>
+<td>The concentration at the end of the first infusion, always first: it is the C<sub>0</sub> for what follows. Her values: 17.28 mg/L (Example 4), 22.24 and 6.26 mg/L (the activity sheet).</td>
+<td>Yes, as the infusion line.</td></tr>
+
+<tr><td><b>C = C<sub>end</sub>e<sup>&minus;kt</sup></b>, summed over the infusions</td>
+<td>t for each infusion = the time from the end of that infusion to the time asked for</td>
+<td>After an infusion stops: first-order elimination only. Same drug, same rate, same duration gives the same C<sub>end</sub> each time, and the contributions add.</td>
+<td>The concentration a stated time after the second infusion ends. Her number line for Example 4: ends at 2 and 8 hr, the question at 12 hr, so t = 10 and 4 hr; 3.86 + 9.48 = 13.33 mg/L.</td>
+<td>C = C<sub>0</sub>e<sup>&minus;kt</sup>, page 1.</td></tr>
+
+<tr><td><b>C<sub>ss</sub> = {{frac:R|Cl}}</b></td>
+<td>R mg/hr, Cl L/hr</td>
+<td>Only if the same rate were run continuously; the short infusions never reach it.</td>
+<td>The activity sheet's last part: 100/2.54 = 39.37 mg/L.</td>
+<td>Yes, page 1.</td></tr>
+</tbody></table>
+{{fig:two_infusions|Her Example 4: each infusion on its own, and their sum, read at 12 hours.}}
+
+<h3>Module 6 &mdash; multiple oral doses</h3>
+<p>The single-oral-dose equation with the accumulation brackets attached. Her way of telling the oral steady-state peak from the bolus one on the equation sheet: <i>"what tells you that this is for an oral dose? F is one thing. ... What else tells us? Team Max, right? ... Only for oral do you need to find T Max."</i> The two things a regimen can change are the dose and the dosing interval: <i>"We don't change clearance, we don't change half-life, we don't change volume and distribution."</i></p>
+
+<table class="reftab"><thead><tr>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+
+<tr><td><b>t<sub>max</sub><sup>&infin;</sup> = {{frac:1|k<sub>a</sub> &minus; k}} ln[{{frac:k<sub>a</sub>(1 &minus; e<sup>&minus;k&tau;</sup>)|k(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>)}}]</b></td>
+<td>k<sub>a</sub>, k hr<sup>&minus;1</sup>; &tau; hr; result in hr</td>
+<td>Steady state after multiple oral doses. It holds k, k<sub>a</sub> and &tau;, where the single-dose t<sub>max</sub> holds only k and k<sub>a</sub>; a new interval means a new t<sub>max</sub>.</td>
+<td>t<sub>max</sub> at steady state, before C<sub>max</sub> at steady state. Her tetracycline values: 3.1 hr for the first dose, 2.06 hr at steady state. <i>"generally going to be smaller than the T-Max of the first dose."</i></td>
+<td>Yes; <i>"the bottom of the right hand column."</i></td></tr>
+
+<tr><td><b>C<sub>max</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>}} ({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt<sub>max</sub>&infin;</sup></b></td>
+<td>F fraction absorbed; t<sub>max</sub><sup>&infin;</sup> from the line above</td>
+<td>Steady state, oral. Without the F and the t<sub>max</sub> it is the repeated-bolus C<sub>max</sub><sup>&infin;</sup>.</td>
+<td>The steady-state peak: 3.4 mg/L for tetracycline against 1.35 mg/L after the first dose, higher because drug has accumulated.</td>
+<td>Yes.</td></tr>
+
+<tr><td><b>C<sub>min</sub><sup>&infin;</sup> = {{frac:k<sub>a</sub>FD<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}} ({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;k&tau;</sup></b></td>
+<td>The single-dose prefactor, the accumulation factor, one interval of decline</td>
+<td>Steady state, oral, at the end of the interval.</td>
+<td>The steady-state trough: 2.4 mg/L for tetracycline.</td>
+<td>Yes.</td></tr>
+
+<tr><td><b>C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}}</b></td>
+<td>As in the repeated-bolus section</td>
+<td>Steady state, any route; F is now less than 1.</td>
+<td>The average: 187.5 mg / (112.5 L &times; 0.0693 hr<sup>&minus;1</sup> &times; 8 hr) = 3.0 mg/L for tetracycline.</td>
+<td>Yes.</td></tr>
+
+<tr><td><b>C<sub>p</sub></b> after n oral doses: the single-dose equation with {{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}} on the e<sup>&minus;kt</sup> term and {{frac:1 &minus; e<sup>&minus;nk<sub>a</sub>&tau;</sup>|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}} on the e<sup>&minus;k<sub>a</sub>t</sup> term</td>
+<td>n the dose number; at steady state each numerator is 1</td>
+<td>Any time after the n-th dose. <i>"the only difference here ... what number of dose are we on? And now we have the tau."</i></td>
+<td>Not worked in the lecture; she goes from the first dose to steady state.</td>
+<td>Yes, the long line on page 1.</td></tr>
+</tbody></table>
+
+<p><b>Changing the regimen.</b> Increase the dose, same interval: higher steady-state concentrations, a larger swing from peak to trough, usually no change in compliance. Increase the interval, same dose: lower concentrations, a larger swing, better compliance; decrease the interval: higher concentrations, a smaller swing because <i>"we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve,"</i> and worse compliance. Neither change moves the time to reach steady state. Her instruction on stating a regimen: an interval the patient can keep and an oral dose rounded to a strength that exists, <i>"Don't tell me 17.29 mg for an oral dose."</i></p>
+
 <h3>The equation sheet as a whole</h3>
 <p>BasicPharmacokineticsEquations.pdf runs to two pages. It is not organised by module, so a line for a module not yet lectured sits beside one from Module 1. Her instruction about using it: <i>"before you grab your calculator, before, for any question, and before you start flipping to the equation sheet, think about what is being asked of you and what you need."</i></p>
 
@@ -403,7 +468,7 @@ const REFERENCE_HTML = `
 <tr><td>Two compartment</td><td>C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup>; k, k<sub>12</sub>, k<sub>21</sub> from A, B, a, b; V<sub>p</sub> two ways; V<sub>t</sub></td><td>Module 2</td></tr>
 <tr><td>Clearance and elimination</td><td>Cl<sub>T</sub> = FD<sub>0</sub>/AUC; f<sub>e</sub> = D<sub>u</sub><sup>&infin;</sup>/FD<sub>0</sub> = k<sub>e</sub>/k; Cl<sub>R</sub> = f<sub>e</sub>Cl<sub>T</sub>; Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>)Cl<sub>T</sub>; rate of elimination = (Cl)(C<sub>p</sub>); Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub></td><td>Module 4</td></tr>
 <tr><td>Single oral dose</td><td>The full C<sub>p</sub> equation and t<sub>max</sub></td><td>Module 5</td></tr>
-<tr><td>Multiple dosing</td><td>D<sub>max</sub>, D<sub>min</sub>, D<sub>avg</sub>, C<sub>max</sub>, C<sub>min</sub>, C<sub>avg</sub>, and C<sub>p</sub> after n doses, all carrying a dosing interval; plus multiple-oral-dose C<sub>max</sub>, C<sub>min</sub> and t<sub>max</sub> on page 2</td><td>Module 6 (repeated IV bolus, lectured) and Modules 7 and 8, not yet lectured</td></tr>
+<tr><td>Multiple dosing</td><td>D<sub>max</sub>, D<sub>min</sub>, D<sub>avg</sub>, C<sub>max</sub>, C<sub>min</sub>, C<sub>avg</sub>, and C<sub>p</sub> after n doses, all carrying a dosing interval; plus multiple-oral-dose C<sub>max</sub>, C<sub>min</sub> and t<sub>max</sub> on page 2</td><td>Module 6, all three parts: repeated IV bolus, intermittent infusions, multiple oral doses</td></tr>
 <tr><td>Bioavailability</td><td>F = (AUC<sub>po</sub>/AUC<sub>IV</sub>)(D<sub>IV</sub>/D<sub>po</sub>); F<sub>rel</sub> = (AUC<sub>A</sub>/AUC<sub>B</sub>)(D<sub>B</sub>/D<sub>A</sub>); D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>)</td><td>Module 9, not yet lectured</td></tr>
 <tr><td>Shelf life and stability</td><td>An E and E<sub>0</sub> log-decline line, and three t<sub>eff</sub> forms including t<sub>eff</sub> = 1.44 t&frac12; ln[D<sub>0</sub>/(C<sub>eff</sub>V<sub>D</sub>)]</td><td>Chemical kinetics; not lectured in Modules 1 to 5</td></tr>
 <tr><td>Nonlinear pharmacokinetics</td><td>R = V<sub>max</sub>C<sub>ss</sub>/(K<sub>M</sub> + C<sub>ss</sub>); K<sub>M</sub> from two rate and concentration pairs; t&frac12; = 0.693(K<sub>M</sub> + C<sub>p</sub>)V<sub>D</sub>/V<sub>max</sub>; Cl<sub>T</sub> = V<sub>max</sub>/(K<sub>M</sub> + C<sub>p</sub>)</td><td>Final exam material</td></tr>

@@ -21,5 +21,6 @@ const QUESTIONS = [].concat(
   Q_MODULE4,   // Module 4 — Elimination, clearance, renal clearance    (Exam 2)
   Q_MODULE5,   // Module 5 — Oral absorption, single dose               (Exam 2)
   Q_MODULE6,   // Module 6 — Multiple dosing, repeated IV bolus          (Exam 2)
+  Q_MODULE6B,  // Module 6 — Intermittent IV infusions, multiple oral    (Exam 2)
   Q_FIGURES    // Figure reading, every module, drawn by figures.py    (Exams 1, 2)
 );

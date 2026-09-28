@@ -124,6 +124,24 @@ const TOPICS = [
     cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Amount of Drug in the Body Following Repeated IV Bolus Injections" to "Example 1"'},
    {id:'ndose', name:'Concentration after n doses and after the last dose',
     cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Plasma Drug Concentration at Any Time After n Doses" to "Example 3"'}]},
+
+ {id:'intermit', name:'Multiple dosing: intermittent IV infusions', prof:'Mosley',
+  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Intermittent Intravenous Infusions"',
+  subs:[
+   {id:'why', name:'Why, and the equation for one infusion',
+    cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale" and "Administering One or More Doses by IV Infusion"'},
+   {id:'add', name:'Adding the infusions on a time line',
+    cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Example 4" to "Summary"'}]},
+
+ {id:'multoral', name:'Multiple dosing: oral doses', prof:'Mosley',
+  cite:'6a---Multiple-Oral-Doses.pdf, slide "Objectives"',
+  subs:[
+   {id:'oeq', name:'The multiple-oral-dose equations',
+    cite:'6a---Multiple-Oral-Doses.pdf, slides "Concentration of Drug in the Plasma at Any Time" and "Peak, Trough and Average Plasma Concentrations at Steady State"'},
+   {id:'ossc', name:'Peak, trough and time to peak at steady state',
+    cite:'6a---Multiple-Oral-Doses.pdf, slides "Time to Peak at Steady State" and "Example 1"'},
+   {id:'oparam', name:'Changing the dose and the dosing interval',
+    cite:'6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens" to "Consider Peak and Trough"'}]},
 ];
 
 
@@ -240,6 +258,22 @@ const CHAINS = [
  {id:'m6-practice1', module:6, name:'One gram every 8 hours to a 65-kg patient (a–h)',
   setup:'V<sub>D</sub> 26.2 L/100 kg, Cl<sub>T</sub> 52.95 mL/min per 70 kg: her parts (a) to (h) in her order; part (i), the renal mechanism, is with the concepts',
   parts:['m6-p1a','m6-p1b','m6-p1c','m6-p1d','m6-p1e','m6-p1f','m6-p1g','m6-p1h']},
+
+ {id:'m6-ex4', module:6, name:'Two 2-hour infusions of 300 mg, 6 hours apart',
+  setup:'k 0.15 hr<sup>&minus;1</sup>, V<sub>D</sub> 15 L: the rate, the end of the first infusion, then 4 hours after the second ends',
+  parts:['m6b-n01','m6b-n02','m6b-n03']},
+
+ {id:'m6-act1', module:6, name:'In-class activity 1: 500 mg over 2 hours, twice',
+  setup:'t&frac12; 3 hr, V<sub>D</sub> 18 L, the second infusion starting 6 hours after the first: the end of the first, then 4 hours after the second ends',
+  parts:['m6b-n04','m6b-n05']},
+
+ {id:'m6-act2', module:6, name:'In-class activity 2: 150 mg over 1.5 hours, twice',
+  setup:'Cl 2.54 L/hr, V<sub>D</sub> 22 L, 8 hours between starts: the end of the first, 6 hours after the second ends, then the plateau of a continuous infusion',
+  parts:['m6b-n06','m6b-n07','m6b-n08']},
+
+ {id:'m6-tetracycline', module:6, name:'Tetracycline 250 mg orally every 8 hours',
+  setup:'F 0.75, V<sub>D</sub> 1.5 L/kg in a 75-kg male, t&frac12; 10 hr, k<sub>a</sub> 0.9 hr<sup>&minus;1</sup>: the first-dose peak, then the peak, trough and average at steady state',
+  parts:['m6b-n09','m6b-n10','m6b-n11','m6b-n12','m6b-n13','m6b-n14']},
 ];
 
 const Q_MODULE1 = [

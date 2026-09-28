@@ -61,11 +61,19 @@ TITLE_PAGES = {
      'Plasma Drug Concentration at Any Time After n Doses'): 14,
     ('6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
      'Plasma Drug Concentration at Steady State'): 17,
+    ('6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf',
+     'Administering One or More Doses by IV Infusion'): 22,
+    ('6a---Multiple-Oral-Doses.pdf', 'Peak, Trough and Average Plasma Concentrations at Steady State'): 6,
+    ('6a---Multiple-Oral-Doses.pdf', 'Time to Peak at Steady State'): 7,
+    ('6a---Multiple-Oral-Doses.pdf', 'Altering Steady-State Concentrations, Method 2'): 15,
+    ('6a---Multiple-Oral-Doses.pdf', 'Altering Dose, second slide'): 14,
+    ('6a---Multiple-Oral-Doses.pdf', 'Altering Dosing Interval, second slide'): 18,
+    ('6a---Multiple-Oral-Doses.pdf', 'Altering Dosing Interval, third slide'): 17,
 }
 
 QUESTION_FILES = ['q1_module1.js', 'q2_module2.js', 'q3_module3.js',
-                  'q4_module4.js', 'q5_module5.js', 'q7_module6.js', 'q6_figures.js']
-ARRAYS = ['Q_MODULE1', 'Q_MODULE2', 'Q_MODULE3', 'Q_MODULE4', 'Q_MODULE5', 'Q_MODULE6', 'Q_FIGURES']
+                  'q4_module4.js', 'q5_module5.js', 'q7_module6.js', 'q8_module6b.js', 'q6_figures.js']
+ARRAYS = ['Q_MODULE1', 'Q_MODULE2', 'Q_MODULE3', 'Q_MODULE4', 'Q_MODULE5', 'Q_MODULE6', 'Q_MODULE6B', 'Q_FIGURES']
 
 
 def norm(s):

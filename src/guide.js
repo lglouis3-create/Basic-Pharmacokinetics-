@@ -19,8 +19,8 @@
 
    Objective counts: Module 1 five, Module 2 six (three on each of the deck's
    two objectives slides), Module 3 seven, Module 4 five, Module 5 four,
-   Module 6 two of three (the third is Part 2 of the deck, not yet lectured).
-   Modules 7 to 9 are not yet lectured and carry no guides. Module 6 also
+   Module 6 three, plus two on the 6a multiple-oral deck.
+   Module 9 is not yet lectured and carries no guide. Module 6 also
    draws on Chapter 9, Multiple-Dosage Regimens, and says so where it does.
    ========================================================================== */
 const GUIDE_HTML = `
@@ -955,7 +955,7 @@ const GUIDE_HTML = `
 </section>
 
 <h2>Module 6 - Multiple Dosings</h2>
-<p class="prose">Three objectives, printed on the "Objectives" slide of 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf. The first two were lectured on 23 September and are below. The third, predicting the concentration after multiple IV infusions, is the second part of the same deck and has not been lectured yet. Her framing: <i>"up to uh till this point, we've been talking about single dose administration. So, today, we're gonna start talking about multiple dosing. We're gonna start with giving multiple IV bolus doses"</i> (09-23).</p>
+<p class="prose">Three objectives, printed on the "Objectives" slide of 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf. The first two were lectured on 23 September and the third on 28 September, followed in the same lecture by the multiple-oral deck she files as 6a. Her framing: <i>"up to uh till this point, we've been talking about single dose administration. So, today, we're gonna start talking about multiple dosing. We're gonna start with giving multiple IV bolus doses"</i> (09-23).</p>
 
 <section class="gobj" id="gobj-m6-1">
 <h3 data-nav="Module 6, objective 1 &mdash; Explain the principle of superposition and its assumptions in multiple-dose regimens">Module 6 - Objective 1</h3>
@@ -1025,6 +1025,109 @@ const GUIDE_HTML = `
 <li>One patient vignette asked in parts, in the order first-dose peak, first-dose trough, steady-state maximum, minimum and average, then a time before steady state and a time after the last dose.</li>
 <li>Dose and volume are both given per kilogram, or scaled from a per-70-kg or per-100-kg value, so the first step is putting both on the same basis.</li>
 <li>The steady-state trough, and every time after the last dose, are C = C<sub>0</sub>e<sup>&minus;kt</sup> with the steady-state peak as the starting value.</li>
+</ul></div>
+</section>
+
+<section class="gobj" id="gobj-m6-3">
+<h3 data-nav="Module 6, objective 3 &mdash; Predict the concentration of drug in the plasma at any time following multiple IV infusions of drug">Module 6 - Objective 3</h3>
+<div class="gbar"><span>Objective</span><b>Predict the concentration of drug in the plasma at any time following multiple IV infusions of drug</b><i>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Intermittent Intravenous Infusions" through "Summary"</i></div>
+
+<h4>What the slides carry, in slide order</h4>
+<ul>
+<li>Rationale: prevent high drug concentrations and accompanying side effects; many drugs are better tolerated when infused slowly over time compared to IV bolus dosing &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Rationale".</li>
+<li>Administering one or more doses by IV infusion: C<sub>p</sub> = (R/V<sub>D</sub>k)(1 &minus; e<sup>&minus;kt</sup>) &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Administering One or More Doses by IV Infusion".</li>
+<li>Example 4: a 300-mg dose of an antibiotic administered as an IV infusion over a period of 2 hours; six hours after the start of the first infusion a second dose of 300 mg infused, again over 2 hours (k = 0.15 h<sup>&minus;1</sup>, V<sub>D</sub> = 15 L); (a) the concentration at the end of the first infusion, (b) the concentration 4 hours after the cessation of the second infusion &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 4".</li>
+<li>Summary: with basic knowledge of the pharmacokinetics of a single dose, one can predict the concentration of drug in the plasma following repetitive IV bolus injections or intermittent IV infusions &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Summary".</li>
+</ul>
+
+<h4>What she said about it</h4>
+<ul class="saidlist">
+<li class="said"><span class="lead">Why infuse rather than push</span><q>some drugs aren't are better tolerated when they are infused slowly versus all at once, OK?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The same equation, with t the infusion time</span><q>this is the same equation that we had when we talked about our single IV infusion, right? So, the assumption here is that we're going to put the same drug into the body at the same rate um for the same duration of time.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Why the end-of-infusion concentration comes first</span><q>What happens when we stop the infusion? It's only elimination.</q> and <q>So that C0 is gonna be the concentration at the end of the infusion, right?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The number line</span><q>Now, right here, I draw myself a little line, a little number line, like in 1st grade.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The part to pay attention to</span><q>We are interested in the concentration from this red infusion where we stop at time 2. All the way out here on our number line at 12 hours later. So, the time that we're interested in is going to be the time that we're interested 12 minus 2, OK? So, 10 hours.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The contributions add</span><q>the concentrations from each administration of the dose will be additive over time</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+</ul>
+
+<div class="gpoll"><b>Her own questions, 09-28</b>
+<p class="prose">Example 4 worked on the slides: 17.28 mg/L at the end of the first infusion; 13.33 mg/L 4 hours after the second ends, as 17.3e<sup>&minus;0.15(10)</sup> + 17.3e<sup>&minus;0.15(4)</sup>. The In-Class Activity sheet, Multiple IV Infusions, two problems: (1) 500 mg over 2 hours, the second infusion starting 6 hours after the first, t&frac12; 3 hr, V<sub>D</sub> 18 L, asked for the end of the first infusion and 4 hours after the end of the second; her confirmed answers 22.2 mg/L and "eleven-ish". (2) 150 mg over 1.5 hours (Cl 2.54 L/hr, V<sub>D</sub> 22 L), the second starting 8 hours after the first, asked for the end of the first infusion (6.26 mg/L), 6 hours after the end of the second (set up as 6.26e<sup>&minus;0.115(6)</sup> + 6.26e<sup>&minus;0.115(14)</sup>), and the steady state of a continuous infusion at that rate (R/Cl = 39.37 mg/L).</p></div>
+
+<div class="gask"><b>How she asks it</b>
+<ul>
+<li>Two infusions of the same dose and duration, the second starting a stated number of hours after the first starts, then the concentration at the end of the first infusion and a stated number of hours after the end of the second.</li>
+<li>The elimination parameter arrives as k, as a half-life, or as a clearance with a volume, so the first step differs each time.</li>
+<li>A closing part asks what a continuous infusion at the same rate would reach: R/Cl.</li>
+</ul></div>
+</section>
+
+<h2>Module 6 - Multiple Oral Doses</h2>
+<p class="prose">Two objectives, printed on the "Objectives" slide of 6a---Multiple-Oral-Doses.pdf. Her framing: <i>"For a multiple dosing, multiple oral dosing, our equations look a little bit uglier. Don't panic"</i> (09-28).</p>
+
+<section class="gobj" id="gobj-m6a-1">
+<h3 data-nav="Module 6a, objective 1 &mdash; Calculate plasma drug concentration following multiple extravascular administrations of drug">Module 6a - Objective 1</h3>
+<div class="gbar"><span>Objective</span><b>Calculate plasma drug concentration following multiple extravascular administrations of drug</b><i>6a---Multiple-Oral-Doses.pdf, slides "Cp vs. Time for a Single Oral Dose" through "Example 1"</i></div>
+
+<h4>What the slides carry, in slide order</h4>
+<ul>
+<li>The single-oral-dose curve and equation again, with t<sub>max</sub> = ln(k<sub>a</sub>/k)/(k<sub>a</sub> &minus; k) &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Cp vs. Time for a Single Oral Dose".</li>
+<li>Concentration at any time after n doses: the single-dose prefactor Fk<sub>a</sub>D<sub>0</sub>/(V<sub>D</sub>(k<sub>a</sub> &minus; k)) multiplied by [(1 &minus; e<sup>&minus;nk&tau;</sup>)/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt</sup> &minus; [(1 &minus; e<sup>&minus;nk<sub>a</sub>&tau;</sup>)/(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>)]e<sup>&minus;k<sub>a</sub>t</sup>; at steady state each numerator is 1 &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Concentration of Drug in the Plasma at Any Time".</li>
+<li>C<sub>max</sub><sup>&infin;</sup> = (FD<sub>0</sub>/V<sub>D</sub>)[1/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt<sub>max</sub>&infin;</sup>; C<sub>min</sub><sup>&infin;</sup> = [k<sub>a</sub>FD<sub>0</sub>/(V<sub>D</sub>(k<sub>a</sub> &minus; k))][1/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;k&tau;</sup>; C<sub>avg</sub><sup>&infin;</sup> = FD<sub>0</sub>/Cl<sub>T</sub>&tau; &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Peak, Trough and Average Plasma Concentrations at Steady State".</li>
+<li>t<sub>max</sub><sup>&infin;</sup> = [1/(k<sub>a</sub> &minus; k)] ln[k<sub>a</sub>(1 &minus; e<sup>&minus;k&tau;</sup>)/(k(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>))] &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Time to Peak at Steady State".</li>
+<li>Example 1: an adult male (75 kg) received 250 mg tetracycline hydrochloride orally every 8 hours for 2 weeks; about 75% bioavailable, V<sub>D</sub> 1.5 L/kg, t&frac12; about 10 hours, k<sub>a</sub> 0.9 hr<sup>&minus;1</sup>; calculate C<sub>max</sub> of the first dose, C<sub>max</sub>, C<sub>min</sub> and C<sub>avg</sub> at steady state &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Example 1".</li>
+</ul>
+
+<h4>What she said about it</h4>
+<ul class="saidlist">
+<li class="said"><span class="lead">What is new in the long equation</span><q>But the only difference here, well, one of the differences is this in. Again, what number of dose are we on? And now we have the tau. What is our dosing interval?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">How to tell the oral peak from the bolus peak on the sheet</span><q>what tells you that this is for an oral dose? F is one thing. I, I heard tau, but tau is just our dosing interval, so we could give multiple bolus, we could give multiple oral. What else tells us? Team Max, right?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Only oral needs t<sub>max</sub></span><q>Only for oral do you need to find T Max. OK. Now, I might ask you what is the max for a bolus dose, and you know that that is C0, right? OK. But max for an oral dose, you have to find T-Max before you can find C-Max.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">What t<sub>max</sub> at steady state depends on</span><q>for at steady state following multiple oral dosing. Depends on K, KA and tau. OK. Single oral dose, K and KA.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">The direction of the change</span><q>That steady state TMAX is going to be lower than the T-Max of the first dose, OK?</q> and <q>The expectation is that the steady-state concentration is gonna be higher than the first dose because there is drug that is accumulated in the body.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Where the equations sit on the sheet</span><q>I think this is on the backside or at the bottom very bottom of the right hand column. C-Max at um steady state for an oral dose.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+</ul>
+
+<div class="gpoll"><b>Her own question &mdash; the tetracycline example, 09-28</b>
+<p class="prose">Her values: t<sub>max</sub> of the first dose <i>"something like 3-ish hours"</i> (3.1 hr in the working) and C<sub>max</sub> <i>"1.35 mg per liter"</i>; at steady state t<sub>max</sub> <i>"I got 2.06 hours"</i>, C<sub>max</sub> <i>"3.3"</i>, C<sub>min</sub> <i>"2.4-ish"</i>; C<sub>avg</sub> set up as 0.75 &times; 250 over 112.5 L, k and &tau;. The attendance poll that opened the lecture repeated the single-dose question: increasing an oral dose gives no change in t<sub>max</sub>, <i>"That is what I was looking for."</i></p></div>
+
+<div class="gask"><b>How she asks it</b>
+<ul>
+<li>One regimen, asked as the first-dose peak and then the steady-state peak, trough and average, so that the first-dose and steady-state values can be compared. t<sub>max</sub> is found first in both places even when not asked for.</li>
+<li>V<sub>D</sub> per kilogram with a body weight, a half-life rather than k, and F as a percent.</li>
+<li>The in-between doses are not worked: <i>"we're going first dose to steady state."</i></li>
+</ul></div>
+</section>
+
+<section class="gobj" id="gobj-m6a-2">
+<h3 data-nav="Module 6a, objective 2 &mdash; Discuss the effects of changing various parameters on the pharmacokinetics">Module 6a - Objective 2</h3>
+<div class="gbar"><span>Objective</span><b>Discuss the effects of changing various parameters on the pharmacokinetics</b><i>6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens" through "Consider Peak and Trough"</i></div>
+
+<h4>What the slides carry, in slide order</h4>
+<ul>
+<li>Two main parameters can be adjusted in developing a dosage regimen: dose size and dosage interval &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Multiple-Dosage Regimens".</li>
+<li>Method 1: change the drug dose and maintain the same dosing interval; a figure with the dose doubled &mdash; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations" and "Altering Dose".</li>
+<li>Increasing dose: increase steady-state concentrations, increase fluctuations between peak to trough, usually no change in patient compliance; decreasing dose: the reverse &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Altering Dose, second slide".</li>
+<li>Method 2: change the dosing interval and maintain the same drug dose; a figure with the interval halved, and the chapter's figure of equal doses every 6 hours and every 8 hours with k<sub>a</sub> and k constant &mdash; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations, Method 2", "Altering Dosing Interval" and "Altering Dosing Interval, third slide".</li>
+<li>Increasing dosing interval: decrease steady-state concentrations, increase fluctuations between peak to trough, increase patient compliance; decreasing dosing interval: the reverse &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Altering Dosing Interval, second slide".</li>
+<li>Consider peak and trough: the steady-state curve drawn inside the therapeutic range &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Consider Peak and Trough".</li>
+</ul>
+
+<h4>What she said about it</h4>
+<ul class="saidlist">
+<li class="said"><span class="lead">The only two dials</span><q>So the only things that we can change. Are the dose, so the, the size of the dose, how much drug we give, and the dosing intervals. OK. We don't change clearance, we don't change half-life, we don't change volume and distribution.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Increasing the dose</span><q>if we increase the dose, we expect increased concentration and increased fluctuation between peaks and troughs</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Increasing the interval</span><q>Increasing the dosing interval means that we're giving more time in between doses, decreased steady-state concentration, increased fluctuation between peak to trough. Increase patient compliance, generally.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Why a shorter interval shrinks the swing</span><q>if we decrease that, um, dosing interval, then maybe we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<li class="said"><span class="lead">Stating a regimen for a patient</span><q>Don't tell me 17.29 mg for an oral dose.</q> and, on intervals, <q>if you calculate a dosing interval, that is, let's say, 3.72 hours. As your patient. Does that dosing interval make sense to me?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+</ul>
+
+<div class="gpoll"><b>Her own question on it</b>
+<p class="prose">Posed to the room: 500 mg every 4 hours changed to 500 mg every 8 hours, <i>"What is your expectation?"</i> The answer she confirms is a decreased steady-state concentration. She says she will ask for dosing intervals and oral doses on the exam and expects them rounded to what a patient can take.</p></div>
+
+<div class="gask"><b>How she asks it</b>
+<ul>
+<li>One parameter changed, the other held, and three things asked in her order: the steady-state concentration, the fluctuation between peak and trough, and patient compliance. The answers are directions.</li>
+<li>A calculated interval or oral dose, to be restated as a practical one.</li>
 </ul></div>
 </section>
 `;

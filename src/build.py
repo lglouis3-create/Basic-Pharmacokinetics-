@@ -31,6 +31,7 @@ DATA_FILES = ['course.js',
               'q4_module4.js',
               'q5_module5.js',
               'q7_module6.js',
+              'q8_module6b.js',  # Module 6, second lecture: intermittent infusions, multiple oral doses
               'q6_figures.js',   # figure-reading questions, every module
               'qz_all.js']       # must stay last: builds QUESTIONS
 
