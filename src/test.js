@@ -616,6 +616,12 @@ console.log('\n=== 5e. What an explanation may say ===');
       if (open !== good) bad(`${q.id}: a {{frac:...}} in its concept block is malformed`);
     }
   }
+  /* The worked lines of a calculation stack their ratios the same way. */
+  for (const q of X.QUESTIONS) for (const st of (q.steps || [])) {
+    const open = (String(st.t).match(/\{\{frac:/g) || []).length, good = (String(st.t).match(X.FRAC_RE) || []).length;
+    fr += open;
+    if (open !== good) bad(`${q.id}: a {{frac:...}} in its working is malformed`);
+  }
   console.log(`  ok    ${tb} comparison tables have a cell for every column; ${fr} stacked fractions are well formed`);
 
   /* A CONTROL ON THE FORMULA FORMATTER. It sets typed formulas as the slides

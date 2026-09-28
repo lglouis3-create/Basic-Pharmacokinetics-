@@ -1275,7 +1275,7 @@ const Q_MODULE1 = [
  steps:[
   {k:'setup', t:'90 per cent decomposed leaves 10 per cent, so C = 0.10 × 350 mg/mL = 35 mg/mL',
    why:'The question names what has gone and the equation is written in terms of what is left, so the percentage has to be turned round before anything is substituted. A tenth of 350 is 35, and that is the concentration the solution has to fall to.'},
-  {k:'setup', t:'C = C0 − kt, so t = (C0 − C) / k',
+  {k:'setup', t:'C = C0 − kt, so t = {{frac:C0 − C|k}}',
    why:'Rearranging the zero-order line puts the time on its own. The numerator is the amount of concentration that has to disappear and the denominator is how much disappears each hour, so the quotient is a number of hours.'},
   {k:'algebra', t:'t = (350 − 35) mg/mL ÷ (6 (mg/mL)/hr) = 315 ÷ 6 = 52.5 hr',
    why:'Milligrams per millilitre divided by milligrams per millilitre per hour leaves hours. The 315 is what must be lost, and at 6 per hour that takes 52.5 hours.'},
