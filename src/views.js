@@ -325,8 +325,7 @@ function topicCard(t){
     <summary>
       <span class="tname">${esc(t.name)}<small>${esc(t.cite||'')}</small></span>
       ${profTag(t.prof)}
-      ${meterHTML(m)}
-      ${countsHTML(m, pool)}
+      ${progressHTML(m, pool)}
     </summary>
     <div class="subs">`;
   for(const s of (t.subs||[])){
@@ -337,7 +336,7 @@ function topicCard(t){
     const done = sm.total && sm.mastered === sm.total;
     h += `<div class="subrow">
       <span class="sname">${esc(s.name)}<small>${splitNote(sp)} · ${esc(s.cite||'')}</small></span>
-      ${meterHTML(sm)}${countsHTML(sm, sp)}
+      ${progressHTML(sm, sp)}
       <button data-t="${t.id}" data-s="${s.id}" data-k="" class="${done?'done':''}">${done?'Review':'Start'}</button>
     </div>`;
   }
@@ -502,7 +501,7 @@ function renderTopics(){
       const em = masteryOf(pool), epct = em.total ? Math.round(100*em.mastered/em.total) : 0;
       h += `<details class="module"><summary>
           <span class="mname">${esc(m.name)}<small>${splitNote(pool)}${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
-          ${meterHTML(em)}${countsHTML(em, pool)}
+          ${progressHTML(em, pool)}
         </summary><div class="mfoot">
         ${examRows(pool, m.exam)}
         <div class="subrow"><span class="sname"><b>Straight pass</b>
@@ -533,7 +532,7 @@ function renderTopics(){
     }
     h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
         <span class="mname">${esc(m.name)}<small>${splitNote(mpool)} · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
-        ${meterHTML(mm)}${countsHTML(mm, mpool)}
+        ${progressHTML(mm, mpool)}
       </summary>
       ${ts.map(topicCard).join('')}
       ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
@@ -1001,22 +1000,33 @@ const pctCol = p => p == null ? 'inherit' : p >= 80 ? 'var(--ok)' : p >= 60 ? 'v
 const an = w => (/^[aeiou]/i.test(w) ? 'an ' : 'a ') + w;
 /* Answers on the questions of one pool: how many, and how many right. */
 function seenOf(pool){ const ids = new Set(pool.map(q => q.id)); return acc(DB.answers.filter(a => ids.has(a.qid))); }
-/* The meter: mastered concepts in full colour, and behind them, in a lighter
-   shade, the concepts answered right at the last attempt and waiting for their
-   next review day. The light fill moves with the first correct answer; the
-   full fill follows a few days later. */
-function meterHTML(m){
+/* Two bars beside every topic. The first is coverage: how many of the
+   topic's questions have been answered at all, which fills from the first
+   answer and reads "all N answered" when the topic is done. The second is
+   mastery: concepts answered right on three separate review days in full
+   colour, with the concepts answered right and waiting for their next review
+   day behind them in a lighter shade. The two move on different clocks, so
+   they are shown apart. */
+function answeredOf(pool){
+  const ids = new Set(pool.map(q => q.id)), seen = new Set();
+  for(const a of DB.answers) if(ids.has(a.qid)) seen.add(a.qid);
+  return {n: seen.size, total: ids.size};
+}
+function progressHTML(m, pool){
+  const an = answeredOf(pool), sn = seenOf(pool);
+  const pa = an.total ? Math.round(100 * an.n / an.total) : 0;
   const pm = m.total ? Math.round(100 * m.mastered / m.total) : 0;
   const pw = m.total ? Math.round(100 * (m.mastered + (m.onway || 0)) / m.total) : 0;
-  return `<span class="meter"><b style="width:${pw}%"></b><i style="width:${pm}%"></i></span>`;
-}
-/* The counts beside a meter: concepts mastered, and under it what has been
-   answered and how well, which moves from the first answer on. */
-function countsHTML(m, pool){
-  const sn = seenOf(pool);
-  return `<span class="counts" title="Mastered means three correct answers on separate review days; the light part of the bar is concepts answered right and waiting for their next review. The second line is every answer given on these questions.">${m.mastered}/${m.total} mastered${
-    m.onway ? `<br>${m.onway} on the way` : ''}${
-    sn.n ? `<br><em style="color:${pctCol(sn.pct)}">${sn.pct}%</em> of ${sn.n}` : ''}</span>`;
+  const done = an.total && an.n === an.total;
+  return `<span class="meters">
+    <span class="mrow2" title="Questions in this set answered at least once${sn.n ? `; ${sn.pct}% of those answers were right` : ''}">
+      <span class="meter cov"><i style="width:${pa}%"></i></span>
+      <span class="counts">${done ? `<em class="done">✓ all ${an.total} answered</em>` : `${an.n}/${an.total} answered`}${
+        sn.n ? ` · <em style="color:${pctCol(sn.pct)}">${sn.pct}%</em> right` : ''}</span></span>
+    <span class="mrow2" title="Mastered means three correct answers on separate review days; the light part is concepts answered right and waiting for their next review">
+      <span class="meter"><b style="width:${pw}%"></b><i style="width:${pm}%"></i></span>
+      <span class="counts">${m.mastered}/${m.total} mastered${m.onway ? ` · ${m.onway} on the way` : ''}</span></span>
+  </span>`;
 }
 /* What this drill session produced, against everything before it. */
 function sessionSummary(){
