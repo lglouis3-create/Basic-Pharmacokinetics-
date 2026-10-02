@@ -651,8 +651,13 @@ console.log('\n=== 5e. What an explanation may say ===');
 console.log('\n=== 6. Storage isolation ===');
 {
   const keys = Object.keys(store);
-  if (!keys.some(k=>k.includes('TestUser'))) bad('profile-namespaced key not written');
-  else console.log(`  ok    progress written under namespaced key: ${keys.find(k=>k.includes('TestUser'))}`);
+  // No name is asked for: a first visit saves under the "default" profile.
+  if (!keys.some(k=>k.endsWith(':data:default'))) bad('progress not written under the default profile');
+  else console.log(`  ok    progress written under namespaced key: ${keys.find(k=>k.endsWith(':data:default'))}`);
+  let asked = false; sandbox.prompt = () => { asked = true; return 'x'; };
+  X.askProfile();
+  if (asked) bad('starting the drill asked for a name');
+  else console.log('  ok    starting the drill asks for no name');
   if (!keys.every(k => k.startsWith(COURSE.ns + ':'))) bad(`a key was written outside the "${COURSE.ns}" namespace`);
   else console.log(`  ok    every key sits under the course namespace "${COURSE.ns}"`);
 }

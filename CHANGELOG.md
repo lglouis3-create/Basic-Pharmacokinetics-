@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-03 (theme, no name prompt)
+- Header: System, Light or Dark theme; figures switch with it.
+- No name pop-up on first visit; progress saves under a default profile.
+- A different profile name can be set under Settings, for a shared browser.
+
 ## 2026-10-03 (diagrams)
 - Diagrams grouped by what she asks: order or model, a value, two curves, a regimen.
 - Each figure has a "Read this graph" walk-through: axes, shape, equation, how, what she asks.

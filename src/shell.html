@@ -527,6 +527,65 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
 .wcite{font-size:12px;color:var(--text-dim);margin:2px 0 0}
 .morefilters{margin:14px 0 4px} .morefilters>summary{cursor:pointer;color:var(--accent);font-size:14px;font-weight:600}
 @media (max-width:560px){.subrow .btns{flex-basis:100%;order:10}}
+
+/* ---------- dark theme ----------
+   System follows the device; Light or Dark in the header overrides it. The
+   same values are written twice: once for System when the device is dark,
+   once for an explicit Dark choice. Drawn figures (SVG) are inverted with the
+   hue kept, so their blue and amber stay blue and amber; lecture slides are
+   photographs of the deck and keep their white page. */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--ink:#0B1118; --ink-2:#141D27; --paper:#18212B; --surface:#10161D;
+  --line:#33404F; --line-soft:#26303C;
+  --text:#E4EAF1; --text-dim:#9FAEBE;
+  --ok:#5DC58C; --ok-bg:#15301F; --bad:#F2837A; --bad-bg:#3A1B19;
+  --warn:#E7AE55; --warn-bg:#33270F; --accent:#86AEEC; --accent-bg:#1A2840;
+  --sik:#86AEEC; --yen:#C99BE6; --sel:#3B5C90;}
+:root:not([data-theme="light"]) .teach{border-color:#2C3F5C}
+:root:not([data-theme="light"]) .teach .prose+h5.tsec{border-top-color:rgba(255,255,255,.08)}
+:root:not([data-theme="light"]) .tdiag,:root:not([data-theme="light"]) .tdimg,:root:not([data-theme="light"]) .qimg{background:var(--paper)}
+:root:not([data-theme="light"]) .tag.sik{border-color:#2C4466;background:#16243A}
+:root:not([data-theme="light"]) .tag.yen,:root:not([data-theme="light"]) .tag.sata{border-color:#4A3560;background:#251B30;color:#C99BE6}
+:root:not([data-theme="light"]) .meter b{background:#3D6B4D}
+:root:not([data-theme="light"]) .note{border-color:#5A4520;color:#F0CB8E} :root:not([data-theme="light"]) .note b{color:#F0CB8E}
+:root:not([data-theme="light"]) .misskind p{color:#F0CB8E}
+:root:not([data-theme="light"]) .shortfall{border-color:#6A2C27;color:#F4A59E} :root:not([data-theme="light"]) .shortfall b{color:#F4A59E}
+:root:not([data-theme="light"]) .btn.amber,:root:not([data-theme="light"]) .warnbtn{border-color:#5A4520}
+:root:not([data-theme="light"]) .sweepcard .subrow:hover{background:rgba(255,255,255,.04)}
+:root:not([data-theme="light"]) .chip[aria-pressed="true"],:root:not([data-theme="light"]) .rtab[aria-pressed="true"],:root:not([data-theme="light"]) .mtab[aria-pressed="true"],:root:not([data-theme="light"]) .misskind button[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:#fff}
+:root:not([data-theme="light"]) .examhead{background:#141D27}
+:root:not([data-theme="light"]) img[src^="data:image/svg+xml"],:root:not([data-theme="light"]) .stsvg svg{filter:invert(.88) hue-rotate(180deg)}
+:root:not([data-theme="light"]) .reffig img,:root:not([data-theme="light"]) .stepfig .stsvg svg{border-color:var(--line)}
+:root:not([data-theme="light"]) #zoom img{background:#fff}
+:root:not([data-theme="light"]) select,:root:not([data-theme="light"]) input{color-scheme:dark}
+:root:not([data-theme="light"]) .btn:not(.ghost):not(.amber),:root:not([data-theme="light"]) .subrow button:not(.ghost):not(.done),:root:not([data-theme="light"]) .mrow button,:root:not([data-theme="light"]) .gbar,:root:not([data-theme="light"]) .gbar *{color:#0B1118}
+}
+:root[data-theme="dark"]{--ink:#0B1118; --ink-2:#141D27; --paper:#18212B; --surface:#10161D;
+  --line:#33404F; --line-soft:#26303C;
+  --text:#E4EAF1; --text-dim:#9FAEBE;
+  --ok:#5DC58C; --ok-bg:#15301F; --bad:#F2837A; --bad-bg:#3A1B19;
+  --warn:#E7AE55; --warn-bg:#33270F; --accent:#86AEEC; --accent-bg:#1A2840;
+  --sik:#86AEEC; --yen:#C99BE6; --sel:#3B5C90;}
+:root[data-theme="dark"] .teach{border-color:#2C3F5C}
+:root[data-theme="dark"] .teach .prose+h5.tsec{border-top-color:rgba(255,255,255,.08)}
+:root[data-theme="dark"] .tdiag,:root[data-theme="dark"] .tdimg,:root[data-theme="dark"] .qimg{background:var(--paper)}
+:root[data-theme="dark"] .tag.sik{border-color:#2C4466;background:#16243A}
+:root[data-theme="dark"] .tag.yen,:root[data-theme="dark"] .tag.sata{border-color:#4A3560;background:#251B30;color:#C99BE6}
+:root[data-theme="dark"] .meter b{background:#3D6B4D}
+:root[data-theme="dark"] .note{border-color:#5A4520;color:#F0CB8E} :root[data-theme="dark"] .note b{color:#F0CB8E}
+:root[data-theme="dark"] .misskind p{color:#F0CB8E}
+:root[data-theme="dark"] .shortfall{border-color:#6A2C27;color:#F4A59E} :root[data-theme="dark"] .shortfall b{color:#F4A59E}
+:root[data-theme="dark"] .btn.amber,:root[data-theme="dark"] .warnbtn{border-color:#5A4520}
+:root[data-theme="dark"] .sweepcard .subrow:hover{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .chip[aria-pressed="true"],:root[data-theme="dark"] .rtab[aria-pressed="true"],:root[data-theme="dark"] .mtab[aria-pressed="true"],:root[data-theme="dark"] .misskind button[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:#fff}
+:root[data-theme="dark"] .examhead{background:#141D27}
+:root[data-theme="dark"] img[src^="data:image/svg+xml"],:root[data-theme="dark"] .stsvg svg{filter:invert(.88) hue-rotate(180deg)}
+:root[data-theme="dark"] .reffig img,:root[data-theme="dark"] .stepfig .stsvg svg{border-color:var(--line)}
+:root[data-theme="dark"] #zoom img{background:#fff}
+:root[data-theme="dark"] select,:root[data-theme="dark"] input{color-scheme:dark}
+:root[data-theme="dark"] .btn:not(.ghost):not(.amber),:root[data-theme="dark"] .subrow button:not(.ghost):not(.done),:root[data-theme="dark"] .mrow button,:root[data-theme="dark"] .gbar,:root[data-theme="dark"] .gbar *{color:#0B1118}
+:root{--sel:var(--ink)}
+header .themesel{background:#2A3A4D;color:#DCE6F2;border:1px solid #3B4F66;border-radius:6px;padding:3px 6px;font:inherit;font-size:12px}
 </style>
 </head>
 <body>
@@ -534,8 +593,10 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
 <header>
   <h1>Course drill</h1>
   <div class="who">
-    <span id="whoName">—</span>
-    <button id="btnWho">Switch</button>
+    <span id="whoName"></span>
+    <select id="themeSel" class="themesel" aria-label="Colour theme">
+      <option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option>
+    </select>
   </div>
 </header>
 
@@ -828,21 +889,18 @@ function save(){
     LS.set(keyFor(PROFILE), JSON.stringify(DB));
   },150);
 }
-function askProfile(force){
-  let n = PROFILE;
-  if(force || !n){
-    n = (prompt(
-      'Your name or initials.\n\n'+
-      'This keeps your progress separate from anyone else using this same browser. '+
-      'Nothing is sent anywhere — it stays on this device.', PROFILE||'') || '').trim();
-    if(!n) n = PROFILE || 'me';
-  }
-  PROFILE = n;
+/* No name is asked for. Progress is saved under the profile last used in this
+   browser, or "default" on a first visit. Someone sharing the browser can type
+   another profile name on the Settings page; that is optional, never a pop-up.
+   askProfile() keeps its name so the checks that call it still work. */
+function setProfile(name){
+  PROFILE = String(name || '').trim() || 'default';
   LS.set(NS+':profile', PROFILE);
   load();
   const who = document.getElementById('whoName');
-  if(who) who.textContent = PROFILE + (LS.available ? '' : ' (progress not saved)');
+  if(who) who.textContent = (PROFILE === 'default' ? '' : PROFILE) + (LS.available ? '' : ' (progress not saved)');
 }
+function askProfile(){ setProfile(PROFILE || 'default'); }
 
 /* ==========================================================================
    SPACED REPETITION

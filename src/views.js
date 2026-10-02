@@ -2241,6 +2241,17 @@ function renderSettings(){
   ${COURSE.exams.length > 1 ? `<h3>Exam you are preparing for</h3>
   ${examPicker('The exam simulator, Weak spots and the exam-weighted pass all follow this choice.')}` : ''}
 
+  <h3 id="profile">Profile</h3>
+  <div class="filters">
+    <div class="frow"><input type="text" id="profIn" value="${esc(PROFILE)}" aria-label="Profile name" maxlength="40"
+      style="font:inherit;font-size:15px;padding:7px 10px;border:1px solid var(--line);border-radius:7px;min-width:0;flex:1 1 160px;background:var(--paper);color:var(--text)">
+      <button class="btn ghost" id="btnProf">Switch profile</button></div>
+    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">
+      Progress is saved in this browser under the profile named here. Only needed if several people share one browser:
+      type another name and switch, and each name keeps its own answers. Switch back to see your own again.
+    </p>
+  </div>
+
   <h3>Review schedule</h3>
   <div class="filters">
     <div class="frow">
@@ -2273,7 +2284,7 @@ function renderSettings(){
     <div class="frow"><button class="btn ghost" id="btnReset"
       style="color:var(--bad);border-color:#E9B8B4">Erase my history</button></div>
     <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">
-      Clears every answer and schedule for “${esc(PROFILE)}”. Other people's profiles are untouched.
+      Clears every answer and schedule for the profile “${esc(PROFILE)}”. Other profiles are untouched.
     </p>
   </div>
 
@@ -2281,8 +2292,8 @@ function renderSettings(){
 
   <div class="note" style="margin-top:20px">
     <b>Sharing this with classmates.</b> Each person's history lives in their own browser on their own
-    device, so nobody can see anyone else's. On a shared computer, use the Switch button at the top
-    right to keep profiles apart. Private/incognito windows and “clear site data” erase progress.
+    device, so nobody can see anyone else's. On a shared computer, use a different profile name
+    above to keep progress apart. Private/incognito windows and “clear site data” erase progress.
   </div>`;
 
   $('#v-settings').querySelectorAll('.chip[data-m]').forEach(b=>b.onclick=()=>{
@@ -2291,6 +2302,15 @@ function renderSettings(){
   $('#v-settings').querySelectorAll('.chip[data-exam]').forEach(b=>b.onclick=()=>{
     chooseExam(+b.dataset.exam); renderSettings();
   });
+  $('#btnProf').onclick = () => {
+    const n = $('#profIn').value.trim() || 'default';
+    if(n === PROFILE) return;
+    if(EX && EX.running && !confirm('A paper is in progress and will be discarded. Switch profile anyway?')) return;
+    setProfile(n);
+    // a new name means a new history, so nothing from the last person's session carries over
+    Q = null; if(EX){ clearInterval(EX.timer); EX = null; }
+    renderSettings();
+  };
   $('#btnExport').onclick = ()=>{
     const blob = new Blob([JSON.stringify({profile:PROFILE, db:DB}, null, 1)], {type:'application/json'});
     const a = document.createElement('a');
@@ -2935,13 +2955,16 @@ document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
 document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn
 document.addEventListener('click', zoomClick);   // tap any figure to enlarge it
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
-document.getElementById('btnWho').onclick = () => {
-  if(EX && EX.running && !confirm('A paper is in progress and will be discarded. Switch profile anyway?')) return;
-  const was = PROFILE;
-  askProfile(true);
-  // a new name means a new history, so nothing from the last person's session carries over
-  if(PROFILE !== was){ Q = null; if(EX){ clearInterval(EX.timer); EX = null; } show('topics'); }
-  else show(VIEW);
-};
-askProfile(false);
+/* Theme: System (no attribute), Light or Dark, kept per browser. */
+const THEME_KEY = NS + ':theme';
+function applyTheme(t){
+  if(t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  else document.documentElement.removeAttribute('data-theme');
+}
+{
+  const ts = document.getElementById('themeSel'), saved = LS.get(THEME_KEY) || 'system';
+  applyTheme(saved);
+  if(ts){ ts.value = saved; ts.onchange = () => { LS.set(THEME_KEY, ts.value); applyTheme(ts.value); }; }
+}
+askProfile();
 show('topics');
