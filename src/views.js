@@ -74,6 +74,19 @@ function prettyMath(s){
   return t;
 }
 const rich = s => mathHTML(prettyMath(esc(s)));
+/* A stem is plain text. Blank lines separate paragraphs, and a block whose
+   every line holds "a | b" is a data table, its first line the heading. */
+function stemHTML(stem){
+  return String(stem || '').split(/\n\s*\n/).map(block => {
+    const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+    if(lines.length >= 2 && lines.every(l => l.includes('|'))){
+      const cells = l => l.split('|').map(c => c.trim());
+      return `<div class="cmpwrap"><table class="stemtab"><thead><tr>${cells(lines[0]).map(c => `<th>${rich(c)}</th>`).join('')}</tr></thead>
+        <tbody>${lines.slice(1).map(l => `<tr>${cells(l).map(c => `<td>${rich(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    }
+    return `<p>${rich(lines.join(' '))}</p>`;
+  }).join('');
+}
 const richHTML = h => mathHTML(prettyMath(h));
 
 /* ==========================================================================
@@ -657,7 +670,7 @@ function calcsPage(module){
       <div class="cbtns"><button class="btn small" data-ctype="${esc(t.id)}">Single problems</button>${
         chains.length === 1 ? `<button class="btn small ghost" data-chain="${esc(chains[0].id)}">In parts</button>` : ''}</div>
       ${ex ? `<details class="worked"><summary>Worked example</summary><div class="wbody">
-        <p class="wstem">${rich(ex.stem)}</p>${stepsBlock(ex)}
+        <div class="wstem">${stemHTML(ex.stem)}</div>${stepsBlock(ex)}
         <p class="wans"><b>Answer:</b> ${esc(String(ex.answer))} ${esc(ex.units || '')}</p>
         <p class="wcite">${esc(ex.cite || '')}</p></div></details>` : ''}
       ${chains.length > 1 ? `<details class="worked"><summary>In parts: ${chains.length} of her problems</summary>
@@ -915,7 +928,7 @@ function renderQuiz(){
   </div>
   <div class="qbody">
     ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}
-    <p class="stem">${rich(q.stem)}</p>`;
+    <div class="stem">${stemHTML(q.stem)}</div>`;
 
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
 
@@ -1460,7 +1473,7 @@ function renderGaps(){
               .map(i=>q.options[i] ? q.options[i].t : '').filter(Boolean).join(' · ');
       }
       h += `<div class="missq">
-        <div class="mstem">${rich(q.stem)}</div>
+        <div class="mstem">${stemHTML(q.stem)}</div>
         <div class="mmeta" style="color:var(--ok);margin-bottom:4px">Answer: ${esc(correctTxt)}</div>
         ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${esc(pickedTxt)}</div>` : ''}
         ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss</div>` : ''}
@@ -1468,7 +1481,7 @@ function renderGaps(){
       </div>`;
     }
   }
-  h = h.replace(/<table class="gap">/g, '<div class="tw"><table class="gap">').replace(/<\/table>/g, '</table></div>');
+  h = h.replace(/<table class="gap">([\s\S]*?)<\/table>/g, '<div class="tw"><table class="gap">$1</table></div>');
   el.innerHTML = h;
   wireReviewPlan(el, plan);
 
@@ -1994,7 +2007,7 @@ function renderExamQ(){
     kind==='numeric' ? '<span class="tag">calculation</span>' : ''}${
     kind==='match' ? '<span class="tag">matching</span>' : ''}<span class="spacer"></span>
     <span>no feedback until you submit</span></div>
-  <div class="qbody"><p class="stem">${rich(q.stem)}</p>`;
+  <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
   if(kind === 'numeric'){
     h += numericInput(q, EX.picks[EX.i], false, '');
@@ -2069,7 +2082,7 @@ function renderExamResult(){
     h += `<div class="qcard" style="margin-bottom:12px"><div class="qhead">
       ${profTag(q.prof)}<span>Q${i+1}</span>${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
       <span style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'correct':(blankQ?'blank':'missed')}</span>
-      </div><div class="qbody"><p class="stem" style="font-size:15.5px">${rich(q.stem)}</p>`;
+      </div><div class="qbody"><div class="stem" style="font-size:15.5px">${stemHTML(q.stem)}</div>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
     if(kind === 'numeric'){
       h += `<p class="verdict ${ok?'ok':'bad'}">Keyed answer ${q.answer.toFixed(4)} ${esc(q.units)}${

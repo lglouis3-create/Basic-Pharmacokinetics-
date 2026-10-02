@@ -45,7 +45,8 @@ QSRC = built_question_files()
 
 # A question object opens at column 0. The TOPICS entries in the first question
 # file are indented, so they are not counted.
-QRE = re.compile(r"(?m)^\{id:'[^']+',")
+# The generated worksheet files (gen/*.py) write JSON, so "id": is counted too.
+QRE = re.compile(r"""(?m)^\{(?:id:'[^']+',|"id": "[^"]+", (?!"src"))""")   # a problem set carries "src"
 
 
 def source_counts():

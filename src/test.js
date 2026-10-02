@@ -434,7 +434,13 @@ console.log('\n=== 5c. Problem sets ===');
          one module, and each must be answered with a number: a set whose parts
          drift across modules is two problems filed as one. */
       if (q.module !== c.module) bad(`${id} is module ${q.module} but sits in problem set "${c.id}", declared module ${c.module}`);
-      if (X.kindOf(q) !== 'calc') bad(`${id} is a concept question and cannot be a part of problem set "${c.id}"`);
+      /* A worksheet is reproduced as she handed it out, so its conceptual parts
+         (the renal mechanism, whether a tablet is enough) stay in it. A lecture
+         example worked in parts is calculation only. */
+      if (X.kindOf(q) !== 'calc' && (c.src || 'example') === 'example')
+        bad(`${id} is a concept question and cannot be a part of problem set "${c.id}"`);
+      if (c.src && !['example', 'practice', 'inclass', 'homework', 'review', 'extra'].includes(c.src))
+        bad(`problem set "${c.id}" has an unknown src "${c.src}"`);
     }
     if (!c.name || !c.setup) bad(`problem set "${c.id}" is missing a name or its vignette line`);
   }
