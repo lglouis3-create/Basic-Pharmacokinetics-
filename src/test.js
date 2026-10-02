@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -114,7 +114,7 @@ const ids = new Set();
 const topicIds = new Set(TOPICS.map(t=>t.id));
 const subIds = new Set(TOPICS.flatMap(t=>(t.subs||[]).map(s=>t.id+'/'+s.id)));
 const skillIds = new Set(COURSE.skills.map(s=>s.id));
-for (const q of QUESTIONS) {
+for (const q of QUESTIONS.concat(X.EXTRAS)) {   // extra practice is held to the same rules
   const kind = X.qType(q);
   if (ids.has(q.id)) bad(`duplicate question id: ${q.id}`);
   ids.add(q.id);
@@ -192,7 +192,7 @@ console.log('\n=== 1b. Question types render-ready ===');
   QUESTIONS.forEach(q => { byKind[X.qType(q)]++; if (X.isMulti(q)) byKind.multi++; });
   console.log(`  ${byKind.mc} multiple choice (${byKind.multi} select-all), ${byKind.numeric} numeric, ${byKind.match} match`);
   // grading, exercised directly rather than assumed
-  for (const q of QUESTIONS.filter(q => X.qType(q) === 'numeric')) {
+  for (const q of QUESTIONS.concat(X.EXTRAS).filter(q => X.qType(q) === 'numeric')) {
     if (!X.gradeNumeric(q, String(q.answer))) bad(`${q.id}: the keyed answer does not grade as correct`);
     if (!X.gradeNumeric(q, String(q.answer + q.tol))) bad(`${q.id}: an answer exactly at the tolerance is graded wrong`);
     if (X.gradeNumeric(q, String(q.answer + q.tol * 2 + 1))) bad(`${q.id}: an answer well outside the tolerance is graded right`);
@@ -601,7 +601,7 @@ console.log('\n=== 5e. What an explanation may say ===');
     return t.filter(([, v]) => v);
   };
   let n = 0;
-  for (const q of X.QUESTIONS) for (const [where, v] of shown(q)) {
+  for (const q of X.QUESTIONS.concat(X.EXTRAS)) for (const [where, v] of shown(q)) {
     if (SOURCING.test(v)) { bad(`${q.id}: sourcing commentary in its ${where}: "${String(v).match(SOURCING)[0]}"`); n++; }
     if (where !== 'note' && /\bin class\b/i.test(v)) { bad(`${q.id}: "in class" in its ${where}; only a note may say it`); n++; }
   }
@@ -609,7 +609,7 @@ console.log('\n=== 5e. What an explanation may say ===');
 
   /* Tables and fractions are markup, so a malformed one shows as raw text. */
   let tb = 0, fr = 0;
-  for (const q of X.QUESTIONS) for (const p of X.teachParts(q.teach)) {
+  for (const q of X.QUESTIONS.concat(X.EXTRAS)) for (const p of X.teachParts(q.teach)) {
     if (p.table) {
       tb++;
       const w = p.table.head.length;
@@ -623,7 +623,7 @@ console.log('\n=== 5e. What an explanation may say ===');
     }
   }
   /* The worked lines of a calculation stack their ratios the same way. */
-  for (const q of X.QUESTIONS) for (const st of (q.steps || [])) {
+  for (const q of X.QUESTIONS.concat(X.EXTRAS)) for (const st of (q.steps || [])) {
     const open = (String(st.t).match(/\{\{frac:/g) || []).length, good = (String(st.t).match(X.FRAC_RE) || []).length;
     fr += open;
     if (open !== good) bad(`${q.id}: a {{frac:...}} in its working is malformed`);

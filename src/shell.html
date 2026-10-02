@@ -982,7 +982,9 @@ let LAST_TIER = 0;   // tier of the question pickNext served last (4 = a missed 
 const $  = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LETTERS = 'ABCDEFGHIJ';
-const byId = id => QUESTIONS.find(q=>q.id===id);
+/* Extra practice lives outside QUESTIONS (no exam draw, no module counts), but
+   an answer to one is still looked up by id in the quiz and in Weak spots. */
+const byId = id => QUESTIONS.find(q=>q.id===id) || (typeof EXTRAS === 'undefined' ? undefined : EXTRAS.find(q=>q.id===id));
 const shuffle = a => { for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; };
 
 function conceptsIn(pool){ return [...new Set(pool.map(q=>q.concept))]; }

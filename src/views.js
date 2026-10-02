@@ -679,8 +679,13 @@ function calcsPage(module){
   });
   const ex = chainsOfKind(module, ['example']);
   if(ex.length) h += `<h3>Her lecture examples, in parts</h3><div class="topic plain"><div class="subs">${ex.map(chainRow).join('')}</div></div>`;
+  const extra = typesOf(module).map(t => [t, extrasOf(t)]).filter(([, p]) => p.length);
+  if(extra.length) h += `<h3>Extra practice</h3><p class="sub">Problems written for this drill in her formats, with numbers that are not hers. They are kept out of the exam simulator and the module counts.</p>
+    <div class="topic plain"><div class="subs">${extra.map(([t, p]) =>
+      rowHTML(esc(t.name), `${p.length} problem${p.length === 1 ? '' : 's'}`, p, `<button data-xtype="${esc(t.id)}">Start</button>`)).join('')}</div></div>`;
   return h;
 }
+const extrasOf = t => (typeof EXTRAS === 'undefined' ? [] : EXTRAS).filter(q => q.xtype === t.id);
 function worksheetsPage(module){
   let h = `<p class="sub">Problems from her handouts, kept apart from the calculation drills. Each is worked in her part order.</p>`, any = false;
   for(const [k, name, note] of WORKSHEET_KINDS){
@@ -711,6 +716,8 @@ function renderModulePage(){
   el.querySelectorAll('[data-ctype]').forEach(b => b.onclick = () => {
     const t = CALC_TYPES.find(x => x.id === b.dataset.ctype); startSweepOf(typePool(t), t.name); });
   el.querySelectorAll('button[data-chain]').forEach(b => b.onclick = () => startChain(b.dataset.chain));
+  el.querySelectorAll('[data-xtype]').forEach(b => b.onclick = () => {
+    const t = CALC_TYPES.find(x => x.id === b.dataset.xtype); startSweepOf(extrasOf(t), `${t.name} — extra practice`); });
 }
 
 /* ==========================================================================

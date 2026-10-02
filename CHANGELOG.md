@@ -2,6 +2,10 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-03 (extra practice)
+- Calculations: an Extra practice list, 81 problems in her formats with numbers that are not hers.
+- Extra practice stays out of the exam simulator and the module counts.
+
 ## 2026-10-03 (worksheets)
 - Worksheets: Clearance & Elimination Practice 1–4 and Single Oral Practice 1–3, keyed to her solutions.
 - Worksheets: Homework 1–5 in her wording with changed numbers, every answer worked out.

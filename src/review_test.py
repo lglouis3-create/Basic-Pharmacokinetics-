@@ -80,6 +80,12 @@ with sync_playwright() as p:
             ok(f'module {m}: worksheets hold only handout problems ({len(ws)})', ws and 'example' not in srcs)
             chain_buttons |= set(ws)
 
+    ok('extra practice stays out of the main bank and the exam pools',
+       pg.evaluate("EXTRAS.length > 0 && !EXTRAS.some(x => QUESTIONS.includes(x)) && !POOLS.some(p => poolQuestions(p).some(q => q.extra))"))
+    pg.evaluate("MODPAGE = {module: 6, sec: 'calcs'}; show('topics')")
+    pg.locator('#v-topics [data-xtype]').first.click(); pg.wait_for_timeout(150)
+    ok('an Extra practice row draws only extra problems of its kind',
+       pg.evaluate("Q.pool.length > 0 && Q.pool.every(q => q.extra && q.xtype === Q.pool[0].xtype)"))
     allc = set(pg.evaluate("CHAINS.map(c => c.id)"))
     ok(f'every problem set has a Start button ({len(chain_buttons & allc)} of {len(allc)})', allc <= chain_buttons)
 

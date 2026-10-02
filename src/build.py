@@ -35,6 +35,7 @@ DATA_FILES = ['course.js',
               'q6_figures.js',   # figure-reading questions, every module
               'q9_worksheets.js',  # her daily practice sheets as problem sets (after q1: appends to CHAINS)
               'q10_homework.js',   # her homework wording, numbers changed (appends to CHAINS)
+              'q11_extra.js',      # extra practice written for this drill: EXTRAS, never in QUESTIONS
               'qz_all.js']       # must stay last: builds QUESTIONS
 
 # The content files: data the engine reads, but not questions. They are

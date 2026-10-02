@@ -108,7 +108,8 @@ def main():
         # the question bank reached the page, counted from the sources rather
         # than from a literal, so adding questions does not require editing this
         want_q, want_i = source_counts()
-        n = page.evaluate('typeof QUESTIONS !== "undefined" ? QUESTIONS.length : -1')
+        # extra practice is a separate array (EXTRAS), counted with the bank
+        n = page.evaluate('typeof QUESTIONS !== "undefined" ? QUESTIONS.length + (typeof EXTRAS !== "undefined" ? EXTRAS.length : 0) : -1')
         check(n == want_q, f'question bank present in the page ({n} of {want_q} in the sources)')
         imgs = page.evaluate('typeof IMAGES !== "undefined" ? Object.keys(IMAGES).length : -1')
         check(imgs == want_i, f'image bank present in the page ({imgs} of {want_i} in images.json)')
