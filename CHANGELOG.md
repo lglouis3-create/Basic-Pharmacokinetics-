@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-03 (diagrams)
+- Diagrams grouped by what she asks: order or model, a value, two curves, a regimen.
+- Each figure has a "Read this graph" walk-through: axes, shape, equation, how, what she asks.
+- Figure text is larger, and any figure can be tapped to see it full size.
+- The zero-order curve on a log axis no longer runs into the bottom of the axis.
+
 ## 2026-10-03 (extra practice)
 - Calculations: an Extra practice list, 81 problems in her formats with numbers that are not hers.
 - Extra practice stays out of the exam simulator and the module counts.

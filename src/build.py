@@ -43,7 +43,8 @@ DATA_FILES = ['course.js',
 CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
                  'reference.js',
                  'tell.js',
-                 'guide.js']
+                 'guide.js',
+                 'diagrams.js']   # the Diagrams tab: groups and how to read each graph
 
 # Everything that has to parse before a build is allowed to proceed. Derived
 # from the two lists above rather than named again, so adding a file cannot

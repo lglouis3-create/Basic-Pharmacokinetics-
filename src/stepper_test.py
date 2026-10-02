@@ -128,6 +128,12 @@ def main():
             if res:
                 bad_all.append(f'{k}: ' + '; '.join(res[:3]))
         check(not bad_all, f'{len(keys)} drawn figures: labels inside, none overlapping', ' | '.join(bad_all))
+        missing = page.evaluate("""() => { const on = new Set(DIAGRAMS.flatMap(g => g.figs.map(d => d.key)));
+            const bad = [...Object.keys(FIG_TITLES), ...Object.keys(STEPFIGS)].filter(k => !on.has(k));
+            DIAGRAMS.forEach(g => g.figs.forEach(d => { if (!['axes','shape','eq','how','asks'].every(f => d[f])) bad.push(d.key + ' (walk-through incomplete)');
+              if (!IMAGES[d.key] && !STEPFIGS[d.key]) bad.push(d.key + ' (no figure)'); }));
+            return bad; }""")
+        check(not missing, 'every drawn figure is on the Diagrams tab with a full walk-through', ', '.join(missing))
         check(not errs, 'no page errors', '; '.join(errs[:2]))
         b.close()
     print('\nStep-through test passed\n' if not fails else f'\n{len(fails)} STEP-THROUGH PROBLEMS\n')

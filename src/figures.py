@@ -40,7 +40,7 @@ GRID = '#E7ECF1'
 AXIS = '#C3CCD8'
 
 W, H = 720, 430
-L, R, T, B = 86, 26, 22, 66          # margins
+L, R, T, B = 96, 26, 22, 74          # margins (room for the larger axis text)
 PW, PH = W - L - R, H - T - B
 
 
@@ -54,7 +54,7 @@ class Plot:
 
     def __init__(self, xmax, yticks, log=False, xlabel='Time (hours)',
                  ylabel='Plasma drug concentration', xticks=None,
-                 w=W, h=H, l=L, r=R, t=T, b=B, fs=1.0, numbers=True):
+                 w=W, h=H, l=L, r=R, t=T, b=B, fs=1.55, numbers=True):
         self.numbers = numbers            # False draws the shape with unnumbered axes
         self.xmax, self.log, self.yticks = xmax, log, yticks
         self.xlabel, self.ylabel = xlabel, ylabel
@@ -97,8 +97,9 @@ class Plot:
         p.append(f'<line x1="{self.L}" y1="{self.T}" x2="{self.L}" y2="{self.T+self.PH}" stroke="{AXIS}" stroke-width="1.5"/>')
         p.append(f'<line x1="{self.L}" y1="{self.T+self.PH}" x2="{self.L+self.PW}" y2="{self.T+self.PH}" stroke="{AXIS}" stroke-width="1.5"/>')
         p.append(f'<text x="{self.L+self.PW/2:.0f}" y="{self.H-14}" text-anchor="middle" '
-                 f'font-size="{14*self.fs:.1f}" fill="{INK}">{esc(self.xlabel)}</text>')
-        p.append(f'<text x="18" y="{self.T+self.PH/2:.0f}" text-anchor="middle" font-size="{14*self.fs:.1f}" '
+                 f'font-size="{14*min(self.fs, 1.35):.1f}" fill="{INK}">{esc(self.xlabel)}</text>')
+        # axis titles stop growing at 1.35 so a long rotated title still fits the panel height
+        p.append(f'<text x="18" y="{self.T+self.PH/2:.0f}" text-anchor="middle" font-size="{14*min(self.fs, 1.35):.1f}" '
                  f'fill="{INK}" transform="rotate(-90 18 {self.T+self.PH/2:.0f})">{esc(self.ylabel)}</text>')
         self.parts = p + self.parts
         return self
@@ -225,7 +226,7 @@ fig('ord_semilog_straight', 'Concentration against time on an axis marked 1, 10,
 # A constant amount lost per unit time, drawn on the same decade axis: it bends
 # away downward and is not straight.
 p = Plot(10, [1, 10, 100, 1000], log=True)
-p.frame([0, 2, 4, 6, 8, 10]).curve(lambda t: max(300 - 29.9 * t, 1e-6))
+p.frame([0, 2, 4, 6, 8, 10]).curve(lambda t: 300 - 28 * t)   # ends at 20, so the bend shows without running into the floor
 fig('ord_semilog_curve', 'Concentration against time on an axis marked 1, 10, 100, 1000, bending downward',
     p.svg('Semi-logarithmic concentration against time, curve bending down'))
 
@@ -382,7 +383,7 @@ for i, (title, args, caption) in enumerate(PANEL):
     fn, tmax, auc = oral_of(*args)
     cmax = fn(tmax)
     pan = Plot(12, [0, 2, 4, 6, 8], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
-               w=PW_, h=PH_, l=90, r=26, t=84, b=62, fs=1.1)
+               w=PW_, h=PH_, l=90, r=26, t=84, b=62, fs=1.25)
     pan.frame([0, 2, 4, 6, 8, 10, 12])
     pan.curve(base_fn, color=DIM, dash='5 5')          # the unchanged drug, recessive
     pan.curve(fn, color=BLUE)
@@ -560,7 +561,7 @@ def md_curve(t):
 
 
 md = Plot(64, [0, 10, 20, 30, 40, 50, 60], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
-          w=720, h=520, l=76, r=24, t=96, b=62, fs=1.15)
+          w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
 md.frame([0, 8, 16, 24, 32, 40, 48, 56, 64])
 md.xband(12, 20)
 md.text(16, 58, '3 to 5 half-lives', size=14, color=DIM, anchor='middle')
@@ -607,7 +608,7 @@ inf2 = lambda t: one_infusion(t, 6.0, 2.0)
 both = lambda t: inf1(t) + inf2(t)
 
 ti = Plot(14, [0, 5, 10, 15, 20, 25, 30], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
-          w=720, h=500, l=76, r=24, t=96, b=62, fs=1.15)
+          w=720, h=500, l=76, r=24, t=96, b=62, fs=1.3)
 ti.frame([0, 2, 4, 6, 8, 10, 12, 14])
 ti.xband(0, 2); ti.xband(6, 8)
 ti.curve(inf1, color=AMBER, dash='6 5', n=700)
@@ -728,7 +729,7 @@ def md_s5(pl):
 
 
 ms = Plot(64, [0, 10, 20, 30, 40, 50, 60], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
-          w=720, h=520, l=76, r=24, t=96, b=62, fs=1.15)
+          w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
 ms.frame([0, 8, 16, 24, 32, 40, 48, 56, 64])
 heading(ms, 'Six doses of 10 mg/kg every 8 hours, then none',
         't½ 4 hr, VD 0.25 L/kg, so each dose adds C0 = 40 mg/L.', big=1.0)
@@ -777,7 +778,7 @@ def ti_s4(pl):
 
 
 ts = Plot(14, [0, 5, 10, 15, 20, 25, 30], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
-          w=720, h=500, l=76, r=24, t=96, b=62, fs=1.15)
+          w=720, h=500, l=76, r=24, t=96, b=62, fs=1.3)
 ts.frame([0, 2, 4, 6, 8, 10, 12, 14])
 heading(ts, 'Two 2-hour infusions of 300 mg, starting at 0 and 6 hours',
         'k 0.15 hr⁻¹, VD 15 L, so R = 150 mg/hr.', big=1.0)

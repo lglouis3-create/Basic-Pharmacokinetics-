@@ -485,7 +485,22 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
 .dgtoc{background:var(--paper);border:1px solid var(--line-soft);border-radius:var(--r);padding:10px 14px;margin:0 0 10px}
 .dgchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .dgchips .chip{text-decoration:none;max-width:100%;white-space:normal}
-.dgfig{margin:0 0 18px}
+.dgfig{margin:0 0 22px;background:var(--paper);border:1px solid var(--line-soft);border-radius:var(--r);padding:12px 14px}
+.dgfig .reffig{margin:8px 0 6px}
+.dghead{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.dghead b{font-size:16px} .dghead span{font-size:12px;color:var(--text-dim)}
+.readgraph{border-top:1px solid var(--line-soft);margin-top:8px;padding-top:8px}
+.readgraph h4{margin:0 0 4px;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.readgraph ol{margin:0;padding-left:20px} .readgraph li{margin:4px 0;font-size:14.5px;line-height:1.5}
+.dquote{font-style:italic;color:var(--text-dim);font-size:13.5px;margin:8px 0 0;border-left:3px solid var(--line);padding-left:10px}
+.dgintro{background:var(--accent-bg);border-radius:var(--r);padding:10px 14px;margin:0 0 12px}
+.dgintro p{margin:0 0 4px} .dgintro ol{margin:0 0 4px;padding-left:20px} .dgintro li{margin:3px 0;font-size:14.5px}
+
+/* ---------- enlarged figure ---------- */
+.reffig img,img.qimg{cursor:zoom-in}
+#zoom{position:fixed;inset:0;background:rgba(10,16,24,.88);z-index:100;overflow:auto;-webkit-overflow-scrolling:touch;padding:56px 0 20px}
+#zoom img{display:block;width:max(760px,100vw);max-width:none;background:#fff;margin:0 auto}
+#zoomx{position:fixed;top:10px;right:10px;z-index:101}
 
 /* ---------- module cards and module pages ---------- */
 .modcard .mrow{padding-bottom:6px}

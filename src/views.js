@@ -1794,6 +1794,23 @@ function stepTo(fig, from, to){
   oldLeaves.forEach((el, k) => { if(used.has(el)) ghostLeaves[k].remove(); });
   svg.appendChild(ghost); setTimeout(() => ghost.remove(), 600);
 }
+/* Tap a figure to see it at full drawing width: on a phone the page shrinks a
+   720-unit figure to fit, which makes its axis numbers small. The enlarged
+   copy scrolls sideways; the close button or Escape returns to the page. */
+function openZoom(img){
+  closeZoom();
+  const z = document.createElement('div');
+  z.id = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', 'Enlarged figure');
+  z.innerHTML = `<button class="btn" id="zoomx">✕ Close</button><img src="${img.src}" alt="${esc(img.alt || 'figure')}">`;
+  document.body.appendChild(z);
+  z.querySelector('#zoomx').onclick = closeZoom;
+  z.onclick = e => { if(e.target === z) closeZoom(); };
+}
+function closeZoom(){ const z = document.getElementById('zoom'); if(z) z.remove(); }
+function zoomClick(e){
+  const img = e.target.closest && e.target.closest('.reffig img, img.qimg');
+  if(img && !e.target.closest('#zoom')) openZoom(img);
+}
 function stepClick(e){
   const b = e.target.closest('[data-anim] button'); if(!b) return;
   const fig = b.closest('figure'), steps = [...fig.querySelectorAll('.st')]; if(!steps.length) return;
@@ -1824,26 +1841,32 @@ function stepClick(e){
    Every drawn figure in one place, grouped by module, with a contents card of
    chips that jump to each one. ▶ marks a step-through figure. The groups are
    this course's; the titles are the ones figures.py gives each figure. */
-const DIAGRAMS = [
-  ['Module 1 — kinetic orders', ['ord_linear_straight', 'ord_linear_curve', 'ord_semilog_straight', 'ord_semilog_curve']],
-  ['Module 2 — IV bolus, one and two compartments', ['cpt_one', 'cpt_two']],
-  ['Module 3 — IV infusion', ['inf_css', 'inf_two_rates']],
-  ['Module 4 — elimination', ['elim_rate_linear', 'elim_rate_flat']],
-  ['Module 5 — oral absorption', ['oral_peak', 'oral_semilog', 'input_types', 'rate_vs_constant', 'ka_k_effects', 'k_vs_ka', 'flipflop']],
-  ['Module 6 — multiple dosing', ['md_bolus_steps', 'md_bolus', 'two_infusions_steps', 'two_infusions']],
-];
+/* The groups, walk-throughs and figure keys are course content, in
+   diagrams.js. Each figure gets a card: its name and module, the figure (or
+   step-through), and the five-step "Read this graph" list. */
+function readGraphHTML(d){
+  const row = (k, label) => d[k] ? `<li><b>${label}</b> ${richHTML(esc(d[k]))}</li>` : '';
+  return `<div class="readgraph"><h4>Read this graph</h4><ol>
+    ${row('axes', 'Axes.')}${row('shape', 'Shape.')}${row('eq', 'Equation.')}${row('how', 'How the equation makes the shape.')}${row('asks', 'What she asks.')}</ol>
+    ${d.quote ? `<p class="dquote">“${esc(d.quote)}”</p>` : ''}</div>`;
+}
 function renderDiagrams(){
   let toc = '', body = '';
-  DIAGRAMS.forEach(([name, keys], gi) => {
-    const ks = keys.filter(k => STEPFIGS[k] || IMAGES[k]); if(!ks.length) return;
-    const title = k => STEPFIGS[k] ? STEPFIGS[k].title : (FIG_TITLES[k] || k);
-    toc += `<div class="dgtoc"><b>${esc(name)}</b><div class="dgchips">${ks.map(k =>
-      `<a class="chip" href="#dg-${k}" data-dg="${k}">${esc(title(k))}${STEPFIGS[k] ? ' ▶' : ''}</a>`).join('')}</div></div>`;
-    body += `<h3 id="dgg-${gi}">${esc(name)}</h3>${ks.map(k => `<div id="dg-${k}" class="dgfig">${STEPFIGS[k] ? stepFigHTML(k)
-      : `<figure class="reffig"><img src="${IMAGES[k]}" alt="${esc(title(k))}"><figcaption>${esc(title(k))}</figcaption></figure>`}</div>`).join('')}`;
+  DIAGRAMS.forEach((g, gi) => {
+    const figs = g.figs.filter(d => STEPFIGS[d.key] || IMAGES[d.key]); if(!figs.length) return;
+    toc += `<div class="dgtoc"><b>${esc(g.group)}</b><div class="dgchips">${figs.map(d =>
+      `<a class="chip" href="#dg-${d.key}" data-dg="${d.key}">${esc(d.name)}${STEPFIGS[d.key] ? ' ▶' : ''}</a>`).join('')}</div></div>`;
+    body += `<h3 id="dgg-${gi}">${esc(g.group)}</h3><p class="sub">${esc(g.note)}</p>` + figs.map(d => `<div id="dg-${d.key}" class="dgfig">
+      <div class="dghead"><b>${esc(d.name)}</b><span>Module ${d.module}</span></div>
+      ${STEPFIGS[d.key] ? stepFigHTML(d.key)
+        : `<figure class="reffig"><img src="${IMAGES[d.key]}" alt="${esc(FIG_TITLES[d.key] || d.name)}"></figure>`}
+      ${readGraphHTML(d)}</div>`).join('');
   });
   const el = $('#v-diag');
-  el.innerHTML = `<h2>Diagrams</h2><p class="sub">Every drawn figure in one place, by module. ▶ marks a step-through figure: use Next, Play all or the step dots under it.</p>${toc}${body}`;
+  el.innerHTML = `<h2>Diagrams</h2>
+    <div class="dgintro"><p><b>Three steps for any graph</b></p><ol>${DIAGRAM_INTRO.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
+    <p class="dquote">“${esc(DIAGRAM_QUOTE)}”</p></div>
+    <p class="sub">Tap any figure to enlarge it. ▶ marks a step-through figure: use Next, Play all or the step dots under it.</p>${toc}${body}`;
   el.querySelectorAll('[data-dg]').forEach(a => a.onclick = e => { e.preventDefault();
     const t = document.getElementById('dg-' + a.dataset.dg); if(t) scrollToEl(t); });
 }
@@ -2910,6 +2933,8 @@ document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
   show(b.dataset.v);
 });
 document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn
+document.addEventListener('click', zoomClick);   // tap any figure to enlarge it
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
 document.getElementById('btnWho').onclick = () => {
   if(EX && EX.running && !confirm('A paper is in progress and will be discarded. Switch profile anyway?')) return;
   const was = PROFILE;
