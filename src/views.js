@@ -465,6 +465,7 @@ function renderTopics(){
   let h = `<h2>Study by module</h2>${updatedText() ? `<p class="updated">${esc(updatedText())}${
       CHANGELOG.length ? ' · <a href="#" id="allChanges">All changes</a>' : ''}</p>` : ''}
   ${newsCard()}
+  <p class="laywrap">${layoutToggle()}</p>
   <p class="sub">${esc(EXAM.name)} is ${EXAM.questions} questions in ${EXAM.minutes} minutes${
       EXAM.date ? ` on ${esc(EXAM.date)}` : ''}.${cd ? ` <b class="countdown">${esc(cd)}</b>` : ''}
     ${EXAM.blurb ? esc(EXAM.blurb) + ' ' : ''}
@@ -814,9 +815,9 @@ function nextQuestion(){
   if(Q.sweep){
     // walk the fixed queue rather than asking the scheduler what is due
     q = null;
-    while(Q.i < Q.sweep.length && !q) q = byId(Q.sweep[Q.i++]);
+    while(Q.i < Q.sweep.length && !q){ const id = Q.sweep[Q.i++]; if(!(Q.doneIds && Q.doneIds.has(id))) q = byId(id); }
   }else{
-    q = pickNext(Q.pool, Q.lastId);
+    q = pickNext(Q.doneIds ? Q.pool.filter(x => !Q.doneIds.has(x.id)) : Q.pool, Q.lastId);
   }
   Q.current = q;
   Q.picked = q && qType(q) === 'match' ? {} : null;
@@ -871,8 +872,266 @@ function pairsBlock(q){
     </div>`).join('') + `</div>`;
 }
 
+/* ==========================================================================
+   ANSWER LAYOUT: ONE AT A TIME, OR ALL ON ONE PAGE
+   ==========================================================================
+   DB.settings.layout is 'one' or 'all', saved with the learner's progress.
+   The quiz and the exam read it. Both quiz layouts share Q.doneIds, the
+   questions already answered in this drill, so switching layout part-way
+   never asks a question twice. On one page, each card is answered in place
+   and only that card is redrawn. */
+const layoutOf = () => (DB.settings && DB.settings.layout === 'all') ? 'all' : 'one';
+function layoutToggle(){
+  const L = layoutOf();
+  return `<span class="laytog"><span>Answer:</span><button class="chip" data-layout="one" aria-pressed="${L === 'one'}">One at a time</button><button class="chip" data-layout="all" aria-pressed="${L === 'all'}">All on one page</button></span>`;
+}
+function layoutClick(e){
+  const b = e.target.closest && e.target.closest('[data-layout]'); if(!b) return;
+  DB.settings.layout = b.dataset.layout; save();
+  if(VIEW === 'quiz') renderQuiz(); else if(VIEW === 'exam') renderExam(); else if(VIEW === 'topics') renderTopics();
+}
+const markDone = id => (Q.doneIds ||= new Set()).add(id);
+const noIds = h => h.replace(/ id="(numIn|mSel\d+|btnCheck)"/g, '');
+
+/* The quiz on one page: the drill's questions in its own order, first 40,
+   with "Show more" for the rest. */
+function quizAllList(){
+  if(!Q.allIds) Q.allIds = Q.sweep ? Q.sweep.slice() : shuffle(Q.pool.map(q => q.id));
+  Q.allState ||= {};
+  // questions answered one at a time before switching are not asked again here
+  return Q.allIds.filter(id => !(Q.doneIds && Q.doneIds.has(id) && !Q.allState[id]) && byId(id));
+}
+function allCardState(q){
+  return Q.allState[q.id] ||= {picked: qType(q) === 'match' ? {} : null, revealed: false, missKind: null,
+    order: isMC(q) ? shuffle(q.options.map((o, i) => i)) : [], startedAt: Date.now()};
+}
+function allCardHTML(q, n, total){
+  const st = allCardState(q), kind = qType(q), multi = isMulti(q);
+  const ok = st.revealed ? gradeAnswer(q, st.picked) : false;
+  const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, inChain: !!Q.chain};
+  let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}<span>${n} of ${total}</span><span class="spacer"></span>${
+      st.revealed ? `<span style="color:var(${ok ? '--ok' : '--bad'})">${ok ? 'right' : 'missed'}</span>` : ''}</div>
+    <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
+  if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
+  h += answerInputsHTML(q, cst);
+  if(st.revealed) h += feedbackHTML(q, cst);
+  h += `</div>`;
+  const needCheck = kind === 'numeric' || kind === 'match' || multi;
+  if(!st.revealed && needCheck) h += `<div class="qfoot"><button class="btn small" data-check="1">Check answer</button></div>`;
+  if(st.revealed && ok && !st.guessed) h += `<div class="qfoot"><button class="btn small amber" data-guess="1">I guessed that one</button></div>`;
+  return noIds(h + `</div>`);
+}
+function wireAllCard(card){
+  const q = byId(card.dataset.qid), st = allCardState(q), kind = qType(q), multi = isMulti(q);
+  const done = result => {
+    st.revealed = true; markDone(q.id);
+    record(q, result, kind === 'match' ? Object.assign({}, st.picked) : kind === 'numeric' ? String(st.picked == null ? '' : st.picked) : st.picked,
+           Date.now() - st.startedAt);
+    refreshAllCard(q.id);
+  };
+  if(!st.revealed){
+    card.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const oi = +b.dataset.o;
+      if(multi){ const p = st.picked || []; st.picked = p.includes(oi) ? p.filter(x => x !== oi) : [...p, oi]; refreshAllCard(q.id); }
+      else { st.picked = oi; done(q.options[oi].correct ? 'correct' : 'wrong'); }
+    });
+    const ni = card.querySelector('input.numin');
+    if(ni){ ni.oninput = e => { st.picked = e.target.value; };
+            ni.onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); card.querySelector('[data-check]').click(); } }; }
+    card.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
+      st.picked = Object.assign({}, st.picked); if(sel.value) st.picked[sel.dataset.l] = sel.value; else delete st.picked[sel.dataset.l]; });
+    const bc = card.querySelector('[data-check]');
+    if(bc) bc.onclick = () => {
+      if(multi && !(st.picked || []).length) return;
+      if(multi) st.picked = st.picked.slice().sort((a, b) => a - b);
+      const right = kind === 'numeric' ? gradeNumeric(q, st.picked) : kind === 'match' ? gradeMatch(q, st.picked) : gradeMulti(q, st.picked);
+      done(right ? 'correct' : 'wrong');
+    };
+  }
+  card.querySelectorAll('[data-mk]').forEach(b => b.onclick = () => { st.missKind = b.dataset.mk; setMissKind(q, st.missKind); refreshAllCard(q.id); });
+  const bg = card.querySelector('[data-guess]');
+  if(bg) bg.onclick = () => { markGuessed(q); st.guessed = true; refreshAllCard(q.id); };
+  card.querySelectorAll('[data-chainlink]').forEach(b => b.onclick = () => startChain(b.dataset.chainlink));
+}
+function refreshAllCard(id){
+  const card = document.querySelector(`#v-quiz .allcard[data-qid="${CSS.escape(id)}"]`); if(!card) return;
+  const list = quizAllList(), n = list.indexOf(id) + 1;
+  card.outerHTML = allCardHTML(byId(id), n, list.length);
+  wireAllCard(document.querySelector(`#v-quiz .allcard[data-qid="${CSS.escape(id)}"]`));
+  const c = document.getElementById('allCount'); if(c) c.textContent = allCountText(list);
+  const ss = document.getElementById('sess'); if(ss) ss.outerHTML = sessStrip();
+}
+const allCountText = list => `${list.filter(id => Q.allState[id] && Q.allState[id].revealed).length} of ${list.length} answered`;
+function renderQuizAll(){
+  const el = $('#v-quiz'), list = quizAllList();
+  Q.allShow ||= 40;
+  const shown = list.slice(0, Q.allShow);
+  let h = `<div class="sessline">${sessStrip()}</div><div class="allhead"><b>${esc(Q.label)}</b><span id="allCount">${allCountText(list)}</span></div>
+    <div class="laywrap">${layoutToggle()}</div>
+    ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}`;
+  h += shown.map((id, i) => allCardHTML(byId(id), i + 1, list.length)).join('');
+  if(list.length > shown.length) h += `<p style="text-align:center"><button class="btn ghost" id="allMore">Show ${Math.min(40, list.length - shown.length)} more</button></p>`;
+  if(!list.length) h += `<div class="empty">Every question in this drill has been answered.</div>`;
+  h += `<p style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:14px">
+    <button class="btn ghost" onclick="show('gaps')">See weak spots</button><button class="btn ghost" onclick="show('topics')">Back to topics</button></p>`;
+  el.innerHTML = h;
+  el.querySelectorAll('.allcard').forEach(wireAllCard);
+  const m = $('#allMore'); if(m) m.onclick = () => { Q.allShow += 40; renderQuizAll(); };
+}
+
+/* The exam on one page: every question, the clock in the bar at the top, one
+   Submit at the end. Nothing is marked until the paper is submitted. */
+function renderExamAll(){
+  const el = $('#v-exam');
+  const answered = EX.picks.filter((p, i) => !isBlank(EX.qs[i], p)).length;
+  let h = `<div class="examhead sticky"><span class="clock" id="exClock">${fmt(EX.ends - Date.now())}</span>
+    <span class="prog" id="exProg">${answered} of ${EX.qs.length} answered</span></div>
+    <div class="laywrap">${layoutToggle()}</div>${shortfallNote(EX.coverage)}`;
+  EX.qs.forEach((q, i) => {
+    const kind = qType(q), multi = isMulti(q);
+    h += `<div class="qcard allcard" data-ei="${i}"><div class="qhead">${profTag(q.prof)}<span>Question ${i + 1} of ${EX.qs.length}</span>${
+      multi ? '<span class="tag sata">select all that apply</span>' : ''}</div><div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
+    if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
+    if(kind === 'numeric') h += numericInput(q, EX.picks[i], false, '');
+    else if(kind === 'match') h += matchSelects(q, EX.picks[i], false, false);
+    else EX.orders[i].forEach((oi, n) => {
+      const sel = multi ? EX.picks[i].includes(oi) : EX.picks[i] === oi;
+      h += `<button class="opt${multi ? ' multi' : ''}${sel ? (multi ? ' on' : ' pick-ok') : ''}" data-o="${oi}" aria-pressed="${sel}">
+        <span class="k">${multi ? (sel ? '☑' : '☐') : LETTERS[n]}</span><span>${rich(q.options[oi].t)}</span></button>`;
+    });
+    h += `</div></div>`;
+  });
+  h += `<p style="text-align:center"><button class="btn" id="exEnd">Submit paper</button></p>`;
+  el.innerHTML = noIds(h);
+  const prog = () => { const p = document.getElementById('exProg');
+    if(p) p.textContent = `${EX.picks.filter((x, i) => !isBlank(EX.qs[i], x)).length} of ${EX.qs.length} answered`; };
+  el.querySelectorAll('.allcard[data-ei]').forEach(card => {
+    const i = +card.dataset.ei, q = EX.qs[i], multi = isMulti(q);
+    card.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const oi = +b.dataset.o;
+      if(multi){ const p = EX.picks[i]; EX.picks[i] = p.includes(oi) ? p.filter(x => x !== oi) : [...p, oi]; }
+      else EX.picks[i] = oi;
+      card.querySelectorAll('.opt').forEach(o => { const v = +o.dataset.o, sel = multi ? EX.picks[i].includes(v) : EX.picks[i] === v;
+        o.className = 'opt' + (multi ? ' multi' : '') + (sel ? (multi ? ' on' : ' pick-ok') : ''); o.setAttribute('aria-pressed', sel);
+        if(multi) o.querySelector('.k').textContent = sel ? '☑' : '☐'; });
+      prog();
+    });
+    const ni = card.querySelector('input.numin'); if(ni) ni.oninput = e => { EX.picks[i] = e.target.value; prog(); };
+    card.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
+      const p = Object.assign({}, EX.picks[i]); if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l]; EX.picks[i] = p; prog(); });
+  });
+  $('#exEnd').onclick = () => { if(confirm('Submit the paper and see your score?')) finishExam(); };
+}
+
+/* The answer controls for one question: number box, matching selects, or
+   option buttons, drawn the same way in either answer layout. */
+function answerInputsHTML(q, st){
+  const kind = qType(q), multi = isMulti(q), ok = st.ok;
+  const picks = multi ? (st.picked || []) : null;
+  let h = '';
+  if(kind === 'numeric'){
+    h += `<p class="sata">Type the number and check it. Anything within ${q.tol} ${esc(q.units)} of the keyed value counts.</p>`;
+    h += numericInput(q, st.picked, st.revealed, st.revealed ? (ok ? 'ok' : 'bad') : '');
+  }else if(kind === 'match'){
+    h += `<p class="sata">Choose the matching item for each row, then check. Marked right only when every row matches.</p>`;
+    h += matchSelects(q, st.picked, st.revealed, st.revealed);
+  }else{
+    if(multi) h += `<p class="sata">Select all that apply, then check. Marked right only when the whole set matches.</p>`;
+    st.order.forEach((oi,n)=>{
+      const o = q.options[oi];
+      let cls = 'opt' + (multi ? ' multi' : '');
+      const chosen = multi ? picks.includes(oi) : (oi === st.picked);
+      if(st.revealed){
+        if(chosen) cls += o.correct ? ' pick-ok' : ' pick-bad';
+        else if(o.correct)  cls += ' reveal-ok';
+      }else if(multi && chosen){
+        cls += ' on';
+      }
+      h += `<button class="${cls}" data-o="${oi}"${st.revealed?' disabled':''} aria-pressed="${chosen}">
+        <span class="k">${multi ? (chosen ? '☑' : '☐') : LETTERS[n]}</span><span>${rich(o.t)}</span></button>`;
+    });
+  }
+
+  return h;
+}
+/* What follows an answer: the verdict, the working or each option's reason,
+   the concept block, the note and the citation. */
+function feedbackHTML(q, st){
+  const kind = qType(q), multi = isMulti(q), ok = st.ok;
+  const picks = multi ? (st.picked || []) : null;
+  let h = '';
+    // one gloss per term per question, shared between the options and the concept block
+    const seen = new Set();
+    const self = [teachText(q.teach), ...(q.options||[]).map(o=>o.why||''),
+                  ...(q.steps||[]).map(x=>x.why||''), ...(q.pairs||[]).map(x=>x.why||'')].join(' ');
+    let verdictLine;
+    if(kind === 'numeric'){
+      verdictLine = ok ? `✓ Correct — keyed answer ${q.answer.toFixed(4)} ${esc(q.units)}`
+        : `✗ Not correct — the answer is ${q.answer.toFixed(4)} ${esc(q.units)}, and you entered ${esc(String(st.picked||'nothing'))}`;
+    }else if(kind === 'match'){
+      const got = (q.pairs||[]).filter(p => (st.picked||{})[p.l] === p.r).length;
+      verdictLine = ok ? `✓ Correct — all ${q.pairs.length} rows matched`
+        : `✗ Not correct — ${got} of ${q.pairs.length} rows matched`;
+    }else if(multi){
+      const want = correctSet(q);
+      const missedOnes = want.filter(i => !picks.includes(i)).length;
+      const extraOnes  = picks.filter(i => !want.includes(i)).length;
+      verdictLine = ok ? `✓ Correct — all ${want.length} identified`
+        : `✗ Not correct — ${missedOnes ? missedOnes + ' correct option' + (missedOnes>1?'s':'') + ' left out' : ''}${
+            missedOnes && extraOnes ? ', ' : ''}${extraOnes ? extraOnes + ' wrong option' + (extraOnes>1?'s':'') + ' included' : ''}`;
+    }else{
+      verdictLine = ok ? '✓ Correct'
+        : `✗ Not correct — the answer is ${LETTERS[st.order.indexOf(q.options.findIndex(o=>o.correct))]}`;
+    }
+    h += `<div class="why">
+      <p class="verdict ${ok?'ok':'bad'}">${verdictLine}</p>`;
+
+    if(kind === 'numeric'){
+      /* A missed calculation is asked about before it is explained. Naming the
+         kind of slip takes one click, and it is the only way the app can tell
+         a student who cannot set the problem up from one who sets it up
+         correctly and loses the marks converting units. */
+      if(!ok && !st.missKind){
+        h += `<div class="misskind"><p><b>Which kind of miss was this?</b> One click, then the working.</p>
+          <div class="frow">${MISS_KINDS.map(m =>
+            `<button data-mk="${m.id}" aria-pressed="false" title="${esc(m.hint)}">${esc(m.label)}</button>`).join('')}</div></div>`;
+      }else{
+        if(!ok) h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[st.missKind]||'').toLowerCase()))} miss.</p>`;
+        h += stepsBlock(q);
+      }
+    }else if(kind === 'match'){
+      h += pairsBlock(q);
+    }else{
+      st.order.forEach((oi,n)=>{
+        const o = q.options[oi];
+        const chosen = multi ? picks.includes(oi) : (oi === st.picked);
+        h += `<div class="wrow">
+          <span class="mark ${o.correct?'y':'n'}">${o.correct?'✓':'✗'}</span>
+          <span class="wtxt"><b>${LETTERS[n]}. ${rich(o.t)}</b>${multi && chosen ? ' <i class="youpicked">you selected this</i>' : ''} — ${richHTML(glossify(esc(o.why), seen, self))}</span>
+          </div>`;
+      });
+    }
+
+    if(q.teach) h += `<div class="teach"><h4>The concept behind this</h4>${
+        q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${
+        renderTeach(q.teach, seen, self)}</div>`;
+    if(q.note) h += `<p class="prose qnote">${rich(q.note)}</p>`;
+    const inSet = CHAIN_OF[q.id];
+    if(inSet && !st.inChain)
+      h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">She sets this as part
+        ${inSet.step} of ${inSet.chain.parts.length} of one problem: ${esc(inSet.chain.name)}.
+        <button class="linkish" data-chainlink="${esc(inSet.chain.id)}">Work the whole set
+        from the start</button></p>`;
+    h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${
+        srcFlag(q)}${esc(q.cite)}</div>`;
+    h += `</div>`;
+  return h;
+}
 function renderQuiz(){
   const el = $('#v-quiz');
+  if(Q && layoutOf() === 'all') return renderQuizAll();
+  // the question waiting here may have been answered on the one-page layout meanwhile
+  if(Q && Q.current && !Q.revealed && Q.doneIds && Q.doneIds.has(Q.current.id)) return nextQuestion();
   if(!Q){ el.innerHTML = `<div class="empty">Choose a topic to begin.</div>`; return; }
   if(!Q.current && Q.sweep){
     el.innerHTML = `<div class="empty">
@@ -920,7 +1179,7 @@ function renderQuiz(){
   const missedBefore = s && s.wrong > 0 && s.box === 0;
   const ok = Q.revealed ? gradeAnswer(q, Q.picked) : false;
 
-  let h = `<div class="sessline">${sessStrip()}</div><div class="qcard"><div class="qhead">
+  let h = `<div class="sessline">${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
     ${profTag(q.prof)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
@@ -941,97 +1200,9 @@ function renderQuiz(){
 
   const multi = isMulti(q);
   const picks = multi ? (Q.picked || []) : null;
-
-  if(kind === 'numeric'){
-    h += `<p class="sata">Type the number and check it. Anything within ${q.tol} ${esc(q.units)} of the keyed value counts.</p>`;
-    h += numericInput(q, Q.picked, Q.revealed, Q.revealed ? (ok ? 'ok' : 'bad') : '');
-  }else if(kind === 'match'){
-    h += `<p class="sata">Choose the matching item for each row, then check. Marked right only when every row matches.</p>`;
-    h += matchSelects(q, Q.picked, Q.revealed, Q.revealed);
-  }else{
-    if(multi) h += `<p class="sata">Select all that apply, then check. Marked right only when the whole set matches.</p>`;
-    Q.order.forEach((oi,n)=>{
-      const o = q.options[oi];
-      let cls = 'opt' + (multi ? ' multi' : '');
-      const chosen = multi ? picks.includes(oi) : (oi === Q.picked);
-      if(Q.revealed){
-        if(chosen) cls += o.correct ? ' pick-ok' : ' pick-bad';
-        else if(o.correct)  cls += ' reveal-ok';
-      }else if(multi && chosen){
-        cls += ' on';
-      }
-      h += `<button class="${cls}" data-o="${oi}"${Q.revealed?' disabled':''} aria-pressed="${chosen}">
-        <span class="k">${multi ? (chosen ? '☑' : '☐') : LETTERS[n]}</span><span>${rich(o.t)}</span></button>`;
-    });
-  }
-
-  if(Q.revealed){
-    // one gloss per term per question, shared between the options and the concept block
-    const seen = new Set();
-    const self = [teachText(q.teach), ...(q.options||[]).map(o=>o.why||''),
-                  ...(q.steps||[]).map(x=>x.why||''), ...(q.pairs||[]).map(x=>x.why||'')].join(' ');
-    let verdictLine;
-    if(kind === 'numeric'){
-      verdictLine = ok ? `✓ Correct — keyed answer ${q.answer.toFixed(4)} ${esc(q.units)}`
-        : `✗ Not correct — the answer is ${q.answer.toFixed(4)} ${esc(q.units)}, and you entered ${esc(String(Q.picked||'nothing'))}`;
-    }else if(kind === 'match'){
-      const got = (q.pairs||[]).filter(p => (Q.picked||{})[p.l] === p.r).length;
-      verdictLine = ok ? `✓ Correct — all ${q.pairs.length} rows matched`
-        : `✗ Not correct — ${got} of ${q.pairs.length} rows matched`;
-    }else if(multi){
-      const want = correctSet(q);
-      const missedOnes = want.filter(i => !picks.includes(i)).length;
-      const extraOnes  = picks.filter(i => !want.includes(i)).length;
-      verdictLine = ok ? `✓ Correct — all ${want.length} identified`
-        : `✗ Not correct — ${missedOnes ? missedOnes + ' correct option' + (missedOnes>1?'s':'') + ' left out' : ''}${
-            missedOnes && extraOnes ? ', ' : ''}${extraOnes ? extraOnes + ' wrong option' + (extraOnes>1?'s':'') + ' included' : ''}`;
-    }else{
-      verdictLine = ok ? '✓ Correct'
-        : `✗ Not correct — the answer is ${LETTERS[Q.order.indexOf(q.options.findIndex(o=>o.correct))]}`;
-    }
-    h += `<div class="why">
-      <p class="verdict ${ok?'ok':'bad'}">${verdictLine}</p>`;
-
-    if(kind === 'numeric'){
-      /* A missed calculation is asked about before it is explained. Naming the
-         kind of slip takes one click, and it is the only way the app can tell
-         a student who cannot set the problem up from one who sets it up
-         correctly and loses the marks converting units. */
-      if(!ok && !Q.missKind){
-        h += `<div class="misskind"><p><b>Which kind of miss was this?</b> One click, then the working.</p>
-          <div class="frow">${MISS_KINDS.map(m =>
-            `<button data-mk="${m.id}" aria-pressed="false" title="${esc(m.hint)}">${esc(m.label)}</button>`).join('')}</div></div>`;
-      }else{
-        if(!ok) h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[Q.missKind]||'').toLowerCase()))} miss.</p>`;
-        h += stepsBlock(q);
-      }
-    }else if(kind === 'match'){
-      h += pairsBlock(q);
-    }else{
-      Q.order.forEach((oi,n)=>{
-        const o = q.options[oi];
-        const chosen = multi ? picks.includes(oi) : (oi === Q.picked);
-        h += `<div class="wrow">
-          <span class="mark ${o.correct?'y':'n'}">${o.correct?'✓':'✗'}</span>
-          <span class="wtxt"><b>${LETTERS[n]}. ${rich(o.t)}</b>${multi && chosen ? ' <i class="youpicked">you selected this</i>' : ''} — ${richHTML(glossify(esc(o.why), seen, self))}</span>
-          </div>`;
-      });
-    }
-
-    if(q.teach) h += `<div class="teach"><h4>The concept behind this</h4>${
-        q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${
-        renderTeach(q.teach, seen, self)}</div>`;
-    if(q.note) h += `<p class="prose qnote">${rich(q.note)}</p>`;
-    const inSet = CHAIN_OF[q.id];
-    if(inSet && !Q.chain)
-      h += `<p class="prose" style="margin:13px 0 0;font-size:14.5px">She sets this as part
-        ${inSet.step} of ${inSet.chain.parts.length} of one problem: ${esc(inSet.chain.name)}.
-        <button class="linkish" id="btnChain" data-c="${esc(inSet.chain.id)}">Work the whole set
-        from the start</button></p>`;
-    h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${
-        srcFlag(q)}${esc(q.cite)}</div>`;
-    h += `</div>`;
-  }
+  const cst = {picked:Q.picked, order:Q.order, revealed:Q.revealed, missKind:Q.missKind, ok, inChain:!!Q.chain};
+  h += answerInputsHTML(q, cst);
+  if(Q.revealed) h += feedbackHTML(q, cst);
   h += `</div><div class="qfoot">`;
   if(!Q.revealed){
     if(kind === 'numeric' || kind === 'match' || multi){
@@ -1049,8 +1220,7 @@ function renderQuiz(){
   h += `</div></div>`;
   el.innerHTML = h;
 
-  const setBtn = document.getElementById('btnChain');
-  if(setBtn) setBtn.onclick = () => startChain(setBtn.dataset.c);
+  el.querySelectorAll('[data-chainlink]').forEach(b => b.onclick = () => startChain(b.dataset.chainlink));
   el.querySelectorAll('.opt').forEach(b => b.onclick = () => multi ? toggleOption(+b.dataset.o) : answer(+b.dataset.o));
   const ni = document.getElementById('numIn');
   if(ni && !Q.revealed){
@@ -1077,6 +1247,7 @@ function renderQuiz(){
 
 function answer(oi){
   if(Q.revealed) return;
+  markDone(Q.current.id);
   Q.picked = oi; Q.revealed = true; Q.guessedLogged = false;
   record(Q.current, Q.current.options[oi].correct ? 'correct' : 'wrong', oi, Date.now() - (Q.startedAt||Date.now()));
   renderQuiz();
@@ -1089,6 +1260,7 @@ function toggleOption(oi){
 }
 function submitMulti(){
   if(Q.revealed || !Q.picked || !Q.picked.length) return;
+  markDone(Q.current.id);
   Q.revealed = true; Q.guessedLogged = false;
   const picks = Q.picked.slice().sort((a,b)=>a-b);
   record(Q.current, gradeMulti(Q.current, picks) ? 'correct' : 'wrong', picks, Date.now() - (Q.startedAt||Date.now()));
@@ -1096,6 +1268,7 @@ function submitMulti(){
 }
 function submitNumeric(){
   if(Q.revealed) return;
+  markDone(Q.current.id);
   const ni = document.getElementById('numIn');
   if(ni) Q.picked = ni.value;
   Q.revealed = true; Q.guessedLogged = false;
@@ -1105,6 +1278,7 @@ function submitNumeric(){
 }
 function submitMatch(){
   if(Q.revealed) return;
+  markDone(Q.current.id);
   Q.revealed = true; Q.guessedLogged = false;
   record(Q.current, gradeMatch(Q.current, Q.picked) ? 'correct' : 'wrong',
          Object.assign({}, Q.picked), Date.now() - (Q.startedAt||Date.now()));
@@ -1958,6 +2132,7 @@ function renderExam(){
   ${shortfallNote(cov)}
   <div class="note"><b>This does not feed your spaced-repetition history until you submit.</b>
   Finish the paper, then every answer is logged at once so your weak spots stay accurate.</div>
+  <p class="laywrap">${layoutToggle()}</p>
   <p><button class="btn" id="startExam">Start the ${EXAM.minutes}-minute paper${
     nPaper < EXAM.questions ? ` (${nPaper} questions available)` : ''}</button></p>
   ${examHistory()}`;
@@ -2025,6 +2200,7 @@ const fmt = ms => { const s = Math.max(0, Math.round(ms/1000));
   return String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
 
 function renderExamQ(){
+  if(layoutOf() === 'all') return renderExamAll();
   const el = $('#v-exam'), q = EX.qs[EX.i], order = EX.orders[EX.i];
   const answered = EX.picks.filter((p, i) => !isBlank(EX.qs[i], p)).length;
   const kind = qType(q), multi = isMulti(q);
@@ -2954,6 +3130,7 @@ document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
 });
 document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn
 document.addEventListener('click', zoomClick);   // tap any figure to enlarge it
+document.addEventListener('click', layoutClick); // the One at a time / All on one page chips
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
 /* Theme: System (no attribute), Light or Dark, kept per browser. */
 const THEME_KEY = NS + ':theme';

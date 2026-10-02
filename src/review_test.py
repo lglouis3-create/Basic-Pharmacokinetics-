@@ -96,6 +96,33 @@ with sync_playwright() as p:
     pg.click('#nav button[data-v="topics"]'); pg.wait_for_timeout(150)
     ok('tapping Topics while on a module page returns to the module list', pg.locator('.modcard').count() == len(mods))
 
+    # answer layout: on one page, then back to one at a time, never repeating
+    pg.evaluate("MODPAGE = {module: 6, sec: 'calcs'}; show('topics')")
+    pg.click('#v-topics [data-calcall]'); pg.wait_for_timeout(150)
+    pg.click('#v-quiz [data-layout="all"]'); pg.wait_for_timeout(200)
+    cards = pg.locator('#v-quiz .allcard').count()
+    ok(f'All on one page shows the drill as cards ({cards})', cards >= 2)
+    first = pg.locator('#v-quiz .allcard').first
+    fid = first.get_attribute('data-qid')
+    first.locator('input.numin').fill(str(pg.evaluate(f"byId('{fid}').answer")))
+    first.locator('[data-check]').click(); pg.wait_for_timeout(150)
+    ok('a card answered on the page is marked in place and logged',
+       pg.locator(f'#v-quiz .allcard[data-qid="{fid}"] .verdict.ok').count() == 1 and pg.evaluate("DB.answers.slice(-1)[0].qid") == fid)
+    pg.click('#v-quiz [data-layout="one"]'); pg.wait_for_timeout(150)
+    seen = []
+    for _ in range(40):
+        cur = pg.evaluate("Q && Q.current && Q.current.id")
+        if not cur: break
+        seen.append(cur); pg.evaluate("Q.revealed = true; markDone(Q.current.id); nextQuestion()")
+    ok(f'switching back to one at a time never asks it again ({len(seen)} served)', fid not in seen)
+    pg.evaluate("DB.settings.layout = 'all'; EX = null; show('exam')"); pg.wait_for_timeout(150)
+    pg.click('#startExam'); pg.wait_for_timeout(300)
+    n = pg.locator('#v-exam .allcard').count()
+    ok(f'the exam on one page shows every question ({n})', n == pg.evaluate("EX.qs.length") and pg.locator('#exClock').count() == 1)
+    pg.evaluate("window.confirm = () => true"); pg.click('#exEnd'); pg.wait_for_timeout(300)
+    ok('submitting the one-page paper shows the result', pg.evaluate("EX && EX.done"))
+    pg.evaluate("DB.settings.layout = 'one'; EX = null")
+
     ok('no uncaught error', not errs)
     if errs: print('   ', errs[:3])
     b.close()

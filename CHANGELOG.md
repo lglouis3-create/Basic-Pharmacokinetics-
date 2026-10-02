@@ -2,6 +2,10 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-03 (answer layout)
+- Answer one at a time or all on one page, in drills and on the exam paper.
+- Switching layout mid-drill never asks a question twice.
+
 ## 2026-10-03 (theme, no name prompt)
 - Header: System, Light or Dark theme; figures switch with it.
 - No name pop-up on first visit; progress saves under a default profile.

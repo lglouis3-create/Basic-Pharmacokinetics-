@@ -71,9 +71,9 @@ with sync_playwright() as p:
     pg.fill('#numIn', '0.78'); pg.click('#btnCheck'); pg.wait_for_timeout(150)
     body = pg.inner_text('#v-quiz')
     ok('a part answered alone says which set it belongs to', 'part 5 of 6' in body)
-    ok('and offers to work the set', pg.locator('#btnChain').count() == 1)
+    ok('and offers to work the set', pg.locator('[data-chainlink]').count() == 1)
     battery = pg.evaluate("CHAINS.find(c => c.id === 'm4-battery').parts")
-    pg.click('#btnChain'); pg.wait_for_timeout(200)
+    pg.click('[data-chainlink]'); pg.wait_for_timeout(200)
     ok('that button starts the set at part 1',
        pg.evaluate("Q.chain && Q.chain.id") == 'm4-battery' and pg.evaluate("Q.current.id") == battery[0])
 
