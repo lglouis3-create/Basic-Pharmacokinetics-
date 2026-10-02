@@ -873,6 +873,79 @@ function pairsBlock(q){
 }
 
 /* ==========================================================================
+   EXPLAIN MORE
+   ==========================================================================
+   After every answer, up to four buttons open the page section that teaches
+   that question: the Guide section for its objective, the Reference section
+   for its module, its figure on the Diagrams tab, and its module's equations.
+   A floating button returns to the question with the place kept (the quiz
+   and exam state are global, so the question is exactly as it was).
+   Anchors: guide-N and ref-N are the headings renderDoc numbers in page
+   order; dg-<figure key> on Diagrams; eq-m<module> on Equations. */
+const headsOf = html => [...html.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>/g)].map((m, i) => {
+  const nav = /data-nav="([^"]*)"/.exec(m[1]);
+  return {i, t: deEnt((nav ? nav[1] : m[2]).replace(/<[^>]+>/g, '')).trim()};
+});
+let GUIDE_HEADS = null;
+const REF_TOPIC_WORD = {multi: 'repeated', intermit: 'intermittent', multoral: 'oral'};
+function linksFor(q){
+  const out = [];
+  GUIDE_HEADS ||= headsOf(GUIDE_HTML);
+  const objs = OBJECTIVES.filter(o => o.module === q.module && o.subs.includes(subKey(q)));
+  for(const o of objs.slice(0, 1)){
+    const mod = /^6a\./.test(o.n) ? '6a' : String(o.module), n = /^6a\./.test(o.n) ? o.n.slice(3) : o.n;
+    const g = GUIDE_HEADS.find(h => h.t.startsWith(`Module ${mod}, objective ${n} `));
+    if(g) out.push(['guide', `guide-${g.i}`, `Guide: ${objLabel(o)}`]);
+  }
+  let refs = refLinksFor(q);
+  if(refs.length > 1 && REF_TOPIC_WORD[q.topic]) refs = refs.filter(r => r.t.includes(REF_TOPIC_WORD[q.topic])).concat(refs).slice(0, 1);
+  if(refs.length) out.push(['ref', `ref-${refs[0].i}`, `Reference: Module ${q.module}`]);
+  const figKeys = [q.img, ...(Array.isArray(q.teach) ? q.teach.map(p => p && p.fig) : [])].filter(Boolean);
+  for(const k of figKeys){
+    const d = DIAGRAMS.flatMap(g => g.figs).find(f => f.key === k);
+    if(d){ out.push(['diag', `dg-${k}`, `Diagram: ${d.name}`]); break; }
+  }
+  if(kindOf(q) === 'calc' && EQUATIONS.some(e => e.module === q.module)) out.push(['eq', `eq-m${q.module}`, `Equations: Module ${q.module}`]);
+  return out;
+}
+function explainHTML(q){
+  const ls = linksFor(q);
+  return ls.length ? `<div class="explainmore"><span>Explain more:</span>${ls.map(([v, a, t]) =>
+    `<button type="button" class="chip" data-jump="${v}:${a}">${esc(t)}</button>`).join('')}</div>` : '';
+}
+let RET = [];
+function jump(view, anchor){
+  RET.push({view: VIEW, y: window.scrollY, label: VIEW === 'exam' ? 'the exam' : 'the question'});
+  show(view);
+  const t = document.getElementById(anchor);
+  if(t){
+    for(let d = t.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true;
+    if(t.tagName === 'DETAILS') t.open = true;
+    /* Figures above the target take their height only once decoded, so the
+       position is taken after they are, and checked again a moment later. */
+    const land = () => { const hd = ['header', '#nav'].reduce((s, sel) => { const n = document.querySelector(sel); return s + (n ? n.getBoundingClientRect().height : 0); }, 0);
+      window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - hd - 8); };
+    land();
+    const imgs = [...document.querySelectorAll(`#v-${view} img`)].filter(i => !i.complete);
+    Promise.all(imgs.map(i => i.decode ? i.decode().catch(() => {}) : null)).then(() => { land(); setTimeout(land, 150); });
+  }
+  backBtn();
+}
+function backBtn(){
+  let b = document.getElementById('backbtn');
+  if(!RET.length){ if(b) b.remove(); return; }
+  if(!b){ b = document.createElement('button'); b.id = 'backbtn'; b.className = 'btn'; document.body.appendChild(b); }
+  b.textContent = `← Back to ${RET[RET.length - 1].label}`;
+  b.onclick = () => {
+    const r = RET.pop(); show(r.view); window.scrollTo(0, r.y); backBtn();
+  };
+}
+function jumpClick(e){
+  const b = e.target.closest && e.target.closest('[data-jump]'); if(!b) return;
+  const [v, a] = b.dataset.jump.split(':'); jump(v, a);
+}
+
+/* ==========================================================================
    ANSWER LAYOUT: ONE AT A TIME, OR ALL ON ONE PAGE
    ==========================================================================
    DB.settings.layout is 'one' or 'all', saved with the learner's progress.
@@ -1124,6 +1197,7 @@ function feedbackHTML(q, st){
         from the start</button></p>`;
     h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${
         srcFlag(q)}${esc(q.cite)}</div>`;
+    h += explainHTML(q);
     h += `</div>`;
   return h;
 }
@@ -2317,7 +2391,7 @@ function renderExamResult(){
     if(q.teach) h += `<div class="teach"><h4>The concept behind this</h4>${
         q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${
         renderTeach(q.teach)}</div>`;
-    h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${srcFlag(q)}${esc(q.cite)}</div></div></div>`;
+    h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${srcFlag(q)}${esc(q.cite)}</div>${explainHTML(q)}</div></div>`;
   });
   $('#v-exam').innerHTML = h;
   $('#exAgain').onclick = ()=>{ EX=null; renderExam(); };
@@ -2871,7 +2945,7 @@ function eqPickerHTML(){
   const modName = m => (COURSE.topicsMenu.find(t => t.module === m) || {}).name || ('Module ' + m);
   for(const m of mods){
     const es = EQUATIONS.filter(e => e.module === m);
-    h += `<details class="module" open><summary>
+    h += `<details class="module" id="eq-m${m}" open><summary>
       <span class="mname">${esc(modName(m))}<small>${es.length} equations ·
         ${es.filter(e => chosen.has(e.id)).length} selected</small></span>
       <button class="chip" data-modpick="${m}">Select all</button></summary><div class="mfoot">`;
@@ -3126,11 +3200,13 @@ function eqCheck(){
    ========================================================================== */
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
   if(b.dataset.v === 'topics' && VIEW === 'topics') MODPAGE = null;   // a second tap on Topics returns to the module list
+  RET = []; backBtn();
   show(b.dataset.v);
 });
 document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn
 document.addEventListener('click', zoomClick);   // tap any figure to enlarge it
 document.addEventListener('click', layoutClick); // the One at a time / All on one page chips
+document.addEventListener('click', jumpClick);   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
 /* Theme: System (no attribute), Light or Dark, kept per browser. */
 const THEME_KEY = NS + ':theme';

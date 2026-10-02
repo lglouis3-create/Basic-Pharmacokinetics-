@@ -123,6 +123,35 @@ with sync_playwright() as p:
     ok('submitting the one-page paper shows the result', pg.evaluate("EX && EX.done"))
     pg.evaluate("DB.settings.layout = 'one'; EX = null")
 
+    # Explain more: every question links somewhere, and every target exists
+    nolink = pg.evaluate("QUESTIONS.concat(EXTRAS).filter(q => !linksFor(q).length).map(q => q.id)")
+    ok(f'every question has at least one Explain-more link ({len(nolink)} without)', not nolink)
+    targets = pg.evaluate("[...new Set(QUESTIONS.concat(EXTRAS).flatMap(q => linksFor(q).map(l => l[0] + ':' + l[1])))]")
+    missing = []
+    for t in targets:
+        v, a = t.split(':')
+        pg.evaluate(f"show('{v}')")
+        if not pg.evaluate(f"!!document.getElementById('{a}')"): missing.append(t)
+    ok(f'every Explain-more target exists ({len(targets)} targets)', not missing)
+    if missing: print('   ', missing[:8])
+    pg.evaluate("RET = []; startChain('m6-ex1')"); pg.wait_for_timeout(150)
+    pg.fill('#numIn', '1'); pg.click('#btnCheck'); pg.wait_for_timeout(150)
+    pg.click('#v-quiz [data-mk="setup"]'); pg.wait_for_timeout(150)
+    qid = pg.evaluate("Q.current.id")
+    pg.locator('#v-quiz [data-jump]').first.click(); pg.wait_for_timeout(250)
+    went = pg.evaluate("VIEW")
+    ok(f'an Explain-more button opens its section ({went}) and offers the way back', went != 'quiz' and pg.locator('#backbtn').count() == 1)
+    pg.click('#backbtn'); pg.wait_for_timeout(250)
+    ok('the way back returns to the same answered question',
+       pg.evaluate("VIEW") == 'quiz' and pg.evaluate("Q.current.id") == qid and pg.locator('#v-quiz .verdict').count() == 1 and pg.locator('#backbtn').count() == 0)
+
+    pg.evaluate("RET = []; backBtn(); startPool(QUESTIONS.filter(q => q.id === 'fig-ord-4'), 'x')"); pg.wait_for_timeout(150)
+    pg.locator('#v-quiz .opt').first.click(); pg.wait_for_timeout(150)
+    pg.locator('#v-quiz [data-jump^="diag"]').click(); pg.wait_for_timeout(900)
+    top = pg.evaluate("document.getElementById('dg-ord_semilog_curve').getBoundingClientRect().top")
+    ok(f'a jump lands its section just below the header ({round(top)} px from the top)', 40 <= top <= 160)
+    pg.click('#backbtn'); pg.wait_for_timeout(200)
+
     ok('no uncaught error', not errs)
     if errs: print('   ', errs[:3])
     b.close()

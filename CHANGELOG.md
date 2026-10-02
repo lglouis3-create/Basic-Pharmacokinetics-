@@ -2,6 +2,10 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-03 (explain more)
+- After every answer: buttons to the Guide, Reference, Diagram and Equations section for it.
+- A floating button returns to the same question, answer and place kept.
+
 ## 2026-10-03 (answer layout)
 - Answer one at a time or all on one page, in drills and on the exam paper.
 - Switching layout mid-drill never asks a question twice.
