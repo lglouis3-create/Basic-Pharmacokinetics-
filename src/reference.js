@@ -20,22 +20,38 @@ const REFERENCE_HTML = `
 <p class="sub">Every equation this course uses, what each symbol means, the condition it holds under, and whether the exam equation sheet carries it. Nothing here is scored.</p>
 
 <h3>Not on the exam equation sheet</h3>
-<p>Dr. Mosley supplies a paper equation sheet and the same equations inside ExamSoft: <i>"We will have equations for exams. I will put, give you a paper copy and equations will also be in ExamSoft for you, OK? So, the equations are there. You've got to think about which one do I want to apply in this application."</i> She named five things she does not put on it. These five are the ones she expects without the sheet.</p>
+<ul class="tlist">
+<li>Dr. Mosley supplies a paper equation sheet and the same equations inside ExamSoft: <i>"We will have equations for exams. I will put, give you a paper copy and equations will also be in ExamSoft for you, OK? So, the equations are there. You've got to think about which one do I want to apply in this application."</i></li>
+<li>She named five things she does not put on the sheet.</li>
+<li>She expects you to know these five without the sheet.</li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:26%">Relation</th><th style="width:34%">What she said</th><th>Where it is needed, and the state of the equation sheet</th></tr></thead><tbody>
 
 <tr><td><b>First-order half-life</b><br>t&frac12; = {{frac:0.693|k}}</td>
 <td><i>"first order half-life &hellip; that will not be on your equation sheet. This is the one that you take to your grave with you, OK? 0.693 over K."</i> (08-19). Repeated 08-24, 08-26 and in the 09-09 exam review: <i>"That one is not on your equation sheet."</i></td>
-<td>Needed in every module. It is also how the two-compartment beta half-life and the absorption half-life are obtained, since both are first-order half-lives of a different rate constant. The equation sheet does not carry it: the only line on it that solves for a half-life is the nonlinear one on page 2, t&frac12; = V<sub>D</sub>(0.693/V<sub>max</sub>)(K<sub>M</sub> + C<sub>p</sub>).</td></tr>
+<td><ul class="tlist">
+<li>Needed in every module.</li>
+<li>It also gives the two-compartment beta half-life and the absorption half-life, because both are first-order half-lives, each of a different rate constant.</li>
+<li>Not on the sheet. The only sheet line that solves for a half-life is the nonlinear one on page 2, t&frac12; = V<sub>D</sub>(0.693/V<sub>max</sub>)(K<sub>M</sub> + C<sub>p</sub>).</li>
+</ul></td></tr>
 
 <tr><td><b>Clearance from k and V<sub>D</sub></b><br>Cl = k &times; V<sub>D</sub></td>
 <td><i>"this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd."</i> (08-24)</td>
-<td>Needed for total body clearance, for the infusion rate R = C<sub>ss</sub>&middot;Cl and for every renal/hepatic split. The deck slide that states it, 2IVBolusAdministration.pdf slide "Clearance", carries the handwritten note that the equation will not be given on the exam. The equation sheet does not carry it; its clearance lines are Cl<sub>T</sub> = FD<sub>0</sub>/AUC, the renal and hepatic split, and the nonlinear Cl<sub>T</sub> = V<sub>max</sub>/(K<sub>M</sub> + C<sub>p</sub>).</td></tr>
+<td><ul class="tlist">
+<li>Needed for total body clearance, for the infusion rate R = C<sub>ss</sub>&middot;Cl, and for every renal/hepatic split.</li>
+<li>2IVBolusAdministration.pdf slide "Clearance" states it, with a handwritten note that the equation will not be given on the exam.</li>
+<li>Not on the sheet. The sheet's clearance lines are Cl<sub>T</sub> = FD<sub>0</sub>/AUC, the renal and hepatic split, and the nonlinear Cl<sub>T</sub> = V<sub>max</sub>/(K<sub>M</sub> + C<sub>p</sub>).</li>
+</ul></td></tr>
 
 <tr><td><b>Volume, dose and concentration</b><br>C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}, so V<sub>D</sub> = {{frac:D<sub>B</sub>|C<sub>p</sub>}}</td>
 <td><i>"The other one, the relationship between volume of distribution, concentration, and dose, that one is in, in, in you as well"</i> (08-26)</td>
-<td><b>Two sources differ here.</b> She names this as one to hold without the sheet, but the equation sheet does carry the line C<sub>p</sub> = D<sub>B</sub>/V<sub>D</sub>, on page 1, left column. Both readings are stated because neither cancels the other: the line is on the sheet, and she still expects it known.</td></tr>
+<td><b>Two sources differ here.</b><ul class="tlist">
+<li>She names it as one to know without the sheet.</li>
+<li>The sheet does carry the line C<sub>p</sub> = D<sub>B</sub>/V<sub>D</sub>, on page 1, left column.</li>
+<li>Both hold: the line is on the sheet, and she still expects it known.</li>
+</ul></td></tr>
 
 <tr><td><b>Cockcroft-Gault</b><br>CrCl = {{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}, &times; 0.85 if female</td>
 <td><i>"this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one, OK."</i> (09-14)</td>
@@ -46,9 +62,21 @@ const REFERENCE_HTML = `
 <td>Module 4, as the IBW that feeds Cockcroft-Gault. She keeps the arithmetic simple on purpose: <i>"All of our patients are going to be 5 ft tall. And all, and we're just gonna use ideal body weight."</i> The equation sheet does not carry it.</td></tr>
 </tbody></table>
 
-<div class="note"><b>Four lines the text extract dropped, read from the rendered sheet.</b> The text extract of the equation sheet turns four lines into replacement characters. The rendered pages of Basic-Pharmacokinetics-Equations.pdf show all four: (1) page 1, second line: C = C<sub>0</sub> &minus; k<sub>0</sub>t, the zero-order line; (2) page 1, directly under D<sub>L</sub> = R/k: D<sub>L</sub> = C<sub>ss</sub>V<sub>D</sub>; (3) page 1, last line of the right column: C<sub>p</sub> after n oral doses, {{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}}[({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt</sup> &minus; ({{frac:1 &minus; e<sup>&minus;nk<sub>a</sub>&tau;</sup>|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}})e<sup>&minus;k<sub>a</sub>t</sup>]; (4) page 2, directly under D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>): F<sub>abs</sub>D<sub>po</sub> = (Cl)(AUC<sub>po</sub>). None of the four is one of the five relations above.</div>
+<div class="note"><b>Four more lines on the equation sheet (Basic-Pharmacokinetics-Equations.pdf).</b>
+<ul class="tlist">
+<li>(1) Page 1, second line: C = C<sub>0</sub> &minus; k<sub>0</sub>t, the zero-order line.</li>
+<li>(2) Page 1, directly under D<sub>L</sub> = R/k: D<sub>L</sub> = C<sub>ss</sub>V<sub>D</sub>.</li>
+<li>(3) Page 1, last line of the right column: C<sub>p</sub> after n oral doses, {{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}}[({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt</sup> &minus; ({{frac:1 &minus; e<sup>&minus;nk<sub>a</sub>&tau;</sup>|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}})e<sup>&minus;k<sub>a</sub>t</sup>].</li>
+<li>(4) Page 2, directly under D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>): F<sub>abs</sub>D<sub>po</sub> = (Cl)(AUC<sub>po</sub>).</li>
+<li>None of the four is one of the five relations above.</li>
+</ul></div>
 
-<p>Three further half-life relations sit apart from the five above, because she never said either way whether the sheet carries them. None of the three is on the sheet: its zero-order line is the concentration line C = C<sub>0</sub> &minus; k<sub>0</sub>t, and the only line on it that solves for a half-life is the nonlinear one on page 2.</p>
+<ul class="tlist">
+<li>Three further half-life relations are kept apart from the five above, because she never said either way whether the sheet carries them.</li>
+<li>None of the three is on the sheet.</li>
+<li>The sheet's zero-order line is the concentration line C = C<sub>0</sub> &minus; k<sub>0</sub>t.</li>
+<li>The only sheet line that solves for a half-life is the nonlinear one on page 2.</li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Relation</th><th style="width:26%">Source that states it</th><th>Status on the sheet</th></tr></thead><tbody>
@@ -58,16 +86,34 @@ const REFERENCE_HTML = `
 </tbody></table>
 
 <h3>Units, and the conversions this course keeps needing</h3>
-<p>Two of her standing deductions are about units, not pharmacokinetics: <i>"If there are units. Then you should give me units. OK, don't just give me a number. Because a milligram is very different than a microgram."</i> and <i>"There should never be a leading decimal &hellip; If you give me that as your final answer, you will lose half the points for this answer."</i></p>
+<p>Two of her standing deductions are about units, not pharmacokinetics:</p>
+<ul class="tlist">
+<li>Units: <i>"If there are units. Then you should give me units. OK, don't just give me a number. Because a milligram is very different than a microgram."</i></li>
+<li>Leading decimals: <i>"There should never be a leading decimal &hellip; If you give me that as your final answer, you will lose half the points for this answer."</i></li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:26%">Parameter</th><th style="width:26%">Units she quotes it in</th><th>Notes from her own solutions</th></tr></thead><tbody>
-<tr><td>Concentration C, C<sub>p</sub>, C<sub>0</sub>, C<sub>ss</sub>, C<sub>max</sub></td><td>mg/L, or mcg/mL</td><td>mg/L is the default in her worked answers; stems are posed in mcg/mL about as often, and she swaps the label mid-solution without comment because the two are numerically equal. mg/mL is reserved for bulk-solution stability problems.</td></tr>
+<tr><td>Concentration C, C<sub>p</sub>, C<sub>0</sub>, C<sub>ss</sub>, C<sub>max</sub></td><td>mg/L, or mcg/mL</td><td><ul class="tlist">
+<li>mg/L is the default in her worked answers.</li>
+<li>Stems use mcg/mL about as often. She swaps the label mid-solution without comment, because the two are numerically equal.</li>
+<li>mg/mL is kept for bulk-solution stability problems.</li>
+</ul></td></tr>
 <tr><td>Amount D, D<sub>B</sub>, D<sub>0</sub>, D<sub>L</sub>, D<sub>u</sub></td><td>mg</td><td>Micrograms appear in stems; she warns that 500 micrograms and 500 milligrams are different answers.</td></tr>
-<tr><td>First-order rate constant k, k<sub>e</sub>, k<sub>m</sub>, k<sub>a</sub>, k<sub>12</sub>, k<sub>21</sub>, a, b</td><td>reciprocal time, usually hr<sup>&minus;1</sup></td><td><i>"Is it time? One over time. We call that reciprocal time."</i> She writes k to four decimal places (0.0866, 0.1733, 0.1386, 0.2235) and warns against truncating early: <i>"don't truncate that to 0.2 early on."</i> A rate constant is never negative.</td></tr>
+<tr><td>First-order rate constant k, k<sub>e</sub>, k<sub>m</sub>, k<sub>a</sub>, k<sub>12</sub>, k<sub>21</sub>, a, b</td><td>reciprocal time, usually hr<sup>&minus;1</sup></td><td><ul class="tlist">
+<li><i>"Is it time? One over time. We call that reciprocal time."</i></li>
+<li>She writes k to four decimal places (0.0866, 0.1733, 0.1386, 0.2235).</li>
+<li>She warns against rounding early: <i>"don't truncate that to 0.2 early on."</i></li>
+<li>A rate constant is never negative.</li>
+</ul></td></tr>
 <tr><td>Zero-order rate constant k<sub>0</sub></td><td>amount/time or concentration/time, e.g. mg/mL per day</td><td><i>"our K for zero order processes is either going to be concentration per unit time. Or amount per unit time."</i></td></tr>
 <tr><td>Half-life t&frac12;</td><td>time &mdash; hours, or days for the shelf-life problems</td><td>Flagged as a scored error: <i>"It is a time, so it is not days to the minus one. It is just days."</i> The most important word in the definition is <i>time</i>.</td></tr>
-<tr><td>Volume of distribution V<sub>D</sub>, V<sub>p</sub>, V<sub>t</sub></td><td>L (mL for compounding volumes)</td><td>She states it four ways: absolute (16 L), per kilogram (0.5 L/kg, 400 mL/kg), as a percent of body weight (20%, 23.1%), or not at all, to be back-calculated from D<sub>0</sub>/C<sub>0</sub> or from Cl/k.</td></tr>
+<tr><td>Volume of distribution V<sub>D</sub>, V<sub>p</sub>, V<sub>t</sub></td><td>L (mL for compounding volumes)</td><td>She states it four ways:<ul class="tlist">
+<li>absolute (16 L);</li>
+<li>per kilogram (0.5 L/kg, 400 mL/kg);</li>
+<li>as a percent of body weight (20%, 23.1%);</li>
+<li>not at all, to be back-calculated from D<sub>0</sub>/C<sub>0</sub> or from Cl/k.</li>
+</ul></td></tr>
 <tr><td>Clearance Cl<sub>T</sub>, Cl<sub>R</sub>, Cl<sub>H</sub></td><td>L/hr</td><td>Except creatinine clearance, which she requires in mL/min.</td></tr>
 <tr><td>Infusion rate R</td><td>amount per time, usually mg/hr</td><td><i>"The units of r. Are going to be a mount. Per time. So most often milligrams per hour."</i> A parallel mL/hr or mL/min part appears whenever the stem supplies a solution concentration.</td></tr>
 <tr><td>AUC</td><td>concentration &times; time, e.g. mcg&middot;hr/mL</td><td>Her own words on the units: <i>"Micrograms per mil times hour, kind of funky units."</i></td></tr>
@@ -78,17 +124,43 @@ const REFERENCE_HTML = `
 
 <table class="reftab"><thead><tr>
 <th style="width:34%">Conversion</th><th>Where it is used, and how she handles it</th></tr></thead><tbody>
-<tr><td><b>mcg/mL = mg/L</b></td><td>Handed over so no exam time is spent on it: <i>"Milligrams per liter equals micrograms per mL &hellip; I don't want you to spend 10 minutes doing the conversion and then being off by a magnitude of 10."</i> Restated in the 09-09 review. Either label is accepted for a concentration answer.</td></tr>
-<tr><td><b>minutes &rarr; hours</b> (divide by 60)</td><td>15 minutes becomes 0.25 hr silently in the standard eight-part IV bolus battery. 45 minutes becomes 0.75 hr and 90 minutes becomes 1.5 hr in the oral absorption examples. Named as a common error: <i>"when you are calculating um T max, do not forget to change your times to out to the same unit, usually hours."</i></td></tr>
-<tr><td><b>pounds &rarr; kilograms</b> (divide by 2.2)</td><td>She gives weight in pounds whenever she wants the conversion tested &mdash; 110 lb, 154 lb, 162 lb, 165 lb, 187 lb &mdash; and always divides by 2.2 without showing the step. Pounds and mg/kg dosing tend to appear together, so the conversion gates the whole problem.</td></tr>
-<tr><td><b>inches &rarr; centimetres</b> (1 inch = 2.54 cm)</td><td>Module 4 only, to reach ideal body weight from a height in centimetres: <i>"if you don't remember, 1 inch is equal to 2.54 centimetres &hellip; I am getting 64.96 inches. So, let's call that 65 inches."</i> She also expects the reverse: <i>"You should also know how to convert inches to centimetres and back and forth."</i></td></tr>
-<tr><td><b>inches over 5 ft</b> (5 ft = 60 inches)</td><td>The input to both ideal body weight formulas is height in inches minus 60. For the 165 cm patient that is 65 &minus; 60 = 5 inches over 5 ft. She warns that students mishandle a fractional height: <i>"64.5 is like 64.5 inches tall. It's not 64 and then another 5 inches."</i></td></tr>
-<tr><td><b>percent of body weight &rarr; litres</b> (1 L is taken as 1 kg)</td><td>Printed on 2IVBolusAdministration.pdf slide "Volume of Distribution": <i>"a 1-L volume is assumed to be equal to the weight of 1 kg."</i> So V<sub>D</sub> at 20% of an 80 kg body weight is 16 L, and she insists on the unit: <i>"14 apples, 14 L, OK? Not 14 kg 14 L."</i></td></tr>
+<tr><td><b>mcg/mL = mg/L</b></td><td><ul class="tlist">
+<li>She gives it to you so no exam time is spent on it: <i>"Milligrams per liter equals micrograms per mL &hellip; I don't want you to spend 10 minutes doing the conversion and then being off by a magnitude of 10."</i></li>
+<li>Restated in the 09-09 review.</li>
+<li>Either label is accepted for a concentration answer.</li>
+</ul></td></tr>
+<tr><td><b>minutes &rarr; hours</b> (divide by 60)</td><td><ul class="tlist">
+<li>In the standard eight-part IV bolus battery, 15 minutes becomes 0.25 hr without a shown step.</li>
+<li>In the oral absorption examples, 45 minutes becomes 0.75 hr and 90 minutes becomes 1.5 hr.</li>
+<li>Named as a common error: <i>"when you are calculating um T max, do not forget to change your times to out to the same unit, usually hours."</i></li>
+</ul></td></tr>
+<tr><td><b>pounds &rarr; kilograms</b> (divide by 2.2)</td><td><ul class="tlist">
+<li>She gives weight in pounds whenever she wants the conversion tested: 110 lb, 154 lb, 162 lb, 165 lb, 187 lb.</li>
+<li>She always divides by 2.2 without showing the step.</li>
+<li>Pounds and mg/kg dosing tend to appear together, so a wrong conversion makes the whole problem wrong.</li>
+</ul></td></tr>
+<tr><td><b>inches &rarr; centimetres</b> (1 inch = 2.54 cm)</td><td><ul class="tlist">
+<li>Module 4 only, to reach ideal body weight from a height in centimetres: <i>"if you don't remember, 1 inch is equal to 2.54 centimetres &hellip; I am getting 64.96 inches. So, let's call that 65 inches."</i></li>
+<li>She also expects the reverse: <i>"You should also know how to convert inches to centimetres and back and forth."</i></li>
+</ul></td></tr>
+<tr><td><b>inches over 5 ft</b> (5 ft = 60 inches)</td><td><ul class="tlist">
+<li>The input to both ideal body weight formulas is height in inches minus 60.</li>
+<li>For the 165 cm patient: 65 &minus; 60 = 5 inches over 5 ft.</li>
+<li>She warns that students mishandle a fractional height: <i>"64.5 is like 64.5 inches tall. It's not 64 and then another 5 inches."</i></li>
+</ul></td></tr>
+<tr><td><b>percent of body weight &rarr; litres</b> (1 L is taken as 1 kg)</td><td><ul class="tlist">
+<li>Printed on 2IVBolusAdministration.pdf slide "Volume of Distribution": <i>"a 1-L volume is assumed to be equal to the weight of 1 kg."</i></li>
+<li>So V<sub>D</sub> at 20% of an 80 kg body weight is 16 L.</li>
+<li>She insists on the unit: <i>"14 apples, 14 L, OK? Not 14 kg 14 L."</i></li>
+</ul></td></tr>
 </tbody></table>
 <p class="sub">Grams to milligrams is not carried here. No stem, worked solution, slide or transcript line in these five modules states a dose or a concentration in grams, so there is no source for it.</p>
 
 <h3>Module 1 &mdash; kinetic orders, half-life and AUC</h3>
-<p>The two orders are the pair most often confused, so they are set out together. The 09-09 review names the one item guaranteed to appear: <i>"On this exam, I am going to give you a data set, and I expect you to figure out if it's zero or first."</i></p>
+<ul class="tlist">
+<li>Zero order and first order are the pair most often confused, so they are set out together.</li>
+<li>The 09-09 review names the one item guaranteed to appear: <i>"On this exam, I am going to give you a data set, and I expect you to figure out if it's zero or first."</i></li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
@@ -121,7 +193,7 @@ const REFERENCE_HTML = `
 <td>k first-order elimination rate constant (hr<sup>&minus;1</sup>); result in time, never reciprocal time</td>
 <td>First order only. Constant at every concentration, because <i>"a constant divided by a constant is A constant."</i></td>
 <td>Asked in essentially every problem, usually as part a or b. Also run backwards to get k from a stated half-life.</td>
-<td>No &mdash; named by her, three times.</td></tr>
+<td>No &mdash; named by her four times (08-19, 08-24, 08-26, 09-09).</td></tr>
 
 <tr><td><b>AUC over one segment</b><br>{{frac:C<sub>n&minus;1</sub> + C<sub>n</sub>|2}} &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)</td>
 <td>C<sub>n&minus;1</sub>, C<sub>n</sub> the two concentrations bounding the segment; t in hours; result in concentration &times; time</td>
@@ -136,10 +208,20 @@ const REFERENCE_HTML = `
 <td>Yes, in the dose-corrected form.</td></tr>
 </tbody></table>
 
-<p>What separates the two orders, in her own terms: for zero order <i>"rate is independent of the concentration &hellip; While half-life is dependent"</i>; for first order <i>"the rate depends on the rate constant K times the concentration &hellip; At higher concentrations, we have a faster rate."</i> The half-life behaves the opposite way round from the rate in each case. She also flags the axis as a trap: <i>"even if the scale does not say log C, if you look at that scale and you see that &hellip; it's increasing by a func- uh, a function of 10, then that tells you that it is a logarithmic scale. So, don't just look at that straight line and assume &hellip; that it is zero order."</i></p>
+<p><b>What separates the two orders</b>, in her own terms:</p>
+<ul class="tlist">
+<li>Zero order: <i>"rate is independent of the concentration &hellip; While half-life is dependent"</i>.</li>
+<li>First order: <i>"the rate depends on the rate constant K times the concentration &hellip; At higher concentrations, we have a faster rate."</i></li>
+<li>In each order, the half-life behaves the opposite way round from the rate.</li>
+<li>She names the axis as a common error: <i>"even if the scale does not say log C, if you look at that scale and you see that &hellip; it's increasing by a func- uh, a function of 10, then that tells you that it is a logarithmic scale. So, don't just look at that straight line and assume &hellip; that it is zero order."</i></li>
+</ul>
 
 <h3>Module 2 &mdash; IV bolus, one and multi-compartment</h3>
-<p>What the words "IV bolus" are meant to trigger: <i>"if I tell you that we are administering a drug via IV bolus injection. Then you should think. Whichever form of this equation you like."</i> Input is instantaneous, elimination is first order, and she must tell you the compartment count: <i>"I have to tell you that it follows a one compartment model or a two compartment."</i></p>
+<ul class="tlist">
+<li>When a stem says "IV bolus", she expects this equation: <i>"if I tell you that we are administering a drug via IV bolus injection. Then you should think. Whichever form of this equation you like."</i></li>
+<li>Input is instantaneous and elimination is first order.</li>
+<li>She must tell you the compartment count: <i>"I have to tell you that it follows a one compartment model or a two compartment."</i></li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
@@ -159,7 +241,11 @@ const REFERENCE_HTML = `
 <tr><td><b>dD<sub>B</sub>/dt = &minus;kD<sub>B</sub></b><br>C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup><br>ln C<sub>p</sub> = ln C<sub>p</sub><sup>0</sup> &minus; kt<br>log C<sub>p</sub> = log C<sub>p</sub><sup>0</sup> &minus; {{frac:kt|2.3}}</td>
 <td>C<sub>p</sub><sup>0</sup> the concentration extrapolated back to time zero (mg/L); k hr<sup>&minus;1</sup></td>
 <td>One compartment, IV bolus, first-order elimination. The deck marks the natural-log form as the one she prefers.</td>
-<td>k from two plasma points; C<sub>0</sub> by back-extrapolation; C at a stated time; time to 99.9% eliminated. She warns that C<sub>0</sub> must exceed every sampled point and that the exponent sign flips when solving backwards.</td>
+<td><ul class="tlist">
+<li>k from two plasma points; C<sub>0</sub> by back-extrapolation; C at a stated time; time to 99.9% eliminated.</li>
+<li>She warns that C<sub>0</sub> must exceed every sampled point.</li>
+<li>She warns that the exponent sign flips when solving backwards.</li>
+</ul></td>
 <td>Yes.</td></tr>
 
 <tr><td><b>Cl<sub>T</sub> = k &times; V<sub>D</sub></b><br><b>Cl = {{frac:D<sub>0</sub>|AUC<sub>0&rarr;&infin;</sub>}}</b></td>
@@ -176,13 +262,21 @@ const REFERENCE_HTML = `
 
 <tr><td><b>C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup></b><br>C<sub>p</sub><sup>0</sup> = A + B</td>
 <td>A, B intercepts in concentration units (mg/L or mcg/mL); a (alpha) and b (beta) slopes in reciprocal time. <i>"Our A and our B are our intercepts &hellip; our lowercase A and B are the slopes."</i></td>
-<td>Two-compartment, IV bolus. Alpha is the larger because <i>"the distribution phase is gonna happen a lot faster than an elimination phase."</i> She hands A, B, alpha and beta over rather than asking for feathering: <i>"I am pretty much gonna give you A, B, alpha, beta."</i></td>
+<td><ul class="tlist">
+<li>Two-compartment, IV bolus.</li>
+<li>Alpha is the larger, because <i>"the distribution phase is gonna happen a lot faster than an elimination phase."</i></li>
+<li>She gives A, B, alpha and beta rather than asking for feathering: <i>"I am pretty much gonna give you A, B, alpha, beta."</i></li>
+</ul></td>
 <td>Concentration at a stated time; C<sub>0</sub> as A + B.</td>
 <td>C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup>: yes, page 1. C<sub>p</sub><sup>0</sup> = A + B is not printed; it is the same line at t = 0.</td></tr>
 
 <tr><td><b>t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}</b></td>
 <td>b the terminal slope, hr<sup>&minus;1</sup>; result in time</td>
-<td>Two compartment. The distribution half-life is not asked: <i>"we don't really care about the half-life of the distribution phase. We care about the half-life of the elimination phase."</i> She names the quantity explicitly on the paper so there is no ambiguity.</td>
+<td><ul class="tlist">
+<li>Two compartment.</li>
+<li>The distribution half-life is not asked: <i>"we don't really care about the half-life of the distribution phase. We care about the half-life of the elimination phase."</i></li>
+<li>She names the quantity explicitly on the paper, so there is no ambiguity.</li>
+</ul></td>
 <td>The elimination half-life. She warns against the long route: <i>"Don't solve for K and then 0.693 over K. You've, you've done too much work."</i></td>
 <td>No; covered by her first-order half-life carve-out.</td></tr>
 
@@ -199,10 +293,19 @@ const REFERENCE_HTML = `
 <td>Yes, all three. The AUC form prints a plain k: V<sub>p</sub> = D<sub>0</sub>/(k[AUC]<sub>0</sub><sup>&infin;</sup>).</td></tr>
 </tbody></table>
 
-<p>Reading a semi-log graph, as she will ask it on the exam: a single straight line is one compartment, and a line with a steeper early segment above it is two compartments. <i>"if I give you a graph &hellip; just a log scale &hellip; and I just give you a, a line that looks like this one, the black line. That should say to you that this is a two compartment model. If I gave you a graph on a log scale that looks just like the blue line all by itself, that tells you it's an IV bolus dose one compartment model."</i></p>
+<p><b>Reading a semi-log graph</b>, as she will ask it on the exam:</p>
+<ul class="tlist">
+<li>A single straight line is one compartment.</li>
+<li>A line with a steeper early segment above it is two compartments.</li>
+<li><i>"if I give you a graph &hellip; just a log scale &hellip; and I just give you a, a line that looks like this one, the black line. That should say to you that this is a two compartment model. If I gave you a graph on a log scale that looks just like the blue line all by itself, that tells you it's an IV bolus dose one compartment model."</i></li>
+</ul>
 
 <h3>Module 3 &mdash; IV infusion, steady state and loading dose</h3>
-<p>The input changes and nothing else does: <i>"the only thing we've changed here, we haven't changed the drug, we've changed the manner that we put the drug in the body."</i> A constant rate in is zero order; elimination out stays first order. <i>"Our input is zero order, constant in, first order out. When we stop the in, then it's just out."</i></p>
+<ul class="tlist">
+<li>The input changes and nothing else does: <i>"the only thing we've changed here, we haven't changed the drug, we've changed the manner that we put the drug in the body."</i></li>
+<li>A constant rate in is zero order; elimination out stays first order.</li>
+<li><i>"Our input is zero order, constant in, first order out. When we stop the in, then it's just out."</i></li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
@@ -227,7 +330,11 @@ const REFERENCE_HTML = `
 
 <tr><td><b>D<sub>L</sub> = {{frac:R|k}}</b><br><b>D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub></b></td>
 <td>D<sub>L</sub> loading dose (mg); R mg/hr; k hr<sup>&minus;1</sup>; V<sub>D</sub> L</td>
-<td>An IV bolus given at the same moment an infusion starts. <i>"We want the loading dose to look like the amount of drug that's in the body at steady state."</i> The first form is only as good as the rate already chosen: <i>"If you just pick a number out of the air, then you're probably not gonna pick the the best loading dose."</i></td>
+<td><ul class="tlist">
+<li>An IV bolus given at the same moment an infusion starts.</li>
+<li><i>"We want the loading dose to look like the amount of drug that's in the body at steady state."</i></li>
+<li>The first form is only as good as the rate already chosen: <i>"If you just pick a number out of the air, then you're probably not gonna pick the the best loading dose."</i></li>
+</ul></td>
 <td>The loading dose. She prints both routes side by side whenever both inputs are available.</td>
 <td>D<sub>L</sub> = R/k: yes. D<sub>L</sub> = C<sub>ss</sub>V<sub>D</sub>: yes, page 1, directly under it.</td></tr>
 
@@ -245,15 +352,28 @@ const REFERENCE_HTML = `
 <tr><td>1</td><td>50%</td><td>50%</td><td>Slide annotation and transcript, both lectures</td></tr>
 <tr><td>2</td><td>75%</td><td>75%</td><td>Slide annotation and transcript, both lectures</td></tr>
 <tr><td>3</td><td>87.5%</td><td>87.5%</td><td>Slide annotation and transcript, both lectures</td></tr>
-<tr><td>4</td><td>93.25%</td><td>&mdash;</td><td>Transcript only, and the two recordings differ: 93.25% on 09-02 and "93" in the 09-09 review. No slide carries a fourth row.</td></tr>
+<tr><td>4</td><td>93.75%</td><td>&mdash;</td><td>Computed: 1 &minus; 0.5<sup>4</sup> = 93.75%. Her spoken values differ: 93.25% on 09-02 and "93" in the 09-09 review. No slide carries a fourth row.</td></tr>
 <tr><td>10</td><td>99.9%</td><td>99.9%</td><td>Transcript, both lectures: <i>"it's gonna take 10 half-lives for 99.9% of the drug to be eliminated"</i> and <i>"10 half-lives, we're at 99.9% of the steady-state concentration."</i></td></tr>
-<tr><td>11</td><td>99.99%</td><td>&mdash;</td><td>Transcript 09-02: <i>"10 gets us 99.9, 11 gets us 99.99."</i></td></tr>
+<tr><td>11</td><td>99.95%</td><td>&mdash;</td><td>Computed: 1 &minus; 0.5<sup>11</sup> = 99.95%. Transcript 09-02 says 99.99: <i>"10 gets us 99.9, 11 gets us 99.99."</i></td></tr>
 </tbody></table>
 
-<p>Two non-integer multiples she uses in worked solutions: <b>3.32 half-lives reaches 90%</b> of C<sub>ss</sub> (09-02, offered as her own shortcut and not required), and <b>4.32 half-lives reaches 95%</b> of C<sub>ss</sub>, which is the route in her printed solution to the renal-failure part of IV Infusions Practice 3. Her short answer to "how long to steady state" is fixed: <i>"3 to 5 half-lives, OK?"</i> And the rate does not change it: <i>"if you get a question that says, 'Increasing the rate of infusion will decrease or ha- double or do whatever funkiness to the time that it takes to get to steady state,' we are clear that it has no impact, right? Because it is three to five half-lives. Depends on the half-life, that rate constant K."</i> Raising R raises C<sub>ss</sub> in proportion and shifts the whole curve upward; the plateau still arrives at the same time.</p>
+<p><b>Time to steady state.</b> Two non-integer multiples appear in her worked solutions:</p>
+<ul class="tlist">
+<li><b>3.32 half-lives reaches 90%</b> of C<sub>ss</sub> (09-02). She offered it as her own shortcut; it is not required.</li>
+<li><b>4.32 half-lives reaches 95%</b> of C<sub>ss</sub>. This is the route in her printed solution to the renal-failure part of IV Infusions Practice 3.</li>
+<li>Her short answer to "how long to steady state" is fixed: <i>"3 to 5 half-lives, OK?"</i></li>
+<li>The infusion rate does not change that time: <i>"if you get a question that says, 'Increasing the rate of infusion will decrease or ha- double or do whatever funkiness to the time that it takes to get to steady state,' we are clear that it has no impact, right? Because it is three to five half-lives. Depends on the half-life, that rate constant K."</i></li>
+<li>Raising R raises C<sub>ss</sub> in proportion and shifts the whole curve upward; the plateau still arrives at the same time.</li>
+</ul>
 
 <h3>Module 4 &mdash; elimination, clearance and renal clearance</h3>
-<p>The elimination words nest inside one another, and she keeps them distinct: elimination is <i>"all the irreversible processes or irreversible removal of drugs by all routes"</i>; excretion is <i>"removal of intact drug or metabolite"</i>; biotransformation is <i>"chemically converting that um drug in the body to some metabolite."</i> The kidney and the liver are the two major elimination organs.</p>
+<p>Elimination includes excretion and biotransformation, and she keeps the three words distinct:</p>
+<ul class="tlist">
+<li>Elimination is <i>"all the irreversible processes or irreversible removal of drugs by all routes"</i>.</li>
+<li>Excretion is <i>"removal of intact drug or metabolite"</i>.</li>
+<li>Biotransformation is <i>"chemically converting that um drug in the body to some metabolite."</i></li>
+<li>The kidney and the liver are the two major elimination organs.</li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
@@ -290,8 +410,16 @@ const REFERENCE_HTML = `
 
 <tr><td><b>CrCl = {{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}</b><br>&times; 0.85 if female</td>
 <td>age in years; IBW ideal body weight in kg; S<sub>Cr</sub> serum creatinine in mg/dL; answer reported in mL/min</td>
-<td>Estimating a patient's renal function. Normal on the deck slide is 120&ndash;130 mL/min. The 0.85 factor rests on an assumption she states: <i>"The assumption is that women are smaller than men, less muscular than men."</i></td>
-<td>CrCl for a patient vignette, then whether the patient's renal function is reduced. Her worked example: a 45-year-old female, 165 cm, S<sub>Cr</sub> 1.1 mg/dL gives 58 mL/min. The stated actual weight of 61 kg is deliberately unused.</td>
+<td><ul class="tlist">
+<li>Estimating a patient's renal function.</li>
+<li>Normal on the deck slide is 120&ndash;130 mL/min.</li>
+<li>The 0.85 factor rests on an assumption she states: <i>"The assumption is that women are smaller than men, less muscular than men."</i></li>
+</ul></td>
+<td><ul class="tlist">
+<li>CrCl for a patient vignette, then whether the patient's renal function is reduced.</li>
+<li>Her worked example: a 45-year-old female, 165 cm, S<sub>Cr</sub> 1.1 mg/dL gives 58 mL/min.</li>
+<li>The stated actual weight of 61 kg is deliberately unused.</li>
+</ul></td>
 <td>No &mdash; named by her.</td></tr>
 
 <tr><td><b>IBW male = 50 + 2.3 &times; (inches over 5 ft)</b><br><b>IBW female = 45.5 + 2.3 &times; (inches over 5 ft)</b></td>
@@ -304,48 +432,111 @@ const REFERENCE_HTML = `
 <td>pKa of the drug; weak acids have pKa values 3&ndash;8 and weak bases 7.5&ndash;10.5, per the slide</td>
 <td>Reabsorption of weak acids and weak bases from the renal tubule, which depends on urine pH and on the drug's pKa.</td>
 <td>Nothing yet. She posed the two questions and the recording ends mid-answer.</td>
-<td>Both forms are printed on 4---Clearance-and-Elimination.pdf slide 20, but the text extract of that slide interleaves the two numerators and denominators, so which form is labelled for acids and which for bases cannot be read off it.</td></tr>
+<td><ul class="tlist">
+<li>Both forms are printed on 4---Clearance-and-Elimination.pdf slide 20.</li>
+<li>Weak acids (pK<sub>a</sub> 3 to 8): pH = pK<sub>a</sub> + log(ionized/nonionized).</li>
+<li>Weak bases (pK<sub>a</sub> 7.5 to 10.5): pH = pK<sub>a</sub> + log(nonionized/ionized).</li>
+</ul></td></tr>
 </tbody></table>
 
-<p><b>The three renal mechanisms, and the 120 mL/min rule.</b> Renal clearance is the net result of glomerular filtration, active tubular secretion and tubular reabsorption. Filtration is passive diffusion across the glomerulus and averages 120 mL/min. Filtration and secretion both add drug to the tubular lumen; reabsorption moves drug back into the blood. So a renal clearance above 120 mL/min means secretion is contributing on top of filtration, and one below 120 mL/min means some drug is being reabsorbed. Her tolerance around the number: <i>"And I'm saying 120. If it's 119, 121, OK, let's call that filtration. If it's 250, then let's assume that we've got some active secretion going on."</i></p>
+<p><b>The three renal mechanisms, and the 120 mL/min rule.</b></p>
+<ul class="tlist">
+<li>Renal clearance is the net result of glomerular filtration, active tubular secretion and tubular reabsorption.</li>
+<li>Filtration is passive diffusion across the glomerulus and averages 120 mL/min.</li>
+<li>Filtration and secretion both add drug to the tubular lumen; reabsorption moves drug back into the blood.</li>
+<li>So a renal clearance above 120 mL/min means secretion is contributing on top of filtration.</li>
+<li>A renal clearance below 120 mL/min means some drug is being reabsorbed.</li>
+<li>Her tolerance around the number: <i>"And I'm saying 120. If it's 119, 121, OK, let's call that filtration. If it's 250, then let's assume that we've got some active secretion going on."</i></li>
+</ul>
 
 <h3>Module 5 &mdash; oral absorption, single dose</h3>
-<p>The third input type: <i>"we have not had 1st order input, OK? It's all been either instantaneous or zero order &hellip; today we will talk about The kinetics of following oral administration."</i> First order in and first order out, so the curve rises to a peak and then falls. <i>"if I give you a curve on the exam and it looks like this &hellip; where there is a clear peak &hellip; I want you to identify that as an oral input."</i> A capital F in a stem is the signal: <i>"when you see a capital F, You should think oral."</i></p>
+<ul class="tlist">
+<li>The third input type: <i>"we have not had 1st order input, OK? It's all been either instantaneous or zero order &hellip; today we will talk about The kinetics of following oral administration."</i></li>
+<li>First order in and first order out, so the curve rises to a peak and then falls.</li>
+<li>A curve with a peak means oral input: <i>"if I give you a curve on the exam and it looks like this &hellip; where there is a clear peak &hellip; I want you to identify that as an oral input."</i></li>
+<li>A capital F in a stem is the signal: <i>"when you see a capital F, You should think oral."</i></li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
 <tr><td><b>C<sub>p</sub> = {{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}} &times; <span class="nw">(e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)</span></b></td>
 <td>F oral bioavailability fraction, no units; k<sub>a</sub> first-order absorption rate constant (hr<sup>&minus;1</sup>); k elimination rate constant (hr<sup>&minus;1</sup>); D<sub>0</sub> oral dose (mg); V<sub>D</sub> (L); C<sub>p</sub> (mg/L or mcg/mL)</td>
-<td>Single oral dose, one compartment, first-order absorption and first-order elimination. The bracket is drug in minus drug out. The lumped prefactor is <b>not</b> C<sub>0</sub>: <i>"this big portion right here does not represent C0."</i></td>
-<td>Concentration at any stated time; C<sub>max</sub> once t<sub>max</sub> is known; and, rearranged, V<sub>D</sub> back-solved from a given prefactor. Named error: <i>"Do not forget the volume of distribution."</i></td>
+<td><ul class="tlist">
+<li>Single oral dose, one compartment, first-order absorption and first-order elimination.</li>
+<li>The bracket is drug in minus drug out.</li>
+<li>The lumped prefactor is <b>not</b> C<sub>0</sub>: <i>"this big portion right here does not represent C0."</i></li>
+</ul></td>
+<td><ul class="tlist">
+<li>Concentration at any stated time; C<sub>max</sub> once t<sub>max</sub> is known; and, rearranged, V<sub>D</sub> back-solved from a given prefactor.</li>
+<li>Named error: <i>"Do not forget the volume of distribution."</i></li>
+</ul></td>
 <td>Yes, page 1.</td></tr>
 
 <tr><td><b>t<sub>max</sub> = {{frac:ln(k<sub>a</sub>/k)|k<sub>a</sub> &minus; k}}</b></td>
 <td>Both rate constants in the same reciprocal time unit; result in time</td>
-<td>Single oral dose. It contains no dose and no volume, so t<sub>max</sub> depends only on the two rate constants: <i>"T-Max depends solely on the relationship between K and KA."</i> Doubling the dose does not move it.</td>
-<td>t<sub>max</sub>, always, and always before C<sub>max</sub>: <i>"if you are asked for C-Max, and I will ask you for CMax, you must find TMax first."</i> Named errors: mixing time units, and using a half-life where a rate constant belongs.</td>
+<td><ul class="tlist">
+<li>Single oral dose.</li>
+<li>It contains no dose and no volume, so t<sub>max</sub> depends only on the two rate constants: <i>"T-Max depends solely on the relationship between K and KA."</i></li>
+<li>Doubling the dose does not move it.</li>
+</ul></td>
+<td><ul class="tlist">
+<li>t<sub>max</sub>, always, and always before C<sub>max</sub>: <i>"if you are asked for C-Max, and I will ask you for CMax, you must find TMax first."</i></li>
+<li>Named errors: mixing time units, and using a half-life where a rate constant belongs.</li>
+</ul></td>
 <td>Yes, page 1.</td></tr>
 
 <tr><td><b>t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}</b></td>
 <td>k<sub>a</sub> hr<sup>&minus;1</sup>; result in time</td>
-<td>The absorption half-life, and the usual way k<sub>a</sub> is handed over: stems give "half-life of absorption is 45 minutes" and the conversion to k<sub>a</sub> = 0.693/0.75 = 0.924 hr<sup>&minus;1</sup> is the first step.</td>
-<td>k<sub>a</sub> from a stated absorption half-life, or the absorption half-life from a k<sub>a</sub> read off a given equation. An unqualified t&frac12; means elimination: <i>"If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination."</i></td>
+<td><ul class="tlist">
+<li>The absorption half-life. It is the usual way k<sub>a</sub> is given.</li>
+<li>Stems say "half-life of absorption is 45 minutes"; the first step is the conversion to k<sub>a</sub> = 0.693/0.75 = 0.924 hr<sup>&minus;1</sup>.</li>
+</ul></td>
+<td><ul class="tlist">
+<li>k<sub>a</sub> from a stated absorption half-life, or the absorption half-life from a k<sub>a</sub> read off a given equation.</li>
+<li>An unqualified t&frac12; means elimination: <i>"If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination."</i></li>
+</ul></td>
 <td>No; covered by her first-order half-life carve-out.</td></tr>
 
 <tr><td><b>C<sub>max</sub></b>: substitute t<sub>max</sub> into the C<sub>p</sub> equation above</td>
 <td>Result in mg/L or mcg/mL</td>
-<td>Single oral dose. There is no separate single-dose C<sub>max</sub> expression on the deck or on the sheet for this module &mdash; the sheet's standalone C<sub>max</sub> forms all carry a dosing interval and belong to multiple dosing.</td>
+<td><ul class="tlist">
+<li>Single oral dose.</li>
+<li>Neither the deck nor the sheet has a separate single-dose C<sub>max</sub> expression for this module.</li>
+<li>The sheet's standalone C<sub>max</sub> forms all carry a dosing interval and belong to multiple dosing.</li>
+</ul></td>
 <td>C<sub>max</sub>, in every worked example. Her values: 12.17 mg/L, 55.4 mg/L, about 13 mg/L, 12.14 mcg/mL.</td>
 <td>By substitution only.</td></tr>
 </tbody></table>
 
-<p><b>What moves when a parameter changes</b>, in her own summary. Increasing the <b>dose</b>: C<sub>max</sub> and AUC rise in proportion, t<sub>max</sub> does not move, the absorption and elimination rates rise because more drug is present, and k and k<sub>a</sub> are unchanged. Increasing <b>k<sub>a</sub></b> relative to k: C<sub>max</sub> is higher, t<sub>max</sub> is earlier, AUC is relatively unchanged, because <i>"if we're just changing KA we're not changing the clearance at all."</i> Increasing <b>k</b>: C<sub>max</sub> is lower, t<sub>max</sub> is earlier, and AUC falls, because <i>"if we change the K, we are effectively changing the clearance."</i> She notes the AUC claim for varying k<sub>a</sub> comes from the textbook table rather than from the slide graph.</p>
+<p><b>What moves when a parameter changes</b>, in her own summary:</p>
+<ul class="tlist">
+<li>Increasing the <b>dose</b>: C<sub>max</sub> and AUC rise in proportion, and t<sub>max</sub> does not move.</li>
+<li>With a larger dose, the absorption and elimination rates rise because more drug is present; k and k<sub>a</sub> are unchanged.</li>
+<li>Increasing <b>k<sub>a</sub></b> relative to k: C<sub>max</sub> is higher, t<sub>max</sub> is earlier, and AUC is relatively unchanged, because <i>"if we're just changing KA we're not changing the clearance at all."</i></li>
+<li>Increasing <b>k</b>: C<sub>max</sub> is lower, t<sub>max</sub> is earlier, and AUC falls, because <i>"if we change the K, we are effectively changing the clearance."</i></li>
+<li>She notes that the AUC claim for varying k<sub>a</sub> comes from the textbook table, not from the slide graph.</li>
+</ul>
 
-<p><b>Which process sets the terminal slope.</b> Disposition rate limiting is the usual case, where the absorption half-life is much shorter than the elimination half-life, so k<sub>a</sub> is much larger than k and the tail of the curve falls with k. Absorption rate limiting is the other case, where the absorption half-life is longer. A modified-release oral product that releases at a constant rate is zero-order in and first-order out, which is the shape of an IV infusion rather than of an ordinary oral dose &mdash; her reason for the word "usually" on the summary slide.</p>
+<p><b>Which process sets the terminal slope.</b></p>
+<ul class="tlist">
+<li>Disposition rate limiting is the usual case.</li>
+<li>In it, the absorption half-life is much shorter than the elimination half-life, so k<sub>a</sub> is much larger than k and the tail of the curve falls with k.</li>
+<li>Absorption rate limiting is the other case: the absorption half-life is the longer one.</li>
+<li>A modified-release oral product that releases at a constant rate is zero-order in and first-order out.</li>
+<li>That is the shape of an IV infusion, not of an ordinary oral dose. It is her reason for the word "usually" on the summary slide.</li>
+</ul>
 
 <h3>Module 6 &mdash; multiple dosing: repeated IV bolus</h3>
-<p>The same dose at the same interval &tau;. Each dose is added to what is left of the doses before it, so the peaks and troughs climb to a plateau, steady state, in 3 to 5 half-lives whatever the dose: <i>"not 3 to 5 doses, 3 to 5 half-lives."</i> Superposition assumes first-order (linear) elimination and pharmacokinetics that later doses do not change, so each dose follows the first-dose curve and the only difference at steady state is the accumulated drug. The &infin; sign means steady state. &tau; is the interval, not the frequency: TID is &tau; = 8 hr.</p>
+<ul class="tlist">
+<li>The same dose is given at the same interval &tau;.</li>
+<li>Each dose is added to what is left of the doses before it, so the peaks and troughs climb to a plateau: steady state.</li>
+<li>The plateau arrives in 3 to 5 half-lives, whatever the dose: <i>"not 3 to 5 doses, 3 to 5 half-lives."</i></li>
+<li>Superposition assumes first-order (linear) elimination, and pharmacokinetics that later doses do not change.</li>
+<li>So each dose follows the first-dose curve, and the only difference at steady state is the accumulated drug.</li>
+<li>The &infin; sign means steady state.</li>
+<li>&tau; is the interval, not the frequency: TID is &tau; = 8 hr.</li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
@@ -387,14 +578,32 @@ const REFERENCE_HTML = `
 <td>No. The sheet prints the n-dose line (page 1), which becomes this one as n grows and e<sup>&minus;nk&tau;</sup> falls to zero.</td></tr>
 </tbody></table>
 
-<p><b>Her Example 1</b>, t&frac12; 4 hr, V<sub>D</sub> 25% of body weight, 10 mg/kg every 8 hours: first dose 40 mg/L falling to 10 mg/L; at steady state 53.3, 13.3 and an average of 28.9 mg/L. The interval is two half-lives, so e<sup>&minus;k&tau;</sup> = 0.25 and the accumulation factor is 1.33.</p>
+<p><b>Her Example 1</b>: t&frac12; 4 hr, V<sub>D</sub> 25% of body weight, 10 mg/kg every 8 hours.</p>
+<ul class="tlist">
+<li>First dose: 40 mg/L, falling to 10 mg/L.</li>
+<li>At steady state: 53.3, 13.3 and an average of 28.9 mg/L.</li>
+<li>The interval is two half-lives, so e<sup>&minus;k&tau;</sup> = 0.25 and the accumulation factor is 1.33.</li>
+</ul>
 {{fig:md_bolus|Her Example 1 regimen: six doses, then none. The dashed curve is the first dose on its own.}}
 {{steps:md_bolus_steps}}
 
-<p><b>What the chapter adds.</b> The accumulation index R = C<sub>max</sub><sup>&infin;</sup>/C<sub>max</sub> after the first dose = 1/(1 &minus; e<sup>&minus;k&tau;</sup>), which depends on k and &tau; and not on the dose. Time to steady state depends on the elimination half-life only, not on the dose, the interval or the number of doses: 90% at 3.3 half-lives, 95% at 4.32, 99% at 6.6. Superposition fails when repeated dosing changes the pharmacokinetics: changing pathophysiology, saturation of a carrier system, enzyme induction or inhibition, and nonlinear pharmacokinetics.</p>
+<p><b>What the chapter adds.</b></p>
+<ul class="tlist">
+<li>The accumulation index R = C<sub>max</sub><sup>&infin;</sup>/C<sub>max</sub> after the first dose = 1/(1 &minus; e<sup>&minus;k&tau;</sup>).</li>
+<li>It depends on k and &tau;, not on the dose.</li>
+<li>Time to steady state depends on the elimination half-life only, not on the dose, the interval or the number of doses: 90% at 3.3 half-lives, 95% at 4.32, 99% at 6.6.</li>
+<li>Superposition fails when repeated dosing changes the pharmacokinetics: changing pathophysiology, saturation of a carrier system, enzyme induction or inhibition, and nonlinear pharmacokinetics.</li>
+</ul>
 
 <h3>Module 6 &mdash; intermittent IV infusions</h3>
-<p>The repeated-bolus regimen with each dose put in slowly: <i>"instead of putting all the drug into the body all at once, we are going to put the drug into the body via a zero order ... constant process."</i> The reason is tolerance: many drugs are better tolerated infused over time than pushed at once. Nothing new is needed: the rise during each infusion is the Module 3 infusion equation stopped at the infusion time, the fall after it is C<sub>0</sub>e<sup>&minus;kt</sup> from the end-of-infusion value, and with first-order kinetics the infusions add.</p>
+<ul class="tlist">
+<li>The repeated-bolus regimen, with each dose put in slowly: <i>"instead of putting all the drug into the body all at once, we are going to put the drug into the body via a zero order ... constant process."</i></li>
+<li>The reason is tolerance: many drugs are better tolerated infused over time than pushed at once.</li>
+<li>No new equation is needed.</li>
+<li>The rise during each infusion is the Module 3 infusion equation, stopped at the infusion time.</li>
+<li>The fall after it is C<sub>0</sub>e<sup>&minus;kt</sup>, starting from the end-of-infusion value.</li>
+<li>With first-order kinetics, the infusions add.</li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
@@ -408,7 +617,11 @@ const REFERENCE_HTML = `
 <tr><td><b>C = C<sub>end</sub>e<sup>&minus;kt</sup></b>, summed over the infusions</td>
 <td>t for each infusion = the time from the end of that infusion to the time asked for</td>
 <td>After an infusion stops: first-order elimination only. Same drug, same rate, same duration gives the same C<sub>end</sub> each time, and the contributions add.</td>
-<td>The concentration a stated time after the second infusion ends. Her number line for Example 4: ends at 2 and 8 hr, the question at 12 hr, so t = 10 and 4 hr; 3.86 + 9.48 = 13.33 mg/L.</td>
+<td><ul class="tlist">
+<li>The concentration a stated time after the second infusion ends.</li>
+<li>Her number line for Example 4: infusions end at 2 and 8 hr, the question is at 12 hr, so t = 10 and 4 hr.</li>
+<li>3.86 + 9.48 = 13.34 mg/L. Her stated value is 13.33, from 17.3 rounded before the exponentials.</li>
+</ul></td>
 <td>C = C<sub>0</sub>e<sup>&minus;kt</sup>, page 1.</td></tr>
 
 <tr><td><b>C<sub>ss</sub> = {{frac:R|Cl}}</b></td>
@@ -421,7 +634,11 @@ const REFERENCE_HTML = `
 {{steps:two_infusions_steps}}
 
 <h3>Module 6 &mdash; multiple oral doses</h3>
-<p>The single-oral-dose equation with the accumulation brackets attached. Her way of telling the oral steady-state peak from the bolus one on the equation sheet: <i>"what tells you that this is for an oral dose? F is one thing. ... What else tells us? Team Max, right? ... Only for oral do you need to find T Max."</i> The two things a regimen can change are the dose and the dosing interval: <i>"We don't change clearance, we don't change half-life, we don't change volume and distribution."</i></p>
+<ul class="tlist">
+<li>The single-oral-dose equation, with the accumulation brackets attached.</li>
+<li>How she tells the oral steady-state peak from the bolus one on the equation sheet: <i>"what tells you that this is for an oral dose? F is one thing. ... What else tells us? Team Max, right? ... Only for oral do you need to find T Max."</i></li>
+<li>A regimen can change two things, the dose and the dosing interval: <i>"We don't change clearance, we don't change half-life, we don't change volume and distribution."</i></li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
@@ -429,8 +646,16 @@ const REFERENCE_HTML = `
 <tr><td><b>t<sub>max</sub><sup>&infin;</sup> = {{frac:1|k<sub>a</sub> &minus; k}} ln[{{frac:k<sub>a</sub>(1 &minus; e<sup>&minus;k&tau;</sup>)|k(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>)}}]</b></td>
 <td>k<sub>a</sub>, k hr<sup>&minus;1</sup>; &tau; hr; result in hr</td>
 <td>Steady state after multiple oral doses. It holds k, k<sub>a</sub> and &tau;, where the single-dose t<sub>max</sub> holds only k and k<sub>a</sub>; a new interval means a new t<sub>max</sub>.</td>
-<td>t<sub>max</sub> at steady state, before C<sub>max</sub> at steady state. Her tetracycline values: 3.1 hr for the first dose, 2.06 hr at steady state. <i>"generally going to be smaller than the T-Max of the first dose."</i></td>
-<td>Yes, page 2, left column, fourth line. In lecture she placed the oral steady-state lines <i>"on the backside or at the bottom very bottom of the right hand column"</i> (09-28); on this copy they are on the back page, and the bottom of page 1's right column holds the n-dose oral line.</td></tr>
+<td><ul class="tlist">
+<li>t<sub>max</sub> at steady state, before C<sub>max</sub> at steady state.</li>
+<li>Her tetracycline values: 3.1 hr for the first dose, 2.06 hr at steady state.</li>
+<li><i>"generally going to be smaller than the T-Max of the first dose."</i></li>
+</ul></td>
+<td><ul class="tlist">
+<li>Yes, page 2, left column, fourth line.</li>
+<li>In lecture she placed the oral steady-state lines <i>"on the backside or at the bottom very bottom of the right hand column"</i> (09-28).</li>
+<li>On this copy they are on the back page; the bottom of page 1's right column holds the n-dose oral line.</li>
+</ul></td></tr>
 
 <tr><td><b>C<sub>max</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>}} ({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt<sub>max</sub>&infin;</sup></b></td>
 <td>F fraction absorbed; t<sub>max</sub><sup>&infin;</sup> from the line above</td>
@@ -457,10 +682,21 @@ const REFERENCE_HTML = `
 <td>Yes, page 1, last line of the right column.</td></tr>
 </tbody></table>
 
-<p><b>Changing the regimen.</b> Increase the dose, same interval: higher steady-state concentrations, a larger swing from peak to trough, usually no change in compliance. Increase the interval, same dose: lower concentrations, a larger swing, better compliance; decrease the interval: higher concentrations, a smaller swing because <i>"we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve,"</i> and worse compliance. Neither change moves the time to reach steady state. Her instruction on stating a regimen: an interval the patient can keep and an oral dose rounded to a strength that exists, <i>"Don't tell me 17.29 mg for an oral dose."</i></p>
+<p><b>Changing the regimen.</b></p>
+<ul class="tlist">
+<li>Increase the dose, same interval: higher steady-state concentrations, a larger swing from peak to trough, usually no change in compliance.</li>
+<li>Increase the interval, same dose: lower concentrations, a larger swing, better compliance.</li>
+<li>Decrease the interval: higher concentrations and worse compliance, with a smaller swing because <i>"we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve,"</i></li>
+<li>Neither change moves the time to reach steady state.</li>
+<li>When stating a regimen, give an interval the patient can keep and an oral dose rounded to a strength that exists: <i>"Don't tell me 17.29 mg for an oral dose."</i></li>
+</ul>
 
 <h3>The equation sheet as a whole</h3>
-<p>BasicPharmacokineticsEquations.pdf runs to two pages. It is not organised by module, so a line for a module not yet lectured sits beside one from Module 1. Her instruction about using it: <i>"before you grab your calculator, before, for any question, and before you start flipping to the equation sheet, think about what is being asked of you and what you need."</i></p>
+<ul class="tlist">
+<li>BasicPharmacokineticsEquations.pdf runs to two pages.</li>
+<li>It is not organised by module, so a line for a module not yet lectured sits beside one from Module 1.</li>
+<li>Her instruction on using it: <i>"before you grab your calculator, before, for any question, and before you start flipping to the equation sheet, think about what is being asked of you and what you need."</i></li>
+</ul>
 
 <table class="reftab"><thead><tr>
 <th style="width:26%">Group</th><th style="width:44%">Lines carried</th><th>Module</th></tr></thead><tbody>

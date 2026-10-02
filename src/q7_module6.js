@@ -45,23 +45,30 @@ const M6_EQ = {h:'The steady-state equations for repeated IV bolus doses', list:
   'τ (tau) is the dosing interval in hours, the time between doses. TID, three times a day, is τ = 8 hr.',
   'The amount forms, Dmax∞, Dmin∞ and Davg∞, carry D0 where the concentration forms carry C0. Dividing an amount by VD gives the concentration.']};
 
-const M6_ACCFAC = {h:'The accumulation factor', table:{head:['', 'First dose', 'At steady state'],
+const M6_ACCFAC = {h:'The accumulation factor', list:[
+  'The factor {{frac:1|1 - e^(-kτ)}} is the accumulation factor: the steady-state peak divided by the first-dose peak.',
+  'It holds only k and τ, so it does not depend on the dose.',
+  'A shorter interval makes e^(-kτ) larger and the factor larger, which means more accumulation.'],
+  table:{head:['', 'First dose', 'At steady state'],
   rows:[['Drug already in the body when a dose is given', 'None', 'The steady-state trough, Cmin∞, left from earlier doses'],
         ['Peak', 'C0 = D0/VD', 'Cmax∞ = C0 × {{frac:1|1 - e^(-kτ)}}'],
         ['Trough, at the end of the interval', 'C0e^(-kτ)', 'Cmax∞e^(-kτ)'],
-        ['Decline between doses', 'First order, rate constant k', 'First order, the same k']]},
-  after:'The factor {{frac:1|1 - e^(-kτ)}} is the accumulation factor: the steady-state peak divided by the first-dose peak. It holds only k and τ, so it does not depend on the dose. A shorter interval makes e^(-kτ) larger and the factor larger, which means more accumulation.'};
+        ['Decline between doses', 'First order, rate constant k', 'First order, the same k']]}};
 
-const M6_FIG = {h:'Her Example 1 regimen drawn out', fig:'md_bolus',
-  t:'10 mg/kg every 8 hours with a half-life of 4 hours and VD 0.25 L/kg. Each dose adds C0 = 40 mg/L. The first dose falls to 10 mg/L at 8 hours because 8 hours is two half-lives.',
-  after:'The peaks climb from 40 to 53.3 mg/L and the troughs from 10 to 13.3 mg/L, and the climb is over within 3 to 5 half-lives, 12 to 20 hours. The average at steady state, 28.9 mg/L, sits below the midpoint of peak and trough, 33.3 mg/L, because the curve spends more of each interval at the lower concentrations. After the sixth dose the level falls by first-order elimination alone.'};
+const M6_FIG = {h:'Her Example 1 regimen drawn out', fig:'md_bolus', list:[
+  '10 mg/kg every 8 hours, with a half-life of 4 hours and VD (apparent volume of distribution) 0.25 L/kg. Each dose adds C0 = 40 mg/L.',
+  'The first dose falls to 10 mg/L at 8 hours, because 8 hours is two half-lives.',
+  'The peaks climb from 40 to 53.3 mg/L and the troughs from 10 to 13.3 mg/L. The climb is over within 3 to 5 half-lives, 12 to 20 hours.',
+  'The average at steady state, 28.9 mg/L, sits below the midpoint of peak and trough, 33.3 mg/L, because the curve spends more of each interval at the lower concentrations.',
+  'After the sixth dose the level falls by first-order elimination alone.']};
 
 const M6_CH = {h:'What the chapter adds', list:[
   'The accumulation index is R = Cmax∞ divided by the first-dose Cmax, which equals {{frac:1|1 - e^(-kτ)}}. It depends on k and τ and not on the dose.',
   'Time to steady state depends on the elimination half-life only. It does not depend on the dose, the dosing interval or the number of doses; changing the dose or the interval changes the plateau level, not how long it takes to reach it.',
   'Fractions of steady state: 90 per cent at 3.3 half-lives, 95 per cent at 4.32 and 99 per cent at 6.6.',
   'If each dose is given after the previous dose has been eliminated, there is no accumulation.',
-  'Superposition fails when the pharmacokinetics change with repeated doses: a change in the patient\'s pathophysiology, saturation of a drug carrier system, enzyme induction or enzyme inhibition. Drugs with nonlinear pharmacokinetics are not predictable by superposition.']};
+  'Superposition fails when the pharmacokinetics change with repeated doses: a change in the patient\'s pathophysiology, saturation of a drug carrier system, enzyme induction or enzyme inhibition.',
+  'Drugs with nonlinear pharmacokinetics are not predictable by superposition.']};
 
 const M6_NDOSE = {h:'Before steady state, and after the last dose', list:[
   'After n doses: Cp = {{frac:D0|VD}} ({{frac:1 - e^(-nkτ)|1 - e^(-kτ)}}) e^(-kt). n is the dose number just given; t is the time since that dose.',
@@ -80,9 +87,9 @@ const Q_MODULE6 = [
   {t:'3 to 5 half-lives', correct:true,
    why:'Elimination is first order, so how close the level is to its plateau is set by how many half-lives have passed. After 3 to 5 half-lives the peaks and troughs have stopped climbing and each dose reaches the same maximum and minimum.'},
   {t:'3 to 5 doses',
-   why:'Choosing this confuses doses with half-lives: it counts doses where the rule counts half-lives. The number of doses given in 3 to 5 half-lives depends on the interval: with a half-life of 4 hours and a dose every 8 hours, 3 to 5 half-lives is 12 to 20 hours, by which time 2 to 3 doses have been given (at 0, 8 and 16 hours). With a dose every 2 hours the same 12 to 20 hours holds 7 to 11 doses.'},
+   why:'Choosing this counts doses where the rule counts half-lives. With a half-life of 4 hours, 3 to 5 half-lives is 12 to 20 hours: 2 to 3 doses (at 0, 8 and 16 hours) with a dose every 8 hours, but 7 to 11 doses with a dose every 2 hours.'},
   {t:'One dosing interval',
-   why:'Choosing this treats the first trough as the plateau. One interval brings the level down to the first trough, not to the plateau. The second dose then starts from that trough, and the peaks keep climbing for several more intervals, which is the accumulation this module is about.'},
+   why:'Choosing this treats the first trough as the plateau. One interval brings the level down to the first trough, not to the plateau. The second dose then starts from that trough, and the peaks keep climbing for several more intervals. That climb is accumulation.'},
   {t:'A time that doubles when the dose doubles',
    why:'This answer ties the time to plateau to the dose. A first-order rate is proportional to the amount present, so a larger dose is eliminated faster in proportion, and the time to plateau does not change. Doubling the dose doubles the plateau level instead.'}],
  teach:[
@@ -355,7 +362,7 @@ const Q_MODULE6 = [
   {t:'It cannot be compared without the AUC (area under the curve)',
    why:'Choosing this treats the AUC as the only route to the average. Cavg∞ can be found without an AUC from FD0/(VD kτ), and the shape of the curve alone puts it below the midpoint. The exponential decline is enough to answer.'}],
  teach:[
-  {t:'Cavg∞ is not (Cmax∞ + Cmin∞)/2. It is the area over one interval divided by τ, or FD0/(VD kτ). Because first-order decline is logarithmic, not algebraic, the average sits below the midpoint.'},
+  {t:'Cavg∞ is not (Cmax∞ + Cmin∞)/2. It is the area over one interval divided by τ, or FD0/(VD kτ). A first-order decline is exponential: it falls fast early and slowly late, so the average sits below the midpoint.'},
   M6_FIG, M6_EQ],
  teachImg:'slide_6RepetitiveIVBolus_p8',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',
@@ -395,7 +402,9 @@ const Q_MODULE6 = [
   {t:'Twice as high, whatever the interval',
    why:'Choosing this treats the accumulation factor as a fixed number. The ratio is 1/(1 − e^(-kτ)), which depends on k and τ. It is 2 only when τ is one half-life. With τ equal to two half-lives, as in her Example 1, it is 1.33.'}],
  teach:[
-  {t:'With repeated intravenous (IV) bolus doses, the steady-state peak is higher than the first-dose peak by the accumulation factor. With a very long interval compared with the half-life, e^(-kτ) is close to 0, the factor is close to 1, and there is little accumulation.'},
+  {h:'The idea', list:[
+   'With repeated intravenous (IV) bolus doses, the steady-state peak is higher than the first-dose peak by the accumulation factor.',
+   'With a very long interval compared with the half-life, e^(-kτ) is close to 0, the factor is close to 1, and there is little accumulation.']},
   M6_ACCFAC, M6_CH],
  teachImg:'slide_6RepetitiveIVBolus_p8',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',

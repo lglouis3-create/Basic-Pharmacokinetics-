@@ -41,9 +41,9 @@
 
    OMITTED ON PURPOSE. The two Henderson-Hasselbalch forms on
    4---Clearance-and-Elimination.pdf slide 20 are not here. The slide prints
-   both, but its text extract interleaves the numerators and denominators, so
-   which form is labelled for weak acids and which for weak bases cannot be
-   read off it. Drilling one of them would be drilling a guess.
+   both; the rendered slide labels pH = pKa + log(ionized/nonionized) for weak
+   acids (pKa 3-8) and pH = pKa + log(nonionized/ionized) for weak bases
+   (pKa 7.5-10.5). Reference carries them; they are not drilled here.
    ========================================================================== */
 const EQUATIONS = [
 
