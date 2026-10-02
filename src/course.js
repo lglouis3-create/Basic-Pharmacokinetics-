@@ -179,6 +179,7 @@ const COURSE = {
     {id: 'crcl',      label: 'Creatinine clearance and ideal weight',  short: 'CrCl',      kind: 'calc'},
     {id: 'oral',      label: 'Oral absorption — Cmax, tmax, ka',       short: 'Oral',      kind: 'calc'},
     {id: 'multidose', label: 'Repeated dosing — peak, trough, average', short: 'Multi-dose', kind: 'calc'},
+    {id: 'term', label: 'Terms and definitions', short: 'Terms', kind: 'concept'},
   ],
 
   paceDefault: 'weekly',

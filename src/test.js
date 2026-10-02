@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -710,6 +710,38 @@ console.log('\n=== 8. Small pools end instead of looping ===');
   console.log(more>0 ? `  ok    "Ask everything" still serves (${more} more)` : '  FAIL  "Ask everything" stopped too');
   if(!more) fails++;
   X.getDB().settings.mode='cram';
+})();
+
+
+console.log('\n=== 9. Terms ===');
+(() => {
+  const T = X.TERMS, TQ = X.TERM_QS; let bad = 0;
+  const ids = new Set();
+  for (const t of T) {
+    const miss = ['id','term','module','group','def','gist','scene','cite'].filter(k => !t[k]);
+    if (miss.length) { console.log(`  FAIL  term ${t.id || t.term}: missing ${miss.join(', ')}`); bad++; }
+    if (ids.has(t.id)) { console.log(`  FAIL  term id ${t.id} used twice`); bad++; }
+    ids.add(t.id);
+    if (!/\.pdf|deck|slide|transcript/i.test(t.cite || '')) { console.log(`  FAIL  term ${t.id}: cite names no deck or transcript`); bad++; }
+  }
+  for (const q of TQ) {
+    const right = q.options.filter(o => o.correct).length;
+    const texts = q.options.map(o => o.t.toLowerCase());
+    if (right !== 1) { console.log(`  FAIL  ${q.id}: ${right} correct options`); bad++; }
+    if (q.options.length !== 4) { console.log(`  FAIL  ${q.id}: ${q.options.length} options`); bad++; }
+    if (new Set(texts).size !== texts.length) { console.log(`  FAIL  ${q.id}: two options read the same`); bad++; }
+    if (q.options.some(o => !o.why)) { console.log(`  FAIL  ${q.id}: an option has no why`); bad++; }
+    if (X.byId(q.id) !== q) { console.log(`  FAIL  ${q.id}: not found by id, so progress on it cannot be recorded`); bad++; }
+    if (QUESTIONS.some(b => b.id === q.id)) { console.log(`  FAIL  ${q.id}: collides with a bank question`); bad++; }
+    // the scene and definition stems must not print the term they ask for
+    if (!/-gist$/.test(q.id)) {
+      const t = T.find(x => x.id === q.termId), name = t.term.replace(/\s*\(.*\)\s*$/, '');
+      if (q.stem.toLowerCase().includes(name.toLowerCase())) { console.log(`  FAIL  ${q.id}: the stem prints the term`); bad++; }
+    }
+  }
+  if (TQ.some(q => QUESTIONS.includes(q))) { console.log('  FAIL  term questions leaked into the exam bank'); bad++; }
+  console.log(bad ? `  FAIL  ${bad} term problems` : `  ok    ${T.length} terms, ${TQ.length} term questions: one keyed answer each, four distinct options, no stem prints its term, kept off the exam`);
+  fails += bad;
 })();
 
 console.log(`\n${fails ? 'FAILURES: '+fails : 'All checks passed'}${warns ? '  (warnings: '+warns+')' : ''}\n`);

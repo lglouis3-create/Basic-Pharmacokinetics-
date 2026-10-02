@@ -285,14 +285,14 @@ function poolFor(topicId, subId){
     matchesFilter(q));
 }
 
-const VIEWS = ['topics','quiz','gaps','exam','guide','tell','diag','eq','ref','settings'];
+const VIEWS = ['topics','quiz','gaps','exam','guide','tell','terms','diag','eq','ref','settings'];
 function show(v){
   VIEW = v;
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.v===v));
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
   ({topics:renderTopics, quiz:renderQuiz, gaps:renderGaps, exam:renderExam,
-    guide:renderGuide, tell:renderTell, diag:renderDiagrams, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
+    guide:renderGuide, tell:renderTell, terms:renderTerms, diag:renderDiagrams, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
 }
 
 /* ==========================================================================
@@ -455,6 +455,10 @@ function updatedText(){
     year: 'numeric', hour: 'numeric', minute: '2-digit'});
 }
 
+/* Which exam cards start open: the one being prepared for, unless this
+   browser was told otherwise; earlier and later exams start closed. */
+const EXAMGRP_KEY = NS + ':examgrp:';
+const examGroupOpen = id => { const v = LS.get(EXAMGRP_KEY + id); return v ? v === 'open' : id === EXAM.id; };
 function renderTopics(){
   if(MODPAGE) return renderModulePage();
   FILTER.kind = 'all';
@@ -495,7 +499,45 @@ function renderTopics(){
       <button id="sweepFiltered" class="ghost">Start</button></div>` : ''}
   </div></div>`;
 
+  /* Modules and their recap sit inside one card per exam, so the page reads
+     Exam 1 (Modules 1-3, then a review of all three), Exam 2, and so on.
+     The exam a module belongs to comes from the lecture list. */
+  const examOfModule = mod => (COURSE.lectures.find(l => l.module === mod) || {}).exam;
+  const groups = new Map(), rest = [];
   for(const m of outline()){
+    const e = m.module != null ? examOfModule(m.module) : m.exam;
+    if(e == null){ rest.push(m); continue; }
+    if(!groups.has(e)) groups.set(e, {mods: [], recap: null});
+    if(m.module != null) groups.get(e).mods.push(m); else groups.get(e).recap = m;
+  }
+  for(const [id, g] of groups){
+    const ex = COURSE.exams.find(e => e.id === id);
+    const pool = examQuestions(id);
+    if(!pool.length && !g.mods.some(m => modulePool(m.module).length)) continue;
+    const nums = g.mods.map(m => m.module);
+    const span = nums.length > 1 ? `Modules ${nums[0]}–${nums[nums.length - 1]}` : nums.length ? `Module ${nums[0]}` : '';
+    const day = ex && (ex.when || ex.date) ? new Date(ex.when || ex.date + 'T12:00').toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric'}) : '';
+    const when = ex ? [day, examCountdown(ex)].filter(Boolean).join(' · ') : '';
+    h += `<details class="examgrp" data-examgrp="${id}"${examGroupOpen(id) ? ' open' : ''}><summary>
+        <span class="mname">${esc(ex ? ex.name : 'Exam ' + id)}<small>${[span, when, pool.length ? pool.length + ' questions' : ''].filter(Boolean).map(esc).join(' · ')}</small></span>
+        ${pool.length ? progressHTML(masteryOf(pool), pool) : ''}
+      </summary><div class="egbody">`;
+    for(const m of g.mods) h += moduleCard(m);
+    if(pool.length && !stepwiseOnly){
+      h += `<div class="module recapcard"><div class="mrow"><span class="mname">Review all of ${esc(ex ? ex.name : 'this exam')}<small>${splitNote(pool)}${span ? ' · ' + esc(span) + ' together' : ''}</small></span></div>
+        <div class="mfoot">${examRows(pool, id)}
+        <div class="subrow"><span class="sname"><b>Straight pass</b>
+          <small>Every question once, shuffled, nothing held back by scheduling</small></span>
+          <button data-exam="${id}" data-how="sweep" data-k="" class="ghost">Start</button></div>
+        ${ex ? `<div class="subrow"><span class="sname"><b>Sit a practice paper</b>
+          <small>${ex.questions} questions in ${ex.minutes} minutes at the blueprint, no feedback until you submit</small></span>
+          <button data-exam="${id}" data-how="paper">Open</button></div>` : ''}
+        </div></div>`;
+    }
+    h += `</div></details>`;
+  }
+
+  for(const m of rest){
     if(m.topic){ h += topicCard(m.topic); continue; }
 
     if(m.view){
@@ -507,27 +549,6 @@ function renderTopics(){
         ${m.view === 'eq' ? `<span class="meter"><i style="width:${Math.round(100 * nl / Math.max(1, EQUATIONS.length))}%"></i></span>
         <span class="counts" title="Learned means three correct answers in a row in the equation drill">${nl}/${EQUATIONS.length} learned</span>` : ''}
         <button data-view="${esc(m.view)}">Open</button></div></div>`;
-      continue;
-    }
-
-    if(m.exam != null){
-      if(stepwiseOnly) continue;          // a recap is a mixed drill, not a problem set
-      const ex = COURSE.exams.find(e => e.id === m.exam);
-      const pool = examQuestions(m.exam);
-      if(!pool.length) continue;
-      const em = masteryOf(pool), epct = em.total ? Math.round(100*em.mastered/em.total) : 0;
-      h += `<details class="module"><summary>
-          <span class="mname">${esc(m.name)}<small>${splitNote(pool)}${ex ? ' · ' + esc(ex.name) + ' material' : ''}</small></span>
-          ${progressHTML(em, pool)}
-        </summary><div class="mfoot">
-        ${examRows(pool, m.exam)}
-        <div class="subrow"><span class="sname"><b>Straight pass</b>
-          <small>Every question once, shuffled, nothing held back by scheduling</small></span>
-          <button data-exam="${m.exam}" data-how="sweep" data-k="" class="ghost">Start</button></div>
-        ${ex ? `<div class="subrow"><span class="sname"><b>Sit a practice paper</b>
-          <small>${ex.questions} questions in ${ex.minutes} minutes at the blueprint, no feedback until you submit</small></span>
-          <button data-exam="${m.exam}" data-how="paper">Open</button></div>` : ''}
-        </div></details>`;
       continue;
     }
 
@@ -550,6 +571,9 @@ function renderTopics(){
 
   const el = $('#v-topics');
   el.innerHTML = h;
+  el.querySelectorAll('details.examgrp').forEach(d => d.addEventListener('toggle', () => {
+    LS.set(EXAMGRP_KEY + d.dataset.examgrp, d.open ? 'open' : 'closed');
+  }));
 
   el.querySelectorAll('.chip').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
@@ -870,6 +894,145 @@ function pairsBlock(q){
       <span class="pl">${esc(p.l)}</span>
       <span class="pr">${rich(p.r)}<span>${rich(p.why)}</span></span>
     </div>`).join('') + `</div>`;
+}
+
+/* ==========================================================================
+   TERMS
+   ==========================================================================
+   Three modes over TERMS (glossary.js): Glossary (cards), Flashcards (the
+   scene first, the term hidden), Quiz me (three questions per term). A group
+   filter applies to all three; the Glossary has a search box, an A–Z bar and
+   a By group / A–Z toggle. Term questions are kept outside QUESTIONS, so the
+   exam draw and the module counts are unchanged, but their answers are
+   logged and counted in Weak spots under the skill "Terms". */
+const TERM_BY = Object.fromEntries(TERMS.map(t => [t.id, t]));
+const termName = t => t.term.replace(/\s*\(.*\)\s*$/, '');
+const termAbbr = t => (t.term.match(/\(([^)]*)\)/) || [, ''])[1];
+const termMask = (t, s) => {
+  let out = String(s);
+  const words = [termName(t), termAbbr(t)].filter(w => w && w.length > 1);
+  for(const w of words) out = out.replace(new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), '____');
+  return out;
+};
+function termDistractors(t, n){
+  const pick = [...(t.confuse || []).map(id => TERM_BY[id]).filter(Boolean)];
+  for(const o of TERMS) if(pick.length < n && o !== t && o.group === t.group && !pick.includes(o)) pick.push(o);
+  for(const o of TERMS) if(pick.length < n && o !== t && !pick.includes(o)) pick.push(o);
+  return pick.slice(0, n);
+}
+function termQuestions(){
+  const out = [];
+  for(const t of TERMS){
+    const ds = termDistractors(t, 3);
+    const base = {prof: 'Mosley', tier: 'new', exam: t.module <= 3 ? 1 : 2, module: t.module, lecture: t.lecture,
+      topic: 'terms', sub: t.group, concept: 'term:' + t.id, skill: 'term', source: t.src || 'slide', cite: t.cite, termId: t.id,
+      teach: [{h: termName(t), list: [t.def, ...(t.hook ? [t.hook] : [])]}]};
+    const named = (o, right) => ({t: o.term, correct: right, why: right ? `${termName(o)}: ${o.gist}` : `${termName(o)} means something else: ${o.gist}`});
+    out.push(Object.assign({}, base, {id: `term-${t.id}-scene`, stem: `Which term describes this? ${termMask(t, t.scene)}`,
+      options: shuffle([named(t, true), ...ds.map(o => named(o, false))])}));
+    out.push(Object.assign({}, base, {id: `term-${t.id}-gist`, dupOf: `term-${t.id}-scene`, stem: `What does "${t.term}" mean?`,
+      options: shuffle([{t: t.gist, correct: true, why: `${termName(t)}: ${t.gist}`},
+        ...ds.map(o => ({t: o.gist, why: `That describes ${termName(o)}, not ${termName(t)}.`}))])}));
+    out.push(Object.assign({}, base, {id: `term-${t.id}-def`, dupOf: `term-${t.id}-scene`, stem: `Which term has this definition? ${termMask(t, t.def)}`,
+      options: shuffle([named(t, true), ...ds.map(o => named(o, false))])}));
+  }
+  return out;
+}
+const TERM_QS = termQuestions();
+const TERM_GROUPS = [...new Set(TERMS.map(t => t.group))];
+const LETTERS_AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const termLetter = t => (termName(t).match(/[A-Za-z]/) || ['#'])[0].toUpperCase();
+let TV = {mode: 'gloss', group: 'all', order: 'group', q: '', fc: null};
+let TIO = null;
+
+function termCardHTML(t){
+  const fig = t.fig && (IMAGES[t.fig] ? `<figure class="reffig"><img src="${IMAGES[t.fig]}" alt="${esc(t.term)}"></figure>` : '');
+  return `<div class="termcard" id="term-${esc(t.id)}" data-letter="${termLetter(t)}">
+    <div class="dghead"><b>${esc(t.term)}</b><span>Module ${t.module} · ${esc(t.group)}</span></div>
+    <p class="tgist">${rich(t.gist)}</p>
+    <ul class="tlist"><li><b>Definition.</b> ${rich(t.def)}</li><li><b>In action.</b> ${rich(t.scene)}</li>${
+      t.hook ? `<li><b>Her point.</b> ${rich(t.hook)}</li>` : ''}</ul>${fig || ''}
+    ${t.quote ? `<p class="dquote">“${esc(t.quote)}”</p>` : ''}<p class="wcite">${esc(t.cite)}</p></div>`;
+}
+const termsInGroup = () => TERMS.filter(t => TV.group === 'all' || t.group === TV.group);
+function termMatches(t, q){
+  if(!q) return 2;
+  const s = q.toLowerCase();
+  if(t.term.toLowerCase().includes(s)) return 2;
+  return [t.gist, t.def, t.scene, t.hook || ''].join(' ').toLowerCase().includes(s) ? 1 : 0;
+}
+function renderTerms(){
+  const el = $('#v-terms');
+  const groupChips = `<div class="frow">${['all', ...TERM_GROUPS].map(g => `<button class="chip" data-tgroup="${esc(g)}" aria-pressed="${TV.group === g}">${g === 'all' ? 'All groups' : esc(g)}</button>`).join('')}</div>`;
+  const modeTabs = `<div class="mtabs">${[['gloss', 'Glossary'], ['flash', 'Flashcards'], ['quiz', 'Quiz me']].map(([m, l]) =>
+    `<button class="mtab" data-tmode="${m}" aria-pressed="${TV.mode === m}">${l}</button>`).join('')}</div>`;
+  let h = `<h2>Terms</h2><p class="sub">${TERMS.length} terms from her slides, each with its definition, what it looks like in practice, and where it is on the slides.</p>${modeTabs}<div class="filters">${groupChips}</div>`;
+  if(TV.mode === 'gloss'){
+    const pool = termsInGroup().map(t => [t, termMatches(t, TV.q)]).filter(([, m]) => m)
+      .sort((a, b) => TV.q ? b[1] - a[1] || termName(a[0]).localeCompare(termName(b[0])) : 0).map(([t]) => t);
+    const has = new Set(termsInGroup().map(termLetter));
+    h += `<div class="tsearch" id="tsearch"><input type="search" id="tq" placeholder="Search terms, meanings and definitions" value="${esc(TV.q)}" aria-label="Search terms">
+      <div class="frow"><button class="chip" data-torder="group" aria-pressed="${TV.order === 'group'}">By group</button><button class="chip" data-torder="az" aria-pressed="${TV.order === 'az'}">A–Z</button></div>
+      <div class="azbar">${LETTERS_AZ.map(L => `<button class="az" data-az="${L}"${has.has(L) ? '' : ' disabled'}>${L}</button>`).join('')}</div></div>`;
+    if(!pool.length) h += `<div class="empty">No term matches "${esc(TV.q)}".</div>`;
+    else if(TV.q || TV.order === 'az'){
+      const list = TV.q ? pool : pool.slice().sort((a, b) => termName(a).localeCompare(termName(b)));
+      h += `<div id="tlist">${list.map(termCardHTML).join('')}</div>`;
+    }else{
+      h += `<div id="tlist">${TERM_GROUPS.filter(g => pool.some(t => t.group === g)).map(g =>
+        `<h3>${esc(g)}</h3>${pool.filter(t => t.group === g).map(termCardHTML).join('')}`).join('')}</div>`;
+    }
+  }else if(TV.mode === 'flash'){
+    const pool = termsInGroup();
+    if(!TV.fc || TV.fc.group !== TV.group) TV.fc = {group: TV.group, order: shuffle(pool.map(t => t.id)), i: 0, shown: false};
+    const fc = TV.fc;
+    if(fc.i >= fc.order.length){
+      h += `<div class="empty">That is every card in this group. <button class="btn small" id="fcAgain">Shuffle and start again</button></div>`;
+    }else{
+      const t = TERM_BY[fc.order[fc.i]];
+      h += `<div class="qcard flash"><div class="qhead"><span>Card ${fc.i + 1} of ${fc.order.length}</span><span class="spacer"></span><span>${esc(t.group)}</span></div>
+        <div class="qbody"><p class="fcscene"><b>In action:</b> ${rich(termMask(t, t.scene))}</p>${
+        fc.shown ? `<p class="fcterm">${esc(t.term)}</p><p>${rich(t.gist)}</p><p class="wcite">${esc(t.def)}</p>` : ''}</div>
+        <div class="qfoot">${fc.shown ? `<button class="btn" data-fc="correct">Knew it</button><button class="btn amber" data-fc="guessed">Not sure</button><button class="btn ghost" data-fc="wrong">Did not know</button>`
+          : `<button class="btn" id="fcShow">Show the term</button>`}</div></div>`;
+    }
+  }else{
+    h += `<p class="sub">Three questions per term: which term a situation describes, what a term means, and which term a definition belongs to.</p>
+      <div class="topic plain"><div class="subs">${['all', ...TERM_GROUPS].map(g => {
+        const pool = TERM_QS.filter(q => g === 'all' || q.sub === g);
+        return rowHTML(g === 'all' ? 'All terms' : esc(g), `${pool.length} questions`, null, `<button data-tquiz="${esc(g)}">Start</button>`); }).join('')}</div></div>`;
+  }
+  el.innerHTML = h;
+  el.querySelectorAll('[data-tmode]').forEach(b => b.onclick = () => { TV.mode = b.dataset.tmode; renderTerms(); });
+  el.querySelectorAll('[data-tgroup]').forEach(b => b.onclick = () => { TV.group = b.dataset.tgroup; TV.fc = null; renderTerms(); });
+  el.querySelectorAll('[data-torder]').forEach(b => b.onclick = () => { TV.order = b.dataset.torder; renderTerms(); });
+  el.querySelectorAll('[data-az]').forEach(b => b.onclick = () => {
+    if(TV.order !== 'az' || TV.q){ TV.order = 'az'; TV.q = ''; renderTerms(); }
+    const c = document.querySelector(`#v-terms .termcard[data-letter="${b.dataset.az}"]`); if(c) scrollToEl(c); });
+  const tq = $('#tq');
+  if(tq){ tq.oninput = () => { TV.q = tq.value; const pos = tq.selectionStart; renderTerms(); const n = $('#tq'); n.focus(); n.setSelectionRange(pos, pos); }; }
+  const fs = $('#fcShow'); if(fs) fs.onclick = () => { TV.fc.shown = true; renderTerms(); };
+  const fa = $('#fcAgain'); if(fa) fa.onclick = () => { TV.fc = null; renderTerms(); };
+  el.querySelectorAll('[data-fc]').forEach(b => b.onclick = () => {
+    const t = TERM_BY[TV.fc.order[TV.fc.i]];
+    record(byId(`term-${t.id}-gist`), b.dataset.fc, null, 0);
+    TV.fc.i++; TV.fc.shown = false; renderTerms();
+  });
+  el.querySelectorAll('[data-tquiz]').forEach(b => b.onclick = () => {
+    const g = b.dataset.tquiz; startPool(TERM_QS.filter(q => g === 'all' || q.sub === g), g === 'all' ? 'Terms' : `Terms — ${g}`); });
+  // one observer at a time: the back-to-search button shows while the search bar is off screen
+  if(TIO){ TIO.disconnect(); TIO = null; }
+  const tb = document.getElementById('tback'); if(tb) tb.remove();
+  const bar = $('#tsearch');
+  if(bar && 'IntersectionObserver' in window){
+    TIO = new IntersectionObserver(([e]) => {
+      let b = document.getElementById('tback');
+      if(e.isIntersecting || VIEW !== 'terms'){ if(b) b.remove(); return; }
+      if(!b){ b = document.createElement('button'); b.id = 'tback'; b.className = 'btn'; b.textContent = '↑ Search or pick a letter';
+        b.onclick = () => scrollToEl($('#tsearch')); document.body.appendChild(b); }
+    });
+    TIO.observe(bar);
+  }
 }
 
 /* ==========================================================================
@@ -3201,6 +3364,7 @@ function eqCheck(){
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
   if(b.dataset.v === 'topics' && VIEW === 'topics') MODPAGE = null;   // a second tap on Topics returns to the module list
   RET = []; backBtn();
+  if(b.dataset.v !== 'terms'){ if(TIO){ TIO.disconnect(); TIO = null; } const tb = document.getElementById('tback'); if(tb) tb.remove(); }
   show(b.dataset.v);
 });
 document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn

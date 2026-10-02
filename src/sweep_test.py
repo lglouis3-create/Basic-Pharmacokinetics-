@@ -45,7 +45,7 @@ SEED = """() => {
   save();
 }"""
 
-TABS = ['topics', 'quiz', 'gaps', 'exam', 'guide', 'tell', 'diag', 'eq', 'ref', 'settings']
+TABS = ['topics', 'quiz', 'gaps', 'exam', 'guide', 'tell', 'terms', 'diag', 'eq', 'ref', 'settings']
 
 
 def main():

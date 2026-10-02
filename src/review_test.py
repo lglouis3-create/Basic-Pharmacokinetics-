@@ -30,7 +30,11 @@ def drain(pg):
 
 def page(pg, module, sec):
     pg.evaluate("MODPAGE = null; show('topics')"); pg.wait_for_timeout(100)
-    pg.click(f'.modbtn[data-mod="{module}"][data-sec="{sec}"]'); pg.wait_for_timeout(150)
+    # a module's buttons sit inside its exam's card, which may start closed
+    btn = f'.modbtn[data-mod="{module}"][data-sec="{sec}"]'
+    if not pg.is_visible(btn):
+        pg.click(f'details.examgrp:has({btn}) > summary'); pg.wait_for_timeout(100)
+    pg.click(btn); pg.wait_for_timeout(150)
 
 with sync_playwright() as p:
     b = p.chromium.launch(); pg = b.new_page(viewport={'width': 1100, 'height': 1300})
@@ -41,6 +45,13 @@ with sync_playwright() as p:
     print('\n=== Module layout ===')
     mods = pg.evaluate("outline().filter(m => m.module != null && modulePool(m.module).length).map(m => m.module)")
     ok(f'one card per module ({len(mods)})', pg.locator('.modcard').count() == len(mods))
+    grp = pg.evaluate("[...document.querySelectorAll('details.examgrp')].map(d => [+d.dataset.examgrp, [...d.querySelectorAll('.modbtn[data-sec=concepts]')].map(x => +x.dataset.mod), !!d.querySelector('.recapcard'), d.open])")
+    want = {e: sorted({l['module'] for l in pg.evaluate('COURSE.lectures') if l['exam'] == e and l['module'] in mods}) for e, *_ in grp}
+    ok('each exam card holds exactly its own modules: ' + '; '.join(f'exam {e}: {m}' for e, m, *_ in grp),
+       all(sorted(m) == want[e] for e, m, *_ in grp) and sorted(x for _, m, *_ in grp for x in m) == sorted(mods))
+    ok('each exam card ends with a review of the whole exam', all(r for *_, r, _ in grp))
+    ok('only the exam being prepared for starts open',
+       all(o == (e == pg.evaluate('EXAM.id')) for e, _, _, o in grp))
     ok('no topic list or review switch on the main page',
        pg.locator('#v-topics details.topic').count() == 0 and pg.locator('#v-topics .rtab').count() == 0)
     untyped = pg.evaluate("QUESTIONS.filter(q => kindOf(q) === 'calc' && !calcTypeOf(q)).map(q => q.id)")

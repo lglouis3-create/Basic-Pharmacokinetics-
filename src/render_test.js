@@ -35,9 +35,9 @@ const html=fs.readFileSync(OUT,'utf8');
 }
 let code=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)][0][1];
 const b=code.lastIndexOf('   BOOT'); code=code.slice(0,code.lastIndexOf('/* ===',b));
-code+="\nglobalThis.__X={COURSE,QUESTIONS,TOPICS,startQuiz,startSweep,renderTopics,renderQuiz,renderGaps,renderRef,renderTell,renderDiagrams,renderEq,eqStart,eqSetChosen,EQUATIONS,EQref:()=>EQ,renderGuide,renderSettings,renderExam,answer,submitNumeric,submitMatch,submitMulti,qType,isMulti,correctSet,Qref:()=>Q,askProfile,record,beginExam,renderExamQ,finishExam,EXref:()=>EX};\n";
+code+="\nglobalThis.__X={COURSE,QUESTIONS,TOPICS,startQuiz,startSweep,renderTopics,renderQuiz,renderGaps,renderRef,renderTell,renderDiagrams,renderTerms,TVref:()=>TV,TERMS,TERM_QS,renderEq,eqStart,eqSetChosen,EQUATIONS,EQref:()=>EQ,renderGuide,renderSettings,renderExam,answer,submitNumeric,submitMatch,submitMulti,qType,isMulti,correctSet,Qref:()=>Q,askProfile,record,beginExam,renderExamQ,finishExam,EXref:()=>EX};\n";
 const store={}, sinks={};
-function mk(id){ return sinks[id] ||= {innerHTML:'',textContent:'',value:'',dataset:{},style:{},classList:{toggle(){},add(){},remove(){},contains(){return false}},setAttribute(){},querySelectorAll(){return []},onclick:null,click(){}}; }
+function mk(id){ return sinks[id] ||= {innerHTML:'',textContent:'',value:'',dataset:{},style:{},classList:{toggle(){},add(){},remove(){},contains(){return false}},setAttribute(){},querySelectorAll(){return []},onclick:null,click(){},remove(){},focus(){},setSelectionRange(){}}; }
 const sb={console,localStorage:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)},removeItem:k=>{delete store[k]}},
  document:{querySelector:s=>mk(s),querySelectorAll:()=>[],getElementById:i=>mk(i),createElement:()=>mk('tmp'),body:mk('body')},
  window:{scrollTo(){}},prompt:()=>'Tester',alert:m=>console.log('ALERT:',m),confirm:()=>true,
@@ -136,6 +136,10 @@ console.log('         miss-kind panel present: '+/Where the calculations go wron
 X.renderRef();           ok &= check('reference', sinks['#v-ref'].innerHTML);
 X.renderTell();          ok &= check('tell apart', sinks['#v-tell'].innerHTML);
 X.renderDiagrams();      ok &= check('diagrams', sinks['#v-diag'].innerHTML);
+for(const m of ['gloss','flash','quiz']){ X.TVref().mode = m; X.renderTerms(); ok &= check('terms, '+m, sinks['#v-terms'].innerHTML); }
+X.TVref().mode = 'gloss'; X.TVref().q = 'clearance'; X.renderTerms(); ok &= check('terms, search', sinks['#v-terms'].innerHTML);
+X.TVref().q = '';
+console.log('         terms: '+X.TERMS.length+' · term questions: '+X.TERM_QS.length);
 console.log('         step-through figures: '+(sinks['#v-diag'].innerHTML.match(/data-stepfig=/g)||[]).length);
 console.log('         review plan present: '+/What to review next/.test(sinks['#v-gaps'].innerHTML)+
             ' · this session present: '+/This session/.test(sinks['#v-gaps'].innerHTML));

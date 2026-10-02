@@ -2,35 +2,47 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
-## 2026-10-03 (explain more)
+## 2026-10-02 (grouped by exam)
+- Topics: Modules 1–3 and their review sit inside Exam 1; Modules 4–6 and a review inside Exam 2.
+- The exam being prepared for opens by default; each card remembers being opened or closed.
+
+## 2026-10-02 (clearer explanations)
+- Explanations, Reference, Guides and Tell apart rewritten as short bullets, every term defined.
+- Fixed wrong statements found in the rewrite (half-life counts, renal clearance, k12, F, ka).
+
+## 2026-10-02 (terms)
+- Terms tab: 70 terms from her slides, each with a definition, an example and its slide.
+- Glossary with search and A–Z, Flashcards, and Quiz me (3 questions per term).
+
+## 2026-10-02 (explain more)
 - After every answer: buttons to the Guide, Reference, Diagram and Equations section for it.
 - A floating button returns to the same question, answer and place kept.
 
-## 2026-10-03 (answer layout)
+## 2026-10-02 (answer layout)
 - Answer one at a time or all on one page, in drills and on the exam paper.
 - Switching layout mid-drill never asks a question twice.
 
-## 2026-10-03 (theme, no name prompt)
+## 2026-10-02 (theme, no name prompt)
 - Header: System, Light or Dark theme; figures switch with it.
 - No name pop-up on first visit; progress saves under a default profile.
 - A different profile name can be set under Settings, for a shared browser.
 
-## 2026-10-03 (diagrams)
+## 2026-10-02 (diagrams)
 - Diagrams grouped by what she asks: order or model, a value, two curves, a regimen.
 - Each figure has a "Read this graph" walk-through: axes, shape, equation, how, what she asks.
 - Figure text is larger, and any figure can be tapped to see it full size.
 - The zero-order curve on a log axis no longer runs into the bottom of the axis.
 
-## 2026-10-03 (extra practice)
+## 2026-10-02 (extra practice)
 - Calculations: an Extra practice list, 81 problems in her formats with numbers that are not hers.
 - Extra practice stays out of the exam simulator and the module counts.
 
-## 2026-10-03 (worksheets)
+## 2026-10-02 (worksheets)
 - Worksheets: Clearance & Elimination Practice 1–4 and Single Oral Practice 1–3, keyed to her solutions.
 - Worksheets: Homework 1–5 in her wording with changed numbers, every answer worked out.
 - Data tables in a question now show as tables, not one long line.
 
-## 2026-10-03 (modules reorganized)
+## 2026-10-02 (modules reorganized)
 - Each module is one card: Concepts, Calculations and Worksheets.
 - Concepts: pick one of her objectives, or all of them.
 - Calculations: each kind of problem has a worked example, single problems and problems in parts.

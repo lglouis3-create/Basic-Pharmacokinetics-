@@ -44,7 +44,8 @@ CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
                  'reference.js',
                  'tell.js',
                  'guide.js',
-                 'diagrams.js']   # the Diagrams tab: groups and how to read each graph
+                 'diagrams.js',   # the Diagrams tab: groups and how to read each graph
+                 'glossary.js']   # the Terms tab: TERMS, one object per term
 
 # Everything that has to parse before a build is allowed to proceed. Derived
 # from the two lists above rather than named again, so adding a file cannot
