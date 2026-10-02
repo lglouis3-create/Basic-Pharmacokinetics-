@@ -272,14 +272,14 @@ function poolFor(topicId, subId){
     matchesFilter(q));
 }
 
-const VIEWS = ['topics','quiz','gaps','exam','guide','tell','eq','ref','settings'];
+const VIEWS = ['topics','quiz','gaps','exam','guide','tell','diag','eq','ref','settings'];
 function show(v){
   VIEW = v;
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.v===v));
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
   ({topics:renderTopics, quiz:renderQuiz, gaps:renderGaps, exam:renderExam,
-    guide:renderGuide, tell:renderTell, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
+    guide:renderGuide, tell:renderTell, diag:renderDiagrams, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
 }
 
 /* ==========================================================================
@@ -446,9 +446,12 @@ function renderTopics(){
   const shares = poolShares();
   const covered = shares.reduce((s,o)=> s + Math.min(o.want, poolQuestions(o.pool).length), 0);
 
-  let h = `<h2>Pick a topic</h2>${updatedText() ? `<p class="updated">${esc(updatedText())}</p>` : ''}
+  const cd = examCountdown(EXAM);
+  let h = `<h2>Pick a topic</h2>${updatedText() ? `<p class="updated">${esc(updatedText())}${
+      CHANGELOG.length ? ' · <a href="#" id="allChanges">All changes</a>' : ''}</p>` : ''}
+  ${newsCard()}
   <p class="sub">${esc(EXAM.name)} is ${EXAM.questions} questions in ${EXAM.minutes} minutes${
-      EXAM.date ? ` on ${esc(EXAM.date)}` : ''}.
+      EXAM.date ? ` on ${esc(EXAM.date)}` : ''}.${cd ? ` <b class="countdown">${esc(cd)}</b>` : ''}
     ${EXAM.blurb ? esc(EXAM.blurb) + ' ' : ''}
     Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
     COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
@@ -585,6 +588,10 @@ function renderTopics(){
   if(sa) sa.onclick = () => startSweep('all');
   const sf = document.getElementById('sweepFiltered');
   if(sf) sf.onclick = () => startSweep('filtered');
+  const nok = document.getElementById('newsok');
+  if(nok) nok.onclick = () => { LS.set(NEWS_KEY, newsId(CHANGELOG[0])); const c = document.getElementById('news'); if(c) c.remove(); };
+  ['newsall', 'allChanges'].forEach(id => { const b = document.getElementById(id);
+    if(b) b.onclick = e => { e.preventDefault(); showChangelog(); }; });
 }
 
 /* ==========================================================================
@@ -787,7 +794,7 @@ function renderQuiz(){
   const missedBefore = s && s.wrong > 0 && s.box === 0;
   const ok = Q.revealed ? gradeAnswer(q, Q.picked) : false;
 
-  let h = `<div class="qcard"><div class="qhead">
+  let h = `<div class="sessline">${sessStrip()}</div><div class="qcard"><div class="qhead">
     ${profTag(q.prof)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
@@ -1135,6 +1142,8 @@ function renderGaps(){
   </div>
   <p class="sub">A concept counts as mastered after three correct answers on separate review days, so that number stays low in the first week however well you score. The accuracy figures move at once.</p>`;
 
+  const plan = reviewPlan();
+  h += sessionCard() + plan.html;
   h += progressSection();
 
   /* ---- What to do next ------------------------------------------------
@@ -1355,6 +1364,7 @@ function renderGaps(){
   }
   h = h.replace(/<table class="gap">/g, '<div class="tw"><table class="gap">').replace(/<\/table>/g, '</table></div>');
   el.innerHTML = h;
+  wireReviewPlan(el, plan);
 
   el.querySelectorAll('[data-next]').forEach(b => b.onclick = () => {
     const pl = pools.find(x=>x.key===b.dataset.pool);
@@ -1379,6 +1389,337 @@ function renderGaps(){
          current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
     nextQuestion(); show('quiz');
   };
+}
+
+/* ==========================================================================
+   EXAM COUNTDOWN
+   ==========================================================================
+   Calendar days between today and the exam's date in local time, not hours
+   rounded up, so the evening before reads "1 day" and exam morning reads
+   "today". `when` is the start time from the syllabus; the end is that plus
+   the paper's minutes. */
+function daysToExam(ex){
+  if(!ex || !ex.when) return null;
+  const day = d => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
+  return Math.round((day(ex.when) - day(Date.now())) / DAY_MS);
+}
+function examCountdown(ex){
+  const d = daysToExam(ex);
+  if(d == null) return '';
+  const start = new Date(ex.when).getTime(), end = start + (ex.minutes || 0) * 60000, now = Date.now();
+  if(now >= end) return 'This exam is over.';
+  if(now >= start) return 'The exam is in progress.';
+  if(d <= 0) return 'Exam day is today.';
+  return `${d} day${d === 1 ? '' : 's'} until the exam.`;
+}
+
+/* ==========================================================================
+   WHAT'S NEW
+   ==========================================================================
+   CHANGELOG.md, embedded by build.py, newest first. Topics shows the entries
+   newer than the last one this browser marked as seen ("Got it"); Settings
+   shows all of them. The seen marker is per browser, shared by every profile,
+   since it is about the page and not about anyone's answers. */
+const NEWS_KEY = NS + ':newsSeen';
+const newsId = c => c ? c.date + '|' + c.items.join('').length : '';   // changes if bullets are added under the same heading
+function newsCard(){
+  if(!CHANGELOG.length) return '';
+  const seen = LS.get(NEWS_KEY), i = seen ? CHANGELOG.findIndex(c => newsId(c) === seen) : 1;
+  const fresh = CHANGELOG.slice(0, i < 0 ? 1 : i); if(!fresh.length) return '';
+  const items = fresh.flatMap(c => c.items), shown = items.slice(0, 8);
+  return `<div class="news" id="news"><div class="newshead"><b>What’s new</b><span>${esc(fresh[0].date.replace(/ \(.*\)$/, ''))}</span></div>
+    <ul>${shown.map(t => `<li>${esc(t)}</li>`).join('')}</ul>${items.length > shown.length ? `<p class="newsmore">+ ${items.length - shown.length} more</p>` : ''}
+    <div class="newsbtns"><button class="btn small" id="newsok">Got it</button><button class="btn small ghost" id="newsall">All changes</button></div></div>`;
+}
+function changelogHTML(){
+  if(!CHANGELOG.length) return '';
+  return `<h3 id="changelog">Change log</h3><div class="filters changelog">${CHANGELOG.map(c =>
+    `<p><b>${esc(c.date)}</b></p><ul>${c.items.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`).join('')}</div>`;
+}
+function showChangelog(){
+  show('settings');
+  const t = document.getElementById('changelog'); if(t) scrollToEl(t);
+}
+
+/* ==========================================================================
+   THIS SESSION
+   ==========================================================================
+   A session is the run of answers with no gap longer than 30 minutes, ending
+   with the latest answer, so it survives a page reload. It is over once 30
+   minutes pass with no answer. "Solid" is a correct answer that was not marked
+   as a guess. sessStrip() is the one line above the quiz card; the quiz card
+   is redrawn after every answer, so the line is current after every answer. */
+const SESSION_GAP = 30 * 60000;
+function sessionLog(){
+  const L = DB.answers; if(!L.length) return [];
+  let k = L.length - 1;
+  while(k > 0 && L[k].at - L[k - 1].at < SESSION_GAP) k--;
+  return Date.now() - L[L.length - 1].at < SESSION_GAP ? L.slice(k) : [];
+}
+const solid = a => a.result === 'correct';
+const dotsHTML = (as, cls) => `<span class="sdots10${cls ? ' ' + cls : ''}">${as.map(a =>
+  `<i class="${solid(a) ? 'y' : 'n'}" title="${esc(a.qid)}${a.result === 'guessed' ? ' (guessed)' : ''}"></i>`).join('')}</span>`;
+function sessStrip(){
+  const ses = sessionLog();
+  if(!ses.length) return `<span id="sess">This session: no answers yet</span>`;
+  const ok = ses.filter(solid).length, last = ses.slice(-10);
+  return `<span id="sess">This session: ${ok}/${ses.length} (${Math.round(100 * ok / ses.length)}%) · last ${last.length}: ${dotsHTML(last)}</span>`;
+}
+
+/* The score of a question on its last three answers, 0 to 1; null if never
+   answered. A question below 1 is not yet solid. */
+function recentById(){
+  const r = {};
+  for(const a of DB.answers) (r[a.qid] ||= []).push(a);
+  return r;
+}
+function lastThree(recent, q){
+  const r = (recent[q.id] || []).slice(-3);
+  return r.length ? r.filter(solid).length / r.length : null;
+}
+
+function sessionCard(){
+  const ses = sessionLog();
+  if(!ses.length) return '';
+  const recent = recentById();
+  const ok = ses.filter(solid).length, pct = Math.round(100 * ok / ses.length);
+  const half = Math.floor(ses.length / 2), a = ses.slice(0, half), b = ses.slice(half);
+  const pa = a.length ? Math.round(100 * a.filter(solid).length / a.length) : null,
+        pb = b.length ? Math.round(100 * b.filter(solid).length / b.length) : null;
+  const missed = [...new Set(ses.filter(x => !solid(x)).map(x => x.qid))]
+    .map(byId).filter(q => q && lastThree(recent, q) < 1);
+  const mins = Math.max(1, Math.round((ses[ses.length - 1].at - ses[0].at) / 60000));
+  SESSION_RETRY = missed;
+  return `<h3>This session</h3><div class="sesscard">
+    <div class="sesstop"><span><b class="big">${pct}%</b> ${ok} of ${ses.length} solid in ${mins} min</span>
+      ${pa != null && ses.length >= 6 ? `<span>first half ${pa}% → second half ${pb}%</span>` : ''}</div>
+    ${dotsHTML(ses.slice(-20), 'big')}
+    <p class="sesshint">The last ${Math.min(20, ses.length)} answers, oldest on the left; filled is a correct answer, outlined is a miss or a guess. A session ends after 30 minutes with no answer.</p>
+    ${missed.length ? `<button class="btn small" id="retrySess">Retry the ${missed.length} missed this session</button>` : ''}</div>`;
+}
+let SESSION_RETRY = [];
+
+/* ==========================================================================
+   WHAT TO REVIEW NEXT
+   ==========================================================================
+   Every question not solid on its last three answers, grouped by the subtopic
+   that teaches it and ranked by how much is missing. Each concept shows its
+   stem, what was chosen and why that is not the answer, the answer, the first
+   sentences of its concept block, links to the Reference sections for its
+   module, and a button that drills the group. `picked` is an option index, an
+   array of indices (select-all), the string typed (numeric) or a left-to-right
+   map (matching), so each is read back in its own way. */
+let REF_HEADS = null;
+function refLinksFor(q){
+  REF_HEADS ||= [...REFERENCE_HTML.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>/g)]
+    .map((m, i) => ({i, t: deEnt(m[2].replace(/<[^>]+>/g, '')).trim()}));
+  return q.module == null ? [] : REF_HEADS.filter(h => h.t.startsWith(`Module ${q.module} `));
+}
+const plainMath = s => String(s || '').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '($1)/($2)');
+const clip = (s, n) => s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : s;
+function firstSentences(t){
+  const txt = plainMath(teachText(t)).replace(/<[^>]+>/g, '');
+  const m = txt.match(/^(.*?[.!?](\s|$)){1,2}/);
+  return clip((m ? m[0] : txt).trim(), 320);
+}
+function pickedRead(q, a){
+  const p = a.picked; if(p === undefined || p === null) return null;
+  const kind = qType(q);
+  if(kind === 'numeric') return {txt: String(p) + (q.units ? ' ' + q.units : ''), why: ''};
+  if(kind === 'match'){
+    const wrong = (q.pairs || []).filter(pr => p[pr.l] !== pr.r);
+    if(!wrong.length) return null;
+    return {txt: wrong.map(pr => `${pr.l} → ${p[pr.l] || 'blank'}`).join(' · '),
+            why: wrong.map(pr => `${pr.l} goes with ${pr.r}.${pr.why ? ' ' + pr.why : ''}`).join(' ')};
+  }
+  const os = [].concat(p).map(i => q.options && q.options[i]).filter(o => o && !o.correct);
+  if(!os.length) return null;
+  return {txt: os.map(o => o.t).join(' · '), why: os.map(o => o.why || '').join(' ')};
+}
+function answerRead(q){
+  const kind = qType(q);
+  if(kind === 'numeric') return `${q.answer} ${q.units || ''}`.trim();
+  if(kind === 'match') return (q.pairs || []).map(p => `${p.l} → ${p.r}`).join(' · ');
+  return (q.options || []).filter(o => o.correct).map(o => o.t).join(' · ');
+}
+function reviewPlan(){
+  const recent = recentById();
+  const notSolid = QUESTIONS.filter(q => { const s = lastThree(recent, q); return s != null && s < 1; });
+  const areas = {};
+  for(const q of notSolid){
+    const t = TOPICS.find(x => x.id === q.topic), sb = t && (t.subs || []).find(x => x.id === q.sub);
+    const key = q.topic + '|' + (q.sub || '');
+    const A = areas[key] ||= {name: t ? (sb ? `${t.name} — ${sb.name}` : t.name) : 'Other', links: refLinksFor(q), qs: [], gap: 0, concepts: {}};
+    A.qs.push(q); A.gap += 1 - lastThree(recent, q);
+    const c = A.concepts[q.concept] ||= {qs: [], last: null};
+    c.qs.push(q);
+    const miss = (recent[q.id] || []).filter(a => !solid(a)).pop();
+    if(miss && (!c.last || miss.at > c.last.a.at)) c.last = {a: miss, q};
+  }
+  const ranked = Object.values(areas).sort((x, y) => y.gap - x.gap);
+  let h = `<h3>What to review next</h3>`;
+  if(!ranked.length){
+    h += `<div class="empty">Every question you have answered is solid on its last three answers.</div>`;
+    return {html: h, ranked, notSolid};
+  }
+  h += `<p class="sub">${notSolid.length} question${notSolid.length === 1 ? '' : 's'} not yet solid on their last three answers, grouped by subtopic, the most missing first. A correct answer marked as a guess counts as a miss here.</p>`;
+  ranked.slice(0, 6).forEach((A, ai) => {
+    const cs = Object.values(A.concepts).sort((x, y) => y.qs.length - x.qs.length);
+    h += `<div class="plan"><div class="planhead"><b>${ai + 1}. ${esc(A.name)}</b><span>${A.qs.length} question${A.qs.length === 1 ? '' : 's'} · ${cs.length} concept${cs.length === 1 ? '' : 's'}</span></div>`;
+    cs.slice(0, 4).forEach(c => {
+      const q = (c.last && c.last.q) || c.qs[0], pr = c.last ? pickedRead(c.last.q, c.last.a) : null;
+      h += `<div class="pconcept"><div class="pq">${rich(clip(plainMath(q.stem), 200))}</div>`;
+      if(pr) h += `<div class="pw"><b>You ${qType(q) === 'numeric' ? 'entered' : 'chose'}:</b> ${rich(pr.txt)}${
+        pr.why ? `<span class="pwhy">${qType(q) === 'match' ? 'What each one goes with' : 'Why it is not the answer'}: ${rich(clip(plainMath(pr.why), 400))}</span>` : ''}</div>`;
+      else if(c.last && c.last.a.result === 'guessed') h += `<div class="pw"><b>You got it right but marked it a guess.</b></div>`;
+      h += `<div class="pr"><b>Answer:</b> ${rich(answerRead(q))}</div>`;
+      if(q.teach) h += `<div class="pi"><b>The idea:</b> ${rich(firstSentences(q.teach))}</div>`;
+      if(c.qs.length > 1) h += `<div class="pmore">${c.qs.length} questions on this concept are not solid.</div>`;
+      h += `</div>`;
+    });
+    if(cs.length > 4) h += `<p class="pmore">+ ${cs.length - 4} more concept${cs.length - 4 === 1 ? '' : 's'} in this subtopic.</p>`;
+    h += `<div class="planbtns">${A.links.map(l => `<button type="button" class="chip" data-refjump="${l.i}">Read: ${esc(l.t)}</button>`).join('')}
+      <button class="btn small" data-area="${ai}">Drill these ${A.qs.length}</button></div></div>`;
+  });
+  if(ranked.length > 6) h += `<p class="sub">${ranked.length - 6} more subtopic${ranked.length - 6 === 1 ? ' has' : 's have'} questions to review; they appear here as these are solved.</p>`;
+  h += `<p class="sub"><button class="btn ghost" id="planAll">Drill all ${notSolid.length} not-solid questions</button></p>`;
+  return {html: h, ranked, notSolid};
+}
+/* The plan's questions were mostly missed moments ago, so the scheduler's GAP
+   rule would hold them back; a fixed queue asks each one. */
+function wireReviewPlan(el, plan){
+  el.querySelectorAll('[data-area]').forEach(b => b.onclick = () => {
+    const A = plan.ranked[+b.dataset.area]; if(A) startSweepOf(A.qs.slice(), A.name);
+  });
+  el.querySelectorAll('#planAll').forEach(b => b.onclick = () => startSweepOf(plan.notSolid.slice(), 'Not yet solid'));
+  el.querySelectorAll('#retrySess').forEach(b => b.onclick = () => startSweepOf(SESSION_RETRY.slice(), 'Missed this session'));
+  el.querySelectorAll('[data-refjump]').forEach(b => b.onclick = () => {
+    show('ref'); const t = document.getElementById('ref-' + b.dataset.refjump); if(t) scrollToEl(t);
+  });
+}
+
+/* Scroll so the target sits just below the sticky header and tab bar, which
+   scrollIntoView would leave it underneath. */
+const RM = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function scrollToEl(el){
+  const off = ['header', '#nav'].reduce((s, sel) => { const n = document.querySelector(sel);
+    return s + (n ? n.getBoundingClientRect().height : 0); }, 0) + 8;
+  window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - off, behavior: RM() ? 'auto' : 'smooth'});
+}
+
+/* ==========================================================================
+   STEP-THROUGH FIGURES
+   ==========================================================================
+   figures.py draws each one as a single inline SVG with one <g class="st"> per
+   step and the caption of each step as data. Back and Next wrap around,
+   Replay re-runs the move into the current step, Play all runs from step 1
+   and stops at the last, and a dot per step jumps to it.
+
+   stepTo() does the motion. A shape present in both steps is matched by its
+   data-k (else by tag, class and text or fill; the signature leaves out the
+   fadein/glide classes stepTo adds) and glides from where it was; a new shape
+   fades in; a shape that is gone fades out from a copy left behind for half a
+   second. A shape with an SVG transform attribute does not glide, since a CSS
+   transform would replace it. CSS does the timing, and none of it runs under
+   prefers-reduced-motion. */
+function stepFigHTML(key){
+  const f = STEPFIGS[key]; if(!f) return '';
+  const n = f.steps.length;
+  const dots = f.steps.map((s, i) => `<button class="sdot${i ? '' : ' on'}" data-go="dot" data-i="${i}" aria-label="Go to step ${i + 1}"${i ? '' : ' aria-current="step"'}></button>`).join('');
+  return `<figure class="reffig stepfig" data-stepfig="${esc(key)}"><div class="stsvg">${f.svg}</div>
+    <div class="anim" data-anim="${esc(key)}"><button class="btn small ghost" data-go="-1">◀ Back</button><button class="btn small ghost" data-go="1">Next ▶</button><button class="btn small ghost" data-go="replay">↻ Replay step</button><button class="btn small ghost" data-go="play">▶ Play all</button><span class="sdots">${dots}</span></div>
+    ${f.steps.map((s, i) => `<p class="stcap${i ? '' : ' on'}" data-i="${i}"><b>Step ${i + 1} of ${n} · ${esc(s.tag)}.</b> ${esc(s.cap)}</p>`).join('')}
+    <figcaption>${esc(f.title)}</figcaption></figure>`;
+}
+const LEAF_SEL = 'text,circle,rect,ellipse,line,polyline,polygon,path';
+const sigOf = el => el.getAttribute('data-k') || [el.tagName, (el.getAttribute('class') || '').replace(/\b(fadein|glide)\b/g, '').trim(),
+  el.tagName === 'text' ? el.textContent : (el.getAttribute('fill') || '')].join('|');
+const centreOf = el => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2, r.width + r.height]; };
+let ANIM = null;
+function stepTo(fig, from, to){
+  const steps = [...fig.querySelectorAll('.st')], svg = fig.querySelector('svg');
+  fig.querySelectorAll('.st-out').forEach(n => n.remove());
+  const old = from != null && from !== to ? steps[from] : null;
+  const before = new Map();   // signature -> queue of old screen positions
+  if(old && !RM()) old.querySelectorAll(LEAF_SEL).forEach(el => { const k = sigOf(el), c = centreOf(el);
+    if(c[2]) (before.get(k) || before.set(k, []).get(k)).push({el, c}); });
+  steps.forEach((s, j) => s.classList.toggle('on', j === to));
+  fig.querySelectorAll('.stcap').forEach((p, j) => p.classList.toggle('on', j === to));
+  fig.querySelectorAll('.sdot').forEach((d, j) => { d.classList.toggle('on', j === to); d.setAttribute('aria-current', j === to ? 'step' : 'false'); });
+  if(RM()) return;
+  const now = steps[to], scale = svg.viewBox.baseVal.width / (svg.getBoundingClientRect().width || 1), used = new Set();
+  const leaves = [...now.querySelectorAll(LEAF_SEL)];
+  leaves.forEach(el => { el.classList.remove('fadein', 'glide'); el.style.transform = ''; });
+  svg.getBoundingClientRect();                        // restart the fade-in animations
+  leaves.forEach(el => {
+    const q = before.get(sigOf(el)), m = q && q.shift();
+    if(!m){ el.classList.add('fadein'); return; }
+    used.add(m.el);
+    if(el.hasAttribute('transform')) return;
+    const c = centreOf(el), dx = (m.c[0] - c[0]) * scale, dy = (m.c[1] - c[1]) * scale;
+    if(Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) return;
+    el.style.transform = `translate(${dx}px,${dy}px)`;
+    el.getBoundingClientRect();                       // commit the start position
+    el.classList.add('glide'); el.style.transform = '';
+  });
+  if(!old) return;
+  const ghost = old.cloneNode(true); ghost.classList.remove('on', 'st'); ghost.classList.add('st-out'); ghost.removeAttribute('data-step');
+  const oldLeaves = [...old.querySelectorAll(LEAF_SEL)], ghostLeaves = [...ghost.querySelectorAll(LEAF_SEL)];
+  oldLeaves.forEach((el, k) => { if(used.has(el)) ghostLeaves[k].remove(); });
+  svg.appendChild(ghost); setTimeout(() => ghost.remove(), 600);
+}
+function stepClick(e){
+  const b = e.target.closest('[data-anim] button'); if(!b) return;
+  const fig = b.closest('figure'), steps = [...fig.querySelectorAll('.st')]; if(!steps.length) return;
+  const cur = steps.findIndex(s => s.classList.contains('on')), n = steps.length;
+  const playBtn = fig.querySelector('[data-go="play"]');
+  const stop = () => { if(ANIM){ clearInterval(ANIM.t); ANIM.b.textContent = '▶ Play all'; ANIM = null; } };
+  const go = b.dataset.go;
+  if(go === 'play'){
+    const same = ANIM && ANIM.b === b; stop(); if(same) return;
+    b.textContent = '❚❚ Pause'; stepTo(fig, cur, 0);
+    ANIM = {b, t: setInterval(() => {
+      if(!document.body.contains(fig)) return stop();
+      const i = steps.findIndex(s => s.classList.contains('on'));
+      if(i >= n - 1) return stop();
+      stepTo(fig, i, i + 1); if(i + 1 === n - 1) stop();
+    }, 3600)};
+    return;
+  }
+  if(ANIM && ANIM.b === playBtn) stop();
+  if(go === 'replay') return stepTo(fig, cur > 0 ? cur - 1 : null, cur);
+  if(go === 'dot') return stepTo(fig, cur, +b.dataset.i);
+  stepTo(fig, cur, (cur + (+go) + n) % n);
+}
+
+/* ==========================================================================
+   DIAGRAMS
+   ==========================================================================
+   Every drawn figure in one place, grouped by module, with a contents card of
+   chips that jump to each one. ▶ marks a step-through figure. The groups are
+   this course's; the titles are the ones figures.py gives each figure. */
+const DIAGRAMS = [
+  ['Module 1 — kinetic orders', ['ord_linear_straight', 'ord_linear_curve', 'ord_semilog_straight', 'ord_semilog_curve']],
+  ['Module 2 — IV bolus, one and two compartments', ['cpt_one', 'cpt_two']],
+  ['Module 3 — IV infusion', ['inf_css', 'inf_two_rates']],
+  ['Module 4 — elimination', ['elim_rate_linear', 'elim_rate_flat']],
+  ['Module 5 — oral absorption', ['oral_peak', 'oral_semilog', 'input_types', 'rate_vs_constant', 'ka_k_effects', 'k_vs_ka', 'flipflop']],
+  ['Module 6 — multiple dosing', ['md_bolus_steps', 'md_bolus', 'two_infusions_steps', 'two_infusions']],
+];
+function renderDiagrams(){
+  let toc = '', body = '';
+  DIAGRAMS.forEach(([name, keys], gi) => {
+    const ks = keys.filter(k => STEPFIGS[k] || IMAGES[k]); if(!ks.length) return;
+    const title = k => STEPFIGS[k] ? STEPFIGS[k].title : (FIG_TITLES[k] || k);
+    toc += `<div class="dgtoc"><b>${esc(name)}</b><div class="dgchips">${ks.map(k =>
+      `<a class="chip" href="#dg-${k}" data-dg="${k}">${esc(title(k))}${STEPFIGS[k] ? ' ▶' : ''}</a>`).join('')}</div></div>`;
+    body += `<h3 id="dgg-${gi}">${esc(name)}</h3>${ks.map(k => `<div id="dg-${k}" class="dgfig">${STEPFIGS[k] ? stepFigHTML(k)
+      : `<figure class="reffig"><img src="${IMAGES[k]}" alt="${esc(title(k))}"><figcaption>${esc(title(k))}</figcaption></figure>`}</div>`).join('')}`;
+  });
+  const el = $('#v-diag');
+  el.innerHTML = `<h2>Diagrams</h2><p class="sub">Every drawn figure in one place, by module. ▶ marks a step-through figure: use Next, Play all or the step dots under it.</p>${toc}${body}`;
+  el.querySelectorAll('[data-dg]').forEach(a => a.onclick = e => { e.preventDefault();
+    const t = document.getElementById('dg-' + a.dataset.dg); if(t) scrollToEl(t); });
 }
 
 /* ==========================================================================
@@ -1693,6 +2034,7 @@ const mathHTML = h => String(h).replace(FRAC_RE,
 
 function refFigures(html){
   html = mathHTML(html);
+  html = html.replace(/\{\{steps:([a-z0-9_]+)\}\}/gi, (_, key) => stepFigHTML(key));
   return html.replace(/\{\{fig:([a-z0-9_]+)\|([^}]*)\}\}/gi, (_, key, cap) => {
     if(!IMAGES[key]) return '';
     const c = esc(deEnt(cap));
@@ -1701,6 +2043,17 @@ function refFigures(html){
   });
 }
 
+/* On a phone a reference table becomes one card per row: each cell carries
+   its column heading as a label, which the CSS shows under 640px. */
+function stackTables(root){
+  root.querySelectorAll('table.reftab').forEach(t => {
+    const heads = [...t.querySelectorAll('thead th')].map(th => th.textContent.trim());
+    if(!heads.length) return;
+    t.classList.add('stack');
+    t.querySelectorAll('tbody tr').forEach(tr => [...tr.children].forEach((td, i) => {
+      if(heads[i]) td.setAttribute('data-label', heads[i]); }));
+  });
+}
 function renderDoc(el, html, prefix){
   // a jump list, built from the section headings that are actually present
   // a heading may carry data-nav with a fuller label for the jump list, so a
@@ -1715,11 +2068,12 @@ function renderDoc(el, html, prefix){
         `<a href="#${prefix}-${n}">${esc(h)}</a>`).join('')}</nav></details>`
     : '';
   el.innerHTML = body.replace('</p>', '</p>' + nav);
+  stackTables(el);
   el.querySelectorAll('.refnav a').forEach(a => a.onclick = e => {
     e.preventDefault();
     const t = el.querySelector(a.getAttribute('href'));
     const d = el.querySelector('.refnav-wrap'); if (d) d.open = false;
-    if (t) t.scrollIntoView({behavior: 'smooth', block: 'start'});
+    if (t) scrollToEl(t);
   });
 }
 function renderRef(){ renderDoc($('#v-ref'), refFigures(REFERENCE_HTML), 'ref'); }
@@ -1773,6 +2127,8 @@ function renderSettings(){
       Clears every answer and schedule for “${esc(PROFILE)}”. Other people's profiles are untouched.
     </p>
   </div>
+
+  ${changelogHTML()}
 
   <div class="note" style="margin-top:20px">
     <b>Sharing this with classmates.</b> Each person's history lives in their own browser on their own
@@ -2424,6 +2780,7 @@ function eqCheck(){
    BOOT
    ========================================================================== */
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => show(b.dataset.v));
+document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn
 document.getElementById('btnWho').onclick = () => {
   if(EX && EX.running && !confirm('A paper is in progress and will be discarded. Switch profile anyway?')) return;
   const was = PROFILE;

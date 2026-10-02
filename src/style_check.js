@@ -90,4 +90,13 @@ if(vague.length)
   console.log(`  citations naming neither a slide number nor a slide title: ${
     vague.slice(0,6).map(q=>q.id).join(', ')}${vague.length>6?' …':''}`);
 console.log(`  numeric questions: ${Q.filter(q=>qType(q)==='numeric').length} · match questions: ${Q.filter(q=>qType(q)==='match').length}`);
+/* The change log is read on a phone as a short list: one short line per bullet. */
+{
+  const cl = path.join(__dirname, '..', 'CHANGELOG.md');
+  if(fs.existsSync(cl)){
+    const long = fs.readFileSync(cl, 'utf8').split('\n').filter(l => l.startsWith('- ') && l.length > 120);
+    long.forEach(l => { console.log(`  CHANGELOG bullet longer than one short line: ${l.slice(0, 60)}…`); hits++; });
+    console.log(long.length ? '' : '  change log: every bullet is one short line');
+  }
+}
 process.exit(hits?1:0);

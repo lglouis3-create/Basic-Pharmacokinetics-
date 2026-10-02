@@ -49,6 +49,8 @@ where the last good one was. The output path is
 | `problemset_test.py` | Works one of her problem sets through in Chromium and checks the parts arrive in her order. **Gate.** |
 | `equation_test.py` | Drives the equation drill in Chromium: what the typed-answer checker accepts and refuses, building an equation from pieces by tapping, and the chosen set surviving a reload. **Gate.** |
 | `review_test.py` | Checks the four review modes on the Topics page: reviewing concepts shows no calculation anywhere, and every split drill can only draw its own kind. **Gate.** |
+| `stepper_test.py` | Drives every step-through figure in Chromium: each step settles with one step, dot and caption shown, no shape fades out and back in, Play all and Pause work; and no figure label runs outside its SVG or overlaps another. **Gate.** |
+| `sweep_test.py` | Opens every tab at 375 px and 1100 px in light and dark colour schemes with seeded answers: no page error, no sideways scroll, no `undefined` or `NaN`; matching dropdowns fit the screen. **Gate.** |
 | `harvest.py` | Crops the figure out of each slide of a lecture PDF and encodes it for `images.json`. Standalone; not part of the build. |
 
 ---
@@ -63,7 +65,12 @@ python3 browser_test.py
 python3 problemset_test.py
 python3 equation_test.py
 python3 review_test.py
+python3 stepper_test.py
+python3 sweep_test.py
 ```
+
+Every update adds its bullets to `../CHANGELOG.md` in the same commit; the build embeds it and
+`style_check.js` fails on a bullet longer than 120 characters.
 
 The first line is the gate: it must be clean before the file goes anywhere. The
 last three are run separately because two of them are reports rather than

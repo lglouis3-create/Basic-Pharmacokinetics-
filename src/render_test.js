@@ -35,7 +35,7 @@ const html=fs.readFileSync(OUT,'utf8');
 }
 let code=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)][0][1];
 const b=code.lastIndexOf('   BOOT'); code=code.slice(0,code.lastIndexOf('/* ===',b));
-code+="\nglobalThis.__X={COURSE,QUESTIONS,TOPICS,startQuiz,startSweep,renderTopics,renderQuiz,renderGaps,renderRef,renderTell,renderEq,eqStart,eqSetChosen,EQUATIONS,EQref:()=>EQ,renderGuide,renderSettings,renderExam,answer,submitNumeric,submitMatch,submitMulti,qType,isMulti,correctSet,Qref:()=>Q,askProfile,record,beginExam,renderExamQ,finishExam,EXref:()=>EX};\n";
+code+="\nglobalThis.__X={COURSE,QUESTIONS,TOPICS,startQuiz,startSweep,renderTopics,renderQuiz,renderGaps,renderRef,renderTell,renderDiagrams,renderEq,eqStart,eqSetChosen,EQUATIONS,EQref:()=>EQ,renderGuide,renderSettings,renderExam,answer,submitNumeric,submitMatch,submitMulti,qType,isMulti,correctSet,Qref:()=>Q,askProfile,record,beginExam,renderExamQ,finishExam,EXref:()=>EX};\n";
 const store={}, sinks={};
 function mk(id){ return sinks[id] ||= {innerHTML:'',textContent:'',value:'',dataset:{},style:{},classList:{toggle(){},add(){},remove(){},contains(){return false}},setAttribute(){},querySelectorAll(){return []},onclick:null,click(){}}; }
 const sb={console,localStorage:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)},removeItem:k=>{delete store[k]}},
@@ -135,6 +135,10 @@ X.renderGaps();          ok &= check('weak spots', sinks['#v-gaps'].innerHTML);
 console.log('         miss-kind panel present: '+/Where the calculations go wrong/.test(sinks['#v-gaps'].innerHTML));
 X.renderRef();           ok &= check('reference', sinks['#v-ref'].innerHTML);
 X.renderTell();          ok &= check('tell apart', sinks['#v-tell'].innerHTML);
+X.renderDiagrams();      ok &= check('diagrams', sinks['#v-diag'].innerHTML);
+console.log('         step-through figures: '+(sinks['#v-diag'].innerHTML.match(/data-stepfig=/g)||[]).length);
+console.log('         review plan present: '+/What to review next/.test(sinks['#v-gaps'].innerHTML)+
+            ' · this session present: '+/This session/.test(sinks['#v-gaps'].innerHTML));
 X.renderEq();            ok &= check('equations, the picker', sinks['#v-eq'].innerHTML);
 /* Both exercises render, since each builds different markup from the same entry
    and a missing field shows up in one and not the other. */

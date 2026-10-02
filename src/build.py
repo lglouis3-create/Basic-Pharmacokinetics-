@@ -90,6 +90,26 @@ def main():
     # the page shows it in the reader's own time zone.
     built = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     parts.append(f"const BUILD_AT = '{built}';\n")
+    # The change log, newest first: '## date (title)' then '- bullet' lines.
+    # Topics shows the entries this browser has not marked as seen; Settings
+    # shows all of them.
+    changelog = []
+    cl_path = os.path.join(HERE, '..', 'CHANGELOG.md')
+    if os.path.exists(cl_path):
+        for block in open(cl_path, encoding='utf-8').read().split('\n## ')[1:]:
+            lines = block.strip().split('\n')
+            changelog.append({'date': lines[0].strip(),
+                              'items': [l[2:].strip() for l in lines[1:] if l.startswith('- ')]})
+    parts.append('const CHANGELOG = ' + json.dumps(changelog, ensure_ascii=False) + ';\n')
+    # Step-through figures: inline SVG with one <g class="st"> per step, drawn by
+    # figures.py. Inline rather than a data URL so each shape can move between steps.
+    steps_path = os.path.join(HERE, 'steps.json')
+    stepfigs = json.load(open(steps_path)) if os.path.exists(steps_path) else {}
+    parts.append('const STEPFIGS = ' + json.dumps(stepfigs, ensure_ascii=False) + ';\n')
+    # The title figures.py gives each drawn figure, for the Diagrams tab.
+    titles_path = os.path.join(HERE, 'figtitles.json')
+    figtitles = json.load(open(titles_path)) if os.path.exists(titles_path) else {}
+    parts.append('const FIG_TITLES = ' + json.dumps(figtitles, ensure_ascii=False) + ';\n')
     for f in DATA_FILES:
         parts.append(open(f, encoding='utf-8').read() + '\n')
     for f in CONTENT_FILES:

@@ -41,6 +41,8 @@ node render_test.js     # every view renders
 node explain_check.js   # report: ranks weak explanations by exam weight
 python3 cite_check.py   # needs the decks under decks/; SKIPs without them
 python3 browser_test.py # Chromium: answers every question, visits every view
+python3 stepper_test.py # Chromium: step-through figures, figure labels
+python3 sweep_test.py   # every tab at 375 and 1100 px, light and dark
 ```
 
 `build.py` writes to `/mnt/user-data/outputs/`. Copy the result to the repo

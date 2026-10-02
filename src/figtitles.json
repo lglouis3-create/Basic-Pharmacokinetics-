@@ -1,0 +1,21 @@
+{
+"cpt_one": "Semi-logarithmic plot after an intravenous bolus: one straight line",
+"cpt_two": "Semi-logarithmic plot after an intravenous bolus: a steep early phase then a shallower straight phase",
+"elim_rate_flat": "Rate of elimination plotted against plasma concentration: a horizontal line",
+"elim_rate_linear": "Rate of elimination plotted against plasma concentration: a straight line through the origin",
+"flipflop": "One drug given as an immediate-release and an extended-release product: the tail of each curve",
+"inf_css": "Concentration during a constant-rate infusion, rising towards a plateau",
+"inf_two_rates": "Two infusion rates of the same drug, plotted together",
+"input_types": "Three ways drug can enter, each with first-order elimination",
+"k_vs_ka": "Raising k against raising ka, with the area each change gains or loses shaded",
+"ka_k_effects": "Three panels: doubling the dose, doubling the absorption rate constant, and doubling the elimination rate constant",
+"md_bolus": "Repeated IV bolus doses every 8 hours rising to a steady state between the same peak and trough",
+"oral_peak": "Concentration against time after a single oral dose, rising to a peak and then falling",
+"oral_semilog": "Concentration after a single oral dose on an axis marked 0.1, 1, 10, 100",
+"ord_linear_curve": "Concentration against time on an evenly spaced axis, falling as a curve",
+"ord_linear_straight": "Concentration against time on an evenly spaced axis, falling as a straight line",
+"ord_semilog_curve": "Concentration against time on an axis marked 1, 10, 100, 1000, bending downward",
+"ord_semilog_straight": "Concentration against time on an axis marked 1, 10, 100, 1000, falling as a straight line",
+"rate_vs_constant": "Amount in the body against time for two doses, with the rate of loss marked at three points",
+"two_infusions": "Two intermittent IV infusions: each curve on its own and their sum, read at 12 hours"
+}

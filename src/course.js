@@ -96,6 +96,7 @@ const COURSE = {
     {id: 1,
      name: 'Exam 1',
      date: '2026-09-11',
+     when: '2026-09-11T10:00',   // syllabus: Friday 11 September, 10:00–12:00
      questions: 40,          // stated by Louis: 40 questions, 20 conceptual + 20 math
      minutes: 120,           // syllabus: Friday 11 September, 10:00–12:00
      sata: 4,                // ASSUMED. Select-all questions appear; the count is not published.
@@ -112,6 +113,7 @@ const COURSE = {
     {id: 2,
      name: 'Exam 2',
      date: '2026-10-08',
+     when: '2026-10-08T07:50',   // syllabus: Thursday 8 October, 7:50–9:50
      questions: 40,
      minutes: 120,           // syllabus: Thursday 8 October, 7:50–9:50
      sata: 4,                // ASSUMED, as above.
@@ -131,6 +133,7 @@ const COURSE = {
     {id: 3,
      name: 'Final Exam',
      date: '2026-10-27',
+     when: '2026-10-27T07:50',   // syllabus: Tuesday 27 October, 7:50–9:50
      questions: 40,          // ASSUMED same shape as exams 1 and 2; not published.
      minutes: 120,           // syllabus: Tuesday 27 October, 7:50–9:50
      sata: 4,                // ASSUMED.

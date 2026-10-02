@@ -630,6 +630,155 @@ FIGS['two_infusions'] = ('Two intermittent IV infusions: each curve on its own a
                          ti.svg('Two intermittent infusions added on a time line'))
 
 
+# ---- step-through figures ----------------------------------------------------
+# The same two Module 6 examples, drawn one stage at a time. Each step is a
+# <g class="st"> group inside one inline SVG; the frame and heading sit outside
+# the groups and never change. Every shape carries a data-k made from its own
+# markup, so a shape present in two consecutive steps is recognised as the same
+# shape and stays put while the new ones fade in. The captions are HTML under
+# the figure, so they wrap on a phone. Every number in a caption is computed
+# here from the slide's inputs, formatted to the places the bank prints.
+STEPS = {}
+
+
+def keyed(parts):
+    import hashlib
+    out = []
+    for p in parts:
+        k = hashlib.md5(p.encode('utf-8')).hexdigest()[:10]
+        out.append(p.replace(' ', f' data-k="k{k}" ', 1) if p.startswith('<') else p)
+    return out
+
+
+def stepped(key, title, plot, steps, footer=''):
+    """plot: a Plot already framed and headed. steps: [(tag, caption, draw)],
+    where draw(plot) adds that step's shapes to plot.parts."""
+    base = plot.parts[:]
+    groups = []
+    for i, (tag, cap, draw) in enumerate(steps):
+        plot.parts = []
+        draw(plot)
+        groups.append(f'<g class="st{" on" if i == 0 else ""}" data-step="{i + 1}">' + '\n'.join(keyed(plot.parts)) + '</g>')
+    plot.parts = base
+    svg = plot.svg(title).replace('\n</svg>', '\n' + '\n'.join(groups) + '\n</svg>')
+    STEPS[key] = {'title': title, 'svg': svg, 'steps': [{'tag': t, 'cap': c} for t, c, _ in steps], 'footer': footer}
+
+
+# Example 1, dose by dose. Same inputs as md_bolus above.
+R1 = math.exp(-MK * MTAU)
+peaks = [MC0 * (1 - R1 ** n) / (1 - R1) for n in range(1, MN + 1)]
+
+
+def seg(pl, a, b, fn=md_curve, color=BLUE, dash=None):
+    pts = []
+    for i in range(121):
+        t = a + (b - a) * i / 120
+        pts.append(f'{pl.px(t):.1f},{pl.py(fn(t)):.1f}')
+    d = f' stroke-dasharray="{dash}"' if dash else ''
+    pl.parts.append(f'<polyline points="{" ".join(pts)}" fill="none" stroke="{color}" stroke-width="2" '
+                    f'stroke-linecap="round" stroke-linejoin="round"{d}/>')
+
+
+def md_upto(pl, b):
+    for i in range(int(b // MTAU)):
+        seg(pl, i * MTAU + 1e-6, min((i + 1) * MTAU, b) - 1e-6)
+
+
+def md_s1(pl):
+    md_upto(pl, 8); pl.points([0, 8], [MC0, md_curve(8 - 1e-6)], color=AMBER)
+    pl.text(0.9, 42.5, '40', size=14); pl.text(9.0, 7.0, '10', size=14)
+
+
+def md_s2(pl):
+    md_s1(pl); md_upto(pl, 16); pl.points([8, 16], [peaks[1], md_curve(16 - 1e-6)])
+    pl.text(9.0, peaks[1] + 2.5, '%.1f' % peaks[1], size=14)
+
+
+def md_s3(pl):
+    md_upto(pl, 48); pl.points([i * MTAU for i in range(MN)], peaks)
+
+
+def md_s4(pl):
+    md_s3(pl); pl.xband(12, 20)
+    pl.text(16, 58, '3 to 5 half-lives', size=14, color=DIM, anchor='middle')
+    pl.hline(53.3, color=BLUE); pl.hline(13.3, color=BLUE)
+    pl.hline(33.3, color=DIM, dash='2 4'); pl.hline(28.9, color=AMBER)
+    pl.text(63, 55.3, 'Cmax 53.3', size=14, anchor='end')
+    pl.text(63, 35.3, 'midpoint 33.3', size=14, color=DIM, anchor='end')
+    pl.text(63, 24.2, 'Cavg 28.9', size=14, color=AMBER, anchor='end')
+    pl.text(63, 15.3, 'Cmin 13.3', size=14, anchor='end')
+
+
+def md_s5(pl):
+    md_s3(pl); seg(pl, 48 + 1e-6, 64)
+    pl.text(56, 8.0, 'no seventh dose', size=14, color=DIM, anchor='middle')
+
+
+ms = Plot(64, [0, 10, 20, 30, 40, 50, 60], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+          w=720, h=520, l=76, r=24, t=96, b=62, fs=1.15)
+ms.frame([0, 8, 16, 24, 32, 40, 48, 56, 64])
+heading(ms, 'Six doses of 10 mg/kg every 8 hours, then none',
+        't½ 4 hr, VD 0.25 L/kg, so each dose adds C0 = 40 mg/L.', big=1.0)
+stepped('md_bolus_steps', 'Repeated IV bolus, dose by dose', ms, [
+    ('dose 1', 'Dose 1 gives C0 = 40 mg/L. Eight hours is two half-lives of 4 hr, so 40 falls to %.0f mg/L just before dose 2.'
+     % md_curve(8 - 1e-6), md_s1),
+    ('dose 2', 'Dose 2 adds another 40 mg/L to the %.0f still present: %.1f mg/L, which falls to %.1f mg/L by 16 hr.'
+     % (md_curve(8 - 1e-6), peaks[1], md_curve(16 - 1e-6)), md_s2),
+    ('doses 3 to 6', 'Each dose adds 40 mg/L to a larger remainder, so the peaks climb ' +
+     ', '.join('%.1f' % p for p in peaks) + ' mg/L and stop climbing.', md_s3),
+    ('steady state', 'The climb is over within 3 to 5 half-lives, 12 to 20 hours. At steady state the curve repeats between '
+     'Cmax 53.3 and Cmin 13.3 mg/L; the average, 28.9 mg/L, sits below the midpoint 33.3 because the curve spends more '
+     'of each interval at the lower concentrations.', md_s4),
+    ('after the last dose', 'After the sixth dose the level falls by first-order elimination alone, halving every 4 hours.', md_s5),
+])
+
+
+# Example 4, stage by stage. Same inputs as two_infusions above.
+def ti_s1(pl):
+    pl.xband(0, 2); seg(pl, 0, 2, inf1)
+    pl.points([2], [inf1(2)]); pl.text(2.2, inf1(2) + 1.4, '%.2f' % inf1(2), size=14)
+    pl.text(1.0, 1.0, 'infusion 1', size=13, color=DIM)
+
+
+def ti_s2(pl):
+    ti_s1(pl); seg(pl, 2, 6, inf1)
+    pl.points([6], [inf1(6)]); pl.text(6.2, inf1(6) + 1.4, '%.2f' % inf1(6), size=14)
+
+
+def ti_s3(pl):
+    ti_s1(pl); seg(pl, 2, 6, inf1); pl.xband(6, 8)
+    pl.text(6.1, 1.0, 'infusion 2', size=13, color=DIM)
+    seg(pl, 6, 8, inf1, color=AMBER, dash='6 5'); seg(pl, 6, 8, inf2, color=AMBER, dash='2 5'); seg(pl, 6, 8, both)
+    pl.points([8], [both(8)]); pl.text(8.2, both(8) + 1.4, '%.2f' % both(8), size=14)
+    pl.label(0.3, 28.6, 'plasma concentration, the sum', color=BLUE, swatch=True)
+    pl.label(0.3, 26.4, 'each infusion on its own', color=AMBER, swatch=True)
+
+
+def ti_s4(pl):
+    ti_s3(pl)
+    seg(pl, 8, 14, inf1, color=AMBER, dash='6 5'); seg(pl, 8, 14, inf2, color=AMBER, dash='2 5'); seg(pl, 8, 14, both)
+    pl.vline(12, both(12)); pl.points([12], [both(12)])
+    pl.text(12.2, both(12) + 1.4, '%.2f at 12 hr' % both(12), size=14)
+    pl.text(12.15, inf2(12) - 1.3, 'second: %.2f' % inf2(12), size=13, color=AMBER)
+    pl.text(12.15, inf1(12) - 1.3, 'first: %.2f' % inf1(12), size=13, color=AMBER)
+
+
+ts = Plot(14, [0, 5, 10, 15, 20, 25, 30], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+          w=720, h=500, l=76, r=24, t=96, b=62, fs=1.15)
+ts.frame([0, 2, 4, 6, 8, 10, 12, 14])
+heading(ts, 'Two 2-hour infusions of 300 mg, starting at 0 and 6 hours',
+        'k 0.15 hr⁻¹, VD 15 L, so R = 150 mg/hr.', big=1.0)
+stepped('two_infusions_steps', 'Two intermittent IV infusions, stage by stage', ts, [
+    ('infusion 1', 'From 0 to 2 hr the first infusion runs: C = (R/(VD k))(1 − e^−kt) with t = 2 hr gives %.2f mg/L.' % inf1(2), ti_s1),
+    ('infusion 1 stops', 'With the infusion off, the level falls first order from %.2f: at 6 hr it is %.2f × e^(−0.6) = %.2f mg/L.'
+     % (inf1(2), inf1(2), inf1(6)), ti_s2),
+    ('infusion 2', 'The second infusion builds exactly as the first did, to %.2f mg/L at 8 hr. The leftover of dose 1 has fallen to '
+     '%.2f mg/L, so the plasma level at 8 hr is %.2f mg/L.' % (inf2(8), inf1(8), both(8)), ti_s3),
+    ('read at 12 hr', 'At 12 hr dose 1 has declined 10 hr and gives %.2f mg/L; dose 2 has declined 4 hr and gives %.2f mg/L. '
+     'The plasma concentration is the sum, %.2f mg/L.' % (inf1(12), inf2(12), both(12)), ti_s4),
+])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dir', help='also write each figure as a .svg file to look at')
@@ -642,6 +791,13 @@ def main():
             os.makedirs(a.dir, exist_ok=True)
             open(os.path.join(a.dir, key + '.svg'), 'w', encoding='utf-8').write(svg)
         print(f'  {key:24s} {len(svg)/1024:5.1f} KB svg   {title[:58]}')
+    json.dump({k: v[0] for k, v in FIGS.items()}, open(os.path.join(HERE, 'figtitles.json'), 'w'),
+              indent=0, sort_keys=True, ensure_ascii=False)
+    json.dump(STEPS, open(os.path.join(HERE, 'steps.json'), 'w'), indent=0, sort_keys=True, ensure_ascii=False)
+    for key, st in STEPS.items():
+        print(f'  {key:24s} {len(st["svg"])/1024:5.1f} KB svg   {len(st["steps"])} steps')
+        for s_ in st['steps']:
+            print('      ', s_['tag'], '|', s_['cap'])
     path = os.path.join(HERE, 'images.json')
     # images.json also holds the rendered lecture slides, written by slides.py.
     # Rewriting only the drawn figures would delete them, so they are carried

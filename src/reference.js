@@ -4,8 +4,8 @@
    Static HTML document: the equation tables the questions keep returning to.
    Authored as HTML in a template literal — no backtick and no dollar-brace
    inside. Each <h3> becomes a jump-list entry automatically.
-   {{fig:key|caption}} tokens resolve against images.json; none are used here
-   because no figures have been harvested yet.
+   {{fig:key|caption}} tokens resolve against images.json, and {{steps:key}}
+   tokens against steps.json (step-through figures); figures.py draws both.
 
    SOURCES. Every equation, symbol, unit, number and claim below comes from
    one of: BasicPharmacokineticsEquations.pdf (the exam equation sheet),
@@ -388,6 +388,7 @@ const REFERENCE_HTML = `
 
 <p><b>Her Example 1</b>, t&frac12; 4 hr, V<sub>D</sub> 25% of body weight, 10 mg/kg every 8 hours: first dose 40 mg/L falling to 10 mg/L; at steady state 53.3, 13.3 and an average of 28.9 mg/L. The interval is two half-lives, so e<sup>&minus;k&tau;</sup> = 0.25 and the accumulation factor is 1.33.</p>
 {{fig:md_bolus|Her Example 1 regimen: six doses, then none. The dashed curve is the first dose on its own.}}
+{{steps:md_bolus_steps}}
 
 <p><b>What the chapter adds.</b> The accumulation index R = C<sub>max</sub><sup>&infin;</sup>/C<sub>max</sub> after the first dose = 1/(1 &minus; e<sup>&minus;k&tau;</sup>), which depends on k and &tau; and not on the dose. Time to steady state depends on the elimination half-life only, not on the dose, the interval or the number of doses: 90% at 3.3 half-lives, 95% at 4.32, 99% at 6.6. Superposition fails when repeated dosing changes the pharmacokinetics: changing pathophysiology, saturation of a carrier system, enzyme induction or inhibition, and nonlinear pharmacokinetics.</p>
 
@@ -416,6 +417,7 @@ const REFERENCE_HTML = `
 <td>Yes, page 1.</td></tr>
 </tbody></table>
 {{fig:two_infusions|Her Example 4: each infusion on its own, and their sum, read at 12 hours.}}
+{{steps:two_infusions_steps}}
 
 <h3>Module 6 &mdash; multiple oral doses</h3>
 <p>The single-oral-dose equation with the accumulation brackets attached. Her way of telling the oral steady-state peak from the bolus one on the equation sheet: <i>"what tells you that this is for an oral dose? F is one thing. ... What else tells us? Team Max, right? ... Only for oral do you need to find T Max."</i> The two things a regimen can change are the dose and the dosing interval: <i>"We don't change clearance, we don't change half-life, we don't change volume and distribution."</i></p>
