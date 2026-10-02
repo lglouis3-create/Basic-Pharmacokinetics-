@@ -680,8 +680,17 @@ def seg(pl, a, b, fn=md_curve, color=BLUE, dash=None):
 
 
 def md_upto(pl, b):
+    """One polyline per dosing interval, each starting with the vertical jump
+    the dose makes (from what was left to the new peak), so consecutive
+    intervals join into one curve rather than reading as separate lines."""
     for i in range(int(b // MTAU)):
-        seg(pl, i * MTAU + 1e-6, min((i + 1) * MTAU, b) - 1e-6)
+        a0, b0 = i * MTAU, min((i + 1) * MTAU, b) - 1e-6
+        pts = [] if i == 0 else [f'{pl.px(a0):.1f},{pl.py(md_curve(a0 - 1e-6)):.1f}']
+        for j in range(121):
+            t = a0 + 1e-6 + (b0 - a0 - 1e-6) * j / 120
+            pts.append(f'{pl.px(t):.1f},{pl.py(md_curve(t)):.1f}')
+        pl.parts.append(f'<polyline points="{" ".join(pts)}" fill="none" stroke="{BLUE}" stroke-width="2" '
+                        f'stroke-linecap="round" stroke-linejoin="round"/>')
 
 
 def md_s1(pl):
@@ -710,7 +719,11 @@ def md_s4(pl):
 
 
 def md_s5(pl):
-    md_s3(pl); seg(pl, 48 + 1e-6, 64)
+    md_s3(pl)
+    pts = [f'{pl.px(48):.1f},{pl.py(md_curve(48 - 1e-6)):.1f}'] + \
+          [f'{pl.px(48 + 16 * j / 120 + 1e-6):.1f},{pl.py(md_curve(48 + 16 * j / 120 + 1e-6)):.1f}' for j in range(121)]
+    pl.parts.append(f'<polyline points="{" ".join(pts)}" fill="none" stroke="{BLUE}" stroke-width="2" '
+                    f'stroke-linecap="round" stroke-linejoin="round"/>')
     pl.text(56, 8.0, 'no seventh dose', size=14, color=DIM, anchor='middle')
 
 
