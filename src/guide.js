@@ -7,14 +7,18 @@
    {{fig:key|caption}} tokens resolve against images.json; none are used here
    because no figures have been harvested.
 
-   SOURCES. Every line is traceable to a printed slide in one of the five
+   LAYOUT per objective (checked by guide_check.js): In plain words, Terms
+   to know, Equations (each a rendered {{frac}} with its symbols and sheet
+   status), Worked example, Picture it, How she tests it, and In her words
+   (at most a few short quotes, kept only where her exact wording matters),
+   then a source line.
+
+   SOURCES. Every line is traceable to a printed slide in one of the
    lectured decks, to Dr. Mosley's spoken words recorded in
-   TRANSCRIPT_CUES.md, or to one of her own worked solutions recorded in
-   STYLE.md or printed in a deck. Bullets under "What she said about it" are
-   transcript, rendered as <q>: her words with the auto-caption fillers
-   removed, or, as <q class="para">, a passage the captions garbled,
-   restated in plain words. Each says which it is and on what date.
-   OCR'd handwriting on the annotated decks is not used as a source.
+   TRANSCRIPT_CUES.md, to one of her own worked solutions recorded in
+   STYLE.md or printed in a deck, or to a question file whose working it
+   repeats. Quotes are rendered as <q>; <q class="para"> marks a passage the
+   captions garbled, restated in plain words.
    Where slide and transcript differ, both are stated.
 
    Objective counts: Module 1 five, Module 2 six (three on each of the deck's
@@ -25,1517 +29,2475 @@
    ========================================================================== */
 const GUIDE_HTML = `
 <h2>Objective guides</h2>
-<p class="sub">One section per objective from Dr. Mosley's own objectives slides, in her wording and her order. Nothing here is scored.</p>
+<p class="sub">One section per objective on Dr. Mosley's objectives slides, in her order. Nothing here is scored.</p>
 <ul class="sub">
-<li>Each section gives what the slides carry, what she added out loud, her own question on it, and the form the question takes when she sets it.</li>
-<li>Under <i>What she said about it</i>, a solid bar carries her own words with the auto-caption fillers removed.</li>
-<li>A dashed bar carries a passage the captions garbled, restated in plain words.</li>
-<li>The line under each quote says which it is, and the lecture date.</li>
+<li><b>In plain words</b> says what the objective is about, assuming nothing from earlier lectures.</li>
+<li><b>Terms to know</b> and <b>Equations</b> define every symbol and say whether the equation is on the exam sheet.</li>
+<li><b>Worked example</b> runs one of her problems line by line, and <b>How she tests it</b> lists the question formats and traps.</li>
+<li><b>In her words</b> keeps a quote only where her exact wording matters.</li>
 </ul>
 
 <h2>Module 1 - Introduction &amp; Math Review</h2>
-<p class="prose">Five objectives, printed on Introduction.pdf slide 2 and reprinted unchanged on RecapExam1.pdf slide 2.</p>
-<ul class="saidlist">
-<li class="said"><span class="lead">On what those slides are for</span><q>the first slide there after the title slide is our objectives. I put this here because this is what I want you to know for the exam.</q><span class="when">her words, caption fillers removed</span></li>
-</ul>
+<p class="prose">Five objectives. Dr. Mosley lists them at the start of the Introduction deck and again, unchanged, in the Exam 1 recap, as the things she wants you to know for the exam.</p>
 
 <section class="gobj" id="gobj-m1-1">
 <h3 data-nav="Module 1, objective 1 &mdash; Define pharmacokinetics and discuss some related disciplines">Module 1 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Define pharmacokinetics and discuss some related disciplines</b><i>Introduction.pdf slides 3&ndash;8</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>The schematic on Introduction.pdf slide 3 splits the path into two labelled parts.</li>
-<li><b>Pharmaceutics</b> runs from the dosage form to drug in solution.</li>
-<li><b>Pharmacokinetics</b> runs from drug in solution through drug in systemic circulation, distribution to tissues, metabolism and excretion, to pharmacologic effect.</li>
-<li><b>Absorption</b> &mdash; passage of drug molecules from the administration site into systemic circulation &mdash; Introduction.pdf slide 4.</li>
-<li><b>Distribution</b> &mdash; process of reversible transfer of a drug to and from the site of measurement &mdash; slide 4.</li>
-<li><b>Metabolism</b> &mdash; conversion of one chemical species to another (biotransformation) &mdash; slide 4.</li>
-<li><b>Excretion</b> &mdash; removal of intact drug or metabolite from the body &mdash; slide 4.</li>
-<li><b>Biopharmaceutics</b> &mdash; the interrelationship of the physicochemical drug properties, dosage form and route of administration on the rate and extent of systemic drug absorption &mdash; Introduction.pdf slide 6.</li>
-<li>The biopharmaceutic considerations table lists seven inputs to drug product design &mdash; Introduction.pdf slide 7.</li>
-<li>The seven inputs: therapeutic objective; the drug (active pharmaceutical ingredient, API); route of administration; drug dosage and dosage regimen; type of drug product; excipients; method of manufacture.</li>
-<li><b>Clinical pharmacokinetics</b> &mdash; the application of pharmacokinetic methods to drug therapy &mdash; Introduction.pdf slide 8.</li>
-<li><b>Population pharmacokinetics</b> &mdash; the study of pharmacokinetic differences in various population groups &mdash; slide 8.</li>
-<li><b>Pharmacodynamics</b> &mdash; the relationship between drug concentration at the site of action and pharmacological response &mdash; slide 8.</li>
-<li><b>Clinical toxicology</b> &mdash; study of adverse effects of drugs in the body &mdash; slide 8.</li>
-<li><b>Toxicokinetics</b> &mdash; the application of pharmacokinetic principles to drug safety evaluation studies &mdash; slide 8.</li>
-<li>Summary: pharmacokinetics is the study of ADME (absorption, distribution, metabolism, excretion) &mdash; Introduction.pdf slide 15.</li>
-<li>Summary, continued: the related disciplines are biopharmaceutics, clinical pharmacokinetics, pharmacodynamics, clinical toxicology and toxicokinetics.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>A drug's journey has two halves. Pharmaceutics covers the dosage form up to the point where the drug is dissolved, and pharmacokinetics covers everything after that.</li>
+<li>Pharmacokinetics (PK) follows the dissolved drug into the blood, out to the tissues, through metabolism and excretion, and on to its effect. In short, PK is the study of ADME.</li>
+<li>Several neighbouring disciplines borrow PK methods for a particular purpose, such as treating patients, comparing population groups or judging safety. Each has a one-line definition you are expected to know.</li>
+<li>The quickest way to separate PK from pharmacodynamics (PD) is what each one relates: PK links concentration to time, and PD links concentration to response.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The two-word contrast that separates the two disciplines, which the slide does not put side by side</span><q class="para">Pharmacodynamics is concentration and response; pharmacokinetics is concentration and time.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">On the slide 7 table</span><q>If you see a table, no, I do not expect you to memorize the table. This is to help clarify in your brain how the pieces fit.</q> and of that table specifically, <q>this is for your information</q><span class="when">08-17 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Which of these are examinable, from the Exam 1 review</span><q class="para">There are some definitions that I expect you to know, and some related disciplines. Remember, we talked about clinical pharmacokinetics, toxicology, pharmacodynamics, pharmacology.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her own wording of biopharmaceutics, closer to the exam's likely phrasing than the slide's</span><q class="para">Biopharmaceutics is the relation tying the physicochemical drug properties, the drug itself, the dosage form and the route of administration to the rate and extent of systemic absorption.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">ADME is lettered differently by other faculty, which is why she fixes the four letters here</span><q class="para">Dr. Smith adds a T to ADME for toxicology; Dr. Yendaalli adds an L at the beginning for liberation.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Pharmaceutics</dt><dd>The part of the path from the dosage form to drug in solution.</dd>
+<dt>Pharmacokinetics (PK)</dt><dd>The part from drug in solution, through the systemic circulation, distribution, metabolism and excretion, to the pharmacologic effect; the study of ADME.</dd>
+<dt>ADME</dt><dd>Absorption, distribution, metabolism, excretion. Other faculty add a letter (an L for liberation, or a T for toxicology); in this course it is these four.</dd>
+<dt>Absorption</dt><dd>Passage of drug molecules from the administration site into the systemic circulation.</dd>
+<dt>Distribution</dt><dd>Reversible transfer of a drug to and from the site of measurement.</dd>
+<dt>Metabolism</dt><dd>Conversion of one chemical species to another (biotransformation).</dd>
+<dt>Excretion</dt><dd>Removal of intact drug or metabolite from the body.</dd>
+<dt>Biopharmaceutics</dt><dd>How the drug's physicochemical properties, the dosage form and the route of administration together affect the rate and extent of systemic absorption.</dd>
+<dt>Clinical pharmacokinetics</dt><dd>Applying pharmacokinetic methods to drug therapy.</dd>
+<dt>Population pharmacokinetics</dt><dd>The study of pharmacokinetic differences between population groups.</dd>
+<dt>Pharmacodynamics (PD)</dt><dd>The relationship between drug concentration at the site of action and the pharmacological response.</dd>
+<dt>Clinical toxicology</dt><dd>The study of adverse effects of drugs in the body.</dd>
+<dt>Toxicokinetics</dt><dd>Applying pharmacokinetic principles to drug safety evaluation studies.</dd>
+</dl>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Single-answer multiple choice. The stem reads out a definition almost word for word, and the options are bare discipline names, so you go from definition to name.</li>
+<li>Her own poll item gave the biopharmaceutics definition (physicochemical properties, dosage form and route affecting rate and extent of absorption). The options were biopharmaceutics, toxicology, pharmacodynamics and pharmacology.</li>
+<li>The answer was biopharmaceutics. A few students picked pharmacodynamics, so watch for that pull: PD is about response, not absorption.</li>
+<li>Distractors come from the other related disciplines, plus pharmacology, which the deck never defines.</li>
+<li>At the Exam 1 review she named these definitions and the related disciplines as examinable. The biopharmaceutic considerations table (seven inputs to product design) is for understanding only; she does not expect it memorised.</li>
+<li>To recognise the answer, look for the key words: absorption from dosage form and route means biopharmaceutics; response means PD; drug therapy means clinical PK; safety studies means toxicokinetics.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question &mdash; poll slide, Introduction.pdf</b>
-<p class="prose">Stem: <i>"Which term best describes the examination of the interrelationship of the physicochemical properties of the drug, the dosage form in which the drug is given, and the route of administration on the rate and extent of systemic drug absorption?"</i></p>
-<ul>
-<li>Options: biopharmaceutics; toxicology; pharmacodynamics; pharmacology.</li>
-<li>Her answer, debriefing the same item on 08-19: <i>"most of you guys thought biopharm, a few of you guys thought pharmacodynamics, and somebody thought pharmacology. BioPharm is what I was looking at."</i></li>
-<li>Correct: biopharmaceutics.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>The stem is the slide's definition, read out almost word for word, and the options are bare discipline names. The definition arrives first and the name is the answer, not the other way round.</li>
-<li>The distractors are drawn from the neighbouring slide &mdash; the other related disciplines &mdash; plus pharmacology, which is not defined anywhere in the deck.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q class="para">Pharmacodynamics is concentration and response; pharmacokinetics is concentration and time.</q> (08-17, restated from a garbled caption)</li>
+</ul>
+<p class="gsrc">Sources: Introduction.pdf slides 2&ndash;8 and 15 (summary), biopharmaceutics poll slide; RecapExam1.pdf slide 2; transcripts 08-17, 08-19, 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m1-2">
 <h3 data-nav="Module 1, objective 2 &mdash; Describe the types of pharmacokinetic modeling">Module 1 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Describe the types of pharmacokinetic modeling</b><i>Introduction.pdf slides 11&ndash;15</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Pharmacokinetic models are used to predict drug levels and to determine dosing regimens &mdash; Introduction.pdf slide 11.</li>
-<li>They estimate possible accumulation of drugs and/or metabolites, and correlate drug concentrations with pharmacologic or toxicologic activity.</li>
-<li>They evaluate differences in the rate or extent of availability between formulations (bioequivalence).</li>
-<li>They describe how changes in physiology or disease affect the pharmacokinetics of the drug, and they explain drug interactions.</li>
-<li><b>Physiologic pharmacokinetic models</b> are blood flow or perfusion models, based on known anatomic and physiologic data &mdash; Introduction.pdf slide 12.</li>
-<li><b>Compartment pharmacokinetic models</b> are of two kinds, mammillary and catenary &mdash; Introduction.pdf slide 13.</li>
-<li>The mammillary model is drawn with compartment 1 in the centre, compartment 2 to its left and compartment 3 to its right, carrying k<sub>12</sub>/k<sub>21</sub> and k<sub>13</sub>/k<sub>31</sub>.</li>
-<li>The catenary model is drawn as a chain 1&ndash;2&ndash;3, carrying k<sub>12</sub>/k<sub>21</sub> and k<sub>23</sub>/k<sub>32</sub>.</li>
-<li>A figure of worked examples of compartment models follows &mdash; Introduction.pdf slide 14.</li>
-<li>Summary: modeling helps to make pharmacokinetic predictions &mdash; Introduction.pdf slide 15.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>A pharmacokinetic model is a simplified description of the body that lets you predict drug levels and choose a dosing regimen.</li>
+<li>Models are also used to estimate accumulation, link concentration to effect or toxicity, compare formulations (bioequivalence), and explain how disease or drug interactions change PK.</li>
+<li>There are two broad types. Physiologic models are built from real anatomy and blood flow; compartment models treat the body as one or more boxes the drug moves between.</li>
+<li>This course uses compartment models almost entirely. The way a drug behaves in the body decides how many boxes are needed and how they are joined.</li>
+<li>Physiologic models need more input data than the course uses, so they appear mainly as a wrong answer choice.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Which kind this course actually uses, and what the box means</span><q class="para">We primarily do compartmental modeling: we treat the body as a little box, put all of the drug into the box, and how the drug behaves in the body decides which model to use.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Why the physiologic model is on the slide but not used</span><q class="para">Physiological models we do not use quite as much; those require more input than we want to do.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The catenary model described as a chain rather than as a diagram</span><q class="para">Compartments joined together like the compartments of a train: one car, next car, next car. You do not get to the third car without going through the second car. That is our catenary system.</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Physiologic (perfusion) model</dt><dd>A blood flow model based on known anatomic and physiologic data.</dd>
+<dt>Compartment model</dt><dd>The body represented as one or more boxes (compartments), with the drug moving between them at set rate constants.</dd>
+<dt>Mammillary model</dt><dd>A central compartment 1 with other compartments each joined directly to it, e.g. 2 on one side and 3 on the other, exchanging by k<sub>12</sub> and k<sub>21</sub>, and k<sub>13</sub> and k<sub>31</sub>.</dd>
+<dt>Catenary model</dt><dd>Compartments joined in a chain, 1 to 2 to 3, so drug reaches compartment 3 only by passing through 2 (k<sub>12</sub> and k<sub>21</sub>, then k<sub>23</sub> and k<sub>32</sub>).</dd>
+<dt>Rate constant between compartments (k<sub>12</sub>)</dt><dd>The rate constant for transfer from compartment 1 to compartment 2, in reciprocal time (hr<sup>&minus;1</sup>).</dd>
+<dt>Bioequivalence</dt><dd>Comparison of the rate or extent of availability between two formulations of a drug.</dd>
+</dl>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She asks by how the compartments are joined, not by how many there are.</li>
+<li>Her poll stem: which model has compartments joined to one another like the compartments of a train? Options: catenary, mammillary, physiologic. The answer is catenary.</li>
+<li>The trap is mammillary, which also has three compartments. Ask yourself whether every outer box connects to the centre (mammillary) or whether they form a chain (catenary).</li>
+<li>Physiologic appears only as a distractor in these wiring questions.</li>
 </ul>
-
-<div class="gpoll"><b>Her own question &mdash; poll slide, Introduction.pdf</b>
-<p class="prose">Stem: <i>"Which pharmacokinetic model consists of compartments joined to one another like the compartments of a train?"</i> Options: catenary; mammillary; physiologic.</p>
-<p class="prose">Correct: catenary, confirmed in her 08-19 debrief quoted above (<i>"Most of you guys were there."</i>).</p></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>She asks by wiring, not by count.</li>
-<li>The stem gives the arrangement &mdash; joined like the compartments of a train &mdash; and the options are the three model names from slides 12 and 13.</li>
-<li>The physiologic model appears as a distractor in a question about compartment wiring, which is the only place it is examined.</li>
-</ul></div>
+<p class="gsrc">Sources: Introduction.pdf slides 11&ndash;15 and the catenary poll slide; transcripts 08-19 (poll debrief), 09-09 (exam review).</p>
 </section>
 
 <section class="gobj" id="gobj-m1-3">
 <h3 data-nav="Module 1, objective 3 &mdash; Define some fundamental pharmacokinetics terms">Module 1 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Define some fundamental pharmacokinetics terms</b><i>Introduction.pdf slides 5, 9, 10</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li><b>Elimination</b> &mdash; irreversible loss of drug from the body by all routes &mdash; Introduction.pdf slide 5.</li>
-<li><b>Disposition</b> &mdash; all the kinetic processes that occur to a drug subsequent to its systemic absorption, that is distribution and elimination &mdash; slide 5.</li>
-<li><b>First-pass effect</b> &mdash; rapid metabolism of an orally administered drug before reaching the general circulation &mdash; slide 5.</li>
-<li><b>Bioavailability</b> &mdash; measure of the systemic availability of a drug &mdash; slide 5.</li>
-<li>The concentration-versus-time curve: concentration rises from zero to a peak and then declines &mdash; Introduction.pdf slide 9.</li>
-<li><b>Whole blood</b> is generally obtained by venous puncture and contains an anticoagulant such as heparin or EDTA &mdash; Introduction.pdf slide 10.</li>
-<li>Whole blood contains all the cellular and protein elements of blood.</li>
-<li><b>Serum</b> is obtained from whole blood after the blood is allowed to clot and the clot is removed.</li>
-<li>Serum does not contain the cellular elements, fibrinogen, or the other clotting factors.</li>
-<li><b>Plasma</b> is the liquid supernatant obtained after centrifugation of non-clotted whole blood that contains an anticoagulant.</li>
-<li>Plasma is the noncellular liquid fraction of whole blood, containing all the proteins including albumin.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>These are the working words of the whole course. Later modules use them without redefining them, so learn the exact meaning now.</li>
+<li>After a dose, the plasma concentration (C<sub>p</sub>) rises from zero to a peak and then falls. The aim of dosing is to keep it above the level that works and below the level that harms.</li>
+<li>Drug levels are measured in a fluid sample. Serum or plasma is used most, because they contain fewer components for the drug to interact with than whole blood does.</li>
+<li>Elimination covers both metabolism and excretion; disposition covers distribution plus elimination.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Elimination as the catch-all, which the slide's one-line definition does not say</span><q class="para">Elimination refers to the irreversible loss of drugs from the body by all routes. Metabolism and excretion are both elimination terms; elimination is our catch-all.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Disposition in her own compressed form</span><q>Disposition is the processes that occur to a drug after it's absorbed, so distribution and elimination</q><span class="when">08-17 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">First-pass effect tied to the number it changes</span><q>often when we take oral medications, they hit the liver first before they get to that systemic circulation… Liver eats them up, eats up half the drug, and then you have a lower what we call a bioavailability</q><span class="when">08-17 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The subscript convention, which no slide states</span><q>if you see CP, we're looking at concentration of drug in the plasma, CS we're looking at concentration of drug in the serum, or if you just see a C, you can assume whatever.</q><span class="when">08-17 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Two lines she draws on the slide 9 curve that are not printed on it &mdash; a minimum toxic concentration above and a minimum effective concentration below</span><q class="para">Our goal is to stay in between these two lines.</q> On the upper line: <q>Remember that's the top of that curve, right there is where we start to see problems, and toxic can be different things for different drugs.</q>. Slide and speech differ here: the printed slide carries a plain curve, and an exam written from these lectures would key the spoken thresholds, because that is the only place they are defined.<span class="when">08-17 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Why serum or plasma rather than whole blood</span><q>We mostly use serum and plasma because remember we try to minimize the interactions of drug with anything else that might be in that sample</q><span class="when">08-19 &middot; her words, caption fillers removed</span></li>
-</ul>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Elimination</dt><dd>Irreversible loss of drug from the body by all routes. Metabolism and excretion are both forms of elimination.</dd>
+<dt>Disposition</dt><dd>Everything that happens to a drug after it is absorbed into the systemic circulation, that is, distribution and elimination.</dd>
+<dt>First-pass effect</dt><dd>Rapid metabolism of an oral drug, mainly by the liver, before it reaches the general circulation. It lowers the bioavailability.</dd>
+<dt>Bioavailability (F)</dt><dd>A measure of the systemic availability of a drug; F is the fraction of the dose that reaches the plasma, with no units.</dd>
+<dt>Minimum effective concentration (MEC)</dt><dd>The concentration that must be met or exceeded for the desired pharmacologic response. Drawn as the lower line on the concentration-time curve.</dd>
+<dt>Minimum toxic concentration (MTC)</dt><dd>The concentration above which adverse effects start; what counts as toxic differs between drugs. Drawn as the upper line.</dd>
+<dt>Minimum inhibitory concentration (MIC)</dt><dd>Used for antibiotics: the lowest concentration needed to kill or inhibit the bacteria. A distractor in her MEC question.</dd>
+<dt>Whole blood</dt><dd>Venous blood with an anticoagulant such as heparin or EDTA; contains all the cellular and protein elements.</dd>
+<dt>Serum</dt><dd>The liquid left after blood is allowed to clot and the clot is removed; no cells, no fibrinogen, no other clotting factors.</dd>
+<dt>Plasma</dt><dd>The liquid supernatant after centrifuging non-clotted, anticoagulated blood; no cells, but all the proteins including albumin.</dd>
+<dt>C<sub>p</sub>, C<sub>s</sub>, C</dt><dd>Drug concentration in plasma, in serum, or unspecified (take it as whichever fluid applies), in units such as mg/L or mcg/mL.</dd>
+</dl>
 
-<div class="gpoll"><b>Her own questions &mdash; two polls</b>
-<p class="prose"><b>Poll, 08-17.</b> Stem: <i>"What concentration must be met or exceeded? In order for the desired pharmacologic response to result."</i></p>
-<ul>
-<li>Options as she named them in the debrief: steady-state concentration; minimum toxic concentration; minimum effective; minimum inhibitory concentration.</li>
-<li>Her answer: <i>"looks like most of you guys picked C, which was minimum effective, I think. &hellip; OK, um, that is the correct answer."</i></li>
-<li>On the minimum inhibitory distractor: <i>"a lot of times we're looking at, um, biochemical um processes like um antibiotics &hellip; What is the minimum concentration that we need to, um, kill this bacteria"</i>.</li>
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Definition-style multiple choice where every option is a real term from the same family, so you have to know the definition; no option can be ruled out as nonsense.</li>
+<li>She words the stem as the property and asks for the name, e.g. which concentration must be met or exceeded for the desired response.</li>
+<li>That poll offered steady-state, minimum toxic, minimum effective and minimum inhibitory concentration. The answer is minimum effective (MEC).</li>
+<li>Another poll asked which sample is most commonly used for drug measurement: saliva, urine, whole blood, or serum or plasma. The answer is serum or plasma; all four are possible samples.</li>
+<li>For elimination versus disposition, check whether distribution is included. If it is, the term is disposition.</li>
 </ul>
-<p class="prose"><b>Poll slide, Introduction.pdf.</b> Stem: <i>"Which is most commonly used for drug measurement in pharmacokinetic analysis?"</i></p>
-<ul>
-<li>Options: saliva; urine; whole blood; serum or plasma.</li>
-<li>Her answer (08-19): <i>"most of you guys thought serum or plasma, and all of these are options"</i> &mdash; correct is serum or plasma.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>Definitional multiple choice in which every option is a real term from the same family: four concentration thresholds, or four sample fluids.</li>
-<li>So the discrimination is the definition, not plausibility.</li>
-<li>She words the stem as the property rather than the name: "what concentration must be met or exceeded", "which is most commonly used". The term is the answer.</li>
-</ul></div>
+<p class="gsrc">Sources: Introduction.pdf slides 5, 9, 10 and the sample-fluid poll slide; transcripts 08-17 (MEC poll, MEC and MTC lines, C<sub>p</sub> convention), 08-19 (serum or plasma).</p>
 </section>
 
 <section class="gobj" id="gobj-m1-4">
 <h3 data-nav="Module 1, objective 4 &mdash; Differentiate between orders of reaction and calculate basic parameters given a data set">Module 1 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Differentiate between orders of reaction and calculate basic parameters given a data set</b><i>Introduction.pdf slides 17&ndash;21, 26</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li><b>Zero-order reactions.</b> Amount or concentration of drug decreases at a constant rate. dC/dt = &minus;k, and C = C<sub>0</sub> &minus; kt. The plotted curve is plasma drug concentration against time &mdash; Introduction.pdf slide 17.</li>
-<li><b>First-order reactions.</b> Amount or concentration of drug decreases at a rate that is proportional to the amount of drug remaining &mdash; Introduction.pdf slide 18.</li>
-<li>First-order equations: dC/dt = &minus;kC; log C = log C<sub>0</sub> &minus; kt/2.3, so C = C<sub>0</sub>10<sup>&minus;kt/2.3</sup>; ln C = ln C<sub>0</sub> &minus; kt, so C = C<sub>0</sub>e<sup>&minus;kt</sup>.</li>
-<li><b>Half-life</b> is the time required for the amount or concentration of a drug to decrease by one-half. Zero-order half-life t&frac12; = C<sub>0</sub>/2k. First-order half-life t&frac12; = 0.693/k &mdash; Introduction.pdf slide 19.</li>
-<li>A semi-logarithmic plot whose concentration axis is labelled 1, 10, 100, 1000 &mdash; Introduction.pdf slide 21.</li>
-<li>Its points: C<sub>p</sub><sup>0</sup> = 200 mcg/mL at time zero, then 93, 44, 21, 10, 4.9 and 2.3 mcg/mL at hours 1 to 6.</li>
-<li>Summary: knowing the order of the reaction is critical to making pharmacokinetic predictions &mdash; Introduction.pdf slide 26.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>In a zero-order process the same amount (or concentration) of drug is lost every hour, however much is left. In a first-order process the same fraction is lost every hour, so more is lost per hour when more drug is present.</li>
+<li>Every prediction later in the course depends on knowing which order applies. When a stem says IV bolus, assume first order; when it gives you a data table, you must decide the order yourself.</li>
+<li>Half-life (t&frac12;) is the time for the amount or concentration to fall by half. For first order it is constant at any concentration; for zero order it depends on the starting concentration.</li>
+<li>From a data table you are expected to find four things: the rate constant (k), the starting concentration (C<sub>0</sub>), the half-life, and the time for a stated percentage to be lost.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The single affirmative statement in any lecture about a specific exam item</span><q class="para">Here is the secret. On this exam, I am going to give you a data set, and I expect you to figure out if it is zero or first. The rest of the time, if I tell you that it is an IV bolus dose, your expectation is first order. But if I give you a data set, expect that I expect you to tell me if it is zero or first.</q><span class="when">09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The first-order half-life is not supplied</span><q class="para">First-order half-life will not be on your equation sheet. This is the one that you take to your grave with you: 0.693 over k.</q> and again at the review: <q>That one is not on your equation sheet.</q><span class="when">08-19, 09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Half-life is a time, and the units are scored</span><q>I expect you to give me half-life in units of time.</q> <q>It is a time, so it is not days to the minus one. It is just days.</q><span class="when">08-19, 09-09 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Why the first-order half-life does not move</span><q class="para">0.693 over k is the one you take with you: a constant divided by a constant is a constant.</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Units decide the order of a rate constant: zero order is</span><q class="para">Either concentration per unit time or amount per unit time.</q>, first order is <q>Is it time? One over time. We call that reciprocal time.</q>. And, either way, <q>our rate constant is never going to be a negative</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The axis trap, flagged three separate times</span><q class="para">Notice that it does not say log.</q> <q class="para">You will see graphs like this, and this word will not be over here most of the time. You have got to pay attention to the axis.</q> <q class="para">If you look at that scale and it is not changing by a regular step but by a factor of 10, that tells you it is a logarithmic scale. Do not just look at that straight line and assume it is zero order. Look at the scale.</q><span class="when">08-19, 09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">A rounding error she says will change your answer</span><q>don't truncate that to 0.2 early on because if you put that as 0.2, your number is gonna be very different than our numbers</q>, with the instruction to <q>keep, 3 to 4 decimal places for that K</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">A sign error she makes on purpose and then names: solving backwards for C<sub>0</sub></span><q>if I punch C0E or CE to the minus KT because I always throw in that minus there, what's gonna happen to my number? If it's minus KT, then that number is going to be lower than where I started</q>. On the zero-order version she catches the same thing: <q>What is wrong with the way I've set that up?… It is going to be a lower concentration, so this should be plus</q><span class="when">08-19 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The half-life counting table she builds live, which no slide carries: one half-life leaves 50% and eliminates 50%; two half-lives</span><q class="para">You said 75%, so 25% remains.</q>; three, <q class="para">Three half-lives: 12.5% remains, 87.5% gone.</q>. And <q>First order processes, it's gonna take 10 half-lives for 99.9% of the drug to be eliminated from the body.</q><span class="when">08-19, 08-24 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Zero-order rate constant (k or k<sub>0</sub>)</dt><dd>Concentration or amount lost per unit time, e.g. (mg/mL)/hr or mg/hr. Never negative.</dd>
+<dt>First-order rate constant (k)</dt><dd>Fraction lost per unit time, in reciprocal time (hr<sup>&minus;1</sup>, day<sup>&minus;1</sup>). Never negative.</dd>
+<dt>Initial concentration (C<sub>0</sub>)</dt><dd>The concentration at time zero, e.g. mg/L or mg/mL. Often found by working backwards from a later point.</dd>
+<dt>Half-life (t&frac12;)</dt><dd>Time for the amount or concentration to fall by one half. A time (hr, days), never reciprocal time.</dd>
+<dt>Semi-logarithmic (semilog) plot</dt><dd>A graph whose concentration axis rises by factors of 10 (1, 10, 100, 1000). A first-order decline is a straight line on it.</dd>
+<dt>Natural log (ln) and log</dt><dd>ln is log to base e; log is base 10. The 2.3 in the log form converts between them.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">Zero order: {{frac:dC|dt}} = &minus;k &nbsp;&nbsp; and &nbsp;&nbsp; C = C<sub>0</sub> &minus; kt</div>
+<ul class="tlist">
+<li>C concentration at time t (mg/mL); C<sub>0</sub> starting concentration (mg/mL); k zero-order rate constant ((mg/mL)/hr); t time (hr).</li>
+<li>When to use it: the loss per unit time is constant. Concentration against time is a straight line on ordinary (linear) axes.</li>
+<li>On the equation sheet: yes, page 1, written C = C<sub>0</sub> &minus; k<sub>0</sub>t.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">First order: {{frac:dC|dt}} = &minus;kC &nbsp;&nbsp; and &nbsp;&nbsp; C = C<sub>0</sub>e<sup>&minus;kt</sup></div>
+<div class="geqline">ln C = ln C<sub>0</sub> &minus; kt &nbsp;&nbsp; or &nbsp;&nbsp; log C = log C<sub>0</sub> &minus; {{frac:kt|2.3}}</div>
+<ul class="tlist">
+<li>Same symbols, but k is in reciprocal time (hr<sup>&minus;1</sup>), so kt has no units. The rate depends on the concentration C that is present.</li>
+<li>When to use it: the fraction lost per unit time is constant. A curve on linear axes, a straight line on a semilog plot.</li>
+<li>On the equation sheet: yes, all three forms, once in concentration (C) and once in amount (D).</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">First-order k from two points: k = {{frac:ln C<sub>1</sub> &minus; ln C<sub>2</sub>|t<sub>2</sub> &minus; t<sub>1</sub>}}</div>
+<div class="geqline">Zero-order k from two points: k = {{frac:C<sub>1</sub> &minus; C<sub>2</sub>|t<sub>2</sub> &minus; t<sub>1</sub>}}</div>
+<ul class="tlist">
+<li>C<sub>1</sub> at the earlier time t<sub>1</sub>, C<sub>2</sub> at the later time t<sub>2</sub>. Earlier minus later keeps k positive.</li>
+<li>When to use it: a table or two measured points, once you have decided the order. C<sub>0</sub> cancels, so you do not need it.</li>
+<li>On the equation sheet: not as separate lines; each is the sheet's C or ln C line written for two points.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Working back to time zero: first order C<sub>0</sub> = C e<sup>+kt</sup> &nbsp;&nbsp; zero order C<sub>0</sub> = C + kt</div>
+<ul class="tlist">
+<li>C a measured concentration at time t after the start.</li>
+<li>When to use it: asked for the initial concentration. The sign is plus because C<sub>0</sub> must be larger than any later concentration.</li>
+<li>On the equation sheet: not written this way; it is the sheet's line rearranged.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">First-order half-life: t<sub>&frac12;</sub> = {{frac:0.693|k}}</div>
+<ul class="tlist">
+<li>k first-order rate constant (hr<sup>&minus;1</sup>); the answer is a time (hr).</li>
+<li>When to use it: any first-order process. Run it backwards (k = {{frac:0.693|t<sub>&frac12;</sub>}}) when a half-life is given.</li>
+<li>On the equation sheet: no. She says this one must be memorised.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Zero-order half-life: t<sub>&frac12;</sub> = {{frac:C<sub>0</sub>|2k}}</div>
+<ul class="tlist">
+<li>C<sub>0</sub> starting concentration (mg/mL); k zero-order rate constant ((mg/mL)/hr); the answer is a time (hr).</li>
+<li>When to use it: zero order only. Because C<sub>0</sub> is in it, a lower starting concentration gives a shorter half-life.</li>
+<li>On the equation sheet: no; she has not said either way. It follows from C = C<sub>0</sub> &minus; kt with C set to half of C<sub>0</sub>.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Time to fall to concentration C, first order: t = {{frac:ln C<sub>0</sub> &minus; ln C|k}}</div>
+<div class="geqline">For 90% decomposed (10% left): t = {{frac:ln 10|k}}</div>
+<ul class="tlist">
+<li>Turn "decomposed by 90%" into "10% remains" first, so C = 0.1 C<sub>0</sub>, and C<sub>0</sub> cancels.</li>
+<li>When to use it: a percentage that is not a power of one half. For 50%, 75% or 87.5% lost, count half-lives instead (1, 2 or 3).</li>
+<li>On the equation sheet: not as its own line; it is the sheet's ln C line rearranged for t.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her practice set: a drug solution sampled at 2, 6, 12, 24, 36 and 48 hr gave 294.3, 208.1, 123.8, 43.8, 15.5 and 5.5 mg/L. Find k, C<sub>0</sub>, t&frac12; and the time to 90% decomposed.</p>
+<ol class="gsteps">
+<li>Decide the order by comparing ratios over equal time spans. From 12 to 24 hr: {{frac:123.8|43.8}} = 2.83. From 24 to 36 hr: {{frac:43.8|15.5}} = 2.83. Equal ratios, so first order.</li>
+<li>Find k from the 6 hr and 24 hr points: k = {{frac:ln 208.1 &minus; ln 43.8|24 &minus; 6}} = {{frac:5.3380 &minus; 3.7796|18 hr}} = {{frac:1.5584|18 hr}} = 0.08658, so <b>k = 0.0866 hr<sup>&minus;1</sup></b>.</li>
+<li>Work back to time zero from the 12 hr point: kt = 0.0866 &times; 12 = 1.0392, and C<sub>0</sub> = 123.8 &times; e<sup>1.0392</sup> = 123.8 &times; 2.827 = 349.98, so <b>C<sub>0</sub> = 350 mg/L</b>.</li>
+<li>Half-life: t&frac12; = {{frac:0.693|0.0866 hr<sup>&minus;1</sup>}} = 8.002, so <b>t&frac12; = 8 hr</b>.</li>
+<li>Time to 90% decomposed: 10% remains, so t = {{frac:ln 10|0.0866 hr<sup>&minus;1</sup>}} = {{frac:2.3026|0.0866}} = 26.589, so <b>t = 26.6 hr</b>.</li>
+</ol>
+<p class="prose">The same stem with a zero-order table: 338, 314, 278, 206, 134 and 62 mg/mL at the same six times.</p>
+<ol class="gsteps">
+<li>Decide the order: 338 &minus; 314 = 24 mg/mL in 4 hr and 314 &minus; 278 = 36 mg/mL in 6 hr, both 6 mg/mL per hour. Equal losses per hour, so zero order.</li>
+<li>Rate constant from the 2 hr and 24 hr points: k = {{frac:338 &minus; 206|24 &minus; 2}} = {{frac:132 mg/mL|22 hr}} = 6, so <b>k = 6 (mg/mL)/hr</b>.</li>
+<li>Work back to time zero: C<sub>0</sub> = 338 + 6 &times; 2 = 338 + 12, so <b>C<sub>0</sub> = 350 mg/mL</b>.</li>
+<li>Half-life: t&frac12; = {{frac:350|2 &times; 6}} = {{frac:350|12}} = 29.17, so <b>t&frac12; = 29.2 hr</b>.</li>
+<li>Time to 90% decomposed: 10% of 350 is 35 mg/mL, and t = {{frac:350 &minus; 35|6}} = {{frac:315|6}}, so <b>t = 52.5 hr</b>.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Guaranteed on Exam 1: a data table with the order withheld. You decide zero or first, then answer k, C<sub>0</sub>, t&frac12; and time to 90% decomposed, in that order.</li>
+<li>How to decide: equal differences per hour mean zero order; equal ratios over equal time spans mean first order. On a graph, a straight line on linear axes is zero order, and on a semilog axis it is first order.</li>
+<li>The axis trap: the concentration axis often is not labelled "log". If its marks go 1, 10, 100, 1000, it is a log scale, and a straight line there means first order.</li>
+<li>A paired stem gives one starting concentration and one later value (e.g. 300 mg/mL, then 80 mg/mL after 30 days) and asks for the half-life assuming first order, then assuming zero order. The stated temperature is never used.</li>
+<li>Where the percentage lost is a power of one half, she expects half-life counting: 1 half-life leaves 50%, 2 leave 25%, 3 leave 12.5%. About 10 half-lives remove 99.9%.</li>
+<li>Her example: t&frac12; is 8 hr; how long for 750 mg to decompose by 87.5%? That is 3 half-lives, so 24 hr; the 750 mg is not needed.</li>
+<li>True/false and select-all items pair "rate" with "half-life". First order: the rate changes with concentration, the half-life is constant. Zero order: the rate is constant, the half-life depends on C<sub>0</sub>.</li>
+<li>Her select-all on first-order processes had one correct option, a constant half-life. A constant rate of elimination, {{frac:dC|dt}} = &minus;k, and k in concentration per time all describe zero order.</li>
+<li>Marked errors: half-life given in reciprocal time (it is a time, e.g. days, not days<sup>&minus;1</sup>); a negative k; rounding k early (keep 3 to 4 decimal places); a minus sign when working back to C<sub>0</sub>.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; three polls and a practice set</b>
-<p class="prose"><b>Poll slide, Introduction.pdf.</b> Stem: <i>"The rate of a first-order process is independent of the concentration of drug present."</i> True / False.</p>
-<ul>
-<li>The class split fifty-fifty. The answer is false, on her reason: <i>"the rate depends on the concentration that's there"</i> (08-19).</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li>On t&frac12; = {{frac:0.693|k}}: <q>That one is not on your equation sheet.</q> (09-09)</li>
+<li><q>I expect you to give me half-life in units of time.</q> (08-19, 09-09)</li>
 </ul>
-<p class="prose"><b>Poll slide, Introduction.pdf, select-all.</b> Stem: <i>"First-order processes are characterized by"</i>.</p>
-<ul>
-<li>Options: a constant half-life; a constant rate of elimination; dC/dt = &minus;k; units of k of (concentration or amount)/time.</li>
-<li>Correct: a constant half-life.</li>
-<li>Her debrief on each distractor (08-19): <i>"The rate of elimination &hellip; the rate is constantly changing &hellip; DCDT, you don't see a concentration term there &hellip; And then units of K being concentration or amount per time. Remember K is going to be reciprocal time."</i></li>
-</ul>
-<p class="prose"><b>Poll slide opening 2IVBolusAdministration.pdf.</b> Stem: <i>"The half-life of a first-order process is independent of the concentration of drug present."</i> True / False.</p>
-<ul>
-<li>Correct: true. <i>"no matter how much drug you have for a first-order process, the half-life will be the half-life, 0.693 over the rate constant K"</i> (08-24).</li>
-<li>This poll and the first one above are the same sentence with <i>rate</i> swapped for <i>half-life</i>, and the answers are opposite.</li>
-</ul>
-<p class="prose"><b>Daily practice, Introduction and Math Review.</b> Stem, verbatim: <i>"In an experiment to study the chemical decomposition, a drug solution was prepared and a sample was obtained at different time points. The drug concentrations in the samples and the results were as follows:"</i></p>
-<ul>
-<li>A six-row time/concentration table follows, then four parts.</li>
-<li>a. the rate constant for the decrease in concentration; b. the initial starting concentration of the solution.</li>
-<li>c. the time required for exactly half the solution to decompose; d. the time required for the original solution to decompose by 90%.</li>
-<li>Her first-order version runs from 294.3 mg/L at 2 hr down to 5.5 mg/L at 48 hr.</li>
-<li>Her first-order answers: k = 0.0866 hr<sup>&minus;1</sup> from the 6 hr and 24 hr points, C<sub>0</sub> = 350 mg/L, t&frac12; = 8 hr, t = 26.6 hr.</li>
-<li>She reuses the identical stem for a zero-order table, from 338 mg/mL at 2 hr down to 62 mg/mL at 48 hr.</li>
-<li>Her zero-order answers: k = 6 (mg/mL)/hr, C<sub>0</sub> = 350 mg/mL, t&frac12; = 29.2 hr, t = 52.5 hr.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>A data table with the order withheld, then the same four parts in the same order: rate constant, initial concentration, half-life, time to 90% decomposed.</li>
-<li>Deciding the order is the whole exercise. The identical stem is served once as first order and once as zero order.</li>
-<li>The paired stem opens: <i>"A solution of a drug was freshly prepared at a concentration of X mg/mL. After N days at 25&deg;C, the drug concentration in the solution was Y mg/mL"</i>.</li>
-<li>It continues: <i>"a. Assuming first-order kinetics, when will the drug decline to one-half of the original concentration? b. Assuming zero-order kinetics, &hellip;"</i></li>
-<li>The same two numbers are worked both ways. The 25&deg;C is always stated and never used.</li>
-<li>Where the percentage is a power of one half, she expects half-life counting rather than the logarithmic route.</li>
-<li>Her example: <i>"If the half-life for decomposition of a drug is 8 hours, how long will it take for 750 mg of the drug to decompose by 87.5%?"</i>, answered as three half-lives, 24 hours, with the 750 mg never used.</li>
-<li>Conceptually, she sets true/false and select-all items whose two halves are <i>rate</i> and <i>half-life</i>.</li>
-<li>The correct answer turns on which of the two is the constant one.</li>
-</ul></div>
+<p class="gsrc">Sources: Introduction.pdf slides 17&ndash;21, 26 and the three order polls (the third opens 2IVBolusAdministration.pdf); Daily practice, Introduction and Math Review (question ids m1-ord-n01 to n04, m1-ord-n05, n17, n06, n18); exam review stem m1-ord-n14 and n15; transcripts 08-19, 08-24, 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m1-5">
 <h3 data-nav="Module 1, objective 5 &mdash; Determine the area under the curve for a provided data set using the trapezoidal rule">Module 1 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Determine the area under the curve for a provided data set using the trapezoidal rule</b><i>Introduction.pdf slides 22&ndash;26</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>The concept of area under the curve (AUC) is introduced on its own slide &mdash; Introduction.pdf slide 22.</li>
-<li>AUC<sub>total</sub> is the sum of each segment of AUC &mdash; Introduction.pdf slide 23.</li>
-<li>It is used to determine the extent of drug absorption or the effectiveness of a given drug after administration by a particular route.</li>
-<li>AUC<sub>oral</sub>/AUC<sub>IV</sub> = F, where F represents the fraction of oral dose that enters the plasma, the bioavailability factor.</li>
-<li>The trapezoidal rule, printed as the area of one segment: the mean of the two bounding concentrations multiplied by the time interval between them, summed over segments &mdash; Introduction.pdf slide 24.</li>
-<li>The worked example supplies six rows: 0.5 hr / 38.9 mcg/mL, 1 hr / 30.3, 2 hr / 18.4, 3 hr / 11.1, 4 hr / 6.77, 5 hr / 4.10 &mdash; Introduction.pdf slide 25.</li>
-<li>It asks: <i>"What is the AUC from hours 2 &ndash; 4?"</i></li>
-<li>Summary: the trapezoidal rule is a simplistic way of estimating the area under the concentration-versus-time curve &mdash; Introduction.pdf slide 26.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Plot concentration against time and the area under that curve (AUC) tells you the extent of drug that is available for the body to use.</li>
+<li>You rarely have an equation for the curve, only a table of measured points. The trapezoidal rule estimates the area from those points.</li>
+<li>Join each pair of neighbouring points with a straight line. Each strip underneath is a trapezoid: its area is the average of the two concentrations times the time between them.</li>
+<li>Add the strips inside the interval you are asked about. The units are concentration times time, e.g. mcg&middot;hr/mL.</li>
+<li>AUC comes back later in the course: comparing oral and IV AUC gives bioavailability, and clearance links the dose to the AUC.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">What AUC is for, in her words</span><q>for us, that tells us about the extent of drug that is available for the body to use</q>, repeated at the review as <q>area under the curve is a concept that tells us something about the extent of drug that's available for the body to use</q><span class="when">08-19, 09-09 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The printed formula reduced to the geometry</span><q class="para">The trapezoidal rule says we take our curve, break it up into little segments, and determine the area of each segment. It looks like a complicated calculation, but it is fifth-grade geometry: one half base times height.</q><span class="when">08-19 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The units, which she flags as unfamiliar</span><q>Micrograms per mil times hour, kind of funky units.</q><span class="when">08-19 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The other reason AUC recurs, stated in two later modules</span><q class="para">Another reason that we like clearance is that it directly relates the dose to that area under the curve.</q> (08-24, repeated 09-09)<span class="when">restated from a garbled caption</span></li>
-</ul>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Area under the curve (AUC)</dt><dd>Area under the concentration-time curve; a measure of the extent of drug available. Units concentration &times; time (mcg&middot;hr/mL).</dd>
+<dt>AUC<sub>total</sub></dt><dd>The sum of the AUC of every segment.</dd>
+<dt>Trapezoidal rule</dt><dd>A simple way to estimate AUC by splitting it into trapezoids between measured points and adding their areas.</dd>
+<dt>Bioavailability factor (F)</dt><dd>The fraction of an oral dose that enters the plasma; no units.</dd>
+</dl>
 
-<div class="gpoll"><b>Her own question &mdash; worked example slide, Introduction.pdf slide 25</b>
-<p class="prose">The AUC from hours 2 to 4 off the six-row table.</p>
-<ul>
-<li>Her working aloud (08-19): <i>"18.4. Plus 11.1 divided by 2 plus. 11.1 + 6.77. Divide by 2 You guys getting something like this, 23.7?"</i></li>
-<li>Answer: 23.7 mcg&middot;hr/mL, as the sum of two trapezoids each of width one hour.</li>
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">AUC of one segment = {{frac:C<sub>n&minus;1</sub> + C<sub>n</sub>|2}} &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)</div>
+<ul class="tlist">
+<li>C<sub>n&minus;1</sub> and C<sub>n</sub> the two concentrations bounding the segment (mcg/mL); t<sub>n</sub> &minus; t<sub>n&minus;1</sub> the width of the segment (hr). AUC<sub>total</sub> is the sum over segments.</li>
+<li>When to use it: any concentration-time table, any route, when asked for the AUC between two times.</li>
+<li>On the equation sheet: yes, page 1, first line.</li>
 </ul>
-<p class="prose">This is the only AUC problem in the corpus. No daily practice set, homework or in-class sheet in the collected files sets an AUC or trapezoidal-rule question.</p></div>
+</div>
+<div class="geq">
+<div class="geqline">F = {{frac:AUC<sub>oral</sub>|AUC<sub>IV</sub>}}</div>
+<ul class="tlist">
+<li>F bioavailability factor (no units); AUC<sub>oral</sub> and AUC<sub>IV</sub> the areas after oral and IV doses.</li>
+<li>When to use it: comparing how much of an oral dose reaches the plasma, relative to IV. Taught in full in the bioavailability module.</li>
+<li>On the equation sheet: yes, but in the dose-corrected form F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}.</li>
+</ul>
+</div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>She names the interval in hours and expects the trapezoids between the tabulated rows that fall inside it.</li>
-<li>That is two segments here: not the whole table, and not an extrapolated tail.</li>
-<li>The table is supplied with an awkward first interval (0.5 hr) that is outside the asked interval, so the first step is choosing rows, not calculating.</li>
-<li>The answer carries concentration multiplied by time, and she says the unit combination aloud rather than printing it.</li>
-</ul></div>
+<h4>Worked example</h4>
+<p class="prose">Her slide example: plasma levels of 38.9, 30.3, 18.4, 11.1, 6.77 and 4.10 mcg/mL at 0.5, 1, 2, 3, 4 and 5 hr. What is the AUC from hours 2 to 4?</p>
+<ol class="gsteps">
+<li>Pick the rows inside 2 to 4 hr: 2 hr (18.4), 3 hr (11.1) and 4 hr (6.77). That makes two segments, each 1 hr wide.</li>
+<li>Segment 2 to 3 hr: {{frac:18.4 + 11.1|2}} &times; 1 hr = 14.75 mcg&middot;hr/mL.</li>
+<li>Segment 3 to 4 hr: {{frac:11.1 + 6.77|2}} &times; 1 hr = 8.935 mcg&middot;hr/mL.</li>
+<li>Add them: 14.75 + 8.935 = 23.685, so <b>AUC = 23.7 mcg&middot;hr/mL</b>.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>A table of concentrations and an interval named in hours. Use only the trapezoids between rows inside that interval, not the whole table and not an extrapolated tail.</li>
+<li>The first step is choosing the rows. Her table starts at 0.5 hr, outside the interval she asked about, and the 5 hr row is beyond it.</li>
+<li>Check each width from the time column. Where sampling times are uneven (0.5 to 1 hr is half an hour), a segment's width is not 1 hr.</li>
+<li>Give the units as concentration times time (mcg&middot;hr/mL); she says the unit combination aloud rather than printing it.</li>
+<li>Conceptually she asks what AUC tells you: the extent of drug available for the body to use.</li>
+<li>Her slide example is the only AUC problem in the collected course material; no practice set, homework or in-class sheet sets one.</li>
+</ul>
+<p class="gsrc">Sources: Introduction.pdf slides 22&ndash;26 (worked example slide 25; question id m1-auc-n01); transcripts 08-19, 08-24, 09-09.</p>
 </section>
 
 <h2>Module 2 - IV Bolus Administration</h2>
-<p class="prose">Six objectives, printed on the two "Lecture Objectives" slides of 2IVBolusAdministration.pdf.</p>
-<ul>
-<li>Three are for the one-compartment lecture of 24 August, and three for the multicompartment lecture of 26 August.</li>
-<li>Both sets are reprinted unchanged on RecapExam1.pdf.</li>
-</ul>
+<p class="prose">Six objectives. The first three come from the one-compartment lecture of 24 August and the last three from the multicompartment lecture of 26 August. Both sets are reprinted unchanged on the Exam 1 recap deck.</p>
 
 <section class="gobj" id="gobj-m2-1">
 <h3 data-nav="Module 2, objective 1 &mdash; Describe a one-compartment model, IV bolus injection">Module 2 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Describe a one-compartment model, IV bolus injection</b><i>2IVBolusAdministration.pdf, slides "One-Compartment Open Model" and "Concentration of Drug in the Plasma, Cp"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>The one-compartment open model with IV bolus administration is the simplest way to describe drug distribution and elimination &mdash; 2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration".</li>
-<li>It assumes that the drug can enter and leave the body, and that the body acts like a single, uniform compartment.</li>
-<li>The diagram carries an IV arrow in and a k arrow out, with C<sub>p</sub> = D<sub>B</sub>/V<sub>D</sub>, dD<sub>B</sub>/dt = &minus;kD<sub>B</sub>, and k = k<sub>m</sub> + k<sub>e</sub>.</li>
-<li>D<sub>B</sub> is drug in body at time t; V<sub>D</sub> is volume of distribution.</li>
-<li>The concentration of drug in the plasma follows dC<sub>p</sub>/dt = &minus;kC<sub>p</sub> &mdash; 2IVBolusAdministration.pdf, slide "Concentration of Drug in the Plasma, Cp".</li>
-<li>Written out: log C<sub>p</sub> = &minus;kt/2.3 + log C<sub>p</sub><sup>0</sup>, ln C<sub>p</sub> = &minus;kt + ln C<sub>p</sub><sup>0</sup>, and C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup>.</li>
-<li>Summary: the one-compartment open model represents the simplest way of describing the process of drug distribution and elimination in the body &mdash; 2IVBolusAdministration.pdf, slide "Summary".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>An IV bolus is a whole dose injected into a vein at once, so all of the drug is in the body at time zero.</li>
+<li>The one-compartment model treats the body as one uniform space: the drug spreads through it instantly and evenly, and the plasma concentration stands for the whole body.</li>
+<li>Elimination starts the moment the drug is in, and it is first order, so a fixed fraction of the drug leaves per unit time.</li>
+<li>These are simplifying assumptions that real bodies do not meet exactly, but they make the simplest model of distribution and elimination, and the rest of the course builds on it.</li>
+<li>On paper the result is a concentration that starts high and falls along an exponential curve, which becomes a straight line on a log scale.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The two assumptions together, and that they are assumptions</span><q>the drug goes into the body all at once, like instantly all the drug is into the body and all the drug is instantly uniformly distributed throughout the body. Assumptions, simplifications, this does not happen.</q><span class="when">08-24 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Elimination starts at once</span><q>all the drug goes in, all the drug goes out. As soon as that drug is in the body, it starts immediately being eliminated as well.</q>. The name for the input: <q>We call that instantaneous input of drug into the body.</q><span class="when">08-24 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">What the phrase "IV bolus" is meant to trigger</span><q class="para">If I tell you that we are administering a drug via IV bolus injection, then you should think: whichever form of this equation you like.</q> &mdash; and the order that goes with it, from the review: <q class="para">If I tell you that it is an IV bolus dose that is administered, your expectation is first order.</q><span class="when">08-24, 09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">What an unsubscripted k means</span><q>KM is a rate constant for metabolism, KE is the rate constant for excretion… If you see K with no subscript, that is our overall rate constant for elimination. all the process is wrapped up into there.</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Which of the three printed forms she works in, which the slide does not settle</span><q>this is my preferred equations down here with natural log, but either one gets you there.</q><span class="when">08-19 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">A drawing step she recommends before calculating</span><q>when you see the question that says IV bolus administration, your brain, even on the side of your paper, draw your little curve that starts up high, comes down low.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>IV bolus</dt><dd>A single dose injected intravenously all at once; she also calls it instantaneous input.</dd>
+<dt>One-compartment open model</dt><dd>The body as one uniform compartment that drug can enter and leave ("open").</dd>
+<dt>Amount of drug in the body (D<sub>B</sub>)</dt><dd>Drug in the body at time t, in mg. At time zero after a bolus it equals the dose, D<sub>0</sub>.</dd>
+<dt>Volume of distribution (V<sub>D</sub>)</dt><dd>The volume, in L, that links the amount in the body to the plasma concentration.</dd>
+<dt>Plasma concentration (C<sub>p</sub>)</dt><dd>Drug concentration in plasma at time t, in mg/L. C<sub>p</sub><sup>0</sup> (or C<sub>0</sub>) is the value at time zero.</dd>
+<dt>Elimination rate constant (k)</dt><dd>The overall first-order rate constant for elimination, in hr<sup>&minus;1</sup>. A k with no subscript always means this overall constant.</dd>
+<dt>k<sub>m</sub> and k<sub>e</sub></dt><dd>The rate constants for metabolism and for excretion, in hr<sup>&minus;1</sup>; together they make up k.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}</div>
+<ul class="tlist">
+<li>C<sub>p</sub> plasma concentration (mg/L); D<sub>B</sub> amount in the body (mg); V<sub>D</sub> volume of distribution (L).</li>
+<li>When to use it: to convert between an amount and a concentration at any one time.</li>
+<li>On the equation sheet: yes, and she also expects you to know it without the sheet.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">k = k<sub>m</sub> + k<sub>e</sub></div>
+<ul class="tlist">
+<li>k overall elimination rate constant; k<sub>m</sub> metabolism; k<sub>e</sub> excretion; all in hr<sup>&minus;1</sup>.</li>
+<li>When to use it: to read the model diagram; the overall k is what the calculations use.</li>
+<li>On the equation sheet: no.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">{{frac:dD<sub>B</sub>|dt}} = &minus;kD<sub>B</sub> &nbsp;&nbsp; and &nbsp;&nbsp; {{frac:dC<sub>p</sub>|dt}} = &minus;kC<sub>p</sub></div>
+<ul class="tlist">
+<li>The rate of loss is proportional to what is present, which is what first order means; the minus sign says the amount is falling.</li>
+<li>When to use it: to recognise the model. You will not integrate it; the three forms below are the integrated result.</li>
+<li>On the equation sheet: yes, grouped with the integrated forms below.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup></div>
+<div class="geqline">ln C<sub>p</sub> = &minus;kt + ln C<sub>p</sub><sup>0</sup></div>
+<div class="geqline">log C<sub>p</sub> = &minus;{{frac:kt|2.3}} + log C<sub>p</sub><sup>0</sup></div>
+<ul class="tlist">
+<li>C<sub>p</sub><sup>0</sup> concentration at time zero (mg/L); k in hr<sup>&minus;1</sup>; t time since the dose (hr).</li>
+<li>The three lines are the same relation; she prefers the natural-log form, but any of them gets the same answer.</li>
+<li>When to use it: whenever a stem says IV bolus and one compartment.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>The model is usually a condition in the stem rather than a question of its own; it is examined inside the calculations of objective 3.</li>
+<li>About half the time she states it outright, as "one-compartment, first-order elimination", "one-compartment open model" or "linear, first-order, one compartment pharmacokinetics".</li>
+<li>In the data-table problems she leaves it out, because working out the order from the data is the task.</li>
+<li>If she gives a graph with a log concentration axis, a single straight line after an IV bolus means one compartment.</li>
+<li>Before calculating, she recommends sketching a curve that starts high and falls, so you can check that a later concentration comes out lower.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">No poll or practice question in the collected sources asks this objective on its own. It is examined inside the calculation questions of objective 3, where the model is either stated in the stem or left to be inferred.</p></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>The model is a stem condition, not a question.</li>
-<li>She states it outright about half the time: "one-compartment, first-order elimination", "one-compartment open model", "linear, first-order, one compartment pharmacokinetics".</li>
-<li>She omits it in the data-table problems, where inferring the order is the task.</li>
-<li>When she gives a graph instead, the reading rule is fixed: on a logarithmic concentration axis, a single straight line following an IV bolus dose is the one-compartment model.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q class="para">If I tell you that it is an IV bolus dose that is administered, your expectation is first order.</q> (09-09)</li>
+</ul>
+<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "One-Compartment Open Model: IV Bolus Administration", "Concentration of Drug in the Plasma, Cp" and "Summary"; RecapExam1.pdf; reference.js (equation sheet status); lectures 08-19, 08-24, 09-02, 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m2-2">
 <h3 data-nav="Module 2, objective 2 &mdash; Define key pharmacokinetic parameters &ndash; clearance and volume of distribution">Module 2 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Define key pharmacokinetic parameters &ndash; clearance and volume of distribution</b><i>2IVBolusAdministration.pdf, slides "Volume of Distribution" (two) and "Clearance"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>The volume of distribution is a hypothetical volume of body fluid that would be required to dissolve the total amount of drug at the same concentration as that found in the blood.</li>
-<li>It is a proportionality constant relating the amount of drug in the body to the measured concentration in the biological fluid: V<sub>D</sub> = D<sub>B</sub>/C<sub>p</sub> &mdash; 2IVBolusAdministration.pdf, first slide "Volume of Distribution".</li>
-<li>A large V<sub>D</sub> means the drug is more concentrated in extravascular tissues and less concentrated intravascularly &mdash; 2IVBolusAdministration.pdf, second slide "Volume of Distribution".</li>
-<li>A drug highly bound to plasma proteins or remaining in the vascular region gives a higher C<sub>p</sub> and a smaller V<sub>D</sub>.</li>
-<li>The apparent V<sub>D</sub> can be expressed as a simple volume or as a percent of body weight.</li>
-<li>In the percent form, a 1-L volume is assumed equal to the weight of 1 kg.</li>
-<li>Clearance is a measure of drug elimination from the body without identifying the mechanism or process &mdash; 2IVBolusAdministration.pdf, slide "Clearance".</li>
-<li>It is the volume of plasma that is cleared of drug per unit time.</li>
-<li>The same quantity is called drug clearance, systemic clearance and total body clearance.</li>
-<li>The slide carries Cl = kV<sub>D</sub> and Cl<sub>T</sub> = D<sub>0</sub>/AUC<sub>0</sub>.</li>
-<li>A fish tank model of clearance is presented from a 2026 American Journal of Pharmaceutical Education article &mdash; 2IVBolusAdministration.pdf, slide "Fish Tank Model of Clearance".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>The volume of distribution (V<sub>D</sub>) is the volume the dose would have to dissolve in to give the concentration measured in plasma. It is not a real body space, which is why it is called "apparent".</li>
+<li>A drug that leaves the blood for the tissues has a low plasma concentration and so a large V<sub>D</sub>; a drug held in the blood, for example by binding to plasma proteins, has a small V<sub>D</sub>.</li>
+<li>Clearance (Cl) is the volume of plasma cleared of drug per unit time. It measures elimination without saying how the drug is removed.</li>
+<li>Both are constants for a given drug in a given patient, so changing the dose or the concentration does not change them.</li>
+<li>Clearance is useful for two reasons: it stays constant, and it links the dose directly to the area under the curve.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The word "apparent" and why it is there</span><q class="para">This volume of distribution is hypothetical. It is not an actual volume; it depends on the drug.</q> and <q class="para">You will often see "apparent volume of distribution", to remember that it is a proportionality, not a real number.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The kilogram-to-litre convention stated as a rule</span><q>in kinetics, our body weight is always in kilograms… So, 1 L volume is equal to 1 kg of body weight</q>. Her check on the answer's unit: <q class="para">I hear 14 apples: 14 L. Not 14 kg, 14 L.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The clearance equation is not supplied</span><q>this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd.</q><span class="when">08-24 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Why she prefers clearance to the elimination rate</span><q class="para">What we like about clearance is that, for most drugs in most situations, it is going to be a constant: a constant times a constant is a constant.</q> and <q>our volume of distribution is going to be a constant… and our rate constant K is going to be a constant.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The second reason</span><q class="para">Another reason that we like clearance is that it directly relates the dose to that area under the curve.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Three volumes she narrates against the same dose, which the slide does not print</span><q class="para">If we inject 100 mg into a volume of distribution of 1 L, we expect 100 mg per liter as our concentration. 100 mg into 10 L gives 10 mg per liter. With the largest volume of distribution, the same 100 mg into 100 L, now we are at 1 mg per liter.</q> &mdash; with the caveat <q>same amount of drugs, but here, we would be looking at different drugs</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">On the fish tank slide, she limits it</span><q>This little model, I like it, but it goes into a little bit more detail than what we're gonna cover.</q> The part she does use: <q>Only the free drugs, so only the free fish. are able to be swept up into this net. The ones that are tied up with the little algae down there, they're bound, so they can't be swept up</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Apparent volume of distribution (V<sub>D</sub>)</dt><dd>A proportionality constant between amount in the body and plasma concentration, in L (or L/kg, or % of body weight).</dd>
+<dt>Clearance (Cl, Cl<sub>T</sub>)</dt><dd>Volume of plasma cleared of drug per unit time, in L/hr; also called drug, systemic or total body clearance.</dd>
+<dt>Elimination rate constant (k)</dt><dd>Overall first-order rate constant, in hr<sup>&minus;1</sup>.</dd>
+<dt>Area under the curve (AUC<sub>0</sub><sup>&infin;</sup>)</dt><dd>Area under the plasma concentration&ndash;time curve from time zero to infinity, in mg&middot;hr/L.</dd>
+<dt>Dose (D<sub>0</sub>)</dt><dd>The amount given, in mg; for a bolus it is the amount in the body at time zero.</dd>
+<dt>Percent of body weight</dt><dd>A way of giving V<sub>D</sub>: 1 L is taken as equal to 1 kg, so 10% of an 80-kg patient is 8 L.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">V<sub>D</sub> = {{frac:D<sub>B</sub>|C<sub>p</sub>}} &nbsp;&nbsp; so at time zero &nbsp;&nbsp; V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}}</div>
+<ul class="tlist">
+<li>D<sub>B</sub> amount in the body (mg); C<sub>p</sub> plasma concentration at the same time (mg/L); D<sub>0</sub> dose (mg); C<sub>0</sub> concentration at time zero (mg/L).</li>
+<li>When to use it: to find V<sub>D</sub> from a dose and an initial concentration, or to turn a measured concentration into an amount.</li>
+<li>On the equation sheet: yes, as C<sub>p</sub> = D<sub>B</sub> over V<sub>D</sub>; she also expects it known.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl = k &times; V<sub>D</sub></div>
+<ul class="tlist">
+<li>Cl in L/hr; k in hr<sup>&minus;1</sup>; V<sub>D</sub> in L.</li>
+<li>When to use it: for total body clearance once k and V<sub>D</sub> are known.</li>
+<li>On the equation sheet: no. She named it as one to memorise, together with the half-life equation.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl<sub>T</sub> = {{frac:D<sub>0</sub>|AUC<sub>0</sub><sup>&infin;</sup>}}</div>
+<ul class="tlist">
+<li>D<sub>0</sub> dose (mg); AUC<sub>0</sub><sup>&infin;</sup> in mg&middot;hr/L; Cl<sub>T</sub> in L/hr.</li>
+<li>When to use it: when a dose and an AUC are given instead of k and V<sub>D</sub>.</li>
+<li>On the equation sheet: yes, written as Cl<sub>T</sub> = FD<sub>0</sub> over AUC (F, the fraction absorbed, is 1 for IV).</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her lecture example: the same 100 mg dose given into three different volumes of distribution.</p>
+<ol class="gsteps">
+<li>Use C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}} with V<sub>D</sub> = 1 L: {{frac:100 mg|1 L}} = <b>100 mg/L</b>.</li>
+<li>With V<sub>D</sub> = 10 L: {{frac:100 mg|10 L}} = <b>10 mg/L</b>.</li>
+<li>With V<sub>D</sub> = 100 L: {{frac:100 mg|100 L}} = <b>1 mg/L</b>.</li>
+<li>Same amount of drug, but these would be three different drugs; the larger the V<sub>D</sub>, the lower the plasma concentration.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Definitions as single-best-answer polls: which parameter describes elimination as volume of fluid cleared of drug per unit time? Answer: clearance (not biotransformation, elimination rate or excretion).</li>
+<li>True/false: "Clearance increases as concentration increases." False, because clearance is a constant.</li>
+<li>Which increases when the IV bolus dose increases? Only the plasma concentration; clearance, half-life and V<sub>D</sub> stay the same.</li>
+<li>At the end of calculation problems: if the dose were doubled, what happens to the half-life, the clearance and the initial concentration? No change, no change, doubled.</li>
+<li>V<sub>D</sub> arrives per kilogram (3 L/kg, 0.5 L/kg, 400 mL/kg), as a percent of body weight (20%, 23.1%), as litres (16 L, 12 L), or not at all, to be found as dose divided by C<sub>0</sub>.</li>
+<li>The usual trap is the unit: a percent or per-kilogram V<sub>D</sub> must be multiplied by the weight in kg, and the answer is in litres, not kilograms.</li>
+<li>The fish tank model of clearance on her slide goes beyond the course; the part she uses is that only free (unbound) drug can be cleared, and protein-bound drug cannot.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; three polls</b>
-<p class="prose"><b>Poll slide, 2IVBolusAdministration.pdf.</b> Stem: <i>"Which parameter describes the elimination of drug in terms of volume of fluid removed from the drug per unit time?"</i></p>
-<ul>
-<li>Options: biotransformation; clearance; elimination rate; excretion.</li>
-<li>Correct: clearance. She debriefed it on 08-26 as <i>"a definitional one. Basically, what does clearance mean? So remember, um, it is basically the volume of fluid that cleared of drug per unit time"</i>.</li>
-<li>She set it again on 09-14.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd.</q> (08-24)</li>
+<li><q>in kinetics, our body weight is always in kilograms… So, 1 L volume is equal to 1 kg of body weight</q> (08-24)</li>
 </ul>
-<p class="prose"><b>Poll, 08-24.</b> Stem: <i>"Clearance increases as concentration increases. True or false."</i></p>
-<ul>
-<li>Correct: false. <i>"We like clearance because it is a constant &hellip; changing the concentration does not change the clearance."</i></li>
-</ul>
-<p class="prose"><b>Poll slide opening 3IntravenousInfusions.pdf.</b> Stem: <i>"Which of the following would you expect to increase with an increase in IV bolus dose?"</i></p>
-<ul>
-<li>Options: concentration of drug in the plasma; clearance; elimination half-life; apparent volume of distribution.</li>
-<li>Correct: concentration of drug in the plasma. <i>"our clearance, our half-life, and our volume of distribution. These things are going to be constant."</i> (09-02)</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>Conceptually, as a true/false or single-best-answer on what stays constant when something else changes.</li>
-<li>Doubling the dose, raising the concentration: the item is which parameters move and which do not.</li>
-<li>She closes several calculation problems with the same idea in prose: <i>"If the dose were doubled, what is the expected change in the half-life of elimination?"</i>, <i>"&hellip;in the clearance?"</i>, <i>"&hellip;in the initial plasma concentration?"</i></li>
-<li>The answers: none, none, and doubled.</li>
-<li>Numerically, V<sub>D</sub> arrives in four rotated framings.</li>
-<li>Per kilogram (3 L/kg, 0.5 L/kg, 400 mL/kg), or as a percent of body weight (20%, 23.1%).</li>
-<li>As an absolute volume (16 L, 12 L), or not at all, to be back-calculated from dose divided by C<sub>0</sub>.</li>
-</ul></div>
+<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "Volume of Distribution" (two), "Clearance", "Fish Tank Model of Clearance" and the poll after "Summary"; 3IntravenousInfusions.pdf, opening poll; reference.js (equation sheet status); lectures 08-24, 08-26, 09-02, 09-14.</p>
 </section>
 
 <section class="gobj" id="gobj-m2-3">
 <h3 data-nav="Module 2, objective 3 &mdash; Calculate pharmacokinetic parameters from concentration versus time data">Module 2 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Calculate pharmacokinetic parameters from concentration versus time data</b><i>2IVBolusAdministration.pdf, slide "Practice"</i></div>
 
-<h4>What the slides carry</h4>
-<ul>
-<li>Slide "Practice", verbatim: <i>"A new drug was administered as a single IV dose of 200 mg to an 80-kg adult male. After 6 hours, the plasma drug concentration was 15 mg/L of plasma. Assuming that the apparent V<sub>D</sub> is 10% of body weight, estimate the amount of drug in the body after 12 hours. What is the half-life of this drug in this patient?"</i></li>
-<li>The relations the calculation runs on are already printed two slides earlier: C<sub>p</sub> = D<sub>B</sub>/V<sub>D</sub> and C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup>.</li>
-<li>Clearance as kV<sub>D</sub> is on the slide that follows.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Given a dose and one or two measured plasma concentrations, you work out the patient's elimination rate constant, half-life, starting concentration, volume of distribution and clearance.</li>
+<li>Each value feeds the next, so the order matters: k first, then half-life, then C<sub>0</sub>, then V<sub>D</sub>, then clearance and amounts.</li>
+<li>Compare like with like: a rate constant comes from two amounts or from two concentrations, never from an amount and a concentration together.</li>
+<li>V<sub>D</sub> is the converter between the two, because an amount equals V<sub>D</sub> times a concentration.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Her worked answer, step by step: V<sub>D</sub> &mdash;</span><q>did we all get a volume of distribution of 8 L?</q>; amount at 6 hr &mdash; <q>8 L times 15 mg per liter</q>, giving 120 mg; the rate constant &mdash; <q class="para">Natural log of D0 over D, divided by t, gives us the rate constant k: we have 200 over 120, and our time is 6 hours.</q>, giving 0.085; amount at 12 hr &mdash; <q class="para">D0 is 200 mg, e to the minus 0.085 times 12: I am getting 72-ish milligrams.</q>; half-life &mdash; <q>what's the Half-Life? 8.15 hours.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The trap in this specific problem</span><q class="para">You have a dose of 200 mg and you are given a concentration of 15 mg per liter. You have to be apples to apples: either amount or concentration, but you cannot mix the 200 and the 15.</q><span class="when">08-24 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">She separates the printed question from her own addition</span><q>my question on the slide, estimate the amount of drug in the body after 12 hours. the amount of drug in the body after 12 hours should be about 72 mg. Then, impromptu, I added, what's the concentration? That's not on the slide.</q> The added answer: <q>you take that 72… divided by the volume of distribution, which we said was 8 L. you should get 9 mg per liter</q><span class="when">08-24 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">A check on C<sub>0</sub> when it comes from a data set</span><q>remember, C0 should be the highest point of the sample</q><span class="when">08-24 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The conversion she hands over to save time</span><q>Milligrams per liter equals micrograms per mL. I am telling you this because I don't want you to spend 10 minutes doing the conversion and then being off by a magnitude of 10</q> (08-24, repeated 08-26 and 09-09).<span class="when">her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Answers are scored for form as well as value</span><q>There should never be a leading decimal… If you give me that as your final answer, you will lose half the points for this answer.</q> and <q class="para">If there are units, then you should give me units.</q><span class="when">08-17 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Elimination rate constant (k)</dt><dd>First-order rate constant, in hr<sup>&minus;1</sup>; the slope of ln C<sub>p</sub> against time, with the sign changed.</dd>
+<dt>Half-life (t&frac12;)</dt><dd>Time for the concentration or amount to fall by half, in hr; the same at any concentration for a first-order drug.</dd>
+<dt>Initial concentration (C<sub>0</sub>)</dt><dd>Plasma concentration at time zero, in mg/L, found by running a measured point back along the line.</dd>
+<dt>Volume of distribution (V<sub>D</sub>)</dt><dd>Links amount and concentration, in L.</dd>
+<dt>Total body clearance (Cl<sub>T</sub>)</dt><dd>Volume of plasma cleared of drug per unit time, in L/hr.</dd>
+<dt>Amount in the body (D<sub>B</sub>) and dose (D<sub>0</sub>)</dt><dd>Both in mg; D<sub>0</sub> is the amount at time zero.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">k = {{frac:ln C<sub>1</sub> &minus; ln C<sub>2</sub>|t<sub>2</sub> &minus; t<sub>1</sub>}} &nbsp;&nbsp; or, with amounts, &nbsp;&nbsp; k = {{frac:ln D<sub>0</sub> &minus; ln D<sub>B</sub>|t}}</div>
+<ul class="tlist">
+<li>C<sub>1</sub>, C<sub>2</sub> concentrations at times t<sub>1</sub>, t<sub>2</sub> (mg/L, hr); D<sub>0</sub> dose and D<sub>B</sub> amount at time t (mg); k in hr<sup>&minus;1</sup>.</li>
+<li>When to use it: whenever two points of the same kind are known.</li>
+<li>On the equation sheet: yes, as a rearrangement of the ln C<sub>p</sub> line.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t&frac12; = {{frac:0.693|k}}</div>
+<ul class="tlist">
+<li>t&frac12; in hr; k in hr<sup>&minus;1</sup>.</li>
+<li>When to use it: every time a half-life is asked, and to check answers by counting half-lives.</li>
+<li>On the equation sheet: no. She named it as one to memorise.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>0</sub> = C<sub>t</sub>e<sup>kt</sup></div>
+<ul class="tlist">
+<li>C<sub>t</sub> a measured concentration at time t (mg/L). The exponent is positive because you are going back in time.</li>
+<li>When to use it: to find C<sub>0</sub> when no sample was taken at time zero. C<sub>0</sub> must be higher than every sampled point.</li>
+<li>On the equation sheet: yes, as C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup> rearranged.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;kt</sup> &nbsp;&nbsp; or &nbsp;&nbsp; D<sub>B</sub> = V<sub>D</sub> &times; C<sub>t</sub></div>
+<ul class="tlist">
+<li>D<sub>B</sub> amount in the body at time t (mg). Both routes give the same answer, and she accepts either.</li>
+<li>When to use it: when the question asks for an amount rather than a concentration.</li>
+<li>On the equation sheet: the C<sub>p</sub> forms are; these are the same lines multiplied by V<sub>D</sub>.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}} &nbsp;&nbsp; and &nbsp;&nbsp; Cl<sub>T</sub> = k &times; V<sub>D</sub></div>
+<ul class="tlist">
+<li>V<sub>D</sub> in L; Cl<sub>T</sub> in L/hr. See objective 2 for the sheet status of each.</li>
+<li>When to use it: parts e and f of her standard battery.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her deck practice: 200 mg IV dose to an 80-kg man; 15 mg/L in plasma at 6 hours; V<sub>D</sub> is 10% of body weight. Find the amount in the body at 12 hours and the half-life.</p>
+<ol class="gsteps">
+<li>Convert V<sub>D</sub> to litres, using 1 L per kg: V<sub>D</sub> = 0.10 &times; 80 kg = 8 L.</li>
+<li>Turn the 6-hour concentration into an amount so it can be compared with the 200 mg dose: D<sub>B</sub> = 8 L &times; 15 mg/L = 120 mg.</li>
+<li>Find k from the two amounts: k = {{frac:ln 200 &minus; ln 120|6 hr}} = 0.085 hr<sup>&minus;1</sup>.</li>
+<li>Amount at 12 hours: D<sub>B</sub> = 200 mg &times; e<sup>&minus;(0.085)(12)</sup> = 200 &times; 0.36 = <b>72 mg</b>.</li>
+<li>Half-life: t&frac12; = {{frac:0.693|0.085 hr<sup>&minus;1</sup>}} = <b>8.15 hr</b>. Carrying k unrounded (0.08514 hr<sup>&minus;1</sup>) gives 8.14 hr; the 72 mg is the same either way.</li>
+<li>Her added question, not on the slide, the concentration at 12 hours: C = {{frac:72 mg|8 L}} = <b>9 mg/L</b>.</li>
+</ol>
+<p class="prose">Her Exam 1 review problem: 154-lb woman, 15 mg/kg IV bolus; 32.85 mcg/mL at 2 hours and 9.32 mcg/mL at 8 hours.</p>
+<ol class="gsteps">
+<li>Rate constant from the two concentrations, 6 hours apart: k = {{frac:ln 32.85 &minus; ln 9.32|8 &minus; 2 hr}} = {{frac:1.2598|6 hr}} = 0.21 hr<sup>&minus;1</sup>.</li>
+<li>Half-life: t&frac12; = {{frac:0.693|0.21 hr<sup>&minus;1</sup>}} = <b>3.3 hr</b>.</li>
+<li>Dose: 154 lb &divide; 2.2 = 70 kg, so D<sub>0</sub> = 15 mg/kg &times; 70 kg = 1050 mg.</li>
+<li>Back-extrapolate to time zero: C<sub>0</sub> = 32.85 &times; e<sup>(0.21)(2)</sup> = <b>50 mcg/mL</b>, which is 50 mg/L.</li>
+<li>Volume: V<sub>D</sub> = {{frac:1050 mg|50 mg/L}} = <b>21 L</b>.</li>
+<li>Clearance: Cl<sub>T</sub> = 0.21 hr<sup>&minus;1</sup> &times; 21 L = <b>4.41 L/hr</b>.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>One patient, then a chain of small parts, each meant to take a minute or two; if a part takes five minutes, you are working too hard.</li>
+<li>Her standard eight parts, in order: k; half-life; C<sub>0</sub>; concentration 15 minutes after the dose; V<sub>D</sub>; total body clearance; amount in the body at 3 hours; time for 99.9% to be eliminated.</li>
+<li>The data come either as a six-row table or as two plasma points in prose. On the exam the parts are split up and you cannot go back to an earlier part.</li>
+<li>Weight in pounds with a mg/kg dose means the 2.2 conversion is being tested, and every later part depends on it. Weight in kg is sometimes given and never used.</li>
+<li>"15 minutes" must be converted to 0.25 hr. "99.9% eliminated" always means ten half-lives.</li>
+<li>Usual trap: dividing the dose by a concentration to get k. Convert one of them first so both are amounts or both are concentrations.</li>
+<li>mg/L and mcg/mL are the same number, so no conversion is needed between them.</li>
+<li>Marking: no leading decimal point (write 0.21, not .21), and give units whenever the answer has them.</li>
+<li>For the review problem the captions also carry "51 liters" and "4.14"; 21 L and 4.41 L/hr are what her own numbers give.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; the deck example and the standard battery</b>
-<p class="prose"><b>Slide "Practice", 2IVBolusAdministration.pdf.</b> Quoted in full above; her answers are V<sub>D</sub> 8 L, D at 6 hr 120 mg, k 0.085 hr<sup>&minus;1</sup>, D at 12 hr about 72 mg, t&frac12; 8.15 hr, and off-slide C at 12 hr 9 mg/L.</p>
-<p class="prose"><b>Daily practice, IV Bolus Practice 1 and 2.</b> Her eight-part battery, in this fixed order:</p>
-<ul>
-<li>a. elimination rate constant; b. half-life of elimination; c. initial plasma concentration.</li>
-<li>d. concentration of drug in the plasma 15 minutes after the dose was given; e. apparent volume of distribution.</li>
-<li>f. total body clearance of this drug in this patient; g. the amount of drug in the body 3 hours after the drug was administered.</li>
-<li>h. time required for 99.9% of the drug to be eliminated from the body.</li>
-<li>One version feeds it with a six-row table, the other with two plasma points in prose.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>Milligrams per liter equals micrograms per mL. I am telling you this because I don't want you to spend 10 minutes doing the conversion and then being off by a magnitude of 10</q> (08-24)</li>
+<li><q>There should never be a leading decimal… If you give me that as your final answer, you will lose half the points for this answer.</q> (08-17)</li>
 </ul>
-<p class="prose"><b>Exam 1 review practice, RecapExam1.pdf.</b> <i>"A 154-lb female patient received a single IV bolus dose of an antibacterial drug at a level of 15 mg/kg. The concentration of the drug determined at 2 hours and 8 hours was 32.85 mcg/mL and 9.32 mcg/mL, respectively."</i></p>
-<ul>
-<li>Four parts: half-life, initial concentration, apparent volume of distribution, clearance.</li>
-<li>Her spoken answers (09-09): k 0.21 hr<sup>&minus;1</sup> over a delta-t of six hours, and t&frac12; 3.3 hr.</li>
-<li>Then dose 1050 mg, C<sub>0</sub> 50 mcg/mL, V<sub>D</sub> 1050/50 = 21 L, and clearance 0.21 &times; 21.</li>
-<li>The captions also carry "51 liters" and "4.14".</li>
-<li>21 L and 4.41 L/hr are the values her own numbers produce, and an exam written from this lecture would key those.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>One patient, then a chain of small parts off that one patient, each answerable in a minute or two.</li>
-<li>Her words: <i>"I am going to ask you a little piece of information that you should be able to, to figure out in a minute or two. So, if you're taking 5 minutes trying to answer a question, you're working too hard on it."</i></li>
-<li>On the exam the chain is broken up and there is no backwards navigation.</li>
-<li>Weight is in pounds whenever she wants the 2.2 conversion tested. It is paired with mg/kg dosing, so the conversion gates every later part.</li>
-<li>Weight is in kilograms when it is incidental, and is sometimes stated and never used at all.</li>
-<li>"15 minutes" is given in minutes and converted silently to 0.25 hr; "99.9% eliminated" always resolves to ten half-lives.</li>
-<li>Two routes to the same answer are shown side by side and either is accepted: half-life counting against the exponential equation, V<sub>D</sub>C<sub>t</sub> against D<sub>0</sub>e<sup>&minus;kt</sup>.</li>
-</ul></div>
+<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "Practice" (one-compartment section), "Concentration of Drug in the Plasma, Cp" and "Clearance"; RecapExam1.pdf, Exam 1 review practice; IV Bolus Practice 1 and 2; q2_module2.js m2-n-deck12; lectures 08-17, 08-24, 08-26, 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m2-4">
 <h3 data-nav="Module 2, objective 4 &mdash; Differentiate between single and multiple-compartment pharmacokinetic models">Module 2 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Differentiate between single and multiple-compartment pharmacokinetic models</b><i>2IVBolusAdministration.pdf, slides "Why Multicompartment Models?" through "Plasma Level&ndash;Time Curve"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>A plot of log C<sub>p</sub> against time carrying a line that is not straight, under the heading asking why multicompartment models are needed &mdash; 2IVBolusAdministration.pdf, slide "Why Multicompartment Models?".</li>
-<li>Multi-compartment models describe the observation of some drugs that distribute at various rates into different tissue groups &mdash; 2IVBolusAdministration.pdf, slide "One- versus Two-Compartment Models".</li>
-<li>The method of residuals, also called feathering or peeling, is a procedure for fitting a curve to the experimental data of a drug &mdash; 2IVBolusAdministration.pdf, slide "Method of Residuals".</li>
-<li>It is used when the drug does not clearly follow a one-compartment model.</li>
-<li>The residual plasma concentration, the rapidly distributed alpha phase, is obtained by subtracting the extrapolated line from the observed data.</li>
-<li>The plasma level&ndash;time curve for a two-compartment model is labelled with a distribution phase &mdash; 2IVBolusAdministration.pdf, slide "Plasma Level&ndash;Time Curve for Two-Compartment Model".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Both models start with an IV bolus. The difference is whether the drug spreads evenly through the body at once (one compartment) or reaches some tissues before others (two or more compartments).</li>
+<li>You tell them apart on a plot of concentration on a log scale against time: one compartment gives a single straight line.</li>
+<li>Two compartments give a steep early segment, the distribution phase, followed by a straight, shallower segment, the elimination phase.</li>
+<li>Graphs in this deck use a log scale even when the axis is not labelled "log".</li>
+<li>Unless she shows a graph, she has to tell you which model the drug follows.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The graph-reading rule, stated as an exam instruction</span><q>if I give you a graph that looks something like this without the red and blue and just a log scale and I'm telling you that it is an IV bolus dose, and I just give you a line that looks like this one, the black line. That should say to you that this is a two compartment model. If I gave you a graph on a log scale that looks just like the blue line all by itself, that tells you it's an IV bolus dose one compartment model.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Otherwise she has to say which it is</span><q>if I tell you that we're giving an IV bolus dose, now what do I have to tell you? I have to tell you that it follows a one compartment model or a two compartment</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Names for the two segments</span><q>This handle piece up top is what we would call our distribution phase</q> and <q>once the drug is distributed uniformly throughout the body… Then we call this blue phase our elimination phase</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The one-compartment contrast restated at the review</span><q>that two compartment model has got that distribution step, so it doesn't uniformly distribute… all at once.</q><span class="when">09-09 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Feathering is conceptual only, and she says so plainly</span><q>we talked about feathering. the methods of residual and all that good stuff, I want you to conceptually know what that is, but I'm not gonna ask you to do that. I am pretty much gonna give you A, B, alpha, beta I want you to know what they represent and why we use them.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The log axis again, on this deck's graphs</span><q>Even though it doesn't say log, you realize that it is on a log scale</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Log C<sub>p</sub> plot</dt><dd>Plasma concentration (C<sub>p</sub>) on a logarithmic axis against time; a first-order decline is a straight line on it.</dd>
+<dt>Distribution phase</dt><dd>The steep early fall in a two-compartment curve, while drug is still moving into the tissues.</dd>
+<dt>Elimination phase</dt><dd>The later straight segment, once the drug is evenly distributed and its fall reflects elimination.</dd>
+<dt>Method of residuals (feathering, peeling)</dt><dd>A way to fit a curve to data that do not follow one compartment: the extrapolated straight line is subtracted from the observed data to get the fast (alpha) phase.</dd>
+<dt>A, B, alpha (a), beta (b)</dt><dd>The two intercepts (mg/L) and two slopes (hr<sup>&minus;1</sup>) of a two-compartment curve; see objective 6.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">One compartment: C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup></div>
+<div class="geqline">Two compartments: C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup></div>
+<ul class="tlist">
+<li>One exponential term means one straight line on a log plot; two terms mean two phases. k, a and b are rate constants in hr<sup>&minus;1</sup>; C<sub>p</sub><sup>0</sup>, A and B are concentrations in mg/L.</li>
+<li>When to use it: to identify the model from the equation a stem gives you.</li>
+<li>On the equation sheet: yes, both.</li>
+</ul>
+</div>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>A log-scale graph after an IV bolus with the model withheld: a single straight line is one compartment; a line with a steeper early segment is two compartments.</li>
+<li>A stem that never says "two-compartment" but gives a biexponential equation, or A, B, alpha and beta. Recognising the model is the first step of the calculation.</li>
+<li>Feathering is conceptual only. She will not ask you to do the method of residuals; she will give you A, B, alpha and beta and ask what they represent and why they are used.</li>
+<li>No poll or practice item in the sources asks the one-versus-two choice on its own.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">No poll or practice item in the collected sources asks the one-against-two discrimination directly.</p>
-<ul>
-<li>The discrimination is built into the stems of the two-compartment problems, which she never labels two-compartment.</li>
-<li>She supplies A, B, alpha and beta, or a biexponential equation, and asks for parameters only a two-compartment model has.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>As a graph on a logarithmic concentration axis with the compartment count withheld, where a single straight line and a line with a steeper early segment are the two answers.</li>
-<li>As a stem that never says "two-compartment" but hands over a biexponential equation, so recognising the model is the first step of a calculation question rather than a question of its own.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>if I tell you that we're giving an IV bolus dose, now what do I have to tell you? I have to tell you that it follows a one compartment model or a two compartment</q> (08-26)</li>
+<li><q>I want you to conceptually know what that is, but I'm not gonna ask you to do that.</q> (08-26, on feathering)</li>
+</ul>
+<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "Why Multicompartment Models?", "One- versus Two-Compartment Models", "Method of Residuals", "Plasma Level&ndash;Time Curve for Two-Compartment Model" and "Concentration of Drug in the Central Compartment"; reference.js (equation sheet status); lectures 08-26, 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m2-5">
 <h3 data-nav="Module 2, objective 5 &mdash; Explain why some drugs best fit a multi-compartment model">Module 2 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Explain why some drugs best fit a multi-compartment model</b><i>2IVBolusAdministration.pdf, slides "General Grouping of Tissues" through "Relationship between Tissue and Plasma Concentrations"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Tissues are grouped by blood supply &mdash; 2IVBolusAdministration.pdf, slide "General Grouping of Tissues According to Blood Supply".</li>
-<li>Highly perfused: heart, brain, hepatic-portal system, kidney and endocrine glands, 9% of body weight.</li>
-<li>Skin and muscle, 50%; adipose (fat) tissue and marrow, 19%.</li>
-<li>Slowly perfused: bone, ligaments, tendons, cartilage, teeth and hair, 22%.</li>
-<li>Examples of two-compartment models are shown as three wirings &mdash; 2IVBolusAdministration.pdf, slide "Examples of Two-Compartment Models".</li>
-<li>The three wirings: elimination from the central compartment, elimination from the tissue compartment, and elimination from both.</li>
-<li>The two-compartment open model for IV bolus injection is drawn as a central compartment (D<sub>p</sub>, C<sub>p</sub>, V<sub>p</sub>) and a tissue compartment (D<sub>t</sub>, C<sub>t</sub>, V<sub>t</sub>) &mdash; 2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)".</li>
-<li>The two compartments exchange drug by k<sub>12</sub> and k<sub>21</sub>. Input is into the central compartment, and elimination k is out of the central compartment.</li>
-<li>The differential equations printed are dC<sub>t</sub>/dt = k<sub>12</sub>C<sub>p</sub> &minus; k<sub>21</sub>C<sub>t</sub> and dC<sub>p</sub>/dt = k<sub>21</sub>C<sub>t</sub> &minus; k<sub>12</sub>C<sub>p</sub> &minus; kC<sub>p</sub>.</li>
-<li>A figure relates tissue and plasma concentrations for a two-compartment open model &mdash; 2IVBolusAdministration.pdf, slide "Relationship between Tissue and Plasma Concentrations for a Two-Compartment Open Model".</li>
-<li>Summary: multi-compartment models are useful to help explain the pharmacokinetics when the plasma level&ndash;time curve does not decrease linearly following a single IV bolus injection of a drug.</li>
-<li>Source: 2IVBolusAdministration.pdf, slide "Summary".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Tissues receive different amounts of blood, so a drug reaches well-perfused organs first and slowly perfused tissues later, before it is evenly spread through the body.</li>
+<li>When that happens the plasma level after a single IV bolus does not fall as one straight line on a log plot, and one compartment no longer describes it.</li>
+<li>The two-compartment model splits the body into a central compartment (plasma and fast tissues) and a tissue compartment, with drug moving back and forth between them.</li>
+<li>The course uses the version in which drug enters and leaves the body only through the central compartment.</li>
+<li>Distribution has to be faster than elimination; otherwise the drug would be eliminated before it reached concentrations high enough to work.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The reason in one sentence</span><q>the drug is going to go preferentially to some organs before it is widely distributed uniformly throughout the body</q><span class="when">08-26 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Which of the three printed wirings the course uses</span><q>if we've got a central compartment, it's going to and from that tissue compartment, so equilibrating within whatever peripheral compartment makes up the secondary compartment, and then that the drug is being eliminated from the central compartment only.</q><span class="when">08-26 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">What k<sub>12</sub> and k<sub>21</sub> are</span><q>Remember, those are our transfer constants, so how fast is the drug going from one compartment or the central compartment to the peripheral compartment and back and forth.</q><span class="when">08-26 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">An exception to the perfusion table that is not printed on it</span><q class="para">The brain works really hard to keep things out, so even though it is a highly perfused organ, it is not usually one of those seen in that distribution phase.</q>. The slide lists brain among the highly perfused tissues; she removes it from the distribution phase out loud. An exam written from these lectures would key the slide's grouping for a tissue-perfusion question and her caveat for a question about what appears in the distribution phase.<span class="when">08-26 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">On the tissue-versus-plasma figure, a limit the slide does not state</span><q>this is a theoretical graph… because remember, we sample the plasma We don't sample tissue to see how much drug is there.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">On the perfusion table</span><q>general grouping of tissues, table, don't panic</q>, consistent with her standing rule that tables are not memorised.<span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Why the distribution phase has to be faster than elimination</span><q>If the elimination phase is significantly fast relative to the distribution phase, then you're not going to build up appreciable levels. You're not gonna reach the concentration that you need for the drug to be effective</q><span class="when">08-26 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Perfusion</dt><dd>Blood supply to a tissue. Highly perfused: heart, brain, hepatic-portal system, kidney, endocrine glands (9% of body weight).</dd>
+<dt>Other tissue groups</dt><dd>Skin and muscle 50%; adipose tissue and marrow 19%; slowly perfused bone, ligaments, tendons, cartilage, teeth and hair 22%.</dd>
+<dt>Central compartment (D<sub>p</sub>, C<sub>p</sub>, V<sub>p</sub>)</dt><dd>Plasma and quickly reached tissues: amount (mg), concentration (mg/L) and volume (L). Drug goes in and is eliminated here.</dd>
+<dt>Tissue compartment (D<sub>t</sub>, C<sub>t</sub>, V<sub>t</sub>)</dt><dd>The more slowly reached tissues, with their own amount, concentration and volume.</dd>
+<dt>Transfer constants (k<sub>12</sub>, k<sub>21</sub>)</dt><dd>How fast drug moves from central to tissue (k<sub>12</sub>) and from tissue back to central (k<sub>21</sub>), in hr<sup>&minus;1</sup>.</dd>
+<dt>Elimination rate constant (k)</dt><dd>Elimination from the central compartment, in hr<sup>&minus;1</sup>.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">{{frac:dC<sub>t</sub>|dt}} = k<sub>12</sub>C<sub>p</sub> &minus; k<sub>21</sub>C<sub>t</sub></div>
+<div class="geqline">{{frac:dC<sub>p</sub>|dt}} = k<sub>21</sub>C<sub>t</sub> &minus; k<sub>12</sub>C<sub>p</sub> &minus; kC<sub>p</sub></div>
+<ul class="tlist">
+<li>The tissue gains drug from plasma and loses it back. Plasma gains drug from tissue, loses it to tissue, and also loses it by elimination (the extra &minus;kC<sub>p</sub>).</li>
+<li>When to use it: to read the model diagram. She does not ask you to solve these; objective 6 has the equations you calculate with.</li>
+<li>On the equation sheet: not stated in the sources for this module.</li>
 </ul>
+</div>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">No poll or practice question in the collected sources asks this objective. It is treated in the lecture as explanation rather than as an item.</p>
-<ul>
-<li>The only thing she says will be asked from these slides is what A, B, alpha and beta represent and why they are used.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>As a reason, in prose, not a calculation. She names the two things she wants back: what the parameters represent, and why the model is used.</li>
-<li>She rules out the arithmetic that these slides would otherwise support: no feathering, no method-of-residuals working, and the alpha and beta values handed over instead.</li>
-</ul></div>
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>As a reason in words, not a calculation: what A, B, alpha and beta represent, and why the model is used.</li>
+<li>No poll or practice question in the sources asks this objective directly.</li>
+<li>The perfusion table is not for memorising; she told the class not to panic over it.</li>
+<li>The brain is listed as highly perfused, but she says it keeps drugs out and is usually not part of the distribution phase. Use the table for a perfusion question and her caveat for a distribution-phase question.</li>
+<li>The figure of tissue against plasma concentrations is theoretical, because only plasma is sampled in practice.</li>
+<li>Of the three two-compartment wirings shown (elimination from the central compartment, from the tissue, or from both), the course uses elimination from the central compartment only.</li>
+</ul>
+<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "General Grouping of Tissues According to Blood Supply", "Examples of Two-Compartment Models", "Two-Compartment Open Model (IV Bolus Injection)", "Relationship between Tissue and Plasma Concentrations for a Two-Compartment Open Model" and "Summary"; lecture 08-26.</p>
 </section>
 
 <section class="gobj" id="gobj-m2-6">
 <h3 data-nav="Module 2, objective 6 &mdash; Predict drug concentration following IV bolus administration in a multi-compartment model">Module 2 - Objective 6</h3>
 <div class="gbar"><span>Objective</span><b>Predict drug concentration following IV bolus administration in a multi-compartment model</b><i>2IVBolusAdministration.pdf, slides "Concentration of Drug in the Central Compartment" through "Apparent Volumes of Distribution"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>The concentration in the central compartment is C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup>, with C<sub>p</sub><sup>0</sup> = A + B &mdash; 2IVBolusAdministration.pdf, slide "Concentration of Drug in the Central Compartment".</li>
-<li>It is shown against a log C<sub>p</sub> plot on which A is the distribution intercept and B the elimination intercept.</li>
-<li>Slide "Practice", verbatim: <i>"The equation below describes theophylline kinetics in nine human volunteers. What is the plasma level of theophylline 3 hours after an IV bolus dose?"</i></li>
-<li>The equation on that slide: C<sub>p</sub> = 12e<sup>&minus;5.8t</sup> + 18e<sup>&minus;0.16t</sup>.</li>
-<li>The beta half-life is t&frac12;<sub>b</sub> = 0.693/b &mdash; 2IVBolusAdministration.pdf, slide "Beta Half-life".</li>
-<li>Three rate constants are given in terms of A, B, a and b &mdash; 2IVBolusAdministration.pdf, slide "Rate Constants".</li>
-<li>They are the overall elimination rate constant k, the transfer constant k<sub>12</sub> from compartment 1 to 2, and the transfer constant k<sub>21</sub> from compartment 2 to 1.</li>
-<li>Several different volumes of distribution can be calculated for multi-compartment models &mdash; 2IVBolusAdministration.pdf, slide "Apparent Volumes of Distribution".</li>
-<li>They are V<sub>p</sub> from the dose and A + B, V<sub>p</sub> from the dose and the area under the curve, and V<sub>t</sub> from V<sub>p</sub> with k<sub>12</sub> and k<sub>21</sub>.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>For a two-compartment drug, the plasma concentration is the sum of two falling exponential terms: a fast one for distribution and a slow one for elimination.</li>
+<li>She gives you the four parameters A, B, alpha and beta (or the equation that contains them), and you substitute them; you do not have to derive them.</li>
+<li>Alpha is always the larger exponent, because distribution is faster than elimination. The intercepts A and B can be either way round.</li>
+<li>The elimination (beta) half-life comes from beta alone, and the concentration at time zero is A + B.</li>
+<li>The same four numbers also give the overall elimination constant, the two transfer constants and the volumes of the compartments.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">What the four parameters are</span><q>Our A and our B are our intercepts So we've done some extrapolation to get the intercepts, and then our lowercase A and B are the slopes. That tells us about the rates of both processes.</q><span class="when">09-09 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Which of alpha and beta is larger, and why</span><q>Alpha bigger because the distribution phase is gonna happen a lot faster than an elimination phase</q>. Her check on the theophylline equation: <q>your 5.8 is significantly bigger than your 0.16</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Which half-life is wanted, and what it is called on the paper</span><q>we don't really care about the half-life of the distribution phase. We care about the half-life of the elimination phase… 0.693 over B or beta</q> and <q class="para">It will be written as beta half-life, because I am going to ask you for either the beta half-life or the elimination half-life, so that there is no confusion.</q><span class="when">08-26 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">How not to do it</span><q class="para">Do not get all complicated. Do not solve for k and then 0.693 over k; you have done too much work.</q>; at the review, <q>You take your 0.693 and you divide by lowercase b.</q><span class="when">08-26, 09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her worked theophylline answers: concentration at time zero</span><q>30, and since I didn't give you units, my bad</q>; at three hours <q>I'm hearing eleven-ish milligrams per liter</q>; beta half-life <q class="para">0.693 over 0.16: 4.33 hours.</q><span class="when">08-26 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her in-class sheet answers, read aloud</span><q>Did you get the half-life, beta Half-Life, six-ish hours?… initial concentration, 13.8 mg per liter?… Concentration, 4 hours after administration of the dose, 3.4 mg per liter.… Volume distribution, central compartment, 18-ish liters.… I got for the overall rate constant K 0.272 per hour.… then transfer from 1 to 2, 1.1 per hour.… then from 2 to 1, 0.9 per hour.</q><span class="when">08-26 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">How much of this she will set</span><q>We don't do a lot of this kind of manipulation, but we'll do a little practice today just so that you can get a feel for what it looks like and what the numbers look like</q><span class="when">08-26 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>A and B</dt><dd>Intercepts of the distribution and elimination phases on the log C<sub>p</sub> axis, in mg/L (or mcg/mL).</dd>
+<dt>Alpha (a) and beta (b)</dt><dd>Slopes of the distribution and elimination phases, in hr<sup>&minus;1</sup>; a is larger than b.</dd>
+<dt>Beta half-life (t&frac12;<sub>&beta;</sub>)</dt><dd>The elimination half-life of a two-compartment drug, in hr. An exam will say "beta half-life" or "elimination half-life".</dd>
+<dt>Overall elimination constant (k)</dt><dd>Elimination from the central compartment, in hr<sup>&minus;1</sup>; it is a different number from beta.</dd>
+<dt>Transfer constants (k<sub>12</sub>, k<sub>21</sub>)</dt><dd>Central to tissue, and tissue to central, in hr<sup>&minus;1</sup>.</dd>
+<dt>Central and tissue volumes (V<sub>p</sub>, V<sub>t</sub>)</dt><dd>Apparent volumes of the two compartments, in L.</dd>
+<dt>Dose (D<sub>0</sub>) and AUC<sub>0</sub><sup>&infin;</sup></dt><dd>The bolus dose (mg) and the area under the plasma curve to infinity (mg&middot;hr/L).</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup></div>
+<div class="geqline">C<sub>p</sub><sup>0</sup> = A + B</div>
+<ul class="tlist">
+<li>C<sub>p</sub> concentration at time t (mg/L); t in hr. At t = 0 both exponentials equal 1, which gives the second line.</li>
+<li>When to use it: a concentration at a stated hour, and the initial concentration.</li>
+<li>On the equation sheet: the first line yes; A + B is not printed but is the same line at t = 0.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}</div>
+<ul class="tlist">
+<li>b the beta slope (hr<sup>&minus;1</sup>); result in hr.</li>
+<li>When to use it: whenever the elimination or beta half-life is asked. Do not calculate k first; divide 0.693 by beta directly.</li>
+<li>On the equation sheet: no; it is the first-order half-life she expects memorised.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">k = {{frac:ab(A + B)|Ab + Ba}}</div>
+<div class="geqline">k<sub>21</sub> = {{frac:Ab + Ba|A + B}}</div>
+<div class="geqline">k<sub>12</sub> = {{frac:AB(b &minus; a)<sup>2</sup>|(A + B)(Ab + Ba)}}</div>
+<ul class="tlist">
+<li>All three results are in hr<sup>&minus;1</sup>. Each uses the cross term Ab + Ba, in which each intercept is multiplied by the other phase's slope, so work it out once.</li>
+<li>When to use it: when A, B, alpha and beta are listed and the rate constants of the model are asked.</li>
+<li>On the equation sheet: yes, all three.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}} &nbsp;&nbsp; or &nbsp;&nbsp; V<sub>p</sub> = {{frac:D<sub>0</sub>|k &times; AUC<sub>0</sub><sup>&infin;</sup>}}</div>
+<div class="geqline">V<sub>t</sub> = {{frac:V<sub>p</sub>k<sub>12</sub>|k<sub>21</sub>}}</div>
+<ul class="tlist">
+<li>V<sub>p</sub> and V<sub>t</sub> in L; D<sub>0</sub> in mg. Use the first V<sub>p</sub> form when A and B are given, the second when a dose and an AUC are given.</li>
+<li>When to use it: the "volume of distribution of the central compartment" part, nearly always by dose over A + B.</li>
+<li>On the equation sheet: yes, all three.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her deck practice, theophylline: C<sub>p</sub> = 12e<sup>&minus;5.8t</sup> + 18e<sup>&minus;0.16t</sup>. What is the plasma level 3 hours after an IV bolus dose?</p>
+<ol class="gsteps">
+<li>Read the parameters: A = 12 mg/L, a = 5.8 hr<sup>&minus;1</sup>, B = 18 mg/L, b = 0.16 hr<sup>&minus;1</sup>. Check that alpha (5.8) is much larger than beta (0.16).</li>
+<li>Concentration at time zero: C<sub>p</sub><sup>0</sup> = 12 + 18 = <b>30 mg/L</b>.</li>
+<li>Distribution term at 3 hr: 12 &times; e<sup>&minus;(5.8)(3)</sup> = 12 &times; e<sup>&minus;17.4</sup>, which is effectively 0 mg/L.</li>
+<li>Elimination term at 3 hr: 18 &times; e<sup>&minus;(0.16)(3)</sup> = 18 &times; e<sup>&minus;0.48</sup> = 18 &times; 0.6188 = 11.14 mg/L.</li>
+<li>Add the two terms: C<sub>p</sub> = 0 + 11.14 = <b>11.14 mg/L</b> (she said "eleven-ish" aloud).</li>
+<li>Beta half-life: t&frac12;<sub>&beta;</sub> = {{frac:0.693|0.16 hr<sup>&minus;1</sup>}} = <b>4.33 hr</b>.</li>
+</ol>
+<p class="prose">Her in-class sheet: 250 mg IV bolus, A = 8.45 mg/L, B = 5.32 mg/L, a = 2.18 hr<sup>&minus;1</sup>, b = 0.114 hr<sup>&minus;1</sup>.</p>
+<ol class="gsteps">
+<li>Beta half-life: {{frac:0.693|0.114 hr<sup>&minus;1</sup>}} = <b>6.08 hr</b> ("six-ish hours").</li>
+<li>Initial concentration: 8.45 + 5.32 = <b>13.77 mg/L</b>. At 4 hr: 8.45e<sup>&minus;(2.18)(4)</sup> + 5.32e<sup>&minus;(0.114)(4)</sup> = 0.001 + 3.372 = <b>3.37 mg/L</b>.</li>
+<li>Central volume: V<sub>p</sub> = {{frac:250 mg|13.77 mg/L}} = <b>18.16 L</b>.</li>
+<li>Cross term: Ab + Ba = (8.45)(0.114) + (5.32)(2.18) = 0.9633 + 11.5976 = 12.5609.</li>
+<li>k = {{frac:(2.18)(0.114)(13.77)|12.5609}} = {{frac:3.4221|12.5609}} = <b>0.272 hr<sup>&minus;1</sup></b>.</li>
+<li>k<sub>21</sub> = {{frac:12.5609|13.77}} = <b>0.912 hr<sup>&minus;1</sup></b>; k<sub>12</sub> = {{frac:(8.45)(5.32)(0.114 &minus; 2.18)<sup>2</sup>|(13.77)(12.5609)}} = {{frac:191.88|172.96}} = <b>1.109 hr<sup>&minus;1</sup></b>.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She gives the equation, or A, B, alpha and beta, and does not say "two-compartment"; the parameters are the whole stem.</li>
+<li>The same four parts recur in the same order across two practice sets, a homework and the review deck: elimination half-life, initial concentration, concentration at a stated hour, central volume.</li>
+<li>The first part is almost always the elimination half-life, from the smaller exponent. Using alpha, or calculating k first, is the usual mistake.</li>
+<li>Units are set in a parenthetical such as "(Concentration is given in mcg/mL and time in hours)", so take the answer's units from there.</li>
+<li>When she lists A, B, alpha and beta instead of an equation, she adds k, k<sub>12</sub>, k<sub>21</sub> and the central volume to the battery.</li>
+<li>Exam 1 review: 500 mg dose, C = 15e<sup>&minus;3.4t</sup> + 7e<sup>&minus;0.12t</sup>. She gave the half-life as 5.8 hr and the central volume as 500 divided by 22, and left the 6-hour concentration for you.</li>
+<li>She does little of this manipulation in the course; the practice is to show what the numbers look like.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; the deck example and the review practice</b>
-<p class="prose"><b>Slide "Practice", 2IVBolusAdministration.pdf.</b> Theophylline, C<sub>p</sub> = 12e<sup>&minus;5.8t</sup> + 18e<sup>&minus;0.16t</sup>, plasma level three hours after an IV bolus dose.</p>
-<ul>
-<li>Her answers: C at time zero 30 (units not given), C at 3 hr 11.14 mg/L (written on the slide; she says "eleven-ish" aloud), t&frac12;<sub>beta</sub> 4.33 hr.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q class="para">It will be written as beta half-life, because I am going to ask you for either the beta half-life or the elimination half-life, so that there is no confusion.</q> (08-26)</li>
+<li><q class="para">Do not get all complicated. Do not solve for k and then 0.693 over k; you have done too much work.</q> (08-26)</li>
 </ul>
-<p class="prose"><b>Exam 1 review practice, RecapExam1.pdf.</b> <i>"The equation below describes the kinetics of a medicinal agent following IV bonus injection of a 500 mg dose. (Units of C and t are mcg/mL and hr, respectively)"</i> with C = 15e<sup>&minus;3.4t</sup> + 7e<sup>&minus;0.12t</sup>.</p>
-<ul>
-<li>Three parts: the elimination half-life; the concentration 6 hours after administration of the dose; the apparent volume of distribution of the central compartment.</li>
-<li>Her spoken answers (09-09): elimination half-life 0.693/0.12 = <i>"5.8. &hellip; Did everybody get something like 5.8 hours?"</i></li>
-<li>The central volume as <i>"500 divided by 22"</i>, the quotient not stated aloud.</li>
-<li>The 6-hour concentration is not worked: <i>"I'm gonna trust that you guys can do that."</i></li>
-</ul>
-<p class="prose"><b>Daily practice, IV Bolus Practice 4 and Homework 2.</b> The biexponential stem, with the parenthetical <i>"(Concentration is given in mcg/mL and time in hours)"</i> printed identically in both.</p>
-<ul>
-<li>The same four parts follow each time: elimination half-life from beta; initial concentration as A + B; concentration at 4 hours; volume of the central compartment as dose divided by A + B.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>She hands over the equation and never says "two-compartment". The parameters in it are the whole stem.</li>
-<li>The first question is almost always the elimination half-life off the smaller exponent.</li>
-<li>The four parts recur in the same order and the same wording across two practice sets, a homework and the review deck: half-life, initial concentration, a concentration at a stated hour, central volume of distribution.</li>
-<li>Units are fixed in a parenthetical rather than on the numbers, so the answer's units come from the stem's parenthetical, not from the equation.</li>
-<li>Where she gives A, B, alpha and beta as a list instead of an equation, she adds the three rate constants and the central volume to the same battery.</li>
-</ul></div>
+<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "Concentration of Drug in the Central Compartment", "Practice" (theophylline), "Beta Half-life", "Rate Constants", "Apparent Volumes of Distribution" and the in-class two-compartment practice sheet; RecapExam1.pdf; IV Bolus Practice 4; Homework 2; q2_module2.js m2-n-theo, m2-n-koverall, m2-n-k21, m2-n-k12; reference.js (equation sheet status); lectures 08-26, 09-09.</p>
 </section>
 
 <h2>Module 3 - Intravenous Infusions</h2>
-<p class="prose">Seven objectives, printed on the "Objectives" slide of 3IntravenousInfusions.pdf and reprinted unchanged on RecapExam1.pdf.</p>
+<p class="prose">Seven objectives, printed on the "Objectives" slide of 3IntravenousInfusions.pdf and reprinted unchanged on RecapExam1.pdf. The module keeps the drug from Module 2 and changes only how it enters the body: a steady drip instead of a single injection.</p>
 
 <section class="gobj" id="gobj-m3-1">
 <h3 data-nav="Module 3, objective 1 &mdash; Discuss and describe the pharmacokinetics of a medicinal agent following administration by IV infusion">Module 3 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Discuss and describe the pharmacokinetics of a medicinal agent following administration by IV infusion</b><i>3IntravenousInfusions.pdf, slide "Intravenous Infusion"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Intravenous infusion allows for precise control of plasma drug concentration, and the drug is administered at a constant rate of input &mdash; 3IntravenousInfusions.pdf, slide "Intravenous Infusion".</li>
-<li>The plotted C<sub>p</sub> against time starts at zero and rises to a plateau.</li>
-<li>Summary: IV infusion, the administration of drug into the body at a constant rate, is useful to achieve precise control of plasma concentration &mdash; 3IntravenousInfusions.pdf, slide "Summary".</li>
-<li>Given basic pharmacokinetic parameters, the plasma concentration can readily be predicted at any time during or after an intravenous infusion.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>An intravenous (IV) infusion runs drug into a vein at a constant rate for a set time, instead of giving it all at once as an IV bolus.</li>
+<li>A constant rate of input is a zero-order process. Elimination stays first order, exactly as after a bolus, because the drug itself has not changed; only the way it enters the body has.</li>
+<li>The plasma concentration (C<sub>p</sub>) starts at zero and rises toward a plateau, called steady state, where the rate of drug going in equals the rate going out.</li>
+<li>When the infusion stops there is no more input, so C<sub>p</sub> falls by ordinary first-order elimination.</li>
+<li>The point of infusing is precise control of C<sub>p</sub>: with the basic parameters you can predict C<sub>p</sub> at any time during or after the infusion.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">What "constant rate" is meant to trigger, which the slide leaves unsaid</span><q class="para">Constant rate in pharmacokinetics: what does that say to us? We have talked about two types of processes. When we see constant rate, we are talking about zero order.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The two orders in one sentence</span><q>Our input is zero order, constant in, first order out. When we stop the in, then it's just out.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">What has and has not changed from the previous module</span><q>the only thing we've changed here, we haven't changed the drug, we've changed the manner that we put the drug in the body.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Why infuse at all</span><q>we do the infusion because it allows us to control, to really control the plasma concentration of drug</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The shape to draw before calculating</span><q>IV infusion, we're starting low and we're building.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Units of the infusion rate, flagged as a thing to know</span><q class="para">What I want you to know about this one: the units of R are going to be amount per time, most often milligrams per hour.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Infusion rate (R)</dt><dd>Amount of drug put in per unit time; amount per time, most often mg/hr.</dd>
+<dt>Zero order</dt><dd>A process that runs at a constant rate, whatever the concentration (for an infusion, mg/hr).</dd>
+<dt>First order</dt><dd>A process whose rate is proportional to the drug present, set by the elimination rate constant k (hr<sup>&minus;1</sup>).</dd>
+<dt>Plasma concentration (C<sub>p</sub>)</dt><dd>Drug concentration in plasma at a given time, in mg/L.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>The plateau C<sub>p</sub> reached when rate in equals rate out, in mg/L.</dd>
+<dt>Cessation</dt><dd>Stopping the continuous IV infusion; after it, drug only leaves the body.</dd>
+</dl>
+
+<h4>Worked example</h4>
+<p class="prose">IV Infusions Practice 1, parts a and e: 200 mg of an analgesic dissolved in 500 mL of 5% dextrose, infused over 24 hours. Find the rate in mg/hr and in mL/min.</p>
+<ol class="gsteps">
+<li>The rate is the amount infused divided by the time it runs: R = {{frac:200 mg|24 hr}} = 8.33 mg/hr.</li>
+<li>For the pump, use the volume instead of the drug amount: {{frac:500 mL|24 hr}} = 20.83 mL/hr.</li>
+<li>Convert hours to minutes: {{frac:500 mL|24 hr}} &times; {{frac:1 hr|60 min}} = 0.347 mL/min, which she reports as 0.35 mL/min.</li>
+</ol>
+<p class="prose">Answer: <b>R = 8.33 mg/hr</b>, run at <b>0.35 mL/min</b>.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>No poll or practice question asks this objective on its own. It is the frame for every calculation in the module, so expect it inside multi-part problems.</li>
+<li>Her stems read as clinical requests in the second person, such as "You are asked to recommend&hellip;", with a patient vignette, an indication and a body weight.</li>
+<li>A compounding detail (200 mg in 500 mL of 5% dextrose) is there for a later part that asks the same rate in mL/min.</li>
+<li>Weight may come in pounds and V<sub>D</sub> (apparent volume of distribution) in L/kg: 110 lb became 50 kg and 3 L/kg became 150 L in her solution, so convert before using them.</li>
+<li>The words "constant rate" or "continuous infusion" signal zero-order input with first-order elimination.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">The poll printed on this deck's title slide is an IV bolus recall item, not an infusion item; it is recorded under Module 2 objective 2.</p>
-<ul>
-<li>No poll or practice question in the collected sources asks this objective on its own. It is the frame for every calculation in the module.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>Our input is zero order, constant in, first order out. When we stop the in, then it's just out.</q> (09-02)</li>
+</ul>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>Infusion problems arrive as clinical recommendations in the second person: <i>"You are asked to recommend&hellip;"</i>, <i>"What rate &hellip; would you infuse this drug&hellip;"</i>, <i>"What rate of infusion and loading dose would you recommend&hellip;?"</i></li>
-<li>The stem carries a patient vignette with an indication and a weight.</li>
-<li>It often adds a compounding detail, such as 200 mg dissolved in 500 mL of 5% dextrose, which is there for a later millilitres-per-minute part.</li>
-</ul></div>
+<p class="gsrc">Sources: 3IntravenousInfusions.pdf, slides "Intravenous Infusion" and "Summary"; IV-Infusions-Practice-1-Solutions.pdf, parts a and e; transcript 09-02.</p>
 </section>
 
 <section class="gobj" id="gobj-m3-2">
 <h3 data-nav="Module 3, objective 2 &mdash; Describe the concept of steady state and how it relates to continuous dosing">Module 3 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Describe the concept of steady state and how it relates to continuous dosing</b><i>3IntravenousInfusions.pdf, slides "Drug Concentration at Steady-State" and "Drug Concentration Prior to Reaching Steady-State"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Steady state is achieved when rate in equals rate out, and the steady-state concentration is C<sub>ss</sub> = R/Cl = R/kV<sub>D</sub> &mdash; 3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State".</li>
-<li>Before steady state, C<sub>p</sub> = (R/Cl)(1 &minus; e<sup>&minus;kt</sup>) &mdash; 3IntravenousInfusions.pdf, first slide "Drug Concentration Prior to Reaching Steady-State".</li>
-<li>The term (1 &minus; e<sup>&minus;kt</sup>) gives the fraction of steady-state concentration achieved after infusing the drug for an amount of time t.</li>
-<li>At very early times after the infusion is started, (1 &minus; e<sup>&minus;kt</sup>) is a small fraction &mdash; second slide of the same title.</li>
-<li>At times approaching five half-lives after the infusion is started, it begins to approach 1.</li>
-<li>A third slide of the same title plots the rising curve with C<sub>ss</sub> and the fraction of C<sub>ss</sub> achieved marked against it &mdash; 3IntravenousInfusions.pdf, third slide "Drug Concentration Prior to Reaching Steady-State".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Steady state is reached when the rate of drug going in equals the rate going out, so the plasma concentration (C<sub>p</sub>) stops rising and holds at a plateau, C<sub>ss</sub>.</li>
+<li>Early in an infusion little drug is in the body, so little is eliminated. As C<sub>p</sub> rises, the amount eliminated per hour rises until it matches the infusion rate (R).</li>
+<li>The curve is asymptotic: it gets closer and closer to C<sub>ss</sub> but in theory never reaches it exactly.</li>
+<li>The time to approach steady state depends only on the half-life (t<sub>&frac12;</sub>), so on the elimination rate constant k. Her short answer is 3 to 5 half-lives.</li>
+<li>The rate R sets how high the plateau is, not how soon it arrives. A faster infusion gives a higher C<sub>ss</sub> at the same time.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The answer she wants memorised word for word</span><q class="para">I want you to hear my voice in your head: if I ask you how long it takes to get to steady state following IV infusion, the simplest answer is 3 to 5 half-lives.</q> &mdash; with the boundary on when that answer is not enough: <q>3 to 5 half-lives is a short answer. If I ask you more specific, if I ask you how long does it take to get to 95% steady state, then that's a different calculation.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Steady state defined</span><q>steady state we say is achieved when the rate of drug in the body is equal to the rate of drug out of the body</q> and <q>the rate out will continue to increase until we reach this steady-state concentration or steady state kind of plateau</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The plateau is never actually reached</span><q>remember, this is an asymptotic curve, so we're never actually going to reach steady state, we're gonna get close. So, 10 gets us 99.9, 11 gets us 99.99</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The fraction table she builds live, which no slide carries: one half-life</span><q>I'm getting 0.5</q>; two, <q>we should be at 75%</q>; three, <q>87.5</q>; four, 93.25 as spoken (1 &minus; 0.5<sup>4</sup> = 93.75%; at the review she gives 93); ten, <q>99.9% of the steady-state concentration</q>. Her link back to the previous module: <q class="para">Does this look familiar? We are seeing the same thing; this time we are going this way.</q>, restated at the review as <q>One half-life is the time for 50% of whatever you've got to be eliminated. If we're now going this way, then one half-life is 50, the time it'll take to get to 50% of our steady state concentration.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The point she repeats on purpose</span><q>changing the rate changes our steady state concentration with me. I feel like I've said it 5 times, and I've said it 5 times because this is one of those things that I want you to take with you. so I've said it 5 times. I'm gonna ask it of you 10 times.</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The matching exam item shape</span><q>if you get a question that says, 'Increasing the rate of infusion will decrease or double or do whatever funkiness to the time that it takes to get to steady state,' we are clear that it has no impact Because it is three to five half-lives. Depends on the half-life, that rate constant K.</q><span class="when">09-09 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">A rule of thumb she gives and then withdraws</span><q>3.32. Times the half-life, 3.32 half-lives gets us at 90%. You don't have to remember that, it's in my head</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>The plateau plasma concentration, where rate in equals rate out; mg/L.</dd>
+<dt>Infusion rate (R)</dt><dd>Drug put in per unit time; mg/hr.</dd>
+<dt>Total body clearance (Cl)</dt><dd>Volume of plasma cleared of drug per unit time; L/hr. Cl = k &times; V<sub>D</sub>.</dd>
+<dt>Elimination rate constant (k)</dt><dd>First-order rate constant for removal of drug; hr<sup>&minus;1</sup>.</dd>
+<dt>Apparent volume of distribution (V<sub>D</sub>)</dt><dd>Volume that relates the amount in the body to C<sub>p</sub>; L.</dd>
+<dt>Half-life (t<sub>&frac12;</sub>)</dt><dd>Time for the concentration to change by half; hr.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">C<sub>ss</sub> = {{frac:R|Cl}} = {{frac:R|kV<sub>D</sub>}}</div>
+<ul class="tlist">
+<li>C<sub>ss</sub> in mg/L; R in mg/hr; Cl in L/hr; k in hr<sup>&minus;1</sup>; V<sub>D</sub> in L.</li>
+<li>When to use it: at steady state only. It contains no time, so it says nothing about when steady state arrives.</li>
+<li>On the equation sheet: yes, as C<sub>ss</sub> = {{frac:R|Cl}}.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)</div>
+<ul class="tlist">
+<li>The first factor is C<sub>ss</sub>. The bracket (1 &minus; e<sup>&minus;kt</sup>) is the fraction of C<sub>ss</sub> reached after infusing for time t (hr, from the start).</li>
+<li>Early on the bracket is a small fraction; by about five half-lives it approaches 1.</li>
+<li>When to use it: during an infusion, before steady state; rearranged with a natural log, it gives the time to a stated percentage of C<sub>ss</sub>.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">k = {{frac:0.693|t<sub>&frac12;</sub>}}</div>
+<ul class="tlist">
+<li>Converts a given half-life (hr) into k (hr<sup>&minus;1</sup>), which every infusion equation uses.</li>
+<li>On the equation sheet: no. She expects the first-order half-life relation to be memorised.</li>
+</ul>
+</div>
+<p class="prose">Fraction of C<sub>ss</sub> reached, counted in half-lives (1 &minus; 0.5<sup>n</sup> after n half-lives):</p>
+<ul class="tlist">
+<li>1 half-life: 50%. 2: 75%. 3: 87.5%. 10: 99.9%.</li>
+<li>4 half-lives: 93.75% (1 &minus; 0.5<sup>4</sup>). She said 93.25 aloud on 09-02 and "93" at the 09-09 review; the computed value is 93.75%.</li>
+<li>About 3.32 half-lives reaches 90% (her own shortcut, not required), and 4.32 half-lives reaches 95%.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; worked examples</b>
-<p class="prose"><b>Slide "Example 4", 3IntravenousInfusions.pdf.</b> <i>"How long will the infusion have to be continued to achieve 90% steady-state?"</i>, with k = 0.15 hr<sup>&minus;1</sup>.</p>
-<ul>
-<li>Her working (09-02): <i>"1 minus 0.9, that's gonna give us 0.1 is equal to &hellip; E to the minus 0.15 T. I'm gonna take the natural log of both sides &hellip; And natural log of 0.1. Divided by -0.15."</i></li>
-<li>Answer, as she states it: <i>"I'm hearing 15. 15 hours."</i></li>
-</ul>
-<p class="prose"><b>Daily practice, IV Infusions Practice 4.</b> Two adjacent parts on the same infusion.</p>
-<ul>
-<li><i>"If there were no loading dose, how much time would be required to reach the 5 mg/L level?"</i> Her note: <i>"5 mg/L = 50% of Css"</i>, giving one half-life, 6 hr.</li>
-<li><i>"If there were no loading dose, how much time would be required to reach 80% of the steady-state plasma concentration?"</i>, giving 13.93 hr.</li>
-</ul></div>
+<h4>Worked example</h4>
+<p class="prose">Slide "Example 4": k = 0.15 hr<sup>&minus;1</sup>. How long must the infusion run to reach 90% of steady state?</p>
+<ol class="gsteps">
+<li>Set the bracket equal to the fraction wanted: 0.9 = 1 &minus; e<sup>&minus;0.15t</sup>.</li>
+<li>Isolate the exponential: e<sup>&minus;0.15t</sup> = 1 &minus; 0.9 = 0.1.</li>
+<li>Take the natural log of both sides: &minus;0.15t = ln(0.1) = &minus;2.3026.</li>
+<li>Solve for t: t = {{frac:&minus;2.3026|&minus;0.15 hr<sup>&minus;1</sup>}} = 15.35 hr.</li>
+<li>Check: t<sub>&frac12;</sub> = {{frac:0.693|0.15 hr<sup>&minus;1</sup>}} = 4.62 hr, and 15.35 hr is 3.32 half-lives, matching her 90% shortcut.</li>
+</ol>
+<p class="prose">Answer: <b>15.35 hr</b>, which she states as <b>about 15 hours</b>.</p>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>Two shapes sit side by side in her own practice, and she prints both routes.</li>
-<li>A percentage that is a power of one half is answered by counting half-lives.</li>
-<li>A percentage that is not is answered from (1 &minus; e<sup>&minus;kt</sup>) with a natural logarithm.</li>
-<li>A concentration given in the stem is often a percentage of C<sub>ss</sub> in disguise: 5 mg/L against a C<sub>ss</sub> of 10 mg/L.</li>
-<li>She expects that to be seen before the calculator is picked up.</li>
-<li>The conceptual item is a statement that changing the infusion rate changes the time to steady state. It is false; the time depends on the half-life alone.</li>
-</ul></div>
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>"How long to reach steady state after an IV infusion?" The answer she wants is 3 to 5 half-lives.</li>
+<li>A statement that raising the infusion rate shortens or otherwise changes the time to steady state. It is false, because that time depends on the half-life alone.</li>
+<li>A specific percentage (90%, 95%) needs a calculation, not "3 to 5 half-lives". If it is 50, 75 or 87.5%, count half-lives; otherwise solve 1 &minus; e<sup>&minus;kt</sup> with a natural log.</li>
+<li>A concentration in the stem may be a percentage in disguise: in Practice 4, 5 mg/L against a C<sub>ss</sub> of 10 mg/L is 50%, so one half-life, 6 hr.</li>
+<li>The next part of Practice 4 asks for 80% of C<sub>ss</sub>, which is not a power of one half, so it needs the log route: 13.93 hr.</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q class="para">I want you to hear my voice in your head: if I ask you how long it takes to get to steady state following IV infusion, the simplest answer is 3 to 5 half-lives.</q> (09-02)</li>
+</ul>
+
+<p class="gsrc">Sources: 3IntravenousInfusions.pdf, slides "Drug Concentration at Steady-State", "Drug Concentration Prior to Reaching Steady-State" (three slides) and "Example 4"; IV-Infusions-Practice-4-Solutions.pdf, parts d and e; transcripts 09-02 and 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m3-3">
 <h3 data-nav="Module 3, objective 3 &mdash; Determine optimum dosing for an infused drug by calculating pharmacokinetic parameters">Module 3 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Determine optimum dosing for an infused drug by calculating pharmacokinetic parameters</b><i>3IntravenousInfusions.pdf, slides "Example 1" through "Example 4"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Example 1, verbatim: <i>"What is the expected steady-state concentration of theophylline in a patient?"</i> with t&frac12; = 6 hr, V<sub>D</sub> = 30 L, continuous IV infusion rate 50 mg/hr &mdash; 3IntravenousInfusions.pdf, slide "Example 1".</li>
-<li>Example 3, verbatim: <i>"Calculate the C<sub>p</sub> 8 hrs after an infusion of 50 mg/hr has been started"</i>, with Cl<sub>T</sub> = 4.5 L/hr and k = 0.15 hr<sup>&minus;1</sup> &mdash; 3IntravenousInfusions.pdf, slide "Example 3".</li>
-<li>Example 4, verbatim: <i>"What will the C<sub>ss</sub> be if the infusion is continued indefinitely?"</i> and <i>"How long will the infusion have to be continued to achieve 90% steady-state?"</i> &mdash; 3IntravenousInfusions.pdf, slide "Example 4".</li>
-<li>Example 4 uses the same parameters as Example 3.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Most infusion problems start by turning the stem's data into the parameters the equations need: the elimination rate constant (k), the apparent volume of distribution (V<sub>D</sub>) and the total body clearance (Cl).</li>
+<li>With those and the infusion rate (R), every later part follows: steady-state concentration (C<sub>ss</sub>), plasma concentration (C<sub>p</sub>) at a time, time to a percentage, loading dose, pump rate.</li>
+<li>She builds one patient and chains six or seven parts from it, so an error in k early on carries into every later answer.</li>
+<li>Read what the question asks before reaching for the calculator; the parts are small once the parameters are set.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Her Example 1 working</span><q>our seasteady state. Rate over clearance. 50 mg per hour. Our clearance is 30 L</q> (the 30 L is V<sub>D</sub>; times k it gives the clearance), with the half-life converted to k, giving <q>I'm hearing 14.… it's still a concentration, so milligrams per liter</q>. She later draws the same curve as <q>our curve for 14.4</q>, so the value she works with is 14.4 mg/L.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Her Example 4 steady-state answer</span><q>if we continued infusing indefinitely. What's the steady-state concentration? 11.11… then our units, it's a concentration, milligrams per liter.</q>. The eight-hour concentration of Example 3 is never stated aloud.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Reading before calculating</span><q class="para">Step back and look at this question and think about it before you plug it into your calculator. Look at the question and understand what is being asked.</q> and <q>yes, I want you to be able to punch the numbers, but I want you to think through. What's going on Because they're gonna get bigger and uglier looking.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">On exam time for these</span><q>I heard somebody say you're gonna run out of time on the exam. No, you won't.</q> and <q class="para">This will not be one question on the exam. This is going to be broken up into little pieces, so do not panic.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Elimination rate constant (k)</dt><dd>First-order rate constant for removal of drug; hr<sup>&minus;1</sup>.</dd>
+<dt>Half-life (t<sub>&frac12;</sub>)</dt><dd>Time for the concentration to fall by half; during an infusion, also the time to reach 50% of C<sub>ss</sub>; hr.</dd>
+<dt>Apparent volume of distribution (V<sub>D</sub>)</dt><dd>L; sometimes given per kilogram (L/kg), so multiply by body weight.</dd>
+<dt>Total body clearance (Cl or Cl<sub>T</sub>)</dt><dd>L/hr; the sum of renal and metabolic clearance when both are given.</dd>
+<dt>Infusion rate (R)</dt><dd>mg/hr.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>Plateau concentration; mg/L.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">Cl = k &times; V<sub>D</sub></div>
+<ul class="tlist">
+<li>Cl in L/hr; k in hr<sup>&minus;1</sup>; V<sub>D</sub> in L.</li>
+<li>When to use it: whenever the stem gives a half-life or k and a volume, but the equation needs clearance.</li>
+<li>On the equation sheet: no. She names it as one to know without the sheet.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl<sub>T</sub> = Cl<sub>renal</sub> + Cl<sub>metabolic</sub></div>
+<ul class="tlist">
+<li>All in L/hr. Practice 4 prints this sum in its stem: 5 + 6.55 = 11.55 L/hr.</li>
+<li>When to use it: when the stem gives the routes separately, and again in a renal-failure part where only the renal value changes.</li>
+<li>On the equation sheet: the sheet carries a renal and hepatic split of clearance.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>ss</sub> = {{frac:R|Cl}} &nbsp;and&nbsp; C<sub>p</sub> = C<sub>ss</sub>(1 &minus; e<sup>&minus;kt</sup>)</div>
+<ul class="tlist">
+<li>The two infusion lines from objective 2, with t the time since the infusion started (hr).</li>
+<li>On the equation sheet: yes, both.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Slide "Example 1": theophylline, t<sub>&frac12;</sub> = 6 hr, V<sub>D</sub> = 30 L, infused at 50 mg/hr. What is the expected C<sub>ss</sub>?</p>
+<ol class="gsteps">
+<li>Convert the half-life to k: k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>&minus;1</sup>.</li>
+<li>Get clearance from k and the volume: Cl = 0.1155 hr<sup>&minus;1</sup> &times; 30 L = 3.465 L/hr.</li>
+<li>Divide the rate by clearance: C<sub>ss</sub> = {{frac:50 mg/hr|3.465 L/hr}} = 14.43 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>14.43 mg/L</b> (she works with 14.4 mg/L).</p>
+<p class="prose">Slides "Example 3" and "Example 4": Cl<sub>T</sub> = 4.5 L/hr, k = 0.15 hr<sup>&minus;1</sup>, 50 mg/hr. Find C<sub>ss</sub>, then C<sub>p</sub> 8 hours after the start.</p>
+<ol class="gsteps">
+<li>C<sub>ss</sub> = {{frac:50 mg/hr|4.5 L/hr}} = 11.11 mg/L (her Example 4 answer).</li>
+<li>Fraction of C<sub>ss</sub> reached at 8 hr: 1 &minus; e<sup>&minus;(0.15)(8)</sup> = 1 &minus; e<sup>&minus;1.2</sup> = 0.6988.</li>
+<li>C<sub>p</sub> = 11.11 mg/L &times; 0.6988 = 7.76 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>7.76 mg/L</b> at 8 hours. She did not say this value aloud; it is computed from her R, Cl<sub>T</sub> and k.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>One infusion in the stem, then six or seven parts. Later parts say "at the rate you determined above", so carry your earlier answers forward.</li>
+<li>Contrasting scenarios are set in capitals, WITH THE LOADING DOSE against WITHOUT THE LOADING DOSE; check which one each part means.</li>
+<li>Expect unit work first: 110 lb to 50 kg, 3 L/kg to 150 L, and a half-life of 4 hr to k = 0.1733 hr<sup>&minus;1</sup> (Practice 1).</li>
+<li>A renal-failure part changes only clearance: in Practice 4 Cl<sub>T</sub> falls from 11.55 to 8.55 L/hr, k to 0.0855 hr<sup>&minus;1</sup>, and R to 85.5 mg/hr.</li>
+<li>Some stem data are never used, such as the 65 kg body weight in Practice 4.</li>
+<li>She computes to more precision than she reports and rounds to a practical value, for example 14.86 mg/hr to 15 mg/hr and 454.5 mg to 455 mg.</li>
+<li>While working Example 1 aloud she called the 30 L the clearance. 30 L is V<sub>D</sub>; k &times; 30 L gives the clearance, 3.465 L/hr.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; the practice batteries</b>
-<p class="prose"><b>Daily practice, IV Infusions Practice 1.</b> The stem, verbatim:</p>
-<blockquote class="prose"><i>"Continuous intravenous infusion of a potent analgesic is recommended for a patient with inoperable colon cancer and a body weight of 110 pounds. The dose is prepared by dissolving 200 mg of the drug in 500 mL of 5% dextrose. The drug is to be infused over 24 hours. The drug has a half-life of 4 hours and an apparent volume of distribution of 3 L/kg. Calculate the following:"</i></blockquote>
-<ul>
-<li>Seven parts: a. rate of drug infusion in mg/hr; b. plasma concentration 6 hours after the start of the infusion; c. total amount of drug in the body 12 hours after the start.</li>
-<li>d. steady-state plasma concentration; e. rate of drug infusion in mL/min; f. an IV bolus loading dose; g. plasma concentration 12 hours after the cessation of the infusion.</li>
-<li>Her answers: 8.33 mg/hr; 0.207 mg/L; 0.28 mg/L and 42 mg; 0.32 mg/L; 0.35 mL/min; 48 mg; 0.04 mg/L.</li>
-<li>She works with k = 0.1733 hr<sup>&minus;1</sup> and V<sub>D</sub> = 150 L, from 110 lb converted silently to 50 kg.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q class="para">This will not be one question on the exam. This is going to be broken up into little pieces, so do not panic.</q> (09-02)</li>
 </ul>
-<p class="prose"><b>Daily practice, IV Infusions Practice 4.</b> The stem, verbatim:</p>
-<blockquote class="prose"><i>"The therapeutic plasma level of a drug is 4 to 15 mg/L. You would like to immediately attain a steady-state concentration level of 10 mg/L and maintain this concentration over 12 hours. The drug has a half-life of 6 hours and renal and metabolic clearances of 5 and 6.55 L/hr, respectively (total body clearance = renal clearance + metabolic clearance). The patient's body weight is 65 kg."</i></blockquote>
-<ul>
-<li>Her answers include Cl<sub>T</sub> = 11.55 L/hr, R = 115.5 mg/hr, D<sub>L</sub> = 1000 mg and V<sub>D</sub> = 100 L.</li>
-<li>For the renal-failure part: Cl<sub>T</sub> = 8.55 L/hr, k = 0.0855 hr<sup>&minus;1</sup>, R = 85.5 mg/hr, and the loading dose unchanged at 1000 mg.</li>
-<li>The 65 kg is never used.</li>
-</ul></div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>One infusion, then six or seven parts chained off it. Later parts are flagged <i>"at the rate you determined above"</i> or <i>"the drug in question #1"</i>.</li>
-<li>Contrasting scenarios are set in capitals: <b>WITH THE LOADING DOSE</b> against <b>WITHOUT THE LOADING DOSE</b>.</li>
-<li>Where the stem supplies a solution concentration, one part asks the same infusion rate again in mL/min or mL/hr, so the answer is a pump setting rather than a drug rate.</li>
-<li>She computes to more precision than she reports and prints an arrow to the practical value: 14.86 mg/hr to 15 mg/hr, 454.5 mg to 455 mg.</li>
-</ul></div>
+<p class="gsrc">Sources: 3IntravenousInfusions.pdf, slides "Example 1", "Example 3" and "Example 4"; IV-Infusions-Practice-1-Solutions.pdf; IV-Infusions-Practice-4-Solutions.pdf; transcript 09-02.</p>
 </section>
 
 <section class="gobj" id="gobj-m3-4">
 <h3 data-nav="Module 3, objective 4 &mdash; Calculate loading doses to be used with an intravenous infusion">Module 3 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Calculate loading doses to be used with an intravenous infusion</b><i>3IntravenousInfusions.pdf, slides "IV Bolus Loading Dose and Continuous IV Infusion" and "Example 7"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>With a loading dose given at the same time as an infusion, the bolus contributes C = C<sub>0</sub>e<sup>&minus;kt</sup> = (D<sub>L</sub>/V<sub>D</sub>)e<sup>&minus;kt</sup> &mdash; 3IntravenousInfusions.pdf, first slide "IV Bolus Loading Dose and Continuous IV Infusion".</li>
-<li>The infusion contributes C = (R/kV<sub>D</sub>)(1 &minus; e<sup>&minus;kt</sup>).</li>
-<li>The loading dose itself is D<sub>L</sub> = R/k.</li>
-<li>Example 7, verbatim: <i>"A physician wants to administer an agent at a rate of 20 mg/hr by IV infusion. The elimination rate constant is 0.16 hr&ndash;1, and the volume of distribution (one compartment) is 10 L. What loading dose should be recommended if the doctor wants the drug level to reach 12.5 mcg/mL immediately?"</i></li>
-<li>Example 8, verbatim: <i>"An IV bolus loading dose of 288 mg was administered simultaneously with the continuous infusion of the drug at 50mg/hr (the drug has a t&frac12; of 4 hr and a volume of distribution of 12 L)? What is the concentration of drug in the plasma at 2 hours after the start of the therapy? At 4 hours? At 6 hours?"</i></li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>A loading dose (D<sub>L</sub>) is an IV bolus given at the same moment the infusion starts.</li>
+<li>Its size should equal the amount of drug the body holds at steady state: the target steady-state concentration (C<sub>ss</sub>) times the apparent volume of distribution (V<sub>D</sub>).</li>
+<li>A second route divides the infusion rate (R) by the elimination rate constant (k). It gives the right dose only if R was itself chosen to give the target C<sub>ss</sub>.</li>
+<li>After it is given, the bolus part of the concentration falls by first-order elimination while the infusion part rises, and the two are added.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The second route to the loading dose, which the slide does not print</span><q class="para">Another way to think about this loading dose: concentration of drug in the body at steady state times the volume of distribution.</q>, restated at the review as <q>If we know we want a certain steady-state concentration, C steady-state times our volume of distribution… Another way to calculate it is rate over K.</q><span class="when">09-02, 09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The condition on the printed equation</span><q>this equation. Is one way to calculate a loading dose, and this works, but remember the one thing that we can change. We can change the rate. this works if you have chosen a rate, an appropriate rate of an infusion… If you just pick a number out of the air, then you're probably not gonna pick the best loading dose</q>. Slide and speech differ here: the slide carries D<sub>L</sub> = R/k alone, and an exam written from these lectures would accept either route, because she works both.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Her Example 7 answer and both routes</span><q>125 mg</q>, from <q>if you said 20 mg per hour divided by 0.16, or if you said 12.5 times 10, you should get 125 mg</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Her Example 8 answer at two hours</span><q>I hear 24 mg per liter</q>, built as the bolus part plus the infusion part &mdash; <q>So 7 mg per liter for the infusion… then for the bolus, that 288 mg… divided by that volume distribution that gives us that C0 dose of volume distribution. Times E to the minus KT. then… 7 plus 18 gets us 25, or 7 + 17 gets us to 24.</q> At four hours: <q>4 hours, I'm getting 12 mg per liter for the bolus</q> and the infusion part also about 12.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The superposition rule that makes the two parts additive</span><q>at any point on the curve, then the concentration here plus the concentration here should equal the concentration there.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Loading dose (D<sub>L</sub>)</dt><dd>IV bolus given with the start of an infusion to reach C<sub>ss</sub> at once; mg.</dd>
+<dt>Initial concentration (C<sub>0</sub>)</dt><dd>Concentration the bolus produces at time zero, D<sub>L</sub> divided by V<sub>D</sub>; mg/L.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>mg/L. Note that 1 mcg/mL equals 1 mg/L.</dd>
+<dt>Apparent volume of distribution (V<sub>D</sub>)</dt><dd>L.</dd>
+<dt>Infusion rate (R) and rate constant (k)</dt><dd>mg/hr and hr<sup>&minus;1</sup>.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub></div>
+<ul class="tlist">
+<li>D<sub>L</sub> in mg; C<sub>ss</sub> in mg/L; V<sub>D</sub> in L.</li>
+<li>When to use it: whenever a target C<sub>ss</sub> and a volume are given. It does not depend on any rate.</li>
+<li>On the equation sheet: yes, page 1, directly under the R and k form.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">D<sub>L</sub> = {{frac:R|k}}</div>
+<ul class="tlist">
+<li>R in mg/hr; k in hr<sup>&minus;1</sup>; result in mg.</li>
+<li>When to use it: when an appropriate infusion rate has already been chosen for the target. A rate picked without that check gives a poor loading dose.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>p</sub> = (bolus part) + (infusion part)</div>
+<div class="geqline">bolus part = {{frac:D<sub>L</sub>|V<sub>D</sub>}} e<sup>&minus;kt</sup> &nbsp;&nbsp; infusion part = {{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)</div>
+<ul class="tlist">
+<li>Both parts in mg/L; t is the time since the start of therapy (hr).</li>
+<li>When to use it: loading dose and infusion running together, for C<sub>p</sub> at a stated time.</li>
+<li>On the equation sheet: not as one line. The sheet carries the two parts separately, as the first-order C line and the infusion line.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Slide "Example 7": R = 20 mg/hr, k = 0.16 hr<sup>&minus;1</sup>, V<sub>D</sub> = 10 L. What loading dose reaches 12.5 mcg/mL immediately?</p>
+<ol class="gsteps">
+<li>First route, rate over k: D<sub>L</sub> = {{frac:20 mg/hr|0.16 hr<sup>&minus;1</sup>}} = 125 mg.</li>
+<li>Second route: 12.5 mcg/mL is 12.5 mg/L, so D<sub>L</sub> = 12.5 mg/L &times; 10 L = 125 mg.</li>
+<li>The routes agree because this rate is the one that gives 12.5 mg/L: C<sub>ss</sub> = {{frac:20 mg/hr|0.16 hr<sup>&minus;1</sup> &times; 10 L}} = 12.5 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>125 mg</b>, by either route.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She asks for the loading dose and the infusion rate together, as one recommendation for one patient, in either order.</li>
+<li>Either route earns the answer; she shows both and joins them with "or".</li>
+<li>Exam 1 review: a C<sub>ss</sub> of 24 mg/L and V<sub>D</sub> of about 22 L give D<sub>L</sub> = 24 &times; 22 = 528 mg. The answer is a dose, so it is in milligrams.</li>
+<li>A renal-failure part changes clearance and leaves V<sub>D</sub> alone, so R moves and D<sub>L</sub> does not: Practice 4 gives R 115.5 then 85.5 mg/hr, and D<sub>L</sub> 1000 mg both times.</li>
+<li>The trap is using D<sub>L</sub> = {{frac:R|k}} with a rate that was never matched to the target concentration.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; the deck examples and the review practice</b>
-<p class="prose"><b>Slide "Example 7", 3IntravenousInfusions.pdf.</b> Quoted in full above; her answer 125 mg by both routes.</p>
-<p class="prose"><b>Exam 1 review practice, RecapExam1.pdf.</b> <i>"Recommend a loading dose to achieve the desired steady-state concentration"</i>.</p>
-<ul>
-<li>The agent has C<sub>ss</sub> 24 mg/L, elimination half-life 5 hours and volume of distribution about 22 L.</li>
-<li>Her answer (09-09): <i>"528 milligrams. &hellip; Remember, we want our loading dose to look like the amount of drug that should be in the body at steady state. So our 24 milligrams per liter times our 22 liter volume of distribution should come up as 528. Right? And it's a dose, so we're looking for milligrams."</i></li>
-</ul>
-<p class="prose"><b>Daily practice, IV Infusions Practice 4.</b> <i>"Determine an IV bolus loading dose and infusion rate to achieve the desired steady-state plasma level of 10 mg/L"</i>.</p>
-<ul>
-<li>Her answers: R = 115.5 mg/hr and D<sub>L</sub> = 1000 mg.</li>
-<li>The same pair is asked again after renal clearance falls: R drops to 85.5 mg/hr and D<sub>L</sub> stays 1000 mg.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>She asks for the loading dose and the infusion rate together, in that order or the reverse, as a single recommendation for one patient.</li>
-<li>Where both routes are available she shows both and joins them with "or", so either D<sub>L</sub> = R/k or D<sub>L</sub> = C<sub>ss</sub>V<sub>D</sub> earns the answer.</li>
-<li>The answer is a dose in milligrams and she rounds it to a practical number.</li>
-<li>The perturbation part changes clearance and leaves V<sub>D</sub> alone, so the rate moves and the loading dose does not.</li>
-</ul></div>
+<p class="gsrc">Sources: 3IntravenousInfusions.pdf, first slide "IV Bolus Loading Dose and Continuous IV Infusion" and slide "Example 7"; RecapExam1.pdf; IV-Infusions-Practice-4-Solutions.pdf, parts a and g; transcripts 09-02 and 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m3-5">
 <h3 data-nav="Module 3, objective 5 &mdash; Describe the purpose of a loading dose">Module 3 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Describe the purpose of a loading dose</b><i>3IntravenousInfusions.pdf, second slide "IV Bolus Loading Dose and Continuous IV Infusion"</i></div>
 
-<h4>What the slides carry</h4>
-<ul>
-<li>The second loading-dose slide repeats the three relations &mdash; 3IntravenousInfusions.pdf, second slide "IV Bolus Loading Dose and Continuous IV Infusion".</li>
-<li>It adds a figure of the combined curve, showing what the plasma concentration does when the loading dose chosen is too high and when it is too low.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>An infusion alone takes 3 to 5 half-lives to approach its steady-state concentration (C<sub>ss</sub>), so the patient sits below the target for that time.</li>
+<li>A loading dose (D<sub>L</sub>) puts in, at once, the amount of drug that would otherwise take 3 to 5 half-lives to build up, so C<sub>ss</sub> is reached almost immediately.</li>
+<li>When D<sub>L</sub> is chosen correctly, the falling bolus curve and the rising infusion curve add to a flat line at C<sub>ss</sub> throughout therapy.</li>
+<li>Too large a loading dose gives a peak above the plateau that falls back to it; too small gives a dip below it that climbs up. The plateau itself is set by the infusion.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The purpose in one sentence</span><q>the loading dose helps us to reach that steady state concentration, like almost immediately. you got to choose wisely on the loading dose</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">What a correctly chosen loading dose is</span><q>We want the loading dose to look like the amount of drug that's in the body at steady state.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">What follows if it is chosen correctly</span><q>if you choose an appropriate loading dose, you should be able to be at that concentration at any time throughout the therapy</q><span class="when">09-09 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The figure read out: the combined concentration is flat only when the bolus matches what the infusion will hold, and a bolus that is too large or too small produces a peak or a dip before the plateau &mdash; her version of the same point is the superposition rule</span><q>at any point on the curve, then the concentration here plus the concentration here should equal the concentration there.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Loading dose (D<sub>L</sub>)</dt><dd>IV bolus given with the start of an infusion; mg.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>Plateau plasma concentration; mg/L.</dd>
+<dt>Superposition</dt><dd>Adding the concentrations from the bolus and the infusion at the same time to get the total.</dd>
+</dl>
+
+<h4>Worked example</h4>
+<p class="prose">Slide "Example 8": D<sub>L</sub> = 288 mg given with an infusion of 50 mg/hr; t<sub>&frac12;</sub> (half-life) = 4 hr, V<sub>D</sub> (apparent volume of distribution) = 12 L. Find C<sub>p</sub> (plasma concentration) at 2 and 4 hours.</p>
+<ol class="gsteps">
+<li>Rate constant: k = {{frac:0.693|4 hr}} = 0.17325 hr<sup>&minus;1</sup>.</li>
+<li>Bolus part at 2 hr: {{frac:288 mg|12 L}} e<sup>&minus;(0.17325)(2)</sup> = 24 mg/L &times; 0.7072 = 16.97 mg/L.</li>
+<li>Plateau of the infusion: {{frac:50 mg/hr|0.17325 hr<sup>&minus;1</sup> &times; 12 L}} = 24.05 mg/L.</li>
+<li>Infusion part at 2 hr: 24.05 mg/L &times; (1 &minus; 0.7072) = 24.05 &times; 0.2928 = 7.04 mg/L.</li>
+<li>Add the parts: 16.97 + 7.04 = 24.01 mg/L, which she gives as 24 mg/L.</li>
+<li>At 4 hr, exactly one half-life: bolus 24 &times; 0.5 = 12.00 mg/L, infusion 24.05 &times; 0.5 = 12.02 mg/L, sum 24 mg/L.</li>
+<li>Why it stays flat: {{frac:R|k}} = {{frac:50 mg/hr|0.17325 hr<sup>&minus;1</sup>}} = 288.6 mg, so 288 mg matches the amount held at steady state.</li>
+</ol>
+<p class="prose">Answer: <b>24 mg/L at 2 hours and 24 mg/L at 4 hours</b>, the same as the plateau.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>No poll or practice question asks the purpose as a separate item; it is the reasoning attached to the loading-dose calculations of objective 4.</li>
+<li>As a one-sentence free response: the loading dose puts in at once the amount that would otherwise take 3 to 5 half-lives to accumulate.</li>
+<li>In class she reworked Example 8 with 388 mg: about 30 mg/L at two hours against a plateau of 24 mg/L, the "too high" case.</li>
+<li>A perturbation part asks how long a new steady state takes after renal failure; answer in half-lives of the new, longer half-life (4.32 half-lives for 95% in Practice 3).</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">No poll or practice question in the collected sources asks the purpose as a separate item.</p>
-<ul>
-<li>It appears as the reasoning attached to the calculation questions of objective 4, and as her closing prose parts of the perturbation type.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>We want the loading dose to look like the amount of drug that's in the body at steady state.</q> (09-02)</li>
+<li><q>the loading dose helps us to reach that steady state concentration, like almost immediately. you got to choose wisely on the loading dose</q> (09-02)</li>
+</ul>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>As a free-response prose answer rather than a number.</li>
-<li>Her perturbation parts take this form, for example <i>"If the patient suddenly develops partial renal failure, how long would it take for a new steady-state plasma level to be established?"</i>, answered in half-lives of the new half-life.</li>
-<li>The reasoning she wants back is one sentence: the loading dose puts into the body, at once, the amount that would otherwise take three to five half-lives to accumulate.</li>
-</ul></div>
+<p class="gsrc">Sources: 3IntravenousInfusions.pdf, second slide "IV Bolus Loading Dose and Continuous IV Infusion" and slide "Example 8"; IV-Infusions-Practice-3---Solutions.pdf, part h; transcripts 09-02 and 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m3-6">
 <h3 data-nav="Module 3, objective 6 &mdash; Determine an appropriate infusion rate to achieve a desired steady-state plasma concentration">Module 3 - Objective 6</h3>
 <div class="gbar"><span>Objective</span><b>Determine an appropriate infusion rate to achieve a desired steady-state plasma concentration</b><i>3IntravenousInfusions.pdf, slide "Example 2"</i></div>
 
-<h4>What the slides carry</h4>
-<ul>
-<li>The steady-state relation rearranged is the whole method: C<sub>ss</sub> = R/Cl = R/kV<sub>D</sub>, so R = C<sub>ss</sub>kV<sub>D</sub> &mdash; 3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State".</li>
-<li>Example 2, verbatim: <i>"How would we alter the infusion rate to achieve a steady-state concentration of 20 mg/L?"</i>, carried forward from Example 1's t&frac12; = 6 hr and V<sub>D</sub> = 30 L &mdash; 3IntravenousInfusions.pdf, slide "Example 2".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>To hit a target steady-state concentration (C<sub>ss</sub>), rearrange the steady-state equation for the infusion rate (R): R equals C<sub>ss</sub> times clearance (Cl).</li>
+<li>If only the half-life and volume are given, build clearance first from the elimination rate constant (k) and the apparent volume of distribution (V<sub>D</sub>).</li>
+<li>R is an amount per time, most often mg/hr. If the stem gives a solution concentration, convert R into mL/hr or mL/min for the pump.</li>
+<li>Raising R raises C<sub>ss</sub> in proportion and shifts the whole curve upward, but the plateau still arrives at the same time.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Her Example 2 working and answer</span><q class="para">Our rate is going to be 20 mg per liter, the steady state we are trying to achieve, times our clearance, 30 L, which gives milligrams per hour. What are we increasing it to? I hear 69.3 mg per hour.</q> (the 30 L is V<sub>D</sub>; times k it gives the clearance)<span class="when">09-02 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">What changing the rate does and does not do, said five times on purpose</span><q>changing the rate changes our steady state concentration</q>, while on the two-curve slide, <q>All we're doing is shifting that curve upward… If This is our plateau at steady state, then it occurs at the same time.</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The unit of the answer</span><q class="para">The units of R are going to be amount per time, most often milligrams per hour.</q><span class="when">09-02 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her review working of the same shape</span><q class="para">Rate is equal to steady state, 24 milligrams per liter, our desired steady state, times our clearance, which is our volume of distribution times k: 22 liters, 0.693, five hours.</q>, giving 73 mg/hr.<span class="when">09-09 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Infusion rate (R)</dt><dd>mg/hr, or mL/hr and mL/min as a pump setting.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>The target plateau; mg/L.</dd>
+<dt>Clearance (Cl)</dt><dd>L/hr; equals k &times; V<sub>D</sub>.</dd>
+<dt>Elimination rate constant (k) and volume (V<sub>D</sub>)</dt><dd>hr<sup>&minus;1</sup> and L.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">R = C<sub>ss</sub> &times; Cl = C<sub>ss</sub> &times; k &times; V<sub>D</sub></div>
+<ul class="tlist">
+<li>R in mg/hr; C<sub>ss</sub> in mg/L; Cl in L/hr; k in hr<sup>&minus;1</sup>; V<sub>D</sub> in L.</li>
+<li>When to use it: a target concentration is given and the question asks what rate to run.</li>
+<li>On the equation sheet: yes, in the form C<sub>ss</sub> = {{frac:R|Cl}}; rearrange it.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Slide "Example 2": the drug from Example 1 (t<sub>&frac12;</sub> = 6 hr, V<sub>D</sub> = 30 L). What rate gives a C<sub>ss</sub> of 20 mg/L?</p>
+<ol class="gsteps">
+<li>Rate constant: k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>&minus;1</sup>.</li>
+<li>Clearance: Cl = 0.1155 hr<sup>&minus;1</sup> &times; 30 L = 3.465 L/hr.</li>
+<li>Rate: R = 20 mg/L &times; 3.465 L/hr = 69.3 mg/hr.</li>
+<li>Check: {{frac:69.3 mg/hr|3.465 L/hr}} = 20 mg/L, up from the 14.43 mg/L that 50 mg/hr gave.</li>
+</ol>
+<p class="prose">Answer: <b>69.3 mg/hr</b>.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She gives a target C<sub>ss</sub> and two of the parameters (half-life or k, and V<sub>D</sub> or clearance) and asks what rate to recommend.</li>
+<li>Exam 1 review: 24 mg/L, half-life 5 hours, V<sub>D</sub> about 22 L, so R = 24 &times; 0.1386 &times; 22 = 73.18 mg/hr, which she gives as about 73 mg/hr.</li>
+<li>The word "recommend" means round to a number a pump could take.</li>
+<li>With a solution concentration in the stem, a parallel part asks the rate in volume: 0.35 mL/min in Practice 1, and 1.32 mL/hr from 125 mg/mL vials in Practice 2.</li>
+<li>The distractor she flags is that a different rate reaches steady state sooner. It does not, because that time depends only on the half-life.</li>
+<li>While working Example 2 aloud she called the 30 L the clearance. 30 L is V<sub>D</sub>; k &times; 30 L gives the clearance, 3.465 L/hr.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; the deck example and the review practice</b>
-<p class="prose"><b>Slide "Example 2", 3IntravenousInfusions.pdf.</b> Alter the infusion rate to reach a steady-state concentration of 20 mg/L, with t&frac12; 6 hr and V<sub>D</sub> 30 L. Her answer: 69.3 mg/hr.</p>
-<p class="prose"><b>Exam 1 review practice, RecapExam1.pdf.</b> <i>"Recommend an infusion rate to achieve a steady state concentration of 24 mg/L of an agent that has an elimination half-life of 5 hours and volume of distribution of approximately 22L."</i></p>
-<ul>
-<li>Her answer (09-09): about 73 mg/hr.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>changing the rate changes our steady state concentration</q> (09-02; she said she repeated it five times on purpose)</li>
 </ul>
-<p class="prose"><b>Daily practice, IV Infusions Practice 1 part e.</b> The same rate asked again in mL/min, from 500 mL infused over 24 hours: 0.35 mL/min.</p></div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>She gives a target concentration and two of the three parameters &mdash; half-life or k, and V<sub>D</sub> or clearance &mdash; and asks what rate to run.</li>
-<li>The answer is in mg/hr, unless the stem has supplied a solution concentration; then a parallel part asks for mL/hr or mL/min.</li>
-<li>The word is <i>recommend</i>, so the answer is rounded to a number a pump could take.</li>
-<li>The distractor she flags is the claim that a different rate reaches steady state sooner; it does not, because the time depends only on the half-life.</li>
-</ul></div>
+<p class="gsrc">Sources: 3IntravenousInfusions.pdf, slides "Drug Concentration at Steady-State" and "Example 2"; RecapExam1.pdf; IV-Infusions-Practice-1-Solutions.pdf, part e; IV-Infusions-Practice-2-Solutions.pdf, part a; transcripts 09-02 and 09-09.</p>
 </section>
 
 <section class="gobj" id="gobj-m3-7">
 <h3 data-nav="Module 3, objective 7 &mdash; Determine the plasma concentration given pharmacokinetic parameters at any time">Module 3 - Objective 7</h3>
 <div class="gbar"><span>Objective</span><b>Determine the plasma concentration given pharmacokinetic parameters at any time</b><i>3IntravenousInfusions.pdf, slides "Drug Concentration after an IV Infusion has Ended", "Example 5", "Example 6"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>During the infusion, C<sub>p</sub> = (R/Cl)(1 &minus; e<sup>&minus;kt</sup>) &mdash; 3IntravenousInfusions.pdf, first slide "Drug Concentration Prior to Reaching Steady-State".</li>
-<li>After the infusion has ended, C<sub>p</sub> = C<sub>pk</sub>e<sup>&minus;kt</sup> &mdash; 3IntravenousInfusions.pdf, slide "Drug Concentration after an IV Infusion has Ended".</li>
-<li>It is plotted as ln C<sub>p</sub> against time, falling in a straight line from the peak. The slide notes that the peak may or may not be C<sub>ss</sub>.</li>
-<li>Example 5, verbatim: <i>"What is the expected plasma concentration 12 hours following the cessation of a continuous intravenous infusion of a medicinal agent (half-life = 5 hr) that yielded a steady-state concentration of 15 mg/L?"</i></li>
-<li>Example 6, verbatim: <i>"A patient received an intravenous infusion of 150 mg over a period of 6 hours. The drug has an elimination rate constant of 0.231 hr&ndash;1 and an apparent volume of distribution of 15 L. What is the concentration of the drug in the body 3 hours after cessation of the infusion?"</i></li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>The plasma concentration (C<sub>p</sub>) follows a different equation in each phase: while the infusion runs it rises, and after it stops it falls.</li>
+<li>After cessation no more drug goes in; it is only elimination, so C<sub>p</sub> decays by first order from the concentration at the moment the infusion stopped (C<sub>peak</sub>).</li>
+<li>C<sub>peak</sub> equals the steady-state concentration (C<sub>ss</sub>) only if the infusion ran long enough to reach steady state. Otherwise, compute C<sub>peak</sub> first from the during-infusion equation.</li>
+<li>When a time is a whole number of half-lives, count halves instead of evaluating the exponential; she shows both routes.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The step that comes first after an infusion stops</span><q>you have to know the concentration when you stop that infusion, cause when you stop the infusion, then it goes back to that C is equal to C0 E minus KT that we've already talked about</q> and <q>Think of that C peak as your C0 as your starting point.</q><span class="when">09-02 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">What cessation means</span><q>Cessation means stopping of a continuous IV infusion</q>; and after it, <q class="para">There is no more drug going in. It is just drug going out; it is just elimination now. No more in, just out.</q><span class="when">09-02, 09-09 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her Example 5 route, which replaces the exponential with half-life counting</span><q>To make our math a little easier, let's change our 12 to 10.… Why did I change from 12 to 10? Because 10 is two half-lives. What happens in two half-lives?… 75% Of drug is eliminated, so 25% of drug remains in the body… 0.25 times what? 15.</q>. She does not state the product aloud; the slide's own figure for the answer is 3.75 mg/L, which is 0.25 of 15 mg/L at ten hours.<span class="when">09-02 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Her Example 6 reasoning and answer: the rate is</span><q>150 mg divided by 6 hours</q>; the half-life is 3 hours so six hours of infusion is two half-lives and the concentration at the end is 75% of steady state; then <q>we expect the concentration 3 hours after a cessation of the 6 hour infusion. To be 2.7 mg per liter.</q> Her cross-check: <q>I put 0.5 times 5.41… I got the exactly the same thing as plugging it into the full equation. Because our half-life is 3 hours, and in one half-life, we should have 50% eliminated</q><span class="when">09-02 &middot; her words, caption fillers removed</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Cessation</dt><dd>Stopping the continuous IV infusion.</dd>
+<dt>Peak concentration (C<sub>peak</sub>, C<sub>pk</sub>)</dt><dd>C<sub>p</sub> at the moment the infusion stops; it may or may not be C<sub>ss</sub>; mg/L.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>mg/L.</dd>
+<dt>Elimination rate constant (k), clearance (Cl), infusion rate (R)</dt><dd>hr<sup>&minus;1</sup>, L/hr and mg/hr.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">During the infusion: C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)</div>
+<ul class="tlist">
+<li>t is the time since the infusion started (hr). Put t = infusion length to get C<sub>peak</sub>.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">After the infusion: C<sub>p</sub> = C<sub>peak</sub> e<sup>&minus;kt</sup></div>
+<ul class="tlist">
+<li>t is the time since cessation (hr). C<sub>peak</sub> plays the part of C<sub>0</sub> in the IV bolus equation.</li>
+<li>Plotted as ln C<sub>p</sub> against time, it is a straight falling line from the peak.</li>
+<li>On the equation sheet: yes, as the first-order line C = C<sub>0</sub>e<sup>&minus;kt</sup>.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Slide "Example 6": 150 mg infused over 6 hours; k = 0.231 hr<sup>&minus;1</sup>, V<sub>D</sub> (apparent volume of distribution) = 15 L. Find C<sub>p</sub> 3 hours after cessation.</p>
+<ol class="gsteps">
+<li>Rate: R = {{frac:150 mg|6 hr}} = 25 mg/hr.</li>
+<li>Clearance and plateau: Cl = 0.231 &times; 15 L = 3.465 L/hr, so C<sub>ss</sub> = {{frac:25 mg/hr|3.465 L/hr}} = 7.215 mg/L.</li>
+<li>Half-life: {{frac:0.693|0.231 hr<sup>&minus;1</sup>}} = 3 hr, so 6 hours of infusion is two half-lives and steady state was not reached.</li>
+<li>C<sub>peak</sub> = 7.215 &times; (1 &minus; e<sup>&minus;(0.231)(6)</sup>) = 7.215 &times; 0.7499 = 5.41 mg/L, which is 75% of C<sub>ss</sub>.</li>
+<li>Decay for 3 hours, one half-life: C<sub>p</sub> = 5.41 &times; e<sup>&minus;(0.231)(3)</sup> = 5.41 &times; 0.5 = 2.71 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>2.7 mg/L</b>, her stated value.</p>
+<p class="prose">Slide "Example 5": C<sub>ss</sub> = 15 mg/L, half-life 5 hr. C<sub>p</sub> 12 hours after cessation?</p>
+<ol class="gsteps">
+<li>The infusion reached steady state, so C<sub>peak</sub> = 15 mg/L, and k = {{frac:0.693|5 hr}} = 0.1386 hr<sup>&minus;1</sup>.</li>
+<li>C<sub>p</sub> = 15 mg/L &times; e<sup>&minus;(0.1386)(12)</sup> = 15 &times; 0.1895 = 2.84 mg/L.</li>
+<li>In class she changed 12 hours to 10, exactly two half-lives, and took 0.25 &times; 15 mg/L = 3.75 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>2.84 mg/L</b> at 12 hours. The slide's 3.75 mg/L is the answer for 10 hours, while the question asks for 12 hours.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Her stems ask for the concentration "X hours after the cessation of the infusion" and state in brackets whether a loading dose was given.</li>
+<li>The key decision is the starting point: decay from C<sub>ss</sub> if the infusion ran to steady state, or from a computed end-of-infusion value if it ran for a stated shorter time.</li>
+<li>Two adjacent parts of one practice set often differ only in that respect, so read the infusion length in each.</li>
+<li>Exam 1 review: stopped after 5 hours with a 5-hour half-life, so C<sub>peak</sub> is half of 24 mg/L, 12 mg/L; 3 hours later it is 7.9 mg/L.</li>
+<li>In that review a student started from 18 mg/L and she corrected it to 12 mg/L; one half-life of infusion reaches 50% of C<sub>ss</sub>, not 75%.</li>
+<li>Practice 4 part f decays from a C<sub>ss</sub> of 10 mg/L: 8.91, 5 and 2.5 mg/L at 1, 6 and 12 hours after cessation.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; the deck examples and the review practice</b>
-<p class="prose"><b>Slides "Example 5" and "Example 6", 3IntravenousInfusions.pdf.</b> Both quoted in full above.</p>
-<ul>
-<li>Example 5 decays from a stated C<sub>ss</sub>.</li>
-<li>Example 6 decays from an end-of-infusion concentration that has to be computed first, because six hours is not long enough to reach steady state.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>Think of that C peak as your C0 as your starting point.</q> (09-02)</li>
 </ul>
-<p class="prose"><b>Exam 1 review practice, RecapExam1.pdf.</b> <i>"If the infusion were stopped 5 hours after it was started, what is the concentration of drug in the plasma 3 hours after cessation of the infusion?"</i></p>
-<ul>
-<li>Her working (09-09): five hours is one half-life, so the concentration at the end of the infusion is half of the 24 mg/L steady state, namely 12 mg/L.</li>
-<li>Then she decays that for three hours: <i>"I got 7.9 over here. 7.9 milligrams per liter."</i></li>
-<li>A student first answered 18 mg/L and she corrected it to 12.</li>
-</ul>
-<p class="prose"><b>Daily practice, IV Infusions Practice 4 part f.</b> <i>"Calculate the concentration of drug in the plasma at 1, 6 and 12 hours following the cessation of the infusion at the steady-state level of 10 mg/L"</i> &mdash; 8.91, 5 and 2.5 mg/L.</p></div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>Her signature post-infusion wording comes in four interchangeable forms.</li>
-<li>Form 1: <i>"plasma concentration 12 hours after the cessation of the infusion"</i></li>
-<li>Form 2: <i>"what is the concentration of drug in the plasma 12 hours after the cessation of the 6-hour infusion (no loading dose)?"</i></li>
-<li>Form 3: <i>"what would be the concentration of drug in the plasma 6 hours after the cessation of the infusion?"</i></li>
-<li>Form 4: <i>"what is the expected concentration of drug 4 hours after cessation of the infusion?"</i></li>
-<li>She always parenthesises whether a loading dose was given.</li>
-<li>She always distinguishes decay from C<sub>ss</sub>, when the infusion ran to steady state, from decay from an end-of-infusion concentration, when the infusion ran for a stated shorter time.</li>
-<li>Two adjacent parts of one practice set differ only in that respect.</li>
-<li>The stated duration is usually a whole number of half-lives, so the starting concentration can be got by counting rather than by exponentiating. She shows both.</li>
-</ul></div>
+<p class="gsrc">Sources: 3IntravenousInfusions.pdf, slides "Drug Concentration Prior to Reaching Steady-State", "Drug Concentration after an IV Infusion has Ended", "Example 5" and "Example 6"; RecapExam1.pdf; IV-Infusions-Practice-4-Solutions.pdf, part f; transcripts 09-02 and 09-09.</p>
 </section>
 
 <h2>Module 4 - Drug Elimination and Clearance</h2>
-<p class="prose">Five objectives, printed on 4---Clearance-and-Elimination.pdf slide 2.</p>
+<p class="prose">Five objectives, printed on slide 2 of 4---Clearance-and-Elimination.pdf and lectured on 14 September. The module explains how drug leaves the body, how the kidney handles it, how to estimate a patient's renal function, and how to split clearance between kidney and liver.</p>
 
 <section class="gobj" id="gobj-m4-1">
 <h3 data-nav="Module 4, objective 1 &mdash; Describe the main routes of drug elimination from the body &ndash; renal and hepatic">Module 4 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Describe the main routes of drug elimination from the body &ndash; renal and hepatic</b><i>4---Clearance-and-Elimination.pdf slides 3, 8, 11, 24</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Drug elimination is the irreversible removal of drug from the body by all routes of elimination &mdash; 4---Clearance-and-Elimination.pdf slide 3.</li>
-<li>Excretion is removal of intact drug.</li>
-<li>Biotransformation, or drug metabolism, is drug chemically converted in the body to a metabolite.</li>
-<li>The kidney and liver are the two major drug elimination organs in the body.</li>
-<li>Total body clearance is the sum of the two routes: Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub> &mdash; 4---Clearance-and-Elimination.pdf slide 8.</li>
-<li>Rate and extent of metabolism can rarely be measured directly &mdash; 4---Clearance-and-Elimination.pdf slide 11.</li>
-<li>By taking advantage of the additivity of clearance, hepatic clearance is readily estimated as the difference between total and renal clearance.</li>
-<li>Cl<sub>H</sub> = Cl<sub>T</sub> &minus; Cl<sub>R</sub>, equivalently Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>)Cl<sub>T</sub>.</li>
-<li>Summary: the two major routes of elimination of drug from the body are excretion and biotransformation &mdash; 4---Clearance-and-Elimination.pdf slide 24.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Elimination is the irreversible removal of drug from the body, by every route at once. Drug that moves into tissue and later comes back has only been distributed, not eliminated.</li>
+<li>There are two ways out. Excretion removes the drug intact, without changing it chemically. Biotransformation (drug metabolism) first converts the drug chemically into a metabolite.</li>
+<li>Biotransformation most often produces a compound that the body can eliminate more readily than the parent drug.</li>
+<li>The kidney and the liver are the two major elimination organs. The kidney excretes drug into the urine, and the liver biotransforms it.</li>
+<li>Each route has its own clearance, and the two add up to the total body clearance. That sum is how the two routes appear in every calculation in this module.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Elimination as the whole set</span><q>elimination refers to all the processes, all the irreversible processes or irreversible removal of drugs by all routes of elimination</q><span class="when">09-14 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Excretion, with the chemistry explicitly absent</span><q>Excretion means we're talking about removal of intact drug or metabolite. Excretion just says that we're not changing this drug at this point, we're just removing it from the body.</q><span class="when">09-14 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Biotransformation, with its usual consequence</span><q>Biotransformation definitionally is we're chemically converting that drug in the body to some metabolite. Most often, it's gonna result in a drug that is going to be eliminated from the body more readily.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The two organs</span><q>our main organs of elimination. Our kidneys and the liver</q><span class="when">09-14 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Why the hepatic route is always got by subtraction</span><q class="para">Hepatic clearance is a different story, because we do not have a direct way: we are not going to sample the liver. We calculate renal because that is straightforward, and then we subtract renal from total to give us hepatic clearance.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Elimination</dt><dd>Irreversible removal of drug from the body by all routes; it covers both excretion and biotransformation.</dd>
+<dt>Excretion</dt><dd>Removal of intact drug (or metabolite) from the body with no chemical change at that step; mainly by the kidney.</dd>
+<dt>Biotransformation (metabolism)</dt><dd>Chemical conversion of the drug in the body to a metabolite; mainly in the liver.</dd>
+<dt>Total body clearance (Cl<sub>T</sub>)</dt><dd>Clearance by all routes together, in L/hr. A Cl written with no subscript means total body clearance.</dd>
+<dt>Renal clearance (Cl<sub>R</sub>)</dt><dd>The part of total clearance done by the kidney, in L/hr.</dd>
+<dt>Hepatic clearance (Cl<sub>H</sub>)</dt><dd>The part done by the liver, also called metabolic clearance, in L/hr.</dd>
+<dt>Fraction excreted unchanged (f<sub>e</sub>)</dt><dd>The fraction of the dose recovered unchanged in the urine; it has no units.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub></div>
+<ul class="tlist">
+<li>Cl<sub>T</sub> is total body clearance, Cl<sub>R</sub> renal clearance and Cl<sub>H</sub> hepatic clearance, all in the same units (L/hr).</li>
+<li>When to use it: whenever two of the three clearances are known and the third is asked, or when separate renal and metabolic clearances are given and the total is needed.</li>
+<li>On the equation sheet: yes, page 1, right column.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl<sub>H</sub> = Cl<sub>T</sub> &minus; Cl<sub>R</sub> &nbsp; or &nbsp; Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>) &times; Cl<sub>T</sub></div>
+<ul class="tlist">
+<li>f<sub>e</sub> is the fraction excreted unchanged (no units), so 1 &minus; f<sub>e</sub> is the share of clearance that is not renal. The two forms give the same answer.</li>
+<li>When to use it: to get hepatic clearance. The rate and extent of metabolism can rarely be measured directly, and the liver is not sampled, so hepatic clearance is found by difference.</li>
+<li>On the equation sheet: yes, both forms.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">A drug has a total body clearance of 1.3 L/hr, and 0.6 of the dose is excreted unchanged in the urine. Find its hepatic clearance using the fraction excreted.</p>
+<ol class="gsteps">
+<li>Find the share of clearance that is not renal: 1 &minus; f<sub>e</sub> = 1 &minus; 0.6 = 0.4</li>
+<li>Apply that share to total clearance: Cl<sub>H</sub> = (0.4)(1.3 L/hr) = 0.52 L/hr</li>
+<li>Check by subtraction: Cl<sub>R</sub> = (0.6)(1.3 L/hr) = 0.78 L/hr, and 1.3 L/hr &minus; 0.78 L/hr = 0.52 L/hr</li>
+</ol>
+<p class="prose">Hepatic clearance = <b>0.52 L/hr</b>.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>As vocabulary, the way Module 1 terms are asked: a definition in the stem and four related words as options, such as elimination, excretion, biotransformation and distribution.</li>
+<li>The deciding features are whether removal is irreversible (distribution is not) and whether the drug is chemically changed (biotransformation) or removed intact (excretion).</li>
+<li>A usual trap swaps the organs, putting excretion in the liver and biotransformation in the kidney.</li>
+<li>Numerically, the two routes return as the two terms of the additive clearance question in objective 5, where hepatic clearance is whatever is left after renal clearance is subtracted.</li>
+<li>Her 09-14 attendance poll was a definition question on clearance, the volume of fluid removed of drug per unit time; only its debrief was recorded.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">The attendance poll of 09-14 was definitional and on clearance.</p>
-<ul>
-<li>Only the debrief survives in the captions, so its stem and options cannot be given.</li>
-<li>No other poll or practice question in the collected sources asks the routes as a separate item.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>The routes are asked as the vocabulary questions of Module 1 are asked: a definition as the stem and four related words as options.</li>
-<li>The discrimination is how much of the pathway each word covers, and whether the drug is chemically changed.</li>
-<li>Numerically, the two routes are asked as the two terms of the additive clearance question of objective 5, where the hepatic term is whatever is left after the renal term is subtracted.</li>
-</ul></div>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 3, 8, 11, 24; transcript 09-14; drill items m4-rou-1, m4-rou-2, m4-rou-3, m4-n-clh2.</p>
 </section>
 
 <section class="gobj" id="gobj-m4-2">
 <h3 data-nav="Module 4, objective 2 &mdash; Define glomerular filtration, tubular secretion, and tubular reabsorption">Module 4 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Define glomerular filtration, tubular secretion, and tubular reabsorption</b><i>4---Clearance-and-Elimination.pdf slides 12, 13, 18, 19, 24</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Appearance of drug in the urine is the net result of filtration, secretion, and reabsorption &mdash; 4---Clearance-and-Elimination.pdf slide 12.</li>
-<li>The first two processes add drug to the lumen in the proximal part of the nephron.</li>
-<li>The last involves the movement of drug from the lumen back into the bloodstream.</li>
-<li>The three mechanisms of renal excretion are on 4---Clearance-and-Elimination.pdf slide 13.</li>
-<li><b>Glomerular filtration</b> &mdash; passive diffusion of drug across the glomerulus, average 120 mL/min.</li>
-<li><b>Active tubular secretion</b> &mdash; active secretion of some drugs from the blood into the urine.</li>
-<li><b>Tubular reabsorption</b> &mdash; reabsorption of some drugs from the urine back into the blood.</li>
-<li>Secretion is inferred when the rate of excretion exceeds the rate of filtration &mdash; 4---Clearance-and-Elimination.pdf slide 18.</li>
-<li>Stated differently, secretion is apparent when renal clearance is greater than the glomerular filtration rate.</li>
-<li>Reabsorption occurs if the renal clearance is less than the calculated clearance by filtration &mdash; 4---Clearance-and-Elimination.pdf slide 19.</li>
-<li>Summary: the processes by which a drug is excreted via the kidneys include glomerular filtration, tubular secretion, and tubular reabsorption &mdash; 4---Clearance-and-Elimination.pdf slide 24.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>The amount of drug that ends up in the urine is the net result of three processes in the kidney's nephron: filtration, secretion and reabsorption.</li>
+<li>Glomerular filtration: drug passes from the blood across the glomerulus into the tubule by passive diffusion, which needs no energy. In normal kidneys it averages 120 mL/min.</li>
+<li>Active tubular secretion: a transporter uses energy to move drug from the blood into the urine, so it removes drug on top of what filtration removes.</li>
+<li>Tubular reabsorption: some drug moves from the urine in the tubule back into the blood, so it takes away from what was removed.</li>
+<li>Because of this, a drug's renal clearance (Cl<sub>R</sub>) compared with 120 mL/min tells you which processes are at work.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Filtration as movement with no work done</span><q>glomerular filtration is just passive diffusion Drug is just easing on down that concentration gradient and sliding on out of the body. Passive diffusion, no big deal. 120 mL per minute if things are working like they should</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">What "active" adds</span><q>it means it requires energy… The drug is moving because we've got something that's pulling that drug out of the body, some transporter, some mechanism, other than just passive diffusion to get the drug out of the body.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The inference worked in the direction she will ask it</span><q>if it's, let's say 350 mL per minute. That says that we've got the filtration, but we've also got some transporters, something else to help get this drug out of the body faster than 120 mL per minute.</q> And the other direction: <q class="para">If it is reabsorbed, it is going back in: 120 minus the drug that is going back up. Then we would expect our renal clearance to be less than 120 mL per minute.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The tolerance around 120, which no slide states</span><q>I'm saying 120. If it's 119, 121 let's call that filtration. If it's 250, then let's assume that we've got some active secretion going on.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">She asks students to reason to the rule before showing the slide that states it</span><q>You can skip ahead if you want to, but let's think about this before we go to the next slide.</q><span class="when">09-14 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Glomerular filtration rate (GFR)</dt><dd>The rate at which the glomerulus filters fluid from the blood; average 120 mL/min.</dd>
+<dt>Tubular lumen</dt><dd>The fluid space inside the kidney tubule. Filtration and secretion add drug to it; reabsorption moves drug from it back to the bloodstream.</dd>
+<dt>Passive diffusion</dt><dd>Movement of drug down its concentration gradient with no energy used; this is how filtration works.</dd>
+<dt>Active (process)</dt><dd>One that requires energy and a transporter; secretion is active.</dd>
+<dt>Renal clearance (Cl<sub>R</sub>)</dt><dd>The volume removed of drug per unit time through the kidney; in mL/min when compared with GFR.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">Cl<sub>R</sub> = filtration + secretion &minus; reabsorption</div>
+<ul class="tlist">
+<li>Each term is that process's contribution to renal clearance, in mL/min. Filtration and secretion add drug to the urine; reabsorption subtracts it.</li>
+<li>Above 120 mL/min: secretion is adding to filtration. Below 120 mL/min: some drug is being reabsorbed. About 120 mL/min: filtration alone.</li>
+<li>When to use it: whenever a stem gives a renal clearance and asks for the mechanism. Convert the clearance to mL/min first if it is given in L/hr.</li>
+<li>On the equation sheet: no. It is a reasoning rule, and the sheet carries no line for the three processes.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">A drug has a total body clearance of 52.95 mL/min per 70 kg and a renal clearance of 34.72 mL/min per 70 kg. What is the probable mechanism of its renal clearance?</p>
+<ol class="gsteps">
+<li>Pick the number the question is about. The mechanism is read from renal clearance only, so set total clearance aside: Cl<sub>R</sub> = 34.72 mL/min</li>
+<li>Check the units match the reference: both are in mL/min, so no conversion is needed.</li>
+<li>Compare with filtration alone: 34.72 mL/min &lt; 120 mL/min</li>
+<li>The kidney removes less drug than filtration alone would, so some filtered drug must be returning to the blood.</li>
+</ol>
+<p class="prose">Mechanism: <b>glomerular filtration with tubular reabsorption</b>. Her own example in the other direction: a renal clearance of 350 mL/min means filtration plus active secretion.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>The stem gives a renal clearance and the answer is the process, with 120 mL/min as the reference on both sides. The item tests direction, not arithmetic.</li>
+<li>She allows a margin: a value within a unit or two of 120 (119 or 121) counts as filtration, while 250 or her 350 mL/min counts as secretion.</li>
+<li>Usual trap: reading a value below 120 as reduced filtration. Within this rule, a value below the filtration rate points to drug returning to the blood.</li>
+<li>Second trap: comparing a renal clearance in L/hr with 120 mL/min without converting.</li>
+<li>It also turns up as the last part of a longer problem: her Module 6 practice set ends by asking the probable mechanism of renal clearance from a renal clearance of 34.72 mL/min per 70 kg.</li>
+<li>In class she has students reason out the above-120 and below-120 conclusions before she shows the slides that state them.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">No poll or written practice question in the collected sources asks this objective.</p>
-<ul>
-<li>Her own question on it is the one she puts to the room before slides 18 and 19: given a renal clearance number, which of the three processes is going on.</li>
-<li>The numbers she uses: 350 mL/min for secretion, a value below 120 mL/min for reabsorption, and 119 or 121 mL/min for filtration alone.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li>The margin she allows around 120 mL/min, stated as a rule: <q>I'm saying 120. If it's 119, 121 let's call that filtration. If it's 250, then let's assume that we've got some active secretion going on.</q> (09-14)</li>
+</ul>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>A renal clearance is supplied and the mechanism is the answer, with 120 mL/min as the reference point on both sides.</li>
-<li>She keeps the inference loose on purpose: a value within a unit or two of 120 counts as filtration, and a value like 250 or 350 counts as secretion.</li>
-<li>The item is the direction, not the arithmetic.</li>
-</ul></div>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 12, 13, 18, 19, 24; transcript 09-14; drill items m4-rm-5, m4-rm-6, m6-p1i (Multiple-IV-Bolus-Practice-1 question 1i).</p>
 </section>
 
 <section class="gobj" id="gobj-m4-3">
 <h3 data-nav="Module 4, objective 3 &mdash; Calculate creatinine clearance and discuss significance">Module 4 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Calculate creatinine clearance and discuss significance</b><i>4---Clearance-and-Elimination.pdf slides 14&ndash;17, 25</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Glomerular filtration rate (GFR) is measured by using a drug that is eliminated primarily by filtration only, neither reabsorbed nor secreted &mdash; 4---Clearance-and-Elimination.pdf slide 14.</li>
-<li>Creatinine and inulin are used clinically to measure GFR, even though creatinine is also secreted.</li>
-<li>Creatinine clearance is very commonly used as an estimation of GFR.</li>
-<li>The most common measure of renal clearance is creatinine clearance, calculated by the Cockcroft-Gault equation, with 120&ndash;130 mL/min considered normal &mdash; 4---Clearance-and-Elimination.pdf slide 15.</li>
-<li>CrCl = (140 &minus; age)(IBW) / (72 &times; S<sub>Cr</sub>), multiplied by 0.85 if female.</li>
-<li>The inputs: age in years; IBW is ideal body weight in kg, with male IBW = 50 + 2.3 (inches over 5 ft) and female IBW = 45.5 + 2.3 (inches over 5 ft); S<sub>Cr</sub> is serum creatinine in mg/dL &mdash; 4---Clearance-and-Elimination.pdf slide 16.</li>
-<li>The worked example, verbatim: <i>"Estimate (using the ideal body weight) the CrCl of a 45-year-old female who weighs 61 kg, S<sub>Cr</sub> =1.1 mg/dL, and is 165 cm tall."</i> &mdash; 4---Clearance-and-Elimination.pdf slide 17.</li>
-<li>Summary: creatinine clearance is one of the most common methods of estimating GFR &mdash; 4---Clearance-and-Elimination.pdf slide 25.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>The glomerular filtration rate (GFR) tells you how well a patient's kidneys are working. It is measured with a substance eliminated primarily by filtration only, one that is neither reabsorbed nor secreted.</li>
+<li>Inulin is almost completely filtered, so it is the better marker. It is not native to the body, though: it has to be given, and the testing is a more involved process.</li>
+<li>Creatinine comes from the breakdown of muscle and is already in the blood, so creatinine clearance (CrCl) is the common clinical estimate of GFR. Creatinine is also secreted, which is why CrCl estimates GFR rather than measuring it.</li>
+<li>CrCl is calculated with the Cockcroft-Gault equation, and 120&ndash;130 mL/min is considered normal.</li>
+<li>A low CrCl means reduced renal function, so a drug eliminated by the kidney is excreted more slowly and may accumulate. Depending on the drug, its dose may need adjusting.</li>
+<li>CrCl describes the patient's kidneys, not a particular drug. A drug's renal clearance, worked out from f<sub>e</sub> in objective 5, is a different number.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Both equations are outside the equation sheet</span><q>this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one</q> and <q>the ideal body weight, again, you need to know this one.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">What she will not ask</span><q>By simple, that means I'm not gonna ask you to think about whether we need to use the adjusted or the actual or ideal body weight, whether our patient is 4 ft 2, whether our patient is an amputee. All of our patients are going to be 5 ft tall. all, and we're just gonna use ideal body weight.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The required units, named as an error</span><q>I also want you to recognize that the units of creatinine clearance should be in milliliters per minute So don't give me kilograms per milligram per deciliter. Milliliters per minute.</q>, with the admission that the algebra does not produce them: <q>if you're like me, I like for the units to cross off. The units don't cross off.</q> Slide and speech differ here: the printed formula yields kg divided by mg/dL, and an exam written from this lecture would key mL/min regardless.<span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The conversion she expects</span><q>You should also know how to convert inches to centimeters and back and forth.</q> and, in the worked example, <q>1 inch is equal to 2.54 centimeters… I am getting 64.96 inches. let's call that 65 inches.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">How to read a decimal height</span><q class="para">64.5 is 64.5 inches tall. It is not 64 and then another 5 inches; people do different things with that.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">What the number is for</span><q>this is a GFR estimator. what are we estimating here? The patient's renal function</q> and <q>yes, clearance is a volume per unit time, but we are specifically going to compare to 120 mL per minute to see where that individual patient is.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">The confusion she flags by name</span><q class="para">Things get a little blurry when we are talking about renal clearance and then I ask you to calculate creatinine clearance. I want you to think about what I am asking you each time.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Creatinine against inulin</span><q>creatinine comes from the breakdown of muscle</q> <q class="para">Inulin is not just hanging out in our bodies. Inulin is almost completely filtered, so it is a better marker than creatinine. But inulin you have to add to somebody&rsquo;s body, they sit down and take tests, and it is a whole more complicated process.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The 0.85 factor's assumption, and its limits</span><q>The assumption is that women are smaller than men, less muscular than men.</q> and <q>for little old ladies and guys that lift a lot of weight, that serum creatinine value might not truly be indicative of who and what they are</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Serum creatinine units, asked and answered twice in the same lecture</span><q>serum creatinine is gonna be presented as milligrams per deciliter.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Glomerular filtration rate (GFR)</dt><dd>The rate of filtration by the kidneys; average 120 mL/min.</dd>
+<dt>Creatinine clearance (CrCl)</dt><dd>An estimate of GFR, and so of the patient's renal function; reported in mL/min.</dd>
+<dt>Serum creatinine (S<sub>Cr</sub>)</dt><dd>The creatinine concentration in the blood, given in mg/dL.</dd>
+<dt>Ideal body weight (IBW)</dt><dd>A weight in kg calculated from sex and height; the weight used in Cockcroft-Gault in this course.</dd>
+<dt>Inulin</dt><dd>A GFR marker that is almost completely filtered but must be administered.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">CrCl = {{frac:(140 &minus; age) &times; IBW|72 &times; S<sub>Cr</sub>}} &nbsp; (&times; 0.85 if female)</div>
+<ul class="tlist">
+<li>age in years; IBW is ideal body weight in kg; S<sub>Cr</sub> is serum creatinine in mg/dL; the result is reported in mL/min.</li>
+<li>A higher age makes (140 &minus; age) smaller, so an older patient gets a lower estimate. A higher S<sub>Cr</sub> sits in the bottom of the fraction, so it also lowers the estimate.</li>
+<li>The 0.85 factor rests on the assumption that women are smaller and less muscular than men.</li>
+<li>Serum creatinine may not reflect renal function well in people with unusually low or unusually high muscle mass.</li>
+<li>Units: the algebra gives kg divided by mg/dL, and the units do not cancel. She still requires the answer in mL/min.</li>
+<li>When to use it: to estimate a patient's renal function from age, sex, height and serum creatinine.</li>
+<li>On the equation sheet: no. She said to memorize it.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">IBW (male) = 50 + 2.3 &times; (inches over 5 ft)</div>
+<div class="geqline">IBW (female) = 45.5 + 2.3 &times; (inches over 5 ft)</div>
+<ul class="tlist">
+<li>IBW is in kg. "Inches over 5 ft" is the height in inches minus 60.</li>
+<li>When to use it: every time you need the IBW for Cockcroft-Gault. In this course every patient is 5 ft or taller and IBW is always the weight used, so there is no actual-or-adjusted weight decision.</li>
+<li>On the equation sheet: no. She said to memorize it.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">height in inches = {{frac:height in cm|2.54}}</div>
+<ul class="tlist">
+<li>1 inch = 2.54 cm. A decimal height is read as written: 64.5 inches is 64.5 inches, not 64 inches plus another 5.</li>
+<li>When to use it: when the height is given in centimetres. She expects you to convert in both directions.</li>
+<li>On the equation sheet: no.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Estimate (using the ideal body weight) the CrCl of a 45-year-old female who weighs 61 kg, S<sub>Cr</sub> = 1.1 mg/dL, and is 165 cm tall.</p>
+<ol class="gsteps">
+<li>Convert the height to inches: {{frac:165 cm|2.54}} = 64.96 inches, which she rounds to 65 inches</li>
+<li>Find the inches over 5 ft (60 inches): 65 &minus; 60 = 5 inches</li>
+<li>Use the female IBW: IBW = 45.5 + 2.3 &times; 5 = 45.5 + 11.5 = 57 kg. The 61 kg actual weight is not used.</li>
+<li>Work the top of the fraction: (140 &minus; 45) &times; 57 = 95 &times; 57 = 5415</li>
+<li>Work the bottom: 72 &times; 1.1 = 79.2</li>
+<li>Divide: {{frac:5415|79.2}} = 68.37</li>
+<li>Apply the female factor: 68.37 &times; 0.85 = 58.1 mL/min</li>
+</ol>
+<p class="prose">CrCl = <b>58.1 mL/min</b> (she called it "58-ish"). That is below the normal 120&ndash;130 mL/min, so her renal function is reduced, and depending on the drug the dose may need adjusting.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>A one-patient vignette giving age, sex, height, actual body weight and serum creatinine, with the answer in mL/min.</li>
+<li>The height usually arrives in centimetres, so the conversion is part of the question. The actual weight is there to be left alone.</li>
+<li>Sex decides two things: which IBW constant is used (50 or 45.5) and whether the 0.85 factor applies.</li>
+<li>When she worked this example in class, students reported 104 and 54 mL/min; she said 54 meant something had been done wrong.</li>
+<li>A second part asks what the number means, read against 120&ndash;130 mL/min. For example, a CrCl of 30 mL/min means a renally eliminated drug will be excreted more slowly and may accumulate.</li>
+<li>Trap she names herself: confusing a drug's renal clearance with the patient's creatinine clearance. Read what each question is asking.</li>
+<li>She also asks which relationships must come from memory: Cockcroft-Gault and the IBW formulas. She said the same calculation appears on the benchmark.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question &mdash; worked example slide, 4---Clearance-and-Elimination.pdf slide 17</b>
-<p class="prose">The stem is quoted in full above.</p>
-<ul>
-<li>Her working (09-14): 165 cm converts to 64.96 inches, called 65 inches, which is 5 inches over 5 ft.</li>
-<li>Female IBW = 45.5 + 2.3 &times; 5 = 57 kg.</li>
-<li>Then: <i>"The patient is 45. 5 by 72. by 1.1, and don't forget to multiply this whole thing by 0.85 because she's female. OK. So I'm getting 58-ish milliliters per minute"</i>.</li>
-<li>The 61 kg actual weight is given in the stem and deliberately unused.</li>
-<li>Her interpretation: <i>"that says that she's got maybe something going on. So we, depending on her situation, she might, or and depending on the drug, it might or might not need to be adjusted to accommodate for her renal function."</i></li>
-<li>Her correction to two wrong answers in the room: <i>"You got 104. You got 54. If you got 54, you did something wrong."</i></li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li>Why you must memorize it: <q>this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one</q> (09-14)</li>
+<li>The units she will mark: <q>I also want you to recognize that the units of creatinine clearance should be in milliliters per minute So don't give me kilograms per milligram per deciliter. Milliliters per minute.</q> (09-14)</li>
+</ul>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>A one-patient vignette with age, sex, height, an actual body weight and a serum creatinine.</li>
-<li>The height arrives in centimetres, so the conversion is part of the question. The actual weight is there to be left alone.</li>
-<li>Every patient is 5 ft tall or taller, so the ideal body weight formula always applies without adjustment.</li>
-<li>The sex decides both which ideal body weight constant is used and whether the 0.85 factor is applied.</li>
-<li>The answer is in mL/min and is then interpreted against 120&ndash;130 mL/min, so a second part asks what the number says about the patient's renal function.</li>
-</ul></div>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 14, 15, 16, 17, 25; transcript 09-14; drill items m4-cr-1, m4-cr-2, m4-cr-4, m4-cr-5, m4-cr-6, m4-n-inches, m4-n-ibwf, m4-n-crcl; reference.js (equations not on the sheet); tell.js (renal against creatinine clearance).</p>
 </section>
 
 <section class="gobj" id="gobj-m4-4">
 <h3 data-nav="Module 4, objective 4 &mdash; Discuss the effect of degree of ionization on the renal excretion of drugs">Module 4 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Discuss the effect of degree of ionization on the renal excretion of drugs</b><i>4---Clearance-and-Elimination.pdf slides 20, 25</i></div>
 
-<div class="note"><b>The lecture did not finish this objective.</b> The 09-14 recording reaches slide 20, she poses two questions on it &mdash; <i>"what impact does pH have on filtration of drugs?"</i> and <i>"What impact does pH have on our active secretion?"</i> &mdash; and the recording ends mid-discussion at <i>"Oh, it's just passing."</i> No answer to either question is captured, and no worked example, poll or practice problem on urine pH or degree of ionization exists in any of the collected sources. What follows is what the slides carry and nothing more.</div>
-
-<h4>What the slides carry</h4>
-<ul>
-<li>Reabsorption of weak acids and weak bases is influenced by the pH of the fluid in the renal tubule and the pK<sub>a</sub> of the drug &mdash; 4---Clearance-and-Elimination.pdf slide 20.</li>
-<li>The slide prints two forms of the same relation, one for each drug class &mdash; 4---Clearance-and-Elimination.pdf slide 20.</li>
-<li>For weak acids, pH = pK<sub>a</sub> + log(ionized / nonionized); for weak bases, pH = pK<sub>a</sub> + log(nonionized / ionized).</li>
-<li>The pK<sub>a</sub> ranges given: weak acids, pK<sub>a</sub> values 3 to 8; weak bases, pK<sub>a</sub> values 7.5 to 10.5 &mdash; 4---Clearance-and-Elimination.pdf slide 20.</li>
-<li>Summary: the extent of drug reabsorption of weak acids and weak bases is influenced by the pH of the urine and the degree of ionization of the drug &mdash; 4---Clearance-and-Elimination.pdf slide 25.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>After drug is filtered into the tubule, some of it can cross back into the blood (tubular reabsorption). For weak acids and weak bases, how much crosses back depends on the pH of the urine and on the drug's pK<sub>a</sub>.</li>
+<li>A weak acid or weak base exists in two forms at once: ionized and nonionized. Only the nonionized form crosses membranes, so only that form is reabsorbed.</li>
+<li>The urine pH, compared with the drug's pK<sub>a</sub>, sets how the drug splits between the two forms. This split is the degree of ionization.</li>
+<li>A weak acid is more ionized in alkaline urine; a weak base is more ionized in acidic urine.</li>
+<li>More ionized drug stays in the tubule, so less is reabsorbed and renal clearance rises. Filtration itself is passive and does not depend on urine pH.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The two questions she put to the room, which are the only spoken content on this objective</span><q>what impact does pH have on filtration of drugs?</q> and <q>What impact does pH have on our active secretion?</q>. Neither is answered before the recording ends.<span class="when">09-14 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The surrounding fact the slide's process depends on, from the same lecture: reabsorption is</span><q class="para">Going back in: then we would expect our renal clearance to be less than 120 mL per minute.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Ionized form</dt><dd>The form that does not cross membranes, so it stays in the urine.</dd>
+<dt>Nonionized form</dt><dd>The form that crosses membranes and can be reabsorbed.</dd>
+<dt>Degree of ionization</dt><dd>How the drug is split between the ionized and nonionized forms at a given pH.</dd>
+<dt>pK<sub>a</sub></dt><dd>A property of the drug that, together with the pH, fixes its degree of ionization. Weak acids have pK<sub>a</sub> values of 3 to 8; weak bases, 7.5 to 10.5.</dd>
+<dt>Urine pH</dt><dd>The pH of the fluid in the renal tubule.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">Weak acid: &nbsp; pH = pK<sub>a</sub> + log {{frac:ionized|nonionized}}</div>
+<div class="geqline">Weak base: &nbsp; pH = pK<sub>a</sub> + log {{frac:nonionized|ionized}}</div>
+<ul class="tlist">
+<li>pH is the pH of the tubular fluid; pK<sub>a</sub> is the drug's; "ionized" and "nonionized" are the amounts of drug in each form, so their ratio has no units.</li>
+<li>The two forms differ only in which way up the ratio is written: ionized on top for a weak acid, nonionized on top for a weak base.</li>
+<li>When to use it: to work out the degree of ionization at the tubular pH, and from it whether reabsorption will be high or low.</li>
+<li>The pK<sub>a</sub> ranges overlap between 7.5 and 8, so a pK<sub>a</sub> alone does not always settle whether the drug is treated as an acid or a base.</li>
+<li>On the equation sheet: no. Neither form is among the lines the sheet carries.</li>
+</ul>
+</div>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>The 09-14 recording ends while she is introducing this slide, so there is no spoken answer, worked example, poll or practice problem on it in any source.</li>
+<li>She posed two open questions to the room: what effect pH has on filtration, and what effect it has on active secretion. Neither was answered before the recording ended.</li>
+<li>The objective is printed on both the objectives slide and the summary slide, so it can still be examined; the format is unknown.</li>
+<li>The drill asks it as recall: the two factors that govern reabsorption (urine pH and the drug's pK<sub>a</sub>). Trap options swap in plasma pH or the filtration rate.</li>
+<li>The drill also asks the pK<sub>a</sub> ranges. The usual trap swaps them, putting weak bases at 3 to 8.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">None exists in the collected sources, beyond the two unanswered questions quoted above.</p></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>There is no evidence in the sources for how she sets this one. The two questions she posed are open prose questions about the effect of pH on a named renal process, which is the only form observed.</li>
-</ul></div>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slide 20 (PDF page 22) and slide 25; transcript 09-14 (recording ends on this slide); drill items m4-io-1, m4-io-2.</p>
 </section>
 
 <section class="gobj" id="gobj-m4-5">
 <h3 data-nav="Module 4, objective 5 &mdash; Calculate total, renal and hepatic clearance">Module 4 - Objective 5</h3>
 <div class="gbar"><span>Objective</span><b>Calculate total, renal and hepatic clearance</b><i>4---Clearance-and-Elimination.pdf slides 4&ndash;11, 21&ndash;23, 25</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Clearance is the process of drug elimination from the body or from a single organ without identifying the individual processes involved &mdash; 4---Clearance-and-Elimination.pdf slide 4.</li>
-<li>It is the volume of fluid removed of drug from the body per unit time.</li>
-<li>Clearance can be defined as the proportionality factor that relates rate of drug elimination to the plasma drug concentration &mdash; 4---Clearance-and-Elimination.pdf slide 5.</li>
-<li>It may also be described as the loss of drug across an organ of elimination: rate of elimination = Cl &times; C<sub>p</sub>.</li>
-<li>The worked example, verbatim: <i>"Penicillin has a Cl<sub>T</sub> of 15 mL/min. What is the elimination rate of penicillin when the plasma drug concentration is 5 mcg/mL?"</i> &mdash; 4---Clearance-and-Elimination.pdf slide 6.</li>
-<li>Clearance is directly related to the dose administered and to the overall systemic exposure achieved, through the dose and the AUC, with the bioavailability factor in the numerator &mdash; 4---Clearance-and-Elimination.pdf slide 7.</li>
-<li>Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub> &mdash; 4---Clearance-and-Elimination.pdf slide 8.</li>
-<li>Renal clearance is the volume that is removed of drug per unit of time through the kidney, and can be determined from the fraction excreted unchanged and total clearance: Cl<sub>R</sub> = f<sub>e</sub>Cl<sub>T</sub> &mdash; 4---Clearance-and-Elimination.pdf slide 9.</li>
-<li>The fraction excreted and renal clearance are written out with the cumulative urinary amount &mdash; 4---Clearance-and-Elimination.pdf slide 10.</li>
-<li>f<sub>e</sub> comes from D<sub>u</sub> over the dose, k<sub>e</sub> = f<sub>e</sub>k, and renal clearance is the same fraction applied to total clearance.</li>
-<li>Hepatic clearance is estimated by difference: Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>)Cl<sub>T</sub> and Cl<sub>H</sub> = Cl<sub>T</sub> &minus; Cl<sub>R</sub> &mdash; 4---Clearance-and-Elimination.pdf slide 11.</li>
-<li>Clearance, elimination half-life and volume of distribution combined: Cl<sub>T</sub> = kV<sub>D</sub> and t&frac12; = 0.693/k give t&frac12; = 0.693V<sub>D</sub>/Cl<sub>T</sub> &mdash; 4---Clearance-and-Elimination.pdf slide 21.</li>
-<li>Slide 22, verbatim: <i>"Five hundred mg of a drug was administered by rapid IV injection. The V<sub>D</sub> is 15 L and the elimination half-life is 8 hours. Urine samples were collected for 48 hours and 300 mg of unchanged drug was recovered. What fraction of the dose is excreted unchanged in the urine? Calculate k, k<sub>e</sub>, Cl<sub>T</sub>, Cl<sub>R</sub> and Cl<sub>H</sub>."</i></li>
-<li>She moved this worked example forward in the deck.</li>
-<li>Second worked example, slide 23: <i>"A new antibiotic is actively secreted by the kidney; V<sub>D</sub> is 25 L in the normal adult. The clearance of this drug is 750 mL/min. What is the usual t&frac12; for this drug? What would be the new t&frac12; for this drug in an adult with partial renal failure whose clearance of the antibiotic was 150 mL/min?"</i></li>
-<li>Summary: clearance is a constant for first-order processes and is directly related to dose and overall exposure &mdash; 4---Clearance-and-Elimination.pdf slides 24 and 25.</li>
-<li>Provided with relevant pharmacokinetic parameters, one can readily calculate total, renal and hepatic clearance.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Clearance (Cl) is the volume of fluid cleared of drug per unit time, so its units are a volume per time, such as L/hr or mL/min. It can describe the whole body or one organ without naming the individual processes.</li>
+<li>For a first-order drug, clearance is a constant. The rate of elimination, an amount per time, equals clearance times the plasma concentration, so the rate falls as the concentration falls while clearance stays the same.</li>
+<li>Total clearance comes from the elimination rate constant and the volume of distribution, or from the dose and the area under the curve.</li>
+<li>Collecting urine gives the fraction of the dose excreted unchanged (f<sub>e</sub>). Renal clearance is that fraction of total clearance, and hepatic clearance is the rest.</li>
+<li>Clearance, half-life and volume are linked: if the volume stays the same and clearance falls, as in renal failure, the half-life gets longer.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">What an unsubscripted Cl means</span><q class="para">If there is no subscript, you should assume we are talking about total body clearance: the result of all the different clearances, the ways that the drug is leaving the body.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The cumulative urinary amount</span><q>that DU infinity is the cumulative amount of drug that appears in the urine following dosing</q> and the fraction, <q>that FE says how much drug appeared in the urine divided by the dose of drug that was administered</q><span class="when">09-14 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The two F's, kept apart by hand</span><q>lowercase fe is our fraction excreted, capital F is our bioavailability factor</q> and <q>for our IV administered doses, that capital F is assumed to be 1</q><span class="when">09-14 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The units of the fraction, asked as a question</span><q>What are the units of FE? No units</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">Her penicillin working</span><q class="para">Our rate of elimination is our clearance times the concentration of drug in the plasma: 15 mL per minute times 5 mcg per mL, so 75 mcg per minute.</q><span class="when">09-14 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her slide 22 working, part by part: f<sub>e</sub> = 300 mg over the 500 mg dose; k</span><q>0.0866</q> from 0.693 divided by 8; k<sub>e</sub> <q class="para">We can take our fe, which we said was 0.6, times k: I am getting 0.052.</q>; total clearance <q class="para">15 L times k: you get 1.3 L per hour, something like that.</q>; renal clearance <q class="para">0.6, or fe, times 1.3 L per hour: I am getting 0.78 L per hour.</q>; hepatic clearance set up as <q class="para">Total, which was 1.3, minus 0.78.</q>, the difference not spoken aloud.<span class="when">09-14 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The third reason she likes clearance, added to the two from Module 2</span><q>It serves as a proportionality factor between our rate of elimination… as well as this concentration of drug in the plasma.</q><span class="when">09-14 &middot; her words, caption fillers removed</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Total body clearance (Cl<sub>T</sub>, or Cl with no subscript)</dt><dd>Clearance by all routes, in L/hr.</dd>
+<dt>Rate of elimination</dt><dd>The amount of drug removed per unit time, such as mcg/min or mg/hr.</dd>
+<dt>Plasma concentration (C<sub>p</sub>)</dt><dd>Drug concentration in plasma, in mg/L or mcg/mL; 1 mg/L equals 1 mcg/mL.</dd>
+<dt>Elimination rate constant (k)</dt><dd>The overall first-order rate constant for all routes, in hr<sup>&minus;1</sup>.</dd>
+<dt>Excretion rate constant (k<sub>e</sub>)</dt><dd>The part of k due to urinary excretion of unchanged drug, in hr<sup>&minus;1</sup>.</dd>
+<dt>Volume of distribution (V<sub>D</sub>)</dt><dd>The apparent volume the drug distributes into, in L.</dd>
+<dt>Half-life (t&frac12;)</dt><dd>The time for the concentration to fall by half, in hr or min.</dd>
+<dt>Dose (D<sub>0</sub>) and bioavailability factor (F)</dt><dd>D<sub>0</sub> in mg; F has no units and is taken as 1 for an IV dose.</dd>
+<dt>Area under the curve (AUC)</dt><dd>Area under the plasma concentration&ndash;time curve, in mg&middot;hr/L.</dd>
+<dt>Cumulative urinary amount (D<sub>u</sub><sup>&infin;</sup>)</dt><dd>Total unchanged drug that appears in the urine after dosing, in mg.</dd>
+<dt>Fraction excreted unchanged (f<sub>e</sub>)</dt><dd>D<sub>u</sub><sup>&infin;</sup> as a fraction of the dose; no units.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">Rate of elimination = Cl &times; C<sub>p</sub></div>
+<ul class="tlist">
+<li>Cl in volume per time; C<sub>p</sub> in amount per volume; the volumes cancel and the rate comes out as amount per time.</li>
+<li>When to use it: the elimination rate at a stated concentration. Her example: (15 mL/min)(5 mcg/mL) = 75 mcg/min.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl<sub>T</sub> = {{frac:F &times; D<sub>0</sub>|AUC}}</div>
+<ul class="tlist">
+<li>F has no units (1 for IV); D<sub>0</sub> in mg; AUC in mg&middot;hr/L; Cl<sub>T</sub> comes out in L/hr.</li>
+<li>When to use it: total clearance from a dose and an AUC, or a dose from a clearance and an AUC.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl<sub>T</sub> = k &times; V<sub>D</sub></div>
+<ul class="tlist">
+<li>k in hr<sup>&minus;1</sup>, V<sub>D</sub> in L, so Cl<sub>T</sub> is in L/hr.</li>
+<li>When to use it: total clearance when the half-life (or k) and the volume are given.</li>
+<li>On the equation sheet: no. She said to memorize it.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">f<sub>e</sub> = {{frac:D<sub>u</sub><sup>&infin;</sup>|F &times; D<sub>0</sub>}} = {{frac:k<sub>e</sub>|k}}, &nbsp; so &nbsp; k<sub>e</sub> = f<sub>e</sub> &times; k</div>
+<ul class="tlist">
+<li>D<sub>u</sub><sup>&infin;</sup> and D<sub>0</sub> in mg, so f<sub>e</sub> has no units; k<sub>e</sub> and k in hr<sup>&minus;1</sup>.</li>
+<li>When to use it: f<sub>e</sub> from a urine recovery, then k<sub>e</sub> from f<sub>e</sub> and k. Lower-case f<sub>e</sub> is not capital F.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl<sub>R</sub> = f<sub>e</sub> &times; Cl<sub>T</sub></div>
+<div class="geqline">Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>) &times; Cl<sub>T</sub> = Cl<sub>T</sub> &minus; Cl<sub>R</sub></div>
+<ul class="tlist">
+<li>All clearances in L/hr; f<sub>e</sub> has no units.</li>
+<li>When to use it: splitting a total clearance into its renal and hepatic parts once f<sub>e</sub> is known.</li>
+<li>On the equation sheet: yes, all three forms.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t&frac12; = {{frac:0.693|k}} &nbsp; and &nbsp; t&frac12; = {{frac:0.693 &times; V<sub>D</sub>|Cl<sub>T</sub>}}</div>
+<ul class="tlist">
+<li>The second form comes from putting Cl<sub>T</sub> = k &times; V<sub>D</sub> into the first. V<sub>D</sub> and Cl<sub>T</sub> must share a volume unit; t&frac12; then takes the time unit of Cl<sub>T</sub>.</li>
+<li>When to use it: k from a half-life, or a half-life from a clearance and a volume, including the new half-life when clearance falls and V<sub>D</sub> does not.</li>
+<li>On the equation sheet: no. The only half-life line on the sheet is the nonlinear one, so build these from Cl<sub>T</sub> = k &times; V<sub>D</sub> and t&frac12; = {{frac:0.693|k}}.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Five hundred mg of a drug was administered by rapid IV injection. The V<sub>D</sub> is 15 L and the elimination half-life is 8 hours. Urine samples were collected for 48 hours and 300 mg of unchanged drug was recovered. Find f<sub>e</sub>, k, k<sub>e</sub>, Cl<sub>T</sub>, Cl<sub>R</sub> and Cl<sub>H</sub>.</p>
+<ol class="gsteps">
+<li>Fraction excreted unchanged, with F = 1 for an IV dose: f<sub>e</sub> = {{frac:300 mg|500 mg}} = 0.6, with no units</li>
+<li>Elimination rate constant from the half-life: k = {{frac:0.693|8 hr}} = 0.0866 hr<sup>&minus;1</sup></li>
+<li>Excretion rate constant: k<sub>e</sub> = f<sub>e</sub> &times; k = (0.6)(0.0866 hr<sup>&minus;1</sup>) = 0.052 hr<sup>&minus;1</sup></li>
+<li>Total clearance: Cl<sub>T</sub> = k &times; V<sub>D</sub> = (0.0866 hr<sup>&minus;1</sup>)(15 L) = 1.3 L/hr</li>
+<li>Renal clearance: Cl<sub>R</sub> = f<sub>e</sub> &times; Cl<sub>T</sub> = (0.6)(1.3 L/hr) = 0.78 L/hr</li>
+<li>Hepatic clearance by difference: Cl<sub>H</sub> = 1.3 L/hr &minus; 0.78 L/hr = 0.52 L/hr</li>
+</ol>
+<p class="prose">Answers: <b>f<sub>e</sub> = 0.6; k = 0.0866 hr<sup>&minus;1</sup>; k<sub>e</sub> = 0.052 hr<sup>&minus;1</sup>; Cl<sub>T</sub> = 1.3 L/hr; Cl<sub>R</sub> = 0.78 L/hr; Cl<sub>H</sub> = 0.52 L/hr</b>. The 48-hour collection time is not used.</p>
+<p class="prose">A second example sets the half-life against clearance. A new antibiotic is actively secreted by the kidney; V<sub>D</sub> is 25 L, and its clearance is 750 mL/min, falling to 150 mL/min in partial renal failure. She gave no answer in class; the working is below.</p>
+<ol class="gsteps">
+<li>Put clearance in litres so it matches V<sub>D</sub>: 750 mL/min = 0.75 L/min</li>
+<li>Usual half-life: t&frac12; = {{frac:0.693 &times; 25 L|0.75 L/min}} = 23.1 min</li>
+<li>In renal failure, V<sub>D</sub> stays 25 L and clearance is 0.15 L/min: t&frac12; = {{frac:0.693 &times; 25 L|0.15 L/min}} = 115.5 min</li>
+</ol>
+<p class="prose">Half-life: <b>23.1 min normally, 115.5 min in partial renal failure</b>. Clearance fell to one fifth, so the half-life became five times longer.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>One stem with a dose, a V<sub>D</sub>, a half-life and a urine recovery, followed by a list of terms to calculate: f<sub>e</sub>, k, k<sub>e</sub>, Cl<sub>T</sub>, Cl<sub>R</sub> and Cl<sub>H</sub>.</li>
+<li>f<sub>e</sub> is asked first because every later term uses it. The urine collection time is given but only the cumulative amount and the dose are used.</li>
+<li>Traps: giving f<sub>e</sub> units, or putting the urinary fraction in place of capital F. On an IV problem F is 1 whatever the urine shows.</li>
+<li>Another trap is a true/false item claiming clearance rises as concentration rises. A change in concentration changes the elimination rate, not the clearance.</li>
+<li>Unit changes are part of the question: 15 mL/min is 0.9 L/hr, and with 5 mcg/mL (5 mg/L) the rate is 4.5 mg/hr.</li>
+<li>Separate clearances may be given to be added, as in her Module 3 practice: renal and metabolic clearances of 5 and 6.55 L/hr.</li>
+<li>The half-life form is asked as a before-and-after, a normal clearance and then a reduced one, with V<sub>D</sub> held constant so only the half-life changes.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; three worked example slides</b>
-<p class="prose"><b>Slide 6.</b> Penicillin, Cl<sub>T</sub> 15 mL/min, C<sub>p</sub> 5 mcg/mL; her answer 75 mcg/min.</p>
-<p class="prose"><b>Slide 22.</b> The 500 mg IV injection with 300 mg recovered in urine over 48 hours.</p>
-<ul>
-<li>Her answers: f<sub>e</sub> = 0.6 with no units, k = 0.0866 hr<sup>&minus;1</sup>, k<sub>e</sub> = 0.052 hr<sup>&minus;1</sup>, Cl<sub>T</sub> = 1.3 L/hr, Cl<sub>R</sub> = 0.78 L/hr.</li>
-<li>Cl<sub>H</sub> is the difference, set up but not stated aloud.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li>The two F's, which she separates as a rule: <q>lowercase fe is our fraction excreted, capital F is our bioavailability factor</q> (09-14)</li>
+<li>Her question on the fraction's units: <q>What are the units of FE? No units</q> (09-14)</li>
 </ul>
-<p class="prose"><b>Slide 23.</b> The actively secreted antibiotic, V<sub>D</sub> 25 L, clearance 750 mL/min then 150 mL/min.</p>
-<ul>
-<li>It asks the usual half-life and the half-life in partial renal failure.</li>
-<li>No answer to either part is recorded anywhere in the collected sources.</li>
-<li>The relation it is set on is slide 21's t&frac12; = 0.693V<sub>D</sub>/Cl<sub>T</sub>.</li>
-</ul></div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>One dose, one volume of distribution, one half-life and one urine collection, then a named list of every clearance term in one line: <i>"Calculate k, k<sub>e</sub>, Cl<sub>T</sub>, Cl<sub>R</sub> and Cl<sub>H</sub>"</i>.</li>
-<li>The fraction excreted unchanged is asked first, because every term after it uses it.</li>
-<li>The urine collection is stated as an amount recovered over a stated number of hours. The hours are not used, only the cumulative amount and the dose.</li>
-<li>Clearances are separately supplied and summed in Module 3's practice as well.</li>
-<li>That stem reads <i>"renal and metabolic clearances of 5 and 6.55 L/hr, respectively (total body clearance = renal clearance + metabolic clearance)"</i>, with the additivity spelled out.</li>
-<li>The half-life form of the relation is asked as a before-and-after: a normal clearance and a reduced one.</li>
-<li>V<sub>D</sub> is held constant, so the half-life is the only thing that moves.</li>
-</ul></div>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 4&ndash;11, 21, 22 (taught after slide 11), 23, 25; transcript 09-14; drill items m4-n-pen1, m4-n-pen3, m4-n-fe, m4-n-k, m4-n-ke, m4-n-clt, m4-n-clr, m4-n-clh, m4-n-ab1, m4-n-ab2; reference.js (equation sheet); tell.js (clearance against rate); STYLE.md (Module 3 practice).</p>
 </section>
 
 <h2>Module 5 - Single Oral Administration</h2>
-<p class="prose">Four objectives, printed on the "Objectives" slide of 5---Pharmacokinetics-of-Oral-Absorption.pdf.</p>
-<ul>
-<li>Her framing of the module: <i>"today we will move into our 1st order. So, up to this point, we have not had 1st order input, OK? It's all been either instantaneous or zero order"</i> (09-21).</li>
-</ul>
+<p class="prose">Four objectives, from the "Objectives" slide of the oral absorption deck. Until this module every input was either instantaneous (IV bolus) or zero order (IV infusion); here the input becomes first order.</p>
 
 <section class="gobj" id="gobj-m5-1">
 <h3 data-nav="Module 5, objective 1 &mdash; Describe the kinetics of a drug following extravascular administration">Module 5 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Describe the kinetics of a drug following extravascular administration</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "IV Bolus vs. Oral Administration" through "Example of a concentration-time profile"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>IV bolus administration and oral administration are set side by side as two curves &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "IV Bolus vs. Oral Administration".</li>
-<li>Drug enters the body from the gastrointestinal compartment and leaves by elimination &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Drug in the Body".</li>
-<li>D<sub>GI</sub> absorbs into D<sub>B</sub> in V<sub>D</sub>, which eliminates to D<sub>E</sub>, so dD<sub>B</sub>/dt = dD<sub>GI</sub>/dt &minus; dD<sub>E</sub>/dt.</li>
-<li>The absorption half-life is t&frac12;<sub>a</sub> = 0.693/k<sub>a</sub> &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Kinetics of Absorption".</li>
-<li>In the first-order absorption model, D<sub>GI</sub> enters D<sub>B</sub> in V<sub>D</sub> by k<sub>a</sub> and leaves by k, and dD<sub>B</sub>/dt is rate in minus rate out &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "First-Order Absorption Model".</li>
-<li>An example concentration-time profile following extravascular administration is shown with an absorption phase and a post-absorption phase marked &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example of a concentration-time profile following extravascular administration".</li>
-<li>Summary: oral administration usually refers to first-order absorption and first-order elimination &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Summary".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Extravascular means the dose is given outside the blood vessels. In this course that means by mouth (oral), so the drug has to be absorbed before it reaches the blood.</li>
+<li>An IV bolus puts all the drug in at once, and an IV infusion puts it in at a constant (zero-order) rate. An oral dose goes in by a first-order process instead: first order in, first order out.</li>
+<li>Because the drug enters gradually while it is also being eliminated, the plasma curve starts at zero, rises to a clear peak and then falls. That peaked shape is how you recognise oral input.</li>
+<li>Before it reaches the body the tablet has to disintegrate, dissolve, cross membranes and pass through the liver. All of those steps are rolled into one absorption rate constant, k<sub>a</sub>.</li>
+<li>Usually only part of the dose arrives, because some of it is eliminated before it becomes available. The fraction that arrives is F; for an IV dose F is taken as 1.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The three input types lined up</span><q class="para">IV bolus input means we put all of the drug into the body all at once. Then we talked about IV infusion, which meant we put the drug into the body at a constant rate of input, so that is our zero order. Today we move into our first order.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">What "extravascular" means here</span><q>extravascular, also known as oral</q>, against <q>Intravascular, we've got our IV bolus, our IV infusion that's into the vascular system</q><span class="when">09-21 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The curve-identification rule, stated as an exam instruction</span><q class="para">If I give you a curve on the exam and it looks like this, where there is a clear peak (we go up, we peak, we come back down), I want you to identify that as an oral input. First order in, first order out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">What k<sub>a</sub> physically contains</span><q class="para">First it needs to disintegrate, it needs to dissolve, and it has to have enough polarity to cross membranes before it can get into the body. Then it gets into the body and hits the liver. All of those pieces give us ka, the first-order rate constant for absorption.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The three phases of the curve. She was missing this slide and taught it from the students' copies</span><q>I feel like I'm missing a slide. Oh, I'm missing a very important slide</q>. Her account is the only one there is: the absorption phase is where <q>we've got more drug going in to the body than there is drug going out… absorption rate is gonna be greater than the elimination rate on the left side</q>; the post-absorption phase is <q>where it says that the elimination rate is greater than the absorption rate, that means that we still have some drug that's available to be absorbed there</q>; and <q>once all the drug has been absorbed, Then we are fully into the complete elimination phase</q>. At the peak, <q class="para">Right at Cmax, the rate in is going to be equal to the rate out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Why the summary slide says "usually"</span><q class="para">If we have a modified-release solid dosage form releasing drug at a zero-order rate, what does it look like? It looks like IV infusion. Zero-order release, or controlled release, looks like our IV infusion.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">A one-letter trigger</span><q>when you see a capital F, You should think oral.</q><span class="when">09-21 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Extravascular administration</dt><dd>Given outside the vascular system; here, oral. Intravascular means IV bolus or IV infusion.</dd>
+<dt>D<sub>GI</sub></dt><dd>Amount of drug still in the gastrointestinal tract waiting to be absorbed (mg).</dd>
+<dt>D<sub>B</sub></dt><dd>Amount of drug in the body, spread through the volume of distribution V<sub>D</sub> (mg).</dd>
+<dt>D<sub>E</sub></dt><dd>Amount of drug already eliminated (mg).</dd>
+<dt>Absorption rate constant (k<sub>a</sub>)</dt><dd>First-order rate constant for drug moving from the gut into the body (hr<sup>&minus;1</sup>).</dd>
+<dt>Elimination rate constant (k)</dt><dd>First-order rate constant for drug leaving the body (hr<sup>&minus;1</sup>).</dd>
+<dt>Bioavailability (F)</dt><dd>Fraction of the oral dose that reaches the body and is available to act; between 0 and 1, no units.</dd>
+<dt>Absorption half-life (t&frac12;<sub>a</sub>)</dt><dd>Time for half of the drug still to be absorbed to be absorbed (hr).</dd>
+<dt>Absorption phase</dt><dd>The rising part of the curve: more drug is going in than coming out.</dd>
+<dt>Peak (C<sub>max</sub> at t<sub>max</sub>)</dt><dd>The top of the curve, where the rate in equals the rate out.</dd>
+<dt>Post-absorption phase</dt><dd>Just after the peak: elimination is now faster than absorption, although some drug is still being absorbed.</dd>
+<dt>Elimination phase</dt><dd>All the drug has been absorbed, so only elimination is left.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">{{frac:dD<sub>B</sub>|dt}} = {{frac:dD<sub>GI</sub>|dt}} &minus; {{frac:dD<sub>E</sub>|dt}}</div>
+<ul class="tlist">
+<li>The change in the amount in the body (mg/hr) is the rate of absorption from the gut (rate in) minus the rate of elimination (rate out).</li>
+<li>When to use it: to explain the curve in words. Rate in is larger while the curve rises, the two are equal at the peak, and rate out is larger after it.</li>
+<li>On the equation sheet: no.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}</div>
+<ul class="tlist">
+<li>t&frac12;<sub>a</sub> is the absorption half-life (hr) and k<sub>a</sub> the absorption rate constant (hr<sup>&minus;1</sup>).</li>
+<li>When to use it: stems usually give the absorption half-life, and you turn it into k<sub>a</sub> before using any oral equation.</li>
+<li>On the equation sheet: no. It is the first-order half-life relation, which she expects you to know without the sheet.</li>
+</ul>
+</div>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She shows a curve and asks for the route. A clear peak (up, peak, back down) means oral input, first order in and first order out.</li>
+<li>Compare the other two shapes: an IV bolus profile starts at its highest point and falls, and an IV infusion profile starts at zero and levels off to a plateau.</li>
+<li>A capital F among the given parameters is the cue that the route is oral and that this first-order absorption model applies.</li>
+<li>Know why the summary slide says oral input is "usually" first order: a modified-release product that releases drug at a zero-order rate gives a curve shaped like an IV infusion.</li>
+<li>She taught the three phases aloud from the students' copies of a slide missing from her deck, so her spoken description (rate in versus rate out) is the one to learn.</li>
+<li>Her 09-21 attendance poll repeated an earlier question whose stem is not in the captions; 36% chose first-order input, and she did not state the correct option. No written practice question tests this objective alone.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">The 09-21 attendance poll repeated an earlier question, and its stem is not in the captions.</p>
-<ul>
-<li>Her debrief: <i>"does this question look vaguely familiar? OK. All right. So, that means that we all got it right. Oh, OK. So, 36% of you guys picked first order absorption. Or first order input, sorry, I'm, I'm ahead of myself."</i></li>
-<li>She does not state which option was correct.</li>
-<li>No written practice question in the collected sources asks this objective on its own.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>when you see a capital F, You should think oral.</q></li>
+</ul>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>As a curve to identify: a profile with a clear peak is oral input, first order in and first order out.</li>
-<li>The two other profiles: the bolus profile starts high, and the infusion profile starts at zero and plateaus.</li>
-<li>As a stem condition, where a capital F in the given parameters is the signal that the route is oral and the model is the one on these slides.</li>
-</ul></div>
+<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "IV Bolus vs. Oral Administration", "Drug in the Body", "Kinetics of Absorption", "First-Order Absorption Model", "Example of a concentration-time profile following extravascular administration", "Summary"; equation sheet; lecture transcript 09-21.</p>
 </section>
 
 <section class="gobj" id="gobj-m5-2">
 <h3 data-nav="Module 5, objective 2 &mdash; Calculate plasma drug concentration following extravascular administration of a single dose">Module 5 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Calculate plasma drug concentration following extravascular administration of a single dose</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Concentration of Drug in Plasma Following a Single Oral Dose"</i></div>
 
-<h4>What the slides carry</h4>
-<ul>
-<li>The single-oral-dose concentration equation: C<sub>p</sub> is Fk<sub>a</sub>D<sub>0</sub> divided by V<sub>D</sub>(k<sub>a</sub> &minus; k), multiplied by the difference of two exponentials &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Concentration of Drug in Plasma Following a Single Oral Dose".</li>
-<li>The two exponentials: e<sup>&minus;kt</sup> minus e<sup>&minus;k<sub>a</sub>t</sup>.</li>
-<li>Summary: plasma drug concentration at any time after oral administration can be calculated provided basic pharmacokinetic parameters &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Summary".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>One equation gives the plasma concentration (C<sub>p</sub>) at any time after a single oral dose, as long as you know F, the dose, V<sub>D</sub>, k<sub>a</sub> and k.</li>
+<li>Inside the bracket, e<sup>&minus;kt</sup> is drug going out, and the bracket as a whole is drug in minus drug out.</li>
+<li>At time zero the bracket is e<sup>0</sup> &minus; e<sup>0</sup> = 0, so the oral curve starts at zero concentration and has to rise.</li>
+<li>The fraction in front is not C<sub>0</sub> (a starting concentration). It lumps F, the dose, k<sub>a</sub>, V<sub>D</sub> and the difference of the rate constants into one number.</li>
+<li>In her problems the equation often arrives with that fraction already worked out, for example C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>, and you work backwards to a parameter hidden inside it.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">How she reads the two exponentials</span><q class="para">We will break this down: this piece is drug out, and this piece is drug in minus drug out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">What the lumped prefactor is not, said twice</span><q>this big portion right here does not represent C0</q> and <q>That is not our C0. That is all of that wrapped up into that one concentration.</q><span class="when">09-21 &middot; her words, caption fillers removed</span></li>
-<li class="said"><span class="lead">What F is</span><q class="para">Oral bioavailability factor: what fraction of this oral dose do we expect to be absorbed by the body and available for the body to use? When we give a drug IV, that F is assumed to be one.</q> and the reason it is below one, <q>a portion of that dose is going to be eliminated by the body before it even becomes available for the body to use</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">How she enters it on the calculator, narrated so students can copy the keystroke order</span><q>0.85 times 500 times 0.924 divided by 22, divided by left parentheses 0.924 minus 0.231, right left parenthesis, I'm over here now. E to the minus 0.231 times 2, closing that parenthesis minus E to the 0.924 times 2, and closing this parenthesis and closing that parenthesis.</q><span class="when">09-21 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Which half-life is meant when no qualifier is given</span><q>If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination</q><span class="when">09-21 &middot; her words, caption fillers removed</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Plasma concentration (C<sub>p</sub>)</dt><dd>Drug concentration in plasma at time t (mg/L, which is numerically the same as mcg/mL).</dd>
+<dt>Dose (D<sub>0</sub>)</dt><dd>The single oral dose given (mg).</dd>
+<dt>Bioavailability (F)</dt><dd>Fraction of the oral dose that reaches the body; a stem's percent (84%) is used as a decimal (0.84).</dd>
+<dt>Volume of distribution (V<sub>D</sub>)</dt><dd>Apparent volume the drug in the body is spread through (L).</dd>
+<dt>Absorption rate constant (k<sub>a</sub>)</dt><dd>First-order rate constant for absorption (hr<sup>&minus;1</sup>); in this module it is the larger exponent.</dd>
+<dt>Elimination rate constant (k)</dt><dd>First-order rate constant for elimination (hr<sup>&minus;1</sup>); the smaller exponent.</dd>
+<dt>Leading number (P)</dt><dd>The single number in front of the exponentials in a given equation, such as 75 or 23.2 (mg/L). It equals the whole fraction in front.</dd>
+<dt>Half-life (t&frac12;)</dt><dd>With no qualifier, the elimination half-life (hr).</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">C<sub>p</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}} &times; (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)</div>
+<ul class="tlist">
+<li>C<sub>p</sub> in mg/L; F no units; k<sub>a</sub> and k in hr<sup>&minus;1</sup>; D<sub>0</sub> in mg; V<sub>D</sub> in L; t in hr after the dose.</li>
+<li>When to use it: a single oral dose, one compartment, first-order absorption and first-order elimination. Use it for C<sub>p</sub> at a stated time, and for C<sub>max</sub> once t<sub>max</sub> is known.</li>
+<li>On the equation sheet: yes, page 1.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">V<sub>D</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|P (k<sub>a</sub> &minus; k)}}</div>
+<ul class="tlist">
+<li>P is the leading number of the given equation (mg/L); the other symbols are as above, and V<sub>D</sub> comes out in L.</li>
+<li>When to use it: the equation is given already evaluated, together with F and the dose, and the question asks for V<sub>D</sub>.</li>
+<li>On the equation sheet: not as its own line. It is the page 1 C<sub>p</sub> equation with its fraction set equal to P and rearranged.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t&frac12; = {{frac:0.693|k}}</div>
+<ul class="tlist">
+<li>t&frac12; is the elimination half-life (hr) and k the elimination rate constant (hr<sup>&minus;1</sup>), read from the smaller exponent.</li>
+<li>When to use it: whenever a question asks for "the half-life" with no qualifier.</li>
+<li>On the equation sheet: no. She says this one is never on the sheet and must be memorised.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">In-class practice 2: a 750-mg oral dose, 84% bioavailable, gives C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>) in mg/L, with t in hours. Find V<sub>D</sub> and the half-life of elimination.</p>
+<ol class="gsteps">
+<li>Read the rate constants off the exponents. The larger is k<sub>a</sub> = 0.872 hr<sup>&minus;1</sup>, and the smaller is k = 0.182 hr<sup>&minus;1</sup>.</li>
+<li>Set the leading number equal to the fraction: 23.2 mg/L = {{frac:(0.84)(750 mg)(0.872 hr<sup>&minus;1</sup>)|V<sub>D</sub> (0.872 &minus; 0.182) hr<sup>&minus;1</sup>}}</li>
+<li>Rearrange so V<sub>D</sub> stands alone: V<sub>D</sub> = {{frac:(0.84)(750 mg)(0.872 hr<sup>&minus;1</sup>)|(23.2 mg/L)(0.690 hr<sup>&minus;1</sup>)}} = {{frac:549.36|16.008}} L</li>
+<li>Divide: V<sub>D</sub> = 34.32 L, which she reports as <b>34.3 L</b>.</li>
+<li>"Half-life" with no qualifier means elimination, so use k: t&frac12; = {{frac:0.693|0.182 hr<sup>&minus;1</sup>}} = <b>3.8 hr</b>.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She gives the full two-exponential equation with the fraction already worked out, then asks for something inside it, most often V<sub>D</sub>, with F and the dose supplied.</li>
+<li>Slide "Example 2" works the same way: C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>, a 500-mg dose at 87% bioavailability, and her answer is a V<sub>D</sub> of 6.3 (she spoke no unit; the arithmetic gives litres).</li>
+<li>She expects you to pick the larger exponent as k<sub>a</sub> without being told which is which.</li>
+<li>Units are fixed in a sentence of the stem, such as "Assume units of mcg/mL for C<sub>p</sub> and hr for time", rather than on the numbers.</li>
+<li>Usual traps: reading the leading number as C<sub>0</sub>, leaving out V<sub>D</sub>, and losing the (k<sub>a</sub> &minus; k) term when rearranging.</li>
+<li>On the calculator she enters the whole expression in one pass: numerator, divided by V<sub>D</sub>, divided by (k<sub>a</sub> &minus; k) in parentheses, times the bracket of two exponentials.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; back-solving the equation</b>
-<p class="prose"><b>Slide "Example 2".</b> <i>"A single oral dose of an antibiotic was given to an adult 70 kg male patient. The literature reports that this drug fits a one compartment open model with the equation below. Calculate t<sub>max</sub>, C<sub>max</sub> and t&frac12; for this drug in this patient. Assume units of mcg/mL for C<sub>p</sub> and hr for time."</i></p>
-<ul>
-<li>The equation, from 5---Pharmacokinetics-of-Oral-Absorption.pdf: C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>.</li>
-<li>She then adds a part the slide does not print: given a 500 mg dose at 87% bioavailability, what is the volume of distribution?</li>
-<li>Her answer (09-21): <i>"I'm telling you that this 75. Equals F times dose times KA divided by volume distribution KA minus K"</i>, rearranged to give 6.3, with no unit spoken.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>this big portion right here does not represent C0</q></li>
+<li><q>If it's just T1/2, then your assumption is that I'm looking for the half-life of elimination</q></li>
 </ul>
-<p class="prose"><b>In-class practice 2, 5---Pharmacokinetics-of-Oral-Absorption.pdf.</b> 750 mg orally, equation with prefactor 23.2 mg/L, F = 0.84, k<sub>a</sub> = 0.872 hr<sup>&minus;1</sup>, k = 0.182 hr<sup>&minus;1</sup>.</p>
-<ul>
-<li>Her answer for the volume of distribution: <i>"our Weime of distribution is going to be our F, which is 0.84 times our dose, which is 750 mg. Times RKA which is 0.872 per hour. Divided by 23.2 mg per liter &hellip; and then 0.872 minus 0.182 per hour &hellip; 34.3. Thank you. 34.3 L."</i></li>
-<li>Elimination half-life from the same equation: <i>"0.693 over R K 0.182 per hour &hellip; 3.8 hours?"</i></li>
-</ul></div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>She hands over the full biexponential equation with the prefactor already evaluated as a single number.</li>
-<li>She then asks for a parameter inside that number, most often V<sub>D</sub>, given F and the dose.</li>
-<li>Units are fixed in a sentence of the stem rather than on the numbers: <i>"Assume units of mcg/mL for C<sub>p</sub> and hr for time."</i></li>
-<li>The two rate constants are read straight off the exponents, and she expects the larger of the two to be identified as k<sub>a</sub> without being told.</li>
-</ul></div>
+<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "Concentration of Drug in Plasma Following a Single Oral Dose", "Example 2", "In-Class Practice", "Summary"; equation sheet page 1; lecture transcript 09-21; question bank m5-n09, m5-n15, m5-n16.</p>
 </section>
 
 <section class="gobj" id="gobj-m5-3">
 <h3 data-nav="Module 5, objective 3 &mdash; Calculate peak plasma concentration and the time to peak following extravascular administration of a single dose">Module 5 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Calculate peak plasma concentration and the time to peak following extravascular administration of a single dose</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Cp vs. Time for a Single Oral Dose"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>The plasma-level curve for a single oral dose is drawn with C<sub>max</sub> marked on the concentration axis and t<sub>max</sub> on the time axis &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Cp vs. Time for a Single Oral Dose".</li>
-<li>Beside the curve are the full C<sub>p</sub> equation and t<sub>max</sub> = ln(k<sub>a</sub>/k) / (k<sub>a</sub> &minus; k).</li>
-<li>Example 1: <i>"The following pharmacokinetic parameters were found for an investigational new drug: V<sub>D</sub> = 22 L, half-life of absorption is 45 minutes, half-life of elimination is 3 hours. The drug is 85% bioavailable and follows a one-compartment model. What is the expected maximum concentration following a single 500-mg dose and when does the maximum occur?"</i></li>
-<li>Summary: for a single oral dose, the time to peak is based on the rate constants of absorption and elimination &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Summary".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>t<sub>max</sub> is the time after the dose at which the plasma concentration is highest, and C<sub>max</sub> is that highest concentration. At the peak the rate in equals the rate out.</li>
+<li>t<sub>max</sub> depends only on the two rate constants, k<sub>a</sub> and k. The dose, F and V<sub>D</sub> do not appear, so changing the dose does not move t<sub>max</sub>.</li>
+<li>There is no separate C<sub>max</sub> equation for a single oral dose. You find t<sub>max</sub>, then put it in for t in the C<sub>p</sub> equation, which is why t<sub>max</sub> always comes first.</li>
+<li>Both equations need rate constants, not half-lives, and both constants in the same time unit, usually hours.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The order of operations, stated three separate times</span><q class="para">If you are asked for Cmax, and I will ask you for Cmax, you must find tmax first. Even if I do not specifically ask you to find tmax, you must find tmax before you can find Cmax.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">What t<sub>max</sub> is and what it depends on</span><q>TMAX is the time that it takes to reach the maximum plasma concentration of that drug in that patient</q> and <q class="para">tmax depends solely on the relationship between k and ka: drug going in, drug going out.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Three errors she names in advance. Mixed time units</span><q class="para">When you are calculating tmax, do not forget to change your times to the same unit, usually hours.</q>. A half-life used as a rate constant: <q class="para">When you change your times, recognize that the 1.5 here is the half-life: you still need 0.693 divided by that.</q> &mdash; in her own arithmetic she divides 0.693 by 1.5, and the captions have the operands reversed. And a dropped volume: <q>Do not forget the volume of distribution.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her Example 1 working: 45 minutes is</span><q>3/4 of an hour or 0.75 hour</q>; k<sub>a</sub> = 0.693/0.75 = 0.924 hr<sup>&minus;1</sup>; <q>our K is 0.231</q> <q class="para">Our tmax is going to be equal to the natural log of ka divided by k, so I am getting 2 hours.</q>; and C<sub>max</sub> <q class="para">I am getting 12.17 milligrams per liter.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her Example 2 working</span><q class="para">It looks like the max is going to occur one hour after the dose was administered.</q>, then C<sub>max</sub> <q class="para">75 e to the minus 0.22 times 1, e to the minus 2.75 times 1: 55.4 milligrams per liter.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her in-class practice 1 working, with the printed volume of distribution changed live from 40 L to 20 L: k<sub>a</sub></span><q>0.693 divided by 1.5. 0.462</q>; k <q>0.693 divided by 5. 0.1386</q>; t<sub>max</sub> <q class="para">3.7 hours.</q>; C<sub>max</sub> <q>I'm getting 13-ish milligrams per liter.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Her in-class practice 2 working: t<sub>max</sub></span><q class="para">Natural log of 0.872 divided by 0.182, divided by the difference, 0.872 minus 0.182: 2.27 hours.</q>; C<sub>max</sub> <q class="para">We take that 2.27 and plug it in for the t values: 12.14 mg per liter, or micrograms per mL.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Time to peak (t<sub>max</sub>)</dt><dd>Time from the dose to the maximum plasma concentration (hr).</dd>
+<dt>Peak concentration (C<sub>max</sub>)</dt><dd>The maximum plasma concentration after the dose (mg/L).</dd>
+<dt>Absorption rate constant (k<sub>a</sub>)</dt><dd>First-order rate constant for absorption (hr<sup>&minus;1</sup>).</dd>
+<dt>Elimination rate constant (k)</dt><dd>First-order rate constant for elimination (hr<sup>&minus;1</sup>).</dd>
+<dt>Absorption half-life (t&frac12;<sub>a</sub>)</dt><dd>Half-life of the absorption process (hr); often given in minutes.</dd>
+<dt>Elimination half-life (t&frac12;)</dt><dd>Half-life of the elimination process (hr).</dd>
+<dt>F, D<sub>0</sub>, V<sub>D</sub></dt><dd>Bioavailable fraction (no units), oral dose (mg) and volume of distribution (L).</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">k<sub>a</sub> = {{frac:0.693|t&frac12;<sub>a</sub>}} &nbsp;and&nbsp; k = {{frac:0.693|t&frac12;}}</div>
+<ul class="tlist">
+<li>Each rate constant (hr<sup>&minus;1</sup>) is 0.693 divided by the half-life of its own process (hr).</li>
+<li>When to use it: the stem gives half-lives; convert both before using either equation below.</li>
+<li>On the equation sheet: no; first-order half-life relations are hers to know by heart.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t<sub>max</sub> = {{frac:ln(k<sub>a</sub> &divide; k)|k<sub>a</sub> &minus; k}}</div>
+<ul class="tlist">
+<li>k<sub>a</sub> and k in hr<sup>&minus;1</sup>; t<sub>max</sub> comes out in hr. The top is the natural log of k<sub>a</sub> divided by k.</li>
+<li>When to use it: always, and always before C<sub>max</sub>, even when the question asks only for C<sub>max</sub>.</li>
+<li>On the equation sheet: yes, page 1.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>max</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}} &times; (e<sup>&minus;k t<sub>max</sub></sup> &minus; e<sup>&minus;k<sub>a</sub> t<sub>max</sub></sup>)</div>
+<ul class="tlist">
+<li>This is the C<sub>p</sub> equation with t replaced by t<sub>max</sub>; C<sub>max</sub> comes out in mg/L.</li>
+<li>When to use it: after t<sub>max</sub> is found. If the equation is given already evaluated, put t<sub>max</sub> into that instead.</li>
+<li>On the equation sheet: only by substitution into the page 1 C<sub>p</sub> equation. The sheet's other C<sub>max</sub> lines contain &tau; and belong to multiple dosing.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Slide "Example 1": V<sub>D</sub> = 22 L, absorption half-life 45 minutes, elimination half-life 3 hours, 85% bioavailable, one compartment. What is the peak after a single 500-mg dose, and when does it occur?</p>
+<ol class="gsteps">
+<li>Put both half-lives in hours: 45 min = 0.75 hr; the elimination half-life is already 3 hr.</li>
+<li>Absorption rate constant: k<sub>a</sub> = {{frac:0.693|0.75 hr}} = 0.924 hr<sup>&minus;1</sup></li>
+<li>Elimination rate constant: k = {{frac:0.693|3 hr}} = 0.231 hr<sup>&minus;1</sup></li>
+<li>Time to peak: t<sub>max</sub> = {{frac:ln(0.924 &divide; 0.231)|(0.924 &minus; 0.231) hr<sup>&minus;1</sup>}} = {{frac:ln 4|0.693 hr<sup>&minus;1</sup>}} = {{frac:1.386|0.693}} hr = <b>2 hr</b></li>
+<li>The fraction in front: {{frac:(0.85)(500 mg)(0.924 hr<sup>&minus;1</sup>)|(22 L)(0.693 hr<sup>&minus;1</sup>)}} = {{frac:392.7|15.246}} = 25.76 mg/L</li>
+<li>The bracket at t = 2 hr: e<sup>&minus;(0.231)(2)</sup> &minus; e<sup>&minus;(0.924)(2)</sup> = 0.630 &minus; 0.157 = 0.472</li>
+<li>Peak: C<sub>max</sub> = (25.76 mg/L)(0.472) = <b>12.17 mg/L</b></li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Two answers, always in the same order: t<sub>max</sub> first, then C<sub>max</sub> at that time. She often asks only for C<sub>max</sub> and still expects t<sub>max</sub> to be worked out.</li>
+<li>The parameters come either as a list (V<sub>D</sub>, two half-lives, a percent F, a dose) or as a finished equation; she wants the same two answers either way.</li>
+<li>The absorption half-life is given in minutes (45 min, 90 min) and the elimination half-life in hours, so the first step is converting to hours.</li>
+<li>Trap: using a half-life where a rate constant belongs. In practice 1 the 1.5 hr is a half-life, so k<sub>a</sub> = {{frac:0.693|1.5 hr}} = 0.462 hr<sup>&minus;1</sup>.</li>
+<li>Trap: leaving V<sub>D</sub> out of the fraction in front.</li>
+<li>Her answers: practice 1 (500 mg, F 88%, t&frac12;<sub>a</sub> 90 min, t&frac12; 5 hr, V<sub>D</sub> changed live from 40 L to 20 L) gives t<sub>max</sub> 3.7 hr and C<sub>max</sub> about 13 mg/L.</li>
+<li>Practice 2 (the 23.2 equation) gives t<sub>max</sub> 2.27 hr and C<sub>max</sub> 12.14 mg/L. Example 2 (the 75 equation) gives t<sub>max</sub> 1 hr and C<sub>max</sub> 55.4 mg/L.</li>
+<li>Source conflict: for Example 2 she says 55.4 mg/L, which is what 75(e<sup>&minus;0.22</sup> &minus; e<sup>&minus;2.75</sup>) gives at t = 1 hr. The 53.4 mg/L written on the annotated slide does not follow from the equation.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions &mdash; the deck examples and the in-class sheet</b>
-<p class="prose"><b>Slide "Example 1".</b> Quoted in full above; her answers t<sub>max</sub> 2 hr and C<sub>max</sub> 12.17 mg/L.</p>
-<p class="prose"><b>Slide "Example 2".</b> C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>, asking t<sub>max</sub>, C<sub>max</sub> and t&frac12;.</p>
-<ul>
-<li>Her answers: t<sub>max</sub> 1 hr, C<sub>max</sub> 55.4 mg/L, elimination half-life 0.693/0.22.</li>
-<li>She says 55.4 aloud, and 75(e<sup>&minus;0.22</sup> &minus; e<sup>&minus;2.75</sup>) at t = 1 hr gives 55.4. A figure of 53.4 mg/L does not follow from the equation.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q class="para">If you are asked for Cmax, and I will ask you for Cmax, you must find tmax first. Even if I do not specifically ask you to find tmax, you must find tmax before you can find Cmax.</q></li>
+<li><q>Do not forget the volume of distribution.</q></li>
 </ul>
-<p class="prose"><b>In-class practice, two problems.</b></p>
-<ul>
-<li>Problem 1: 500 mg oral, F = 88%, absorption half-life 90 minutes, elimination half-life 5 hours, apparent V<sub>D</sub> changed live from 40 L to 20 L.</li>
-<li>Problem 1 answers: k<sub>a</sub> 0.462 hr<sup>&minus;1</sup>, k 0.1386 hr<sup>&minus;1</sup>, t<sub>max</sub> 3.7 hr, C<sub>max</sub> about 13 mg/L.</li>
-<li>Problem 2: 750 mg oral, equation supplied.</li>
-<li>Problem 2 answers: V<sub>D</sub> 34.3 L, t&frac12; 3.8 hr, t<sub>max</sub> 2.27 hr, C<sub>max</sub> 12.14 mg/L.</li>
-</ul></div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>Two parameters in, two answers out, always in the same order: the time to peak first, then the peak concentration computed at that time.</li>
-<li>She asks for C<sub>max</sub> without asking for t<sub>max</sub>, and still expects t<sub>max</sub> to be found.</li>
-<li>Absorption half-life is given in minutes (45 min, 90 min) while elimination half-life is given in hours, so the first step is a unit conversion.</li>
-<li>Each half-life must then be turned into a rate constant before either goes into the formula.</li>
-<li>The parameters arrive either as a list &mdash; V<sub>D</sub>, two half-lives, a percent bioavailability, a dose &mdash; or as a finished equation, and the same two answers are wanted either way.</li>
-<li>Bioavailability is stated as a percent in the stem (85%, 88%, 87%) and used as a decimal.</li>
-</ul></div>
+<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "Cp vs. Time for a Single Oral Dose", "Example 1", "Example 2", "In-Class Practice", "Summary"; equation sheet pages 1 and 2; lecture transcript 09-21; question bank m5-n01 to m5-n04, m5-n07, m5-n08, m5-n11 to m5-n13, m5-n17, m5-n18.</p>
 </section>
 
 <section class="gobj" id="gobj-m5-4">
 <h3 data-nav="Module 5, objective 4 &mdash; Discuss the effects of changing various parameters on the pharmacokinetics following extravascular administration">Module 5 - Objective 4</h3>
 <div class="gbar"><span>Objective</span><b>Discuss the effects of changing various parameters on the pharmacokinetics following extravascular administration</b><i>5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "Changing Dose" through "Significance of Absorption Rate Constants"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>A pair of curves shows the effect of changing the dose &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Changing Dose".</li>
-<li>Two figures sit side by side &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Effect of ka and k on Cmax, tmax, and AUC".</li>
-<li>The first is the effect of a change in the absorption rate constant, k<sub>a</sub>, on the plasma drug concentration-versus-time curve, with the dose 100 mg, V<sub>D</sub> 10 L and k 0.1 hr<sup>&minus;1</sup>.</li>
-<li>The second is the effect of a change in the elimination rate constant, k, with the dose 100 mg, V<sub>D</sub> 10 L and k<sub>a</sub> 0.1 hr<sup>&minus;1</sup>.</li>
-<li>Absorption kinetics terminology &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Absorption Kinetics Terminology".</li>
-<li><b>Disposition rate limiting</b> &mdash; absorption half-life is much shorter than elimination half-life.</li>
-<li><b>Absorption rate limiting</b> &mdash; absorption half-life is much longer than elimination half-life.</li>
-<li>The significance of the absorption rate constant, t<sub>max</sub> and C<sub>max</sub> &mdash; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Significance of Absorption Rate Constants, tmax, and Cmax".</li>
-<li>Designing multiple-dosage regimens, that is prediction of peak and trough plasma drug concentrations.</li>
-<li>Bioequivalence studies: comparing rates of absorption from chemically equivalent products, comparative bioavailability and bioequivalence.</li>
-<li>Determining the preferred route of drug administration and the desired dosage form for the patient.</li>
-<li>Assessing the onset of action, and correlating with the pharmacological effect.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>This objective asks what happens to C<sub>max</sub>, t<sub>max</sub> and AUC (area under the curve) when one parameter changes. The answers are directions (up, down, unchanged), not numbers.</li>
+<li>Raise the dose: C<sub>max</sub> and AUC rise in proportion, and t<sub>max</sub> stays put. The rates rise because there is more drug, but the rate constants k and k<sub>a</sub> do not change.</li>
+<li>Raise k<sub>a</sub> with k unchanged: the drug gets in faster, so C<sub>max</sub> is higher and t<sub>max</sub> earlier. AUC is relatively unchanged because clearance has not changed.</li>
+<li>Raise k with k<sub>a</sub> unchanged: the drug leaves faster, so C<sub>max</sub> is lower and t<sub>max</sub> earlier. AUC falls, because changing k changes the clearance.</li>
+<li>Two terms say which process is slower. Disposition rate limiting (the usual case) has the shorter absorption half-life; absorption rate limiting has the longer one.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Increasing the dose</span><q class="para">If we increase the dose, we expect a proportional increase in concentration and AUC. We do not expect a change in tmax. The rates of absorption and elimination increase because there is more drug, but the rate constants k and ka do not change; the rate depends on how much is there.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Increasing k<sub>a</sub> relative to k</span><q class="para">If we increase ka relative to k, we get the drug into the body faster: a higher Cmax, a tmax that occurs earlier, and the AUC is relatively unchanged.</q>, with her reason, <q class="para">If we are just changing ka, we are not changing the clearance at all, so our AUC is unchanged.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Increasing k</span><q class="para">We are getting that drug out of the body a lot faster. Notice that we are not able to build to as high, and we are getting an earlier tmax either way, because tmax is just a relationship of k and ka. If we change k, we are effectively changing the clearance, so we are getting this drug out of the body a whole lot faster.</q> The k values compared on that slide are 0.5, 0.3 and 0.2 per hour.<span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The AUC claim is not readable off the figure and she says where it comes from</span><q>looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the AUC is relatively unchanged.</q> Slide and speech differ here: the figure does not show it, and the spoken statement is the one to hold.<span class="when">09-21 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Which rate-limiting case is normal</span><q class="para">Most of the time we are going to be looking at disposition rate limiting, where our ka is significantly faster, or larger, than our k.</q>. In the same lecture she also calls this <q>distribution limited</q> once, while the slide's term is disposition rate limiting; the slide's term is the one to key.<span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">How she reads the rate-limiting case off an equation</span><q class="para">Notice that this is e to the minus 0.18 and this is e to the minus 0.87: absorption is going to happen a lot faster than elimination.</q><span class="when">09-21 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">Onset of action, from the significance slide</span><q>when does the drug reach a therapeutic concentration? That's our onset.</q><span class="when">09-21 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Area under the curve (AUC)</dt><dd>Area under the plasma concentration-time curve; it depends on how much drug gets in and how long it stays.</dd>
+<dt>Clearance (Cl)</dt><dd>Volume of plasma cleared of drug per unit time (L/hr); Cl = k &times; V<sub>D</sub>.</dd>
+<dt>Disposition rate limiting</dt><dd>Absorption half-life much shorter than elimination half-life, so k<sub>a</sub> is much larger than k. The usual case.</dd>
+<dt>Absorption rate limiting</dt><dd>Absorption half-life much longer than elimination half-life.</dd>
+<dt>Onset of action</dt><dd>The time at which the drug reaches a therapeutic concentration.</dd>
+<dt>C<sub>max</sub>, t<sub>max</sub>, k<sub>a</sub>, k</dt><dd>Peak concentration (mg/L), time to peak (hr), absorption and elimination rate constants (hr<sup>&minus;1</sup>).</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">AUC = {{frac:F D<sub>0</sub>|Cl}} &nbsp;with&nbsp; Cl = k &times; V<sub>D</sub></div>
+<ul class="tlist">
+<li>F no units, D<sub>0</sub> in mg, Cl in L/hr, k in hr<sup>&minus;1</sup>, V<sub>D</sub> in L. k<sub>a</sub> appears in neither line, which is why changing k<sub>a</sub> leaves AUC about the same.</li>
+<li>When to use it: to reason out the AUC direction for a change in dose, F or k.</li>
+<li>On the equation sheet: yes in the form Cl<sub>T</sub> = {{frac:FD<sub>0</sub>|AUC}} on page 1. Cl = k &times; V<sub>D</sub> is not on the sheet; she expects it known.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t<sub>max</sub> = {{frac:ln(k<sub>a</sub> &divide; k)|k<sub>a</sub> &minus; k}}</div>
+<ul class="tlist">
+<li>Only k<sub>a</sub> and k (hr<sup>&minus;1</sup>) appear. There is no dose, F or V<sub>D</sub>, so a dose change cannot move t<sub>max</sub>.</li>
+<li>When to use it: to justify any t<sub>max</sub> direction.</li>
+<li>On the equation sheet: yes, page 1.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Which rate-limiting case is the antibiotic of slide "Example 2", C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>?</p>
+<ol class="gsteps">
+<li>Read the exponents: k<sub>a</sub> = 2.75 hr<sup>&minus;1</sup> (the larger) and k = 0.22 hr<sup>&minus;1</sup>.</li>
+<li>Absorption half-life: t&frac12;<sub>a</sub> = {{frac:0.693|2.75 hr<sup>&minus;1</sup>}} = 0.252 hr</li>
+<li>Elimination half-life: t&frac12; = {{frac:0.693|0.22 hr<sup>&minus;1</sup>}} = 3.15 hr</li>
+<li>Compare them: {{frac:3.15 hr|0.252 hr}} = 12.5, so absorption is 12.5 times faster.</li>
+<li>The absorption half-life is much the shorter, so the drug is <b>disposition rate limiting</b>, the usual case.</li>
+</ol>
+<p class="prose">A dose change in slide "Example 1": doubling the dose from 500 mg to 1000 mg.</p>
+<ol class="gsteps">
+<li>t<sub>max</sub> uses only k<sub>a</sub> and k, so it stays at <b>2 hr</b>.</li>
+<li>The dose sits only in the fraction in front, so C<sub>max</sub> doubles: (12.17 mg/L)({{frac:1000 mg|500 mg}}) = <b>24.34 mg/L</b>. AUC doubles as well.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She posed this aloud on 09-21 and named it as a question she will set: if the dose is increased, what happens to t<sub>max</sub>? Her answer: nothing, because t<sub>max</sub> is independent of dose.</li>
+<li>One parameter changes, and she asks about C<sub>max</sub>, t<sub>max</sub> and AUC in that order. In earlier modules the same shape was free response, such as the change in half-life if the dose were doubled.</li>
+<li>The rate-limiting question gives two exponents to compare rather than two half-lives. With e<sup>&minus;0.18</sup> against e<sup>&minus;0.87</sup>, absorption is much faster than elimination.</li>
+<li>Trap: the AUC result for a change in k<sub>a</sub> cannot be read off the slide figure; it comes from the textbook table. Hold the spoken statement that AUC is relatively unchanged.</li>
+<li>She once said "distribution limited" for the usual case; the slide's term, disposition rate limiting, is the one to use.</li>
+<li>The figures on the k<sub>a</sub> and k slide hold the dose at 100 mg and V<sub>D</sub> at 10 L, with the unchanged constant at 0.1 hr<sup>&minus;1</sup>; the k values compared are 0.5, 0.3 and 0.2 hr<sup>&minus;1</sup>.</li>
+<li>The significance slide lists why k<sub>a</sub>, t<sub>max</sub> and C<sub>max</sub> matter: multiple-dose design (peaks and troughs), bioequivalence, choice of route and dosage form, onset of action, and correlation with effect.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question &mdash; posed aloud, 09-21</b>
-<p class="prose">Stem, as she put it to the room: <i>"If I increase the dose. What happens to Team Max? Here's our equation. If I increase the dose, what happens to T-Max?"</i></p>
-<ul>
-<li>Her answer: <i>"Nothing, right? &hellip; T-Max is independent or dependent of dose. Independent, right? So when I ask you this question. Right? We all see it."</i></li>
-<li>She names it as a question she will set.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the AUC is relatively unchanged.</q></li>
 </ul>
-<p class="prose">No written practice question in the collected sources asks a parameter change directly.</p>
-<ul>
-<li>The nearest is the in-class sheet's rate-limiting identification: the two exponents of the supplied equation decide whether the case is disposition or absorption rate limiting.</li>
-</ul></div>
 
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>One parameter is changed and the three outputs are asked about in the same order: C<sub>max</sub>, t<sub>max</sub>, AUC. The answers are directions, not numbers.</li>
-<li>Her closing parts of this kind in earlier modules are free-response prose: <i>"If the dose were doubled, what is the expected change in the half-life of elimination?"</i>, <i>"&hellip;in the clearance?"</i>, <i>"&hellip;in the initial plasma concentration?"</i></li>
-<li>This objective is the oral version of the same shape.</li>
-<li>The rate-limiting question comes as two exponents to compare rather than as two half-lives to look up.</li>
-</ul></div>
+<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "Changing Dose", "Effect of ka and k on Cmax, tmax, and AUC", "Absorption Kinetics Terminology", "Significance of Absorption Rate Constants, tmax, and Cmax", "Example 1", "Example 2"; equation sheet page 1; lecture transcript 09-21; question bank m5-n05, m5-n06, m5-n19, m5-n20, m5-c26.</p>
 </section>
 
 <h2>Module 6 - Multiple Dosings</h2>
-<p class="prose">Three objectives, printed on the "Objectives" slide of 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf.</p>
-<ul>
-<li>The first two were lectured on 23 September and the third on 28 September.</li>
-<li>The multiple-oral deck she files as 6a followed in the same 28 September lecture.</li>
-<li>Her framing: <i>"up to uh till this point, we've been talking about single dose administration. So, today, we're gonna start talking about multiple dosing. We're gonna start with giving multiple IV bolus doses"</i> (09-23).</li>
+<p class="prose">Until now every module gave one dose. This module gives the same dose again and again, as a pharmacist does with TID or BID orders, and asks what the plasma concentration does as the doses add up.</p>
+<ul class="tlist">
+<li>Three objectives, from the "Objectives" slide of the repetitive IV bolus and intermittent IV infusion deck.</li>
+<li>Objectives 1 and 2 were lectured on 23 September; objective 3 on 28 September, in the same lecture that began multiple oral doses.</li>
 </ul>
 
 <section class="gobj" id="gobj-m6-1">
 <h3 data-nav="Module 6, objective 1 &mdash; Explain the principle of superposition and its assumptions in multiple-dose regimens">Module 6 - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Explain the principle of superposition and its assumptions in multiple-dose regimens</b><i>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Drug accumulation with repeated administration" and "Superposition"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>A figure plots grams in the body against days under repeated doses, rising to a plateau &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Drug accumulation with repeated administration".</li>
-<li>Time to plateau will be reached by 3-5 half-lives, and this is independent of the dose.</li>
-<li>If drug input is stopped, most drug will be eliminated in 3-5 half-lives.</li>
-<li>Superposition: drug is eliminated by first-order kinetics, and the pharmacokinetics of the drug after a single dose are not altered after multiple doses &mdash; slide "Superposition".</li>
-<li>The figure marks AUC from 0 to &infin; under the first dose, and AUC from t<sub>1</sub> to t<sub>2</sub> over one interval &tau; at steady state.</li>
-<li>It gives C<sub>av</sub><sup>&infin;</sup> = [AUC]<sub>t1</sub><sup>t2</sup>/&tau;.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>When the same dose is given at a fixed interval, each new dose is added to what is left of the earlier doses, so the peaks and troughs climb.</li>
+<li>The climb stops at a plateau called steady state: every dose then rises to the same peak and falls to the same trough, because the drug eliminated over one interval equals one dose.</li>
+<li>Steady state is reached in 3 to 5 half-lives. That time depends on the half-life only, not on the dose, and after the last dose most of the drug is gone in another 3 to 5 half-lives.</li>
+<li>Superposition says the concentration at any time is the sum of what is left of every dose given so far, each dose following its own single-dose curve.</li>
+<li>It holds under two assumptions: elimination is first order, and the pharmacokinetics after one dose are not altered by later doses, so the half-life and clearance stay the same.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Peaks, troughs and the plateau</span><q>So with each subsequent dose, it goes to the exactly the same max and min. Right? As you're dosing. This plateau piece. Is also known as our steady state.</q><span class="when">09-23 &middot; her words; "min" where the captions print "men"</span></li>
-<li class="said"><span class="lead">Half-lives, not doses</span><q>3 to 5 half-lives, right? Hear my voice in your head, 3 to 5 half-lives.</q> and <q>not 3 to 5 doses, 3 to 5 half-lives, OK? Cause the 2nd bullet, independent of dose</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Linear means first order</span><q>I'm gonna put this word in your brain right now. First order kinetics equals linear pharmacokinetics.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The second assumption</span><q>that means that the half-life and the clearance don't change after multiple doses</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">What superposition lets her do</span><q class="para">We can take this first curve and place it over the curve at steady state, and the same kinetics apply: C = C0e^-kt from one point to the next on the first curve is the same C = C0e^-kt at steady state. The difference is that at the first dose there is no drug in the body, and at steady state there is drug that has accumulated.</q><span class="when">09-23 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">The infinity sign, and the average</span><q>when you see this little infinity sign, right, see infinity, that says infinity equals steady state. So the average concentration of drug in the plasma at steady state is given by AUC divided by tau.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Dosing interval (&tau;, tau)</dt><dd>The time between doses, in hours. TID (three times a day) is &tau; = 8 hr.</dd>
+<dt>Steady state (&infin;)</dt><dd>The plateau where peaks and troughs repeat. A &infin; sign on a symbol means "at steady state".</dd>
+<dt>Peak and trough</dt><dd>The highest concentration in an interval (the maximum) and the lowest, just before the next dose (the minimum), in mg/L.</dd>
+<dt>First-order kinetics</dt><dd>Elimination at a rate proportional to the amount present, with a constant rate constant k (hr<sup>&minus;1</sup>). Also called linear pharmacokinetics.</dd>
+<dt>Half-life (t&frac12;)</dt><dd>The time for the concentration to fall by half, in hours.</dd>
+<dt>Area under the curve (AUC)</dt><dd>The area under the concentration&ndash;time curve, in mg&middot;hr/L.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">C = C<sub>0</sub>e<sup>&minus;kt</sup></div>
+<ul class="tlist">
+<li>C<sub>0</sub> is the concentration just after a dose (mg/L), k the elimination rate constant (hr<sup>&minus;1</sup>), t the time since that dose (hr).</li>
+<li>When to use it: superposition means this single-dose decline applies after every dose, at steady state as well as after the first; only the starting value is higher.</li>
+<li>On the equation sheet: yes, page 1.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>av</sub><sup>&infin;</sup> = {{frac:[AUC]<sub>t1</sub><sup>t2</sup>|&tau;}}</div>
+<ul class="tlist">
+<li>[AUC]<sub>t1</sub><sup>t2</sup> is the area under the curve over one dosing interval at steady state (mg&middot;hr/L); &tau; is that interval (hr).</li>
+<li>When to use it: to define the average concentration at steady state. The figure marks this one-interval area at steady state beside the AUC from 0 to &infin; of the first dose.</li>
+<li>On the equation sheet: no, this AUC form is not printed.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her Example 1 regimen (questions m6-n01, m6-n02, m6-n06): t&frac12; 4 hr, volume of distribution (V<sub>D</sub>) 0.25 L/kg, 10 mg/kg by IV bolus every 8 hours. What is the peak just after the second dose, and when is steady state reached?</p>
+<ol class="gsteps">
+<li>Find the peak after the first dose; the kilograms cancel: C<sub>0</sub> = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L.</li>
+<li>Let the first dose fall for one interval. 8 hours is two half-lives, so it halves twice: 40 &rarr; 20 &rarr; 10 mg/L.</li>
+<li>Add the second dose on top of what is left of the first, which is superposition: 40 + 10 = 50 mg/L.</li>
+<li>Time to steady state is 3 to 5 half-lives: 3 &times; 4 hr = 12 hr to 5 &times; 4 hr = 20 hr.</li>
+</ol>
+<p class="prose">Answer: <b>50 mg/L just after the second dose; steady state within 12 to 20 hours</b>. At steady state the peak reaches 53.3 mg/L, which is the new dose's 40 mg/L plus the 13.3 mg/L trough left from earlier doses.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>She asks for the two assumptions: first-order elimination, and pharmacokinetics unchanged by later doses. The second is the one that names half-life and clearance.</li>
+<li>She asks how long steady state takes. The answer is 3 to 5 half-lives; "3 to 5 doses" and "it depends on the dose" are the two wrong answers she argues against.</li>
+<li>Know that the &infin; sign means steady state, and that "first order" and "linear" mean the same thing in her questions.</li>
+<li>No written poll or practice item in the collected sources asks this objective on its own; it underlies every multiple-dose calculation in objectives 2 and 3.</li>
+<li>Chapter 9 lists what breaks superposition: changing pathophysiology in the patient, saturation of a drug carrier system, enzyme induction or inhibition, and nonlinear pharmacokinetics in general.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">The 09-23 session opened with a quiz on Modules 4 and 5. No written poll or practice item in the collected sources asks this objective on its own.</p>
-<ul>
-<li>Chapter 9 names what breaks superposition: changing pathophysiology in the patient, saturation of a drug carrier system, enzyme induction and enzyme inhibition, and nonlinear pharmacokinetics in general.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>As the two assumptions, first-order elimination and pharmacokinetics unchanged by later doses, where the second is the one with half-life and clearance in it.</li>
-<li>As the time to plateau, where "3 to 5 doses" and "depends on the dose" are the two answers she argues against.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>not 3 to 5 doses, 3 to 5 half-lives, OK? Cause the 2nd bullet, independent of dose</q> (09-23)</li>
+<li><q>I'm gonna put this word in your brain right now. First order kinetics equals linear pharmacokinetics.</q> (09-23)</li>
+</ul>
+<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Drug accumulation with repeated administration" and "Superposition"; 09-23 lecture; Chapter 9, Multiple-Dosage Regimens; questions m6-n01, m6-n02, m6-n06.</p>
 </section>
 
 <section class="gobj" id="gobj-m6-2">
 <h3 data-nav="Module 6, objective 2 &mdash; Predict the concentration of drug in the plasma at any time following multiple IV bolus injections of drug">Module 6 - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Predict the concentration of drug in the plasma at any time following multiple IV bolus injections of drug</b><i>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Amount of Drug in the Body Following Repeated IV Bolus Injections" through "Example 3"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Drug in the body following a single rapid IV injection is eliminated according to first-order kinetics &mdash; slide "Amount of Drug in the Body Following Repeated IV Bolus Injections".</li>
-<li>D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;k&tau;</sup>, where &tau; is equal to the dosage interval.</li>
-<li>Amounts of drug in the body at steady state &mdash; slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections".</li>
-<li>Maximum: D<sub>max</sub><sup>&infin;</sup> = D<sub>0</sub>/(1 &minus; e<sup>&minus;k&tau;</sup>).</li>
-<li>Minimum: D<sub>min</sub><sup>&infin;</sup> = D<sub>0</sub>e<sup>&minus;k&tau;</sup>/(1 &minus; e<sup>&minus;k&tau;</sup>).</li>
-<li>Average: D<sub>avg</sub><sup>&infin;</sup> = FD<sub>0</sub>/k&tau;.</li>
-<li>Concentrations at steady state &mdash; slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections".</li>
-<li>Maximum: C<sub>max</sub><sup>&infin;</sup> = D<sub>max</sub><sup>&infin;</sup>/V<sub>D</sub> = C<sub>0</sub>/(1 &minus; e<sup>&minus;k&tau;</sup>).</li>
-<li>Minimum: C<sub>min</sub><sup>&infin;</sup> = D<sub>min</sub><sup>&infin;</sup>/V<sub>D</sub> = C<sub>0</sub>e<sup>&minus;k&tau;</sup>/(1 &minus; e<sup>&minus;k&tau;</sup>).</li>
-<li>Average: C<sub>avg</sub><sup>&infin;</sup> = D<sub>avg</sub><sup>&infin;</sup>/V<sub>D</sub> = FD<sub>0</sub>/V<sub>D</sub>k&tau; = FD<sub>0</sub>/Cl<sub>T</sub>&tau;.</li>
-<li>Example 1: an antibiotic with an average t&frac12; of approximately 4 hours and an apparent V<sub>D</sub> that is 25% of body weight &mdash; slide "Example 1".</li>
-<li>The dose is 10 mg/kg every 8 hours by multiple IV bolus injections to a 65-kg female.</li>
-<li>It asks (a) the maximum, (b) the minimum and (c) the average concentration at steady state.</li>
-<li>C<sub>p</sub> = (D<sub>0</sub>/V<sub>D</sub>)[(1 &minus; e<sup>&minus;nk&tau;</sup>)/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt</sup> &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses".</li>
-<li>Example 2: the same antibiotic, the concentration 3 hours after injection of the 2nd dose &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 2".</li>
-<li>C<sub>p</sub> = (D<sub>0</sub>/V<sub>D</sub>)[1/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt</sup> &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Steady State".</li>
-<li>Example 3: the same antibiotic, the concentration 3 hours after injection of the last dose, assuming steady state was attained &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 3".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>After one IV bolus, the drug falls by first-order elimination; the fraction still in the body when the next dose is due is e<sup>&minus;k&tau;</sup>.</li>
+<li>That leftover is why drug accumulates. At steady state every peak equals the first-dose peak multiplied by an accumulation factor that holds only k and &tau;.</li>
+<li>The steady-state trough is one interval of decline after the steady-state peak, so it is at the end of the dosing interval.</li>
+<li>The average at steady state is not the midpoint of peak and trough, because the decline is exponential; it comes from the dose, the clearance and the interval.</li>
+<li>Before steady state, a dose-number term n tracks how far the climb has gone. After the last dose, the level simply falls from the last peak.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Frequency against interval</span><q>What does TID mean? 3 times a day. That is the frequency that you would give the dose, right? So, the interval would be what?</q> The room answers 8 hours, and she adds <q>as pharmacists, we think TID and BID, right?</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The factor that keeps appearing</span><q>we've got this 1/1 minus E to the -K tau, which will, you will see over and over again, because that tells us how much drug is accumulated in the body at steady state</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Where the minimum is</span><q>the min occurs at the end of the dosing interval</q><span class="when">09-23 &middot; her words; "min" where the captions print "men"</span></li>
-<li class="said"><span class="lead">The average is not the midpoint</span><q>I want you to realize that the average is not the max plus the min divided by 2</q>, because the decline is logarithmic and <q>it is not an, um, algebraic mean</q><span class="when">09-23 &middot; her words; "min" where the captions print "men"</span></li>
-<li class="said"><span class="lead">F in the average</span><q>Bolus dosing, IV dosing, this F is equal to 1. Right? For for IV dosing. For oral, you will have given, provided, or we will calculate a bioavailability factor.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">A check on the steady-state peak</span><q>Anybody get a value greater than 40 mg per liter? OK. What'd you get? Cause if you got a value less than 40 mg per liter, you've done something wrong.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Work from the process, not the sheet</span><q class="para">You have the equation sheet and can find the equation and punch in every variable. But if you think about what is going on from max to min, it is first-order elimination, C = C0e^-kt, and that makes it much easier; you do not spend five minutes looking for the equation.</q><span class="when">09-23 &middot; restated from a garbled caption</span></li>
-<li class="said"><span class="lead">n and t</span><q>the um N is 2, right? Because that's the dose number, the second dose, and the um lowercase t at the end of it is 3, because we're looking at the concentration 3 hours out.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">After the last dose</span><q>Last dose, we're gonna start at 53.3, and then it's just C0E minus KT.</q><span class="when">09-23 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Dose (D<sub>0</sub>)</dt><dd>The amount given each time, in mg.</dd>
+<dt>Apparent volume of distribution (V<sub>D</sub>)</dt><dd>The volume that relates amount in the body to plasma concentration, in L (or L/kg).</dd>
+<dt>First-dose peak (C<sub>0</sub>)</dt><dd>The concentration just after the first IV bolus, D<sub>0</sub> divided by V<sub>D</sub>, in mg/L.</dd>
+<dt>Elimination rate constant (k)</dt><dd>The first-order rate constant, in hr<sup>&minus;1</sup>; k = 0.693 divided by the half-life (t&frac12;).</dd>
+<dt>Dosing interval (&tau;)</dt><dd>The time between doses, in hr. TID (three times a day) is 8 hr; it is the interval, not the frequency.</dd>
+<dt>Steady state (&infin;)</dt><dd>The plateau; C<sub>max</sub><sup>&infin;</sup>, C<sub>min</sub><sup>&infin;</sup> and C<sub>avg</sub><sup>&infin;</sup> are its peak, trough and average, in mg/L.</dd>
+<dt>Bioavailability (F)</dt><dd>The fraction of the dose that reaches the circulation; F = 1 for IV dosing.</dd>
+<dt>Total clearance (Cl<sub>T</sub>)</dt><dd>The volume of plasma cleared of drug per unit time, in L/hr; it equals V<sub>D</sub> times k.</dd>
+<dt>Dose number (n)</dt><dd>The number of the dose just given, before steady state.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;k&tau;</sup></div>
+<ul class="tlist">
+<li>D<sub>B</sub> is the amount still in the body (mg) one interval &tau; after a dose D<sub>0</sub> (mg).</li>
+<li>When to use it: to see what fraction of a dose is left when the next one is given; that fraction is what accumulates.</li>
+<li>On the equation sheet: not with &tau; written in; D = D<sub>0</sub>e<sup>&minus;kt</sup> on page 1 is the same line with t = &tau;.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Accumulation factor: r = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}</div>
+<ul class="tlist">
+<li>k in hr<sup>&minus;1</sup> and &tau; in hr, so k&tau; has no units. r is the steady-state peak divided by the first-dose peak.</li>
+<li>When to use it: inside every steady-state peak and trough below. It does not depend on the dose, and a shorter interval makes it larger.</li>
+<li>On the equation sheet: it appears inside the C<sub>max</sub><sup>&infin;</sup>, C<sub>min</sub><sup>&infin;</sup> and n-dose lines of the multiple-dosing group.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>max</sub><sup>&infin;</sup> = C<sub>0</sub> &times; r = {{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}, &nbsp; with C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}</div>
+<ul class="tlist">
+<li>C<sub>0</sub> is the first-dose peak (mg/L); the result is the steady-state peak (mg/L).</li>
+<li>When to use it: the maximum concentration at steady state. It must come out higher than C<sub>0</sub>.</li>
+<li>On the equation sheet: yes, in the multiple-dosing group.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>min</sub><sup>&infin;</sup> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;k&tau;</sup> = {{frac:C<sub>0</sub>e<sup>&minus;k&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}</div>
+<ul class="tlist">
+<li>Same symbols; the result is the steady-state trough (mg/L), at the end of the interval.</li>
+<li>When to use it: the minimum at steady state. Her route is the left form: start at C<sub>max</sub><sup>&infin;</sup> and apply C = C<sub>0</sub>e<sup>&minus;kt</sup> with t = &tau;.</li>
+<li>On the equation sheet: yes, in the multiple-dosing group.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>k&tau;}} = {{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}}</div>
+<ul class="tlist">
+<li>F is bioavailability (1 for IV), D<sub>0</sub> the dose (mg), V<sub>D</sub> in L, k in hr<sup>&minus;1</sup>, Cl<sub>T</sub> in L/hr, &tau; in hr; the result is in mg/L.</li>
+<li>When to use it: the average concentration at steady state. No exponential and no accumulation factor are needed.</li>
+<li>On the equation sheet: the V<sub>D</sub>k&tau; form, yes, page 1; the Cl<sub>T</sub>&tau; form is not printed.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">D<sub>max</sub><sup>&infin;</sup> = {{frac:D<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}} &nbsp; D<sub>min</sub><sup>&infin;</sup> = {{frac:D<sub>0</sub>e<sup>&minus;k&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}} &nbsp; D<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|k&tau;}}</div>
+<ul class="tlist">
+<li>The same three results as amounts in the body (mg). Dividing any of them by V<sub>D</sub> gives the matching concentration.</li>
+<li>When to use it: when the question asks for an amount, such as the average amount of drug in the body at steady state.</li>
+<li>On the equation sheet: D<sub>max</sub><sup>&infin;</sup> and D<sub>avg</sub><sup>&infin;</sup>, yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">After n doses: C<sub>p</sub> = (first-dose part) &times; (build-up after n doses) &times; (decay since dose n)</div>
+<div class="geqline">first-dose part = {{frac:D<sub>0</sub>|V<sub>D</sub>}}</div>
+<div class="geqline">build-up after n doses = {{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}</div>
+<div class="geqline">decay since dose n = e<sup>&minus;kt</sup></div>
+<ul class="tlist">
+<li>n is the dose number just given; t is the time since that dose (hr), not since the first dose.</li>
+<li>When to use it: a concentration a stated time after the n-th dose, before steady state.</li>
+<li>As n grows, e<sup>&minus;nk&tau;</sup> falls towards 0, the build-up term becomes the accumulation factor r, and this becomes the steady-state line below.</li>
+<li>On the equation sheet: yes, in the multiple-dosing group.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">At steady state: C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}} &times; r &times; e<sup>&minus;kt</sup> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;kt</sup></div>
+<ul class="tlist">
+<li>r is the accumulation factor above; t is the time since the most recent dose (hr).</li>
+<li>When to use it: any time within a steady-state interval, and any time after the last dose, when the level just falls from C<sub>max</sub><sup>&infin;</sup>.</li>
+<li>On the equation sheet: no; the n-dose line becomes it as n grows.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her Example 1 (questions m6-n03 to m6-n05): an antibiotic with t&frac12; about 4 hr and V<sub>D</sub> 25% of body weight, 10 mg/kg every 8 hours by IV bolus to a 65-kg female. Find the maximum, minimum and average at steady state.</p>
+<ol class="gsteps">
+<li>Put dose and volume on the same basis; 25% of body weight is 0.25 L/kg: C<sub>0</sub> = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L (650 mg over 16.25 L gives the same).</li>
+<li>Get k from the half-life: k = {{frac:0.693|4 hr}} = 0.1733 hr<sup>&minus;1</sup>.</li>
+<li>Work out the exponent and the fraction left after one interval: k&tau; = 0.1733 &times; 8 = 1.386, so e<sup>&minus;1.386</sup> = 0.25.</li>
+<li>Steady-state peak: C<sub>max</sub><sup>&infin;</sup> = {{frac:40 mg/L|1 &minus; 0.25}} = {{frac:40 mg/L|0.75}} = 53.3 mg/L.</li>
+<li>Steady-state trough, one interval later: C<sub>min</sub><sup>&infin;</sup> = 53.3 mg/L &times; 0.25 = 13.3 mg/L.</li>
+<li>Average, with F = 1 for IV: C<sub>avg</sub><sup>&infin;</sup> = {{frac:40 mg/L|1.386}} = 28.9 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>C<sub>max</sub><sup>&infin;</sup> = 53.3 mg/L, C<sub>min</sub><sup>&infin;</sup> = 13.3 mg/L, C<sub>avg</sub><sup>&infin;</sup> = 28.9 mg/L</b>. The average sits below the midpoint of peak and trough, 33.3 mg/L.</p>
+<p class="prose">Her Example 2 (question m6-n06), same regimen: the concentration 3 hours after the 2nd dose.</p>
+<ol class="gsteps">
+<li>Two doses is not steady state, so use the n-dose line with n = 2 and t = 3 hr; the first-dose part is 40 mg/L.</li>
+<li>Build-up after 2 doses: {{frac:1 &minus; e<sup>&minus;2(1.386)</sup>|1 &minus; e<sup>&minus;1.386</sup>}} = {{frac:1 &minus; 0.0625|1 &minus; 0.25}} = 1.25, so the peak after dose 2 is 40 &times; 1.25 = 50 mg/L.</li>
+<li>Decay for 3 hours: e<sup>&minus;(0.1733)(3)</sup> = e<sup>&minus;0.520</sup> = 0.595.</li>
+<li>Multiply the parts: C<sub>p</sub> = 40 mg/L &times; 1.25 &times; 0.595 = 29.7 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>29.7 mg/L</b>.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>One patient vignette asked in parts: first-dose peak, first-dose trough, steady-state maximum, minimum and average, then a time before steady state and a time after the last dose.</li>
+<li>Dose and volume come per kilogram, or scaled from a per-70-kg or per-100-kg value, so the first step is putting both on the same basis.</li>
+<li>Frequency is given as TID or BID; convert it to the interval &tau; (TID is 8 hr) before using any equation.</li>
+<li>Her check on the steady-state peak: it must be above the first-dose peak (40 mg/L in Example 1). A smaller value means the accumulation factor was multiplied in the wrong direction.</li>
+<li>The trough, and any time after the last dose, are C = C<sub>0</sub>e<sup>&minus;kt</sup> started from the steady-state peak. She prefers this route to searching the sheet for the matching line.</li>
+<li>In the n-dose line, n is the dose number and t the hours since that dose; in Example 2, n = 2 and t = 3.</li>
+<li>Multiple-IV-Bolus-Practice-1 runs the same battery on 1 g every 8 hours to a 65-kg patient. Keyed: t&frac12; 4 hr, first-dose C<sub>max</sub> 58.72 and C<sub>min</sub> 14.69 mg/L.</li>
+<li>Its keyed steady-state values: C<sub>max</sub><sup>&infin;</sup> 78.31, C<sub>min</sub><sup>&infin;</sup> 19.59, C<sub>avg</sub><sup>&infin;</sup> 42.37 mg/L and D<sub>avg</sub><sup>&infin;</sup> 721.61 mg; also 9.799 mg/L 12 hours after the last dose.</li>
+<li>That practice set also asks the renal mechanism; its key gives glomerular filtration with tubular reabsorption.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions, posed aloud on 09-23</b>
-<p class="prose">Before Example 1 she added two first-dose parts that are not on the slide.</p>
-<ul>
-<li>The maximum concentration of the first dose: her answer 40 mg/L, since 10 mg/kg over 0.25 L/kg cancels the kilograms.</li>
-<li>The minimum after the first dose: 10 mg/L, <i>"I'm asking you concentration and 2 half-lives"</i>.</li>
-<li>Then: <i>"Relative to the first dose, what do you expect the maximum concentration at steady state to be?"</i> Higher, because drug has accumulated.</li>
-<li>Her answers to the slide parts: 53.3, 13.3 and 28.9 mg/L; to Example 2, 29.7 mg/L.</li>
-<li>The recording ends as she asks for the concentration 4 hours after the last dose, one half-life after the 53.3 mg/L peak.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>I want you to realize that the average is not the max plus the min divided by 2</q> (09-23)</li>
+<li><q>Bolus dosing, IV dosing, this F is equal to 1. Right? For for IV dosing. For oral, you will have given, provided, or we will calculate a bioavailability factor.</q> (09-23)</li>
 </ul>
-<p class="prose">Multiple-IV-Bolus-Practice-1 asks the same battery on one gram every 8 hours to a 65-kg patient.</p>
-<ul>
-<li>Keyed first-dose values: t&frac12; 4 hr, C<sub>max</sub> 58.72 and C<sub>min</sub> 14.69 mg/L.</li>
-<li>Keyed steady-state values: C<sub>max</sub><sup>&infin;</sup> 78.31, C<sub>min</sub><sup>&infin;</sup> 19.59, C<sub>avg</sub><sup>&infin;</sup> 42.37 mg/L, D<sub>avg</sub><sup>&infin;</sup> 721.61 mg.</li>
-<li>Also keyed: 9.799 mg/L 12 hours after the last dose, and a renal mechanism of glomerular filtration with tubular reabsorption.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>One patient vignette asked in parts, in the order first-dose peak, first-dose trough, steady-state maximum, minimum and average, then a time before steady state and a time after the last dose.</li>
-<li>Dose and volume are both given per kilogram, or scaled from a per-70-kg or per-100-kg value, so the first step is putting both on the same basis.</li>
-<li>The steady-state trough, and every time after the last dose, are C = C<sub>0</sub>e<sup>&minus;kt</sup> with the steady-state peak as the starting value.</li>
-</ul></div>
+<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Amount of Drug in the Body Following Repeated IV Bolus Injections", "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections", "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections", "Example 1", "Plasma Drug Concentration at Any Time After n Doses", "Example 2", "Plasma Drug Concentration at Steady State", "Example 3"; 09-23 lecture; Multiple-IV-Bolus-Practice-1 and its key; questions m6-n03 to m6-n06.</p>
 </section>
 
 <section class="gobj" id="gobj-m6-3">
 <h3 data-nav="Module 6, objective 3 &mdash; Predict the concentration of drug in the plasma at any time following multiple IV infusions of drug">Module 6 - Objective 3</h3>
 <div class="gbar"><span>Objective</span><b>Predict the concentration of drug in the plasma at any time following multiple IV infusions of drug</b><i>6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Intermittent Intravenous Infusions" through "Summary"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Rationale: prevent high drug concentrations and accompanying side effects &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Rationale".</li>
-<li>Many drugs are better tolerated when infused slowly over time compared to IV bolus dosing.</li>
-<li>Administering one or more doses by IV infusion: C<sub>p</sub> = (R/V<sub>D</sub>k)(1 &minus; e<sup>&minus;kt</sup>) &mdash; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Administering One or More Doses by IV Infusion".</li>
-<li>Example 4: a 300-mg dose of an antibiotic administered as an IV infusion over a period of 2 hours &mdash; slide "Example 4".</li>
-<li>Six hours after the start of the first infusion, a second dose of 300 mg is infused, again over 2 hours (k = 0.15 h<sup>&minus;1</sup>, V<sub>D</sub> = 15 L).</li>
-<li>It asks (a) the concentration at the end of the first infusion and (b) the concentration 4 hours after the cessation of the second infusion.</li>
-<li>Summary: with basic knowledge of the pharmacokinetics of a single dose, one can predict the concentration of drug in the plasma following repetitive IV bolus injections or intermittent IV infusions &mdash; slide "Summary".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>An intermittent IV infusion gives each dose slowly over a set time instead of all at once, which prevents high concentrations and the side effects that go with them.</li>
+<li>No new equation is needed. During each infusion the level rises by the single-infusion equation from Module 3; when it stops, the level falls by first-order elimination.</li>
+<li>The same drug at the same rate for the same duration reaches the same end-of-infusion concentration every time, and that value is the starting point for the fall.</li>
+<li>Because elimination is first order, the contributions of separate infusions add (superposition), so the concentration at a later time is the sum of what is left of each one.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">Why infuse rather than push</span><q>some drugs aren't are better tolerated when they are infused slowly versus all at once, OK?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The same equation, with t the infusion time</span><q>this is the same equation that we had when we talked about our single IV infusion, right? So, the assumption here is that we're going to put the same drug into the body at the same rate um for the same duration of time.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Why the end-of-infusion concentration comes first</span><q>What happens when we stop the infusion? It's only elimination.</q> and <q>So that C0 is gonna be the concentration at the end of the infusion, right?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The number line</span><q>Now, right here, I draw myself a little line, a little number line, like in 1st grade.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The part to pay attention to</span><q>We are interested in the concentration from this red infusion where we stop at time 2. All the way out here on our number line at 12 hours later. So, the time that we're interested in is going to be the time that we're interested 12 minus 2, OK? So, 10 hours.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The contributions add</span><q>the concentrations from each administration of the dose will be additive over time</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Infusion rate (R)</dt><dd>The dose divided by the infusion time, in mg/hr. A constant-rate input is zero order.</dd>
+<dt>Elimination rate constant (k)</dt><dd>The first-order rate constant, in hr<sup>&minus;1</sup>; k = 0.693 divided by the half-life (t&frac12;).</dd>
+<dt>Apparent volume of distribution (V<sub>D</sub>)</dt><dd>In L; V<sub>D</sub> times k is the clearance.</dd>
+<dt>Clearance (Cl)</dt><dd>The volume of plasma cleared of drug per unit time, in L/hr.</dd>
+<dt>End-of-infusion concentration (C<sub>end</sub>)</dt><dd>The plasma concentration at the moment an infusion stops, in mg/L; it is the C<sub>0</sub> for the decline that follows.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>The plateau a continuous infusion at rate R would reach, in mg/L. Short infusions stop well below it.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">R = {{frac:dose|infusion time}}</div>
+<ul class="tlist">
+<li>Dose in mg, infusion time in hr, R in mg/hr.</li>
+<li>When to use it: always first, because the stem gives a dose and a duration while the infusion equation needs a rate.</li>
+<li>On the equation sheet: the sources do not list it; it is the definition of a rate.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">During an infusion: C<sub>p</sub> = {{frac:R|V<sub>D</sub>k}} (1 &minus; e<sup>&minus;kt</sup>)</div>
+<ul class="tlist">
+<li>R in mg/hr, V<sub>D</sub>k is the clearance in L/hr, so {{frac:R|V<sub>D</sub>k}} is in mg/L; t is the time the pump has run (hr).</li>
+<li>When to use it: the concentration at the end of an infusion, with t = the infusion time (2 hr in Example 4), never the 6-hour spacing.</li>
+<li>On the equation sheet: yes, as the infusion line.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">After an infusion stops: C = C<sub>end</sub>e<sup>&minus;kt</sup></div>
+<ul class="tlist">
+<li>C<sub>end</sub> is the end-of-infusion concentration (mg/L); t is the time since that infusion ended (hr), not since it started.</li>
+<li>When to use it: once per infusion, each with its own t; then add the results.</li>
+<li>On the equation sheet: yes, as C = C<sub>0</sub>e<sup>&minus;kt</sup>, page 1.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Two infusions: C = C<sub>end</sub>e<sup>&minus;kt<sub>1</sub></sup> + C<sub>end</sub>e<sup>&minus;kt<sub>2</sub></sup></div>
+<ul class="tlist">
+<li>t<sub>1</sub> is the time since the first infusion ended and t<sub>2</sub> the time since the second ended (hr).</li>
+<li>When to use it: a concentration after both infusions have stopped. Draw a number line of start and stop times first.</li>
+<li>On the equation sheet: not as one line; it is the page-1 decay line used once for each infusion.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>ss</sub> = {{frac:R|Cl}}</div>
+<ul class="tlist">
+<li>R in mg/hr, Cl in L/hr, C<sub>ss</sub> in mg/L.</li>
+<li>When to use it: only for the concentration a continuous infusion at the same rate would reach.</li>
+<li>On the equation sheet: yes, page 1.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her Example 4 (questions m6b-n02 and m6b-n03): 300 mg infused over 2 hours; a second 300 mg starts 6 hours after the first started, again over 2 hours (k = 0.15 hr<sup>&minus;1</sup>, V<sub>D</sub> = 15 L). Find (a) the concentration at the end of the first infusion and (b) 4 hours after the second infusion stops.</p>
+<ol class="gsteps">
+<li>Turn the dose into a rate: R = {{frac:300 mg|2 hr}} = 150 mg/hr.</li>
+<li>Find the clearance and the plateau: V<sub>D</sub>k = (15 L)(0.15 hr<sup>&minus;1</sup>) = 2.25 L/hr, and {{frac:150 mg/hr|2.25 L/hr}} = 66.67 mg/L.</li>
+<li>Fraction reached in 2 hours: 1 &minus; e<sup>&minus;(0.15)(2)</sup> = 1 &minus; 0.7408 = 0.2592.</li>
+<li>(a) End of the first infusion: C<sub>p</sub> = 66.67 &times; 0.2592 = 17.28 mg/L. The second infusion is identical, so it also ends at 17.28 mg/L.</li>
+<li>Draw the number line: infusion 1 runs 0 to 2 hr, infusion 2 runs 6 to 8 hr, and the time asked for is 8 + 4 = 12 hr.</li>
+<li>Give each infusion its own t: 12 &minus; 2 = 10 hr for the first, 12 &minus; 8 = 4 hr for the second.</li>
+<li>First infusion's leftover: 17.28 &times; e<sup>&minus;(0.15)(10)</sup> = 17.28 &times; 0.2231 = 3.86 mg/L.</li>
+<li>Second infusion's leftover: 17.28 &times; e<sup>&minus;(0.15)(4)</sup> = 17.28 &times; 0.5488 = 9.48 mg/L.</li>
+<li>(b) Add them: C = 3.86 + 9.48 = 13.34 mg/L.</li>
+</ol>
+<p class="prose">Answer: <b>(a) 17.28 mg/L; (b) 13.34 mg/L</b>. Her stated answer to (b) is 13.33 mg/L; the difference is rounding.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Two infusions of the same dose and duration, the second starting a stated number of hours after the first starts. She asks the end of the first infusion, then a stated time after the second ends.</li>
+<li>The elimination parameter arrives as k, as a half-life, or as a clearance with a volume, so the first step changes: convert to k (and to R) before anything else.</li>
+<li>Usual trap: using the same t for both infusions. Each t runs from the end of its own infusion, which the number line makes clear.</li>
+<li>Second trap: putting the 6-hour spacing into the infusion equation. Its t is the infusion time only.</li>
+<li>In-Class Activity problem 1: 500 mg over 2 hr, second infusion 6 hr after the first starts, t&frac12; 3 hr, V<sub>D</sub> 18 L. Her confirmed answers: 22.2 mg/L, and "eleven-ish" 4 hr after the second ends.</li>
+<li>Problem 2: 150 mg over 1.5 hr (Cl 2.54 L/hr, V<sub>D</sub> 22 L), second starting 8 hr after the first. End of first infusion 6.26 mg/L; 6 hr after the second, 6.26e<sup>&minus;0.115(6)</sup> + 6.26e<sup>&minus;0.115(14)</sup>.</li>
+<li>A closing part asks what a continuous infusion at the same rate would reach: {{frac:R|Cl}}, 39.37 mg/L in problem 2.</li>
 </ul>
 
-<div class="gpoll"><b>Her own questions, 09-28</b>
-<p class="prose">Example 4, worked on the slides:</p>
-<ul>
-<li>17.28 mg/L at the end of the first infusion.</li>
-<li>13.33 mg/L 4 hours after the second ends, as 17.3e<sup>&minus;0.15(10)</sup> + 17.3e<sup>&minus;0.15(4)</sup>.</li>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>the concentrations from each administration of the dose will be additive over time</q> (09-28)</li>
+<li><q>So that C0 is gonna be the concentration at the end of the infusion, right?</q> (09-28)</li>
 </ul>
-<p class="prose">The In-Class Activity sheet, Multiple IV Infusions, has two problems.</p>
-<ul>
-<li>Problem 1: 500 mg over 2 hours, the second infusion starting 6 hours after the first, t&frac12; 3 hr, V<sub>D</sub> 18 L.</li>
-<li>Problem 1 asks for the end of the first infusion and 4 hours after the end of the second. Her confirmed answers: 22.2 mg/L and "eleven-ish".</li>
-<li>Problem 2: 150 mg over 1.5 hours (Cl 2.54 L/hr, V<sub>D</sub> 22 L), the second starting 8 hours after the first.</li>
-<li>Problem 2 asks for the end of the first infusion (6.26 mg/L), and 6 hours after the end of the second, set up as 6.26e<sup>&minus;0.115(6)</sup> + 6.26e<sup>&minus;0.115(14)</sup>.</li>
-<li>Its last part asks the steady state of a continuous infusion at that rate: R/Cl = 39.37 mg/L.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>Two infusions of the same dose and duration, the second starting a stated number of hours after the first starts, then the concentration at the end of the first infusion and a stated number of hours after the end of the second.</li>
-<li>The elimination parameter arrives as k, as a half-life, or as a clearance with a volume, so the first step differs each time.</li>
-<li>A closing part asks what a continuous infusion at the same rate would reach: R/Cl.</li>
-</ul></div>
+<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale", "Administering One or More Doses by IV Infusion", "Example 4", "What is the plasma drug concentration at the end of the first infusion?", "What is the plasma drug concentration 4 hours after the cessation of the second infusion?", "Summary"; 09-28 lecture; In-Class Activity, Multiple IV Infusions; questions m6b-n01 to m6b-n03.</p>
 </section>
 
 <h2>Module 6 - Multiple Oral Doses</h2>
-<p class="prose">Two objectives, printed on the "Objectives" slide of 6a---Multiple-Oral-Doses.pdf. Her framing: <i>"For a multiple dosing, multiple oral dosing, our equations look a little bit uglier. Don't panic"</i> (09-28).</p>
+<p class="prose">Two objectives: calculating the plasma concentration when a drug is taken by mouth again and again, and predicting what happens when the dose or the dosing interval is changed.</p>
 
 <section class="gobj" id="gobj-m6a-1">
 <h3 data-nav="Module 6a, objective 1 &mdash; Calculate plasma drug concentration following multiple extravascular administrations of drug">Module 6a - Objective 1</h3>
 <div class="gbar"><span>Objective</span><b>Calculate plasma drug concentration following multiple extravascular administrations of drug</b><i>6a---Multiple-Oral-Doses.pdf, slides "Cp vs. Time for a Single Oral Dose" through "Example 1"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>The single-oral-dose curve and equation again, with t<sub>max</sub> = ln(k<sub>a</sub>/k)/(k<sub>a</sub> &minus; k) &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Cp vs. Time for a Single Oral Dose".</li>
-<li>Concentration at any time after n doses &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Concentration of Drug in the Plasma at Any Time".</li>
-<li>It is the single-dose prefactor Fk<sub>a</sub>D<sub>0</sub>/(V<sub>D</sub>(k<sub>a</sub> &minus; k)) multiplied by the difference of two terms.</li>
-<li>First term: [(1 &minus; e<sup>&minus;nk&tau;</sup>)/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt</sup>.</li>
-<li>Second term: [(1 &minus; e<sup>&minus;nk<sub>a</sub>&tau;</sup>)/(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>)]e<sup>&minus;k<sub>a</sub>t</sup>.</li>
-<li>At steady state each numerator is 1.</li>
-<li>Peak, trough and average at steady state &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Peak, Trough and Average Plasma Concentrations at Steady State".</li>
-<li>Peak: C<sub>max</sub><sup>&infin;</sup> = (FD<sub>0</sub>/V<sub>D</sub>)[1/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;kt<sub>max</sub>&infin;</sup>.</li>
-<li>Trough: C<sub>min</sub><sup>&infin;</sup> = [k<sub>a</sub>FD<sub>0</sub>/(V<sub>D</sub>(k<sub>a</sub> &minus; k))][1/(1 &minus; e<sup>&minus;k&tau;</sup>)]e<sup>&minus;k&tau;</sup>.</li>
-<li>Average: C<sub>avg</sub><sup>&infin;</sup> = FD<sub>0</sub>/Cl<sub>T</sub>&tau;.</li>
-<li>t<sub>max</sub><sup>&infin;</sup> = [1/(k<sub>a</sub> &minus; k)] ln[k<sub>a</sub>(1 &minus; e<sup>&minus;k&tau;</sup>)/(k(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>))] &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Time to Peak at Steady State".</li>
-<li>Example 1: an adult male (75 kg) received 250 mg tetracycline hydrochloride orally every 8 hours for 2 weeks &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Example 1".</li>
-<li>The drug is about 75% bioavailable, V<sub>D</sub> 1.5 L/kg, t&frac12; about 10 hours, k<sub>a</sub> 0.9 hr<sup>&minus;1</sup>.</li>
-<li>Calculate C<sub>max</sub> of the first dose, and C<sub>max</sub>, C<sub>min</sub> and C<sub>avg</sub> at steady state.</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Extravascular means given outside a blood vessel; here it means by mouth. Each oral dose has to be absorbed before it reaches the plasma, so the concentration rises to a peak and then falls.</li>
+<li>When the next dose arrives before the last one is gone, drug builds up (accumulates) until each interval looks the same. That repeating pattern is steady state.</li>
+<li>The multiple-oral-dose equations are the single-oral-dose equation from Module 5 with extra factors attached, one for each thing that repeating the dose adds.</li>
+<li>For an oral dose the peak is not at the moment of dosing, so the time to peak (t<sub>max</sub>) has to be found before the peak concentration (C<sub>max</sub>), both for the first dose and at steady state.</li>
+<li>At steady state the peak comes earlier and is higher than after the first dose, because drug from earlier doses is still in the body.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">What is new in the long equation</span><q>But the only difference here, well, one of the differences is this in. Again, what number of dose are we on? And now we have the tau. What is our dosing interval?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">How to tell the oral peak from the bolus peak on the sheet</span><q>what tells you that this is for an oral dose? F is one thing. I, I heard tau, but tau is just our dosing interval, so we could give multiple bolus, we could give multiple oral. What else tells us? Team Max, right?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Only oral needs t<sub>max</sub></span><q>Only for oral do you need to find T Max. OK. Now, I might ask you what is the max for a bolus dose, and you know that that is C0, right? OK. But max for an oral dose, you have to find T-Max before you can find C-Max.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">What t<sub>max</sub> at steady state depends on</span><q>for at steady state following multiple oral dosing. Depends on K, KA and tau. OK. Single oral dose, K and KA.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">The direction of the change</span><q>That steady state TMAX is going to be lower than the T-Max of the first dose, OK?</q> and <q>The expectation is that the steady-state concentration is gonna be higher than the first dose because there is drug that is accumulated in the body.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Where the equations sit on the sheet</span><q>I think this is on the backside or at the bottom very bottom of the right hand column. C-Max at um steady state for an oral dose.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Dosing interval (&tau;, tau)</dt><dd>Time from one dose to the next, in hr; 8 hr in her tetracycline example.</dd>
+<dt>Dose number (n)</dt><dd>Which dose the patient is on: 1 for the first dose, 2 for the second, and so on. No units.</dd>
+<dt>Steady state (&infin;)</dt><dd>The point after many doses where every interval repeats the same peak, trough and average; a superscript &infin; marks a steady-state value.</dd>
+<dt>Bioavailability (F)</dt><dd>Fraction of the oral dose that reaches the systemic circulation, no units; 75% is written F = 0.75.</dd>
+<dt>Dose (D<sub>0</sub>)</dt><dd>Amount given each time, in mg.</dd>
+<dt>Absorption rate constant (k<sub>a</sub>)</dt><dd>First-order rate constant for absorption from the gut, in hr<sup>&minus;1</sup>.</dd>
+<dt>Elimination rate constant (k)</dt><dd>First-order rate constant for elimination, in hr<sup>&minus;1</sup>; k = {{frac:0.693|t<sub>&frac12;</sub>}}, where t<sub>&frac12;</sub> is the half-life in hr.</dd>
+<dt>Apparent volume of distribution (V<sub>D</sub>)</dt><dd>Volume that relates the amount in the body to the plasma concentration, in L; often given in L/kg and multiplied by body weight.</dd>
+<dt>Total clearance (Cl<sub>T</sub>)</dt><dd>Volume of plasma cleared of drug per unit time, in L/hr; Cl<sub>T</sub> = V<sub>D</sub>k.</dd>
+<dt>Plasma concentration (C<sub>p</sub>)</dt><dd>Drug concentration in plasma at a stated time, in mg/L.</dd>
+<dt>t<sub>max</sub> and C<sub>max</sub></dt><dd>Time to the peak (hr) and the peak concentration (mg/L) after a single dose.</dd>
+<dt>t<sub>max</sub><sup>&infin;</sup>, C<sub>max</sub><sup>&infin;</sup>, C<sub>min</sub><sup>&infin;</sup>, C<sub>avg</sub><sup>&infin;</sup></dt><dd>At steady state: time to peak (hr), peak, trough (the lowest value, just before the next dose) and average over one interval (all mg/L).</dd>
+</dl>
+
+<h4>Equations</h4>
+<p class="prose">The long steady-state equations are built from three named parts. Learn the parts first; each full equation below is then a product of parts.</p>
+
+<div class="geq">
+<div class="geqline">Part 1, the first-dose prefactor: &nbsp; P = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}}</div>
+<ul class="tlist">
+<li>F no units; k<sub>a</sub> and k in hr<sup>&minus;1</sup>; D<sub>0</sub> in mg; V<sub>D</sub> in L. P comes out in mg/L.</li>
+<li>What it does: it sets the scale of one oral dose. It is the same number for every dose, because F, k<sub>a</sub>, k, V<sub>D</sub> and D<sub>0</sub> do not change with repeated dosing.</li>
+<li>It is not C<sub>0</sub> and not the peak. It multiplies a bracket that is always less than 1. For tetracycline P = 1.806 mg/L, while the first-dose peak is 1.35 mg/L.</li>
+<li>When to use it: inside the single-dose equation, the n-dose equation and C<sub>min</sub><sup>&infin;</sup>.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">Part 2, the two accumulation factors: &nbsp; r<sub>k</sub> = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} &nbsp;&nbsp; and &nbsp;&nbsp; r<sub>a</sub> = {{frac:1|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}}</div>
+<ul class="tlist">
+<li>&tau; in hr; both factors have no units and are always at least 1. The equation sheet has no letters for them; it writes the fractions out in full.</li>
+<li>e<sup>&minus;k&tau;</sup> is the fraction of drug still in the body one interval after a dose: 0.574 for tetracycline (k 0.0693 hr<sup>&minus;1</sup>, &tau; 8 hr).</li>
+<li>r<sub>k</sub> raises the elimination term by the drug left over from all earlier doses. For tetracycline it is 2.35: more than double, because less than one half-life (10 hr) passes between doses.</li>
+<li>r<sub>a</sub> does the same for the absorption term. For tetracycline e<sup>&minus;k<sub>a</sub>&tau;</sup> = 0.0007, so r<sub>a</sub> = 1.00: each dose is fully absorbed before the next, and nothing builds up on the absorption side.</li>
+<li>When to use them: in every steady-state oral equation. A longer &tau; makes r<sub>k</sub> smaller, so less accumulates.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">Part 3, the two decay terms: &nbsp; e<sup>&minus;kt</sup> &nbsp;&nbsp; and &nbsp;&nbsp; e<sup>&minus;k<sub>a</sub>t</sup></div>
+<ul class="tlist">
+<li>t is the time in hr after the most recent dose.</li>
+<li>e<sup>&minus;kt</sup> follows elimination. It falls slowly, because k is small: 0.807 at 3.09 hr for tetracycline.</li>
+<li>e<sup>&minus;k<sub>a</sub>t</sup> follows the drug not yet absorbed. It falls quickly, because k<sub>a</sub> is large: 0.062 at 3.09 hr, so most of the dose has been absorbed by the peak.</li>
+<li>The concentration is P times the elimination term minus the absorption term, each with its accumulation factor once doses repeat.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">Single dose (Module 5): &nbsp; C<sub>p</sub> = P (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>) &nbsp;&nbsp; with &nbsp;&nbsp; t<sub>max</sub> = {{frac:1|k<sub>a</sub> &minus; k}} ln({{frac:k<sub>a</sub>|k}})</div>
+<ul class="tlist">
+<li>C<sub>max</sub> of the first dose is C<sub>p</sub> with t set to t<sub>max</sub>.</li>
+<li>t<sub>max</sub> holds only k and k<sub>a</sub>: no dose, no volume, no &tau;. Changing the dose does not move it.</li>
+<li>When to use it: the first dose, when the body starts with no drug.</li>
+<li>On the equation sheet: yes, both lines, page 1.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">After n doses: &nbsp; C<sub>p</sub> = P [ {{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}} e<sup>&minus;kt</sup> &minus; {{frac:1 &minus; e<sup>&minus;nk<sub>a</sub>&tau;</sup>|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}} e<sup>&minus;k<sub>a</sub>t</sup> ]</div>
+<ul class="tlist">
+<li>What is new compared with the single dose: n, the dose number, and &tau;, the dosing interval. With n = 1 both fractions equal 1 and the single-dose equation is left.</li>
+<li>As n grows, e<sup>&minus;nk&tau;</sup> and e<sup>&minus;nk<sub>a</sub>&tau;</sup> shrink towards 0, so each numerator becomes 1 and the fractions become r<sub>k</sub> and r<sub>a</sub>.</li>
+<li>When to use it: the concentration at a time t after the n-th dose, before steady state. She did not work this one in lecture.</li>
+<li>On the equation sheet: yes, page 1, last line of the right column.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">At steady state: &nbsp; C<sub>p</sub><sup>&infin;</sup> = P (r<sub>k</sub> e<sup>&minus;kt</sup> &minus; r<sub>a</sub> e<sup>&minus;k<sub>a</sub>t</sup>)</div>
+<ul class="tlist">
+<li>The n-dose equation with each numerator set to 1. It is the full steady-state curve; the peak, trough and time-to-peak lines below are read from it.</li>
+<li>When to use it: as the source of the shorter lines; the exam questions use the shorter lines.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">Time to peak at steady state: &nbsp; t<sub>max</sub><sup>&infin;</sup> = {{frac:1|k<sub>a</sub> &minus; k}} ln[ {{frac:k<sub>a</sub>|k}} &times; {{frac:1 &minus; e<sup>&minus;k&tau;</sup>|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}} ]</div>
+<ul class="tlist">
+<li>The first two pieces are the single-dose t<sub>max</sub>. The last fraction is the steady-state correction; it holds &tau;.</li>
+<li>The correction is less than 1 (0.426 for tetracycline), so the number inside ln is smaller and t<sub>max</sub><sup>&infin;</sup> is shorter than the first-dose t<sub>max</sub>.</li>
+<li>It depends on k, k<sub>a</sub> and &tau;, so a new dosing interval means a new t<sub>max</sub><sup>&infin;</sup>.</li>
+<li>When to use it: before C<sub>max</sub><sup>&infin;</sup>, every time. On the equation sheet: yes, page 2, written with one fraction inside ln.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">Peak at steady state: &nbsp; C<sub>max</sub><sup>&infin;</sup> = {{frac:F D<sub>0</sub>|V<sub>D</sub>}} &times; r<sub>k</sub> &times; e<sup>&minus;kt<sub>max</sub>&infin;</sup></div>
+<ul class="tlist">
+<li>{{frac:F D<sub>0</sub>|V<sub>D</sub>}} is the absorbed dose spread through V<sub>D</sub>: 1.667 mg/L for tetracycline.</li>
+<li>r<sub>k</sub> raises it for the drug left from earlier doses: &times; 2.35.</li>
+<li>e<sup>&minus;kt<sub>max</sub>&infin;</sup> is the decline from the time of the dose to the peak at t<sub>max</sub><sup>&infin;</sup>: &times; 0.867.</li>
+<li>Putting t = 2.06 hr into the full steady-state curve (P, r<sub>k</sub>, r<sub>a</sub>) gives the same 3.39 mg/L.</li>
+<li>F and t<sub>max</sub><sup>&infin;</sup> mark this line as oral. Take them away and the repeated-bolus peak, {{frac:D<sub>0</sub>|V<sub>D</sub>}} &times; r<sub>k</sub>, is left. &tau; alone does not tell the two apart.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">Trough at steady state: &nbsp; C<sub>min</sub><sup>&infin;</sup> = P &times; r<sub>k</sub> &times; e<sup>&minus;k&tau;</sup> &nbsp;=&nbsp; {{frac:k<sub>a</sub> F D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}} &times; {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} &times; e<sup>&minus;k&tau;</sup></div>
+<ul class="tlist">
+<li>It starts from P, the first-dose prefactor, not from {{frac:F D<sub>0</sub>|V<sub>D</sub>}}; mixing the two up is the usual slip.</li>
+<li>e<sup>&minus;k&tau;</sup> is one full interval of decline, because the trough is at the end of the interval, just before the next dose.</li>
+<li>Compared with the steady-state curve at t = &tau;, the k<sub>a</sub> term is missing. For tetracycline that term is about 0.001 mg/L, because e<sup>&minus;k<sub>a</sub>&tau;</sup> is 0.0007.</li>
+<li>On the equation sheet: yes.</li>
+</ul>
+</div>
+
+<div class="geq">
+<div class="geqline">Average at steady state: &nbsp; C<sub>avg</sub><sup>&infin;</sup> = {{frac:F D<sub>0</sub>|Cl<sub>T</sub>&tau;}} &nbsp;=&nbsp; {{frac:F D<sub>0</sub>|V<sub>D</sub>k&tau;}}</div>
+<ul class="tlist">
+<li>The absorbed dose per interval divided by the volume cleared per interval (Cl<sub>T</sub> in L/hr times &tau; in hr gives L).</li>
+<li>No t<sub>max</sub> and no accumulation factor. It is the same average as for repeated IV bolus doses, with F now less than 1.</li>
+<li>It is a time average, not the midpoint of peak and trough. For this oral regimen it sits above the midpoint (3.01 against 2.915 mg/L); for an IV bolus regimen it sits below.</li>
+<li>On the equation sheet: yes, on page 1 as the V<sub>D</sub>k&tau; form; Cl<sub>T</sub> = V<sub>D</sub>k makes the two the same.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Example 1: a 75-kg man takes 250 mg tetracycline hydrochloride by mouth every 8 hours for 2 weeks. F is about 75%, V<sub>D</sub> 1.5 L/kg, t<sub>&frac12;</sub> about 10 hr, k<sub>a</sub> 0.9 hr<sup>&minus;1</sup>. Find C<sub>max</sub> of the first dose, then C<sub>max</sub>, C<sub>min</sub> and C<sub>avg</sub> at steady state.</p>
+<ol class="gsteps">
+<li>Convert the inputs: k = {{frac:0.693|10 hr}} = 0.0693 hr<sup>&minus;1</sup>; V<sub>D</sub> = 1.5 L/kg &times; 75 kg = 112.5 L; F = 0.75; &tau; = 8 hr.</li>
+<li>First-dose t<sub>max</sub>: {{frac:1|0.9 &minus; 0.0693}} ln({{frac:0.9|0.0693}}) = {{frac:ln(12.99)|0.8307}} = {{frac:2.564|0.8307}} = <b>3.09 hr</b> (she writes 3.1 hr).</li>
+<li>Prefactor: P = {{frac:(0.75)(0.9)(250 mg)|(112.5 L)(0.8307)}} = {{frac:168.75|93.45}} = 1.806 mg/L.</li>
+<li>First-dose C<sub>max</sub>: 1.806 &times; (e<sup>&minus;0.0693 &times; 3.09</sup> &minus; e<sup>&minus;0.9 &times; 3.09</sup>) = 1.806 &times; (0.807 &minus; 0.062) = 1.806 &times; 0.745 = <b>1.35 mg/L</b>.</li>
+<li>Steady-state pieces: e<sup>&minus;0.0693 &times; 8</sup> = 0.574, so 1 &minus; e<sup>&minus;k&tau;</sup> = 0.426 and r<sub>k</sub> = 2.35; e<sup>&minus;0.9 &times; 8</sup> = 0.0007, so 1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup> = 0.999.</li>
+<li>t<sub>max</sub><sup>&infin;</sup> = {{frac:1|0.8307}} ln[12.99 &times; {{frac:0.426|0.999}}] = {{frac:ln(5.53)|0.8307}} = {{frac:1.710|0.8307}} = <b>2.06 hr</b>, about an hour earlier than the first dose.</li>
+<li>C<sub>max</sub><sup>&infin;</sup> = {{frac:(0.75)(250 mg)|112.5 L}} &times; 2.35 &times; e<sup>&minus;0.0693 &times; 2.06</sup> = 1.667 &times; 2.35 &times; 0.867 = <b>3.39 mg/L</b>.</li>
+<li>C<sub>min</sub><sup>&infin;</sup> = P &times; r<sub>k</sub> &times; e<sup>&minus;k&tau;</sup> = 1.806 &times; 2.35 &times; 0.574 = <b>2.44 mg/L</b>.</li>
+<li>C<sub>avg</sub><sup>&infin;</sup> = {{frac:(0.75)(250 mg)|(112.5 L)(0.0693 hr<sup>&minus;1</sup>)(8 hr)}} = {{frac:187.5 mg|62.37 L}} = <b>3.01 mg/L</b>.</li>
+<li>Check the pattern: the steady-state peak (3.39) is higher than the first-dose peak (1.35) and comes earlier (2.06 against 3.09 hr); even the trough (2.44) is above the first-dose peak.</li>
+<li>Check the average: it lies between trough and peak, and above their midpoint of 2.915 mg/L.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>One regimen, asked as the first-dose peak and then the steady-state peak, trough and average, so the first-dose and steady-state values can be compared. The doses in between are not worked.</li>
+<li>The stem gives V<sub>D</sub> per kilogram with a body weight, a half-life instead of k, and F as a percent, so the first step is converting all three.</li>
+<li>She expects t<sub>max</sub> to be found first for any oral peak, first dose or steady state, even when the question does not ask for it. A bolus peak is C<sub>0</sub> and needs no t<sub>max</sub>.</li>
+<li>Usual trap on the equation sheet: taking the repeated-bolus C<sub>max</sub><sup>&infin;</sup> line for an oral regimen. Both carry &tau; and r<sub>k</sub>; the F and the t<sub>max</sub> mark the oral line.</li>
+<li>Second trap: putting the first-dose t<sub>max</sub> (3.1 hr) into C<sub>max</sub><sup>&infin;</sup>. The steady-state peak needs t<sub>max</sub><sup>&infin;</sup>, which depends on k, k<sub>a</sub> and &tau;.</li>
+<li>Direction questions: t<sub>max</sub><sup>&infin;</sup> is shorter than the first-dose t<sub>max</sub>; C<sub>max</sub><sup>&infin;</sup> is expected to be higher, because drug has accumulated.</li>
+<li>Her opening poll: increasing an oral dose gives no change in t<sub>max</sub>, because t<sub>max</sub> holds only k and k<sub>a</sub>.</li>
+<li>Her spoken steady-state peak was 3.3 mg/L; the inputs give 3.39 mg/L (3.4 rounded), with t<sub>max</sub><sup>&infin;</sup> taken as either 2.06 or 2.1 hr.</li>
+<li>On where to find the lines, she pointed to the bottom of the right-hand column or the back of the sheet; on the current copy the oral steady-state lines are on page 2.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question &mdash; the tetracycline example, 09-28</b>
-<p class="prose">Her values for the tetracycline example:</p>
-<ul>
-<li>First dose: t<sub>max</sub> <i>"something like 3-ish hours"</i> (3.1 hr in the working) and C<sub>max</sub> <i>"1.35 mg per liter"</i>.</li>
-<li>Steady state: t<sub>max</sub> <i>"I got 2.06 hours"</i>, C<sub>max</sub> <i>"3.3"</i>, C<sub>min</sub> <i>"2.4-ish"</i>.</li>
-<li>C<sub>avg</sub> set up as 0.75 &times; 250 over 112.5 L, k and &tau;.</li>
-<li>The attendance poll that opened the lecture repeated the single-dose question: increasing an oral dose gives no change in t<sub>max</sub>. Her words: <i>"That is what I was looking for."</i></li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>One regimen, asked as the first-dose peak and then the steady-state peak, trough and average, so that the first-dose and steady-state values can be compared.</li>
-<li>t<sub>max</sub> is found first in both places, even when not asked for.</li>
-<li>V<sub>D</sub> per kilogram with a body weight, a half-life rather than k, and F as a percent.</li>
-<li>The in-between doses are not worked: <i>"we're going first dose to steady state."</i></li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>Only for oral do you need to find T Max. OK. Now, I might ask you what is the max for a bolus dose, and you know that that is C0, right? OK. But max for an oral dose, you have to find T-Max before you can find C-Max.</q></li>
+</ul>
+<p class="gsrc">Sources: 6a---Multiple-Oral-Doses.pdf, slides "Cp vs. Time for a Single Oral Dose", "Concentration of Drug in the Plasma at Any Time", "Peak, Trough and Average Plasma Concentrations at Steady State", "Time to Peak at Steady State", "Example 1" (slides 3&ndash;9); BasicPharmacokineticsEquations.pdf pages 1&ndash;2; transcript 09-28; questions m6b-n09 to m6b-n14.</p>
 </section>
 
 <section class="gobj" id="gobj-m6a-2">
 <h3 data-nav="Module 6a, objective 2 &mdash; Discuss the effects of changing various parameters on the pharmacokinetics">Module 6a - Objective 2</h3>
 <div class="gbar"><span>Objective</span><b>Discuss the effects of changing various parameters on the pharmacokinetics</b><i>6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens" through "Consider Peak and Trough"</i></div>
 
-<h4>What the slides carry, in slide order</h4>
-<ul>
-<li>Two main parameters can be adjusted in developing a dosage regimen: dose size and dosage interval &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Multiple-Dosage Regimens".</li>
-<li>Method 1: change the drug dose and maintain the same dosing interval; a figure with the dose doubled &mdash; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations" and "Altering Dose".</li>
-<li>Increasing dose: increase steady-state concentrations, increase fluctuations between peak to trough, usually no change in patient compliance &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Altering Dose, second slide".</li>
-<li>Decreasing dose: the reverse.</li>
-<li>Method 2: change the dosing interval and maintain the same drug dose &mdash; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations, Method 2", "Altering Dosing Interval" and "Altering Dosing Interval, third slide".</li>
-<li>One figure has the interval halved.</li>
-<li>The chapter's figure shows equal doses every 6 hours and every 8 hours, with k<sub>a</sub> and k constant.</li>
-<li>Increasing dosing interval: decrease steady-state concentrations, increase fluctuations between peak to trough, increase patient compliance &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Altering Dosing Interval, second slide".</li>
-<li>Decreasing dosing interval: the reverse.</li>
-<li>Consider peak and trough: the steady-state curve drawn inside the therapeutic range &mdash; 6a---Multiple-Oral-Doses.pdf, slide "Consider Peak and Trough".</li>
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>A dosage regimen is the dose size (D<sub>0</sub>) plus the dosing interval (&tau;, the time between doses). These are the only two things a prescriber adjusts.</li>
+<li>Clearance (Cl<sub>T</sub>), half-life (t<sub>&frac12;</sub>), the elimination rate constant (k) and the volume of distribution (V<sub>D</sub>) belong to the drug and the patient, so a regimen does not change them.</li>
+<li>Changing the dose or the interval moves the steady-state concentrations and the size of the swing between peak and trough. The interval also changes how easy the regimen is to follow.</li>
+<li>Neither change alters how long steady state takes to reach, because the half-life alone sets that.</li>
+<li>The aim is a regimen whose peak and trough both sit inside the therapeutic range, at an interval and a tablet strength the patient can actually use.</li>
 </ul>
 
-<h4>What she said about it</h4>
-<ul class="saidlist">
-<li class="said"><span class="lead">The only two dials</span><q>So the only things that we can change. Are the dose, so the, the size of the dose, how much drug we give, and the dosing intervals. OK. We don't change clearance, we don't change half-life, we don't change volume and distribution.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Increasing the dose</span><q>if we increase the dose, we expect increased concentration and increased fluctuation between peaks and troughs</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Increasing the interval</span><q>Increasing the dosing interval means that we're giving more time in between doses, decreased steady-state concentration, increased fluctuation between peak to trough. Increase patient compliance, generally.</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Why a shorter interval shrinks the swing</span><q>if we decrease that, um, dosing interval, then maybe we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve</q><span class="when">09-28 &middot; her words, verbatim</span></li>
-<li class="said"><span class="lead">Stating a regimen for a patient</span><q>Don't tell me 17.29 mg for an oral dose.</q> and, on intervals, <q>if you calculate a dosing interval, that is, let's say, 3.72 hours. As your patient. Does that dosing interval make sense to me?</q><span class="when">09-28 &middot; her words, verbatim</span></li>
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Dosage regimen</dt><dd>The dose (mg) and the dosing interval (hr) together, for example 500 mg every 8 hours.</dd>
+<dt>Steady-state concentration</dt><dd>The level the plasma concentration settles around after repeated doses, in mg/L.</dd>
+<dt>Fluctuation</dt><dd>The difference between the peak (C<sub>max</sub><sup>&infin;</sup>) and the trough (C<sub>min</sub><sup>&infin;</sup>) within one interval at steady state.</dd>
+<dt>Patient compliance</dt><dd>How reliably the patient takes each dose as prescribed; fewer doses a day usually means better compliance.</dd>
+<dt>Therapeutic range</dt><dd>The concentrations between the lowest effective level and the level where toxicity starts, in mg/L.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">C<sub>avg</sub><sup>&infin;</sup> = {{frac:F D<sub>0</sub>|Cl<sub>T</sub>&tau;}}</div>
+<ul class="tlist">
+<li>F bioavailability (no units), D<sub>0</sub> dose (mg), Cl<sub>T</sub> total clearance (L/hr), &tau; dosing interval (hr); C<sub>avg</sub><sup>&infin;</sup> in mg/L.</li>
+<li>D<sub>0</sub> is on top, so a larger dose at the same &tau; raises the steady-state level. &tau; is underneath, so a longer interval at the same dose lowers it.</li>
+<li>When to use it: to predict which way the average moves when one of the two is changed. On the equation sheet: yes.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Accumulation factor: &nbsp; r<sub>k</sub> = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} &nbsp;&nbsp; and one interval of decline: &nbsp; e<sup>&minus;k&tau;</sup></div>
+<ul class="tlist">
+<li>A longer &tau; makes e<sup>&minus;k&tau;</sup> smaller: more of each dose is eliminated before the next, so r<sub>k</sub> is smaller and less accumulates.</li>
+<li>The trough is the peak level carried down through the rest of the interval, so a longer &tau; lets it fall further and the swing gets larger.</li>
+<li>&tau; is also inside t<sub>max</sub><sup>&infin;</sup>, so a new interval means recalculating t<sub>max</sub><sup>&infin;</sup> and C<sub>max</sub><sup>&infin;</sup>. A new dose changes neither t<sub>max</sub>.</li>
+<li>On the equation sheet: yes, inside the steady-state lines.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her question to the room: 500 mg every 4 hours is changed to 500 mg every 8 hours. What is the expectation at steady state?</p>
+<ol class="gsteps">
+<li>Find what changed: the dose stays at 500 mg; the interval doubles from 4 to 8 hr.</li>
+<li>Steady-state level: &tau; is in the denominator of {{frac:F D<sub>0</sub>|Cl<sub>T</sub>&tau;}}, so doubling &tau; halves the average. The level goes down.</li>
+<li>Fluctuation: each dose now has 8 hr instead of 4 hr to be eliminated, so the trough falls further below the peak. The swing gets larger.</li>
+<li>Compliance: every 8 hours is 3 doses a day instead of 6, which is easier to keep to.</li>
+<li>Answer: <b>lower steady-state concentration, larger peak-to-trough fluctuation, better patient compliance</b>. The part she confirmed in class was the lower steady-state concentration.</li>
+<li>Second case, stating a regimen: a calculation gives 17.29 mg every 3.72 hours. Write it as a strength and interval the patient can use, such as <b>20 mg every 4 hours</b>.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>One parameter is changed and the other held, then three things are asked in her order: the steady-state concentration, the fluctuation between peak and trough, and patient compliance. The answers are directions, not numbers.</li>
+<li>Larger dose, same interval: higher concentrations, larger fluctuation, usually no change in compliance. Smaller dose: the reverse, compliance again unchanged.</li>
+<li>Longer interval, same dose: lower concentrations, larger fluctuation, better compliance. Shorter interval: higher concentrations, smaller fluctuation, worse compliance.</li>
+<li>A shorter interval shrinks the swing because the next dose arrives before the 3 to 5 half-lives the level would need to reach the bottom of the curve.</li>
+<li>Trap: pairing a higher level with a smaller swing for a larger dose. A larger dose raises both the level and the swing.</li>
+<li>Trap: expecting a longer interval to raise the level because each dose has more time to be absorbed. Absorption is complete either way; the extra time goes to elimination.</li>
+<li>Figure question: equal doses every 6 hours and every 8 hours, same k<sub>a</sub> and k. The 6-hour curve has the higher plateau, and both reach steady state in the same time.</li>
+<li>Peak and trough, not the average, are the values that must sit inside the therapeutic range.</li>
+<li>She will ask for dosing intervals and oral doses on the exam, and expects them rounded to an interval and a tablet strength a patient can use.</li>
 </ul>
 
-<div class="gpoll"><b>Her own question on it</b>
-<p class="prose">Posed to the room: 500 mg every 4 hours changed to 500 mg every 8 hours, <i>"What is your expectation?"</i> The answer she confirms is a decreased steady-state concentration.</p>
-<ul>
-<li>She says she will ask for dosing intervals and oral doses on the exam, and expects them rounded to what a patient can take.</li>
-</ul></div>
-
-<div class="gask"><b>How she asks it</b>
-<ul>
-<li>One parameter changed, the other held, and three things asked in her order: the steady-state concentration, the fluctuation between peak and trough, and patient compliance.</li>
-<li>The answers are directions.</li>
-<li>A calculated interval or oral dose, to be restated as a practical one.</li>
-</ul></div>
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>Don't tell me 17.29 mg for an oral dose.</q></li>
+<li><q>if you calculate a dosing interval, that is, let's say, 3.72 hours. As your patient. Does that dosing interval make sense to me?</q></li>
+</ul>
+<p class="gsrc">Sources: 6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens", "Altering Steady-State Concentrations" (Methods 1 and 2), "Altering Dose", "Altering Dosing Interval" (three slides, including the 6-hour and 8-hour figure) and "Consider Peak and Trough" (slides 11&ndash;19); transcript 09-28; questions in q8_module6b.js, sub "oparam".</p>
 </section>
 `;

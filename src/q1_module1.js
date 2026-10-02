@@ -707,9 +707,9 @@ const Q_MODULE1 = [
  stem:'In a zero-order reaction, the amount or concentration of drug decreases:',
  options:[
   {t:'At a constant rate', correct:true,
-   why:'The differential form is dC/dt = −k with no concentration term on the right, so the rate does not depend on how much drug is present. The same quantity leaves in each unit of time whether the concentration is high or low. Integrating that gives C = C0 − kt, which is the equation of a straight line.'},
+   why:'The differential form is {{frac:dC|dt}} = −k with no concentration term on the right, so the rate does not depend on how much drug is present. The same quantity leaves in each unit of time whether the concentration is high or low. Integrating that gives C = C0 − kt, which is the equation of a straight line.'},
   {t:'At a rate proportional to the amount remaining', correct:false,
-   why:'That statement is the definition of a first-order reaction, where dC/dt = −kC and the concentration appears on the right-hand side. The two definitions differ by exactly that one term. Selecting this means matching on the word rate without checking what the rate is tied to.'},
+   why:'That statement is the definition of a first-order reaction, where {{frac:dC|dt}} = −kC and the concentration appears on the right-hand side. The two definitions differ by exactly that one term. Selecting this means matching on the word rate without checking what the rate is tied to.'},
   {t:'By a constant fraction of the amount remaining per unit time', correct:false,
    why:'A constant fraction per unit time is the first-order behaviour restated in words rather than symbols. For a zero-order process the fraction lost per hour grows as the concentration falls, because the quantity removed stays fixed while the amount present shrinks. Fraction and quantity are what separate the two orders.'},
   {t:'At a rate proportional to the square of the amount remaining', correct:false,
@@ -718,12 +718,12 @@ const Q_MODULE1 = [
   {h:'The idea', list:[
     'The order of a reaction is the power to which the concentration is raised in the rate law.',
     'Zero order: the concentration is raised to the power zero, so it drops out of the rate law.',
-    'The rate is then a fixed quantity per unit time: dC/dt = −k, which integrates to C = C0 − kt.',
+    'The rate is then a fixed quantity per unit time: {{frac:dC|dt}} = −k, which integrates to C = C0 − kt.',
     'C0 is the concentration at time zero, and k is the zero-order rate constant.',
     'k carries units of concentration or amount per unit time.',
     'On linear axes, concentration against time is a straight line whose slope is −k.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -k0, a rate that does not depend on how much drug is present.',
+    'Rate: {{frac:dC|dt}} = -k0, a rate that does not depend on how much drug is present.',
     'Integrated: C = C0 - k0t, a straight line on an evenly spaced concentration axis.',
     'k0 carries concentration per time, such as mg/L per hour.',
     'Half-life: t1/2 = C0/2k0, so it changes with the starting concentration.']},
@@ -742,7 +742,7 @@ const Q_MODULE1 = [
  stem:'In a first-order reaction, the amount or concentration of drug decreases at a rate that is:',
  options:[
   {t:'Proportional to the amount of drug remaining', correct:true,
-   why:'The rate law dC/dt = −kC makes the rate the rate constant times the concentration present, so it is fast at high concentrations and slows as they fall, which is why the linear plot curves. Integrating gives ln C = ln C0 − kt, or C = C0 e^(−kt).'},
+   why:'The rate law {{frac:dC|dt}} = −kC makes the rate the rate constant times the concentration present, so it is fast at high concentrations and slows as they fall, which is why the linear plot curves. Integrating gives ln C = ln C0 − kt, or C = C0 e^(−kt).'},
   {t:'Constant and independent of the amount of drug remaining', correct:false,
    why:'That is the zero-order definition, and it is the answer students give when they remember that something about the process is constant. What is constant in first order is the rate constant and the half-life, not the rate itself. The rate changes continuously throughout the time course.'},
   {t:'Proportional to the elapsed time', correct:false,
@@ -751,16 +751,16 @@ const Q_MODULE1 = [
    why:'That expression is not a rate at all; it has units of time squared and cannot describe how fast a concentration falls. The relationship between half-life and rate constant for a first-order process is t½ = 0.693 ÷ k, which is a division the other way round. This option assembles two familiar symbols into a quantity that has no meaning.'}],
  teach:[
   {h:'The idea', list:[
-    'First order: the rate depends on the concentration present, so dC/dt = −kC.',
+    'First order: the rate depends on the concentration present, so {{frac:dC|dt}} = −kC.',
     'The rate constant k is a proportion removed per unit time, not a quantity, so its units are reciprocal time.',
     'A fixed proportion is removed in each interval, so losing half of whatever is present takes the same time at every concentration.',
     'That is why a first-order half-life is one number for a drug.',
     'The integrated form ln C = ln C0 − kt, where C0 is the concentration at time zero, makes ln C against time a straight line.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -kC, proportional to what remains.',
-    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'Rate: {{frac:dC|dt}} = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
-    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+    'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
   {h:'The common error', t:'Remembering that something is constant and picking a constant rate. In first order the rate constant and the half-life are constant; the rate keeps changing.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
@@ -781,7 +781,7 @@ const Q_MODULE1 = [
   {t:'A constant rate of elimination', correct:false,
    why:'The rate of elimination is the rate constant multiplied by the concentration, so it changes continuously as the concentration falls; a constant rate of elimination is the zero-order property. Only 8 per cent of the class picked this when polled, holding the word constant and losing what it attaches to.'},
   {t:'dC/dt = −k', correct:false,
-   why:'This expression has no concentration term on the right-hand side, which is precisely what makes it the zero-order rate law. The first-order form is dC/dt = −kC. Recognising the order from the differential equation means checking whether a concentration appears beside the rate constant.'},
+   why:'This expression has no concentration term on the right-hand side, which is precisely what makes it the zero-order rate law. The first-order form is {{frac:dC|dt}} = −kC. Recognising the order from the differential equation means checking whether a concentration appears beside the rate constant.'},
   {t:'Units of k of concentration or amount per unit time', correct:false,
    why:'Concentration or amount per unit time are the units of a zero-order constant, which is itself a rate. A first-order constant multiplies a concentration to give a rate, so its units are reciprocal time; this was the most popular wrong answer in the class poll, at 44 per cent.'}],
  teach:[
@@ -791,10 +791,10 @@ const Q_MODULE1 = [
     'The half-life is fixed at 0.693 divided by k.',
     'The quantity removed per unit time is not fixed, so the rate of elimination falls as the concentration falls.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -kC, proportional to what remains.',
-    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'Rate: {{frac:dC|dt}} = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
-    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+    'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
   {h:'The common error', t:'Holding on to the word "constant" and losing what it attaches to. A statement that fixes a quantity per unit time, rather than a proportion, describes zero order.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
@@ -811,7 +811,7 @@ const Q_MODULE1 = [
  stem:'The rate of a first-order process is independent of the concentration of drug present. Is this true or false?',
  options:[
   {t:'False, because the rate is the rate constant multiplied by the concentration', correct:true,
-   why:'The rate law dC/dt = −kC puts the concentration on the right-hand side, so the rate cannot be independent of it: faster at high concentration, slower as it falls. What is independent of concentration is the rate constant, and so the half-life.'},
+   why:'The rate law {{frac:dC|dt}} = −kC puts the concentration on the right-hand side, so the rate cannot be independent of it: faster at high concentration, slower as it falls. What is independent of concentration is the rate constant, and so the half-life.'},
   {t:'True, because a first-order rate constant carries units of reciprocal time and no concentration term', correct:false,
    why:'This swaps the rate constant for the rate. The constant is a fixed number in reciprocal time, but the rate is that constant times the concentration, so it changes whenever the concentration changes; the class split fifty-fifty on this statement for this reason.'},
   {t:'True, because the half-life does not change', correct:false,
@@ -825,10 +825,10 @@ const Q_MODULE1 = [
     'The rate is k multiplied by the current concentration, so it is largest at the start and falls continuously.',
     'In a zero-order process this reverses: the rate is fixed, and the proportion removed per unit time grows.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -kC, proportional to what remains.',
-    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'Rate: {{frac:dC|dt}} = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
-    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+    'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
   {h:'The common error', t:'Treating the rate and the rate constant as the same quantity.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
@@ -861,7 +861,7 @@ const Q_MODULE1 = [
   {h:'How the variables relate', list:[
     'An evenly spaced concentration axis: a straight line means zero order.',
     'An axis stepping 1, 10, 100, 1000: a straight line means first order.',
-    'On a base-ten decade axis the slope is -k/2.3; on a natural-log axis it is -k.',
+    'On a base-ten decade axis the slope is -{{frac:k|2.3}}; on a natural-log axis it is -k.',
     'Read the tick values before the line. The word "log" is usually not printed.']},
   {h:'The common error', list:[
     'Naming the order from a straight line before identifying the plot.',
@@ -887,7 +887,7 @@ const Q_MODULE1 = [
    why:'The rate constant and the half-life are two different descriptions of the same decline, linked by the factor 0.693, and they are not equal to one another. Copying the given number across skips the relation entirely. The two also have different units, which is enough on its own to rule this out.'},
   {t:'It cannot be found without the starting concentration', correct:false,
    why:'For a first-order process t½ = 0.693 ÷ k, with no starting concentration in it, which is why it is constant. The starting concentration is needed only for zero order, where t½ = C0 ÷ 2k, so picking this applies the zero-order relation to a first-order problem.'}],
- note:'The first-order half-life relation, t1/2 = 0.693/k, is not on the equation sheet.',
+ note:'The first-order half-life relation, t1/2 = {{frac:0.693|k}}, is not on the equation sheet.',
  audit:'The transcript of 19 August renders her definition of half-life as "decrease by 15"; the printed slide reads "decrease by one-half", and her worked examples immediately after are all at 50 per cent. An exam written from these lectures would key one-half. The first-order half-life relation is also not printed on BasicPharmacokineticsEquations.pdf, which is why she says it has to be held without the sheet.',
  teach:[
   {h:'The idea', list:[
@@ -896,7 +896,7 @@ const Q_MODULE1 = [
     'First order: t½ = 0.693 ÷ k. Both are constants, so the half-life is constant and does not depend on where the concentration started.',
     'Zero order: t½ is the starting concentration divided by twice the rate constant, so it changes whenever the starting concentration changes.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1044,10 +1044,10 @@ const Q_MODULE1 = [
     'A positive exponent moves back towards the start, so it must give a larger number.',
     'A negative exponent moves forward, so it must give a smaller number.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -kC, proportional to what remains.',
-    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'Rate: {{frac:dC|dt}} = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
-    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+    'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
   {h:'The common error', t:'Keeping the minus sign in the exponent. Check the direction first: in a falling process the starting concentration must be larger than any later one.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
@@ -1079,7 +1079,7 @@ const Q_MODULE1 = [
     'The relation has no concentration term, so the half-life does not change as the solution decomposes.',
     'That is what lets a drug be described by one half-life across all its doses.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1117,10 +1117,10 @@ const Q_MODULE1 = [
     'Take the natural logarithm of its reciprocal and divide by the rate constant k.',
     'If the fraction remaining is a power of one half, counting half-lives gives the same answer faster; Dr. Mosley prints both routes when both are available.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -kC, proportional to what remains.',
-    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'Rate: {{frac:dC|dt}} = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
-    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+    'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
   {h:'The common error', t:'Using the percentage decomposed as the fraction remaining. Decomposing by 90 per cent leaves one tenth.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
@@ -1186,7 +1186,7 @@ const Q_MODULE1 = [
     'First order: t½ = 0.693 ÷ k. No concentration appears, so the half-life is constant.',
     'Zero order: t½ = C0 ÷ 2k, the starting concentration divided by twice the rate constant. Doubling C0 doubles the half-life.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1225,7 +1225,7 @@ const Q_MODULE1 = [
     'Stage 2: divide half of A0 by the rate constant: t½ = A0 ÷ 2k.',
     'Both stages use the same straight-line relation, and neither needs a logarithm.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1260,10 +1260,10 @@ const Q_MODULE1 = [
     'The rate constant k is that slope with its sign reversed.',
     'Without a logarithm column, the same calculation is written as the logarithm of the ratio of the two concentrations, the form Dr. Mosley prefers.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -kC, proportional to what remains.',
-    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'Rate: {{frac:dC|dt}} = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
-    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+    'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
   {h:'The common error', t:'Subtracting in the wrong order and getting a negative k. Put the earlier concentration first; a rate constant is never negative.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
@@ -1296,10 +1296,10 @@ const Q_MODULE1 = [
     'The definition of concentration, amount per volume, then turns C0 into a volume: V = amount dissolved ÷ C0.',
     'The same two stages appear throughout the course whenever a volume of distribution is found from a dose and an extrapolated concentration.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -kC, proportional to what remains.',
-    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - kt/2.3.',
+    'Rate: {{frac:dC|dt}} = -kC, proportional to what remains.',
+    'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
-    'Half-life: t1/2 = 0.693/k, one number for the drug. This one is not on the equation sheet.']},
+    'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
   {h:'The common error', t:'Dividing before the units agree. The dose is in milligrams and the concentration in micrograms per millilitre, so convert first.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
@@ -1334,7 +1334,7 @@ const Q_MODULE1 = [
     'Choosing between the two recoveries is the only place the order enters, and here the stem states it.',
     'In both orders the final step is the definition of concentration rearranged for volume: V = dose ÷ C0.']},
   {h:'How the variables relate', list:[
-    'Rate: dC/dt = -k0, a rate that does not depend on how much drug is present.',
+    'Rate: {{frac:dC|dt}} = -k0, a rate that does not depend on how much drug is present.',
     'Integrated: C = C0 - k0t, a straight line on an evenly spaced concentration axis.',
     'k0 carries concentration per time, such as mg/L per hour.',
     'Half-life: t1/2 = C0/2k0, so it changes with the starting concentration.']},
@@ -1369,7 +1369,7 @@ const Q_MODULE1 = [
     'The count works for amounts, concentrations and percentages alike, because in a first-order process all three fall by the same factor in the same time.',
     'When the fraction is not a power of one half, the logarithmic route is needed.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1409,7 +1409,7 @@ const Q_MODULE1 = [
     'The first-order half-life (t½) comes from the rate constant alone, t½ = 0.693 ÷ k, and does not depend on where the concentration started.',
     'The question asks when the concentration falls to one half of the original, time-zero value. That is the half-life, so t½ answers it directly.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1451,7 +1451,7 @@ const Q_MODULE1 = [
     'It would change if the starting concentration changed; the first-order half-life would not.',
     'Two points lie on both a straight line and an exponential, so the data alone cannot select the order; the stem states which to assume.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1489,7 +1489,7 @@ const Q_MODULE1 = [
     'Dr. Mosley prints both, as she does whenever two independent routes reach the same answer.',
     'The count does not depend on the starting concentration, so the same ten half-lives applies to any dose.']},
   {h:'How the variables relate', list:[
-    'First order: t1/2 = 0.693/k, where 0.693 is ln 2. Not on the equation sheet.',
+    'First order: t1/2 = {{frac:0.693|k}}, where 0.693 is ln 2. Not on the equation sheet.',
     'Zero order: t1/2 = C0/2k0, which depends on where the concentration started.',
     'Fraction remaining after n half-lives = (1/2)^n: 50%, 25%, 12.5%, 6.25%.',
     '99.9% is gone after 10 half-lives; the long route is t = {{frac:ln(1000)|k}}.',
@@ -1528,7 +1528,7 @@ const Q_MODULE1 = [
   {h:'How the variables relate', list:[
     'AUC measures the extent of drug available to the body.',
     'Its units are concentration multiplied by time, such as mg/L x hr or mcg/mL x hr.',
-    'Clearance (Cl) ties the dose (D0) to exposure: Cl = D0/AUC.']},
+    'Clearance (Cl) ties the dose (D0) to exposure: Cl = {{frac:D0|AUC}}.']},
   {h:'The common error', t:'Reading the rate of absorption from the area. Rate comes from how fast the curve rises and when it peaks; area measures extent.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 treats the area as a measure of the amount of drug the body has been exposed to.',
@@ -1673,7 +1673,7 @@ const Q_MODULE1 = [
     'Zero order: t = {{frac:C0 - C|k0}}, linear in the amount to be removed.',
     'First order: t = {{frac:ln(C0/C)|k}}, so 90 per cent is always {{frac:ln(10)|k}}, or 3.32 half-lives.',
     'A zero-order half-life is C0/2k0, and the second half takes the same time as the first.',
-    'The solution reaches zero concentration at t = C0/k0, which is 58.3 hours here.',
+    'The solution reaches zero concentration at t = {{frac:C0|k0}}, which is 58.3 hours here.',
     'Deciding the order has to come before either relation is used.']},
   {h:'The common error', t:'Counting half-lives as if the process were first order.'}],
  teachImg:'slide_Introduction_p20',

@@ -128,7 +128,7 @@ const Q_MODULE4 = [
     'The definition does not say how the drug is removed, so one number covers filtration, secretion, metabolism and every other process.',
     'Because it is a volume per time, clearance can describe the whole body or a single organ, and the organ clearances add up to the total.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -150,7 +150,7 @@ const Q_MODULE4 = [
   {t:'The rate of drug elimination and the plasma drug concentration', correct:true,
    why:'Clearance is the proportionality factor that relates the rate of drug elimination to the plasma drug concentration: rate of elimination = Cl × Cp. Because the factor is constant, the rate rises and falls in step with the concentration, which is first-order behaviour.'},
   {t:'The amount of drug in the body and the measured plasma concentration', correct:false,
-   why:'Picking this swaps the two volume constants. That factor is the volume of distribution, from Cp = DB/VD: it converts an amount in the body into a concentration. Both constants contain a volume, but only clearance carries a time. An amount points to VD; a rate points to clearance.'},
+   why:'Picking this swaps the two volume constants. That factor is the volume of distribution, from Cp = {{frac:DB|VD}}: it converts an amount in the body into a concentration. Both constants contain a volume, but only clearance carries a time. An amount points to VD; a rate points to clearance.'},
   {t:'The dose and the half-life', correct:false,
    why:'The error is taking any two quantities that appear together in dosing as linked by a factor. In a linear first-order system the half-life does not change with dose: doubling the dose doubles both the concentration and the rate, and the half-life stays the same. Clearance sits between a rate and a concentration.'},
   {t:'The renal and hepatic clearances', correct:false,
@@ -161,7 +161,7 @@ const Q_MODULE4 = [
     'the proportionality factor between the rate of elimination and the plasma concentration (Cp): rate of elimination = Cl × Cp;',
     'the loss of drug across an organ of elimination, which is why renal and hepatic clearance can be quoted separately and then added.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -195,7 +195,7 @@ const Q_MODULE4 = [
     'Their ratio measures how efficiently the body removes the drug.',
     'F (bioavailability factor) multiplies the dose because only the part of the dose that reached the circulation contributed to the AUC. For an intravenous dose that is all of it.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -231,7 +231,7 @@ const Q_MODULE4 = [
     'F scales the dose in the relationship between clearance and AUC (area under the curve).',
     'fe splits total clearance into its renal and hepatic parts.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -265,7 +265,7 @@ const Q_MODULE4 = [
     'Hepatic clearance is then the remainder: ClH = ClT − ClR.',
     'The same reasoning gives the other form: ClH = (1 − fe) × ClT.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -301,7 +301,7 @@ const Q_MODULE4 = [
     'Clearance is the fixed part. Multiplying it by the current plasma concentration (Cp) gives the rate at that moment.',
     'As the concentration falls, the rate falls in exact proportion. That is first-order elimination stated in terms of clearance.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -341,7 +341,7 @@ const Q_MODULE4 = [
     'Converting the clearance, not the concentration, is usually less work.',
     'Because micrograms per millilitre equals milligrams per litre, the concentration often needs no arithmetic at all.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -381,7 +381,7 @@ const Q_MODULE4 = [
     'Drug not recovered unchanged is attributed to the other elimination routes, so 1 − fe is the fraction handled by metabolism.',
     'The two fractions split total clearance between the kidney and the liver.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -415,7 +415,7 @@ const Q_MODULE4 = [
     'Given a urine collection, it yields the fraction; given the fraction, it predicts the collection.',
     'The amount not recovered unchanged is the amount biotransformed, so the same fraction also splits clearance into its renal and hepatic parts.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -449,7 +449,7 @@ const Q_MODULE4 = [
     'Clearance is k multiplied by VD (apparent volume of distribution), and ke (the excretion rate constant) is a fraction of k.',
     'So the stated half-life is converted to k first, keeping four decimal places; truncating k early causes the rounding drift Dr. Mosley warns about.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -486,7 +486,7 @@ const Q_MODULE4 = [
     'The metabolic remainder is (1 − fe) × k.',
     'Applying the same split to clearance instead of k gives renal and hepatic clearance.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -522,7 +522,7 @@ const Q_MODULE4 = [
     'Both give the volume of fluid cleared of drug per unit time for the whole body, without saying which organ did the clearing.',
     'Splitting ClT into organ contributions is the next step, and it needs fe, the fraction excreted unchanged.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -558,7 +558,7 @@ const Q_MODULE4 = [
     'Clearance and the rate constant split the same way, because both are proportional to the same set of elimination routes.',
     'That is why the same fraction converts k into ke and ClT into ClR.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -594,7 +594,7 @@ const Q_MODULE4 = [
     'Clearances add: total body clearance (ClT) is the sum of the organ clearances, so two known values fix the third.',
     'The same result follows from (1 − fe) × ClT, where fe is the fraction excreted unchanged.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -633,7 +633,7 @@ const Q_MODULE4 = [
     'If renal clearance is already known, subtract.',
     'If only the fraction excreted unchanged (fe) and the total are given, use the complement, 1 − fe.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -672,7 +672,7 @@ const Q_MODULE4 = [
     'Multiplying that concentration by total body clearance (ClT) gives the rate at that instant.',
     'The concentration then falls, so the rate falls too, while the clearance linking them stays constant.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -708,7 +708,7 @@ const Q_MODULE4 = [
     'Substituting gives t½ = 0.693 × VD ÷ ClT.',
     'This form shows why a fall in clearance lengthens the half-life when VD is unchanged.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -752,7 +752,7 @@ const Q_MODULE4 = [
   {h:'Units', list:[
     'Rate constants are in reciprocal hours; clearances are in litres per hour.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -1311,7 +1311,7 @@ const Q_MODULE4 = [
     'The time unit in the clearance becomes the time unit of k.',
     'A clearance in mL/min against a VD in litres always needs converting first.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -1348,7 +1348,7 @@ const Q_MODULE4 = [
     'An actively secreted drug has a clearance well above the glomerular filtration rate.',
     'A large clearance against a modest VD is what makes this half-life so short.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',
@@ -1386,7 +1386,7 @@ const Q_MODULE4 = [
     'This is why a reduced creatinine clearance matters clinically for a drug eliminated by the kidney.',
     'The same reasoning applies to the renal failure part of her infusion problems: the loading dose was unchanged because VD was unchanged.']},
   {h:'How the variables relate', list:[
-    'ClT (total body clearance) = k x VD = D0/AUC, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
+    'ClT (total body clearance) = k x VD = {{frac:D0|AUC}}, where k is the elimination rate constant, VD the apparent volume of distribution, D0 the dose and AUC the area under the concentration-time curve.',
     'Rate of elimination = ClT x Cp (plasma drug concentration), so a plot of rate against concentration has slope ClT.',
     'fe is the fraction of the dose recovered unchanged in urine: fe = {{frac:Du^(∞)|D0}}, and it has no units.',
     'ClR (renal clearance) = fe x ClT, and ClH (hepatic clearance) = ClT - ClR.',

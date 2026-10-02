@@ -992,7 +992,7 @@ function renderTerms(){
       const t = TERM_BY[fc.order[fc.i]];
       h += `<div class="qcard flash"><div class="qhead"><span>Card ${fc.i + 1} of ${fc.order.length}</span><span class="spacer"></span><span>${esc(t.group)}</span></div>
         <div class="qbody"><p class="fcscene"><b>In action:</b> ${rich(termMask(t, t.scene))}</p>${
-        fc.shown ? `<p class="fcterm">${esc(t.term)}</p><p>${rich(t.gist)}</p><p class="wcite">${esc(t.def)}</p>` : ''}</div>
+        fc.shown ? `<p class="fcterm">${esc(t.term)}</p><p>${rich(t.gist)}</p><p class="wcite">${rich(t.def)}</p>` : ''}</div>
         <div class="qfoot">${fc.shown ? `<button class="btn" data-fc="correct">Knew it</button><button class="btn amber" data-fc="guessed">Not sure</button><button class="btn ghost" data-fc="wrong">Did not know</button>`
           : `<button class="btn" id="fcShow">Show the term</button>`}</div></div>`;
     }
@@ -1102,6 +1102,24 @@ function backBtn(){
   b.onclick = () => {
     const r = RET.pop(); show(r.view); window.scrollTo(0, r.y); backBtn();
   };
+}
+/* "Explain one" on Tell apart: a select, or a Why? chip in a table row, shows
+   the matching <template data-x="group:key"> card under that table. */
+function showExplain(group, key){
+  const out = document.querySelector(`[data-xout="${group}"]`), sel = document.querySelector(`[data-xsel="${group}"]`);
+  if(!out) return null;
+  const t = key && document.querySelector(`template[data-x="${group}:${key}"]`);
+  out.innerHTML = t ? t.innerHTML : '';
+  if(sel) sel.value = key || '';
+  return out;
+}
+function xselChange(e){ const s = e.target.closest && e.target.closest('select[data-xsel]'); if(s) showExplain(s.dataset.xsel, s.value); }
+function xpickClick(e){
+  const w = e.target.closest && e.target.closest('[data-xpick]');
+  if(!w) return;
+  const [g, k] = w.dataset.xpick.split(':');
+  const out = showExplain(g, k);
+  if(out) scrollToEl(out.closest('.xpick'));
 }
 function jumpClick(e){
   const b = e.target.closest && e.target.closest('[data-jump]'); if(!b) return;
@@ -3370,7 +3388,9 @@ document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
 document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn
 document.addEventListener('click', zoomClick);   // tap any figure to enlarge it
 document.addEventListener('click', layoutClick); // the One at a time / All on one page chips
-document.addEventListener('click', jumpClick);   // Explain more: open the teaching section, keep the way back
+document.addEventListener('click', jumpClick);
+document.addEventListener('click', xpickClick);   // Tell apart: Why? chips
+document.addEventListener('change', xselChange);  // Tell apart: Explain one   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
 /* Theme: System (no attribute), Light or Dark, kept per browser. */
 const THEME_KEY = NS + ':theme';

@@ -39,7 +39,7 @@ const M6_SUP = {h:'Superposition and its two assumptions', list:[
   'After a dose at steady state the concentration falls with the same k as after the first dose. It starts higher, at Cmax∞, because drug from the earlier doses is still in the body.']};
 
 const M6_EQ = {h:'The steady-state equations for repeated IV bolus doses', list:[
-  'Cmax∞ = {{frac:C0|1 - e^(-kτ)}}: the first-dose peak, C0 = D0/VD, divided by (1 - e^(-kτ)).',
+  'Cmax∞ = {{frac:C0|1 - e^(-kτ)}}: the first-dose peak, C0 = {{frac:D0|VD}}, divided by (1 - e^(-kτ)).',
   'Cmin∞ = {{frac:C0e^(-kτ)|1 - e^(-kτ)}}, which is Cmax∞ × e^(-kτ): the steady-state peak after one full interval of first-order decline.',
   'Cavg∞ = {{frac:FD0|VD kτ}} = {{frac:FD0|ClT τ}}. F = 1 for an intravenous (IV) dose.',
   'τ (tau) is the dosing interval in hours, the time between doses. TID, three times a day, is τ = 8 hr.',
@@ -258,7 +258,7 @@ const Q_MODULE6 = [
   {t:'This is the area under the curve from Module 1 applied to one piece of the steady-state curve: take the area over one interval and divide by the interval.'},
   {h:'Why it is not the midpoint', list:[
     'The average is an area divided by a time. The curve falls exponentially, quickly at first and then slowly, so it spends more of each interval at the lower concentrations.',
-    'That makes the average lower than (Cmax∞ + Cmin∞)/2.',
+    'That makes the average lower than {{frac:Cmax∞ + Cmin∞|2}}.',
     'Chapter 9 adds that the area over one interval at steady state equals the area from 0 to ∞ after a single dose.']},
   M6_FIG],
  teachImg:'slide_6RepetitiveIVBolus_p4',
@@ -298,7 +298,7 @@ const Q_MODULE6 = [
   {t:'The fraction of the dose eliminated in one interval',
    why:'That is 1 − e^(-kτ), the other part of the dose. Reading the remaining fraction as the eliminated one reverses every steady-state result that is built from it.'},
   {t:'The accumulation factor',
-   why:'Choosing this confuses the fraction left with the accumulation factor, which is 1/(1 − e^(-kτ)), built from this fraction but not equal to it. With e^(-kτ) = 0.25 the accumulation factor is 1.33.'},
+   why:'Choosing this confuses the fraction left with the accumulation factor, which is {{frac:1|1 − e^(-kτ)}}, built from this fraction but not equal to it. With e^(-kτ) = 0.25 the accumulation factor is 1.33.'},
   {t:'The number of doses to reach steady state',
    why:'Choosing this treats a fraction as a count. e^(-kτ) is a number between 0 and 1 and carries no units, so it cannot be a count of doses. The time to steady state is 3 to 5 half-lives.'}],
  teach:[
@@ -320,7 +320,7 @@ const Q_MODULE6 = [
   {t:'The fraction of each dose eliminated',
    why:'Choosing this reads the denominator as the whole factor. The fraction eliminated in one interval is 1 − e^(-kτ), the denominator itself. Its reciprocal is what multiplies C0, and that reciprocal is the accumulation.'},
   {t:'The conversion from amount to concentration',
-   why:'Choosing this mixes the accumulation factor up with VD. The conversion from amount to concentration is division by VD, which is already inside C0 = D0/VD. This factor has no units.'}],
+   why:'Choosing this mixes the accumulation factor up with VD. The conversion from amount to concentration is division by VD, which is already inside C0 = {{frac:D0|VD}}. This factor has no units.'}],
  teach:[
   {t:'The same factor, 1/(1 − e^(-kτ)), appears in the steady-state maximum, the minimum and the concentration after n doses. Each time it carries the drug that has accumulated.'},
   M6_ACCFAC, M6_EQ],
@@ -360,7 +360,7 @@ const Q_MODULE6 = [
   {t:'Higher, because drug has accumulated',
    why:'Choosing this counts accumulation twice. Accumulation has already raised both the peak and the trough, and the midpoint is taken from those raised values. The shape of the decline between them is what puts the average below the midpoint.'},
   {t:'It cannot be compared without the AUC (area under the curve)',
-   why:'Choosing this treats the AUC as the only route to the average. Cavg∞ can be found without an AUC from FD0/(VD kτ), and the shape of the curve alone puts it below the midpoint. The exponential decline is enough to answer.'}],
+   why:'Choosing this treats the AUC as the only route to the average. Cavg∞ can be found without an AUC from {{frac:FD0|VD kτ}}, and the shape of the curve alone puts it below the midpoint. The exponential decline is enough to answer.'}],
  teach:[
   {t:'Cavg∞ is not (Cmax∞ + Cmin∞)/2. It is the area over one interval divided by τ, or FD0/(VD kτ). A first-order decline is exponential: it falls fast early and slowly late, so the average sits below the midpoint.'},
   M6_FIG, M6_EQ],
@@ -394,13 +394,13 @@ const Q_MODULE6 = [
  stem:'A drug is given by repeated IV bolus at a fixed dose and interval. How does Cmax∞ compare with the peak after the first dose?',
  options:[
   {t:'Higher, because drug has accumulated', correct:true,
-   why:'The first dose enters a body with no drug in it. At steady state each dose is added to what is left of earlier doses, so the peak is C0 multiplied by 1/(1 − e^(-kτ)), which is more than 1. A calculated Cmax∞ below C0 means a setup error.'},
+   why:'The first dose enters a body with no drug in it. At steady state each dose is added to what is left of earlier doses, so the peak is C0 multiplied by {{frac:1|1 − e^(-kτ)}}, which is more than 1. A calculated Cmax∞ below C0 means a setup error.'},
   {t:'Equal, because the dose is the same',
    why:'Choosing this treats the same dose as the same peak. The dose is the same, but the starting point is not. Equal peaks happen only when each dose is eliminated before the next, which needs an interval long compared with the half-life.'},
   {t:'Lower, because elimination has increased',
    why:'Choosing this confuses a faster elimination rate with a larger rate constant. The elimination rate in mg per hour is higher at steady state because more drug is present, but that is balanced by the dose; k is unchanged. The peak is higher, not lower.'},
   {t:'Twice as high, whatever the interval',
-   why:'Choosing this treats the accumulation factor as a fixed number. The ratio is 1/(1 − e^(-kτ)), which depends on k and τ. It is 2 only when τ is one half-life. With τ equal to two half-lives, as in her Example 1, it is 1.33.'}],
+   why:'Choosing this treats the accumulation factor as a fixed number. The ratio is {{frac:1|1 − e^(-kτ)}}, which depends on k and τ. It is 2 only when τ is one half-life. With τ equal to two half-lives, as in her Example 1, it is 1.33.'}],
  teach:[
   {h:'The idea', list:[
    'With repeated intravenous (IV) bolus doses, the steady-state peak is higher than the first-dose peak by the accumulation factor.',
@@ -416,7 +416,7 @@ const Q_MODULE6 = [
  stem:'Which change increases the accumulation factor of a drug given by repeated IV bolus, the ratio of the steady-state peak to the first-dose peak?',
  options:[
   {t:'Shortening the dosing interval', correct:true,
-   why:'A shorter τ leaves less time for each dose to be eliminated, so e^(-kτ) is larger and the accumulation factor 1/(1 − e^(-kτ)) is larger. More of each dose is still present when the next is given.'},
+   why:'A shorter τ leaves less time for each dose to be eliminated, so e^(-kτ) is larger and the accumulation factor {{frac:1|1 − e^(-kτ)}} is larger. More of each dose is still present when the next is given.'},
   {t:'Increasing the dose',
    why:'Choosing this confuses higher levels with a larger factor. A larger dose raises the peaks and troughs in proportion, so more drug is in the body, but the accumulation factor holds only k and τ. The ratio of the steady-state peak to the first-dose peak stays the same.'},
   {t:'Lengthening the dosing interval',
@@ -458,13 +458,13 @@ const Q_MODULE6 = [
  stem:'In the equation for Cp after n doses, what happens to the term (1 − e^(-nkτ)) as n becomes very large?',
  options:[
   {t:'It approaches 1', correct:true,
-   why:'e^(-nkτ) shrinks towards 0 as n grows, so 1 minus it approaches 1. The equation then becomes Cp = (D0/VD)[1/(1 − e^(-kτ))]e^(-kt), which is the steady-state equation.'},
+   why:'e^(-nkτ) shrinks towards 0 as n grows, so 1 minus it approaches 1. The equation then becomes Cp = ({{frac:D0|VD}})[{{frac:1|1 − e^(-kτ)}}]e^(-kt), which is the steady-state equation.'},
   {t:'It approaches 0',
    why:'This has the exponential and the whole term the wrong way round. It is e^(-nkτ) that approaches 0; one minus a vanishing number approaches 1.'},
   {t:'It grows without limit',
    why:'Choosing this confuses the growing dose number with a growing term. The term is 1 minus a positive fraction, so it can never exceed 1. That limit is why the concentration levels off at a plateau instead of rising forever.'},
   {t:'It equals the accumulation factor',
-   why:'Choosing this confuses the n term with the accumulation factor, which is 1/(1 − e^(-kτ)), with τ and not nτ. The n term approaches 1 and drops out, leaving the accumulation factor behind.'}],
+   why:'Choosing this confuses the n term with the accumulation factor, which is {{frac:1|1 − e^(-kτ)}}, with τ and not nτ. The n term approaches 1 and drops out, leaving the accumulation factor behind.'}],
  teach:[
   {t:'The n-dose equation and the steady-state equation are the same equation. Steady state is the limit reached when the dose number is large.'},
   M6_NDOSE],
@@ -530,7 +530,7 @@ const Q_MODULE6 = [
   {k:'algebra', t:'{{frac:8 hr|4 hr}} = 2 half-lives',
    why:'The interval is exactly two half-lives, so the level halves twice: 40, then 20, then 10. Two half-lives leave one quarter of the peak, and 40 × 0.25 = 10 mg/L.'},
   {k:'algebra', t:'Cmin = 40 mg/L × e^(-(0.693/4 hr)(8 hr)) = 40 × 0.25 = 10 mg/L',
-   why:'k = 0.693/4 hr = 0.1733 hr⁻¹, and kτ = 1.386 with no units, so e^(-1.386) = 0.25. The hours cancel inside the exponent.'},
+   why:'k = {{frac:0.693|4}} hr = 0.1733 hr⁻¹, and kτ = 1.386 with no units, so e^(-1.386) = 0.25. The hours cancel inside the exponent.'},
   {k:'round', t:'Cmin = 10 mg/L',
    why:'Her value, 10 mg/L. It is the first-dose trough, the level just before the second dose, and the steady-state trough will be higher than it by the same accumulation factor as the peak.'}],
  teach:[
@@ -578,7 +578,7 @@ const Q_MODULE6 = [
   {k:'algebra', t:'Cmin∞ = 53.3 mg/L × e^(-(0.693/4 hr)(8 hr)) = 53.3 × 0.25',
    why:'k is unchanged at steady state, 0.1733 hr⁻¹, and kτ = 1.386, a pure number. The interval is two half-lives, so the peak is halved twice.'},
   {k:'algebra', t:'Cmin∞ = 13.3 mg/L',
-   why:'53.3 × 0.25 = 13.3. Starting from the first-dose peak instead gives 40/0.75 × 0.25, the same value by a longer route.'},
+   why:'53.3 × 0.25 = 13.3. Starting from the first-dose peak instead gives {{frac:40|0.75}} × 0.25, the same value by a longer route.'},
   {k:'round', t:'Cmin∞ = 13.3 mg/L',
    why:'Her value. It is above the first-dose trough of 10 mg/L by the same factor, 1.33, as the peak is above 40 mg/L.'}],
  teach:[
@@ -599,9 +599,9 @@ const Q_MODULE6 = [
   {k:'setup', t:'Cavg∞ = {{frac:FD0|VD kτ}}, with F = 1',
    why:'The average over one interval at steady state is the dose divided by clearance times the interval, and clearance is VD k. An intravenous (IV) dose has F = 1.'},
   {k:'unit', t:'{{frac:D0|VD}} = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L',
-   why:'D0/VD is the first-dose C0 again, so the kilograms cancel and the value from part one can be reused. The dose is 650 mg and VD is 16.25 L, which give the same 40 mg/L.'},
+   why:'{{frac:D0|VD}} is the first-dose C0 again, so the kilograms cancel and the value from part one can be reused. The dose is 650 mg and VD is 16.25 L, which give the same 40 mg/L.'},
   {k:'algebra', t:'Cavg∞ = {{frac:40 mg/L|(0.693/4 hr)(8 hr)}} = {{frac:40 mg/L|1.386}}',
-   why:'k is 0.693/4 = 0.1733 hr⁻¹ and τ is 8 hr. k times τ is reciprocal hours times hours, a pure number, so the result stays in mg/L.'},
+   why:'k is {{frac:0.693|4}} = 0.1733 hr⁻¹ and τ is 8 hr. k times τ is reciprocal hours times hours, a pure number, so the result stays in mg/L.'},
   {k:'algebra', t:'Cavg∞ = 28.9 mg/L',
    why:'40 divided by 1.386 is 28.86. kτ is 1.386 because the interval is two half-lives: 2 × 0.693. No exponential is needed for the average.'},
   {k:'round', t:'Cavg∞ = 28.9 mg/L',
@@ -626,7 +626,7 @@ const Q_MODULE6 = [
   {k:'setup', t:'Cp = {{frac:D0|VD}} ({{frac:1 - e^(-nkτ)|1 - e^(-kτ)}}) e^(-kt), with n = 2 and t = 3 hr',
    why:'Two doses are not steady state, so the n-dose equation is used. n is the dose just given and t is the time since it was given.'},
   {k:'unit', t:'{{frac:D0|VD}} = 40 mg/L; k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹; kτ = 1.386',
-   why:'The kilograms cancel in D0/VD, giving 40 mg/L. All times are in hours, so kτ = 0.1733 × 8 = 1.386 and each exponent is a pure number.'},
+   why:'The kilograms cancel in {{frac:D0|VD}}, giving 40 mg/L. All times are in hours, so kτ = 0.1733 × 8 = 1.386 and each exponent is a pure number.'},
   {k:'algebra', t:'{{frac:1 - e^(-2(1.386))|1 - e^(-1.386)}} = {{frac:1 - 0.0625|1 - 0.25}} = {{frac:0.9375|0.75}} = 1.25',
    why:'e^(-2.772) = 0.25² = 0.0625. The bracket is how far the peak has risen after two doses: 1.25 times C0, against 1.33 at steady state.'},
   {k:'algebra', t:'e^(-kt) = e^(-(0.1733 hr⁻¹)(3 hr)) = e^(-0.520) = 0.595',
@@ -707,7 +707,7 @@ const Q_MODULE6 = [
   {k:'setup', t:'k = {{frac:ClT|VD}}; t½ = {{frac:0.693|k}}',
    why:'Clearance is k times VD, so k is clearance divided by volume, and the half-life follows from k. Neither step needs the dose or the interval; they come in only from part (b) on.'},
   {k:'algebra', t:'k = {{frac:2.95 L/hr|17.03 L}} = 0.1732 hr⁻¹; t½ = {{frac:0.693|0.1732 hr⁻¹}} = 4 hr',
-   why:'In k = ClT/VD the litres cancel, leaving reciprocal hours; 0.693 divided by reciprocal hours leaves hours. 0.693/0.1732 = 4.00.'},
+   why:'In k = {{frac:ClT|VD}} the litres cancel, leaving reciprocal hours; 0.693 divided by reciprocal hours leaves hours. {{frac:0.693|0.1732}} = 4.00.'},
   {k:'round', t:'t½ = 4 hr',
    why:'Her keyed value, 4 hr. With τ = 8 hr the interval is two half-lives, the same as in Example 1, so the accumulation factor in the later parts is again 1.33.'}],
  teach:[
@@ -773,7 +773,7 @@ const Q_MODULE6 = [
   {k:'algebra', t:'e^(-(8 hr)(0.1732 hr⁻¹)) = e^(-1.386) = 0.2502; 1 - 0.2502 = 0.7498',
    why:'e^(-kτ) is the fraction of each dose left at the end of an interval, and 1 minus it is the fraction removed during the interval.'},
   {k:'algebra', t:'Cmax∞ = {{frac:58.72 mg/L|1 - e^(-(8)(0.1732))}} = {{frac:58.72 mg/L|0.7498}} = 78.31 mg/L',
-   why:'Dividing by a number less than 1 raises the peak, as accumulation must: 58.72/0.7498 = 78.31, a factor of 1.33.'},
+   why:'Dividing by a number less than 1 raises the peak, as accumulation must: {{frac:58.72|0.7498}} = 78.31, a factor of 1.33.'},
   {k:'round', t:'Cmax∞ = 78.31 mg/L',
    why:'Her keyed value, 78.31 mg/L, higher than the first-dose 58.72 mg/L by the accumulation factor 1.33, as a steady-state peak must be.'}],
  teach:[
@@ -813,7 +813,7 @@ const Q_MODULE6 = [
  tol:0.1,
  steps:[
   {k:'setup', t:'Cavg∞ = {{frac:FD0|ClT τ}}, with F = 1',
-   why:'With clearance already known from part (a), the ClT form is the direct one; it is the same as FD0/(VD kτ) because ClT = kVD. intravenous (IV) dosing gives F = 1.'},
+   why:'With clearance already known from part (a), the ClT form is the direct one; it is the same as {{frac:FD0|VD kτ}} because ClT = kVD. intravenous (IV) dosing gives F = 1.'},
   {k:'algebra', t:'Cavg∞ = {{frac:1000 mg|(2.95 L/hr)(8 hr)}}',
    why:'In the denominator L/hr times hr leaves L, so mg over L gives a concentration in mg/L. The dose is 1000 mg, one gram converted to milligrams.'},
   {k:'algebra', t:'Cavg∞ = {{frac:1000 mg|23.6 L}} = 42.37 mg/L',
@@ -839,9 +839,9 @@ const Q_MODULE6 = [
   {k:'algebra', t:'Davg∞ = (42.37 mg/L)(17.03 L)',
    why:'mg/L times L: the litres cancel, leaving mg, an amount, which is what the question asks for. The volume is the 17.03 L found in part (a).'},
   {k:'algebra', t:'Davg∞ = 721.6 mg',
-   why:'42.37 × 17.03 = 721.6. The same result comes from the amount form, FD0/(kτ) = 1000/(0.1732 × 8) = 721.7, within rounding.'},
+   why:'42.37 × 17.03 = 721.6. The same result comes from the amount form, {{frac:FD0|kτ}} = {{frac:1000|0.1732 × 8}} = 721.7, within rounding.'},
   {k:'round', t:'Davg∞ = 721.61 mg',
-   why:'Her keyed value is 721.61 mg, and 721.6 mg is the same to four significant figures. It lies between the minimum and maximum amounts at steady state, Dmin∞ = 1000 × 0.2502/0.7498 = 333.7 mg and Dmax∞ = 1000/0.7498 = 1333.7 mg.'}],
+   why:'Her keyed value is 721.61 mg, and 721.6 mg is the same to four significant figures. It lies between the minimum and maximum amounts at steady state, Dmin∞ = 1000 × {{frac:0.2502|0.7498}} = 333.7 mg and Dmax∞ = {{frac:1000|0.7498}} = 1333.7 mg.'}],
  teach:[
   {t:'The amount forms of the steady-state equations are the concentration forms multiplied by VD. The same result comes from Davg∞ = FD0/(kτ) = 1000/(0.1732 × 8).'},
   M6_EQ],

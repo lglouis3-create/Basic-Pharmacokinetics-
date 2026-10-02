@@ -537,13 +537,13 @@ def zero_in(t):
     return 8 * (1 - math.exp(-K3 * T3)) * math.exp(-K3 * (t - T3))
 
 
-stack('input_types', 'Three ways drug can enter, each with first-order elimination', [
-    input_panel(lambda t: 10 * math.exp(-K3 * t), 'Instantaneous in, first-order out',
-                'IV bolus: highest at time zero, then falls.'),
-    input_panel(lambda t: 13.33 * (math.exp(-K3 * t) - math.exp(-1.2 * t)), 'First-order in, first-order out',
-                'Ordinary tablet: rises to a peak, then falls.'),
-    input_panel(zero_in, 'Zero-order in, first-order out',
-                'Infusion or constant-rate product: levels off.', stop=T3),
+stack('input_types', 'IV bolus, oral tablet and IV infusion, each with first-order elimination', [
+    input_panel(lambda t: 10 * math.exp(-K3 * t), 'IV bolus',
+                'Instantaneous in, first-order out: highest at time zero, then falls.'),
+    input_panel(lambda t: 13.33 * (math.exp(-K3 * t) - math.exp(-1.2 * t)), 'Oral tablet or capsule',
+                'First-order in, first-order out: rises to a peak, then falls.'),
+    input_panel(zero_in, 'IV infusion or controlled-release product',
+                'Zero-order in, first-order out: levels off.', stop=T3),
 ], 600, 320)
 
 # ---- module 6: repeated IV bolus, her Example 1 -----------------------------

@@ -2,6 +2,17 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-02 (guides and tell apart rebuilt)
+- Guides: each objective in plain words, then terms, equations, a worked example and how she tests it.
+- Guides: her quotes only where her exact wording matters; the rest is said plainly.
+- Tell apart: a table of the models from each module at the top, with an Explain-one menu.
+- Tell apart: every section is a short table; tap Why? or pick one for the full explanation.
+- Reference and Terms draw every formula as a stacked fraction too.
+
+## 2026-10-02 (stacked fractions)
+- Worked steps and explanations draw every a/b formula as a stacked fraction.
+- Diagrams: the three input curves are titled by dosage form: IV bolus, oral tablet, IV infusion.
+
 ## 2026-10-02 (grouped by exam)
 - Topics: Modules 1–3 and their review sit inside Exam 1; Modules 4–6 and a review inside Exam 2.
 - The exam being prepared for opens by default; each card remembers being opened or closed.

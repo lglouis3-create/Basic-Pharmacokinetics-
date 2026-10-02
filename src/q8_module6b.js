@@ -28,7 +28,7 @@ const B_INF = {h:'What one infusion does (Module 3)', list:[
   'The body removes drug by first-order elimination: the rate out is k (the elimination rate constant) times the amount in the body.',
   'So the concentration rises, and the rise slows as it goes, because the rate out grows as drug builds up.',
   'During the infusion: Cp = {{frac:R|VD k}} (1 - e^(-kt)), where VD is the apparent volume of distribution.',
-  'R/(VD k) equals R/Cl, where Cl is clearance. It is Css, the steady-state concentration the infusion would reach if it ran forever.',
+  '{{frac:R|VD k}} equals {{frac:R|Cl}}, where Cl is clearance. It is Css, the steady-state concentration the infusion would reach if it ran forever.',
   '(1 - e^(-kt)) is the fraction of Css reached after infusing for a time t. Here t is the infusion time.',
   'R is the dose divided by the infusion duration.',
   'When the infusion stops, no more drug goes in, and only first-order elimination is left.',
@@ -46,7 +46,7 @@ const B_INF_SUM = [
     ['0 to 2 hr', 'Dose 1 infusing', '{{frac:R|VD k}} (1 - e^(-kt)), t up to 2 hr'],
     ['2 to 6 hr', 'Dose 1 declining', 'Cpeak e^(-kt), t from 2 hr'],
     ['6 to 8 hr', 'Dose 2 infusing while dose 1 keeps declining', 'The infusion equation for dose 2, added to the leftover of dose 1'],
-    ['8 to 12 hr', 'Both declining', 'Cpeak e^(-k(t - 2)) + Cpeak e^(-k(t - 8))']]}, after:'If the same rate ran without stopping, the plateau would be Css = R/Cl.'}];
+    ['8 to 12 hr', 'Both declining', 'Cpeak e^(-k(t - 2)) + Cpeak e^(-k(t - 8))']]}, after:'If the same rate ran without stopping, the plateau would be Css = {{frac:R|Cl}}.'}];
 
 const B_INF_ERR = {h:'The common errors', list:[
   'Using 4 hours, or 12, as t for both doses. At the 12-hour mark t is 10 hours for dose 1 and 4 hours for dose 2, because each t runs from when that dose stopped.',
@@ -56,7 +56,7 @@ const B_INF_ERR = {h:'The common errors', list:[
 const B_INF_FIG = [
   {h:'Her Example 4 drawn out', fig:'two_infusions', list:[
     '300 mg is infused over 2 hours, so R = 150 mg/hr.',
-    'k is 0.15 hr⁻¹ and VD is 15 L, so Cl = 2.25 L/hr and R/Cl = 66.67 mg/L.',
+    'k is 0.15 hr⁻¹ and VD is 15 L, so Cl = 2.25 L/hr and {{frac:R|Cl}} = 66.67 mg/L.',
     'The second infusion starts at 6 hours and runs to 8 hours.',
     'Each infusion on its own rises to 17.28 mg/L, 26 per cent of the 66.67 mg/L it was heading for.']},
   {h:'The concentration at 12 hours', list:[
@@ -131,9 +131,9 @@ const Q_MODULE6B = [
   {t:'Cp = C0e^(−kt)',
    why:'This is the decline after the infusion stops, not the rise during it. The concentration at the end of the infusion, C0, has to be found first; this equation is then applied to it. Choosing this skips the step that produces C0: the concentration at the end of the infusion has to be found first, and this equation is then applied to it.'},
   {t:'Cmax∞ = C0/(1 − e^(−kτ))',
-   why:'This carries the bolus steady-state peak into an infusion regimen. That equation needs C0 = D0/VD, a bolus quantity; an infusion has no concentration at time zero, because the drug enters over time. Choosing this carries the bolus steady-state peak into an infusion regimen.'},
+   why:'This carries the bolus steady-state peak into an infusion regimen. That equation needs C0 = {{frac:D0|VD}}, a bolus quantity; an infusion has no concentration at time zero, because the drug enters over time. Choosing this carries the bolus steady-state peak into an infusion regimen.'},
   {t:'Css = R/Cl',
-   why:'This treats a short infusion as if it had run to steady state. R/Cl is the plateau a continuous infusion reaches after 3 to 5 half-lives; a 2-hour infusion stops short of it whenever 2 hours is less than 3 to 5 half-lives, and the (1 − e^(−kt)) factor measures how far short.'}],
+   why:'This treats a short infusion as if it had run to steady state. {{frac:R|Cl}} is the plateau a continuous infusion reaches after 3 to 5 half-lives; a 2-hour infusion stops short of it whenever 2 hours is less than 3 to 5 half-lives, and the (1 − e^(−kt)) factor measures how far short.'}],
  teach:[
   {h:'The idea', list:[
     'The rise during each infusion needs nothing new: it is the Module 3 infusion equation.',
@@ -153,7 +153,7 @@ const Q_MODULE6B = [
   {t:'Zero-order decline at the infusion rate',
    why:'This reverses input and output. Once the infusion stops the input plays no further part, and the body removes a constant fraction per hour, not a constant amount.'},
   {t:'A continued rise towards R/Cl',
-   why:'This treats the input as still running. The rise towards R/Cl happens only while drug is going in; when the pump stops, the concentration is at its highest for that infusion and can only fall.'},
+   why:'This treats the input as still running. The rise towards {{frac:R|Cl}} happens only while drug is going in; when the pump stops, the concentration is at its highest for that infusion and can only fall.'},
   {t:'A steady level until the next infusion',
    why:'This confuses the plateau of a continuous infusion with the gap between two short ones. A level holds steady only while rate in equals rate out, and between infusions the rate in is zero.'}],
  teach:[
@@ -230,7 +230,7 @@ const Q_MODULE6B = [
   {h:'The idea', list:[
     'Repeated IV (intravenous) bolus and intermittent infusion share the equations for what happens between doses.',
     'They differ in where the peak sits and in how it is found.',
-    'Bolus: C0 = D0/VD, the dose over the apparent volume of distribution.',
+    'Bolus: C0 = {{frac:D0|VD}}, the dose over the apparent volume of distribution.',
     'Infusion: the infusion equation with t equal to the infusion time.']},
   {h:'Repeated bolus against intermittent infusion', table:{head:['', 'Repeated IV bolus', 'Intermittent IV infusion'], rows:[
     ['Input', 'Instantaneous', 'Zero order, for the infusion time'],
@@ -298,11 +298,11 @@ const Q_MODULE6B = [
  tol:0.1,
  steps:[
   {k:'setup', t:'Cp = {{frac:R|VD k}} (1 - e^(-kt)), with t = 2 hr',
-   why:'During the infusion the concentration rises towards R/(VD k). When the infusion stops it has reached the fraction (1 − e^(−kt)) of it. t is the infusion time, not the interval.'},
+   why:'During the infusion the concentration rises towards {{frac:R|VD k}}. When the infusion stops it has reached the fraction (1 − e^(−kt)) of it. t is the infusion time, not the interval.'},
   {k:'unit', t:'R = {{frac:300 mg|2 hr}} = 150 mg/hr; VD k = (15 L)(0.15 hr⁻¹) = 2.25 L/hr',
-   why:'VD times k is the clearance in L/hr, so R over it is mg/hr over L/hr, which leaves mg/L. When clearance is given directly, R/Cl is the same quantity.'},
+   why:'VD times k is the clearance in L/hr, so R over it is mg/hr over L/hr, which leaves mg/L. When clearance is given directly, {{frac:R|Cl}} is the same quantity.'},
   {k:'algebra', t:'kt = (0.15 hr⁻¹)(2 hr) = 0.30; 1 - e^(-0.30) = 1 - 0.7408 = 0.2592',
-   why:'Two hours is less than one half-life (0.693/0.15 = 4.6 hr), so only about a quarter of the plateau is reached.'},
+   why:'Two hours is less than one half-life ({{frac:0.693|0.15}} = 4.6 hr), so only about a quarter of the plateau is reached.'},
   {k:'algebra', t:'Cp = {{frac:150 mg/hr|(15 L)(0.15 hr⁻¹)}} (1 - e^(-(0.15)(2))) = 66.67 × 0.2592 = 17.28 mg/L',
    why:'66.67 mg/L is the plateau a continuous infusion would reach; this 2-hour infusion stops at 26 per cent of it.'},
   {k:'round', t:'Cp = 17.28 mg/L',
@@ -336,7 +336,7 @@ const Q_MODULE6B = [
   {k:'algebra', t:'C = 3.86 + 9.48 = 13.34 mg/L',
    why:'The sum of the two contributions is the plasma concentration at 12 hours. Adding is allowed because elimination is first order, so each infusion declines independently of the other.'},
   {k:'round', t:'C = 13.34 mg/L',
-   why:'Her value is 13.33 mg/L, from 17.3 rounded before the exponentials; carrying 17.28 through gives 13.34. Both are within the tolerance.'}],
+   why:'Her stated value is 13.33 mg/L. Carrying 17.28 through gives 13.34, and starting from 17.3 gives 13.35; all three are within the tolerance.'}],
  teach:[
   {h:'The idea', list:[
     'One decline per infusion, each with its own t measured from its own end.',
@@ -423,16 +423,16 @@ const Q_MODULE6B = [
   {k:'unit', t:'R = {{frac:150 mg|1.5 hr}} = 100 mg/hr; k = {{frac:Cl|VD}} = {{frac:2.54 L/hr|22 L}} = 0.1155 hr⁻¹',
    why:'This stem gives the clearance (Cl), not k or a half-life, so k comes from Cl = kVD. Litres cancel, leaving reciprocal hours.'},
   {k:'setup', t:'Cp = {{frac:R|Cl}} (1 - e^(-kt)), with t = 1.5 hr',
-   why:'With the clearance given, R/Cl is the direct form of the plateau; it equals R/(VD k). t is the infusion time.'},
+   why:'With the clearance given, {{frac:R|Cl}} is the direct form of the plateau; it equals {{frac:R|VD k}}. t is the infusion time.'},
   {k:'algebra', t:'{{frac:R|Cl}} = {{frac:100 mg/hr|2.54 L/hr}} = 39.37 mg/L; 1 - e^(-(0.1155)(1.5)) = 1 - e^(-0.173) = 1 - 0.841 = 0.159',
-   why:'kt = 0.1155 × 1.5 = 0.173, a pure number. An hour and a half is a quarter of the 6-hour half-life (0.693/0.1155), so only 16 per cent of the plateau is reached.'},
+   why:'kt = 0.1155 × 1.5 = 0.173, a pure number. An hour and a half is a quarter of the 6-hour half-life ({{frac:0.693|0.1155}}), so only 16 per cent of the plateau is reached.'},
   {k:'algebra', t:'Cp = 39.37 × 0.159 = 6.26 mg/L',
    why:'This is 16 per cent of 39.37 mg/L. The plateau is high because the clearance is small, and the infusion is short against the half-life, so the product is modest.'},
   {k:'round', t:'Cp = 6.26 mg/L',
    why:'Her value, 6.26 mg/L. It is the C0 for the decline after this infusion and, because the second infusion is identical, for the second decline as well.'}],
  teach:[
   {h:'The idea', list:[
-    'When the stem gives clearance (Cl), use R/Cl for the plateau and Cl/VD for k.',
+    'When the stem gives clearance (Cl), use {{frac:R|Cl}} for the plateau and {{frac:Cl|VD}} for k.',
     'The slip she named: dividing by 24 instead of the 22-litre volume.']},
   B_INF],
  audit:'Stem transcribed from the photograph of the sheet on the annotated Part 2 deck. She works this part aloud in the 09.28 recording: "I\'m getting a K of 0.115 per hour ... 6.26".',
@@ -483,12 +483,12 @@ const Q_MODULE6B = [
   {k:'unit', t:'R = {{frac:150 mg|1.5 hr}} = 100 mg/hr',
    why:'The same rate the short infusions run at, 150 mg over 1.5 hours, now imagined running without a break. mg per hr is the zero-order input the plateau depends on.'},
   {k:'algebra', t:'Css = {{frac:100 mg/hr|2.54 L/hr}} = 39.37 mg/L',
-   why:'mg/hr over L/hr leaves mg/L. The 1.5-hour infusions reach only 16 per cent of this R/Cl, because they stop long before 3 to 5 half-lives have passed.'},
+   why:'mg/hr over L/hr leaves mg/L. The 1.5-hour infusions reach only 16 per cent of this {{frac:R|Cl}}, because they stop long before 3 to 5 half-lives have passed.'},
   {k:'round', t:'Css = 39.37 mg/L',
    why:'Her method, the rate divided by the clearance, gives 39.37 mg/L. It has no time term, so it says nothing about when the plateau would be reached.'}],
  teach:[
   {h:'The idea', list:[
-    'The plateau of a continuous infusion is the Module 3 result Css = R/Cl, the rate over the clearance.',
+    'The plateau of a continuous infusion is the Module 3 result Css = {{frac:R|Cl}}, the rate over the clearance.',
     'The 1.5-hour infusions in this problem stop at 6.26 mg/L, 16 per cent of it, because they stop long before 3 to 5 half-lives.']},
   B_INF],
  audit:'Stem from the photograph of the sheet on the annotated Part 2 deck; she states the method ("rate divided by your clearance") and 100/2.54 = 39.37.',
@@ -503,7 +503,7 @@ const Q_MODULE6B = [
  stem:'Cmax∞ = (FD0/VD) × [1/(1 − e^(−kτ))] × e^(−k·tmax∞). What marks this as the steady-state peak for an oral dose rather than for a repeated intravenous (IV) bolus?',
  options:[
   {t:'The F and the tmax', correct:true,
-   why:'F is bioavailability, which an IV dose does not need, and tmax is the time to peak, which a bolus lacks because it peaks at the moment of the dose. Remove those two and what is left, (D0/VD)/(1 − e^(−kτ)), is the bolus Cmax∞.'},
+   why:'F is bioavailability, which an IV dose does not need, and tmax is the time to peak, which a bolus lacks because it peaks at the moment of the dose. Remove those two and what is left, {{frac:D0 ÷ VD|1 − e^(−kτ)}}, is the bolus Cmax∞.'},
   {t:'The τ',
    why:'This reads the dosing interval as an oral feature. Every multiple-dose regimen has a τ, bolus or oral, so τ cannot tell the two apart.'},
   {t:'The accumulation factor 1/(1 − e^(−kτ))',
@@ -551,7 +551,7 @@ const Q_MODULE6B = [
   {t:'k and ka',
    why:'This treats the rate constants as adjustable. They belong to the drug and the formulation; a regimen changes only the dose and the interval.'},
   {t:'Only Cavg∞',
-   why:'The average does change, since τ is in FD0/(ClT τ), but this stops one step short: the peak and its timing change too, because τ appears in both.'},
+   why:'The average does change, since τ is in {{frac:FD0|ClT τ}}, but this stops one step short: the peak and its timing change too, because τ appears in both.'},
   {t:'Nothing at steady state',
    why:'This reads steady state as a fixed property of the drug. Steady state is a balance between what is given and what is cleared, and giving the same dose half as often halves the input.'}],
  teach:[
@@ -595,7 +595,7 @@ const Q_MODULE6B = [
   {t:'Higher, because ka increases with repeated dosing',
    why:'This changes a rate constant that a regimen does not change. ka belongs to the drug and its formulation and is the same for every dose; the higher peak comes from accumulation. Choosing this changes a rate constant that a regimen does not change.'},
   {t:'The same, because the dose is the same',
-   why:'This treats each dose as if it entered an empty body. The first dose does; the doses at steady state do not, which is what the factor 1/(1 − e^(−kτ)) counts. This answer treats each dose as if it entered an empty body.'},
+   why:'This treats each dose as if it entered an empty body. The first dose does; the doses at steady state do not, which is what the factor {{frac:1|1 − e^(−kτ)}} counts. This answer treats each dose as if it entered an empty body.'},
   {t:'Lower, because absorption is slower at steady state',
    why:'This invents a change in absorption. Absorption is first order with the same ka every time; the steady-state peak is earlier and higher, not lower. Choosing this invents a change in absorption.'}],
  teach:[
@@ -613,7 +613,7 @@ const Q_MODULE6B = [
  stem:'The equation for the plasma concentration after n oral doses has the same prefactor FkaD0/(VD(ka − k)) as the single-dose equation. What is new in it?',
  options:[
   {t:'The dose number n and the dosing interval τ', correct:true,
-   why:'Each exponential is now multiplied by a bracket: (1 − e^(−nkτ))/(1 − e^(−kτ)) on the elimination term, and the matching bracket in ka on the absorption term. n says which dose has just been given, and τ how far apart the doses are.'},
+   why:'Each exponential is now multiplied by a bracket: {{frac:1 − e^(−nkτ)|1 − e^(−kτ)}} on the elimination term, and the matching bracket in ka on the absorption term. n says which dose has just been given, and τ how far apart the doses are.'},
   {t:'F and VD',
    why:'This reads the prefactor as new. F and VD are already in the single-dose equation; what changes is the multiplier on each exponential.'},
   {t:'A new rate constant for accumulation',
@@ -681,7 +681,7 @@ const Q_MODULE6B = [
   {t:'Higher concentrations, because each dose has more time to be absorbed',
    why:'This confuses absorption with accumulation. A longer interval changes how much of each dose is eliminated before the next arrives, which is more.'},
   {t:'The same concentrations, because the dose is unchanged',
-   why:'This leaves the interval out of the average. Cavg∞ = FD0/(ClT τ), so doubling τ halves the average even though D0 is the same. Choosing this leaves the interval out of the average.'}],
+   why:'This leaves the interval out of the average. Cavg∞ = {{frac:FD0|ClT τ}}, so doubling τ halves the average even though D0 is the same. Choosing this leaves the interval out of the average.'}],
  teach:[
   {h:'The idea', list:[
     'Method 2 for altering steady state: change the interval, keep the dose.',
@@ -792,7 +792,7 @@ const Q_MODULE6B = [
   {k:'setup', t:'tmax = {{frac:ln(ka/k)|ka - k}}',
    why:'For the first dose the body starts empty, so the single-dose time to peak applies, with no τ in it. The dosing interval enters only at steady state.'},
   {k:'algebra', t:'tmax = {{frac:ln(0.9/0.0693)|0.9 - 0.0693}} = {{frac:ln(12.99)|0.8307}} = {{frac:2.564|0.8307}} = 3.09 hr',
-   why:'Reciprocal hours in the denominator leave hours. The logarithm has no units, because ka/k is a ratio of two rate constants in the same unit.'},
+   why:'Reciprocal hours in the denominator leave hours. The logarithm has no units, because {{frac:ka|k}} is a ratio of two rate constants in the same unit.'},
   {k:'round', t:'tmax = 3.1 hr',
    why:'Her value: "something like 3-ish hours for T-Max", written as 3.1 hr in the working. The first-dose Cmax is evaluated at this time in the next part.'}],
  teach:[
@@ -842,9 +842,9 @@ const Q_MODULE6B = [
   {k:'algebra', t:'1 - e^(-0.0693 × 8) = 1 - 0.574 = 0.426; 1 - e^(-0.9 × 8) = 1 - 0.0007 = 0.999',
    why:'Over one 8-hour interval 43 per cent of the drug is eliminated, and absorption is complete (0.999) because ka is large.'},
   {k:'algebra', t:'ln[{{frac:0.9 × 0.426|0.0693 × 0.999}}] = ln({{frac:0.383|0.0692}}) = ln(5.53) = 1.710',
-   why:'The ratio inside the logarithm is smaller than the single-dose ka/k of 12.99, which is why the steady-state peak comes earlier.'},
+   why:'The ratio inside the logarithm is smaller than the single-dose {{frac:ka|k}} of 12.99, which is why the steady-state peak comes earlier.'},
   {k:'algebra', t:'tmax∞ = {{frac:1.710|0.8307 hr⁻¹}} = 2.06 hr',
-   why:'Dividing by ka − k = 0.8307 hr⁻¹ leaves hours, because the logarithm has no units. 1.710/0.8307 = 2.06 hr, about an hour earlier than the first-dose peak.'},
+   why:'Dividing by ka − k = 0.8307 hr⁻¹ leaves hours, because the logarithm has no units. {{frac:1.710|0.8307}} = 2.06 hr, about an hour earlier than the first-dose peak.'},
   {k:'round', t:'tmax∞ = 2.06 hr',
    why:'Her value: "T-Max at steady state. I got 2.06 hours." It is shorter than the first-dose 3.1 hours, and it is the time at which Cmax at steady state is evaluated.'}],
  teach:[
@@ -904,7 +904,7 @@ const Q_MODULE6B = [
    why:'Her value: "I\'m getting 2.4-ish." The steady-state trough, 2.44 mg/L, is higher than the first-dose peak of 1.35 mg/L.'}],
  teach:[
   {h:'The idea', list:[
-    'The oral trough carries the single-dose prefactor, not FD0/VD, and e^(-kτ) for the full interval.',
+    'The oral trough carries the single-dose prefactor, not {{frac:FD0|VD}}, and e^(-kτ) for the full interval.',
     'For a bolus the trough is Cmax∞ e^(-kτ), which has no absorption term to carry.']},
   B_ORAL_EQ],
  cite:'6a---Multiple-Oral-Doses.pdf, slide "Peak, Trough and Average Plasma Concentrations at Steady State"; slide "Example 1"; 09.28 lecture',

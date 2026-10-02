@@ -6,7 +6,7 @@
 "flipflop": "One drug given as an immediate-release and an extended-release product: the tail of each curve",
 "inf_css": "Concentration during a constant-rate infusion, rising towards a plateau",
 "inf_two_rates": "Two infusion rates of the same drug, plotted together",
-"input_types": "Three ways drug can enter, each with first-order elimination",
+"input_types": "IV bolus, oral tablet and IV infusion, each with first-order elimination",
 "k_vs_ka": "Raising k against raising ka, with the area each change gains or loses shaded",
 "ka_k_effects": "Three panels: doubling the dose, doubling the absorption rate constant, and doubling the elimination rate constant",
 "md_bolus": "Repeated IV bolus doses every 8 hours rising to a steady state between the same peak and trough",

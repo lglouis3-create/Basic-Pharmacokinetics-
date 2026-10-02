@@ -247,7 +247,7 @@ const Q_MODULE5 = [
  stem:'What determines the time to peak, tmax, after a single oral dose?',
  options:[
   {t:'The absorption and elimination rate constants only', correct:true,
-   why:'tmax is the natural logarithm of ka/k divided by ka − k, and nothing else appears in it. Dose, F and VD cancel, because they scale the whole curve up or down without moving the point where the two rates cross; only a change in a rate constant moves the peak in time.'},
+   why:'tmax is the natural logarithm of {{frac:ka|k}} divided by ka − k, and nothing else appears in it. Dose, F and VD cancel, because they scale the whole curve up or down without moving the point where the two rates cross; only a change in a rate constant moves the peak in time.'},
   {t:'The dose and the volume of distribution', correct:false,
    why:'Both sit in the constant prefactor, so this reads quantities that scale the curve as if they shaped it. Multiplying every point by one number cannot move a turning point: a larger dose gives a taller curve with its peak at the same time. tmax contains only the two rate constants.'},
   {t:'The bioavailability and the dose', correct:false,
@@ -369,14 +369,14 @@ const Q_MODULE5 = [
   {t:'An increase in the rates of absorption and elimination', correct:true,
    why:'A rate is an amount per time, mg/hr. Both legs are first order: rate in = kₐ × amount still to be absorbed, and rate out = k × amount in the body. Doubling the dose doubles both amounts, so both rates double while kₐ and k stay where they were, which is why the peak does not move.'},
   {t:'An increase in the rate constants ka and k for absorption and elimination', correct:false,
-   why:'Picking this mistakes the rising rate for a rising constant. A rate constant is a fraction per time, hr⁻¹, with no milligrams in its units, so no quantity of drug can change it. What rises is the rate, the constant times the amount present. kₐ answers to the formulation and k to clearance and volume of distribution, since k = Cl/Vᴅ.'},
+   why:'Picking this mistakes the rising rate for a rising constant. A rate constant is a fraction per time, hr⁻¹, with no milligrams in its units, so no quantity of drug can change it. What rises is the rate, the constant times the amount present. kₐ answers to the formulation and k to clearance and volume of distribution, since k = {{frac:Cl|V}}ᴅ.'},
   {t:'A later time to peak', correct:false,
    why:'This treats the peak as a target to be filled, so a larger dose should take longer to reach it. The time to peak is fixed by ka and k alone, and the dose changes neither; both rates rise in proportion with the larger amount, so they cross at the same moment. The curve is taller, not slower.'}],
  teach:[
   {h:'A rate and a rate constant are different quantities', t:'Their units tell them apart.', list:['A rate is an amount per time, mg/hr: how many milligrams actually left this hour.', 'A rate constant is a fraction per time, hr⁻¹: what share of whatever is present leaves each hour.', 'They are tied by rate = constant × amount, and the units agree: hr⁻¹ × mg = mg/hr.', 'A constant whose units contain no milligrams cannot be changed by giving more milligrams.']},
   {h:'What doubling the dose does to each', fig:'rate_vs_constant', list:['Doubling the dose doubles the amount, so rate = k × amount doubles with it.', 'The constant is the ratio rate ÷ amount, and doubling both leaves that ratio where it was.', 'The figure marks three moments on two doses of one drug: 200 mg losing 40 mg/hr, 100 mg losing 20 mg/hr, and the 200 mg dose once it has fallen to 100 mg, losing 20 mg/hr again.', 'The rate tracks the amount present; k is 0.2 per hour at every one of them.']},
   {h:'Absorption and elimination are not affected differently here', list:['Both legs are first order, so each has the same form.', 'The rate in is kₐ × the amount still at the absorption site.', 'The rate out is k × the amount in the body.', 'Doubling the dose doubles both amounts, so both rates double by the same factor and neither constant moves.', 'That is why the peak does not shift: the peak is the moment the two rates become equal, and doubling both leaves that moment where it was.']},
-  {h:'What would actually move a rate constant', list:['kₐ is a property of the formulation and the absorption conditions, so a different tablet, a different salt or a modified-release design moves it.', 'k is a property of the patient and the drug. Since k = Cl/Vᴅ (clearance over volume of distribution), anything that changes either one moves it.', 'Examples: renal or hepatic impairment, or a change in body size.', 'The dose is not on either list.']},
+  {h:'What would actually move a rate constant', list:['kₐ is a property of the formulation and the absorption conditions, so a different tablet, a different salt or a modified-release design moves it.', 'k is a property of the patient and the drug. Since k = {{frac:Cl|V}}ᴅ (clearance over volume of distribution), anything that changes either one moves it.', 'Examples: renal or hepatic impairment, or a change in body size.', 'The dose is not on either list.']},
   {h:'Dose, ka and k: what each one changes', t:'How raising the dose, ka or k moves Cmax (the peak concentration), tmax (the time to peak) and AUC (the area under the curve).', table:{head:['', 'Dose raised', 'ka raised, k the same', 'k raised, ka the same'], rows:[['Cmax', 'Higher, in proportion to the dose', 'Higher: drug arrives faster than it can leave', 'Lower: drug leaves faster while it is still arriving'], ['tmax', 'Unchanged: both rates rise by the same factor', 'Earlier: the rate in meets the rate out sooner', 'Earlier: the rate out catches up with the rate in sooner'], ['AUC', 'Higher, in proportion: twice the milligrams, each staying just as long', 'Unchanged: the same milligrams get in and each stays just as long; only their arrival is earlier', 'Lower: the same milligrams get in, but each is removed sooner and adds to the area for less time'], ['What changed', 'The amount of drug; neither constant', 'The input side', 'The output side']]}, after:'tmax moves earlier whether ka or k is raised, so tmax on its own cannot tell you which one changed. Cmax and AUC can: Cmax goes up with ka and down with k, and only k moves the AUC.'},
   {h:'What sets the AUC', list:['AUC depends on how many milligrams get in and how long each one stays.', 'The dose changes the first, k changes the second, and ka changes neither.']},
   {h:'How the variables relate', list:['rate = rate constant x amount, and the units show it: mg/hr = hr^-1 x mg.', 'AUC = {{frac:F x D0|Cl}} and Cl = k x VD: the dose moves AUC, and ka appears in neither.', 'tmax = {{frac:ln(ka/k)|ka - k}}: both constants and no dose, which is why a change in dose leaves tmax where it was.']}],
@@ -519,7 +519,7 @@ const Q_MODULE5 = [
  steps:[
   {k:'unit', t:'45 min × {{frac:1 hr|60 min}} = 0.75 hr',
    why:'Every other parameter in this problem is quoted in hours, and a rate constant taken from a half-life in minutes would come out in reciprocal minutes and could not be combined with them. Minutes multiplied by hours per minute cancels the minutes and leaves hours. Forty-five minutes is three quarters of an hour.'},
-  {k:'setup', t:'t½a = {{frac:0.693|ka, so ka}} = {{frac:0.693|t½a}}',
+  {k:'setup', t:'t½a = {{frac:0.693|ka}}, so ka = {{frac:0.693|t½a}}',
    why:'Absorption is a first-order process, so its half-life and its rate constant are linked by 0.693 in exactly the same way as on the elimination side. Rearranging puts the rate constant on its own with the half-life underneath. The half-life given is an absorption half-life, so the constant that comes out is ka and not k.'},
   {k:'algebra', t:'ka = {{frac:0.693|0.75 hr}} = 0.924 hr⁻¹',
    why:'Dividing a pure number by a time in hours leaves reciprocal hours, which is the unit every first-order rate constant must carry. The arithmetic is 0.693 divided by 0.75.'},
@@ -543,7 +543,7 @@ const Q_MODULE5 = [
  answer:0.231,
  tol:0.005,
  steps:[
-  {k:'setup', t:'t½ = {{frac:0.693|k, so k}} = {{frac:0.693|t½}}',
+  {k:'setup', t:'t½ = {{frac:0.693|k}}, so k = {{frac:0.693|t½}}',
    why:'Elimination is first order, so the half-life is 0.693 divided by the rate constant, and this relation is not on the equation sheet and has to be held from memory. Rearranging it isolates the rate constant.'},
   {k:'algebra', t:'k = {{frac:0.693|3 hr}} = 0.231 hr⁻¹',
    why:'The half-life is already in hours, so no conversion is needed and the division can be done directly. A pure number over hours leaves reciprocal hours.'},
@@ -581,7 +581,7 @@ const Q_MODULE5 = [
    why:'Her worked value is 2 hours, and the unrounded 2.0004 rounds to it. The time to peak depends only on the two rate constants, so the 22 L volume, the 500 mg dose and the 85 per cent bioavailability given in the stem play no part in this particular answer.'}],
  teach:[
   {h:'The idea', list:['tmax (the time to peak) is found from the two rate constants alone: ka (absorption) and k (elimination).', 'Neither the dose nor VD (apparent volume of distribution) appears, so the same drug peaks at the same moment whatever dose is given.']},
-  {h:'The relation', list:['The expression divides the logarithm of the ratio ka/k by the difference ka − k.', 'So both constants must be in the same reciprocal time unit.', 'Any half-life given in minutes has to be converted before it is used.']},
+  {h:'The relation', list:['The expression divides the logarithm of the ratio {{frac:ka|k}} by the difference ka − k.', 'So both constants must be in the same reciprocal time unit.', 'Any half-life given in minutes has to be converted before it is used.']},
   {h:'How the variables relate', list:['tmax (the time to peak) = {{frac:ln(ka/k)|ka - k}}: the two rate constants and nothing else.', 'Cmax (the peak concentration) is found by putting tmax back into the concentration equation, so tmax comes first every time.', 'At the peak the rate of absorption equals the rate of elimination, which is what makes it a maximum.', 'Because dose, F and VD cancel out of tmax, doubling the dose doubles Cmax and leaves tmax where it was.']},
   {h:'What the chapter adds', list:['Chapter 16 describes the peak as a balance with no net change.', 'At Cmax the rate of absorption equals the rate of elimination, so the amount in the body is steady for a moment.', 'Just after tmax there is still drug at the absorption site, and absorption is still running.', 'The concentration falls then only because elimination has become the faster of the two.', 'The tail becomes elimination alone later, once the absorption site is depleted and the absorption rate reaches zero.']}],
  teachImg:'slide_5Pharmacokineticso_p13',
@@ -598,7 +598,7 @@ const Q_MODULE5 = [
  steps:[
   {k:'unit', t:'45 min = 0.75 hr, so ka = {{frac:0.693|0.75 hr}} = 0.924 hr⁻¹; k = {{frac:0.693|3 hr}} = 0.231 hr⁻¹',
    why:'Both rate constants must be in reciprocal hours before they can be subtracted from one another or multiplied by a time in hours. The absorption half-life is the one given in minutes, so it is the one that needs converting.'},
-  {k:'setup', t:'Cp = {{frac:[F·ka·D0|(VD(ka − k))](e^(−k·t) − e^(−ka·t)), evaluated at t}} = tmax',
+  {k:'setup', t:'Cp = {{frac:F·ka·D0|VD(ka − k)}}(e^(−k·t) − e^(−ka·t)), evaluated at t = tmax',
    why:'The maximum concentration is simply the concentration at the turning point, so the full single oral dose equation is used with the time to peak in both exponentials. F scales the dose down to the amount that actually reaches the circulation and the volume of distribution converts that amount into a concentration.'},
   {k:'algebra', t:'tmax = {{frac:ln(0.924 / 0.231)|(0.924 − 0.231) hr⁻¹}} = 2.0004 hr',
    why:'There is no separate expression for the peak concentration, so the time at which it occurs must be found first and then substituted. This is the step that is skipped when the peak is asked for without the time being asked for as well.'},
@@ -853,7 +853,7 @@ const Q_MODULE5 = [
  steps:[
   {k:'unit', t:'90 min = 1.5 hr, so ka = {{frac:0.693|1.5 hr}} = 0.462 hr⁻¹; k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹',
    why:'Both rate constants must be in reciprocal hours before the exponentials can be evaluated at a time in hours. The absorption half-life is the one given in minutes.'},
-  {k:'setup', t:'Cmax = {{frac:[F·ka·D0|(VD(ka − k))](e^(−k·t) − e^(−ka·t)) evaluated at t}} = tmax, so the time to peak is needed before the concentration can be',
+  {k:'setup', t:'Cmax = {{frac:F·ka·D0|VD(ka − k)}}(e^(−k·t) − e^(−ka·t)) evaluated at t = tmax, so the time to peak is needed before the concentration can be found',
    why:'The peak concentration is the full oral equation at the one time the curve turns over, so nothing can be substituted until that time is known. The prefactor holds the dose, F and VD; the bracket holds the competition between absorption and elimination, and only the bracket depends on time.'},
   {k:'algebra', t:'tmax = {{frac:ln(0.462 / 0.1386)|(0.462 − 0.1386) hr⁻¹}} = 3.7 hr',
    why:'The peak concentration is the concentration at the time of the peak, so that time is found first and then substituted. She uses 3.7 hours in the substitution that follows.'},
@@ -883,7 +883,7 @@ const Q_MODULE5 = [
  answer:6.57,
  tol:0.2,
  steps:[
-  {k:'setup', t:'Cmax = {{frac:[F·ka·D0|(VD(ka − k))](e^(−k·t) − e^(−ka·t)) at t}} = tmax, and only the volume of distribution has changed, so tmax is unaffected',
+  {k:'setup', t:'Cmax = {{frac:F·ka·D0|VD(ka − k)}}(e^(−k·t) − e^(−ka·t)) at t = tmax, and only the volume of distribution has changed, so tmax is unaffected',
    why:'The time to peak depends on the two rate constants alone, so doubling the volume of distribution moves the height of the curve without moving the moment it peaks. The volume sits in the prefactor only, which is why the bracket can be carried over unchanged from the previous part rather than recomputed.'},
   {k:'algebra', t:'tmax = {{frac:ln(0.462 / 0.1386)|(0.462 − 0.1386) hr⁻¹}} = 3.7 hr, unchanged',
    why:'The volume of distribution does not appear in the expression for the time to peak, so doubling it cannot move the peak in time. Only the height of the curve is affected, which is why the same time is substituted as before.'},
@@ -921,7 +921,7 @@ const Q_MODULE5 = [
  steps:[
   {k:'setup', t:'ka = 0.872 hr⁻¹ and k = 0.182 hr⁻¹, identified by size',
    why:'The larger of the two exponential constants is the absorption rate constant for an ordinary oral product, and the prefactor expression needs ka in its numerator. Assigning them the other way round would put 0.182 on top and make the difference negative, giving a negative volume.'},
-  {k:'setup', t:'23.2 mg/L = {{frac:F·ka·D0|(VD(ka − k)), so VD}} = {{frac:F·ka·D0|[23.2 mg/L × (ka − k)]}}',
+  {k:'setup', t:'23.2 mg/L = {{frac:F·ka·D0|(VD(ka − k))}}, so VD = {{frac:F·ka·D0|[23.2 mg/L × (ka − k)]}}',
    why:'The leading coefficient of the equation is the whole constant prefactor, so equating the two and rearranging isolates the volume of distribution. Everything else in the expression is given in the stem.'},
   {k:'algebra', t:'VD = {{frac:(0.84)(750 mg)(0.872 hr⁻¹)|[(23.2 mg/L)(0.690 hr⁻¹)]}} = {{frac:549.36|16.008}}',
    why:'The difference of the rate constants is 0.872 minus 0.182, which is 0.690 per hour. Milligrams times reciprocal hours divided by milligrams per litre times reciprocal hours leaves litres.'},
@@ -1023,7 +1023,7 @@ const Q_MODULE5 = [
  answer:24.34,
  tol:0.5,
  steps:[
-  {k:'setup', t:'Cmax = {{frac:[F·ka·D0|(VD(ka − k))](e^(−k·t) − e^(−ka·t)) at t}} = tmax, in which the dose appears only in the prefactor, so Cmax scales directly with D0',
+  {k:'setup', t:'Cmax = {{frac:F·ka·D0|VD(ka − k)}}(e^(−k·t) − e^(−ka·t)) at t = tmax, in which the dose appears only in the prefactor, so Cmax scales directly with D0',
    why:'Everything that fixes the shape of the curve, the two rate constants and therefore the time to peak, is untouched by the size of the dose, and the dose enters as a simple multiplier in front. That is what makes this a proportion rather than a fresh calculation, and it is the behaviour her Changing Dose slide sets out.'},
   {k:'algebra', t:'tmax = {{frac:ln(0.924 / 0.231)|(0.924 − 0.231) hr⁻¹}} = 2.0 hr, unchanged by the dose',
    why:'The dose does not appear in the expression for the time to peak, so doubling it cannot move the peak in time. The larger dose peaks at the same moment as the smaller one, directly above it on the curve.'},
