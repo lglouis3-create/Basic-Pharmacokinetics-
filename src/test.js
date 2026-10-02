@@ -459,7 +459,7 @@ console.log('\n=== 5d. Equations ===');
       if (!e[f]) bad(`equation "${e.id}" has no ${f}`);
     if (!Array.isArray(e.tokens) || !e.tokens.length) bad(`equation "${e.id}" has no pieces to build from`);
     if (!Array.isArray(e.symbols) || !e.symbols.length) bad(`equation "${e.id}" names no symbols`);
-    if (!['yes', 'no', 'unknown'].includes(e.sheet)) bad(`equation "${e.id}" has sheet "${e.sheet}"`);
+    if (!['yes', 'no', 'absent'].includes(e.sheet)) bad(`equation "${e.id}" has sheet "${e.sheet}"`);
     /* The two exercises must key the same equation. If the pieces joined up do
        not read as the canonical typed answer, a student who builds it right is
        told they typed it wrong, or the reverse. */

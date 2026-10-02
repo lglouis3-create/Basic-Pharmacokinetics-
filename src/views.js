@@ -2483,7 +2483,7 @@ let EQ = null;   /* {queue:[id], i, mode:'type'|'build', slots:[], tray:[], reve
 const SHEET_TAG = {
   no:      ['not on the sheet', 'She said out loud she does not supply this one'],
   yes:     ['on the sheet', 'The equation sheet carries it'],
-  unknown: ['sheet unclear',  'That part of the equation-sheet extract cannot be read, and she never said either way'],
+  absent:  ['not on the sheet', 'No line of the equation sheet prints it; she never said either way'],
 };
 
 function renderEq(){
@@ -2532,7 +2532,7 @@ function eqPickerHTML(){
       <button class="chip" data-modpick="${m}">Select all</button></summary><div class="mfoot">`;
     for(const e of es){
       const st = eqStat(e.id), done = eqLearned(e.id);
-      const tag = SHEET_TAG[e.sheet] || SHEET_TAG.unknown;
+      const tag = SHEET_TAG[e.sheet] || SHEET_TAG.absent;
       h += `<div class="subrow eqrow">
         <label class="eqpick"><input type="checkbox" data-eq="${esc(e.id)}"${chosen.has(e.id)?' checked':''}>
           <span class="sname"><b>${esc(e.name)}</b>

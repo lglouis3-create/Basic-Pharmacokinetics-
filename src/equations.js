@@ -13,8 +13,9 @@
 
    `must` marks the five she said out loud she does not put on the equation
    sheet, plus the second ideal-body-weight form. `sheet` records what the
-   readable extract of the sheet carries: 'yes', 'no' where she said so, and
-   'unknown' where the extract cannot be read and she never said either way.
+   rendered pages of Basic-Pharmacokinetics-Equations.pdf carry: 'yes' where a
+   line prints it, 'no' where she said out loud she does not supply it, and
+   'absent' where no line prints it and she never said either way.
 
    THE SHAPE OF AN ENTRY
 
@@ -102,7 +103,7 @@ const EQUATIONS = [
  cite:'4---Clearance-and-Elimination.pdf slide 2'},
 
 /* ───────── Module 1 ───────── */
-{id:'zero-line', module:1, name:'Zero-order decline', sheet:'unknown',
+{id:'zero-line', module:1, name:'Zero-order decline', sheet:'yes',
  lhs:'C', tokens:['C<sub>0</sub>', '&minus;', 'kt'], typed:'C = C0 - kt',
  also:['C = C0 - k0t'],
  lures:['+', 'e<sup>&minus;kt</sup>', '&times;', 'ln', '/'],
@@ -143,7 +144,7 @@ const EQUATIONS = [
  holds:'The same relation written in amount rather than concentration. The two are not mixed in one calculation.',
  cite:'Introduction.pdf slide 18; equation sheet page 1'},
 
-{id:'thalf-zero', module:1, name:'Zero-order half-life', sheet:'unknown',
+{id:'thalf-zero', module:1, name:'Zero-order half-life', sheet:'absent',
  lhs:'t&frac12;', tokens:['C<sub>0</sub>', '/', '2k'], disp:'{{frac:C<sub>0</sub>|2k}}', typed:'t1/2 = C0/2k',
  also:['t1/2 = C0/(2*k)'],
  lures:['0.693', '&times;', '2C<sub>0</sub>', 'k'],
@@ -171,7 +172,7 @@ const EQUATIONS = [
  cite:'Introduction.pdf slide 23'},
 
 /* ───────── Module 2 ───────── */
-{id:'k-sum', module:2, name:'Elimination as metabolism plus excretion', sheet:'no',
+{id:'k-sum', module:2, name:'Elimination as metabolism plus excretion', sheet:'absent',
  lhs:'k', tokens:['k<sub>m</sub>', '+', 'k<sub>e</sub>'], typed:'k = km + ke',
  lures:['&minus;', '&times;', 'f<sub>e</sub>', 'k<sub>a</sub>'],
  symbols:[['k<sub>m</sub>', 'rate constant for metabolism'], ['k<sub>e</sub>', 'rate constant for excretion']],
@@ -186,7 +187,7 @@ const EQUATIONS = [
  holds:'Any route, provided F is known; F is 1 for an intravenous dose. This is what relates the dose directly to the exposure.',
  cite:'4---Clearance-and-Elimination.pdf; equation sheet page 1'},
 
-{id:'thalf-cl-vd', module:2, name:'Half-life from volume and clearance', sheet:'unknown',
+{id:'thalf-cl-vd', module:2, name:'Half-life from volume and clearance', sheet:'absent',
  lhs:'t&frac12;', tokens:['0.693', 'V<sub>D</sub>', '/', 'Cl<sub>T</sub>'], disp:'{{frac:0.693 V<sub>D</sub>|Cl<sub>T</sub>}}', typed:'t1/2 = 0.693*VD/ClT',
  also:['t1/2 = 0.693VD/Cl'],
  lures:['&times;', 'k', '2.3', 'Cl<sub>R</sub>'],
@@ -203,7 +204,7 @@ const EQUATIONS = [
  holds:'Two compartment, IV bolus. Alpha is larger because distribution happens faster than elimination.',
  cite:'2IVBolusAdministration.pdf; equation sheet page 1'},
 
-{id:'c0-ab', module:2, name:'Two-compartment initial concentration', sheet:'yes',
+{id:'c0-ab', module:2, name:'Two-compartment initial concentration', sheet:'absent',
  lhs:'C<sub>p</sub><sup>0</sup>', tokens:['A', '+', 'B'], typed:'Cp0 = A + B',
  also:['C0 = A + B', 'Cp^0 = A + B'],
  lures:['&minus;', '&times;', '/'],
@@ -211,7 +212,7 @@ const EQUATIONS = [
  holds:'Two compartment, at time zero. Both exponentials are 1 at t = 0, so the concentration is the sum of the intercepts.',
  cite:'2IVBolusAdministration.pdf'},
 
-{id:'thalf-beta', module:2, name:'Beta half-life', sheet:'unknown',
+{id:'thalf-beta', module:2, name:'Beta half-life', sheet:'absent',
  lhs:'t&frac12;<sub>&beta;</sub>', tokens:['0.693', '/', 'b'], disp:'{{frac:0.693|b}}', typed:'t1/2beta = 0.693/b',
  also:['t1/2 = 0.693/b'],
  lures:['a', '&times;', 'k', 'A'],
@@ -298,7 +299,7 @@ const EQUATIONS = [
  holds:'An IV bolus given at the moment an infusion starts. It is only as good as the rate already chosen.',
  cite:'3IntravenousInfusions.pdf; equation sheet page 1'},
 
-{id:'dl-css-vd', module:3, name:'Loading dose from the target', sheet:'unknown',
+{id:'dl-css-vd', module:3, name:'Loading dose from the target', sheet:'yes',
  lhs:'D<sub>L</sub>', tokens:['C<sub>ss</sub>', '&times;', 'V<sub>D</sub>'], typed:'DL = Css*VD',
  also:['DL = Css VD'],
  lures:['/', 'k', 'Cl', 'R'],
@@ -306,7 +307,7 @@ const EQUATIONS = [
  holds:'The amount that fills the volume of distribution to the target in one go. It depends on the volume, not on the half-life.',
  cite:'3IntravenousInfusions.pdf, slide "IV Bolus Loading Dose and Continuous IV Infusion"'},
 
-{id:'load-plus-infusion', module:3, name:'Loading dose and infusion together', sheet:'yes',
+{id:'load-plus-infusion', module:3, name:'Loading dose and infusion together', sheet:'absent',
  lhs:'C<sub>p</sub>',
  tokens:['(D<sub>L</sub>/V<sub>D</sub>)', 'e<sup>&minus;kt</sup>', '+', '(R/kV<sub>D</sub>)', '(1 &minus; e<sup>&minus;kt</sup>)'],
  disp:'{{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>&minus;kt</sup> + {{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)', typed:'Cp = (DL/VD)*e^(-kt) + (R/(k*VD))*(1 - e^(-kt))',
@@ -390,7 +391,7 @@ const EQUATIONS = [
  holds:'Single oral dose. It carries no dose and no volume, so tmax depends only on the two rate constants and doubling the dose does not move it. It is always found before Cmax.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf; equation sheet page 1'},
 
-{id:'thalf-abs', module:5, name:'Absorption half-life', sheet:'unknown',
+{id:'thalf-abs', module:5, name:'Absorption half-life', sheet:'absent',
  lhs:'t&frac12;<sub>a</sub>', tokens:['0.693', '/', 'k<sub>a</sub>'], disp:'{{frac:0.693|k<sub>a</sub>}}', typed:'t1/2a = 0.693/ka',
  also:['t1/2 = 0.693/ka'],
  lures:['k', '&times;', '2.3'],
@@ -398,7 +399,7 @@ const EQUATIONS = [
  holds:'The first-order half-life applied to absorption. Stems usually give the absorption half-life in minutes, so converting it to ka is the first step. An unqualified half-life means elimination.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Kinetics of Absorption"'},
 /* ───────── Module 6 ───────── */
-{id:'db-tau', module:6, name:'Amount left after one dosing interval', sheet:'unknown',
+{id:'db-tau', module:6, name:'Amount left after one dosing interval', sheet:'absent',
  lhs:'D<sub>B</sub>', tokens:['D<sub>0</sub>', 'e<sup>&minus;k&tau;</sup>'], typed:'DB = D0*e^(-k*tau)',
  also:['DB = D0e^(-kτ)'],
  lures:['e<sup>&minus;kt</sup>', '(1 &minus; e<sup>&minus;k&tau;</sup>)', '/'],
@@ -461,7 +462,7 @@ const EQUATIONS = [
  holds:'Steady state, IV or oral. The same as FD0/(VD k&tau;). Not (Cmax + Cmin)/2.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"'},
 
-{id:'cav-auc', module:6, name:'Average concentration from the area over one interval', sheet:'unknown',
+{id:'cav-auc', module:6, name:'Average concentration from the area over one interval', sheet:'absent',
  lhs:'C<sub>av</sub><sup>&infin;</sup>', tokens:['[AUC]<sub>t1</sub><sup>t2</sup>', '/', '&tau;'],
  disp:'{{frac:[AUC]<sub>t1</sub><sup>t2</sup>|&tau;}}', typed:'Cav,ss = [AUC]t1^t2/tau',
  also:['Cav^inf = [AUC]t1^t2/tau', 'Cav∞ = AUC t1^t2/τ'],
@@ -480,7 +481,7 @@ const EQUATIONS = [
  holds:'Repeated IV bolus before steady state. As n grows, e^-nk&tau; approaches 0 and this becomes the steady-state equation.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses"'},
 
-{id:'cp-ss', module:6, name:'Concentration at any time at steady state', sheet:'unknown',
+{id:'cp-ss', module:6, name:'Concentration at any time at steady state', sheet:'absent',
  lhs:'C<sub>p</sub>', tokens:['(D<sub>0</sub>/V<sub>D</sub>)', '&times;', '1', '/', '(1 &minus; e<sup>&minus;k&tau;</sup>)', '&times;', 'e<sup>&minus;kt</sup>'],
  disp:'{{frac:D<sub>0</sub>|V<sub>D</sub>}} ({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt</sup>',
  typed:'Cp = (D0/VD)*(1/(1 - e^(-k*tau)))*e^(-kt)',

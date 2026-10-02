@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-02 (equation sheet read in full)
+- Reference: the four sheet lines the old text extract lost are now read and listed.
+- Reference: C = C0 − k0t and DL = CssVD are marked as on the sheet.
+- Reference: the loading-dose-plus-infusion sum and Cp0 = A + B are marked as not on the sheet.
+- Equation drill: "sheet unclear" tags replaced by "on the sheet" or "not on the sheet".
+
 ## 2026-10-02 (engine upgrades)
 - What's new card on Topics; Settings lists every change.
 - Topics shows a countdown to the exam: days left, today, in progress or over.
