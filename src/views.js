@@ -443,11 +443,13 @@ function updatedText(){
 }
 
 function renderTopics(){
+  if(MODPAGE) return renderModulePage();
+  FILTER.kind = 'all';
   const shares = poolShares();
   const covered = shares.reduce((s,o)=> s + Math.min(o.want, poolQuestions(o.pool).length), 0);
 
   const cd = examCountdown(EXAM);
-  let h = `<h2>Pick a topic</h2>${updatedText() ? `<p class="updated">${esc(updatedText())}${
+  let h = `<h2>Study by module</h2>${updatedText() ? `<p class="updated">${esc(updatedText())}${
       CHANGELOG.length ? ' · <a href="#" id="allChanges">All changes</a>' : ''}</p>` : ''}
   ${newsCard()}
   <p class="sub">${esc(EXAM.name)} is ${EXAM.questions} questions in ${EXAM.minutes} minutes${
@@ -456,9 +458,7 @@ function renderTopics(){
     Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
     COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
 
-  h += reviewSwitch();
-  h += filterBar();
-  const stepwiseOnly = FILTER.kind === 'chain';
+  const stepwiseOnly = false;
 
   // The featured pass follows the paper rather than the bank: a straight pass
   // through everything spends most of its time wherever the most questions
@@ -517,32 +517,11 @@ function renderTopics(){
       continue;
     }
 
-    const ts = m.topics || [];
-    const mpool = ts.flatMap(t => poolFor(t.id, null));
-    if(!mpool.length) continue;
-    const mm = masteryOf(mpool), mpct = mm.total ? Math.round(100*mm.mastered/mm.total) : 0;
-    /* Stepwise mode shows the module's problem sets and nothing else. Concept
-       mode leaves them out, since every one of them is arithmetic. The other two
-       modes show them after the topics, under their own heading. */
-    if(stepwiseOnly){
-      const sets = chainRows(m.module);
-      if(!sets) continue;
-      const n = chainsInModule(m.module).length;
-      h += `<details class="module" open><summary>
-          <span class="mname">${esc(m.name)}<small>${n} problem${n === 1 ? '' : 's'} in parts</small></span>
-        </summary>${sets}</details>`;
-      continue;
-    }
-    h += `<details class="module"${ts.some(t => t.open) ? ' open' : ''}><summary>
-        <span class="mname">${esc(m.name)}<small>${splitNote(mpool)} · ${ts.length} topic${ts.length===1?'':'s'}</small></span>
-        ${progressHTML(mm, mpool)}
-      </summary>
-      ${ts.map(topicCard).join('')}
-      ${ts.length > 1 ? `<div class="mfoot">${startRows(mpool, m.name, `data-module="${m.module}"`)}</div>` : ''}
-      ${FILTER.kind === 'concept' ? '' : chainRows(m.module)}
-      </details>`;
+    h += moduleCard(m);
   }
 
+  const fb = filterBar();
+  if(fb) h += `<details class="morefilters"><summary>Filter by what a question asks</summary>${fb}</details>`;
   if(!stepwiseOnly) h += `<h3>Mixed drills</h3>
   <div class="topic"><div class="subs">
     <div class="subrow"><span class="sname"><b>Everything, adaptive</b>
@@ -561,8 +540,8 @@ function renderTopics(){
   el.querySelectorAll('.chip').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });
-  el.querySelectorAll('.rtab').forEach(b => b.onclick = () => {
-    FILTER.kind = b.dataset.review; renderTopics();
+  el.querySelectorAll('.modbtn').forEach(b => b.onclick = () => {
+    MODPAGE = {module: +b.dataset.mod, sec: b.dataset.sec}; renderModulePage();
   });
   el.querySelectorAll('.subrow button[data-t]').forEach(b => b.onclick = () => {
     startQuiz(b.dataset.t || null, b.dataset.s || null, b.dataset.k || null);
@@ -592,6 +571,133 @@ function renderTopics(){
   if(nok) nok.onclick = () => { LS.set(NEWS_KEY, newsId(CHANGELOG[0])); const c = document.getElementById('news'); if(c) c.remove(); };
   ['newsall', 'allChanges'].forEach(id => { const b = document.getElementById(id);
     if(b) b.onclick = e => { e.preventDefault(); showChangelog(); }; });
+}
+
+/* ==========================================================================
+   MODULES: CONCEPTS, CALCULATIONS, WORKSHEETS
+   ==========================================================================
+   Each module on Topics is one card with three ways in. Concepts lists her
+   objectives; Calculations lists the kinds of problem, each with a worked
+   example, single problems and problems in parts; Worksheets holds her
+   practice sheets, in-class activities, homework and exam-review items. Each
+   opens as its own page under Topics, with a way back. */
+let MODPAGE = null;   // {module, sec:'concepts'|'calcs'|'worksheets'}
+const subKey = q => q.topic + '/' + q.sub;
+function modulePool(module){
+  const m = outline().find(o => o.module === module);
+  return m ? (m.topics || []).flatMap(t => poolFor(t.id, null)) : [];
+}
+const objectivesOf = module => (typeof OBJECTIVES === 'undefined' ? [] : OBJECTIVES).filter(o => o.module === module);
+const objectivePool = o => QUESTIONS.filter(q => kindOf(q) === 'concept' && o.subs.includes(subKey(q)) && matchesFilter(q));
+const objLabel = o => /^6a\./.test(o.n) ? `Oral doses, objective ${o.n.slice(3)}` : `Objective ${o.n}`;
+/* the calculation type a question belongs to: the first whose match it meets */
+function calcTypeOf(q){
+  if(kindOf(q) !== 'calc' || typeof CALC_TYPES === 'undefined') return null;
+  return CALC_TYPES.find(t => t.module === q.module && t.match.some(m => {
+    const [ts, sk] = m.split(':');
+    return (ts === subKey(q) || ts === q.topic) && (!sk || skillOf(q) === sk);
+  })) || null;
+}
+const typesOf = module => (typeof CALC_TYPES === 'undefined' ? [] : CALC_TYPES).filter(t => t.module === module);
+const typePool = t => QUESTIONS.filter(q => calcTypeOf(q) === t && matchesFilter(q));
+const chainsOfKind = (module, kinds) => chainsInModule(module).filter(c => kinds.includes(c.src || 'example'));
+const chainsForType = t => chainsInModule(t.module).filter(c => c.parts.some(id => { const q = byId(id); return q && calcTypeOf(q) === t; }));
+
+function modBtn(module, sec, title, sub, pool){
+  const an = pool ? answeredOf(pool) : null;
+  return `<button class="modbtn" data-mod="${module}" data-sec="${sec}"><b>${title}</b><small>${sub}</small>${
+    an && an.total ? `<span class="meter cov"><i style="width:${Math.round(100 * an.n / an.total)}%"></i></span>` : ''}</button>`;
+}
+function moduleCard(m){
+  const pool = modulePool(m.module);
+  if(!pool.length) return '';
+  const cpool = ofKind(pool, 'concept'), kpool = ofKind(pool, 'calc');
+  const objs = objectivesOf(m.module).filter(o => objectivePool(o).length);
+  const types = typesOf(m.module).filter(t => typePool(t).length);
+  const sheets = chainsOfKind(m.module, ['practice', 'inclass', 'homework', 'review']);
+  const sheetQs = sheets.flatMap(c => c.parts.map(byId).filter(Boolean));
+  return `<div class="module modcard"><div class="mrow">
+      <span class="mname">${esc(m.name)}<small>${pool.length} questions</small></span>
+      ${progressHTML(masteryOf(pool), pool)}</div>
+    <div class="modbtns">
+      ${modBtn(m.module, 'concepts', 'Concepts', `${cpool.length} questions · ${objs.length} objective${objs.length === 1 ? '' : 's'}`, cpool)}
+      ${modBtn(m.module, 'calcs', 'Calculations', `${kpool.length} problems · ${types.length} type${types.length === 1 ? '' : 's'}`, kpool)}
+      ${sheets.length ? modBtn(m.module, 'worksheets', 'Worksheets', `${sheets.length} set${sheets.length === 1 ? '' : 's'} from her handouts`, sheetQs) : ''}
+    </div></div>`;
+}
+
+function rowHTML(title, sub, pool, btns){
+  return `<div class="subrow"><span class="sname"><b>${title}</b><small>${sub}</small></span>
+    ${pool && pool.length ? progressHTML(masteryOf(pool), pool) : ''}<span class="btns">${btns}</span></div>`;
+}
+function chainRow(c){
+  const parts = c.parts.map(byId).filter(Boolean);
+  return rowHTML(esc(c.name), `${parts.length} parts · ${c.setup}`, parts, `<button data-chain="${esc(c.id)}">Start</button>`);
+}
+function conceptsPage(module){
+  const all = objectivePool({subs: objectivesOf(module).flatMap(o => o.subs)});
+  let h = `<p class="sub">Pick one objective, or study all of them. Questions on a concept you missed come back first.</p>`;
+  h += `<div class="topic plain"><div class="subs">` +
+    rowHTML('All objectives', `${all.length} questions, no arithmetic`, all, `<button data-objall="${module}">Start</button>`) +
+    objectivesOf(module).map((o, i) => { const pool = objectivePool(o); if(!pool.length) return '';
+      return rowHTML(`<span class="objn">${esc(objLabel(o))}</span>${esc(o.text)}`, `${pool.length} question${pool.length === 1 ? '' : 's'}`, pool,
+        `<button data-obj="${i}">Start</button>`); }).join('') + `</div></div>`;
+  return h;
+}
+function calcsPage(module){
+  const all = ofKind(modulePool(module), 'calc');
+  let h = `<p class="sub">Each kind of problem has a worked example. <b>Single problems</b> asks the problems of that kind one at a time; <b>In parts</b> works one of her problems where each part uses the answer before it.</p>`;
+  h += `<div class="topic plain"><div class="subs">` +
+    rowHTML(`All calculations in this module`, `${all.length} problems, one at a time, shuffled`, all, `<button data-calcall="${module}">Start</button>`) + `</div></div>`;
+  typesOf(module).forEach((t, i) => {
+    const pool = typePool(t); if(!pool.length) return;
+    const ex = byId(t.example), chains = chainsForType(t);
+    h += `<div class="ctype"><div class="ctop"><span class="sname"><b>${esc(t.name)}</b><small>${pool.length} problem${pool.length === 1 ? '' : 's'}${
+        chains.length ? ` · ${chains.length} in parts` : ''}</small></span>${progressHTML(masteryOf(pool), pool)}</div>
+      <div class="cbtns"><button class="btn small" data-ctype="${esc(t.id)}">Single problems</button>${
+        chains.length === 1 ? `<button class="btn small ghost" data-chain="${esc(chains[0].id)}">In parts</button>` : ''}</div>
+      ${ex ? `<details class="worked"><summary>Worked example</summary><div class="wbody">
+        <p class="wstem">${rich(ex.stem)}</p>${stepsBlock(ex)}
+        <p class="wans"><b>Answer:</b> ${esc(String(ex.answer))} ${esc(ex.units || '')}</p>
+        <p class="wcite">${esc(ex.cite || '')}</p></div></details>` : ''}
+      ${chains.length > 1 ? `<details class="worked"><summary>In parts: ${chains.length} of her problems</summary>
+        <div class="subs">${chains.map(chainRow).join('')}</div></details>` : ''}
+    </div>`;
+  });
+  const ex = chainsOfKind(module, ['example']);
+  if(ex.length) h += `<h3>Her lecture examples, in parts</h3><div class="topic plain"><div class="subs">${ex.map(chainRow).join('')}</div></div>`;
+  return h;
+}
+function worksheetsPage(module){
+  let h = `<p class="sub">Problems from her handouts, kept apart from the calculation drills. Each is worked in her part order.</p>`, any = false;
+  for(const [k, name, note] of WORKSHEET_KINDS){
+    const cs = chainsOfKind(module, [k]); if(!cs.length) continue; any = true;
+    h += `<h3>${esc(name)}</h3><p class="sub">${esc(note)}</p><div class="topic plain"><div class="subs">${cs.map(chainRow).join('')}</div></div>`;
+  }
+  return any ? h : h + `<div class="empty">No worksheets for this module yet.</div>`;
+}
+function renderModulePage(){
+  const {module, sec} = MODPAGE, m = outline().find(o => o.module === module);
+  if(!m){ MODPAGE = null; return renderTopics(); }
+  const tab = (s, label) => `<button class="mtab" data-sec="${s}" aria-pressed="${sec === s}">${label}</button>`;
+  const hasSheets = chainsOfKind(module, ['practice', 'inclass', 'homework', 'review']).length > 0;
+  let h = `<p class="crumb"><button class="linkbtn" id="modBack">← All modules</button></p>
+    <h2>${esc(m.name)}</h2>
+    <div class="mtabs" role="group" aria-label="Section">${tab('concepts', 'Concepts')}${tab('calcs', 'Calculations')}${hasSheets ? tab('worksheets', 'Worksheets') : ''}</div>`;
+  h += sec === 'calcs' ? calcsPage(module) : sec === 'worksheets' ? worksheetsPage(module) : conceptsPage(module);
+  const el = $('#v-topics');
+  el.innerHTML = h;
+  window.scrollTo(0, 0);
+  el.querySelector('#modBack').onclick = () => { MODPAGE = null; renderTopics(); };
+  el.querySelectorAll('.mtab').forEach(b => b.onclick = () => { MODPAGE.sec = b.dataset.sec; renderModulePage(); });
+  el.querySelectorAll('[data-objall]').forEach(b => b.onclick = () =>
+    startPool(objectivePool({subs: objectivesOf(module).flatMap(o => o.subs)}), `${m.name} — all objectives`));
+  el.querySelectorAll('[data-obj]').forEach(b => b.onclick = () => {
+    const o = objectivesOf(module)[+b.dataset.obj]; startPool(objectivePool(o), `${m.name} — ${objLabel(o)}`); });
+  el.querySelectorAll('[data-calcall]').forEach(b => b.onclick = () => startSweepOf(ofKind(modulePool(module), 'calc'), `${m.name} — calculations`));
+  el.querySelectorAll('[data-ctype]').forEach(b => b.onclick = () => {
+    const t = CALC_TYPES.find(x => x.id === b.dataset.ctype); startSweepOf(typePool(t), t.name); });
+  el.querySelectorAll('button[data-chain]').forEach(b => b.onclick = () => startChain(b.dataset.chain));
 }
 
 /* ==========================================================================
@@ -2779,7 +2885,10 @@ function eqCheck(){
 /* ==========================================================================
    BOOT
    ========================================================================== */
-document.querySelectorAll('#nav button').forEach(b => b.onclick = () => show(b.dataset.v));
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  if(b.dataset.v === 'topics' && VIEW === 'topics') MODPAGE = null;   // a second tap on Topics returns to the module list
+  show(b.dataset.v);
+});
 document.addEventListener('click', stepClick);   // step-through figure controls, wherever a figure is drawn
 document.getElementById('btnWho').onclick = () => {
   if(EX && EX.running && !confirm('A paper is in progress and will be discarded. Switch profile anyway?')) return;

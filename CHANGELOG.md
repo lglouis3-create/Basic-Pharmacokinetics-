@@ -2,6 +2,13 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-03 (modules reorganized)
+- Each module is one card: Concepts, Calculations and Worksheets.
+- Concepts: pick one of her objectives, or all of them.
+- Calculations: each kind of problem has a worked example, single problems and problems in parts.
+- Worksheets: her practice sheets, in-class activities and homework, apart from the drills.
+- Filters moved under "Filter by what a question asks" at the bottom of Topics.
+
 ## 2026-10-02 (six-dose figure)
 - Six-dose step-through: each dose now jumps up to its new peak, so the curve is one line.
 

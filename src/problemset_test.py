@@ -34,9 +34,13 @@ with sync_playwright() as p:
     ok('every part id resolves to a question', not missing)
 
     # every module group lists its sets
-    pg.evaluate("document.querySelectorAll('#v-topics details').forEach(d => d.open = true)")
-    pg.wait_for_timeout(200)
-    shown = pg.eval_on_selector_all('#v-topics button[data-chain]', 'bs => bs.map(b => b.dataset.c || b.getAttribute("data-chain"))')
+    shown = []
+    for m in pg.evaluate("[...new Set(CHAINS.map(c => c.module))]"):
+        for sec in ('calcs', 'worksheets'):
+            pg.evaluate(f"MODPAGE = {{module: {m}, sec: '{sec}'}}; show('topics')")
+            pg.evaluate("document.querySelectorAll('#v-topics details').forEach(d => d.open = true)")
+            shown += pg.eval_on_selector_all('#v-topics button[data-chain]', 'bs => bs.map(b => b.getAttribute("data-chain"))')
+    shown = sorted(set(shown))
     ok(f'all {len(chains)} sets have a start button ({len(shown)} shown)', len(shown) == len(chains))
 
     # work the eight-part battery straight through

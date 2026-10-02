@@ -167,114 +167,195 @@ const TOPICS = [
    test.js checks that every id here exists and that no part is listed twice.
    ========================================================================== */
 const CHAINS = [
- {id:'m1-first', module:1, name:'Decomposition of a drug solution, first order',
+ {id:'m1-first', src:'practice', module:1, name:'Decomposition of a drug solution, first order',
   setup:'One table of six samples over 48 hours, worked through to the time for 90 per cent',
   parts:['m1-ord-n01','m1-ord-n02','m1-ord-n03','m1-ord-n04']},
 
- {id:'m1-zero', module:1, name:'The same experiment, zero order',
+ {id:'m1-zero', src:'practice', module:1, name:'The same experiment, zero order',
   setup:'Her identical stem with numbers that make the decomposition zero order, in four parts',
   parts:['m1-ord-n05','m1-ord-n17','m1-ord-n06','m1-ord-n18']},
 
- {id:'m1-antibiotic', module:1, name:'An antibiotic dissolved in purified water',
+ {id:'m1-antibiotic', src:'homework', module:1, name:'An antibiotic dissolved in purified water',
   setup:'Aliquots assayed over 16 hours, ending in the volume the solution was made up to',
   parts:['m1-ord-n09','m1-ord-n10']},
 
- {id:'m1-30days', module:1, name:'A solution assayed after 30 days, read both ways',
+ {id:'m1-30days', src:'review', module:1, name:'A solution assayed after 30 days, read both ways',
   setup:'The same two concentrations taken first as first order and then as zero order',
   parts:['m1-ord-n14','m1-ord-n15']},
 
- {id:'m1-auc', module:1, name:'Area under the curve from one table of plasma levels',
+ {id:'m1-auc', src:'example', module:1, name:'Area under the curve from one table of plasma levels',
   setup:'Six plasma levels, with the trapezoidal rule applied over two different intervals',
   parts:['m1-auc-n02','m1-auc-n01']},
 
- {id:'m2-table', module:2, name:'IV bolus from a concentration–time table (a–h)',
+ {id:'m2-table', src:'practice', module:2, name:'IV bolus from a concentration–time table (a–h)',
   setup:'50 mg to a 70-kg patient, six samples over 3 hours, her eight-part battery in her order',
   parts:['m2-n-k1','m2-n-t1','m2-n-c0a','m2-n-c15','m2-n-vd1','m2-n-cl1','m2-n-d3a','m2-n-999a']},
 
- {id:'m2-points', module:2, name:'IV bolus from two plasma points (a–h)',
+ {id:'m2-points', src:'practice', module:2, name:'IV bolus from two plasma points (a–h)',
   setup:'250 mg of an antibiotic, two concentrations in prose, the same eight parts',
   parts:['m2-n-k2','m2-n-t2','m2-n-c0b','m2-n-c15b','m2-n-vd2','m2-n-cl3','m2-n-d3b','m2-n-999b']},
 
- {id:'m3-theophylline', module:3, name:'Theophylline by continuous infusion',
+ {id:'m3-theophylline', src:'example', module:3, name:'Theophylline by continuous infusion',
   setup:'The plateau at 50 mg/hr, then the rate that would reach a different plateau',
   parts:['inf-n1','inf-n2']},
 
- {id:'m3-150mg', module:3, name:'150 mg infused over 6 hours',
+ {id:'m3-150mg', src:'example', module:3, name:'150 mg infused over 6 hours',
   setup:'The concentration at the end of the infusion, then 3 hours after it stops',
   parts:['inf-n6','inf-n7']},
 
- {id:'m3-agent24', module:3, name:'An agent targeted at 24 mg/L',
+ {id:'m3-agent24', src:'review', module:3, name:'An agent targeted at 24 mg/L',
   setup:'Rate, loading dose, the climb at 10 hours and the decay after an early stop',
   parts:['inf-n10','inf-n12','inf-n11','inf-n13']},
 
- {id:'m3-inclass', module:3, name:'Recommend a rate and a loading dose, then four scenarios',
+ {id:'m3-inclass', src:'inclass', module:3, name:'Recommend a rate and a loading dose, then four scenarios',
   setup:'C<sub>ss</sub> 20 mg/L, t&frac12; 5 hr, V<sub>D</sub> 16 L &mdash; with the loading dose and without it, side by side',
   parts:['inf-n14','inf-n19','inf-n20','inf-n21','inf-n15']},
 
- {id:'m3-3days', module:3, name:'A loading dose with a 75 mg/hr infusion for 3 days',
+ {id:'m3-3days', src:'inclass', module:3, name:'A loading dose with a 75 mg/hr infusion for 3 days',
   setup:'Where the 500 mg loading dose in her stem is not the appropriate one',
   parts:['inf-n22','inf-n23','inf-n24','inf-n25','inf-n26']},
 
- {id:'m3-female', module:3, name:'A 35-year-old, 65-kg patient on infusion',
+ {id:'m3-female', src:'practice', module:3, name:'A 35-year-old, 65-kg patient on infusion',
   setup:'The rate from a volume stated as a percentage of body weight, then the time to 95 per cent',
   parts:['inf-n17','inf-n16']},
 
- {id:'m4-battery', module:4, name:'500 mg IV bolus with a 48-hour urine collection',
+ {id:'m4-battery', src:'example', module:4, name:'500 mg IV bolus with a 48-hour urine collection',
   setup:'Her six-part battery: f<sub>e</sub>, k, k<sub>e</sub>, then total, renal and hepatic clearance',
   parts:['m4-n-fe','m4-n-k','m4-n-ke','m4-n-clt','m4-n-clr','m4-n-clh']},
 
- {id:'m4-antibiotic', module:4, name:'An antibiotic secreted by the kidney, before and after renal failure',
+ {id:'m4-antibiotic', src:'example', module:4, name:'An antibiotic secreted by the kidney, before and after renal failure',
   setup:'k and half-life at a clearance of 750 mL/min, then the half-life at 150 mL/min',
   parts:['m4-n-abk','m4-n-ab1','m4-n-ab2']},
 
- {id:'m4-crcl', module:4, name:'Creatinine clearance for a 45-year-old female',
+ {id:'m4-crcl', src:'example', module:4, name:'Creatinine clearance for a 45-year-old female',
   setup:'Height in centimetres to inches, then ideal body weight, then Cockcroft–Gault',
   parts:['m4-n-inches','m4-n-ibwf','m4-n-crcl']},
 
- {id:'m5-investigational', module:5, name:'An investigational drug given as a 500-mg oral dose',
+ {id:'m5-investigational', src:'example', module:5, name:'An investigational drug given as a 500-mg oral dose',
   setup:'The two rate constants, then t<sub>max</sub> and C<sub>max</sub>, then C<sub>max</sub> when the dose is doubled',
   parts:['m5-n01','m5-n02','m5-n03','m5-n04','m5-n19']},
 
- {id:'m5-antibiotic', module:5, name:'An oral antibiotic given by its two-exponential equation',
+ {id:'m5-antibiotic', src:'example', module:5, name:'An oral antibiotic given by its two-exponential equation',
   setup:'C<sub>p</sub> = 75(e<sup>&minus;0.22t</sup> &minus; e<sup>&minus;2.75t</sup>), read for both half-lives, the peak, the volume and a later point',
   parts:['m5-n05','m5-n06','m5-n07','m5-n08','m5-n09','m5-n10']},
 
- {id:'m5-750', module:5, name:'A 750-mg oral dose given by its equation',
+ {id:'m5-750', src:'inclass', module:5, name:'A 750-mg oral dose given by its equation',
   setup:'C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>), read for the half-life, the peak and the volume',
   parts:['m5-n16','m5-n17','m5-n18','m5-n15']},
 
- {id:'m5-500', module:5, name:'A 500-mg oral dose, 88 per cent bioavailable',
+ {id:'m5-500', src:'example', module:5, name:'A 500-mg oral dose, 88 per cent bioavailable',
   setup:'The absorption rate constant, t<sub>max</sub> and C<sub>max</sub>, then C<sub>max</sub> when the volume doubles',
   parts:['m5-n11','m5-n12','m5-n13','m5-n14']},
 
- {id:'m6-ex1', module:6, name:'An antibiotic, 10 mg/kg every 8 hours by IV bolus',
+ {id:'m6-ex1', src:'example', module:6, name:'An antibiotic, 10 mg/kg every 8 hours by IV bolus',
   setup:'t&frac12; 4 hr, V<sub>D</sub> 25% of body weight, a 65-kg female: the first dose, then C<sub>max</sub>, C<sub>min</sub> and C<sub>avg</sub> at steady state',
   parts:['m6-n01','m6-n02','m6-n03','m6-n04','m6-n05']},
 
- {id:'m6-ex23', module:6, name:'The same antibiotic before steady state and after the last dose',
+ {id:'m6-ex23', src:'example', module:6, name:'The same antibiotic before steady state and after the last dose',
   setup:'3 hours after the 2nd dose, then 3 and 4 hours after the last dose at steady state',
   parts:['m6-n06','m6-n07','m6-n08']},
 
- {id:'m6-practice1', module:6, name:'One gram every 8 hours to a 65-kg patient (a–h)',
+ {id:'m6-practice1', src:'practice', module:6, name:'One gram every 8 hours to a 65-kg patient (a–h)',
   setup:'V<sub>D</sub> 26.2 L/100 kg, Cl<sub>T</sub> 52.95 mL/min per 70 kg: her parts (a) to (h) in her order; part (i), the renal mechanism, is with the concepts',
   parts:['m6-p1a','m6-p1b','m6-p1c','m6-p1d','m6-p1e','m6-p1f','m6-p1g','m6-p1h']},
 
- {id:'m6-ex4', module:6, name:'Two 2-hour infusions of 300 mg, 6 hours apart',
+ {id:'m6-ex4', src:'example', module:6, name:'Two 2-hour infusions of 300 mg, 6 hours apart',
   setup:'k 0.15 hr<sup>&minus;1</sup>, V<sub>D</sub> 15 L: the rate, the end of the first infusion, then 4 hours after the second ends',
   parts:['m6b-n01','m6b-n02','m6b-n03']},
 
- {id:'m6-act1', module:6, name:'In-class activity 1: 500 mg over 2 hours, twice',
+ {id:'m6-act1', src:'inclass', module:6, name:'In-class activity 1: 500 mg over 2 hours, twice',
   setup:'t&frac12; 3 hr, V<sub>D</sub> 18 L, the second infusion starting 6 hours after the first: the end of the first, then 4 hours after the second ends',
   parts:['m6b-n04','m6b-n05']},
 
- {id:'m6-act2', module:6, name:'In-class activity 2: 150 mg over 1.5 hours, twice',
+ {id:'m6-act2', src:'inclass', module:6, name:'In-class activity 2: 150 mg over 1.5 hours, twice',
   setup:'Cl 2.54 L/hr, V<sub>D</sub> 22 L, 8 hours between starts: the end of the first, 6 hours after the second ends, then the plateau of a continuous infusion',
   parts:['m6b-n06','m6b-n07','m6b-n08']},
 
- {id:'m6-tetracycline', module:6, name:'Tetracycline 250 mg orally every 8 hours',
+ {id:'m6-tetracycline', src:'example', module:6, name:'Tetracycline 250 mg orally every 8 hours',
   setup:'F 0.75, V<sub>D</sub> 1.5 L/kg in a 75-kg male, t&frac12; 10 hr, k<sub>a</sub> 0.9 hr<sup>&minus;1</sup>: the first-dose peak, then the peak, trough and average at steady state',
   parts:['m6b-n09','m6b-n10','m6b-n11','m6b-n12','m6b-n13','m6b-n14']},
 ];
+
+/* Where each problem set comes from, in `src` above:
+     example   a worked example on her lecture slides (listed under Calculations)
+     practice  a posted practice sheet with her solutions          (Worksheets)
+     inclass   an in-class activity or in-class practice            (Worksheets)
+     homework  a homework problem, her wording                      (Worksheets)
+     review    a practice item from her exam-review slides          (Worksheets) */
+const WORKSHEET_KINDS = [
+  ['practice', 'Practice sheets', 'Her posted practice problems, worked in her part order'],
+  ['inclass',  'In-class activities', 'The problems worked in class'],
+  ['homework', 'Homework', 'Her homework wording; numbers marked as changed are not the graded ones'],
+  ['review',   'Exam review practice', 'Practice items from her exam-review slides'],
+];
+
+/* The objectives on each module's Objectives slide, in her wording (the same
+   lines head the Guides). Each concept question belongs to the objective its
+   subtopic serves; a subtopic may serve two objectives. Objectives with no
+   concept question (calculation-only objectives) are left out of the list. */
+const OBJECTIVES = [
+  {module:1, n:'1', text:'Define pharmacokinetics and discuss some related disciplines', subs:['intro/disc']},
+  {module:1, n:'2', text:'Describe the types of pharmacokinetic modeling', subs:['intro/models']},
+  {module:1, n:'3', text:'Define some fundamental pharmacokinetics terms', subs:['intro/terms', 'intro/matrix', 'intro/curve']},
+  {module:1, n:'4', text:'Differentiate between orders of reaction and calculate basic parameters given a data set', subs:['orders/zero', 'orders/first', 'orders/half', 'orders/plots', 'orders/decide']},
+  {module:1, n:'5', text:'Determine the area under the curve for a provided data set using the trapezoidal rule', subs:['auc/concept', 'auc/trap']},
+  {module:2, n:'1', text:'Describe a one-compartment model, IV bolus injection', subs:['bolus1/model']},
+  {module:2, n:'2', text:'Define key pharmacokinetic parameters – clearance and volume of distribution', subs:['bolus1/vd', 'bolus1/cl']},
+  {module:2, n:'4', text:'Differentiate between single and multiple-compartment pharmacokinetic models', subs:['bolus2/why']},
+  {module:2, n:'5', text:'Explain why some drugs best fit a multi-compartment model', subs:['bolus2/why']},
+  {module:2, n:'6', text:'Predict drug concentration following IV bolus administration in a multi-compartment model', subs:['bolus2/params']},
+  {module:3, n:'1', text:'Discuss and describe the pharmacokinetics of a medicinal agent following administration by IV infusion', subs:['infusion/basics']},
+  {module:3, n:'2', text:'Describe the concept of steady state and how it relates to continuous dosing', subs:['infusion/css']},
+  {module:3, n:'5', text:'Describe the purpose of a loading dose', subs:['infusion/load']},
+  {module:3, n:'7', text:'Determine the plasma concentration given pharmacokinetic parameters at any time', subs:['infusion/pre', 'infusion/stop']},
+  {module:4, n:'1', text:'Describe the main routes of drug elimination from the body – renal and hepatic', subs:['clearance/routes']},
+  {module:4, n:'2', text:'Define glomerular filtration, tubular secretion, and tubular reabsorption', subs:['clearance/renalmech']},
+  {module:4, n:'3', text:'Calculate creatinine clearance and discuss significance', subs:['clearance/crclcalc']},
+  {module:4, n:'4', text:'Discuss the effect of degree of ionization on the renal excretion of drugs', subs:['clearance/ionization']},
+  {module:4, n:'5', text:'Calculate total, renal and hepatic clearance', subs:['clearance/clcalc']},
+  {module:5, n:'1', text:'Describe the kinetics of a drug following extravascular administration', subs:['oral/extravasc']},
+  {module:5, n:'2', text:'Calculate plasma drug concentration following extravascular administration of a single dose', subs:['oral/conc']},
+  {module:5, n:'3', text:'Calculate peak plasma concentration and the time to peak following extravascular administration of a single dose', subs:['oral/peak']},
+  {module:5, n:'4', text:'Discuss the effects of changing various parameters on the pharmacokinetics following extravascular administration', subs:['oral/changes']},
+  {module:6, n:'1', text:'Explain the principle of superposition and its assumptions in multiple-dose regimens', subs:['multi/accum', 'multi/superpos']},
+  {module:6, n:'2', text:'Predict the concentration of drug in the plasma at any time following multiple IV bolus injections of drug', subs:['multi/ssbolus', 'multi/ndose']},
+  {module:6, n:'3', text:'Predict the concentration of drug in the plasma at any time following multiple IV infusions of drug', subs:['intermit/why', 'intermit/add']},
+  {module:6, n:'6a.1', text:'Calculate plasma drug concentration following multiple extravascular administrations of drug', subs:['multoral/oeq', 'multoral/ossc']},
+  {module:6, n:'6a.2', text:'Discuss the effects of changing various parameters on the pharmacokinetics', subs:['multoral/oparam']},
+];
+
+/* The kinds of calculation each module asks, in the order they are taught.
+   A calculation question belongs to the first type it matches (topic/sub, and
+   skill where given); test.js checks every calculation lands in exactly one.
+   `example` is the question whose working is shown as the worked example. */
+const CALC_TYPES = [
+  {module:1, id:'m1-decide', name:'Deciding the order from a data set, then k', match:['orders/decide'], example:'m1-ord-n01'},
+  {module:1, id:'m1-zero', name:'Zero order: rate, concentration and time', match:['orders/zero'], example:'m1-ord-n17'},
+  {module:1, id:'m1-first', name:'First order: concentration and time', match:['orders/first'], example:'m1-ord-n02'},
+  {module:1, id:'m1-half', name:'Half-life and the time to decompose', match:['orders/half'], example:'m1-ord-n12'},
+  {module:1, id:'m1-auc', name:'Area under the curve by the trapezoidal rule', match:['auc/trap'], example:'m1-auc-n01'},
+  {module:2, id:'m2-k', name:'Rate constant and half-life after an IV bolus', match:['bolus1/calc:krate'], example:'m2-n-k2'},
+  {module:2, id:'m2-c', name:'Concentration or amount at a time', match:['bolus1/calc:conctime'], example:'m2-n-c0a'},
+  {module:2, id:'m2-vdcl', name:'Volume of distribution and clearance', match:['bolus1/calc:vddose', 'bolus1/calc:clearance'], example:'m2-n-cl2'},
+  {module:2, id:'m2-two', name:'Two compartments: A, B, alpha, beta and the rate constants', match:['bolus2/calc'], example:'m2-n-koverall'},
+  {module:3, id:'m3-rate', name:'Infusion rate and the steady-state concentration', match:['infusion/css', 'infusion/rate'], example:'inf-n10'},
+  {module:3, id:'m3-pre', name:'Concentration during an infusion, before steady state', match:['infusion/pre'], example:'inf-n3'},
+  {module:3, id:'m3-time', name:'Time to reach a stated fraction of steady state', match:['infusion/time'], example:'inf-n4'},
+  {module:3, id:'m3-stop', name:'Concentration after the infusion stops', match:['infusion/stop'], example:'inf-n5'},
+  {module:3, id:'m3-load', name:'Loading dose, alone and with an infusion', match:['infusion/load'], example:'inf-n12'},
+  {module:4, id:'m4-cl', name:'Total, renal and hepatic clearance, and the elimination rate', match:['clearance/clcalc:clearance'], example:'m4-n-clt'},
+  {module:4, id:'m4-k', name:'Rate constant and half-life from clearance, and renal failure', match:['clearance/clcalc'], example:'m4-n-abk'},
+  {module:4, id:'m4-crcl', name:'Creatinine clearance and ideal body weight', match:['clearance/crclcalc'], example:'m4-n-crcl'},
+  {module:5, id:'m5-k', name:'Absorption and elimination rate constants and half-lives', match:['oral/extravasc', 'oral/conc:krate'], example:'m5-n01'},
+  {module:5, id:'m5-conc', name:'Concentration, F and volume from the oral equation', match:['oral/conc'], example:'m5-n10'},
+  {module:5, id:'m5-peak', name:'Peak concentration and time to peak', match:['oral/peak', 'oral/changes'], example:'m5-n03'},
+  {module:6, id:'m6-ss', name:'Repeated IV bolus: peak, trough and average at steady state', match:['multi/ssbolus'], example:'m6-n03'},
+  {module:6, id:'m6-n', name:'Repeated IV bolus: after n doses and after the last dose', match:['multi/ndose'], example:'m6-n06'},
+  {module:6, id:'m6-inf1', name:'One intermittent infusion: rate and the end-of-infusion level', match:['intermit/why'], example:'m6b-n02'},
+  {module:6, id:'m6-infadd', name:'Adding infusions on a time line', match:['intermit/add'], example:'m6b-n03'},
+  {module:6, id:'m6-oral', name:'Multiple oral doses: peak, trough, time to peak and average', match:['multoral/ossc'], example:'m6b-n12'},
+];
+
 
 const Q_MODULE1 = [
 
