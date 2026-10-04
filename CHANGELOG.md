@@ -2,6 +2,13 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (every term explained where it first appears)
+- Guides, Reference, Tell apart, Terms, Equations and Diagrams: each symbol and term is explained at its first use.
+- Long paragraphs became short bullets; module summaries open each Guides module as a list.
+- Guides carry "From the textbook" bullets for Modules 4, 5 and 6, each with its chapter and page.
+- New pictures under Diagrams: the half-life ladder, the accumulation factor, the kidney, units that cancel.
+- A step-through of her AUC example shades each trapezoid in turn.
+
 ## 2026-10-04 (collapsible sections)
 - Guides, Reference, Tell apart and Diagrams: every section folds; Expand all and Collapse all are remembered per tab.
 - Sections sit under Exam 1 and Exam 2 headings, the exam being prepared for open; Diagrams can filter by exam.
