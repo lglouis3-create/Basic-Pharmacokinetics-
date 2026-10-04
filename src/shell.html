@@ -851,11 +851,16 @@ function gradeMulti(q, picks){
 }
 /* The student's entry is compared exactly as typed, with no rounding of their
    number: only the tolerance decides. A blank or unreadable entry is wrong. */
+/* A number, with or without its unit after it. She requires units on the
+   exam, so "2.6 hr", "188.2 (mg/L)hr" and "55%" read as 2.6, 188.2 and 55; the
+   unit text is not graded. Anything that is not a number followed at most by
+   a unit reads as no number at all. */
 function parseNum(entered){
   if(entered === null || entered === undefined) return NaN;
   const t = String(entered).trim().replace(/,/g, '');
-  if(!/^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(t)) return NaN;
-  return parseFloat(t);
+  const m = /^([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)(?:\s*[A-Za-zµ%(][A-Za-z\s/()·⋅%^.\-⁻¹²³⁴]*)?$/.exec(t);
+  if(!m) return NaN;
+  return parseFloat(m[1]);
 }
 /* The comparison is |entered - answer| <= tol, with one caveat. Binary floating
    point cannot hold most decimal tolerances exactly, so a student who types the
@@ -1019,6 +1024,7 @@ function isDue(s){
 }
 function record(q, result, picked, ms, missKind){   // result: 'correct' | 'wrong' | 'guessed'
   const s = st(q.concept);
+  const prev = {box: s.box, streak: s.streak};   // kept on a miss so "No, I was right" can undo it
   DB.qn++;
   s.seen++;
   s.lastQ = DB.qn;
@@ -1040,9 +1046,32 @@ function record(q, result, picked, ms, missKind){   // result: 'correct' | 'wron
   if(picked !== undefined && picked !== null) entry.picked = picked;
   if(ms) entry.ms = ms;
   if(missKind) entry.missKind = missKind;
+  if(result !== 'correct') entry.prev = prev;
   DB.answers.push(entry);
   if(DB.answers.length > 4000) DB.answers.splice(0, DB.answers.length-4000);
   save();
+}
+
+/* "No, I was right": the student says a numeric answer graded wrong was a
+   typing slip (a stray character, a unit typed into the box). The last log
+   entry for the question flips to correct, the concept's box and streak go
+   back to what they were before the miss and then advance as a right answer
+   would, and the entry keeps a mark so the override stays visible in the log. */
+function markRight(q){
+  for(let i = DB.answers.length - 1; i >= 0; i--){
+    const a = DB.answers[i];
+    if(a.qid !== q.id) continue;
+    if(a.result !== 'wrong') return false;
+    const s = st(q.concept);
+    a.result = 'correct'; a.overrode = true; delete a.missKind;
+    s.wrong = Math.max(0, s.wrong - 1); s.correct++;
+    const prev = a.prev || {box: 0, streak: 0};
+    s.streak = prev.streak + 1;
+    s.box = Math.min(prev.box + 1, DAYS.length - 1);
+    schedule(s); save();
+    return true;
+  }
+  return false;
 }
 
 /* Naming the kind of slip after a missed numeric question. The answer is

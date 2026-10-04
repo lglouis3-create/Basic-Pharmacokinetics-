@@ -933,7 +933,7 @@ function nextQuestion(){
   const st0 = q && DB.concepts[q.concept];
   Q.status = !st0 || !(st0.seen > 0) ? 'new' : (st0.wrong > 0 && st0.box === 0) ? 'missed before' : 'review';
   Q.picked = q && qType(q) === 'match' ? {} : null;
-  Q.revealed = false; Q.missKind = null; Q.startedAt = Date.now();
+  Q.revealed = false; Q.missKind = null; Q.overrode = false; Q.startedAt = Date.now();
   if(q && isMC(q)) Q.order = shuffle(q.options.map((o,i)=>i));
   else Q.order = [];
   renderQuiz();
@@ -1251,8 +1251,8 @@ function allCardState(q){
 }
 function allCardHTML(q, n, total){
   const st = allCardState(q), kind = qType(q), multi = isMulti(q);
-  const ok = st.revealed ? gradeAnswer(q, st.picked) : false;
-  const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, inChain: !!Q.chain};
+  const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
+  const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain};
   let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}<span>${n} of ${total}</span><span class="spacer"></span>${
       st.revealed ? `<span style="color:var(${ok ? '--ok' : '--bad'})">${ok ? 'right' : 'missed'}</span>` : ''}</div>
     <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
@@ -1263,6 +1263,7 @@ function allCardHTML(q, n, total){
   const needCheck = kind === 'numeric' || kind === 'match' || multi;
   if(!st.revealed && needCheck) h += `<div class="qfoot"><button class="btn small" data-check="1">Check answer</button></div>`;
   if(st.revealed && ok && !st.guessed) h += `<div class="qfoot"><button class="btn small amber" data-guess="1">I guessed that one</button></div>`;
+  if(st.revealed && !ok && kind === 'numeric') h += `<div class="qfoot"><button class="btn small ghost" data-right="1" title="A typing slip: count it as right">No, I was right</button></div>`;
   return noIds(h + `</div>`);
 }
 function wireAllCard(card){
@@ -1295,6 +1296,8 @@ function wireAllCard(card){
   card.querySelectorAll('[data-mk]').forEach(b => b.onclick = () => { st.missKind = b.dataset.mk; setMissKind(q, st.missKind); refreshAllCard(q.id); });
   const bg = card.querySelector('[data-guess]');
   if(bg) bg.onclick = () => { markGuessed(q); st.guessed = true; refreshAllCard(q.id); };
+  const br = card.querySelector('[data-right]');
+  if(br) br.onclick = () => { if(markRight(q)){ st.overrode = true; st.missKind = null; refreshAllCard(q.id); } };
   card.querySelectorAll('[data-chainlink]').forEach(b => b.onclick = () => startChain(b.dataset.chainlink));
 }
 function refreshAllCard(id){
@@ -1374,7 +1377,7 @@ function answerInputsHTML(q, st){
   const picks = multi ? (st.picked || []) : null;
   let h = '';
   if(kind === 'numeric'){
-    h += `<p class="sata">Type the number and check it. Anything within ${fmtTol(q)} ${esc(q.units)} of the keyed value counts, her margin of 2% or wider.</p>`;
+    h += `<p class="sata">Type the number and check it. Anything within ${fmtTol(q)} ${esc(q.units)} of the keyed value counts, her margin of 2% or wider. The unit may be typed after the number.</p>`;
     h += numericInput(q, st.picked, st.revealed, st.revealed ? (ok ? 'ok' : 'bad') : '');
   }else if(kind === 'match'){
     h += `<p class="sata">Choose the matching item for each row, then check. Marked right only when every row matches.</p>`;
@@ -1410,7 +1413,8 @@ function feedbackHTML(q, st){
                   ...(q.steps||[]).map(x=>x.why||''), ...(q.pairs||[]).map(x=>x.why||'')].join(' ');
     let verdictLine;
     if(kind === 'numeric'){
-      verdictLine = ok ? `✓ Correct — keyed answer ${fmtAns(q.answer)} ${esc(q.units)}`
+      verdictLine = ok && st.overrode ? `✓ Counted as right — keyed answer ${fmtAns(q.answer)} ${esc(q.units)}; you entered ${esc(String(st.picked||'nothing'))}`
+        : ok ? `✓ Correct — keyed answer ${fmtAns(q.answer)} ${esc(q.units)}`
         : `✗ Not correct — the answer is ${fmtAns(q.answer)} ${esc(q.units)}, and you entered ${esc(String(st.picked||'nothing'))}`;
     }else if(kind === 'match'){
       const got = (q.pairs||[]).filter(p => (st.picked||{})[p.l] === p.r).length;
@@ -1520,7 +1524,7 @@ function renderQuiz(){
   const totalC = conceptsIn(Q.pool).length;
   const left   = remainingIn(Q.pool);
   const pctDone = totalC ? Math.round(100*(totalC-left)/totalC) : 0;
-  const ok = Q.revealed ? gradeAnswer(q, Q.picked) : false;
+  const ok = Q.revealed ? (Q.overrode || gradeAnswer(q, Q.picked)) : false;
 
   let h = `<div class="sessline">${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
     ${profTag(q.prof)}
@@ -1542,7 +1546,7 @@ function renderQuiz(){
 
   const multi = isMulti(q);
   const picks = multi ? (Q.picked || []) : null;
-  const cst = {picked:Q.picked, order:Q.order, revealed:Q.revealed, missKind:Q.missKind, ok, inChain:!!Q.chain};
+  const cst = {picked:Q.picked, order:Q.order, revealed:Q.revealed, missKind:Q.missKind, ok, overrode:Q.overrode, inChain:!!Q.chain};
   h += answerInputsHTML(q, cst);
   if(Q.revealed) h += feedbackHTML(q, cst);
   h += `</div><div class="qfoot">`;
@@ -1557,6 +1561,8 @@ function renderQuiz(){
     h += `<button class="btn" id="btnNext">Next question</button>`;
     if(ok && !Q.guessedLogged)
       h += `<button class="btn amber" id="btnGuess">I guessed that one</button>`;
+    if(!ok && kind === 'numeric')
+      h += `<button class="btn ghost" id="btnRight" title="A typing slip: count it as right">No, I was right</button>`;
     h += `<button class="btn ghost" onclick="show('topics')">Change topic</button>`;
   }
   h += `</div></div>`;
@@ -1585,6 +1591,7 @@ function renderQuiz(){
     bg.textContent = 'Marked as a guess';
     bg.disabled = true;
   };
+  const br = $('#btnRight'); if(br) br.onclick = () => { if(markRight(Q.current)){ Q.overrode = true; Q.missKind = null; renderQuiz(); } };
 }
 
 function answer(oi){
@@ -2625,7 +2632,8 @@ function finishExam(){
   renderExamResult();
 }
 function renderExamResult(){
-  const right = EX.qs.filter((q,i)=> examRight(q, EX.picks[i])).length;
+  const overrode = i => !!(EX.rightOv && EX.rightOv[i]);
+  const right = EX.qs.filter((q,i)=> examRight(q, EX.picks[i]) || overrode(i)).length;
   const blank = EX.qs.filter((q,i)=> examBlank(q, EX.picks[i])).length;
   const pct = EX.qs.length ? Math.round(100*right/EX.qs.length) : 0;
   let h = `<h2>${esc(EX.title || 'Exam simulation')} — ${right} / ${EX.qs.length} (${pct}%)</h2>
@@ -2636,7 +2644,7 @@ function renderExamResult(){
      <button class="btn ghost" onclick="show('gaps')">See weak spots</button></p>
   <h3>Every question, with the reasoning</h3>`;
   EX.qs.forEach((q,i)=>{
-    const p = EX.picks[i], ok = examRight(q, p), blankQ = examBlank(q, p);
+    const p = EX.picks[i], ok = examRight(q, p) || overrode(i), blankQ = examBlank(q, p);
     const kind = qType(q), multi = isMulti(q);
     const chosen = oi => multi ? (p || []).includes(oi) : oi === p;
     h += `<div class="qcard" style="margin-bottom:12px"><div class="qhead">
@@ -2646,7 +2654,8 @@ function renderExamResult(){
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
     if(kind === 'numeric'){
       h += `<p class="verdict ${ok?'ok':'bad'}">Keyed answer ${fmtAns(q.answer)} ${esc(q.units)}${
-        blankQ ? ' — left blank' : ` — you entered ${esc(String(p))}`}</p>`;
+        blankQ ? ' — left blank' : ` — you entered ${esc(String(p))}`}${overrode(i) ? ' (counted as right)' : ''}</p>`;
+      if(!ok && !blankQ) h += `<p><button class="btn small ghost" data-right="${i}" title="A typing slip: count it as right">No, I was right</button></p>`;
       /* the kind of slip is asked here as it is in the quiz, so a paper's
          misses count in the miss-kind table like any other */
       if(!ok && !blankQ){
@@ -2678,6 +2687,14 @@ function renderExamResult(){
   $('#v-exam').querySelectorAll('button[data-mk]').forEach(b => b.onclick = () => {
     const q = EX.qs[+b.dataset.qi];
     if(q && setMissKind(q, b.dataset.mk)) renderExamResult();
+  });
+  $('#v-exam').querySelectorAll('button[data-right]').forEach(b => b.onclick = () => {
+    const i = +b.dataset.right, q = EX.qs[i];
+    if(!q || !markRight(q)) return;
+    (EX.rightOv ||= {})[i] = true;
+    const last = (DB.exams || [])[DB.exams.length - 1];
+    if(last && last.exam === (EX.paper || EXAM.id)) last.right = Math.min(last.total, last.right + 1);
+    save(); renderExamResult();
   });
 }
 
@@ -3294,7 +3311,7 @@ function eqStart(mode){
 }
 function eqLoad(){
   const e = EQ_BY_ID[EQ.queue[EQ.i]];
-  EQ.revealed = false; EQ.ok = false; EQ.typed = '';
+  EQ.revealed = false; EQ.ok = false; EQ.shown = false; EQ.overrode = false; EQ.typed = '';
   if(e && EQ.step === 'build'){
     EQ.slots = e.tokens.map(() => null);
     EQ.tray  = shuffle([...e.tokens, ...(e.lures || [])].map((t, i) => ({t, i})));
@@ -3349,7 +3366,7 @@ function eqDrillHTML(){
 
   if(EQ.revealed){
     h += `<div class="why"><p class="verdict ${EQ.ok ? 'ok' : 'bad'}">${
-      EQ.ok ? '✓ Correct' : '✗ Not correct'}</p>
+      EQ.ok ? (EQ.overrode ? '✓ Counted as right' : '✓ Correct') : '✗ Not correct'}</p>
       <p class="eqanswer"><b>${eqShow(e)}</b></p>`;
     if(!EQ.ok && !building && EQ.typed.trim())
       h += `<p class="prose">You wrote <code>${esc(EQ.typed.trim())}</code>, which reads as
@@ -3375,6 +3392,7 @@ function eqDrillHTML(){
     h += `<button class="btn ghost" id="eqShow">Show me</button>`;
   }else{
     h += `<button class="btn" id="eqNext">Next</button>`;
+    if(!EQ.ok && !EQ.shown && !building) h += `<button class="btn ghost" id="eqRight" title="A typing slip: count it as right">No, I was right</button>`;
   }
   h += `<button class="btn ghost" id="eqStop">Choose equations</button></div></div>`;
   return h;
@@ -3439,10 +3457,11 @@ function eqDrillWire(el){
     EQ.slots = EQ.slots.map(() => null); EQ.trayOf = {}; EQ.sel = null; renderEq();
   };
   if(byId('eqShow')) byId('eqShow').onclick = () => {
-    EQ.revealed = true; EQ.ok = false;
+    EQ.revealed = true; EQ.ok = false; EQ.shown = true;
     eqRecord(e.id, EQ.step, false);
     renderEq();
   };
+  if(byId('eqRight')) byId('eqRight').onclick = eqMarkRight;
   if(byId('eqNext')) byId('eqNext').onclick = () => {
     /* In the alternating mode the same equation is typed straight after it has
        been built, so the piece order is still in mind when the typing is asked
@@ -3479,7 +3498,18 @@ function eqCheck(){
   }
   EQ.revealed = true;
   EQ.asked++; if(EQ.ok) EQ.right++;
+  EQ.prevStreak = eqStat(e.id).streak;   // kept so "No, I was right" can restore it
   eqRecord(e.id, EQ.step, EQ.ok);
+  renderEq();
+}
+/* A typed equation graded wrong that the student says was a typing slip:
+   the record flips to right and the streak carries on as if it had been. */
+function eqMarkRight(){
+  const e = EQ_BY_ID[EQ.queue[EQ.i]];
+  if(!e || !EQ.revealed || EQ.ok || EQ.shown) return;
+  const s = (DB.eq || {})[e.id];
+  if(s){ s.wrong = Math.max(0, s.wrong - 1); s.right++; s.streak = (EQ.prevStreak || 0) + 1; s.mode[EQ.step] = (s.mode[EQ.step] || 0) + 1; save(); }
+  EQ.ok = true; EQ.right++; EQ.overrode = true;
   renderEq();
 }
 

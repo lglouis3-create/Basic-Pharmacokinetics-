@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (a typing slip is not a miss)
+- A number typed with its unit ("2.6 hr") is read as the number, since she requires units on the exam.
+- "No, I was right" under a missed number or equation counts it as right and restores the review schedule.
+- The quiz card now says units and decimal places are required on the exam, and a dose is rounded to a practical figure.
+
 ## 2026-10-04 (her graded quizzes)
 - Her Quiz 2 and Quiz 3 questions are in the bank word for word, with her keys and margins.
 - Numeric answers are graded to at least 2% of the key, her smallest Canvas margin.

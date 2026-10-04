@@ -209,9 +209,10 @@ const COURSE = {
        'Intermittent infusions: the concentration from each infusion adds to what is left of the earlier ones.',
        'Oral multiple dosing: t<sub>max</sub> at steady state depends on k, k<sub>a</sub> and τ. Know what changing the dose or the interval does to the steady-state level and to the peak-to-trough swing.',
        'Exam 2 is Thursday 8 October. It is cumulative in the sense that a multiple-dose problem needs the single-dose skills; the exams weigh 27%, 27% and 33%.',
-       'Her Quizzes 2 and 3 were each 8 questions at 12.5 points: 4 word-only concept items and 4 numeric entries, each with a rounding rule ("Round to the nearest tenth") and a margin of error of 2% or 3%. Units are not typed.',
+       'Her Quizzes 2 and 3 were each 8 questions at 12.5 points: 4 word-only concept items and 4 numeric entries, each with a rounding rule ("Round to the nearest tenth") and a margin of error of 2% or 3%. On the Canvas quizzes the units are not typed.',
+       'On the exam, every calculated answer carries its units, and each question states how many decimal places it wants, in varying wording. Where the result is a dose, she wants a figure a patient can take: "we might round it to 200 if there\'s a 175 or something that makes sense as opposed to 181. blah blah blah".',
      ],
-     src: 'transcript 09-30 (quiz scope, emphasis, rules); transcript 09-23 (8 am start, 24-minute Quiz 3); her graded Canvas Quiz 2 and Quiz 3 (format)'},
+     src: 'transcript 09-30 (quiz scope, emphasis, rules, rounding a dose); transcript 09-23 (8 am start, 24-minute Quiz 3); her graded Canvas Quiz 2 and Quiz 3 (format); units and decimal places on the exam as reported from class, 4 Oct'},
   ],
 
   paceDefault: 'weekly',

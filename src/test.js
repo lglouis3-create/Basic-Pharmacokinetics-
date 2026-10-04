@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,tolOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,tolOf,parseNum,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -191,6 +191,12 @@ console.log('\n=== 1b. Question types render-ready ===');
   const byKind = {mc:0, numeric:0, match:0, multi:0};
   QUESTIONS.forEach(q => { byKind[X.qType(q)]++; if (X.isMulti(q)) byKind.multi++; });
   console.log(`  ${byKind.mc} multiple choice (${byKind.multi} select-all), ${byKind.numeric} numeric, ${byKind.match} match`);
+  // a number typed with its unit reads as the number; anything else reads as none
+  for (const [typed, want] of [['2.6 hr', 2.6], ['188.2 (mg/L)hr', 188.2], ['3.13 L/hr', 3.13], ['55%', 55], ['0.17325 hr⁻¹', 0.17325],
+                               ['1,000 mg', 1000], ['2.6e3', 2600], ['-0.2', -0.2], ['=3.13', NaN], ['3..13', NaN], ['2.6 hr 3', NaN], ['abc', NaN], ['', NaN]]) {
+    const got = X.parseNum(typed);
+    if (Number.isNaN(want) ? !Number.isNaN(got) : got !== want) bad(`parseNum(${JSON.stringify(typed)}) read ${got}, wanted ${want}`);
+  }
   // grading, exercised directly rather than assumed
   for (const q of QUESTIONS.concat(X.EXTRAS).filter(q => X.qType(q) === 'numeric')) {
     // graded to the item's own tolerance or 2% of the key, whichever is wider (her Canvas margin)
