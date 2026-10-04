@@ -2431,6 +2431,7 @@ function renderDiagrams(){
     <div class="dgintro"><p><b>Three steps for any graph</b></p><ol>${DIAGRAM_INTRO.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
     <p class="dquote">“${esc(DIAGRAM_QUOTE)}”</p></div>
     ${modChips}${toc}${body}`;
+  stackTables(el);   // the models table becomes one card per model on a phone
   el.querySelectorAll('[data-dgmod]').forEach(b => b.onclick = () => { DG_MOD = /^\d+$/.test(b.dataset.dgmod) ? +b.dataset.dgmod : b.dataset.dgmod; renderDiagrams(); });
   el.querySelectorAll('[data-dg]').forEach(a => a.onclick = e => { e.preventDefault();
     const t = document.getElementById('dg-' + a.dataset.dg); if(t){ scrollToEl(t); listBack('dgtop', 'the list of figures'); } });
@@ -2446,8 +2447,8 @@ function listBack(targetId, label){
 /* The dosing models in one table: what goes in, what goes out, the shape. */
 function modelTableHTML(rows){
   const head = ['Model', 'Drug in', 'Drug out', 'Compartments', 'Curve', 'Recognise it by'];
-  return `<div class="tw"><table class="reftab"><thead><tr>${head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${
-    rows.map(r => `<tr>${r.map((c, i) => `<td>${i ? richHTML(esc(c)) : `<b>${richHTML(esc(c))}</b>`}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  return `<table class="reftab"><thead><tr>${head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${
+    rows.map(r => `<tr>${r.map((c, i) => `<td>${i ? richHTML(esc(c)) : `<b>${richHTML(esc(c))}</b>`}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 }
 
 /* ==========================================================================
