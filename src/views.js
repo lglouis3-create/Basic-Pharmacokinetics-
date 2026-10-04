@@ -786,7 +786,7 @@ function calcsPage(module){
     const pool = typePool(t); if(!pool.length) return;
     const ex = byId(t.example), chains = chainsForType(t);
     h += `<div class="ctype"><div class="ctop"><span class="sname"><b>${esc(t.name)}</b><small>${pool.length} problem${pool.length === 1 ? '' : 's'}${
-        chains.length ? ` · ${chains.length} in parts` : ''}</small></span>${progressHTML(masteryOf(pool), pool)}</div>
+        chains.length ? ` · ${chains.length} in parts` : ''} · ${originMix(pool)}</small></span>${progressHTML(masteryOf(pool), pool)}</div>
       <div class="cbtns"><button class="btn small" data-ctype="${esc(t.id)}">Single problems</button>${
         chains.length === 1 ? `<button class="btn small ghost" data-chain="${esc(chains[0].id)}">In parts</button>` : ''}</div>
       ${ex ? `<details class="worked"><summary>Worked example</summary><div class="wbody">
