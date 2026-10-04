@@ -4,7 +4,7 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 
 ## 2026-10-04 (her Exam 2 practice sheets)
 - Worksheets: Multiple IV Bolus Practice 2–4, Infusion & Oral Practice 1–3, BA-BE Practice 1–3, keyed to her solutions.
-- Parts on the second page of a sheet are not in yet; they follow once the files are shared.
+- Every part of those sheets is in, 55 questions, each answer recomputed from her stem.
 
 ## 2026-10-04 (bioavailability lecture)
 - Module 7a, bioavailability and bioequivalence: 26 questions from her slide, in-class and poll problems.

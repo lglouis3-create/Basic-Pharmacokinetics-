@@ -1389,11 +1389,11 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 > d. Calculate the average steady-state plasma concentration.
 > e. Does your regimen provide the desired peak and trough concentrations? If not, how would you adjust to achieve the desired concentrations?
 
-**Keyed answers (page 1):** (a) D0 = Cmax∞ VD (1 − e^−kτ) = (10 mg/L)(16.4 L)(1 − e^−(0.231)(8)) = 138.16 mg; (b) Cmax∞ = 10 mg/L; (c) Cmin∞ = 10 mg/L (e^−(0.231)(8)) = 1.576 mg/L; (d) Cavg∞ = 138.16 mg/((16.4 L)(0.231 hr⁻¹)(8 hr)) = 4.56 mg/L; (e) in words: "The predicted steady-state peaks and troughs of this regimen are 10 mg/L - 1.6 mg/L. The predicted minimum falls beyond the therapeutic window for this drug; therefore, for a portion of the treatment time, the antibiotic will be at a sub-therapeutic concentration. The two ways that we alter the regimen are to change the dose and/or to change the dosing interval. Since this drug has a half-life of 3 hours, it will decrease in concentration from 10 mg/L to 2 mg/L in about 7 hours, so a decrease in the dosing interval from 8 to 6 hours" (cut there).
+**Keyed answers:** (a) D0 = Cmax∞ VD (1 − e^−kτ) = (10 mg/L)(16.4 L)(1 − e^−(0.231)(8)) = 138.16 mg; (b) Cmax∞ = 10 mg/L; (c) Cmin∞ = 10 mg/L (e^−(0.231)(8)) = 1.576 mg/L; (d) Cavg∞ = 138.16 mg/((16.4 L)(0.231 hr⁻¹)(8 hr)) = 4.56 mg/L; (e) in words: "The predicted steady-state peaks and troughs of this regimen are 10 mg/L - 1.6 mg/L. The predicted minimum falls beyond the therapeutic window for this drug; therefore, for a portion of the treatment time, the antibiotic will be at a sub-therapeutic concentration. The two ways that we alter the regimen are to change the dose and/or to change the dosing interval. Since this drug has a half-life of 3 hours, it will decrease in concentration from 10 mg/L to 2 mg/L in about 7 hours, so a decrease in the dosing interval from 8 to 6 hours would be a good first step." Then: D0 = (10 mg/L)(16.4 L)(1 − e^−(0.231)(6)) = 123 mg; Cmax∞ = 123 mg/[(16.4 L)(1 − e^−(0.231)(6))] = 10 mg/L (the exponent is misprinted "(02.31)(6)"); Cmin∞ = 10 mg/L (e^−(0.231)(6)) = 2.5 mg/L. "The new proposed regimen is 123 mg every 6 hours with an expected steady-state peak of 10 mg/L and an expected steady-state trough of 2.5 mg/L."
 
-*Recompute:* k = 0.693/3 = 0.231 hr⁻¹, VD = 0.2 × 82 = 16.4 L; (a) 138.16 mg; (b) 10.0 mg/L; (c) 1.5755 mg/L; (d) 4.559 mg/L; (e) 10 → 2 mg/L takes ln(5)/0.231 = 6.97 hr, and at τ = 6 hr the trough is 10e^−(0.231)(6) = 2.50 mg/L → **all match**.
+*Recompute:* k = 0.693/3 = 0.231 hr⁻¹, VD = 0.2 × 82 = 16.4 L; (a) 138.16 mg; (b) 10.0 mg/L; (c) 1.5755 mg/L; (d) 4.559 mg/L; (e) 10 → 2 mg/L takes ln(5)/0.231 = 6.97 hr; the 6-hour dose is (10)(16.4)(1 − e^−1.386) = 123.0 mg, its peak 10.0 mg/L and its trough 2.50 mg/L → **all match**.
 
-**Formats observed:** the dose is the unknown, with the steady-state peak assigned at the top of the window (she says so in a hint); the window is printed in mcg/mL and worked in mg/L; age and renal function are stated but not used; a words-only part closes the set, and the drill carries it as a choice (ws6-b2e). Page 2 not indexed; the end of part e (the regimen at a 6-hour interval) to follow.
+**Formats observed:** the dose is the unknown, with the steady-state peak assigned at the top of the window (she says so in a hint); the window is printed in mcg/mL and worked in mg/L; age and renal function are stated but not used; a words-only part closes the set, and the drill carries it as a choice (ws6-b2e), followed by two numeric parts for the key's working on the 6-hour regimen (ws6-b2f, the 123 mg dose; ws6-b2g, the 2.5 mg/L trough), whose stems are written from the key's working and are not printed questions. One page; nothing cut.
 
 ## Source: `Multiple-IV-Bolus-Practice-3---Solutions.pdf`
 
@@ -1404,12 +1404,14 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 > d. Maximum steady-state plasma drug concentration.
 > e. Minimum steady-state plasma drug concentration.
 > f. Average steady-state plasma drug concentration.
+> g. Average amount of drug in the body during steady state.
+> h. Plasma level 12 hours after the last dose, assuming steady-state levels are achieved.
 
-**Keyed answers (page 1):** (a) t½ = (0.693)(20 L)/4.62 L/hr = 3 hr; (b) C0 = 20 mg/kg / 0.25 L/kg = 80 mg/L; (c) Cmin = 80 mg/L (e^−0.231(6)) = 20 mg/L; (d) Cmax∞ = 80 mg/L/(1 − e^−0.231(6)) = 106.68 mg/L; (e) Cmin∞ = 106.68 mg/L (e^−0.231(6)) = 26.68 mg/L; (f) cut after "Cavg∞ =".
+**Keyed answers:** (a) t½ = (0.693)(20 L)/4.62 L/hr = 3 hr; (b) C0 = 20 mg/kg / 0.25 L/kg = 80 mg/L; (c) Cmin = 80 mg/L (e^−0.231(6)) = 20 mg/L; (d) Cmax∞ = 80 mg/L/(1 − e^−0.231(6)) = 106.68 mg/L; (e) Cmin∞ = 106.68 mg/L (e^−0.231(6)) = 26.68 mg/L; (f) Cavg∞ = (80 mg/L)/[(0.231 hr⁻¹)(6 hr)] = 57.72 mg/L; (g) Davg∞ = (57.72 mg/L)(20 L) = 1154 mg; (h) C12∞ = (106.68 mg/L)(e^−0.231(6)) = 6.67 mg/L, where the printed exponent reads (6) but 6.67 is the 12-hour value.
 
-*Recompute:* VD = 20 L, k = 4.62/20 = 0.231 hr⁻¹; (a) 3.00 hr; (b) 80 mg/L; (c) 20.01 mg/L; (d) 106.68 mg/L; (e) 26.68 mg/L → **all match**. (f) from the stem would be 1600 mg/((4.62 L/hr)(6 hr)) = 57.72 mg/L; not written, since her key for it is not on the page.
+*Recompute:* VD = 20 L, k = 4.62/20 = 0.231 hr⁻¹; (a) 3.00 hr; (b) 80 mg/L; (c) 20.01 mg/L; (d) 106.68 mg/L; (e) 26.68 mg/L; (f) 57.72 mg/L (also 1600 mg/((4.62 L/hr)(6 hr))); (g) 1154.4 mg; (h) 106.68e^−(0.231)(12) = 6.67 mg/L, while 106.68e^−(0.231)(6) would be 26.68 mg/L, the trough → **all match**, with the part h exponent read as 12 hr; the drill keys 6.67 mg/L at t = 12 hr and its note says the key's exponent reads (6).
 
-**Formats observed:** dose and volume both per kilogram, so the first-dose peak is taken as a ratio of the two without the weight; elimination arrives as clearance with volume, so k = ClT/VD; 6 hours is two half-lives, so the first-dose trough is a quarter of the peak. Page 2 not indexed; part f (the average at steady state) to follow.
+**Formats observed:** dose and volume both per kilogram, so the first-dose peak is taken as a ratio of the two without the weight; elimination arrives as clearance with volume, so k = ClT/VD; 6 hours is two half-lives, so the first-dose trough is a quarter of the peak; the average is written as C0/(kτ) rather than D0/(VD k τ); the level after the last dose is counted from the steady-state peak. One page; nothing cut.
 
 ## Source: `Multiple-IV-Bolus-Practice-4---Solutions.pdf`
 
@@ -1418,13 +1420,13 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 > b. What is the maximum plasma concentration of the first dose?
 > c. What is the maximum steady-state plasma concentration?
 > d. What is the minimum steady-state plasma concentration?
-> e. What is the plasma con… (cut)
+> e. What is the plasma concentration 10 hours after the last dose assuming steady state was attained?
 
-**Keyed answers (page 1):** (a) D0 = (25 mg/L)(26.2 L)(0.21 hr⁻¹)(4 hr) = 550.2 mg → 550 mg; (b) C0 = 550 mg/26.2 L = 21 mg/L; (c) Cmax∞ = 21 mg/L/(1 − e^−0.21(4)) = 36.95 mg/L; (d) Cmin∞ = 36.95 mg/L (e^−0.21(4)) = 15.95 mg/L.
+**Keyed answers:** (a) D0 = (25 mg/L)(26.2 L)(0.21 hr⁻¹)(4 hr) = 550.2 mg → 550 mg; (b) C0 = 550 mg/26.2 L = 21 mg/L; (c) Cmax∞ = 21 mg/L/(1 − e^−0.21(4)) = 36.95 mg/L; (d) Cmin∞ = 36.95 mg/L (e^−0.21(4)) = 15.95 mg/L; (e) C10∞ = 36.95 mg/L (e^−0.21(10)) = 4.52 mg/L.
 
-*Recompute:* 192 lb/2.2 = 87.27 kg, VD = 26.18 L (she carries 26.2 L), k = 0.693/3.3 = 0.21 hr⁻¹; (a) 549.8 mg with 26.18 L, 550.2 mg with 26.2 L, both 550 mg; (b) 20.99 mg/L → 21; (c) 36.95 mg/L; (d) 15.95 mg/L → **all match**.
+*Recompute:* 192 lb/2.2 = 87.27 kg, VD = 26.18 L (she carries 26.2 L), k = 0.693/3.3 = 0.21 hr⁻¹; (a) 549.8 mg with 26.18 L, 550.2 mg with 26.2 L, both 550 mg; (b) 20.99 mg/L → 21; (c) 36.95 mg/L; (d) 15.95 mg/L; (e) 4.525 mg/L → **all match**.
 
-**Formats observed:** weight in pounds, volume as a percentage of body weight, the dose rounded to the nearest 10 mg on instruction; the rounded dose (550 mg) is carried into the later parts, and the trough equals the peak minus C0. Page 2 not indexed; part e (a plasma concentration at a stated time) to follow.
+**Formats observed:** weight in pounds, volume as a percentage of body weight, the dose rounded to the nearest 10 mg on instruction; the rounded dose (550 mg) is carried into the later parts, and the trough equals the peak minus C0; the level after the last dose is the steady-state peak declined for the stated time. One page; nothing cut.
 
 ## Source: `Multiple-IV-Infusions--26-Multiple-Oral-Administrations-Practice-1---Solutions.pdf` ("Daily Practice Multiple IV Infusions & Multiple Oral Administration PHAR 4221 Practice 1")
 
@@ -1442,12 +1444,14 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 > g. Minimum plasma drug concentration at steady state.
 > h. Average plasma drug concentration at steady state.
 > i. Dose required to reach an average steady state conc of 25 mg/L.
+> j. Average plasma drug concentration at steady state if the dose were increased to 750 mg.
+> k. Average plasma drug concentration at steady state if the dosing interval was decreased to 8 hours (dose 500 mg).
 
-**Keyed answers (page 1):** 1(a) Cp = (800 mg/3 hr)/(4.62 L/hr) × (1 − e^−0.231(3)) = 28.86 mg/L; 1(b) time line 0 3 6 9 15, Cp = (28.86)e^−(0.231)(6) + (28.86)e^−(0.231)(12) = 9.02 mg/L. 2(a) tmax = ln(0.5544/0.0949)/(0.5544 − 0.0949) = 3.84 hr; 2(b) Cmax = [0.9(500)(0.5544)]/[19.2(0.5544 − 0.0949)] × (e^−(0.0949)(3.84) − e^−(0.5544)(3.84)) = 16.28 mg/L; 2(c) Cmin, same prefactor at 12 hr = 9.02 mg/L; 2(d) AUC = 0.9(500)/[(19.2)(0.0949)] = 246.97 mg·hr/L; 2(e) tmax∞ = 3 hr; 2(f) Cmax∞ = 0.9(500)/19.2 × 1/(1 − e^−(0.0949)(12)) × e^−(0.0949)(3) = 25.94 mg/L; 2(g) Cmin∞ = prefactor × 1/(1 − e^−(0.0949)(12)) × e^−(0.0949)(12) = 13.32 mg/L; 2(h) Cavg∞ = 0.9(500)/[(19.2)(0.0949)(12)] = 20.58 mg/L; 2(i) cut after "D0 = (25 mg/L)(19.2 L)".
+**Keyed answers (three pages):** 1(a) Cp = (800 mg/3 hr)/(4.62 L/hr) × (1 − e^−0.231(3)) = 28.86 mg/L; 1(b) time line 0 3 6 9 15, Cp = (28.86)e^−(0.231)(6) + (28.86)e^−(0.231)(12) = 9.02 mg/L. 2(a) tmax = ln(0.5544/0.0949)/(0.5544 − 0.0949) = 3.84 hr; 2(b) Cmax = [0.9(500)(0.5544)]/[19.2(0.5544 − 0.0949)] × (e^−(0.0949)(3.84) − e^−(0.5544)(3.84)) = 16.28 mg/L; 2(c) Cmin, same prefactor at 12 hr = 9.02 mg/L; 2(d) AUC = 0.9(500)/[(19.2)(0.0949)] = 246.97 mg·hr/L; 2(e) tmax∞ = 3 hr; 2(f) Cmax∞ = 0.9(500)/19.2 × 1/(1 − e^−(0.0949)(12)) × e^−(0.0949)(3) = 25.94 mg/L; 2(g) Cmin∞ = prefactor × 1/(1 − e^−(0.0949)(12)) × e^−(0.0949)(12) = 13.32 mg/L; 2(h) Cavg∞ = 0.9(500)/[(19.2)(0.0949)(12)] = 20.58 mg/L; 2(i) D0 = (25 mg/L)(19.2 L)(0.0949 hr⁻¹)(12 hr)/0.9 = 607.36 mg → 600 mg; 2(j) Cavg∞ = 0.9(750 mg)/[(19.2 L)(0.0949 hr⁻¹)(12 hr)] = 30.87 mg/L; 2(k) Cavg∞ = 0.9(500 mg)/[(19.2 L)(0.0949 hr⁻¹)(8 hr)] = 30.87 mg/L.
 
-*Recompute:* 1(a) 28.86; 1(b) 9.02 → **match**. k = 0.693/7.3 = 0.09493, ka = 0.693/1.25 = 0.5544, VD = 19.2 L: 2(a) 3.841 hr; 2(b) 16.28; 2(c) 9.015; 2(d) 246.89 with the unrounded k (246.97 with 0.0949); 2(e) 3.004 hr; 2(f) 25.92 unrounded (25.94 with k 0.0949 and tmax∞ 3); 2(g) 13.31 (13.32); 2(h) 20.57 (20.58) → **all match within her rounding of k to 0.0949**; the drill notes the two values where they differ in the last digit. 2(i) from the stem would be (25)(19.2)(0.0949)(12)/0.9 = 607.6 mg; not written.
+*Recompute:* 1(a) 28.86; 1(b) 9.02 → **match**. k = 0.693/7.3 = 0.09493, ka = 0.693/1.25 = 0.5544, VD = 19.2 L: 2(a) 3.841 hr; 2(b) 16.28; 2(c) 9.015; 2(d) 246.89 with the unrounded k (246.97 with 0.0949); 2(e) 3.004 hr; 2(f) 25.92 unrounded (25.94 with k 0.0949 and tmax∞ 3); 2(g) 13.31 (13.32); 2(h) 20.57 (20.58) → **all match within her rounding of k to 0.0949**; the drill notes the two values where they differ in the last digit. 2(i) 607.36 with k 0.0949, 607.56 unrounded, keyed as her rounded 600 mg with both accepted; 2(j) 30.86 (30.87 with 0.0949); 2(k) 30.86 (30.87) → **match**.
 
-**Formats observed:** the infusion problem gives dose and duration, never R, and the second infusion by "hours after the start of the first"; her time line lists start and end of each infusion and the time asked for; elimination arrives as ClT with VD. The oral problem gives F as a percentage, VD per kilogram, both half-lives (absorption in minutes), and asks first dose then steady state in her fixed order tmax, Cmax, Cmin, AUC, tmax∞, Cmax∞, Cmin∞, Cavg∞, then a dose. Page 2 not indexed; part 2(i) (the dose for Cavg∞ 25 mg/L) to follow.
+**Formats observed:** the infusion problem gives dose and duration, never R, and the second infusion by "hours after the start of the first"; her time line lists start and end of each infusion and the time asked for; elimination arrives as ClT with VD. The oral problem gives F as a percentage, VD per kilogram, both half-lives (absorption in minutes), and asks first dose then steady state in her fixed order tmax, Cmax, Cmin, AUC, tmax∞, Cmax∞, Cmin∞, Cavg∞, then a dose, then the average with the dose raised and with the interval shortened (the two changes give the same 30.87 mg/L because the daily absorbed dose is the same). The 607.36 mg dose is rounded to 600 mg. Three pages; nothing cut.
 
 ## Source: `Multiple-IV-Infusion--26-Multiple-Oral-Administrations-Practice-2---Solutions.pdf` ("Daily Practice Multiple IV Infusions and Oral Administration PHAR 4221 Practice 2"; both pages indexed)
 
@@ -1468,7 +1472,7 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 
 **Formats observed:** the infusion time is given in minutes and converted to hours; the oral problem drops tmax, tmax∞, AUC and the dose as separate parts and folds tmax into Cmax and tmax∞ into Cmax∞; a very large VD (3.2 L/kg) keeps every concentration below 2 mg/L. Nothing cut.
 
-## Source: `Multiple-IV-Infusion-and-Multiple-Oral-Solution-3.pdf` ("Daily Practice Multiple IV Infusion and Multiple Oral Administrations PHAR 4221 Practice 3")
+## Source: `Multiple-IV-Infusion-and-Multiple-Oral-Solution-3.pdf` ("Daily Practice Multiple IV Infusion and Multiple Oral Administrations PHAR 4221 Practice 3"; two pages, both read)
 
 > 1. A 200-mg dose of an antibiotic was administered as an IV infusion over a period of 2 hours. Eight hours after the start of the first infusion, a second dose of 200 mg was infused, again over 2 hours. The antibiotic has a half-life of 4 hours and a total body clearance of 2.8 L/hr.
 > a. What is the plasma drug concentration at the end of the first infusion?
@@ -1480,13 +1484,13 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 > c. What is the ClT of the drug in this patient while taking the 1000 mg orally every 8 hours?
 > d. What will be the average steady-state plasma concentration if the patient were taking 500 mg every 6 hours of the same oral capsule?
 > e. What oral dose is required to reach an average steady-state plasma concentration of 30 mg/L from this drug product in this patient taken every 8 hours?
-> f. Because the patient had problems swallowing the oral capsules he was shifted to 500 mg IV every 8 hours. What will be the average steady-state concentrati… (cut)
+> f. Because the patient had problems swallowing the oral capsules he was shifted to 500 mg IV every 8 hours. What will be the average steady-state concentration of this drug in this patient?
 
-**Keyed answers (page 1):** 1(a) Cp = (100 mg/hr)/(2.8 L/hr) × (1 − e^−(2)(0.17325)) = 10.46 mg/L; 1(b) time line 0 … 14, Cp = (10.46)e^−(0.17325)(12) + (10.46)e^−(0.17325)(4) = 6.54 mg/L. 2(a) (0.8)(500)/[(2.5)(8)] = 20 mg/L; 2(b) (0.8)(1000)/[(2.5)(8)] = 40 mg/L; 2(c) 2.5 L/hr, "ClT is constant"; 2(d) (0.8)(500)/[(2.5)(6)] = 26.67 mg/L; 2(e) D0 = (30)(2.5)(8)/0.8 = 750 mg.
+**Keyed answers:** 1(a) Cp = (100 mg/hr)/(2.8 L/hr) × (1 − e^−(2)(0.17325)) = 10.46 mg/L; 1(b) time line 0 … 14, Cp = (10.46)e^−(0.17325)(12) + (10.46)e^−(0.17325)(4) = 6.54 mg/L. 2(a) (0.8)(500)/[(2.5)(8)] = 20 mg/L; 2(b) (0.8)(1000)/[(2.5)(8)] = 40 mg/L; 2(c) 2.5 L/hr, "ClT is constant"; 2(d) (0.8)(500)/[(2.5)(6)] = 26.67 mg/L; 2(e) D0 = (30)(2.5)(8)/0.8 = 750 mg; 2(f) Cavg∞ = 500 mg/[(2.5 L/hr)(8 hr)] = 25 mg/L.
 
-*Recompute:* k = 0.693/4 = 0.17325 hr⁻¹: 1(a) 10.46; 1(b) 6.538 → **match**. 2(a) 20; 2(b) 40; 2(d) 26.67; 2(e) 750 → **all match**. 2(f) from the stem would be 500/((2.5)(8)) = 25 mg/L (F = 1); not written.
+*Recompute:* k = 0.693/4 = 0.17325 hr⁻¹: 1(a) 10.46; 1(b) 6.538 → **match**. 2(a) 20; 2(b) 40; 2(d) 26.67; 2(e) 750; 2(f) 25 (F = 1) → **all match**.
 
-**Formats observed:** the oral problem is worked entirely with Cavg∞ = FD0/(ClT τ), with clearance given directly and no VD; the dose, then the interval, then the target average are changed one at a time; a words-only part asks whether clearance changes with the dose (the drill carries it as a choice, ws6-i3-2c). Page 2 not indexed; part 2(f) (the same regimen given IV) to follow.
+**Formats observed:** the oral problem is worked entirely with Cavg∞ = FD0/(ClT τ), with clearance given directly and no VD; the dose, then the interval, then the target average are changed one at a time; a words-only part asks whether clearance changes with the dose (the drill carries it as a choice, ws6-i3-2c); the closing part switches the route to IV so that F becomes 1 and the average rises from 20 to 25 mg/L. Nothing cut.
 
 
 ---
@@ -1534,13 +1538,13 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 
 > The equation for concentration of drug in the plasma as a function of time following a 250 mg IV bolus dose was found to be: Cp = 30e^(−0.092t)
 > a. If the AUC following a 500 mg oral tablet dose was found to be 435 mcg·hr/mL, what is the bioavailability of the drug in the tablet dosage form?
-> b. What oral dose would provide comparable bioavailability to the 250 mg I… (cut)
+> b. What oral dose would provide comparable bioavailability to the 250 mg IV bolus dose? (Round to the nearest 5 mg)
 
-**Keyed answers (page 1):** (a) two ways: F = (435 (mg/L)hr)(0.092 hr⁻¹)(8.33 L)/500 mg = 0.667, and F = [(435 (mg/L)hr)/(326 (mg/L)hr)] × (250 mg/500 mg) = 0.667.
+**Keyed answers:** (a) two ways: F = (435 (mg/L)hr)(0.092 hr⁻¹)(8.33 L)/500 mg = 0.667, and F = [(435 (mg/L)hr)/(326 (mg/L)hr)] × (250 mg/500 mg) = 0.667; (b) Dpo = 250 mg/0.667 = 374.8 mg → 375 mg.
 
-*Recompute:* VD = 250/30 = 8.33 L, AUC_IV = 30/0.092 = 326.1 (mg/L)hr; (a) 0.667 both ways → **match**. (b) from the stem would be 250 mg/0.667 = 374.8 mg; not written, since her key for it is cut. The drill carries the IV area of her second method as its own part (ws7-1a0, 326 (mg/L)hr) so the set has two parts; that part's wording is not hers.
+*Recompute:* VD = 250/30 = 8.33 L, AUC_IV = 30/0.092 = 326.1 (mg/L)hr; (a) 0.667 both ways; (b) 374.8 mg → 375 mg → **match**.
 
-**Formats observed:** the IV curve is given as an equation, so VD and AUC_IV have to be read off it; the oral AUC is printed in mcg·hr/mL and worked in (mg/L)hr; she shows both the clearance form and the two-AUC form and gets the same F. Page 2 not indexed; part b (the oral dose comparable to 250 mg IV) to follow.
+**Formats observed:** the IV curve is given as an equation, so VD and AUC_IV have to be read off it; the oral AUC is printed in mcg·hr/mL and worked in (mg/L)hr; she shows both the clearance form and the two-AUC form and gets the same F; the equivalent dose is rounded to the nearest 5 mg on instruction. One page; nothing cut.
 
 ## Source: `BA-BE-Practice-2----Solutions.pdf` ("PHAR 4221 Daily Practice BA-BE Practice 2")
 
@@ -1559,10 +1563,10 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 > 1. After oral administration of a single 1000 mg capsule of an investigational drug (half-life approximately 4.6 hours and apparent volume of distribution approximately 18 L) to a normal volunteer, the calculated AUC was 246 mg h/L.
 > a. What is the bioavailability of this oral capsule in this volunteer?
 > b. What is the expected AUC after administration of a single IV bolus dose of 500 mg to the same volunteer?
-> c. What oral dose would pr… (cut)
+> c. What oral dose would provide equivalent bioavailability to the 500-mg IV bolus dose? (Round to the nearest ten)
 
-**Keyed answers (page 1):** (a) F D po = Cl AUC po → F = (18 L)(0.693/4.6 hr)(246 mg·hr/L)/1000 mg = 0.667; (b) D iv = Cl AUC iv → AUC = 500 mg/[(18 L)(0.693/4.6 hr)] = 184.4 mg·hr/L.
+**Keyed answers:** (a) F D po = Cl AUC po → F = (18 L)(0.693/4.6 hr)(246 mg·hr/L)/1000 mg = 0.667; (b) D iv = Cl AUC iv → AUC = 500 mg/[(18 L)(0.693/4.6 hr)] = 184.4 mg·hr/L; (c) D0po = 500 mg/0.667 = 749.5 mg → 750 mg.
 
-*Recompute:* k = 0.1507 hr⁻¹, ClT = 2.712 L/hr; (a) 0.6671; (b) 184.38 (mg/L)hr → **match**.
+*Recompute:* k = 0.1507 hr⁻¹, ClT = 2.712 L/hr; (a) 0.6671; (b) 184.38 (mg/L)hr; (c) 749.6 mg → 750 mg → **match**.
 
-**Formats observed:** no IV AUC is given, so F comes from F × D po = ClT × AUC po with ClT = k VD; the IV area is then dose over clearance; the AUC unit is printed as "mg h/L" in the stem and "mg·hr/L" in the key. Page 2 not indexed; part c (an oral dose) to follow.
+**Formats observed:** no IV AUC is given, so F comes from F × D po = ClT × AUC po with ClT = k VD; the IV area is then dose over clearance; the AUC unit is printed as "mg h/L" in the stem and "mg·hr/L" in the key; the equivalent dose is rounded to the nearest ten on instruction, and the stem prints "half-life life". One page; nothing cut.

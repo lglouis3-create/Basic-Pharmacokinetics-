@@ -341,8 +341,7 @@ chain('ws5-p3', src='practice', module=5, name='Single Oral Practice 3', setup='
 
 # ================================================================ Exam 2 sheets
 # Module 6 (repeated IV bolus, intermittent infusions, multiple oral doses) and
-# Module 7a (bioavailability). Only the first page of most sheets is indexed;
-# parts past the cut are not written. STYLE.md says which.
+# Module 7a (bioavailability).
 T_SS = [{'h': 'Peak, trough and average after repeated IV bolus doses', 'list': [
     'Cmax∞ = {{frac:D0|VD(1 − e^(−kτ))}}: the first-dose peak {{frac:D0|VD}} times the accumulation factor {{frac:1|1 − e^(−kτ)}}.',
     'Cmin∞ = Cmax∞ e^(−kτ): one interval of first-order decline from the steady-state peak.',
@@ -450,8 +449,17 @@ q = [
         'The ratio of trough to peak, e^(−kτ), is fixed by the interval alone; the dose scales both together.',
         'A trough that is too low with a peak at the limit is corrected by shortening the interval, not by raising the dose.',
         'With t½ = 3 hr, 10 mg/L falls to 2 mg/L in {{frac:ln(10/2)|0.231 hr⁻¹}} = 7 hr, so an interval of 6 hours holds the trough above 2 mg/L.']}],
-    cite=f'{MB2}, part e')]
-chain('ws6-b2', src='practice', module=6, name='Multiple IV Bolus Practice 2', setup='An antibiotic, t½ 3 hr, VD 20% of body weight, window 2–10 mcg/mL; 82-kg man dosed every 8 hours; parts a–e', parts=q)
+    cite=f'{MB2}, part e'),
+ num('ws6-b2f', stem=B2 + ' With the dosing interval decreased from 8 to 6 hours, what dose every 6 hours gives a steady-state peak of 10 mg/L? (82-kg patient, VD 16.4 L.)', units='mg', ans=123, calc=10 * vb2 * (1 - e(-kb2 * 6)), **M6B, sub='ssbolus', skill='multidose', concept='dose-from-cmax-ss',
+     steps=[('setup', 'D0 = Cmax∞ VD (1 − e^(−kτ)), with τ = 6 hr', 'The same rearranged peak equation as for the 8-hour regimen; only the interval changes, and a shorter interval leaves a smaller (1 − e^(−kτ)), so a smaller dose holds the same peak.'),
+            ('algebra', 'D0 = (10 mg/L)(16.4 L)(1 − e^(−(0.231)(6))) = (164 mg)(0.75) = 123 mg', 'mg/L times L leaves mg; 6 hours is two half-lives, so three quarters of each dose is eliminated during an interval and the dose that holds a 10 mg/L peak is 123 mg.'),
+            ('algebra', 'Check: Cmax∞ = {{frac:123 mg|(16.4 L)(1 − e^(−(0.231)(6)))}} = {{frac:123 mg|12.3 L}} = 10 mg/L', 'Putting the dose back into the peak equation returns the assigned 10 mg/L, so the new regimen keeps the peak at the top of the window.')],
+     teach=T_DOSE_CMAX, cite=f'{MB2}, part e (the working after the decision)'),
+ num('ws6-b2g', stem=B2 + ' On the new proposed regimen, 123 mg every 6 hours with an expected steady-state peak of 10 mg/L, what is the expected steady-state trough?', units='mg/L', ans=2.5, calc=10 * e(-kb2 * 6), **M6B, sub='ssbolus', skill='multidose', concept='cmin-ss',
+     steps=[('setup', 'Cmin∞ = Cmax∞ e^(−kτ), with τ = 6 hr', 'From the steady-state peak to the steady-state trough is one 6-hour interval of first-order decline, so the peak is multiplied by e^(−kτ).'),
+            ('algebra', 'Cmin∞ = (10 mg/L) e^(−(0.231)(6)) = (10 mg/L)(0.25) = 2.5 mg/L', 'Six hours is two half-lives, so a quarter of the peak remains; 2.5 mg/L is above the 2 mcg/mL lower limit, so the new regimen of 123 mg every 6 hours sits inside the window at both ends.')],
+     teach=T_SS, cite=f'{MB2}, part e (the working after the decision)')]
+chain('ws6-b2', src='practice', module=6, name='Multiple IV Bolus Practice 2', setup='An antibiotic, t½ 3 hr, VD 20% of body weight, window 2–10 mcg/mL; 82-kg man dosed every 8 hours, then the 6-hour regimen; parts a–e and the adjusted regimen', parts=q)
 
 # ------------------------------------------------- Multiple IV Bolus Practice 3
 B3 = 'A 80 kg patient is scheduled to receive a 20 mg/kg IV bolus injection of a medication every 6 hours. The drug has an apparent volume of distribution that is 25% of body weight and a total body clearance is 4.62 L/hr. Determine the following for this medication in this patient:'
@@ -477,8 +485,20 @@ q = [
  num('ws6-b3e', stem=B3 + ' e. Minimum steady-state plasma drug concentration.', units='mg/L', ans=26.68, calc=cb3 * e(-kb3 * 6), **M6B, sub='ssbolus', skill='multidose', concept='cmin-ss',
      steps=[('setup', 'Cmin∞ = Cmax∞ e^(−kτ)', 'The steady-state trough is the steady-state peak after one interval of first-order decline, the same decline as after the first dose but from a higher start.'),
             ('algebra', 'Cmin∞ = (106.68 mg/L) e^(−(0.231)(6)) = (106.68 mg/L)(0.2501) = 26.68 mg/L', 'One quarter of the steady-state peak remains after two half-lives; 26.68 mg/L is above the first-dose trough of 20 mg/L by the same accumulation factor, 1.33.')],
-     teach=T_SS, cite=f'{MB3}, part e')]
-chain('ws6-b3', src='practice', module=6, name='Multiple IV Bolus Practice 3', setup='80-kg patient, 20 mg/kg IV bolus every 6 hours, VD 25% of body weight, ClT 4.62 L/hr; parts a–e', parts=q)
+     teach=T_SS, cite=f'{MB3}, part e'),
+ num('ws6-b3f', stem=B3 + ' f. Average steady-state plasma drug concentration.', units='mg/L', ans=57.72, calc=80 / (kb3 * 6), **M6B, sub='ssbolus', skill='multidose', concept='cavg-ss',
+     steps=[('setup', 'Cavg∞ = {{frac:FD0|VD k τ}} = {{frac:C0|k τ}}, with F = 1', 'D0 over VD is the first-dose peak, 80 mg/L, so the average at steady state is that peak divided by kτ; an IV dose is wholly available, so F = 1.'),
+            ('algebra', 'Cavg∞ = {{frac:80 mg/L|(0.231 hr⁻¹)(6 hr)}} = {{frac:80 mg/L|1.386}} = 57.72 mg/L', 'hr⁻¹ times hr is a pure number, 1.386, so the unit stays mg/L; the same value comes from {{frac:1600 mg|(4.62 L/hr)(6 hr)}}. The average lies between the trough, 26.68, and the peak, 106.68 mg/L.')],
+     teach=T_SS, cite=f'{MB3}, part f'),
+ num('ws6-b3g', stem=B3 + ' g. Average amount of drug in the body during steady state.', units='mg', ans=1154, calc=80 / (kb3 * 6) * 20, **M6B, sub='ssbolus', skill='multidose', concept='davg-ss',
+     steps=[('setup', 'Davg∞ = Cavg∞ × VD', 'Amount and concentration are linked by the volume of distribution at every time, including on average at steady state; the average, 57.72 mg/L, is the one from part f.'),
+            ('algebra', 'Davg∞ = (57.72 mg/L)(20 L) = 1154 mg', 'mg/L times L: the litres cancel and an amount is left. The same result comes from the amount form, {{frac:D0|kτ}} = {{frac:1600 mg|1.386}} = 1154 mg.')],
+     teach=T_SS, cite=f'{MB3}, part g'),
+ num('ws6-b3h', stem=B3 + ' h. Plasma level 12 hours after the last dose, assuming steady-state levels are achieved.', units='mg/L', ans=6.67, calc=cb3 * e(-kb3 * 12), **M6B, sub='ndose', skill='multidose', concept='cp-after-last',
+     steps=[('setup', 'C = Cmax∞ e^(−kt), with t = 12 hr', 'After the last dose at steady state the level falls from the steady-state peak, 106.68 mg/L, by first-order elimination; the 12 hours is counted from the last dose, and the interval no longer enters.'),
+            ('algebra', 'C12∞ = (106.68 mg/L) e^(−(0.231)(12)) = (106.68 mg/L)(0.0625) = 6.67 mg/L', 'The exponent (0.231 hr⁻¹)(12 hr) = 2.772 is a pure number; 12 hours is four half-lives, so one sixteenth of the peak remains, below the steady-state trough of 26.68 mg/L because 12 hours is longer than the 6-hour interval.')],
+     teach=T_SS, note='Her key prints the exponent as e^(−0.231(6)) with the result 6.67 mg/L; 6.67 is the 12-hour value, e^(−0.231(12)). With 6 hours the value would be 26.68 mg/L, the steady-state trough.', cite=f'{MB3}, part h')]
+chain('ws6-b3', src='practice', module=6, name='Multiple IV Bolus Practice 3', setup='80-kg patient, 20 mg/kg IV bolus every 6 hours, VD 25% of body weight, ClT 4.62 L/hr; parts a–h', parts=q)
 
 # ------------------------------------------------- Multiple IV Bolus Practice 4
 B4 = 'A 192 lb patient is to receive IV bolus injections of a medication every 4 hours. The elimination half-life of the medication is approximately 3.3 hours and the apparent volume of distribution is 30% of body weight.'
@@ -502,8 +522,12 @@ q = [
  num('ws6-b4d', stem=B4 + ' d. What is the minimum steady-state plasma concentration? (The dose is the 550 mg recommended in part a.)', units='mg/L', ans=15.95, calc=cb4 * e(-kb4 * 4), **M6B, sub='ssbolus', skill='multidose', concept='cmin-ss',
      steps=[('setup', 'Cmin∞ = Cmax∞ e^(−kτ)', 'The steady-state trough is the steady-state peak after one 4-hour interval of first-order decline, the same decline as after the first dose but starting from the higher steady-state peak.'),
             ('algebra', 'Cmin∞ = (36.95 mg/L) e^(−(0.21)(4)) = (36.95 mg/L)(0.4317) = 15.95 mg/L', 'e^(−0.84) = 0.4317 of the peak remains after 4 hours; the trough is also Cmax∞ − C0 = 36.95 − 21 = 15.95 mg/L, since each dose adds C0 to the trough.')],
-     teach=T_SS, cite=f'{MB4}, part d')]
-chain('ws6-b4', src='practice', module=6, name='Multiple IV Bolus Practice 4', setup='192-lb patient, IV bolus every 4 hours, t½ 3.3 hr, VD 30% of body weight; dose for Cavg∞ 25 mg/L, then its peaks and trough; parts a–d', parts=q)
+     teach=T_SS, cite=f'{MB4}, part d'),
+ num('ws6-b4e', stem=B4 + ' e. What is the plasma concentration 10 hours after the last dose assuming steady state was attained? (The dose is the 550 mg recommended in part a.)', units='mg/L', ans=4.52, calc=cb4 * e(-kb4 * 10), **M6B, sub='ndose', skill='multidose', concept='cp-after-last',
+     steps=[('setup', 'C = Cmax∞ e^(−kt), with t = 10 hr', 'After the last dose at steady state the level falls from the steady-state peak, 36.95 mg/L, by first-order elimination; the 10 hours is counted from the last dose, and the 4-hour interval no longer enters.'),
+            ('algebra', 'C10∞ = (36.95 mg/L) e^(−(0.21)(10)) = (36.95 mg/L)(0.1225) = 4.52 mg/L', 'The exponent (0.21 hr⁻¹)(10 hr) = 2.1 is a pure number; 10 hours is three half-lives, so about one eighth of the peak remains, well below the steady-state trough of 15.95 mg/L.')],
+     teach=T_SS, cite=f'{MB4}, part e')]
+chain('ws6-b4', src='practice', module=6, name='Multiple IV Bolus Practice 4', setup='192-lb patient, IV bolus every 4 hours, t½ 3.3 hr, VD 30% of body weight; dose for Cavg∞ 25 mg/L, then its peaks, trough and the level after the last dose; parts a–e', parts=q)
 
 # ------------------------------- Multiple IV Infusion & Multiple Oral Practice 1
 I1 = '1. An 800-mg dose of a medication was administered as an IV infusion over a period of 3 hours to an 80-kg patient. Six hours after the start of the first infusion, a second of 800-mg dose was infused, again over 3 hours. The drug has an apparent volume of distribution that is 25% of body weight and a total body clearance is 4.62 L/hr.'
@@ -558,8 +582,21 @@ q += [
  num('ws6-i1-2h', stem=O1 + ' h. Average plasma drug concentration at steady state.', units='mg/L', ans=20.58, calc=Fo1 * Do1 / (vo1 * ko * to1), **M6O, sub='ossc', skill='multidose', concept='cavg-ss-oral',
      steps=[('setup', 'Cavg∞ = {{frac:FD0|VD k τ}}', 'The average over one interval at steady state is the absorbed dose per interval over the volume of plasma cleared per interval; it needs no tmax and no accumulation factor.'),
             ('algebra', 'Cavg∞ = {{frac:(0.9)(500 mg)|(19.2 L)(0.0949 hr⁻¹)(12 hr)}} = {{frac:450 mg|21.86 L}} = 20.58 mg/L', 'L × hr⁻¹ × hr leaves litres, so mg over L is mg/L; the average lies between the trough, 13.32, and the peak, 25.94 mg/L.')],
-     teach=T_ORALSS, note='With the unrounded k the average is 20.57 mg/L; her key prints 20.58. Either is accepted.', cite=f'{IO1}, problem 2, part h')]
-chain('ws6-i1', src='practice', module=6, name='Multiple IV Infusion & Oral Practice 1', setup='Two 3-hour infusions of 800 mg (VD 25%, ClT 4.62 L/hr), then 500 mg orally every 12 hours (F 0.9, VD 0.24 L/kg, t½ 7.3 hr, t½a 75 min)', parts=q)
+     teach=T_ORALSS, note='With the unrounded k the average is 20.57 mg/L; her key prints 20.58. Either is accepted.', cite=f'{IO1}, problem 2, part h'),
+ num('ws6-i1-2i', stem=O1 + ' i. Dose required to reach an average steady state conc of 25 mg/L.', units='mg', ans=600, calc=25 * vo1 * ko * to1 / Fo1, **M6O, sub='ossc', skill='multidose', concept='dose-from-cavg-oral',
+     steps=[('setup', 'Cavg∞ = {{frac:FD0|VD k τ}}, so D0 = {{frac:Cavg∞ VD k τ|F}}', 'The average equation is rearranged for the dose; dividing by F = 0.9 makes the oral dose larger than the amount that has to be absorbed, because only 90% of a dose reaches the circulation.'),
+            ('algebra', 'D0 = {{frac:(25 mg/L)(19.2 L)(0.0949 hr⁻¹)(12 hr)|0.9}} = {{frac:546.6 mg|0.9}} = 607.36 mg', 'mg/L × L × hr⁻¹ × hr leaves mg: 546.6 mg must be absorbed per interval, and 607.36 mg must be given for 546.6 mg to be absorbed.'),
+            ('round', 'D0 = 600 mg', 'Her key rounds 607.36 mg to 600 mg, a dose that can be given; 600 mg every 12 hours gives an average close to the 25 mg/L target.')],
+     teach=T_DOSE_CAVG, note='Her key gets 607.36 mg with k 0.0949 hr⁻¹ and reports 600 mg; the unrounded k gives 607.56 mg. 600 and 607 are both accepted.', cite=f'{IO1}, problem 2, part i'),
+ num('ws6-i1-2j', stem=O1 + ' j. Average plasma drug concentration at steady state if the dose were increased to 750 mg.', units='mg/L', ans=30.87, calc=Fo1 * 750 / (vo1 * ko * to1), **M6O, sub='ossc', skill='multidose', concept='cavg-dose-proportional',
+     steps=[('setup', 'Cavg∞ = {{frac:FD0|VD k τ}}, with D0 = 750 mg', 'Only the dose changes; F, the volume, k and the interval are the same as in part h, so the average scales with the dose.'),
+            ('algebra', 'Cavg∞ = {{frac:(0.9)(750 mg)|(19.2 L)(0.0949 hr⁻¹)(12 hr)}} = {{frac:675 mg|21.86 L}} = 30.87 mg/L', 'L × hr⁻¹ × hr leaves litres, so mg over L is mg/L; 750 is 1.5 times 500, and the average is 1.5 times the 20.58 mg/L of part h.')],
+     teach=T_CAVG_CL, note='With the unrounded k the average is 30.86 mg/L; her key prints 30.87. Either is accepted.', cite=f'{IO1}, problem 2, part j'),
+ num('ws6-i1-2k', stem=O1 + ' k. Average plasma drug concentration at steady state if the dosing interval was decreased to 8 hours (dose 500 mg).', units='mg/L', ans=30.87, calc=Fo1 * Do1 / (vo1 * ko * 8), **M6O, sub='ossc', skill='multidose', concept='cavg-interval',
+     steps=[('setup', 'Cavg∞ = {{frac:FD0|VD k τ}}, with τ = 8 hr', 'Only the interval changes; the same 450 mg is absorbed every 8 hours instead of every 12, so less plasma is cleared per dose and the average rises.'),
+            ('algebra', 'Cavg∞ = {{frac:(0.9)(500 mg)|(19.2 L)(0.0949 hr⁻¹)(8 hr)}} = {{frac:450 mg|14.58 L}} = 30.87 mg/L', 'The average rises in the ratio 12 over 8, from 20.58 to 30.87 mg/L, the same value as giving 750 mg every 12 hours, because the daily absorbed dose is the same, 1350 mg, in both regimens.')],
+     teach=T_CAVG_CL, note='With the unrounded k the average is 30.86 mg/L; her key prints 30.87. Either is accepted.', cite=f'{IO1}, problem 2, part k')]
+chain('ws6-i1', src='practice', module=6, name='Multiple IV Infusion & Oral Practice 1', setup='Two 3-hour infusions of 800 mg (VD 25%, ClT 4.62 L/hr), then 500 mg orally every 12 hours (F 0.9, VD 0.24 L/kg, t½ 7.3 hr, t½a 75 min), parts a–k', parts=q)
 
 # ------------------------------- Multiple IV Infusion & Multiple Oral Practice 2
 I2 = '1. A 300-mg dose of an antibiotic was administered as an IV infusion to a 85 kg male over a period of 90 minutes. Eight hours after the start of the first infusion, a second 300-mg dose was infused, again over a period of 90 minutes. The drug has a half-life of 3.3 hours and apparent volume of distribution of 0.2 L/kg.'
@@ -646,23 +683,28 @@ q += [
  num('ws6-i3-2e', stem=O3 + ' e. What oral dose is required to reach an average steady-state plasma concentration of 30 mg/L from this drug product in this patient taken every 8 hours?', units='mg', ans=750, calc=30 * 2.5 * 8 / 0.8, **M6O, sub='ossc', skill='multidose', concept='dose-from-cavg-oral',
      steps=[('setup', 'Cavg∞ = {{frac:FD0|ClT τ}}, so D0 = {{frac:Cavg∞ ClT τ|F}}', 'The average equation is rearranged for the dose; dividing by F = 0.8 makes the oral dose larger than the amount that has to be absorbed, because only 80% of a capsule reaches the circulation.'),
             ('algebra', 'D0 = {{frac:(30 mg/L)(2.5 L/hr)(8 hr)|0.8}} = {{frac:600 mg|0.8}} = 750 mg', 'mg/L × L/hr × hr leaves mg: 600 mg must be absorbed per interval, and 750 mg must be swallowed for 600 mg to be absorbed.')],
-     teach=T_CAVG_CL, cite=f'{IO3}, problem 2, part e')]
-chain('ws6-i3', src='practice', module=6, name='Multiple IV Infusion & Oral Practice 3', setup='Two 2-hour infusions of 200 mg (t½ 4 hr, ClT 2.8 L/hr), then an oral capsule 500 mg every 8 hours (F 0.8, ClT 2.5 L/hr): the average at steady state as dose and interval change', parts=q)
+     teach=T_CAVG_CL, cite=f'{IO3}, problem 2, part e'),
+ num('ws6-i3-2f', stem=O3 + ' f. Because the patient had problems swallowing the oral capsules he was shifted to 500 mg IV every 8 hours. What will be the average steady-state concentration of this drug in this patient?', units='mg/L', ans=25, calc=500 / (2.5 * 8), **M6O, sub='ossc', skill='multidose', concept='cavg-iv-vs-oral',
+     steps=[('setup', 'Cavg∞ = {{frac:FD0|ClT τ}}, with F = 1', 'An IV dose enters the circulation whole, so F = 1 and the whole 500 mg counts; the clearance and the interval are the same as for the capsule, so only F changes.'),
+            ('algebra', 'Cavg∞ = {{frac:500 mg|(2.5 L/hr)(8 hr)}} = {{frac:500 mg|20 L}} = 25 mg/L', 'L/hr × hr leaves litres, so mg over L is mg/L; the IV regimen gives 25 mg/L against 20 mg/L for the same dose by capsule, because the capsule delivered only 400 mg of each 500 mg.')],
+     teach=T_CAVG_CL, cite=f'{IO3}, problem 2, part f')]
+chain('ws6-i3', src='practice', module=6, name='Multiple IV Infusion & Oral Practice 3', setup='Two 2-hour infusions of 200 mg (t½ 4 hr, ClT 2.8 L/hr), then an oral capsule 500 mg every 8 hours (F 0.8, ClT 2.5 L/hr): the average at steady state as dose, interval and route change; parts a–f', parts=q)
 
 # ------------------------------------------------------------- BA-BE Practice 1
 A1 = 'The equation for concentration of drug in the plasma as a function of time following a 250 mg IV bolus dose was found to be: Cp = 30e^(−0.092t).'
 q = [
- num('ws7-1a0', stem=A1 + ' What is the AUC following the 250 mg IV bolus dose?', units='(mg/L)hr', ans=326, calc=30 / 0.092, **M7, sub='fabs', skill='bioavail', concept='auc-from-iv-equation',
-     steps=[('setup', 'AUC IV = {{frac:C0|k}}', 'The area under a single-exponential IV curve is the intercept over the rate constant; here C0 = 30 mg/L and k = 0.092 hr⁻¹ are read straight off the equation.'),
-            ('algebra', 'AUC IV = {{frac:30 mg/L|0.092 hr⁻¹}} = 326 (mg/L)hr', 'mg/L over hr⁻¹ is (mg/L)hr, the unit of an area under a concentration–time curve. The same area comes from D0 over ClT, with VD = {{frac:250 mg|30 mg/L}} = 8.33 L and ClT = (0.092 hr⁻¹)(8.33 L) = 0.767 L/hr.')],
-     teach=T_AUC_IV, cite=f'{BA1}, part a (the IV area in her second method)'),
  num('ws7-1a', stem=A1 + ' a. If the AUC following a 500 mg oral tablet dose was found to be 435 mcg·hr/mL, what is the bioavailability of the drug in the tablet dosage form?', units='(as a decimal fraction)', ans=0.667, calc=435 * 0.092 * (250 / 30) / 500, **M7, sub='fabs', skill='bioavail', concept='fabs-from-clearance',
      steps=[('unit', '435 mcg·hr/mL = 435 (mg/L)hr; VD = {{frac:250 mg|30 mg/L}} = 8.33 L', '1 mcg/mL is 1 mg/L, so the oral area is 435 (mg/L)hr; the volume is the IV dose over the intercept of the IV curve.'),
             ('setup', 'F D po = ClT × AUC po, so F = {{frac:AUC po × k × VD|D po}}', 'Clearance times the area under the oral curve is the amount that reached the circulation, F × D po; with ClT = k VD, F follows from the IV parameters and the oral area.'),
             ('algebra', 'F = {{frac:(435 (mg/L)hr)(0.092 hr⁻¹)(8.33 L)|500 mg}} = {{frac:333.4 mg|500 mg}} = 0.667', '(mg/L)hr × hr⁻¹ × L leaves mg, and mg over mg is a pure fraction: two thirds of the tablet dose reached the circulation.'),
             ('algebra', 'Or F = {{frac:AUC po|AUC IV}} × {{frac:D IV|D po}} = {{frac:435 (mg/L)hr|326 (mg/L)hr}} × {{frac:250 mg|500 mg}} = 0.667', 'The two-AUC form gives the same value, with AUC IV = 30 over 0.092 = 326 (mg/L)hr and the dose ratio correcting for the different doses.')],
-     teach=T_FABS, cite=f'{BA1}, part a')]
-chain('ws7-1', src='practice', module=7, name='BA-BE Practice 1', setup='250 mg IV bolus, Cp = 30e^(−0.092t); a 500 mg oral tablet with AUC 435 mcg·hr/mL', parts=q)
+     teach=T_FABS, cite=f'{BA1}, part a'),
+ num('ws7-1b', stem=A1 + ' b. What oral dose would provide comparable bioavailability to the 250 mg IV bolus dose? (Round to the nearest 5 mg) (The tablet is 0.667 bioavailable.)', units='mg', ans=375, calc=250 / 0.667, **M7, sub='fabs', skill='bioavail', concept='equiv-oral-dose',
+     steps=[('setup', 'F × D po = D IV, so D po = {{frac:D IV|F}}', 'Comparable bioavailability means the oral AUC equals the IV AUC, so the fraction absorbed times the oral dose must equal the whole 250 mg IV dose.'),
+            ('algebra', 'D po = {{frac:250 mg|0.667}} = 374.8 mg', 'F has no units, so the oral dose is in milligrams; it is larger than 250 mg because only two thirds of the tablet dose reaches the circulation.'),
+            ('round', 'D po = 375 mg', 'The stem asks for the nearest 5 mg, so 374.8 mg is reported as 375 mg.')],
+     teach=T_EQDOSE, cite=f'{BA1}, part b')]
+chain('ws7-1', src='practice', module=7, name='BA-BE Practice 1', setup='250 mg IV bolus, Cp = 30e^(−0.092t); a 500 mg oral tablet with AUC 435 mcg·hr/mL; parts a–b', parts=q)
 
 # ------------------------------------------------------------- BA-BE Practice 2
 q = [
@@ -689,8 +731,13 @@ q = [
  num('ws7-3b', stem=A3 + ' b. What is the expected AUC after administration of a single IV bolus dose of 500 mg to the same volunteer?', units='(mg/L)hr', ans=184.4, calc=500 / cl3, **M7, sub='fabs', skill='bioavail', concept='auc-from-dose-and-cl',
      steps=[('setup', 'D IV = ClT × AUC IV, so AUC IV = {{frac:D IV|ClT}}', 'An IV dose is wholly available, so the whole dose over the clearance is the area; the clearance is the same 2.712 L/hr as for the oral dose.'),
             ('algebra', 'AUC IV = {{frac:500 mg|(18 L)(0.1507 hr⁻¹)}} = {{frac:500 mg|2.712 L/hr}} = 184.4 (mg/L)hr', 'mg over L/hr gives (mg/L)hr; the 500 mg IV dose gives a smaller area than the 1000 mg capsule, 184.4 against 246, because 667 mg of the capsule was absorbed.')],
-     teach=T_AUC_IV, cite=f'{BA3}, part b')]
-chain('ws7-3', src='practice', module=7, name='BA-BE Practice 3', setup='1000 mg oral capsule, AUC 246 mg h/L, t½ 4.6 hr, VD 18 L; then the area of a 500 mg IV dose', parts=q)
+     teach=T_AUC_IV, cite=f'{BA3}, part b'),
+ num('ws7-3c', stem=A3 + ' c. What oral dose would provide equivalent bioavailability to the 500-mg IV bolus dose? (Round to the nearest ten) (The capsule is 0.667 bioavailable.)', units='mg', ans=750, calc=500 / 0.667, **M7, sub='fabs', skill='bioavail', concept='equiv-oral-dose',
+     steps=[('setup', 'F × D po = D IV, so D po = {{frac:D IV|F}}', 'Equivalent bioavailability means the oral AUC equals the IV AUC, so the fraction absorbed times the oral dose must equal the whole 500 mg IV dose.'),
+            ('algebra', 'D po = {{frac:500 mg|0.667}} = 749.5 mg', 'F has no units, so the oral dose is in milligrams; it is larger than 500 mg because only two thirds of the capsule dose reaches the circulation.'),
+            ('round', 'D po = 750 mg', 'The stem asks for the nearest ten, so 749.5 mg is reported as 750 mg.')],
+     teach=T_EQDOSE, cite=f'{BA3}, part c')]
+chain('ws7-3', src='practice', module=7, name='BA-BE Practice 3', setup='1000 mg oral capsule, AUC 246 mg h/L, t½ 4.6 hr, VD 18 L; then the area of a 500 mg IV dose and the equivalent oral dose; parts a–c', parts=q)
 
 HEADER = '''/* ==========================================================================
    WORKSHEETS: HER DAILY PRACTICE SHEETS
@@ -698,8 +745,7 @@ HEADER = '''/* =================================================================
    Clearance & Elimination Practice 1–4, Single Oral Practice 1–3, Multiple
    IV Bolus Practice 2–4, Multiple IV Infusion & Oral Practice 1–3 and BA-BE
    Practice 1–3, each stem as she printed it and each line of working from
-   her solution key. Where only the first page of a sheet is indexed, the
-   parts past the cut are not written (STYLE.md says which).
+   her solution key, every part of every sheet.
    Written by src/gen/ws_practice.py (run it, not this file), which recomputes every answer from the
    stem and fails if the keyed value is outside the tolerance. Where her key's
    last digit comes from an unrounded intermediate, `note` says so and the
