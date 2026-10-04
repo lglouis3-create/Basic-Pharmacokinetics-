@@ -135,7 +135,7 @@ h3{font-size:16px;margin:22px 0 8px}
 .counts em{font-style:normal;font-weight:600}
 .session{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;margin:12px 0 4px;font-size:14.5px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 20px;position:relative}
-.tw.wide::after{content:"scroll \2192";position:sticky;left:100%;display:block;width:max-content;margin:-22px 0 2px auto;padding:1px 6px;font-size:11px;color:var(--text-dim);background:var(--surface);border-radius:4px;pointer-events:none}
+.tw.wide::after{content:"scroll \2192";position:sticky;right:0;display:block;width:max-content;margin:-22px 0 2px auto;padding:1px 6px;font-size:11px;color:var(--text-dim);background:var(--surface);border-radius:4px;pointer-events:none}
 .tw table.gap{margin-bottom:0}
 
 /* the build stamp under the Topics heading */
@@ -881,7 +881,9 @@ function gradeMulti(q, picks){
 function parseNum(entered){
   if(entered === null || entered === undefined) return NaN;
   const t = String(entered).trim().replace(/,/g, '');
-  const m = /^([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)(?:\s*[A-Za-zµ%(][A-Za-z\s/()·⋅%^.\-⁻¹²³⁴]*)?$/.exec(t);
+  // the unit tail: letters, slashes, brackets and dots, with a digit allowed only right after a minus, a caret or a slash
+  // ("hr-1", "hr^-1", "1/hr", "mg/L*hr"), so a second number after a space is still no answer
+  const m = /^([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)(?:\s*(?:1\/)?[A-Za-zµ%(/](?:[A-Za-z\s/()·⋅*%^.\-⁻¹²³⁴]|[-^/]\d+)*)?$/.exec(t);
   if(!m) return NaN;
   return parseFloat(m[1]);
 }
@@ -1073,6 +1075,7 @@ function record(q, result, picked, ms, missKind){   // result: 'correct' | 'wron
   DB.answers.push(entry);
   if(DB.answers.length > 4000) DB.answers.splice(0, DB.answers.length-4000);
   save();
+  return entry;
 }
 
 /* "No, I was right": the student says a numeric answer graded wrong was a
@@ -1080,10 +1083,11 @@ function record(q, result, picked, ms, missKind){   // result: 'correct' | 'wron
    entry for the question flips to correct, the concept's box and streak go
    back to what they were before the miss and then advance as a right answer
    would, and the entry keeps a mark so the override stays visible in the log. */
-function markRight(q){
+function markRight(q, qn){   // qn: the exact log entry to flip (a paper's), else the question's latest
   for(let i = DB.answers.length - 1; i >= 0; i--){
     const a = DB.answers[i];
     if(a.qid !== q.id) continue;
+    if(qn != null && a.qn !== qn) continue;
     if(a.result !== 'wrong') return false;
     const s = st(q.concept);
     a.result = 'correct'; a.overrode = true; delete a.missKind;

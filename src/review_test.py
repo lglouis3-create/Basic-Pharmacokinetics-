@@ -192,6 +192,14 @@ with sync_playwright() as p:
     ok('the way back returns to the same answered question',
        pg.evaluate("VIEW") == 'quiz' and pg.evaluate("Q.current.id") == qid and pg.locator('#v-quiz .verdict').count() == 1 and pg.locator('#backbtn').count() == 0)
 
+    pg.evaluate("RET = []; backBtn(); show('tell')"); pg.wait_for_timeout(200)
+    pg.select_option('select[data-xsel="dosing"]', 'm3-infusion'); pg.wait_for_timeout(200)
+    pg.click('[data-jump="diag:dg-infusion_steps"]'); pg.wait_for_timeout(500)
+    pg.click('#backbtn'); pg.wait_for_timeout(300)
+    ok('the way back from a step-through reopens the Explain-one card it left',
+       pg.evaluate("VIEW") == 'tell' and pg.evaluate("document.querySelector('select[data-xsel=\"dosing\"]').value") == 'm3-infusion' and pg.locator('[data-xout="dosing"] .xexp').count() == 1)
+    pg.evaluate("RET = []; backBtn(); show('quiz')"); pg.wait_for_timeout(150)
+
     pg.evaluate("RET = []; backBtn(); startPool(QUESTIONS.filter(q => q.id === 'fig-ord-4'), 'x')"); pg.wait_for_timeout(150)
     pg.locator('#v-quiz .opt').first.click(); pg.wait_for_timeout(150)
     pg.locator('#v-quiz [data-jump^="diag"]').click(); pg.wait_for_timeout(900)
@@ -208,6 +216,7 @@ with sync_playwright() as p:
     ok('typing in the exam box is kept as the exam answer', pg.evaluate("EX.picks[0]") == '12.5')
     ok('the parked quiz question is untouched', pg.evaluate("Q.picked") is None)
     pg.evaluate("clearInterval(EX.timer); EX = null; show('quiz')"); pg.wait_for_timeout(150)
+    ok('the quiz hint names the 2% rule and no absolute tolerance', 'within 2% of the keyed value' in pg.locator('#v-quiz .sata').inner_text() and 'within 0.' not in pg.locator('#v-quiz .sata').inner_text())
     pg.fill('#v-quiz #numIn', '7'); pg.keyboard.press('Enter'); pg.wait_for_timeout(200)
     ok('a quiz answer typed after the paper is graded from the quiz box', pg.evaluate("Q.revealed && String(Q.picked) === '7'"))
     ok('a blank numeric miss reads as left blank', pg.evaluate("pickedRead(Q.current, {picked: ''}).txt") == 'left blank')
@@ -243,6 +252,7 @@ with sync_playwright() as p:
     pg.evaluate("DB.settings.cheer = false; save(); const b = document.getElementById('cheer'); if(b) b.remove(); renderExamResult()"); pg.wait_for_timeout(100)
     ok('with the setting off there is no offer', pg.locator('#cheerGo').count() == 0 and pg.locator('#cheer').count() == 0)
     pg.evaluate("DB.settings.cheer = true; save()")
+    ok('the paper remembers which log entry each answer made', pg.evaluate("Array.isArray(EX.logQn) && EX.logQn.length === EX.qs.length"))
     ok('the review counts it right and the paper record follows', pg.evaluate("DB.exams[DB.exams.length-1].right") == 1 and pg.locator('#v-exam h2').inner_text().startswith('probe — 1 / 1') and pg.locator('#v-exam button[data-right]').count() == 0)
     pg.evaluate("EX = null")
 

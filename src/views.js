@@ -291,7 +291,8 @@ const VIEWS = ['topics','quiz','gaps','exam','guide','tell','terms','diag','eq',
 function show(v){
   VIEW = v;
   { const lb = document.getElementById('lback'); if(lb) lb.remove(); }
-  if(ANIM && v !== 'diag'){ clearInterval(ANIM.t); ANIM.b.textContent = '▶ Play all'; ANIM = null; }
+  { const pane = document.getElementById('v-' + v);
+    if(ANIM && !(pane && pane.contains(ANIM.b))){ clearInterval(ANIM.t); ANIM.b.textContent = '▶ Play all'; ANIM = null; } }
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.v===v));
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
@@ -469,7 +470,7 @@ function updatedText(){
 const QUIZ_HIDE_KEY = NS + ':quizhide:';
 const PANEL_OPEN = {morefilters: false, qsaid: false};   // panels on Topics that stay as left across re-renders
 let QUIZ_N = 8;    // questions on a practice quiz: her Quizzes 2 and 3 had 8, four concept and four calculation
-let QUIZ_MIN = 0;  // minutes chosen for the practice quiz; 0 means the quiz's own figure
+const QUIZ_MIN = {};  // minutes chosen for a practice quiz, by quiz id; unset means the quiz's own figure
 const fmtAns = v => String(+(+v).toPrecision(6));   // the key as written, without trailing zeros
 const fmtTol = q => { const t = tolOf(q); return t >= 10 ? String(Math.round(t)) : t >= 1 ? t.toFixed(1) : t >= 0.1 ? t.toFixed(2) : t.toFixed(3); };
 const quizScope = qz => QUESTIONS.filter(q => (qz.modules || []).includes(q.module));
@@ -500,7 +501,7 @@ function quizCards(){
       <div class="subrow"><span class="sname"><b>Sit a practice quiz</b>
         <small>Half concept, half calculation, drawn from these modules; timed, no feedback until you submit. Her Quizzes 2 and 3 were 8 questions, 4 concept and 4 calculation, 12.5 points each; Quiz 3 ran ${qz.minutes} minutes.</small>
         <span class="frow qopt"><span class="olab">Questions</span>${[8, 10, 12].map(n => `<button class="chip" data-quizn="${n}" aria-pressed="${n === QUIZ_N}">${n}</button>`).join('')}</span>
-        <span class="frow qopt"><span class="olab">Minutes</span>${[15, 20, qz.minutes, 30].filter((m, i, a) => a.indexOf(m) === i).sort((x, y) => x - y).map(m => `<button class="chip" data-quizmin="${m}" aria-pressed="${m === (QUIZ_MIN || qz.minutes)}">${m}</button>`).join('')}</span></span>
+        <span class="frow qopt"><span class="olab">Minutes</span>${[15, 20, qz.minutes, 30].filter((m, i, a) => a.indexOf(m) === i).sort((x, y) => x - y).map(m => `<button class="chip" data-quizmin="${m}" data-quizid="${esc(qz.id)}" aria-pressed="${m === (QUIZ_MIN[qz.id] || qz.minutes)}">${m}</button>`).join('')}</span></span>
         <span class="btns"><button data-quizpaper="${qz.id}">Open</button></span></div>
       </div></div>`;
   }).join('');
@@ -518,7 +519,7 @@ function beginQuiz(qz, n){
   if(qs.length < n) qs = qs.concat(drawN(src.filter(q => !qs.includes(q)), n - qs.length));
   qs = shuffle(qs.slice(0, n));
   if(!qs.length){ alert('The bank holds no question on this quiz yet.'); return; }
-  startPaper(qs, QUIZ_MIN || qz.minutes, {paper: qz.id, title: qz.name + ' practice', sata: {per: [], drawn: 0},
+  startPaper(qs, QUIZ_MIN[qz.id] || qz.minutes, {paper: qz.id, title: qz.name + ' practice', sata: {per: [], drawn: 0},
                               coverage: {drawn: 0, missing: 0, short: [], shares: []}});
   show('exam');
 }
@@ -690,7 +691,7 @@ function renderTopics(){
     else startPool(narrow(quizScope(qz), k), label);
   });
   el.querySelectorAll('[data-quizn]').forEach(b => b.onclick = () => { QUIZ_N = +b.dataset.quizn; renderTopics(); });
-  el.querySelectorAll('[data-quizmin]').forEach(b => b.onclick = () => { QUIZ_MIN = +b.dataset.quizmin; renderTopics(); });
+  el.querySelectorAll('[data-quizmin]').forEach(b => b.onclick = () => { QUIZ_MIN[b.dataset.quizid] = +b.dataset.quizmin; renderTopics(); });
   el.querySelectorAll('[data-quizpaper]').forEach(b => b.onclick = () => {
     const qz = (COURSE.quizzes || []).find(z => z.id === b.dataset.quizpaper); if(qz) beginQuiz(qz, QUIZ_N); });
   el.querySelectorAll('[data-quizhide]').forEach(b => b.onclick = () => { LS.set(QUIZ_HIDE_KEY + b.dataset.quizhide, '1'); renderTopics(); });
@@ -1190,7 +1191,9 @@ function explainHTML(q){
 }
 let RET = [];
 function jump(view, anchor){
-  RET.push({view: VIEW, y: window.scrollY, label: ({exam: 'the exam', quiz: 'the question', gaps: 'Weak spots', terms: 'Terms', diag: 'Diagrams', tell: 'Tell apart', guide: 'Guides', ref: 'Reference'})[VIEW] || 'where you were'});
+  // a static tab is rebuilt on return, so the Explain-one cards open on it are noted and reopened
+  const open = [...document.querySelectorAll(`#v-${VIEW} select[data-xsel]`)].filter(s => s.value).map(s => [s.dataset.xsel, s.value]);
+  RET.push({view: VIEW, y: window.scrollY, open, label: ({exam: 'the exam', quiz: 'the question', gaps: 'Weak spots', terms: 'Terms', diag: 'Diagrams', tell: 'Tell apart', guide: 'Guides', ref: 'Reference'})[VIEW] || 'where you were'});
   if(view === 'eq') EQ = null;                      // the anchors live on the picker, not in a running drill
   if(view === 'diag') DG_MOD = 'all';               // a filtered Diagrams tab may be hiding the target
   show(view);
@@ -1214,7 +1217,9 @@ function backBtn(){
   if(!b){ b = document.createElement('button'); b.id = 'backbtn'; b.className = 'btn'; document.body.appendChild(b); }
   b.textContent = `← Back to ${RET[RET.length - 1].label}`;
   b.onclick = () => {
-    const r = RET.pop(); show(r.view); window.scrollTo(0, r.y); backBtn();
+    const r = RET.pop(); show(r.view);
+    (r.open || []).forEach(([g, k]) => showExplain(g, k));
+    window.scrollTo(0, r.y); backBtn();
   };
 }
 /* "Explain one" on Tell apart: a select, or a Why? chip in a table row, shows
@@ -1401,7 +1406,7 @@ function answerInputsHTML(q, st){
   const picks = multi ? (st.picked || []) : null;
   let h = '';
   if(kind === 'numeric'){
-    h += `<p class="sata">Type the number and check it. Anything within ${fmtTol(q)} ${esc(q.units)} of the keyed value counts, her margin of 2% or wider. The unit may be typed after the number.</p>`;
+    h += `<p class="sata">Type the number and check it. Anything within 2% of the keyed value counts, or her stated margin where that is wider. The unit may be typed after the number.</p>`;
     h += numericInput(q, st.picked, st.revealed, st.revealed ? (ok ? 'ok' : 'bad') : '');
   }else if(kind === 'match'){
     h += `<p class="sata">Choose the matching item for each row, then check. Marked right only when every row matches.</p>`;
@@ -1437,9 +1442,10 @@ function feedbackHTML(q, st){
                   ...(q.steps||[]).map(x=>x.why||''), ...(q.pairs||[]).map(x=>x.why||'')].join(' ');
     let verdictLine;
     if(kind === 'numeric'){
+      const tolTxt = ` (within ±${fmtTol(q)} ${esc(q.units)} counts)`;
       verdictLine = ok && st.overrode ? `✓ Counted as right — keyed answer ${fmtAns(q.answer)} ${esc(q.units)}; you entered ${esc(String(st.picked||'nothing'))}`
-        : ok ? `✓ Correct — keyed answer ${fmtAns(q.answer)} ${esc(q.units)}`
-        : `✗ Not correct — the answer is ${fmtAns(q.answer)} ${esc(q.units)}, and you entered ${esc(String(st.picked||'nothing'))}`;
+        : ok ? `✓ Correct — keyed answer ${fmtAns(q.answer)} ${esc(q.units)}${tolTxt}`
+        : `✗ Not correct — the answer is ${fmtAns(q.answer)} ${esc(q.units)}${tolTxt}, and you entered ${esc(String(st.picked||'nothing'))}`;
     }else if(kind === 'match'){
       const got = (q.pairs||[]).filter(p => (st.picked||{})[p.l] === p.r).length;
       verdictLine = ok ? `✓ Correct — all ${q.pairs.length} rows matched`
@@ -2302,8 +2308,8 @@ function stepFigHTML(key){
   return `<figure class="reffig stepfig" data-stepfig="${esc(key)}"><div class="stsvg">${f.svg}</div>
     <div class="anim" data-anim="${esc(key)}"><button class="btn small ghost" data-go="-1">◀ Back</button><button class="btn small ghost" data-go="1">Next ▶</button><button class="btn small ghost" data-go="replay">↻ Replay step</button><button class="btn small ghost" data-go="play">▶ Play all</button><span class="sdots">${dots}</span></div>
     ${f.steps.map((s, i) => `<div class="stcap${i ? '' : ' on'}" data-i="${i}"><b>Step ${i + 1} of ${n} · ${esc(s.tag)}</b>${
-        String(s.cap).split('\n').map(line => `<span class="stline">${mathHTML(esc(line))}</span>`).join('')}</div>`).join('')}
-    <figcaption>${esc(f.title)}</figcaption></figure>`;
+        String(s.cap).split('\n').map(line => `<span class="stline">${richHTML(esc(line))}</span>`).join('')}</div>`).join('')}
+    <figcaption>${esc(f.title)}</figcaption>${f.footer ? `<p class="wcite">Source: ${esc(f.footer)}</p>` : ''}</figure>`;
 }
 const LEAF_SEL = 'text,circle,rect,ellipse,line,polyline,polygon,path';
 const sigOf = el => el.getAttribute('data-k') || [el.tagName, (el.getAttribute('class') || '').replace(/\b(fadein|glide)\b/g, '').trim(),
@@ -2678,12 +2684,13 @@ const examBlank = (q, p) => isBlank(q, p);
 function finishExam(){
   clearInterval(EX.timer);
   EX.running = false; EX.done = true;
+  EX.logQn = [];   // the log entry each answer made, so a later override flips that one and no other
   EX.qs.forEach((q,i)=>{
     const p = EX.picks[i];
     const picked = isMulti(q) ? (p || []).slice().sort((a,b)=>a-b)
                  : qType(q)==='match' ? Object.assign({}, p)
                  : qType(q)==='numeric' ? String(p == null ? '' : p) : p;
-    record(q, examRight(q, p) ? 'correct' : 'wrong', picked);
+    EX.logQn[i] = record(q, examRight(q, p) ? 'correct' : 'wrong', picked).qn;
   });
   const right = EX.qs.filter((q, i) => examRight(q, EX.picks[i])).length;
   (DB.exams ||= []).push({at: Date.now(), exam: EX.paper || EXAM.id, right, total: EX.qs.length,
@@ -2710,7 +2717,10 @@ function celebrate(){
     <video playsinline controls preload="auto" src="${cheerPick()}"></video>
     <div class="frow"><button class="btn" id="cheerClose">Close</button></div></div>`;
   document.body.appendChild(box);
-  const v = box.querySelector('video'), close = () => box.remove();
+  const v = box.querySelector('video'), close = () => { box.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if(e.key === 'Escape') close(); };
+  document.addEventListener('keydown', onKey);
+  box.onclick = e => { if(e.target === box) close(); };
   box.querySelector('#cheerClose').onclick = close;
   v.onerror = close;
   v.onended = () => setTimeout(close, 800);
@@ -2776,7 +2786,7 @@ function renderExamResult(){
   });
   $('#v-exam').querySelectorAll('button[data-right]').forEach(b => b.onclick = () => {
     const i = +b.dataset.right, q = EX.qs[i];
-    if(!q || !markRight(q)) return;
+    if(!q || !markRight(q, EX.logQn ? EX.logQn[i] : undefined)) return;
     (EX.rightOv ||= {})[i] = true;
     const last = (DB.exams || [])[DB.exams.length - 1];
     if(last && last.exam === (EX.paper || EXAM.id)) last.right = Math.min(last.total, last.right + 1);

@@ -193,7 +193,8 @@ console.log('\n=== 1b. Question types render-ready ===');
   console.log(`  ${byKind.mc} multiple choice (${byKind.multi} select-all), ${byKind.numeric} numeric, ${byKind.match} match`);
   // a number typed with its unit reads as the number; anything else reads as none
   for (const [typed, want] of [['2.6 hr', 2.6], ['188.2 (mg/L)hr', 188.2], ['3.13 L/hr', 3.13], ['55%', 55], ['0.17325 hr⁻¹', 0.17325],
-                               ['1,000 mg', 1000], ['2.6e3', 2600], ['-0.2', -0.2], ['=3.13', NaN], ['3..13', NaN], ['2.6 hr 3', NaN], ['abc', NaN], ['', NaN]]) {
+                               ['1,000 mg', 1000], ['2.6e3', 2600], ['-0.2', -0.2], ['0.17 hr-1', 0.17], ['0.17 h-1', 0.17], ['0.17 hr^-1', 0.17],
+                               ['0.17 /hr', 0.17], ['0.17 1/hr', 0.17], ['12 mg/L*hr', 12], ['=3.13', NaN], ['3..13', NaN], ['2.6 hr 3', NaN], ['abc', NaN], ['', NaN]]) {
     const got = X.parseNum(typed);
     if (Number.isNaN(want) ? !Number.isNaN(got) : got !== want) bad(`parseNum(${JSON.stringify(typed)}) read ${got}, wanted ${want}`);
   }
