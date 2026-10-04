@@ -688,4 +688,59 @@ const TELL_HTML = `
 <p class="xtrap"><b>How she tests it:</b> The wrong pick pairs a higher level with a smaller swing for a larger dose.</p>
 <p class="xtrap">Another: expecting a longer interval to raise the level because each dose has longer to be absorbed. Absorption is complete either way; what a longer interval gives each dose is more time to be eliminated.</p>
 <p class="gsrc">Source: 6a---Multiple-Oral-Doses.pdf, slides "Altering Dose, second slide" and "Altering Dosing Interval, second slide"; transcript 09-28</p></div></template>
+<h3>Bioavailability and bioequivalence (Module 7a)</h3>
+<p class="sub">Pairs from the bioavailability lecture, separated by what is compared with what, and by which one goes in the denominator.</p>
+<table class="reftab"><thead><tr><th>Pair</th><th>First one</th><th>Second one</th></tr></thead><tbody>
+<tr><td>Absolute vs relative bioavailability <button type="button" class="chip xwhy" data-xpick="bioequiv:abs-rel">Why?</button></td><td>Oral against IV; the IV AUC underneath; at most 1</td><td>Two formulations; the reference underneath; can exceed 1</td></tr>
+<tr><td>Bioavailability vs bioequivalence <button type="button" class="chip xwhy" data-xpick="bioequiv:ba-be">Why?</button></td><td>Rate and extent of one product; F measures the extent</td><td>No significant difference in rate and extent between two products</td></tr>
+<tr><td>Rate (t<sub>max</sub>) vs extent (AUC) <button type="button" class="chip xwhy" data-xpick="bioequiv:rate-extent">Why?</button></td><td>When the peak comes; read from the curve</td><td>How much is absorbed; the area, and what F is built from</td></tr>
+<tr><td>Test vs reference product <button type="button" class="chip xwhy" data-xpick="bioequiv:test-ref">Why?</button></td><td>The product being judged; its AUC on top</td><td>The standard or comparator; its AUC in the denominator</td></tr>
+<tr><td>F from AUCs vs F from doses <button type="button" class="chip xwhy" data-xpick="bioequiv:f-auc-dose">Why?</button></td><td>{{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}, for any pair of doses</td><td>{{frac:D<sub>IV</sub>|D<sub>po</sub>}}, only when the AUCs are set equal</td></tr>
+</tbody></table>
+<div class="xpick"><label><b>Explain one:</b> <select data-xsel="bioequiv"><option value="">Choose a pair</option>
+<option value="abs-rel">Absolute vs relative bioavailability</option>
+<option value="ba-be">Bioavailability vs bioequivalence</option>
+<option value="rate-extent">Rate (tmax) vs extent (AUC)</option>
+<option value="test-ref">Test vs reference product</option>
+<option value="f-auc-dose">F from AUCs vs F from doses</option>
+</select></label><div class="xout" data-xout="bioequiv"></div></div>
+<template data-x="bioequiv:abs-rel"><div class="xexp"><h4>Absolute vs relative bioavailability</h4>
+<p><b>In one line:</b> They differ in what the product is compared with: an IV dose, or another formulation.</p>
+<dl><dt>Absolute bioavailability (F<sub>abs</sub>)</dt><dd>The drug by an extravascular route, oral here, against the same drug intravenously (IV). F<sub>abs</sub> = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}, with AUC the area under the curve and D the dose.</dd>
+<dd>The IV dose is all in the blood, so its F is 1 and it is the standard. An absolute F cannot be above 1. Her slide problem: {{frac:101.5|73.8}} &times; {{frac:100|250}} = 0.55.</dd>
+<dt>Relative bioavailability (F<sub>rel</sub>)</dt><dd>Two formulations of the same drug, neither IV: F<sub>rel</sub> = {{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}} &times; {{frac:D<sub>B</sub>|D<sub>A</sub>}}, with B the reference or comparator. Her slide problem: {{frac:101.5|98.76}} = 1.03.</dd>
+<dd>A relative F can be above 1, because an old standard can be beaten by a newer product; her example was Bayer aspirin.</dd>
+<dt>The quick test</dt><dd>Is one of the two an IV dose? Then it is absolute. Both oral, or a new product against the originator? Relative.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> The wrong pick inverts the ratio and gets 1.82 for the slide problem, or calls an absolute F of 1.03 possible. She said the quiz would lean toward absolute bioavailability.</p>
+<p class="gsrc">Source: 7a---Bioavailability-and-Bioequivalence.pdf, slides "Absolute Bioavailability", "Practice Problem" and "Relative Bioavailability"; transcript 09-30</p></div></template>
+<template data-x="bioequiv:ba-be"><div class="xexp"><h4>Bioavailability vs bioequivalence</h4>
+<p><b>In one line:</b> One describes a product; the other compares two products and needs rate as well as extent.</p>
+<dl><dt>Bioavailability</dt><dd>The rate and extent to which the active ingredient is absorbed from a drug product and becomes available at the site of action. The course's F, the fraction absorbed, is the extent half, measured as the area under the curve (AUC).</dd>
+<dt>Bioequivalence</dt><dd>No significant difference in the rate and extent to which the active ingredient becomes available, from two products at the same molar dose under similar conditions. A bioequivalence study is a specialized relative bioavailability study.</dd>
+<dt>The quick test</dt><dd>A relative F of 1.03 says the two products have similar extent. It says nothing about when each peaks, so bioequivalence is not shown by F alone.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> The wrong pick calls two products bioequivalent because their AUCs match. On her figure, A and B share an AUC and peak at different times, and are not bioequivalent.</p>
+<p class="xtrap">Her words after the relative problem: <q>these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate.</q></p>
+<p class="gsrc">Source: 7a---Bioavailability-and-Bioequivalence.pdf, slides "Bioavailability", "Bioequivalence" and "Bioequivalence Example"; transcript 09-30</p></div></template>
+<template data-x="bioequiv:rate-extent"><div class="xexp"><h4>Rate (t<sub>max</sub>) vs extent (AUC)</h4>
+<p><b>In one line:</b> Rate is how fast the drug gets in; extent is how much gets in.</p>
+<dl><dt>Rate</dt><dd>Read as the time of the peak, t<sub>max</sub>, in hours: when the maximum concentration occurs. It comes from the shape of the curve, not from F.</dd>
+<dt>Extent</dt><dd>Read as the area under the plasma concentration against time curve (AUC), in (mg/L)hr. Both bioavailability equations are ratios of AUC, so F measures extent only.</dd>
+<dt>The quick test</dt><dd>On her figure, A and B have the same area but B peaks later: same extent, different rate. A and C peak together but C has half the area: same rate, different extent.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> The wrong pick treats a matching AUC as a matching rate, or expects F to carry information about the peak time.</p>
+<p class="gsrc">Source: 7a---Bioavailability-and-Bioequivalence.pdf, slides "Bioavailability" (her note "AUC, Tmax") and "Bioequivalence Example"; transcript 09-30</p></div></template>
+<template data-x="bioequiv:test-ref"><div class="xexp"><h4>Test vs reference product</h4>
+<p><b>In one line:</b> The test product is the one being judged; the reference is the standard it is judged against, and the standard goes underneath.</p>
+<dl><dt>Test product (A)</dt><dd>The product whose bioavailability is being asked about: the tablet in her problems, or a new product coming onto the market. Its area under the curve (AUC) is the numerator.</dd>
+<dt>Reference product (B)</dt><dd>The standard or comparator: the oral solution in her relative problem, the originator product for a new generic, or the IV bolus in an absolute comparison. Its AUC is the denominator.</dd>
+<dt>The quick test</dt><dd>"Compared to" names the reference. "The tablet compared to the oral solution" puts the solution's AUC underneath, and the dose ratio runs the other way: D<sub>B</sub> over D<sub>A</sub>.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> The wrong pick puts the product asked about in the denominator, which turns 1.03 into 0.97 and 0.55 into 1.82.</p>
+<p class="gsrc">Source: 7a---Bioavailability-and-Bioequivalence.pdf, slides "Relative Bioavailability", "Practice Problem" (second) and "Bioequivalence"; transcript 09-30</p></div></template>
+<template data-x="bioequiv:f-auc-dose"><div class="xexp"><h4>F from AUCs vs F from doses when the AUCs are equal</h4>
+<p><b>In one line:</b> The full equation measures F from two areas; the short form uses a known F to find the oral dose that gives the same area.</p>
+<dl><dt>F from AUCs</dt><dd>F<sub>abs</sub> = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}: the areas under the curve (AUC) after the oral and the IV dose, corrected for the two doses D. This is the measurement.</dd>
+<dt>F from doses</dt><dd>When the oral AUC is to equal the IV AUC, the area ratio is 1 and F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}}, so D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}. This is the use: an oral dose equivalent to an IV dose.</dd>
+<dd>Her slide: {{frac:100 mg|0.55}} = 182 mg, rounded to a strength that exists. Ciprofloxacin at 70%: {{frac:400 mg|0.70}} = 571.43 mg, given as 575 or 600 mg.</dd>
+<dt>The quick test</dt><dd>Asked for F? Use the AUCs. Asked for an oral dose to match an IV dose, or "the same extent of absorption"? Divide the IV dose by F, and expect a larger number.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> The wrong pick multiplies the IV dose by F and gets a smaller oral dose, or answers 571.43 mg as a tablet strength.</p>
+<p class="gsrc">Source: 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" with her working, In-Class Activity page 18; transcript 09-30</p></div></template>
 `;

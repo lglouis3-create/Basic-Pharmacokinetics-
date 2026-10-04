@@ -23,9 +23,10 @@
 
    Objective counts: Module 1 five, Module 2 six (three on each of the deck's
    two objectives slides), Module 3 seven, Module 4 five, Module 5 four,
-   Module 6 three, plus two on the 6a multiple-oral deck.
-   Module 9 is not yet lectured and carries no guide. Module 6 also
-   draws on Chapter 9, Multiple-Dosage Regimens, and says so where it does.
+   Module 6 three, plus two on the 6a multiple-oral deck, Module 7a
+   (bioavailability and bioequivalence, lectured 30 September) four.
+   Module 6 also draws on Chapter 9, Multiple-Dosage Regimens, and says so
+   where it does.
    ========================================================================== */
 const GUIDE_HTML = `
 <h2>Objective guides</h2>
@@ -2499,5 +2500,284 @@ const GUIDE_HTML = `
 <li><q>if you calculate a dosing interval, that is, let's say, 3.72 hours. As your patient. Does that dosing interval make sense to me?</q></li>
 </ul>
 <p class="gsrc">Sources: 6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens", "Altering Steady-State Concentrations" (Methods 1 and 2), "Altering Dose", "Altering Dosing Interval" (three slides, including the 6-hour and 8-hour figure) and "Consider Peak and Trough" (slides 11&ndash;19); transcript 09-28; questions in q8_module6b.js, sub "oparam".</p>
+</section>
+
+<h2>Module 7a - Bioavailability and Bioequivalence</h2>
+<p class="prose">One lecture, 30 September. It brings back the area under the curve (AUC) from Module 1 and the clearance, dose and AUC relationship from Module 4, and uses them to compare one dosage form with another: an oral tablet against an IV dose, or a new product against the standard.</p>
+<ul class="tlist">
+<li>Four objectives, from the "Objectives" slide of the 7a deck.</li>
+<li>Quiz 4 on Monday 5 October covers this lecture and multiple dosing. She said the bioavailability items would lean toward absolute bioavailability, with definitions, the why, and short calculations.</li>
+</ul>
+
+<section class="gobj" id="gobj-m7-1">
+<h3 data-nav="Module 7a, objective 1 &mdash; Define drug product performance, bioavailability, and bioequivalence">Module 7a - Objective 1</h3>
+<div class="gbar"><span>Objective</span><b>Define drug product performance, bioavailability, and bioequivalence</b><i>7a---Bioavailability-and-Bioequivalence.pdf, slides "Drug Product Performance", "Bioavailability", "Bioequivalence" and "Bioequivalence Example"</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>A tablet or capsule only works if the drug leaves the dosage form. Drug product performance is that release step: the drug substance coming out of the product so that it can be absorbed.</li>
+<li>Bioavailability is the rate and extent to which the active ingredient is absorbed from the product and reaches the site of action. Extent is measured by the area under the curve (AUC), rate by the time of the peak (t<sub>max</sub>).</li>
+<li>Most of this course uses bioavailability as a fraction, F: the share of a dose that reaches the systemic circulation. That fraction is the extent half of the definition.</li>
+<li>Bioequivalence compares the same active ingredient from two products, a test product and a reference product. They are bioequivalent when there is no significant difference in rate and extent at the same molar dose under similar conditions.</li>
+<li>Because bioequivalence needs rate as well as extent, two products with the same AUC are not shown to be bioequivalent until their peak times are also shown to be similar.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Drug product performance</dt><dd>The release of the drug substance from the drug product, which leads to the bioavailability of the drug substance.</dd>
+<dt>Bioavailability</dt><dd>The rate and extent to which the active ingredient or active moiety is absorbed from a drug product and becomes available at the site of action.</dd>
+<dt>Bioavailability factor (F)</dt><dd>The fraction of a dose absorbed, with no units; written 0.55 or 55%. F is 1 for an intravenous (IV) dose.</dd>
+<dt>Area under the curve (AUC)</dt><dd>The area under the plasma concentration against time curve, in (mg/L)hr or (mcg/mL)hr. It measures extent.</dd>
+<dt>Time of peak (t<sub>max</sub>)</dt><dd>The time at which an oral curve reaches its highest concentration, in hours. It measures rate.</dd>
+<dt>Bioequivalence</dt><dd>The absence of a significant difference in the rate and extent to which the active ingredient becomes available at the site of action, at the same molar dose under similar conditions, in an appropriately designed study.</dd>
+<dt>Test and reference product</dt><dd>The product under study (test) and the product it is compared with (reference), which is the standard or originator product.</dd>
+</dl>
+
+<h4>Worked example</h4>
+<p class="prose">Her "Bioequivalence Example": three formulations A, B and C of one drug on a single plasma level against time plot, with AUC<sub>A</sub> = AUC<sub>B</sub> and AUC<sub>C</sub> = 0.5 AUC<sub>A</sub>. Which pairs are bioequivalent?</p>
+<ol class="gsteps">
+<li>Compare extent first: A and B enclose the same area; C encloses half the area of A.</li>
+<li>Compare rate next: A and C peak at the same time; B peaks later than A.</li>
+<li>A against B: same extent, different rate, so not bioequivalent.</li>
+<li>A against C: same rate, different extent, so not bioequivalent.</li>
+<li>A fourth curve drawn close to A, peaking at about the same time with about the same area, is the one she called bioequivalent: similar in both, not identical in either.</li>
+</ol>
+<p class="prose">Answer: <b>none of A, B and C is bioequivalent to another; only a curve that matches A in both rate and extent would be</b>.</p>
+
+<h4>Picture it</h4>
+{{fig:slide_7a---Bioavailabili_p13|Three formulations of one drug. A and B share an AUC but peak at different times; A and C peak together but C has half the area. Her drawn curve D, close to A in both, is the one she called bioequivalent.}}
+<p class="prose">Read the area and the peak time separately: the area answers extent, the peak time answers rate, and bioequivalence needs both to match.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Definitions were the first thing she named for the quiz, together with the why: what each term is for, and what bioavailability data tell a pharmacist about a product.</li>
+<li>Rate and extent: a stem that gives only AUC values gives extent. Whether two products are bioequivalent cannot be answered yes from AUC alone, because the rate (the peak time) is not known.</li>
+<li>On a figure like the one above, she asks which curves share an AUC, which share a peak time, and which pair could be called bioequivalent.</li>
+<li>Bioavailability against bioequivalence: a relative bioavailability study compares extent; a bioequivalence study is a specialized relative bioavailability study that compares rate as well.</li>
+<li>The words in the definition that carry the meaning: "absence of a significant difference", so the two products need not be identical; "same molar dose"; and "rate and extent".</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate.</q></li>
+<li><q>It's the absence of a significant difference. So they don't have to be exactly the same, but they just can't be too different.</q></li>
+</ul>
+<p class="gsrc">Sources: 7a---Bioavailability-and-Bioequivalence.pdf, slides "Drug Product Performance", "Bioavailability", "Bioequivalence", "Bioequivalence Example" and "Summary"; transcript 09-30.</p>
+</section>
+
+<section class="gobj" id="gobj-m7-2">
+<h3 data-nav="Module 7a, objective 2 &mdash; Distinguish between relative bioavailability and absolute bioavailability">Module 7a - Objective 2</h3>
+<div class="gbar"><span>Objective</span><b>Distinguish between relative bioavailability and absolute bioavailability</b><i>7a---Bioavailability-and-Bioequivalence.pdf, slides "Absolute Bioavailability" (two slides), "Practice Problem" (two slides) and "Relative Bioavailability"</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Absolute bioavailability compares the drug given by an extravascular route, oral in this lecture, with the same drug given intravenously (IV). The IV dose is all in the blood, so its F is 1 and it is the standard.</li>
+<li>Relative bioavailability compares two formulations of the same drug, such as a tablet against an oral solution, or a new product against the originator. Neither is IV; the reference product is the standard.</li>
+<li>Both are a ratio of areas under the curve (AUC) corrected for dose, so both have no units. The product being asked about goes on top; the standard goes in the denominator.</li>
+<li>An absolute F cannot be above 1, because an oral dose cannot deliver more than the same dose given IV. A relative F can be above 1 when the test product does better than the reference.</li>
+<li>Absolute F is also what converts an IV dose into an oral dose with the same AUC, which is the use she said the quiz would lean toward.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Absolute bioavailability (F<sub>abs</sub>)</dt><dd>Comparison of the bioavailability of the active drug in the systemic circulation after extravascular administration with that after IV administration. No units.</dd>
+<dt>Relative bioavailability (F<sub>rel</sub>)</dt><dd>Comparison of two drug product formulations of the same drug. No units.</dd>
+<dt>Extravascular</dt><dd>Any route other than directly into the blood; here, oral (po).</dd>
+<dt>Area under the curve (AUC)</dt><dd>The area under the plasma concentration against time curve, in (mcg/mL)hr in the slide problems; the measure of extent.</dd>
+<dt>Dose (D<sub>IV</sub>, D<sub>po</sub>, D<sub>A</sub>, D<sub>B</sub>)</dt><dd>The amount given by each route or in each product, in mg.</dd>
+<dt>Reference product (B)</dt><dd>The standard or comparator in a relative comparison; its AUC goes in the denominator. In an absolute comparison the IV bolus plays this part.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">F<sub>abs</sub> = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}</div>
+<ul class="tlist">
+<li>AUC<sub>po</sub> and AUC<sub>IV</sub> are the areas after the oral and the IV dose, in the same units, so they cancel; D<sub>IV</sub> and D<sub>po</sub> are the two doses in mg, which also cancel. F<sub>abs</sub> has no units.</li>
+<li>When to use it: the stem gives an oral AUC and an IV AUC, or an oral AUC with enough to calculate the IV one. The IV AUC goes in the denominator and the IV dose goes on top.</li>
+<li>On the equation sheet: yes, page 2, left column, written as the product of the two ratios.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">F<sub>rel</sub> = {{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}} &times; {{frac:D<sub>B</sub>|D<sub>A</sub>}}</div>
+<ul class="tlist">
+<li>A is the product being compared (the test); B is the reference or comparator. AUC in matching units, D in mg; F<sub>rel</sub> has no units.</li>
+<li>When to use it: two formulations of the same drug, neither of them IV. "Compared to the oral solution" puts the oral solution in the denominator as B.</li>
+<li>On the equation sheet: yes, page 2, directly under the absolute bioavailability lines.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her two slide practice problems, six volunteers each. Problem 1: a 250 mg oral tablet with an average AUC of 101.5 (mcg/mL)hr, against a 100 mg IV bolus with an average AUC of 73.8 (mcg/mL)hr. What is the absolute bioavailability of the tablet?</p>
+<p class="prose">Problem 2: the same 250 mg tablet against 5 mL of an oral solution holding 250 mg, average AUC 98.76 (mcg/mL)hr. What is the relative bioavailability of the tablet compared to the oral solution?</p>
+<ol class="gsteps">
+<li>Problem 1 is absolute because the comparator is IV. Put the IV AUC underneath and the IV dose on top: F<sub>abs</sub> = {{frac:101.5|73.8}} &times; {{frac:100 mg|250 mg}}.</li>
+<li>Multiply out: 1.375 &times; 0.4 = 0.5501, which she rounds to <b>0.55, or 55%</b>. The units cancel.</li>
+<li>Problem 2 is relative because both products are oral. The solution is the comparator, so it is B: F<sub>rel</sub> = {{frac:101.5|98.76}} &times; {{frac:250 mg|250 mg}}.</li>
+<li>The doses are equal, so the dose ratio is 1: F<sub>rel</sub> = 1.0277, rounded to <b>1.03</b>.</li>
+<li>Read the two answers: the tablet delivers 55% of what the IV dose delivers, and about 3% more than the solution. A relative F above 1 is allowed; an absolute F above 1 is not.</li>
+<li>What the 1.03 does not say: the tablet and the solution have similar extent, but nothing here gives their peak times, so bioequivalence is not established.</li>
+</ol>
+<p class="prose">Answer: <b>F<sub>abs</sub> = 0.55 (55%); F<sub>rel</sub> = 1.03</b>.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>The stem names the comparison: "absolute", or an IV dose, means absolute; "compared to the oral solution", or two oral products, means relative.</li>
+<li>Which goes where: the product asked about on top, the comparator's AUC in the denominator, and the dose ratio the other way round. Inverting Problem 1 gives 1.82 instead of 0.55.</li>
+<li>She has few relative bioavailability problems and said she would not ask many; the practice set and the quiz lean toward absolute bioavailability.</li>
+<li>A conceptual pair: can F be greater than 1? Relative, yes, as with an old standard such as Bayer aspirin that a newer product can beat; absolute, no.</li>
+<li>A relative F on its own does not show bioequivalence, because the rate is unknown. She asked the room this straight after Problem 2.</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>I want you to remember that the IVAUC is going to be in the denominator, right? That is what you are comparing it to.</q></li>
+<li><q>Can we have an F greater than 1? Yes, For absolute or for relative or either, both? Relative, but what about for absolute?</q></li>
+</ul>
+<p class="gsrc">Sources: 7a---Bioavailability-and-Bioequivalence.pdf, slides "Absolute Bioavailability" (two slides), "Practice Problem" (two slides, with her working) and "Relative Bioavailability"; BasicPharmacokineticsEquations.pdf page 2; transcript 09-30.</p>
+</section>
+
+<section class="gobj" id="gobj-m7-3">
+<h3 data-nav="Module 7a, objective 3 &mdash; Discuss factors that can influence bioavailability">Module 7a - Objective 3</h3>
+<div class="gbar"><span>Objective</span><b>Discuss factors that can influence bioavailability</b><i>7a---Bioavailability-and-Bioequivalence.pdf, slides "Factors Influencing Bioavailability" and "Summary"</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Bioavailability can be low for reasons in the product, reasons on the way into the circulation, and reasons in the patient. The list on the slide has nine entries.</li>
+<li>The product: physicochemical properties of the drug and the formulation, drug stability and pH effects, and prodrugs.</li>
+<li>On the way in: pre-systemic and first-pass metabolism, which is the liver acting on an oral dose before it reaches the systemic circulation, plus food effects, drug-drug interactions and efflux transporters.</li>
+<li>The patient: age and disease state. Her comment on age was that the body changes and everything slows down.</li>
+<li>She named the first three entries as the ones that come to mind most often: the physical and chemical properties of the drug itself, what pH does to it once it is in the body, first-pass metabolism, and stability.</li>
+<li>The summary slide ties it together: low bioavailability has a variety of causes, including formulation factors and the first-pass effect, and it bears on the drug's safety and efficacy.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>First-pass metabolism (first-pass effect)</dt><dd>Metabolism of an oral dose, mainly by the liver, before the drug reaches the systemic circulation; it lowers F.</dd>
+<dt>Pre-systemic metabolism</dt><dd>Any metabolism that happens before the drug reaches the systemic circulation; listed together with first-pass metabolism.</dd>
+<dt>Bioavailability factor (F)</dt><dd>The fraction of a dose that reaches the systemic circulation, no units; F = 1 for an IV dose. A low F is the sign that one of these factors is at work.</dd>
+</dl>
+
+<h4>Worked example</h4>
+<p class="prose">Her reading of the first practice problem, where the tablet's F came to 0.55. What does that number mean for a 1000 mg tablet, and is oral the right route?</p>
+<ol class="gsteps">
+<li>Amount available from the tablet: 0.55 &times; 1000 mg = <b>550 mg</b>.</li>
+<li>The same 1000 mg given IV: F = 1, so all 1000 mg is available for the body to use.</li>
+<li>Compare with the oral problems so far in the course, where F was about 0.7, 0.8 or 0.9. At 0.55 almost half the dose is lost, so whether oral is the best way to give this drug is open to question.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>No poll or practice item in the lecture asked the factors; she went through the list briefly and described the quiz as definitions, the why, and calculations.</li>
+<li>If a factor is asked, the ones she singled out are the first three on the list, and the first-pass effect is the one the summary slide names beside formulation factors.</li>
+<li>The link to the numbers: a low F from an absolute bioavailability calculation is read as drug lost to one of these factors, and it raises the oral dose needed to match an IV dose.</li>
+<li>While on this slide she gave the format rule for F: write 0.55 or 55%, never a bare decimal point with nothing in front of it.</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>just a little reminder, there should be no leading decimals, OK?</q></li>
+<li><q>Yeah, because our bodies change as we age, and yes, everything slows down.</q></li>
+</ul>
+<p class="gsrc">Sources: 7a---Bioavailability-and-Bioequivalence.pdf, slides "Factors Influencing Bioavailability" (with her note "0.55, don't forget leading decimals") and "Summary"; transcript 09-30.</p>
+</section>
+
+<section class="gobj" id="gobj-m7-4">
+<h3 data-nav="Module 7a, objective 4 &mdash; Estimate bioavailability of a dose given route of administration, dosage form, etc.">Module 7a - Objective 4</h3>
+<div class="gbar"><span>Objective</span><b>Estimate bioavailability of a dose given route of administration, dosage form, etc.</b><i>7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (equations), "Practice Problem" with her working, and the In-Class Activity pages 17 to 19</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>The calculation is a ratio of areas corrected for dose. When the stem gives both areas under the curve (AUC), it is one line. When it gives only the oral AUC, the IV AUC is built from clearance: an IV dose equals clearance times its AUC.</li>
+<li>Clearance (Cl) is the volume of plasma cleared of drug per hour. For a one-compartment drug it is k &times; V<sub>D</sub>, with k from the half-life, so a half-life and a volume of distribution are enough to get the IV AUC.</li>
+<li>The same relationship written for the oral dose, F &times; D<sub>po</sub> = Cl &times; AUC<sub>po</sub>, gives F from the oral AUC, the clearance and the oral dose. Both routes give the same number.</li>
+<li>Turned round: if an oral dose is to match an IV dose in AUC, the AUCs are set equal and F becomes the IV dose divided by the oral dose. The oral dose is then the IV dose divided by F, rounded to a strength that exists.</li>
+<li>Linear kinetics: AUC is proportional to dose, so half the IV dose gives half the AUC.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Bioavailability factor (F, F<sub>abs</sub>)</dt><dd>The fraction of the oral dose absorbed, no units; F = 1 for an IV dose.</dd>
+<dt>Area under the curve (AUC<sub>po</sub>, AUC<sub>IV</sub>)</dt><dd>The area under the plasma concentration against time curve after the oral or the IV dose, in mg&middot;hr/L (written (mg/L)hr or mg h/L on her sheets).</dd>
+<dt>Dose (D<sub>po</sub>, D<sub>IV</sub>)</dt><dd>The oral and the intravenous dose, in mg.</dd>
+<dt>Clearance (Cl)</dt><dd>The volume of plasma cleared of drug per unit time, in L/hr; Cl = k &times; V<sub>D</sub> for one compartment.</dd>
+<dt>Elimination rate constant (k)</dt><dd>The first-order rate constant, in hr<sup>&minus;1</sup>; k = {{frac:0.693|t<sub>&frac12;</sub>}}, with t<sub>&frac12;</sub> the half-life in hours.</dd>
+<dt>Volume of distribution (V<sub>D</sub>)</dt><dd>The volume that relates the amount of drug in the body to its plasma concentration, in L; V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}} after an IV bolus.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">F<sub>abs</sub> = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}</div>
+<ul class="tlist">
+<li>AUC in matching units, D in mg, F with no units. With equal doses the dose ratio is 1 and only the AUC ratio is left.</li>
+<li>When to use it: whenever an oral AUC and an IV AUC are available, given or calculated.</li>
+<li>On the equation sheet: yes, page 2.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">D<sub>IV</sub> = Cl &times; AUC<sub>IV</sub>, &nbsp; so &nbsp; AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}} = {{frac:D<sub>IV</sub>|k &times; V<sub>D</sub>}}</div>
+<ul class="tlist">
+<li>D<sub>IV</sub> in mg, Cl in L/hr, k in hr<sup>&minus;1</sup>, V<sub>D</sub> in L; the AUC comes out in mg&middot;hr/L.</li>
+<li>When to use it: the stem gives a half-life and a volume of distribution instead of an IV AUC. It is the Module 4 line Cl<sub>T</sub> = {{frac:FD<sub>0</sub>|AUC}} with F = 1.</li>
+<li>On the equation sheet: the product form D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>), yes, page 2; Cl = kV<sub>D</sub> is not printed and is one she expects from memory.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">F<sub>abs</sub> &times; D<sub>po</sub> = Cl &times; AUC<sub>po</sub>, &nbsp; so &nbsp; F<sub>abs</sub> = {{frac:Cl &times; AUC<sub>po</sub>|D<sub>po</sub>}}</div>
+<ul class="tlist">
+<li>The same symbols; the oral dose times F is the amount that actually entered the circulation.</li>
+<li>When to use it: the second route to the same F when the oral AUC, the clearance and the oral dose are known. Every unit cancels.</li>
+<li>On the equation sheet: yes, page 2, as F<sub>abs</sub>D<sub>po</sub> = (Cl)(AUC<sub>po</sub>).</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Equivalent oral dose, when AUC<sub>po</sub> is to equal AUC<sub>IV</sub>: &nbsp; F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}}, &nbsp; so &nbsp; D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}</div>
+<ul class="tlist">
+<li>D<sub>IV</sub> is the IV dose being replaced (mg); F the absolute bioavailability of the oral product; D<sub>po</sub> the oral dose that gives the same AUC (mg).</li>
+<li>When to use it: "an equivalent therapeutic regimen", "the same extent of absorption", or sending a patient home on oral. The answer is larger than the IV dose, and is then rounded to a strength that exists.</li>
+<li>On the equation sheet: no. She derived it from F<sub>abs</sub> on the slide by setting the two AUCs equal.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">In-Class Activity, question 1: a single 500 mg oral tablet of an antihypertensive drug gave an AUC of 70 mg&middot;hr/L. A 500 mg IV bolus of the same drug in the same volunteer: half-life 3 hours, V<sub>D</sub> 25 L. (a) The absolute bioavailability of the tablet? (b) The expected AUC after a 250 mg IV bolus?</p>
+<ol class="gsteps">
+<li>Get k from the half-life: k = {{frac:0.693|3 hr}} = 0.231 hr<sup>&minus;1</sup>.</li>
+<li>Build the IV area from the IV dose and the clearance: AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|k &times; V<sub>D</sub>}} = {{frac:500 mg|25 L &times; 0.231 hr<sup>&minus;1</sup>}} = 86.58 mg&middot;hr/L.</li>
+<li>The doses are equal, so the dose ratio is 1: F = {{frac:70|86.58}} = 0.8085, <b>about 81%</b>. The units cancel, so F has none.</li>
+<li>Same answer by the other route: F = {{frac:Cl &times; AUC<sub>po</sub>|D<sub>po</sub>}} = {{frac:(25 L)(0.231 hr<sup>&minus;1</sup>)(70 mg&middot;hr/L)|500 mg}} = 0.8085.</li>
+<li>(b) Half the IV dose with linear kinetics: AUC = {{frac:250 mg|25 L &times; 0.231 hr<sup>&minus;1</sup>}} = <b>43.29 mg&middot;hr/L</b>, half of 86.58.</li>
+</ol>
+<p class="prose">Question 2: ciprofloxacin, oral immediate-release bioavailability 70%. What oral dose gives the same extent of absorption as a 400 mg IV bolus?</p>
+<ol class="gsteps">
+<li>Same extent means equal AUCs, so F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}} and D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}.</li>
+<li>D<sub>po</sub> = {{frac:400 mg|0.70}} = 571.43 mg.</li>
+<li>Round to a strength a tablet could have: she accepted <b>575 mg or 600 mg</b>. The marketed strengths she looked up were 250 and 500 mg, so 571.43 mg is not a real tablet.</li>
+</ol>
+<p class="prose">Question 3: after a 500 mg IV bolus, C<sub>p</sub> = 50e<sup>&minus;0.2t</sup>. (a) The clearance? (b) The AUC of this dose? (c) The oral bioavailability of a 500 mg tablet whose AUC is 188 mg&middot;hr/L?</p>
+<ol class="gsteps">
+<li>Read C<sub>0</sub> = 50 mg/L and k = 0.2 hr<sup>&minus;1</sup> straight off the equation. V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}} = {{frac:500 mg|50 mg/L}} = 10 L.</li>
+<li>Cl = k &times; V<sub>D</sub> = 0.2 hr<sup>&minus;1</sup> &times; 10 L = <b>2 L/hr</b>.</li>
+<li>AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}} = {{frac:500 mg|2 L/hr}} = <b>250 mg&middot;hr/L</b>.</li>
+<li>Same dose by both routes: F = {{frac:188|250}} = 0.752, <b>75%</b>.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Her poll, the model quiz item: a 500 mg tablet with AUC 115 (mg/L)hr against a 400 mg IV bolus with AUC 132 (mg/L)hr; options 50%, 70%, 85%, 92%. F = {{frac:115|132}} &times; {{frac:400|500}} = 0.697, so <b>70%</b>.</li>
+<li>She said the wording of that item cannot change much, only the numbers; most of the room got it.</li>
+<li>Two stem shapes: both AUCs given, which is one line; or the oral AUC with a half-life and a V<sub>D</sub>, where the IV AUC must be built from clearance first. Either route gives the same F.</li>
+<li>The IV AUC goes in the denominator and the IV dose in the numerator. The inverted ratio is the usual wrong answer.</li>
+<li>Write F as 0.55 or 55%. A bare decimal point with nothing in front of it is not accepted.</li>
+<li>Equivalent dose: "same extent", "equivalent therapeutic regimen" or sending a patient home on oral means set the AUCs equal, divide the IV dose by F, then round to a strength that exists. Expect a number larger than the IV dose.</li>
+<li>A smaller IV dose scales the AUC in proportion: half the dose, half the area.</li>
+<li>Calculations are meant to take 2 minutes or less. Read the stem for 30 seconds and decide the route before reaching for the sheet.</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>Then this reduces down to where F is equal to DIV over DPO. Right? If the AUCs are equivalent.</q></li>
+<li><q>We might round it to 200 if there's a 175 or something that makes sense as opposed to 181.</q></li>
+</ul>
+<p class="gsrc">Sources: 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (equations), "Practice Problem" with her working, In-Class Activity pages 17 and 18, PollEv page 19; BasicPharmacokineticsEquations.pdf page 2; transcript 09-30.</p>
 </section>
 `;

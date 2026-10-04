@@ -1379,3 +1379,44 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 **Poll (attendance question, 09.28, repeated from 09.21):** "Which of the following results when an oral dose is increased? An increase in tmax / A decrease in tmax / No change in the tmax." Her answer: no change, "That is what I was looking for."
 
 **Formats observed:** first-dose and steady-state values asked side by side so the change can be seen; she says she will ask for dosing intervals and oral doses and expects them rounded to a practical interval and an existing strength ("Don't tell me 17.29 mg for an oral dose").
+
+---
+
+# Module 7a — Bioavailability and bioequivalence
+
+## Source: `7a---Bioavailability-and-Bioequivalence.pdf`, slides "Practice Problem" (printed stems), 09.30 lecture
+
+> **Practice Problem (absolute).** The bioavailability of an investigational drug was studied in 6 volunteers. Each volunteer received either a single oral tablet containing 250 mg of the drug or a single IV bolus injection containing 100 mg of the drug. The average AUC of the oral tablet was 101.5 (mcg/mL)hr and the average AUC of the IV bolus injection was 73.8 (mcg/mL)hr. What is the absolute bioavailability of the drug from the tablet?
+
+**Her answer (written on the slide and confirmed in the 09.30 lecture):** F = (101.5/73.8)(100 mg/250 mg) = 0.55013 ≈ 0.55, "means 55% bioavailability". *Recompute:* 0.55014 → **matches**.
+
+**Her follow-up, asked in words and worked on the equation slide:** "give me an oral dose that's equivalent to the 100 mg IV." If the AUCs are to be equal, F = D_IV/D_PO, so D_PO = D_IV/F = 100 mg/0.55 = 181.8181 mg ≈ 182 mg; "We might round it to 200 if there's a 175 or something that makes sense as opposed to 181." *Recompute:* 181.82 → **matches**. (She first describes the patient as on 250 mg IV, then asks for the equivalent of the 100 mg IV dose; the written working uses 100 mg.)
+
+> **Practice Problem (relative).** The relative bioavailability of an investigational drug was studied in 6 volunteers. Each volunteer received either a single oral tablet containing 250 mg of the drug or 5 mL of a pure aqueous solution containing 250 mg of the drug. The average AUC of the oral tablet was 101.5 (mcg/mL)hr and the average AUC of the oral solution was 98.76 (mcg/mL)hr. What is the relative bioavailability of the drug from the tablet compared to the oral solution?
+
+**Her answer:** F_rel = 101.5/98.76 = 1.0277 ≈ 1.03, "has a greater bioavailability than 1"; "we don't know the bioequivalence b/c we don't know the rate (when they peak)". *Recompute:* 1.02774 → **matches**.
+
+## Source: In-Class Activity, Bioavailability (09.30) — sheet not posted; stems read from the photographs on pages 17 and 18 of the annotated deck
+
+> 1. After oral administration of a single 500 mg tablet of an antihypertensive drug to a normal volunteer, the calculated AUC was 70 mg h/L. Following a 500 mg IV bolus dose of the same drug to the same volunteer, the elimination half-life was 3 hours and the apparent volume of distribution was 25 L.
+> a. What is the absolute bioavailability of this oral tablet in this volunteer?
+> b. What is the expected AUC after administration of a single IV bolus dose of 250 mg to the same volunteer?
+
+> 2. Ciprofloxacin is a fluoroquinolone with several FDA-labeled indications. It is available for oral as well as IV administration. The bioavailability of the immediate release oral dosage form is reported to be 70%. What would be an appropriate oral dose to achieve the same extent of absorption as a 400 mg IV bolus dose?
+
+> 3. The equation for concentration of drug in the plasma as a function of time following a 500 mg IV bolus dose was found to be: Cp = 50e^(−0.2t)
+> a. What is the clearance of the drug?
+> b. What is the AUC of the drug following this 500 mg IV bolus dose?
+> c. If the AUC following a 500-mg oral tablet dose was found to be 188 mcg hr/mL, what is the oral bioavailability of the drug from the tablet?
+
+**Her answers (written on the photographs and spoken in the 09.30 lecture):**
+- 1(a): AUC_IV = 500 mg/((25 L)(0.231 hr⁻¹)) = 86.58 (written "mg/L"; spoken "mg per liter times an hour"); F = 70/86.58 = 0.8085, "about 81%"; also F = (70 mg·hr/L)(25 L)(0.231 hr⁻¹)/500 mg = 0.8085, "it doesn't matter which approach you use". *Recompute:* 86.580 and 0.80851 → **matches**.
+- 1(b): AUC = 250 mg/((25 L)(0.231 hr⁻¹)) = 43.29 (mg/L)hr, "Half, right?". *Recompute:* 43.290 → **matches**.
+- 2: D_PO = D_IV/F = 400 mg/0.70 = 571.43 mg, then "575 mg or 600 mg or 570 mg" written beside it; spoken: "not gonna be a strength of Cipro ... 250, 500 ... maybe come up with the 600 or you can tell me 575". *Recompute:* 571.43 → **matches**.
+- 3(a): VD = 500 mg/50 mg/L = 10 L; Cl = k·VD = 0.2 × 10 L = 2 L/hr. 3(b): AUC_IV = 500 mg/(2 L/hr) = 250 (mg/L)hr. 3(c): F = (188 mg·hr/L)(2 L/hr)/500 mg = 0.752, "75%". *Recompute:* 10 L, 2 L/hr, 250, 0.752 → **matches**. (The sheet prints the oral AUC in mcg hr/mL and part (b) in (mg/L)hr; the units are equal.)
+
+**PollEv (page 19, 09.30):** "What is the bioavailability of a 500 mg tablet which yielded an AUC of 115 (mg/L)hr compared to a 400 mg IV bolus dose that yielded an AUC of 132 (mg/L)hr? 50% / 70% / 85% / 92%". Class answer 70%, confirmed: "Most of you guys thought 70%. OK. OK. Straightforward." *Recompute:* (115/132)(400/500) = 0.697 → **70%**.
+
+**Second poll (multiple IV bolus, quiz preparation), worked on page 19:** 300 mg every 12 hours, VD 16 L, t½ 4 hr; maximum at steady state. k = 0.693/4 = 0.17325 hr⁻¹; Cl = 0.17325 × 16 L = 2.772 L/hr; C0 = 300 mg/16 L = 18.75 mg/L; Cmax∞ = 18.75/(1 − e^(−0.17325 × 12)) = 21.4 mg/L. "Most of you guys thought that it was B." *Recompute:* 21.43 → **matches**.
+
+**Formats observed:** the absolute problem gives two AUCs and two different doses; the relative problem gives equal doses and names the reference ("compared to the oral solution"). The in-class sheet withholds the IV AUC and gives t½ and VD instead, or gives the IV curve as an equation, so the IV AUC has to come from dose/clearance; equal oral and IV doses make the dose ratio 1. The equivalent-dose question is asked as "an appropriate oral dose to achieve the same extent of absorption as a ___ mg IV bolus dose", and the answer is rounded to a marketed strength. F is reported as 0.55 or 55%, never .55 ("no leading decimals"). She says the poll wording will not change, only the numbers, and that practice and the quiz will "focus more on the absolute bioavailability".

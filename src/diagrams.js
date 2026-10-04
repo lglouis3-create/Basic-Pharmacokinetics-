@@ -137,6 +137,13 @@ const DIAGRAMS = [
    eq:'Cp = A(e^(−kt) − e^(−ka t)). The tail follows whichever constant is smaller.',
    how:'Immediate release: ka > k, so the tail falls with k. Extended release: ka < k, so the tail falls with ka (flip-flop). The drug, and k, are the same.',
    asks:'What the slope of the tail measures, and why it is not always k.'},
+  {key:'slide_7a---Bioavailabili_p13', module:7, name:'Three formulations: same area or same peak time',
+   axes:'Time across; plasma level up, evenly spaced; no numbers, because only the areas and the peak times are compared.',
+   shape:'Three curves of one drug. A and B enclose the same area but B peaks later; A and C peak at the same time but C encloses half the area of A (AUC A = AUC B, AUC C = 0.5 AUC A). Her drawn curve D sits close to A in both.',
+   eq:'F(rel) = {{frac:AUC of A|AUC of B}} × {{frac:dose of B|dose of A}}; the peak time is read from the curve, not from F.',
+   how:'The area measures extent and the peak time measures rate. A relative F compares only the areas, so A and B would give F(rel) = 1 and still not be bioequivalent, because B peaks later.',
+   asks:'Which pair shares an AUC, which pair shares a peak time, and which curve could be called bioequivalent to A: her D, similar in both, not identical in either.',
+   quote:'Formulation A and Formulation B have similar AUCs. OK, but they clearly peak at different times.'},
  ]},
  {group:'Follow a dosing regimen over time', note:'Doses add on a time line; step through them one at a time.',
   figs:[

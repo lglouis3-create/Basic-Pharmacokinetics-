@@ -204,7 +204,7 @@ const REFERENCE_HTML = `
 <tr><td><b>F = {{frac:AUC<sub>oral</sub>|AUC<sub>IV</sub>}}</b></td>
 <td>F fraction of the oral dose reaching plasma, no units</td>
 <td>Comparing two routes. Printed on Introduction.pdf slide 23 in this bare form; the equation sheet carries the dose-corrected version, F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}}{{frac:D<sub>IV</sub>|D<sub>po</sub>}}.</td>
-<td>Bioavailability. Module 9, not yet lectured.</td>
+<td>Bioavailability, Module 7a. She asks the dose-corrected form; with equal doses it reduces to this bare ratio.</td>
 <td>Yes, in the dose-corrected form.</td></tr>
 </tbody></table>
 
@@ -691,6 +691,71 @@ const REFERENCE_HTML = `
 <li>When stating a regimen, give an interval the patient can keep and an oral dose rounded to a strength that exists: <i>"Don't tell me 17.29 mg for an oral dose."</i></li>
 </ul>
 
+<h3>Module 7a &mdash; bioavailability and bioequivalence</h3>
+<ul class="tlist">
+<li>The area under the curve (AUC) from Module 1 and the clearance, dose and AUC relationship from Module 4, used to compare one dosage form with another.</li>
+<li>Bioavailability is rate and extent: <i>"extent. We think about that in terms of our AUC, right? ... What do you think about the rate? So we think about rate in terms of T max."</i></li>
+<li>Absolute compares with IV; relative compares two formulations: <i>"Absolute says that we are comparing it to the IV. Relative bioavailability says that we are just comparing two drug formulations."</i></li>
+<li>What goes underneath: <i>"I want you to remember that the IVAUC is going to be in the denominator, right? That is what you are comparing it to."</i></li>
+<li>How to write F: 0.55 or 55%, never a bare decimal point. <i>"just a little reminder, there should be no leading decimals, OK?"</i></li>
+<li>For Quiz 4: <i>"I'm not gonna ask you too many of those. We're gonna kind of focus more on the absolute bioavailability."</i></li>
+</ul>
+
+<table class="reftab"><thead><tr>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+
+<tr><td><b>F<sub>abs</sub> = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}</b></td>
+<td>AUC<sub>po</sub>, AUC<sub>IV</sub> the areas after the oral and the IV dose, in the same units ((mcg/mL)hr or mg&middot;hr/L); D<sub>IV</sub>, D<sub>po</sub> the doses (mg); F<sub>abs</sub> no units, written 0.55 or 55%</td>
+<td><ul class="tlist">
+<li>An extravascular dose compared with an IV dose of the same drug. The IV AUC is in the denominator and the IV dose on top.</li>
+<li>Equal doses leave only the AUC ratio. Cannot exceed 1.</li>
+</ul></td>
+<td><ul class="tlist">
+<li>Her slide problem: {{frac:101.5|73.8}} &times; {{frac:100 mg|250 mg}} = 0.55; her note beside it: <i>"means 55% bioavailability"</i>.</li>
+<li>Her poll: a 500 mg tablet, AUC 115 (mg/L)hr, against a 400 mg IV bolus, AUC 132 (mg/L)hr: {{frac:115|132}} &times; {{frac:400|500}} = 0.70, which the room answered 70%.</li>
+</ul></td>
+<td>Yes, page 2, left column.</td></tr>
+
+<tr><td><b>D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>)</b>, so AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}} = {{frac:D<sub>IV</sub>|kV<sub>D</sub>}}</td>
+<td>Cl clearance (L/hr), kV<sub>D</sub> for one compartment; k (hr<sup>&minus;1</sup>) from the half-life; V<sub>D</sub> (L); AUC in mg&middot;hr/L</td>
+<td>An IV dose, where F = 1. The stem gives a half-life and a volume instead of an IV AUC. The Module 4 line Cl<sub>T</sub> = {{frac:FD<sub>0</sub>|AUC}} is the same relationship.</td>
+<td>In-Class Activity 1(a): AUC<sub>IV</sub> = {{frac:500 mg|25 L &times; 0.231 hr<sup>&minus;1</sup>}} = 86.58 mg&middot;hr/L, then F = {{frac:70|86.58}} = 0.81; 1(b): half the dose, 43.29 mg&middot;hr/L. Activity 3: Cl = 0.2 hr<sup>&minus;1</sup> &times; 10 L = 2 L/hr, AUC = {{frac:500 mg|2 L/hr}} = 250 mg&middot;hr/L.</td>
+<td>Yes, page 2. Cl = kV<sub>D</sub> itself is not printed.</td></tr>
+
+<tr><td><b>F<sub>abs</sub>D<sub>po</sub> = (Cl)(AUC<sub>po</sub>)</b>, so F<sub>abs</sub> = {{frac:(Cl)(AUC<sub>po</sub>)|D<sub>po</sub>}}</td>
+<td>The same symbols; F<sub>abs</sub>D<sub>po</sub> is the amount of the oral dose that entered the circulation (mg)</td>
+<td>The second route to the same F, from the oral AUC, the clearance and the oral dose. <i>"it doesn't matter which approach you use, right?"</i></td>
+<td>Activity 1(a) again: {{frac:(70 mg&middot;hr/L)(25 L)(0.231 hr<sup>&minus;1</sup>)|500 mg}} = 0.8085; <i>"recognize that F is a dimensionless number, right? Cause all of our units are are canceling."</i></td>
+<td>Yes, page 2.</td></tr>
+
+<tr><td><b>F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}}</b>, so D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}} (when the AUCs are to match)</td>
+<td>D<sub>IV</sub> the IV dose being replaced (mg); F the absolute bioavailability of the oral product; D<sub>po</sub> the oral dose with the same AUC (mg)</td>
+<td>An equivalent therapeutic regimen, the same extent of absorption, or sending a patient home on oral. Set AUC<sub>po</sub> = AUC<sub>IV</sub> in F<sub>abs</sub> and the AUC ratio drops out.</td>
+<td><ul class="tlist">
+<li>Her slide: {{frac:100 mg|0.55}} = 181.8, so about 182 mg; <i>"We might round it to 200 if there's a 175 or something that makes sense"</i>.</li>
+<li>Activity 2, ciprofloxacin at 70%: {{frac:400 mg|0.70}} = 571.43 mg, given as 575 or 600 mg; the strengths she looked up were 250 and 500 mg.</li>
+<li>Expect a larger number than the IV dose.</li>
+</ul></td>
+<td>No. Derived on the slide from F<sub>abs</sub>.</td></tr>
+
+<tr><td><b>F<sub>rel</sub> = {{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}} &times; {{frac:D<sub>B</sub>|D<sub>A</sub>}}</b></td>
+<td>A the product being compared (test); B the reference standard or comparator; AUC in matching units; D in mg; no units</td>
+<td>Two formulations of the same drug, neither IV. <i>"compared to the oral solution ... that tells you that the oral solution, the AUC, the oral solution is going to be in the denominator."</i> Can exceed 1.</td>
+<td>Her slide problem: a 250 mg tablet, AUC 101.5, against 250 mg in oral solution, AUC 98.76: {{frac:101.5|98.76}} = 1.03. It says nothing about bioequivalence, because the rate is unknown.</td>
+<td>Yes, page 2, under the absolute lines.</td></tr>
+</tbody></table>
+
+<p><b>Definitions, in the slides' wording.</b></p>
+<table class="reftab"><thead><tr>
+<th style="width:22%">Term</th><th style="width:48%">Definition</th><th>How she puts it</th></tr></thead><tbody>
+<tr><td>Drug product performance</td><td>The release of the drug substance from the drug product leading to bioavailability of the drug substance.</td><td><i>"If the drug does not release from dosage form, then the drug will not be available for the body to use."</i></td></tr>
+<tr><td>Bioavailability</td><td>The rate and extent to which the active ingredient or active moiety is absorbed from a drug product and becomes available at the site of action.</td><td>Extent is the AUC; rate is t<sub>max</sub>. The course's F is the extent half.</td></tr>
+<tr><td>Absolute bioavailability</td><td>Comparison of the bioavailability of the active drug in the systemic circulation following extravascular administration with the bioavailability of the same drug following intravenous administration.</td><td>Her note on the slide: comparing AUCs to IV, think oral. The IV AUC is the denominator.</td></tr>
+<tr><td>Relative bioavailability</td><td>Comparison of two drug product formulations.</td><td>The reference B is underneath; <i>"something new that comes onto the market could have a slightly higher bioavailability"</i>, so F<sub>rel</sub> can pass 1.</td></tr>
+<tr><td>Bioequivalence</td><td>The absence of a significant difference in the rate and extent to which the active ingredient or active moiety becomes available at the site of drug action when administered at the same molar dose under similar conditions in an appropriately designed study. A bioequivalence study is a specialized type of relative bioavailability study.</td><td><i>"these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate."</i></td></tr>
+<tr><td>Test and reference product</td><td>Comparison of the bioavailability of the same active pharmaceutical ingredient from one drug product (test) to a second drug product (reference).</td><td><i>"B is the reference standard or the comparator, right? So, in our um absolute example, our reference standard would be our IV bolus."</i></td></tr>
+</tbody></table>
+
 <h3>The equation sheet as a whole</h3>
 <ul class="tlist">
 <li>BasicPharmacokineticsEquations.pdf runs to two pages.</li>
@@ -709,7 +774,7 @@ const REFERENCE_HTML = `
 <tr><td>Clearance and elimination</td><td>Cl<sub>T</sub> = {{frac:FD<sub>0</sub>|AUC}}; f<sub>e</sub> = {{frac:D<sub>u</sub><sup>&infin;</sup>|FD<sub>0</sub>}} = {{frac:k<sub>e</sub>|k}}; Cl<sub>R</sub> = f<sub>e</sub>Cl<sub>T</sub>; Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>)Cl<sub>T</sub>; rate of elimination = (Cl)(C<sub>p</sub>); Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub></td><td>Module 4</td></tr>
 <tr><td>Single oral dose</td><td>The full C<sub>p</sub> equation and t<sub>max</sub></td><td>Module 5</td></tr>
 <tr><td>Multiple dosing</td><td>D<sub>max</sub>, D<sub>min</sub>, D<sub>avg</sub>, C<sub>max</sub>, C<sub>min</sub>, C<sub>avg</sub>, and C<sub>p</sub> after n doses, IV and oral, all carrying a dosing interval; plus multiple-oral-dose C<sub>p</sub>, C<sub>max</sub>, C<sub>min</sub> and t<sub>max</sub> at steady state on page 2</td><td>Module 6, all three parts: repeated IV bolus, intermittent infusions, multiple oral doses</td></tr>
-<tr><td>Bioavailability</td><td>F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}}{{frac:D<sub>IV</sub>|D<sub>po</sub>}}; F<sub>rel</sub> = {{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}}{{frac:D<sub>B</sub>|D<sub>A</sub>}}; D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>); F<sub>abs</sub>D<sub>po</sub> = (Cl)(AUC<sub>po</sub>)</td><td>Module 9, not yet lectured</td></tr>
+<tr><td>Bioavailability</td><td>F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}}{{frac:D<sub>IV</sub>|D<sub>po</sub>}}; F<sub>rel</sub> = {{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}}{{frac:D<sub>B</sub>|D<sub>A</sub>}}; D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>); F<sub>abs</sub>D<sub>po</sub> = (Cl)(AUC<sub>po</sub>)</td><td>Module 7a</td></tr>
 <tr><td>Shelf life and stability</td><td>An E and E<sub>0</sub> log-decline line, and three t<sub>eff</sub> forms including t<sub>eff</sub> = 1.44 t&frac12; ln[{{frac:D<sub>0</sub>|C<sub>eff</sub>V<sub>D</sub>}}]</td><td>Chemical kinetics; not lectured in Modules 1 to 5</td></tr>
 <tr><td>Nonlinear pharmacokinetics</td><td>R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}; K<sub>M</sub> from two rate and concentration pairs; t&frac12; = {{frac:0.693(K<sub>M</sub> + C<sub>p</sub>)V<sub>D</sub>|V<sub>max</sub>}}; Cl<sub>T</sub> = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}</td><td>Final exam material</td></tr>
 </tbody></table>

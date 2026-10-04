@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (bioavailability lecture)
+- Module 7a, bioavailability and bioequivalence: 26 questions from her slide, in-class and poll problems.
+- Module 7a guide, reference section, tell-apart table, six terms, and the bioequivalence figure walk-through.
+- Exam 2: the bioavailability pool can now be drawn in full.
+
 ## 2026-10-04 (quiz 4 card)
 - Topics: a Quiz 4 card with what she said to prepare, drills on its modules, and a timed practice quiz.
 - The quiz card hides itself once the quiz is over, or when you tap Hide.

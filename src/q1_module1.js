@@ -142,6 +142,21 @@ const TOPICS = [
     cite:'6a---Multiple-Oral-Doses.pdf, slides "Time to Peak at Steady State" and "Example 1"'},
    {id:'oparam', name:'Changing the dose and the dosing interval',
     cite:'6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens" to "Consider Peak and Trough"'}]},
+
+ /* ───────── Module 7a ───────── */
+ {id:'bioavail', name:'Bioavailability and bioequivalence', prof:'Mosley',
+  cite:'7a---Bioavailability-and-Bioequivalence.pdf, slide "Objectives"',
+  subs:[
+   {id:'defs', name:'Drug product performance, bioavailability, absolute and relative, bioequivalence',
+    cite:'7a---Bioavailability-and-Bioequivalence.pdf, slides "Drug Product Performance" to "Bioequivalence"'},
+   {id:'factors', name:'Factors influencing bioavailability',
+    cite:'7a---Bioavailability-and-Bioequivalence.pdf, slides "Factors Influencing Bioavailability" and "Summary"'},
+   {id:'fabs', name:'Absolute bioavailability and the equivalent oral dose',
+    cite:'7a---Bioavailability-and-Bioequivalence.pdf, slides "Absolute Bioavailability" and "Practice Problem"'},
+   {id:'frel', name:'Relative bioavailability',
+    cite:'7a---Bioavailability-and-Bioequivalence.pdf, slides "Relative Bioavailability" and "Practice Problem"'},
+   {id:'figure', name:'Reading the bioequivalence example',
+    cite:'7a---Bioavailability-and-Bioequivalence.pdf, slide "Bioequivalence Example"'}]},
 ];
 
 
@@ -274,6 +289,18 @@ const CHAINS = [
  {id:'m6-tetracycline', src:'example', module:6, name:'Tetracycline 250 mg orally every 8 hours',
   setup:'F 0.75, V<sub>D</sub> 1.5 L/kg in a 75-kg male, t&frac12; 10 hr, k<sub>a</sub> 0.9 hr<sup>&minus;1</sup>: the first-dose peak, then the peak, trough and average at steady state',
   parts:['m6b-n09','m6b-n10','m6b-n11','m6b-n12','m6b-n13','m6b-n14']},
+
+ {id:'m7-practice', src:'example', module:7, name:'Absolute bioavailability of a tablet, then the equivalent oral dose',
+  setup:'250 mg tablet (AUC 101.5 (mcg/mL)hr) against a 100 mg IV bolus (AUC 73.8 (mcg/mL)hr): F, then the oral dose equivalent to 100 mg IV',
+  parts:['m7-n01','m7-n02']},
+
+ {id:'m7-act1', src:'inclass', module:7, name:'In-class activity 1: a 500 mg tablet against a 500 mg IV bolus',
+  setup:'Oral AUC 70 mg h/L; IV t&frac12; 3 hr, V<sub>D</sub> 25 L: the absolute bioavailability, then the AUC a 250 mg IV dose would give',
+  parts:['m7-n04','m7-n05']},
+
+ {id:'m7-act3', src:'inclass', module:7, name:'In-class activity 3: C<sub>p</sub> = 50e<sup>&minus;0.2t</sup> after 500 mg IV',
+  setup:'The clearance, the IV AUC from the dose and clearance, then the oral bioavailability of a 500 mg tablet with AUC 188 mcg hr/mL',
+  parts:['m7-n07','m7-n08','m7-n09']},
 ];
 
 /* Where each problem set comes from, in `src` above:
@@ -322,6 +349,10 @@ const OBJECTIVES = [
   {module:6, n:'3', text:'Predict the concentration of drug in the plasma at any time following multiple IV infusions of drug', subs:['intermit/why', 'intermit/add']},
   {module:6, n:'6a.1', text:'Calculate plasma drug concentration following multiple extravascular administrations of drug', subs:['multoral/oeq', 'multoral/ossc']},
   {module:6, n:'6a.2', text:'Discuss the effects of changing various parameters on the pharmacokinetics', subs:['multoral/oparam']},
+  {module:7, n:'7a.1', text:'Define drug product performance, bioavailability, and bioequivalence', subs:['bioavail/defs', 'bioavail/figure']},
+  {module:7, n:'7a.2', text:'Distinguish between relative bioavailability and absolute bioavailability', subs:['bioavail/defs', 'bioavail/frel']},
+  {module:7, n:'7a.3', text:'Discuss factors that can influence bioavailability', subs:['bioavail/factors']},
+  {module:7, n:'7a.4', text:'Estimate bioavailability of a dose given route of administration, dosage form, etc.', subs:['bioavail/fabs', 'bioavail/frel']},
 ];
 
 /* The kinds of calculation each module asks, in the order they are taught.
@@ -356,6 +387,8 @@ const CALC_TYPES = [
   {module:6, id:'m6-inf1', name:'One intermittent infusion: rate and the end-of-infusion level', match:['intermit/why'], example:'m6b-n02'},
   {module:6, id:'m6-infadd', name:'Adding infusions on a time line', match:['intermit/add'], example:'m6b-n03'},
   {module:6, id:'m6-oral', name:'Multiple oral doses: peak, trough, time to peak and average', match:['multoral/ossc'], example:'m6b-n12'},
+  {module:7, id:'m7-fabs', name:'Absolute bioavailability from two AUCs, and the equivalent oral dose', match:['bioavail/fabs'], example:'m7-n01'},
+  {module:7, id:'m7-frel', name:'Relative bioavailability of one formulation against another', match:['bioavail/frel'], example:'m7-n03'},
 ];
 
 

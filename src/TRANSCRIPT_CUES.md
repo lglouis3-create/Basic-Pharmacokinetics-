@@ -900,3 +900,73 @@ No other polls found.
 - Quiz 3: Wednesday, covering > "single oral and elimination and clearance" (cue 11).
 - Class time moves to 8:00 am from that Wednesday onward (cue 12).
 - No question counts, timing or calculator rules stated in this lecture.
+
+---
+
+## 9. `Basic Pharmacokinetics 09.30 Lecture Transcript.txt` — Module 7a: Bioavailability and bioequivalence
+
+### 9.1 Exam and quiz cues
+
+1. Quiz 4 scope: > "our last quiz, we covered, um, all the stuff since the last exam. So we talked about clearance and I think we had our single oral. Dosing on that last quiz. So this quiz will really only be today's stuff and the multiple oral dosing or multiple dosing, right? Cause we did multiple IV, multiple infusion, and multiple oral."
+2. Quiz 4 date: > "we will have the quiz bright and early Monday morning, um, and then on Monday we'll do the quiz, we'll do a recap, and then we will get together again on Thursday for exam number 2"
+3. Quiz 4 emphasis, this lecture: > "Now, conceptually. Definitions Right? And that's pretty much it for this, right? Um, and, and the why, right? Why do we care?" and > "You will notice that I didn't do too many relative bioavailability. I don't have too many of those. I'm not gonna ask you too many of those. We're gonna kind of focus more on the absolute bioavailability."
+4. Quiz 4 emphasis, multiple dosing: > "think about the why" — the maximum at steady state after multiple IV bolus doses "is a question that you should be able to just think through without having to pull up that equation sheet"; C0 = dose/VD and the accumulation factor 1/(1 − e^(−kτ)); the minimum is the maximum times e^(−kτ); the homework asked for a time after the last dose ("we're going from tau to tea"); for oral, tmax at steady state "depends on KKA and now tau"; the things a regimen can change are "How much drug we give and how often we give the drug"; for intermittent infusions, "the why" and that the concentrations from each infusion are additive.
+5. Calculations on the quiz and exam: > "definitions, um, there will be a few calculations as always, um, the calculations should not take you the full, should the calculations, think about them before you approach them. You can do them in 1 minute or I'm gonna say 1 minute or less, but we'll say 2 minutes or less, right? Take a, take a 30 seconds to read through, understand what is being asked in the question."
+6. Exam 2 date and sense in which it is cumulative: > "our next exam is next Thursday. So um next week will be Monday, Thursday. Um, so, the exams are cumulative just based, so exam two will be cumulative. Math and conceptual, so I'm not gonna ask you multiple choice about like which of the is this first order or zero order, right? But for example, multiple IV bolus dosing, you need to know single IV bolus dosing in order to do that, right? So it will be cumulative. In that aspect, the 3rd exam will be completely cumulative"
+7. Exam weights: > "the exams are 27% each, so 1 and 2 are 27%, and the third exam is 33%. So you can bring yourself back up to wherever you want to be with that"
+8. Exam 3 scope: > "I will go back to exam 10 versus 1st, trapezoidal rule and all the stuff we did on exam 1 plus the stuff on exam 2, and we only have a little bit of stuff for new stuff for exam 3." `[likely: "exam 1 material"; "exam 10" is caption garble]`
+9. No leading decimals, restated: > "If I ask you for bioavailability, or the F, And let's say you calculated 55%. You can give that to me as 55%. You can give that to me as 0.55, but you cannot give that to me. Like so, OK, just a little reminder, there should be no leading decimals, OK? 55% is fine, 0.55% is fine. I, I don't care either way, but 0.55 is not fine." `[?]` The captions put "0.55" in both the accepted and the rejected place; her slide annotation is "0.55 ... don't forget leading decimals" and the rejected form is .55. "0.55%" is read as a garble of 0.55.
+10. The IV AUC goes in the denominator, to be known without the sheet: > "without looking at your equation sheet, remember, I, I want you to remember that the IVAUC is going to be in the denominator, right? That is what you are comparing it to."
+11. What she will ask: > "Most of the time, it, it's just gonna say the, what is the oral bioavailability or what is the bioavailability of this compared to the other, right?"
+12. The poll wording is fixed, the numbers move: > "If I change up the numbers, we're all gonna get this, right? Cause there's not a whole lot I can do with the wording here. Straightforward."
+13. Rounding an oral dose: > "if you give me something reasonable, and if you, if, if you give me 571.43 mg, um, I won't judge you real hard, right? But, but right, um, that's not a, a real, it's not gonna be a realistic solid oral dosage form strength, right? That is the number that you should get. So we're gonna come close to that, as close as possible. So, maybe come up with the 600 or you can tell me 575, etc."
+14. Materials she will post: > "I will post practice problems on this material that we covered today." and > "I will post some homework tomorrow. It will be due on Sunday night"
+15. The quiz she "made up": > "I feel like I've disappointed you guys because I got several questions slash emails about a quiz. Did you guys want a quiz today? ... OK, I just made it up. OK. Um, so, but our quiz will be next time"
+
+**Exam cue count: 15**
+
+### 9.2 Her exact wording for terms and definitions
+
+- Drug product performance: > "Product performance is basically making sure that the drug releases from the dosage form. If the drug does not release from dosage form, then the drug will not be available for the body to use."
+- Bioavailability is rate and extent: > "we tend to think about bioavailability as the extent, so looking at that area under the curve, but notice that the definition definition, the textbook definition of bioavailability is the rate and the extent."
+- Extent is AUC, rate is tmax: > "We think about that in terms of our AUC, right? What's the AUC of one dose, one dosage forms relative to another? What is the AUC? What do you think about the rate? So we think about rate in terms of T max. When does the max occur, right?"
+- Absolute: > "Here, we're comparing active drug following extravascular administration, so think oral to bioavailability following IV, OK? So, absolute says we are comparing basically to the IV. So, the IV when we talked about our F before our IV that F is 1."
+- Why the doses are in the equation: > "we can have a dose of 1000 mg and compare it to 100, but that's why we've, we throw that into the equation because we think about all of those pieces."
+- Clearance relates dose to AUC: > "dose IV is equal to clearance times AUC. Remember we talked about that, that importance of clearance in terms of it being a constant in terms of elimination terms. But also that it relates the dose directly to the AUC"
+- What 0.55 means: > "if you give, let's say 1000 mg tablet. Right? 55% of 550 mg of that should be available for the body to use per our definition of bioavailability, right? Versus if you gave a 1000 mg dose of our um IV dose, all of that should be available for the body to use" and > "Here, we're losing about 55, we're, we're losing almost half the drug giving it orally"
+- Equivalent oral dose: > "Basically what we're saying is that we want. The AUCs to be similar. ... Here, if we want our AUCs to be similar. Then this reduces down to where F is equal to DIV over DPO. Right? If the AUCs are equivalent." and > "What do you expect the number to be relative to the IV dose? You, you expect that you're gonna have a larger, um, PO dose, right?"
+- Relative: > "Relative bioavailability says that we are just comparing two drug formulations. Um, we could be comparing, um, a new product on the market to the innovator part, um, product, etc. but we are comparing two different formulations of the same drug."
+- The reference: > "B is the reference standard or the comparator, right? So, in our um absolute example, our reference standard would be our IV bolus. Um, here our B is whatever the originator of the standard is for the drug"
+- F greater than 1: > "Can we have an F greater than 1? Yes, For absolute or for relative or either, both? Relative, but what about for absolute?" and the Bayer aspirin example: > "it is very possible that something new that comes onto the market could have a slightly higher bioavailability."
+- Bioequivalence: > "bioequivalence is basically a specialized type of bioavailability study." > "It's the absence of a significant difference. So they don't have to be exactly the same, but they just can't be too different. And they The rate and the extent."
+- Relative F alone is not bioequivalence: > "here, these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate. When do, when does it peak, right?"
+- F is dimensionless: > "recognize that F is a dimensionless number, right? Cause all of our units are are canceling."
+- Linear kinetics and the AUC: > "we expect for our linear pharmacokinetics, a proportional increase, decrease, or whatever, change. In the AUC as well as the concentration as we change the dose."
+
+### 9.3 Worked examples she does aloud
+
+- Practice Problem (absolute): the IV AUC in the denominator, the IV dose in the numerator; "I'm hearing 0.55". Equivalent oral dose of the 100 mg IV: 182 mg, "We might round it to 200 if there's a 175".
+- Practice Problem (relative): "One 1 point. 03"; a student says the two are bioequivalent and she corrects: the rate is unknown.
+- In-class 1(a): > "our dose is 500 mg. Our clearance is our volume distribution, 25 L times RK, which is 0.231 per hour. So I'm coming up with 86.58 mg per liter times hour. ... So I'm getting about 81%." Then the second route: > "F is going to be equal to our AUC, so 70. Our volume and distribution is 25 L. OK is 0.231 per hour. The dose is 500 mg. So this is canceling, that's canceling, this is canceling. And you should get exactly the same thing." `[?]` "you can do this 22 different ways" is caption garble for "two different ways".
+- In-class 1(b): "Half, right?" — 250 mg, 25 L, 0.231: 43.29.
+- In-class 2: 400 mg/0.7 = 571.43 mg; strengths googled in class: "250, 500, it says something about there is a generic 100".
+- In-class 3: clearance 2 L/hr (VD 10 L from 500 mg/50 mg/L); AUC 500/2 = 250 mg per liter times an hour; F = 188/250 = 75%.
+- Poll, multiple IV bolus maximum at steady state: 300 mg/16 L = C0, divided by 1 − e^(−0.1733 × 12), 21.4 mg/L; most of the class chose B.
+
+### 9.4 Poll / clicker questions
+
+- Opening attendance poll: a flashback on the trapezoidal rule as the way to calculate AUC ("most of you guys thought, yes").
+- PollEv: "What is the bioavailability of a 500 mg tablet which yielded an AUC of 115 (mg/L)hr compared to a 400 mg IV bolus dose that yielded an AUC of 132 (mg/L)hr? 50% / 70% / 85% / 92%" → 70%.
+- Second poll: maximum steady-state concentration after multiple IV bolus doses (300 mg every 12 hours, VD 16 L, t½ 4 hr) → 21.4 mg/L, "most of you guys thought that it was B".
+
+### 9.5 Where she explains a concept differently from the slide
+
+- The slide defines bioavailability as rate and extent; she adds that in practice it is thought of as the extent, and that rate means tmax.
+- The equation slide gives three equations; she makes the third into the equivalent-dose relation F = D_IV/D_PO by setting the AUCs equal, which is not printed.
+- The factors slide is a list; she says the first three are the ones that come to mind most often and, on age, "our bodies change as we age, and yes, everything slows down".
+
+### 9.6 Exam format
+
+- Quiz 4 on Monday: this lecture plus multiple dosing (IV bolus, intermittent infusion, oral); definitions and the why; a few calculations of 2 minutes or less each.
+- Exam 2 on Thursday: cumulative in that multiple-dose problems need the single-dose skills, not in re-asking Exam 1's conceptual items; Exam 3 completely cumulative; weights 27 / 27 / 33 per cent.
+- Practice problems to be posted; homework posted the next day, due Sunday night.

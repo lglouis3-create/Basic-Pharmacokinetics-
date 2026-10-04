@@ -1319,5 +1319,120 @@ const TERMS = [
   ],
   "cite": "6a---Multiple-Oral-Doses.pdf, slides 12, 13, 14, 15, 16, 17, 18 (PDF page numbering; deck prints no slide numbers); guide.js Module 6a objective 2 (transcript 09-28); drill Guides, 09-28",
   "src": "both"
+ },
+ {
+  "id": "drug-product-performance",
+  "term": "Drug product performance",
+  "module": 7,
+  "lecture": "L10",
+  "group": "Bioavailability and bioequivalence",
+  "def": "Drug product performance - the release of the drug substance from the drug product leading to bioavailability of the drug substance.",
+  "gist": "Release of the drug from its dosage form, the step before absorption.",
+  "scene": "A capsule is swallowed, but the powder inside never dissolves out of the shell, so no plasma curve rises; the step that failed comes before absorption.",
+  "hook": "If the drug does not release from the dosage form, the body cannot use it and there is no curve to measure.",
+  "confuse": [
+   "bioavailability-rate-extent",
+   "absorption",
+   "bioequivalence"
+  ],
+  "quote": "Product performance is basically making sure that the drug releases from the dosage form. If the drug does not release from dosage form, then the drug will not be available for the body to use.",
+  "cite": "7a---Bioavailability-and-Bioequivalence.pdf, slide 3 (PDF page numbering; deck prints no slide numbers); transcript 09-30",
+  "src": "both"
+ },
+ {
+  "id": "bioavailability-rate-extent",
+  "term": "Bioavailability (rate and extent)",
+  "module": 7,
+  "lecture": "L10",
+  "group": "Bioavailability and bioequivalence",
+  "def": "Bioavailability - the rate and extent to which the active ingredient or active moiety is absorbed from a drug product and becomes available at the site of action. Bioavailability data provide an estimate of the fraction of drug absorbed from the formulation and provide information about the pharmacokinetics of the drug.",
+  "gist": "Rate and extent of absorption from a product; AUC for extent, tmax for rate.",
+  "scene": "Two tablets of one drug are compared by how much of each dose reaches the blood and how fast it gets there, read as the area under the curve and the time of the peak.",
+  "hook": "Extent is the AUC; rate is tmax. The course's F is the extent half of the definition.",
+  "confuse": [
+   "bioequivalence",
+   "absolute-bioavailability",
+   "drug-product-performance",
+   "area-under-the-curve"
+  ],
+  "quote": "notice that the definition definition, the textbook definition of bioavailability is the rate and the extent.",
+  "cite": "7a---Bioavailability-and-Bioequivalence.pdf, slide 4 (PDF page numbering; deck prints no slide numbers); transcript 09-30",
+  "src": "both"
+ },
+ {
+  "id": "absolute-bioavailability",
+  "term": "Absolute bioavailability (Fabs)",
+  "module": 7,
+  "lecture": "L10",
+  "group": "Bioavailability and bioequivalence",
+  "def": "Absolute bioavailability - comparison of the bioavailability of the active drug in the systemic circulation following extravascular administration with the bioavailability of the same drug following intravenous administration; Fabs = {{frac:AUCpo|AUCiv}} x {{frac:Div|Dpo}}.",
+  "gist": "Oral AUC against IV AUC, corrected for dose; the IV AUC goes underneath.",
+  "scene": "A 250 mg tablet gave an area of 101.5 (mcg/mL)hr and a 100 mg IV bolus gave 73.8 (mcg/mL)hr; the tablet's fraction absorbed comes to 0.55, with the IV area in the denominator.",
+  "hook": "The IV AUC is in the denominator; this F cannot exceed 1, and is written 0.55 or 55%, never a bare decimal point.",
+  "confuse": [
+   "relative-bioavailability",
+   "bioavailability",
+   "fraction-excreted"
+  ],
+  "quote": "I want you to remember that the IVAUC is going to be in the denominator, right? That is what you are comparing it to.",
+  "cite": "7a---Bioavailability-and-Bioequivalence.pdf, slides 5, 6, 7, 8 (PDF page numbering; deck prints no slide numbers); transcript 09-30",
+  "src": "both"
+ },
+ {
+  "id": "relative-bioavailability",
+  "term": "Relative bioavailability (Frel)",
+  "module": 7,
+  "lecture": "L10",
+  "group": "Bioavailability and bioequivalence",
+  "def": "Relative bioavailability - comparison of two drug product formulations; Frel = {{frac:AUCA|AUCB}} x {{frac:DB|DA}}, where B is the reference standard or comparator.",
+  "gist": "Two formulations of one drug compared by AUC; the reference underneath; may exceed 1.",
+  "scene": "A 250 mg tablet (AUC 101.5) is compared with 250 mg in an oral solution (AUC 98.76); the ratio is 1.03, and neither product is IV.",
+  "hook": "Her Bayer aspirin example: an old standard can be beaten by a new product, so this F can be greater than 1.",
+  "confuse": [
+   "absolute-bioavailability",
+   "bioequivalence",
+   "bioavailability-rate-extent"
+  ],
+  "quote": "Relative bioavailability says that we are just comparing two drug formulations.",
+  "cite": "7a---Bioavailability-and-Bioequivalence.pdf, slides 9, 10, 11 (PDF page numbering; deck prints no slide numbers); transcript 09-30",
+  "src": "both"
+ },
+ {
+  "id": "bioequivalence",
+  "term": "Bioequivalence",
+  "module": 7,
+  "lecture": "L10",
+  "group": "Bioavailability and bioequivalence",
+  "def": "Bioequivalence is defined as the absence of a significant difference in the rate and extent to which the active ingredient or active moiety becomes available at the site of drug action when administered at the same molar dose under similar conditions in an appropriately designed study. A bioequivalence study is a specialized type of relative bioavailability study.",
+  "gist": "No significant difference in rate and extent at the same molar dose.",
+  "scene": "Two products of one active ingredient are given at the same molar dose; their areas match and their peaks come at about the same time, so no significant difference is found in either.",
+  "hook": "The same AUC alone is not enough: curves A and B on her figure share an area but peak at different times.",
+  "confuse": [
+   "relative-bioavailability",
+   "bioavailability-rate-extent",
+   "reference-product"
+  ],
+  "quote": "these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate.",
+  "cite": "7a---Bioavailability-and-Bioequivalence.pdf, slides 12, 13 (PDF page numbering; deck prints no slide numbers); transcript 09-30",
+  "src": "both"
+ },
+ {
+  "id": "reference-product",
+  "term": "Reference product (comparator)",
+  "module": 7,
+  "lecture": "L10",
+  "group": "Bioavailability and bioequivalence",
+  "def": "Bioequivalence - comparison of the bioavailability of the same active pharmaceutical ingredient from one drug product (test) to a second drug product (reference); the reference is B, the reference standard or comparator, in the denominator of Frel.",
+  "gist": "The standard a test product is measured against; its AUC goes in the denominator.",
+  "scene": "A new tablet is measured against the originator's product, and the originator's area under the curve is the one written underneath.",
+  "hook": "In an absolute study the IV bolus plays this part; in a relative study it is whatever the originator or standard is.",
+  "confuse": [
+   "bioequivalence",
+   "relative-bioavailability",
+   "iv-bolus"
+  ],
+  "quote": "B is the reference standard or the comparator, right? So, in our um absolute example, our reference standard would be our IV bolus.",
+  "cite": "7a---Bioavailability-and-Bioequivalence.pdf, slides 9, 12 (PDF page numbering; deck prints no slide numbers); transcript 09-30",
+  "src": "both"
  }
 ];

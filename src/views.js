@@ -691,7 +691,7 @@ function modulePool(module){
 }
 const objectivesOf = module => (typeof OBJECTIVES === 'undefined' ? [] : OBJECTIVES).filter(o => o.module === module);
 const objectivePool = o => QUESTIONS.filter(q => kindOf(q) === 'concept' && o.subs.includes(subKey(q)) && matchesFilter(q));
-const objLabel = o => /^6a\./.test(o.n) ? `Oral doses, objective ${o.n.slice(3)}` : `Objective ${o.n}`;
+const objLabel = o => /^6a\./.test(o.n) ? `Oral doses, objective ${o.n.slice(3)}` : /^\d+[a-z]\./.test(o.n) ? `Objective ${o.n.slice(o.n.indexOf('.') + 1)}` : `Objective ${o.n}`;
 /* the calculation type a question belongs to: the first whose match it meets */
 function calcTypeOf(q){
   if(kindOf(q) !== 'calc' || typeof CALC_TYPES === 'undefined') return null;
@@ -1120,7 +1120,8 @@ function linksFor(q){
   GUIDE_HEADS ||= headsOf(GUIDE_HTML);
   const objs = OBJECTIVES.filter(o => o.module === q.module && o.subs.includes(subKey(q)));
   for(const o of objs.slice(0, 1)){
-    const mod = /^6a\./.test(o.n) ? '6a' : String(o.module), n = /^6a\./.test(o.n) ? o.n.slice(3) : o.n;
+    const lettered = /^(\d+[a-z])\.(.+)$/.exec(o.n);   // 6a.1, 7a.2: a deck lettered after its module
+    const mod = lettered ? lettered[1] : String(o.module), n = lettered ? lettered[2] : o.n;
     const g = GUIDE_HEADS.find(h => h.t.startsWith(`Module ${mod}, objective ${n} `));
     if(g) out.push(['guide', `guide-${g.i}`, `Guide: ${objLabel(o)}`]);
   }
@@ -2132,7 +2133,7 @@ let REF_HEADS = null;
 function refLinksFor(q){
   REF_HEADS ||= [...REFERENCE_HTML.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>/g)]
     .map((m, i) => ({i, t: deEnt(m[2].replace(/<[^>]+>/g, '')).trim()}));
-  return q.module == null ? [] : REF_HEADS.filter(h => h.t.startsWith(`Module ${q.module} `));
+  return q.module == null ? [] : REF_HEADS.filter(h => new RegExp(`^Module ${q.module}[a-z]? `).test(h.t));
 }
 const plainMath = s => String(s || '').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '($1)/($2)');
 const clip = (s, n) => s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : s;
@@ -2684,8 +2685,8 @@ const mathHTML = h => String(h).replace(FRAC_RE,
 
 function refFigures(html){
   html = mathHTML(html);
-  html = html.replace(/\{\{steps:([a-z0-9_]+)\}\}/gi, (_, key) => stepFigHTML(key));
-  return html.replace(/\{\{fig:([a-z0-9_]+)\|([^}]*)\}\}/gi, (_, key, cap) => {
+  html = html.replace(/\{\{steps:([a-z0-9_-]+)\}\}/gi, (_, key) => stepFigHTML(key));
+  return html.replace(/\{\{fig:([a-z0-9_-]+)\|([^}]*)\}\}/gi, (_, key, cap) => {
     if(!IMAGES[key]) return '';
     const c = esc(deEnt(cap));
     return `<figure class="reffig"><img src="${IMAGES[key]}" alt="${c}">` +
