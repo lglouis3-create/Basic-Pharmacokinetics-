@@ -66,6 +66,7 @@ def fracify(s):
     t = re.sub(r'\{\{frac:[^}]*\}\}', mask, s)
     t = re.sub(r'\^\((?:[^()]|\([^()]*\))*\)', mask, t)
     t = re.sub(r'"[^"]*"|“[^”]*”', mask, t)
+    t = re.sub(r'\bt1/2(?!\d)', mask, t)             # the half-life name, not a fraction
     def rep(m):
         a, b = m.group(1).strip(), m.group(2).strip()
         if _UNIT.match(a) or _UNIT.match(b) or _UNIT.match(a.split()[-1]):

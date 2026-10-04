@@ -20,6 +20,8 @@ const SUBSYM = [
   ['Cav∞','C<sub>av</sub><sup>∞</sup>'],['Dmax∞','D<sub>max</sub><sup>∞</sup>'],['Dmin∞','D<sub>min</sub><sup>∞</sup>'],
   ['Davg∞','D<sub>avg</sub><sup>∞</sup>'],
   ['kVD','kV<sub>D</sub>'],['FD0','FD<sub>0</sub>'],
+  ['AUCA','AUC<sub>A</sub>'],['AUCB','AUC<sub>B</sub>'],['AUCC','AUC<sub>C</sub>'],['Fabs','F<sub>abs</sub>'],['Frel','F<sub>rel</sub>'],
+  ['Dpo','D<sub>po</sub>'],['DIV','D<sub>IV</sub>'],['DA','D<sub>A</sub>'],
   ['AUCoral','AUC<sub>oral</sub>'],['AUCiv','AUC<sub>IV</sub>'],['AUCpo','AUC<sub>po</sub>'],['AUCIV','AUC<sub>IV</sub>'],
   ['Cpeak','C<sub>peak</sub>'],['Cmax','C<sub>max</sub>'],['Cmin','C<sub>min</sub>'],['tmax','t<sub>max</sub>'],
   ['Css','C<sub>ss</sub>'],['ClT','Cl<sub>T</sub>'],['ClR','Cl<sub>R</sub>'],['ClH','Cl<sub>H</sub>'],['SCr','S<sub>Cr</sub>'],
@@ -463,6 +465,7 @@ function updatedText(){
    drills on the modules she named and a timed practice paper drawn from
    them; the paper runs on the exam engine with its own title and id. */
 const QUIZ_HIDE_KEY = NS + ':quizhide:';
+const PANEL_OPEN = {morefilters: false, qsaid: false};   // panels on Topics that stay as left across re-renders
 let QUIZ_N = 10;   // questions on a practice quiz: she has not said how many, so the student picks
 const quizScope = qz => QUESTIONS.filter(q => (qz.modules || []).includes(q.module));
 function quizLive(qz){
@@ -484,7 +487,7 @@ function quizCards(){
       <button class="ghost" data-quizhide="${qz.id}" title="Hide this card">Hide</button></div>
       <div class="mfoot">
       ${qz.quote ? `<p class="dquote">“${esc(qz.quote)}”</p>` : ''}
-      <details class="qsaid"><summary>What she said to prepare</summary><ul class="tlist">${(qz.said || []).map(t => `<li>${mathHTML(t)}</li>`).join('')}</ul>
+      <details class="qsaid"${PANEL_OPEN.qsaid ? ' open' : ''}><summary>What she said to prepare</summary><ul class="tlist">${(qz.said || []).map(t => `<li>${mathHTML(t)}</li>`).join('')}</ul>
         ${qz.src ? `<p class="wcite">${esc(qz.src)}</p>` : ''}</details>
       ${c ? row('Concepts on this quiz, adaptive', `${c} questions, no arithmetic — ${due}`, 'adaptive', 'concept') : ''}
       ${m ? row('Calculations on this quiz, adaptive', `${m} questions, each worked to a number — ${due}`, 'adaptive', 'calc') : ''}
@@ -498,7 +501,7 @@ function quizCards(){
   }).join('');
 }
 function beginQuiz(qz, n){
-  if(EX && EX.running) return;
+  if(EX && EX.running){ show('exam'); return; }   // a paper is already running: go to it
   const src = quizScope(qz).filter(q => !q.lowYield);
   const qs = shuffle(drawN(src, Math.min(n, src.length)));
   if(!qs.length){ alert('The bank holds no question on this quiz yet.'); return; }
@@ -610,7 +613,7 @@ function renderTopics(){
   }
 
   const fb = filterBar();
-  if(fb) h += `<details class="morefilters"><summary>Filter by what a question asks</summary>${fb}</details>`;
+  if(fb) h += `<details class="morefilters"${PANEL_OPEN.morefilters ? ' open' : ''}><summary>Filter by what a question asks</summary>${fb}</details>`;
   if(!stepwiseOnly) h += `<h3>Mixed drills</h3>
   <div class="topic"><div class="subs">
     <div class="subrow"><span class="sname"><b>Everything, adaptive</b>
@@ -625,13 +628,18 @@ function renderTopics(){
 
   const el = $('#v-topics');
   el.innerHTML = h;
-  el.querySelectorAll('details.examgrp').forEach(d => d.addEventListener('toggle', () => {
-    LS.set(EXAMGRP_KEY + d.dataset.examgrp, d.open ? 'open' : 'closed');
-  }));
+  el.querySelectorAll('details.examgrp').forEach(d => { const initial = d.open;
+    d.addEventListener('toggle', () => {              // a parser-fired toggle on <details open> is not a choice
+      if(!d._touched && d.open === initial){ d._touched = true; return; }
+      d._touched = true; LS.set(EXAMGRP_KEY + d.dataset.examgrp, d.open ? 'open' : 'closed');
+    }); });
 
-  el.querySelectorAll('.chip').forEach(b => b.onclick = () => {
+  el.querySelectorAll('.chip[data-f]').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });
+  el.querySelectorAll('details.morefilters, details.qsaid').forEach(d => d.addEventListener('toggle', () => {
+    PANEL_OPEN[d.classList.contains('qsaid') ? 'qsaid' : 'morefilters'] = d.open;
+  }));
   el.querySelectorAll('.modbtn').forEach(b => b.onclick = () => {
     MODPAGE = {module: +b.dataset.mod, sec: b.dataset.sec}; renderModulePage();
   });
@@ -650,7 +658,7 @@ function renderTopics(){
     const id = +b.dataset.exam, ex = COURSE.exams.find(e => e.id === id);
     const k = b.dataset.k || null;
     const label = kindLabel((ex ? ex.name : 'Exam') + ' recap', k);
-    if(b.dataset.how === 'paper'){ chooseExam(id); show('exam'); return; }
+    if(b.dataset.how === 'paper'){ if(EX && EX.done) EX = null; chooseExam(id); show('exam'); return; }
     if(b.dataset.how === 'sweep') startSweepOf(narrow(examQuestions(id), k), label);
     else startPool(narrow(examQuestions(id), k), label);
   });
@@ -1144,6 +1152,7 @@ function explainHTML(q){
 let RET = [];
 function jump(view, anchor){
   RET.push({view: VIEW, y: window.scrollY, label: VIEW === 'exam' ? 'the exam' : 'the question'});
+  if(view === 'eq') EQ = null;                      // the anchors live on the picker, not in a running drill
   show(view);
   const t = document.getElementById(anchor);
   if(t){
@@ -2463,8 +2472,12 @@ function renderExam(){
    never carries both: taking either one blocks the other. */
 function drawN(pool, n, blocked){
   const picked = [], used = blocked || new Set(), byConcept = {};
-  const take = q => { picked.push(q); used.add(q.id); if(q.dupOf) used.add(q.dupOf); };
-  const free = q => !used.has(q.id) && !(q.dupOf && used.has(q.dupOf));
+  // two wordings of one fact may chain (a dupOf b, b dupOf c): block by the root
+  const rootOf = q => { let r = q; const seen = new Set();
+    while(r.dupOf && !seen.has(r.id)){ seen.add(r.id); const p = byId(r.dupOf); if(!p) break; r = p; }
+    return r.id; };
+  const take = q => { picked.push(q); used.add(q.id); used.add(rootOf(q)); };
+  const free = q => !used.has(q.id) && !used.has(rootOf(q));
   shuffle(pool.slice()).forEach(q => { (byConcept[q.concept] ||= []).push(q); });
   const concepts = shuffle(Object.keys(byConcept));
   for(const c of concepts){                       // one per concept first, for spread
@@ -2519,7 +2532,7 @@ function beginExam(){
   });
   const qs = shuffle(paper);
   if(!qs.length){ alert('The bank holds no question on this blueprint yet.'); return; }
-  startPaper(qs, EXAM.minutes, {sata, coverage: blueprintCoverage()});
+  startPaper(qs, EXAM.minutes, {sata, coverage: blueprintCoverage(), title: EXAM.name + ' paper'});
   renderExamQ();
 }
 const fmt = ms => { const s = Math.max(0, Math.round(ms/1000));
@@ -2828,7 +2841,7 @@ function renderSettings(){
       try{
         const j = JSON.parse(r.result);
         if(!j.db || !j.db.concepts) throw new Error('not a progress file');
-        DB = Object.assign(BLANK(), j.db); save();
+        DB = Object.assign(BLANK(), j.db); save(); setActiveExam(DB.settings.exam || COURSE.activeExam);
         alert('Progress loaded.'); renderSettings();
       }catch(err){ alert('That file could not be read as a progress export.'); }
     };

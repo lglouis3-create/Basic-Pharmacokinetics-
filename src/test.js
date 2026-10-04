@@ -744,5 +744,27 @@ console.log('\n=== 9. Terms ===');
   fails += bad;
 })();
 
+
+console.log('\n=== 10. Bank fields are plain text ===');
+(() => {
+  // stems, options, steps, teach blocks and notes are escaped before they render,
+  // so an HTML tag written into one shows up on screen as text
+  const TAG = /<\/?(sub|sup|b|i|br|span|p|ul|li)\b/i;
+  const bad = [];
+  const look = (id, where, v) => { if (typeof v === 'string' && TAG.test(v)) bad.push(`${id} ${where}`); };
+  for (const q of QUESTIONS.concat(X.EXTRAS, X.TERM_QS)) {
+    look(q.id, 'stem', q.stem); look(q.id, 'note', q.note);
+    (q.options || []).forEach((o, i) => { look(q.id, 'option ' + i, o.t); look(q.id, 'option ' + i + ' why', o.why); });
+    (q.steps || []).forEach((st, i) => { look(q.id, 'step ' + i, st.t); look(q.id, 'step ' + i + ' why', st.why); });
+    (q.pairs || []).forEach((pr, i) => { look(q.id, 'pair ' + i, pr.why); });
+    for (const part of X.teachParts(q.teach)) {
+      look(q.id, 'teach heading', part.h); look(q.id, 'teach text', part.t); look(q.id, 'teach after', part.after);
+      (part.list || []).forEach((li, i) => look(q.id, 'teach bullet ' + i, li));
+    }
+  }
+  if (bad.length) { console.log(`  FAIL  HTML tags in escaped fields (write the symbol plainly; prettyMath subscripts it): ${bad.slice(0, 8).join('; ')}${bad.length > 8 ? ' …' : ''}`); fails += 1; }
+  else console.log('  ok    no HTML tag in any stem, option, step, pair, note or teach text');
+})();
+
 console.log(`\n${fails ? 'FAILURES: '+fails : 'All checks passed'}${warns ? '  (warnings: '+warns+')' : ''}\n`);
 process.exit(fails ? 1 : 0);

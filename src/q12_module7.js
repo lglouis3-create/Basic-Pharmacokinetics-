@@ -27,8 +27,8 @@ const B_TERMS = {h:'The four definitions', list:[
   'Drug product performance: the release of the drug substance from the drug product, leading to bioavailability of the drug substance. If the drug does not release from the dosage form, the body cannot use it.',
   'Bioavailability: the rate and extent to which the active ingredient or active moiety is absorbed from a drug product and becomes available at the site of action.',
   'Extent is read from AUC (the area under the plasma concentration–time curve); rate is read from tmax (the time at which the peak concentration occurs).',
-  'Absolute bioavailability, F<sub>abs</sub>: the bioavailability of the drug after extravascular administration (oral, PO) compared with the same drug given intravenously (IV).',
-  'Relative bioavailability, F<sub>rel</sub>: the bioavailability of one drug product formulation compared with a second formulation of the same drug.',
+  'Absolute bioavailability, Fabs: the bioavailability of the drug after extravascular administration (oral, PO) compared with the same drug given intravenously (IV).',
+  'Relative bioavailability, Frel: the bioavailability of one drug product formulation compared with a second formulation of the same drug.',
   'Bioequivalence: the absence of a significant difference in the rate and extent to which the active ingredient or active moiety becomes available at the site of drug action, when two products are given at the same molar dose under similar conditions in an appropriately designed study.']};
 
 const B_CMP = {h:'Absolute, relative and bioequivalent, side by side', table:{head:['', 'Absolute bioavailability', 'Relative bioavailability', 'Bioequivalence'], rows:[
@@ -39,42 +39,42 @@ const B_CMP = {h:'Absolute, relative and bioequivalent, side by side', table:{he
   after:'A bioequivalence study is a specialized type of relative bioavailability study: it adds the rate to the extent.'};
 
 const B_FABS = {h:'The absolute bioavailability equations', list:[
-  'F<sub>abs</sub> = ({{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}})({{frac:D<sub>IV</sub>|D<sub>po</sub>}}): the ratio of the two AUCs (areas under the plasma concentration–time curve), corrected for the doses when they differ.',
-  'AUC<sub>IV</sub> is the denominator because the IV (intravenous) dose is what the oral product is compared with. For an IV dose F is 1.',
+  'Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}}): the ratio of the two AUCs (areas under the plasma concentration–time curve), corrected for the doses when they differ.',
+  'AUCIV is the denominator because the IV (intravenous) dose is what the oral product is compared with. For an IV dose F is 1.',
   'The dose ratio is the other way up from the AUC ratio: the IV dose on top, the oral dose underneath. A larger oral dose would produce a larger AUC on its own, and the dose ratio removes that.',
   'When the oral and IV doses are the same the dose ratio is 1, and F is the AUC ratio alone.',
-  'D<sub>IV</sub> = Cl × AUC<sub>IV</sub>, where Cl is clearance. Rearranged, AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}}: an IV AUC can be found from the dose and the clearance without any plasma data.',
-  'F<sub>abs</sub> × D<sub>po</sub> = Cl × AUC<sub>po</sub>, so F = {{frac:Cl × AUC<sub>po</sub>|D<sub>po</sub>}} gives the same answer from the oral AUC and the clearance.',
+  'DIV = Cl × AUCIV, where Cl is clearance. Rearranged, AUCIV = {{frac:DIV|Cl}}: an IV AUC can be found from the dose and the clearance without any plasma data.',
+  'Fabs × Dpo = Cl × AUCpo, so F = {{frac:Cl × AUCpo|Dpo}} gives the same answer from the oral AUC and the clearance.',
   'All three are on the equation sheet. F is a ratio of two AUCs and two doses, so every unit cancels: F is dimensionless.']};
 
 const B_IVAUC = {h:'Finding an IV AUC without plasma data', list:[
-  'D<sub>IV</sub> = Cl × AUC<sub>IV</sub>, so AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}}.',
+  'DIV = Cl × AUCIV, so AUCIV = {{frac:DIV|Cl}}.',
   'Clearance comes from Cl = k × VD, where k is the elimination rate constant and VD the apparent volume of distribution; k = {{frac:0.693|t½}} when a half-life is given.',
   'From an IV equation Cp = C0e^(-kt), the dose over C0 gives VD, and k is read from the exponent.',
   'With linear (first-order) kinetics the AUC is proportional to the dose: half the IV dose gives half the AUC.',
-  'Either route works: find AUC<sub>IV</sub> and take the ratio, or put Cl × AUC<sub>po</sub> over D<sub>po</sub>. Both give the same F.']};
+  'Either route works: find AUCIV and take the ratio, or put Cl × AUCpo over Dpo. Both give the same F.']};
 
 const B_DOSE = {h:'From F to an equivalent oral dose', list:[
   'An equivalent regimen means the same extent of exposure: the oral AUC equal to the IV AUC.',
-  'With AUC<sub>po</sub> = AUC<sub>IV</sub>, the AUC ratio in F<sub>abs</sub> is 1 and the equation reduces to F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}}.',
-  'Rearranged: D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}. Dividing by a fraction smaller than 1 makes the oral dose larger than the IV dose, because only the fraction F of an oral dose reaches the circulation.',
+  'With AUCpo = AUCIV, the AUC ratio in Fabs is 1 and the equation reduces to F = {{frac:DIV|Dpo}}.',
+  'Rearranged: Dpo = {{frac:DIV|F}}. Dividing by a fraction smaller than 1 makes the oral dose larger than the IV dose, because only the fraction F of an oral dose reaches the circulation.',
   'The result is then rounded to a strength that is made. 181.8 mg becomes 182 mg, or 200 mg if 175 and 200 are the strengths available; 571.43 mg of ciprofloxacin becomes 575 or 600 mg, the marketed strengths being 250 and 500 mg.']};
 
 const B_WHY = {h:'What the number means', list:[
   'An F of 0.55 means that of a 1000 mg tablet, 550 mg is available for the body to use; of a 1000 mg IV dose, all of it is.',
   'The oral F values met in the single-dose and multiple-dose problems have been around 0.7, 0.8 or 0.9. At 0.55 almost half the oral dose is lost, which bears on whether the oral route is the best way to give the drug.',
-  'The same F converts an IV regimen to an oral one: D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}.',
+  'The same F converts an IV regimen to an oral one: Dpo = {{frac:DIV|F}}.',
   'F is written as 0.55 or as 55 per cent. It is never written .55: no leading decimals.']};
 
 const B_FREL = {h:'Relative bioavailability', list:[
-  'F<sub>rel</sub> = ({{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}})({{frac:D<sub>B</sub>|D<sub>A</sub>}}), on the equation sheet.',
+  'Frel = ({{frac:AUCA|AUCB}})({{frac:DB|DA}}), on the equation sheet.',
   'A is the product being tested; B is the reference standard or comparator, and B goes in the denominator. In the absolute case the reference standard is the IV bolus.',
   'The stem names the reference: "compared to the oral solution" puts the solution\'s AUC in the denominator.',
-  'F<sub>rel</sub> can be greater than 1. The standard is whatever product set the standard, and an old product such as Bayer aspirin can have a lower bioavailability than a newer product compared against it.',
-  'F<sub>rel</sub> compares extent only. Two products with the same F<sub>rel</sub> may still peak at different times, so F<sub>rel</sub> alone does not show bioequivalence.']};
+  'Frel can be greater than 1. The standard is whatever product set the standard, and an old product such as Bayer aspirin can have a lower bioavailability than a newer product compared against it.',
+  'Frel compares extent only. Two products with the same Frel may still peak at different times, so Frel alone does not show bioequivalence.']};
 
 const B_BE_FIG = {h:'Reading the bioequivalence example', fig:'slide_7a---Bioavailabili_p13', list:[
-  'Three formulations, A, B and C, of one drug on one plot of plasma level against time, with AUC<sub>A</sub> = AUC<sub>B</sub> and AUC<sub>C</sub> = 0.5 AUC<sub>A</sub>.',
+  'Three formulations, A, B and C, of one drug on one plot of plasma level against time, with AUCA = AUCB and AUCC = 0.5 AUCA.',
   'A and B: the same AUC, so the same extent, but B peaks later, so a different rate. Not bioequivalent.',
   'A and C: the same time of peak, so the same rate, but C has half the AUC, so a different extent. Not bioequivalent.',
   'A product whose curve sits close to A in both its peak time and its area, neither differing significantly, would be considered bioequivalent to A. The two curves do not have to be identical.']};
@@ -168,7 +168,7 @@ const Q_MODULE7 = [
  stem:'A study compares the AUC of a new tablet of a drug with the AUC of the innovator\'s tablet of the same drug, both at 250 mg. Which quantity does it measure?',
  options:[
   {t:'Relative bioavailability', correct:true,
-   why:'Two formulations of the same drug are compared and neither is IV (intravenous), so the ratio is relative: F<sub>rel</sub>, with the innovator product as the reference B in the denominator.'},
+   why:'Two formulations of the same drug are compared and neither is IV (intravenous), so the ratio is relative: Frel, with the innovator product as the reference B in the denominator.'},
   {t:'Absolute bioavailability',
    why:'Absolute bioavailability needs the IV dose as the reference, because only an IV dose has F equal to 1. Comparing two oral products gives a value relative to whichever was chosen as the standard, which may itself be incompletely absorbed. Choosing this treats the innovator tablet as if it were the IV dose.'},
   {t:'Bioequivalence',
@@ -222,8 +222,8 @@ const Q_MODULE7 = [
    why:'This confuses the dose correction with the AUC ratio. Doses enter through the second bracket, IV dose over oral dose; which AUC is underneath is set by which product is the reference.'}],
  teach:[
   {h:'The idea', list:[
-    'The IV AUC is the denominator of F<sub>abs</sub>.',
-    'Product B, the reference, is the denominator of F<sub>rel</sub>, and the question names it.',
+    'The IV AUC is the denominator of Fabs.',
+    'Product B, the reference, is the denominator of Frel, and the question names it.',
     'The dose ratio runs the other way: the reference dose is on top.']},
   B_FABS,
   B_FREL],
@@ -236,11 +236,11 @@ const Q_MODULE7 = [
  stem:'Can a bioavailability, F, be greater than 1?',
  options:[
   {t:'A relative F can; an absolute F cannot', correct:true,
-   why:'An IV (intravenous) dose is entirely in the circulation, so an oral product cannot deliver more than the IV reference and F<sub>abs</sub> is at most 1. A relative F compares two formulations, and the test product can have a larger AUC than the standard, as a new product may against an old one such as Bayer aspirin.'},
+   why:'An IV (intravenous) dose is entirely in the circulation, so an oral product cannot deliver more than the IV reference and Fabs is at most 1. A relative F compares two formulations, and the test product can have a larger AUC than the standard, as a new product may against an old one such as Bayer aspirin.'},
   {t:'Neither can, because F is a fraction',
    why:'This carries the absolute rule over to the relative case. The relative reference is another formulation, not the IV dose, and nothing stops a new formulation being absorbed better than the one that set the standard.'},
   {t:'Both can, when the oral dose is larger than the IV dose',
-   why:'This leaves the dose correction out. The dose ratio D<sub>IV</sub> over D<sub>po</sub> removes the effect of a larger oral dose, so a bigger tablet does not push an absolute F above 1.'},
+   why:'This leaves the dose correction out. The dose ratio DIV over Dpo removes the effect of a larger oral dose, so a bigger tablet does not push an absolute F above 1.'},
   {t:'An absolute F can; a relative F cannot',
    why:'This reverses the two. The absolute F is capped at 1 by the IV reference; the relative F has no such cap because its reference is an ordinary product.'}],
  teach:[
@@ -314,7 +314,7 @@ const Q_MODULE7 = [
   {t:'A low clearance and a high AUC',
    why:'A low clearance raises the AUC of any dose, oral or IV, and the ratio of the two is unchanged. F is lowered by what happens before the drug reaches the circulation, not by how slowly it leaves.'},
   {t:'Too small an IV reference dose',
-   why:'The dose ratio in F<sub>abs</sub> removes the effect of the reference dose, so the size of the IV dose does not lower the F found. The reasons on the summary are about the product and the first pass through the liver.'}],
+   why:'The dose ratio in Fabs removes the effect of the reference dose, so the size of the IV dose does not lower the F found. The reasons on the summary are about the product and the first pass through the liver.'}],
  teach:[
   {h:'The idea', list:[
     'Drug product performance, bioavailability and bioequivalence are all related to a drug\'s safety and efficacy.',
@@ -330,7 +330,7 @@ const Q_MODULE7 = [
 {id:'m7-c11', prof:'Mosley', tier:'new', exam:2, module:7, lecture:'L10',
  topic:'bioavail', sub:'figure', concept:'figure-same-auc-different-rate', skill:'read',
  source:'both', img:'slide_7a---Bioavailabili_p13',
- stem:'Three formulations, A, B and C, of one drug are plotted as plasma level against time, with AUC<sub>A</sub> = AUC<sub>B</sub> and AUC<sub>C</sub> = 0.5 AUC<sub>A</sub>. Why are formulations A and B not bioequivalent?',
+ stem:'Three formulations, A, B and C, of one drug are plotted as plasma level against time, with AUCA = AUCB and AUCC = 0.5 AUCA. Why are formulations A and B not bioequivalent?',
  options:[
   {t:'They have the same extent of absorption but different rates: B peaks later', correct:true,
    why:'Equal AUCs mean the same amount of drug reached the circulation, so the extent matches. B\'s peak sits well to the right of A\'s, so the drug from B arrives more slowly, and bioequivalence needs the rate to match as well as the extent.'},
@@ -353,7 +353,7 @@ const Q_MODULE7 = [
 {id:'m7-c12', prof:'Mosley', tier:'new', exam:2, module:7, lecture:'L10',
  topic:'bioavail', sub:'figure', concept:'figure-bioequivalent-curve', skill:'read',
  source:'both', img:'slide_7a---Bioavailabili_p13',
- stem:'On the same plot (AUC<sub>A</sub> = AUC<sub>B</sub>, AUC<sub>C</sub> = 0.5 AUC<sub>A</sub>), a fourth formulation D peaks at nearly the same time as A, slightly higher, and has nearly the same area. Which formulations are bioequivalent to A?',
+ stem:'On the same plot (AUCA = AUCB, AUCC = 0.5 AUCA), a fourth formulation D peaks at nearly the same time as A, slightly higher, and has nearly the same area. Which formulations are bioequivalent to A?',
  options:[
   {t:'D only', correct:true,
    why:'D matches A in both rate (its peak is at about the same time) and extent (about the same area), and neither difference is large. B matches A in extent but not rate; C matches A in rate but not extent. Only D satisfies both halves of the definition.'},
@@ -402,14 +402,14 @@ const Q_MODULE7 = [
  source:'both',
  stem:'A patient on an IV dose is to be sent home on an oral dose of the same drug that gives an equivalent therapeutic effect. What does the absolute bioavailability equation reduce to, and why?',
  options:[
-  {t:'F = D<sub>IV</sub>/D<sub>po</sub>, because an equivalent effect means equal AUCs, so the AUC ratio is 1', correct:true,
-   why:'An equivalent regimen means the same extent of exposure, which is the same AUC (area under the curve) by either route. With AUC<sub>po</sub> = AUC<sub>IV</sub> the first bracket of F<sub>abs</sub> is 1 and only the dose ratio is left, which rearranges to D<sub>po</sub> = D<sub>IV</sub> over F.'},
-  {t:'F = D<sub>po</sub>/D<sub>IV</sub>, because the oral dose is larger',
-   why:'This inverts the dose ratio. The oral dose is larger, so D<sub>po</sub> over D<sub>IV</sub> would be greater than 1, which an absolute F cannot be. The IV dose stays on top, and dividing it by F is what makes the oral dose larger.'},
-  {t:'F = AUC<sub>po</sub>/AUC<sub>IV</sub>, because the doses are equal',
+  {t:'F = DIV/Dpo, because an equivalent effect means equal AUCs, so the AUC ratio is 1', correct:true,
+   why:'An equivalent regimen means the same extent of exposure, which is the same AUC (area under the curve) by either route. With AUCpo = AUCIV the first bracket of Fabs is 1 and only the dose ratio is left, which rearranges to Dpo = DIV over F.'},
+  {t:'F = Dpo/DIV, because the oral dose is larger',
+   why:'This inverts the dose ratio. The oral dose is larger, so Dpo over DIV would be greater than 1, which an absolute F cannot be. The IV dose stays on top, and dividing it by F is what makes the oral dose larger.'},
+  {t:'F = AUCpo/AUCIV, because the doses are equal',
    why:'This has the equality on the wrong bracket. The doses are what is being solved for, so they are not equal; it is the AUCs that are set equal to make the two regimens equivalent.'},
-  {t:'F = Cl × AUC<sub>IV</sub>, because clearance links dose to AUC',
-   why:'Cl × AUC<sub>IV</sub> is the IV dose, not F. Clearance does link each dose to its AUC, but when the two AUCs are equal the clearance cancels and the dose ratio alone remains.'}],
+  {t:'F = Cl × AUCIV, because clearance links dose to AUC',
+   why:'Cl × AUCIV is the IV dose, not F. Clearance does link each dose to its AUC, but when the two AUCs are equal the clearance cancels and the dose ratio alone remains.'}],
  teach:[
   {h:'The idea', list:[
     'Same therapy means the same extent, so the AUCs are set equal.',
@@ -453,7 +453,7 @@ const Q_MODULE7 = [
  answer:0.55,
  tol:0.006,
  steps:[
-  {k:'setup', t:'F<sub>abs</sub> = ({{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}})({{frac:D<sub>IV</sub>|D<sub>po</sub>}})',
+  {k:'setup', t:'Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}})',
    why:'Absolute bioavailability compares the tablet with the IV (intravenous) bolus, so the IV AUC (area under the curve) is the denominator. The doses differ, 250 mg against 100 mg, so the dose ratio is needed, with the IV dose on top.'},
   {k:'unit', t:'Both AUCs are in (mcg/mL)hr and both doses in mg, so the units cancel',
    why:'The AUC ratio is (mcg/mL)hr over (mcg/mL)hr and the dose ratio is mg over mg. Nothing is left, so F is dimensionless and the units can be dropped from the working.'},
@@ -479,13 +479,13 @@ const Q_MODULE7 = [
  answer:181.8,
  tol:1.2,
  steps:[
-  {k:'setup', t:'Equivalent therapy: AUC<sub>po</sub> = AUC<sub>IV</sub>, so F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}}',
+  {k:'setup', t:'Equivalent therapy: AUCpo = AUCIV, so F = {{frac:DIV|Dpo}}',
    why:'The same therapeutic effect means the same extent of exposure, which is the same AUC (area under the curve). With the AUC ratio equal to 1, the absolute bioavailability equation leaves only the dose ratio.'},
-  {k:'algebra', t:'D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}',
-   why:'Multiply both sides by D<sub>po</sub> and divide by F. Dividing the IV dose by a fraction smaller than 1 gives a larger oral dose, as expected: only 55 per cent of what is swallowed reaches the circulation, so more has to be swallowed.'},
-  {k:'algebra', t:'D<sub>po</sub> = {{frac:100 mg|0.55}} = 181.8 mg',
+  {k:'algebra', t:'Dpo = {{frac:DIV|F}}',
+   why:'Multiply both sides by Dpo and divide by F. Dividing the IV dose by a fraction smaller than 1 gives a larger oral dose, as expected: only 55 per cent of what is swallowed reaches the circulation, so more has to be swallowed.'},
+  {k:'algebra', t:'Dpo = {{frac:100 mg|0.55}} = 181.8 mg',
    why:'F is dimensionless, so milligrams divided by it stay milligrams. The oral dose is 1.82 times the IV dose, the reciprocal of 0.55.'},
-  {k:'round', t:'D<sub>po</sub> = 182 mg, to be rounded to a strength that exists',
+  {k:'round', t:'Dpo = 182 mg, to be rounded to a strength that exists',
    why:'Her value, 182 mg from 181.818. A tablet of 181.8 mg is not made, so the prescribed dose is rounded to a strength that is: 200 mg if 175 and 200 are the strengths available. The calculated figure is the one keyed here.'}],
  teach:[
   {h:'The idea', list:[
@@ -506,13 +506,13 @@ const Q_MODULE7 = [
  answer:1.03,
  tol:0.006,
  steps:[
-  {k:'setup', t:'F<sub>rel</sub> = ({{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}})({{frac:D<sub>B</sub>|D<sub>A</sub>}}), with A the tablet and B the solution',
+  {k:'setup', t:'Frel = ({{frac:AUCA|AUCB}})({{frac:DB|DA}}), with A the tablet and B the solution',
    why:'"Compared to the oral solution" makes the solution the reference, B, so its AUC (area under the curve) goes in the denominator. Neither product is IV, so this is a relative, not an absolute, bioavailability.'},
-  {k:'unit', t:'Both doses are 250 mg, so {{frac:D<sub>B</sub>|D<sub>A</sub>}} = 1; both AUCs are in (mcg/mL)hr',
-   why:'With equal doses the dose correction is 1 and drops out. The AUC units cancel in the ratio, so F<sub>rel</sub> is dimensionless.'},
-  {k:'algebra', t:'F<sub>rel</sub> = {{frac:101.5|98.76}} = 1.0277',
+  {k:'unit', t:'Both doses are 250 mg, so {{frac:DB|DA}} = 1; both AUCs are in (mcg/mL)hr',
+   why:'With equal doses the dose correction is 1 and drops out. The AUC units cancel in the ratio, so Frel is dimensionless.'},
+  {k:'algebra', t:'Frel = {{frac:101.5|98.76}} = 1.0277',
    why:'The tablet\'s area is slightly larger than the solution\'s, so the ratio is slightly above 1: the tablet has a slightly greater bioavailability than the standard it is compared with.'},
-  {k:'round', t:'F<sub>rel</sub> = 1.03',
+  {k:'round', t:'Frel = 1.03',
    why:'Her value, 1.03. A relative F may exceed 1, because the reference is another formulation rather than the IV dose. The two products have similar extents; whether they are bioequivalent is not known, because their peak times are not.'}],
  teach:[
   {h:'The idea', list:[
@@ -536,17 +536,17 @@ const Q_MODULE7 = [
  steps:[
   {k:'unit', t:'k = {{frac:0.693|3 hr}} = 0.231 hr⁻¹; Cl = k × VD = (0.231 hr⁻¹)(25 L) = 5.775 L/hr',
    why:'No IV AUC is given, so it has to be built from the IV data. The half-life gives k, the elimination rate constant, and k times VD (the apparent volume of distribution) is the clearance, in litres per hour.'},
-  {k:'setup', t:'AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}}',
-   why:'D<sub>IV</sub> = Cl × AUC<sub>IV</sub> is on the equation sheet: clearance is the constant that relates a dose to its area. Rearranged, the IV dose over the clearance is the IV AUC.'},
-  {k:'algebra', t:'AUC<sub>IV</sub> = {{frac:500 mg|(25 L)(0.231 hr⁻¹)}} = {{frac:500 mg|5.775 L/hr}} = 86.58 (mg/L)hr',
+  {k:'setup', t:'AUCIV = {{frac:DIV|Cl}}',
+   why:'DIV = Cl × AUCIV is on the equation sheet: clearance is the constant that relates a dose to its area. Rearranged, the IV dose over the clearance is the IV AUC.'},
+  {k:'algebra', t:'AUCIV = {{frac:500 mg|(25 L)(0.231 hr⁻¹)}} = {{frac:500 mg|5.775 L/hr}} = 86.58 (mg/L)hr',
    why:'mg over L/hr is mg·hr/L, the unit of an AUC. This is the area the same 500 mg would give if all of it were in the circulation.'},
   {k:'algebra', t:'F = ({{frac:70|86.58}})({{frac:500 mg|500 mg}}) = 0.8085',
-   why:'The doses are equal, so the dose ratio is 1 and F is the AUC ratio alone. The same answer comes from F = {{frac:Cl × AUC<sub>po</sub>|D<sub>po</sub>}} = {{frac:(70)(25)(0.231)|500}} = 0.8085; either route works.'},
+   why:'The doses are equal, so the dose ratio is 1 and F is the AUC ratio alone. The same answer comes from F = {{frac:Cl × AUCpo|Dpo}} = {{frac:(70)(25)(0.231)|500}} = 0.8085; either route works.'},
   {k:'round', t:'F = 0.81',
    why:'Her value, about 81 per cent. F is dimensionless because every unit cancelled. Written as 0.81 or 81 per cent.'}],
  teach:[
   {h:'The idea', list:[
-    'When the IV AUC is not given, clearance supplies it: AUC<sub>IV</sub> = D<sub>IV</sub> over Cl.',
+    'When the IV AUC is not given, clearance supplies it: AUCIV = DIV over Cl.',
     'Then the ordinary ratio, with the dose correction equal to 1 because both doses were 500 mg.']},
   B_IVAUC,
   B_FABS],
@@ -562,11 +562,11 @@ const Q_MODULE7 = [
  answer:43.29,
  tol:0.3,
  steps:[
-  {k:'setup', t:'AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}}, with Cl = k × VD unchanged',
+  {k:'setup', t:'AUCIV = {{frac:DIV|Cl}}, with Cl = k × VD unchanged',
    why:'Clearance belongs to the drug and the patient, not to the dose, so the same relation holds with the new dose. The area is proportional to the dose when kinetics are linear (first order).'},
-  {k:'algebra', t:'AUC<sub>IV</sub> = {{frac:250 mg|(25 L)(0.231 hr⁻¹)}} = {{frac:250 mg|5.775 L/hr}} = 43.29 (mg/L)hr',
+  {k:'algebra', t:'AUCIV = {{frac:250 mg|(25 L)(0.231 hr⁻¹)}} = {{frac:250 mg|5.775 L/hr}} = 43.29 (mg/L)hr',
    why:'Half the dose over the same clearance gives half the area. mg over L/hr leaves (mg/L)hr.'},
-  {k:'round', t:'AUC<sub>IV</sub> = 43.29 (mg/L)hr',
+  {k:'round', t:'AUCIV = 43.29 (mg/L)hr',
    why:'Her value, 43.29: half of the 86.58 found for 500 mg, as expected. With linear pharmacokinetics a proportional change in the dose gives a proportional change in the AUC and in the concentrations.'}],
  teach:[
   {h:'The idea', list:[
@@ -585,13 +585,13 @@ const Q_MODULE7 = [
  answer:571.43,
  tol:4,
  steps:[
-  {k:'setup', t:'Same extent of absorption: AUC<sub>po</sub> = AUC<sub>IV</sub>, so F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}}',
+  {k:'setup', t:'Same extent of absorption: AUCpo = AUCIV, so F = {{frac:DIV|Dpo}}',
    why:'The same extent means the same AUC (area under the curve) by both routes. With equal AUCs the absolute bioavailability equation reduces to the dose ratio.'},
   {k:'unit', t:'F = 70% = 0.70',
    why:'The percentage is converted to a decimal fraction before it is used in the equation: 70 per cent of each oral dose reaches the circulation.'},
-  {k:'algebra', t:'D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}} = {{frac:400 mg|0.70}} = 571.43 mg',
+  {k:'algebra', t:'Dpo = {{frac:DIV|F}} = {{frac:400 mg|0.70}} = 571.43 mg',
    why:'Dividing the IV dose by 0.70 gives an oral dose about 1.43 times larger, so that 70 per cent of it equals the 400 mg delivered intravenously.'},
-  {k:'round', t:'D<sub>po</sub> = 571.43 mg, prescribed as a strength that exists, 575 or 600 mg',
+  {k:'round', t:'Dpo = 571.43 mg, prescribed as a strength that exists, 575 or 600 mg',
    why:'Her value, 571.43 mg, is the number to get, and it is not a strength of ciprofloxacin: the marketed strengths are 250 and 500 mg. The dose is rounded to something that can be given, 600 mg or 575 mg; the calculated figure is the one keyed here.'}],
  teach:[
   {h:'The idea', list:[
@@ -614,7 +614,7 @@ const Q_MODULE7 = [
  steps:[
   {k:'setup', t:'Cp = C0e^(-kt): C0 = 50 mg/L and k = 0.2 hr⁻¹',
    why:'The IV bolus equation is read directly: the number in front is C0, the concentration at time zero, and the number in the exponent is k, the elimination rate constant.'},
-  {k:'algebra', t:'VD = {{frac:D<sub>IV</sub>|C0}} = {{frac:500 mg|50 mg/L}} = 10 L',
+  {k:'algebra', t:'VD = {{frac:DIV|C0}} = {{frac:500 mg|50 mg/L}} = 10 L',
    why:'The apparent volume of distribution comes from the dose over C0: mg over mg/L leaves litres. The whole dose is in the body at time zero after a bolus, so it is the only moment the amount is known exactly.'},
   {k:'algebra', t:'Cl = k × VD = (0.2 hr⁻¹)(10 L) = 2 L/hr',
    why:'Clearance is the rate constant times the volume: hr⁻¹ times L gives L/hr. This clearance is what relates the dose to its AUC in the next part.'},
@@ -637,11 +637,11 @@ const Q_MODULE7 = [
  answer:250,
  tol:2,
  steps:[
-  {k:'setup', t:'D<sub>IV</sub> = Cl × AUC<sub>IV</sub>, so AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}}',
+  {k:'setup', t:'DIV = Cl × AUCIV, so AUCIV = {{frac:DIV|Cl}}',
    why:'Clearance is the link between a dose and the area it produces: the dose is the clearance times the AUC (area under the curve). Rearranging gives the area from the dose and the clearance, with no plasma data and no trapezoids.'},
-  {k:'algebra', t:'AUC<sub>IV</sub> = {{frac:500 mg|2 L/hr}} = 250 (mg/L)hr',
+  {k:'algebra', t:'AUCIV = {{frac:500 mg|2 L/hr}} = 250 (mg/L)hr',
    why:'mg over L/hr leaves mg·hr/L, which is the unit of an AUC. The same figure follows from C0 over k, 50 over 0.2, for a one-compartment bolus.'},
-  {k:'round', t:'AUC<sub>IV</sub> = 250 (mg/L)hr',
+  {k:'round', t:'AUCIV = 250 (mg/L)hr',
    why:'Her value, 250 mg per litre times hour. It is the denominator for the oral bioavailability in the next part.'}],
  teach:[
   {h:'The idea', list:[
@@ -661,18 +661,18 @@ const Q_MODULE7 = [
  answer:0.752,
  tol:0.01,
  steps:[
-  {k:'setup', t:'F<sub>abs</sub> = ({{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}})({{frac:D<sub>IV</sub>|D<sub>po</sub>}})',
+  {k:'setup', t:'Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}})',
    why:'The tablet is compared with the IV bolus of the same drug, so this is an absolute bioavailability with the IV AUC (area under the curve) underneath.'},
   {k:'unit', t:'188 mcg hr/mL = 188 (mg/L)hr, because mcg/mL and mg/L are the same concentration',
    why:'One microgram per millilitre is one milligram per litre, so the two AUCs are already in the same unit and cancel. The doses are both 500 mg, so the dose ratio is 1.'},
   {k:'algebra', t:'F = {{frac:188|250}} = 0.752',
-   why:'With equal doses F is the AUC ratio alone. The same answer comes from F = {{frac:Cl × AUC<sub>po</sub>|D<sub>po</sub>}} = {{frac:(2 L/hr)(188 (mg/L)hr)|500 mg}} = 0.752.'},
+   why:'With equal doses F is the AUC ratio alone. The same answer comes from F = {{frac:Cl × AUCpo|Dpo}} = {{frac:(2 L/hr)(188 (mg/L)hr)|500 mg}} = 0.752.'},
   {k:'round', t:'F = 0.75',
    why:'Her value, 75 per cent. Written as 0.75 or as 75 per cent; three quarters of the tablet dose becomes available for the body to use.'}],
  teach:[
   {h:'The idea', list:[
     'Equal doses, so F is simply the oral AUC over the IV AUC.',
-    'Either the AUC ratio or Cl × AUC<sub>po</sub> over D<sub>po</sub>; both give 0.752.']},
+    'Either the AUC ratio or Cl × AUCpo over Dpo; both give 0.752.']},
   B_FABS,
   B_WHY],
  audit:'Stem transcribed from the photograph on page 18 of the annotated deck; the sheet prints the oral AUC as "188 mcg hr/mL" while part (b) is in (mg/L)hr, and the two units are equal. Her written working: F = (188 mg·hr/L)(2 L/hr)/500 mg = 0.752. Recomputed: 0.752.',
@@ -689,7 +689,7 @@ const Q_MODULE7 = [
  answer:0.67,
  tol:0.006,
  steps:[
-  {k:'setup', t:'F<sub>abs</sub> = ({{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}})({{frac:D<sub>IV</sub>|D<sub>po</sub>}})',
+  {k:'setup', t:'Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}})',
    why:'The tablet is compared with the IV bolus, so the IV AUC (area under the curve) is the denominator, and because the doses differ the dose ratio is needed with the IV dose on top.'},
   {k:'unit', t:'Both AUCs in (mcg/mL)hr, both doses in mg: the units cancel',
    why:'The AUC ratio is (mcg/mL)hr over (mcg/mL)hr and the dose ratio is mg over mg, so nothing is left. F is a ratio of like quantities and carries no unit, which is why the units can be left out of the working.'},
@@ -715,13 +715,13 @@ const Q_MODULE7 = [
  answer:0.9,
  tol:0.006,
  steps:[
-  {k:'setup', t:'F<sub>rel</sub> = ({{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}})({{frac:D<sub>B</sub>|D<sub>A</sub>}}), with A the tablet and B the solution',
+  {k:'setup', t:'Frel = ({{frac:AUCA|AUCB}})({{frac:DB|DA}}), with A the tablet and B the solution',
    why:'"Compared to the oral solution" makes the solution the reference B, so its AUC (area under the curve) is the denominator.'},
   {k:'unit', t:'Both doses are 500 mg, so the dose ratio is 1; both AUCs are in (mcg/mL)hr',
    why:'Equal doses remove the dose correction, and the AUC units cancel.'},
-  {k:'algebra', t:'F<sub>rel</sub> = {{frac:61.2|68.0}} = 0.90',
+  {k:'algebra', t:'Frel = {{frac:61.2|68.0}} = 0.90',
    why:'The tablet\'s area is smaller than the solution\'s, so the ratio is below 1: the tablet delivers 90 per cent of the extent the solution does.'},
-  {k:'round', t:'F<sub>rel</sub> = 0.90',
+  {k:'round', t:'Frel = 0.90',
    why:'Written as 0.90 or 90 per cent. The extents are similar; whether the two products are bioequivalent would also need their peak times.'}],
  teach:[
   {h:'The idea', list:[

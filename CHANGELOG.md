@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (fixes from review)
+- Module 7a explanations showed raw tags where a subscript belonged; they now render.
+- Filter and quiz-card panels stay open when a chip is tapped; practice papers never land on an old result.
+- An exam paper never carries two wordings of one fact, even through a chain of duplicates.
+
 ## 2026-10-04 (her Exam 2 practice sheets)
 - Worksheets: Multiple IV Bolus Practice 2–4, Infusion & Oral Practice 1–3, BA-BE Practice 1–3, keyed to her solutions.
 - Every part of those sheets is in, 55 questions, each answer recomputed from her stem.
