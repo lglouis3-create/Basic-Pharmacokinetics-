@@ -2691,17 +2691,20 @@ function finishExam(){
   if(DB.exams.length > 100) DB.exams.splice(0, DB.exams.length - 100);
   save();
   renderExamResult();
-  celebrate();
 }
-/* After a paper is submitted, one of the two short videos beside the page
-   plays, chosen at random. Submitting is a tap, so playing with sound is
-   allowed; if the browser refuses anyway the controls are there to press.
-   An offline copy of the page has no media folder: then the video errors
-   and the box goes away by itself. Settings can turn it off. */
+/* After a paper is submitted the result page offers a short clip, one of
+   the two beside the page chosen at random. Nothing plays on its own: the
+   student presses the offer, which is the tap that lets the clip play with
+   sound, or ignores it. An offline copy of the page has no media folder:
+   then the video errors and the box goes away by itself. Settings can hide
+   the offer. */
 const CHEER = ['media/cheer-1.mp4', 'media/cheer-2.mp4'];
 const cheerPick = () => CHEER[Math.floor(Math.random() * CHEER.length)];
+const cheerOfferHTML = () => DB.settings.cheer === false ? ''
+  : `<div class="cheeroffer"><span>Paper done. A few seconds of motivation, if you want it:</span>
+     <button class="btn small" id="cheerGo">Press me</button></div>`;
 function celebrate(){
-  if(DB.settings.cheer === false || document.getElementById('cheer')) return;
+  if(document.getElementById('cheer')) return;
   const box = document.createElement('div'); box.id = 'cheer';
   box.innerHTML = `<div class="cheerbox"><p class="cheerline">Paper submitted. The practice is what counts.</p>
     <video playsinline controls preload="auto" src="${cheerPick()}"></video>
@@ -2718,7 +2721,7 @@ function renderExamResult(){
   const right = EX.qs.filter((q,i)=> examRight(q, EX.picks[i]) || overrode(i)).length;
   const blank = EX.qs.filter((q,i)=> examBlank(q, EX.picks[i])).length;
   const pct = EX.qs.length ? Math.round(100*right/EX.qs.length) : 0;
-  let h = `<h2>${esc(EX.title || 'Exam simulation')} — ${right} / ${EX.qs.length} (${pct}%)</h2>
+  let h = `<h2>${esc(EX.title || 'Exam simulation')} — ${right} / ${EX.qs.length} (${pct}%)</h2>${cheerOfferHTML()}
   <p class="sub">${blank ? blank+' left blank, scored as incorrect. ' : ''}All ${EX.qs.length} are now in your history,
   so anything you missed is back in active review.</p>
   ${shortfallNote(EX.coverage)}
@@ -2766,6 +2769,7 @@ function renderExamResult(){
   });
   $('#v-exam').innerHTML = h;
   $('#exAgain').onclick = ()=>{ EX=null; renderExam(); };
+  const cg = $('#cheerGo'); if(cg) cg.onclick = celebrate;
   $('#v-exam').querySelectorAll('button[data-mk]').forEach(b => b.onclick = () => {
     const q = EX.qs[+b.dataset.qi];
     if(q && setMissKind(q, b.dataset.mk)) renderExamResult();
@@ -2907,7 +2911,7 @@ function renderSettings(){
     <div class="frow"><label>Short video</label>
       <button class="chip" data-cheer="on" aria-pressed="${DB.settings.cheer !== false}">On</button>
       <button class="chip" data-cheer="off" aria-pressed="${DB.settings.cheer === false}">Off</button></div>
-    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">One of two short clips plays after an exam or quiz paper is submitted.</p>
+    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">After a paper the result page offers a short clip to press, one of two. Off hides the offer.</p>
   </div>
 
   <h3>Move your progress between devices</h3>

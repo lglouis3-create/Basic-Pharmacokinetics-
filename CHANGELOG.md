@@ -5,7 +5,7 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 ## 2026-10-04 (every dosing model, step by step)
 - Six more step-through walk-throughs, each from one of her own problems, so every dosing model has one.
 - "Step through it with her numbers" under each dosing model in Tell apart.
-- A short clip plays after a paper is submitted; Settings turns it off.
+- After a paper, the result page offers a short clip to press for motivation; Settings hides the offer.
 
 ## 2026-10-04 (walk-throughs line by line)
 - Step-through captions show one sentence per line with stacked fractions.
