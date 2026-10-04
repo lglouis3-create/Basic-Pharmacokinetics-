@@ -1380,6 +1380,115 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 
 **Formats observed:** first-dose and steady-state values asked side by side so the change can be seen; she says she will ask for dosing intervals and oral doses and expects them rounded to a practical interval and an existing strength ("Don't tell me 17.29 mg for an oral dose").
 
+## Source: `Multiple-IV-Bolus-Practice-2---Solutions.pdf`
+
+> 1. The elimination half-life of an antibiotic is 3 hours and the apparent volume of distribution is 20% of the body weight. The therapeutic window for this drug is from 2 to 10 mcg/mL. Adverse toxicity is often observed at drug concentrations above 15 mcg/mL. The drug will be given by multiple IV bolus injections.
+> a. Calculate the dose for an adult male patient (68 years old, 82 kg) with normal renal function to be given every 8 hours. (Hint, I started by assigning 10 mg/L as the maximum concentration at steady state).
+> b. Calculate the maximum steady-state plasma concentration.
+> c. Calculate the minimum steady-state plasma concentration.
+> d. Calculate the average steady-state plasma concentration.
+> e. Does your regimen provide the desired peak and trough concentrations? If not, how would you adjust to achieve the desired concentrations?
+
+**Keyed answers (page 1):** (a) D0 = Cmax∞ VD (1 − e^−kτ) = (10 mg/L)(16.4 L)(1 − e^−(0.231)(8)) = 138.16 mg; (b) Cmax∞ = 10 mg/L; (c) Cmin∞ = 10 mg/L (e^−(0.231)(8)) = 1.576 mg/L; (d) Cavg∞ = 138.16 mg/((16.4 L)(0.231 hr⁻¹)(8 hr)) = 4.56 mg/L; (e) in words: "The predicted steady-state peaks and troughs of this regimen are 10 mg/L - 1.6 mg/L. The predicted minimum falls beyond the therapeutic window for this drug; therefore, for a portion of the treatment time, the antibiotic will be at a sub-therapeutic concentration. The two ways that we alter the regimen are to change the dose and/or to change the dosing interval. Since this drug has a half-life of 3 hours, it will decrease in concentration from 10 mg/L to 2 mg/L in about 7 hours, so a decrease in the dosing interval from 8 to 6 hours" (cut there).
+
+*Recompute:* k = 0.693/3 = 0.231 hr⁻¹, VD = 0.2 × 82 = 16.4 L; (a) 138.16 mg; (b) 10.0 mg/L; (c) 1.5755 mg/L; (d) 4.559 mg/L; (e) 10 → 2 mg/L takes ln(5)/0.231 = 6.97 hr, and at τ = 6 hr the trough is 10e^−(0.231)(6) = 2.50 mg/L → **all match**.
+
+**Formats observed:** the dose is the unknown, with the steady-state peak assigned at the top of the window (she says so in a hint); the window is printed in mcg/mL and worked in mg/L; age and renal function are stated but not used; a words-only part closes the set, and the drill carries it as a choice (ws6-b2e). Page 2 not indexed; the end of part e (the regimen at a 6-hour interval) to follow.
+
+## Source: `Multiple-IV-Bolus-Practice-3---Solutions.pdf`
+
+> 1. A 80 kg patient is scheduled to receive a 20 mg/kg IV bolus injection of a medication every 6 hours. The drug has an apparent volume of distribution that is 25% of body weight and a total body clearance is 4.62 L/hr. Determine the following for this medication in this patient:
+> a. Elimination half-life.
+> b. Maximum plasma drug concentration of the first dose.
+> c. Minimum plasma drug concentration of the first dose.
+> d. Maximum steady-state plasma drug concentration.
+> e. Minimum steady-state plasma drug concentration.
+> f. Average steady-state plasma drug concentration.
+
+**Keyed answers (page 1):** (a) t½ = (0.693)(20 L)/4.62 L/hr = 3 hr; (b) C0 = 20 mg/kg / 0.25 L/kg = 80 mg/L; (c) Cmin = 80 mg/L (e^−0.231(6)) = 20 mg/L; (d) Cmax∞ = 80 mg/L/(1 − e^−0.231(6)) = 106.68 mg/L; (e) Cmin∞ = 106.68 mg/L (e^−0.231(6)) = 26.68 mg/L; (f) cut after "Cavg∞ =".
+
+*Recompute:* VD = 20 L, k = 4.62/20 = 0.231 hr⁻¹; (a) 3.00 hr; (b) 80 mg/L; (c) 20.01 mg/L; (d) 106.68 mg/L; (e) 26.68 mg/L → **all match**. (f) from the stem would be 1600 mg/((4.62 L/hr)(6 hr)) = 57.72 mg/L; not written, since her key for it is not on the page.
+
+**Formats observed:** dose and volume both per kilogram, so the first-dose peak is taken as a ratio of the two without the weight; elimination arrives as clearance with volume, so k = ClT/VD; 6 hours is two half-lives, so the first-dose trough is a quarter of the peak. Page 2 not indexed; part f (the average at steady state) to follow.
+
+## Source: `Multiple-IV-Bolus-Practice-4---Solutions.pdf`
+
+> 1. A 192 lb patient is to receive IV bolus injections of a medication every 4 hours. The elimination half-life of the medication is approximately 3.3 hours and the apparent volume of distribution is 30% of body weight.
+> a. Recommend a dose to achieve an average steady state concentration of 25 mg/L. (Round to the nearest 10 mg).
+> b. What is the maximum plasma concentration of the first dose?
+> c. What is the maximum steady-state plasma concentration?
+> d. What is the minimum steady-state plasma concentration?
+> e. What is the plasma con… (cut)
+
+**Keyed answers (page 1):** (a) D0 = (25 mg/L)(26.2 L)(0.21 hr⁻¹)(4 hr) = 550.2 mg → 550 mg; (b) C0 = 550 mg/26.2 L = 21 mg/L; (c) Cmax∞ = 21 mg/L/(1 − e^−0.21(4)) = 36.95 mg/L; (d) Cmin∞ = 36.95 mg/L (e^−0.21(4)) = 15.95 mg/L.
+
+*Recompute:* 192 lb/2.2 = 87.27 kg, VD = 26.18 L (she carries 26.2 L), k = 0.693/3.3 = 0.21 hr⁻¹; (a) 549.8 mg with 26.18 L, 550.2 mg with 26.2 L, both 550 mg; (b) 20.99 mg/L → 21; (c) 36.95 mg/L; (d) 15.95 mg/L → **all match**.
+
+**Formats observed:** weight in pounds, volume as a percentage of body weight, the dose rounded to the nearest 10 mg on instruction; the rounded dose (550 mg) is carried into the later parts, and the trough equals the peak minus C0. Page 2 not indexed; part e (a plasma concentration at a stated time) to follow.
+
+## Source: `Multiple-IV-Infusions--26-Multiple-Oral-Administrations-Practice-1---Solutions.pdf` ("Daily Practice Multiple IV Infusions & Multiple Oral Administration PHAR 4221 Practice 1")
+
+> 1. An 800-mg dose of a medication was administered as an IV infusion over a period of 3 hours to an 80-kg patient. Six hours after the start of the first infusion, a second of 800-mg dose was infused, again over 3 hours. The drug has an apparent volume of distribution that is 25% of body weight and a total body clearance is 4.62 L/hr.
+> a. What is the plasma drug concentration at the end of the first infusion?
+> b. What is the plasma drug concentration 6 hours after the cessation of the second infusion?
+
+> 2. An adult male (80 kg) was given 500 mg of an antibiotic orally every 12 hours for 2 weeks. The literature reports that the antibiotic is about 90% bioavailable and has a VD of 0.24 L/kg. The elimination half-life is about 7.3 hours and the absorption half-life is about 75 minutes. Calculate
+> a. Time required to reach the maximum concentration of the first dose.
+> b. Maximum plasma drug concentration of the first dose.
+> c. Minimum plasma drug concentration of the first dose.
+> d. Area under the curve of the first dose.
+> e. Time required to reach the maximum concentration at steady state.
+> f. Maximum plasma drug concentration at steady state.
+> g. Minimum plasma drug concentration at steady state.
+> h. Average plasma drug concentration at steady state.
+> i. Dose required to reach an average steady state conc of 25 mg/L.
+
+**Keyed answers (page 1):** 1(a) Cp = (800 mg/3 hr)/(4.62 L/hr) × (1 − e^−0.231(3)) = 28.86 mg/L; 1(b) time line 0 3 6 9 15, Cp = (28.86)e^−(0.231)(6) + (28.86)e^−(0.231)(12) = 9.02 mg/L. 2(a) tmax = ln(0.5544/0.0949)/(0.5544 − 0.0949) = 3.84 hr; 2(b) Cmax = [0.9(500)(0.5544)]/[19.2(0.5544 − 0.0949)] × (e^−(0.0949)(3.84) − e^−(0.5544)(3.84)) = 16.28 mg/L; 2(c) Cmin, same prefactor at 12 hr = 9.02 mg/L; 2(d) AUC = 0.9(500)/[(19.2)(0.0949)] = 246.97 mg·hr/L; 2(e) tmax∞ = 3 hr; 2(f) Cmax∞ = 0.9(500)/19.2 × 1/(1 − e^−(0.0949)(12)) × e^−(0.0949)(3) = 25.94 mg/L; 2(g) Cmin∞ = prefactor × 1/(1 − e^−(0.0949)(12)) × e^−(0.0949)(12) = 13.32 mg/L; 2(h) Cavg∞ = 0.9(500)/[(19.2)(0.0949)(12)] = 20.58 mg/L; 2(i) cut after "D0 = (25 mg/L)(19.2 L)".
+
+*Recompute:* 1(a) 28.86; 1(b) 9.02 → **match**. k = 0.693/7.3 = 0.09493, ka = 0.693/1.25 = 0.5544, VD = 19.2 L: 2(a) 3.841 hr; 2(b) 16.28; 2(c) 9.015; 2(d) 246.89 with the unrounded k (246.97 with 0.0949); 2(e) 3.004 hr; 2(f) 25.92 unrounded (25.94 with k 0.0949 and tmax∞ 3); 2(g) 13.31 (13.32); 2(h) 20.57 (20.58) → **all match within her rounding of k to 0.0949**; the drill notes the two values where they differ in the last digit. 2(i) from the stem would be (25)(19.2)(0.0949)(12)/0.9 = 607.6 mg; not written.
+
+**Formats observed:** the infusion problem gives dose and duration, never R, and the second infusion by "hours after the start of the first"; her time line lists start and end of each infusion and the time asked for; elimination arrives as ClT with VD. The oral problem gives F as a percentage, VD per kilogram, both half-lives (absorption in minutes), and asks first dose then steady state in her fixed order tmax, Cmax, Cmin, AUC, tmax∞, Cmax∞, Cmin∞, Cavg∞, then a dose. Page 2 not indexed; part 2(i) (the dose for Cavg∞ 25 mg/L) to follow.
+
+## Source: `Multiple-IV-Infusion--26-Multiple-Oral-Administrations-Practice-2---Solutions.pdf` ("Daily Practice Multiple IV Infusions and Oral Administration PHAR 4221 Practice 2"; both pages indexed)
+
+> 1. A 300-mg dose of an antibiotic was administered as an IV infusion to a 85 kg male over a period of 90 minutes. Eight hours after the start of the first infusion, a second 300-mg dose was infused, again over a period of 90 minutes. The drug has a half-life of 3.3 hours and apparent volume of distribution of 0.2 L/kg.
+> a. What is the plasma drug concentration at the end of the first infusion?
+> b. What is the plasma drug concentration 4 hours after the cessation of the second infusion?
+
+> 2. An adult male (72 kg) was given 300 mg of an antibiotic orally every 8 hours for 2 weeks. The literature reports that the antibiotic is about 85% bioavailable and has a VD of 3.2 L/kg. The elimination half-life is about 7.3 hours and the absorption half-life is about 75 minutes. Calculate
+> a. Cmax after the first dose.
+> b. Cmin after the first dose.
+> c. Maximum plasma drug concentration at steady state.
+> d. Minimum plasma drug concentration at steady state.
+> e. Average plasma drug concentration at steady state.
+
+**Keyed answers:** 1(a) Cp = (300 mg/1.5 hr)/[(17 L)(0.21 hr⁻¹)] × (1 − e^−(0.21)(1.5)) = 15.14 mg/L; 1(b) time line 0 1.5 8 9.5 13.5, Cp = (15.14)e^−(0.21)(12) + (15.14)e^−(0.21)(4) = 7.75 mg/L. 2(a) ka = 0.5544, k = 0.0949, tmax = 3.8413 hr, Cmax = [(0.85)(300)(0.5544)]/[(3.2 L/kg)(72 kg)(0.5544 − 0.0949)] × (e^−(3.84)(0.0949) − e^−(3.84)(0.5544)) = 0.7687 mg/L; 2(b) Cmin = prefactor × (e^−(8)(0.0949) − e^−(8)(0.5544)) = 0.6092 mg/L; 2(c) tmax∞ = 2.49 hr, Cmax∞ = [(0.85)(300)]/[(3.2)(72)] × 1/(1 − e^−(0.0949)(8)) × e^−(0.0949)(2.49) = 1.64 mg/L; 2(d) Cmin∞ = prefactor × 1/(1 − e^−(0.0949)(8)) × e^−(0.0949)(8) = 1.17 mg/L; 2(e) Cavg∞ = (0.85)(300)/[(3.2)(72)(0.0949)(8)] = 1.46 mg/L.
+
+*Recompute:* VD = 17 L, k = 0.21 hr⁻¹: 1(a) 15.14; 1(b) 7.753 → **match**. VD = 230.4 L: 2(a) 0.7686; 2(b) 0.6091; 2(c) tmax∞ 2.494 hr, Cmax∞ 1.642; 2(d) 1.174; 2(e) 1.457 → **all match**.
+
+**Formats observed:** the infusion time is given in minutes and converted to hours; the oral problem drops tmax, tmax∞, AUC and the dose as separate parts and folds tmax into Cmax and tmax∞ into Cmax∞; a very large VD (3.2 L/kg) keeps every concentration below 2 mg/L. Nothing cut.
+
+## Source: `Multiple-IV-Infusion-and-Multiple-Oral-Solution-3.pdf` ("Daily Practice Multiple IV Infusion and Multiple Oral Administrations PHAR 4221 Practice 3")
+
+> 1. A 200-mg dose of an antibiotic was administered as an IV infusion over a period of 2 hours. Eight hours after the start of the first infusion, a second dose of 200 mg was infused, again over 2 hours. The antibiotic has a half-life of 4 hours and a total body clearance of 2.8 L/hr.
+> a. What is the plasma drug concentration at the end of the first infusion?
+> b. What is the plasma drug concentration 4 hours after the cessation of the second infusion?
+
+> 2. A patient is receiving his antihypertensive medication as 500 mg every 8 hours in the form of an oral capsule. The bioavailability of the drug from this capsule is 80% and the total body clearance in this patient is 2.5 L/hr.
+> a. What is the average steady-state plasma concentration of this drug in this patient?
+> b. What will be the average steady-state plasma concentration if the patient were taking 1000 mg every 8 hours of the same oral capsule?
+> c. What is the ClT of the drug in this patient while taking the 1000 mg orally every 8 hours?
+> d. What will be the average steady-state plasma concentration if the patient were taking 500 mg every 6 hours of the same oral capsule?
+> e. What oral dose is required to reach an average steady-state plasma concentration of 30 mg/L from this drug product in this patient taken every 8 hours?
+> f. Because the patient had problems swallowing the oral capsules he was shifted to 500 mg IV every 8 hours. What will be the average steady-state concentrati… (cut)
+
+**Keyed answers (page 1):** 1(a) Cp = (100 mg/hr)/(2.8 L/hr) × (1 − e^−(2)(0.17325)) = 10.46 mg/L; 1(b) time line 0 … 14, Cp = (10.46)e^−(0.17325)(12) + (10.46)e^−(0.17325)(4) = 6.54 mg/L. 2(a) (0.8)(500)/[(2.5)(8)] = 20 mg/L; 2(b) (0.8)(1000)/[(2.5)(8)] = 40 mg/L; 2(c) 2.5 L/hr, "ClT is constant"; 2(d) (0.8)(500)/[(2.5)(6)] = 26.67 mg/L; 2(e) D0 = (30)(2.5)(8)/0.8 = 750 mg.
+
+*Recompute:* k = 0.693/4 = 0.17325 hr⁻¹: 1(a) 10.46; 1(b) 6.538 → **match**. 2(a) 20; 2(b) 40; 2(d) 26.67; 2(e) 750 → **all match**. 2(f) from the stem would be 500/((2.5)(8)) = 25 mg/L (F = 1); not written.
+
+**Formats observed:** the oral problem is worked entirely with Cavg∞ = FD0/(ClT τ), with clearance given directly and no VD; the dose, then the interval, then the target average are changed one at a time; a words-only part asks whether clearance changes with the dose (the drill carries it as a choice, ws6-i3-2c). Page 2 not indexed; part 2(f) (the same regimen given IV) to follow.
+
+
 ---
 
 # Module 7a — Bioavailability and bioequivalence
@@ -1420,3 +1529,40 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 **Second poll (multiple IV bolus, quiz preparation), worked on page 19:** 300 mg every 12 hours, VD 16 L, t½ 4 hr; maximum at steady state. k = 0.693/4 = 0.17325 hr⁻¹; Cl = 0.17325 × 16 L = 2.772 L/hr; C0 = 300 mg/16 L = 18.75 mg/L; Cmax∞ = 18.75/(1 − e^(−0.17325 × 12)) = 21.4 mg/L. "Most of you guys thought that it was B." *Recompute:* 21.43 → **matches**.
 
 **Formats observed:** the absolute problem gives two AUCs and two different doses; the relative problem gives equal doses and names the reference ("compared to the oral solution"). The in-class sheet withholds the IV AUC and gives t½ and VD instead, or gives the IV curve as an equation, so the IV AUC has to come from dose/clearance; equal oral and IV doses make the dose ratio 1. The equivalent-dose question is asked as "an appropriate oral dose to achieve the same extent of absorption as a ___ mg IV bolus dose", and the answer is rounded to a marketed strength. F is reported as 0.55 or 55%, never .55 ("no leading decimals"). She says the poll wording will not change, only the numbers, and that practice and the quiz will "focus more on the absolute bioavailability".
+
+## Source: `BA-BE-Practice-1---Solutions.pdf` ("PHAR 4221 Daily Practice BA-BE Practice 1")
+
+> The equation for concentration of drug in the plasma as a function of time following a 250 mg IV bolus dose was found to be: Cp = 30e^(−0.092t)
+> a. If the AUC following a 500 mg oral tablet dose was found to be 435 mcg·hr/mL, what is the bioavailability of the drug in the tablet dosage form?
+> b. What oral dose would provide comparable bioavailability to the 250 mg I… (cut)
+
+**Keyed answers (page 1):** (a) two ways: F = (435 (mg/L)hr)(0.092 hr⁻¹)(8.33 L)/500 mg = 0.667, and F = [(435 (mg/L)hr)/(326 (mg/L)hr)] × (250 mg/500 mg) = 0.667.
+
+*Recompute:* VD = 250/30 = 8.33 L, AUC_IV = 30/0.092 = 326.1 (mg/L)hr; (a) 0.667 both ways → **match**. (b) from the stem would be 250 mg/0.667 = 374.8 mg; not written, since her key for it is cut. The drill carries the IV area of her second method as its own part (ws7-1a0, 326 (mg/L)hr) so the set has two parts; that part's wording is not hers.
+
+**Formats observed:** the IV curve is given as an equation, so VD and AUC_IV have to be read off it; the oral AUC is printed in mcg·hr/mL and worked in (mg/L)hr; she shows both the clearance form and the two-AUC form and gets the same F. Page 2 not indexed; part b (the oral dose comparable to 250 mg IV) to follow.
+
+## Source: `BA-BE-Practice-2----Solutions.pdf` ("PHAR 4221 Daily Practice BA-BE Practice 2")
+
+> 1. A physician would like an equivalent oral dose of an antibiotic that has been administered to achieve the same extent of absorption as a 500 mg IV bolus dose. The oral drug product has an absolute bioavailability of 67%. What dose would you recommend (Please round to the nearest 10 mg)?
+
+> 2. The relative bioavailability of a capsule formulation was studied in 24 volunteers. Each volunteer received either a single oral tablet containing 500 mg of the drug or a capsule containing 500 mg of the drug. The average AUC of the oral tablet was 200 (mcg/mL) hr and the average AUC of the capsule was 160 (mcg/mL) hr. What is the relative bioavailability of the drug from the tablet compared to the capsule?
+
+**Keyed answers:** (1) D0 po = 500 mg/0.67 = 746.3 mg ≅ 750 mg; (2) F = (200/160)(500 mg/500 mg) = 1.25.
+
+*Recompute:* (1) 746.27 mg → 750 mg; (2) 1.25 → **match**.
+
+**Formats observed:** the equivalent-dose question gives F as a percentage and asks for rounding to the nearest 10 mg; the relative problem gives equal doses, so the dose ratio is 1, and names the reference after "compared to". Nothing cut.
+
+## Source: `BA-BE-Practice-3---Solutions.pdf` ("PHAR 4221 Daily Practice BA-BE Practice 3")
+
+> 1. After oral administration of a single 1000 mg capsule of an investigational drug (half-life approximately 4.6 hours and apparent volume of distribution approximately 18 L) to a normal volunteer, the calculated AUC was 246 mg h/L.
+> a. What is the bioavailability of this oral capsule in this volunteer?
+> b. What is the expected AUC after administration of a single IV bolus dose of 500 mg to the same volunteer?
+> c. What oral dose would pr… (cut)
+
+**Keyed answers (page 1):** (a) F D po = Cl AUC po → F = (18 L)(0.693/4.6 hr)(246 mg·hr/L)/1000 mg = 0.667; (b) D iv = Cl AUC iv → AUC = 500 mg/[(18 L)(0.693/4.6 hr)] = 184.4 mg·hr/L.
+
+*Recompute:* k = 0.1507 hr⁻¹, ClT = 2.712 L/hr; (a) 0.6671; (b) 184.38 (mg/L)hr → **match**.
+
+**Formats observed:** no IV AUC is given, so F comes from F × D po = ClT × AUC po with ClT = k VD; the IV area is then dose over clearance; the AUC unit is printed as "mg h/L" in the stem and "mg·hr/L" in the key. Page 2 not indexed; part c (an oral dose) to follow.
