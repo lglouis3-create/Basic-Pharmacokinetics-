@@ -2500,14 +2500,14 @@ function startPaper(qs, minutes, extra){
         running:true, done:false,
         ends: Date.now() + minutes*60000,
         orders: qs.map(q => isMC(q) ? shuffle(q.options.map((o,k)=>k)) : [])}, extra || {});
-  clearInterval(EX.timer);
-  EX.timer = setInterval(()=>{
-    if(!EX || !EX.running) return clearInterval(EX.timer);
+  const tick = setInterval(()=>{
+    if(!EX || !EX.running || EX.timer !== tick) return clearInterval(tick);
     if(Date.now() >= EX.ends){ finishExam(); return; }
     const c = document.getElementById('exClock');
     if(c){ const l = EX.ends - Date.now();
       c.textContent = fmt(l); c.classList.toggle('low', l < 5*60000); }
   }, 1000);
+  EX.timer = tick;
 }
 function beginExam(){
   const shares = poolShares();
