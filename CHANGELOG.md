@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (walk-throughs line by line)
+- Step-through captions show one sentence per line with stacked fractions.
+- Diagrams: the dosing models side by side have their own chip and a table of drug in, drug out and shape.
+- A way back after a Diagrams chip jump, and after a Weak spots "Read" link.
+
 ## 2026-10-04 (cleaner layout on the reference tabs)
 - Exam facts on Topics and Exam sim are labelled rows and a marks table, not a paragraph.
 - Tell apart: each dosing model now shows its curve, each equation on its own line with its note beneath.

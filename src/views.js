@@ -290,6 +290,7 @@ function poolFor(topicId, subId){
 const VIEWS = ['topics','quiz','gaps','exam','guide','tell','terms','diag','eq','ref','settings'];
 function show(v){
   VIEW = v;
+  { const lb = document.getElementById('lback'); if(lb) lb.remove(); }
   if(ANIM && v !== 'diag'){ clearInterval(ANIM.t); ANIM.b.textContent = '▶ Play all'; ANIM = null; }
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.v===v));
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
@@ -1189,7 +1190,7 @@ function explainHTML(q){
 }
 let RET = [];
 function jump(view, anchor){
-  RET.push({view: VIEW, y: window.scrollY, label: VIEW === 'exam' ? 'the exam' : 'the question'});
+  RET.push({view: VIEW, y: window.scrollY, label: ({exam: 'the exam', quiz: 'the question', gaps: 'Weak spots', terms: 'Terms', diag: 'Diagrams', tell: 'Tell apart', guide: 'Guides', ref: 'Reference'})[VIEW] || 'where you were'});
   if(view === 'eq') EQ = null;                      // the anchors live on the picker, not in a running drill
   show(view);
   const t = document.getElementById(anchor);
@@ -2266,9 +2267,7 @@ function wireReviewPlan(el, plan){
   });
   el.querySelectorAll('#planAll').forEach(b => b.onclick = () => startSweepOf(plan.notSolid.slice(), 'Not yet solid'));
   el.querySelectorAll('#retrySess').forEach(b => b.onclick = () => startSweepOf(SESSION_RETRY.slice(), 'Missed this session'));
-  el.querySelectorAll('[data-refjump]').forEach(b => b.onclick = () => {
-    show('ref'); const t = document.getElementById('ref-' + b.dataset.refjump); if(t) scrollToEl(t);
-  });
+  el.querySelectorAll('[data-refjump]').forEach(b => b.onclick = () => jump('ref', 'ref-' + b.dataset.refjump));
 }
 
 /* Scroll so the target sits just below the sticky header and tab bar, which
@@ -2301,7 +2300,8 @@ function stepFigHTML(key){
   const dots = f.steps.map((s, i) => `<button class="sdot${i ? '' : ' on'}" data-go="dot" data-i="${i}" aria-label="Go to step ${i + 1}"${i ? '' : ' aria-current="step"'}></button>`).join('');
   return `<figure class="reffig stepfig" data-stepfig="${esc(key)}"><div class="stsvg">${f.svg}</div>
     <div class="anim" data-anim="${esc(key)}"><button class="btn small ghost" data-go="-1">◀ Back</button><button class="btn small ghost" data-go="1">Next ▶</button><button class="btn small ghost" data-go="replay">↻ Replay step</button><button class="btn small ghost" data-go="play">▶ Play all</button><span class="sdots">${dots}</span></div>
-    ${f.steps.map((s, i) => `<p class="stcap${i ? '' : ' on'}" data-i="${i}"><b>Step ${i + 1} of ${n} · ${esc(s.tag)}.</b> ${esc(s.cap)}</p>`).join('')}
+    ${f.steps.map((s, i) => `<div class="stcap${i ? '' : ' on'}" data-i="${i}"><b>Step ${i + 1} of ${n} · ${esc(s.tag)}</b>${
+        String(s.cap).split('\n').map(line => `<span class="stline">${mathHTML(esc(line))}</span>`).join('')}</div>`).join('')}
     <figcaption>${esc(f.title)}</figcaption></figure>`;
 }
 const LEAF_SEL = 'text,circle,rect,ellipse,line,polyline,polygon,path';
@@ -2394,21 +2394,26 @@ function stepClick(e){
 function readGraphHTML(d){
   const row = (k, label) => d[k] ? `<li><b>${label}</b> ${richHTML(esc(d[k]))}</li>` : '';
   return `<div class="readgraph"><h4>Read this graph</h4><ol>
-    ${row('axes', 'Axes.')}${row('shape', 'Shape.')}${row('eq', 'Equation.')}${row('how', 'How the equation makes the shape.')}${row('asks', 'What she asks.')}</ol>
+    ${row('axes', 'Axes.')}${row('inout', 'Drug in, drug out.')}${row('shape', 'Shape.')}${row('eq', 'Equation.')}${row('how', 'How the equation makes the shape.')}${row('asks', 'What she asks.')}</ol>
     ${d.quote ? `<p class="dquote">“${esc(d.quote)}”</p>` : ''}</div>`;
 }
 let DG_MOD = 'all';
-const dgInModule = d => DG_MOD === 'all' || (d.modules ? d.modules.includes(DG_MOD) : d.module === DG_MOD);
+/* A group marked `own` (the dosing models side by side) has its own chip and
+   stays out of the module filters, so it is not the first thing under every
+   module. */
+const dgShown = (g, d) => DG_MOD === 'all' ? true : DG_MOD === 'models' ? g.own === 'models'
+  : !g.own && (d.modules ? d.modules.includes(DG_MOD) : d.module === DG_MOD);
 function renderDiagrams(){
   let toc = '', body = '';
-  const dmods = [...new Set(DIAGRAMS.flatMap(g => g.figs.flatMap(d => d.modules || [d.module])).filter(m => typeof m === 'number'))].sort((a, b) => a - b);
-  const modChips = `<div class="filters"><div class="frow"><label>Module</label>${['all', ...dmods].map(m =>
-    `<button class="chip" data-dgmod="${m}" aria-pressed="${DG_MOD === m}">${m === 'all' ? 'All' : esc(modShort(m))}</button>`).join('')}</div></div>`;
+  const dmods = [...new Set(DIAGRAMS.filter(g => !g.own).flatMap(g => g.figs.flatMap(d => d.modules || [d.module])).filter(m => typeof m === 'number'))].sort((a, b) => a - b);
+  const chipLabel = m => m === 'all' ? 'All' : m === 'models' ? 'Dosing models side by side' : 'Module ' + esc(modShort(m));
+  const modChips = `<div class="filters" id="dgtop"><div class="frow"><label>Show</label>${['all', 'models', ...dmods].map(m =>
+    `<button class="chip" data-dgmod="${m}" aria-pressed="${DG_MOD === m}">${chipLabel(m)}</button>`).join('')}</div></div>`;
   DIAGRAMS.forEach((g, gi) => {
-    const figs = g.figs.filter(d => (STEPFIGS[d.key] || IMAGES[d.key]) && dgInModule(d)); if(!figs.length) return;
+    const figs = g.figs.filter(d => (STEPFIGS[d.key] || IMAGES[d.key]) && dgShown(g, d)); if(!figs.length) return;
     toc += `<div class="dgtoc"><b>${esc(g.group)}</b><div class="dgchips">${figs.map(d =>
       `<a class="chip" href="#dg-${d.key}" data-dg="${d.key}">${esc(d.name)}${STEPFIGS[d.key] ? ' ▶' : ''}</a>`).join('')}</div></div>`;
-    body += `<h3 id="dgg-${gi}">${esc(g.group)}</h3><p class="sub">${esc(g.note)}</p>` + figs.map(d => `<div id="dg-${d.key}" class="dgfig">
+    body += `<h3 id="dgg-${gi}">${esc(g.group)}</h3><p class="sub">${esc(g.note)}</p>${g.table ? modelTableHTML(g.table) : ''}` + figs.map(d => `<div id="dg-${d.key}" class="dgfig">
       <div class="dghead"><b>${esc(d.name)}</b><span>Module${d.modules ? 's' : ''} ${esc(typeof d.module === 'number' ? modShort(d.module) : String(d.module))}</span></div>
       ${STEPFIGS[d.key] ? stepFigHTML(d.key)
         : `<figure class="reffig"><img src="${IMAGES[d.key]}" alt="${esc(FIG_TITLES[d.key] || d.name)}"></figure>`}
@@ -2426,9 +2431,23 @@ function renderDiagrams(){
     <div class="dgintro"><p><b>Three steps for any graph</b></p><ol>${DIAGRAM_INTRO.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
     <p class="dquote">“${esc(DIAGRAM_QUOTE)}”</p></div>
     ${modChips}${toc}${body}`;
-  el.querySelectorAll('[data-dgmod]').forEach(b => b.onclick = () => { DG_MOD = b.dataset.dgmod === 'all' ? 'all' : +b.dataset.dgmod; renderDiagrams(); });
+  el.querySelectorAll('[data-dgmod]').forEach(b => b.onclick = () => { DG_MOD = /^\d+$/.test(b.dataset.dgmod) ? +b.dataset.dgmod : b.dataset.dgmod; renderDiagrams(); });
   el.querySelectorAll('[data-dg]').forEach(a => a.onclick = e => { e.preventDefault();
-    const t = document.getElementById('dg-' + a.dataset.dg); if(t) scrollToEl(t); });
+    const t = document.getElementById('dg-' + a.dataset.dg); if(t){ scrollToEl(t); listBack('dgtop', 'the list of figures'); } });
+}
+/* After a jump down a long tab, a floating way back to the list at the top.
+   It goes when pressed, or when the tab changes. */
+function listBack(targetId, label){
+  let b = document.getElementById('lback');
+  if(!b){ b = document.createElement('button'); b.id = 'lback'; b.className = 'btn ghost'; document.body.appendChild(b); }
+  b.textContent = `▲ Back to ${label}`;
+  b.onclick = () => { const t = document.getElementById(targetId); b.remove(); if(t) scrollToEl(t); };
+}
+/* The dosing models in one table: what goes in, what goes out, the shape. */
+function modelTableHTML(rows){
+  const head = ['Model', 'Drug in', 'Drug out', 'Compartments', 'Curve', 'Recognise it by'];
+  return `<div class="tw"><table class="reftab"><thead><tr>${head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${
+    rows.map(r => `<tr>${r.map((c, i) => `<td>${i ? richHTML(esc(c)) : `<b>${richHTML(esc(c))}</b>`}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 }
 
 /* ==========================================================================

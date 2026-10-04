@@ -733,17 +733,27 @@ ms = Plot(64, [0, 10, 20, 30, 40, 50, 60], xlabel='Time (hours)', ylabel='Concen
 ms.frame([0, 8, 16, 24, 32, 40, 48, 56, 64])
 heading(ms, 'Six doses of 10 mg/kg every 8 hours, then none',
         't½ 4 hr, VD 0.25 L/kg, so each dose adds C0 = 40 mg/L.', big=1.0)
+# Each caption is a list of lines (joined with newlines): the drill shows one
+# line at a time, and any division is written as a stacked fraction.
 stepped('md_bolus_steps', 'Repeated IV bolus, dose by dose', ms, [
-    ('dose 1', 'Dose 1 gives C0 = 40 mg/L. Eight hours is two half-lives of 4 hr, so 40 falls to %.0f mg/L just before dose 2.'
-     % md_curve(8 - 1e-6), md_s1),
-    ('dose 2', 'Dose 2 adds another 40 mg/L to the %.0f still present: %.1f mg/L, which falls to %.1f mg/L by 16 hr.'
-     % (md_curve(8 - 1e-6), peaks[1], md_curve(16 - 1e-6)), md_s2),
-    ('doses 3 to 6', 'Each dose adds 40 mg/L to a larger remainder, so the peaks climb ' +
-     ', '.join('%.1f' % p for p in peaks) + ' mg/L and stop climbing.', md_s3),
-    ('steady state', 'The climb is over within 3 to 5 half-lives, 12 to 20 hours. At steady state the curve repeats between '
-     'Cmax 53.3 and Cmin 13.3 mg/L; the average, 28.9 mg/L, sits below the midpoint 33.3 because the curve spends more '
-     'of each interval at the lower concentrations.', md_s4),
-    ('after the last dose', 'After the sixth dose the level falls by first-order elimination alone, halving every 4 hours.', md_s5),
+    ('dose 1', '\n'.join([
+        'Dose 1 arrives at time zero. C0, the concentration it produces on its own, is the dose over the volume: '
+        'C0 = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L.',
+        'Eight hours is two half-lives of 4 hr.',
+        'So 40 mg/L halves to 20, then to %.0f mg/L just before dose 2.' % md_curve(8 - 1e-6)]), md_s1),
+    ('dose 2', '\n'.join([
+        'Dose 2 adds another 40 mg/L to the %.0f mg/L still present: %.0f + 40 = %.1f mg/L.' % (md_curve(8 - 1e-6), md_curve(8 - 1e-6), peaks[1]),
+        'Over the next 8 hours that %.1f falls by two half-lives to %.1f mg/L by 16 hr.' % (peaks[1], md_curve(16 - 1e-6))]), md_s2),
+    ('doses 3 to 6', '\n'.join([
+        'Each dose adds 40 mg/L to a larger remainder, so each peak is higher than the last by a smaller amount.',
+        'The peaks climb ' + ', '.join('%.1f' % p for p in peaks) + ' mg/L and stop climbing.']), md_s3),
+    ('steady state', '\n'.join([
+        'The climb is over within 3 to 5 half-lives, here 12 to 20 hours. This is steady state: each dose now replaces exactly what was lost.',
+        'At steady state the curve repeats between the peak, Cmax 53.3 mg/L, and the trough, Cmin 13.3 mg/L.',
+        'The average over an interval, Cavg 28.9 mg/L, sits below the midpoint of 33.3 mg/L because the curve spends more of each interval at the lower concentrations.']), md_s4),
+    ('after the last dose', '\n'.join([
+        'After the sixth dose no more drug comes in.',
+        'The level falls by first-order elimination alone, halving every 4 hours.']), md_s5),
 ])
 
 
@@ -783,13 +793,21 @@ ts.frame([0, 2, 4, 6, 8, 10, 12, 14])
 heading(ts, 'Two 2-hour infusions of 300 mg, starting at 0 and 6 hours',
         'k 0.15 hr⁻¹, VD 15 L, so R = 150 mg/hr.', big=1.0)
 stepped('two_infusions_steps', 'Two intermittent IV infusions, stage by stage', ts, [
-    ('infusion 1', 'From 0 to 2 hr the first infusion runs: C = (R/(VD k))(1 − e^−kt) with t = 2 hr gives %.2f mg/L.' % inf1(2), ti_s1),
-    ('infusion 1 stops', 'With the infusion off, the level falls first order from %.2f: at 6 hr it is %.2f × e^(−0.6) = %.2f mg/L.'
-     % (inf1(2), inf1(2), inf1(6)), ti_s2),
-    ('infusion 2', 'The second infusion builds exactly as the first did, to %.2f mg/L at 8 hr. The leftover of dose 1 has fallen to '
-     '%.2f mg/L, so the plasma level at 8 hr is %.2f mg/L.' % (inf2(8), inf1(8), both(8)), ti_s3),
-    ('read at 12 hr', 'At 12 hr dose 1 has declined 10 hr and gives %.2f mg/L; dose 2 has declined 4 hr and gives %.2f mg/L. '
-     'The plasma concentration is the sum, %.2f mg/L.' % (inf1(12), inf2(12), both(12)), ti_s4),
+    ('infusion 1', '\n'.join([
+        'From 0 to 2 hr the first infusion runs. Its rate R is the dose over the infusion time: R = {{frac:300 mg|2 hr}} = 150 mg/hr.',
+        'While it runs, the level climbs as a single infusion does: C = {{frac:R|VD × k}}(1 − e^(−kt)).',
+        'With t = 2 hr, the end of the infusion, that gives %.2f mg/L.' % inf1(2)]), ti_s1),
+    ('infusion 1 stops', '\n'.join([
+        'With the infusion off, nothing comes in and the level falls by first-order elimination from %.2f mg/L.' % inf1(2),
+        'At 6 hr, four hours after it stopped: %.2f × e^(−0.15 × 4) = %.2f × e^(−0.6) = %.2f mg/L.' % (inf1(2), inf1(2), inf1(6))]), ti_s2),
+    ('infusion 2', '\n'.join([
+        'The second infusion starts at 6 hr and builds exactly as the first did, to %.2f mg/L at 8 hr.' % inf2(8),
+        'By 8 hr the leftover of dose 1 has fallen to %.2f mg/L.' % inf1(8),
+        'The plasma level at 8 hr is the sum of the two: %.2f + %.2f = %.2f mg/L.' % (inf2(8), inf1(8), both(8))]), ti_s3),
+    ('read at 12 hr', '\n'.join([
+        'At 12 hr dose 1 has been declining for 10 hr since it stopped and gives %.2f mg/L.' % inf1(12),
+        'Dose 2 has been declining for 4 hr since it stopped and gives %.2f mg/L.' % inf2(12),
+        'The plasma concentration is the sum: %.2f + %.2f = %.2f mg/L.' % (inf1(12), inf2(12), both(12))]), ti_s4),
 ])
 
 

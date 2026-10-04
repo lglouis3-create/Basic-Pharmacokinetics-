@@ -3,23 +3,23 @@
 "footer": "",
 "steps": [
 {
-"cap": "Dose 1 gives C0 = 40 mg/L. Eight hours is two half-lives of 4 hr, so 40 falls to 10 mg/L just before dose 2.",
+"cap": "Dose 1 arrives at time zero. C0, the concentration it produces on its own, is the dose over the volume: C0 = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L.\nEight hours is two half-lives of 4 hr.\nSo 40 mg/L halves to 20, then to 10 mg/L just before dose 2.",
 "tag": "dose 1"
 },
 {
-"cap": "Dose 2 adds another 40 mg/L to the 10 still present: 50.0 mg/L, which falls to 12.5 mg/L by 16 hr.",
+"cap": "Dose 2 adds another 40 mg/L to the 10 mg/L still present: 10 + 40 = 50.0 mg/L.\nOver the next 8 hours that 50.0 falls by two half-lives to 12.5 mg/L by 16 hr.",
 "tag": "dose 2"
 },
 {
-"cap": "Each dose adds 40 mg/L to a larger remainder, so the peaks climb 40.0, 50.0, 52.5, 53.1, 53.3, 53.3 mg/L and stop climbing.",
+"cap": "Each dose adds 40 mg/L to a larger remainder, so each peak is higher than the last by a smaller amount.\nThe peaks climb 40.0, 50.0, 52.5, 53.1, 53.3, 53.3 mg/L and stop climbing.",
 "tag": "doses 3 to 6"
 },
 {
-"cap": "The climb is over within 3 to 5 half-lives, 12 to 20 hours. At steady state the curve repeats between Cmax 53.3 and Cmin 13.3 mg/L; the average, 28.9 mg/L, sits below the midpoint 33.3 because the curve spends more of each interval at the lower concentrations.",
+"cap": "The climb is over within 3 to 5 half-lives, here 12 to 20 hours. This is steady state: each dose now replaces exactly what was lost.\nAt steady state the curve repeats between the peak, Cmax 53.3 mg/L, and the trough, Cmin 13.3 mg/L.\nThe average over an interval, Cavg 28.9 mg/L, sits below the midpoint of 33.3 mg/L because the curve spends more of each interval at the lower concentrations.",
 "tag": "steady state"
 },
 {
-"cap": "After the sixth dose the level falls by first-order elimination alone, halving every 4 hours.",
+"cap": "After the sixth dose no more drug comes in.\nThe level falls by first-order elimination alone, halving every 4 hours.",
 "tag": "after the last dose"
 }
 ],
@@ -30,19 +30,19 @@
 "footer": "",
 "steps": [
 {
-"cap": "From 0 to 2 hr the first infusion runs: C = (R/(VD k))(1 − e^−kt) with t = 2 hr gives 17.28 mg/L.",
+"cap": "From 0 to 2 hr the first infusion runs. Its rate R is the dose over the infusion time: R = {{frac:300 mg|2 hr}} = 150 mg/hr.\nWhile it runs, the level climbs as a single infusion does: C = {{frac:R|VD × k}}(1 − e^(−kt)).\nWith t = 2 hr, the end of the infusion, that gives 17.28 mg/L.",
 "tag": "infusion 1"
 },
 {
-"cap": "With the infusion off, the level falls first order from 17.28: at 6 hr it is 17.28 × e^(−0.6) = 9.48 mg/L.",
+"cap": "With the infusion off, nothing comes in and the level falls by first-order elimination from 17.28 mg/L.\nAt 6 hr, four hours after it stopped: 17.28 × e^(−0.15 × 4) = 17.28 × e^(−0.6) = 9.48 mg/L.",
 "tag": "infusion 1 stops"
 },
 {
-"cap": "The second infusion builds exactly as the first did, to 17.28 mg/L at 8 hr. The leftover of dose 1 has fallen to 7.03 mg/L, so the plasma level at 8 hr is 24.30 mg/L.",
+"cap": "The second infusion starts at 6 hr and builds exactly as the first did, to 17.28 mg/L at 8 hr.\nBy 8 hr the leftover of dose 1 has fallen to 7.03 mg/L.\nThe plasma level at 8 hr is the sum of the two: 17.28 + 7.03 = 24.30 mg/L.",
 "tag": "infusion 2"
 },
 {
-"cap": "At 12 hr dose 1 has declined 10 hr and gives 3.86 mg/L; dose 2 has declined 4 hr and gives 9.48 mg/L. The plasma concentration is the sum, 13.34 mg/L.",
+"cap": "At 12 hr dose 1 has been declining for 10 hr since it stopped and gives 3.86 mg/L.\nDose 2 has been declining for 4 hr since it stopped and gives 9.48 mg/L.\nThe plasma concentration is the sum: 3.86 + 9.48 = 13.34 mg/L.",
 "tag": "read at 12 hr"
 }
 ],
