@@ -290,6 +290,7 @@ function poolFor(topicId, subId){
 const VIEWS = ['topics','quiz','gaps','exam','guide','tell','terms','diag','eq','ref','settings'];
 function show(v){
   VIEW = v;
+  if(ANIM && v !== 'diag'){ clearInterval(ANIM.t); ANIM.b.textContent = '▶ Play all'; ANIM = null; }
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.v===v));
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
@@ -468,11 +469,10 @@ const QUIZ_HIDE_KEY = NS + ':quizhide:';
 const PANEL_OPEN = {morefilters: false, qsaid: false};   // panels on Topics that stay as left across re-renders
 let QUIZ_N = 10;   // questions on a practice quiz: she has not said how many, so the student picks
 const quizScope = qz => QUESTIONS.filter(q => (qz.modules || []).includes(q.module));
-function quizLive(qz){
-  if(!qz.when) return false;
-  if(Date.now() >= new Date(qz.when).getTime() + (qz.minutes || 0) * 60000) return false;
-  return LS.get(QUIZ_HIDE_KEY + qz.id) !== '1';
-}
+// the quiz has not been sat yet (its start time plus its length is still ahead)
+const quizAhead = qz => !!qz.when && Date.now() < new Date(qz.when).getTime() + (qz.minutes || 0) * 60000;
+const quizHidden = qz => LS.get(QUIZ_HIDE_KEY + qz.id) === '1';
+function quizLive(qz){ return quizAhead(qz) && !quizHidden(qz); }
 function quizCards(){
   return (COURSE.quizzes || []).filter(quizLive).map(qz => {
     const pool = quizScope(qz), c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
@@ -916,6 +916,9 @@ function nextQuestion(){
     q = pickNext(Q.doneIds ? Q.pool.filter(x => !Q.doneIds.has(x.id)) : Q.pool, Q.lastId);
   }
   Q.current = q;
+  // header status is fixed when the question comes up, so answering it now does not relabel it
+  const st0 = q && DB.concepts[q.concept];
+  Q.status = !st0 || !(st0.seen > 0) ? 'new' : (st0.wrong > 0 && st0.box === 0) ? 'missed before' : 'review';
   Q.picked = q && qType(q) === 'match' ? {} : null;
   Q.revealed = false; Q.missKind = null; Q.startedAt = Date.now();
   if(q && isMC(q)) Q.order = shuffle(q.options.map((o,i)=>i));
@@ -1499,21 +1502,18 @@ function renderQuiz(){
     document.getElementById('goAll').onclick = () => startQuiz(null, null);
     return;
   }
-  const q = Q.current, s = DB.concepts[q.concept];
+  const q = Q.current;
   const kind = qType(q);
   const totalC = conceptsIn(Q.pool).length;
   const left   = remainingIn(Q.pool);
   const pctDone = totalC ? Math.round(100*(totalC-left)/totalC) : 0;
-  const seenBefore = s && s.seen > 0;
-  const missedBefore = s && s.wrong > 0 && s.box === 0;
   const ok = Q.revealed ? gradeAnswer(q, Q.picked) : false;
 
   let h = `<div class="sessline">${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
     ${profTag(q.prof)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
-    ${missedBefore ? '<span style="color:var(--bad)">missed before</span>' :
-      seenBefore   ? '<span>review</span>' : '<span>new</span>'}
+    ${Q.status === 'missed before' ? '<span style="color:var(--bad)">missed before</span>' : `<span>${Q.status || 'new'}</span>`}
   </div>
   <div class="qprog">
     <span>${Q.chain ? `part ${Q.i} of ${Q.sweep.length}`
@@ -1551,7 +1551,7 @@ function renderQuiz(){
 
   el.querySelectorAll('[data-chainlink]').forEach(b => b.onclick = () => startChain(b.dataset.chainlink));
   el.querySelectorAll('.opt').forEach(b => b.onclick = () => multi ? toggleOption(+b.dataset.o) : answer(+b.dataset.o));
-  const ni = document.getElementById('numIn');
+  const ni = el.querySelector('#numIn');
   if(ni && !Q.revealed){
     ni.oninput = e => { Q.picked = e.target.value; };
     ni.onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); submitNumeric(); } };
@@ -1598,7 +1598,7 @@ function submitMulti(){
 function submitNumeric(){
   if(Q.revealed) return;
   markDone(Q.current.id);
-  const ni = document.getElementById('numIn');
+  const ni = $('#v-quiz #numIn');
   if(ni) Q.picked = ni.value;
   Q.revealed = true; Q.guessedLogged = false;
   record(Q.current, gradeNumeric(Q.current, Q.picked) ? 'correct' : 'wrong',
@@ -1633,7 +1633,7 @@ const fmtDay = t => new Date(t).toLocaleDateString(undefined, {weekday: 'short',
 const fmtWhen = t => new Date(t).toLocaleDateString(undefined, {month: 'short', day: 'numeric'});
 const pctTxt = a => a.pct == null ? '—' : a.pct + '%';
 const pctCol = p => p == null ? 'inherit' : p >= 80 ? 'var(--ok)' : p >= 60 ? 'var(--warn)' : 'var(--bad)';
-const an = w => (/^[aeiou]/i.test(w) ? 'an ' : 'a ') + w;
+const an = w => (/^[aeio]|^u(?![a-z]i)/i.test(w) ? 'an ' : 'a ') + w;
 /* Answers on the questions of one pool: how many, and how many right. */
 function seenOf(pool){ const ids = new Set(pool.map(q => q.id)); return acc(DB.answers.filter(a => ids.has(a.qid))); }
 /* Two bars beside every topic. The first is coverage: how many of the
@@ -1977,7 +1977,7 @@ function renderGaps(){
       const last = DB.answers.slice().reverse().find(a=>a.qid===id && a.result==='wrong');
       let pickedTxt = '';
       if(last && last.picked !== undefined && last.picked !== null){
-        if(qType(q)==='numeric') pickedTxt = String(last.picked);
+        if(qType(q)==='numeric') pickedTxt = String(last.picked).trim() === '' ? 'left blank' : String(last.picked);
         else if(qType(q)==='match') pickedTxt = Object.keys(last.picked).map(k=>`${k} → ${last.picked[k]}`).join(' · ');
         else pickedTxt = (Array.isArray(last.picked) ? last.picked : [last.picked])
               .map(i=>q.options[i] ? q.options[i].t : '').filter(Boolean).join(' · ');
@@ -1993,6 +1993,7 @@ function renderGaps(){
   }
   h = h.replace(/<table class="gap">([\s\S]*?)<\/table>/g, '<div class="tw"><table class="gap">$1</table></div>');
   el.innerHTML = h;
+  el.querySelectorAll('.tw').forEach(w => w.classList.toggle('wide', w.scrollWidth > w.clientWidth + 4));
   wireReviewPlan(el, plan);
 
   el.querySelectorAll('[data-next]').forEach(b => b.onclick = () => {
@@ -2154,7 +2155,8 @@ function firstSentences(t){
 function pickedRead(q, a){
   const p = a.picked; if(p === undefined || p === null) return null;
   const kind = qType(q);
-  if(kind === 'numeric') return {txt: String(p) + (q.units ? ' ' + q.units : ''), why: ''};
+  if(kind === 'numeric') return String(p).trim() === '' ? {txt: 'left blank', why: ''}
+                                : {txt: String(p) + (q.units ? ' ' + q.units : ''), why: ''};
   if(kind === 'match'){
     const wrong = (q.pairs || []).filter(pr => p[pr.l] !== pr.r);
     if(!wrong.length) return null;
@@ -2577,7 +2579,7 @@ function renderExamQ(){
     if(multi){ const p = EX.picks[EX.i]; EX.picks[EX.i] = p.includes(oi) ? p.filter(x=>x!==oi) : [...p, oi]; }
     else EX.picks[EX.i] = oi;
     renderExamQ(); });
-  const ni = document.getElementById('numIn');
+  const ni = el.querySelector('#numIn');
   if(ni) ni.oninput = e => { EX.picks[EX.i] = e.target.value; };
   el.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
     const p = Object.assign({}, EX.picks[EX.i]);
@@ -2782,6 +2784,12 @@ function renderSettings(){
     </p>
   </div>
 
+  ${(COURSE.quizzes||[]).some(qz => quizAhead(qz) && quizHidden(qz)) ? `<h3>Quiz prep cards</h3>
+  <div class="filters">
+    <div class="frow"><button class="btn ghost" id="btnUnhideQuiz">Show the hidden quiz card again</button></div>
+    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">A card hidden with its Hide button stays hidden on this browser until the quiz has been sat. This puts it back on Topics.</p>
+  </div>` : ''}
+
   <h3>Move your progress between devices</h3>
   <div class="filters">
     <div class="frow">
@@ -2817,6 +2825,8 @@ function renderSettings(){
   $('#v-settings').querySelectorAll('.chip[data-exam]').forEach(b=>b.onclick=()=>{
     chooseExam(+b.dataset.exam); renderSettings();
   });
+  const unhide = $('#btnUnhideQuiz');
+  if(unhide) unhide.onclick = () => { (COURSE.quizzes||[]).forEach(qz => LS.set(QUIZ_HIDE_KEY + qz.id, '0')); renderSettings(); };
   $('#btnProf').onclick = () => {
     const n = $('#profIn').value.trim() || 'default';
     if(n === PROFILE) return;

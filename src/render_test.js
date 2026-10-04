@@ -37,7 +37,7 @@ let code=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)][0][1];
 const b=code.lastIndexOf('   BOOT'); code=code.slice(0,code.lastIndexOf('/* ===',b));
 code+="\nglobalThis.__X={COURSE,QUESTIONS,TOPICS,startQuiz,startSweep,renderTopics,renderQuiz,renderGaps,renderRef,renderTell,renderDiagrams,renderTerms,TVref:()=>TV,TERMS,TERM_QS,renderEq,eqStart,eqSetChosen,EQUATIONS,EQref:()=>EQ,renderGuide,renderSettings,renderExam,answer,submitNumeric,submitMatch,submitMulti,qType,isMulti,correctSet,Qref:()=>Q,askProfile,record,beginExam,renderExamQ,finishExam,EXref:()=>EX};\n";
 const store={}, sinks={};
-function mk(id){ return sinks[id] ||= {innerHTML:'',textContent:'',value:'',dataset:{},style:{},classList:{toggle(){},add(){},remove(){},contains(){return false}},setAttribute(){},querySelectorAll(){return []},onclick:null,click(){},remove(){},focus(){},setSelectionRange(){}}; }
+function mk(id){ return sinks[id] ||= {innerHTML:'',textContent:'',value:'',dataset:{},style:{},classList:{toggle(){},add(){},remove(){},contains(){return false}},setAttribute(){},querySelectorAll(){return []},querySelector(){return null},onclick:null,click(){},remove(){},focus(){},setSelectionRange(){}}; }
 const sb={console,localStorage:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)},removeItem:k=>{delete store[k]}},
  document:{querySelector:s=>mk(s),querySelectorAll:()=>[],getElementById:i=>mk(i),createElement:()=>mk('tmp'),body:mk('body')},
  window:{scrollTo(){}},prompt:()=>'Tester',alert:m=>console.log('ALERT:',m),confirm:()=>true,
@@ -90,7 +90,7 @@ function drive(q, submit, value){
   Q.startedAt = Date.now();
   X.renderQuiz();
   // the real number box is read back on submit; the stub needs the same value
-  if(X.qType(q)==='numeric') sinks['numIn'].value = value === undefined ? '' : String(value);
+  if(X.qType(q)==='numeric') mk('#v-quiz #numIn').value = value === undefined ? '' : String(value);
   const before = sinks['#v-quiz'].innerHTML;
   submit();
   return {before, after: sinks['#v-quiz'].innerHTML};

@@ -11,20 +11,23 @@ Live at <https://lglouis3-create.github.io/Basic-Pharmacokinetics-/>
 
 ## What is in the bank
 
-190 questions, 92 of them calculations, drawn from Dr. Mosley's decks, the
-lecture recordings and her own practice sets.
+480 questions, 302 of them calculations, drawn from Dr. Mosley's decks, the
+lecture recordings, her in-class activities and her practice sheets with their
+answer keys.
 
 | Module | Topic | Questions | Exam |
 |---|---|---:|---|
-| 1 | Introduction, kinetic orders, AUC | 36 | Exam 1 |
-| 2 | IV bolus, one- and multi-compartment | 40 | Exam 1 |
-| 3 | Intravenous infusion | 34 | Exam 1 |
-| 4 | Elimination, clearance, renal clearance | 40 | Exam 2 |
-| 5 | Oral absorption, single dose | 40 | Exam 2 |
+| 1 | Introduction and math review | 53 | Exam 1 |
+| 2 | IV bolus, one- and multi-compartment | 60 | Exam 1 |
+| 3 | Intravenous infusions | 54 | Exam 1 |
+| 4 | Drug elimination and clearance | 80 | Exam 2 |
+| 5 | Single oral administration | 77 | Exam 2 |
+| 6 | Multiple dosing: IV bolus, intermittent infusion, oral | 123 | Exam 2 |
+| 7a | Bioavailability and bioequivalence | 33 | Exam 2 |
 
-Modules 6 to 9 are on the Exam 2 blueprint and are not yet lectured. The exam
-simulator draws only what exists and states on screen how much of the paper it
-cannot yet cover, rather than padding from another module.
+Modules not yet lectured are not in the bank. The exam simulator draws only
+what exists and states on screen how much of the paper it cannot yet cover,
+rather than padding from another module.
 
 ## Building
 

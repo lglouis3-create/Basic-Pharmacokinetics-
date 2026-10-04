@@ -134,7 +134,8 @@ h3{font-size:16px;margin:22px 0 8px}
 }
 .counts em{font-style:normal;font-weight:600}
 .session{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;margin:12px 0 4px;font-size:14.5px}
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 20px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 20px;position:relative}
+.tw.wide::after{content:"scroll \2192";position:sticky;left:100%;display:block;width:max-content;margin:-22px 0 2px auto;padding:1px 6px;font-size:11px;color:var(--text-dim);background:var(--surface);border-radius:4px;pointer-events:none}
 .tw table.gap{margin-bottom:0}
 
 /* the build stamp under the Topics heading */

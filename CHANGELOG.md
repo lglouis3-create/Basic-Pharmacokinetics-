@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (fixes from the click-through)
+- A number typed on an exam or practice paper was lost whenever a numeric question sat on the Quiz tab; it is kept now.
+- A blank numeric answer reads "left blank" in Weak spots; a hidden quiz card can be brought back from Settings.
+- Leaving Diagrams stops Play all; wide Weak-spots tables show a scroll cue; "missed before" no longer flips as you answer.
+
 ## 2026-10-04 (fixes from review)
 - Module 7a explanations showed raw tags where a subscript belonged; they now render.
 - Filter and quiz-card panels stay open when a chip is tapped; practice papers never land on an old result.

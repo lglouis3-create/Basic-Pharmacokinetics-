@@ -190,6 +190,20 @@ with sync_playwright() as p:
     ok(f'a jump lands its section just below the header ({round(top)} px from the top)', 40 <= top <= 160)
     pg.click('#backbtn'); pg.wait_for_timeout(200)
 
+    print('\n=== Number boxes on two tabs ===')
+    # a numeric question parked on the Quiz tab must not catch the exam's typing
+    pg.evaluate("RET = []; backBtn(); EX = null; startPool(QUESTIONS.filter(q => qType(q) === 'numeric').slice(0, 1), 'x')"); pg.wait_for_timeout(150)
+    pg.evaluate("const qs = QUESTIONS.filter(q => qType(q) === 'numeric').slice(1, 3); startPaper(qs, 5, {title:'probe', paper:'probe', sata:{per:[],drawn:0}, coverage:{drawn:0,missing:0,short:[],shares:[]}}); show('exam')"); pg.wait_for_timeout(200)
+    ok('the exam shows its own number box', pg.locator('#v-exam #numIn').count() == 1)
+    pg.fill('#v-exam #numIn', '12.5'); pg.wait_for_timeout(100)
+    ok('typing in the exam box is kept as the exam answer', pg.evaluate("EX.picks[0]") == '12.5')
+    ok('the parked quiz question is untouched', pg.evaluate("Q.picked") is None)
+    pg.evaluate("clearInterval(EX.timer); EX = null; show('quiz')"); pg.wait_for_timeout(150)
+    pg.fill('#v-quiz #numIn', '7'); pg.keyboard.press('Enter'); pg.wait_for_timeout(200)
+    ok('a quiz answer typed after the paper is graded from the quiz box', pg.evaluate("Q.revealed && String(Q.picked) === '7'"))
+    ok('a blank numeric miss reads as left blank', pg.evaluate("pickedRead(Q.current, {picked: ''}).txt") == 'left blank')
+    ok('the article before a miss kind is right', pg.evaluate("[an('unit conversion'), an('algebra'), an('set-up')].join('|')") == 'a unit conversion|an algebra|a set-up')
+
     ok('no uncaught error', not errs)
     if errs: print('   ', errs[:3])
     b.close()

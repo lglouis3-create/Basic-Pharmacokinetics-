@@ -298,7 +298,7 @@ const CHAINS = [
   setup:'Oral AUC 70 mg h/L; IV t&frac12; 3 hr, V<sub>D</sub> 25 L: the absolute bioavailability, then the AUC a 250 mg IV dose would give',
   parts:['m7-n04','m7-n05']},
 
- {id:'m7-act3', src:'inclass', module:7, name:'In-class activity 3: C<sub>p</sub> = 50e<sup>&minus;0.2t</sup> after 500 mg IV',
+ {id:'m7-act3', src:'inclass', module:7, name:'In-class activity 3: Cp = 50e^(\u22120.2t) after 500 mg IV',
   setup:'The clearance, the IV AUC from the dose and clearance, then the oral bioavailability of a 500 mg tablet with AUC 188 mcg hr/mL',
   parts:['m7-n07','m7-n08','m7-n09']},
 ];
