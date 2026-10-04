@@ -25,6 +25,51 @@ Chapter PDFs the student supplies go in `src/decks/readings/` (gitignored, like 
 The syllabus column reads "Chapter 9" on the line between 21 and 23 September and "Chapter 10" on
 the 19 October line; the table above assigns each to the topic it sits beside.
 
+## Edition note
+
+The syllabus chapter numbers follow the 7th edition. The chapters the student has
+supplied from AccessPharmacy are the 8th edition except one, and the numbering differs:
+
+| Syllabus (7e) | Topic | Supplied file | Edition and title |
+|---|---|---|---|
+| Chapter 7 | Drug elimination, clearance, renal clearance | `Shargel8e-Ch15-Elimination-and-Clearance.pdf` (47 pp) | 8e Chapter 15, Pharmacokinetic Calculations for Drug Elimination and Clearance |
+| Chapter 8 | Oral absorption | `Shargel8e-Ch16-Drug-Absorption.pdf` (30 pp) | 8e Chapter 16, Pharmacokinetics of Drug Absorption |
+| Chapter 9 | Multiple dosing | `Shargel7e-Ch09-Multiple-Dosage-Regimens.pdf` (33 pp) | 7e Chapter 9, Multiple-Dosage Regimens (the file's own header says 7e) |
+| Chapter 21 | PK-PD | `Shargel8e-Ch22-PK-PD-Relationship.pdf` (50 pp) | 8e Chapter 22 (its text still cross-references equations as 21.x) |
+
+The 7e-to-8e match for Chapters 15 and 16 is by title and topic against the syllabus
+line; the Chapter 22 match is confirmed by the chapter's own cross-references. The
+bioavailability chapter (syllabus Chapter 16) has not been supplied.
+
+### Chapter 15 (8e) objectives, as printed
+Clinical role of clearance; clearance by noncompartmental, compartmental and
+"physiological" approaches; clearance against half-life and volume; total, hepatic and
+renal clearance; renal excretion processes and which predominates for a drug given its
+renal clearance; the renal clearance model (blood flow, filtration, reabsorption); whether
+a change in hepatic or renal clearance matters; the well-stirred hepatic model; drug
+interactions on protein binding and intrinsic clearance for low- and high-extraction
+drugs. Sections: drug elimination; clinical importance of clearance; principles of
+clearance calculations; clearance models; compartmental approach; rate constants,
+volumes and clearances; noncompartmental approach; organ clearance; clearance from the
+fractions eliminated by kidney and liver; summary; learning questions.
+
+### Chapter 16 (8e) objectives, as printed
+Oral absorption and its relevance; zero- and first-order absorption; parameters of an
+oral one-compartment drug; k_a for a two-compartment drug; current against historical
+absorption methods; flip-flop kinetics for extended-release products; clinical
+implication of absorption half-life; how k_a and k_el influence C_max, t_max and AUC;
+safety implications. Sections: absorption against elimination after an oral dose;
+zero-order and first-order absorption; clinical application; practice problem; methods
+for the absorption parameters; summary; learning questions; appendices A and B.
+
+### Chapter 9 (7e) objectives, as printed
+Index of drug accumulation; accumulation and accumulation half-life; superposition and
+its assumptions; steady-state C_max and C_min after multiple IV bolus doses; k and V_D of
+aminoglycosides in multiple dosing; adjusting steady-state C_max and C_min when the last
+dose is early, late or missed. Sections: drug accumulation; repetitive IV injections;
+intermittent IV infusion; multiple-oral-dose regimen; loading dose; dosage regimen
+schedules; practice problems; summary; learning questions.
+
 ## Chapter 22 (8e): Relationship between Pharmacokinetics and Pharmacodynamics
 
 File: `src/decks/readings/Shargel8e-Ch22-PK-PD-Relationship.pdf` (50 pages, AccessPharmacy export,

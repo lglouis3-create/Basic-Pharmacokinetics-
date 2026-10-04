@@ -33,6 +33,7 @@ DATA_FILES = ['course.js',
               'q7_module6.js',
               'q8_module6b.js',  # Module 6, second lecture: intermittent infusions, multiple oral doses
               'q12_module7.js',  # Module 7a: bioavailability and bioequivalence
+              'q13_quizzes.js',  # her graded Canvas quizzes 2 and 3, verbatim
               'q6_figures.js',   # figure-reading questions, every module
               'q9_worksheets.js',  # her daily practice sheets as problem sets (after q1: appends to CHAINS)
               'q10_homework.js',   # her homework wording, numbers changed (appends to CHAINS)

@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,tolOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -193,9 +193,12 @@ console.log('\n=== 1b. Question types render-ready ===');
   console.log(`  ${byKind.mc} multiple choice (${byKind.multi} select-all), ${byKind.numeric} numeric, ${byKind.match} match`);
   // grading, exercised directly rather than assumed
   for (const q of QUESTIONS.concat(X.EXTRAS).filter(q => X.qType(q) === 'numeric')) {
+    // graded to the item's own tolerance or 2% of the key, whichever is wider (her Canvas margin)
+    const t = X.tolOf(q);
+    if (t < q.tol) bad(`${q.id}: the graded tolerance is tighter than the item's own`);
     if (!X.gradeNumeric(q, String(q.answer))) bad(`${q.id}: the keyed answer does not grade as correct`);
-    if (!X.gradeNumeric(q, String(q.answer + q.tol))) bad(`${q.id}: an answer exactly at the tolerance is graded wrong`);
-    if (X.gradeNumeric(q, String(q.answer + q.tol * 2 + 1))) bad(`${q.id}: an answer well outside the tolerance is graded right`);
+    if (!X.gradeNumeric(q, String(q.answer + t))) bad(`${q.id}: an answer exactly at the tolerance is graded wrong`);
+    if (X.gradeNumeric(q, String(q.answer + t * 2 + 1))) bad(`${q.id}: an answer well outside the tolerance is graded right`);
     if (X.gradeNumeric(q, '')) bad(`${q.id}: a blank entry is graded right`);
     if (X.gradeNumeric(q, 'abc')) bad(`${q.id}: an unreadable entry is graded right`);
   }

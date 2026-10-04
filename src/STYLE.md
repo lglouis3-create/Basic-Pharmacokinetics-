@@ -1281,9 +1281,74 @@ Key: **14.9** (margin of error ±2%). Recomputed: 154 lb / 2.2 = 70 kg; V_D = 0.
 > b. What is the volume of distribution of this agent in this patient?
 > c. How much time following administration of the dose is required for 75% of the dose to be eliminated?
 
+### Quiz 3, Modules 4–5 (graded Canvas set; file `Quiz3-Modules4-5-graded.pdf`, supplied 4 Oct as "Module 4-5 Practice Questions")
+
+Eight questions at 12.5 points; the screenshots show her keys. The student's own
+answers on Q7 and Q8 were wrong (1.26 and 5.5); the keys below are hers.
+(`Quiz2-Modules2-3-graded.pdf`, supplied the same day as "Part 2", is the
+Modules 2–3 set already transcribed above as "Canvas graded set, questions 1–8".)
+
+**Q3-1 — multiple choice, definition.**
+> Which term describes the process by which drug is chemically converted in the body?
+> - biotransformation ✔
+> - distribution
+> - excretion
+> - absorption
+
+**Q3-2 — multiple choice, direction of change (three options).**
+> If there is an increase in the total body clearance of an agent due to renal dysfunction, what is the expected change to the elimination half-life of that agent?
+> - The elimination half-life will increase.
+> - The elimination half-life will not change.
+> - The elimination half-life will decrease. ✔
+
+The premise (renal dysfunction raising clearance) is as printed; the key follows the stated increase in clearance through t½ = 0.693·V_D/Cl.
+
+**Q3-3 — multiple choice, t_max.**
+> Which statement is true regarding the time needed to reach the maximum concentration following administration of an oral dose?
+> - the time needed to reach the maximum concentration is independent of the rate constants for absorption and elimination
+> - the time needed to reach the maximum concentration depends on the rate constants for absorption and elimination ✔
+> - the time needed to reach the maximum concentration increases if the dose is increased
+> - the time needed to reach the maximum concentration increases if the dose is decreased
+
+**Q3-4 — multiple choice, C_max.**
+> Which of the following is true regarding the C_max following oral administration?
+> - the rate of drug elimination is faster than the rate of drug absorption
+> - the rate of drug absorption is faster than the rate of drug elimination
+> - the rate of drug absorption equals the rate of drug elimination ✔
+> - drug at the absorption site has become depleted
+
+**Q3-5 — numeric, t_max from two half-lives (dose, F and V_D given and not needed).**
+> When does the maximum concentration of drug in the the plasma occur following a single 1000-mg oral dose of an agent that has an oral bioavailability of 83%, apparent volume of distribution of 18 L, absorption half-life of 0.8 hours, and elimination half-life of 5.6 hours?
+> **Calculate your answer in hours to the nearest tenth (one decimal place). You cannot enter units; number only.**
+
+Key: **2.6** (margin of error ±3%). Recomputed: k_a = 0.693/0.8 = 0.86625 hr⁻¹; k = 0.693/5.6 = 0.12375 hr⁻¹; t_max = ln(0.86625/0.12375)/(0.86625 − 0.12375) = ln 7/0.7425 = 1.9459/0.7425 = 2.621 → 2.6 hr. ("the the" as printed.)
+
+**Q3-6 — numeric, AUC of an IV bolus from V_D and t½ (weight given and not needed).**
+> A 500-mg IV bolus dose of an antibiotic with an apparent volume of distribution of 23 L and half-life of 6.0 hr was administered to a 75 kg male volunteer. What is the expected AUC of this dose?
+> **Calculate your answer in (mg/L)hr to the nearest tenth (one decimal place) You cannot enter units; number only.**
+
+Key: **188.2** (margin of error ±3%). Recomputed: k = 0.693/6 = 0.1155 hr⁻¹; Cl = 0.1155 × 23 = 2.6565 L/hr; AUC = 500/2.6565 = 188.22 → 188.2 (mg/L)hr.
+
+**Q3-7 — numeric, renal clearance from urine recovery.**
+> 1,000 mg of a drug was given by IV bolus injection. The V_D is 19 L and the elimination half-life is 3 hours. Urine samples were collected for 48 hours and 713 mg of unchanged drug was recovered. What is the renal clearance of this drug?
+> **Calculate your answer in L/hr to the nearest hundredth (two decimal places). You cannot enter units; number only.**
+
+Key: **3.13** (margin of error ±3%). Recomputed: k = 0.693/3 = 0.231 hr⁻¹; Cl_T = 0.231 × 19 = 4.389 L/hr; AUC = 1000/4.389 = 227.84 (mg/L)hr; Cl_R = 713/227.84 = 3.129 → 3.13 L/hr. Also f_e × Cl_T = 0.713 × 4.389 = 3.13.
+
+**Q3-8 — numeric, V_D from a printed oral equation.**
+> The kinetics following the oral administration of a single 500-mg dose of a medicinal agent best fits a one-compartment model described by the equation below.
+> 30(e^(−0.133t) − e^(−0.934t))
+> What is the volume of distribution following the 500-mg dose if the oral bioavailability is 82%?
+> Assume units of mcg/mL for Cp and hr for time.
+> **Calculate your answer in L to the nearest tenth (one decimal place) You cannot enter units; number only.**
+
+Key: **15.9** (margin of error ±3%). Recomputed: the coefficient 30 = F·D₀·k_a/(V_D(k_a − k)), so V_D = 0.82 × 500 × 0.934/(30 × (0.934 − 0.133)) = 382.94/24.03 = 15.94 → 15.9 L.
+
 ### What the graded items add to the formats above
 
 - **Numeric entry with a stated rounding rule and margin of error.** Every calculation is a blank with its unit printed after it ("______ hr", "______ mg/L", "______ mg/hr"), an explicit rounding instruction ("Round to the nearest hundredth", "nearest tenth", "nearest whole number") and a tolerance of ±2–3%. The drill's numeric items match this shape.
+- **Quiz 3 wrote the numeric instruction in bold inside the stem:** "Calculate your answer in hours to the nearest tenth (one decimal place). You cannot enter units; number only." Same ±3% margin on all four. The drill grades every numeric item to at least ±2% of its key, her smallest margin.
+- **Every quiz so far is 8 items, 4 concept and 4 numeric, 12.5 points each.** Concept items are a definition, a direction-of-change or a which-statement-is-true; the numeric items each carry one quantity that is not needed (weight, age, sex, dose, F, V_D).
 - **Conceptual items are word-only.** None of the eleven items carries a graph, a table to read off, or a figure; the one table (Quiz 1 Q3) is a data set to calculate from. The conceptual items are definitions (Q1), purpose (Q4) and a direction-of-change question (Q6).
 - **Two-compartment items give A, B, α, β and never name the model** (Q2, Q3), exactly as in IV Bolus Practice 4 and Homework 2.
 - **Select-all appears on a quiz** (Quiz 1 Q1), asked on the properties of a first-order process.

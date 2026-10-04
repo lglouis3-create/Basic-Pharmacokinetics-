@@ -23,6 +23,7 @@ const QUESTIONS = [].concat(
   Q_MODULE6,   // Module 6 — Multiple dosing, repeated IV bolus          (Exam 2)
   Q_MODULE6B,  // Module 6 — Intermittent IV infusions, multiple oral    (Exam 2)
   Q_MODULE7,   // Module 7a — Bioavailability and bioequivalence       (Exam 2)
+  Q_QUIZZES,   // Her graded Canvas quizzes 2 and 3, word for word    (Exams 1, 2)
   Q_FIGURES,   // Figure reading, every module, drawn by figures.py    (Exams 1, 2)
   Q_WORKSHEETS,// Her daily practice sheets, Modules 4 and 5             (Exam 2)
   Q_HOMEWORK   // Her homework wording, numbers changed, Modules 1–6     (Exams 1, 2)

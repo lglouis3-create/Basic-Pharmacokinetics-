@@ -376,6 +376,8 @@ ol.gsteps{padding-left:22px;margin:6px 0} ol.gsteps li{margin:6px 0;line-height:
 .quizcard .qsaid ul.tlist li{font-size:14px}
 .quizcard .qsaid .dquote{margin:6px 0 2px}
 .quizcard .btns .frow{gap:4px;margin-right:6px}
+.quizcard .qopt{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:6px}
+.quizcard .olab{font-size:12px;color:var(--text-dim);min-width:68px}
 .examgrp{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px}
 .examgrp>summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px;cursor:pointer;list-style:none;font-size:18px;font-weight:800}
 .examgrp>summary::-webkit-details-marker{display:none}
@@ -864,10 +866,16 @@ function parseNum(entered){
    that. It is far below any tolerance a question would set, so it cannot let a
    genuinely wrong answer through. */
 const FP_SLACK = 1e-9;
+/* The tolerance a numeric item is graded to. Her Canvas quizzes accept a
+   margin of 2% or 3% of the key, so no item here is graded tighter than 2%
+   of its key; an item whose own tolerance is wider keeps it. */
+const QUIZ_MARGIN = 0.02;
+const tolOf = q => Math.max(q.tol || 0, QUIZ_MARGIN * Math.abs(q.answer || 0));
 function gradeNumeric(q, entered){
   const v = parseNum(entered);
   if(!isFinite(v)) return false;
-  return Math.abs(v - q.answer) <= q.tol + Math.abs(q.tol) * FP_SLACK;
+  const tol = tolOf(q);
+  return Math.abs(v - q.answer) <= tol + Math.abs(tol) * FP_SLACK;
 }
 /* `picks` maps a left item to the right item chosen for it. Right only when
    every keyed pair is matched. */

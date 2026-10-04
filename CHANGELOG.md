@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (her graded quizzes)
+- Her Quiz 2 and Quiz 3 questions are in the bank word for word, with her keys and margins.
+- Numeric answers are graded to at least 2% of the key, her smallest Canvas margin.
+- The Quiz 4 practice paper draws half concept, half calculation, like her quizzes; pick the minutes.
+
 ## 2026-10-04 (fixes from the click-through)
 - A number typed on an exam or practice paper was lost whenever a numeric question sat on the Quiz tab; it is kept now.
 - A blank numeric answer reads "left blank" in Weak spots; a hidden quiz card can be brought back from Settings.

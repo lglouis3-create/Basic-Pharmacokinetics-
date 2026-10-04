@@ -467,7 +467,10 @@ function updatedText(){
    them; the paper runs on the exam engine with its own title and id. */
 const QUIZ_HIDE_KEY = NS + ':quizhide:';
 const PANEL_OPEN = {morefilters: false, qsaid: false};   // panels on Topics that stay as left across re-renders
-let QUIZ_N = 10;   // questions on a practice quiz: she has not said how many, so the student picks
+let QUIZ_N = 8;    // questions on a practice quiz: her Quizzes 2 and 3 had 8, four concept and four calculation
+let QUIZ_MIN = 0;  // minutes chosen for the practice quiz; 0 means the quiz's own figure
+const fmtAns = v => String(+(+v).toPrecision(6));   // the key as written, without trailing zeros
+const fmtTol = q => { const t = tolOf(q); return t >= 10 ? String(Math.round(t)) : t >= 1 ? t.toFixed(1) : t >= 0.1 ? t.toFixed(2) : t.toFixed(3); };
 const quizScope = qz => QUESTIONS.filter(q => (qz.modules || []).includes(q.module));
 // the quiz has not been sat yet (its start time plus its length is still ahead)
 const quizAhead = qz => !!qz.when && Date.now() < new Date(qz.when).getTime() + (qz.minutes || 0) * 60000;
@@ -494,18 +497,27 @@ function quizCards(){
       ${row('Everything on this quiz, adaptive', `${pool.length} questions — ${due}`, 'adaptive', '')}
       ${row('Straight pass', 'Every question once, shuffled, nothing held back by scheduling', 'sweep', '')}
       <div class="subrow"><span class="sname"><b>Sit a practice quiz</b>
-        <small>Questions from these modules, timed, no feedback until you submit. She has not said how many questions or how long; this paper runs ${qz.minutes} minutes, the length of Quiz 3.</small></span>
-        <span class="btns"><span class="frow">${[8, 10, 12].map(n => `<button class="chip" data-quizn="${n}" aria-pressed="${n === QUIZ_N}">${n}</button>`).join('')}</span>
-        <button data-quizpaper="${qz.id}">Open</button></span></div>
+        <small>Half concept, half calculation, drawn from these modules; timed, no feedback until you submit. Her Quizzes 2 and 3 were 8 questions, 4 concept and 4 calculation, 12.5 points each; Quiz 3 ran ${qz.minutes} minutes.</small>
+        <span class="frow qopt"><span class="olab">Questions</span>${[8, 10, 12].map(n => `<button class="chip" data-quizn="${n}" aria-pressed="${n === QUIZ_N}">${n}</button>`).join('')}</span>
+        <span class="frow qopt"><span class="olab">Minutes</span>${[15, 20, qz.minutes, 30].filter((m, i, a) => a.indexOf(m) === i).sort((x, y) => x - y).map(m => `<button class="chip" data-quizmin="${m}" aria-pressed="${m === (QUIZ_MIN || qz.minutes)}">${m}</button>`).join('')}</span></span>
+        <span class="btns"><button data-quizpaper="${qz.id}">Open</button></span></div>
       </div></div>`;
   }).join('');
 }
+/* Her quizzes are half concept items and half calculations, each standing on
+   its own. The draw takes the two halves separately and prefers questions that
+   are not one part of a worksheet chain, which read as a fragment on a paper. */
 function beginQuiz(qz, n){
   if(EX && EX.running){ show('exam'); return; }   // a paper is already running: go to it
   const src = quizScope(qz).filter(q => !q.lowYield);
-  const qs = shuffle(drawN(src, Math.min(n, src.length)));
+  const standalone = q => !/^(ws|hw)/.test(q.id);
+  const half = kind => { const all = ofKind(src, kind), pref = all.filter(standalone); return pref.length >= Math.ceil(n / 2) ? pref : all; };
+  const want = Math.ceil(n / 2);
+  let qs = drawN(half('concept'), want).concat(drawN(half('calc'), n - want));
+  if(qs.length < n) qs = qs.concat(drawN(src.filter(q => !qs.includes(q)), n - qs.length));
+  qs = shuffle(qs.slice(0, n));
   if(!qs.length){ alert('The bank holds no question on this quiz yet.'); return; }
-  startPaper(qs, qz.minutes, {paper: qz.id, title: qz.name + ' practice', sata: {per: [], drawn: 0},
+  startPaper(qs, QUIZ_MIN || qz.minutes, {paper: qz.id, title: qz.name + ' practice', sata: {per: [], drawn: 0},
                               coverage: {drawn: 0, missing: 0, short: [], shares: []}});
   show('exam');
 }
@@ -669,6 +681,7 @@ function renderTopics(){
     else startPool(narrow(quizScope(qz), k), label);
   });
   el.querySelectorAll('[data-quizn]').forEach(b => b.onclick = () => { QUIZ_N = +b.dataset.quizn; renderTopics(); });
+  el.querySelectorAll('[data-quizmin]').forEach(b => b.onclick = () => { QUIZ_MIN = +b.dataset.quizmin; renderTopics(); });
   el.querySelectorAll('[data-quizpaper]').forEach(b => b.onclick = () => {
     const qz = (COURSE.quizzes || []).find(z => z.id === b.dataset.quizpaper); if(qz) beginQuiz(qz, QUIZ_N); });
   el.querySelectorAll('[data-quizhide]').forEach(b => b.onclick = () => { LS.set(QUIZ_HIDE_KEY + b.dataset.quizhide, '1'); renderTopics(); });
@@ -1361,7 +1374,7 @@ function answerInputsHTML(q, st){
   const picks = multi ? (st.picked || []) : null;
   let h = '';
   if(kind === 'numeric'){
-    h += `<p class="sata">Type the number and check it. Anything within ${q.tol} ${esc(q.units)} of the keyed value counts.</p>`;
+    h += `<p class="sata">Type the number and check it. Anything within ${fmtTol(q)} ${esc(q.units)} of the keyed value counts, her margin of 2% or wider.</p>`;
     h += numericInput(q, st.picked, st.revealed, st.revealed ? (ok ? 'ok' : 'bad') : '');
   }else if(kind === 'match'){
     h += `<p class="sata">Choose the matching item for each row, then check. Marked right only when every row matches.</p>`;
@@ -1397,8 +1410,8 @@ function feedbackHTML(q, st){
                   ...(q.steps||[]).map(x=>x.why||''), ...(q.pairs||[]).map(x=>x.why||'')].join(' ');
     let verdictLine;
     if(kind === 'numeric'){
-      verdictLine = ok ? `✓ Correct — keyed answer ${q.answer.toFixed(4)} ${esc(q.units)}`
-        : `✗ Not correct — the answer is ${q.answer.toFixed(4)} ${esc(q.units)}, and you entered ${esc(String(st.picked||'nothing'))}`;
+      verdictLine = ok ? `✓ Correct — keyed answer ${fmtAns(q.answer)} ${esc(q.units)}`
+        : `✗ Not correct — the answer is ${fmtAns(q.answer)} ${esc(q.units)}, and you entered ${esc(String(st.picked||'nothing'))}`;
     }else if(kind === 'match'){
       const got = (q.pairs||[]).filter(p => (st.picked||{})[p.l] === p.r).length;
       verdictLine = ok ? `✓ Correct — all ${q.pairs.length} rows matched`
@@ -1971,7 +1984,7 @@ function renderGaps(){
     for(const id of missedIds.slice().reverse()){
       const q = byId(id); if(!q) continue;
       const s2 = DB.concepts[q.concept] || {};
-      const correctTxt = qType(q)==='numeric' ? q.answer.toFixed(4) + ' ' + q.units
+      const correctTxt = qType(q)==='numeric' ? fmtAns(q.answer) + ' ' + q.units
                        : qType(q)==='match'   ? (q.pairs||[]).map(p=>`${p.l} → ${p.r}`).join(' · ')
                        : q.options.filter(o=>o.correct).map(o=>o.t).join(' · ');
       const last = DB.answers.slice().reverse().find(a=>a.qid===id && a.result==='wrong');
@@ -2632,7 +2645,7 @@ function renderExamResult(){
       </div><div class="qbody"><div class="stem" style="font-size:15.5px">${stemHTML(q.stem)}</div>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
     if(kind === 'numeric'){
-      h += `<p class="verdict ${ok?'ok':'bad'}">Keyed answer ${q.answer.toFixed(4)} ${esc(q.units)}${
+      h += `<p class="verdict ${ok?'ok':'bad'}">Keyed answer ${fmtAns(q.answer)} ${esc(q.units)}${
         blankQ ? ' — left blank' : ` — you entered ${esc(String(p))}`}</p>`;
       /* the kind of slip is asked here as it is in the quiz, so a paper's
          misses count in the miss-kind table like any other */
