@@ -272,6 +272,7 @@ h3{font-size:16px;margin:22px 0 8px}
 .opt.multi.pick-ok .k,.opt.multi.reveal-ok .k{background:var(--ok);color:#fff}
 .opt.multi.pick-bad .k{background:var(--bad);color:#fff}
 .tag.sata{color:#7A46B0;border-color:#DCC7EA;background:#F8F2FB}
+.tag.origin{color:var(--text-dim);border-color:var(--line);background:var(--surface)}
 .youpicked{font-style:normal;font-size:11.5px;color:var(--text-dim);margin-left:4px}
 
 /* ---------- weak spots: what to do next ---------- */
@@ -1223,6 +1224,28 @@ function masteryOf(pool){
    Hidden entirely by the filter bar when the course has one professor. */
 const PROF_CLASS = {};
 COURSE.professors.forEach((p, i) => { PROF_CLASS[p] = ['sik', 'yen'][i] || ''; });
+/* Where a question comes from, read off its id and its citation: her daily
+   practice sheets, her slides, an in-class activity, a homework, a Canvas
+   quiz, a poll, the lecture audio, or extra practice written for this drill. */
+function originOf(q){
+  const c = q.cite || '', id = q.id || '';
+  if(/^cq/.test(id)) return 'Canvas quiz';
+  if(/^x/.test(id) || q.extra) return 'Extra practice';
+  if(/^hw/.test(id) || /Homework/i.test(c)) return 'Homework';
+  if(/In-Class/i.test(c)) return 'In-class activity';
+  if(/^ws/.test(id) || /Solutions\.pdf|Daily Practice|Practice-\d/i.test(c)) return 'Daily practice sheet';
+  if(/PollEv|\bpoll\b/i.test(c)) return 'Poll';
+  if(/RecapExam/i.test(c)) return 'Exam 1 recap';
+  if(/\.pdf|slide/i.test(c)) return /Example|Practice/i.test(c) ? 'Slide example' : 'Slides';
+  if(/lecture|transcript/i.test(c)) return 'Lecture';
+  return 'Other';
+}
+const originTag = q => `<span class="tag origin" title="Where this question comes from">${esc(originOf(q))}</span>`;
+/* "12 daily practice sheet, 4 slide example, 2 homework" for a set of problems. */
+function originMix(pool){
+  const n = {}; pool.forEach(q => { const o = originOf(q).toLowerCase(); n[o] = (n[o] || 0) + 1; });
+  return Object.entries(n).sort((a, b) => b[1] - a[1]).map(([o, k]) => `${k} ${o}`).join(', ');
+}
 function profTag(p){
   if(!p || COURSE.professors.length < 2) return '';
   return `<span class="tag ${PROF_CLASS[p] || ''}">${esc(p)}</span>`;

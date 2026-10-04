@@ -781,7 +781,7 @@ function calcsPage(module){
   const all = ofKind(modulePool(module), 'calc');
   let h = `<p class="sub">Each kind of problem has a worked example. <b>Single problems</b> asks the problems of that kind one at a time; <b>In parts</b> works one of her problems where each part uses the answer before it.</p>`;
   h += `<div class="topic plain"><div class="subs">` +
-    rowHTML(`All calculations in this module`, `${all.length} problems, one at a time, shuffled`, all, `<button data-calcall="${module}">Start</button>`) + `</div></div>`;
+    rowHTML(`All calculations in this module`, `${all.length} problems, one at a time, shuffled: ${originMix(all)}`, all, `<button data-calcall="${module}">Start</button>`) + `</div></div>`;
   typesOf(module).forEach((t, i) => {
     const pool = typePool(t); if(!pool.length) return;
     const ex = byId(t.example), chains = chainsForType(t);
@@ -802,7 +802,7 @@ function calcsPage(module){
   const extra = typesOf(module).map(t => [t, extrasOf(t)]).filter(([, p]) => p.length);
   if(extra.length) h += `<h3>Extra practice</h3><p class="sub">Problems written for this drill in her formats, with numbers that are not hers. They are kept out of the exam simulator and the module counts.</p>
     <div class="topic plain"><div class="subs">${extra.map(([t, p]) =>
-      rowHTML(esc(t.name), `${p.length} problem${p.length === 1 ? '' : 's'}`, p, `<button data-xtype="${esc(t.id)}">Start</button>`)).join('')}</div></div>`;
+      rowHTML(esc(t.name), `${p.length} problem${p.length === 1 ? '' : 's'}: ${originMix(p)}`, p, `<button data-xtype="${esc(t.id)}">Start</button>`)).join('')}</div></div>`;
   return h;
 }
 const extrasOf = t => (typeof EXTRAS === 'undefined' ? [] : EXTRAS).filter(q => q.xtype === t.id);
@@ -1282,7 +1282,7 @@ function allCardHTML(q, n, total){
   const st = allCardState(q), kind = qType(q), multi = isMulti(q);
   const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
   const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain};
-  let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}<span>${n} of ${total}</span><span class="spacer"></span>${
+  let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
       st.revealed ? `<span style="color:var(${ok ? '--ok' : '--bad'})">${ok ? 'right' : 'missed'}</span>` : ''}</div>
     <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -1557,7 +1557,7 @@ function renderQuiz(){
   const ok = Q.revealed ? (Q.overrode || gradeAnswer(q, Q.picked)) : false;
 
   let h = `<div class="sessline">${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
-    ${profTag(q.prof)}
+    ${profTag(q.prof)}${originTag(q)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
     ${Q.status === 'missed before' ? '<span style="color:var(--bad)">missed before</span>' : `<span>${Q.status || 'new'}</span>`}
@@ -2743,7 +2743,7 @@ function renderExamResult(){
     const kind = qType(q), multi = isMulti(q);
     const chosen = oi => multi ? (p || []).includes(oi) : oi === p;
     h += `<div class="qcard" style="margin-bottom:12px"><div class="qhead">
-      ${profTag(q.prof)}<span>Q${i+1}</span>${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
+      ${profTag(q.prof)}<span>Q${i+1}</span>${originTag(q)}${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
       <span style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'correct':(blankQ?'blank':'missed')}</span>
       </div><div class="qbody"><div class="stem" style="font-size:15.5px">${stemHTML(q.stem)}</div>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;

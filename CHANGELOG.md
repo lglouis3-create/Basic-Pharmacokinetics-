@@ -2,6 +2,10 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (where each question comes from)
+- Every question card carries a tag: daily practice sheet, slide example, in-class activity, homework, Canvas quiz, poll or extra practice.
+- The calculation rows on a module page say how many problems come from each source.
+
 ## 2026-10-04 (fixes from the second review)
 - The hint under a number box gives the 2% rule, not the tolerance itself; the tolerance shows after the answer.
 - "0.17 hr-1", "hr^-1", "/hr" and "mg/L*hr" are read as units after a number.
