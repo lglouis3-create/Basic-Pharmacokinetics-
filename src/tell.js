@@ -15,7 +15,13 @@
    ========================================================================== */
 const TELL_HTML = `
 <h2>Tell apart</h2>
-<p class="sub">Things students mix up. Each table shows the difference at a glance; tap <b>Why?</b> on a row, or pick one under <b>Explain one</b>, for the full explanation. Nothing here is scored.</p>
+<p class="sub">Things students mix up, Modules 1 to 7a, each as a short table. Nothing here is scored.</p>
+<details class="tabhelp" open><summary>What this tab is for</summary><ul>
+<li><b>Start with the dosing-model table.</b> How the drug goes in decides the curve and the equation; the table gives the route, the shape, the defining equation and how to recognise the model in a question.</li>
+<li><b>Why?</b> on any row, or <b>Explain one</b> under a table, opens the full explanation. For a dosing model it includes the curve, each equation on its own line, and how she tests it.</li>
+<li><b>See the eight curves side by side</b> under the dosing table to compare the shapes on one set of axes.</li>
+<li>The other tables are the pairs she tests against each other: orders, half-lives, concentrations, clearances, F values.</li>
+</ul></details>
 
 <h3>Kinds of pharmacokinetic model (Module 1)</h3>
 <p class="sub">What each kind of model is made of and how the slides draw it.</p>
@@ -113,6 +119,9 @@ const TELL_HTML = `
 <tr><td><b>Intermittent IV infusion</b> (M6) <button type="button" class="chip xwhy" data-xpick="dosing:m6-infusion">Why?</button></td><td>Each dose infused at a constant rate over a set time</td><td>Rises during each infusion, falls after it; the next rise starts higher</td><td>C = C<sub>end</sub>e<sup>&minus;kt</sup>, one term per infusion</td><td>A dose "over 2 hours", and a second infusion started hours later</td></tr>
 <tr><td><b>Multiple oral doses</b> (M6a) <button type="button" class="chip xwhy" data-xpick="dosing:m6a-oral">Why?</button></td><td>The same oral dose every &tau;; first order in, first order out</td><td>Rounded peaks and troughs climbing to a plateau</td><td>C<sub>max</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>}}({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt<sub>max</sub>&infin;</sup></td><td>F and k<sub>a</sub> with a dosing interval; first dose against steady state</td></tr>
 </tbody></table>
+<details class="figfold"><summary>See the eight curves side by side</summary>
+{{fig:models_all|The eight dosing models drawn on the same axes with the same elimination rate constant, so only the way the drug goes in differs.}}
+</details>
 <div class="xpick"><label><b>Explain one:</b> <select data-xsel="dosing"><option value="">Choose a dosing model</option>
 <option value="m2-one">One-compartment IV bolus (Module 2)</option>
 <option value="m2-two">Two-compartment IV bolus (Module 2)</option>
@@ -126,6 +135,7 @@ const TELL_HTML = `
 
 <template data-x="dosing:m2-one"><div class="xexp"><h4>One-compartment IV bolus (Module 2)</h4>
 <p><b>In one line:</b> The whole dose is injected into a vein at once, spreads evenly through one compartment at once, and is removed by first-order elimination.</p>
+{{fig:model_bolus1|One-compartment IV bolus: highest at time zero, then a first-order fall.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>All of the dose enters the body at once: an intravenous (IV) bolus. The body acts as one uniform compartment that drug can enter and leave.</dd>
@@ -133,10 +143,10 @@ const TELL_HTML = `
 <dt>The curve</dt>
 <dd>Highest at time zero, then falls. On evenly spaced axes it curves down; on a log concentration axis it is one straight line from time zero.</dd>
 <dt>The equations you use</dt>
-<dd>C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}} gives the plasma concentration (C<sub>p</sub>) from the amount in the body (D<sub>B</sub>) and the apparent volume of distribution (V<sub>D</sub>). At time zero, V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}}.</dd>
-<dd>C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup>, or ln C<sub>p</sub> = ln C<sub>p</sub><sup>0</sup> &minus; kt, gives k from two points, C<sub>p</sub><sup>0</sup> by back-extrapolation, and C<sub>p</sub> at any time.</dd>
-<dd>t&frac12; = {{frac:0.693|k}} gives the elimination half-life. It is not on the equation sheet.</dd>
-<dd>Cl<sub>T</sub> = k &times; V<sub>D</sub> gives total body clearance (not on the sheet). Cl = {{frac:D<sub>0</sub>|AUC<sub>0&rarr;&infin;</sub>}} gives it from the dose and the area under the curve (AUC).</dd>
+<dd><span class="xeq">C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}</span><span class="xnote">Gives the plasma concentration (C<sub>p</sub>) from the amount in the body (D<sub>B</sub>) and the apparent volume of distribution (V<sub>D</sub>). At time zero, V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}}.</span></dd>
+<dd><span class="xeq">C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup>, or ln C<sub>p</sub> = ln C<sub>p</sub><sup>0</sup> &minus; kt</span><span class="xnote">Gives k from two points, C<sub>p</sub><sup>0</sup> by back-extrapolation, and C<sub>p</sub> at any time.</span></dd>
+<dd><span class="xeq">t&frac12; = {{frac:0.693|k}}</span><span class="xnote">Gives the elimination half-life. It is not on the equation sheet.</span></dd>
+<dd><span class="xeq">Cl<sub>T</sub> = k &times; V<sub>D</sub></span><span class="xnote">Gives total body clearance (not on the sheet). Cl = {{frac:D<sub>0</sub>|AUC<sub>0&rarr;&infin;</sub>}} gives it from the dose and the area under the curve (AUC).</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>Her eight-part battery, in order: k, t&frac12;, C<sub>0</sub>, C<sub>p</sub> at 15 minutes, V<sub>D</sub>, Cl<sub>T</sub>, the amount in the body at 3 hours, and the time for 99.9% to be eliminated (ten half-lives).</dd>
 </dl>
@@ -145,18 +155,19 @@ const TELL_HTML = `
 
 <template data-x="dosing:m2-two"><div class="xexp"><h4>Two-compartment IV bolus (Module 2)</h4>
 <p><b>In one line:</b> The dose is injected at once into a central compartment, moves into a tissue compartment and back, and is eliminated from the central compartment.</p>
+{{fig:model_bolus2|Two-compartment IV bolus on a log axis: a steep distribution phase, then the elimination line.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>An intravenous (IV) bolus of a drug that reaches different tissue groups at different rates, so distribution takes time. In Model A, the one she uses most, drug leaves the body from the central compartment only.</dd>
 <dt>The curve</dt>
 <dd>On a log concentration axis: a steep early fall (the distribution phase) that turns into a shallower straight line (the elimination phase). Alpha, the early slope, is the larger of the two.</dd>
 <dt>The equations you use</dt>
-<dd>C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup> gives the plasma concentration (C<sub>p</sub>) at any time. A and B are the intercepts, in concentration units; a (&alpha;) and b (&beta;) are the slopes, in reciprocal time.</dd>
-<dd>C<sub>p</sub><sup>0</sup> = A + B gives the concentration at time zero.</dd>
-<dd>t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}} gives the elimination half-life, from the smaller exponent.</dd>
-<dd>V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}} gives the volume of the central compartment (V<sub>p</sub>) from the dose (D<sub>0</sub>).</dd>
-<dd>k = {{frac:(A + B)ab|Ab + Ba}} gives the elimination rate constant from the central compartment.</dd>
-<dd>k<sub>12</sub> = {{frac:AB(b &minus; a)<sup>2</sup>|(A + B)(Ab + Ba)}} and k<sub>21</sub> = {{frac:Ab + Ba|A + B}} give the transfer rate constants, central to tissue and tissue to central.</dd>
+<dd><span class="xeq">C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup></span><span class="xnote">Gives the plasma concentration (C<sub>p</sub>) at any time. A and B are the intercepts, in concentration units; a (&alpha;) and b (&beta;) are the slopes, in reciprocal time.</span></dd>
+<dd><span class="xeq">C<sub>p</sub><sup>0</sup> = A + B</span><span class="xnote">Gives the concentration at time zero.</span></dd>
+<dd><span class="xeq">t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}</span><span class="xnote">Gives the elimination half-life, from the smaller exponent.</span></dd>
+<dd><span class="xeq">V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}}</span><span class="xnote">Gives the volume of the central compartment (V<sub>p</sub>) from the dose (D<sub>0</sub>).</span></dd>
+<dd><span class="xeq">k = {{frac:(A + B)ab|Ab + Ba}}</span><span class="xnote">Gives the elimination rate constant from the central compartment.</span></dd>
+<dd><span class="xeq">k<sub>12</sub> = {{frac:AB(b &minus; a)<sup>2</sup>|(A + B)(Ab + Ba)}} and k<sub>21</sub> = {{frac:Ab + Ba|A + B}}</span><span class="xnote">Give the transfer rate constants, central to tissue and tissue to central.</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>The elimination half-life, the initial concentration, the concentration at a stated hour and the central volume, in that order. When A, B, &alpha; and &beta; come as a list she adds k, k<sub>12</sub> and k<sub>21</sub>.</dd>
 </dl>
@@ -165,16 +176,17 @@ const TELL_HTML = `
 
 <template data-x="dosing:m3-infusion"><div class="xexp"><h4>IV infusion, one compartment (Module 3)</h4>
 <p><b>In one line:</b> Drug runs into a vein at a constant rate, so it goes in by a zero-order process and leaves by a first-order process, and the concentration climbs to a plateau.</p>
+{{fig:model_infusion|IV infusion: climbs to the steady-state plateau, falls once the infusion stops.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>An intravenous (IV) input at a constant rate R (mg/hr), which is zero order. Elimination is first order, rate constant k. As drug builds up the rate out rises, until rate in equals rate out: steady state.</dd>
 <dt>The curve</dt>
 <dd>Starts at zero, rises quickly, then levels off at the steady-state concentration (C<sub>ss</sub>). When the infusion stops, it falls by first-order elimination from wherever it had reached.</dd>
 <dt>The equations you use</dt>
-<dd>C<sub>ss</sub> = {{frac:R|Cl}} = {{frac:R|kV<sub>D</sub>}} gives the plateau, from R and the clearance (Cl), or k and the volume of distribution (V<sub>D</sub>). It has no t in it.</dd>
-<dd>C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>) gives the plasma concentration t hours into the infusion. The bracket is the fraction of C<sub>ss</sub> reached.</dd>
-<dd>C<sub>p</sub> = C<sub>peak</sub>e<sup>&minus;kt</sup> gives the concentration t hours after the infusion stops, from C<sub>peak</sub>, the concentration at the moment it stopped.</dd>
-<dd>R = C<sub>ss</sub> &times; Cl, the first line rearranged, gives the rate needed for a target C<sub>ss</sub>.</dd>
+<dd><span class="xeq">C<sub>ss</sub> = {{frac:R|Cl}} = {{frac:R|kV<sub>D</sub>}}</span><span class="xnote">Gives the plateau, from R and the clearance (Cl), or k and the volume of distribution (V<sub>D</sub>). It has no t in it.</span></dd>
+<dd><span class="xeq">C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)</span><span class="xnote">Gives the plasma concentration t hours into the infusion. The bracket is the fraction of C<sub>ss</sub> reached.</span></dd>
+<dd><span class="xeq">C<sub>p</sub> = C<sub>peak</sub>e<sup>&minus;kt</sup></span><span class="xnote">Gives the concentration t hours after the infusion stops, from C<sub>peak</sub>, the concentration at the moment it stopped.</span></dd>
+<dd><span class="xeq">R = C<sub>ss</sub> &times; Cl</span><span class="xnote">The first line rearranged: gives the rate needed for a target C<sub>ss</sub>.</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>A rate to recommend for a target C<sub>ss</sub>; C<sub>ss</sub> from a rate; C<sub>p</sub> at a stated time into the infusion; the time to a stated fraction of C<sub>ss</sub>; C<sub>p</sub> a stated time after cessation.</dd>
 </dl>
@@ -183,15 +195,16 @@ const TELL_HTML = `
 
 <template data-x="dosing:m3-loading"><div class="xexp"><h4>Loading dose with an infusion (Module 3)</h4>
 <p><b>In one line:</b> An IV bolus loading dose is given at the moment a constant-rate infusion starts, so the concentration is at the steady-state level at once, not after 3 to 5 half-lives.</p>
+{{fig:model_loading|Loading dose with an infusion: flat at the steady-state level from the start; the dashed line is the infusion alone.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>One compartment and first-order elimination. The intravenous (IV) bolus part falls as a bolus does, the infusion part builds as an infusion does, and the two concentrations add.</dd>
 <dt>The curve</dt>
 <dd>With the right loading dose the curve is flat at the steady-state concentration (C<sub>ss</sub>) from the start. The slide also draws doses that are too high (start above and fall) and too low (start below and rise).</dd>
 <dt>The equations you use</dt>
-<dd>D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub> gives the loading dose (D<sub>L</sub>) from the target C<sub>ss</sub> and the volume of distribution (V<sub>D</sub>).</dd>
-<dd>D<sub>L</sub> = {{frac:R|k}} gives the same dose from an infusion rate R already chosen and the elimination rate constant k.</dd>
-<dd>C<sub>p</sub> = {{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>&minus;kt</sup> + {{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>) gives the concentration t hours after both start. The deck prints this sum; the sheet carries the two terms separately.</dd>
+<dd><span class="xeq">D<sub>L</sub> = C<sub>ss</sub> &times; V<sub>D</sub></span><span class="xnote">Gives the loading dose (D<sub>L</sub>) from the target C<sub>ss</sub> and the volume of distribution (V<sub>D</sub>).</span></dd>
+<dd><span class="xeq">D<sub>L</sub> = {{frac:R|k}}</span><span class="xnote">Gives the same dose from an infusion rate R already chosen and the elimination rate constant k.</span></dd>
+<dd><span class="xeq">C<sub>p</sub> = {{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>&minus;kt</sup> + {{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)</span><span class="xnote">Gives the concentration t hours after both start. The deck prints this sum; the sheet carries the two terms separately.</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>The loading dose and the infusion rate together, as one recommendation; or the concentration at 2, 4 and 6 hours after both start (her Example 8). Her Example 7 answer is 125 mg by both routes.</dd>
 </dl>
@@ -200,16 +213,17 @@ const TELL_HTML = `
 
 <template data-x="dosing:m5-oral"><div class="xexp"><h4>Single oral dose, first-order absorption (Module 5)</h4>
 <p><b>In one line:</b> Drug is absorbed from the gut by a first-order process and eliminated by a first-order process, so the concentration rises to a peak and then falls.</p>
+{{fig:model_oral|Single oral dose: rises to the peak at the time of the peak, then falls.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>One compartment. Only the fraction F (bioavailability) of the dose reaches the blood. Absorption (rate constant k<sub>a</sub>) and elimination (rate constant k) are both first order, and usually k<sub>a</sub> is much larger than k.</dd>
 <dt>The curve</dt>
 <dd>Starts at zero, rises to a peak, then falls. The peak is C<sub>max</sub>, at the time t<sub>max</sub>, where the rate in equals the rate out. Later only elimination is left.</dd>
 <dt>The equations you use</dt>
-<dd>C<sub>p</sub> = {{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}}(e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>) gives the plasma concentration at any time, from the dose D<sub>0</sub> and the volume V<sub>D</sub>. The front factor is not C<sub>0</sub>.</dd>
-<dd>t<sub>max</sub> = {{frac:ln(k<sub>a</sub> &divide; k)|k<sub>a</sub> &minus; k}} gives the time of the peak. It holds no dose and no volume, so a larger dose does not move it.</dd>
-<dd>C<sub>max</sub>: put t<sub>max</sub> into the C<sub>p</sub> equation. There is no separate single-dose C<sub>max</sub> equation.</dd>
-<dd>t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}} gives the absorption half-life. Stems usually give it in minutes, so convert to hours first.</dd>
+<dd><span class="xeq">C<sub>p</sub> = {{frac:Fk<sub>a</sub>D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}}(e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)</span><span class="xnote">Gives the plasma concentration at any time, from the dose D<sub>0</sub> and the volume V<sub>D</sub>. The front factor is not C<sub>0</sub>.</span></dd>
+<dd><span class="xeq">t<sub>max</sub> = {{frac:ln(k<sub>a</sub> &divide; k)|k<sub>a</sub> &minus; k}}</span><span class="xnote">Gives the time of the peak. It holds no dose and no volume, so a larger dose does not move it.</span></dd>
+<dd><span class="xeq">C<sub>max</sub></span><span class="xnote">Put t<sub>max</sub> into the C<sub>p</sub> equation. There is no separate single-dose C<sub>max</sub> equation.</span></dd>
+<dd><span class="xeq">t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}</span><span class="xnote">Gives the absorption half-life. Stems usually give it in minutes, so convert to hours first.</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>t<sub>max</sub> and then C<sub>max</sub>, always in that order; V<sub>D</sub> back-solved from a given front factor; and which way C<sub>max</sub>, t<sub>max</sub> and AUC move when the dose, k<sub>a</sub> or k changes.</dd>
 </dl>
@@ -218,17 +232,18 @@ const TELL_HTML = `
 
 <template data-x="dosing:m6-bolus"><div class="xexp"><h4>Repeated IV bolus (Module 6)</h4>
 <p><b>In one line:</b> The same IV bolus dose is given at a fixed interval (&tau;); each dose adds to what is left of the earlier ones until the peaks and troughs stop climbing at steady state.</p>
+{{fig:model_mdbolus|Repeated IV bolus: a saw-tooth climbing to a plateau; the dashed line is the first dose alone.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>Superposition: elimination is first order, and later doses do not change the drug's pharmacokinetics. So each intravenous (IV) dose follows the first-dose curve.</dd>
 <dt>The curve</dt>
 <dd>A saw-tooth: each dose jumps up by C<sub>0</sub> and falls first order until the next. Peaks and troughs climb to a plateau in 3 to 5 half-lives, whatever the dose.</dd>
 <dt>The equations you use</dt>
-<dd>Symbols: C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}, the first-dose peak; &tau; the interval in hours (three times a day is &tau; = 8 hr); &infin; means steady state.</dd>
-<dd>C<sub>max</sub><sup>&infin;</sup> = {{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}} gives the steady-state peak. {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} is the accumulation factor.</dd>
-<dd>C<sub>min</sub><sup>&infin;</sup> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;k&tau;</sup> gives the steady-state trough, one interval after the peak.</dd>
-<dd>C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>k&tau;}} gives the steady-state average (F = 1 for IV). It is not the midpoint of peak and trough.</dd>
-<dd>C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt</sup> gives the concentration t hours after the n-th dose, before steady state.</dd>
+<dd><span class="xnote">Symbols: C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}, the first-dose peak; &tau; the interval in hours (three times a day is &tau; = 8 hr); &infin; means steady state.</span></dd>
+<dd><span class="xeq">C<sub>max</sub><sup>&infin;</sup> = {{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}</span><span class="xnote">Gives the steady-state peak. {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} is the accumulation factor.</span></dd>
+<dd><span class="xeq">C<sub>min</sub><sup>&infin;</sup> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;k&tau;</sup></span><span class="xnote">Gives the steady-state trough, one interval after the peak.</span></dd>
+<dd><span class="xeq">C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>k&tau;}}</span><span class="xnote">Gives the steady-state average (F = 1 for IV). It is not the midpoint of peak and trough.</span></dd>
+<dd><span class="xeq">C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt</sup></span><span class="xnote">Gives the concentration t hours after the n-th dose, before steady state.</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>The first-dose peak and trough, then C<sub>max</sub><sup>&infin;</sup>, C<sub>min</sub><sup>&infin;</sup> and C<sub>avg</sub><sup>&infin;</sup>, then a level before steady state and one after the last dose. Her Example 1: 53.3, 13.3 and 28.9 mg/L.</dd>
 </dl>
@@ -237,15 +252,16 @@ const TELL_HTML = `
 
 <template data-x="dosing:m6-infusion"><div class="xexp"><h4>Intermittent IV infusion (Module 6)</h4>
 <p><b>In one line:</b> A repeated-dose regimen in which each dose is infused at a constant rate over a set time instead of pushed at once; the level rises during each infusion and falls after it.</p>
+{{fig:model_intermit|Intermittent IV infusion: a rise during each infusion and a fall after it, each rise starting higher.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>Each intravenous (IV) infusion is a zero-order input for its duration. Elimination is first order, so the contributions of separate infusions add. It is used because many drugs are better tolerated infused slowly.</dd>
 <dt>The curve</dt>
 <dd>A rise during each infusion and a first-order fall after it. The second rise starts from what is left of the first, so it ends higher.</dd>
 <dt>The equations you use</dt>
-<dd>C<sub>p</sub> = {{frac:R|V<sub>D</sub>k}}(1 &minus; e<sup>&minus;kt</sup>) gives the concentration at the end of one infusion: t is the infusion time, and R (mg/hr) is the dose divided by the infusion time.</dd>
-<dd>C = C<sub>end</sub>e<sup>&minus;kt</sup> gives each infusion's contribution later, from its end-of-infusion value C<sub>end</sub>, with t measured from the end of that infusion. Add one term per infusion.</dd>
-<dd>C<sub>ss</sub> = {{frac:R|Cl}} gives the plateau only if the same rate R ran without stopping; the short infusions never reach it.</dd>
+<dd><span class="xeq">C<sub>p</sub> = {{frac:R|V<sub>D</sub>k}}(1 &minus; e<sup>&minus;kt</sup>)</span><span class="xnote">Gives the concentration at the end of one infusion: t is the infusion time, and R (mg/hr) is the dose divided by the infusion time.</span></dd>
+<dd><span class="xeq">C = C<sub>end</sub>e<sup>&minus;kt</sup></span><span class="xnote">Gives each infusion's contribution later, from its end-of-infusion value C<sub>end</sub>, with t measured from the end of that infusion. Add one term per infusion.</span></dd>
+<dd><span class="xeq">C<sub>ss</sub> = {{frac:R|Cl}}</span><span class="xnote">Gives the plateau only if the same rate R ran without stopping; the short infusions never reach it.</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>The concentration at the end of the first infusion, then a stated time after the end of the second. Her Example 4: 17.28 mg/L, then 13.33 mg/L, with t = 10 hr and 4 hr for the two terms.</dd>
 </dl>
@@ -254,16 +270,17 @@ const TELL_HTML = `
 
 <template data-x="dosing:m6a-oral"><div class="xexp"><h4>Multiple oral doses (Module 6a)</h4>
 <p><b>In one line:</b> The single-oral-dose model given again at a fixed interval (&tau;), with the accumulation factor attached; the peaks and troughs climb to a plateau.</p>
+{{fig:model_mdoral|Multiple oral doses: rounded peaks and troughs climbing to a plateau; the dashed line is the first dose alone.}}
 <dl>
 <dt>What it assumes</dt>
 <dd>First-order absorption (k<sub>a</sub>), first-order elimination (k), a fraction F absorbed, and superposition: later doses do not change k, k<sub>a</sub>, clearance or the volume of distribution (V<sub>D</sub>).</dd>
 <dt>The curve</dt>
 <dd>Rounded peaks and troughs climbing to a plateau. The deck's figure shows dosing every 6 hours levelling off higher than every 8 hours, with k<sub>a</sub> and k unchanged.</dd>
 <dt>The equations you use</dt>
-<dd>t<sub>max</sub><sup>&infin;</sup> = {{frac:1|k<sub>a</sub> &minus; k}} ln[{{frac:k<sub>a</sub>(1 &minus; e<sup>&minus;k&tau;</sup>)|k(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>)}}] gives the time of the steady-state peak (&infin; means steady state). It holds &tau;, so a new interval gives a new t<sub>max</sub>.</dd>
-<dd>C<sub>max</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>}}({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt<sub>max</sub>&infin;</sup> gives the steady-state peak, from the dose D<sub>0</sub>.</dd>
-<dd>C<sub>min</sub><sup>&infin;</sup> = {{frac:k<sub>a</sub>FD<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}}({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;k&tau;</sup> gives the steady-state trough, at the end of the interval.</dd>
-<dd>C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}} gives the steady-state average, with Cl<sub>T</sub> the total body clearance.</dd>
+<dd><span class="xeq">t<sub>max</sub><sup>&infin;</sup> = {{frac:1|k<sub>a</sub> &minus; k}} ln[{{frac:k<sub>a</sub>(1 &minus; e<sup>&minus;k&tau;</sup>)|k(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>)}}]</span><span class="xnote">Gives the time of the steady-state peak (&infin; means steady state). It holds &tau;, so a new interval gives a new t<sub>max</sub>.</span></dd>
+<dd><span class="xeq">C<sub>max</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>}}({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt<sub>max</sub>&infin;</sup></span><span class="xnote">Gives the steady-state peak, from the dose D<sub>0</sub>.</span></dd>
+<dd><span class="xeq">C<sub>min</sub><sup>&infin;</sup> = {{frac:k<sub>a</sub>FD<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}}({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;k&tau;</sup></span><span class="xnote">Gives the steady-state trough, at the end of the interval.</span></dd>
+<dd><span class="xeq">C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}}</span><span class="xnote">Gives the steady-state average, with Cl<sub>T</sub> the total body clearance.</span></dd>
 <dt>What you are usually asked to calculate</dt>
 <dd>First-dose t<sub>max</sub> and C<sub>max</sub>, then t<sub>max</sub><sup>&infin;</sup>, C<sub>max</sub><sup>&infin;</sup>, C<sub>min</sub><sup>&infin;</sup> and C<sub>avg</sub><sup>&infin;</sup>. Her tetracycline t<sub>max</sub>: 3.1 hr for the first dose, 2.06 hr at steady state.</dd>
 <dd>Which way a change of dose or of interval moves the steady-state level, the swing from peak to trough, and compliance.</dd>
@@ -525,7 +542,7 @@ const TELL_HTML = `
 <dd>For a two-compartment bolus, C<sub>0</sub> is A + B, the sum of the two intercepts.</dd>
 <dt>C<sub>ss</sub></dt><dd>The steady-state plateau of a continuous infusion, {{frac:R|Cl}}, with R the infusion rate and Cl the clearance. It contains no time term and is reached only asymptotically, after three to five half-lives.</dd>
 <dt>C<sub>max</sub></dt><dd>The peak of a single oral dose. It occurs at t<sub>max</sub>, the time of the peak, not at time zero, because the drug has to be absorbed first.</dd>
-<dt>The quick test</dt><dd>Her drawing instruction: an IV bolus starts high and comes down, an infusion starts low and builds, and an oral dose rises to a peak and then falls.</dd></dl>
+<dt>The quick test</dt><dd>Her drawing instruction, one curve at a time:<ul class="tlist"><li>An IV bolus starts high and comes down.</li><li>An infusion starts low and builds.</li><li>An oral dose rises to a peak and then falls.</li></ul></dd></dl>
 <p class="xtrap"><b>How she tests it:</b> The wrong pick uses {{frac:D<sub>0</sub>|V<sub>D</sub>}} for an oral peak. That is the concentration the whole dose would give if it arrived instantly and none were lost. It is not a concentration on the oral curve at all.</p>
 <p class="xtrap">Reading C<sub>ss</sub> off a curve that has run for less than three to five half-lives reports the current concentration as the plateau.</p>
 <p class="gsrc">Source: 2IVBolusAdministration.pdf slide "Volume of Distribution"; 3IntravenousInfusions.pdf slide "Drug Concentration at Steady-State"</p>

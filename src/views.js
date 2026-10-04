@@ -522,6 +522,18 @@ function beginQuiz(qz, n){
   show('exam');
 }
 
+/* The exam being prepared for, as labelled rows rather than one paragraph. */
+const efRow = (lab, val) => `<div class="efrow"><span class="eflab">${esc(lab)}</span><span class="efval">${val}</span></div>`;
+function examFactsHTML(cd){
+  const facts = EXAM.facts || (EXAM.blurb ? [['About', EXAM.blurb]] : []);
+  const rows = [efRow('Paper', `${esc(EXAM.name)}: ${EXAM.questions} questions in ${EXAM.minutes} minutes`)];
+  facts.forEach(([lab, val]) => rows.push(efRow(lab, esc(val) + (lab === 'When' && cd ? ` <b class="countdown">${esc(cd)}</b>` : ''))));
+  if(cd && !facts.some(([lab]) => lab === 'When')) rows.push(efRow('Countdown', `<b class="countdown">${esc(cd)}</b>`));
+  rows.push(efRow('Bank', `${QUESTIONS.length} questions across ${conceptsIn(QUESTIONS).length} concepts`));
+  if(COURSE.exams.length > 1) rows.push(efRow('Paper choice', 'Change the paper being prepared for under Exam sim or Settings'));
+  return `<div class="examfacts">${rows.join('')}</div>`;
+}
+
 /* Which exam cards start open: the one being prepared for, unless this
    browser was told otherwise; earlier and later exams start closed. */
 const EXAMGRP_KEY = NS + ':examgrp:';
@@ -537,11 +549,7 @@ function renderTopics(){
       CHANGELOG.length ? ' · <a href="#" id="allChanges">All changes</a>' : ''}</p>` : ''}
   ${newsCard()}
   <p class="laywrap">${layoutToggle()}</p>
-  <p class="sub">${esc(EXAM.name)} is ${EXAM.questions} questions in ${EXAM.minutes} minutes${
-      EXAM.date ? ` on ${esc(EXAM.date)}` : ''}.${cd ? ` <b class="countdown">${esc(cd)}</b>` : ''}
-    ${EXAM.blurb ? esc(EXAM.blurb) + ' ' : ''}
-    Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
-    COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
+  ${examFactsHTML(cd)}`;
 
   h += quizCards();
 
@@ -1030,19 +1038,25 @@ const TERM_QS = termQuestions();
 const TERM_GROUPS = [...new Set(TERMS.map(t => t.group))];
 const LETTERS_AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const termLetter = t => (termName(t).match(/[A-Za-z]/) || ['#'])[0].toUpperCase();
-let TV = {mode: 'gloss', group: 'all', order: 'group', q: '', fc: null};
+let TV = {mode: 'gloss', group: 'all', module: 'all', order: 'group', q: '', fc: null};
+/* "7a" for module 7, from the Topics menu name; the number otherwise. */
+function modShort(m){
+  const t = COURSE.topicsMenu.find(x => x.module === m);
+  const mm = t && /Module\s+(\S+)/.exec(t.name);
+  return mm ? mm[1] : String(m);
+}
 let TIO = null;
 
 function termCardHTML(t){
   const fig = t.fig && (IMAGES[t.fig] ? `<figure class="reffig"><img src="${IMAGES[t.fig]}" alt="${esc(t.term)}"></figure>` : '');
   return `<div class="termcard" id="term-${esc(t.id)}" data-letter="${termLetter(t)}">
-    <div class="dghead"><b>${esc(t.term)}</b><span>Module ${t.module} · ${esc(t.group)}</span></div>
+    <div class="dghead"><b>${esc(t.term)}</b><span>Module ${esc(modShort(t.module))} · ${esc(t.group)}</span></div>
     <p class="tgist">${rich(t.gist)}</p>
     <ul class="tlist"><li><b>Definition.</b> ${rich(t.def)}</li><li><b>In action.</b> ${rich(t.scene)}</li>${
       t.hook ? `<li><b>Her point.</b> ${rich(t.hook)}</li>` : ''}</ul>${fig || ''}
     ${t.quote ? `<p class="dquote">“${esc(t.quote)}”</p>` : ''}<p class="wcite">${esc(t.cite)}</p></div>`;
 }
-const termsInGroup = () => TERMS.filter(t => TV.group === 'all' || t.group === TV.group);
+const termsInGroup = () => TERMS.filter(t => (TV.group === 'all' || t.group === TV.group) && (TV.module === 'all' || t.module === TV.module));
 function termMatches(t, q){
   if(!q) return 2;
   const s = q.toLowerCase();
@@ -1054,7 +1068,14 @@ function renderTerms(){
   const groupChips = `<div class="frow">${['all', ...TERM_GROUPS].map(g => `<button class="chip" data-tgroup="${esc(g)}" aria-pressed="${TV.group === g}">${g === 'all' ? 'All groups' : esc(g)}</button>`).join('')}</div>`;
   const modeTabs = `<div class="mtabs">${[['gloss', 'Glossary'], ['flash', 'Flashcards'], ['quiz', 'Quiz me']].map(([m, l]) =>
     `<button class="mtab" data-tmode="${m}" aria-pressed="${TV.mode === m}">${l}</button>`).join('')}</div>`;
-  let h = `<h2>Terms</h2><p class="sub">${TERMS.length} terms from her slides, each with its definition, what it looks like in practice, and where it is on the slides.</p>${modeTabs}<div class="filters">${groupChips}</div>`;
+  const mods = [...new Set(TERMS.map(t => t.module))].sort((a, b) => a - b);
+  const modChips = `<div class="frow">${['all', ...mods].map(m => `<button class="chip" data-tmod="${m}" aria-pressed="${TV.module === m}">${m === 'all' ? 'All modules' : 'Module ' + esc(modShort(m))}</button>`).join('')}</div>`;
+  let h = `<h2>Terms</h2><p class="sub">${TERMS.length} terms from her slides, Modules 1 to ${esc(modShort(mods[mods.length - 1]))}.</p>
+  <details class="tabhelp" open><summary>What this tab is for</summary><ul>
+  <li><b>Each term</b> has its definition, what it looks like in practice, her point about it, and where it sits on the slides.</li>
+  <li><b>Glossary</b> to read, <b>Flashcards</b> to test yourself, <b>Quiz me</b> to be scored: those answers count in Weak spots like any other.</li>
+  <li>Filter by <b>group</b> (what the term is about) or by <b>module</b>, or search.</li>
+  </ul></details>${modeTabs}<div class="filters">${groupChips}${modChips}</div>`;
   if(TV.mode === 'gloss'){
     const pool = termsInGroup().map(t => [t, termMatches(t, TV.q)]).filter(([, m]) => m)
       .sort((a, b) => TV.q ? b[1] - a[1] || termName(a[0]).localeCompare(termName(b[0])) : 0).map(([t]) => t);
@@ -1093,6 +1114,7 @@ function renderTerms(){
   el.innerHTML = h;
   el.querySelectorAll('[data-tmode]').forEach(b => b.onclick = () => { TV.mode = b.dataset.tmode; renderTerms(); });
   el.querySelectorAll('[data-tgroup]').forEach(b => b.onclick = () => { TV.group = b.dataset.tgroup; TV.fc = null; renderTerms(); });
+  el.querySelectorAll('[data-tmod]').forEach(b => b.onclick = () => { TV.module = b.dataset.tmod === 'all' ? 'all' : +b.dataset.tmod; TV.fc = null; renderTerms(); });
   el.querySelectorAll('[data-torder]').forEach(b => b.onclick = () => { TV.order = b.dataset.torder; renderTerms(); });
   el.querySelectorAll('[data-az]').forEach(b => b.onclick = () => {
     if(TV.order !== 'az' || TV.q){ TV.order = 'az'; TV.q = ''; renderTerms(); }
@@ -2375,23 +2397,36 @@ function readGraphHTML(d){
     ${row('axes', 'Axes.')}${row('shape', 'Shape.')}${row('eq', 'Equation.')}${row('how', 'How the equation makes the shape.')}${row('asks', 'What she asks.')}</ol>
     ${d.quote ? `<p class="dquote">“${esc(d.quote)}”</p>` : ''}</div>`;
 }
+let DG_MOD = 'all';
+const dgInModule = d => DG_MOD === 'all' || (d.modules ? d.modules.includes(DG_MOD) : d.module === DG_MOD);
 function renderDiagrams(){
   let toc = '', body = '';
+  const dmods = [...new Set(DIAGRAMS.flatMap(g => g.figs.flatMap(d => d.modules || [d.module])).filter(m => typeof m === 'number'))].sort((a, b) => a - b);
+  const modChips = `<div class="filters"><div class="frow"><label>Module</label>${['all', ...dmods].map(m =>
+    `<button class="chip" data-dgmod="${m}" aria-pressed="${DG_MOD === m}">${m === 'all' ? 'All' : esc(modShort(m))}</button>`).join('')}</div></div>`;
   DIAGRAMS.forEach((g, gi) => {
-    const figs = g.figs.filter(d => STEPFIGS[d.key] || IMAGES[d.key]); if(!figs.length) return;
+    const figs = g.figs.filter(d => (STEPFIGS[d.key] || IMAGES[d.key]) && dgInModule(d)); if(!figs.length) return;
     toc += `<div class="dgtoc"><b>${esc(g.group)}</b><div class="dgchips">${figs.map(d =>
       `<a class="chip" href="#dg-${d.key}" data-dg="${d.key}">${esc(d.name)}${STEPFIGS[d.key] ? ' ▶' : ''}</a>`).join('')}</div></div>`;
     body += `<h3 id="dgg-${gi}">${esc(g.group)}</h3><p class="sub">${esc(g.note)}</p>` + figs.map(d => `<div id="dg-${d.key}" class="dgfig">
-      <div class="dghead"><b>${esc(d.name)}</b><span>Module ${d.module}</span></div>
+      <div class="dghead"><b>${esc(d.name)}</b><span>Module${d.modules ? 's' : ''} ${esc(typeof d.module === 'number' ? modShort(d.module) : String(d.module))}</span></div>
       ${STEPFIGS[d.key] ? stepFigHTML(d.key)
         : `<figure class="reffig"><img src="${IMAGES[d.key]}" alt="${esc(FIG_TITLES[d.key] || d.name)}"></figure>`}
       ${readGraphHTML(d)}</div>`).join('');
   });
   const el = $('#v-diag');
   el.innerHTML = `<h2>Diagrams</h2>
+    <p class="sub">Every drawn graph in the course, grouped by what she asks you to do with it.</p>
+    <details class="tabhelp" open><summary>What this tab is for</summary><ul>
+    <li><b>Four groups:</b> decide the order or the model from the shape; read a value off the graph; compare two curves; follow a dosing regimen over time.</li>
+    <li><b>Each figure</b> is read the same way: the axes, the shape, the equation that draws it, the term in it that makes the shape, and what she asks about it.</li>
+    <li><b>▶ figures step through</b> a regimen dose by dose: use Next, Play all or the dots under the figure.</li>
+    <li>Tap any figure to enlarge it; filter by module.</li>
+    </ul></details>
     <div class="dgintro"><p><b>Three steps for any graph</b></p><ol>${DIAGRAM_INTRO.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
     <p class="dquote">“${esc(DIAGRAM_QUOTE)}”</p></div>
-    <p class="sub">Tap any figure to enlarge it. ▶ marks a step-through figure: use Next, Play all or the step dots under it.</p>${toc}${body}`;
+    ${modChips}${toc}${body}`;
+  el.querySelectorAll('[data-dgmod]').forEach(b => b.onclick = () => { DG_MOD = b.dataset.dgmod === 'all' ? 'all' : +b.dataset.dgmod; renderDiagrams(); });
   el.querySelectorAll('[data-dg]').forEach(a => a.onclick = e => { e.preventDefault();
     const t = document.getElementById('dg-' + a.dataset.dg); if(t) scrollToEl(t); });
 }
@@ -2477,9 +2512,14 @@ function renderExam(){
       : `The blueprint asks for ${EXAM_SATA} select-all items and the bank holds ${sata.drawn}, so the paper carries ${sata.drawn}. `;
   el.innerHTML = `<h2>Exam simulation</h2>
   ${examPicker('A paper from an earlier exam is drawn the same way, so Exam 1 can be sat again for the final. Weak spots and the exam-weighted pass follow this choice too.')}
-  <p class="sub">${esc(EXAM.name)}: ${EXAM.questions} questions in ${EXAM.minutes} minutes, drawn at the
-  blueprint — ${POOLS.map(p=>`${esc(p.name)} ${p.marks}`).join(' · ')} marks.
-  ${sataLine}No explanations until you finish, same as the real thing.</p>
+  <div class="examfacts">
+    ${efRow('Paper', `${esc(EXAM.name)}: ${EXAM.questions} questions in ${EXAM.minutes} minutes`)}
+    ${EXAM_SATA ? efRow('Select-all', esc(sataLine.trim())) : ''}
+    ${efRow('Feedback', 'None until you submit, same as the real thing')}
+  </div>
+  <div class="tw"><table class="gap"><thead><tr><th>Drawn from</th><th>Marks</th><th>In the bank</th></tr></thead><tbody>${
+    cov.shares.map(o => `<tr><td>${esc(o.pool.name)}</td><td>${o.want}</td><td>${poolDrawable(o.pool).length}</td></tr>`).join('')
+  }</tbody></table></div>
   ${shortfallNote(cov)}
   <div class="note"><b>This does not feed your spaced-repetition history until you submit.</b>
   Finish the paper, then every answer is logged at once so your weak spots stay accurate.</div>
@@ -3221,9 +3261,13 @@ function eqPickerHTML(){
   const chosen = new Set(eqChosen());
   const learned = [...chosen].filter(eqLearned).length;
   let h = `<h2>Equations</h2>
-  <p class="sub">Type an equation out, or build it from its pieces. Tick the ones to work on;
-    the drill asks only those. An equation counts as learned after ${EQ_STREAK} correct answers in a row,
-    and one wrong answer puts it back to nothing. Nothing here is scored against the question bank.</p>`;
+  <p class="sub">Every equation she expects, grouped by module, as a writing drill.</p>
+  <details class="tabhelp" open><summary>What this tab is for</summary><ul>
+  <li><b>Write the equations from memory.</b> Type one out (what the exam asks for) or build it from pieces, some of them wrong.</li>
+  <li><b>Each equation is marked</b> on the sheet, not on the sheet, or one she said to memorise; start with those.</li>
+  <li><b>Learned</b> means ${EQ_STREAK} correct in a row; one wrong answer puts it back to nothing. Tick the ones to work on; the drill asks only those.</li>
+  <li>Nothing here is scored against the question bank or Weak spots; <b>Reference</b> holds the same equations with their symbols and conditions.</li>
+  </ul></details>`;
 
   h += `<div class="topic sweepcard"><div class="subs">
     <div class="subrow"><span class="sname"><b>Type them out</b>

@@ -793,6 +793,128 @@ stepped('two_infusions_steps', 'Two intermittent IV infusions, stage by stage', 
 ])
 
 
+
+# ---- the eight dosing models, one panel each, on the same unnumbered axes ---
+# Shapes only: the axes carry no numbers, so nothing here is a value from a
+# slide. The same k is used in every panel so the curves differ only by how
+# the drug goes in, which is the one thing that decides the model.
+MK8 = 0.3          # elimination rate constant used in every panel
+MA8 = 1.2          # absorption rate constant for the oral panels
+MT8 = 16.0         # hours shown
+
+
+def model_panel(title, line, draw, log=False, ymax=10.0):
+    if log:
+        pan = Plot(MT8, [0.1, 1, 10], log=True, xlabel='Time', ylabel='Concentration (log scale)',
+                   w=600, h=320, l=60, r=24, t=92, b=42, fs=1.4, numbers=False)
+    else:
+        pan = Plot(MT8, [0, ymax / 2, ymax], xlabel='Time', ylabel='Concentration',
+                   w=600, h=320, l=60, r=24, t=92, b=42, fs=1.4, numbers=False)
+    pan.frame([0, 4, 8, 12, 16])
+    draw(pan)
+    heading(pan, title, line)
+    return pan
+
+
+def m8_bolus1(pan):
+    pan.curve(lambda t: 10 * math.exp(-MK8 * t), color=BLUE)
+    pan.text(0.3, 9.2, 'C0', size=15, color=BLUE)
+
+
+def m8_bolus2(pan):
+    pan.curve(lambda t: 7 * math.exp(-1.5 * t) + 3 * math.exp(-0.15 * t), color=BLUE, x0=0.0)
+    pan.text(0.8, 5.2, 'steep: distribution', size=15, color=DIM)
+    pan.text(8.0, 1.75, 'shallow: elimination', size=15, color=DIM)
+
+
+def m8_infusion(pan):
+    stop = 10.0
+    css = 8.0
+    pan.curve(lambda t: css * (1 - math.exp(-MK8 * t)) if t <= stop
+              else css * (1 - math.exp(-MK8 * stop)) * math.exp(-MK8 * (t - stop)), color=BLUE)
+    pan.hline(css, color=DIM)
+    pan.text(0.4, 8.75, 'Css', size=15, color=DIM)
+    pan.vline(stop, 10, color=DIM)
+    pan.label(stop + 0.2, 9.2, 'infusion stops')
+
+
+def m8_loading(pan):
+    css = 8.0
+    pan.curve(lambda t: css * (1 - math.exp(-MK8 * t)), color=AMBER, dash='6 5')
+    pan.curve(lambda t: css, color=BLUE)
+    pan.text(0.4, 8.75, 'Css from the start', size=15, color=BLUE)
+    pan.label(6.0, 5.2, 'infusion alone', color=AMBER, swatch=True)
+
+
+def m8_oral(pan):
+    a = 10 * MA8 / (MA8 - MK8)
+    fn = lambda t: a * (math.exp(-MK8 * t) - math.exp(-MA8 * t))
+    tmax = math.log(MA8 / MK8) / (MA8 - MK8)
+    pan.curve(fn, color=BLUE)
+    pan.points([tmax], [fn(tmax)])
+    pan.text(tmax + 0.4, fn(tmax) + 0.2, 'Cmax at tmax', size=15)
+
+
+TAU8 = 4.0
+
+
+def m8_mdbolus(pan):
+    c0 = 4.0
+    fn = lambda t: sum(c0 * math.exp(-MK8 * (t - i * TAU8)) for i in range(4) if t >= i * TAU8 - 1e-9)
+    pan.curve(fn, color=BLUE, n=1200)
+    pan.curve(lambda t: c0 * math.exp(-MK8 * t), color=AMBER, dash='6 5')
+    pan.label(7.6, 0.75, 'the first dose alone', color=AMBER, swatch=True)
+    pan.text(15.8, 8.6, 'peaks and troughs level off', size=15, color=DIM, anchor='end')
+
+
+def m8_intermit(pan):
+    dur, gap, r = 2.0, 6.0, 4.0
+
+    def one(t, start):
+        if t < start:
+            return 0.0
+        if t <= start + dur:
+            return r / MK8 * (1 - math.exp(-MK8 * (t - start)))
+        return r / MK8 * (1 - math.exp(-MK8 * dur)) * math.exp(-MK8 * (t - start - dur))
+    pan.curve(lambda t: one(t, 0) + one(t, gap) + one(t, 2 * gap), color=BLUE, n=1200)
+    pan.text(2.2, 7.4, 'rises while infusing', size=15, color=DIM)
+    pan.text(4.2, 3.6, 'falls between', size=15, color=DIM)
+
+
+def m8_mdoral(pan):
+    a = 4 * MA8 / (MA8 - MK8)
+    one = lambda t: a * (math.exp(-MK8 * t) - math.exp(-MA8 * t)) if t >= 0 else 0.0
+    pan.curve(lambda t: sum(one(t - i * TAU8) for i in range(4)), color=BLUE, n=1200)
+    pan.curve(lambda t: one(t), color=AMBER, dash='6 5')
+    pan.label(9.0, 1.1, 'the first dose alone', color=AMBER, swatch=True)
+    pan.text(15.8, 8.6, 'rounded peaks level off', size=15, color=DIM, anchor='end')
+
+
+MODEL_PANELS = [
+    ('model_bolus1', 'One-compartment IV bolus (Module 2)',
+     'All in at once, first order out: highest at time zero, then falls.', m8_bolus1, False),
+    ('model_bolus2', 'Two-compartment IV bolus (Module 2)',
+     'Log axis: a steep early fall, then a shallower straight line.', m8_bolus2, True),
+    ('model_infusion', 'IV infusion, one compartment (Module 3)',
+     'Constant rate in, first order out: climbs to Css, falls once stopped.', m8_infusion, False),
+    ('model_loading', 'Loading dose with an infusion (Module 3)',
+     'The bolus supplies the steady-state amount: flat at Css.', m8_loading, False),
+    ('model_oral', 'Single oral dose (Module 5)',
+     'First order in, first order out: rises to Cmax at tmax, then falls.', m8_oral, False),
+    ('model_mdbolus', 'Repeated IV bolus (Module 6)',
+     'The same dose every τ: a saw-tooth climbing to a plateau.', m8_mdbolus, False),
+    ('model_intermit', 'Intermittent IV infusion (Module 6)',
+     'Each dose infused over a set time: a rise, a fall, then a higher rise.', m8_intermit, False),
+    ('model_mdoral', 'Multiple oral doses (Module 6a)',
+     'The oral curve every τ: rounded peaks climbing to a plateau.', m8_mdoral, False),
+]
+for _key, _title, _line, _draw, _log in MODEL_PANELS:
+    _pan = model_panel(_title, _line, _draw, log=_log)
+    FIGS[_key] = (_title + ': the shape of the curve', _pan.svg(_title))
+stack('models_all', 'The eight dosing models on the same axes: how the drug goes in decides the shape',
+      [model_panel(t, l, d, log=g) for _, t, l, d, g in MODEL_PANELS], 600, 320)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dir', help='also write each figure as a .svg file to look at')

@@ -17,7 +17,13 @@
    ========================================================================== */
 const REFERENCE_HTML = `
 <h2>Reference</h2>
-<p class="sub">Every equation this course uses, what each symbol means, the condition it holds under, and whether the exam equation sheet carries it. Nothing here is scored.</p>
+<p class="sub">Every equation this course uses, Modules 1 to 7a. Nothing here is scored.</p>
+<details class="tabhelp" open><summary>What this tab is for</summary><ul>
+<li><b>Look an equation up while working a problem:</b> each one with its symbols, units, the condition it holds under, and whether the exam equation sheet carries it.</li>
+<li><b>First come the ones she said are not on the sheet,</b> then the unit conversions this course keeps needing, then one section per module.</li>
+<li><b>The last section walks the equation sheet itself</b> line by line, so a line on the sheet can be matched to the module it belongs to.</li>
+<li>Use <b>Jump to a section</b> to go straight to a module.</li>
+</ul></details>
 
 <h3>Not on the exam equation sheet</h3>
 <ul class="tlist">

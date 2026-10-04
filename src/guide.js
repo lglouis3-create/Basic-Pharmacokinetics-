@@ -30,13 +30,13 @@
    ========================================================================== */
 const GUIDE_HTML = `
 <h2>Objective guides</h2>
-<p class="sub">One section per objective on Dr. Mosley's objectives slides, in her order. Nothing here is scored.</p>
-<ul class="sub">
-<li><b>In plain words</b> says what the objective is about, assuming nothing from earlier lectures.</li>
-<li><b>Terms to know</b> and <b>Equations</b> define every symbol and say whether the equation is on the exam sheet.</li>
-<li><b>Worked example</b> runs one of her problems line by line, and <b>How she tests it</b> lists the question formats and traps.</li>
+<p class="sub">One section per objective on her objectives slides, in her order, Modules 1 to 7a. Nothing here is scored.</p>
+<details class="tabhelp" open><summary>What this tab is for</summary><ul>
+<li><b>Learn an objective before drilling it.</b> Each section teaches one objective from nothing: <b>In plain words</b>, <b>Terms to know</b>, <b>Equations</b> with their symbols and whether each is on the exam sheet.</li>
+<li><b>Worked example</b> runs one of her own problems line by line; <b>How she tests it</b> lists her question formats and the traps in them.</li>
 <li><b>In her words</b> keeps a quote only where her exact wording matters.</li>
-</ul>
+<li>The <b>Explain more</b> buttons under a quiz question jump to the matching section here; <b>Jump to a section</b> below goes straight to an objective.</li>
+</ul></details>
 
 <h2>Module 1 - Introduction &amp; Math Review</h2>
 <p class="prose">Five objectives. Dr. Mosley lists them at the start of the Introduction deck and again, unchanged, in the Exam 1 recap, as the things she wants you to know for the exam.</p>

@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (cleaner layout on the reference tabs)
+- Exam facts on Topics and Exam sim are labelled rows and a marks table, not a paragraph.
+- Tell apart: each dosing model now shows its curve, each equation on its own line with its note beneath.
+- The eight dosing models drawn side by side, under the dosing table and in Diagrams.
+- Every reference tab opens with "What this tab is for"; Terms and Diagrams filter by module.
+
 ## 2026-10-04 (a typing slip is not a miss)
 - A number typed with its unit ("2.6 hr") is read as the number, since she requires units on the exam.
 - "No, I was right" under a missed number or equation counts it as right and restores the review schedule.

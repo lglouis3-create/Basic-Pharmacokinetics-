@@ -105,6 +105,12 @@ const COURSE = {
             'one- and multi-compartment IV bolus, IV infusion. Half the paper ' +
             'is calculation. The mark split across the three modules is not ' +
             'published — this drill weights it by lecture time (2 : 2 : 1).',
+     facts: [
+       ['When', 'Fri 11 September, 10:00–12:00'],
+       ['Covers', 'Modules 1–3: kinetic orders and the maths; one- and multi-compartment IV bolus; IV infusion'],
+       ['Shape', 'Half the paper is calculation'],
+       ['Mark split', 'Not published; this drill weights the three modules by lecture time, 2 : 2 : 1'],
+     ],
      pools: [
        {key: 'm1', name: 'Module 1 — Intro, kinetic orders, AUC', marks: 16, filter: {module: 1}},
        {key: 'm2', name: 'Module 2 — IV bolus, one and multi-compartment', marks: 16, filter: {module: 2}},
@@ -124,6 +130,12 @@ const COURSE = {
             'bioequivalence. She said on 30 September that this exam is cumulative in ' +
             'the sense that multiple-dose problems need the single-dose skills. The ' +
             'per-module mark split is not published; this drill weights it by lecture time.',
+     facts: [
+       ['When', 'Thu 8 October, 7:50–9:50'],
+       ['Covers', 'Modules 4–7a: elimination and clearance; single oral dosing; multiple dosing (repeated IV bolus, intermittent IV infusions, multiple oral doses); bioavailability and bioequivalence'],
+       ['Cumulative', 'In the sense she gave on 30 September: a multiple-dose problem needs the single-dose skills'],
+       ['Mark split', 'Not published; this drill weights the modules by lecture time'],
+     ],
      pools: [
        {key: 'm4', name: 'Module 4 — Elimination, clearance, renal clearance', marks: 7,  filter: {module: 4}},
        {key: 'm5', name: 'Module 5 — Oral absorption, single dose',            marks: 7,  filter: {module: 5}},
@@ -142,6 +154,12 @@ const COURSE = {
             'nonlinear pharmacokinetics. Question count and mark split are ' +
             'not published; this drill assumes the same 40-question shape and ' +
             'weights the earlier material at half the paper.',
+     facts: [
+       ['When', 'Tue 27 October, 7:50–9:50'],
+       ['Weight', '33% of the course grade'],
+       ['Covers', 'Cumulative, plus PK–PD and nonlinear pharmacokinetics'],
+       ['Mark split', 'Question count and split not published; this drill assumes the 40-question shape and weights the earlier material at half the paper'],
+     ],
      pools: [
        {key: 'f-e1',  name: 'Exam 1 material (Modules 1–3)',  marks: 10, filter: {exam: 1}},
        {key: 'f-e2',  name: 'Exam 2 material (Modules 4–9)',  marks: 10, filter: {exam: 2}},
