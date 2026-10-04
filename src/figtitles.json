@@ -1,9 +1,11 @@
 {
+"accum_factor": "The accumulation factor R against the dosing interval measured in half-lives",
 "cpt_one": "Semi-logarithmic plot after an intravenous bolus: one straight line",
 "cpt_two": "Semi-logarithmic plot after an intravenous bolus: a steep early phase then a shallower straight phase",
 "elim_rate_flat": "Rate of elimination plotted against plasma concentration: a horizontal line",
 "elim_rate_linear": "Rate of elimination plotted against plasma concentration: a straight line through the origin",
 "flipflop": "One drug given as an immediate-release and an extended-release product: the tail of each curve",
+"halflife_ladder": "The half-life ladder: what is left after each half-life, and how close a regimen is to steady state",
 "inf_css": "Concentration during a constant-rate infusion, rising towards a plateau",
 "inf_two_rates": "Two infusion rates of the same drug, plotted together",
 "input_types": "IV bolus, oral tablet and IV infusion, each with first-order elimination",
@@ -26,5 +28,7 @@
 "ord_semilog_curve": "Concentration against time on an axis marked 1, 10, 100, 1000, bending downward",
 "ord_semilog_straight": "Concentration against time on an axis marked 1, 10, 100, 1000, falling as a straight line",
 "rate_vs_constant": "Amount in the body against time for two doses, with the rate of loss marked at three points",
-"two_infusions": "Two intermittent IV infusions: each curve on its own and their sum, read at 12 hours"
+"renal_handling": "The kidney: filtration and secretion move drug into the tubule, reabsorption takes it back, and the net rate is the excretion rate",
+"two_infusions": "Two intermittent IV infusions: each curve on its own and their sum, read at 12 hours",
+"unit_cancel": "Units cancelling in five equations: the unit left over is the unit of the answer"
 }

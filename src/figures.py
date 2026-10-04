@@ -737,9 +737,9 @@ heading(ms, 'Six doses of 10 mg/kg every 8 hours, then none',
 # line at a time, and any division is written as a stacked fraction.
 stepped('md_bolus_steps', 'Repeated IV bolus, dose by dose', ms, [
     ('dose 1', '\n'.join([
-        'Dose 1 arrives at time zero. C0, the concentration it produces on its own, is the dose over the volume: '
+        'Dose 1, 10 mg/kg, arrives at time zero; the same dose follows every 8 hours. C0, the concentration one dose produces on its own, is the dose over the apparent volume of distribution, VD 0.25 L/kg: '
         'C0 = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L.',
-        'Eight hours is two half-lives of 4 hr.',
+        'The half-life, the time for the concentration to fall by half, is 4 hr, so eight hours is two half-lives.',
         'So 40 mg/L halves to 20, then to %.0f mg/L just before dose 2.' % md_curve(8 - 1e-6)]), md_s1),
     ('dose 2', '\n'.join([
         'Dose 2 adds another 40 mg/L to the %.0f mg/L still present: %.0f + 40 = %.1f mg/L.' % (md_curve(8 - 1e-6), md_curve(8 - 1e-6), peaks[1]),
@@ -749,8 +749,8 @@ stepped('md_bolus_steps', 'Repeated IV bolus, dose by dose', ms, [
         'The peaks climb ' + ', '.join('%.1f' % p for p in peaks) + ' mg/L and stop climbing.']), md_s3),
     ('steady state', '\n'.join([
         'The climb is over within 3 to 5 half-lives, here 12 to 20 hours. This is steady state: each dose now replaces exactly what was lost.',
-        'At steady state the curve repeats between the peak, Cmax 53.3 mg/L, and the trough, Cmin 13.3 mg/L.',
-        'The average over an interval, Cavg 28.9 mg/L, sits below the midpoint of 33.3 mg/L because the curve spends more of each interval at the lower concentrations.']), md_s4),
+        'At steady state the curve repeats between the peak, Cmax 53.3 mg/L, and the trough, Cmin 13.3 mg/L: 53.3 halved twice over the two half-lives of the interval.',
+        'The average over an interval is Cavg = {{frac:dose|VD × k × τ}} = {{frac:10 mg/kg|0.25 L/kg × 0.173 hr⁻¹ × 8 hr}} = 28.9 mg/L. k, the elimination rate constant, is {{frac:0.693|4 hr}} = 0.173 hr⁻¹; τ, the dosing interval, is 8 hr. Cavg sits below the midpoint of 33.3 mg/L, {{frac:53.3 + 13.3|2}}, because the curve spends more of each interval at the lower concentrations.']), md_s4),
     ('after the last dose', '\n'.join([
         'After the sixth dose no more drug comes in.',
         'The level falls by first-order elimination alone, halving every 4 hours.']), md_s5),
@@ -795,14 +795,14 @@ heading(ts, 'Two 2-hour infusions of 300 mg, starting at 0 and 6 hours',
 stepped('two_infusions_steps', 'Two intermittent IV infusions, stage by stage', ts, [
     ('infusion 1', '\n'.join([
         'From 0 to 2 hr the first infusion runs. Its rate R is the dose over the infusion time: R = {{frac:300 mg|2 hr}} = 150 mg/hr.',
-        'While it runs, the level climbs as a single infusion does: C = {{frac:R|VD × k}}(1 − e^(−kt)).',
-        'With t = 2 hr, the end of the infusion, that gives %.2f mg/L.' % inf1(2)]), ti_s1),
+        'While it runs, the level climbs as a single infusion does: C = {{frac:R|VD × k}}(1 − e^(−kt)). VD is the apparent volume of distribution, 15 L; k is the elimination rate constant, the fraction lost per hour, 0.15 hr⁻¹.',
+        'With t = 2 hr, the end of the infusion, that gives {{frac:150|15 × 0.15}}(1 − e^(−0.3)) = %.2f mg/L.' % inf1(2)]), ti_s1),
     ('infusion 1 stops', '\n'.join([
-        'With the infusion off, nothing comes in and the level falls by first-order elimination from %.2f mg/L.' % inf1(2),
+        'With the infusion off, nothing comes in and the level falls by first-order elimination (a fixed fraction lost per hour) from %.2f mg/L.' % inf1(2),
         'At 6 hr, four hours after it stopped: %.2f × e^(−0.15 × 4) = %.2f × e^(−0.6) = %.2f mg/L.' % (inf1(2), inf1(2), inf1(6))]), ti_s2),
     ('infusion 2', '\n'.join([
         'The second infusion starts at 6 hr and builds exactly as the first did, to %.2f mg/L at 8 hr.' % inf2(8),
-        'By 8 hr the leftover of dose 1 has fallen to %.2f mg/L.' % inf1(8),
+        'By 8 hr, six hours after it stopped, the leftover of dose 1 has fallen to 17.28 × e^(−0.15 × 6) = %.2f mg/L.' % inf1(8),
         'The plasma level at 8 hr is the sum of the two: %.2f + %.2f = %.2f mg/L.' % (inf2(8), inf1(8), both(8))]), ti_s3),
     ('read at 12 hr', '\n'.join([
         'At 12 hr dose 1 has been declining for 10 hr since it stopped and gives %.2f mg/L.' % inf1(12),
@@ -876,8 +876,8 @@ def b1_s5(pl):
 
 stepped('bolus1_steps', 'One-compartment IV bolus, from her data to every answer', bs, [
     ('the data', lines(
-        'A 50 mg dose was given by IV bolus, all at once into a vein. The six measured concentrations are plotted on a log axis.',
-        'They fall on a straight line, so the drug is eliminated by a first-order process (a fixed fraction leaves each hour) and one compartment describes it.'), b1_s1),
+        'A 50 mg dose was given by IV bolus, all at once into a vein. The six measured concentrations, 2.52, 1.59, 1.00, 0.64, 0.40 and 0.25 mg/L at 0.5, 1, 1.5, 2, 2.5 and 3 hr, are plotted on a log axis.',
+        'They fall on a straight line, so the drug is eliminated by a first-order process (a fixed fraction leaves each hour). One compartment, the whole body treated as one evenly mixed space, describes it.'), b1_s1),
     ('the slope gives k', lines(
         'k, the elimination rate constant, is the slope of the log line. Between 1 and 2 hr: k = {{frac:ln 1.59 − ln 0.64|2 hr − 1 hr}} = %.2f hr⁻¹.' % B1K,
         'The half-life, the time for the concentration to halve: t½ = {{frac:0.693|%.2f hr⁻¹}} = %.2f hr.' % (B1K, B1T12)), b1_s2),
@@ -930,11 +930,11 @@ def in_s3(pl):
 stepped('infusion_steps', 'IV infusion: the climb to steady state, and the fall when it stops', ins, [
     ('the infusion starts', lines(
         'Drug runs in at a constant rate, R = 44.35 mg/hr, chosen so the plateau will be 20 mg/L. A constant rate in is a zero-order input.',
-        'Elimination is first order with k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹, so the amount leaving per hour grows as the level grows.',
-        'Three hours in: C = {{frac:R|VD × k}}(1 − e^(−kt)) = {{frac:44.35|16 × 0.1386}}(1 − e^(−0.1386 × 3)) = %.1f mg/L, her part 3.' % inf_on(3)), in_s1),
+        'Elimination is first order: a fixed fraction leaves each hour. The elimination rate constant is k = {{frac:0.693|t½}} = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹, t½ being the half-life, the time for the level to fall by half. So the amount leaving per hour grows as the level grows.',
+        'VD, the apparent volume of distribution, is 16 L. Three hours in: C = {{frac:R|VD × k}}(1 − e^(−kt)) = {{frac:44.35|16 × 0.1386}}(1 − e^(−0.1386 × 3)) = %.1f mg/L, her part 3.' % inf_on(3)), in_s1),
     ('the climb to steady state', lines(
         'Css, the steady-state concentration, is where rate in equals rate out: Css = {{frac:R|k × VD}} = {{frac:44.35|0.1386 × 16}} = %.0f mg/L.' % ICSS,
-        'The climb is set by the half-life alone: after 1 half-life (5 hr) the level is half of Css, %.1f; after 3 half-lives (15 hr) 87.5%%, %.1f; after 5 half-lives (25 hr) 96.9%%, %.1f.' % (inf_on(5), inf_on(15), inf_on(25)),
+        'The climb is set by the half-life alone. After 1 half-life (5 hr) the level is half of Css, %.1f; after 3 half-lives (15 hr) 87.5%%, %.1f; after 5 half-lives (25 hr) 96.9%%, %.1f.' % (inf_on(5), inf_on(15), inf_on(25)),
         'A faster rate would raise the plateau, not shorten the climb.'), in_s2),
     ('if it stops at 3 hr', lines(
         'Her part 4: the infusion is switched off at 3 hr, at %.1f mg/L. Nothing comes in, so the level falls by first-order elimination alone.' % inf_on(3),
@@ -981,10 +981,10 @@ def ld_s4(pl):
 
 stepped('loading_steps', 'Loading dose with an infusion: why the level is flat from the start', lds, [
     ('the bolus part', lines(
-        'DL, the loading dose, is the amount in the body at steady state: DL = Css × VD = 20 mg/L × 16 L = %.0f mg, her part 1.' % LDL,
-        'On its own that bolus starts at {{frac:320 mg|16 L}} = 20 mg/L and falls by first-order elimination: at 3 hr, 20 × e^(−0.1386 × 3) = %.1f mg/L.' % ld_bolus(3)), ld_s1),
+        'DL, the loading dose, is the amount in the body at steady state, the plateau the infusion is set to hold. Css is the target steady-state concentration, 20 mg/L, and VD the apparent volume of distribution, 16 L. DL = Css × VD = 20 mg/L × 16 L = %.0f mg, her part 1.' % LDL,
+        'On its own that bolus starts at {{frac:320 mg|16 L}} = 20 mg/L and falls by first-order elimination (a fixed fraction lost per hour). The elimination rate constant is k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹, the half-life being 5 hr: at 3 hr, 20 × e^(−0.1386 × 3) = %.1f mg/L.' % ld_bolus(3)), ld_s1),
     ('the infusion part', lines(
-        'The infusion on its own climbs toward Css: at 3 hr, {{frac:44.35|16 × 0.1386}}(1 − e^(−0.1386 × 3)) = %.1f mg/L.' % inf_on(3)), ld_s2),
+        'The infusion on its own, at the rate R = 44.35 mg/hr, climbs toward Css as {{frac:R|VD × k}}(1 − e^(−kt)). At 3 hr: {{frac:44.35|16 × 0.1386}}(1 − e^(−0.1386 × 3)) = %.1f mg/L.' % inf_on(3)), ld_s2),
     ('the sum', lines(
         'The two run at once, so the concentrations add: %.1f + %.1f = %.0f mg/L at 3 hr, her part 2.' % (ld_bolus(3), inf_on(3), ld_sum(3)),
         'What the bolus part loses each hour the infusion part gains, so the sum stays at Css from the first minute.'), ld_s3),
@@ -1039,11 +1039,11 @@ def or_s4(pl):
 
 stepped('oral_steps', 'A single oral dose, from her Example 1 to the peak and beyond', ors, [
     ('absorption wins', lines(
-        'Only F = 0.85 of the 500 mg tablet reaches the blood, and it enters by first-order absorption with ka = {{frac:0.693|0.75 hr}} = %.3f hr⁻¹.' % OKA,
-        'It leaves by first-order elimination with k = {{frac:0.693|3 hr}} = %.3f hr⁻¹. Early on far more enters per hour than leaves, so the level rises.' % OK), or_s1),
+        'Only F = 0.85 of the 500 mg tablet reaches the blood. It enters by first-order absorption: a fixed fraction of what is still in the gut enters each hour. The absorption rate constant ka is 0.693 over the absorption half-life of 0.75 hr (45 min): ka = {{frac:0.693|0.75 hr}} = %.3f hr⁻¹.' % OKA,
+        'It leaves by first-order elimination (a fixed fraction of what is in the body leaves each hour). The elimination rate constant k is 0.693 over the elimination half-life of 3 hr: k = {{frac:0.693|3 hr}} = %.3f hr⁻¹. Early on far more enters per hour than leaves, so the level rises.' % OK), or_s1),
     ('the peak', lines(
         'tmax, the time of the peak, depends on the two rate constants only: tmax = {{frac:ln(ka ÷ k)|ka − k}} = {{frac:ln 4|0.693}} = %.1f hr.' % OTMAX,
-        'Cmax, the peak concentration, is the curve at tmax: Cmax = {{frac:F ka D0|VD (ka − k)}}(e^(−k tmax) − e^(−ka tmax)) = %.2f mg/L, her answer.' % OCMAX,
+        'Cmax, the peak concentration, is the curve at tmax, with D0 the 500 mg dose and VD, the apparent volume of distribution, 22 L. Cmax = {{frac:F ka D0|VD (ka − k)}}(e^(−k tmax) − e^(−ka tmax)). With the numbers in: {{frac:0.85 × 0.924 × 500|22 × 0.693}}(e^(−0.231 × 2) − e^(−0.924 × 2)) = %.2f mg/L, her answer.' % OCMAX,
         'At the peak the rate of absorption equals the rate of elimination.'), or_s2),
     ('elimination wins', lines(
         'After tmax more leaves per hour than enters, so the level falls. At 8 hr: %.2f mg/L.' % oral1(8),
@@ -1051,7 +1051,7 @@ stepped('oral_steps', 'A single oral dose, from her Example 1 to the peak and be
     ('the two terms behind the curve', lines(
         'The equation is a difference of two exponentials with the same front factor, {{frac:F ka D0|VD (ka − k)}} = %.2f mg/L.' % OA,
         'The elimination term, 25.76 e^(−kt), falls slowly; the absorption term, 25.76 e^(−ka t), falls fast. The curve is the first minus the second.',
-        'The front factor is not C0: no concentration on an oral curve is ever as high as it.'), or_s4),
+        'The front factor is not C0 (the time-zero concentration an IV bolus of the same amount would give): no concentration on an oral curve is ever as high as it.'), or_s4),
 ], footer='5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; transcript 09-21')
 
 
@@ -1106,18 +1106,18 @@ def mo_s4(pl):
 
 stepped('md_oral_steps', 'Multiple oral doses, dose by dose: her tetracycline example', mos, [
     ('dose 1', lines(
-        'Each dose is 250 mg by mouth; F = 0.75 of it reaches the blood. VD is 1.5 L/kg × 75 kg = 112.5 L.',
-        'k = {{frac:0.693|10 hr}} = %.4f hr⁻¹ and ka = 0.9 hr⁻¹, so each dose on its own rises to a peak and falls, like a single oral dose.' % MK,
-        'First-dose tmax = {{frac:ln(ka ÷ k)|ka − k}} = %.1f hr and Cmax = %.2f mg/L, her answers.' % (MT1, m_one(MT1))), mo_s1),
+        'Each dose is 250 mg by mouth; F = 0.75 of it reaches the blood. VD, the apparent volume of distribution, is 1.5 L/kg × 75 kg = 112.5 L.',
+        'The elimination half-life, the time for the level to fall by half, is 10 hr, so the elimination rate constant k = {{frac:0.693|10 hr}} = %.4f hr⁻¹. The absorption rate constant, the fraction of the unabsorbed dose entering the blood per hour, is ka = 0.9 hr⁻¹. So each dose on its own rises to a peak and falls, like a single oral dose.' % MK,
+        'First-dose tmax, the time of the peak, = {{frac:ln(ka ÷ k)|ka − k}} = {{frac:ln(0.9 ÷ 0.0693)|0.9 − 0.0693}} = %.1f hr. Cmax, the peak concentration, = {{frac:F ka D0|VD (ka − k)}}(e^(−k tmax) − e^(−ka tmax)) = %.2f mg/L, her answers (D0 is the 250 mg dose).' % (MT1, m_one(MT1))), mo_s1),
     ('dose 2', lines(
         'Dose 2 at 8 hr adds its own curve on top of what is left of dose 1 (superposition: later doses do not change k, ka, F or VD).',
         'So the second peak is higher than the first, and the level just before dose 3 is higher than it was before dose 2.'), mo_s2),
     ('the climb', lines(
         'Every dose adds the same curve to a larger remainder. The half-life is 10 hr, so the climb is over within 3 to 5 half-lives, 30 to 50 hours.',
-        'The accumulation factor {{frac:1|1 − e^(−kτ)}} = {{frac:1|1 − e^(−0.0693 × 8)}} = %.2f says how much higher the steady-state peak sits than the first-dose peak.' % MACC), mo_s3),
+        'τ is the dosing interval, 8 hr. The accumulation factor {{frac:1|1 − e^(−kτ)}} = {{frac:1|1 − e^(−0.0693 × 8)}} = %.2f says how much higher the steady-state peak sits than the first-dose peak.' % MACC), mo_s3),
     ('steady state', lines(
-        'At steady state the peak comes earlier in the interval: tmax∞ = %.2f hr after a dose, her answer, against %.1f hr for the first dose.' % (MTSS, MT1),
-        'Cmax∞ = {{frac:F D0|VD}}({{frac:1|1 − e^(−kτ)}})e^(−k tmax∞) = %.2f mg/L; Cmin∞, at the end of the interval, = %.2f mg/L; Cavg∞ = {{frac:F D0|VD k τ}} = %.2f mg/L.' % (MCMAXSS, MCMINSS, MCAVG),
+        'At steady state (∞ marks it) the peak comes earlier in the interval. tmax∞ = {{frac:1|ka − k}} ln[{{frac:ka(1 − e^(−kτ))|k(1 − e^(−ka τ))}}] = %.2f hr after a dose, her answer, against %.1f hr for the first dose.' % (MTSS, MT1),
+        'Cmax∞ = {{frac:F D0|VD}}({{frac:1|1 − e^(−kτ)}})e^(−k tmax∞) = %.2f mg/L. Cmin∞, at the end of the interval, = {{frac:ka F D0|VD (ka − k)}}({{frac:1|1 − e^(−kτ)}})e^(−kτ) = %.2f mg/L. Cavg∞ = {{frac:F D0|VD k τ}} = %.2f mg/L.' % (MCMAXSS, MCMINSS, MCAVG),
         'Her spoken values were about 3.3, 2.4 and 3; these are what her inputs give.'), mo_s4),
 ], footer='6a---Multiple-Oral-Doses.pdf, Example 1; transcript 09-28')
 
@@ -1167,7 +1167,7 @@ stepped('twocpt_steps', 'Two-compartment IV bolus: reading A, B, α and β off h
     ('the curve', lines(
         'After the bolus the drug is all in the central compartment (the blood and the organs it reaches at once). It then moves into a tissue compartment and back, and leaves from the central one.',
         'On a log axis the curve is steep at first, while drug is still spreading into tissue, then becomes one straight line once the two compartments are in balance.',
-        'C0, the concentration at time zero, is the sum of the two intercepts: 12 + 18 = 30 mg/L.'), tw_s1),
+        'The curve is Cp = 12e^(−5.8t) + 18e^(−0.16t), two exponential terms. C0, the concentration at time zero, is the sum of their two intercepts, the numbers in front: 12 + 18 = 30 mg/L.'), tw_s1),
     ('the terminal line', lines(
         'The straight part is the elimination phase, 18 e^(−0.16t). Extending it back to t = 0 gives the intercept B = 18 mg/L; its slope is β = 0.16 hr⁻¹.',
         'β sets the elimination half-life: t½β = {{frac:0.693|0.16 hr⁻¹}} = %.2f hr.' % (0.693 / TBE)), tw_s2),
@@ -1300,6 +1300,204 @@ for _key, _title, _line, _draw, _log in MODEL_PANELS:
 stack('models_all', 'The eight dosing models on the same axes: how the drug goes in decides the shape',
       [model_panel(t, l, d, log=g) for _, t, l, d, g in MODEL_PANELS], 600, 320)
 
+
+
+# ==========================================================================
+# Explanatory figures (no lecture figure behind them: each draws arithmetic
+# the course states, or a relation the textbook states, and says which).
+# ==========================================================================
+
+# ---- the half-life ladder: 0.5^n left, 1 - 0.5^n reached -------------------
+# 0.5^n and 1 - 0.5^n are arithmetic. The 3.3, 4.32 and 6.6 half-life marks
+# are the textbook's (Shargel 7e Chapter 9, printout pp. 7-8, citing Chapter
+# 6 Table 6-1): 90%, 95% and 99% of steady state.
+HL_W, HL_H = 720, 400
+hl1 = Plot(10, [0, 25, 50, 75, 100], xlabel='Half-lives elapsed', ylabel='Percent of the dose left',
+           w=HL_W, h=HL_H, l=90, r=26, t=84, b=66, fs=1.3)
+hl1.frame(list(range(0, 11)))
+heading(hl1, 'What is left after each half-life', 'Each half-life removes half of what remains: 100, 50, 25, 12.5 ...')
+for n in range(0, 11):
+    left = 100 * 0.5 ** n
+    x0, x1 = hl1.px(n) - 11, hl1.px(n) + 11
+    hl1.parts.append(f'<rect x="{x0:.1f}" y="{hl1.py(left):.1f}" width="22" height="{hl1.py(0)-hl1.py(left):.1f}" fill="{BLUE}" fill-opacity="0.85"/>')
+    lab = ('%g' % left) if n <= 4 else ('%.1f' % left if n <= 6 else '%.2f' % left)
+    if n <= 6 or n == 10:
+        hl1.text(n, left, lab, size=13, anchor='middle', dy=-7)
+hl1.text(7.2, 60, 'ten half-lives: 0.1% left', size=14, color=DIM)
+hl2 = Plot(10, [0, 25, 50, 75, 100], xlabel='Half-lives elapsed', ylabel='Percent of steady state reached',
+           w=HL_W, h=HL_H, l=90, r=26, t=84, b=66, fs=1.3)
+hl2.frame(list(range(0, 11)))
+heading(hl2, 'How close to the plateau after each half-life', 'The mirror image: 50, 75, 87.5, 93.75 ... percent of steady state')
+hl2.curve(lambda n: 100 * (1 - 0.5 ** n), color=BLUE)
+for n in range(1, 5):
+    hl2.points([n], [100 * (1 - 0.5 ** n)])
+    hl2.text(n, 100 * (1 - 0.5 ** n), '%g' % (100 * (1 - 0.5 ** n)), size=13, anchor='middle', dy=18)
+for n, pct, anc, dy in ((3.3, 90, 'end', -10), (4.32, 95, 'start', 22), (6.6, 99, 'start', -8)):
+    hl2.vline(n, pct, color=AMBER); hl2.points([n], [pct], color=AMBER)
+    hl2.text(n + (0.12 if anc == 'start' else -0.12), pct, f'{pct}% at {n:g} half-lives', size=13, color=AMBER, anchor=anc, dy=dy)
+stack('halflife_ladder', 'The half-life ladder: what is left after each half-life, and how close a regimen is to steady state',
+      [hl1, hl2], HL_W, HL_H)
+
+# ---- the accumulation factor against tau in half-lives ----------------------
+# R = 1 / (1 - e^(-k tau)) = 1 / (1 - 0.5^(tau / t½)) (Shargel 7e Chapter 9
+# printout p. 6, Equation 9.2); R = 2 when tau = t½ (p. 22, "dose ratio 2.0").
+def accum(x):
+    return 1 / (1 - 0.5 ** x)
+
+af = Plot(4, [1, 2, 3, 4], xlabel='Dosing interval τ, in half-lives', ylabel='Accumulation factor R',
+          w=720, h=460, l=90, r=26, t=84, b=66, fs=1.3, xticks=[0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4])
+af.frame([0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4])
+heading(af, 'How much a regimen accumulates', 'R depends only on how τ compares with the half-life, never on the dose')
+af.curve(accum, x0=0.5)
+for x in (0.5, 1, 2, 3, 4):
+    af.points([x], [accum(x)], color=AMBER)
+    if x == 4:
+        af.text(x - 0.08, accum(x), 'R = %.2f' % accum(x), size=14, anchor='end', dy=-8)
+    elif x == 3:
+        af.text(x, accum(x), 'R = %.2f' % accum(x), size=14, anchor='middle', dy=-24)
+    elif x == 1:
+        af.text(x + 0.1, accum(x), 'R = %.2f' % accum(x), size=14, dy=20)
+    else:
+        af.text(x + 0.08, accum(x), 'R = %.2f' % accum(x), size=14, dy=-6 if x > 0.5 else 4)
+af.hline(2, color=AMBER)
+af.text(1.25, 2.0, 'τ = one half-life: R = 2, the plateau peak is twice the first', size=13, color=AMBER, dy=-10)
+af.text(2.3, 1.62, 'a long τ accumulates little', size=13, color=DIM)
+fig('accum_factor', 'The accumulation factor R against the dosing interval measured in half-lives', af.svg('Accumulation factor against dosing interval'))
+
+# ---- the trapezoidal rule, strip by strip (her Introduction slide 25) ------
+# Her points: 38.9, 30.3, 18.4, 11.1, 6.77, 4.10 mcg/mL at 0.5, 1, 2, 3, 4, 5 hr;
+# asked for the AUC from 2 to 4 hr. Keyed 23.7 (question m1-auc-n01).
+AUT = [0.5, 1, 2, 3, 4, 5]
+AUC_ = [38.9, 30.3, 18.4, 11.1, 6.77, 4.10]
+A23 = (18.4 + 11.1) / 2 * 1
+A34 = (11.1 + 6.77) / 2 * 1
+au = Plot(5.5, [0, 10, 20, 30, 40], xlabel='Time (hours)', ylabel='Plasma level (mcg/mL)',
+          w=720, h=520, l=90, r=26, t=96, b=62, fs=1.3, xticks=[0, 1, 2, 3, 4, 5])
+au.frame([0, 1, 2, 3, 4, 5])
+heading(au, 'Area under the curve by the trapezoidal rule', 'Her six plasma levels; the AUC from 2 to 4 hours is asked')
+
+
+def au_poly(pl, a, b, color):
+    i, j = AUT.index(a), AUT.index(b)
+    pts = [f'{pl.px(a):.1f},{pl.py(0):.1f}', f'{pl.px(a):.1f},{pl.py(AUC_[i]):.1f}',
+           f'{pl.px(b):.1f},{pl.py(AUC_[j]):.1f}', f'{pl.px(b):.1f},{pl.py(0):.1f}']
+    pl.parts.append(f'<polygon points="{" ".join(pts)}" fill="{color}" fill-opacity="0.3" stroke="{color}" stroke-width="1.5"/>')
+
+
+def au_s1(pl):
+    pts = ' '.join(f'{pl.px(t):.1f},{pl.py(c):.1f}' for t, c in zip(AUT, AUC_))
+    pl.parts.append(f'<polyline points="{pts}" fill="none" stroke="{BLUE}" stroke-width="2"/>')
+    pl.points(AUT, AUC_)
+    for t, c in zip(AUT, AUC_):
+        pl.text(t + 0.1, c, '%g' % c, size=13, dy=-6)
+
+
+def au_s2(pl):
+    au_s1(pl); pl.xband(2, 4)
+    pl.text(2.1, 36, 'rows inside 2 to 4 hr: 18.4, 11.1, 6.77', size=13, color=DIM)
+
+
+def au_s3(pl):
+    au_s2(pl); au_poly(pl, 2, 3, AMBER)
+    pl.text(2.5, 5, '%.2f' % A23, size=14, anchor='middle', weight='600')
+
+
+def au_s4(pl):
+    au_s3(pl); au_poly(pl, 3, 4, BLUE)
+    pl.text(3.5, 3, '%.3f' % A34, size=14, anchor='middle', weight='600')
+
+
+def au_s5(pl):
+    au_s4(pl)
+    pl.text(2.9, 26, 'AUC 2 to 4 hr = %.2f + %.3f = %.3f' % (A23, A34, A23 + A34), size=14, weight='600')
+    pl.text(3.0, 21.5, 'reported as 23.7 mcg·hr/mL', size=14)
+
+
+stepped('auc_steps', 'The trapezoidal rule on her data, one strip at a time', au, [
+    ('the data', lines(
+        'Six plasma levels are plotted against time and joined by straight lines.',
+        'There is no equation for this curve, only the measured points, so the area is estimated from the points.'), au_s1),
+    ('choose the rows', lines(
+        'The question asks for the AUC from 2 to 4 hours, so only the rows at 2, 3 and 4 hours are used.',
+        'The 0.5 and 1 hour rows are before the interval and the 5 hour row is after it; none of them enters the sum.'), au_s2),
+    ('the first strip', lines(
+        'Each strip is a trapezoid: its area is the average of its two heights times its width.',
+        'From 2 to 3 hr: {{frac:18.4 + 11.1|2}} × 1 hr = %.2f mcg·hr/mL.' % A23), au_s3),
+    ('the second strip', lines(
+        'From 3 to 4 hr: {{frac:11.1 + 6.77|2}} × 1 hr = %.3f mcg·hr/mL.' % A34,
+        'The width is read from the time column each time; here both strips are 1 hour wide.'), au_s4),
+    ('add the strips', lines(
+        'AUC from 2 to 4 hr = %.2f + %.3f = %.3f, reported as 23.7 mcg·hr/mL.' % (A23, A34, A23 + A34),
+        'The unit is concentration times time: mcg/mL × hr = mcg·hr/mL.'), au_s5),
+], footer='Introduction.pdf slide 25 (question m1-auc-n01)')
+
+
+# ---- renal handling: filtration + secretion - reabsorption = excretion -----
+# Her slides 12, 13, 18, 19 of 4---Clearance-and-Elimination.pdf (the three
+# processes, 120 mL/min as the reference); Shargel 8e Chapter 15 printout
+# p. 15 (only unbound drug is filtered; Equation 15.42; Table 15-2).
+def box(parts, x, y, w, h, title, line, fill='#F3F6FA', stroke=AXIS):
+    parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="10" fill="{fill}" stroke="{stroke}" stroke-width="1.5"/>')
+    parts.append(f'<text x="{x+w/2}" y="{y+30}" text-anchor="middle" font-size="19" font-weight="600" fill="{INK}">{esc(title)}</text>')
+    for i, ln in enumerate(line.split('\n')):
+        parts.append(f'<text x="{x+w/2}" y="{y+56+i*22}" text-anchor="middle" font-size="16" fill="{DIM}">{esc(ln)}</text>')
+
+
+def arrow(parts, x1, y1, x2, y2, color=BLUE, label='', lx=None, ly=None):
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color}" stroke-width="3" marker-end="url(#ah)"/>')
+    if label:
+        parts.append(f'<text x="{lx}" y="{ly}" text-anchor="middle" font-size="15" font-weight="600" fill="{color}" '
+                     f'stroke="#FFFFFF" stroke-width="4" paint-order="stroke">{esc(label)}</text>')
+
+
+RW, RH = 720, 640
+rp = [f'<rect width="{RW}" height="{RH}" fill="#FFFFFF"/>',
+      f'<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">'
+      f'<path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>']
+rp.append(f'<text x="18" y="32" font-size="21" font-weight="600" fill="{INK}">How the kidney handles a drug</text>')
+rp.append(f'<text x="18" y="58" font-size="17" fill="{DIM}">Two processes put drug into the urine, one takes it back</text>')
+box(rp, 24, 90, 160, 300, 'Blood', 'drug arrives in\nthe renal artery\n\nonly unbound\ndrug is filtered')
+box(rp, 536, 90, 160, 300, 'Tubule', 'the fluid that\nbecomes urine')
+arrow(rp, 184, 160, 536, 160, BLUE, 'Filtration (passive): unbound Cp × GFR', 360, 146)
+arrow(rp, 184, 250, 536, 250, BLUE, 'Secretion (active, a transporter)', 360, 236)
+arrow(rp, 536, 340, 184, 340, AMBER, 'Reabsorption (back to blood)', 360, 326)
+arrow(rp, 616, 390, 616, 428, BLUE, '', 0, 0)
+box(rp, 160, 432, 536, 100, 'Urine', 'excretion rate = filtration + secretion − reabsorption', fill='#FFF7E8', stroke=AMBER)
+rp.append(f'<text x="24" y="572" font-size="16" font-weight="600" fill="{INK}">Renal clearance = excretion rate ÷ Cp, read against GFR, 120 mL/min</text>')
+rp.append(f'<text x="24" y="600" font-size="14.5" fill="{DIM}">above 120: secretion adds · about 120: filtration alone · below 120: some reabsorbed</text>')
+fig('renal_handling', 'The kidney: filtration and secretion move drug into the tubule, reabsorption takes it back, and the net rate is the excretion rate',
+    f'<svg xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 {RW} {RH}" width="{RW}" height="{RH}" role="img" '
+    f'aria-label="How the kidney handles a drug"><title>How the kidney handles a drug</title>' + '\n'.join(rp) + '</svg>')
+
+
+# ---- units cancelling in the four equations she uses most -------------------
+# Unit arithmetic only; the equations are on her sheet (reference.js, Section
+# 2). The cancelled unit is shown in amber.
+UW, UH = 720, 540
+up = [f'<rect width="{UW}" height="{UH}" fill="#FFFFFF"/>',
+      f'<text x="18" y="32" font-size="21" font-weight="600" fill="{INK}">Units that cancel</text>',
+      f'<text x="18" y="58" font-size="17" fill="{DIM}">Write the units in with the numbers; what is left is the unit of the answer</text>']
+ROWS = [
+    ('Cl = k × VD', [('hr⁻¹', INK), (' × ', DIM), ('L', INK), ('  =  ', DIM), ('L/hr', BLUE)], 'a rate constant times a volume is a volume per time'),
+    ('Cl = Dose ÷ AUC', [('mg', AMBER), (' ÷ ', DIM), ('mg', AMBER), ('·hr/L', INK), ('  =  ', DIM), ('L/hr', BLUE)], 'mg cancels; dividing by hr/L is multiplying by L/hr'),
+    ('R = Css × Cl', [('mg/', INK), ('L', AMBER), (' × ', DIM), ('L', AMBER), ('/hr', INK), ('  =  ', DIM), ('mg/hr', BLUE)], 'L cancels; a concentration times a clearance is a dosing rate'),
+    ('t½ = 0.693 ÷ k', [('1', INK), (' ÷ ', DIM), ('hr⁻¹', INK), ('  =  ', DIM), ('hr', BLUE)], 'dividing by a per-hour constant gives hours'),
+    ('VD = Dose ÷ C0', [('mg', AMBER), (' ÷ ', DIM), ('mg', AMBER), ('/L', INK), ('  =  ', DIM), ('L', BLUE)], 'mg cancels; dividing by per-litre gives litres'),
+]
+for i, (eq, chunks, note) in enumerate(ROWS):
+    y = 110 + i * 86
+    up.append(f'<rect x="18" y="{y-26}" width="{UW-36}" height="76" rx="8" fill="{"#F7F9FB" if i % 2 else "#FFFFFF"}"/>')
+    up.append(f'<text x="30" y="{y}" font-size="19" font-weight="600" fill="{INK}">{esc(eq)}</text>')
+    spans = ''
+    for txt, col in chunks:
+        deco = ' text-decoration="line-through"' if col == AMBER else ''
+        wt = '600' if col in (AMBER, BLUE) else '400'
+        spans += f'<tspan fill="{col}" font-weight="{wt}"{deco}>{esc(txt)}</tspan>'
+    up.append(f'<text x="300" y="{y}" font-size="19" xml:space="preserve">{spans}</text>')
+    up.append(f'<text x="30" y="{y+30}" font-size="15" fill="{DIM}">{esc(note)}</text>')
+fig('unit_cancel', 'Units cancelling in five equations: the unit left over is the unit of the answer',
+    f'<svg xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 {UW} {UH}" width="{UW}" height="{UH}" role="img" '
+    f'aria-label="Units cancelling"><title>Units cancelling</title>' + '\n'.join(up) + '</svg>')
 
 def main():
     ap = argparse.ArgumentParser()
