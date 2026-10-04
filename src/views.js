@@ -2915,8 +2915,10 @@ function foldDoc(el, prefix){
     const saved = LS.get(EXAMGRP_KEY + 'doc-' + key);
     grp.open = saved ? saved === 'open' : (key === 'both' || key === String(EXAM.id));
     const n = run.reduce((t, x) => t + secCount(x), 0);
-    const mods = [...new Set(run.flatMap(x => { const m = /Module\s+(\d+[a-z]?)/.exec((x.node.querySelector('summary') || {}).textContent || ''); return m ? [m[1]] : []; }))];
-    grp.innerHTML = `<summary><span class="mname">${esc(examLabel(key))}<small>${n} section${n === 1 ? '' : 's'}${mods.length > 1 ? ' · Modules ' + esc(mods.join(', ')) : mods.length ? ' · Module ' + esc(mods[0]) : ''}</small></span></summary><div class="egbody"></div>`;
+    // the modules an exam covers, from the course's own lecture list, not from the headings
+    const mods = key === 'both' ? [] : [...new Set(COURSE.lectures.filter(l => String(l.exam) === key).map(l => modShort(l.module)))];
+    const span = key === 'both' ? 'material that spans both exams' : mods.length > 1 ? 'Modules ' + esc(mods[0]) + ' to ' + esc(mods[mods.length - 1]) : mods.length ? 'Module ' + esc(mods[0]) : '';
+    grp.innerHTML = `<summary><span class="mname">${esc(examLabel(key))}<small>${n} section${n === 1 ? '' : 's'}${span ? ' · ' + span : ''}</small></span></summary><div class="egbody"></div>`;
     const body = grp.querySelector('.egbody'); run.forEach(x => body.appendChild(x.node));
     grp.addEventListener('toggle', () => LS.set(EXAMGRP_KEY + grp.dataset.examgrp, grp.open ? 'open' : 'closed'));
     out.appendChild(grp);
