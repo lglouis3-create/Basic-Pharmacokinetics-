@@ -3,7 +3,7 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-04 (where each question comes from)
-- Every question card carries a tag: daily practice sheet, slide example, in-class activity, homework, Canvas quiz, poll or extra practice.
+- Every question card carries a tag naming its source: practice sheet, slide, activity, homework, quiz or extra.
 - The calculation rows on a module page say how many problems come from each source.
 
 ## 2026-10-04 (fixes from the second review)
