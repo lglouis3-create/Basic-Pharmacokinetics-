@@ -23,7 +23,7 @@ const TELL_HTML = `
 <li>The other tables are the pairs she tests against each other: orders, half-lives, concentrations, clearances, F values.</li>
 </ul></details>
 
-<h3>Kinds of pharmacokinetic model (Module 1)</h3>
+<h3 data-exam="1">Kinds of pharmacokinetic model (Module 1)</h3>
 <p class="sub">What each kind of model is made of and how the slides draw it.</p>
 <table class="reftab"><thead><tr><th>Model</th><th>What it is built from</th><th>How it is drawn</th><th>When it is used</th></tr></thead><tbody>
 <tr><td><b>Compartment model</b> <button type="button" class="chip xwhy" data-xpick="kinds:compartment">Why?</button></td><td>Boxes (compartments) joined by rate constants</td><td>Boxes, with arrows labelled k between them</td><td>The kind this course uses in every module</td></tr>
@@ -107,7 +107,7 @@ const TELL_HTML = `
 <p class="xtrap"><b>How she tests it:</b> Only as a wrong option, in the poll about how compartments are joined. Choosing it there means the word "model" was matched without reading the wiring.</p>
 <p class="gsrc">Source: Introduction.pdf slide 12; transcript 09-09 exam review</p></div></template>
 
-<h3>The dosing models, Module 2 to Module 6</h3>
+<h3 data-exam="both">The dosing models, Module 2 to Module 6</h3>
 <p class="sub">How the drug goes in decides the curve and the equation, so read the route first.</p>
 <table class="reftab"><thead><tr><th>Model (module)</th><th>How drug goes in</th><th>Curve shape</th><th>Defining equation</th><th>How to recognise it in a question</th></tr></thead><tbody>
 <tr><td><b>One-compartment IV bolus</b> (M2) <button type="button" class="chip xwhy" data-xpick="dosing:m2-one">Why?</button></td><td>All at once; first order out</td><td>Highest at time zero, then falls; one straight line on a log axis</td><td>C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup></td><td>"IV bolus" with one compartment stated, or one straight line on a log axis</td></tr>
@@ -296,7 +296,7 @@ const TELL_HTML = `
 <p class="xtrap"><b>How she tests it:</b> F and t<sub>max</sub> mark the oral lines on the equation sheet: "Only for oral do you need to find T Max." She expects t<sub>max</sub> found first, even when it is not asked for.</p>
 <p class="gsrc">Source: 6a---Multiple-Oral-Doses.pdf slides "Peak, Trough and Average Plasma Concentrations at Steady State", "Time to Peak at Steady State", Example 1, figure "Amount of drug in the body as a function of time"; transcript 09-28</p></div></template>
 
-<h3>Orders, rates and half-lives</h3>
+<h3 data-exam="1">Orders, rates and half-lives</h3>
 <p class="sub">Four pairs about how fast drug leaves the body, and how to read that from a graph.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>First one</th><th>Second one</th></tr></thead><tbody>
 <tr><td>Zero order vs first order <button type="button" class="chip xwhy" data-xpick="orders:zero-first">Why?</button></td><td>Falls at a constant rate; rate constant in mg/mL per day</td><td>Falls in proportion to what remains; k in hr<sup>&minus;1</sup></td></tr>
@@ -344,7 +344,7 @@ const TELL_HTML = `
 <p class="xtrap"><b>How she tests it:</b> The wrong pick is concluding zero order from any straight line. She names this directly: read the scale before deciding.</p>
 <p class="gsrc">Source: Introduction.pdf slide 21; transcript 08-19, 08-26, 09-09 cue 13</p></div></template>
 
-<h3>The elimination vocabulary</h3>
+<h3 data-exam="2">The elimination vocabulary</h3>
 <p class="sub">Words for the drug leaving the body, and the one quantity that stays constant while the rate changes.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>Quick test</th></tr></thead><tbody>
 <tr><td>Excretion, biotransformation, elimination, disposition <button type="button" class="chip xwhy" data-xpick="elimination:four-words">Why?</button></td><td>Excretion + metabolism = elimination; elimination + distribution = disposition</td></tr>
@@ -372,7 +372,7 @@ const TELL_HTML = `
 <p class="xtrap"><b>How she tests it:</b> The wrong pick is answering true to "clearance increases as concentration increases". Changing the concentration changes the elimination rate, not the clearance. The same error produces a clearance quoted in mg/hr.</p>
 <p class="gsrc">Source: 2IVBolusAdministration.pdf slide "Clearance"; 4---Clearance-and-Elimination.pdf slide 5; transcript 08-24 poll 2</p></div></template>
 
-<h3>What is being measured</h3>
+<h3 data-exam="1">What is being measured</h3>
 <p class="sub">Three blood fluids, separated by what was removed from the sample.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>Quick test</th></tr></thead><tbody>
 <tr><td>Serum, plasma, whole blood <button type="button" class="chip xwhy" data-xpick="measured:fluids">Why?</button></td><td>Removed: nothing (whole blood); cells (plasma); cells and clotting factors (serum)</td></tr>
@@ -391,7 +391,7 @@ const TELL_HTML = `
 <p class="xtrap">Answering "whole blood" to what is most commonly measured suggests the fluid was read as a matter of convenience, not as a decision about what the drug can bind to.</p>
 <p class="gsrc">Source: Introduction.pdf slide 10; transcript 08-17, 08-19 poll 3</p></div></template>
 
-<h3>Models</h3>
+<h3 data-exam="1">Models</h3>
 <p class="sub">Model types, separated by how the compartments connect and by whether distribution takes time.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>Quick test</th></tr></thead><tbody>
 <tr><td>Mammillary, catenary, physiologic <button type="button" class="chip xwhy" data-xpick="model-pairs:connections">Why?</button></td><td>Joined to one centre: mammillary; a chain: catenary; organs and blood flow: physiologic</td></tr>
@@ -420,7 +420,7 @@ const TELL_HTML = `
 <p class="xtrap">Reading the early steep segment as noise, not as the distribution phase, is the same error.</p>
 <p class="gsrc">Source: 2IVBolusAdministration.pdf slides "Why Multicompartment Models?" and "Plasma Level-Time Curve for Two-Compartment Model"; transcript 08-26 cues 8 and 9</p></div></template>
 
-<h3>The rate constants</h3>
+<h3 data-exam="both">The rate constants</h3>
 <p class="sub">Symbols that look alike, separated by the process each one describes and whether it is a slope or an intercept.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>Quick test</th></tr></thead><tbody>
 <tr><td>k, k<sub>e</sub>, k<sub>m</sub>, k<sub>a</sub> <button type="button" class="chip xwhy" data-xpick="rate-constants:k-family">Why?</button></td><td>k = k<sub>m</sub> + k<sub>e</sub> (all elimination); only k<sub>a</sub> points into the body</td></tr>
@@ -450,7 +450,7 @@ const TELL_HTML = `
 <p class="xtrap">Adding a slope to an intercept, or reporting A + B in reciprocal time, means the four symbols were read as interchangeable constants, not as two slope-intercept pairs.</p>
 <p class="gsrc">Source: 2IVBolusAdministration.pdf slides "Concentration of Drug in the Central Compartment" and "Beta Half-life"; transcript 08-26, 09-09 cue 12</p></div></template>
 
-<h3>The volumes</h3>
+<h3 data-exam="1">The volumes</h3>
 <p class="sub">Volumes, separated by how many compartments the model has and which compartment the volume belongs to.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>Quick test</th></tr></thead><tbody>
 <tr><td>V<sub>D</sub>, V<sub>p</sub>, V<sub>t</sub>, and the two routes to V<sub>p</sub> <button type="button" class="chip xwhy" data-xpick="volumes:vd-vp-vt">Why?</button></td><td>One compartment: V<sub>D</sub>. Two: V<sub>p</sub> (central) and V<sub>t</sub> (tissue). All in litres</td></tr>
@@ -471,7 +471,7 @@ const TELL_HTML = `
 <p class="xtrap">Reporting a volume in kilograms comes from the percent-of-body-weight framing: 1 L is taken as 1 kg for the arithmetic, but the answer is still a volume. Reading the size the other way round inverts where the drug has gone.</p>
 <p class="gsrc">Source: 2IVBolusAdministration.pdf slides "Volume of Distribution" and "Apparent Volumes of Distribution"; transcript 08-24, 08-26, 09-09</p></div></template>
 
-<h3>Clearance and the kidney</h3>
+<h3 data-exam="2">Clearance and the kidney</h3>
 <p class="sub">Clearances, kidney processes and fractions, separated by whose clearance it is and which way the drug moves.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>Quick test</th></tr></thead><tbody>
 <tr><td>Total, renal, hepatic clearance, and f<sub>e</sub> <button type="button" class="chip xwhy" data-xpick="kidney:cl-split">Why?</button></td><td>Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub>; f<sub>e</sub> has no units, so it is not a clearance</td></tr>
@@ -532,7 +532,7 @@ const TELL_HTML = `
 <p class="xtrap">A capital F in a stem points to an oral dose.</p>
 <p class="gsrc">Source: 4---Clearance-and-Elimination.pdf slides 7 and 10; transcript 09-14, 09-21 cue 9</p></div></template>
 
-<h3>Concentrations and doses</h3>
+<h3 data-exam="1">Concentrations and doses</h3>
 <p class="sub">Named concentrations and doses, separated by the route that produced the curve and the parameter that sets each one.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>Quick test</th></tr></thead><tbody>
 <tr><td>C<sub>ss</sub>, C<sub>max</sub>, C<sub>0</sub> <button type="button" class="chip xwhy" data-xpick="conc-doses:css-cmax-c0">Why?</button></td><td>C<sub>0</sub>: IV bolus at time zero; C<sub>ss</sub>: infusion plateau; C<sub>max</sub>: oral peak at t<sub>max</sub></td></tr>
@@ -575,7 +575,7 @@ const TELL_HTML = `
 <p class="xtrap">Decaying from the wrong starting point makes the whole answer wrong by the same factor.</p>
 <p class="gsrc">Source: 3IntravenousInfusions.pdf slides "Drug Concentration after an IV Infusion has Ended" and Examples 5 and 6; transcript 09-02 worked examples (g) and (h)</p></div></template>
 
-<h3>Oral absorption</h3>
+<h3 data-exam="2">Oral absorption</h3>
 <p class="sub">Pairs from a single oral dose, separated by which rate constant each one depends on.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>First one</th><th>Second one</th></tr></thead><tbody>
 <tr><td>Disposition vs absorption rate limiting <button type="button" class="chip xwhy" data-xpick="oral:rate-limiting">Why?</button></td><td>Absorption half-life much shorter; terminal slope reflects k</td><td>Absorption half-life much longer; terminal slope reflects k<sub>a</sub></td></tr>
@@ -614,7 +614,7 @@ const TELL_HTML = `
 <p class="xtrap">She also names leaving one half-life in minutes and the other in hours before calculating t<sub>max</sub>, and using a half-life where a rate constant is needed without first dividing 0.693 by it.</p>
 <p class="gsrc">Source: 5---Pharmacokinetics-of-Oral-Absorption.pdf slide "Kinetics of Absorption"; transcript 09-21 cues 4, 5 and 8</p></div></template>
 
-<h3>Repeated dosing</h3>
+<h3 data-exam="2">Repeated dosing</h3>
 <p class="sub">Pairs from repeated IV and oral dosing, separated by what each quantity counts or depends on.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>First one</th><th>Second one</th></tr></thead><tbody>
 <tr><td>3 to 5 half-lives vs 3 to 5 doses <button type="button" class="chip xwhy" data-xpick="repeated:half-lives-doses">Why?</button></td><td>Time to plateau for first-order elimination, whatever the dose</td><td>Not a rule: the number of doses depends on the interval</td></tr>
@@ -713,7 +713,7 @@ const TELL_HTML = `
 <p class="xtrap"><b>How she tests it:</b> The wrong pick pairs a higher level with a smaller swing for a larger dose.</p>
 <p class="xtrap">Another: expecting a longer interval to raise the level because each dose has longer to be absorbed. Absorption is complete either way; what a longer interval gives each dose is more time to be eliminated.</p>
 <p class="gsrc">Source: 6a---Multiple-Oral-Doses.pdf, slides "Altering Dose, second slide" and "Altering Dosing Interval, second slide"; transcript 09-28</p></div></template>
-<h3>Bioavailability and bioequivalence (Module 7a)</h3>
+<h3 data-exam="2">Bioavailability and bioequivalence (Module 7a)</h3>
 <p class="sub">Pairs from the bioavailability lecture, separated by what is compared with what, and by which one goes in the denominator.</p>
 <table class="reftab"><thead><tr><th>Pair</th><th>First one</th><th>Second one</th></tr></thead><tbody>
 <tr><td>Absolute vs relative bioavailability <button type="button" class="chip xwhy" data-xpick="bioequiv:abs-rel">Why?</button></td><td>Oral against IV; the IV AUC underneath; at most 1</td><td>Two formulations; the reference underneath; can exceed 1</td></tr>

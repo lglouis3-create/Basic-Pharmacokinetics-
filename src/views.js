@@ -1199,7 +1199,7 @@ function jump(view, anchor){
   show(view);
   const t = document.getElementById(anchor);
   if(t){
-    for(let d = t.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true;
+    openAncestors(t);
     if(t.tagName === 'DETAILS') t.open = true;
     /* Figures above the target take their height only once decoded, so the
        position is taken after they are, and checked again a moment later. */
@@ -2113,12 +2113,12 @@ function newsCard(){
 }
 function changelogHTML(){
   if(!CHANGELOG.length) return '';
-  return `<h3 id="changelog">Change log</h3><div class="filters changelog">${CHANGELOG.map(c =>
-    `<p><b>${esc(c.date)}</b></p><ul>${c.items.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`).join('')}</div>`;
+  return `<details class="tabhelp" id="changelog"><summary>Change log (${CHANGELOG.length} entries)</summary><div class="changelog">${CHANGELOG.map(c =>
+    `<p><b>${esc(c.date)}</b></p><ul>${c.items.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`).join('')}</div></details>`;
 }
 function showChangelog(){
   show('settings');
-  const t = document.getElementById('changelog'); if(t) scrollToEl(t);
+  const t = document.getElementById('changelog'); if(t){ t.open = true; scrollToEl(t); }
 }
 
 /* ==========================================================================
@@ -2409,22 +2409,26 @@ let DG_MOD = 'all';
    stays out of the module filters, so it is not the first thing under every
    module. */
 const dgShown = (g, d) => DG_MOD === 'all' ? true : DG_MOD === 'models' ? g.own === 'models'
+  : /^exam/.test(String(DG_MOD)) ? !g.own && (d.modules || [d.module]).some(m => String(examOf(m)) === String(DG_MOD).slice(4))
   : !g.own && (d.modules ? d.modules.includes(DG_MOD) : d.module === DG_MOD);
 function renderDiagrams(){
   let toc = '', body = '';
   const dmods = [...new Set(DIAGRAMS.filter(g => !g.own).flatMap(g => g.figs.flatMap(d => d.modules || [d.module])).filter(m => typeof m === 'number'))].sort((a, b) => a - b);
-  const chipLabel = m => m === 'all' ? 'All' : m === 'models' ? 'Dosing models side by side' : 'Module ' + esc(modShort(m));
-  const modChips = `<div class="filters" id="dgtop"><div class="frow"><label>Show</label>${['all', 'models', ...dmods].map(m =>
-    `<button class="chip" data-dgmod="${m}" aria-pressed="${DG_MOD === m}">${chipLabel(m)}</button>`).join('')}</div></div>`;
+  const dexams = [...new Set(dmods.map(examOf).filter(Boolean))].sort();
+  const chipLabel = m => m === 'all' ? 'All' : m === 'models' ? 'Dosing models side by side' : /^exam/.test(String(m)) ? examLabel(m.slice(4)) : 'Module ' + esc(modShort(m));
+  const modChips = `<div class="filters" id="dgtop"><div class="frow"><label>Show</label>${['all', 'models', ...dexams.map(e => 'exam' + e), ...dmods].map(m =>
+    `<button class="chip" data-dgmod="${m}" aria-pressed="${DG_MOD === m}">${chipLabel(m)}</button>`).join('')}</div>${foldBarHTML('diag')}</div>`;
+  const figOpen = foldState('diag') === 'open';
   DIAGRAMS.forEach((g, gi) => {
     const figs = g.figs.filter(d => (STEPFIGS[d.key] || IMAGES[d.key]) && dgShown(g, d)); if(!figs.length) return;
     toc += `<div class="dgtoc"><b>${esc(g.group)}</b><div class="dgchips">${figs.map(d =>
       `<a class="chip" href="#dg-${d.key}" data-dg="${d.key}">${esc(d.name)}${STEPFIGS[d.key] ? ' ▶' : ''}</a>`).join('')}</div></div>`;
-    body += `<h3 id="dgg-${gi}">${esc(g.group)}</h3><p class="sub">${esc(g.note)}</p>${g.table ? modelTableHTML(g.table) : ''}` + figs.map(d => `<div id="dg-${d.key}" class="dgfig">
-      <div class="dghead"><b>${esc(d.name)}</b><span>Module${d.modules ? 's' : ''} ${esc(typeof d.module === 'number' ? modShort(d.module) : String(d.module))}</span></div>
+    body += `<details class="dgrp" open><summary><span class="mname">${esc(g.group)}<small>${figs.length} figure${figs.length === 1 ? '' : 's'}</small></span></summary><div class="egbody">
+      <h3 id="dgg-${gi}" class="dggh">${esc(g.group)}</h3><p class="sub">${esc(g.note)}</p>${g.table ? modelTableHTML(g.table) : ''}` + figs.map(d => `<details id="dg-${d.key}" class="dgfig dsec"${figOpen ? ' open' : ''}>
+      <summary><div class="dghead"><b>${esc(d.name)}${STEPFIGS[d.key] ? ' ▶' : ''}</b><span>Module${d.modules ? 's' : ''} ${esc(typeof d.module === 'number' ? modShort(d.module) : String(d.module))}</span></div></summary>
       ${STEPFIGS[d.key] ? stepFigHTML(d.key)
         : `<figure class="reffig"><img src="${IMAGES[d.key]}" alt="${esc(FIG_TITLES[d.key] || d.name)}"></figure>`}
-      ${readGraphHTML(d)}</div>`).join('');
+      ${readGraphHTML(d)}</details>`).join('') + `</div></details>`;
   });
   const el = $('#v-diag');
   el.innerHTML = `<h2>Diagrams</h2>
@@ -2441,7 +2445,9 @@ function renderDiagrams(){
   stackTables(el);   // the models table becomes one card per model on a phone
   el.querySelectorAll('[data-dgmod]').forEach(b => b.onclick = () => { DG_MOD = /^\d+$/.test(b.dataset.dgmod) ? +b.dataset.dgmod : b.dataset.dgmod; renderDiagrams(); });
   el.querySelectorAll('[data-dg]').forEach(a => a.onclick = e => { e.preventDefault();
-    const t = document.getElementById('dg-' + a.dataset.dg); if(t){ scrollToEl(t); listBack('dgtop', 'the list of figures'); } });
+    const t = document.getElementById('dg-' + a.dataset.dg); if(t){ openAncestors(t); t.open = true; scrollToEl(t); listBack('dgtop', 'the list of figures'); } });
+  wireFoldBar(el, 'diag', () => { const o = foldState('diag') === 'open'; el.querySelectorAll('details.dgfig').forEach(d => d.open = o);
+    el.querySelectorAll('[data-fold]').forEach(b => b.setAttribute('aria-pressed', b.dataset.fold === (o ? 'open' : 'closed'))); });
 }
 /* After a jump down a long tab, a floating way back to the list at the top.
    It goes when pressed, or when the tab changes. */
@@ -2846,6 +2852,85 @@ function stackTables(root){
       if(heads[i]) td.setAttribute('data-label', heads[i]); }));
   });
 }
+/* ---- collapsible sections on the document tabs ----------------------------
+   Every <h3> section becomes a <details>; sections are grouped by the exam
+   their module belongs to, with the exam being prepared for open. "Expand
+   all" and "Collapse all" apply to the sections and are remembered per tab.
+   The fake DOM of the render test has no children, so the folding is skipped
+   there and the page is left flat. */
+const examOf = mod => (COURSE.lectures.find(l => l.module === mod) || {}).exam;
+const FOLD_KEY = NS + ':fold:';
+const foldState = prefix => LS.get(FOLD_KEY + prefix) || 'closed';
+const examLabel = e => e === 'both' ? 'Both exams' : (COURSE.exams.find(x => x.id === +e) || {}).name || ('Exam ' + e);
+function openAncestors(t){
+  for(let d = t.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true;
+}
+function foldBarHTML(prefix){
+  const st = foldState(prefix);
+  return `<div class="foldbar"><span>Sections</span><button class="chip" data-fold="open" aria-pressed="${st === 'open'}">Expand all</button><button class="chip" data-fold="closed" aria-pressed="${st === 'closed'}">Collapse all</button></div>`;
+}
+function wireFoldBar(el, prefix, apply){
+  el.querySelectorAll('[data-fold]').forEach(b => b.onclick = () => { LS.set(FOLD_KEY + prefix, b.dataset.fold); apply(); });
+}
+function foldDoc(el, prefix){
+  if(!el.children || !el.querySelectorAll) return;
+  const open = foldState(prefix) === 'open';
+  const examKey = h => {
+    if(h.dataset && h.dataset.exam) return h.dataset.exam;
+    const m = /Module\s+(\d+)/.exec(h.textContent || '');
+    return m ? String(examOf(+m[1]) || 'general') : 'general';
+  };
+  const mkSec = (h, rest) => { const d = document.createElement('details'); d.className = 'dsec'; d.open = open;
+    const sm = document.createElement('summary'); sm.appendChild(h); d.appendChild(sm); if(rest) d.appendChild(rest); d.dataset.exam = examKey(h); return d; };
+  // 1. every <h3> and what follows it (or the <section> that wraps it) becomes a section; a module <h2> holds its sections
+  const kids = [...el.children];
+  const items = [];   // {node, exam, kind: 'pre' | 'sec' | 'mod' | 'post'}
+  let cur = null, mod = null, seenSection = false;
+  const place = node => { if(mod) mod.appendChild(node); else items.push({node, exam: node.dataset.exam, kind: 'sec'}); };
+  for(const k of kids){
+    const isModH2 = k.tagName === 'H2' && kids.indexOf(k) > 0 && /Module/.test(k.textContent);
+    if(isModH2){
+      mod = document.createElement('details'); mod.className = 'dmod'; mod.open = true; mod.dataset.exam = examKey(k);
+      const sm = document.createElement('summary'); sm.appendChild(k); mod.appendChild(sm);
+      items.push({node: mod, exam: mod.dataset.exam, kind: 'mod'}); cur = null; seenSection = true; continue;
+    }
+    if(k.tagName === 'H3'){ cur = mkSec(k); place(cur); seenSection = true; continue; }
+    if(k.tagName === 'SECTION' && k.querySelector('h3')){ const h = k.querySelector('h3'); cur = null; place(mkSec(h, k)); seenSection = true; continue; }
+    if(cur) cur.appendChild(k);
+    else if(mod) mod.appendChild(k);
+    else items.push({node: k, exam: 'pre', kind: seenSection ? 'post' : 'pre'});
+  }
+  // 2. the sections of one exam go under that exam's heading, Exam 1 first, both exams, then Exam 2;
+  //    material belonging to no module stays where it was, before or after
+  const out = document.createDocumentFragment();
+  items.filter(x => x.kind === 'pre').forEach(x => out.appendChild(x.node));
+  const grouped = items.filter(x => (x.kind === 'sec' || x.kind === 'mod') && x.exam !== 'general');
+  const firstGrouped = items.indexOf(grouped[0]);
+  items.filter((x, n) => x.exam === 'general' && (x.kind === 'sec' || x.kind === 'mod') && n < firstGrouped).forEach(x => out.appendChild(x.node));
+  const keys = [...new Set(grouped.map(x => x.exam))].sort((a, b) => ['1', 'both', '2'].indexOf(a) - ['1', 'both', '2'].indexOf(b));
+  const secCount = x => x.kind === 'mod' ? x.node.querySelectorAll('details.dsec').length : 1;
+  for(const key of keys){
+    const run = grouped.filter(x => x.exam === key);
+    const grp = document.createElement('details'); grp.className = 'dgrp'; grp.dataset.examgrp = 'doc-' + key;
+    const saved = LS.get(EXAMGRP_KEY + 'doc-' + key);
+    grp.open = saved ? saved === 'open' : (key === 'both' || key === String(EXAM.id));
+    const n = run.reduce((t, x) => t + secCount(x), 0);
+    const mods = [...new Set(run.flatMap(x => { const m = /Module\s+(\d+[a-z]?)/.exec((x.node.querySelector('summary') || {}).textContent || ''); return m ? [m[1]] : []; }))];
+    grp.innerHTML = `<summary><span class="mname">${esc(examLabel(key))}<small>${n} section${n === 1 ? '' : 's'}${mods.length > 1 ? ' · Modules ' + esc(mods.join(', ')) : mods.length ? ' · Module ' + esc(mods[0]) : ''}</small></span></summary><div class="egbody"></div>`;
+    const body = grp.querySelector('.egbody'); run.forEach(x => body.appendChild(x.node));
+    grp.addEventListener('toggle', () => LS.set(EXAMGRP_KEY + grp.dataset.examgrp, grp.open ? 'open' : 'closed'));
+    out.appendChild(grp);
+  }
+  items.filter((x, n) => x.exam === 'general' && (x.kind === 'sec' || x.kind === 'mod') && n > firstGrouped).forEach(x => out.appendChild(x.node));
+  items.filter(x => x.kind === 'post').forEach(x => out.appendChild(x.node));
+  el.innerHTML = ''; el.appendChild(out);
+  // the fold bar sits under the jump list
+  const nav = el.querySelector('.refnav-wrap');
+  const bar = document.createElement('div'); bar.innerHTML = foldBarHTML(prefix);
+  if(nav) nav.parentElement.insertBefore(bar.firstChild, nav.nextSibling); else el.insertBefore(bar.firstChild, el.firstChild.nextSibling);
+  wireFoldBar(el, prefix, () => { const o = foldState(prefix) === 'open'; el.querySelectorAll('details.dsec').forEach(d => d.open = o);
+    el.querySelectorAll('[data-fold]').forEach(b => b.setAttribute('aria-pressed', b.dataset.fold === (o ? 'open' : 'closed'))); });
+}
 function renderDoc(el, html, prefix){
   // a jump list, built from the section headings that are actually present
   // a heading may carry data-nav with a fuller label for the jump list, so a
@@ -2861,11 +2946,12 @@ function renderDoc(el, html, prefix){
     : '';
   el.innerHTML = body.replace('</p>', '</p>' + nav);
   stackTables(el);
+  foldDoc(el, prefix);
   el.querySelectorAll('.refnav a').forEach(a => a.onclick = e => {
     e.preventDefault();
     const t = el.querySelector(a.getAttribute('href'));
     const d = el.querySelector('.refnav-wrap'); if (d) d.open = false;
-    if (t) scrollToEl(t);
+    if (t){ openAncestors(t); scrollToEl(t); }
   });
 }
 function renderRef(){ renderDoc($('#v-ref'), refFigures(REFERENCE_HTML), 'ref'); }

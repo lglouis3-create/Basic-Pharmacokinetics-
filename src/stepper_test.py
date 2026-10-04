@@ -81,6 +81,7 @@ def main():
         page.on('pageerror', lambda e: errs.append(str(e)))
         page.add_init_script("window.prompt = () => 'StepTest'")
         page.goto(path.as_uri())
+        page.wait_for_timeout(500); page.evaluate("['guide','ref','tell','diag'].forEach(p => LS.set(FOLD_KEY + p, 'open'))")
         page.wait_for_timeout(800)
         page.evaluate("show('diag')")
         keys = page.evaluate('Object.keys(STEPFIGS)')

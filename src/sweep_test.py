@@ -63,6 +63,7 @@ def main():
                 page.on('pageerror', lambda e: errs.append(str(e)))
                 page.add_init_script("window.prompt = () => 'Sweep'; window.alert = () => {}")
                 page.goto(path.as_uri())
+                page.wait_for_timeout(500); page.evaluate("['guide','ref','tell','diag'].forEach(p => LS.set(FOLD_KEY + p, 'open'))")
                 page.wait_for_timeout(700)
                 page.evaluate(SEED)
                 print(f'\n=== {w} px, {scheme} ===')

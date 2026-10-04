@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (collapsible sections)
+- Guides, Reference, Tell apart and Diagrams: every section folds; Expand all and Collapse all are remembered per tab.
+- Sections sit under Exam 1 and Exam 2 headings, the exam being prepared for open; Diagrams can filter by exam.
+- The change log in Settings is folded until opened.
+
 ## 2026-10-04 (where each question comes from)
 - Every question card carries a tag naming its source: practice sheet, slide, activity, homework, quiz or extra.
 - The calculation rows on a module page say how many problems come from each source.

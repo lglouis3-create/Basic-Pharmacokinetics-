@@ -401,6 +401,23 @@ ol.gsteps{padding-left:22px;margin:6px 0} ol.gsteps li{margin:6px 0;line-height:
 .examgrp>summary .mname{flex:1;min-width:0}
 .examgrp>summary .mname small{display:block;font-weight:400;color:var(--text-dim);font-size:12.5px;margin-top:2px}
 .examgrp .egbody{padding:0 10px 2px}
+.dgrp{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin:0 0 12px}
+.dgrp>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;list-style:none;font-size:17px;font-weight:800}
+.dgrp>summary::-webkit-details-marker{display:none}
+.dgrp>summary::before{content:"\25BE";color:var(--text-dim);font-size:14px;transition:transform .15s;align-self:flex-start;margin-top:4px}
+.dgrp:not([open])>summary::before{transform:rotate(-90deg)}
+.dgrp>summary .mname{flex:1;min-width:0} .dgrp>summary .mname small{display:block;font-weight:400;color:var(--text-dim);font-size:12.5px;margin-top:2px}
+.dgrp .egbody{padding:0 12px 4px} .dgrp .egbody .dggh{display:none}
+.dmod{margin:0 0 10px} .dmod>summary{cursor:pointer;list-style:none;padding:6px 0} .dmod>summary::-webkit-details-marker{display:none}
+.dmod>summary h2{display:inline;font-size:18px;margin:0} .dmod>summary::before{content:"\25BE";color:var(--text-dim);font-size:13px;margin-right:8px;display:inline-block;transition:transform .15s}
+.dmod:not([open])>summary::before{transform:rotate(-90deg)}
+.dsec{border-top:1px solid var(--line-soft);padding:2px 0 6px} .dsec>summary{cursor:pointer;list-style:none;padding:8px 0}
+.dsec>summary::-webkit-details-marker{display:none}
+.dsec>summary h3{display:inline;margin:0;font-size:16px} .dsec>summary::before{content:"\25BE";color:var(--text-dim);font-size:12px;margin-right:8px;display:inline-block;transition:transform .15s}
+.dsec:not([open])>summary::before{transform:rotate(-90deg)}
+.dsec>summary .dghead{display:inline-flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.foldbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 12px;font-size:13px;color:var(--text-dim)}
+details.dgfig.dsec{border:1px solid var(--line-soft);border-radius:var(--r);padding:4px 10px 8px;margin:8px 0}
 .examgrp .egbody>.module{background:var(--surface)}
 .recapcard{border-style:dashed}
 .recapcard .mrow{padding:12px 14px 4px}
