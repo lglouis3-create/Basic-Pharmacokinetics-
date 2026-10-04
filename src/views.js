@@ -455,6 +455,58 @@ function updatedText(){
     year: 'numeric', hour: 'numeric', minute: '2-digit'});
 }
 
+/* ==========================================================================
+   QUIZ PREP
+   ==========================================================================
+   One card per quiz in COURSE.quizzes, at the top of Topics, until the quiz
+   is over (`when` plus `minutes`) or the student hides it. It offers the
+   drills on the modules she named and a timed practice paper drawn from
+   them; the paper runs on the exam engine with its own title and id. */
+const QUIZ_HIDE_KEY = NS + ':quizhide:';
+let QUIZ_N = 10;   // questions on a practice quiz: she has not said how many, so the student picks
+const quizScope = qz => QUESTIONS.filter(q => (qz.modules || []).includes(q.module));
+function quizLive(qz){
+  if(!qz.when) return false;
+  if(Date.now() >= new Date(qz.when).getTime() + (qz.minutes || 0) * 60000) return false;
+  return LS.get(QUIZ_HIDE_KEY + qz.id) !== '1';
+}
+function quizCards(){
+  return (COURSE.quizzes || []).filter(quizLive).map(qz => {
+    const pool = quizScope(qz), c = ofKind(pool, 'concept').length, m = ofKind(pool, 'calc').length;
+    const at = new Date(qz.when);
+    const day = at.toLocaleDateString(undefined, {weekday: 'long', month: 'short', day: 'numeric'});
+    const time = at.toLocaleTimeString(undefined, {hour: 'numeric', minute: '2-digit'});
+    const due = 'missed concepts first; stops when nothing is due';
+    const row = (title, sub, how, k) => `<div class="subrow"><span class="sname"><b>${title}</b><small>${sub}</small></span>
+        <button data-quiz="${qz.id}" data-how="${how}" data-k="${k}"${how === 'sweep' ? ' class="ghost"' : ''}>Start</button></div>`;
+    return `<div class="module quizcard"><div class="mrow">
+      <span class="mname">${esc(qz.name)} — ${esc(day)}, ${esc(time)}<small>${esc(examCountdown(qz, 'quiz'))} ${esc(qz.covers || '')}</small></span>
+      <button class="ghost" data-quizhide="${qz.id}" title="Hide this card">Hide</button></div>
+      <div class="mfoot">
+      ${qz.quote ? `<p class="dquote">“${esc(qz.quote)}”</p>` : ''}
+      <details class="qsaid"><summary>What she said to prepare</summary><ul class="tlist">${(qz.said || []).map(t => `<li>${mathHTML(t)}</li>`).join('')}</ul>
+        ${qz.src ? `<p class="wcite">${esc(qz.src)}</p>` : ''}</details>
+      ${c ? row('Concepts on this quiz, adaptive', `${c} questions, no arithmetic — ${due}`, 'adaptive', 'concept') : ''}
+      ${m ? row('Calculations on this quiz, adaptive', `${m} questions, each worked to a number — ${due}`, 'adaptive', 'calc') : ''}
+      ${row('Everything on this quiz, adaptive', `${pool.length} questions — ${due}`, 'adaptive', '')}
+      ${row('Straight pass', 'Every question once, shuffled, nothing held back by scheduling', 'sweep', '')}
+      <div class="subrow"><span class="sname"><b>Sit a practice quiz</b>
+        <small>Questions from these modules, timed, no feedback until you submit. She has not said how many questions or how long; this paper runs ${qz.minutes} minutes, the length of Quiz 3.</small></span>
+        <span class="btns"><span class="frow">${[8, 10, 12].map(n => `<button class="chip" data-quizn="${n}" aria-pressed="${n === QUIZ_N}">${n}</button>`).join('')}</span>
+        <button data-quizpaper="${qz.id}">Open</button></span></div>
+      </div></div>`;
+  }).join('');
+}
+function beginQuiz(qz, n){
+  if(EX && EX.running) return;
+  const src = quizScope(qz).filter(q => !q.lowYield);
+  const qs = shuffle(drawN(src, Math.min(n, src.length)));
+  if(!qs.length){ alert('The bank holds no question on this quiz yet.'); return; }
+  startPaper(qs, qz.minutes, {paper: qz.id, title: qz.name + ' practice', sata: {per: [], drawn: 0},
+                              coverage: {drawn: 0, missing: 0, short: [], shares: []}});
+  show('exam');
+}
+
 /* Which exam cards start open: the one being prepared for, unless this
    browser was told otherwise; earlier and later exams start closed. */
 const EXAMGRP_KEY = NS + ':examgrp:';
@@ -475,6 +527,8 @@ function renderTopics(){
     ${EXAM.blurb ? esc(EXAM.blurb) + ' ' : ''}
     Question bank: ${QUESTIONS.length} across ${conceptsIn(QUESTIONS).length} concepts.${
     COURSE.exams.length > 1 ? ' The paper being prepared for can be changed under Exam or Settings.' : ''}</p>`;
+
+  h += quizCards();
 
   const stepwiseOnly = false;
 
@@ -600,6 +654,16 @@ function renderTopics(){
     if(b.dataset.how === 'sweep') startSweepOf(narrow(examQuestions(id), k), label);
     else startPool(narrow(examQuestions(id), k), label);
   });
+  el.querySelectorAll('button[data-quiz]').forEach(b => b.onclick = () => {
+    const qz = (COURSE.quizzes || []).find(z => z.id === b.dataset.quiz); if(!qz) return;
+    const k = b.dataset.k || null, label = kindLabel(qz.name + ' prep', k);
+    if(b.dataset.how === 'sweep') startSweepOf(narrow(quizScope(qz), k), label);
+    else startPool(narrow(quizScope(qz), k), label);
+  });
+  el.querySelectorAll('[data-quizn]').forEach(b => b.onclick = () => { QUIZ_N = +b.dataset.quizn; renderTopics(); });
+  el.querySelectorAll('[data-quizpaper]').forEach(b => b.onclick = () => {
+    const qz = (COURSE.quizzes || []).find(z => z.id === b.dataset.quizpaper); if(qz) beginQuiz(qz, QUIZ_N); });
+  el.querySelectorAll('[data-quizhide]').forEach(b => b.onclick = () => { LS.set(QUIZ_HIDE_KEY + b.dataset.quizhide, '1'); renderTopics(); });
   const sa = document.getElementById('sweepAll');
   const sw = document.getElementById('sweepWeighted'); if(sw) sw.onclick = () => startSweep('weighted');
   if(sa) sa.onclick = () => startSweep('all');
@@ -1661,9 +1725,9 @@ function progressSection(){
   if(papers.length){
     h += `<table class="gap"><thead><tr><th>Practice paper</th><th>When</th><th>Score</th><th style="width:40%">Result</th></tr></thead><tbody>`;
     for(const x of papers){
-      const ex = COURSE.exams.find(e => e.id === x.exam);
+      const ex = COURSE.exams.find(e => e.id === x.exam) || (COURSE.quizzes || []).find(z => z.id === x.exam);
       const pc = x.total ? Math.round(100 * x.right / x.total) : 0;
-      h += `<tr><td>${esc(ex ? ex.name : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td>
+      h += `<tr><td>${esc(ex ? ex.name + (ex.modules ? ' practice' : '') : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td>
         <td><div class="bar"><i style="width:${pc}%;background:${pctCol(pc)}"></i></div><span style="font-size:12px;color:var(--text-dim)">${pc}%</span></td></tr>`;
     }
     h += `</tbody></table>`;
@@ -1958,14 +2022,14 @@ function daysToExam(ex){
   const day = d => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
   return Math.round((day(ex.when) - day(Date.now())) / DAY_MS);
 }
-function examCountdown(ex){
-  const d = daysToExam(ex);
+function examCountdown(ex, noun){
+  const d = daysToExam(ex), what = noun || 'exam';
   if(d == null) return '';
   const start = new Date(ex.when).getTime(), end = start + (ex.minutes || 0) * 60000, now = Date.now();
-  if(now >= end) return 'This exam is over.';
-  if(now >= start) return 'The exam is in progress.';
-  if(d <= 0) return 'Exam day is today.';
-  return `${d} day${d === 1 ? '' : 's'} until the exam.`;
+  if(now >= end) return `This ${what} is over.`;
+  if(now >= start) return `The ${what} is in progress.`;
+  if(d <= 0) return `${what[0].toUpperCase() + what.slice(1)} day is today.`;
+  return `${d} day${d === 1 ? '' : 's'} until the ${what}.`;
 }
 
 /* ==========================================================================
@@ -2360,9 +2424,9 @@ function examHistory(){
   if(!papers.length) return '';
   let h = `<h3>Your papers so far</h3><div class="tw"><table class="gap"><thead><tr><th>Paper</th><th>When</th><th>Score</th><th>Blank</th><th style="width:36%">Result</th></tr></thead><tbody>`;
   for(const x of papers.slice(0, 12)){
-    const ex = COURSE.exams.find(e => e.id === x.exam);
+    const ex = COURSE.exams.find(e => e.id === x.exam) || (COURSE.quizzes || []).find(z => z.id === x.exam);
     const pc = x.total ? Math.round(100 * x.right / x.total) : 0;
-    h += `<tr><td>${esc(ex ? ex.name : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td><td>${x.blank || 0}</td>
+    h += `<tr><td>${esc(ex ? ex.name + (ex.modules ? ' practice' : '') : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td><td>${x.blank || 0}</td>
       <td><div class="bar"><i style="width:${pc}%;background:${pctCol(pc)}"></i></div><span style="font-size:12px;color:var(--text-dim)">${pc}%</span></td></tr>`;
   }
   return h + `</tbody></table></div>`;
@@ -2426,6 +2490,24 @@ function drawMixed(pool, n, nSata){
   if(out.length < n) out = out.concat(drawN(pool, n - out.length, used));
   return out;
 }
+/* Run a timed paper on the exam engine. `extra` carries what the result page
+   reads: the select-all shares and blueprint coverage for an exam paper, or a
+   `paper` id and `title` for a quiz practice paper. */
+function startPaper(qs, minutes, extra){
+  EX = Object.assign({qs, i:0,
+        picks: qs.map(q => isMulti(q) ? [] : qType(q)==='match' ? {} : qType(q)==='numeric' ? '' : null),
+        running:true, done:false,
+        ends: Date.now() + minutes*60000,
+        orders: qs.map(q => isMC(q) ? shuffle(q.options.map((o,k)=>k)) : [])}, extra || {});
+  clearInterval(EX.timer);
+  EX.timer = setInterval(()=>{
+    if(!EX || !EX.running) return clearInterval(EX.timer);
+    if(Date.now() >= EX.ends){ finishExam(); return; }
+    const c = document.getElementById('exClock');
+    if(c){ const l = EX.ends - Date.now();
+      c.textContent = fmt(l); c.classList.toggle('low', l < 5*60000); }
+  }, 1000);
+}
 function beginExam(){
   const shares = poolShares();
   const sata = sataShares(shares);
@@ -2436,19 +2518,7 @@ function beginExam(){
   });
   const qs = shuffle(paper);
   if(!qs.length){ alert('The bank holds no question on this blueprint yet.'); return; }
-  EX = {qs, i:0, sata,
-        picks: qs.map(q => isMulti(q) ? [] : qType(q)==='match' ? {} : qType(q)==='numeric' ? '' : null),
-        running:true, done:false, coverage: blueprintCoverage(),
-        ends: Date.now() + EXAM.minutes*60000,
-        orders: qs.map(q => isMC(q) ? shuffle(q.options.map((o,k)=>k)) : [])};
-  clearInterval(EX.timer);
-  EX.timer = setInterval(()=>{
-    if(!EX || !EX.running) return clearInterval(EX.timer);
-    if(Date.now() >= EX.ends){ finishExam(); return; }
-    const c = document.getElementById('exClock');
-    if(c){ const l = EX.ends - Date.now();
-      c.textContent = fmt(l); c.classList.toggle('low', l < 5*60000); }
-  }, 1000);
+  startPaper(qs, EXAM.minutes, {sata, coverage: blueprintCoverage()});
   renderExamQ();
 }
 const fmt = ms => { const s = Math.max(0, Math.round(ms/1000));
@@ -2519,7 +2589,7 @@ function finishExam(){
     record(q, examRight(q, p) ? 'correct' : 'wrong', picked);
   });
   const right = EX.qs.filter((q, i) => examRight(q, EX.picks[i])).length;
-  (DB.exams ||= []).push({at: Date.now(), exam: EXAM.id, right, total: EX.qs.length,
+  (DB.exams ||= []).push({at: Date.now(), exam: EX.paper || EXAM.id, right, total: EX.qs.length,
                           blank: EX.qs.filter((q, i) => examBlank(q, EX.picks[i])).length});
   if(DB.exams.length > 100) DB.exams.splice(0, DB.exams.length - 100);
   save();
@@ -2529,7 +2599,7 @@ function renderExamResult(){
   const right = EX.qs.filter((q,i)=> examRight(q, EX.picks[i])).length;
   const blank = EX.qs.filter((q,i)=> examBlank(q, EX.picks[i])).length;
   const pct = EX.qs.length ? Math.round(100*right/EX.qs.length) : 0;
-  let h = `<h2>Exam simulation — ${right} / ${EX.qs.length} (${pct}%)</h2>
+  let h = `<h2>${esc(EX.title || 'Exam simulation')} — ${right} / ${EX.qs.length} (${pct}%)</h2>
   <p class="sub">${blank ? blank+' left blank, scored as incorrect. ' : ''}All ${EX.qs.length} are now in your history,
   so anything you missed is back in active review.</p>
   ${shortfallNote(EX.coverage)}

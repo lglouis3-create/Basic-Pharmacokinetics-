@@ -52,6 +52,33 @@ with sync_playwright() as p:
     ok('each exam card ends with a review of the whole exam', all(r for *_, r, _ in grp))
     ok('only the exam being prepared for starts open',
        all(o == (e == pg.evaluate('EXAM.id')) for e, _, _, o in grp))
+    print('\n=== Quiz prep ===')
+    live = pg.evaluate("(COURSE.quizzes||[]).filter(quizLive).map(z=>z.id)")
+    if live:
+        qid = live[0]
+        ok(f'a card for {qid} is on the page', pg.locator('.quizcard').count() == len(live))
+        qmods = pg.evaluate("COURSE.quizzes.find(z=>z.id===%r).modules" % qid)
+        pool_mods = pg.evaluate("[...new Set(quizScope(COURSE.quizzes.find(z=>z.id===%r)).map(q=>q.module))]" % qid)
+        ok('the quiz pool holds only the modules she named', bool(pool_mods) and all(m in qmods for m in pool_mods))
+        avail = pg.evaluate("quizScope(COURSE.quizzes.find(z=>z.id===%r)).filter(q=>!q.lowYield).length" % qid)
+        pg.click('[data-quizn="8"]'); pg.wait_for_timeout(150)
+        pg.click(f'[data-quizpaper="{qid}"]'); pg.wait_for_timeout(300)
+        n = pg.evaluate("EX && EX.running ? EX.qs.length : 0")
+        ok('a practice quiz of the chosen length starts on the exam engine', n == min(8, avail))
+        ok('its clock runs on the quiz minutes', pg.evaluate("Math.round((EX.ends-Date.now())/60000)") == pg.evaluate("COURSE.quizzes.find(z=>z.id===%r).minutes" % qid))
+        pg.evaluate("finishExam()"); pg.wait_for_timeout(200)
+        ok('the paper is logged under the quiz, not the exam', pg.evaluate("DB.exams[DB.exams.length-1].exam") == qid)
+        pg.evaluate("EX=null; show('topics')"); pg.wait_for_timeout(200)
+        pg.click(f'[data-quizhide="{qid}"]'); pg.wait_for_timeout(150)
+        gone = pg.locator('.quizcard').count() == len(live) - 1
+        pg.reload(); pg.wait_for_timeout(500)
+        ok('Hide removes the card and the choice survives a reload', gone and pg.locator('.quizcard').count() == len(live) - 1)
+        pg.evaluate("localStorage.removeItem(QUIZ_HIDE_KEY + %r)" % qid); pg.reload(); pg.wait_for_timeout(500)
+        ok('a quiz whose time has passed shows no card',
+           pg.evaluate("quizLive(Object.assign({}, COURSE.quizzes[0], {id:'past', when:'2000-01-01T08:00', minutes:24}))") is False)
+    else:
+        print('  skip  no quiz is live today, so the card is not on the page')
+
     ok('no topic list or review switch on the main page',
        pg.locator('#v-topics details.topic').count() == 0 and pg.locator('#v-topics .rtab').count() == 0)
     untyped = pg.evaluate("QUESTIONS.filter(q => kindOf(q) === 'calc' && !calcTypeOf(q)).map(q => q.id)")

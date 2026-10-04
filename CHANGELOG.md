@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (quiz 4 card)
+- Topics: a Quiz 4 card with what she said to prepare, drills on its modules, and a timed practice quiz.
+- The quiz card hides itself once the quiz is over, or when you tap Hide.
+- The 30 September lecture is listed as Module 7a, as her deck numbers it.
+
 ## 2026-10-02 (guides and tell apart rebuilt)
 - Guides: each objective in plain words, then terms, equations, a worked example and how she tests it.
 - Guides: her quotes only where her exact wording matters; the rest is said plainly.
