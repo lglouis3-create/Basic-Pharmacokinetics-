@@ -136,6 +136,7 @@ const TELL_HTML = `
 <template data-x="dosing:m2-one"><div class="xexp"><h4>One-compartment IV bolus (Module 2)</h4>
 <p><b>In one line:</b> The whole dose is injected into a vein at once, spreads evenly through one compartment at once, and is removed by first-order elimination.</p>
 {{fig:model_bolus1|One-compartment IV bolus: highest at time zero, then a first-order fall.}}
+<p><button type="button" class="chip" data-jump="diag:dg-bolus1_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>All of the dose enters the body at once: an intravenous (IV) bolus. The body acts as one uniform compartment that drug can enter and leave.</dd>
@@ -156,6 +157,7 @@ const TELL_HTML = `
 <template data-x="dosing:m2-two"><div class="xexp"><h4>Two-compartment IV bolus (Module 2)</h4>
 <p><b>In one line:</b> The dose is injected at once into a central compartment, moves into a tissue compartment and back, and is eliminated from the central compartment.</p>
 {{fig:model_bolus2|Two-compartment IV bolus on a log axis: a steep distribution phase, then the elimination line.}}
+<p><button type="button" class="chip" data-jump="diag:dg-twocpt_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>An intravenous (IV) bolus of a drug that reaches different tissue groups at different rates, so distribution takes time. In Model A, the one she uses most, drug leaves the body from the central compartment only.</dd>
@@ -177,6 +179,7 @@ const TELL_HTML = `
 <template data-x="dosing:m3-infusion"><div class="xexp"><h4>IV infusion, one compartment (Module 3)</h4>
 <p><b>In one line:</b> Drug runs into a vein at a constant rate, so it goes in by a zero-order process and leaves by a first-order process, and the concentration climbs to a plateau.</p>
 {{fig:model_infusion|IV infusion: climbs to the steady-state plateau, falls once the infusion stops.}}
+<p><button type="button" class="chip" data-jump="diag:dg-infusion_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>An intravenous (IV) input at a constant rate R (mg/hr), which is zero order. Elimination is first order, rate constant k. As drug builds up the rate out rises, until rate in equals rate out: steady state.</dd>
@@ -196,6 +199,7 @@ const TELL_HTML = `
 <template data-x="dosing:m3-loading"><div class="xexp"><h4>Loading dose with an infusion (Module 3)</h4>
 <p><b>In one line:</b> An IV bolus loading dose is given at the moment a constant-rate infusion starts, so the concentration is at the steady-state level at once, not after 3 to 5 half-lives.</p>
 {{fig:model_loading|Loading dose with an infusion: flat at the steady-state level from the start; the dashed line is the infusion alone.}}
+<p><button type="button" class="chip" data-jump="diag:dg-loading_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>One compartment and first-order elimination. The intravenous (IV) bolus part falls as a bolus does, the infusion part builds as an infusion does, and the two concentrations add.</dd>
@@ -214,6 +218,7 @@ const TELL_HTML = `
 <template data-x="dosing:m5-oral"><div class="xexp"><h4>Single oral dose, first-order absorption (Module 5)</h4>
 <p><b>In one line:</b> Drug is absorbed from the gut by a first-order process and eliminated by a first-order process, so the concentration rises to a peak and then falls.</p>
 {{fig:model_oral|Single oral dose: rises to the peak at the time of the peak, then falls.}}
+<p><button type="button" class="chip" data-jump="diag:dg-oral_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>One compartment. Only the fraction F (bioavailability) of the dose reaches the blood. Absorption (rate constant k<sub>a</sub>) and elimination (rate constant k) are both first order, and usually k<sub>a</sub> is much larger than k.</dd>
@@ -233,6 +238,7 @@ const TELL_HTML = `
 <template data-x="dosing:m6-bolus"><div class="xexp"><h4>Repeated IV bolus (Module 6)</h4>
 <p><b>In one line:</b> The same IV bolus dose is given at a fixed interval (&tau;); each dose adds to what is left of the earlier ones until the peaks and troughs stop climbing at steady state.</p>
 {{fig:model_mdbolus|Repeated IV bolus: a saw-tooth climbing to a plateau; the dashed line is the first dose alone.}}
+<p><button type="button" class="chip" data-jump="diag:dg-md_bolus_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>Superposition: elimination is first order, and later doses do not change the drug's pharmacokinetics. So each intravenous (IV) dose follows the first-dose curve.</dd>
@@ -253,6 +259,7 @@ const TELL_HTML = `
 <template data-x="dosing:m6-infusion"><div class="xexp"><h4>Intermittent IV infusion (Module 6)</h4>
 <p><b>In one line:</b> A repeated-dose regimen in which each dose is infused at a constant rate over a set time instead of pushed at once; the level rises during each infusion and falls after it.</p>
 {{fig:model_intermit|Intermittent IV infusion: a rise during each infusion and a fall after it, each rise starting higher.}}
+<p><button type="button" class="chip" data-jump="diag:dg-two_infusions_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>Each intravenous (IV) infusion is a zero-order input for its duration. Elimination is first order, so the contributions of separate infusions add. It is used because many drugs are better tolerated infused slowly.</dd>
@@ -271,6 +278,7 @@ const TELL_HTML = `
 <template data-x="dosing:m6a-oral"><div class="xexp"><h4>Multiple oral doses (Module 6a)</h4>
 <p><b>In one line:</b> The single-oral-dose model given again at a fixed interval (&tau;), with the accumulation factor attached; the peaks and troughs climb to a plateau.</p>
 {{fig:model_mdoral|Multiple oral doses: rounded peaks and troughs climbing to a plateau; the dashed line is the first dose alone.}}
+<p><button type="button" class="chip" data-jump="diag:dg-md_oral_steps">Step through it with her numbers</button></p>
 <dl>
 <dt>What it assumes</dt>
 <dd>First-order absorption (k<sub>a</sub>), first-order elimination (k), a fraction F absorbed, and superposition: later doses do not change k, k<sub>a</sub>, clearance or the volume of distribution (V<sub>D</sub>).</dd>

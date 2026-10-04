@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-04 (every dosing model, step by step)
+- Six more step-through walk-throughs, each from one of her own problems, so every dosing model has one.
+- "Step through it with her numbers" under each dosing model in Tell apart.
+- A short clip plays after a paper is submitted; Settings turns it off.
+
 ## 2026-10-04 (walk-throughs line by line)
 - Step-through captions show one sentence per line with stacked fractions.
 - Diagrams: the dosing models side by side have their own chip and a table of drug in, drug out and shape.

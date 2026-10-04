@@ -1192,6 +1192,7 @@ let RET = [];
 function jump(view, anchor){
   RET.push({view: VIEW, y: window.scrollY, label: ({exam: 'the exam', quiz: 'the question', gaps: 'Weak spots', terms: 'Terms', diag: 'Diagrams', tell: 'Tell apart', guide: 'Guides', ref: 'Reference'})[VIEW] || 'where you were'});
   if(view === 'eq') EQ = null;                      // the anchors live on the picker, not in a running drill
+  if(view === 'diag') DG_MOD = 'all';               // a filtered Diagrams tab may be hiding the target
   show(view);
   const t = document.getElementById(anchor);
   if(t){
@@ -2690,6 +2691,27 @@ function finishExam(){
   if(DB.exams.length > 100) DB.exams.splice(0, DB.exams.length - 100);
   save();
   renderExamResult();
+  celebrate();
+}
+/* After a paper is submitted, one of the two short videos beside the page
+   plays, chosen at random. Submitting is a tap, so playing with sound is
+   allowed; if the browser refuses anyway the controls are there to press.
+   An offline copy of the page has no media folder: then the video errors
+   and the box goes away by itself. Settings can turn it off. */
+const CHEER = ['media/cheer-1.mp4', 'media/cheer-2.mp4'];
+const cheerPick = () => CHEER[Math.floor(Math.random() * CHEER.length)];
+function celebrate(){
+  if(DB.settings.cheer === false || document.getElementById('cheer')) return;
+  const box = document.createElement('div'); box.id = 'cheer';
+  box.innerHTML = `<div class="cheerbox"><p class="cheerline">Paper submitted. The practice is what counts.</p>
+    <video playsinline controls preload="auto" src="${cheerPick()}"></video>
+    <div class="frow"><button class="btn" id="cheerClose">Close</button></div></div>`;
+  document.body.appendChild(box);
+  const v = box.querySelector('video'), close = () => box.remove();
+  box.querySelector('#cheerClose').onclick = close;
+  v.onerror = close;
+  v.onended = () => setTimeout(close, 800);
+  const p = v.play(); if(p && p.catch) p.catch(() => {});
 }
 function renderExamResult(){
   const overrode = i => !!(EX.rightOv && EX.rightOv[i]);
@@ -2880,6 +2902,14 @@ function renderSettings(){
     <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">A card hidden with its Hide button stays hidden on this browser until the quiz has been sat. This puts it back on Topics.</p>
   </div>` : ''}
 
+  <h3>After a paper</h3>
+  <div class="filters">
+    <div class="frow"><label>Short video</label>
+      <button class="chip" data-cheer="on" aria-pressed="${DB.settings.cheer !== false}">On</button>
+      <button class="chip" data-cheer="off" aria-pressed="${DB.settings.cheer === false}">Off</button></div>
+    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">One of two short clips plays after an exam or quiz paper is submitted.</p>
+  </div>
+
   <h3>Move your progress between devices</h3>
   <div class="filters">
     <div class="frow">
@@ -2915,6 +2945,7 @@ function renderSettings(){
   $('#v-settings').querySelectorAll('.chip[data-exam]').forEach(b=>b.onclick=()=>{
     chooseExam(+b.dataset.exam); renderSettings();
   });
+  $('#v-settings').querySelectorAll('.chip[data-cheer]').forEach(b => b.onclick = () => { DB.settings.cheer = b.dataset.cheer === 'on'; save(); renderSettings(); });
   const unhide = $('#btnUnhideQuiz');
   if(unhide) unhide.onclick = () => { (COURSE.quizzes||[]).forEach(qz => LS.set(QUIZ_HIDE_KEY + qz.id, '0')); renderSettings(); };
   $('#btnProf').onclick = () => {
@@ -3444,7 +3475,7 @@ function eqDrillHTML(){
     if(e.symbols && e.symbols.length)
       h += `<h5 class="tsec">What each symbol is</h5><ul class="tlist">${
         e.symbols.map(s => `<li><b>${s[0]}</b> — ${s[1]}</li>`).join('')}</ul>`;
-    if(e.holds) h += `<h5 class="tsec">When it holds</h5><p class="prose">${esc(e.holds)}</p>`;
+    if(e.holds) h += `<h5 class="tsec">When it holds</h5><p class="prose">${richHTML(e.holds)}</p>`;   // entities and {{frac}} render
     if(e.must) h += `<p class="prose"><b>She said to memorise this one.</b> It is not on the equation sheet.</p>`;
     h += `<div class="cite">${esc(e.cite)}</div></div>`;
   }

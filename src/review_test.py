@@ -10,7 +10,8 @@ example. Every problem set has a Start button somewhere.
 
     python3 review_test.py
 """
-import pathlib, sys
+import os, pathlib, sys
+REPO = pathlib.Path(__file__).resolve().parent.parent
 from playwright.sync_api import sync_playwright
 
 OUT = pathlib.Path('/mnt/user-data/outputs/PHAR4221_Drill.html')
@@ -233,6 +234,14 @@ with sync_playwright() as p:
     pg.evaluate("finishExam()"); pg.wait_for_timeout(200)
     ok('the paper scores the slip as a miss', pg.evaluate("DB.exams[DB.exams.length-1].right") == 0 and pg.locator('#v-exam button[data-right]').count() == 1)
     pg.click('#v-exam button[data-right]'); pg.wait_for_timeout(200)
+    # the headless browser cannot decode the clip, so the box is read in the same tick it opens
+    src = pg.evaluate("(() => { const b = document.getElementById('cheer'); if(b) b.remove(); celebrate(); const v = document.querySelector('#cheer video'); return v ? v.getAttribute('src') : null; })()")
+    ok('a submitted paper opens the celebration box with one of the two clips', src in ('media/cheer-1.mp4', 'media/cheer-2.mp4'))
+    ok('Close removes it', pg.evaluate("(() => { const b = document.getElementById('cheer'); if(b) b.remove(); celebrate(); document.getElementById('cheerClose').click(); return !document.getElementById('cheer'); })()"))
+    ok('two clips are on offer and both files are in the repository', pg.evaluate("CHEER.length") == 2 and all((REPO / p).exists() for p in pg.evaluate("CHEER")))
+    pg.evaluate("DB.settings.cheer = false; save(); const b = document.getElementById('cheer'); if(b) b.remove(); celebrate()"); pg.wait_for_timeout(100)
+    ok('with the setting off nothing opens', pg.locator('#cheer').count() == 0)
+    pg.evaluate("DB.settings.cheer = true; save()")
     ok('the review counts it right and the paper record follows', pg.evaluate("DB.exams[DB.exams.length-1].right") == 1 and pg.locator('#v-exam h2').inner_text().startswith('probe — 1 / 1') and pg.locator('#v-exam button[data-right]').count() == 0)
     pg.evaluate("EX = null")
 

@@ -812,6 +812,374 @@ stepped('two_infusions_steps', 'Two intermittent IV infusions, stage by stage', 
 
 
 
+# ---- her worked examples, one step-through per dosing model -----------------
+# Every number below is either printed on her sheet or slide (named at each
+# figure) or computed here from the inputs she printed.
+
+def lines(*ls):
+    return '\n'.join(ls)
+
+
+# (1) One-compartment IV bolus: IV Bolus Practice 1 (her solutions sheet).
+# 50 mg IV bolus; plasma concentrations at 0.5, 1, 1.5, 2, 2.5, 3 hr. Her
+# answers: k 0.91 hr-1, t½ 0.76 hr, C0 3.89 mg/L (from the 2.5-hr point),
+# VD 12.85 L, ClT 11.7 L/hr, 3.2 mg left at 3 hr, 99.9% gone at 7.6 hr.
+B1T = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+B1C = [2.52, 1.59, 1.00, 0.64, 0.40, 0.25]
+B1K = round(math.log(1.59 / 0.64) / 1.0, 4)          # 0.91
+B1T12 = 0.693 / 0.91
+B1C0 = 0.40 * math.exp(0.91 * 2.5)                   # 3.89
+B1VD = 50 / 3.89
+B1CL = 12.85 * 0.91
+b1line = lambda t: 3.89 * math.exp(-0.91 * t)
+bs = Plot(8, [0.1, 1, 10], log=True, xlabel='Time (hours)', ylabel='Concentration (mg/L, log scale)',
+          w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
+bs.frame([0, 1, 2, 3, 4, 5, 6, 7, 8])
+heading(bs, 'A 50 mg IV bolus: her six plasma concentrations',
+        'Measured at 0.5 to 3 hours; the line and every value are worked from them.', big=1.0)
+
+
+def b1_s1(pl):
+    pl.points(B1T, B1C)
+    for t, c in zip(B1T, B1C):
+        pl.text(t + 0.12, c, '%.2f' % c, size=13, dy=4)
+    pl.text(3.4, 3.0, 'the points fall on a straight line on a log axis', size=14, color=DIM)
+
+
+def b1_s2(pl):
+    b1_s1(pl)
+    seg(pl, 1.0, 2.0, b1line, color=AMBER)
+    pl.points([1.0, 2.0], [1.59, 0.64], color=AMBER)
+    pl.text(2.15, 1.1, 'slope between 1 and 2 hr', size=13, color=AMBER)
+
+
+def b1_s3(pl):
+    b1_s2(pl)
+    seg(pl, 0.0, 3.0, b1line, color=BLUE, dash='6 5')
+    pl.points([0], [3.89], color=AMBER)
+    pl.text(0.12, 3.89, 'C0 = 3.89', size=14, dy=-10)
+
+
+def b1_s4(pl):
+    b1_s3(pl)
+    pl.text(4.6, 2.0, 'VD = 12.85 L', size=14)
+    pl.text(4.6, 1.3, 'ClT = 11.7 L/hr', size=14)
+
+
+def b1_s5(pl):
+    b1_s3(pl)
+    seg(pl, 3.0, 7.6, b1line, color=BLUE, dash='6 5')
+    pl.vline(7.6, b1line(7.6)); pl.points([7.6], [b1line(7.6)])
+    pl.text(5.1, 0.17, 'ten half-lives: 0.1% left', size=13, color=DIM)
+    pl.points([3.0], [0.25], color=AMBER); pl.text(3.4, 0.55, '3 hr: 3.2 mg in the body', size=13)
+
+
+stepped('bolus1_steps', 'One-compartment IV bolus, from her data to every answer', bs, [
+    ('the data', lines(
+        'A 50 mg dose was given by IV bolus, all at once into a vein. The six measured concentrations are plotted on a log axis.',
+        'They fall on a straight line, so the drug is eliminated by a first-order process (a fixed fraction leaves each hour) and one compartment describes it.'), b1_s1),
+    ('the slope gives k', lines(
+        'k, the elimination rate constant, is the slope of the log line. Between 1 and 2 hr: k = {{frac:ln 1.59 − ln 0.64|2 hr − 1 hr}} = %.2f hr⁻¹.' % B1K,
+        'The half-life, the time for the concentration to halve: t½ = {{frac:0.693|%.2f hr⁻¹}} = %.2f hr.' % (B1K, B1T12)), b1_s2),
+    ('back to time zero', lines(
+        'C0 is the concentration the dose would give at time zero, before any elimination. It is read by extending the line back to t = 0.',
+        'From her 2.5-hr point: C0 = 0.40 × e^(0.91 × 2.5) = %.2f mg/L.' % B1C0), b1_s3),
+    ('volume and clearance', lines(
+        'VD, the apparent volume of distribution, is the dose over C0: VD = {{frac:50 mg|3.89 mg/L}} = %.2f L.' % B1VD,
+        'ClT, total body clearance, is the volume cleared of drug per hour: ClT = k × VD = 0.91 × 12.85 = %.1f L/hr.' % B1CL), b1_s4),
+    ('how long it lasts', lines(
+        'The amount in the body at 3 hr is the volume times the concentration: 12.85 L × 0.25 mg/L = %.1f mg.' % (12.85 * 0.25),
+        'Each half-life removes half of what is left, so ten half-lives leave 0.1%%: 99.9%% is gone at 10 × 0.76 = %.1f hr.' % (10 * 0.76)), b1_s5),
+], footer='IV-Bolus-Practice-1---Solutions.pdf')
+
+
+# (2) IV infusion: her in-class IV Infusions set, parts 1, 3 and 4.
+# t½ 5 hr (k 0.1386 hr-1), VD 16 L, target Css 20 mg/L, so R = 44.35 mg/hr.
+# Part 3: 3-hour infusion ends at 6.8 mg/L; part 4: 4 hr later, 3.9 mg/L.
+IK2, IV2, IR2 = 0.1386, 16.0, 44.35
+ICSS = IR2 / (IK2 * IV2)
+inf_on = lambda t: ICSS * (1 - math.exp(-IK2 * t))
+inf_stop3 = lambda t: inf_on(3.0) * math.exp(-IK2 * (t - 3.0))
+ins = Plot(30, [0, 5, 10, 15, 20, 25], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+           w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
+ins.frame([0, 5, 10, 15, 20, 25, 30])
+heading(ins, 'An infusion at 44.35 mg/hr: t½ 5 hr, VD 16 L',
+        'Her in-class set: the rate that holds 20 mg/L, and what a 3-hour infusion leaves.', big=1.0)
+
+
+def in_s1(pl):
+    seg(pl, 0, 3, inf_on)
+    pl.points([3], [inf_on(3)]); pl.text(3.3, inf_on(3), '%.1f at 3 hr' % inf_on(3), size=14, dy=-6)
+
+
+def in_s2(pl):
+    seg(pl, 0, 30, inf_on)
+    pl.hline(ICSS, color=DIM); pl.text(0.4, ICSS + 0.8, 'Css = 20 mg/L', size=14, color=DIM)
+    for n, t in ((1, 5), (3, 15), (5, 25)):
+        pl.points([t], [inf_on(t)])
+        pl.text(t + 0.4, inf_on(t) - 1.4, '%d t½: %.1f' % (n, inf_on(t)), size=13)
+
+
+def in_s3(pl):
+    in_s2(pl)
+    seg(pl, 3, 14, inf_stop3, color=AMBER, dash='6 5')
+    pl.points([3, 7], [inf_on(3), inf_stop3(7)], color=AMBER)
+    pl.text(7.3, inf_stop3(7), '%.1f, 4 hr after stopping at 3 hr' % inf_stop3(7), size=13, color=AMBER, dy=6)
+
+
+stepped('infusion_steps', 'IV infusion: the climb to steady state, and the fall when it stops', ins, [
+    ('the infusion starts', lines(
+        'Drug runs in at a constant rate, R = 44.35 mg/hr, chosen so the plateau will be 20 mg/L. A constant rate in is a zero-order input.',
+        'Elimination is first order with k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹, so the amount leaving per hour grows as the level grows.',
+        'Three hours in: C = {{frac:R|VD × k}}(1 − e^(−kt)) = {{frac:44.35|16 × 0.1386}}(1 − e^(−0.1386 × 3)) = %.1f mg/L, her part 3.' % inf_on(3)), in_s1),
+    ('the climb to steady state', lines(
+        'Css, the steady-state concentration, is where rate in equals rate out: Css = {{frac:R|k × VD}} = {{frac:44.35|0.1386 × 16}} = %.0f mg/L.' % ICSS,
+        'The climb is set by the half-life alone: after 1 half-life (5 hr) the level is half of Css, %.1f; after 3 half-lives (15 hr) 87.5%%, %.1f; after 5 half-lives (25 hr) 96.9%%, %.1f.' % (inf_on(5), inf_on(15), inf_on(25)),
+        'A faster rate would raise the plateau, not shorten the climb.'), in_s2),
+    ('if it stops at 3 hr', lines(
+        'Her part 4: the infusion is switched off at 3 hr, at %.1f mg/L. Nothing comes in, so the level falls by first-order elimination alone.' % inf_on(3),
+        'Four hours later: C = %.1f × e^(−0.1386 × 4) = %.1f mg/L.' % (inf_on(3), inf_stop3(7))), in_s3),
+], footer='In-Class IV Infusions - Solutions.pdf, parts 1, 3 and 4')
+
+
+# (3) Loading dose with an infusion: the same in-class set, parts 1 and 2.
+# DL = Css × VD = 320 mg; at 3 hr the bolus part is 13.2 and the infusion
+# part 6.8, which add to 20 mg/L, the steady-state level, from the start.
+LDL = ICSS * IV2
+ld_bolus = lambda t: (LDL / IV2) * math.exp(-IK2 * t)
+ld_sum = lambda t: ld_bolus(t) + inf_on(t)
+lds = Plot(24, [0, 5, 10, 15, 20, 25], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+           w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
+lds.frame([0, 4, 8, 12, 16, 20, 24])
+heading(lds, 'A 320 mg loading dose with the 44.35 mg/hr infusion',
+        'Her in-class set, part 2: the two parts at 3 hours, and their sum.', big=1.0)
+
+
+def ld_s1(pl):
+    seg(pl, 0, 24, ld_bolus, color=AMBER, dash='6 5')
+    pl.points([3], [ld_bolus(3)], color=AMBER); pl.text(3.3, ld_bolus(3), 'bolus part: %.1f at 3 hr' % ld_bolus(3), size=13, color=AMBER, dy=-6)
+
+
+def ld_s2(pl):
+    ld_s1(pl)
+    seg(pl, 0, 24, inf_on, color=AMBER, dash='2 5')
+    pl.points([3], [inf_on(3)], color=AMBER); pl.text(3.3, inf_on(3), 'infusion part: %.1f at 3 hr' % inf_on(3), size=13, color=AMBER, dy=12)
+
+
+def ld_s3(pl):
+    ld_s2(pl)
+    seg(pl, 0, 24, ld_sum, color=BLUE)
+    pl.points([3], [ld_sum(3)]); pl.text(3.3, ld_sum(3) + 0.6, 'sum: %.0f mg/L, flat from the start' % ld_sum(3), size=14)
+
+
+def ld_s4(pl):
+    seg(pl, 0, 24, ld_sum, color=BLUE)
+    seg(pl, 0, 24, inf_on, color=AMBER, dash='2 5')
+    pl.points([16.6], [inf_on(16.6)], color=AMBER)
+    pl.text(10.0, inf_on(16.6) - 2.6, 'infusion alone: 90% of Css only at 16.6 hr', size=13, color=AMBER)
+
+
+stepped('loading_steps', 'Loading dose with an infusion: why the level is flat from the start', lds, [
+    ('the bolus part', lines(
+        'DL, the loading dose, is the amount in the body at steady state: DL = Css × VD = 20 mg/L × 16 L = %.0f mg, her part 1.' % LDL,
+        'On its own that bolus starts at {{frac:320 mg|16 L}} = 20 mg/L and falls by first-order elimination: at 3 hr, 20 × e^(−0.1386 × 3) = %.1f mg/L.' % ld_bolus(3)), ld_s1),
+    ('the infusion part', lines(
+        'The infusion on its own climbs toward Css: at 3 hr, {{frac:44.35|16 × 0.1386}}(1 − e^(−0.1386 × 3)) = %.1f mg/L.' % inf_on(3)), ld_s2),
+    ('the sum', lines(
+        'The two run at once, so the concentrations add: %.1f + %.1f = %.0f mg/L at 3 hr, her part 2.' % (ld_bolus(3), inf_on(3), ld_sum(3)),
+        'What the bolus part loses each hour the infusion part gains, so the sum stays at Css from the first minute.'), ld_s3),
+    ('without the loading dose', lines(
+        'The infusion alone reaches 90%% of Css only when 1 − e^(−kt) = 0.9, at t = {{frac:ln 10|0.1386 hr⁻¹}} = %.1f hr.' % (math.log(10) / IK2),
+        'The loading dose replaces that wait; it does not change the plateau, which the rate sets.'), ld_s4),
+], footer='In-Class IV Infusions - Solutions.pdf, parts 1 and 2')
+
+
+# (4) Single oral dose: her Example 1 (5---Pharmacokinetics-of-Oral-Absorption).
+# 500 mg, F 0.85, VD 22 L, absorption t½ 45 min, elimination t½ 3 hr. Her
+# answers: tmax 2 hr, Cmax 12.17 mg/L.
+OF, OD, OV = 0.85, 500.0, 22.0
+OKA, OK = 0.693 / 0.75, 0.693 / 3
+OA = OF * OD * OKA / (OV * (OKA - OK))
+oral1 = lambda t: OA * (math.exp(-OK * t) - math.exp(-OKA * t))
+OTMAX = math.log(OKA / OK) / (OKA - OK)
+OCMAX = oral1(OTMAX)
+ors = Plot(12, [0, 5, 10, 15], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+           w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
+ors.frame([0, 2, 4, 6, 8, 10, 12])
+heading(ors, 'A single 500 mg oral dose: her Example 1',
+        'F 0.85, VD 22 L, absorption t½ 45 min, elimination t½ 3 hr.', big=1.0)
+
+
+def or_s1(pl):
+    seg(pl, 0, OTMAX, oral1)
+    pl.text(0.3, 9.0, 'absorption faster than elimination: the level rises', size=13, color=DIM)
+
+
+def or_s2(pl):
+    or_s1(pl)
+    pl.points([OTMAX], [OCMAX]); pl.vline(OTMAX, OCMAX)
+    pl.text(OTMAX + 0.25, OCMAX + 0.3, 'Cmax %.2f at tmax %.0f hr' % (OCMAX, OTMAX), size=14)
+
+
+def or_s3(pl):
+    or_s2(pl)
+    seg(pl, OTMAX, 12, oral1)
+    pl.points([8], [oral1(8)]); pl.text(8.3, oral1(8) + 0.4, '%.2f at 8 hr' % oral1(8), size=13)
+    pl.text(6.0, 7.4, 'elimination faster than absorption: the level falls', size=13, color=DIM)
+
+
+def or_s4(pl):
+    seg(pl, 0, 12, oral1)
+    seg(pl, 0, 12, lambda t: OA * math.exp(-OK * t), color=AMBER, dash='6 5')
+    seg(pl, 0, 3.5, lambda t: OA * math.exp(-OKA * t), color=AMBER, dash='2 5')
+    pl.text(0.2, 13.9, '25.76 e^(−kt), the elimination term', size=13, color=AMBER)
+    pl.text(1.1, 1.0, '25.76 e^(−ka t), the absorption term', size=13, color=AMBER)
+    pl.text(6.0, 11.0, 'the curve is the difference of the two', size=13, color=DIM)
+
+
+stepped('oral_steps', 'A single oral dose, from her Example 1 to the peak and beyond', ors, [
+    ('absorption wins', lines(
+        'Only F = 0.85 of the 500 mg tablet reaches the blood, and it enters by first-order absorption with ka = {{frac:0.693|0.75 hr}} = %.3f hr⁻¹.' % OKA,
+        'It leaves by first-order elimination with k = {{frac:0.693|3 hr}} = %.3f hr⁻¹. Early on far more enters per hour than leaves, so the level rises.' % OK), or_s1),
+    ('the peak', lines(
+        'tmax, the time of the peak, depends on the two rate constants only: tmax = {{frac:ln(ka ÷ k)|ka − k}} = {{frac:ln 4|0.693}} = %.1f hr.' % OTMAX,
+        'Cmax, the peak concentration, is the curve at tmax: Cmax = {{frac:F ka D0|VD (ka − k)}}(e^(−k tmax) − e^(−ka tmax)) = %.2f mg/L, her answer.' % OCMAX,
+        'At the peak the rate of absorption equals the rate of elimination.'), or_s2),
+    ('elimination wins', lines(
+        'After tmax more leaves per hour than enters, so the level falls. At 8 hr: %.2f mg/L.' % oral1(8),
+        'Once the absorption site is empty the fall is elimination alone, with the slope k.'), or_s3),
+    ('the two terms behind the curve', lines(
+        'The equation is a difference of two exponentials with the same front factor, {{frac:F ka D0|VD (ka − k)}} = %.2f mg/L.' % OA,
+        'The elimination term, 25.76 e^(−kt), falls slowly; the absorption term, 25.76 e^(−ka t), falls fast. The curve is the first minus the second.',
+        'The front factor is not C0: no concentration on an oral curve is ever as high as it.'), or_s4),
+], footer='5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; transcript 09-21')
+
+
+# (5) Multiple oral doses: her tetracycline Example 1 (6a---Multiple-Oral-Doses).
+# 250 mg every 8 hr, F 0.75, VD 1.5 L/kg × 75 kg = 112.5 L, t½ 10 hr, ka 0.9.
+# Her answers: first-dose tmax 3.1 hr, Cmax 1.35 mg/L; steady-state tmax 2.06
+# hr; steady-state Cmax and Cmin from her inputs 3.39 and 2.44; Cavg 3.01.
+MF, MD, MV, MKA, MK, MTAU2 = 0.75, 250.0, 112.5, 0.9, 0.693 / 10, 8.0
+MA = MF * MD * MKA / (MV * (MKA - MK))
+m_one = lambda t: MA * (math.exp(-MK * t) - math.exp(-MKA * t)) if t >= 0 else 0.0
+m_tot = lambda t: sum(m_one(t - i * MTAU2) for i in range(10))
+MT1 = math.log(MKA / MK) / (MKA - MK)
+MTSS = math.log(MKA * (1 - math.exp(-MK * MTAU2)) / (MK * (1 - math.exp(-MKA * MTAU2)))) / (MKA - MK)
+MACC = 1 / (1 - math.exp(-MK * MTAU2))
+MCMAXSS = (MF * MD / MV) * MACC * math.exp(-MK * MTSS)
+MCMINSS = (MKA * MF * MD / (MV * (MKA - MK))) * MACC * math.exp(-MK * MTAU2)
+MCAVG = MF * MD / (MV * MK * MTAU2)
+mos = Plot(80, [0, 1, 2, 3, 4], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
+           w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
+mos.frame([0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80])
+heading(mos, '250 mg tetracycline every 8 hours: her Example 1',
+        'F 0.75, VD 112.5 L, t½ 10 hr, ka 0.9 hr⁻¹.', big=1.0)
+
+
+def mo_s1(pl):
+    seg(pl, 0, 8, m_one)
+    pl.points([MT1], [m_one(MT1)]); pl.text(MT1 + 0.6, m_one(MT1) + 0.12, 'dose 1: Cmax %.2f at %.1f hr' % (m_one(MT1), MT1), size=13)
+
+
+def mo_s2(pl):
+    mo_s1(pl)
+    seg(pl, 8, 16, m_tot)
+    seg(pl, 8, 16, lambda t: m_one(t), color=AMBER, dash='6 5')
+    pl.text(16.6, 0.45, 'dose 2 on top of what is left', size=13, color=DIM)
+
+
+def mo_s3(pl):
+    seg(pl, 0, 72, m_tot)
+    seg(pl, 0, 24, lambda t: m_one(t), color=AMBER, dash='6 5')
+    pl.label(26, 0.45, 'the first dose alone', color=AMBER, swatch=True)
+    pl.text(40, 3.75, 'peaks climb less each time', size=13, color=DIM)
+
+
+def mo_s4(pl):
+    mo_s3(pl)
+    seg(pl, 72, 80, m_tot)
+    pl.hline(MCMAXSS, color=BLUE); pl.hline(MCMINSS, color=BLUE); pl.hline(MCAVG, color=AMBER)
+    pl.text(79, MCMAXSS + 0.12, 'Cmax∞ %.2f' % MCMAXSS, size=13, anchor='end')
+    pl.text(79, MCAVG - 0.2, 'Cavg∞ %.2f' % MCAVG, size=13, anchor='end', color=AMBER)
+    pl.text(79, MCMINSS - 0.2, 'Cmin∞ %.2f' % MCMINSS, size=13, anchor='end')
+
+
+stepped('md_oral_steps', 'Multiple oral doses, dose by dose: her tetracycline example', mos, [
+    ('dose 1', lines(
+        'Each dose is 250 mg by mouth; F = 0.75 of it reaches the blood. VD is 1.5 L/kg × 75 kg = 112.5 L.',
+        'k = {{frac:0.693|10 hr}} = %.4f hr⁻¹ and ka = 0.9 hr⁻¹, so each dose on its own rises to a peak and falls, like a single oral dose.' % MK,
+        'First-dose tmax = {{frac:ln(ka ÷ k)|ka − k}} = %.1f hr and Cmax = %.2f mg/L, her answers.' % (MT1, m_one(MT1))), mo_s1),
+    ('dose 2', lines(
+        'Dose 2 at 8 hr adds its own curve on top of what is left of dose 1 (superposition: later doses do not change k, ka, F or VD).',
+        'So the second peak is higher than the first, and the level just before dose 3 is higher than it was before dose 2.'), mo_s2),
+    ('the climb', lines(
+        'Every dose adds the same curve to a larger remainder. The half-life is 10 hr, so the climb is over within 3 to 5 half-lives, 30 to 50 hours.',
+        'The accumulation factor {{frac:1|1 − e^(−kτ)}} = {{frac:1|1 − e^(−0.0693 × 8)}} = %.2f says how much higher the steady-state peak sits than the first-dose peak.' % MACC), mo_s3),
+    ('steady state', lines(
+        'At steady state the peak comes earlier in the interval: tmax∞ = %.2f hr after a dose, her answer, against %.1f hr for the first dose.' % (MTSS, MT1),
+        'Cmax∞ = {{frac:F D0|VD}}({{frac:1|1 − e^(−kτ)}})e^(−k tmax∞) = %.2f mg/L; Cmin∞, at the end of the interval, = %.2f mg/L; Cavg∞ = {{frac:F D0|VD k τ}} = %.2f mg/L.' % (MCMAXSS, MCMINSS, MCAVG),
+        'Her spoken values were about 3.3, 2.4 and 3; these are what her inputs give.'), mo_s4),
+], footer='6a---Multiple-Oral-Doses.pdf, Example 1; transcript 09-28')
+
+
+# (6) Two-compartment IV bolus: her theophylline practice slide.
+# Cp = 12 e^(−5.8t) + 18 e^(−0.16t), mg/L and hours. Her answer at 3 hr:
+# 11.14 mg/L; t½β 4.33 hr.
+TA, TAL, TB, TBE = 12.0, 5.8, 18.0, 0.16
+two_all = lambda t: TA * math.exp(-TAL * t) + TB * math.exp(-TBE * t)
+two_b = lambda t: TB * math.exp(-TBE * t)
+two_a = lambda t: TA * math.exp(-TAL * t)
+tws = Plot(8, [1, 10, 100], log=True, xlabel='Time (hours)', ylabel='Concentration (mg/L, log scale)',
+           w=720, h=520, l=76, r=24, t=96, b=62, fs=1.3)
+tws.frame([0, 1, 2, 3, 4, 5, 6, 7, 8])
+heading(tws, 'Theophylline after an IV bolus: her practice slide',
+        'Cp = 12e^(−5.8t) + 18e^(−0.16t), in mg/L and hours, on a log axis.', big=1.0)
+
+
+def tw_s1(pl):
+    seg(pl, 0, 8, two_all)
+    pl.points([0], [two_all(0)]); pl.text(0.15, 30, 'C0 = 12 + 18 = 30', size=14, dy=-8)
+    pl.text(0.5, 60, 'steep at first, then one straight line', size=13, color=DIM)
+
+
+def tw_s2(pl):
+    tw_s1(pl)
+    seg(pl, 0, 8, two_b, color=AMBER, dash='6 5')
+    pl.points([0], [TB], color=AMBER); pl.text(0.15, TB, 'B = 18', size=14, color=AMBER, dy=14)
+    pl.text(4.2, two_b(4.2), 'slope β = 0.16 hr⁻¹', size=13, color=AMBER, dy=-10)
+
+
+def tw_s3(pl):
+    tw_s2(pl)
+    seg(pl, 0, 1.0, two_a, color=AMBER, dash='2 5')
+    pl.points([0], [TA], color=AMBER); pl.text(0.15, TA, 'A = 12', size=14, color=AMBER, dy=14)
+    pl.text(1.1, 2.5, 'residuals: curve minus the line, slope α = 5.8 hr⁻¹', size=13, color=AMBER)
+
+
+def tw_s4(pl):
+    seg(pl, 0, 8, two_all)
+    seg(pl, 0, 8, two_b, color=AMBER, dash='6 5')
+    pl.vline(3, two_all(3)); pl.points([3], [two_all(3)])
+    pl.text(3.15, two_all(3), '%.2f at 3 hr' % two_all(3), size=14, dy=-8)
+
+
+stepped('twocpt_steps', 'Two-compartment IV bolus: reading A, B, α and β off her theophylline curve', tws, [
+    ('the curve', lines(
+        'After the bolus the drug is all in the central compartment (the blood and the organs it reaches at once). It then moves into a tissue compartment and back, and leaves from the central one.',
+        'On a log axis the curve is steep at first, while drug is still spreading into tissue, then becomes one straight line once the two compartments are in balance.',
+        'C0, the concentration at time zero, is the sum of the two intercepts: 12 + 18 = 30 mg/L.'), tw_s1),
+    ('the terminal line', lines(
+        'The straight part is the elimination phase, 18 e^(−0.16t). Extending it back to t = 0 gives the intercept B = 18 mg/L; its slope is β = 0.16 hr⁻¹.',
+        'β sets the elimination half-life: t½β = {{frac:0.693|0.16 hr⁻¹}} = %.2f hr.' % (0.693 / TBE)), tw_s2),
+    ('the residuals', lines(
+        'Subtracting the terminal line from the early part of the curve leaves the distribution term, 12 e^(−5.8t): intercept A = 12 mg/L, slope α = 5.8 hr⁻¹.',
+        'α is the larger constant, so this term is gone within an hour; that is why the early fall is steep.'), tw_s3),
+    ('read at 3 hr', lines(
+        'Put t = 3 into both terms: 12 × e^(−5.8 × 3) = %.4f, effectively nothing, and 18 × e^(−0.16 × 3) = %.2f.' % (two_a(3), two_b(3)),
+        'Cp at 3 hr = %.2f mg/L, her answer. Only the β term is left by then.' % two_all(3)), tw_s4),
+], footer='2IVBolusAdministration.pdf, slide "Practice" (theophylline)')
+
+
 # ---- the eight dosing models, one panel each, on the same unnumbered axes ---
 # Shapes only: the axes carry no numbers, so nothing here is a value from a
 # slide. The same k is used in every panel so the curves differ only by how
