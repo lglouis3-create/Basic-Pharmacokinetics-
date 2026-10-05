@@ -178,15 +178,15 @@ const Q_MODULE4 = [
 {id:'m4-cl-5', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'clcalc', concept:'clearance-auc', skill:'read',
  source:'both',
- stem:'In the relationship Cl = FD0/AUC, what does the capital F represent, and what value does it take for an intravenously administered dose?',
+ stem:'In the relationship Cl = FD0/AUC, what does the capital F represent?',
  options:[
-  {t:'The bioavailability factor, taken as 1 for an intravenous dose', correct:true,
+  {t:'The bioavailability factor', correct:true,
    why:'Capital F is the bioavailability factor: the fraction of the dose that reaches the systemic circulation. An intravenous dose goes straight into the circulation, so F is taken as 1, and in this module the relationship becomes clearance = {{frac:dose|AUC}}.'},
-  {t:'The fraction excreted unchanged, taken as 1 for an intravenous dose', correct:false,
+  {t:'The fraction excreted unchanged',
    why:'Lowercase fe (fraction excreted unchanged) is a different quantity, and it is never 1 for a drug that is also metabolised. An intravenous drug can be fully bioavailable and still have most of its dose metabolised rather than excreted. Mosley separates the two symbols explicitly because they are the commonest pair to confuse.'},
-  {t:'The free fraction of drug in plasma, taken as 1 for an intravenous dose', correct:false,
+  {t:'The free fraction of drug in plasma',
    why:'Picking this mistakes F for a fraction of drug: it is the fraction of the dose that arrives, not the unbound fraction. An intravenous dose puts all the drug in the circulation but does not stop it binding to plasma protein, so a free fraction of 1 does not follow. Route decides arrival; binding decides how much is unbound.'},
-  {t:'The fraction of drug metabolised, taken as 1 for an intravenous dose', correct:false,
+  {t:'The fraction of drug metabolised',
    why:'Choosing this substitutes the fraction metabolised for the fraction that reached the circulation. A metabolised fraction of 1 would leave nothing excreted unchanged, so renal clearance (fe × total clearance) would be zero. The worked 500-mg example recovers 300 mg unchanged in urine, which contradicts this.'}],
  teach:[
  {h:'The idea', list:[
@@ -212,13 +212,13 @@ const Q_MODULE4 = [
 {id:'m4-cl-7', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'clcalc', concept:'fe-vs-F', skill:'tell',
  source:'both',
- stem:'A question gives both a lowercase fe and a capital F for the same drug. What does each one measure?',
+ stem:'What do the lowercase fe and the capital F each represent?',
  options:[
   {t:'fe is the fraction excreted unchanged; F is the bioavailability factor', correct:true,
    why:'Lowercase fe is the fraction of the dose that appears unchanged in urine: cumulative urinary {{frac:amount|dose}}. Capital F is the fraction of the dose that reached the systemic circulation. The symbols look alike but measure opposite ends: F on the way in, fe on the way out.'},
   {t:'fe is the free fraction; F is the fraction excreted unchanged', correct:false,
    why:'Choosing this misreads the e in fe as free; it stands for excreted, and protein binding plays no part in either symbol. Reading fe as a free fraction shifts the labels, so the fraction excreted unchanged lands on capital F, which is actually the bioavailability factor.'},
-  {t:'fe is the bioavailability factor; F is the fraction excreted unchanged in urine', correct:false,
+  {t:'fe is the bioavailability factor; F is the fraction excreted unchanged',
    why:'This swaps the two symbols. Renal clearance would become F × total clearance; for an intravenous dose, where F is 1, renal clearance would equal total clearance and hepatic clearance would be zero. Lowercase fe is the fraction recovered unchanged in urine; capital F is the fraction that reached the circulation.'},
   {t:'fe is the fraction metabolised; F is the fraction eliminated', correct:false,
    why:'The fraction metabolised is one minus fe, not fe itself, so this reverses the quantity that urine collection actually measures. Calling F a fraction eliminated also confuses input with output, since bioavailability is settled before any elimination has happened.'}],
@@ -967,7 +967,7 @@ const Q_MODULE4 = [
 {id:'m4-cr-2', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'crclcalc', concept:'creatinine-vs-inulin', skill:'tell',
  source:'both',
- stem:'Inulin is almost completely filtered and is not appreciably secreted, yet creatinine clearance is what is used to estimate glomerular filtration rate in practice. Why?',
+ stem:'Why is creatinine clearance, rather than inulin clearance, used in practice to estimate the glomerular filtration rate?',
  options:[
   {t:'Creatinine is already in the body; inulin must be given', correct:true,
    why:'Creatinine comes from the breakdown of muscle, so it can be measured in a routine serum sample without giving the patient anything. Inulin is not native to the body: it has to be administered, and the procedure is longer. Inulin is the better marker kinetically but is ruled out on practical grounds.'},
@@ -1004,7 +1004,7 @@ const Q_MODULE4 = [
 {id:'m4-cr-5', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'crclcalc', concept:'equation-sheet-carveout', skill:'recall',
  source:'transcript',
- stem:'Which relationships in this module must be supplied from memory rather than read off the equation sheet provided in the exam?',
+ stem:'Which of the following is not on the equation sheet and must be known from memory?',
  options:[
   {t:'The Cockcroft-Gault equation and the ideal body weight formulas', correct:true,
    why:'Dr. Mosley states that the Cockcroft-Gault equation is not on the equation sheet she handed out, so it has to be known. The same holds for the male and female ideal body weight formulas. Both are needed for a creatinine clearance calculation, which cannot be started without them.'},
@@ -1428,13 +1428,13 @@ const Q_MODULE4 = [
  source:'slide',
  stem:'The reabsorption of weak acids and weak bases from the renal tubule is influenced by which two factors?',
  options:[
-  {t:'The pH of the fluid in the renal tubule and the pKa of the drug', correct:true,
+  {t:'The pH of the tubular fluid and the pKa of the drug', correct:true,
    why:'Reabsorption of weak acids and weak bases depends on the pH of the fluid in the renal tubule and the pKa of the drug (slide 20). Together these fix the degree of ionization, which the Henderson-Hasselbalch expressions calculate. Put another way, reabsorption depends on urine pH and the drug’s degree of ionization.'},
   {t:'The pH of the plasma and the molecular weight of the drug', correct:false,
    why:'Picking this substitutes plasma pH for the pH of the tubular fluid, where reabsorption happens. Plasma pH is tightly regulated, so it cannot explain differences between drugs or patients; molecular weight does not enter the ionization calculation. The tubular pH and the drug’s pKa together fix the degree of ionization.'},
   {t:'The glomerular filtration rate and the pKa of the drug', correct:false,
    why:'Picking this keeps the pKa but substitutes delivery for the tubular pH. The filtration rate sets how much drug enters the lumen, not how much crosses back into the blood; that depends on the non-ionized fraction, set by the tubular pH against the pKa. Changing urine pH changes reabsorption without changing the filtration rate.'},
-  {t:'The rate of urine flow and the plasma protein binding of the drug', correct:false,
+  {t:'Urine flow rate and plasma protein binding of the drug', correct:false,
    why:'Neither factor enters the ionization calculation that governs reabsorption. Protein binding acts earlier, deciding how much free drug is available to be filtered, not what happens to filtered drug in the lumen. This answer also leaves out the pKa, which with the tubular pH is one of the two factors.'}],
  teach:[
  {h:'The idea', list:[

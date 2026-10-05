@@ -103,7 +103,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'Why is a drug given as repeated short intravenous (IV) infusions rather than as repeated IV bolus injections?',
  options:[
-  {t:'To avoid high concentrations and the side effects that go with them', correct:true,
+  {t:'To prevent high concentrations and their side effects', correct:true,
    why:'A bolus puts the whole dose into the plasma at once, so the concentration peaks at that moment. Spreading the same dose over an infusion keeps the peak lower, and many drugs are better tolerated infused slowly than pushed all at once.'},
   {t:'To reach steady state sooner',
    why:'This confuses the route with the time to plateau. Steady state takes 3 to 5 half-lives however the drug is given, because first-order elimination sets that time, not the input.'},
@@ -126,7 +126,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'A drug is given as a series of 2-hour intravenous (IV) infusions. Which equation gives the plasma concentration at the end of one infusion?',
  options:[
-  {t:'Cp = R/(VD k) × (1 − e^(−kt)), with t the infusion time', correct:true,
+  {t:'Cp = R/(VD k) × (1 − e^(−kt))', correct:true,
    why:'Each infusion is a constant-rate input, so during it the concentration follows the single-infusion equation. R is the dose divided by the duration, and t runs only to the end of the infusion.'},
   {t:'Cp = C0e^(−kt)',
    why:'This is the decline after the infusion stops, not the rise during it. The concentration at the end of the infusion, C0, has to be found first; this equation is then applied to it. Choosing this skips the step that produces C0: the concentration at the end of the infusion has to be found first, and this equation is then applied to it.'},
@@ -218,13 +218,13 @@ const Q_MODULE6B = [
  source:'both',
  stem:'A drug is given either as repeated intravenous (IV) bolus injections or as repeated 2-hour IV infusions, same dose and same interval. Where does each interval\'s peak occur?',
  options:[
-  {t:'Bolus: at the moment of the dose; infusion: at the end of the infusion', correct:true,
+  {t:'Bolus: when the dose is given; infusion: when the infusion ends', correct:true,
    why:'A bolus goes in all at once, so its peak is the instant it is given. An infusion keeps adding drug until the pump stops, so its highest point is the end of the infusion, where the decline starts.'},
-  {t:'Both at the moment the dose starts',
+  {t:'Both when the dose starts',
    why:'This treats the infusion as a bolus. When an infusion starts nothing has gone in yet; the concentration rises during the infusion and peaks only at its end.'},
   {t:'Both at the end of the dosing interval',
    why:'This reverses peak and trough. The end of the interval, just before the next dose, is where the concentration is lowest for either route.'},
-  {t:'Bolus: at the end of the infusion; infusion: at the moment of the dose',
+  {t:'Bolus: when the infusion ends; infusion: when the dose is given',
    why:'This swaps the two routes. A bolus has no infusion time, and an infusion has no single moment at which the dose is in.'}],
  teach:[
   {h:'The idea', list:[
@@ -246,13 +246,13 @@ const Q_MODULE6B = [
  source:'both',
  stem:'A second 2-hour intravenous (IV) infusion of the same dose starts 6 hours after the first began. What value of t goes into (1 − e^(−kt)) to find the concentration at the end of the second infusion?',
  options:[
-  {t:'2 hours, the duration of the infusion', correct:true,
+  {t:'2 hours', correct:true,
    why:'The (1 − e^(−kt)) term describes the rise while drug is going in, so its t is how long the pump ran. Every infusion in the series runs 2 hours, so each reaches the same end-of-infusion concentration, 17.28 mg/L in her Example 4.'},
-  {t:'6 hours, the time since the first infusion started',
+  {t:'6 hours',
    why:'This puts the clock time into an equation that only uses how long drug has been going in. The 6 hours places the second infusion on the time line; its rise depends only on its own 2-hour duration. Choosing this puts the clock time into an equation that only knows how long the drug has been going in.'},
-  {t:'8 hours, the time the second infusion ends',
+  {t:'8 hours',
    why:'This confuses when the infusion ends with how long it ran. Eight hours is where the second peak sits on the number line; the rise to that peak took 2 hours.'},
-  {t:'4 hours, the gap between the first infusion ending and the second starting',
+  {t:'4 hours',
    why:'This attaches the gap between the infusions to the rise. During the gap the first dose declines; the second dose rises over the same 2-hour climb from zero as the first. Choosing this attaches the gap between the infusions to the rise.'}],
  teach:[
   {h:'The idea', list:[
@@ -552,14 +552,14 @@ const Q_MODULE6B = [
 {id:'m6b-c09', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
  topic:'multoral', sub:'ossc', concept:'interval-changes-tmax-cmax', skill:'apply',
  source:'both',
- stem:'A drug given orally every 6 hours is changed to every 12 hours, same dose. Which steady-state quantities must be recalculated?',
+ stem:'A drug given orally every 6 hours is changed to every 12 hours, same dose. Which of the following must be recalculated?',
  options:[
   {t:'tmax∞ and Cmax∞', correct:true,
    why:'Both carry τ: tmax∞ inside its logarithm, and Cmax∞ through the accumulation factor and through tmax∞ itself. A new interval means a new time to peak and a new peak.'},
   {t:'k and ka',
    why:'This treats the rate constants as adjustable. They belong to the drug and the formulation; a regimen changes only the dose and the interval.'},
-  {t:'Only Cavg∞',
-   why:'The average does change, since τ is in {{frac:FD0|ClT τ}}, but this stops one step short: the peak and its timing change too, because τ appears in both.'},
+  {t:'ClT and Cavg∞',
+   why:'Replaces "Only Cavg∞", which the item\'s own why admits is partly true; ClT is a parameter a regimen cannot change, so the pair is wrong without implying Cavg∞ stays fixed.'},
   {t:'Nothing at steady state',
    why:'This reads steady state as a fixed property of the drug. Steady state is a balance between what is given and what is cleared, and giving the same dose half as often halves the input.'}],
  teach:[
@@ -581,7 +581,7 @@ const Q_MODULE6B = [
    why:'At steady state drug from earlier doses is already in the body, so elimination runs at a higher rate from the moment the new dose is taken, and the rising and falling rates balance sooner. In her tetracycline example tmax falls from 3.1 hours to 2.06 hours.'},
   {t:'It is generally longer',
    why:'This runs the wrong way. Accumulated drug does not delay the peak; it brings it forward, because the elimination rate is already high when absorption begins.'},
-  {t:'It is the same, because k and ka are unchanged',
+  {t:'It is the same',
    why:'This uses single-dose reasoning, where only k and ka matter. The steady-state tmax has τ in it as well, and her worked values differ: 3.1 against 2.06 hours. Choosing this uses the single-dose reasoning, where only k and ka matter.'},
   {t:'It is twice as long',
    why:'This attaches a fixed multiple to a relation that has none. The direction is shorter, and the size of the change depends on k, ka and τ together.'}],
@@ -594,7 +594,7 @@ const Q_MODULE6B = [
  quote:'That steady state TMAX is going to be lower than the T-Max of the first dose, OK?'},
 
 {id:'m6b-c11', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
- topic:'multoral', sub:'ossc', concept:'cmax-ss-higher-oral', skill:'apply',
+ topic:'multoral', sub:'ossc', concept:'cmax-ss-higher-oral', skill:'apply', dupOf:'m6-c16',
  source:'both',
  stem:'A drug is given orally at a fixed dose and interval. How is the peak at steady state expected to compare with the peak after the first dose, and why?',
  options:[
@@ -682,14 +682,14 @@ const Q_MODULE6B = [
  source:'both',
  stem:'A 500-mg oral dose given every 4 hours is changed to 500 mg every 8 hours. What is expected at steady state?',
  options:[
-  {t:'Lower concentrations, a larger swing between peak and trough, and better compliance', correct:true,
+  {t:'Lower concentrations, a larger swing, and better compliance', correct:true,
    why:'The same dose half as often halves the input, so the average falls. Each dose also has longer to be eliminated before the next, so the level drops further between doses and the swing grows. Fewer doses a day are easier to keep to.'},
-  {t:'Lower concentrations and a smaller swing',
-   why:'This pairs the right level with the wrong swing. A longer gap between doses lets the concentration fall further before the next dose, which widens the peak-to-trough difference. Choosing this pairs the right level with the wrong swing.'},
-  {t:'Higher concentrations, because each dose has more time to be absorbed',
-   why:'This confuses absorption with accumulation. A longer interval changes how much of each dose is eliminated before the next arrives, which is more.'},
-  {t:'The same concentrations, because the dose is unchanged',
-   why:'This leaves the interval out of the average. Cavg∞ = {{frac:FD0|ClT τ}}, so doubling τ halves the average even though D0 is the same. Choosing this leaves the interval out of the average.'}],
+  {t:'Lower concentrations, a smaller swing, and better compliance',
+   why:'Compliance added so the four options read in parallel; the swing direction is still the error.'},
+  {t:'Higher concentrations, a smaller swing, and better compliance',
+   why:'Drops the absorption clause; the level direction is still the error.'},
+  {t:'The same concentrations, the same swing, and better compliance',
+   why:'Drops the "dose is unchanged" clause; leaving τ out of the average is still the error.'}],
  teach:[
   {h:'The idea', list:[
     'Method 2 for altering steady state: change the interval, keep the dose.',
@@ -703,7 +703,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'The dosing interval of an oral regimen is shortened from 8 hours to 4 hours, same dose. Why does the fluctuation between peak and trough decrease?',
  options:[
-  {t:'Less time passes between doses, so the level falls less before the next dose', correct:true,
+  {t:'Less time passes between doses, so the level falls less', correct:true,
    why:'The trough is where the next dose interrupts the decline. With 4 hours instead of 8, the decline stops earlier, closer to the peak, so the peak-to-trough gap is smaller even though both are higher.'},
   {t:'Less drug accumulates, so the peaks are lower',
    why:'This has accumulation backwards. A shorter interval leaves more of each dose behind when the next arrives, so more accumulates and the peaks are higher; the swing shrinks because the troughs rise even more.'},
@@ -724,7 +724,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'Equal oral doses of a drug are given every 6 hours in one regimen and every 8 hours in another; ka and k are the same. What differs between the two curves of amount in the body against time?',
  options:[
-  {t:'The plateau is higher with the 6-hour interval; the time to reach it is the same', correct:true,
+  {t:'The 6-hour plateau is higher and is reached in the same time', correct:true,
    why:'Dosing more often puts more drug in per day, so the plateau is higher. The time to plateau is set by the half-life, which is the same for one drug in both regimens, so both curves level off over the same time.'},
   {t:'The 6-hour regimen reaches its plateau sooner',
    why:'This ties the time to plateau to the interval. It depends on the elimination half-life alone: more frequent doses raise the plateau but do not bring it earlier. Choosing this ties the time to plateau to the interval.'},
@@ -746,13 +746,13 @@ const Q_MODULE6B = [
  source:'transcript',
  stem:'A calculation gives a dosing interval of 3.72 hours and an oral dose of 17.29 mg. How should the regimen be written for the patient?',
  options:[
-  {t:'An interval and a dose the patient can actually use, such as every 4 hours and a 20-mg strength', correct:true,
+  {t:'Rounded to a practical interval and a marketed strength', correct:true,
    why:'A patient cannot take a tablet every 3.72 hours, and no 17.29-mg oral dosage form exists, so both are rounded: to an interval a person can keep and a strength that is made. An IV dose can be given to the calculated milligram, because the nurse draws it up.'},
   {t:'Exactly as calculated, to keep the concentrations on target',
    why:'This treats the arithmetic as the regimen. The numbers give the target concentrations only if the patient takes the drug as prescribed, and every 3.72 hours will not be followed.'},
-  {t:'Every 3.72 hours, but round the dose to 17 mg',
+  {t:'Every 3.72 hours, with the dose rounded to 17 mg',
    why:'This rounds the wrong item and leaves the unusable one. The interval is the harder thing for a patient to keep, and an oral dose is limited to the strengths that exist, of which 17 mg is not one. This answer rounds the wrong item and leaves the unusable one.'},
-  {t:'Every 4 hours, but keep 17.29 mg because oral doses are exact',
+  {t:'Every 4 hours, with the dose kept at 17.29 mg',
    why:'This reverses the two routes. It is the IV dose that can be given to the calculated milligram; a solid oral dose comes only in the strengths manufactured.'}],
  teach:[
   {h:'The idea', list:[

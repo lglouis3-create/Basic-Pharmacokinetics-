@@ -461,7 +461,7 @@ const Q_MODULE1 = [
 
 {id:'m1-int-03', type:'match', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
  topic:'intro', sub:'terms', concept:'adme-key-terms', skill:'recall',
- source:'slide',
+ source:'slide', lowYield:true,
  stem:'Match each pharmacokinetic term to the process it names.',
  left:['Absorption','Distribution','Metabolism','Excretion','Elimination','Disposition'],
  right:['Passage of drug molecules from the administration site into systemic circulation',
@@ -540,9 +540,7 @@ const Q_MODULE1 = [
   {t:'Plasma', correct:false,
    why:'Plasma is the liquid left after centrifuging whole blood that was kept from clotting by an anticoagulant, so it still holds fibrinogen, the other clotting factors and all the proteins, including albumin. The difference from serum is whether clotting was prevented or allowed to run.'},
   {t:'Whole blood', correct:false,
-   why:'Whole blood is the sample as drawn by venous puncture with an anticoagulant such as heparin or EDTA, and it contains all the cellular and protein elements. Nothing has been removed from it. Choosing it means stopping at the sample rather than at the fraction the description asks for.'},
-  {t:'Urine', correct:false,
-   why:'Urine is not a blood component at all, and it appears as an option in this material only as a measurement site that is used less often than serum or plasma. Nothing about clotting applies to it.'}],
+   why:'Whole blood is the sample as drawn by venous puncture with an anticoagulant such as heparin or EDTA, and it contains all the cellular and protein elements. Nothing has been removed from it. Choosing it means stopping at the sample rather than at the fraction the description asks for.'}],
  teach:[
   {h:'The idea', list:[
     'The three blood fractions differ by what has been taken out.',
@@ -563,7 +561,7 @@ const Q_MODULE1 = [
  options:[
   {t:'Serum or plasma', correct:true,
    why:'Serum and plasma are preferred because removing the cellular fraction minimises the interaction of drug with other things in the sample. Dr. Mosley notes that all four options are used somewhere, but that these two are the routine choice. This is why the standard symbols in the course are Cp and Cs rather than a whole-blood concentration.'},
-  {t:'Whole blood collected with heparin or EDTA', correct:false,
+  {t:'Whole blood', correct:false,
    why:'Whole blood contains all the cellular and protein elements, and drug can bind to or interact with those components, which complicates the measurement. It is a usable matrix but not the routine one. Choosing it means taking the least processed sample as the default rather than the one that gives the cleanest assay.'},
   {t:'Urine', correct:false,
    why:'Urine is used, and it becomes important later for renal clearance, but it reports drug that has already left the body rather than the concentration circulating now. A concentration-versus-time curve in this course is a plasma or serum curve. Selecting urine confuses an excretion measurement with a systemic one.'},
@@ -591,9 +589,7 @@ const Q_MODULE1 = [
   {t:'Mammillary', correct:false,
    why:'A mammillary model has one central compartment with every other compartment attached directly to it, so there is no order of travel. It is the arrangement used most in this course, which makes it the reflex answer.'},
   {t:'Physiologic', correct:false,
-   why:'Picking this confuses physiologic models with compartmental ones. Physiologic (blood flow or perfusion) models are built from known anatomic and physiologic data, not from a chain of compartments. Dr. Mosley notes they need more input than this course wants to supply, which is why compartmental models are used instead.'},
-  {t:'Catenary and mammillary are the same arrangement', correct:false,
-   why:'They are two distinct arrangements, told apart by which compartments connect to which: a chain in one, a hub in the other. The rate constant subscripts on the diagram show the difference. Treating them as interchangeable removes the only thing the question turns on.'}],
+   why:'Picking this confuses physiologic models with compartmental ones. Physiologic (blood flow or perfusion) models are built from known anatomic and physiologic data, not from a chain of compartments. Dr. Mosley notes they need more input than this course wants to supply, which is why compartmental models are used instead.'}],
  teach:[
   {h:'The idea', list:[
     'A compartmental model treats the body as a set of compartments, with rate constants for drug movement between them.',
@@ -606,23 +602,19 @@ const Q_MODULE1 = [
  cite:'Introduction.pdf slide 13, and the poll slide following slide 15',
  quote:'compartments joined together like compartments, uh, of a, of a, a train'},
 
-{id:'m1-int-08', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01', multi:true,
+{id:'m1-int-08', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
  topic:'intro', sub:'models', concept:'model-purposes', skill:'recall',
  source:'slide',
- stem:'Select every purpose a pharmacokinetic model serves. Select all that apply.',
+ stem:'Which of the following is a purpose of pharmacokinetic models?',
  options:[
   {t:'Predict drug levels', correct:true,
    why:'Predicting the concentration at a time that was never sampled is the first use given for a model, and it is what every equation in this course does. Without a model there is only a set of measured points and no way to state what lies between or beyond them.'},
-  {t:'Determine dosing regimens', correct:true,
-   why:'Once concentrations can be predicted from a dose, the calculation can be run backwards to find the dose that produces a wanted concentration. This is how infusion rates and loading doses are derived later in the course.'},
-  {t:'Estimate accumulation of drug or metabolites', correct:true,
-   why:'Accumulation is a prediction about repeated dosing, which requires a model of how much remains when the next dose arrives. Failing to estimate it correctly is what leads to concentrations climbing past the intended range.'},
-  {t:'Evaluate differences in rate or extent of availability between formulations', correct:true,
-   why:'Comparing two formulations means comparing their concentration-time behaviour, which is a bioequivalence assessment and is listed among the uses of modelling. The comparison is made on model-derived quantities rather than on raw points.'},
   {t:'Establish the chemical structure of a metabolite', correct:false,
    why:'A pharmacokinetic model works with amounts, concentrations and rates, and carries no information about molecular structure. Identifying a metabolite chemically is an analytical chemistry task. Choosing this extends the model beyond the quantities it contains.'},
   {t:'Replace the need to measure plasma concentrations', correct:false,
-   why:'A model is fitted to measured concentrations and its parameters come from them, so measurement is what makes the model possible rather than what the model removes. Clinical pharmacokinetics applies these methods to specific drugs in specific patients, which requires samples. This option inverts the relationship between data and model.'}],
+   why:'A model is fitted to measured concentrations and its parameters come from them, so measurement is what makes the model possible rather than what the model removes. Clinical pharmacokinetics applies these methods to specific drugs in specific patients, which requires samples. This option inverts the relationship between data and model.'},
+  {t:'Study the adverse effects of drugs in the body',
+   why:'Replaces the three dropped keyed options; it is the slide 8 definition of clinical toxicology, a related discipline placed in the wrong role.'}],
  teach:[
   {h:'The idea', list:[
     'A pharmacokinetic model is a set of assumptions that turns a few measured concentrations into a continuous description.',
@@ -705,7 +697,7 @@ const Q_MODULE1 = [
 {id:'m1-int-11', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01', lowYield:true,
  topic:'intro', sub:'terms', concept:'adme-letter-variants', skill:'recall',
  source:'transcript',
- stem:'Beyond absorption, distribution, metabolism and excretion, which additional step is sometimes placed at the front of the sequence by other faculty?',
+ stem:'Which term is sometimes added at the front of the absorption, distribution, metabolism and excretion sequence?',
  options:[
   {t:'Liberation', correct:true,
    why:'Liberation is release of the drug from its dosage form, which happens before absorption can begin, so an L placed at the front gives LADME. Dr. Mosley notes that another instructor in the programme uses that ordering. In this course the sequence starts at absorption, with the dosage form handled under biopharmaceutics instead.'},
@@ -841,16 +833,16 @@ const Q_MODULE1 = [
 {id:'m1-ord-c04', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
  topic:'orders', sub:'first', concept:'first-order-rate-depends', skill:'tell',
  source:'both',
- stem:'The rate of a first-order process is independent of the concentration of drug present. Is this true or false?',
+ stem:'Which of the following best describes the rate of a first-order process?',
  options:[
-  {t:'False, because the rate is the rate constant multiplied by the concentration', correct:true,
+  {t:'It is proportional to the concentration of drug present', correct:true,
    why:'The rate law {{frac:dC|dt}} = −kC puts the concentration on the right-hand side, so the rate cannot be independent of it: faster at high concentration, slower as it falls. What is independent of concentration is the rate constant, and so the half-life.'},
-  {t:'True, because a first-order rate constant carries units of reciprocal time and no concentration term', correct:false,
+  {t:'It is independent of the concentration of drug present',
    why:'This swaps the rate constant for the rate. The constant is a fixed number in reciprocal time, but the rate is that constant times the concentration, so it changes whenever the concentration changes; the class split fifty-fifty on this statement for this reason.'},
-  {t:'True, because the half-life does not change', correct:false,
-   why:'A constant half-life is a real first-order property, but it describes the time to lose a fixed proportion, not the quantity lost per unit time. Half of a large concentration is more than half of a small one over the same interval, so the rate has changed.'},
-  {t:'False, because zero-order processes have no rate constant', correct:false,
-   why:'Zero-order processes do have a rate constant, in units of concentration or amount per unit time, so the right conclusion here rests on a false reason. Dr. Mosley states that both orders have a rate constant and neither is negative.'}],
+  {t:'It is constant over time',
+   why:'A constant rate, the same quantity lost per unit time whatever is present, is the zero-order case. In a first-order process the rate falls as the concentration falls, while the rate constant and the half-life stay constant.'},
+  {t:'It is set by the half-life alone',
+   why:'A constant half-life is a real first-order property, but it describes the time to lose a fixed proportion, not the quantity lost per unit time. Half of a large concentration is more than half of a small one over the same interval, so the rate has changed.'}],
  teach:[
   {h:'The idea', list:[
     'In a first-order process, the rate and the rate constant behave differently as the concentration falls.',
@@ -883,8 +875,8 @@ const Q_MODULE1 = [
    why:'A zero-order process is straight on linear axes, where gridlines rise by equal additions rather than factors of ten; on these axes it would curve. Calling this zero order means naming the order from a straight line without checking the scale, the error Dr. Mosley warns against.'},
   {t:'A process whose rate constant changes with time', correct:false,
    why:'A straight line on either scale indicates a constant rate constant, because a changing constant would bend the line. Nothing in this course has a rate constant that varies with time. This answer treats the straightness as evidence of change rather than of constancy.'},
-  {t:'Nothing, because the axis is not labelled as a logarithm', correct:false,
-   why:'The absence of the word log on the axis is why the spacing has to be read instead. Dr. Mosley notes that the word will usually not be there, and that a scale increasing by a function of ten is logarithmic whatever it says. Treating an unlabelled axis as uninterpretable discards the information the spacing already gives.'}],
+  {t:'A process that cannot be classified from this plot', correct:false,
+   why:'Same misreading as the current option, the unlabelled axis taken to block the reading, with the reasoning removed.'}],
  teach:[
   {h:'The idea', list:[
     'The same concentrations can be plotted two ways, and each plot answers a different question.',
@@ -916,7 +908,7 @@ const Q_MODULE1 = [
    why:'Half-life is 0.693 divided by the rate constant: {{frac:0.693|0.231}} per day gives 3.0. Dividing by reciprocal days leaves days, so the answer is a time; Dr. Mosley states that the reciprocal units belong to the rate constant, not to the half-life.'},
   {t:'It is 3.0 days to the minus one', correct:false,
    why:'Reciprocal days are the units of the rate constant, which is what was given, not of the half-life, which is what was asked for. Dr. Mosley names this specific error: a half-life is a time, so it is days, not days to the minus one. Carrying the reciprocal across the division is what produces it.'},
-  {t:'It is 0.231 days, because the rate constant is the half-life', correct:false,
+  {t:'It is 0.231 days', correct:false,
    why:'The rate constant and the half-life are two different descriptions of the same decline, linked by the factor 0.693, and they are not equal to one another. Copying the given number across skips the relation entirely. The two also have different units, which is enough on its own to rule this out.'},
   {t:'It cannot be found without the starting concentration', correct:false,
    why:'For a first-order process t½ = {{frac:0.693|k}}, with no starting concentration in it, which is why it is constant. The starting concentration is needed only for zero order, where t½ = {{frac:C0|2k}}, so picking this applies the zero-order relation to a first-order problem.'}],
@@ -949,15 +941,13 @@ const Q_MODULE1 = [
 {id:'m1-ord-c07', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
  topic:'orders', sub:'decide', concept:'order-from-data', skill:'order',
  source:'slide',
- stem:'The table below shows the decomposition of a drug as a function of time.\n\nTime (minute) | Drug A (mg)\n10 | 97.0\n20 | 89.0\n40 | 73.0\n60 | 57.0\n90 | 34.0\n120 | 10.0\n130 | 2.5\n\nHow would you classify the decrease in the amount of drug A?',
+ stem:'The table below shows the decomposition of a drug as a function of time.\n\nTime (minute) | Drug A (mg)\n10 | 97.0\n20 | 89.0\n40 | 73.0\n60 | 57.0\n90 | 34.0\n120 | 10.0\n130 | 2.5\n\nWhich order of reaction describes the decrease in the amount of drug A?',
  options:[
-  {t:'Zero order, a constant amount per unit time', correct:true,
+  {t:'Zero order', correct:true,
    why:'From 20 to 40 minutes the amount falls from 89.0 to 73.0 mg, and from 40 to 60 minutes from 73.0 to 57.0 mg: 16.0 mg lost in each 20 minutes. Equal quantities lost in equal intervals (constant differences, not ratios) is the zero-order signature.'},
-  {t:'First order, because the amount falls continuously', correct:false,
+  {t:'First order',
    why:'Every decomposition falls continuously, so that separates nothing; first order needs a constant ratio over equal intervals. Here {{frac:89.0|73.0}} is 1.22, {{frac:73.0|57.0}} is 1.28 and {{frac:57.0|34.0}} is 1.68, so the ratios climb and the process is not first order.'},
-  {t:'First order, because the amount is measured in milligrams', correct:false,
-   why:'Whether the dependent variable is an amount or a concentration has no bearing on the order; both orders are defined for either. Dr. Mosley writes the definitions as amount or concentration precisely so that this choice of variable does not decide anything. Here the variable is an amount and the process is zero order.'},
-  {t:'Neither, because the intervals between time points are unequal', correct:false,
+  {t:'Neither order fits the data',
    why:'Unequal spacing adds arithmetic but does not prevent classification: take the difference or ratio over whatever interval separates the chosen points. Two pairs of points 20 minutes apart, 20 to 40 and 40 to 60 minutes, settle it immediately.'}],
  teach:[
   {h:'The idea', list:[
@@ -987,14 +977,12 @@ const Q_MODULE1 = [
  source:'slide',
  stem:'A pharmacist dissolved an antibiotic in purified water and measured the drug concentration in aliquots removed over 16 hours.\n\nTime (hr) | C (mcg/mL) | ln C\n0.5 | 233.3 | 5.4523\n1.0 | 217.6 | 5.3827\n2.0 | 189.5 | 5.2444\n4.0 | 143.6 | 4.9670\n8.0 | 82.5 | 4.4128\n12.0 | 47.4 | 3.8586\n16.0 | 27.2 | 3.3032\n\nIs the decomposition of this antibiotic a zero-order or a first-order process?',
  options:[
-  {t:'First order, because ln C against time is a straight line', correct:true,
+  {t:'First order', correct:true,
    why:'Between 4 and 8 hours ln C falls from 4.9670 to 4.4128, and between 8 and 12 hours from 4.4128 to 3.8586: a drop of 0.5542 each 4 hours, a straight line on logarithmic axes. The concentrations themselves fall by 61.1 and then 35.1 mcg/mL, so they are not linear.'},
-  {t:'Zero order, because the concentration falls throughout', correct:false,
+  {t:'Zero order',
    why:'Picking this reads any fall as zero order, but a falling concentration fits either order. Zero order needs equal losses over equal intervals, yet 61.1 mcg/mL is lost from 4 to 8 hours and only 35.1 mcg/mL from 8 to 12 hours; losses that shrink with the concentration are first-order behaviour.'},
-  {t:'Zero order, because the time points are unevenly spaced', correct:false,
-   why:'Spacing of the sampling times is a feature of the experiment rather than of the kinetics, and either order can be sampled at any times. Choosing pairs that are equally separated, such as 4 to 8 hours and 8 to 12 hours, removes the difficulty entirely. Nothing about uneven spacing points towards one order or the other.'},
-  {t:'First order, because the drug was dissolved in water rather than given to a patient', correct:false,
-   why:'The right conclusion for the wrong reason: the medium says nothing about the order, and this reasoning would fail on a zero-order data set in water. Dr. Mosley assumes first order only for a stated intravenous bolus dose; when a data set is supplied, the order must come from the data.'}],
+  {t:'Neither order fits the data',
+   why:'Spacing of the sampling times is a feature of the experiment rather than of the kinetics, and either order can be sampled at any times. Choosing pairs that are equally separated, such as 4 to 8 hours and 8 to 12 hours, removes the difficulty entirely. Nothing about uneven spacing points towards one order or the other.'}],
  teach:[
   {h:'The idea', list:[
     'When a table gives a column of natural logarithms (ln C), that column is the test.',

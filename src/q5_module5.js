@@ -140,7 +140,7 @@ const Q_MODULE5 = [
 {id:'m5-c10', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'conc', concept:'prefactor-not-c0', skill:'read',
  source:'both',
- stem:'A drug given orally is described by Cp = 75(e^(−0.22t) − e^(−2.75t)), with Cp in mcg/mL and t in hours. What is the 75?',
+ stem:'A drug given orally is described by Cp = 75(e^(−0.22t) − e^(−2.75t)), with Cp in mcg/mL and t in hours. Which of the following best describes the 75?',
  options:[
   {t:'The collected constant F·ka·D0 / (VD(ka − k))', correct:true,
    why:'Everything in the equation that does not change with time is gathered into the one number in front of the bracket: the whole prefactor. It can be taken apart to recover F, the dose, ka or VD when the others are known. Its units are those of a concentration, which is why it is mistaken for one.'},
@@ -186,7 +186,7 @@ const Q_MODULE5 = [
  quote:'Most of the time we\'re gonna be looking at disposition rate limiting, where our KA is gonna be significantly faster or larger than our K'},
 
 {id:'m5-c12', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
- topic:'oral', sub:'conc', concept:'oral-curve-shape', skill:'read',
+ topic:'oral', sub:'conc', concept:'oral-curve-shape', skill:'read', dupOf:'fig-oral-1',
  source:'transcript',
  stem:'A plasma concentration against time curve rises to a clear peak and then declines. Which route of administration does it indicate?',
  options:[
@@ -196,7 +196,7 @@ const Q_MODULE5 = [
    why:'A bolus places the whole dose in the circulation at once, so the highest concentration is at time zero and the curve only falls from there. There is no rising limb and therefore no interior peak. Choosing this means reading the descending part of the curve and ignoring the ascending part.'},
   {t:'Intravenous infusion', correct:false,
    why:'Picking this matches the rising limb but not the top: a zero-order infusion drives the level up to a plateau and holds it there, falling only once the infusion stops. A peak partway along needs the input to fade while elimination continues, as a first-order oral input does when the gut empties.'},
-  {t:'Any route, since the shape depends only on the dose', correct:false,
+  {t:'Any route of administration', correct:false,
    why:'This confuses a scale factor with the kinetics. The dose sits in the constant prefactor and multiplies every point equally, so it moves the curve up or down without moving the turning point. The shape is set by how drug enters: instantaneous for a bolus, zero order for an infusion, first order by mouth.'}],
  teach:[
   {h:'The idea', t:'The shape of a concentration against time curve identifies the input.'},
@@ -208,24 +208,19 @@ const Q_MODULE5 = [
  cite:'09.21 lecture',
  quote:'if I give you a curve on the exam and it looks like this. Right, where there is a clear peak. Right, we go up, we peak, we come back down, then you, I want you to identify that as an oral input. Right? First order in, first order out.'},
 
-{id:'m5-c13', type:'match', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
+{id:'m5-c13', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'conc', concept:'oral-curve-phases', skill:'read',
  source:'both',
- stem:'Match each part of the plasma concentration curve after a single oral dose to what is happening at that point.',
- left:['Absorption phase', 'The peak', 'Post-absorption phase', 'Complete elimination phase'],
- right:['The absorption rate is greater than the elimination rate',
-        'The rate in equals the rate out',
-        'The elimination rate is greater than the absorption rate, with drug still to be absorbed',
-        'Absorption is finished and only elimination is occurring'],
- pairs:[
-  {l:'Absorption phase', r:'The absorption rate is greater than the elimination rate',
-   why:'On the rising limb more drug is arriving from the gastrointestinal tract each hour than is being removed, so the amount in the body grows. This is the earliest part of the curve, when the amount left to be absorbed is at its largest.'},
-  {l:'The peak', r:'The rate in equals the rate out',
-   why:'The concentration stops rising exactly when absorption and elimination balance, and it has not yet begun to fall. That instant is the time to peak, and the concentration there is the maximum concentration.'},
-  {l:'Post-absorption phase', r:'The elimination rate is greater than the absorption rate, with drug still to be absorbed',
+ stem:'Which of the following best describes the post-absorption phase of the plasma concentration curve after a single oral dose?',
+ options:[
+  {t:'the elimination rate is greater than the absorption rate, with drug still to be absorbed', correct:true,
    why:'After the peak the falling amount left in the gut can no longer keep pace with elimination, so the concentration declines, but absorption has not stopped. Both processes are still running, which is why this phase is named separately from the one that follows.'},
-  {l:'Complete elimination phase', r:'Absorption is finished and only elimination is occurring',
-   why:'Once the gastrointestinal tract has given up all the drug it is going to give up, the only remaining process is first-order elimination, and the curve becomes an ordinary decay governed by k alone.'}],
+  {t:'the absorption rate is greater than the elimination rate',
+   why:'This is the absorption phase, the rising limb: more drug arrives from the gastrointestinal tract each hour than is removed, so the amount in the body grows.'},
+  {t:'the absorption rate equals the elimination rate',
+   why:'This is the peak, a single instant: the concentration stops rising exactly when absorption and elimination balance, and that time is tmax.'},
+  {t:'absorption is complete and only elimination is occurring',
+   why:'This is the elimination phase that follows: once the gut has given up all the drug it will, the only remaining process is first-order elimination governed by k alone.'}],
  teach:[
   {h:'The idea', t:'The oral curve has three named phases, separated by two events.'},
   {h:'The phases in order', list:['Before the peak (absorption phase): absorption outruns elimination.', 'At the peak: the two rates are equal.', 'After the peak (post-absorption phase): elimination is the faster of the two, while absorption continues.', 'Once absorption is complete (complete elimination phase): the curve is pure elimination.']},
@@ -242,7 +237,7 @@ const Q_MODULE5 = [
 /* ═══════════ TIME TO PEAK AND PEAK CONCENTRATION ═══════════════════════ */
 
 {id:'m5-c15', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
- topic:'oral', sub:'peak', concept:'tmax-depends-on', skill:'recall',
+ topic:'oral', sub:'peak', concept:'tmax-depends-on', skill:'recall', dupOf:'cq3-3',
  source:'both',
  stem:'What determines the time to peak, tmax, after a single oral dose?',
  options:[
@@ -289,7 +284,7 @@ const Q_MODULE5 = [
 {id:'m5-c17', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'peak', concept:'tmax-before-cmax', skill:'apply',
  source:'transcript',
- stem:'A question asks for the maximum plasma concentration after a single oral dose and gives F, the dose, the volume of distribution and both rate constants. What has to be calculated first?',
+ stem:'To calculate the maximum plasma concentration after a single oral dose from F, the dose, the volume of distribution and both rate constants, which quantity must be found first?',
  options:[
   {t:'The time to peak', correct:true,
    why:'There is no separate expression for the peak concentration; it is the concentration equation evaluated at the one time the curve turns over. That time must first be found from the two rate constants. Every quantity in the stem is used, but the time is the one not given.'},
@@ -311,7 +306,7 @@ const Q_MODULE5 = [
 {id:'m5-c19', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'peak', concept:'unqualified-halflife', skill:'recall',
  source:'transcript',
- stem:'An oral problem supplies both rate constants and asks for t½ with no further description. Which half-life is wanted?',
+ stem:'A drug given orally has an absorption rate constant and an elimination rate constant. When the half-life of the drug is stated with no qualifier, which half-life is meant?',
  options:[
   {t:'The elimination half-life', correct:true,
    why:'Half-life without a qualifier always means the elimination half-life, because that is the one routinely quoted for a drug and the one that governs the tail of any curve. It is 0.693 divided by k. The absorption half-life is asked for only when the word absorption is present.'},
@@ -319,8 +314,8 @@ const Q_MODULE5 = [
    why:'The absorption half-life exists and is 0.693 divided by ka, but it is never the default reading of an unqualified t½. Choosing it means picking the larger rate constant because it appears first in the equation. The word absorption has to be there before that constant is used.'},
   {t:'The half-life of the time to peak', correct:false,
    why:'Choosing this treats a property of a process as a property of a curve. Half-lives belong to first-order processes and are 0.693 divided by that process\'s rate constant, so this model has only an absorption and an elimination half-life. The time to peak is a single moment, not a decaying process. An unqualified t½ is 0.693 divided by k.'},
-  {t:'Both, since the two are equal for a one-compartment model', correct:false,
-   why:'Picking this treats the one-compartment assumption as forcing ka to equal k, but the compartment count describes distribution, not how input relates to output. Equal constants would leave the standard oral equation undefined, since ka − k sits in its denominator. For an ordinary drug the absorption half-life is much the shorter.'}],
+  {t:'The distribution half-life',
+   why:'Replaces "Both, since the two are equal for a one-compartment model", which carries its reasoning inside the option, with the neighbouring term from the two-compartment module.'}],
  teach:[
   {h:'The idea', list:['An oral model runs two first-order processes, so it has two half-lives.', 'Each is 0.693 divided by its own rate constant.']},
   {h:'The convention', list:['An unqualified half-life is the elimination half-life, because it belongs to the drug in the patient rather than to the formulation.', 'The absorption half-life is named explicitly whenever it is meant.']},
@@ -329,23 +324,19 @@ const Q_MODULE5 = [
  cite:'09.21 lecture',
  quote:'If it\'s just T1/2, then your assumption is that I\'m looking for the half-life of elimination, right?'},
 
-{id:'m5-c20', multi:true, prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
+{id:'m5-c20', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'peak', concept:'significance-of-params', skill:'recall',
  source:'slide',
- stem:'Select every use of the absorption rate constant, the time to peak and the maximum concentration. Select all that apply.',
+ stem:'Which of the following is a use of the absorption rate constant, the time to peak and the maximum concentration?',
  options:[
-  {t:'Designing multiple-dosage regimens, to predict peak and trough concentrations', correct:true,
-   why:'A repeated dose arrives before the previous one has gone, so the peak and trough reached on each cycle depend on how fast the drug goes in and how fast it comes out. Predicting them needs the same parameters that describe a single dose. This is why the single-dose treatment comes before multiple dosing.'},
-  {t:'Comparing rates of absorption between chemically equivalent products', correct:true,
-   why:'Two products of the same drug can release it at different speeds, which shows up as different absorption rate constants, times to peak and peak concentrations. Bioequivalence work compares exactly those; the elimination side is the same for both, since it belongs to the patient.'},
-  {t:'Assessing the onset of action', correct:true,
+  {t:'assessing the onset of action', correct:true,
    why:'Onset is the time at which the concentration first reaches a therapeutic level, so it is governed by how quickly the rising limb climbs. A product with a larger absorption rate constant reaches that level sooner. This is a direct clinical consequence of the input kinetics.'},
-  {t:'Determining the preferred route and dosage form for the patient', correct:true,
-   why:'Whether a drug is worth giving by mouth at all, and in what form, depends on how much reaches the circulation and how quickly. A dosage form with a peak too late or too low to be useful is ruled out on those grounds. The choice is made on the same three parameters.'},
-  {t:'Estimating the glomerular filtration rate', correct:false,
+  {t:'estimating the glomerular filtration rate',
    why:'Filtration is a renal elimination process and is estimated from creatinine clearance, which has nothing to do with how fast an oral dose is absorbed. None of these three parameters carries information about the kidney. Selecting it imports a quantity from the elimination and clearance material into a list about input.'},
-  {t:'Deciding whether the drug follows zero-order rather than first-order elimination', correct:false,
-   why:'Picking this treats the absorption parameters as reporting on the output side. The order of elimination is judged from the shape of the terminal decline, which is governed by k, not by ka, the time to peak or the peak. First-order elimination is assumed throughout this module, so these three parameters are not used to establish it.'}],
+  {t:'deciding whether elimination is zero order or first order',
+   why:'Picking this treats the absorption parameters as reporting on the output side. The order of elimination is judged from the shape of the terminal decline, which is governed by k, not by ka, the time to peak or the peak. First-order elimination is assumed throughout this module, so these three parameters are not used to establish it.'},
+  {t:'calculating the total body clearance',
+   why:'Clearance is found from the dose and the area under the curve, or from k and the volume of distribution. The absorption rate constant, the time to peak and the peak concentration describe the input side and do not give it.'}],
  teach:[
   {h:'The idea', list:['ka (the absorption rate constant), tmax (the time to peak) and Cmax (the peak concentration) describe how quickly and how completely a formulation delivers its drug.']},
   {h:'What they are used for', list:['Predicting peaks and troughs in repeated dosing.', 'Comparing products for bioequivalence.', 'Choosing a route and a dosage form.', 'Assessing onset of action.', 'Relating the concentration to the pharmacological effect.']},
@@ -357,21 +348,19 @@ const Q_MODULE5 = [
 
 /* ═══════════ IMPACT OF CHANGING PARAMETERS ═════════════════════════════ */
 
-{id:'m5-c22', multi:true, prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
+{id:'m5-c22', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'changes', concept:'dose-change-effects', skill:'apply',
  source:'both',
- stem:'The oral dose of a drug is increased, with everything else unchanged. Select every expected consequence. Select all that apply.',
+ stem:'Which of the following results if the oral dose of a drug is increased, with everything else unchanged?',
  options:[
-  {t:'A proportional increase in plasma concentration', correct:true,
-   why:'The dose sits in the constant prefactor, which multiplies every point on the curve equally, so doubling the dose doubles every concentration including the peak. Nothing about the shape or timing changes. This proportionality is what makes linear pharmacokinetics linear.'},
-  {t:'A proportional increase in the area under the curve', correct:true,
+  {t:'a proportional increase in the area under the curve', correct:true,
    why:'The area is the integral of a curve that has been scaled by a constant, so it scales by that same constant. Total exposure therefore rises in step with the dose. Clearance has not changed, which is the other way of stating the same result.'},
-  {t:'An increase in the rates of absorption and elimination', correct:true,
-   why:'A rate is an amount per time, mg/hr. Both legs are first order: rate in = kₐ × amount still to be absorbed, and rate out = k × amount in the body. Doubling the dose doubles both amounts, so both rates double while kₐ and k stay where they were, which is why the peak does not move.'},
-  {t:'An increase in the rate constants ka and k for absorption and elimination', correct:false,
+  {t:'a later time to peak',
+   why:'This treats the peak as a target to be filled, so a larger dose should take longer to reach it. The time to peak is fixed by ka and k alone, and the dose changes neither; both rates rise in proportion with the larger amount, so they cross at the same moment. The curve is taller, not slower.'},
+  {t:'an increase in the absorption rate constant',
    why:'Picking this mistakes the rising rate for a rising constant. A rate constant is a fraction per time, hr⁻¹, with no milligrams in its units, so no quantity of drug can change it. What rises is the rate, the constant times the amount present. kₐ answers to the formulation and k to clearance and volume of distribution, since k = {{frac:Cl|V}}ᴅ.'},
-  {t:'A later time to peak', correct:false,
-   why:'This treats the peak as a target to be filled, so a larger dose should take longer to reach it. The time to peak is fixed by ka and k alone, and the dose changes neither; both rates rise in proportion with the larger amount, so they cross at the same moment. The curve is taller, not slower.'}],
+  {t:'an increase in the elimination rate constant',
+   why:'k is a fraction per hour set by clearance and volume of distribution, k = {{frac:Cl|VD}}. The dose does not enter it: a larger dose raises the rate of elimination in mg/hr, because more drug is present, but not the constant.'}],
  teach:[
   {h:'A rate and a rate constant are different quantities', t:'Their units tell them apart.', list:['A rate is an amount per time, mg/hr: how many milligrams actually left this hour.', 'A rate constant is a fraction per time, hr⁻¹: what share of whatever is present leaves each hour.', 'They are tied by rate = constant × amount, and the units agree: hr⁻¹ × mg = mg/hr.', 'A constant whose units contain no milligrams cannot be changed by giving more milligrams.']},
   {h:'What doubling the dose does to each', fig:'rate_vs_constant', list:['Doubling the dose doubles the amount, so rate = k × amount doubles with it.', 'The constant is the ratio rate ÷ amount, and doubling both leaves that ratio where it was.', 'The figure marks three moments on two doses of one drug: 200 mg losing 40 mg/hr, 100 mg losing 20 mg/hr, and the 200 mg dose once it has fallen to 100 mg, losing 20 mg/hr again.', 'The rate tracks the amount present; k is 0.2 per hour at every one of them.']},

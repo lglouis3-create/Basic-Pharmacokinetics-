@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-05 (concept questions in her shape)
+- Every concept question was read against her three graded quizzes: 169 checked, 75 rewritten.
+- Stems now take her forms ("Which term describes", "Which of the following best describes", "Which results if").
+- Options are short and parallel, with reasons moved into the explanations; nine select-alls became single answers.
+- No keyed answer changed; four distractors that her own words made defensible were replaced.
+
 ## 2026-10-05 (her Quiz 4, word for word)
 - Quiz 4 (Modules 6 to 7a): ten graded items added, five concept and five calculation, with her keys and margins.
 - Each is tagged Canvas quiz, so a practice paper never shows a wording twice.

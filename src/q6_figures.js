@@ -180,18 +180,18 @@ const Q_FIGURES = [
 
 {id:'fig-ord-5', skill:'read', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
  topic:'orders', sub:'plots', concept:'semilog-axis-recognition', source:'transcript',
- stem:'A concentration axis on an examination figure is marked 1, 10, 100, 1000 at equal spacing, with no other label. Which statements about that axis are correct? Select all that apply.',
- multi:true,
+ stem:'A concentration axis is marked 1, 10, 100, 1000 at equal spacing, with no other label. Which statement about that axis is correct?',
+
  img:'ord_semilog_straight',
  options:[
-  {t:'Equal distances up the axis represent equal multiples of concentration', correct:true,
+  {t:'a straight line on this axis indicates a first-order process', correct:true,
    why:'Moving one tick multiplies the value by ten every time, from 1 to 10 and again from 100 to 1000. That is what a logarithmic axis does: it turns multiplication into equal distance, which is why a fixed-fraction process draws a straight line on it.'},
-  {t:'A straight line on this axis indicates a first-order process', correct:true,
+  {t:'the axis is evenly spaced in concentration',
    why:'First order gives ln C = ln C0 − kt, so the logarithm of concentration falls by equal amounts in equal times. An axis that plots that logarithm turns the decline into a straight line.'},
-  {t:'The axis is evenly spaced in concentration', correct:false,
+  {t:'the axis cannot be treated as logarithmic unless it is labelled as such',
    why:'The distance from 1 to 10 covers nine units and the distance from 100 to 1000 covers nine hundred, yet the two are drawn the same length. Selecting this reads the evenly spaced tick marks as evenly spaced values, when it is the values that multiply and the marks that are evenly spaced.'},
-  {t:'The axis cannot be treated as logarithmic unless it is labelled as such', correct:false,
-   why:'She warns that the word is usually missing from the figure, so the tick values have to carry the decision. Holding out for a label means treating an unlabelled decade axis as linear and classifying every such graph the wrong way round.'}],
+  {t:'a straight line on this axis indicates a zero-order process',
+   why:'Replaces the second keyed statement about equal multiples; it is the misreading she warns against (taking the straight line as zero order).'}],
  teach:[
   {h:'The idea', list:[
    'Read two neighbouring tick values and divide.',
@@ -373,16 +373,16 @@ const Q_FIGURES = [
 
 {id:'fig-inf-2', skill:'infusion', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'css', concept:'rate-change-css-not-time', source:'both',
- stem:'The same drug is infused into the same patient at two different rates, as shown. Which statements about the difference between the two curves are correct? Select all that apply.',
- multi:true,
+ stem:'The same drug is infused into the same patient at two different rates, as shown. Which statement about the two curves is correct?',
+
  img:'inf_two_rates',
  options:[
-  {t:'Doubling the rate doubles the steady-state concentration', correct:true,
-   why:'The plateau is Css = {{frac:R|Cl}}, and clearance is a property of the drug and the patient rather than of the rate. With Cl fixed, the plateau is directly proportional to R, so twice the rate gives twice the plateau.'},
   {t:'Both curves reach their plateau at the same time', correct:true,
    why:'The time to steady state is set by the half-life alone, so the same drug in the same patient takes the same three to five half-lives either way. Raising the rate lifts the whole curve without moving the time axis.'},
   {t:'The higher rate reaches steady state sooner', correct:false,
    why:'This is the error she says she will ask about repeatedly. It comes from reading the steeper early climb of the upper curve as a faster approach, but both curves have closed the same fraction of their own gap at every moment; the higher one simply has further to go.'},
+  {t:'The higher rate reaches steady state later',
+   why:'Replaces the second keyed statement (doubling the rate doubles the steady-state concentration), which her Quiz 2 Q6 (cq2-6) already asks as a single-answer item; the new distractor is the opposite direction.'},
   {t:'The higher rate shortens the half-life of the drug', correct:false,
    why:'The half-life follows from k, which follows from clearance and volume of distribution, and an infusion rate changes none of them. Selecting this treats a dosing decision as though it altered the drug’s disposition, when the rate sets only where the plateau sits.'}],
  teach:[
@@ -556,7 +556,7 @@ const Q_FIGURES = [
  audit:'The same parameters as the peak figure, replotted on a decade axis.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
-{id:'fig-oral-3', skill:'apply', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
+{id:'fig-oral-3', skill:'apply', dupOf:'cq3-4', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'peak', concept:'rates-equal-at-cmax', source:'both',
  stem:'At the marked peak of the curve shown, what is true of the rates of absorption and elimination?',
  img:'oral_peak',
