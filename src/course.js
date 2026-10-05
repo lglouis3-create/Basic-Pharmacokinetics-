@@ -208,6 +208,8 @@ const COURSE = {
      class to prepare, each line from the transcript named in `src`. */
   quizzes: [
     {id: 'q4', name: 'Quiz 4',
+     // Sat 5 Oct 2026 (graded set in STYLE.md, bank ids cq4-1 to cq4-10: ten items at 10 points,
+     // five concept and five numeric, ±5% margins, ±3% on F). The card hides once the quiz is past.
      // "the quiz bright and early Monday morning" (transcript 09-30); class
      // starts at 8:00 am (transcript 09-23). Quiz 3 ran 24 minutes (09-23);
      // she has not said how long Quiz 4 runs, so its card says so.

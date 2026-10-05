@@ -2,6 +2,10 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-05 (her Quiz 4, word for word)
+- Quiz 4 (Modules 6 to 7a): ten graded items added, five concept and five calculation, with her keys and margins.
+- Each is tagged Canvas quiz, so a practice paper never shows a wording twice.
+
 ## 2026-10-05 (the working, and the lines the sheet leaves out)
 - Set-up drill: "Show the problem worked out" opens the keyed answer and the steps in place; stems come shuffled.
 - A line the sheet does not print now comes with the way to reach it from a printed line, in the drills and the quiz.

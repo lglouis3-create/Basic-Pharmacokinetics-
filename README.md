@@ -11,7 +11,7 @@ Live at <https://lglouis3-create.github.io/Basic-Pharmacokinetics-/>
 
 ## What is in the bank
 
-480 questions, 302 of them calculations, drawn from Dr. Mosley's decks, the
+506 questions, 316 of them calculations, drawn from Dr. Mosley's decks, the
 lecture recordings, her in-class activities and her practice sheets with their
 answer keys.
 

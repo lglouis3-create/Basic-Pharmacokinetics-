@@ -1636,3 +1636,73 @@ Graded homework with no posted key, so the drill does not work it. Question 1 of
 *Recompute:* k = 0.1507 hr⁻¹, ClT = 2.712 L/hr; (a) 0.6671; (b) 184.38 (mg/L)hr; (c) 749.6 mg → 750 mg → **match**.
 
 **Formats observed:** no IV AUC is given, so F comes from F × D po = ClT × AUC po with ClT = k VD; the IV area is then dose over clearance; the AUC unit is printed as "mg h/L" in the stem and "mg·hr/L" in the key; the equivalent dose is rounded to the nearest ten on instruction, and the stem prints "half-life life". One page; nothing cut.
+
+## Source: Canvas Quiz 4, Modules 6–7a (graded set; file `Quiz4-Modules6-7a-graded.pdf`, supplied 5 Oct as "Module 6-7 Practice Questions")
+
+Ten questions at 10 points, five concept and five numeric, alternating. The
+screenshots show her keys and the student's own answers; Q3, Q4, Q6 and Q8 were
+missed (increase the dosing interval; 135.4; 17.1; 500). The keys below are hers,
+each numeric key recomputed from its stem. Scanned images, no text layer; read
+from the rendered pages.
+
+**Q4-1 — multiple choice, the why.**
+> Why are multiple dosage regimens are used?
+> - to maintain plasma drug levels within the therapeutic window ✔
+> - to decrease the MEC
+> - to decrease the rate of elimination of drug from the body
+> - to increase the clearance of drugs
+
+**Q4-2 — numeric, steady-state peak after repeated IV bolus.**
+> What is the expected maximum steady-state concentration following IV bolus injections of 17 mg/kg to a 75 kg male every 8 hours? The drug has an elimination half-life of 4 hours, and the apparent volume of distribution is 15% of body weight.
+> **Give your answer in (mg/L), rounded to the nearest tenth (one decimal place) with no units.**
+> Key **151.1**, margin ±5%. *Recompute:* VD = 11.25 L, D0 = 1275 mg, C0 = 113.3 mg/L, k = 0.1733 hr⁻¹, e^(−kτ) = 0.250, Cmax∞ = 113.3 ÷ 0.750 = 151.1 → **matches**.
+
+**Q4-3 — multiple choice, best option (direction).**
+> Which is the best option to increase the steady-state concentration in a dosing regimen?
+> - increase the dosing interval
+> - decrease the dosing interval ✔
+> - increase the clearance
+> - decrease the elimination half-life
+
+**Q4-4 — numeric, two intermittent infusions.**
+> Four hundred milligrams of an antibiotic was infused intravenously over a period of 2 hours. Eight hours after the start of the first infusion, a second 400-mg dose was infused again over a period of 2 hours. The half-life of the antibiotic is approximately 4 hours and the apparent volume of distribution is approximately 20 L. What is the plasma drug concentration 4 hours after the cessation of the second infusion?
+> **Give your answer in mg/L rounded to the nearest tenth (one decimal place) with no units.**
+> Key **10.6**, margin ±5%. *Recompute:* R = 200 mg/hr, Cl = 3.465 L/hr, Cend = 57.72 × (1 − e^(−0.3465)) = 16.90 mg/L; at 14 hr: 16.90 e^(−k·12) + 16.90 e^(−k·4) = 2.11 + 8.45 = 10.56 → **matches**.
+
+**Q4-5 — multiple choice, effect of a parameter change.**
+> Which of the following results if the dose is increased on a medication that is to be administered orally at regularly repeating intervals?
+> - Increased steady-state tmax
+> - Decreased rate of absorption
+> - Increased steady-state Cmax ✔
+> - Decreased clearance
+
+**Q4-6 — numeric, time of the steady-state peak, multiple oral doses.**
+> A 74-kg patient was administered a 750 mg oral dose of a new drug every 8 hours. The drug has an oral bioavailability of 92%, apparent volume of distribution of 0.29 L/kg, elimination half-life of 5 hours, and the absorption half-life of 1.5 hour. **When** does the expected maximum concentration of drug in the plasma at steady-state occur?
+> **Give your answer in hours rounded to the nearest tenth (one decimal place) with no units.**
+> Key **2.6**, margin ±5%. *Recompute:* k = 0.1386, ka = 0.462; tmax∞ = [1 ÷ 0.3234] ln[(0.462 × 0.670) ÷ (0.1386 × 0.975)] = 3.092 × 0.829 = 2.56 → **matches**. (F, VD, dose and weight are not used.)
+
+**Q4-7 — multiple choice, "best describes the assumptions".**
+> Which of the following best describes the assumptions associated with intermittent IV infusions?
+> - all drugs are better tolerated as IV bolus doses compared to IV infusion
+> - intermittent IV infusions decrease elimination half-life which leads to increased efficacy
+> - concentrations of drug in the body following multiple infusions are additive ✔
+> - intermittent IV infusion is the best way to very rapidly achieve high drug concentrations
+
+**Q4-8 — numeric, dose for a target average concentration.**
+> A patient is to take a medication by mouth every 8 hours. The medication has an oral bioavailability of 83%, an absorption half-life of 90 minutes, total body clearance of 3.0 L/hr, and apparent volume of distribution of approximately 25 L. What is an appropriate dose to achieve an average plasma drug concentration of 25 mg/L in this patient?
+> **Give your answer in mg rounded to the nearest whole number with no units.**
+> Key **723**, margin ±5%. *Recompute:* D0 = 25 × 3.0 × 8 ÷ 0.83 = 722.9 → **matches**. (ka and VD are not used.)
+
+**Q4-9 — numeric, absolute bioavailability with no IV AUC.**
+> What is the absolute bioavailability of a drug for which a 500 mg dose resulted in an AUC of 139 (mg/L)hr? The elimination half-life of the drug is 4.5 hr and the apparent volume of distribution is 18 L.
+> **Give your answer as a decimal rounded to the nearest hundredth with no units.**
+> Key **0.77**, margin ±3%. *Recompute:* k = 0.154, Cl = 2.772 L/hr, AUC_IV = 500 ÷ 2.772 = 180.4, F = 139 ÷ 180.4 = 0.771 → **matches**.
+
+**Q4-10 — multiple choice, slide definition quoted, term asked.**
+> Which term describes the comparison of the bioavailability of the active drug in the systemic circulation following extravascular administration with the bioavailability of the same drug following intravenous administration?
+> - Absolute Bioavailability ✔
+> - Bioequivalence
+> - Relative Bioavailability
+> - Drug Product Performance
+
+**Formats observed:** ten items, concept and numeric strictly alternating, one block per objective in deck order (why multiple dosing → repeated IV bolus → altering the regimen → intermittent infusions → altering the oral dose → steady-state tmax → intermittent rationale → dose for Cavg → absolute F → definition). Concept stems: "Why are … used?", "Which is the best option to …?", "Which of the following results if …?", "Which of the following best describes the assumptions …?", a slide definition quoted and the term asked. Four short options each, one correct, lower-case starts on three of five; distractors are the opposite direction and the parameters a regimen cannot change (clearance, half-life, rate of absorption). Numeric instruction now reads "Give your answer in <unit> rounded to the nearest tenth / whole number / hundredth **with no units**" (Quiz 3 said "You cannot enter units; number only"); margins ±5% on four items and ±3% on F. Every numeric stem carries at least one quantity that is not needed (weight and F on Q4-6, ka and VD on Q4-8). The exam, by her 30 September statement, does require units; the drill accepts a unit typed after the number.

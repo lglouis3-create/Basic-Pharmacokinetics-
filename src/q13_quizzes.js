@@ -1,7 +1,7 @@
 /* ==========================================================================
-   HER GRADED CANVAS QUIZZES — Quiz 2 (Modules 2–3) and Quiz 3 (Modules 4–5)
+   HER GRADED CANVAS QUIZZES — Quiz 2 (Modules 2–3), Quiz 3 (Modules 4–5) and Quiz 4 (Modules 6–7a)
    ==========================================================================
-   Sixteen items, each a screenshot of a graded Canvas question with the key
+   Sixteen items from Quizzes 2 and 3, plus ten from Quiz 4 (5 Oct 2026), each a screenshot of a graded Canvas question with the key
    marked, supplied by the student on 4 Oct 2026 (files Quiz2-Modules2-3-
    graded.pdf and Quiz3-Modules4-5-graded.pdf, kept with the decks). Each
    quiz was eight questions at 12.5 points: four word-only concept items and
@@ -342,5 +342,219 @@ const Q_QUIZZES = [
    'The coefficient is F D0 ka / (VD (ka − k)); solve it for whichever quantity is asked, here VD.',
    'F belongs in the numerator: only the absorbed fraction of the dose reaches the body.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 8; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 2"'},
+
+/* ---- Quiz 4 (Modules 6–7a), sat 5 Oct 2026: ten items at 10 points, five concept and
+   five numeric, alternating. Numeric instruction: "Give your answer in <unit> rounded to the
+   nearest tenth / whole number / hundredth with no units", margin ±5% (±3% on the F item).
+   Supplied as a graded screenshot PDF ("Module 6-7 Practice Questions"); stems word for word,
+   a doubled "are" left as she wrote it in question 1. Every numeric key recomputed from its stem. */
+
+{id:'cq4-1', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
+ topic:'multi', sub:'superpos', concept:'why-multiple-dosing', skill:'recall',
+ source:'both',
+ stem:'Why are multiple dosage regimens are used?',
+ options:[
+  {t:'to maintain plasma drug levels within the therapeutic window', correct:true,
+   why:'One dose rises above the minimum effective concentration and then falls below it. Repeating the dose keeps the level between the minimum effective and the minimum toxic concentration, the therapeutic window.'},
+  {t:'to decrease the MEC', correct:false,
+   why:'The minimum effective concentration (MEC) is a property of the drug and the response. Dosing does not move it; dosing moves the plasma level toward it.'},
+  {t:'to decrease the rate of elimination of drug from the body', correct:false,
+   why:'Elimination is set by clearance, which the regimen cannot change. Repeating a dose replaces what elimination removes; it does not slow elimination.'},
+  {t:'to increase the clearance of drugs', correct:false,
+   why:'Clearance is a property of the patient and the drug, not of the schedule. A regimen that raised clearance would lower the levels it is meant to hold up.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Her drawing on the single-dose curve adds two lines, the minimum toxic concentration (MTC) above and the minimum effective concentration (MEC) below: "our goal is that we want to stay in between these two lines."',
+   'A single dose stays between them only for a while. Multiple doses, or an infusion, hold the level there.',
+   'The textbook states the same purpose: multiple-dosage or infusion regimens keep plasma levels within the therapeutic window.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 1; transcript, the MTC and MEC lines drawn on the single-dose curve (TRANSCRIPT_CUES.md); Shargel 7e Chapter 9, printout p. 1'},
+
+{id:'cq4-2', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
+ topic:'multi', sub:'ssbolus', concept:'cmax-ss', skill:'multidose',
+ stem:'What is the expected maximum steady-state concentration following IV bolus injections of 17 mg/kg to a 75 kg male every 8 hours? The drug has an elimination half-life of 4 hours, and the apparent volume of distribution is 15% of body weight. Give your answer in (mg/L), rounded to the nearest tenth (one decimal place) with no units.',
+ units:'mg/L', answer:151.1, tol:7.6,
+ steps:[
+  {k:'setup', t:'Cmax∞ = {{frac:C0|1 − e^(−kτ)}}, with C0 = {{frac:D0|VD}}',
+   why:'"IV bolus injections … every 8 hours" and "maximum steady-state concentration" name the repeated IV bolus block at steady state. The peak at the plateau is the single-dose peak divided by the fraction not yet eliminated at each dose.'},
+  {k:'unit', t:'D0 = 17 mg/kg × 75 kg = 1275 mg; VD = 0.15 × 75 kg = 11.25 L; C0 = {{frac:1275 mg|11.25 L}} = 113.3 mg/L',
+   why:'Both the dose and the volume are given per kilogram of body weight, so both are scaled to the 75 kg patient before anything else. mg over L is mg/L.'},
+  {k:'algebra', t:'k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹; e^(−kτ) = e^(−0.1733 × 8) = e^(−1.386) = 0.250',
+   why:'Eight hours is two half-lives, so one quarter of a dose remains when the next arrives. The exponent is dimensionless: reciprocal hours times hours.'},
+  {k:'algebra', t:'Cmax∞ = {{frac:113.3 mg/L|1 − 0.250}} = {{frac:113.3|0.750}} = 151.1 mg/L',
+   why:'Dividing by 0.75 is the accumulation factor 1.33: the steady-state peak is one third higher than the first-dose peak.'},
+  {k:'round', t:'151.1',
+   why:'Her key is 151.1 with a margin of 5%, so 143.5 to 158.7 scores. One decimal place was asked for, and Canvas took the number with no unit.'}],
+ setup:{eq:'cmax-ss', pre:['thalf-first', 'cp-db-vd'], why:'"IV bolus injections" "every 8 hours" and "maximum steady-state concentration", so the repeated IV bolus block at steady state. Dose per kg, VD per kg, t½ and τ are given and Cmax∞ is asked, so Cmax∞ = {{frac:C0|1 − e^(−kτ)}}. k first from the half-life, and C0 from the scaled dose over the scaled volume.'},
+ teach:[
+  {h:'The idea', list:[
+   'Scale per-kilogram values to the patient first; the mg/kg and L/kg cancel against the same body weight.',
+   'τ equal to two half-lives leaves 25% at each dose, so the factor is 1 ÷ 0.75.',
+   'The same line, with e^(−kτ) multiplied in on top, gives the trough.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 2; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"'},
+
+{id:'cq4-3', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
+ topic:'multoral', sub:'oparam', concept:'raise-css-by-regimen', skill:'apply', dupOf:'m6b-c16',
+ source:'both',
+ stem:'Which is the best option to increase the steady-state concentration in a dosing regimen?',
+ options:[
+  {t:'increase the dosing interval', correct:false,
+   why:'A longer interval gives elimination more time between doses, so the steady-state level falls and the swing between peak and trough grows. This is the direction many pick; it is the opposite of what is asked.'},
+  {t:'decrease the dosing interval', correct:true,
+   why:'Dosing more often puts the next dose in before as much of the last has left, so the plateau rises. Of the two things a regimen can change, the dose and the interval, this is the interval change that raises the level.'},
+  {t:'increase the clearance', correct:false,
+   why:'A regimen cannot change clearance, and a higher clearance would lower the steady-state concentration, since Cavg∞ = F D0 ÷ (Cl × τ).'},
+  {t:'decrease the elimination half-life', correct:false,
+   why:'Half-life is a property of the drug in the patient, not a dosing choice, and a shorter half-life means faster loss and lower levels.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Her rule: the only things a regimen can change are the size of the dose and the dosing interval; clearance and half-life are not choices.',
+   'Slide "Altering Dosing Interval": decreasing the interval increases steady-state concentrations and decreases the peak-to-trough fluctuation, at the cost of compliance.',
+   'Raising the dose also raises the level, but it is not among the options here.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 3; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations" and "Altering Dosing Interval"; 09.28 lecture'},
+
+{id:'cq4-4', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
+ topic:'intermit', sub:'add', concept:'sum-two-infusions', skill:'multidose',
+ stem:'Four hundred milligrams of an antibiotic was infused intravenously over a period of 2 hours. Eight hours after the start of the first infusion, a second 400-mg dose was infused again over a period of 2 hours. The half-life of the antibiotic is approximately 4 hours and the apparent volume of distribution is approximately 20 L. What is the plasma drug concentration 4 hours after the cessation of the second infusion? Give your answer in mg/L rounded to the nearest tenth (one decimal place) with no units.',
+ units:'mg/L', answer:10.6, tol:0.53,
+ steps:[
+  {k:'setup', t:'Each infusion ends at Cend = {{frac:R|k × VD}}(1 − e^(−k × 2 hr)); then Cp = Cend e^(−k t₁) + Cend e^(−k t₂), one term per infusion',
+   why:'The two infusions are added (superposition). Each is a 2-hour infusion that ends at the same concentration because the dose, the time and the patient are the same; after it stops, each decays by first-order elimination from its own end time.'},
+  {k:'unit', t:'R = {{frac:400 mg|2 hr}} = 200 mg/hr; k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹; Cl = k × VD = 0.1733 × 20 L = 3.465 L/hr',
+   why:'The rate is the dose over the infusion time, in mg/hr. Clearance comes from k and VD because the infusion line wants Cl.'},
+  {k:'algebra', t:'Cend = {{frac:200 mg/hr|3.465 L/hr}}(1 − e^(−0.1733 × 2)) = 57.72 × (1 − 0.7071) = 16.90 mg/L',
+   why:'57.72 mg/L would be the plateau if the drip ran on; after two hours, half a half-life, it has reached 29.3% of that.'},
+  {k:'algebra', t:'Times since each infusion ended: first ended at 2 hr, so 12 hr have passed at t = 14 hr; second ended at 10 hr, so 4 hr. Cp = 16.90 e^(−0.1733 × 12) + 16.90 e^(−0.1733 × 4) = 16.90 × 0.125 + 16.90 × 0.500 = 2.11 + 8.45 = 10.56 mg/L',
+   why:'The second infusion started 8 hours after the first began, so it ran from 8 to 10 hours; 4 hours after its end is 14 hours. Twelve hours is three half-lives (one eighth left), four hours is one half-life (one half left).'},
+  {k:'round', t:'10.6',
+   why:'Her key is 10.6 with a margin of 5%, so 10.1 to 11.1 scores. A common wrong answer is 135.4, which comes from treating the two doses as a single bolus concentration; the drip ends far below its plateau.'}],
+ setup:{eq:'cp-after-stop', pre:['thalf-first', 'cl-k-vd', 'cp-infusing'], why:'Two 2-hour infusions and a level "4 hours after the cessation of the second infusion": intermittent infusions, added. Dose, infusion time, t½ and VD are given and Cp is asked, so each end level decays from its own end time and the two are summed. k first, then Cl = k × VD, then the infusion line.'},
+ teach:[
+  {h:'The idea', list:[
+   'Work one infusion to its end level with the infusion line, then let each copy decay from its own stopping time, then add.',
+   'Count the clock from the start of the first infusion: starts at 0 and 8 hours, ends at 2 and 10 hours, the question asks about 14 hours.',
+   'Half-life arithmetic checks the exponentials: 12 hours is three half-lives (0.125), 4 hours is one (0.5).']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 4; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Administering One or More Doses by IV Infusion" and "Example 4"'},
+
+{id:'cq4-5', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
+ topic:'multoral', sub:'oparam', concept:'increase-dose-effects', skill:'apply', dupOf:'m6b-c14',
+ source:'both',
+ stem:'Which of the following results if the dose is increased on a medication that is to be administered orally at regularly repeating intervals?',
+ options:[
+  {t:'Increased steady-state tmax', correct:false,
+   why:'The time of the peak within an interval depends on ka, k and τ only. The dose is not in that expression, so tmax does not move; this was her poll on the first slide of the deck.'},
+  {t:'Decreased rate of absorption', correct:false,
+   why:'The absorption rate constant is a property of the drug and the dosage form. A larger dose means more drug absorbed at the same rate constant.'},
+  {t:'Increased steady-state Cmax', correct:true,
+   why:'Every concentration in the regimen scales with the dose, so the steady-state peak rises in proportion. Slide "Altering Dose": increasing the dose increases steady-state concentrations and the peak-to-trough fluctuation.'},
+  {t:'Decreased clearance', correct:false,
+   why:'Clearance is a property of the patient and the drug. Changing the dose changes the amount cleared per hour, not the clearance.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Dose up: higher Cmax, Cmin and Cavg, a bigger swing between peak and trough, usually no change in compliance.',
+   'Dose does not move tmax (her poll: "no change in the tmax"), ka or clearance.',
+   'The parameters a regimen cannot change are the usual distractors: clearance, half-life, rate constants.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 5; 6a---Multiple-Oral-Doses.pdf, slides "Poll EV" (page 1) and "Altering Dose"; 09.28 lecture'},
+
+{id:'cq4-6', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
+ topic:'multoral', sub:'ossc', concept:'tmax-ss', skill:'multidose',
+ stem:'A 74-kg patient was administered a 750 mg oral dose of a new drug every 8 hours. The drug has an oral bioavailability of 92%, apparent volume of distribution of 0.29 L/kg, elimination half-life of 5 hours, and the absorption half-life of 1.5 hour. When does the expected maximum concentration of drug in the plasma at steady-state occur? Give your answer in hours rounded to the nearest tenth (one decimal place) with no units.',
+ units:'hr', answer:2.6, tol:0.13,
+ steps:[
+  {k:'setup', t:'tmax∞ = {{frac:1|ka − k}} ln[{{frac:ka(1 − e^(−kτ))|k(1 − e^(−kaτ))}}]',
+   why:'"Oral dose … every 8 hours" and "when does the … maximum concentration … at steady-state occur" ask for the time of the peak within an interval at the plateau. Only the two rate constants and τ enter; the dose, F, VD and the weight are not needed.'},
+  {k:'algebra', t:'k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹; ka = {{frac:0.693|1.5 hr}} = 0.462 hr⁻¹',
+   why:'Each half-life gives its own rate constant. The absorption half-life is the shorter one, so ka is the larger constant, as it must be for an immediate-release product.'},
+  {k:'algebra', t:'e^(−kτ) = e^(−0.1386 × 8) = 0.330, so 1 − 0.330 = 0.670; e^(−kaτ) = e^(−0.462 × 8) = 0.0248, so 1 − 0.0248 = 0.975',
+   why:'Both accumulation terms are evaluated at τ = 8 hours. Absorption is nearly complete within an interval (0.975), elimination is not (0.670).'},
+  {k:'algebra', t:'tmax∞ = {{frac:1|0.462 − 0.1386}} ln[{{frac:0.462 × 0.670|0.1386 × 0.975}}] = {{frac:1|0.3234}} ln(2.291) = 3.092 × 0.829 = 2.56 hr',
+   why:'The ratio inside the log is 2.291 and its natural log is 0.829; dividing by the difference of the constants gives hours. The single-dose tmax for the same constants would be 3.72 hr, so the steady-state peak comes earlier.'},
+  {k:'round', t:'2.6',
+   why:'Her key is 2.6 with a margin of 5%, so 2.5 to 2.7 scores. A common wrong answer is 17.1, a time to steady state or a decomposition time, not the time of the peak within an interval.'}],
+ setup:{eq:'tmax-ss', pre:['thalf-first', 'thalf-abs'], why:'"oral dose … every 8 hours" and "when does the expected maximum concentration … at steady-state occur", so the multiple oral block, the time-of-peak line. Two half-lives and τ are given and tmax∞ is asked; F, VD, the dose and the weight are not in the line. k and ka first, each from its half-life.'},
+ teach:[
+  {h:'The idea', list:[
+   'The steady-state peak time needs ka, k and τ only; extra data in the stem (F, VD, weight, dose) is for other parts of the same problem.',
+   'At steady state the peak arrives earlier than after a single dose, because drug left from earlier doses is already being eliminated while the new dose is absorbed.',
+   'Each half-life in the stem is converted to its own rate constant with 0.693.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 6; 6a---Multiple-Oral-Doses.pdf, slide "Example 1" (tmax at steady state)'},
+
+{id:'cq4-7', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
+ topic:'intermit', sub:'why', concept:'intermittent-assumptions', skill:'recall',
+ source:'both',
+ stem:'Which of the following best describes the assumptions associated with intermittent IV infusions?',
+ options:[
+  {t:'all drugs are better tolerated as IV bolus doses compared to IV infusion', correct:false,
+   why:'The rationale slide says the reverse: many drugs are better tolerated when infused slowly over time than as an IV bolus. The word "all" also overstates it.'},
+  {t:'intermittent IV infusions decrease elimination half-life which leads to increased efficacy', correct:false,
+   why:'No route of administration changes the elimination half-life, which belongs to the drug in the patient.'},
+  {t:'concentrations of drug in the body following multiple infusions are additive', correct:true,
+   why:'This is superposition applied to infusions: each infusion is worked as a single infusion, decays from its own end, and the concentrations are added. It is the assumption behind every two-infusion calculation.'},
+  {t:'intermittent IV infusion is the best way to very rapidly achieve high drug concentrations', correct:false,
+   why:'The rationale for infusing is to prevent high concentrations and their side effects. A loading bolus, not an infusion, is the way to reach a level quickly.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Rationale slide: prevent high drug concentrations and accompanying side effects; many drugs are better tolerated when infused slowly over time than by IV bolus.',
+   'Assumption: concentrations from successive infusions add (superposition), and each infusion follows the single-infusion equation with the same R, k and VD.',
+   'The three distractors each reverse a line of the rationale or move a drug property (half-life) that a route cannot move.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 7; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale" and "Administering One or More Doses by IV Infusion"; 09.28 lecture'},
+
+{id:'cq4-8', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
+ topic:'multoral', sub:'ossc', concept:'dose-for-cavg', skill:'multidose',
+ stem:'A patient is to take a medication by mouth every 8 hours. The medication has an oral bioavailability of 83%, an absorption half-life of 90 minutes, total body clearance of 3.0 L/hr, and apparent volume of distribution of approximately 25 L. What is an appropriate dose to achieve an average plasma drug concentration of 25 mg/L in this patient? Give your answer in mg rounded to the nearest whole number with no units.',
+ units:'mg', answer:723, tol:36,
+ steps:[
+  {k:'setup', t:'Cavg∞ = {{frac:F × D0|Cl × τ}}, so D0 = {{frac:Cavg∞ × Cl × τ|F}}',
+   why:'"By mouth every 8 hours" and "average plasma drug concentration" name the average steady-state line of the multiple oral block, rearranged for the dose. Clearance is given directly, so k and VD are not needed; the absorption half-life and VD are extra data for this part.'},
+  {k:'algebra', t:'D0 = {{frac:25 mg/L × 3.0 L/hr × 8 hr|0.83}} = {{frac:600 mg|0.83}} = 722.9 mg',
+   why:'mg/L × L/hr × hr leaves mg: the amount cleared in one interval at the target average. Dividing by F scales it up to the dose that has to be swallowed for 83% of it to reach the blood.'},
+  {k:'round', t:'723',
+   why:'Her key is 723 with a margin of 5%, so 687 to 759 scores. A common wrong answer is 500, which is what the numbers give without dividing by F and with a different interval; the whole number was asked for.'}],
+ setup:{eq:'cavg-ss', pre:[], why:'"by mouth every 8 hours" and "average plasma drug concentration", so the multiple oral block, the average line. Cl, τ, F and the target Cavg∞ are given and the dose is asked, so Cavg∞ = {{frac:F × D0|Cl × τ}} is rearranged for D0. No hinge: clearance is given, so k and VD stay unused.'},
+ teach:[
+  {h:'The idea', list:[
+   'The average steady-state concentration depends on the dosing rate F × D0 ÷ τ and on clearance, and on nothing else: not on ka, not on VD.',
+   'Cl × τ × Cavg∞ is the amount of drug cleared per interval; the dose has to replace it, scaled up by F.',
+   'She rounds a dose to a usable strength on worksheets; here Canvas asked for the whole number.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 8; 6a---Multiple-Oral-Doses.pdf, slide "Peak, Trough and Average Plasma Concentrations at Steady State"'},
+
+{id:'cq4-9', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:7, lecture:'L10',
+ topic:'bioavail', sub:'fabs', concept:'fabs-from-clearance', skill:'bioavail',
+ stem:'What is the absolute bioavailability of a drug for which a 500 mg dose resulted in an AUC of 139 (mg/L)hr? The elimination half-life of the drug is 4.5 hr and the apparent volume of distribution is 18 L. Give your answer as a decimal rounded to the nearest hundredth with no units.',
+ units:'(as a decimal fraction)', answer:0.77, tol:0.023,
+ steps:[
+  {k:'setup', t:'Fabs = {{frac:AUCpo|AUCIV}} with the same dose, and AUCIV = {{frac:DIV|Cl}}, Cl = k × VD',
+   why:'"Absolute bioavailability" with one AUC given and no IV AUC: the IV area has to come from the dose and the clearance, which the half-life and the volume supply. With equal doses the dose ratio is 1.'},
+  {k:'algebra', t:'k = {{frac:0.693|4.5 hr}} = 0.154 hr⁻¹; Cl = 0.154 hr⁻¹ × 18 L = 2.772 L/hr; AUCIV = {{frac:500 mg|2.772 L/hr}} = 180.4 (mg/L)hr',
+   why:'hr⁻¹ × L is L/hr, and mg over L/hr is mg·hr/L, the unit of an AUC. This is the area the same 500 mg would give intravenously.'},
+  {k:'algebra', t:'Fabs = {{frac:139|180.4}} = 0.771',
+   why:'The oral area is 77% of the IV area for the same dose, so 77% of the oral dose reached the circulation.'},
+  {k:'round', t:'0.77',
+   why:'Her key is 0.77 with a margin of 3%, so 0.75 to 0.79 scores. Two decimal places were asked for, as a decimal, not a percentage.'}],
+ setup:{eq:'f-abs', pre:['thalf-first', 'cl-k-vd', 'div-cl-auc'], why:'"absolute bioavailability" with an oral AUC, t½ and VD and no IV AUC, so the bioavailability block. The IV AUC is not given, so it comes from DIV = Cl × AUCIV with Cl = k × VD; then Fabs is the ratio of the two areas, the doses being equal.'},
+ teach:[
+  {h:'The idea', list:[
+   'When the IV curve is not given, dose over clearance is the IV AUC: the in-class sheet asked it this way too.',
+   'Equal oral and IV doses make the dose ratio 1, so F is the ratio of the areas.',
+   'Report F as a decimal with two places (0.77), or as 77%; never 0.771 when two places are asked.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 9; 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (equation) and the in-class activity of 09.30, question 3'},
+
+{id:'cq4-10', prof:'Mosley', tier:'new', exam:2, module:7, lecture:'L10',
+ topic:'bioavail', sub:'defs', concept:'absolute-vs-relative', skill:'recall', dupOf:'m7-c03',
+ source:'slide',
+ stem:'Which term describes the comparison of the bioavailability of the active drug in the systemic circulation following extravascular administration with the bioavailability of the same drug following intravenous administration?',
+ options:[
+  {t:'Absolute Bioavailability', correct:true,
+   why:'The stem is the slide definition word for word. Absolute means measured against the intravenous dose, where all of the drug is in the circulation.'},
+  {t:'Bioequivalence', correct:false,
+   why:'Bioequivalence compares two drug products of the same drug in rate and extent; neither product is the IV dose.'},
+  {t:'Relative Bioavailability', correct:false,
+   why:'Relative bioavailability compares two formulations or routes against a reference that is not the IV dose.'},
+  {t:'Drug Product Performance', correct:false,
+   why:'Drug product performance is the release of the drug from the product and its absorption, the broader term the deck opens with; it is not the IV comparison.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Absolute: against IV. Relative: against another product or route. Bioequivalence: two products of the same drug compared in both rate and extent.',
+   'She asks definitions by quoting the slide and asking for the term; the words "intravenous administration" settle this one.']}],
+ cite:'Canvas Quiz 4 (Modules 6–7a), question 10; 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (page 5)'},
 
 ];
