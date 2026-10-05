@@ -3,7 +3,7 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-05 (which equation, and where it sits on her sheet)
-- Reference opens with a map of her equation sheet: all 52 lines in print order, coloured by module, with the stem words that call for each.
+- Reference opens with a map of her equation sheet: all 52 lines in print order, coloured by module.
 - The map prints on its own; each line has a Drill chip that starts the typing drill on that line.
 - Equations: a set-up drill shows one of her stems and asks only which line solves it, then says why.
 - Equations: "Only Module N" chips drill one module's equations on their own.
