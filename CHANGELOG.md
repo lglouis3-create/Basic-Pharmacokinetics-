@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-05 (the sheet by what is asked, and printed in colour)
+- The sheet map can be regrouped by what a stem asks for (Cp, Cmax, Cmin, tmax ...) or by dosing model.
+- "Print the sheet, colour-coded" prints her two pages as laid out, each line coloured and labelled with its model.
+- The set-up drill follows the Answer setting: one stem at a time, or ten to a page answered in place.
+- Review fixes: textbook bullets split, a kidney sentence corrected, two figures reach every module they serve.
+
 ## 2026-10-05 (which equation, and where it sits on her sheet)
 - Reference opens with a map of her equation sheet: all 52 lines in print order, coloured by module.
 - The map prints on its own; each line has a Drill chip that starts the typing drill on that line.

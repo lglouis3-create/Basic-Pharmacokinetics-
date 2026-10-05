@@ -224,7 +224,7 @@ const DIAGRAMS = [
  ]},
  {group:'See the idea behind the arithmetic', note:'Four pictures of the rules the calculations lean on. Each draws arithmetic the course states or a relation the textbook states, and names which.',
   figs:[
-  {key:'halflife_ladder', module:'2 to 6', modules:[2,3,6], name:'The half-life ladder',
+  {key:'halflife_ladder', module:'2 to 6', modules:[2,3,4,5,6], name:'The half-life ladder',
    axes:'Half-lives elapsed across (0 to 10); percent up. The top panel is the percent of a dose still in the body, the bottom panel the percent of steady state reached.',
    shape:'Top: bars halving each step, 100, 50, 25, 12.5, 6.25, 3.1, 1.6, down to 0.1 at ten half-lives. Bottom: the mirror image, a curve climbing 50, 75, 87.5, 93.75 and flattening at 100.',
    eq:'Percent left after n half-lives = 100 × 0.5ⁿ. Percent of steady state reached = 100 × (1 − 0.5ⁿ). The marks are the textbook figures: 90% at 3.3 half-lives, 95% at 4.32, 99% at 6.6.',
@@ -242,7 +242,7 @@ const DIAGRAMS = [
    eq:'Excretion rate = filtration + secretion − reabsorption. Renal clearance = {{frac:excretion rate|Cp}}, in mL/min, compared with GFR, 120 mL/min.',
    how:'Only unbound drug is filtered, so filtration alone can never exceed GFR. A renal clearance above 120 mL/min therefore needs secretion; one below it means some filtered drug returned to the blood.',
    asks:'The probable mechanism of renal excretion from a renal clearance value: above, about, or below 120 mL/min.'},
-  {key:'unit_cancel', module:'1 to 6', modules:[1,2,3,4,6], name:'Units that cancel',
+  {key:'unit_cancel', module:'1 to 6', modules:[1,2,3,4,5,6], name:'Units that cancel',
    axes:'No axes: five of her equations with the units written in, the cancelled unit struck through in amber and the unit of the answer in blue.',
    shape:'hr⁻¹ × L gives L/hr; mg ÷ (mg·hr/L) gives L/hr; mg/L × L/hr gives mg/hr; 1 ÷ hr⁻¹ gives hr; mg ÷ (mg/L) gives L.',
    eq:'Cl = k × VD; Cl = {{frac:Dose|AUC}}; R = Css × Cl; t½ = {{frac:0.693|k}}; VD = {{frac:Dose|C0}}.',

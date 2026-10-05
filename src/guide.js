@@ -811,7 +811,8 @@ const GUIDE_HTML = `
 <li><q class="para">It will be written as beta half-life, because I am going to ask you for either the beta half-life or the elimination half-life, so that there is no confusion.</q> (08-26)</li>
 <li><q class="para">Do not get all complicated. Do not solve for k and then 0.693 over k; you have done too much work.</q> (08-26)</li>
 </ul>
-<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "Concentration of Drug in the Central Compartment", "Practice" (theophylline), "Beta Half-life", "Rate Constants", "Apparent Volumes of Distribution" and the in-class two-compartment practice sheet; RecapExam1.pdf; IV Bolus Practice 4; Homework 2; q2_module2.js m2-n-theo, m2-n-koverall, m2-n-k21, m2-n-k12; reference.js (equation sheet status); lectures 08-26, 09-09.</p>
+<p class="gsrc">Sources: 2IVBolusAdministration.pdf, slides "Concentration of Drug in the Central Compartment", "Practice" (theophylline), "Beta Half-life", "Rate Constants", "Apparent Volumes of Distribution" and the in-class two-compartment practice sheet.</p>
+<p class="gsrc">RecapExam1.pdf; IV Bolus Practice 4; Homework 2; q2_module2.js m2-n-theo, m2-n-koverall, m2-n-k21, m2-n-k12; reference.js (equation sheet status); lectures 08-26, 09-09.</p>
 </section>
 
 <h2>Module 3 - Intravenous Infusions</h2>
@@ -828,7 +829,8 @@ const GUIDE_HTML = `
 <h4>In plain words</h4>
 <ul class="tlist">
 <li>An intravenous (IV) infusion runs drug into a vein at a constant rate for a set time, instead of giving it all at once as an IV bolus.</li>
-<li>A constant rate of input is a zero-order process. Elimination stays first order (a fixed fraction of the drug present leaves per unit time), exactly as after a bolus, because the drug itself has not changed; only the way it enters the body has.</li>
+<li>A constant rate of input is a zero-order process.</li>
+<li>Elimination stays first order (a fixed fraction of the drug present leaves per unit time), exactly as after a bolus: the drug has not changed, only the way it enters the body has.</li>
 <li>The plasma concentration (C<sub>p</sub>) starts at zero and rises toward a plateau, called steady state, where the rate of drug going in equals the rate going out.</li>
 <li>When the infusion stops there is no more input, so C<sub>p</sub> falls by ordinary first-order elimination.</li>
 <li>The point of infusing is precise control of C<sub>p</sub>: with the basic parameters you can predict C<sub>p</sub> at any time during or after the infusion.</li>
@@ -1365,7 +1367,8 @@ const GUIDE_HTML = `
 <li>Her 09-14 attendance poll was a definition question on clearance, the volume of fluid removed of drug per unit time; only its debrief was recorded.</li>
 </ul>
 
-<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 3, 8, 11, 24; transcript 09-14; drill items m4-rou-1, m4-rou-2, m4-rou-3, m4-n-clh2. Textbook: Shargel 8e Chapter 15, printout pp. 3 and 13.</p>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 3, 8, 11, 24; transcript 09-14; drill items m4-rou-1, m4-rou-2, m4-rou-3, m4-n-clh2.</p>
+<p class="gsrc">Textbook: Shargel 8e Chapter 15, printout pp. 3 and 13.</p>
 </section>
 
 <section class="gobj" id="gobj-m4-2">
@@ -1433,7 +1436,8 @@ const GUIDE_HTML = `
 <li>The margin she allows around 120 mL/min, stated as a rule: <q>I'm saying 120. If it's 119, 121 let's call that filtration. If it's 250, then let's assume that we've got some active secretion going on.</q> (09-14)</li>
 </ul>
 
-<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 12, 13, 18, 19, 24; transcript 09-14; drill items m4-rm-5, m4-rm-6, m6-p1i (Multiple-IV-Bolus-Practice-1 question 1i). Textbook: Shargel 8e Chapter 15, printout p. 15 (Table 15-2).</p>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 12, 13, 18, 19, 24; transcript 09-14; drill items m4-rm-5, m4-rm-6, m6-p1i (Multiple-IV-Bolus-Practice-1 question 1i).</p>
+<p class="gsrc">Textbook: Shargel 8e Chapter 15, printout p. 15 (Table 15-2).</p>
 </section>
 
 <section class="gobj" id="gobj-m4-3">
@@ -1450,7 +1454,8 @@ const GUIDE_HTML = `
 <li>CrCl is calculated with the Cockcroft-Gault equation, and 120&ndash;130 mL/min is considered normal.</li>
 <li>A low CrCl means reduced renal function, so a drug eliminated by the kidney is excreted more slowly and may accumulate. Depending on the drug, its dose may need adjusting.</li>
 <li>CrCl describes the patient's kidneys, not a particular drug. A drug's renal clearance, worked out in objective 5 from f<sub>e</sub> (the fraction of the dose excreted unchanged in the urine), is a different number.</li>
-<li class="tbk"><b>From the textbook.</b> Creatinine clearance estimated by the Cockcroft and Gault method stands in for GFR, and clinicians adjust doses to it; renal clearance is the sum of filtration, secretion and reabsorption.</li>
+<li class="tbk"><b>From the textbook.</b> Creatinine clearance estimated by the Cockcroft and Gault method stands in for GFR, and clinicians adjust doses to it.</li>
+<li class="tbk"><b>From the textbook.</b> Renal clearance combines the three kidney processes: filtration and secretion put drug into the urine, reabsorption takes it back.</li>
 </ul>
 
 <h4>Terms to know</h4>
@@ -1519,11 +1524,12 @@ const GUIDE_HTML = `
 
 <h4>In her words</h4>
 <ul class="tlist">
-<li>Why you must memorize it: <q>this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one</q> (09-14)</li>
+<li>Why it has to be known without the sheet: <q>this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one</q> (09-14)</li>
 <li>The units she will mark: <q>I also want you to recognize that the units of creatinine clearance should be in milliliters per minute So don't give me kilograms per milligram per deciliter. Milliliters per minute.</q> (09-14)</li>
 </ul>
 
-<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 14, 15, 16, 17, 25; transcript 09-14; drill items m4-cr-1, m4-cr-2, m4-cr-4, m4-cr-5, m4-cr-6, m4-n-inches, m4-n-ibwf, m4-n-crcl; reference.js (equations not on the sheet); tell.js (renal against creatinine clearance). Textbook: Shargel 8e Chapter 15, printout p. 11.</p>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 14, 15, 16, 17, 25; transcript 09-14; drill items m4-cr-1, m4-cr-2, m4-cr-4, m4-cr-5, m4-cr-6, m4-n-inches, m4-n-ibwf, m4-n-crcl; reference.js (equations not on the sheet); tell.js (renal against creatinine clearance).</p>
+<p class="gsrc">Textbook: Shargel 8e Chapter 15, printout p. 11.</p>
 </section>
 
 <section class="gobj" id="gobj-m4-4">
@@ -1703,7 +1709,9 @@ const GUIDE_HTML = `
 <li>Her question on the fraction's units: <q>What are the units of FE? No units</q> (09-14)</li>
 </ul>
 
-<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 4&ndash;11, 21, 22 (taught after slide 11), 23, 25; transcript 09-14; drill items m4-n-pen1, m4-n-pen3, m4-n-fe, m4-n-k, m4-n-ke, m4-n-clt, m4-n-clr, m4-n-clh, m4-n-ab1, m4-n-ab2; reference.js (equation sheet); tell.js (clearance against rate); STYLE.md (Module 3 practice). Textbook: Shargel 8e Chapter 15, printout pp. 3, 13 and 17.</p>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 4&ndash;11, 21, 22 (taught after slide 11), 23, 25; transcript 09-14; drill items m4-n-pen1, m4-n-pen3, m4-n-fe, m4-n-k, m4-n-ke, m4-n-clt, m4-n-clr, m4-n-clh, m4-n-ab1, m4-n-ab2.</p>
+<p class="gsrc">Also reference.js (equation sheet); tell.js (clearance against rate); STYLE.md (Module 3 practice).</p>
+<p class="gsrc">Textbook: Shargel 8e Chapter 15, printout pp. 3, 13 and 17.</p>
 </section>
 
 <h2>Module 5 - Single Oral Administration</h2>
@@ -1780,7 +1788,8 @@ const GUIDE_HTML = `
 <li><q>when you see a capital F, You should think oral.</q></li>
 </ul>
 
-<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "IV Bolus vs. Oral Administration", "Drug in the Body", "Kinetics of Absorption", "First-Order Absorption Model", "Example of a concentration-time profile following extravascular administration", "Summary"; equation sheet; lecture transcript 09-21. Textbook: Shargel 8e Chapter 16, printout pp. 3, 5 and 6.</p>
+<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "IV Bolus vs. Oral Administration", "Drug in the Body", "Kinetics of Absorption", "First-Order Absorption Model", "Example of a concentration-time profile following extravascular administration", "Summary"; equation sheet; lecture transcript 09-21.</p>
+<p class="gsrc">Textbook: Shargel 8e Chapter 16, printout pp. 3, 5 and 6.</p>
 </section>
 
 <section class="gobj" id="gobj-m5-2">
@@ -2026,7 +2035,9 @@ const GUIDE_HTML = `
 <li><q>looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the AUC is relatively unchanged.</q></li>
 </ul>
 
-<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "Changing Dose", "Effect of ka and k on Cmax, tmax, and AUC", "Absorption Kinetics Terminology", "Significance of Absorption Rate Constants, tmax, and Cmax", "Example 1", "Example 2"; equation sheet page 1; lecture transcript 09-21; question bank m5-n05, m5-n06, m5-n19, m5-n20, m5-c26. Textbook: Shargel 8e Chapter 16, printout pp. 17 and 19 (Table 16-2).</p>
+<p class="gsrc">Sources: 5---Pharmacokinetics-of-Oral-Absorption.pdf, slides "Changing Dose", "Effect of ka and k on Cmax, tmax, and AUC", "Absorption Kinetics Terminology", "Significance of Absorption Rate Constants, tmax, and Cmax", "Example 1", "Example 2".</p>
+<p class="gsrc">Equation sheet page 1; lecture transcript 09-21; question bank m5-n05, m5-n06, m5-n19, m5-n20, m5-c26.</p>
+<p class="gsrc">Textbook: Shargel 8e Chapter 16, printout pp. 17 and 19 (Table 16-2).</p>
 </section>
 
 <h2>Module 6 - Multiple Dosings</h2>
@@ -2114,7 +2125,8 @@ const GUIDE_HTML = `
 <li><q>not 3 to 5 doses, 3 to 5 half-lives, OK? Cause the 2nd bullet, independent of dose</q> (09-23)</li>
 <li><q>I'm gonna put this word in your brain right now. First order kinetics equals linear pharmacokinetics.</q> (09-23)</li>
 </ul>
-<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Drug accumulation with repeated administration" and "Superposition"; 09-23 lecture; Chapter 9, Multiple-Dosage Regimens; questions m6-n01, m6-n02, m6-n06. Textbook: Shargel 7e Chapter 9, printout pp. 5 and 6.</p>
+<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Drug accumulation with repeated administration" and "Superposition"; 09-23 lecture; Chapter 9, Multiple-Dosage Regimens; questions m6-n01, m6-n02, m6-n06.</p>
+<p class="gsrc">Textbook: Shargel 7e Chapter 9, printout pp. 5 and 6.</p>
 </section>
 
 <section class="gobj" id="gobj-m6-2">
@@ -2260,7 +2272,10 @@ const GUIDE_HTML = `
 <li><q>I want you to realize that the average is not the max plus the min divided by 2</q> (09-23)</li>
 <li><q>Bolus dosing, IV dosing, this F is equal to 1. Right? For for IV dosing. For oral, you will have given, provided, or we will calculate a bioavailability factor.</q> (09-23)</li>
 </ul>
-<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Amount of Drug in the Body Following Repeated IV Bolus Injections", "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections" and "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections". Same deck, slides "Example 1", "Plasma Drug Concentration at Any Time After n Doses", "Example 2", "Plasma Drug Concentration at Steady State" and "Example 3". Also the 09-23 lecture; Multiple-IV-Bolus-Practice-1 and its key; questions m6-n03 to m6-n06. Textbook: Shargel 7e Chapter 9, printout pp. 7, 8, 14, 20 and 22.</p>
+<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Amount of Drug in the Body Following Repeated IV Bolus Injections", "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections".</p>
+<p class="gsrc">Also the slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections".</p>
+<p class="gsrc">Same deck, slides "Example 1", "Plasma Drug Concentration at Any Time After n Doses", "Example 2", "Plasma Drug Concentration at Steady State" and "Example 3". Also the 09-23 lecture; Multiple-IV-Bolus-Practice-1 and its key; questions m6-n03 to m6-n06.</p>
+<p class="gsrc">Textbook: Shargel 7e Chapter 9, printout pp. 7, 8, 14, 20 and 22.</p>
 </section>
 
 <section class="gobj" id="gobj-m6-3">
@@ -2364,7 +2379,9 @@ const GUIDE_HTML = `
 <li><q>the concentrations from each administration of the dose will be additive over time</q> (09-28)</li>
 <li><q>So that C0 is gonna be the concentration at the end of the infusion, right?</q> (09-28)</li>
 </ul>
-<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale", "Administering One or More Doses by IV Infusion" and "Example 4". Same deck, slides "What is the plasma drug concentration at the end of the first infusion?", "What is the plasma drug concentration 4 hours after the cessation of the second infusion?" and "Summary". Also the 09-28 lecture; In-Class Activity, Multiple IV Infusions; questions m6b-n01 to m6b-n03. Textbook: Shargel 7e Chapter 9, printout p. 18.</p>
+<p class="gsrc">Sources: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale", "Administering One or More Doses by IV Infusion" and "Example 4".</p>
+<p class="gsrc">Same deck, slides "What is the plasma drug concentration at the end of the first infusion?", "What is the plasma drug concentration 4 hours after the cessation of the second infusion?" and "Summary". Also the 09-28 lecture; In-Class Activity, Multiple IV Infusions; questions m6b-n01 to m6b-n03.</p>
+<p class="gsrc">Textbook: Shargel 7e Chapter 9, printout p. 18.</p>
 </section>
 
 <h2>Module 6 - Multiple Oral Doses</h2>
@@ -2551,7 +2568,9 @@ const GUIDE_HTML = `
 <ul class="tlist">
 <li><q>Only for oral do you need to find T Max. OK. Now, I might ask you what is the max for a bolus dose, and you know that that is C0, right? OK. But max for an oral dose, you have to find T-Max before you can find C-Max.</q></li>
 </ul>
-<p class="gsrc">Sources: 6a---Multiple-Oral-Doses.pdf, slides "Cp vs. Time for a Single Oral Dose", "Concentration of Drug in the Plasma at Any Time", "Peak, Trough and Average Plasma Concentrations at Steady State", "Time to Peak at Steady State" and "Example 1" (slides 3&ndash;9). Also BasicPharmacokineticsEquations.pdf pages 1&ndash;2; transcript 09-28; questions m6b-n09 to m6b-n14. Textbook: Shargel 7e Chapter 9, printout p. 6.</p>
+<p class="gsrc">Sources: 6a---Multiple-Oral-Doses.pdf, slides "Cp vs. Time for a Single Oral Dose", "Concentration of Drug in the Plasma at Any Time", "Peak, Trough and Average Plasma Concentrations at Steady State", "Time to Peak at Steady State" and "Example 1" (slides 3&ndash;9).</p>
+<p class="gsrc">Also BasicPharmacokineticsEquations.pdf pages 1&ndash;2; transcript 09-28; questions m6b-n09 to m6b-n14.</p>
+<p class="gsrc">Textbook: Shargel 7e Chapter 9, printout p. 6.</p>
 </section>
 
 <section class="gobj" id="gobj-m6a-2">
@@ -2625,7 +2644,8 @@ const GUIDE_HTML = `
 <li><q>Don't tell me 17.29 mg for an oral dose.</q></li>
 <li><q>if you calculate a dosing interval, that is, let's say, 3.72 hours. As your patient. Does that dosing interval make sense to me?</q></li>
 </ul>
-<p class="gsrc">Sources: 6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens", "Altering Steady-State Concentrations" (Methods 1 and 2), "Altering Dose", "Altering Dosing Interval" (three slides, including the 6-hour and 8-hour figure) and "Consider Peak and Trough" (slides 11&ndash;19); transcript 09-28; questions in q8_module6b.js, sub "oparam".</p>
+<p class="gsrc">Sources: 6a---Multiple-Oral-Doses.pdf, slides "Multiple-Dosage Regimens", "Altering Steady-State Concentrations" (Methods 1 and 2), "Altering Dose", "Altering Dosing Interval" (three slides, including the 6-hour and 8-hour figure) and "Consider Peak and Trough" (slides 11&ndash;19).</p>
+<p class="gsrc">Transcript 09-28; questions in q8_module6b.js, sub "oparam".</p>
 </section>
 
 <h2>Module 7a - Bioavailability and Bioequivalence</h2>
@@ -2681,7 +2701,8 @@ const GUIDE_HTML = `
 <li>Definitions were the first thing she named for the quiz, together with the why: what each term is for, and what bioavailability data tell a pharmacist about a product.</li>
 <li>Rate and extent: a stem that gives only AUC values gives extent. Whether two products are bioequivalent cannot be answered yes from AUC alone, because the rate (the peak time) is not known.</li>
 <li>On a figure like the one above, she asks which curves share an AUC, which share a peak time, and which pair could be called bioequivalent.</li>
-<li>Bioavailability against bioequivalence: a relative bioavailability study (two formulations of the same drug compared by their AUCs) compares extent; a bioequivalence study is a specialized relative bioavailability study that compares rate as well.</li>
+<li>Bioavailability against bioequivalence: a relative bioavailability study (two formulations of the same drug compared by their AUCs) compares extent.</li>
+<li>A bioequivalence study is a specialized relative bioavailability study that compares rate as well.</li>
 <li>The words in the definition that carry the meaning: "absence of a significant difference", so the two products need not be identical; "same molar dose"; and "rate and extent".</li>
 </ul>
 
@@ -2773,7 +2794,8 @@ const GUIDE_HTML = `
 <ul class="tlist">
 <li>Bioavailability can be low for reasons in the product, reasons on the way into the circulation, and reasons in the patient. The list on the slide has nine entries.</li>
 <li>The product: physicochemical properties of the drug and the formulation, drug stability and pH effects, and prodrugs (a drug given in an inactive form that the body must convert to the active drug).</li>
-<li>On the way in: pre-systemic and first-pass metabolism, which is the liver acting on an oral dose before it reaches the systemic circulation, plus food effects, drug-drug interactions and efflux transporters (membrane proteins that pump absorbed drug back out of the cell).</li>
+<li>On the way in: pre-systemic and first-pass metabolism, which is the liver acting on an oral dose before it reaches the systemic circulation.</li>
+<li>Also on the way in: food effects, drug-drug interactions and efflux transporters (membrane proteins that pump absorbed drug back out of the cell).</li>
 <li>The patient: age and disease state. Her comment on age was that the body changes and everything slows down.</li>
 <li>She named the first three entries as the ones that come to mind most often: the physical and chemical properties of the drug itself, what pH does to it once it is in the body, first-pass metabolism, and stability.</li>
 <li>The summary slide ties it together: low bioavailability has a variety of causes, including formulation factors and the first-pass effect, and it bears on the drug's safety and efficacy.</li>

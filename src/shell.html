@@ -670,14 +670,18 @@ body:has(#backbtn) #xback, body:has(#backbtn) #tback{bottom:64px}
 .smbtns{display:flex;gap:6px;flex-wrap:wrap}
 .smcol{margin:16px 0 6px;font-size:15px}.smcol small{color:var(--text-dim);font-weight:400;margin-left:6px}
 .smlines{list-style:none;margin:0;padding:0;counter-reset:sm}
-.smline{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"badge eq" "badge when" "badge need" "badge act";gap:2px 10px;align-items:start;
+.smline{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"badge eq" "badge model" "badge when" "badge need" "badge act";gap:2px 10px;align-items:start;
   border-left:5px solid var(--mc);background:var(--mcbg);border-radius:0 var(--r) var(--r) 0;padding:8px 10px 8px 8px;margin:6px 0;counter-increment:sm}
 .smbadge{grid-area:badge;display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--mc);border-radius:5px;padding:2px 6px;min-width:34px;text-align:center}
 .smeq{grid-area:eq;font-size:16px;line-height:1.5;color:var(--text)}
 .smeq::before{content:counter(sm) ". ";color:var(--text-dim);font-size:12px}
 .smwhen{grid-area:when;font-size:13.5px;line-height:1.45}.smneed{grid-area:need;font-size:13.5px;line-height:1.45;color:var(--text-dim)}
 .smact{grid-area:act;margin-top:2px}
-@media (min-width:760px){.smline{grid-template-columns:auto 38% 1fr auto;grid-template-areas:"badge eq when act" "badge eq need act"}}
+@media (min-width:760px){.smline{grid-template-columns:auto 38% 1fr auto;grid-template-areas:"badge eq when act" "badge model need act"}}
+.smmodel{grid-area:model;font-size:12px;color:var(--mc);font-weight:600;letter-spacing:.01em}
+.smorder{margin:6px 0 2px}
+.laytogrow{margin:0 0 8px}
+#sheetprint{display:none}.smprinttitle{display:none}
 @media print{
   body.print-sheet *{visibility:hidden}
   body.print-sheet .sheetmap,body.print-sheet .sheetmap *{visibility:visible}
@@ -685,6 +689,21 @@ body:has(#backbtn) #xback, body:has(#backbtn) #tback{bottom:64px}
   body.print-sheet .smbtns,body.print-sheet .smact{display:none}
   body.print-sheet .smline{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:4px 8px}
   body.print-sheet .smeq{font-size:13px}body.print-sheet .smwhen,body.print-sheet .smneed{font-size:11px}
+  body.print-sheet .smprinttitle{display:block;font-size:17px;font-weight:700;margin:0 0 6px}
+  /* the sheet itself, reproduced for print */
+  body.print-sheet2 *{visibility:hidden}
+  body.print-sheet2 #sheetprint{display:block;visibility:visible;position:absolute;left:0;top:0;width:100%;background:#fff;color:#16202E}
+  body.print-sheet2 #sheetprint *{visibility:visible}
+  .sppage{break-after:page;padding:6mm 8mm}
+  .sptitle{font-size:15px;font-weight:700;margin:0 0 4px}.sptitle small{font-weight:400;color:#5A6878;margin-left:8px;font-size:11px}
+  .splegend{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 6px}
+  .splegend .smkey{font-size:9.5px;padding:1px 6px 1px 3px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .spcols{display:grid;grid-template-columns:1fr 1fr;gap:0 8mm}
+  .spcolhead{font-size:10px;color:#5A6878;text-transform:uppercase;letter-spacing:.04em;margin:2px 0 4px}
+  .spline{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;border-left:4px solid var(--mc);background:var(--mcbg);padding:3px 6px;margin:3px 0;border-radius:0 4px 4px 0;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .speq{font-size:12.5px;line-height:1.35}
+  .sptag{font-size:8.5px;font-weight:700;color:#fff;background:var(--mc);border-radius:3px;padding:1px 5px;white-space:nowrap;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .spmissing{margin-top:8px}
 }
 .sucard .suscope{margin:4px 0 2px}
 .suq .stem{margin:6px 0 10px}

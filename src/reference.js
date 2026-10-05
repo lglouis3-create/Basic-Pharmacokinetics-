@@ -25,6 +25,7 @@ const REFERENCE_HTML = `
 <li><b>The last section walks the equation sheet itself</b> line by line, so a line on the sheet can be matched to the module it belongs to.</li>
 <li>Use <b>Jump to a section</b> to go straight to a module.</li>
 </ul></details>
+{{sheetmap}}
 
 <h3>Not on the exam equation sheet</h3>
 <ul class="tlist">
@@ -739,8 +740,7 @@ const REFERENCE_HTML = `
 <li>Increase the dose, same interval: higher steady-state concentrations, a larger swing from peak to trough, usually no change in compliance.</li>
 <li>Increase the interval, same dose: lower concentrations, a larger swing, better compliance.</li>
 <li>Decrease the interval: higher concentrations and worse compliance.</li>
-<li>A half-life is the time for the concentration to fall by one-half.</li>
-<li>The swing is smaller because the next dose arrives earlier in the decline: <i>"we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve,"</i></li>
+<li>The swing is smaller because the next dose arrives earlier in the decline: <i>"we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve,"</i> (a half-life being the time for the concentration to fall by one-half).</li>
 <li>Neither change moves the time to reach steady state.</li>
 <li>When stating a regimen, give an interval the patient can keep and an oral dose rounded to a strength that exists: <i>"Don't tell me 17.29 mg for an oral dose."</i></li>
 </ul>

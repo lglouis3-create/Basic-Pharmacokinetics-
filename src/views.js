@@ -1263,7 +1263,7 @@ function layoutToggle(){
 function layoutClick(e){
   const b = e.target.closest && e.target.closest('[data-layout]'); if(!b) return;
   DB.settings.layout = b.dataset.layout; save();
-  if(VIEW === 'quiz') renderQuiz(); else if(VIEW === 'exam') renderExam(); else if(VIEW === 'topics') renderTopics();
+  if(VIEW === 'quiz') renderQuiz(); else if(VIEW === 'exam') renderExam(); else if(VIEW === 'topics') renderTopics(); else if(VIEW === 'eq') renderEq();
 }
 const markDone = id => (Q.doneIds ||= new Set()).add(id);
 const noIds = h => h.replace(/ id="(numIn|mSel\d+|btnCheck)"/g, '');
@@ -2965,7 +2965,7 @@ function renderDoc(el, html, prefix){
     if (t){ openAncestors(t); scrollToEl(t); }
   });
 }
-function renderRef(){ renderDoc($('#v-ref'), refFigures(REFERENCE_HTML.replace('</ul></details>', '</ul></details>' + sheetMapHTML())), 'ref'); }
+function renderRef(){ renderDoc($('#v-ref'), refFigures(REFERENCE_HTML.replace('{{sheetmap}}', sheetMapHTML())), 'ref'); }
 function renderTell(){ renderDoc($('#v-tell'), refFigures(TELL_HTML), 'tell'); }
 function renderGuide(){ renderDoc($('#v-guide'), refFigures(GUIDE_HTML), 'guide'); }
 
@@ -3730,48 +3730,108 @@ function eqMarkRight(){
    THE SHEET MAP: HER EQUATION SHEET, LINE BY LINE, COLOURED BY MODULE
    ==========================================================================
    sheet.js lists the 52 lines of Basic-Pharmacokinetics-Equations.pdf in
-   print order. The map shows them in that order with a colour band per
-   module, the words in a stem that call for the line, and the givens it
-   needs; a Drill chip starts the typing drill on that one line, and the
-   whole map prints on its own. */
-const SHEET_MOD_NAME = m => m === 0 ? 'Not lectured yet' : m === 7 ? 'Module 7a' : 'Module ' + m;
+   print order, each tagged with its module, its dosing model and the
+   quantity on its left side. The map shows them in print order, regrouped
+   by what a stem asks for (the way a whiteboard of the course groups them:
+   Cp, Cmax, Cmin, Cavg, tmax ...), or regrouped by dosing model. A colour
+   band per module stays in every order; a Drill chip starts the typing
+   drill on that one line; the whole map prints on its own, and a second
+   print reproduces the sheet itself, two columns a page, colour-coded and
+   labelled with the dosing model. */
+const SHEET_MOD_NAME = m => m === 0 ? 'Not lectured yet' : 'Module ' + modShort(m);
 const SHEET_MODS = [1, 2, 3, 4, 5, 6, 7, 0];
+const SHEET_ORDER_KEY = NS + ':sheetorder';
+const sheetOrder = () => LS.get(SHEET_ORDER_KEY) || 'print';
+const SHEET_ASK_ORDER = ['C at a time', 'C0, VD or the amount', 'Cmax at steady state', 'Cmin at steady state', 'Cavg at steady state', 'tmax and Cmax',
+  'Css, or the rate R', 'Loading dose', 'Amount in the body', 'k, or the time to a level', 'k and the rate constants', 't½ and k', 'Volumes',
+  'Clearance', 'fe and ke', 'Rate of elimination', 'CrCl', 'AUC', 'F', 'Dose or AUC', 'Shelf life', 'Nonlinear'];
+const SHEET_MODEL_ORDER = ['Zero order', 'First order, one compartment', 'First order, any route', 'Any route, from a data table', 'Any route', 'IV bolus, one compartment',
+  'IV bolus, two compartments', 'IV infusion', 'Loading dose with an infusion', 'Elimination and clearance', 'Renal function', 'Single oral dose',
+  'Repeated IV bolus', 'Multiple oral doses', 'Bioavailability', 'Stability, not lectured', 'Nonlinear, not lectured'];
 
-function sheetMapHTML(){
-  const modLabel = m => `<span class="smbadge m${m}">${m === 0 ? 'later' : m === 7 ? 'M7a' : 'M' + m}</span>`;
-  const line = (l, i) => `<li class="smline m${l.module}">
-      ${modLabel(l.module)}
+const sheetBadge = m => `<span class="smbadge m${m}">${m === 0 ? 'later' : 'M' + modShort(m)}</span>`;
+function sheetLineHTML(l, i){
+  return `<li class="smline m${l.module}">
+      ${sheetBadge(l.module)}
       <span class="smeq">${mathHTML(l.html)}</span>
-      <span class="smwhen"><b>Use it when:</b> ${mathHTML(l.when)}</span>
-      <span class="smneed"><b>You need:</b> ${mathHTML(l.need)}</span>
+      <span class="smmodel">${esc(l.model)}${l.asks ? ' · asks: ' + esc(l.asks) : ''}</span>
+      ${l.when ? `<span class="smwhen"><b>Use it when:</b> ${mathHTML(l.when)}</span>` : ''}
+      ${l.need ? `<span class="smneed"><b>You need:</b> ${mathHTML(l.need)}</span>` : ''}
       ${l.eq && EQ_BY_ID[l.eq] ? `<span class="smact"><button type="button" class="chip" data-sheetdrill="${esc(l.eq)}">Drill this line</button></span>` : ''}
     </li>`;
-  let h = `<section class="sheetmap"><h3>Her equation sheet, line by line</h3>
-  <p class="sub">The two pages of Basic-Pharmacokinetics-Equations.pdf in the order they are printed, each line coloured by the module that teaches it. The sheet itself carries no headings.</p>
-  <div class="smhead"><div class="smlegend">${SHEET_MODS.map(m => `<span class="smkey m${m}"><i></i>${esc(SHEET_MOD_NAME(m))}</span>`).join('')}</div>
-    <div class="smbtns"><button type="button" class="chip" data-sheetprint="1">Print the map</button>
-    <button type="button" class="chip" data-sheetsetup="all">Set-up drill: which line?</button></div></div>
-  <ul class="tlist smread">
+}
+function sheetMapHTML(){
+  const order = sheetOrder();
+  let h = `<section class="sheetmap"><h3>Her equation sheet, line by line</h3><div class="smprinttitle">Her equation sheet, line by line</div>
+  <p class="sub">The two pages of Basic-Pharmacokinetics-Equations.pdf, each line coloured by the module that teaches it and labelled with its dosing model. The sheet itself carries no headings.</p>
+  <div class="smhead"><div class="smlegend">${SHEET_MODS.map(m => `<span class="smkey m${m}"><i></i>${esc(SHEET_MOD_NAME(m))}</span>`).join('')}</div></div>
+  <div class="frow smorder"><span class="olab">Order</span>
+    <button type="button" class="chip" data-sheetorder="print" aria-pressed="${order === 'print'}">As printed</button>
+    <button type="button" class="chip" data-sheetorder="asks" aria-pressed="${order === 'asks'}">By what is asked</button>
+    <button type="button" class="chip" data-sheetorder="model" aria-pressed="${order === 'model'}">By dosing model</button></div>
+  <div class="smbtns"><button type="button" class="chip" data-sheetprint="sheet">Print the sheet, colour-coded</button>
+    <button type="button" class="chip" data-sheetprint="map">Print this map</button>
+    <button type="button" class="chip" data-sheetsetup="all">Set-up drill: which line?</button></div>
+  ` + mathHTML(`<ul class="tlist smread">
     <li><b>Read it in blocks.</b> Down the left column of page 1, then the right column, then page 2: the blocks follow the lecture order, with one exception.</li>
     <li><b>The exception:</b> the two-compartment block (A, B, a, b) is printed after the infusion block, so Module 2 sits below Module 3 in the left column.</li>
     <li><b>Two lines are not printed:</b> t&frac12; = {{frac:0.693|k}} and Cl = k &times; V<sub>D</sub>. They join every block to every other, and she said to know them.</li>
     <li><b>The symbol tells the block:</b> a &tau; means multiple dosing; a k<sub>a</sub> means oral; R as a rate means infusion; A, B, a, b mean two compartments; f<sub>e</sub> means Module 4; AUC<sub>po</sub> and AUC<sub>IV</sub> mean bioavailability.</li>
-  </ul>`;
-  SHEET_COLS.forEach((c, ci) => {
-    const ls = SHEET_LINES.filter(l => l.c === c.pg);
-    h += `<h4 class="smcol">${esc(c.col)} <small>${ls.length} lines</small></h4><ol class="smlines">${ls.map(line).join('')}</ol>`;
-  });
-  h += `<h4 class="smcol">Not printed: the lines she said to know</h4><ol class="smlines">${SHEET_MISSING.map(l => `<li class="smline m${l.module}">
-      ${modLabel(l.module)}<span class="smeq">${mathHTML(l.html)}</span>
-      <span class="smwhen"><b>Use it when:</b> ${mathHTML(l.when)}</span>
-      ${EQ_BY_ID[l.eq] ? `<span class="smact"><button type="button" class="chip" data-sheetdrill="${esc(l.eq)}">Drill this line</button></span>` : ''}</li>`).join('')}</ol>`;
-  h += `<p class="wcite">Source: the rendered pages of Basic-Pharmacokinetics-Equations.pdf; module assignments and the "use it when" lines restate the module sections below and the equation entries under Equations.</p></section>`;
-  return mathHTML(h);
+    <li><b>By what is asked</b> groups the lines the way a worked problem starts: find the symbol the stem asks for, then pick the row for the dosing model.</li>
+  </ul>`);
+  const all = SHEET_LINES.concat(SHEET_MISSING.map(l => Object.assign({missing: true}, l)));
+  if(order === 'print'){
+    SHEET_COLS.forEach(c => {
+      const ls = SHEET_LINES.filter(l => l.c === c.pg);
+      h += `<h4 class="smcol">${esc(c.col)} <small>${ls.length} lines</small></h4><ol class="smlines">${ls.map(sheetLineHTML).join('')}</ol>`;
+    });
+    h += `<h4 class="smcol">Not printed: the lines she said to know</h4><ol class="smlines">${SHEET_MISSING.map(sheetLineHTML).join('')}</ol>`;
+  }else{
+    const key = order === 'asks' ? 'asks' : 'model', seq = order === 'asks' ? SHEET_ASK_ORDER : SHEET_MODEL_ORDER;
+    const groups = [...new Set(all.map(l => l[key]))].sort((a, b) => (seq.indexOf(a) + 1 || 99) - (seq.indexOf(b) + 1 || 99));
+    for(const g of groups){
+      const ls = all.filter(l => l[key] === g);
+      h += `<h4 class="smcol">${esc(g)} <small>${ls.length} line${ls.length === 1 ? '' : 's'}</small></h4><ol class="smlines">${ls.map(sheetLineHTML).join('')}</ol>`;
+    }
+  }
+  h += `<p class="wcite">Source: the rendered pages of Basic-Pharmacokinetics-Equations.pdf; module and model labels and the "use it when" lines restate the module sections below and the equation entries under Equations.</p></section>`;
+  return h;
+}
+/* The map's body without its heading: foldDoc has moved the <h3> into the
+   section's summary, so an order change redraws only what sits under it. */
+const sheetMapBody = () => sheetMapHTML().replace(/^<section class="sheetmap">/, '').replace(/<h3>[^<]*<\/h3>/, '').replace(/<\/section>$/, '');
+/* The sheet itself, reproduced for print: two pages, each in two columns,
+   the lines in the order the PDF prints them, each line coloured by module
+   and labelled with its dosing model. Built only when printed. */
+function sheetPrintHTML(){
+  const col = (pg, title) => `<div class="spcol"><div class="spcolhead">${esc(title)}</div>${SHEET_LINES.filter(l => l.c === pg).map(l =>
+    `<div class="spline m${l.module}"><span class="speq">${mathHTML(l.html)}</span><span class="sptag">${esc(l.model)}</span></div>`).join('')}</div>`;
+  const legend = `<div class="splegend">${SHEET_MODS.map(m => `<span class="smkey m${m}"><i></i>${esc(SHEET_MOD_NAME(m))}</span>`).join('')}</div>`;
+  return `<div class="sheetprint">
+    <div class="sppage"><div class="sptitle">Basic Pharmacokinetics Equations <small>colour-coded by module, labelled by dosing model · page 1</small></div>${legend}
+      <div class="spcols">${col(1, 'left column')}${col(2, 'right column')}</div></div>
+    <div class="sppage"><div class="sptitle">Basic Pharmacokinetics Equations <small>page 2</small></div>${legend}
+      <div class="spcols">${col(3, 'left column')}${col(4, 'right column')}</div>
+      <div class="spmissing"><div class="spcolhead">Not printed on her sheet: the lines she said to know</div>${SHEET_MISSING.map(l =>
+        `<div class="spline m${l.module}"><span class="speq">${mathHTML(l.html)}</span><span class="sptag">${esc(l.model)}</span></div>`).join('')}</div></div>
+  </div>`;
+}
+function sheetPrint(what){
+  const cls = what === 'sheet' ? 'print-sheet2' : 'print-sheet';
+  let node = null;
+  if(what === 'sheet'){ node = document.createElement('div'); node.id = 'sheetprint'; node.innerHTML = sheetPrintHTML(); document.body.appendChild(node); }
+  document.body.classList.add(cls);
+  const done = () => { document.body.classList.remove(cls); if(node) node.remove(); };
+  /* the print DOM stays until the dialog closes; only a browser with no
+     afterprint event gets a timer, long enough to choose a printer */
+  if('onafterprint' in window) window.addEventListener('afterprint', done, {once: true}); else setTimeout(done, 60000);
+  window.print();
 }
 function sheetClick(e){
   const p = e.target.closest && e.target.closest('[data-sheetprint]');
-  if(p){ document.body.classList.add('print-sheet'); const done = () => document.body.classList.remove('print-sheet');
-         window.addEventListener('afterprint', done, {once: true}); setTimeout(done, 4000); window.print(); return; }
+  if(p){ sheetPrint(p.dataset.sheetprint); return; }
+  const o = e.target.closest && e.target.closest('[data-sheetorder]');
+  if(o){ LS.set(SHEET_ORDER_KEY, o.dataset.sheetorder); const sec = o.closest('.sheetmap'); if(sec){ const y = window.scrollY; sec.innerHTML = sheetMapBody(); window.scrollTo(0, y); } return; }
   const d = e.target.closest && e.target.closest('[data-sheetdrill]');
   if(d){ eqStartIds([d.dataset.sheetdrill], 'type'); show('eq'); return; }
   const s = e.target.closest && e.target.closest('[data-sheetsetup]');
@@ -3781,6 +3841,7 @@ function sheetClick(e){
 function eqStartIds(ids, mode){
   ids = ids.filter(id => EQ_BY_ID[id]);
   if(!ids.length) return;
+  SU = null;                                        // a parked set-up drill would otherwise hide the typing drill
   EQ = {queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
         slots: [], tray: [], revealed: false, ok: false, typed: '', right: 0, asked: 0};
   eqLoad();
@@ -3789,19 +3850,22 @@ function eqStartIds(ids, mode){
 /* ==========================================================================
    THE SET-UP DRILL: WHICH EQUATION?
    ==========================================================================
-   Her calculation stems, one at a time, and the only question is which line
-   solves what is asked. No arithmetic. Each numeric question carries
-   `setup:{eq, pre, why}` (the line that gives the final number, the hinge
-   lines used before it, and the reason in the stem's own words), written
-   from the question's own steps. The four options are that line and three
-   other lines, drawn first from the same module, so the choice is between
-   lines that are confusable rather than obviously foreign.
+   Her calculation stems, and the only question is which line solves what is
+   asked. No arithmetic. Each numeric question carries `setup:{eq, pre, why}`
+   (the line that gives the final number, the hinge lines used before it, and
+   the reason in the stem's own words), written from the question's own
+   steps. The four options are that line and three other lines, drawn first
+   from the same module, so the choice is between lines that are confusable
+   rather than obviously foreign.
 
-   Nothing here touches the concept scheduler: a wrong pick is a wrong line,
-   not a missed concept, and it is tallied per line under SU_KEY so the lines
-   most often mixed up can be listed. */
-let SU = null;   /* {queue:[q], i, picked, ok, right, asked, scope} */
+   It follows the Answer setting: one stem at a time, or a page of ten
+   stems answered in place (the same chips the quiz uses). Nothing here
+   touches the concept scheduler: a wrong pick is a wrong line, not a missed
+   concept, and it is tallied per line under SU_KEY so the lines most often
+   mixed up can be listed. */
+let SU = null;   /* {queue:[q], i, right, asked, scope, page:{qid:{options, picked, ok}}}; page holds every stem's options and pick in both layouts */
 const SU_KEY = NS + ':setup';
+const SU_PAGE = 10;
 function suStats(){ try { return JSON.parse(LS.get(SU_KEY) || '{}'); } catch(e){ return {}; } }
 function suLog(eqId, ok){
   const s = suStats(); const r = s[eqId] || (s[eqId] = {seen: 0, right: 0, wrong: 0});
@@ -3822,15 +3886,21 @@ const suScopeLabel = scope => scope === 'all' ? 'every module'
 function suStart(scope){
   const pool = shuffle(suScopePool(scope).slice());
   if(!pool.length){ alert('No set-up questions for that scope yet.'); return; }
-  SU = {queue: pool, i: 0, picked: null, ok: false, right: 0, asked: 0, scope, options: []};
-  suLoad();
-  show('eq');
+  SU = {queue: pool, i: 0, right: 0, asked: 0, scope, page: {}};
+  show('eq');                                       // renders the drill once
 }
 /* Three other lines: first from the same module (minus the hinges the
    working uses, which would be defensible picks), then from the modules
    next door, then anywhere. */
+/* Lines the course treats as one relation written two ways: never offered
+   as a lure against each other, because either pick is defensible. The
+   sheet's alsoEq pairs (sheet.js) are joined by the pairs below. */
+const SU_SAME = [['first-exp', 'first-ln', 'first-log', 'cp-after-stop'], ['fe', 'fe-k'], ['dl-rk', 'dl-css-vd'], ['clh', 'clt-sum', 'clr'],
+  ['cl-k-vd', 'thalf-cl-vd'], ['f-abs', 'f-auc'], ['vp-ab', 'vp-auc'], ['cmax-ss', 'cp-ss'], ['css', 'cp-infusing']]
+  .concat(SHEET_LINES.filter(l => l.eq && l.alsoEq).map(l => [l.eq, ...l.alsoEq]));
+const suSame = id => new Set(SU_SAME.filter(g => g.includes(id)).flat());
 function suOptions(q){
-  const e = EQ_BY_ID[q.setup.eq], used = new Set([q.setup.eq, ...(q.setup.pre || [])]);
+  const e = EQ_BY_ID[q.setup.eq], used = new Set([...suSame(q.setup.eq), ...(q.setup.pre || [])]);
   const pick = (cands, n, out) => { for(const c of shuffle(cands.slice())){ if(out.length >= n) break; if(!used.has(c.id) && !out.includes(c)) out.push(c); } };
   const out = [];
   pick(EQUATIONS.filter(x => x.module === e.module), 3, out);
@@ -3838,73 +3908,104 @@ function suOptions(q){
   pick(EQUATIONS, 3, out);
   return shuffle([e, ...out]);
 }
-function suLoad(){
-  const q = SU.queue[SU.i];
-  SU.picked = null; SU.ok = false; SU.options = q ? suOptions(q) : [];
-  renderEq();
+/* The state for one stem, made on first sight and kept, so a layout change
+   or a return never re-asks or re-rolls a stem already answered. */
+const suState = q => (SU.page[q.id] ||= {options: suOptions(q), picked: null, ok: false});
+/* The pick, the verdict and the reasons for one stem; `st` is the state
+   that holds its options and pick (SU itself one at a time, a page entry
+   on one page). */
+function suQuestionHTML(q, st, idx){
+  const e = EQ_BY_ID[q.setup.eq];
+  let h = `<div class="card suq" data-suq="${idx}"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">set-up only</span></div>
+    <div class="stem">${stemHTML(q.stem)}</div>
+    <p class="suask"><b>Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
+    <div class="suopts">${st.options.map((o, i) => {
+      const cls = st.picked == null ? '' : o.id === e.id ? ' right' : i === st.picked ? ' wrong' : ' dim';
+      return `<button type="button" class="suopt${cls}" data-suopt="${i}"${st.picked != null ? ' disabled' : ''}>
+        <span class="suname">${esc(o.name)}</span><span class="sueq">${eqShow(o)}</span></button>`; }).join('')}</div>`;
+  if(st.picked != null){
+    const chosen = st.options[st.picked];
+    const why = (String(q.setup.why || '').match(/[^.?!]+(?:[.?!]+|$)/g) || []).map(t => t.trim()).filter(Boolean);
+    const pre = (q.setup.pre || []).filter(id => EQ_BY_ID[id]);
+    h += `<div class="why"><p class="verdict ${st.ok ? 'ok' : 'bad'}">${st.ok ? '✓ That is the line' : '✗ Not that line'}</p>
+      ${st.ok ? '' : `<p class="sub">You picked <b>${esc(chosen.name)}</b>, ${eqShow(chosen)}. It holds when: ${mathHTML(suFirstSentence(chosen.holds))}</p>`}
+      <div class="suright"><b>${esc(e.name)}</b> <span class="sm">(${esc((SHEET_TAG[e.sheet] || SHEET_TAG.absent)[0])}${e.must ? '; she said to know it' : ''})</span><div class="sueqbig">${eqShow(e)}</div></div>
+      <h4>Why this line</h4><ul class="tlist">${why.map(s => `<li>${mathHTML(esc(s))}</li>`).join('')}</ul>
+      ${pre.length ? `<h4>Lines used on the way</h4><ul class="tlist">${pre.map(id => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}</span></li>`).join('')}</ul>` : ''}
+      <h4>When it holds</h4><p class="sub">${mathHTML(e.holds || '')}</p>
+      <div class="btns">${idx === 'one' ? `<button class="btn" data-sunext="1">Next</button>` : ''}
+        <button class="btn ghost" data-suwork="${esc(q.id)}">Work the full problem</button>
+        <button class="btn ghost" data-sheetdrill="${esc(e.id)}">Type this line from memory</button></div></div>`;
+  }
+  return h + `</div>`;
 }
 function suHTML(){
   const q = SU.queue[SU.i];
+  const tally = `<span>${SU.right} of ${SU.asked} right</span>`;
   if(!q){
     const pct = SU.asked ? Math.round(100 * SU.right / SU.asked) : 0;
     return `<h2>Set-up drill</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.</p>
       ${suMixupsHTML()}
       <div class="btns"><button class="btn" data-suagain="1">Again, reshuffled</button><button class="btn ghost" data-suhome="1">Back to Equations</button></div></div>`;
   }
-  const e = EQ_BY_ID[q.setup.eq];
-  let h = `<h2>Set-up drill</h2>
-  <div class="sessrow"><span>question ${SU.i + 1} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
-    <span class="pbar"><i style="width:${Math.round(100 * SU.i / SU.queue.length)}%"></i></span><span>${SU.right} of ${SU.asked} right</span></div>
-  <div class="card suq"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">set-up only</span></div>
-    <div class="stem">${stemHTML(q.stem)}</div>
-    <p class="suask"><b>Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
-    <div class="suopts">${SU.options.map((o, i) => {
-      const cls = SU.picked == null ? '' : o.id === e.id ? ' right' : i === SU.picked ? ' wrong' : ' dim';
-      return `<button type="button" class="suopt${cls}" data-suopt="${i}"${SU.picked != null ? ' disabled' : ''}>
-        <span class="suname">${esc(o.name)}</span><span class="sueq">${eqShow(o)}</span></button>`; }).join('')}</div>`;
-  if(SU.picked != null){
-    const chosen = SU.options[SU.picked];
-    const why = String(q.setup.why || '').split(/(?<=[.?!])\s+/).filter(Boolean);
-    h += `<div class="why"><p class="verdict ${SU.ok ? 'ok' : 'bad'}">${SU.ok ? '✓ That is the line' : '✗ Not that line'}</p>
-      ${SU.ok ? '' : `<p class="sub">You picked <b>${esc(chosen.name)}</b>, ${eqShow(chosen)}. It holds when: ${mathHTML(String(chosen.holds || '').split(/(?<=\.)\s+/)[0])}</p>`}
-      <div class="suright"><b>${esc(e.name)}</b> <span class="sm">(${esc((SHEET_TAG[e.sheet] || SHEET_TAG.absent)[0])}${e.must ? '; she said to know it' : ''})</span><div class="sueqbig">${eqShow(e)}</div></div>
-      <h4>Why this line</h4><ul class="tlist">${why.map(s => `<li>${mathHTML(esc(s))}</li>`).join('')}</ul>
-      ${(q.setup.pre || []).filter(id => EQ_BY_ID[id]).length ? `<h4>Lines used on the way</h4><ul class="tlist">${(q.setup.pre || []).filter(id => EQ_BY_ID[id]).map(id => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}</span></li>`).join('')}</ul>` : ''}
-      <h4>When it holds</h4><p class="sub">${mathHTML(e.holds || '')}</p>
-      <div class="btns"><button class="btn" data-sunext="1">Next</button>
-        <button class="btn ghost" data-suwork="${esc(q.id)}">Work the full problem</button>
-        <button class="btn ghost" data-sheetdrill="${esc(e.id)}">Type this line from memory</button></div></div>`;
+  let h = `<h2>Set-up drill</h2>`;
+  if(layoutOf() === 'all'){
+    const page = SU.queue.slice(SU.i, SU.i + SU_PAGE);
+    page.forEach(suState);
+    const answered = page.filter(x => SU.page[x.id].picked != null).length;
+    h += `<div class="sessrow"><span>stems ${SU.i + 1} to ${SU.i + page.length} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
+      <span class="pbar"><i style="width:${Math.round(100 * SU.i / SU.queue.length)}%"></i></span>${tally}</div>
+      <div class="laytogrow">${layoutToggle()}</div>`;
+    h += page.map((x, k) => suQuestionHTML(x, SU.page[x.id], String(k))).join('');
+    h += `<div class="btns"><button class="btn" data-sunext="page"${answered < page.length ? ' title="Unanswered stems on this page are skipped"' : ''}>${SU.i + page.length >= SU.queue.length ? 'Finish' : `Next ${Math.min(SU_PAGE, SU.queue.length - SU.i - page.length)}`}</button>
+      <button class="chip" data-suhome="1">Stop and return to Equations</button></div>`;
+    return h;
   }
-  h += `</div><p class="sub"><button class="chip" data-suhome="1">Stop and return to Equations</button></p>`;
+  h += `<div class="sessrow"><span>question ${SU.i + 1} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
+    <span class="pbar"><i style="width:${Math.round(100 * SU.i / SU.queue.length)}%"></i></span>${tally}</div>
+    <div class="laytogrow">${layoutToggle()}</div>`;
+  h += suQuestionHTML(q, suState(q), 'one');
+  h += `<p class="sub"><button class="chip" data-suhome="1">Stop and return to Equations</button></p>`;
   return h;
 }
+const suFirstSentence = t => { const m = /^[\s\S]*?\.(?=\s|$)/.exec(String(t || '')); return m ? m[0] : String(t || ''); };
 function suMixupsHTML(){
   const s = suStats();
   const rows = Object.entries(s).filter(([id, r]) => EQ_BY_ID[id] && r.wrong).sort((a, b) => b[1].wrong - a[1].wrong).slice(0, 6);
   if(!rows.length) return '';
   return `<h4>Lines you have mixed up most</h4><ul class="tlist">${rows.map(([id, r]) => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}: ${r.wrong} wrong of ${r.seen}</span></li>`).join('')}</ul>`;
 }
+function suPick(card, i){
+  const idx = card.dataset.suq;
+  const q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx];
+  const st = q && SU.page[q.id];
+  if(!q || !st || st.picked != null) return;
+  st.picked = i; st.ok = st.options[i].id === q.setup.eq; SU.asked++; if(st.ok) SU.right++;
+  suLog(q.setup.eq, st.ok);
+  if(idx === 'one'){ renderEq(); return; }
+  const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx);
+  card.replaceWith(fresh.firstElementChild);
+  const tally = document.querySelector('#v-eq .sessrow span:last-child'); if(tally) tally.textContent = `${SU.right} of ${SU.asked} right`;
+}
 function suWire(el){
-  el.querySelectorAll('[data-suopt]').forEach(b => b.onclick = () => {
-    if(SU.picked != null) return;
-    const q = SU.queue[SU.i], i = +b.dataset.suopt;
-    SU.picked = i; SU.ok = SU.options[i].id === q.setup.eq; SU.asked++; if(SU.ok) SU.right++;
-    suLog(q.setup.eq, SU.ok);
-    renderEq();
-  });
-  const n = el.querySelector('[data-sunext]'); if(n) n.onclick = () => { SU.i++; suLoad(); window.scrollTo(0, 0); };
-  el.querySelectorAll('[data-suhome]').forEach(b => b.onclick = () => { SU = null; renderEq(); });
-  const a = el.querySelector('[data-suagain]'); if(a) a.onclick = () => suStart(SU.scope);
-  const w = el.querySelector('[data-suwork]'); if(w) w.onclick = () => { const q = byId(w.dataset.suwork) || (typeof EXTRAS === 'undefined' ? null : EXTRAS.find(x => x.id === w.dataset.suwork)); if(q){ SU = null; startSweepOf([q], 'One problem, from the set-up drill'); } };
+  el.onclick = e => {
+    const o = e.target.closest('[data-suopt]'); if(o){ suPick(o.closest('[data-suq]'), +o.dataset.suopt); return; }
+    const n = e.target.closest('[data-sunext]');
+    if(n){ SU.i += n.dataset.sunext === 'page' ? Math.min(SU_PAGE, SU.queue.length - SU.i) : 1; renderEq(); window.scrollTo(0, 0); return; }
+    if(e.target.closest('[data-suhome]')){ SU = null; renderEq(); return; }
+    if(e.target.closest('[data-suagain]')){ suStart(SU.scope); return; }
+    const w = e.target.closest('[data-suwork]');
+    if(w){ const q = byId(w.dataset.suwork); if(q){ SU = null; startSweepOf([q], 'One problem, from the set-up drill'); } }
+  };
 }
 /* The card on the Equations picker that starts the drill. */
 function suCardHTML(){
-  const n = suPoolAll().length;
-  const mods = [...new Set(suPoolAll().map(q => q.module))].sort((a, b) => a - b);
+  const pool = suPoolAll(), n = pool.length;
+  const mods = [...new Set(pool.map(q => q.module))].sort((a, b) => a - b);
   const live = (COURSE.quizzes || []).filter(quizLive);
   return `<div class="topic sweepcard sucard"><div class="subs">
     <div class="subrow"><span class="sname"><b>Set-up only: which equation?</b>
-      <small>Her calculation stems, no arithmetic: pick the line that solves what is asked, then read why. ${n} stems.</small></span></div>
+      <small>Her calculation stems, no arithmetic: pick the line that solves what is asked, then read why. ${n} stems; one at a time or ten to a page, as the Answer setting says.</small></span></div>
     <div class="frow suscope"><span class="olab">Drill</span>
       ${live.map(z => `<button class="chip" data-su="quiz:${esc(z.id)}">${esc(z.name)}</button>`).join('')}
       <button class="chip" data-su="exam:${EXAM.id}">Exam ${EXAM.id}</button>
