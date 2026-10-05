@@ -511,7 +511,7 @@ const Q_MODULE6B = [
  stem:'Cmax∞ = (FD0/VD) × [1/(1 − e^(−kτ))] × e^(−k·tmax∞). What marks this as the steady-state peak for an oral dose rather than for a repeated intravenous (IV) bolus?',
  options:[
   {t:'The F and the tmax', correct:true,
-   why:'F is bioavailability, which an IV dose does not need, and tmax is the time to peak, which a bolus lacks because it peaks at the moment of the dose. Remove those two and what is left, {{frac:D0 ÷ VD|1 − e^(−kτ)}}, is the bolus Cmax∞.'},
+   why:'F is bioavailability, which an IV dose does not need, and tmax is the time to peak, which a bolus lacks because it peaks at the moment of the dose. Remove those two and what is left, {{frac:D0|VD}} × {{frac:1|1 − e^(−kτ)}}, is the bolus Cmax∞.'},
   {t:'The τ',
    why:'This reads the dosing interval as an oral feature. Every multiple-dose regimen has a τ, bolus or oral, so τ cannot tell the two apart.'},
   {t:'The accumulation factor 1/(1 − e^(−kτ))',

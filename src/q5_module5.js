@@ -581,7 +581,7 @@ const Q_MODULE5 = [
    why:'A dimensionless logarithm divided by a quantity in reciprocal hours leaves hours, which is what a time to peak must be. The ratio of the two rate constants is exactly 4 here, so the numerator is the natural logarithm of 4 and the arithmetic comes out very close to a whole number.'},
   {k:'round', t:'tmax = 2 hours',
    why:'Her worked value is 2 hours, and the unrounded 2.0004 rounds to it. The time to peak depends only on the two rate constants, so the 22 L volume, the 500 mg dose and the 85 per cent bioavailability given in the stem play no part in this particular answer.'}],
- setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"single 500-mg oral dose" and "one-compartment model" name the oral block. The absorption and elimination half-lives are given and the time of the maximum concentration is asked, so tmax = {{frac:ln({{frac:ka|k}})|ka − k}}. ka and k first, from the two half-lives, because the line wants rate constants; VD, F and D0 are not used.'},
+ setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"single 500-mg oral dose" and "one-compartment model" name the oral block. The absorption and elimination half-lives are given and the time of the maximum concentration is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. ka and k first, from the two half-lives, because the line wants rate constants; VD, F and D0 are not used.'},
  teach:[
   {h:'The idea', list:['tmax (the time to peak) is found from the two rate constants alone: ka (absorption) and k (elimination).', 'Neither the dose nor VD (apparent volume of distribution) appears, so the same drug peaks at the same moment whatever dose is given.']},
   {h:'The relation', list:['The expression divides the logarithm of the ratio {{frac:ka|k}} by the difference ka − k.', 'So both constants must be in the same reciprocal time unit.', 'Any half-life given in minutes has to be converted before it is used.']},
@@ -613,7 +613,7 @@ const Q_MODULE5 = [
    why:'Multiplying a concentration by a dimensionless fraction leaves a concentration. The bracket is well below one because the two exponentials partly cancel, which is why the peak is far lower than the prefactor on its own would suggest.'},
   {k:'round', t:'Cmax = 12.17 mg/L',
    why:'Her worked value is 12.17 milligrams per litre, to two decimal places, obtained by entering the whole expression in one pass. Entering it stepwise with the rounded intermediates shown here gives the same figure, so the order of the keystrokes does not matter.'}],
- setup:{eq:'oral-cp', pre:['thalf-abs', 'thalf-first', 'tmax'], why:'"single 500-mg oral dose", "bioavailable" and a VD name the oral block. F, D0, VD and the two half-lives are given and the "maximum concentration" is asked, so Cp = [F·ka·{{frac:D0|VD(ka − k)}}](e^(−kt) − e^(−ka·t)) at t = tmax. ka and k first from the half-lives, then tmax from {{frac:ln({{frac:ka|k}})|ka − k}}, because the line wants t.'},
+ setup:{eq:'oral-cp', pre:['thalf-abs', 'thalf-first', 'tmax'], why:'"single 500-mg oral dose", "bioavailable" and a VD name the oral block. F, D0, VD and the two half-lives are given and the "maximum concentration" is asked, so Cp = [F·ka·{{frac:D0|VD(ka − k)}}](e^(−kt) − e^(−ka·t)) at t = tmax. ka and k first from the half-lives, then tmax from {{frac:ln(ka ÷ k)|ka − k}}, because the line wants t.'},
  teach:[
   {h:'The idea', list:['Cmax (the peak concentration) is calculated in two stages.', 'First, find tmax (the time at which the curve turns over) from the two rate constants.', 'Then evaluate the full concentration equation at that time.']},
   {h:'The two parts of the equation', list:['The prefactor supplies the scale, using the bioavailable dose (F × dose) and VD (apparent volume of distribution).', 'The bracket supplies the fraction of that scale the curve actually reaches.']},
@@ -695,7 +695,7 @@ const Q_MODULE5 = [
    why:'The ratio of the two rate constants is 12.5 and its natural logarithm is 2.5257, which is then divided by their difference of 2.53 reciprocal hours. That the numerator and denominator are so nearly equal here is a coincidence of these particular constants, not a general result.'},
   {k:'round', t:'tmax = 1 hour',
    why:'Her worked value is one hour, and the unrounded figure of 0.9983 hour rounds to it. The peak therefore occurs about one hour after the dose, which is early because absorption is more than twelve times faster than elimination for this drug.'}],
- setup:{eq:'tmax', pre:[], why:'"single oral dose" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. ka and k are the larger and smaller exponents and tmax is asked, so tmax = {{frac:ln({{frac:ka|k}})|ka − k}}. No hinge; both rate constants are read straight off the equation.'},
+ setup:{eq:'tmax', pre:[], why:'"single oral dose" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. ka and k are the larger and smaller exponents and tmax is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. No hinge; both rate constants are read straight off the equation.'},
  teach:[
   {h:'The idea', list:['When an oral problem is given as an equation, tmax (the time to peak) needs nothing but the two exponents.', 'The larger constant goes on top of the ratio, and the difference goes underneath.']},
   {h:'Why the peak is early here', list:['The logarithm of the ratio grows only slowly, while the difference grows quickly.', 'So a drug absorbed far faster than it is eliminated peaks early, which is the ordinary case.']},
@@ -725,7 +725,7 @@ const Q_MODULE5 = [
    why:'The intercept of 75 multiplies a dimensionless bracket, so the result keeps the concentration units of the equation. Evaluating at the unrounded time to peak of 0.9983 hour rather than at exactly 1 hour gives the same figure to one decimal place.'},
   {k:'round', t:'Cmax = 55.4 mg/L',
    why:'Report 55.4 milligrams per litre, the value the equation gives at the peak. The tolerance is set narrowly enough to exclude 53.4, which does not follow from the equation at any time near the peak.'}],
- setup:{eq:'oral-cp', pre:['tmax'], why:'"single oral dose" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. The coefficient and both exponents are given and Cmax is asked, so the printed Cp line is evaluated at t = tmax. tmax first, from {{frac:ln({{frac:ka|k}})|ka − k}}, because the concentration line wants t.'},
+ setup:{eq:'oral-cp', pre:['tmax'], why:'"single oral dose" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. The coefficient and both exponents are given and Cmax is asked, so the printed Cp line is evaluated at t = tmax. tmax first, from {{frac:ln(ka ÷ k)|ka − k}}, because the concentration line wants t.'},
  teach:[
   {h:'The idea', list:['With the prefactor already collected into one number, a peak calculation is two exponentials and a subtraction, once tmax (the time to peak) is known.']},
   {h:'A check on the arithmetic', list:['The result must always be smaller than the leading number, because the bracket cannot reach one.']},
@@ -845,7 +845,7 @@ const Q_MODULE5 = [
    why:'The numerator is the natural logarithm of 3.3333, which is 1.2040, and dividing it by 0.3234 reciprocal hours leaves hours. Rounding the logarithm early to 1.20 would give 3.7105 hours, the same figure to one decimal place, so the point at which the rounding is done does not move the reported answer.'},
   {k:'round', t:'tmax = 3.72 hours',
    why:'Her worked value is 3.7 hours, to one decimal place, and 3.72 is the same number carried one place further. This peak is much later than the one-hour peak of the earlier antibiotic because absorption here is only about three times faster than elimination rather than twelve.'}],
- setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"given by mouth" with a "half-life of absorption" and a "half-life of elimination" names the oral block. The two half-lives are given and the time of the peak is asked, so tmax = {{frac:ln({{frac:ka|k}})|ka − k}}. ka and k first, from the two half-lives, because the line wants rate constants; D0, F and VD are not used.'},
+ setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"given by mouth" with a "half-life of absorption" and a "half-life of elimination" names the oral block. The two half-lives are given and the time of the peak is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. ka and k first, from the two half-lives, because the line wants rate constants; D0, F and VD are not used.'},
  teach:[
   {h:'The idea', t:'When both half-lives are given, tmax (the time to peak) takes three lines.'},
   {h:'The three lines', list:['Convert the time units.', 'Convert each half-life to its rate constant.', 'Divide the logarithm of their ratio by their difference.']},
@@ -908,7 +908,7 @@ const Q_MODULE5 = [
    why:'The bracket is unchanged from the 20 L version because it depends only on the rate constants and the time, so only the prefactor has halved. Multiplying a concentration by a dimensionless fraction leaves a concentration.'},
   {k:'round', t:'Cmax = 6.57 mg/L',
    why:'This is exactly half the 13.13 mg/L obtained with a 20 L volume, as it must be when the only change is a doubling of the volume in the denominator. Doubling the volume of distribution halves every concentration on the curve without moving the time at which the peak occurs.'}],
- setup:{eq:'oral-cp', pre:['tmax'], why:'"same 500-mg oral dose" with a changed "volume of distribution" names the oral block. F, D0, ka, k and the new VD are given and the peak concentration is asked, so the oral Cp line is evaluated at t = tmax with the new VD. tmax first, from {{frac:ln({{frac:ka|k}})|ka − k}}, unchanged because VD is not in it.'},
+ setup:{eq:'oral-cp', pre:['tmax'], why:'"same 500-mg oral dose" with a changed "volume of distribution" names the oral block. F, D0, ka, k and the new VD are given and the peak concentration is asked, so the oral Cp line is evaluated at t = tmax with the new VD. tmax first, from {{frac:ln(ka ÷ k)|ka − k}}, unchanged because VD is not in it.'},
  teach:[
   {h:'The idea', list:['VD (the apparent volume of distribution) enters the oral equation only through the constant prefactor.', 'So it scales every concentration on the curve and moves nothing in time.']},
   {h:'Doubling VD', list:['Doubling VD halves the peak and leaves the time to peak exactly where it was.', 'The dose behaves the same way, in the opposite direction.']},
@@ -995,7 +995,7 @@ const Q_MODULE5 = [
    why:'The ratio of the two rate constants is 4.7912 and its natural logarithm is 1.5667, divided by their difference of 0.690 reciprocal hours. Reciprocal hours in the denominator invert to give hours, which is what a time to peak must carry.'},
   {k:'round', t:'tmax = 2.27 hours',
    why:'Her worked value is 2.27 hours, to two decimal places. This peak is later than the one-hour peak of the earlier antibiotic because here the two rate constants are much closer together, so absorption and elimination stay in competition for longer.'}],
- setup:{eq:'tmax', pre:[], why:'"750-mg oral dose" with the printed equation Cp = 23.2(e^(−0.182t) − e^(−0.872t)) names the oral block. ka and k are the larger and smaller exponents and tmax is asked, so tmax = {{frac:ln({{frac:ka|k}})|ka − k}}. No hinge.'},
+ setup:{eq:'tmax', pre:[], why:'"750-mg oral dose" with the printed equation Cp = 23.2(e^(−0.182t) − e^(−0.872t)) names the oral block. ka and k are the larger and smaller exponents and tmax is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. No hinge.'},
  teach:[
   {h:'The idea', list:['The closer the two rate constants are, the later the peak, because absorption takes longer to lose its advantage over elimination.']},
   {h:'Two examples', list:['A drug absorbed nearly five times faster than it is eliminated peaks at about 2.3 hours.', 'A drug absorbed twelve and a half times faster peaks at about one hour.', 'The whole comparison is in the ratio and the difference of the two constants.']},
@@ -1024,7 +1024,7 @@ const Q_MODULE5 = [
    why:'The intercept of 23.2 multiplies a dimensionless bracket, so the result keeps the concentration units of the equation. Evaluating at the unrounded time to peak gives the same figure, so the rounding of tmax to two decimals costs nothing.'},
   {k:'round', t:'Cmax = 12.14 mg/L',
    why:'Her worked value is 12.14 milligrams per litre, which she also states as micrograms per millilitre, the two being numerically identical. Two decimal places matches the precision of the coefficients printed in the equation she supplies.'}],
- setup:{eq:'oral-cp', pre:['tmax'], why:'"750-mg oral dose" with the printed equation Cp = 23.2(e^(−0.182t) − e^(−0.872t)) names the oral block. The coefficient and both exponents are given and Cmax is asked, so the printed Cp line is evaluated at t = tmax. tmax first, from {{frac:ln({{frac:ka|k}})|ka − k}}, because the concentration line wants t.'},
+ setup:{eq:'oral-cp', pre:['tmax'], why:'"750-mg oral dose" with the printed equation Cp = 23.2(e^(−0.182t) − e^(−0.872t)) names the oral block. The coefficient and both exponents are given and Cmax is asked, so the printed Cp line is evaluated at t = tmax. tmax first, from {{frac:ln(ka ÷ k)|ka − k}}, because the concentration line wants t.'},
  teach:[
   {h:'The idea', list:['When the prefactor is supplied as a number, Cmax (the peak concentration) is tmax (the time to peak) substituted into two exponentials.']},
   {h:'Two checks', list:['The result must be below the leading number.', 'At the peak the elimination exponential must be the larger of the two; the reverse means the rate constants were swapped.']},

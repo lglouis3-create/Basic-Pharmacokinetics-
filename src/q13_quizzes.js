@@ -167,7 +167,7 @@ const Q_QUIZZES = [
  steps:[
   {k:'setup', t:'Css = {{frac:R|Cl}} = {{frac:R|k × VD}}',
    why:'At steady state the infusion rate equals the elimination rate, Cl × Css. Clearance is built from k and the patient\'s own VD.'},
-  {k:'unit', t:'154 lb ÷ 2.2 = 70 kg; VD = 0.21 L/kg × 70 kg = 14.7 L',
+  {k:'unit', t:'154 {{frac:lb|2.2}} = 70 kg; VD = 0.21 L/kg × 70 kg = 14.7 L',
    why:'The volume is given per kilogram and the weight in pounds, so the weight is converted first and then scaled. Age and sex are stated and not used.'},
   {k:'algebra', t:'k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹; Cl = 0.1733 × 14.7 L = 2.547 L/hr',
    why:'Clearance is the rate constant times the volume, in L/hr.'},
@@ -272,7 +272,7 @@ const Q_QUIZZES = [
    why:'The ratio of the rate constants is the ratio of the half-lives the other way round, 5.6/0.8 = 7, so the logarithm is ln 7. Dividing by reciprocal hours leaves hours.'},
   {k:'round', t:'2.6 hr',
    why:'Her key is 2.6 with a margin of 3%, so 2.52 to 2.68 scores. One decimal place was asked for.'}],
- setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"single 1000-mg oral dose" with an "absorption half-life" and an "elimination half-life" names the oral block of Module 5. The two half-lives are given and the time of the "maximum concentration" is asked, so tmax = {{frac:ln({{frac:ka|k}})|ka − k}}. ka and k first, from the half-lives; F, VD and the dose are not used.'},
+ setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"single 1000-mg oral dose" with an "absorption half-life" and an "elimination half-life" names the oral block of Module 5. The two half-lives are given and the time of the "maximum concentration" is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. ka and k first, from the half-lives; F, VD and the dose are not used.'},
  teach:[
   {h:'The idea', list:[
    'Convert both half-lives to rate constants, take the natural logarithm of their ratio, divide by their difference.',

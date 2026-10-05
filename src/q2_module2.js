@@ -736,7 +736,7 @@ const Q_MODULE2 = [
  answer:2.95,
  tol:0.08,
  steps:[
-  {k:'unit', t:'187 lb ÷ 2.2 lb/kg = 85.0 kg',
+  {k:'unit', t:'187 {{frac:lb|2.2}} lb/kg = 85.0 kg',
    why:'Body weight in pharmacokinetics is always in kilograms, so a weight stated in pounds is converted before anything else is done with it. She divides by 2.2 and does not show the step, but every absolute quantity in this problem depends on it.'},
   {k:'setup', t:'ClT = k · VD, so the half-life has to become a rate constant and the percentage of body weight has to become an absolute volume before the two can be multiplied',
    why:'Total body clearance is k multiplied by VD, and neither is given directly: the stem gives a half-life and a percentage. Naming the relation first shows which two quantities have to be built. Dr. Mosley leaves this relation off the exam equation sheet, so it has to be known.'},

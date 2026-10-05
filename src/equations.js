@@ -11,6 +11,10 @@
    worked solutions in STYLE.md, or her spoken words in TRANSCRIPT_CUES.md.
    Nothing new is asserted here.
 
+   `derive` (only on entries the sheet does not print) says how to reach the
+   line from a line that is printed, or that it cannot be reached and has to
+   be known.
+
    `must` marks the five she said out loud she does not put on the equation
    sheet, plus the second ideal-body-weight form. `sheet` records what the
    rendered pages of Basic-Pharmacokinetics-Equations.pdf carry: 'yes' where a
@@ -54,6 +58,7 @@ const EQUATIONS = [
  symbols:[['k', 'first-order elimination rate constant, hr&minus;1'],
           ['t&frac12;', 'half-life, the time for the amount or concentration of drug to fall by one-half; a time and never a reciprocal time']],
  holds:'First order only, where the rate of loss is proportional to the amount of drug remaining. Constant at every concentration, so it does not depend on the dose or on where the concentration started.',
+ derive:'Not printed. From the first-order line on the sheet, ln C = ln C<sub>0</sub> &minus; kt: at one half-life C = {{frac:C<sub>0</sub>|2}}, so ln {{frac:1|2}} = &minus;kt&frac12;, and ln 2 = 0.693 gives t&frac12; = {{frac:0.693|k}}.',
  cite:'Introduction.pdf slide 19; she names it three times as not on the sheet'},
 
 {id:'cl-k-vd', module:2, name:'Clearance from k and volume of distribution', must:true, sheet:'no',
@@ -62,6 +67,7 @@ const EQUATIONS = [
  lures:['/', '0.693', 'C<sub>p</sub>', 'AUC', 'D<sub>0</sub>'],
  symbols:[['Cl', 'clearance, L/hr'], ['k', 'first-order elimination rate constant, the fraction of drug removed per hour, hr&minus;1'], ['V<sub>D</sub>', 'apparent volume of distribution, L: the hypothetical volume of body fluid that links the amount of drug in the body to the measured plasma concentration']],
  holds:'First-order elimination, where the rate of loss is proportional to the amount of drug remaining. Clearance is the volume of plasma cleared of drug per unit time, and it stays constant while the elimination rate does not.',
+ derive:'Not printed. The sheet has rate of elimination = Cl &times; C<sub>p</sub>, and first-order elimination is also k &times; D<sub>B</sub> = k &times; V<sub>D</sub> &times; C<sub>p</sub>. Setting the two equal and cancelling C<sub>p</sub> leaves Cl = k &times; V<sub>D</sub>.',
  cite:'2IVBolusAdministration.pdf, slide "Clearance"; she names it as not on the sheet'},
 
 {id:'cp-db-vd', module:2, name:'Concentration, amount and volume', must:true, sheet:'yes',
@@ -82,6 +88,7 @@ const EQUATIONS = [
  symbols:[['age', 'years'], ['IBW', 'ideal body weight, kg: the weight from the height formula, used in place of the patient&rsquo;s actual weight'],
           ['S<sub>Cr</sub>', 'serum creatinine, mg/dL'], ['CrCl', 'creatinine clearance, an estimate of the patient&rsquo;s kidney function; reported in mL/min']],
  holds:'Multiply by 0.85 for a female patient. The answer is reported in mL/min even though the units do not cancel algebraically.',
+ derive:'Not printed and not derivable from a sheet line: she requires it from memory, in mL/min, with the ideal body weight.',
  cite:'4---Clearance-and-Elimination.pdf slide 2; "this one is not there. You need to know this one."'},
 
 {id:'ibw-male', module:4, name:'Ideal body weight, male', must:true, sheet:'no',
@@ -91,6 +98,7 @@ const EQUATIONS = [
  lures:['45.5', '&minus;', '2.54', '60', '/'],
  symbols:[['IBW', 'ideal body weight, kg: the weight used in the creatinine clearance (Cockcroft-Gault) calculation in place of the patient&rsquo;s actual weight'], ['inches over 5 ft', 'height in inches minus 60']],
  holds:'Every patient in this course is 5 ft or taller, and ideal body weight is always the weight used in the creatinine clearance calculation, never the actual weight.',
+ derive:'Not printed and not derivable: 5 ft is 60 inches, and each inch over it adds 2.3 kg to the 50 kg base.',
  cite:'4---Clearance-and-Elimination.pdf slide 2; "again, you need to know this one."'},
 
 {id:'ibw-female', module:4, name:'Ideal body weight, female', must:true, sheet:'no',
@@ -100,6 +108,7 @@ const EQUATIONS = [
  lures:['50', '&minus;', '2.54', '60', '0.85'],
  symbols:[['IBW', 'ideal body weight, kg: the weight used in the creatinine clearance (Cockcroft-Gault) calculation in place of the patient&rsquo;s actual weight'], ['inches over 5 ft', 'height in inches minus 60']],
  holds:'The male form, IBW = 50 + 2.3 &times; (inches over 5 ft), with a different constant. 45.5 is the only difference.',
+ derive:'Not printed and not derivable: the same rule as for a man with a 45.5 kg base.',
  cite:'4---Clearance-and-Elimination.pdf slide 2'},
 
 /* ───────── Module 1 ───────── */
@@ -156,6 +165,7 @@ const EQUATIONS = [
  symbols:[['t&frac12;', 'half-life, the time for the concentration to fall by one-half'], ['C<sub>0</sub>', 'starting concentration'],
           ['k', 'zero-order rate constant, amount or concentration lost per unit time']],
  holds:'Zero order only, where a fixed amount is lost per unit time whatever the concentration. It depends on C0, so it is not a fixed property of the drug: start lower and the half-life is shorter.',
+ derive:'From the zero-order line on the sheet, C = C<sub>0</sub> &minus; k<sub>0</sub>t: set C = {{frac:C<sub>0</sub>|2}} and solve for t, which gives t&frac12; = {{frac:C<sub>0</sub>|2k<sub>0</sub>}}.',
  cite:'Introduction.pdf slide 19'},
 
 {id:'auc-trap', module:1, name:'Trapezoidal rule, one segment', sheet:'yes',
@@ -185,6 +195,7 @@ const EQUATIONS = [
  lures:['&minus;', '&times;', 'f<sub>e</sub>', 'k<sub>a</sub>'],
  symbols:[['k<sub>m</sub>', 'rate constant for metabolism'], ['k<sub>e</sub>', 'rate constant for excretion']],
  holds:'Any first-order elimination, where the rate of loss is proportional to the amount of drug remaining. An unsubscripted k is the overall constant with every route wrapped into it.',
+ derive:'From the sheet line f<sub>e</sub> = {{frac:k<sub>e</sub>|k}}: k<sub>e</sub> is the excretion share of k and the rest, k<sub>m</sub> = (1 &minus; f<sub>e</sub>)k, is metabolism, so k = k<sub>m</sub> + k<sub>e</sub>.',
  cite:'2IVBolusAdministration.pdf; her words on what an unsubscripted k means'},
 
 {id:'cl-auc', module:2, name:'Clearance from dose and area', sheet:'yes',
@@ -204,6 +215,7 @@ const EQUATIONS = [
           ['V<sub>D</sub>', 'apparent volume of distribution, the hypothetical volume linking the amount in the body to the plasma concentration, L'],
           ['Cl<sub>T</sub>', 'total body clearance, the volume of plasma cleared of drug per unit time, L/hr']],
  holds:'Clearance from k and V<sub>D</sub>, Cl = k &times; V<sub>D</sub>, combined with the first-order half-life, t&frac12; = {{frac:0.693|k}}. Here k is the first-order elimination rate constant. It says which way the half-life moves when clearance falls and the volume does not. That is the question asked when kidney failure lowers clearance.',
+ derive:'Two lines she said to know: t&frac12; = {{frac:0.693|k}} and Cl = k &times; V<sub>D</sub>. Replace k by {{frac:Cl|V<sub>D</sub>}} in the first to get t&frac12; = {{frac:0.693 V<sub>D</sub>|Cl}}.',
  cite:'4---Clearance-and-Elimination.pdf slide 21'},
 
 {id:'biexp', module:2, name:'Two-compartment concentration', sheet:'yes',
@@ -223,6 +235,7 @@ const EQUATIONS = [
  symbols:[['C<sub>p</sub><sup>0</sup>', 'the plasma concentration at time zero, mg/L'],
           ['A, B', 'the two intercepts on the concentration axis of the two straight lines in a two-compartment semi-log plot, in concentration units']],
  holds:'Two compartment, meaning the drug spreads into a central and a tissue compartment at different rates, at time zero. Both exponentials in C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup> are 1 at t = 0, so the concentration is the sum of the intercepts.',
+ derive:'From the sheet line C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup>: at t = 0 both exponentials are 1, so C<sub>p</sub><sup>0</sup> = A + B. The sheet uses the same sum in V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}}.',
  cite:'2IVBolusAdministration.pdf'},
 
 {id:'thalf-beta', module:2, name:'Beta half-life', sheet:'absent',
@@ -232,6 +245,7 @@ const EQUATIONS = [
  symbols:[['t&frac12;<sub>&beta;</sub>', 'the elimination half-life of a two-compartment drug, the time for the concentration to fall by one-half once distribution is complete'],
           ['b', 'beta, the slope of the final straight segment of the semi-log concentration-time plot, hr&minus;1']],
  holds:'Two compartment, meaning the drug spreads into a central and a tissue compartment at different rates. It is the first-order half-life, 0.693 divided by a rate constant, applied to the terminal slope. Solving first for k, the overall elimination rate constant, is more work than the question needs.',
+ derive:'The first-order half-life applied to the terminal slope: t&frac12; = {{frac:0.693|k}} with b (the sheet writes &beta; as b) in place of k.',
  cite:'2IVBolusAdministration.pdf, slide "Beta Half-life"'},
 
 {id:'k-overall', module:2, name:'Overall elimination constant from the intercepts and slopes', sheet:'yes',
@@ -346,6 +360,7 @@ const EQUATIONS = [
           ['V<sub>D</sub>', 'apparent volume of distribution, L'], ['R', 'infusion rate, mg/hr'],
           ['k', 'first-order elimination rate constant, hr&minus;1'], ['t', 'time measured from the start of therapy, hr']],
  holds:'The loading dose and the infusion running at once, so the two contributions add: a decaying bolus term and a climbing infusion term. With the right loading dose the sum stays flat at C<sub>ss</sub>, the steady-state concentration, {{frac:R|kV<sub>D</sub>}}.',
+ derive:'Two sheet lines added: the bolus line C = C<sub>0</sub>e<sup>&minus;kt</sup> with C<sub>0</sub> = {{frac:D<sub>L</sub>|V<sub>D</sub>}}, plus the infusion line C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>) with Cl = kV<sub>D</sub>.',
  cite:'3IntravenousInfusions.pdf, slide "IV Bolus Loading Dose and Continuous IV Infusion"'},
 
 /* ───────── Module 4 ───────── */
@@ -439,6 +454,7 @@ const EQUATIONS = [
  symbols:[['t&frac12;<sub>a</sub>', 'absorption half-life, the time for half of the drug still at the absorption site to be absorbed, hr'],
           ['k<sub>a</sub>', 'absorption rate constant, the first-order constant for drug entering the circulation, hr&minus;1']],
  holds:'The first-order half-life, 0.693 divided by a rate constant, applied to absorption, the drug&rsquo;s entry into the circulation. Stems usually give the absorption half-life in minutes, so converting it to ka is the first step. An unqualified half-life means elimination.',
+ derive:'The first-order half-life applied to absorption: t&frac12; = {{frac:0.693|k}} with k<sub>a</sub> in place of k.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Kinetics of Absorption"'},
 /* ───────── Module 6 ───────── */
 {id:'db-tau', module:6, name:'Amount left after one dosing interval', sheet:'absent',
@@ -448,6 +464,7 @@ const EQUATIONS = [
  symbols:[['D<sub>B</sub>', 'amount of drug in the body one interval after a dose, mg'], ['D<sub>0</sub>', 'the dose, mg'],
           ['&tau;', 'the dosing interval, hr: the time between doses'], ['k', 'first-order elimination rate constant, hr&minus;1']],
  holds:'A single IV bolus, the whole dose given into a vein at once, with first-order elimination, where the rate of loss is proportional to the amount remaining. {{frac:D<sub>B</sub>|D<sub>0</sub>}} = e<sup>&minus;k&tau;</sup> is the fraction of the dose still in the body when the next dose is due.',
+ derive:'The sheet line D = D<sub>0</sub>e<sup>&minus;kt</sup> read at t = &tau;, the end of one dosing interval.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body Following Repeated IV Bolus Injections"'},
 
 {id:'dmax-ss', module:6, name:'Maximum amount at steady state', sheet:'yes',
@@ -525,6 +542,7 @@ const EQUATIONS = [
           ['[AUC]<sub>t1</sub><sup>t2</sup>', 'area under the concentration-time curve from t1, one dose, to t2, the next dose, at steady state'],
           ['&tau;', 'the dosing interval, t2 &minus; t1, hr'], ['&infin;', 'at steady state']],
  holds:'Steady state, the plateau reached when each dose adds back what was lost over the interval; one dosing interval. The area over the interval divided by its length.',
+ derive:'From the sheet line C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>k&tau;}}: FD<sub>0</sub> over V<sub>D</sub>k is the dose over clearance, which is the area under one interval at steady state, so C<sub>avg</sub><sup>&infin;</sup> = {{frac:[AUC]<sub>t1</sub><sup>t2</sup>|&tau;}}.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition"'},
 
 {id:'cp-n', module:6, name:'Concentration at any time after n doses', sheet:'yes',
@@ -549,6 +567,7 @@ const EQUATIONS = [
           ['V<sub>D</sub>', 'apparent volume of distribution, L'], ['k', 'first-order elimination rate constant, hr&minus;1'],
           ['t', 'time since the most recent dose, hr'], ['&tau;', 'dosing interval, hr']],
  holds:'Steady state, the plateau reached when each dose adds back what was lost over the interval. The first two factors are C<sub>max</sub><sup>&infin;</sup>, the peak concentration at steady state, so this is C<sub>max</sub><sup>&infin;</sup> &times; e<sup>&minus;kt</sup>, which also gives the level after the last dose.',
+ derive:'From the sheet line for n doses, C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt</sup>: at steady state n is large, e<sup>&minus;nk&tau;</sup> is 0, and the top of the ratio becomes 1.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Steady State"'},
 /* ───────── Module 6, second lecture: multiple oral doses ───────── */
 {id:'tmax-ss', module:6, name:'Time to peak at steady state, oral', sheet:'yes',
@@ -630,6 +649,7 @@ const EQUATIONS = [
  symbols:[['D<sub>po</sub>', 'the oral dose that gives the same AUC as the IV dose, mg'], ['D<sub>IV</sub>', 'the IV dose to be matched, mg'],
           ['F', 'absolute bioavailability of the oral product, the fraction of the oral dose that reaches the circulation, no units']],
  holds:'When the oral AUC (area under the concentration-time curve after the oral dose) is to equal the IV AUC, Fabs simplifies. The absolute bioavailability F<sub>abs</sub> = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}} reduces to {{frac:D<sub>IV</sub>|D<sub>po</sub>}}. The answer is larger than the IV dose and is then rounded to a strength that exists: 400 mg at 70% gives 571.43 mg, offered as 575 or 600 mg.',
+ derive:'From the sheet line F<sub>abs</sub>D<sub>po</sub> = Cl &times; AUC<sub>po</sub>: for the same area as the IV dose, F<sub>abs</sub>D<sub>po</sub> = D<sub>IV</sub>, so D<sub>po</sub> = {{frac:D<sub>IV</sub>|F<sub>abs</sub>}}.',
  cite:'7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" with her working; In-Class Activity page 18'},
 
 {id:'f-rel', module:7, name:'Relative bioavailability', sheet:'yes',

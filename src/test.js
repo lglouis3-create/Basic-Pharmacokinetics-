@@ -803,6 +803,8 @@ console.log('\n=== 10. Bank fields are plain text ===');
   if (banned.length) bad('setup.why uses banned phrasing: ' + banned.slice(0, 6).join(', '));
   if (html.length) bad('setup.why carries an HTML tag: ' + html.slice(0, 6).join(', '));
   if (offModule.length) bad('setup line from a later module than the question: ' + offModule.slice(0, 6).join(', ')); else console.log('  ok    no set-up line comes from a later module than its question');
+  const noDerive = X.EQUATIONS.filter(e => e.sheet !== 'yes' && !e.derive).map(e => e.id);
+  if (noDerive.length) bad('equations the sheet does not print without a derivation: ' + noDerive.join(', ')); else console.log(`  ok    every equation the sheet does not print says how to reach it (${X.EQUATIONS.filter(e => e.derive).length})`);
   const none = nums.filter(q => q.setup && q.setup.eq === 'none').length;
   console.log(`  info  ${none} numeric question(s) have no catalog line for their final step and stay out of the set-up drill`);
   const pool = X.suPoolAll();

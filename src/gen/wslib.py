@@ -86,18 +86,24 @@ def fracify(s):
         t = re.sub(r'\x00(\d+)\x00', lambda m: masks[int(m.group(1))], t)
     return t
 
-_DIVSIGN = re.compile(rf'(?<![\w./^])({_TERM})\s*÷\s*({_TERM})(?![\w(])')
+_TERM2 = rf'(?:{_TERM}|\d+[A-Za-z][A-Za-z₀-₉]*)'   # also 2k, 3t½
+_DIVSIGN = re.compile(rf'(?<![\w./^])({_TERM2})\s*÷\s*({_TERM2})(?![\w(])')
 
 def divify(s):
     """A written division sign between two terms, in a set-up reason, becomes a stacked ratio."""
     if not isinstance(s, str) or '÷' not in s:
         return s
+    masks = []
+    def mask(m):
+        masks.append(m.group(0)); return f'\x00{len(masks) - 1}\x00'
+    t = re.sub(r'\{\{frac:[^}]*\}\}', mask, s)        # a ratio already stacked is never stacked again
     def rep(m):
         a, b = m.group(1).strip(), m.group(2).strip()
-        if _UNIT.match(a) or _UNIT.match(b) or re.search(r'[|}]', a + b):
+        if _UNIT.match(a) or _UNIT.match(b) or re.search(r'[|}\x00]', a + b):
             return m.group(0)
         return '{{frac:%s|%s}}' % (_strip(a), _strip(b))
-    return _DIVSIGN.sub(rep, s)
+    t = _DIVSIGN.sub(rep, t)
+    return re.sub(r'\x00(\d+)\x00', lambda m: masks[int(m.group(1))], t)
 
 def _teach(v):
     if isinstance(v, str):
@@ -111,7 +117,7 @@ def _teach(v):
 def _render(q):
     q = dict(q)
     if 'steps' in q:
-        q['steps'] = [dict(st, t=fracify(st['t']), why=fracify(st.get('why'))) for st in q['steps']]
+        q['steps'] = [dict(st, t=divify(fracify(st['t'])), why=divify(fracify(st.get('why')))) for st in q['steps']]
     if 'options' in q:
         q['options'] = [dict(o, why=fracify(o['why'])) if 'why' in o else o for o in q['options']]
     for k in ('note',):

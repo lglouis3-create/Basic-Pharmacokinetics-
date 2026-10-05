@@ -1483,6 +1483,7 @@ function feedbackHTML(q, st){
         else if(st.guessed && st.missKind) h += `<p class="sub" style="margin:0 0 8px">Logged as a guess, stuck at ${esc((MISS_LABEL[st.missKind]||'').toLowerCase())}.</p>`;
         if(st.missKind === 'setup' && q.setup && q.setup.eq && EQ_BY_ID[q.setup.eq])
           h += `<p class="sub" style="margin:0 0 8px">The line this one needs: ${eqShow(EQ_BY_ID[q.setup.eq])} <button type="button" class="chip" data-sheetsetup="${q.module}">Set-up drill, Module ${esc(modShort(q.module))}</button></p>`;
+        if(q.setup) h += eqDeriveHTML([q.setup.eq, ...(q.setup.pre || [])]);
         h += stepsBlock(q);
       }
     }else if(kind === 'match'){
@@ -3594,6 +3595,7 @@ function eqDrillHTML(){
       h += `<h5 class="tsec">What each symbol is</h5><ul class="tlist">${
         e.symbols.map(s => `<li><b>${s[0]}</b> — ${s[1]}</li>`).join('')}</ul>`;
     if(e.holds) h += `<h5 class="tsec">When it holds</h5><p class="prose">${richHTML(e.holds)}</p>`;   // entities and {{frac}} render
+    if(e.derive) h += `<h5 class="tsec">Not on the sheet: how to get there</h5><p class="prose">${richHTML(e.derive)}</p>`;
     if(e.must) h += `<p class="prose"><b>She said to memorise this one.</b> It is not on the equation sheet.</p>`;
     h += `<div class="cite">${esc(e.cite)}</div></div>`;
   }
@@ -3847,6 +3849,16 @@ function eqStartIds(ids, mode){
   eqLoad();
 }
 
+/* A line the sheet does not print, with the way to reach it from a line
+   that is printed (equations.js `derive`). Shown wherever a worked problem
+   or a drill lands on such a line. */
+function eqDeriveHTML(ids){
+  const es = [...new Set(ids)].map(id => EQ_BY_ID[id]).filter(e => e && e.sheet !== 'yes' && e.derive);
+  if(!es.length) return '';
+  return `<div class="derive"><h4>Not on the sheet: how to get there</h4><ul class="tlist">${es.map(e =>
+    `<li>${eqShow(e)} <span class="sm">${esc(e.name)}${e.must ? '; she said to know it' : ''}</span><br>${richHTML(e.derive)}</li>`).join('')}</ul></div>`;
+}
+
 /* ==========================================================================
    THE SET-UP DRILL: WHICH EQUATION?
    ==========================================================================
@@ -3933,8 +3945,11 @@ function suQuestionHTML(q, st, idx){
       <h4>Why this line</h4><ul class="tlist">${why.map(s => `<li>${mathHTML(esc(s))}</li>`).join('')}</ul>
       ${pre.length ? `<h4>Lines used on the way</h4><ul class="tlist">${pre.map(id => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}</span></li>`).join('')}</ul>` : ''}
       <h4>When it holds</h4><p class="sub">${mathHTML(e.holds || '')}</p>
+      ${eqDeriveHTML([e.id, ...pre])}
+      ${st.shown ? `<div class="suwork"><p class="verdict ok">Keyed answer ${fmtAns(q.answer)} ${esc(q.units || '')}</p>${stepsBlock(q)}</div>` : ''}
       <div class="btns">${idx === 'one' ? `<button class="btn" data-sunext="1">Next</button>` : ''}
-        <button class="btn ghost" data-suwork="${esc(q.id)}">Work the full problem</button>
+        <button class="btn ghost" data-sushow="1">${st.shown ? 'Hide the working' : 'Show the problem worked out'}</button>
+        <button class="btn ghost" data-suwork="${esc(q.id)}">Work it yourself in the quiz</button>
         <button class="btn ghost" data-sheetdrill="${esc(e.id)}">Type this line from memory</button></div></div>`;
   }
   return h + `</div>`;
@@ -3990,6 +4005,9 @@ function suPick(card, i){
 function suWire(el){
   el.onclick = e => {
     const o = e.target.closest('[data-suopt]'); if(o){ suPick(o.closest('[data-suq]'), +o.dataset.suopt); return; }
+    const sh = e.target.closest('[data-sushow]');
+    if(sh){ const card = sh.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(st){ st.shown = !st.shown; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild); } return; }
     const n = e.target.closest('[data-sunext]');
     if(n){ SU.i += n.dataset.sunext === 'page' ? Math.min(SU_PAGE, SU.queue.length - SU.i) : 1; renderEq(); window.scrollTo(0, 0); return; }
     if(e.target.closest('[data-suhome]')){ SU = null; renderEq(); return; }

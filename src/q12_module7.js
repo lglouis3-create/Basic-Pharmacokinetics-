@@ -426,13 +426,13 @@ const Q_MODULE7 = [
  stem:'What is the bioavailability of a 500 mg tablet which yielded an AUC of 115 (mg/L)hr compared to a 400 mg IV bolus dose that yielded an AUC of 132 (mg/L)hr?',
  options:[
   {t:'50%',
-   why:'This comes from the dose ratio the wrong way up, or from reading the two AUCs as 115 of 132 and then taking off more for the larger tablet. (115 ÷ 132)(400 ÷ 500) is 0.697, not 0.50.'},
+   why:'This comes from the dose ratio the wrong way up, or from reading the two AUCs as 115 of 132 and then taking off more for the larger tablet. ({{frac:115|132}})({{frac:400|500}}) is 0.697, not 0.50.'},
   {t:'70%', correct:true,
    why:'F = ({{frac:115|132}})({{frac:400|500}}) = 0.871 × 0.8 = 0.697, which is 70 per cent. The IV AUC is the denominator, and the IV dose is on top of the dose ratio because the tablet was the larger dose.'},
   {t:'85%',
    why:'115 over 132 alone is 0.871. Stopping there leaves out the dose correction: the tablet was 500 mg against 400 mg IV, so its AUC has to be scaled down by 400 over 500 before the two can be compared.'},
   {t:'92%',
-   why:'This has the dose ratio inverted: (115 ÷ 132)(500 ÷ 400) = 1.09, which would be rounded down to look plausible. The IV dose goes on top; a larger oral dose makes F smaller, not larger.'}],
+   why:'This has the dose ratio inverted: ({{frac:115|132}})({{frac:500|400}}) = 1.09, which would be rounded down to look plausible. The IV dose goes on top; a larger oral dose makes F smaller, not larger.'}],
  teach:[
   {h:'The idea', list:[
     'Compare the AUCs with the IV AUC underneath, then correct for the doses with the IV dose on top.',

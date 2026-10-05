@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-05 (the working, and the lines the sheet leaves out)
+- Set-up drill: "Show the problem worked out" opens the keyed answer and the steps in place; stems come shuffled.
+- A line the sheet does not print now comes with the way to reach it from a printed line, in the drills and the quiz.
+- Every worked step writes a ratio as a stacked fraction.
+
 ## 2026-10-05 (the sheet by what is asked, and printed in colour)
 - The sheet map can be regrouped by what a stem asks for (Cp, Cmax, Cmin, tmax ...) or by dosing model.
 - "Print the sheet, colour-coded" prints her two pages as laid out, each line coloured and labelled with its model.
