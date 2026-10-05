@@ -1034,6 +1034,7 @@ const Q_MODULE1 = [
    why:'These are the two points Dr. Mosley selects in her own key, and the pair is a good choice because the 18-hour separation spans most of the decline and reduces the effect of measurement scatter. The concentration units cancel inside the logarithm, leaving a pure number divided by hours. That division is what produces reciprocal hours.'},
   {k:'round', t:'k = 0.08658 hr⁻¹, reported as 0.0866 hr⁻¹.',
    why:'Dividing a dimensionless logarithm by a time gives reciprocal time, the unit of a first-order rate constant. Dr. Mosley reports rate constants to four decimal places (her key prints 0.0866 per hour), and a leading decimal with no digit before it loses half the marks on her paper.'}],
+ setup:{eq:'first-ln', pre:[], why:'"chemical decomposition" with a table of concentrations against time, so the kinetic-orders block, and the constant ratio over equal intervals settles first order. Given C at two times, asked k, so ln C = ln C0 − kt between the two points rearranged to k = {{frac:ln(C1 ÷ C2)|t2 − t1}}. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'A first-order rate constant k from a table is the slope of ln C (the natural logarithm of concentration) against time, with the sign reversed.',
@@ -1070,6 +1071,7 @@ const Q_MODULE1 = [
    why:'The exponential factor e^1.0392 is 2.8270, which is greater than one because the exponent is positive, so the answer is larger than the measured concentration, as it must be for a concentration that has been falling for 12 hours. Milligrams per litre multiplied by a pure number stay milligrams per litre.'},
   {k:'round', t:'C0 = 350 mg/L.',
    why:'Dr. Mosley reports this value as 350 mg/L, to three significant figures, which matches the precision of the tabulated concentrations. The computed 349.98 rounds to that value without any further adjustment.'}],
+ setup:{eq:'first-exp', pre:[], why:'"first-order process" with a rate constant and one later concentration, so the first-order decline line. Given k, t and C, asked the initial concentration C0, so C = C0 e^(−kt) rearranged to C0 = C e^(kt). No hinge.'},
  teach:[
   {h:'The idea', list:[
     'Back-extrapolation recovers the concentration at time zero (C0) from a later measurement.',
@@ -1105,6 +1107,7 @@ const Q_MODULE1 = [
    why:'Dividing a pure number by a quantity in reciprocal hours gives hours, which is the unit a half-life must have. The rate constant sits in the denominator because a faster process has a shorter half-life, so the two quantities move in opposite directions.'},
   {k:'round', t:'t½ = 8 hr.',
    why:'Dr. Mosley reports this as 8 hours, to the whole hour. The answer is a time and carries no reciprocal unit; hours to the minus one belongs to the rate constant that was given, not to the half-life that was asked for.'}],
+ setup:{eq:'thalf-first', pre:[], why:'"first-order process" and "half the solution", so the first-order half-life line. Given k, asked t½, so t½ = {{frac:0.693|k}} directly. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'Half-life (t½) and the rate constant k are two ways of stating the same first-order decline, joined by the natural logarithm of two.',
@@ -1143,6 +1146,7 @@ const Q_MODULE1 = [
    why:'The logarithm of ten is a pure number, and dividing it by a quantity in reciprocal hours leaves hours. The fraction remaining is not a clean power of one half here, so half-life counting will not reach the answer exactly and the logarithmic route is needed.'},
   {k:'round', t:'t = 26.589 hr, reported as 26.6 hr.',
    why:'Dr. Mosley reports this to one decimal place, as 26.6 hours. As a check, 90 per cent decomposition is a little more than three half-lives, which for an 8-hour half-life would be 24 hours, and the answer sits just above that.'}],
+ setup:{eq:'first-exp', pre:[], why:'"first-order process" and "decompose by 90 per cent", so the first-order decline line solved for t. Given k and the fraction remaining {{frac:C|C0}}, asked t, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}. The fraction remaining stands in for {{frac:C|C0}}; no hinge.'},
  teach:[
   {h:'The idea', list:[
     'For a first-order process, a percentage question never needs a concentration, because the starting value cancels.',
@@ -1179,6 +1183,7 @@ const Q_MODULE1 = [
    why:'These are the two points Dr. Mosley takes in her key. Milligrams per millilitre divided by hours gives milligrams per millilitre per hour, which is concentration per unit time, the unit a zero-order rate constant must carry.'},
   {k:'round', t:'k = 6 (mg/mL)/hr.',
    why:'The division is exact at 6, and her key prints 6 mg/mL per hour with no further rounding. Because the process is zero order, this number is the quantity lost every hour, unchanged from the first hour to the last.'}],
+ setup:{eq:'zero-line', pre:[], why:'"chemical decomposition" with a table of concentrations against time, so the kinetic-orders block, and the constant difference over equal intervals settles zero order. Given C at two times, asked k, so C = C0 − kt between the two points rearranged to k = −{{frac:C2 − C1|t2 − t1}}. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'A zero-order rate constant (k0) is itself a rate, so it carries units of concentration or amount per unit time.',
@@ -1213,6 +1218,7 @@ const Q_MODULE1 = [
    why:'Milligrams per millilitre divided by milligrams per millilitre per hour leaves hours, since the concentration units cancel and the reciprocal hour inverts. The factor of two appears because only half of the starting concentration has to be removed.'},
   {k:'round', t:'t½ = 29.167 hr, reported as 29.2 hr.',
    why:'Dr. Mosley reports this to one decimal place, as 29.2 hours. As a check, the table for this solution reads 206 mg/mL at 24 hours and 134 mg/mL at 36 hours, so the concentration passes 175 mg/mL between those two times, which brackets the answer.'}],
+ setup:{eq:'thalf-zero', pre:[], why:'"zero-order process" and "half the solution", so the zero-order half-life line. Given k and C0, asked t½, so t½ = C0 ÷ 2k directly. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'The two half-life relations look alike but behave differently.',
@@ -1251,6 +1257,7 @@ const Q_MODULE1 = [
    why:'Milligrams divided by milligrams per minute leaves minutes, so the result is a time in the same time unit the rate constant was quoted in. Half of the 105 mg starting amount is 52.5 mg, and at 0.8 mg per minute that removal takes 65.625 minutes, which is what dividing by twice the rate constant computes in a single move.'},
   {k:'round', t:'t½ = 65.6 min.',
    why:'Dr. Mosley reports this half-life to one decimal place, as 65.6 minutes, which is as far as a rate constant quoted to one decimal place will justify. The answer is a time and carries no reciprocal unit; per minute belongs to the rate constant that was given, not to the half-life that was asked for.'}],
+ setup:{eq:'thalf-zero', pre:['zero-line'], why:'"zero-order process" and "half-life", so the zero-order block. Given k, t and the amount A remaining, asked t½, so t½ = A0 ÷ 2k written in amount. A0 first, from C = C0 − kt written in amount and rearranged to A0 = A + kt, because the line wants the starting amount and the stem gives a later one.'},
  teach:[
   {h:'The idea', list:[
     'A zero-order half-life needs the starting amount (A0), which the data usually do not give.',
@@ -1286,6 +1293,7 @@ const Q_MODULE1 = [
    why:'A difference of natural logarithms is a pure number, and dividing it by a span of hours gives reciprocal hours. The 15-hour separation is the widest the table allows, which uses the data most efficiently.'},
   {k:'round', t:'k = 0.13863 hr⁻¹, reported as 0.1386 hr⁻¹.',
    why:'Dr. Mosley reports first-order rate constants to four decimal places, and her key prints 0.1386 per hour while carrying 0.13863 into the next parts of the problem. Rounding at the end rather than at each step keeps the later answers consistent with hers.'}],
+ setup:{eq:'first-ln', pre:[], why:'"decomposition is first order" with ln C listed against time, so the first-order natural-log line. Given ln C at two times, asked k, so ln C = ln C0 − kt between the two points rearranged to k = {{frac:ln C1 − ln C2|t2 − t1}}. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'When a table already gives natural logarithms (ln C), a first-order rate constant takes one subtraction and one division.',
@@ -1322,6 +1330,7 @@ const Q_MODULE1 = [
    why:'A concentration is an amount per unit volume, so rearranging it for volume puts the amount on top. The whole 200 mg was dissolved and none had decomposed at time zero, so the amount to use is the full dose.'},
   {k:'round', t:'V = 200,000 mcg ÷ 250.0 mcg/mL = 800 mL.',
    why:'Micrograms divided by micrograms per millilitre leaves millilitres, and the microgram units cancel only because the dose was converted from 200 mg first. Her key prints 800 mL, which is exact at the precision of the data.'}],
+ setup:{eq:'cp-db-vd', pre:['first-ln'], why:'"decomposition is first order" with an amount "dissolved" into water, so the amount, concentration and volume line. Given the amount and C0, asked V, so Cp = {{frac:DB|VD}} rearranged to V = {{frac:amount|C0}}. C0 first, from ln C0 = ln C + kt, because the sample is at one hour, not time zero.'},
  teach:[
   {h:'The idea', list:[
     'Finding a preparation volume joins two ideas.',
@@ -1360,6 +1369,7 @@ const Q_MODULE1 = [
    why:'Milligrams divided by milligrams per millilitre leaves millilitres, and no unit conversion was needed because the dose and the concentration were both quoted in milligrams. The volume is larger than 300 mL because the starting concentration is below 1 mg per millilitre.'},
   {k:'round', t:'V = 600 mL.',
    why:'Her key prints 600 mL with no rounding shown, because every number in the chain divides exactly and no logarithm or exponential was evaluated anywhere in it. Millilitres are the unit the 1.0 mL assay samples were quoted in, so the answer is reported in the same measure.'}],
+ setup:{eq:'cp-db-vd', pre:['zero-line'], why:'"zero-order decomposition" with an amount "dissolved into an unknown volume", so the amount, concentration and volume line. Given the dose and C0, asked V, so Cp = {{frac:DB|VD}} rearranged to V = {{frac:dose|C0}}. C0 first, from C = C0 − kt, with k from the same line between the two samples.'},
  teach:[
   {h:'The idea', list:[
     'This is the first-order volume calculation with one change.',
@@ -1395,6 +1405,7 @@ const Q_MODULE1 = [
    why:'Multiplying a count of half-lives by the length of one half-life gives a time in hours. The 750 mg stated in the question is never used, because for a first-order process the time to reach a given percentage does not depend on the starting amount.'},
   {k:'round', t:'t = 24 hr.',
    why:'The answer is exact rather than rounded, because 87.5 per cent corresponds to a whole number of half-lives and no logarithm had to be evaluated. Dr. Mosley prints 24 hours and reaches it by this same three-step count rather than by an equation.'}],
+ setup:{eq:'first-exp', pre:['thalf-first'], why:'"first-order kinetics" and "decompose by 87.5 per cent", so the first-order decline line solved for t. Given t½ and the fraction remaining, asked t, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}; the working reads one eighth as three half-lives, so t = 3 t½. k = {{frac:0.693|t½}} links the forms.'},
  teach:[
   {h:'The idea', list:[
     'When the fraction remaining is a power of one half, counting half-lives answers the question without a logarithm.',
@@ -1435,6 +1446,7 @@ const Q_MODULE1 = [
    why:'Dividing a dimensionless logarithm by a quantity in reciprocal days leaves days, so the result is a time and carries no reciprocal unit. As a check on direction, the concentration has already fallen well past half of 300 by day 30, so a half-life shorter than 30 days is what the data demand.'},
   {k:'round', t:'t½ = 15.7 days.',
    why:'Her worked answer prints 15.7 days, to one decimal place, which matches the precision of a rate constant she reports as 0.044 per day. Carrying the unrounded rate constant instead gives 15.73 days, a difference far too small to change any conclusion drawn from it.'}],
+ setup:{eq:'thalf-first', pre:['first-ln'], why:'"first-order kinetics" and "decline to one-half", so the first-order half-life line. Given C0, C and t, asked t½, so t½ = {{frac:0.693|k}}. k first, from ln C = ln C0 − kt rearranged to k = {{frac:ln(C0 ÷ C)|t}}, because the line wants k and the stem gives two concentrations instead.'},
  audit:'The transcript of the exam review renders the rate constant once as "0.044 per hour" and once as "0.0044"; the elapsed time of 30 days and her own printed half-life of 15.7 days are both consistent only with 0.044 per day. An exam written from these lectures would key 15.7 days.',
  teach:[
   {h:'The idea', list:[
@@ -1475,6 +1487,7 @@ const Q_MODULE1 = [
    why:'The concentration units cancel and the reciprocal day inverts, leaving days. Using her rounded 7.33 per day in place of the unrounded 7.333 gives 20.46 days instead, a difference too small to change any conclusion, which is why either carries full marks.'},
   {k:'round', t:'t½ = 20.45 days.',
    why:'Dr. Mosley reports 20.45 days, to two decimal places, worked from the unrounded rate constant. The zero-order half-life is far longer than the first-order one for the same pair of points, because a zero-order process removes a fixed amount per day rather than a fixed fraction.'}],
+ setup:{eq:'thalf-zero', pre:['zero-line'], why:'"zero-order kinetics" and "decline to one-half", so the zero-order half-life line. Given C0, C and t, asked t½, so t½ = C0 ÷ 2k. k first, from C = C0 − kt rearranged to k = {{frac:C0 − C|t}}, because the line wants k and the stem gives two concentrations instead.'},
  note:'Rounding k to 7.33 before dividing gives 20.46 days; carrying 7.3333 gives 20.45 days. Both are accepted.',
  audit:'Her handwriting on the RecapExam1 slide records 20.463 days, which follows from the rounded rate constant of 7.33; she says 20.45 days aloud in the exam review, which follows from the unrounded 7.3333. The printed slide gives no answer. Both readings are within the tolerance set here, and an exam written from these lectures would accept either.',
  teach:[
@@ -1514,6 +1527,7 @@ const Q_MODULE1 = [
    why:'Both quantities are pure numbers, so the result is a pure count of half-lives with no time unit attached. Her key prints 9.97 and takes it as 10.'},
   {k:'round', t:'t = 10 half-lives.',
    why:'Her table confirms the same answer without the logarithm: after 10 half-lives 0.1 per cent remains, which is 99.9 per cent decomposed. She uses this figure repeatedly, since a question asking for the time for 99.9 per cent of a drug to be eliminated always resolves to ten half-lives.'}],
+ setup:{eq:'first-exp', pre:['thalf-first'], why:'"first-order kinetics" and "99.9 per cent" decomposed, so the first-order decline line solved for t. Given the fraction remaining {{frac:C|C0}}, asked t in half-lives, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}. k = {{frac:0.693|t½}} is substituted, because the answer is wanted as a multiple of t½.'},
  teach:[
   {h:'The idea', list:[
     'Ten half-lives is the standard count for practical completion of a first-order process.',
@@ -1591,6 +1605,7 @@ const Q_MODULE1 = [
    why:'The two segment areas are in the same unit and add directly, because each was already reduced to a concentration multiplied by a time. Adding rather than averaging is what the trapezoidal rule requires, since the segments sit side by side under the curve rather than overlapping.'},
   {k:'round', t:'AUC = 23.7 mcg·hr/mL.',
    why:'Dr. Mosley reports 23.7 for this interval, to three significant figures, which matches the precision of the tabulated concentrations. The unit is a concentration multiplied by a time, which is why it reads as micrograms times hours per millilitre rather than as a concentration.'}],
+ setup:{eq:'auc-trap', pre:[], why:'"area under the curve" between two sampling times in a table of plasma levels, so the trapezoidal rule. Given Cn−1, Cn and the times bounding each segment, asked AUC, so AUC = [{{frac:Cn−1 + Cn|2}}](tn − tn−1) for each segment in the span, then summed. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'The trapezoidal rule estimates the area beneath a set of measured points.',
@@ -1630,6 +1645,7 @@ const Q_MODULE1 = [
    why:'The segment areas share a unit and add directly. The result is larger than the area from hours 2 to 4 because the concentrations over this earlier interval are higher, which is the expected direction for a curve that is declining throughout.'},
   {k:'round', t:'AUC = 41.65 mcg·hr/mL.',
    why:'The value is reported to two decimal places, which is what the half-hour and one-hour segment widths support without inventing precision. The unit is again a concentration multiplied by a time, unchanged by the unequal segment widths used over this earlier stretch of the curve.'}],
+ setup:{eq:'auc-trap', pre:[], why:'"area under the curve" between two sampling times in a table of plasma levels, so the trapezoidal rule. Given Cn−1, Cn and the times bounding each segment, asked AUC, so AUC = [{{frac:Cn−1 + Cn|2}}](tn − tn−1) for each segment, with unequal widths, then summed. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'The trapezoidal rule does not need evenly spaced samples; each segment uses the interval between its own two points.',
@@ -1664,6 +1680,7 @@ const Q_MODULE1 = [
    why:'Milligrams per millilitre per hour multiplied by hours leaves milligrams per millilitre, so the two terms can be added. Six milligrams per millilitre disappear in each of the first two hours, which is the 12 added back.'},
   {k:'round', t:'C0 = 350 mg/mL',
    why:'Her key prints 350 mg/mL. The value is exact, so no rounding is involved, and it is the number the half-life part of this problem then uses.'}],
+ setup:{eq:'zero-line', pre:[], why:'"zero-order process" with a rate and one later concentration, so the zero-order decline line. Given k, t and C, asked the initial concentration C0, so C = C0 − kt rearranged to C0 = C + kt. No hinge.'},
  teach:[
   {h:'The idea', list:[
     'Recovering the starting concentration (C0, the intercept) from a later sample is the same move in both orders; only the arithmetic differs.',
@@ -1696,6 +1713,7 @@ const Q_MODULE1 = [
    why:'Milligrams per millilitre divided by milligrams per millilitre per hour leaves hours. The 315 is what must be lost, and at 6 per hour that takes 52.5 hours.'},
   {k:'round', t:'t = 52.5 hr',
    why:'Her key prints 52.5 hr, to one decimal place. As a check, the table for this solution reads 62 mg/mL at 48 hours, so 35 mg/mL is reached a few hours after the last sample, which brackets the answer.'}],
+ setup:{eq:'zero-line', pre:[], why:'"zero-order process" and "decompose by 90%", so the zero-order decline line solved for t. Given C0, k and the fraction remaining, asked t, so C = C0 − kt rearranged to t = {{frac:C0 − C|k}}. C first, as the fraction remaining of C0, because the line wants a concentration, not a percentage.'},
  teach:[
   {h:'The idea', list:[
     'A zero-order time is not a multiple of the half-life in the way a first-order time is.',

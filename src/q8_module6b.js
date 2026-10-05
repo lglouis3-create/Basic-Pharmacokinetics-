@@ -281,6 +281,7 @@ const Q_MODULE6B = [
    why:'Milligrams per hour is an amount per unit time, which is what a zero-order rate is. The equation needs the rate, not the dose.'},
   {k:'round', t:'R = 150 mg/hr',
    why:'Her value, 150 mg/hr. Every later part of this example uses this rate with k = 0.15 hr⁻¹ and VD = 15 L, so an error here carries into every later concentration.'}],
+ setup:{eq:'none', pre:[], why:'"administered as an intravenous (IV) infusion over a period of 2 hours". The dose and the infusion time are given and R is asked. No catalog line gives R; the working uses the definition of a constant rate, R = dose divided by infusion time.'},
  teach:[
   {h:'The idea', list:[
     'An intermittent-infusion stem gives a dose and a duration.',
@@ -307,6 +308,7 @@ const Q_MODULE6B = [
    why:'66.67 mg/L is the plateau a continuous infusion would reach; this 2-hour infusion stops at 26 per cent of it.'},
   {k:'round', t:'Cp = 17.28 mg/L',
    why:'Her value, 17.28 mg/L, which she carries as 17.3 into part (b). It is the starting value for the decline after the infusion.'}],
+ setup:{eq:'cp-infusing', pre:['cl-k-vd'], why:'"administered as an intravenous (IV) infusion over a period of 2 hours", "at the end of the first infusion": during an infusion. The dose, infusion time, k and VD are given and Cp is asked, so Cp = {{frac:R|Cl}}(1 - e^(-kt)) with t the infusion time and R the dose over it. Cl first, from Cl = kVD.'},
  teach:[
   {h:'The idea', list:[
     'The end-of-infusion concentration is the number every later part depends on.',
@@ -337,6 +339,7 @@ const Q_MODULE6B = [
    why:'The sum of the two contributions is the plasma concentration at 12 hours. Adding is allowed because elimination is first order, so each infusion declines independently of the other.'},
   {k:'round', t:'C = 13.34 mg/L',
    why:'Her stated value is 13.33 mg/L. Carrying 17.28 through gives 13.34, and starting from 17.3 gives 13.35; all three are within the tolerance.'}],
+ setup:{eq:'cp-after-stop', pre:[], why:'"infusion over a period of 2 hours", "a second dose ... was infused", "4 hours after the cessation of the second infusion": after each infusion stops. Each end-of-infusion concentration, k and the time since each infusion ended are given and Cp is asked, so Cp = Cpeak e^(-kt) once per infusion, the two terms added by superposition.'},
  teach:[
   {h:'The idea', list:[
     'One decline per infusion, each with its own t measured from its own end.',
@@ -368,6 +371,7 @@ const Q_MODULE6B = [
    why:'Two hours is two thirds of the 3-hour half-life, so 37 per cent of the plateau is reached when the infusion stops. The exponent, 0.231 × 2, is a pure number.'},
   {k:'round', t:'Cp = 22.24 mg/L',
    why:'Her confirmed value: "something like 22.2 mg per liter for the first part for A". Because the second infusion is identical, it is the C0 for both declines in part (b).'}],
+ setup:{eq:'cp-infusing', pre:['thalf-first','cl-k-vd'], why:'"multiple intravenous (IV) infusions", "administered over a period of two hours", "at the end of the first infusion": during one infusion. The dose, infusion time, t½ and VD are given and Cp is asked, so Cp = {{frac:R|Cl}}(1 - e^(-kt)) with R the dose over the infusion time. k first, from the half-life, then Cl = kVD.'},
  teach:[
   {h:'The idea', list:[
     'The same first step as her Example 4, but the stem gives the half-life instead of k (the elimination rate constant).',
@@ -399,6 +403,7 @@ const Q_MODULE6B = [
    why:'The sum of the two contributions. Most of it comes from the second infusion, because the first has had 6 more hours to be eliminated.'},
   {k:'round', t:'C = 11.04 mg/L',
    why:'Her confirmed value was "eleven-ish", with rounding differences between students. Carried from 22.24, the sum is 11.04 mg/L.'}],
+ setup:{eq:'cp-after-stop', pre:['thalf-first'], why:'"intravenous (IV) infusion over two hours", "second 2-hour infusion", "four hours after the end of the second infusion": after each infusion stops. Each end-of-infusion concentration, t½ and the time since each infusion ended are given and Cp is asked, so Cp = Cpeak e^(-kt) once per infusion, the two terms added. k first, from the half-life.'},
  teach:[
   {h:'The idea', list:[
     'Same number line as Example 4, so the two values of t are again 10 and 4 hours.',
@@ -430,6 +435,7 @@ const Q_MODULE6B = [
    why:'This is 16 per cent of 39.37 mg/L. The plateau is high because the clearance is small, and the infusion is short against the half-life, so the product is modest.'},
   {k:'round', t:'Cp = 6.26 mg/L',
    why:'Her value, 6.26 mg/L. It is the C0 for the decline after this infusion and, because the second infusion is identical, for the second decline as well.'}],
+ setup:{eq:'cp-infusing', pre:['cl-k-vd'], why:'"infused intravenously over 1.5 hours", "at the end of the first infusion": during one infusion, before steady state. The dose, infusion time, Cl and VD are given and Cp is asked, so Cp = {{frac:R|Cl}}(1 - e^(-kt)) with R the dose over the infusion time. k first, from Cl = kVD rearranged, because the exponent wants k.'},
  teach:[
   {h:'The idea', list:[
     'When the stem gives clearance (Cl), use {{frac:R|Cl}} for the plateau and {{frac:Cl|VD}} for k.',
@@ -459,6 +465,7 @@ const Q_MODULE6B = [
    why:'The sum of the two contributions. The second infusion supplies 3.13 of the 4.37 mg/L, because it ended 8 hours later than the first.'},
   {k:'round', t:'C = 4.37 mg/L',
    why:'Computed from her inputs. With k rounded to 0.115, the pieces are 3.14 and 1.25 and the sum is 4.39; both sums lie inside the tolerance.'}],
+ setup:{eq:'cp-after-stop', pre:['cl-k-vd'], why:'"infused intravenously over 1.5 hours", "a second 150-mg dose was infused", "six hours after the end of the second infusion": after each infusion stops. Each end-of-infusion concentration, Cl, VD and the time since each infusion ended are given and Cp is asked, so Cp = Cpeak e^(-kt) per infusion, the two terms added. k first, from Cl = kVD.'},
  teach:[
   {h:'The idea', list:[
     'Her number line for this one: 0, 1.5, 8, 9.5, 15.5.',
@@ -486,6 +493,7 @@ const Q_MODULE6B = [
    why:'mg/hr over L/hr leaves mg/L. The 1.5-hour infusions reach only 16 per cent of this {{frac:R|Cl}}, because they stop long before 3 to 5 half-lives have passed.'},
   {k:'round', t:'Css = 39.37 mg/L',
    why:'Her method, the rate divided by the clearance, gives 39.37 mg/L. It has no time term, so it says nothing about when the plateau would be reached.'}],
+ setup:{eq:'css', pre:[], why:'"continuously infused at the rate above", "steady-state concentration": the plateau of a continuous infusion. The dose, the infusion time and Cl are given and Css is asked, so Css = {{frac:R|Cl}} with R the dose over the infusion time. No hinge: no k and no t appear in the line.'},
  teach:[
   {h:'The idea', list:[
     'The plateau of a continuous infusion is the Module 3 result Css = {{frac:R|Cl}}, the rate over the clearance.',
@@ -795,6 +803,7 @@ const Q_MODULE6B = [
    why:'Reciprocal hours in the denominator leave hours. The logarithm has no units, because {{frac:ka|k}} is a ratio of two rate constants in the same unit.'},
   {k:'round', t:'tmax = 3.1 hr',
    why:'Her value: "something like 3-ish hours for T-Max", written as 3.1 hr in the working. The first-dose Cmax is evaluated at this time in the next part.'}],
+ setup:{eq:'tmax', pre:['thalf-first'], why:'"orally every 8 hours", "peak of the first dose": a single oral dose, because the body held no drug before it. t½ and ka are given and tmax is asked, so tmax = {{frac:ln(ka/k)|ka - k}}, with no τ in it. k first, from the half-life, because the line wants k, not t½.'},
  teach:[
   {h:'The idea', list:[
     'The first-dose Cmax (peak concentration) is the single-dose equation evaluated at tmax (the time to peak).',
@@ -821,6 +830,7 @@ const Q_MODULE6B = [
    why:'The prefactor times the bracket: 1.806 × 0.745 = 1.35. Both factors are known only once tmax has been found, which is why tmax came first.'},
   {k:'round', t:'Cmax = 1.35 mg/L',
    why:'Her value: "1.35 mg per liter for C-Max". The steady-state peak of 3.4 mg/L is compared with this first-dose peak.'}],
+ setup:{eq:'oral-cp', pre:[], why:'"orally", "Cmax of the first dose": a single oral dose at its peak. F, D0, VD, k, ka and tmax are given and Cmax is asked, so the single oral dose line Cp = {{frac:FkaD0|VD(ka - k)}}(e^(-kt) - e^(-kat)) with t = tmax. No hinge: k and tmax are given.'},
  teach:[
   {h:'The idea', list:[
     'This is the Module 5 single-dose calculation.',
@@ -847,6 +857,7 @@ const Q_MODULE6B = [
    why:'Dividing by ka − k = 0.8307 hr⁻¹ leaves hours, because the logarithm has no units. {{frac:1.710|0.8307}} = 2.06 hr, about an hour earlier than the first-dose peak.'},
   {k:'round', t:'tmax∞ = 2.06 hr',
    why:'Her value: "T-Max at steady state. I got 2.06 hours." It is shorter than the first-dose 3.1 hours, and it is the time at which Cmax at steady state is evaluated.'}],
+ setup:{eq:'tmax-ss', pre:[], why:'"orally every 8 hours", "peak occur at steady state": multiple oral doses at the plateau, so the line with τ in it. k, ka and τ are given and tmax∞ is asked, so tmax∞ = {{frac:1|ka - k}} ln[{{frac:ka(1 - e^(-kτ))|k(1 - e^(-kaτ))}}]. No hinge: k and ka are given.'},
  teach:[
   {h:'The idea', list:[
     'The steady-state peak comes earlier than the first-dose peak.',
@@ -874,6 +885,7 @@ const Q_MODULE6B = [
    why:'The decline over the 2.06 hours to the peak, from her tmax at steady state. The product of the three factors, 1.667 × 2.35 × 0.867, is the peak at steady state.'},
   {k:'round', t:'Cmax∞ = 3.4 mg/L',
    why:'Her spoken value is "Steady state, 3.3". Carried with tmax∞ = 2.06 the product is 3.39 mg/L, and with 2.1, as written in the working, also 3.39. It is higher than the first-dose 1.35 mg/L, as accumulation predicts.'}],
+ setup:{eq:'cmax-ss-oral', pre:[], why:'"orally every 8 hours", "Cmax at steady state": multiple oral doses at the plateau. F, D0, VD, k, τ and tmax∞ are given and Cmax∞ is asked, so Cmax∞ = {{frac:FD0|VD}}({{frac:1|1 - e^(-kτ)}})e^(-k tmax∞), the oral line with F and tmax∞ in it. No hinge: k and tmax∞ are given.'},
  teach:[
   {h:'The idea', list:[
     'Here Cmax∞ is about two and a half times the first-dose Cmax.',
@@ -902,6 +914,7 @@ const Q_MODULE6B = [
    why:'The product of the three factors: 1.806 × 2.35 × 0.574 = 2.44 mg/L. The trough is lower than the peak by the decline over the rest of the interval after the peak.'},
   {k:'round', t:'Cmin∞ = 2.44 mg/L',
    why:'Her value: "I\'m getting 2.4-ish." The steady-state trough, 2.44 mg/L, is higher than the first-dose peak of 1.35 mg/L.'}],
+ setup:{eq:'cmin-ss-oral', pre:[], why:'"orally every 8 hours", "Cmin at steady state": multiple oral doses at the plateau, at the end of the interval. F, D0, VD, k, ka and τ are given and Cmin∞ is asked, so Cmin∞ = {{frac:kaFD0|VD(ka - k)}}({{frac:1|1 - e^(-kτ)}})e^(-kτ). No hinge: k and ka are given.'},
  teach:[
   {h:'The idea', list:[
     'The oral trough carries the single-dose prefactor, not {{frac:FD0|VD}}, and e^(-kτ) for the full interval.',
@@ -926,6 +939,7 @@ const Q_MODULE6B = [
    why:'The average over one interval at steady state: 187.5 mg absorbed per interval, divided by the 62.37 L of plasma cleared per interval.'},
   {k:'round', t:'Cavg∞ = 3.01 mg/L',
    why:'Computed from her inputs. The average, 3.01 mg/L, lies between the trough, 2.44, and the peak, 3.39 mg/L, and above their midpoint, 2.915.'}],
+ setup:{eq:'cavg-ss', pre:['cl-k-vd'], why:'"orally every 8 hours", "Cavg at steady state". F, D0, VD, k and τ are given and Cavg∞ is asked, so Cavg∞ = {{frac:FD0|ClT τ}}, the same as {{frac:FD0|VDkτ}}; F is less than one because the dose is oral. ClT first, from ClT = kVD, because the line wants clearance.'},
  teach:[
   {h:'The idea', list:[
     'The average needs no tmax and no accumulation factor.',

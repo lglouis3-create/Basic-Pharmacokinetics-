@@ -86,6 +86,19 @@ def fracify(s):
         t = re.sub(r'\x00(\d+)\x00', lambda m: masks[int(m.group(1))], t)
     return t
 
+_DIVSIGN = re.compile(rf'(?<![\w./^])({_TERM})\s*÷\s*({_TERM})(?![\w(])')
+
+def divify(s):
+    """A written division sign between two terms, in a set-up reason, becomes a stacked ratio."""
+    if not isinstance(s, str) or '÷' not in s:
+        return s
+    def rep(m):
+        a, b = m.group(1).strip(), m.group(2).strip()
+        if _UNIT.match(a) or _UNIT.match(b) or re.search(r'[|}]', a + b):
+            return m.group(0)
+        return '{{frac:%s|%s}}' % (_strip(a), _strip(b))
+    return _DIVSIGN.sub(rep, s)
+
 def _teach(v):
     if isinstance(v, str):
         return fracify(v)
@@ -103,6 +116,8 @@ def _render(q):
         q['options'] = [dict(o, why=fracify(o['why'])) if 'why' in o else o for o in q['options']]
     for k in ('note',):
         if k in q: q[k] = fracify(q[k])
+    if isinstance(q.get('setup'), dict) and 'why' in q['setup']:
+        q['setup'] = dict(q['setup'], why=divify(fracify(q['setup']['why'])))
     if 'teach' in q:
         q['teach'] = _teach(q['teach'])
     return q

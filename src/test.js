@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -776,6 +776,54 @@ console.log('\n=== 10. Bank fields are plain text ===');
   }
   if (bad.length) { console.log(`  FAIL  HTML tags in escaped fields (write the symbol plainly; prettyMath subscripts it): ${bad.slice(0, 8).join('; ')}${bad.length > 8 ? ' …' : ''}`); fails += 1; }
   else console.log('  ok    no HTML tag in any stem, option, step, pair, note or teach text');
+})();
+
+
+/* ---- the set-up drill and the sheet map ---- */
+(() => {
+  const E = Object.fromEntries(X.EQUATIONS.map(e => [e.id, e]));
+  const BAN = /\b(think of it as|trick|the key is|remember that|memorize|you should)\b/i;
+  const nums = X.QUESTIONS.concat(X.EXTRAS).filter(q => X.qType(q) === 'numeric');
+  const noSetup = nums.filter(q => !q.setup), badEq = [], longWhy = [], banned = [], html = [], offModule = [];
+  for (const q of nums) {
+    const s = q.setup; if (!s) continue;
+    if (s.eq !== 'none' && !E[s.eq]) badEq.push(q.id + ':' + s.eq);
+    for (const p of (s.pre || [])) if (!E[p]) badEq.push(q.id + ':pre:' + p);
+    const w = String(s.why || '').split(/\s+/).filter(Boolean).length;
+    if (!s.why || w > 60) longWhy.push(q.id);
+    if (BAN.test(s.why || '')) banned.push(q.id);
+    if (/<[a-z]/i.test(s.why || '')) html.push(q.id);
+    /* the line that gives the final number belongs to this module or an earlier one; a later module's line cannot be the set-up */
+    if (s.eq !== 'none' && E[s.eq] && E[s.eq].module > q.module && !E[s.eq].must) offModule.push(q.id + ':' + s.eq);   // the lines she said to know (Cp = DB/VD among them) serve every module
+  }
+  if (noSetup.length) bad(`numeric questions without a setup field: ${noSetup.slice(0, 6).map(q => q.id).join(', ')}${noSetup.length > 6 ? ' …' : ''} (${noSetup.length})`);
+  else console.log(`  ok    every numeric question names its set-up line (${nums.length})`);
+  if (badEq.length) bad('setup names an equation id that does not exist: ' + badEq.slice(0, 6).join(', ')); else console.log('  ok    every set-up equation id exists');
+  if (longWhy.length) bad('setup.why missing or over 60 words: ' + longWhy.slice(0, 6).join(', ')); else console.log('  ok    every set-up reason is present and short');
+  if (banned.length) bad('setup.why uses banned phrasing: ' + banned.slice(0, 6).join(', '));
+  if (html.length) bad('setup.why carries an HTML tag: ' + html.slice(0, 6).join(', '));
+  if (offModule.length) bad('setup line from a later module than the question: ' + offModule.slice(0, 6).join(', ')); else console.log('  ok    no set-up line comes from a later module than its question');
+  const none = nums.filter(q => q.setup && q.setup.eq === 'none').length;
+  console.log(`  info  ${none} numeric question(s) have no catalog line for their final step and stay out of the set-up drill`);
+  const pool = X.suPoolAll();
+  const opt = pool.length ? X.suOptions(pool[0]) : [];
+  if (pool.length && (opt.length !== 4 || new Set(opt.map(o => o.id)).size !== 4 || !opt.some(o => o.id === pool[0].setup.eq))) bad('the set-up drill does not offer four distinct lines including the right one');
+  else console.log(`  ok    the set-up drill offers four distinct lines, the right one among them (${pool.length} stems)`);
+  /* the sheet map: 52 lines, every eq id real, every module known */
+  const L = X.SHEET_LINES;
+  if (L.length !== 52) bad(`the sheet map has ${L.length} lines; the rendered sheet has 52`); else console.log('  ok    the sheet map carries all 52 lines of the sheet');
+  const cols = X.SHEET_COLS.map(c => L.filter(l => l.c === c.pg).length);
+  if (cols.join(',') !== '21,15,12,4') bad(`sheet columns hold ${cols.join(', ')} lines; the sheet prints 21, 15, 12 and 4`);
+  const badSheet = L.concat(X.SHEET_MISSING).flatMap(l => [l.eq, ...(l.alsoEq || [])]).filter(id => id && !E[id]);
+  if (badSheet.length) bad('sheet map names an equation id that does not exist: ' + badSheet.join(', ')); else console.log('  ok    every sheet-map drill link points at a real equation');
+  const badMod = L.filter(l => ![0, 1, 2, 3, 4, 5, 6, 7].includes(l.module)).length;
+  if (badMod) bad(`${badMod} sheet line(s) carry an unknown module`);
+  const fracs = L.concat(X.SHEET_MISSING).map(l => l.html + l.when + (l.need || '')).join(' ');
+  const open = (fracs.match(/\{\{frac:/g) || []).length, good = (fracs.match(/\{\{frac:[^|}]*\|[^}]*\}\}/g) || []).length;
+  if (open !== good) bad(`${open - good} malformed {{frac}} in sheet.js`); else console.log('  ok    every sheet-map fraction is well formed');
+  const sheetYes = X.EQUATIONS.filter(e => e.sheet === 'yes').map(e => e.id), mapped = new Set(L.flatMap(l => [l.eq, ...(l.alsoEq || [])]));
+  const unmapped = sheetYes.filter(id => !mapped.has(id));
+  if (unmapped.length) bad(`equations marked "on the sheet" that no sheet line carries: ${unmapped.join(', ')}`); else console.log(`  ok    every equation marked on the sheet appears on a sheet line (${sheetYes.length})`);
 })();
 
 console.log(`\n${fails ? 'FAILURES: '+fails : 'All checks passed'}${warns ? '  (warnings: '+warns+')' : ''}\n`);

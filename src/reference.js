@@ -20,7 +20,8 @@ const REFERENCE_HTML = `
 <p class="sub">Every equation this course uses, Modules 1 to 7a. Nothing here is scored.</p>
 <details class="tabhelp" open><summary>What this tab is for</summary><ul>
 <li><b>Look an equation up while working a problem:</b> each one with its symbols, units, the condition it holds under, and whether the exam equation sheet carries it.</li>
-<li><b>First come the ones she said are not on the sheet,</b> then the unit conversions this course keeps needing, then one section per module.</li>
+<li><b>First comes the map of her equation sheet:</b> every line in print order, coloured by module, with the words in a stem that call for it; it prints on its own.</li>
+<li><b>Then the ones she said are not on the sheet,</b> then the unit conversions this course keeps needing, then one section per module.</li>
 <li><b>The last section walks the equation sheet itself</b> line by line, so a line on the sheet can be matched to the module it belongs to.</li>
 <li>Use <b>Jump to a section</b> to go straight to a module.</li>
 </ul></details>

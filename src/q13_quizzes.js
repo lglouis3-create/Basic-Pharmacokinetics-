@@ -49,6 +49,7 @@ const Q_QUIZZES = [
    why:'A pure number divided by a quantity in reciprocal hours leaves hours. The dose and the two intercepts are not used.'},
   {k:'round', t:'4.62 hr',
    why:'Her key is 4.62 with a margin of 2%, so anything from 4.53 to 4.71 scores. Two decimal places were asked for.'}],
+ setup:{eq:'thalf-beta', pre:[], why:'"IV bolus dose" with A, B, α and β names the two-compartment block of Module 2. β is given and the "elimination half-life" is asked, so t½β = {{frac:0.693|β}}. No hinge; the dose, A, B and α are not used.'},
  teach:[
   {h:'The idea', list:[
    'A two-compartment item gives A, B, α and β and never names the model; the pairing of two intercepts with two rate constants is the signal.',
@@ -69,6 +70,7 @@ const Q_QUIZZES = [
    why:'The terminal term carries the whole answer at 4 hours. The exponent is dimensionless because hr⁻¹ × hr cancels.'},
   {k:'round', t:'1.72 mg/L',
    why:'Her key is 1.72 with a margin of 3%, so 1.67 to 1.77 scores. Rounding the exponent or e^(−0.6) early stays inside that margin; rounding B does not matter since it is given.'}],
+ setup:{eq:'biexp', pre:[], why:'"IV bolus dose" with A, B, α and β names the two-compartment block. All four parameters and t are given and the "concentration of the drug in the plasma" at 4 hours is asked, so Cp = A·e^(−αt) + B·e^(−βt) is evaluated directly. No hinge.'},
  teach:[
   {h:'The idea', list:[
    'Put the time into both exponentials, multiply each by its intercept, and add.',
@@ -108,6 +110,7 @@ const Q_QUIZZES = [
    why:'The exponent is dimensionless, and the 14 mg/L is the concentration at the moment the infusion was stopped, whether or not that was steady state.'},
   {k:'round', t:'6.8 mg/L',
    why:'Her key is 6.8 with a margin of 2%, so 6.66 to 6.94 scores. The unrounded 6.77 rounds to 6.8 at one decimal place.'}],
+ setup:{eq:'cp-after-stop', pre:['cl-k-vd'], why:'"infused intravenously" and "cessation of the infusion" name the infusion block of Module 3. VD, Cl, the concentration at stopping and t are given and Cp after stopping is asked, so Cp = Cpeak·e^(−kt). k first, from Cl = k·VD rearranged to k = {{frac:Cl|VD}}, because the line wants k, not Cl.'},
  teach:[
   {h:'The idea', list:[
    'Stopping an infusion turns the problem into a bolus decay from the stopping concentration.',
@@ -149,6 +152,7 @@ const Q_QUIZZES = [
    why:'Litres cancel and mg/hr remains.'},
   {k:'round', t:'60 mg/hr',
    why:'Her key is 60 with a margin of 2%, so 58.8 to 61.2 scores. A whole number was asked for.'}],
+ setup:{eq:'css', pre:['thalf-first', 'cl-k-vd'], why:'"infusion rate" to reach a "steady-state concentration" names the infusion block. Css, VD and t½ are given and R is asked, so Css = {{frac:R|Cl}} is rearranged to R = Css·Cl. k first, from the half-life, then Cl = k·VD, because the line wants Cl, not VD and t½.'},
  teach:[
   {h:'The idea', list:[
    'The rate that holds a target concentration is the target times the clearance.',
@@ -171,6 +175,7 @@ const Q_QUIZZES = [
    why:'Hours cancel, leaving mg/L.'},
   {k:'round', t:'14.9 mg/L',
    why:'Her key is 14.9 with a margin of 2%, so 14.6 to 15.2 scores. One decimal place was asked for.'}],
+ setup:{eq:'css', pre:['thalf-first', 'cl-k-vd'], why:'"continuous intravenous infusion at a rate of" names the infusion block. R, t½ and a per-kilogram VD are given and the "steady-state concentration" is asked, so Css = {{frac:R|Cl}}. k first, from the half-life, then Cl = k·VD, because the line wants Cl; the weight-based VD is a unit step, not an equation.'},
  teach:[
   {h:'The idea', list:[
    'Css = R/Cl. The only work is assembling Cl from the half-life and a weight-based VD.',
@@ -267,6 +272,7 @@ const Q_QUIZZES = [
    why:'The ratio of the rate constants is the ratio of the half-lives the other way round, 5.6/0.8 = 7, so the logarithm is ln 7. Dividing by reciprocal hours leaves hours.'},
   {k:'round', t:'2.6 hr',
    why:'Her key is 2.6 with a margin of 3%, so 2.52 to 2.68 scores. One decimal place was asked for.'}],
+ setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"single 1000-mg oral dose" with an "absorption half-life" and an "elimination half-life" names the oral block of Module 5. The two half-lives are given and the time of the "maximum concentration" is asked, so tmax = {{frac:ln({{frac:ka|k}})|ka − k}}. ka and k first, from the half-lives; F, VD and the dose are not used.'},
  teach:[
   {h:'The idea', list:[
    'Convert both half-lives to rate constants, take the natural logarithm of their ratio, divide by their difference.',
@@ -287,6 +293,7 @@ const Q_QUIZZES = [
    why:'mg divided by L/hr is mg·hr/L, which is a concentration times a time, the unit of an area under a concentration curve.'},
   {k:'round', t:'188.2 (mg/L)hr',
    why:'Her key is 188.2 with a margin of 3%, so 182.6 to 193.8 scores. The same answer comes from C0/k: C0 = 500/23 = 21.74 mg/L, and 21.74/0.1155 = 188.2.'}],
+ setup:{eq:'cl-auc', pre:['thalf-first', 'cl-k-vd'], why:'"IV bolus dose" with a VD and a "half-life" names the clearance block of Module 4. D0, VD and t½ are given and the AUC is asked, so Cl = {{frac:D0|AUC}} is rearranged to AUC = {{frac:D0|Cl}}. k first, from the half-life, then Cl = k·VD, because the line wants Cl; the 75 kg is not used.'},
  teach:[
   {h:'The idea', list:[
    'AUC after an IV bolus is D0/Cl, or equally C0/k. Both give the same number.',
@@ -307,6 +314,7 @@ const Q_QUIZZES = [
    why:'mg divided by mg·hr/L leaves L/hr. The same answer comes from fe × ClT: 0.713 × 4.389 = 3.13 L/hr.'},
   {k:'round', t:'3.13 L/hr',
    why:'Her key is 3.13 with a margin of 3%, so 3.04 to 3.22 scores. Two decimal places were asked for.'}],
+ setup:{eq:'none', pre:['thalf-first', 'cl-k-vd', 'cl-auc'], why:'"IV bolus injection" with "unchanged drug was recovered" names the renal clearance block of Module 4. D0, VD, t½ and Du∞ are given and "renal clearance" is asked. No catalog line is Du∞ over an area; the working uses ClR = {{frac:Du∞|AUC}} with AUC = {{frac:D0|Cl}}, Cl = k·VD and k from the half-life, which equals ClR = fe·ClT.'},
  teach:[
   {h:'The idea', list:[
    'Renal clearance = amount excreted unchanged ÷ AUC, or fe × total clearance. Both routes give 3.13 L/hr here.',
@@ -327,6 +335,7 @@ const Q_QUIZZES = [
    why:'Reciprocal hours cancel between numerator and denominator, and mg over mg/L leaves litres.'},
   {k:'round', t:'15.9 L',
    why:'Her key is 15.9 with a margin of 3%, so 15.4 to 16.4 scores. Leaving out F gives 19.4 L; swapping ka and k gives a negative volume, which cannot be right.'}],
+ setup:{eq:'oral-cp', pre:[], why:'"oral administration of a single 500-mg dose" fitting a "one-compartment model" with a printed equation names the oral block. The coefficient, both exponents, F and D0 are given and VD is asked, so the prefactor F·ka·{{frac:D0|VD(ka − k)}} of the oral Cp line is set equal to 30 and rearranged for VD. No hinge; ka is the larger exponent.'},
  teach:[
   {h:'The idea', list:[
    'A printed oral equation hands over three numbers: the coefficient, k (the smaller exponent) and ka (the larger).',

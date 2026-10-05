@@ -510,6 +510,7 @@ const Q_MODULE6 = [
    why:'10 divided by 0.25 is 40, and mg over L leaves a concentration. The same result comes from 650 mg divided by 16.25 L.'},
   {k:'round', t:'C0 = 40 mg/L',
    why:'Her value, exact here. Every steady-state concentration in this example is this 40 mg/L multiplied by a factor that holds only k and τ, so an error here carries into every later part.'}],
+ setup:{eq:'cp-db-vd', pre:[], why:'"every 8 hours by multiple IV bolus injections", asked for the peak "after the first dose", so the first-dose line, not a steady-state one. D0 and VD are given per kilogram and C0 is asked, so C0 = {{frac:D0|VD}} with no accumulation factor. No hinge: the kilograms cancel.'},
  teach:[
   {t:'Every steady-state value in this example is built from this first-dose peak, so it is found first. When dose and volume are both per kilogram, the weight cancels.'},
   M6_EQ, M6_FIG],
@@ -533,6 +534,7 @@ const Q_MODULE6 = [
    why:'k = {{frac:0.693|4}} hr = 0.1733 hr⁻¹, and kτ = 1.386 with no units, so e^(-1.386) = 0.25. The hours cancel inside the exponent.'},
   {k:'round', t:'Cmin = 10 mg/L',
    why:'Her value, 10 mg/L. It is the first-dose trough, the level just before the second dose, and the steady-state trough will be higher than it by the same accumulation factor as the peak.'}],
+ setup:{eq:'first-exp', pre:['thalf-first'], why:'"every 8 hours by IV bolus", "minimum concentration after the first dose": the first-dose trough, before any accumulation. C0 and τ are given and Cmin is asked, so the first-order decline C = C0e^(-kt) with t = τ. k first, from the half-life, because the line wants k, not t½.'},
  teach:[
   {t:'This is single-dose intravenous (IV) bolus kinetics from Module 2: C = C0e^(-kt) with t = τ. It is the value the steady-state trough is compared with.'},
   M6_ACCFAC, M6_FIG],
@@ -558,6 +560,7 @@ const Q_MODULE6 = [
    why:'Dividing by 0.75 raises the peak by a third, the accumulation factor 1.33 for an interval of two half-lives. 40 divided by 0.75 is 53.33.'},
   {k:'round', t:'Cmax∞ = 53.3 mg/L',
    why:'Her value, 53.3 mg/L. It is greater than the first-dose peak of 40 mg/L, as a steady-state peak must be; a result below 40 means the factor was multiplied instead of divided.'}],
+ setup:{eq:'cmax-ss', pre:['cp-db-vd','thalf-first'], why:'"every 8 hours by multiple IV bolus injections" and "maximum concentration at steady state" pick the repeated-bolus block. D0, VD, t½ and τ are given and Cmax∞ is asked, so Cmax∞ = {{frac:C0|1 - e^(-kτ)}}. C0 first from {{frac:D0|VD}}, and k from the half-life, because the line wants C0 and k.'},
  teach:[
   {t:'The steady-state peak is the first-dose peak multiplied by the accumulation factor. A result below the first-dose peak means the factor was inverted.'},
   M6_EQ, M6_ACCFAC, M6_FIG],
@@ -581,6 +584,7 @@ const Q_MODULE6 = [
    why:'53.3 × 0.25 = 13.3. Starting from the first-dose peak instead gives {{frac:40|0.75}} × 0.25, the same value by a longer route.'},
   {k:'round', t:'Cmin∞ = 13.3 mg/L',
    why:'Her value. It is above the first-dose trough of 10 mg/L by the same factor, 1.33, as the peak is above 40 mg/L.'}],
+ setup:{eq:'cmin-ss', pre:['thalf-first'], why:'"every 8 hours by IV bolus", "minimum concentration at steady state": the steady-state trough. Cmax∞, t½ and τ are given and Cmin∞ is asked; Cmin∞ is Cmax∞ multiplied by e^(-kτ), the same line as C0e^(-kτ) over (1 - e^(-kτ)). k first, from the half-life, because the exponent wants k.'},
  teach:[
   {t:'The trough follows from the peak by one interval of decline, so there is no need to find a separate equation once Cmax∞ is known.'},
   M6_EQ, M6_FIG],
@@ -606,6 +610,7 @@ const Q_MODULE6 = [
    why:'40 divided by 1.386 is 28.86. kτ is 1.386 because the interval is two half-lives: 2 × 0.693. No exponential is needed for the average.'},
   {k:'round', t:'Cavg∞ = 28.9 mg/L',
    why:'Her value, 28.9 mg/L. It lies between the steady-state trough, 13.3, and peak, 53.3, and below their midpoint, 33.3, because the decline is exponential.'}],
+ setup:{eq:'cavg-ss', pre:['thalf-first','cl-k-vd'], why:'"every 8 hours by multiple IV bolus injections", "average concentration at steady state". D0, VD, t½ and τ are given and Cavg∞ is asked, so Cavg∞ = {{frac:FD0|ClT τ}} with F = 1 for an IV dose. k first, from the half-life, then ClT = kVD, because the line wants clearance.'},
  teach:[
   {t:'The average needs no accumulation factor and no exponential: only the dose, the clearance and the interval. It is not the midpoint of peak and trough.'},
   M6_EQ, M6_FIG],
@@ -635,6 +640,7 @@ const Q_MODULE6 = [
    why:'40 × 1.25 = 50 mg/L is the peak just after the second dose: 40 from the new dose plus the 10 left from the first. Three hours of decline takes it to 29.7.'},
   {k:'round', t:'Cp = 29.7 mg/L',
    why:'Her value, 29.7 mg/L. It is below the 31.7 mg/L found 3 hours after a dose at steady state, because after two doses less drug has accumulated.'}],
+ setup:{eq:'cp-n', pre:['thalf-first'], why:'"every 8 hours by multiple IV bolus injections", "3 hours after injection of the 2nd dose": before steady state, so the n-dose line. D0, VD, t½, τ, n and t are given and Cp is asked. k first, from the half-life, because both exponents want k, not t½.'},
  teach:[
   {t:'Before steady state, the n-dose equation for repeated intravenous (IV) bolus doses places the time: the bracket gives the peak after dose n and e^(-kt) gives the decline since then. Each piece is worked separately.'},
   M6_NDOSE, M6_FIG],
@@ -658,6 +664,7 @@ const Q_MODULE6 = [
    why:'Three hours is less than one half-life, so the level has fallen by less than half, and the answer must lie between 53.3 and 26.7 mg/L.'},
   {k:'round', t:'C = 31.7 mg/L',
    why:'31.7 mg/L, three significant figures as in her other values. It is higher than 29.7 mg/L at the same time after the second dose, because more drug has accumulated by steady state.'}],
+ setup:{eq:'cp-ss', pre:['thalf-first'], why:'"every 8 hours by multiple IV bolus injections", "3 hours after injection of the last dose (assuming steady state was attained)": a concentration at time t within a steady-state interval. Cmax∞, t½ and t are given and Cp is asked; the first two factors of the line are Cmax∞, so Cp = Cmax∞e^(-kt). k first, from the half-life.'},
  teach:[
   {t:'Once steady state is reached, the last intravenous (IV) bolus dose starts the same decline as every other dose, from Cmax∞, and nothing follows it. The same value comes from the steady-state equation, (D0/VD)[1/(1 − e^(-kτ))]e^(-kt).'},
   M6_NDOSE, M6_FIG],
@@ -682,6 +689,7 @@ const Q_MODULE6 = [
    why:'Half of 53.3 is 26.65. Using the exponential gives the same: 53.3 × e^(-0.693) = 53.3 × 0.5, because kt = 0.693 exactly when t is one half-life.'},
   {k:'round', t:'C = 26.7 mg/L',
    why:'26.7 mg/L to three significant figures. After a second half-life, 8 hours after the last dose, it would be 13.3 mg/L, the steady-state trough.'}],
+ setup:{eq:'cp-ss', pre:['thalf-first'], why:'"steady state on repeated IV bolus doses", "4 hours after injection of the last dose": a concentration at time t in a steady-state interval. Cmax∞, t½ and t are given and Cp is asked; the first two factors of the line are Cmax∞, so Cp = Cmax∞e^(-kt). k first, from the half-life.'},
  teach:[
   {t:'After the last intravenous (IV) bolus dose, when the time asked for is a whole number of half-lives, the answer can be found by halving, without the exponential.'},
   M6_NDOSE],
@@ -710,6 +718,7 @@ const Q_MODULE6 = [
    why:'In k = {{frac:ClT|VD}} the litres cancel, leaving reciprocal hours; 0.693 divided by reciprocal hours leaves hours. {{frac:0.693|0.1732}} = 4.00.'},
   {k:'round', t:'t½ = 4 hr',
    why:'Her keyed value, 4 hr. With τ = 8 hr the interval is two half-lives, the same as in Example 1, so the accumulation factor in the later parts is again 1.33.'}],
+ setup:{eq:'thalf-first', pre:['cl-k-vd'], why:'"IV bolus injection every 8 hours", but the part asks for the "elimination half-life", a drug constant. ClT and VD are given, per unit weight, and t½ is asked, so t½ = {{frac:0.693|k}}. k first, from Cl = kVD rearranged, because the line wants k, not clearance; the dose and interval are not used.'},
  teach:[
   {t:'Scale every per-weight parameter to the patient before combining them, and convert clearance to L/hr so that it cancels with a volume in litres.'},
   M6_EQ],
@@ -732,6 +741,7 @@ const Q_MODULE6 = [
    why:'1000 divided by 17.03 is 58.72, and mg over L is a concentration. This C0 is the starting value for every later part.'},
   {k:'round', t:'Cmax = 58.72 mg/L',
    why:'Her keyed value, 58.72 mg/L, to two decimal places, the precision she carries through the rest of the set. It is also the first-dose Cmax.'}],
+ setup:{eq:'cp-db-vd', pre:[], why:'"IV bolus injection every 8 hours", "maximum plasma drug concentration of the first dose": the first-dose peak, with no drug present before it. D0 and VD are given and Cmax is asked, so C0 = {{frac:D0|VD}}. No hinge: grams to milligrams and the per-weight volume scaled to the patient are conversions.'},
  teach:[
   {t:'The first-dose peak is C0 = D0/VD, the starting value for every steady-state concentration in this problem.'},
   M6_EQ],
@@ -754,6 +764,7 @@ const Q_MODULE6 = [
    why:'58.72 × 0.2502 = 14.69. The same result comes from halving twice: 58.72, 29.36, 14.68, with the last digit set by rounding.'},
   {k:'round', t:'Cmin = 14.69 mg/L',
    why:'Her keyed value, 14.69 mg/L. It is the first-dose trough, and the steady-state trough in part (e) is higher by the accumulation factor.'}],
+ setup:{eq:'first-exp', pre:[], why:'"IV bolus every 8 hours", "minimum plasma drug concentration of the first dose": the trough at the end of the first interval. Cmax, k and τ are given and Cmin is asked, so the first-order decline C = C0e^(-kt) with t = τ. No hinge: k is given.'},
  teach:[
   {t:'The first-dose trough of an intravenous (IV) bolus is single-dose decline over one interval.'},
   M6_ACCFAC],
@@ -776,6 +787,7 @@ const Q_MODULE6 = [
    why:'Dividing by a number less than 1 raises the peak, as accumulation must: {{frac:58.72|0.7498}} = 78.31, a factor of 1.33.'},
   {k:'round', t:'Cmax∞ = 78.31 mg/L',
    why:'Her keyed value, 78.31 mg/L, higher than the first-dose 58.72 mg/L by the accumulation factor 1.33, as a steady-state peak must be.'}],
+ setup:{eq:'cmax-ss', pre:[], why:'"IV bolus every 8 hours", "maximum steady-state plasma drug concentration". The first-dose peak C0, k and τ are given and Cmax∞ is asked, so Cmax∞ = {{frac:C0|1 - e^(-kτ)}}. No hinge: k is given.'},
  teach:[
   {t:'The interval is two half-lives here too, so the accumulation factor is again 1.33: 58.72 × 1.33 = 78.3.'},
   M6_EQ, M6_ACCFAC],
@@ -798,6 +810,7 @@ const Q_MODULE6 = [
    why:'78.31 × 0.2502 = 19.59. Checked the other way, 14.69 × 1.3336 = 19.59, the first-dose trough times the accumulation factor.'},
   {k:'round', t:'Cmin∞ = 19.59 mg/L',
    why:'Her keyed value, 19.59 mg/L. It is above the first-dose trough of 14.69 mg/L, which is the drug that has accumulated.'}],
+ setup:{eq:'cmin-ss', pre:[], why:'"IV bolus every 8 hours", "minimum steady-state plasma drug concentration". Cmax∞, k and τ are given and Cmin∞ is asked; Cmin∞ is Cmax∞ multiplied by e^(-kτ), which is the line C0e^(-kτ) over (1 - e^(-kτ)). No hinge: k is given.'},
  teach:[
   {t:'Peak to trough at steady state is the same decline as after the first dose, starting higher.'},
   M6_EQ],
@@ -820,6 +833,7 @@ const Q_MODULE6 = [
    why:'2.95 × 8 = 23.6 L, the volume of plasma cleared of drug in one interval, and 1000 mg divided by 23.6 L is 42.37 mg/L.'},
   {k:'round', t:'Cavg∞ = 42.37 mg/L',
    why:'Her keyed value, 42.37 mg/L. It lies between the trough, 19.59, and the peak, 78.31, and below their midpoint, 48.95, because the decline is exponential.'}],
+ setup:{eq:'cavg-ss', pre:[], why:'"IV bolus every 8 hours", "average steady-state plasma drug concentration". D0, ClT and τ are given and Cavg∞ is asked, so Cavg∞ = {{frac:FD0|ClT τ}} with F = 1 for an IV dose. No hinge: the clearance is given, so neither k nor VD is needed.'},
  teach:[
   {t:'Cavg∞ = FD0/(ClT τ) and FD0/(VD kτ) are the same equation, since ClT = kVD. Use whichever the given data fit.'},
   M6_EQ],
@@ -842,6 +856,7 @@ const Q_MODULE6 = [
    why:'42.37 × 17.03 = 721.6. The same result comes from the amount form, {{frac:FD0|kτ}} = {{frac:1000|0.1732 × 8}} = 721.7, within rounding.'},
   {k:'round', t:'Davg∞ = 721.61 mg',
    why:'Her keyed value is 721.61 mg, and 721.6 mg is the same to four significant figures. It lies between the minimum and maximum amounts at steady state, Dmin∞ = 1000 × {{frac:0.2502|0.7498}} = 333.7 mg and Dmax∞ = {{frac:1000|0.7498}} = 1333.7 mg.'}],
+ setup:{eq:'cp-db-vd', pre:[], why:'"repeated IV bolus", "average amount of drug in the body during steady state". Cavg∞ and VD are given and Davg∞ is asked, so the amount-volume line Cp = {{frac:DB|VD}} rearranged to Davg∞ = Cavg∞ × VD. The amount line Davg∞ = {{frac:FD0|kτ}} gives the same number from D0, k and τ.'},
  teach:[
   {t:'The amount forms of the steady-state equations are the concentration forms multiplied by VD. The same result comes from Davg∞ = FD0/(kτ) = 1000/(0.1732 × 8).'},
   M6_EQ],
@@ -864,6 +879,7 @@ const Q_MODULE6 = [
    why:'78.31 × e^(-2.078) = 9.799. Dividing 78.31 by 8 gives 9.79, the same result by halving three times: 39.16, 19.58, 9.79.'},
   {k:'round', t:'C = 9.799 mg/L',
    why:'Her keyed value, 9.799 mg/L. It is below the steady-state trough of 19.59 mg/L because 12 hours is longer than the 8-hour interval.'}],
+ setup:{eq:'cp-ss', pre:[], why:'"IV bolus every 8 hours", "12 hours after the last dose, assuming steady-state levels": a concentration at time t after a steady-state dose. Cmax∞, k and t are given and Cp is asked; the first two factors of the line are Cmax∞, so Cp = Cmax∞e^(-kt). No hinge: k is given.'},
  teach:[
   {t:'After the last intravenous (IV) bolus dose, count half-lives from the steady-state peak. The interval τ plays no part once dosing has stopped.'},
   M6_NDOSE],

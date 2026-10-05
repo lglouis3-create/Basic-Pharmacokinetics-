@@ -498,6 +498,8 @@ function quizCards(){
       ${m ? row('Calculations on this quiz, adaptive', `${m} questions, each worked to a number — ${due}`, 'adaptive', 'calc') : ''}
       ${row('Everything on this quiz, adaptive', `${pool.length} questions — ${due}`, 'adaptive', '')}
       ${row('Straight pass', 'Every question once, shuffled, nothing held back by scheduling', 'sweep', '')}
+      <div class="subrow"><span class="sname"><b>Set-up only: which equation?</b><small>Her stems from these modules; pick the line that solves each, no arithmetic, and read why.</small></span>
+        <button class="ghost" data-sheetsetup="quiz:${esc(qz.id)}">Start</button></div>
       <div class="subrow"><span class="sname"><b>Sit a practice quiz</b>
         <small>Half concept, half calculation, drawn from these modules; timed, no feedback until you submit. Her Quizzes 2 and 3 were 8 questions, 4 concept and 4 calculation, 12.5 points each; Quiz 3 ran ${qz.minutes} minutes.</small>
         <span class="frow qopt"><span class="olab">Questions</span>${[8, 10, 12].map(n => `<button class="chip" data-quizn="${n}" aria-pressed="${n === QUIZ_N}">${n}</button>`).join('')}</span>
@@ -1194,7 +1196,7 @@ function jump(view, anchor){
   // a static tab is rebuilt on return, so the Explain-one cards open on it are noted and reopened
   const open = [...document.querySelectorAll(`#v-${VIEW} select[data-xsel]`)].filter(s => s.value).map(s => [s.dataset.xsel, s.value]);
   RET.push({view: VIEW, y: window.scrollY, open, label: ({exam: 'the exam', quiz: 'the question', gaps: 'Weak spots', terms: 'Terms', diag: 'Diagrams', tell: 'Tell apart', guide: 'Guides', ref: 'Reference'})[VIEW] || 'where you were'});
-  if(view === 'eq') EQ = null;                      // the anchors live on the picker, not in a running drill
+  if(view === 'eq'){ EQ = null; SU = null; }        // the anchors live on the picker, not in a running drill
   if(view === 'diag') DG_MOD = 'all';               // a filtered Diagrams tab may be hiding the target
   show(view);
   const t = document.getElementById(anchor);
@@ -1281,7 +1283,7 @@ function allCardState(q){
 function allCardHTML(q, n, total){
   const st = allCardState(q), kind = qType(q), multi = isMulti(q);
   const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
-  const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain};
+  const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain, guessed: !!st.guessed};
   let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
       st.revealed ? `<span style="color:var(${ok ? '--ok' : '--bad'})">${ok ? 'right' : 'missed'}</span>` : ''}</div>
     <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
@@ -1469,12 +1471,18 @@ function feedbackHTML(q, st){
          kind of slip takes one click, and it is the only way the app can tell
          a student who cannot set the problem up from one who sets it up
          correctly and loses the marks converting units. */
-      if(!ok && !st.missKind){
-        h += `<div class="misskind"><p><b>Which kind of miss was this?</b> One click, then the working.</p>
+      if((!ok || st.guessed) && !st.missKind){
+        /* A correct answer marked as a guess is asked the same question: a
+           student who guessed right still got stuck somewhere, and naming
+           where is what makes the guess useful to Weak spots. */
+        h += `<div class="misskind"><p><b>${ok ? 'Where did you get stuck?' : 'Which kind of miss was this?'}</b> One click, then the working.</p>
           <div class="frow">${MISS_KINDS.map(m =>
             `<button data-mk="${m.id}" aria-pressed="false" title="${esc(m.hint)}">${esc(m.label)}</button>`).join('')}</div></div>`;
       }else{
         if(!ok) h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[st.missKind]||'').toLowerCase()))} miss.</p>`;
+        else if(st.guessed && st.missKind) h += `<p class="sub" style="margin:0 0 8px">Logged as a guess, stuck at ${esc((MISS_LABEL[st.missKind]||'').toLowerCase())}.</p>`;
+        if(st.missKind === 'setup' && q.setup && q.setup.eq && EQ_BY_ID[q.setup.eq])
+          h += `<p class="sub" style="margin:0 0 8px">The line this one needs: ${eqShow(EQ_BY_ID[q.setup.eq])} <button type="button" class="chip" data-sheetsetup="${q.module}">Set-up drill, Module ${esc(modShort(q.module))}</button></p>`;
         h += stepsBlock(q);
       }
     }else if(kind === 'match'){
@@ -1576,7 +1584,7 @@ function renderQuiz(){
 
   const multi = isMulti(q);
   const picks = multi ? (Q.picked || []) : null;
-  const cst = {picked:Q.picked, order:Q.order, revealed:Q.revealed, missKind:Q.missKind, ok, overrode:Q.overrode, inChain:!!Q.chain};
+  const cst = {picked:Q.picked, order:Q.order, revealed:Q.revealed, missKind:Q.missKind, ok, overrode:Q.overrode, inChain:!!Q.chain, guessed:!!Q.guessedLogged};
   h += answerInputsHTML(q, cst);
   if(Q.revealed) h += feedbackHTML(q, cst);
   h += `</div><div class="qfoot">`;
@@ -1591,6 +1599,8 @@ function renderQuiz(){
     h += `<button class="btn" id="btnNext">Next question</button>`;
     if(ok && !Q.guessedLogged)
       h += `<button class="btn amber" id="btnGuess">I guessed that one</button>`;
+    else if(ok && Q.guessedLogged)
+      h += `<button class="btn amber" disabled>Marked as a guess</button>`;
     if(!ok && kind === 'numeric')
       h += `<button class="btn ghost" id="btnRight" title="A typing slip: count it as right">No, I was right</button>`;
     h += `<button class="btn ghost" onclick="show('topics')">Change topic</button>`;
@@ -1618,8 +1628,7 @@ function renderQuiz(){
   const bg = $('#btnGuess'); if(bg) bg.onclick = () => {
     markGuessed(Q.current);
     Q.guessedLogged = true;
-    bg.textContent = 'Marked as a guess';
-    bg.disabled = true;
+    renderQuiz();                     /* a numeric guess then asks where it got stuck */
   };
   const br = $('#btnRight'); if(br) br.onclick = () => { if(markRight(Q.current)){ Q.overrode = true; Q.missKind = null; renderQuiz(); } };
 }
@@ -2956,7 +2965,7 @@ function renderDoc(el, html, prefix){
     if (t){ openAncestors(t); scrollToEl(t); }
   });
 }
-function renderRef(){ renderDoc($('#v-ref'), refFigures(REFERENCE_HTML), 'ref'); }
+function renderRef(){ renderDoc($('#v-ref'), refFigures(REFERENCE_HTML.replace('</ul></details>', '</ul></details>' + sheetMapHTML())), 'ref'); }
 function renderTell(){ renderDoc($('#v-tell'), refFigures(TELL_HTML), 'tell'); }
 function renderGuide(){ renderDoc($('#v-guide'), refFigures(GUIDE_HTML), 'guide'); }
 
@@ -3405,6 +3414,7 @@ const SHEET_TAG = {
 
 function renderEq(){
   const el = $('#v-eq');
+  if(SU){ el.innerHTML = suHTML(); suWire(el); return; }
   if(EQ){ el.innerHTML = eqDrillHTML(); eqDrillWire(el); return; }
   el.innerHTML = eqPickerHTML();
   eqPickerWire(el);
@@ -3417,6 +3427,7 @@ function eqPickerHTML(){
   <p class="sub">Every equation she expects, grouped by module, as a writing drill.</p>
   <details class="tabhelp" open><summary>What this tab is for</summary><ul>
   <li><b>Write the equations from memory.</b> Type one out (what the exam asks for) or build it from pieces, some of them wrong.</li>
+  <li><b>Set-up only</b> shows one of her calculation stems and asks only which line solves it, then says why; the map of her sheet, line by line and coloured by module, is the first section under Reference.</li>
   <li><b>Each equation is marked</b> on the sheet, not on the sheet, or one she said to memorise; start with those.</li>
   <li><b>Learned</b> means ${EQ_STREAK} correct in a row; one wrong answer puts it back to nothing. Tick the ones to work on; the drill asks only those.</li>
   <li>Nothing here is scored against the question bank or Weak spots; <b>Reference</b> holds the same equations with their symbols and conditions.</li>
@@ -3433,12 +3444,15 @@ function eqPickerHTML(){
       <small>Builds first, then types the same equation, which is the order that makes typing possible</small></span>
       <button data-start="mix"${chosen.size ? '' : ' disabled'} class="ghost">Start</button></div>
   </div></div>`;
+  h += suCardHTML();
 
   h += `<div class="filters"><div class="frow"><label>Choose</label>
     <button class="chip" data-pick="must">The ${EQ_MUST.length} she said to memorise</button>
     <button class="chip" data-pick="all">All ${EQUATIONS.length}</button>
     <button class="chip" data-pick="none">None</button>
     <button class="chip" data-pick="unlearned">Only the ones not yet learned</button>
+    </div><div class="frow"><label>One module</label>
+    ${[...new Set(EQUATIONS.map(e => e.module))].sort((a, b) => a - b).map(m => `<button class="chip" data-pick="m:${m}" title="Drill this module's equations and no others">Module ${esc(modShort(m))}</button>`).join('')}
     </div><div class="frow"><label>Selected</label>
     <span class="sub" style="margin:0">${chosen.size} equation${chosen.size===1?'':'s'}${
       chosen.size ? `, ${learned} learned` : ''}</span></div></div>`;
@@ -3450,7 +3464,7 @@ function eqPickerHTML(){
     h += `<details class="module" id="eq-m${m}" open><summary>
       <span class="mname">${esc(modName(m))}<small>${es.length} equations ·
         ${es.filter(e => chosen.has(e.id)).length} selected</small></span>
-      <button class="chip" data-modpick="${m}">Select all</button></summary><div class="mfoot">`;
+      <button class="chip" data-modpick="${m}" title="Add every equation of this module to the selection">Add all</button></summary><div class="mfoot">`;
     for(const e of es){
       const st = eqStat(e.id), done = eqLearned(e.id);
       const tag = SHEET_TAG[e.sheet] || SHEET_TAG.absent;
@@ -3483,6 +3497,7 @@ function eqPickerWire(el){
     eqSetChosen(p === 'must' ? EQ_MUST
               : p === 'all'  ? EQUATIONS.map(e => e.id)
               : p === 'none' ? []
+              : /^m:/.test(p) ? EQUATIONS.filter(e => e.module === +p.slice(2)).map(e => e.id)
               : EQUATIONS.filter(e => !eqLearned(e.id)).map(e => e.id));
     renderEq();
   });
@@ -3494,6 +3509,7 @@ function eqPickerWire(el){
     renderEq();
   });
   el.querySelectorAll('button[data-start]').forEach(b => b.onclick = () => eqStart(b.dataset.start));
+  el.querySelectorAll('button[data-su]').forEach(b => b.onclick = () => suStart(b.dataset.su));
 }
 
 /* A pass over the chosen equations. The queue is shuffled so the order they
@@ -3711,6 +3727,193 @@ function eqMarkRight(){
 }
 
 /* ==========================================================================
+   THE SHEET MAP: HER EQUATION SHEET, LINE BY LINE, COLOURED BY MODULE
+   ==========================================================================
+   sheet.js lists the 52 lines of Basic-Pharmacokinetics-Equations.pdf in
+   print order. The map shows them in that order with a colour band per
+   module, the words in a stem that call for the line, and the givens it
+   needs; a Drill chip starts the typing drill on that one line, and the
+   whole map prints on its own. */
+const SHEET_MOD_NAME = m => m === 0 ? 'Not lectured yet' : m === 7 ? 'Module 7a' : 'Module ' + m;
+const SHEET_MODS = [1, 2, 3, 4, 5, 6, 7, 0];
+
+function sheetMapHTML(){
+  const modLabel = m => `<span class="smbadge m${m}">${m === 0 ? 'later' : m === 7 ? 'M7a' : 'M' + m}</span>`;
+  const line = (l, i) => `<li class="smline m${l.module}">
+      ${modLabel(l.module)}
+      <span class="smeq">${mathHTML(l.html)}</span>
+      <span class="smwhen"><b>Use it when:</b> ${mathHTML(l.when)}</span>
+      <span class="smneed"><b>You need:</b> ${mathHTML(l.need)}</span>
+      ${l.eq && EQ_BY_ID[l.eq] ? `<span class="smact"><button type="button" class="chip" data-sheetdrill="${esc(l.eq)}">Drill this line</button></span>` : ''}
+    </li>`;
+  let h = `<section class="sheetmap"><h3>Her equation sheet, line by line</h3>
+  <p class="sub">The two pages of Basic-Pharmacokinetics-Equations.pdf in the order they are printed, each line coloured by the module that teaches it. The sheet itself carries no headings.</p>
+  <div class="smhead"><div class="smlegend">${SHEET_MODS.map(m => `<span class="smkey m${m}"><i></i>${esc(SHEET_MOD_NAME(m))}</span>`).join('')}</div>
+    <div class="smbtns"><button type="button" class="chip" data-sheetprint="1">Print the map</button>
+    <button type="button" class="chip" data-sheetsetup="all">Set-up drill: which line?</button></div></div>
+  <ul class="tlist smread">
+    <li><b>Read it in blocks.</b> Down the left column of page 1, then the right column, then page 2: the blocks follow the lecture order, with one exception.</li>
+    <li><b>The exception:</b> the two-compartment block (A, B, a, b) is printed after the infusion block, so Module 2 sits below Module 3 in the left column.</li>
+    <li><b>Two lines are not printed:</b> t&frac12; = {{frac:0.693|k}} and Cl = k &times; V<sub>D</sub>. They join every block to every other, and she said to know them.</li>
+    <li><b>The symbol tells the block:</b> a &tau; means multiple dosing; a k<sub>a</sub> means oral; R as a rate means infusion; A, B, a, b mean two compartments; f<sub>e</sub> means Module 4; AUC<sub>po</sub> and AUC<sub>IV</sub> mean bioavailability.</li>
+  </ul>`;
+  SHEET_COLS.forEach((c, ci) => {
+    const ls = SHEET_LINES.filter(l => l.c === c.pg);
+    h += `<h4 class="smcol">${esc(c.col)} <small>${ls.length} lines</small></h4><ol class="smlines">${ls.map(line).join('')}</ol>`;
+  });
+  h += `<h4 class="smcol">Not printed: the lines she said to know</h4><ol class="smlines">${SHEET_MISSING.map(l => `<li class="smline m${l.module}">
+      ${modLabel(l.module)}<span class="smeq">${mathHTML(l.html)}</span>
+      <span class="smwhen"><b>Use it when:</b> ${mathHTML(l.when)}</span>
+      ${EQ_BY_ID[l.eq] ? `<span class="smact"><button type="button" class="chip" data-sheetdrill="${esc(l.eq)}">Drill this line</button></span>` : ''}</li>`).join('')}</ol>`;
+  h += `<p class="wcite">Source: the rendered pages of Basic-Pharmacokinetics-Equations.pdf; module assignments and the "use it when" lines restate the module sections below and the equation entries under Equations.</p></section>`;
+  return mathHTML(h);
+}
+function sheetClick(e){
+  const p = e.target.closest && e.target.closest('[data-sheetprint]');
+  if(p){ document.body.classList.add('print-sheet'); const done = () => document.body.classList.remove('print-sheet');
+         window.addEventListener('afterprint', done, {once: true}); setTimeout(done, 4000); window.print(); return; }
+  const d = e.target.closest && e.target.closest('[data-sheetdrill]');
+  if(d){ eqStartIds([d.dataset.sheetdrill], 'type'); show('eq'); return; }
+  const s = e.target.closest && e.target.closest('[data-sheetsetup]');
+  if(s){ suStart(s.dataset.sheetsetup); return; }
+}
+/* The typing drill on a named list of equations, from the sheet map. */
+function eqStartIds(ids, mode){
+  ids = ids.filter(id => EQ_BY_ID[id]);
+  if(!ids.length) return;
+  EQ = {queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
+        slots: [], tray: [], revealed: false, ok: false, typed: '', right: 0, asked: 0};
+  eqLoad();
+}
+
+/* ==========================================================================
+   THE SET-UP DRILL: WHICH EQUATION?
+   ==========================================================================
+   Her calculation stems, one at a time, and the only question is which line
+   solves what is asked. No arithmetic. Each numeric question carries
+   `setup:{eq, pre, why}` (the line that gives the final number, the hinge
+   lines used before it, and the reason in the stem's own words), written
+   from the question's own steps. The four options are that line and three
+   other lines, drawn first from the same module, so the choice is between
+   lines that are confusable rather than obviously foreign.
+
+   Nothing here touches the concept scheduler: a wrong pick is a wrong line,
+   not a missed concept, and it is tallied per line under SU_KEY so the lines
+   most often mixed up can be listed. */
+let SU = null;   /* {queue:[q], i, picked, ok, right, asked, scope} */
+const SU_KEY = NS + ':setup';
+function suStats(){ try { return JSON.parse(LS.get(SU_KEY) || '{}'); } catch(e){ return {}; } }
+function suLog(eqId, ok){
+  const s = suStats(); const r = s[eqId] || (s[eqId] = {seen: 0, right: 0, wrong: 0});
+  r.seen++; ok ? r.right++ : r.wrong++; LS.set(SU_KEY, JSON.stringify(s));
+}
+const suPoolAll = () => QUESTIONS.concat(typeof EXTRAS === 'undefined' ? [] : EXTRAS)
+  .filter(q => qType(q) === 'numeric' && q.setup && q.setup.eq && q.setup.eq !== 'none' && EQ_BY_ID[q.setup.eq]);
+function suScopePool(scope){
+  const all = suPoolAll();
+  if(scope === 'all') return all;
+  if(/^quiz:/.test(scope)){ const qz = (COURSE.quizzes || []).find(z => z.id === scope.slice(5)); return qz ? all.filter(q => (qz.modules || []).includes(q.module)) : all; }
+  if(/^exam:/.test(scope)){ const e = +scope.slice(5); return all.filter(q => examOf(q.module) === e); }
+  const m = +scope; return isNaN(m) ? all : all.filter(q => q.module === m);
+}
+const suScopeLabel = scope => scope === 'all' ? 'every module'
+  : /^quiz:/.test(scope) ? ((COURSE.quizzes || []).find(z => z.id === scope.slice(5)) || {}).name || 'the quiz'
+  : /^exam:/.test(scope) ? 'Exam ' + scope.slice(5) : 'Module ' + modShort(+scope);
+function suStart(scope){
+  const pool = shuffle(suScopePool(scope).slice());
+  if(!pool.length){ alert('No set-up questions for that scope yet.'); return; }
+  SU = {queue: pool, i: 0, picked: null, ok: false, right: 0, asked: 0, scope, options: []};
+  suLoad();
+  show('eq');
+}
+/* Three other lines: first from the same module (minus the hinges the
+   working uses, which would be defensible picks), then from the modules
+   next door, then anywhere. */
+function suOptions(q){
+  const e = EQ_BY_ID[q.setup.eq], used = new Set([q.setup.eq, ...(q.setup.pre || [])]);
+  const pick = (cands, n, out) => { for(const c of shuffle(cands.slice())){ if(out.length >= n) break; if(!used.has(c.id) && !out.includes(c)) out.push(c); } };
+  const out = [];
+  pick(EQUATIONS.filter(x => x.module === e.module), 3, out);
+  pick(EQUATIONS.filter(x => Math.abs(x.module - e.module) === 1), 3, out);
+  pick(EQUATIONS, 3, out);
+  return shuffle([e, ...out]);
+}
+function suLoad(){
+  const q = SU.queue[SU.i];
+  SU.picked = null; SU.ok = false; SU.options = q ? suOptions(q) : [];
+  renderEq();
+}
+function suHTML(){
+  const q = SU.queue[SU.i];
+  if(!q){
+    const pct = SU.asked ? Math.round(100 * SU.right / SU.asked) : 0;
+    return `<h2>Set-up drill</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.</p>
+      ${suMixupsHTML()}
+      <div class="btns"><button class="btn" data-suagain="1">Again, reshuffled</button><button class="btn ghost" data-suhome="1">Back to Equations</button></div></div>`;
+  }
+  const e = EQ_BY_ID[q.setup.eq];
+  let h = `<h2>Set-up drill</h2>
+  <div class="sessrow"><span>question ${SU.i + 1} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
+    <span class="pbar"><i style="width:${Math.round(100 * SU.i / SU.queue.length)}%"></i></span><span>${SU.right} of ${SU.asked} right</span></div>
+  <div class="card suq"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">set-up only</span></div>
+    <div class="stem">${stemHTML(q.stem)}</div>
+    <p class="suask"><b>Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
+    <div class="suopts">${SU.options.map((o, i) => {
+      const cls = SU.picked == null ? '' : o.id === e.id ? ' right' : i === SU.picked ? ' wrong' : ' dim';
+      return `<button type="button" class="suopt${cls}" data-suopt="${i}"${SU.picked != null ? ' disabled' : ''}>
+        <span class="suname">${esc(o.name)}</span><span class="sueq">${eqShow(o)}</span></button>`; }).join('')}</div>`;
+  if(SU.picked != null){
+    const chosen = SU.options[SU.picked];
+    const why = String(q.setup.why || '').split(/(?<=[.?!])\s+/).filter(Boolean);
+    h += `<div class="why"><p class="verdict ${SU.ok ? 'ok' : 'bad'}">${SU.ok ? '✓ That is the line' : '✗ Not that line'}</p>
+      ${SU.ok ? '' : `<p class="sub">You picked <b>${esc(chosen.name)}</b>, ${eqShow(chosen)}. It holds when: ${mathHTML(String(chosen.holds || '').split(/(?<=\.)\s+/)[0])}</p>`}
+      <div class="suright"><b>${esc(e.name)}</b> <span class="sm">(${esc((SHEET_TAG[e.sheet] || SHEET_TAG.absent)[0])}${e.must ? '; she said to know it' : ''})</span><div class="sueqbig">${eqShow(e)}</div></div>
+      <h4>Why this line</h4><ul class="tlist">${why.map(s => `<li>${mathHTML(esc(s))}</li>`).join('')}</ul>
+      ${(q.setup.pre || []).filter(id => EQ_BY_ID[id]).length ? `<h4>Lines used on the way</h4><ul class="tlist">${(q.setup.pre || []).filter(id => EQ_BY_ID[id]).map(id => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}</span></li>`).join('')}</ul>` : ''}
+      <h4>When it holds</h4><p class="sub">${mathHTML(e.holds || '')}</p>
+      <div class="btns"><button class="btn" data-sunext="1">Next</button>
+        <button class="btn ghost" data-suwork="${esc(q.id)}">Work the full problem</button>
+        <button class="btn ghost" data-sheetdrill="${esc(e.id)}">Type this line from memory</button></div></div>`;
+  }
+  h += `</div><p class="sub"><button class="chip" data-suhome="1">Stop and return to Equations</button></p>`;
+  return h;
+}
+function suMixupsHTML(){
+  const s = suStats();
+  const rows = Object.entries(s).filter(([id, r]) => EQ_BY_ID[id] && r.wrong).sort((a, b) => b[1].wrong - a[1].wrong).slice(0, 6);
+  if(!rows.length) return '';
+  return `<h4>Lines you have mixed up most</h4><ul class="tlist">${rows.map(([id, r]) => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}: ${r.wrong} wrong of ${r.seen}</span></li>`).join('')}</ul>`;
+}
+function suWire(el){
+  el.querySelectorAll('[data-suopt]').forEach(b => b.onclick = () => {
+    if(SU.picked != null) return;
+    const q = SU.queue[SU.i], i = +b.dataset.suopt;
+    SU.picked = i; SU.ok = SU.options[i].id === q.setup.eq; SU.asked++; if(SU.ok) SU.right++;
+    suLog(q.setup.eq, SU.ok);
+    renderEq();
+  });
+  const n = el.querySelector('[data-sunext]'); if(n) n.onclick = () => { SU.i++; suLoad(); window.scrollTo(0, 0); };
+  el.querySelectorAll('[data-suhome]').forEach(b => b.onclick = () => { SU = null; renderEq(); });
+  const a = el.querySelector('[data-suagain]'); if(a) a.onclick = () => suStart(SU.scope);
+  const w = el.querySelector('[data-suwork]'); if(w) w.onclick = () => { const q = byId(w.dataset.suwork) || (typeof EXTRAS === 'undefined' ? null : EXTRAS.find(x => x.id === w.dataset.suwork)); if(q){ SU = null; startSweepOf([q], 'One problem, from the set-up drill'); } };
+}
+/* The card on the Equations picker that starts the drill. */
+function suCardHTML(){
+  const n = suPoolAll().length;
+  const mods = [...new Set(suPoolAll().map(q => q.module))].sort((a, b) => a - b);
+  const live = (COURSE.quizzes || []).filter(quizLive);
+  return `<div class="topic sweepcard sucard"><div class="subs">
+    <div class="subrow"><span class="sname"><b>Set-up only: which equation?</b>
+      <small>Her calculation stems, no arithmetic: pick the line that solves what is asked, then read why. ${n} stems.</small></span></div>
+    <div class="frow suscope"><span class="olab">Drill</span>
+      ${live.map(z => `<button class="chip" data-su="quiz:${esc(z.id)}">${esc(z.name)}</button>`).join('')}
+      <button class="chip" data-su="exam:${EXAM.id}">Exam ${EXAM.id}</button>
+      ${mods.map(m => `<button class="chip" data-su="${m}">Module ${esc(modShort(m))}</button>`).join('')}
+      <button class="chip" data-su="all">All</button></div>
+  </div></div>`;
+}
+
+/* ==========================================================================
    BOOT
    ========================================================================== */
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
@@ -3723,6 +3926,7 @@ document.addEventListener('click', stepClick);   // step-through figure controls
 document.addEventListener('click', zoomClick);   // tap any figure to enlarge it
 document.addEventListener('click', layoutClick); // the One at a time / All on one page chips
 document.addEventListener('click', jumpClick);
+document.addEventListener('click', sheetClick);   // sheet map: print, drill a line, start the set-up drill
 document.addEventListener('click', xpickClick);   // Tell apart: Why? chips
 document.addEventListener('change', xselChange);  // Tell apart: Explain one   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });

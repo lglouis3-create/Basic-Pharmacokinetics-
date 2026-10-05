@@ -43,6 +43,7 @@ DATA_FILES = ['course.js',
 # The content files: data the engine reads, but not questions. They are
 # concatenated after the banks and before the views.
 CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
+                 'sheet.js',       # her equation sheet line by line (the sheet map under Reference)
                  'reference.js',
                  'tell.js',
                  'guide.js',

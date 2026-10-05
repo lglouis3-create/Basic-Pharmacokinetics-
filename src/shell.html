@@ -648,6 +648,56 @@ body:has(#backbtn) #xback, body:has(#backbtn) #tback{bottom:64px}
    once for an explicit Dark choice. Drawn figures (SVG) are inverted with the
    hue kept, so their blue and amber stay blue and amber; lecture slides are
    photographs of the deck and keep their white page. */
+
+/* ---- the sheet map (Reference) and the set-up drill (Equations) ---- */
+.smline,.smkey,.smbadge{--mc:#6B7280;--mcbg:#EEF0F3}
+.m1{--mc:#2F5FA8;--mcbg:#E7EEF9}.m2{--mc:#1B7F4B;--mcbg:#E3F3EA}.m3{--mc:#C2410C;--mcbg:#FBE9DF}.m4{--mc:#6D28D9;--mcbg:#EEE7FB}
+.m5{--mc:#0E7490;--mcbg:#DFF2F6}.m6{--mc:#B3261E;--mcbg:#FBE5E3}.m7{--mc:#9D174D;--mcbg:#FBE3EE}.m0{--mc:#6B7280;--mcbg:#EEF0F3}
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]) .m1{--mc:#86AEEC;--mcbg:#1A2840}:root:not([data-theme="light"]) .m2{--mc:#5DC58C;--mcbg:#15301F}
+:root:not([data-theme="light"]) .m3{--mc:#F0A070;--mcbg:#3A2416}:root:not([data-theme="light"]) .m4{--mc:#B8A2F2;--mcbg:#2A1F45}
+:root:not([data-theme="light"]) .m5{--mc:#6CCBE0;--mcbg:#12313A}:root:not([data-theme="light"]) .m6{--mc:#F2837A;--mcbg:#3A1B19}
+:root:not([data-theme="light"]) .m7{--mc:#F09AC4;--mcbg:#3B1A2B}:root:not([data-theme="light"]) .m0{--mc:#9CA3AF;--mcbg:#262B33}
+}
+:root[data-theme="dark"] .m1{--mc:#86AEEC;--mcbg:#1A2840}:root[data-theme="dark"] .m2{--mc:#5DC58C;--mcbg:#15301F}
+:root[data-theme="dark"] .m3{--mc:#F0A070;--mcbg:#3A2416}:root[data-theme="dark"] .m4{--mc:#B8A2F2;--mcbg:#2A1F45}
+:root[data-theme="dark"] .m5{--mc:#6CCBE0;--mcbg:#12313A}:root[data-theme="dark"] .m6{--mc:#F2837A;--mcbg:#3A1B19}
+:root[data-theme="dark"] .m7{--mc:#F09AC4;--mcbg:#3B1A2B}:root[data-theme="dark"] .m0{--mc:#9CA3AF;--mcbg:#262B33}
+.smhead{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:8px 0}
+.smlegend{display:flex;flex-wrap:wrap;gap:6px}
+.smkey{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--text-dim);padding:2px 8px 2px 4px;border-radius:999px;background:var(--mcbg)}
+.smkey i{width:12px;height:12px;border-radius:3px;background:var(--mc);display:inline-block}
+.smbtns{display:flex;gap:6px;flex-wrap:wrap}
+.smcol{margin:16px 0 6px;font-size:15px}.smcol small{color:var(--text-dim);font-weight:400;margin-left:6px}
+.smlines{list-style:none;margin:0;padding:0;counter-reset:sm}
+.smline{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"badge eq" "badge when" "badge need" "badge act";gap:2px 10px;align-items:start;
+  border-left:5px solid var(--mc);background:var(--mcbg);border-radius:0 var(--r) var(--r) 0;padding:8px 10px 8px 8px;margin:6px 0;counter-increment:sm}
+.smbadge{grid-area:badge;display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--mc);border-radius:5px;padding:2px 6px;min-width:34px;text-align:center}
+.smeq{grid-area:eq;font-size:16px;line-height:1.5;color:var(--text)}
+.smeq::before{content:counter(sm) ". ";color:var(--text-dim);font-size:12px}
+.smwhen{grid-area:when;font-size:13.5px;line-height:1.45}.smneed{grid-area:need;font-size:13.5px;line-height:1.45;color:var(--text-dim)}
+.smact{grid-area:act;margin-top:2px}
+@media (min-width:760px){.smline{grid-template-columns:auto 38% 1fr auto;grid-template-areas:"badge eq when act" "badge eq need act"}}
+@media print{
+  body.print-sheet *{visibility:hidden}
+  body.print-sheet .sheetmap,body.print-sheet .sheetmap *{visibility:visible}
+  body.print-sheet .sheetmap{position:absolute;left:0;top:0;width:100%;padding:0 8mm}
+  body.print-sheet .smbtns,body.print-sheet .smact{display:none}
+  body.print-sheet .smline{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:4px 8px}
+  body.print-sheet .smeq{font-size:13px}body.print-sheet .smwhen,body.print-sheet .smneed{font-size:11px}
+}
+.sucard .suscope{margin:4px 0 2px}
+.suq .stem{margin:6px 0 10px}
+.suask{margin:0 0 8px;font-size:14.5px}
+.suopts{display:grid;gap:8px;margin:0 0 10px}
+.suopt{text-align:left;border:1.5px solid var(--border);background:var(--card);border-radius:var(--r);padding:9px 12px;cursor:pointer;color:var(--text);font:inherit;display:grid;gap:3px}
+.suopt:hover{border-color:var(--accent)}
+.suopt .suname{font-size:12.5px;color:var(--text-dim)}
+.suopt .sueq{font-size:16px}
+.suopt.right{border-color:var(--ok);background:var(--ok-bg)}.suopt.wrong{border-color:var(--bad);background:var(--bad-bg)}.suopt.dim{opacity:.55}
+.suright{margin:8px 0 4px}.sueqbig{font-size:19px;margin:4px 0}
+.sm{font-size:12.5px;color:var(--text-dim)}
+
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){--ink:#0B1118; --ink-2:#141D27; --paper:#18212B; --surface:#10161D;
   --line:#33404F; --line-soft:#26303C;
@@ -1120,14 +1170,14 @@ function markRight(q, qn){   // qn: the exact log entry to flip (a paper's), els
   return false;
 }
 
-/* Naming the kind of slip after a missed numeric question. The answer is
-   already logged by then, so this writes the kind onto that entry rather than
-   logging a second one. */
+/* Naming the kind of slip after a missed numeric question, or after a correct
+   one the student marked as a guess. The answer is already logged by then, so
+   this writes the kind onto that entry rather than logging a second one. */
 function setMissKind(q, kind){
   for(let i = DB.answers.length - 1; i >= 0; i--){
     const a = DB.answers[i];
     if(a.qid !== q.id) continue;
-    if(a.result !== 'wrong') return false;
+    if(a.result !== 'wrong' && a.result !== 'guessed') return false;
     a.missKind = kind; save(); return true;
   }
   return false;
