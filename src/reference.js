@@ -739,9 +739,13 @@ const REFERENCE_HTML = `
 <ul class="tlist">
 <li>Increase the dose, same interval: higher steady-state concentrations, a larger swing from peak to trough, usually no change in compliance.</li>
 <li>Increase the interval, same dose: lower concentrations, a larger swing, better compliance.</li>
-<li>Decrease the interval: higher concentrations and worse compliance.</li>
+<li>Decrease the interval: higher concentrations, a smaller swing, worse compliance. Cmax, Cmin and Cavg all go up; the trough moves closer to the peak.</li>
+<li>Swing means how far the level falls from peak to trough within one interval. A larger dose widens it in mg/L while the trough stays the same fraction of the peak; a shorter interval brings the trough closer to the peak.</li>
 <li>The swing is smaller because the next dose arrives earlier in the decline: <i>"we're cutting into that 3 to 5 half-lives a little bit more, so we're not going all the way to the bottom of that curve,"</i> (a half-life being the time for the concentration to fall by one-half).</li>
 <li>Neither change moves the time to reach steady state.</li>
+</ul>
+{{fig:dose_interval|Her Example 1 every 8 hours, every 4 hours, and at double the dose, on one scale. Shorter interval: all three lines rise and the trough moves toward the peak (a quarter of it, then half). Double dose: all three double and the gap doubles, 40 to 80 mg/L.}}
+<ul class="tlist">
 <li>When stating a regimen, give an interval the patient can keep and an oral dose rounded to a strength that exists: <i>"Don't tell me 17.29 mg for an oral dose."</i></li>
 </ul>
 

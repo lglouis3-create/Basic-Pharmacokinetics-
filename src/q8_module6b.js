@@ -89,13 +89,16 @@ const B_ORAL_CMP = {h:'First dose against steady state: her tetracycline example
 const B_PARAM = {h:'The two things a regimen can change', list:[
   'A dosage regimen adjusts the dose size and the dosing interval, τ.',
   'It does not change k, the half-life, clearance or VD (apparent volume of distribution); these belong to the drug and the patient.',
-  'Why the dose changes the swing: the trough is a fixed fraction, e^(-kτ), of the peak, so the gap between them is a fixed fraction of the peak and grows with it. In amounts, Chapter 9 notes that Dmax∞ − Dmin∞ always equals the dose, so doubling the dose doubles the swing.',
-  'Why the interval changes the swing: a longer τ gives each dose more time to be eliminated before the next, so e^(-kτ) is smaller, the trough falls further below the peak and less accumulates. A shorter τ cuts into the 3 to 5 half-lives a dose needs to be eliminated, so the level never gets near the bottom of the curve.',
+  'Neither change lowers the peak or the trough on its own side: a larger dose raises Cmax∞, Cmin∞ and Cavg∞, and so does a shorter τ. The figure below draws her Example 1 three ways on one scale.',
+  'Fluctuation, or swing, is how far the level falls from the peak to the trough within one dosing interval. The dose and the interval move it in different ways, so read each separately.',
+  'Dose: the whole curve scales up. The trough stays the same fraction of the peak, e^(-kτ), so the fall in mg/L grows with the dose: in her Example 1, doubling the dose doubles the gap from 40 to 80 mg/L. Chapter 9 states it for amounts: Dmax∞ − Dmin∞ equals the dose. That is the "increased fluctuation" of her slide "Altering Dose".',
+  'Interval: a shorter τ gives each dose less time to be eliminated, so the trough sits closer to the peak, a larger fraction of it, and the curve is flatter. In her Example 1 the trough is a quarter of the peak every 8 hours and half of it every 4 hours. That is the "decreased fluctuation" of her slide "Altering Dosing Interval"; a longer τ does the reverse.',
+  'For a repeated IV bolus the gap in mg/L stays at C0 whatever the interval, 40 mg/L in both, so the flattening shows as the trough rising toward the peak. For an oral regimen absorption spreads each dose out, so the gap in mg/L narrows as well (computed from the oral equation; her slide does not say).',
   'Compliance follows the number of doses a day: every 8 hours is 3 doses, every 4 hours is 6, and fewer doses are easier to keep to. Her slides "Altering Dose" and "Altering Dosing Interval" list the three effects for each change.'], table:{head:['Change', 'Steady-state concentration', 'Fluctuation, peak to trough', 'Patient compliance'], rows:[
   ['Increase the dose, same τ', 'Higher', 'Larger', 'Usually no change'],
   ['Decrease the dose, same τ', 'Lower', 'Smaller', 'Usually no change'],
   ['Increase τ, same dose (less often)', 'Lower', 'Larger', 'Better'],
-  ['Decrease τ, same dose (more often)', 'Higher', 'Smaller', 'Worse']]}, after:'Changing the dose or the interval moves the plateau. It does not change how long the plateau takes to reach, because the half-life alone sets that.'};
+  ['Decrease τ, same dose (more often)', 'Higher', 'Smaller', 'Worse']]}, fig:'dose_interval', after:'The figure: her Example 1 (each dose adds 40 mg/L, t½ 4 hours) every 8 hours, every 4 hours, and at double the dose. Changing the dose or the interval moves the plateau. It does not change how long the plateau takes to reach, because the half-life alone sets that.'};
 
 const Q_MODULE6B = [
 
@@ -699,7 +702,8 @@ const Q_MODULE6B = [
  teach:[
   {h:'The idea', list:[
     'Method 1 for altering steady state: change the dose, keep the interval.',
-    'The whole curve scales up, so everything about it, including the fluctuation, gets bigger.']},
+    'The whole curve scales up: peak, trough and average all double when the dose doubles, and so does the gap between peak and trough.',
+    'The trough stays the same fraction of the peak, because that fraction, e^(−kτ), depends on the interval and k, not on the dose.']},
   B_PARAM],
  cite:'6a---Multiple-Oral-Doses.pdf, slides "Altering Dose" and "Altering Dose, second slide"; 09.28 lecture',
  quote:'if we increase the dose, we expect increased concentration and increased fluctuation between peaks and troughs'},
@@ -723,7 +727,7 @@ const Q_MODULE6B = [
   {k:'algebra', t:'Cavg∞ = {{frac:F D0|Cl τ}}: τ doubles from 4 to 8 hr, so Cavg∞ falls to {{frac:4|8}} = 0.5 of its value; the steady-state concentrations are lower',
    why:'The average steady-state concentration carries the interval in its denominator, with the dose, F and clearance unchanged, so doubling τ halves the average. That is the lower-concentration part of the answer, taken directly from the equation.'},
   {k:'setup', t:'Swing: Cmin∞ = Cmax∞ e^(−kτ); with τ = 8 hr the fraction left at the trough is e^(−8k) = (e^(−4k))², smaller than with τ = 4 hr, so the trough falls further below the peak',
-   why:'Each dose now has 8 hours rather than 4 to be eliminated before the next arrives: two intervals of decline instead of one. The fraction of the peak left at the trough is squared, so the gap between peak and trough grows: a larger swing.'},
+   why:'Each dose now has 8 hours rather than 4 to be eliminated before the next arrives: two intervals of decline instead of one. The fraction of the peak left at the trough is squared, so the trough is a smaller fraction of the peak: a larger swing.'},
   {k:'setup', t:'Compare: lower average (half), larger swing (trough fraction squared), 3 doses a day instead of 6: lower concentrations, a larger swing, better compliance',
    why:'The three parts of the answer each follow from the longer interval: the daily input halves, so the level is lower; the decline between doses is longer, so the swing is larger; three doses a day are easier to keep to than six, so compliance improves.'}],
  givens:[['D0', '500-mg', 'unchanged: the same dose at both intervals'], ['τ', 'every 4 hours', 'the old interval: 6 doses a day'], ['τ new', 'every 8 hours', 'the new interval: 3 doses a day; Cavg∞ falls to {{frac:4|8}} = 0.5']],
@@ -742,9 +746,9 @@ const Q_MODULE6B = [
  stem:'The dosing interval of an oral regimen is shortened from 8 hours to 4 hours, same dose. Why does the fluctuation between peak and trough decrease?',
  options:[
   {t:'Less time passes between doses, so the level falls less', correct:true,
-   why:'The trough is where the next dose interrupts the decline. With 4 hours instead of 8, the decline stops earlier, closer to the peak, so the peak-to-trough gap is smaller even though both are higher.'},
+   why:'The trough is where the next dose interrupts the decline. With 4 hours instead of 8, the decline stops earlier, so the trough sits closer to the peak, a larger fraction of it, even though both peak and trough are higher.'},
   {t:'Less drug accumulates, so the peaks are lower',
-   why:'This has accumulation backwards. A shorter interval leaves more of each dose behind when the next arrives, so more accumulates and the peaks are higher; the swing shrinks because the troughs rise even more.'},
+   why:'This has accumulation backwards. A shorter interval leaves more of each dose behind when the next arrives, so more accumulates and the peaks are higher; the swing shrinks because the troughs rise by a larger fraction than the peaks.'},
   {t:'The elimination rate constant falls',
    why:'This changes k. The regimen changes only how often the drug is given; k, the half-life and clearance are unchanged. Choosing this changes k.'},
   {t:'Absorption becomes slower',
@@ -752,7 +756,8 @@ const Q_MODULE6B = [
  teach:[
   {h:'The idea', list:[
     'Her reasoning: 3 to 5 half-lives clear most of a dose.',
-    'A shorter interval cuts into that time, so the level does not get near the bottom of the curve before the next dose arrives.']},
+    'A shorter interval cuts into that time, so the level does not get near the bottom of the curve before the next dose arrives.',
+    'So Cmax∞ and Cmin∞ both go up; what decreases is how far the level falls between them. In her Example 1 the trough is a quarter of the peak every 8 hours and half of it every 4 hours.']},
   B_PARAM],
  cite:'6a---Multiple-Oral-Doses.pdf, slide "Altering Dosing Interval, second slide"; 09.28 lecture',
  quote:'if we decrease that, um, dosing interval, then maybe we\'re cutting into that 3 to 5 half-lives a little bit more, so we\'re not going all the way to the bottom of that curve'},

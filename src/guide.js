@@ -2632,6 +2632,11 @@ const GUIDE_HTML = `
 <li>Larger dose, same interval: higher concentrations, larger fluctuation, usually no change in compliance. Smaller dose: the reverse, compliance again unchanged.</li>
 <li>Longer interval, same dose: lower concentrations, larger fluctuation, better compliance. Shorter interval: higher concentrations, smaller fluctuation, worse compliance.</li>
 <li>A shorter interval shrinks the swing because the next dose arrives before the 3 to 5 half-lives the level would need to reach the bottom of the curve.</li>
+<li>"Smaller fluctuation" does not mean lower peaks or troughs: with a shorter interval C<sub>max</sub>, C<sub>min</sub> and C<sub>avg</sub> all rise, and the trough sits closer to the peak. In her Example 1 the trough is a quarter of the peak every 8 hours and half of it every 4 hours.</li>
+<li>"Larger fluctuation" from a larger dose is the gap in mg/L: doubling her Example 1 dose doubles it from 40 to 80 mg/L, while the trough stays a quarter of the peak.</li>
+</ul>
+{{fig:dose_interval|Her Example 1 every 8 hours, every 4 hours, and at double the dose, on one concentration scale.}}
+<ul class="tlist">
 <li>Trap: pairing a higher level with a smaller swing for a larger dose. A larger dose raises both the level and the swing.</li>
 <li>Trap: expecting a longer interval to raise the level because each dose has more time to be absorbed. Absorption is complete either way; the extra time goes to elimination.</li>
 <li>Figure question: equal doses every 6 hours and every 8 hours, same k<sub>a</sub> and k. The 6-hour curve has the higher plateau, and both reach steady state in the same time.</li>

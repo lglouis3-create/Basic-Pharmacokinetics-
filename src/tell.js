@@ -770,7 +770,9 @@ const TELL_HTML = `
 <p><b>In one line:</b> They differ in which way the steady-state concentration (the level once repeated dosing has levelled off) and the peak-to-trough swing move.</p>
 <dl><dt>A larger dose, same interval</dt><dd>Raises the concentrations and widens the peak-to-trough swing. Compliance is usually unchanged.</dd>
 <dt>A longer interval, same dose</dt><dd>Lowers the concentrations, widens the swing and improves compliance. A shorter interval does the reverse of each.</dd>
-<dt>The quick test</dt><dd>Both widen the swing; the level moves in opposite directions. Neither changes the time to steady state.</dd></dl>
+<dt>The quick test</dt><dd>Both widen the swing; the level moves in opposite directions. Neither changes the time to steady state.</dd>
+<dt>Which swing</dt><dd>A larger dose widens the gap in mg/L while the trough stays the same fraction of the peak. A longer interval lets the trough fall to a smaller fraction of the peak. A shorter interval raises peak and trough together and brings the trough closer to the peak; it does not lower either.</dd></dl>
+{{fig:dose_interval|Her Example 1 every 8 hours, every 4 hours, and at double the dose, on one scale.}}
 <p class="xtrap"><b>How she tests it:</b> The wrong pick pairs a higher level with a smaller swing for a larger dose.</p>
 <p class="xtrap">Another: expecting a longer interval to raise the level because each dose has longer to be absorbed. Absorption is complete either way; what a longer interval gives each dose is more time to be eliminated.</p>
 <p class="gsrc">Source: 6a---Multiple-Oral-Doses.pdf, slides "Altering Dose, second slide" and "Altering Dosing Interval, second slide"; transcript 09-28</p></div></template>

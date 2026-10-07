@@ -454,8 +454,10 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Her rule: the only things a regimen can change are the size of the dose and the dosing interval; clearance and half-life are not choices.',
    'Slide "Altering Dosing Interval": decreasing the interval increases steady-state concentrations and decreases the peak-to-trough fluctuation, at the cost of compliance.',
+   'What that means for the numbers: Cmax∞, Cmin∞ and Cavg∞ all go up. The fluctuation that decreases is how far the level falls from peak to trough, because the next dose arrives before the level has fallen as far: the trough sits closer to the peak. In her Example 1 the trough is a quarter of the peak every 8 hours and half of it every 4 hours.',
    'Why the interval does it: Cavg∞ = {{frac:F D0|Cl × τ}} has τ in the denominator, so a shorter interval raises the average; and a shorter interval leaves more of each dose in the body when the next arrives, e^(−kτ) larger, so the accumulation factor {{frac:1|1 − e^(−kτ)}} and the peak rise as well.',
-   'Raising the dose also raises the level, but it is not among the options here.']}],
+   'Raising the dose also raises the level, but it is not among the options here.']},
+  {h:'Her Example 1 three ways', fig:'dose_interval', list:['Every 8 hours, every 4 hours, and double the dose every 8 hours, on one concentration scale: the shorter interval raises all three lines and pulls the trough toward the peak; the larger dose raises all three and widens the gap.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 3; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations" and "Altering Dosing Interval"; 09.28 lecture'},
 
 {id:'cq4-4', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
@@ -501,7 +503,7 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Dose up: higher Cmax, Cmin and Cavg, a bigger swing between peak and trough, usually no change in compliance.',
    'Dose does not move tmax (her poll: "no change in the tmax"), ka or clearance.',
-   'Why the swing grows with the dose: Dmax∞ − Dmin∞ equals the dose (Chapter 9, section "Repetitive Intravenous Injections"), so the gap between peak and trough scales with the dose, as every concentration in the regimen does.',
+   'Why the swing grows with the dose: Dmax∞ − Dmin∞ equals the dose (Chapter 9, section "Repetitive Intravenous Injections"), so the gap between peak and trough scales with the dose, as every concentration in the regimen does. The trough stays the same fraction of the peak; it is the distance in mg/L that grows, 40 to 80 mg/L when her Example 1 dose doubles.',
    'The parameters a regimen cannot change are the usual distractors: clearance, half-life, rate constants.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 5; 6a---Multiple-Oral-Doses.pdf, slides "Poll EV" (page 1) and "Altering Dose"; 09.28 lecture'},
 

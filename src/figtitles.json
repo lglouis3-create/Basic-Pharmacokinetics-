@@ -2,6 +2,7 @@
 "accum_factor": "The accumulation factor R against the dosing interval measured in half-lives",
 "cpt_one": "Semi-logarithmic plot after an intravenous bolus: one straight line",
 "cpt_two": "Semi-logarithmic plot after an intravenous bolus: a steep early phase then a shallower straight phase",
+"dose_interval": "Her Example 1 at steady state: the same drug every 8 hours, every 4 hours, and at double the dose",
 "elim_rate_flat": "Rate of elimination plotted against plasma concentration: a horizontal line",
 "elim_rate_linear": "Rate of elimination plotted against plasma concentration: a straight line through the origin",
 "flipflop": "One drug given as an immediate-release and an extended-release product: the tail of each curve",

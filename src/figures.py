@@ -583,6 +583,36 @@ FIGS['md_bolus'] = ('Repeated IV bolus doses every 8 hours rising to a steady st
                     md.svg('Repeated IV bolus: accumulation to steady state, then decline after the last dose'))
 
 
+
+# ---- what a dose change and an interval change each do at steady state ----
+# Her Example 1 (C0 = 40 mg/L per dose, t½ 4 hr, τ 8 hr) against the same drug
+# every 4 hours, and against double the dose every 8 hours. All three are drawn
+# on one concentration scale so the heights compare directly. Values computed
+# here: τ 8: 53.3 / 13.3 / 28.9, gap 40, peak 4 × trough; τ 4: 80.0 / 40.0 /
+# 57.7, gap 40, peak 2 × trough; double dose: 106.7 / 26.7 / 57.7, gap 80,
+# peak 4 × trough. For a repeated IV bolus the gap is always C0 (Chapter 9:
+# Dmax∞ − Dmin∞ = D0), and the peak over the trough is e^(kτ).
+def ss_panel(title, line, c0, tau, xs):
+    r = math.exp(-MK * tau)
+    cmax, cmin, cav = c0 / (1 - r), c0 * r / (1 - r), c0 / (MK * tau)
+    p = Plot(16, [0, 20, 40, 60, 80, 100, 120], xlabel='Time within steady state (hours)', ylabel='Concentration (mg/L)',
+             w=720, h=440, l=88, r=24, t=112, b=66, fs=1.7)
+    p.frame([0, 4, 8, 12, 16])
+    p.hline(cmax, color=BLUE); p.hline(cmin, color=BLUE); p.hline(cav, color=AMBER)
+    p.curve(lambda t: cmax * math.exp(-MK * (t % tau)), color=BLUE, n=900)
+    p.text(15.8, cmax + 4, f'Cmax {cmax:.1f}', size=20, anchor='end', weight='600')
+    p.text(15.8, cav + 4, f'Cavg {cav:.1f}', size=20, color=AMBER, anchor='end', weight='600')
+    p.text(15.8, cmin - 9.5, f'Cmin {cmin:.1f}', size=20, anchor='end', weight='600')
+    heading(p, title, line, big=1.2)
+    return p
+
+
+stack('dose_interval', 'Her Example 1 at steady state: the same drug every 8 hours, every 4 hours, and at double the dose',
+      [ss_panel('Her Example 1: every 8 hours', 'Each dose adds 40 mg/L. Gap 40 mg/L; trough a quarter of peak.', 40.0, 8.0, 0.4),
+       ss_panel('Shorter interval: same dose, every 4 hours', 'All three rise. Gap still 40 mg/L; the trough is now half the peak.', 40.0, 4.0, 0.4),
+       ss_panel('Larger dose: double the dose, every 8 hours', 'All three double. Gap 80 mg/L; trough still a quarter of peak.', 80.0, 8.0, 0.4)],
+      720, 440)
+
 # ---- module 6, second lecture: two intermittent infusions, her Example 4 ----
 # 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 4":
 # 300 mg over 2 hours (R = 150 mg/hr), the second infusion starting 6 hours

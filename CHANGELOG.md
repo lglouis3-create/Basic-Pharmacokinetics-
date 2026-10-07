@@ -2,6 +2,13 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (what a dose change and an interval change each do)
+- The dose and interval explanations now say what moves: a shorter interval raises Cmax, Cmin and Cavg.
+- "Decreased fluctuation" is spelled out: the trough sits closer to the peak, not lower peaks or troughs.
+- "Increased fluctuation" from a larger dose is the gap in mg/L; the trough stays the same fraction of the peak.
+- A new figure draws her Example 1 every 8 hours, every 4 hours and at double the dose, on one scale.
+- The figure sits in the concept blocks, Reference, Tell apart, the Guide and Diagrams.
+
 ## 2026-10-07 (Start timer on the one-page layout)
 - On the one-page layout each calculation has a Start timer button; an answer given without it is not timed.
 
