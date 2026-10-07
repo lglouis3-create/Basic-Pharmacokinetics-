@@ -1067,6 +1067,7 @@ const Q_MODULE1 = [
   {k:'round', t:'k = 0.08658 hr⁻¹, reported as 0.0866 hr⁻¹.',
    why:'Dividing a dimensionless logarithm by a time gives reciprocal time, the unit of a first-order rate constant. Dr. Mosley reports rate constants to four decimal places (her key prints 0.0866 per hour), and a leading decimal with no digit before it loses half the marks on her paper.'}],
  setup:{eq:'first-ln', pre:[], why:'"chemical decomposition" with a table of concentrations against time, so the kinetic-orders block, and the constant ratio over equal intervals settles first order. Given C at two times, asked k, so ln C = ln C0 − kt between the two points rearranged to k = {{frac:ln(C1 ÷ C2)|t2 − t1}}. No hinge.'},
+ asks:'k',
  givens:[['C₁', '208.1 mg/L', 'the earlier concentration, at t₁ = 6 hr, in the numerator'], ['t₁', '6 hr', 'the earlier time'], ['C₂', '43.8 mg/L', 'the later concentration, at t₂ = 24 hr'], ['t₂', '24 hr', 'the later time; t₂ − t₁ = 18 hr in the denominator'], ['other rows', '294.3, 123.8, 15.5, 5.5 mg/L', 'not needed for k: they confirm first order, equal ratios over equal spans']],
  check:{t:'Each 12-hour span cuts the concentration to about a third (123.8 → 43.8 → 15.5), so 12 hr is between one and two half-lives and t½ is near 8 hr; k has to come out near 0.0866 hr⁻¹, a small positive number.', lo:0},
  teach:[
@@ -1106,6 +1107,7 @@ const Q_MODULE1 = [
   {k:'round', t:'C0 = 350 mg/L.',
    why:'Dr. Mosley reports this value as 350 mg/L, to three significant figures, which matches the precision of the tabulated concentrations. The computed 349.98 rounds to that value without any further adjustment.'}],
  setup:{eq:'first-exp', pre:[], why:'"first-order process" with a rate constant and one later concentration, so the first-order decline line. Given k, t and C, asked the initial concentration C0, so C = C0 e^(−kt) rearranged to C0 = C e^(kt). No hinge.'},
+ asks:'C0',
  givens:[['k', '0.0866 hr⁻¹', 'the exponent kt = 0.0866 × 12 = 1.0392'], ['t', '12 hours', 'the time in the exponent'], ['C', '123.8 mg/L', 'the later concentration, multiplied by e^(kt) to go back to C0']],
  check:{t:'With k = 0.0866 hr⁻¹ the half-life is about 8 hr, so 12 hours is more than one half-life: C0 must be more than double 123.8 mg/L and less than four times it, and 350 mg/L fits.', lo:123.8},
  teach:[
@@ -1144,6 +1146,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t½ = 8 hr.',
    why:'Dr. Mosley reports this as 8 hours, to the whole hour. The answer is a time and carries no reciprocal unit; hours to the minus one belongs to the rate constant that was given, not to the half-life that was asked for.'}],
  setup:{eq:'thalf-first', pre:[], why:'"first-order process" and "half the solution", so the first-order half-life line. Given k, asked t½, so t½ = {{frac:0.693|k}} directly. No hinge.'},
+ asks:'t',
  givens:[['k', '0.0866 hr⁻¹', 'the denominator of {{frac:0.693|k}}']],
  check:{t:'The half-life is 0.693 over k. A k near one tenth per hour gives a half-life near 7 hr; 8 hr fits, and k × t½ must return 0.693.', lo:0},
  teach:[
@@ -1185,6 +1188,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t = 26.589 hr, reported as 26.6 hr.',
    why:'Dr. Mosley reports this to one decimal place, as 26.6 hours. As a check, 90 per cent decomposition is a little more than three half-lives, which for an 8-hour half-life would be 24 hours, and the answer sits just above that.'}],
  setup:{eq:'first-exp', pre:[], why:'"first-order process" and "decompose by 90 per cent", so the first-order decline line solved for t. Given k and the fraction remaining {{frac:C|C0}}, asked t, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}. The fraction remaining stands in for {{frac:C|C0}}; no hinge.'},
+ asks:'t',
  givens:[['k', '0.0866 hr⁻¹', 'the denominator of {{frac:ln(10)|k}}'], ['fraction left', '90 per cent', 'decomposed, so 10 per cent remains and ln(10) sits in the numerator']],
  check:{t:'Ten per cent remaining lies between one eighth and one sixteenth, so the time is between three and four half-lives of 8 hr, a little over 24 hr; 26.6 hr fits.', lo:24, hi:32},
  teach:[
@@ -1224,6 +1228,7 @@ const Q_MODULE1 = [
   {k:'round', t:'k = 6 (mg/mL)/hr.',
    why:'The division is exact at 6, and her key prints 6 mg/mL per hour with no further rounding. Because the process is zero order, this number is the quantity lost every hour, unchanged from the first hour to the last.'}],
  setup:{eq:'zero-line', pre:[], why:'"chemical decomposition" with a table of concentrations against time, so the kinetic-orders block, and the constant difference over equal intervals settles zero order. Given C at two times, asked k, so C = C0 − kt between the two points rearranged to k = −{{frac:C2 − C1|t2 − t1}}. No hinge.'},
+ asks:'k0',
  givens:[['C₁', '338 mg/mL', 'the earlier concentration, at t₁ = 2 hr'], ['t₁', '2 hr', 'the earlier time'], ['C₂', '206 mg/mL', 'the later concentration, at t₂ = 24 hr'], ['t₂', '24 hr', 'the later time; t₂ − t₁ = 22 hr in the denominator'], ['other rows', '314, 278, 134, 62 mg/mL', 'not needed for k: they confirm zero order, equal drops over equal spans']],
  check:{t:'From 2 to 24 hr the concentration drops 338 → 206 mg/mL, 132 mg/mL in 22 hr, so the rate is 132 over 22, 6 (mg/mL)/hr: a fixed drop per hour, not a fixed fraction.', lo:0},
  teach:[
@@ -1261,6 +1266,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t½ = 29.167 hr, reported as 29.2 hr.',
    why:'Dr. Mosley reports this to one decimal place, as 29.2 hours. As a check, the table for this solution reads 206 mg/mL at 24 hours and 134 mg/mL at 36 hours, so the concentration passes 175 mg/mL between those two times, which brackets the answer.'}],
  setup:{eq:'thalf-zero', pre:[], why:'"zero-order process" and "half the solution", so the zero-order half-life line. Given k and C0, asked t½, so t½ = {{frac:C0|2k}} directly. No hinge.'},
+ asks:'t',
  givens:[['k', '6 (mg/mL)/hr', 'the 2k in the denominator: 2 × 6 = 12'], ['C0', '350 mg/mL', 'the numerator of {{frac:C0|2k}}']],
  check:{t:'Half of 350 mg/mL is lost at 6 mg/mL each hour, so t½ is 350 over 12, about 29.2 hr; it is half the time to lose everything, so it is well under 60 hr.', lo:0, hi:58.3},
  teach:[
@@ -1302,6 +1308,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t½ = 65.6 min.',
    why:'Dr. Mosley reports this half-life to one decimal place, as 65.6 minutes, which is as far as a rate constant quoted to one decimal place will justify. The answer is a time and carries no reciprocal unit; per minute belongs to the rate constant that was given, not to the half-life that was asked for.'}],
  setup:{eq:'thalf-zero', pre:['zero-line'], why:'"zero-order process" and "half-life", so the zero-order block. Given k, t and the amount A remaining, asked t½, so t½ = {{frac:A0|2k}} written in amount. A0 first, from C = C0 − kt written in amount and rearranged to A0 = A + kt, because the line wants the starting amount and the stem gives a later one.'},
+ asks:'thalf',
  givens:[['k', '0.8 mg/min', 'adds back 0.8 × 40 = 32.0 mg, then is the 2k denominator: 1.6'], ['t', '40 minutes', 'the elapsed time multiplied by k to recover A0'], ['A', '73.0 mg', 'the amount remaining; A0 = 73.0 + 32.0 = 105 mg']],
  check:{t:'Forty minutes at 0.8 mg/min removes 32.0 mg, so the start was 105 mg and less than half had gone by 40 min; the half-life must exceed 40 min, and 105 over 1.6 gives 65.6 min.', lo:40},
  teach:[
@@ -1340,6 +1347,7 @@ const Q_MODULE1 = [
   {k:'round', t:'k = 0.13863 hr⁻¹, reported as 0.1386 hr⁻¹.',
    why:'Dr. Mosley reports first-order rate constants to four decimal places, and her key prints 0.1386 per hour while carrying 0.13863 into the next parts of the problem. Rounding at the end rather than at each step keeps the later answers consistent with hers.'}],
  setup:{eq:'first-ln', pre:[], why:'"decomposition is first order" with ln C listed against time, so the first-order natural-log line. Given ln C at two times, asked k, so ln C = ln C0 − kt between the two points rearranged to k = {{frac:ln C1 − ln C2|t2 − t1}}. No hinge.'},
+ asks:'k',
  givens:[['t₁', '1.0', 'the earlier time, in hr'], ['C₁', '217.6', 'not needed as a number: its logarithm 5.3827 is listed'], ['ln C₁', '5.3827', 'the first term of the numerator'], ['t₂', '16.0', 'the later time; t₂ − t₁ = 15 hr in the denominator'], ['C₂', '27.2', 'not needed as a number: its logarithm 3.3032 is listed'], ['ln C₂', '3.3032', 'subtracted in the numerator: 5.3827 − 3.3032 = 2.0795']],
  check:{t:'From 1.0 to 16.0 hr the concentration falls 217.6 → 27.2 mcg/mL, a factor of 8, which is three half-lives in 15 hr; t½ is 5 hr and k is 0.693 over 5, near 0.1386 hr⁻¹.', lo:0},
  teach:[
@@ -1379,6 +1387,7 @@ const Q_MODULE1 = [
   {k:'round', t:'V = 200,000 mcg ÷ 250.0 mcg/mL = 800 mL.',
    why:'Micrograms divided by micrograms per millilitre leaves millilitres, and the microgram units cancel only because the dose was converted from 200 mg first. Her key prints 800 mL, which is exact at the precision of the data.'}],
  setup:{eq:'cp-db-vd', pre:['first-ln'], why:'"decomposition is first order" with an amount "dissolved" into water, so the amount, concentration and volume line. Given the amount and C0, asked V, so Cp = {{frac:DB|VD}} rearranged to V = {{frac:amount|C0}}. C0 first, from ln C0 = ln C + kt, because the sample is at one hour, not time zero.'},
+ asks:'volume',
  givens:[['amount', '200 mg', 'the amount dissolved, restated in mcg'], ['amount', '200,000 mcg', 'the numerator of V = amount over C0'], ['k', '0.13863 hr⁻¹', 'the kt added to ln C: 0.13863 × 1.0 = 0.1386'], ['t', '1.0 hour', 'the sample time, multiplied by k'], ['C', '217.6 mcg/mL', 'the 1-hour concentration; ln C = 5.3827, raised back to C0 = 250.0 mcg/mL']],
  check:{t:'One hour at k = 0.13863 hr⁻¹ loses about 13 per cent, so C0 is a little above 217.6 mcg/mL, near 250.0, and 200,000 over 250.0 is 800 mL. The volume must be below 200,000 over 217.6 mcg/mL.', hi:919},
  teach:[
@@ -1420,6 +1429,7 @@ const Q_MODULE1 = [
   {k:'round', t:'V = 600 mL.',
    why:'Her key prints 600 mL with no rounding shown, because every number in the chain divides exactly and no logarithm or exponential was evaluated anywhere in it. Millilitres are the unit the 1.0 mL assay samples were quoted in, so the answer is reported in the same measure.'}],
  setup:{eq:'cp-db-vd', pre:['zero-line'], why:'"zero-order decomposition" with an amount "dissolved into an unknown volume", so the amount, concentration and volume line. Given the dose and C0, asked V, so Cp = {{frac:DB|VD}} rearranged to V = {{frac:dose|C0}}. C0 first, from C = C0 − kt, with k from the same line between the two samples.'},
+ asks:'volume',
  givens:[['dose', '300 mg', 'the numerator of V = dose over C0'], ['C₁', '0.45 mg/mL', 'the earlier concentration, at t₁ = 0.5 hour'], ['t₁', '0.5 hour', 'the earlier time'], ['C₂', '0.30 mg/mL', 'the later concentration, at t₂ = 2.0 hours; C0 = C₂ + kt₂'], ['t₂', '2.0 hours', 'the later time; t₂ − t₁ = 1.5 hr gives k = {{frac:0.15|1.5}}']],
  check:{t:'The concentration falls 0.15 mg/mL in 1.5 hr, 0.1 mg/mL per hour, so at time zero it was 0.5 mg/mL and 300 mg over 0.5 mg/mL is 600 mL. C0 is above 0.45 mg/mL, so V is below 300 over 0.45.', hi:667},
  teach:[
@@ -1458,6 +1468,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t = 24 hr.',
    why:'The answer is exact rather than rounded, because 87.5 per cent corresponds to a whole number of half-lives and no logarithm had to be evaluated. Dr. Mosley prints 24 hours and reaches it by this same three-step count rather than by an equation.'}],
  setup:{eq:'first-exp', pre:['thalf-first'], why:'"first-order kinetics" and "decompose by 87.5 per cent", so the first-order decline line solved for t. Given t½ and the fraction remaining, asked t, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}; the working reads one eighth as three half-lives, so t = 3 t½. k = {{frac:0.693|t½}} links the forms.'},
+ asks:'t',
  givens:[['t½', '8 hours', 'the half-life counted three times: t = 3 × 8'], ['D0', '750 mg', 'not needed: the fraction decomposed fixes the time, whatever the amount'], ['fraction', '87.5 per cent', 'decomposed, which leaves one eighth, three half-lives']],
  check:{t:'Half-lives count decomposition as 50 → 75 → 87.5 per cent, so 87.5 per cent gone is exactly three half-lives of 8 hours, 24 hr.', lo:24, hi:24},
  teach:[
@@ -1501,6 +1512,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t½ = 15.7 days.',
    why:'Her worked answer prints 15.7 days, to one decimal place, which matches the precision of a rate constant she reports as 0.044 per day. Carrying the unrounded rate constant instead gives 15.73 days, a difference far too small to change any conclusion drawn from it.'}],
  setup:{eq:'thalf-first', pre:['first-ln'], why:'"first-order kinetics" and "decline to one-half", so the first-order half-life line. Given C0, C and t, asked t½, so t½ = {{frac:0.693|k}}. k first, from ln C = ln C0 − kt rearranged to k = {{frac:ln(C0 ÷ C)|t}}, because the line wants k and the stem gives two concentrations instead.'},
+ asks:'t',
  givens:[['C0', '300 mg/mL', 'the numerator inside ln(C0 over C)'], ['t', '30 days', 'the denominator of k = {{frac:ln(300 over 80)|30}}'], ['C', '80 mg/mL', 'the denominator inside the logarithm']],
  check:{t:'300 falls to 80 mg/mL in 30 days, a factor a little under 4, so 30 days is a little under two half-lives and t½ is a little over 15 days; 15.7 days fits.', lo:15, hi:30},
  audit:'The transcript of the exam review renders the rate constant once as "0.044 per hour" and once as "0.0044"; the elapsed time of 30 days and her own printed half-life of 15.7 days are both consistent only with 0.044 per day. An exam written from these lectures would key 15.7 days.',
@@ -1544,6 +1556,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t½ = 20.45 days.',
    why:'Dr. Mosley reports 20.45 days, to two decimal places, worked from the unrounded rate constant. The zero-order half-life is far longer than the first-order one for the same pair of points, because a zero-order process removes a fixed amount per day rather than a fixed fraction.'}],
  setup:{eq:'thalf-zero', pre:['zero-line'], why:'"zero-order kinetics" and "decline to one-half", so the zero-order half-life line. Given C0, C and t, asked t½, so t½ = {{frac:C0|2k}}. k first, from C = C0 − kt rearranged to k = {{frac:C0 − C|t}}, because the line wants k and the stem gives two concentrations instead.'},
+ asks:'t',
  givens:[['C0', '300 mg/mL', 'the drop C0 − C = 220 mg/mL, then the numerator of {{frac:C0|2k}}'], ['t', '30 days', 'the denominator of k = {{frac:220|30}}'], ['C', '80 mg/mL', 'subtracted from C0 for the drop']],
  check:{t:'Losing 220 mg/mL took 30 days and half of 300 mg/mL is less than 220, so the half-life is under 30 days; at 7.33 (mg/mL)/day, 300 over 14.666 gives 20.45 days.', lo:0, hi:30},
  note:'Rounding k to 7.33 before dividing gives 20.46 days; carrying 7.3333 gives 20.45 days. Both are accepted.',
@@ -1586,6 +1599,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t = 10 half-lives.',
    why:'Her table confirms the same answer without the logarithm: after 10 half-lives 0.1 per cent remains, which is 99.9 per cent decomposed. She uses this figure repeatedly, since a question asking for the time for 99.9 per cent of a drug to be eliminated always resolves to ten half-lives.'}],
  setup:{eq:'first-exp', pre:['thalf-first'], why:'"first-order kinetics" and "99.9 per cent" decomposed, so the first-order decline line solved for t. Given the fraction remaining {{frac:C|C0}}, asked t in half-lives, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}. k = {{frac:0.693|t½}} is substituted, because the answer is wanted as a multiple of t½.'},
+ asks:'nhalf',
  givens:[['fraction', '99.9 per cent', 'decomposed, so 0.1 per cent remains and ln(1000) sits in the numerator']],
  check:{t:'Ten halvings leave about one part in a thousand (0.001), which is 0.1 per cent remaining, so 99.9 per cent gone takes close to 10 half-lives.', lo:9, hi:10},
  teach:[
@@ -1668,6 +1682,7 @@ const Q_MODULE1 = [
   {k:'round', t:'AUC = 23.7 mcg·hr/mL.',
    why:'Dr. Mosley reports 23.7 for this interval, to three significant figures, which matches the precision of the tabulated concentrations. The unit is a concentration multiplied by a time, which is why it reads as micrograms times hours per millilitre rather than as a concentration.'}],
  setup:{eq:'auc-trap', pre:[], why:'"area under the curve" between two sampling times in a table of plasma levels, so the trapezoidal rule. Given Cn−1, Cn and the times bounding each segment, asked AUC, so AUC = [{{frac:Cn−1 + Cn|2}}](tn − tn−1) for each segment in the span, then summed. No hinge.'},
+ asks:'AUC',
  givens:[['C at 2 hr', '18.4 mcg/mL', 'the first side of segment 1'], ['C at 3 hr', '11.1 mcg/mL', 'the shared side of segments 1 and 2'], ['C at 4 hr', '6.77 mcg/mL', 'the last side of segment 2'], ['widths', '2 to 4 hr', 'each segment 1 hr wide: (tₙ − tₙ₋₁) = 1'], ['other rows', '38.9, 30.3, 4.10 mcg/mL', 'not needed: outside hours 2 to 4']],
  check:{t:'The span is 2 hr wide, so the area must lie between 2 × 6.77 and 2 × 18.4 mcg·hr/mL, and 23.7 does.', lo:13.54, hi:36.8},
  teach:[
@@ -1710,6 +1725,7 @@ const Q_MODULE1 = [
   {k:'round', t:'AUC = 41.65 mcg·hr/mL.',
    why:'The value is reported to two decimal places, which is what the half-hour and one-hour segment widths support without inventing precision. The unit is again a concentration multiplied by a time, unchanged by the unequal segment widths used over this earlier stretch of the curve.'}],
  setup:{eq:'auc-trap', pre:[], why:'"area under the curve" between two sampling times in a table of plasma levels, so the trapezoidal rule. Given Cn−1, Cn and the times bounding each segment, asked AUC, so AUC = [{{frac:Cn−1 + Cn|2}}](tn − tn−1) for each segment, with unequal widths, then summed. No hinge.'},
+ asks:'AUC',
  givens:[['C at 0.5 hr', '38.9 mcg/mL', 'the first side of segment 1'], ['C at 1 hr', '30.3 mcg/mL', 'the shared side of segments 1 and 2'], ['C at 2 hr', '18.4 mcg/mL', 'the last side of segment 2'], ['widths', '0.5 to 2 hr', 'segment 1 is 0.5 hr wide, segment 2 is 1 hr wide'], ['other rows', '11.1, 6.77, 4.10 mcg/mL', 'not needed: outside hours 0.5 to 2']],
  check:{t:'The span from 0.5 to 2 hr is one and a half hours wide, so the area must lie between one and a half times 18.4 and one and a half times 38.9 mcg·hr/mL, and 41.65 does.', lo:27.6, hi:58.35},
  teach:[
@@ -1747,6 +1763,7 @@ const Q_MODULE1 = [
   {k:'round', t:'C0 = 350 mg/mL',
    why:'Her key prints 350 mg/mL. The value is exact, so no rounding is involved, and it is the number the half-life part of this problem then uses.'}],
  setup:{eq:'zero-line', pre:[], why:'"zero-order process" with a rate and one later concentration, so the zero-order decline line. Given k, t and C, asked the initial concentration C0, so C = C0 − kt rearranged to C0 = C + kt. No hinge.'},
+ asks:'C0',
  givens:[['k', '6 (mg/mL)/hr', 'the kt added back: 6 × 2 = 12 mg/mL'], ['t', '2 hours', 'the sample time, multiplied by k'], ['C', '338 mg/mL', 'the 2-hour concentration that 12 mg/mL is added to']],
  check:{t:'Two hours at 6 mg/mL per hour is 12 mg/mL, so C0 is 12 above 338, 350 mg/mL; the start must exceed the 2-hour sample.', lo:338},
  teach:[
@@ -1782,6 +1799,7 @@ const Q_MODULE1 = [
   {k:'round', t:'t = 52.5 hr',
    why:'Her key prints 52.5 hr, to one decimal place. As a check, the table for this solution reads 62 mg/mL at 48 hours, so 35 mg/mL is reached a few hours after the last sample, which brackets the answer.'}],
  setup:{eq:'zero-line', pre:[], why:'"zero-order process" and "decompose by 90%", so the zero-order decline line solved for t. Given C0, k and the fraction remaining, asked t, so C = C0 − kt rearranged to t = {{frac:C0 − C|k}}. C first, as the fraction remaining of C0, because the line wants a concentration, not a percentage.'},
+ asks:'t',
  givens:[['C0', '350 mg/mL', 'the start; 90% gone leaves C = 35 mg/mL, so C0 − C = 315'], ['k', '6 (mg/mL)/hr', 'the denominator of {{frac:315|6}}'], ['fraction', '90%', 'decomposed, which fixes C = 35 mg/mL']],
  check:{t:'Ninety per cent of 350 mg/mL is 315 mg/mL, and at 6 mg/mL per hour that takes 315 over 6, 52.5 hr; it must be less than the time to lose all 350, under 60 hr.', lo:0, hi:58.3},
  teach:[

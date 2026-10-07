@@ -589,6 +589,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Css = 14.43 mg/L',
    why:'Report 14.43 mg/L, or about 14 mg/L. The two decimal places follow the four-figure rate constant used throughout.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"continuous intravenous infusion at" a rate, so the infusion block. Given R, t½ and VD, asked the "steady-state plasma concentration", so Css = {{frac:R|Cl}}. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because the line wants Cl and the stem gives t½ and VD instead.'},
+ asks:'Css',
  givens:[['R', '50 mg/hr', 'the numerator of {{frac:R|Cl}}'], ['t½', '6 hours', 'gives k = {{frac:0.693|6}} = 0.1155 hr⁻¹'], ['VD', '30 L', 'with k gives Cl = 0.1155 × 30 = 3.465 L/hr, the denominator']],
  check:{t:'k is 0.693 over 6, 0.1155 hr⁻¹, so Cl is 0.1155 × 30 = 3.465 L/hr; 50 mg/hr spread over 3.465 L/hr is a little over 14 mg/L, and 14.43 fits.', lo:0},
  teach:[
@@ -631,6 +632,7 @@ const Q_MODULE3 = [
   {k:'round', t:'R = 69.3 mg/hr',
    why:'Report 69.3 mg/hr. One decimal place is what the four-figure rate constant supports. As a check, 69.3 divided by the clearance of 3.465 L/hr returns the 20 mg/L target.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"infusion rate" to achieve a "steady-state concentration", so the infusion block. Given Css, t½ and VD, asked R, so Css = {{frac:R|Cl}} rearranged to R = Css·Cl. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because the line wants Cl.'},
+ asks:'R',
  givens:[['t½', '6 hours', 'gives k = {{frac:0.693|6}} = 0.1155 hr⁻¹'], ['VD', '30 L', 'with k gives Cl = 0.1155 × 30 = 3.465 L/hr'], ['Css', '20 mg/L', 'the target, multiplied by Cl']],
  check:{t:'Cl is k × VD = 0.1155 × 30, about three and a half L/hr, and the rate has to replace what is cleared: 20 mg/L × Cl, about 69.3 mg/hr. A higher target needs a proportionally higher rate.', lo:0},
  teach:[
@@ -670,6 +672,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 7.76 mg/L',
    why:'Two decimal places matches the precision of the parameters she supplies in this problem. The concentration is about 70 per cent of the plateau, which is what eight hours at a rate constant of 0.15 per hour should deliver for an infusion started with no loading dose.'}],
  setup:{eq:'cp-infusing', pre:[], why:'"infusion" is "started" and the concentration is asked "8 hours after the infusion is started", before the plateau, so the concentration-during-infusion line. Given R, Cl, k and t, asked Cp, so Cp = ({{frac:R|Cl}})(1 − e^(−kt)) directly. No hinge.'},
+ asks:'Cp',
  givens:[['R', '50 mg/hr', 'the numerator of the plateau {{frac:R|Cl}} = 11.11 mg/L'], ['Cl', '4.5 L/hr', 'the denominator of the plateau'], ['k', '0.15 hr⁻¹', 'the exponent kt = 0.15 × 8 = 1.2'], ['t', '8 hours', 'the time since the start, in the exponent']],
  check:{t:'The plateau is 50 over 4.5, 11.11 mg/L. With k = 0.15 hr⁻¹ the half-life is between 4 and 5 hr, so 8 hours is between one and two half-lives: Cp lies between half and three quarters of 11.11 mg/L, and 7.76 fits.', lo:5.55, hi:8.33},
  teach:[
@@ -711,6 +714,7 @@ const Q_MODULE3 = [
   {k:'round', t:'t = 15.35 hr',
    why:'Report 15.35 hr, or about 15 hours. As a check, that is 3.32 half-lives of 4.62 hr, the number of half-lives that 90 per cent of steady state always takes.'}],
  setup:{eq:'cp-infusing', pre:[], why:'"infused at a constant rate with no loading dose" and "90% of the steady-state concentration", so the concentration-during-infusion line solved for t. Given k and the fraction of Css, asked t, so 0.9 = 1 − e^(−kt) rearranged to t = −{{frac:ln(0.1)|k}}. {{frac:R|Cl}} cancels, so no hinge.'},
+ asks:'t',
  givens:[['k', '0.15 hr⁻¹', 'the denominator of {{frac:−ln(0.1)|k}}'], ['fraction of Css', '90%', 'so e^(−kt) = 0.1 and the numerator is −ln(0.1) = 2.3026']],
  check:{t:'Reaching 90% of the plateau takes a little over three half-lives, and 0.693 over 0.15 is between 4 and 5 hr, so t lies between 13 and 17 hr; 15.35 hr fits.', lo:13.86, hi:18.48},
  teach:[
@@ -747,6 +751,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 2.84 mg/L',
    why:'The exponential evaluates to 0.1895, and 15 multiplied by that is 2.8430 mg/L. Two decimal places matches the precision she reports concentrations to in this module.'}],
  setup:{eq:'cp-after-stop', pre:['thalf-first'], why:'"infusion is stopped" after a "steady-state concentration" was reached, so the after-cessation line. Given Css as Cpeak, t½ and the time since stopping, asked Cp, so Cp = Cpeak e^(−kt). k first, from k = {{frac:0.693|t½}}, because the line wants k, not t½.'},
+ asks:'Cp',
  givens:[['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['Css', '15 mg/L', 'the Cpeak the decline starts from'], ['t', '12 hours', 'the time since stopping: kt = 0.1386 × 12']],
  check:{t:'Twelve hours is between two and three half-lives of 5 hours, so Cp lies between an eighth and a quarter of 15 mg/L; 2.84 mg/L fits.', lo:1.875, hi:3.75},
  teach:[
@@ -796,6 +801,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp at 6 hr = 5.41 mg/L',
    why:'Two decimal places is the precision she carries concentrations to in this module. Her cross-check in the lecture uses this same 5.41 mg/L as the starting point for the post-infusion decay, so rounding here is what the next question in the set inherits.'}],
  setup:{eq:'cp-infusing', pre:['cl-k-vd'], why:'"intravenous infusion of 150 mg over a period of 6 hours" and "the end of the infusion", so the concentration-during-infusion line. Given dose, duration, k and VD, asked Cp at the end, so Cp = ({{frac:R|Cl}})(1 − e^(−kt)). Cl first, from Cl = k·VD, because the line wants Cl; R is the dose divided by the duration.'},
+ asks:'Cp',
  givens:[['dose', '150 mg', 'over the duration gives R = {{frac:150|6}} = 25 mg/hr'], ['duration', '6 hours', 'the denominator of R, and the t in the exponent'], ['k', '0.231 hr⁻¹', 'with VD gives Cl = 3.465 L/hr; the exponent kt = 0.231 × 6'], ['VD', '15 L', 'one factor of Cl = k · VD']],
  check:{t:'k = 0.231 hr⁻¹ is a 3-hour half-life, so 6 hours is two half-lives and the level reaches three quarters of the plateau 7.215 mg/L, about 5.41 mg/L; it must stay below 7.215.', lo:0, hi:7.215},
  teach:[
@@ -840,6 +846,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 2.71 mg/L',
    why:'Two decimal places follows the precision of the 5.41 mg/L the decay started from. 2.7 mg/L, the same number to one decimal place, also carries full marks on her paper.'}],
  setup:{eq:'cp-after-stop', pre:['cl-k-vd','cp-infusing'], why:'"3 hours after cessation of the infusion", so the after-cessation line. Given the end-of-infusion concentration as Cpeak, k and the time since stopping, asked Cp, so Cp = Cpeak e^(−kt). Cpeak first, from Cp = ({{frac:R|Cl}})(1 − e^(−kt)) at the end of the 6 hours with Cl = k·VD, because the stem gives no peak.'},
+ asks:'Cp',
  givens:[['dose', '150 mg', 'over the duration gives R = {{frac:150|6}} = 25 mg/hr'], ['duration', '6 hours', 'the infusion time, in the Cpeak exponent'], ['k', '0.231 hr⁻¹', 'with VD gives Cl = 3.465 L/hr; then the decline exponent kt = 0.231 × 3'], ['VD', '15 L', 'one factor of Cl = k · VD'], ['t', '3 hours', 'the time since cessation, in e^(−kt)']],
  check:{t:'The end-of-infusion level is 5.41 mg/L, and k = 0.231 hr⁻¹ is a 3-hour half-life, so 3 hours after stopping exactly half remains, 2.71 mg/L; the answer must be below 5.41.', lo:0, hi:5.41},
  teach:[
@@ -883,6 +890,7 @@ const Q_MODULE3 = [
   {k:'round', t:'DL = 125 mg',
    why:'Both routes give 125 mg, which is the value she states, so no rounding decision arises and the whole number stands as computed. The unit is milligrams because a loading dose is an amount rather than a concentration or a rate.'}],
  setup:{eq:'dl-rk', pre:[], why:'"IV infusion" at a rate with a "loading dose" so the level is reached "immediately", so the loading-dose-from-rate line. Given R and k, asked DL, so DL = {{frac:R|k}} directly. No hinge; DL = Css·VD from the target level and VD gives the same number as a check.'},
+ asks:'DL',
  givens:[['R', '20 mg/hr', 'the numerator of {{frac:R|k}}'], ['k', '0.16 hr⁻¹', 'the denominator of {{frac:R|k}}'], ['VD', '10 L', 'not needed on the R over k route; it enters the Css · VD check'], ['target', '12.5 mcg/mL', 'not needed on the R over k route; as 12.5 mg/L it enters the check']],
  check:{t:'The loading dose fills the volume to the target: 12.5 mg/L × 10 L = 125 mg, and R over k, 20 over 0.16, must give the same 125 mg.', lo:0},
  teach:[
@@ -929,6 +937,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 24 mg/L',
    why:'She reports 24 mg/L. The computed 24.01 sits at the steady-state concentration of 24.05 mg/L because 288 mg is almost exactly that plateau multiplied by the 12 L volume of distribution, so the curve is flat and the small excess is rounding in the intermediate factors.'}],
  setup:{eq:'load-plus-infusion', pre:['thalf-first'], why:'"IV bolus loading dose" given "simultaneously with a continuous infusion", so the loading-dose-and-infusion line. Given DL, R, VD, t½ and t, asked Cp, so Cp = ({{frac:DL|VD}})e^(−kt) + ({{frac:R|k}}·VD)(1 − e^(−kt)). k first, from k = {{frac:0.693|t½}}, because both terms want k.'},
+ asks:'Cp',
  givens:[['DL', '288 mg', 'over VD gives the bolus start {{frac:288|12}} = 24 mg/L'], ['R', '50 mg/hr', 'the numerator of the infusion plateau R over kVD'], ['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.17325 hr⁻¹'], ['VD', '12 L', 'the denominator of the bolus term and part of kVD'], ['t', '2 hours', 'the time in both exponents: kt = 0.17325 × 2 = 0.3465']],
  check:{t:'288 mg over 12 L gives 24 mg/L at once, and the plateau R over Cl is also about 24 mg/L, so the bolus and the infusion match: the level stays near 24 mg/L at every time, including 2 hr.', lo:24, hi:24.05},
  teach:[
@@ -971,6 +980,7 @@ const Q_MODULE3 = [
   {k:'round', t:'R = 73.18 mg/hr, which she rounds to 73 mg/hr as the practical rate',
    why:'Two decimal places suit the four-figure rate constant, and 73.18 is the computed value. Dr. Mosley rounds infusion rates to a whole number in her recommendations, so 73.18 and her 73 mg/hr are both accepted; the unit is mg per hour because R is an amount per unit time.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"infusion rate to achieve a steady-state concentration", so the infusion block. Given Css, t½ and VD, asked R, so Css = {{frac:R|Cl}} rearranged to R = Css·Cl. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because the line wants Cl.'},
+ asks:'R',
  givens:[['Css', '24 mg/L', 'the target, multiplied by Cl'], ['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['VD', '22 L', 'with k gives Cl = 0.1386 × 22 L']],
  check:{t:'k is 0.693 over 5, 0.1386 hr⁻¹, so Cl is 0.1386 × 22, about 3 L/hr; 24 mg/L × 3 L/hr is about 24 × 3 mg/hr, and 73.18 fits.', lo:0},
  teach:[
@@ -1009,6 +1019,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 18 mg/L',
    why:'Both the half-life reasoning and the exponential give exactly 18 mg/L, so nothing is rounded away and the whole number stands. She reports 18 mg/L, and the agreement of the two routes is the check she prints beside the short one.'}],
  setup:{eq:'cp-infusing', pre:['thalf-first','css'], why:'"infused at the rate that gives a steady-state concentration" and "10 hours after the start of the infusion", so the concentration-during-infusion line. Given Css, t½ and t, asked Cp, so Cp = Css(1 − e^(−kt)); the working reads 1 − e^(−kt) as the fraction of Css reached after 2 half-lives. k = {{frac:0.693|t½}} for the long route.'},
+ asks:'Cp',
  givens:[['t½', '5 hours', '10 hr is two half-lives, which fixes the fraction 0.75'], ['VD', '22 L', 'not needed: the plateau is given, so no clearance enters'], ['Css', '24 mg/L', 'the plateau multiplied by the fraction reached'], ['t', '10 hours', 'two half-lives of 5 hours']],
  check:{t:'Ten hours is two half-lives of 5 hours, so the infusion has climbed half, then half of the rest: 50 → 75 per cent of 24 mg/L, 18 mg/L; the level cannot exceed 24.', lo:12, hi:24},
  teach:[
@@ -1045,6 +1056,7 @@ const Q_MODULE3 = [
   {k:'round', t:'DL = 528 mg',
    why:'She states 528 mg in the review session and reports it as a whole number of milligrams, as she does for every loading dose in this module.'}],
  setup:{eq:'dl-css-vd', pre:[], why:'"loading dose" that will "achieve a steady-state concentration" with a "volume of distribution" given, so the loading-dose-from-target line. Given Css and VD, asked DL, so DL = Css·VD directly. No hinge.'},
+ asks:'DL',
  givens:[['Css', '24 mg/L', 'the target concentration, one factor'], ['VD', '22 L', 'the volume to fill, the other factor']],
  check:{t:'A loading dose fills the volume to the target at once: 24 mg/L × 22 L = 528 mg, in mg because the litres cancel.', lo:0},
  teach:[
@@ -1088,6 +1100,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 7.92 mg/L',
    why:'Two decimal places follows the precision carried through the rest of this problem set. 7.9 mg/L, the same figure to one decimal place, is also accepted on her paper.'}],
  setup:{eq:'cp-after-stop', pre:['thalf-first','css','cp-infusing'], why:'"infusion is stopped" and "3 hours after cessation", so the after-cessation line. Given Css, t½, the infusion length and the time since stopping, asked Cp, so Cp = Cpeak e^(−kt). Cpeak first, from Cp = Css(1 − e^(−kt)) at 5 hours, read as one half-life, then k = {{frac:0.693|t½}} for the decay, because the line wants k.'},
+ asks:'Cp',
  givens:[['t½', '5 hours', '5 hr of infusion is one half-life; also k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['VD', '22 L', 'not needed: the plateau is given'], ['Css', '24 mg/L', 'the plateau; half of it, 12 mg/L, is Cpeak'], ['infusion time', '5 hours', 'one half-life, so the fraction reached is 0.5'], ['t', '3 hours', 'the time since cessation: kt = 0.1386 × 3']],
  check:{t:'Five hours of infusion is one half-life, so the level reached half of 24 mg/L, 12 mg/L; 3 hours after stopping is less than a half-life, so between 6 and 12 mg/L remains, and 7.92 fits.', lo:6, hi:12},
  teach:[
@@ -1129,6 +1142,7 @@ const Q_MODULE3 = [
   {k:'round', t:'R = 44.35 mg/hr, reported as 44 mg/hr',
    why:'Her working carries 44.35 mg/hr and her printed answer line gives 44 mg/hr, rounding to a whole number as the practical recommendation. Both are accepted within the tolerance set here.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"IV infusion rate to achieve a steady-state concentration", so the infusion block. Given Css, t½ and VD, asked R, so Css = {{frac:R|Cl}} rearranged to R = Css·Cl. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because the line wants Cl.'},
+ asks:'R',
  givens:[['Css', '20 mg/L', 'the target, multiplied by Cl'], ['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['VD', '16 L', 'with k gives Cl = 0.1386 × 16 L']],
  check:{t:'Cl is 0.1386 × 16 L, a little over 2 L/hr, so R = 20 mg/L × Cl is a little over twice 20 mg/hr; 44.35 fits, which she rounds to 44 mg/hr.', lo:0},
  teach:[
@@ -1167,6 +1181,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 3.9 mg/L',
    why:'Her printed answer is 3.9 mg/L, to one decimal place, and that is the value keyed here. Using her rounded 6.8 mg/L peak gives 3.906 mg/L and carrying full precision through gives 3.907 mg/L, so neither route changes the figure she reports.'}],
  setup:{eq:'cp-after-stop', pre:['thalf-first','cl-k-vd','cp-infusing'], why:'"infused" "WITHOUT a loading dose for 3 hours" and "4 hours after cessation", so the after-cessation line. Given t½, VD, R, the infusion length and the time since stopping, asked Cp, so Cp = Cpeak e^(−kt). Cpeak first, from Cp = ({{frac:R|Cl}})(1 − e^(−kt)) when the infusion ends, with k = {{frac:0.693|t½}} and Cl = k·VD.'},
+ asks:'Cp',
  givens:[['t½', '5 hours', 'gives k = 0.1386 hr⁻¹, used in both exponents'], ['VD', '16 L', 'with k gives Cl = 2.218 L/hr'], ['R', '44.35 mg/hr', 'the numerator of the plateau {{frac:44.35|2.218}}'], ['infusion time', '3 hours', 'the t in 1 − e^(−kt) for Cpeak'], ['t', '4 hours', 'the time since cessation, in e^(−kt)']],
  check:{t:'Three hours of infusion is under one half-life, so the peak is under half the plateau (6.80 mg/L). Four hours of decline is also under one half-life, so more than half of 6.80 mg/L remains; 3.9 fits.', lo:3.4, hi:6.8},
  teach:[
@@ -1210,6 +1225,7 @@ const Q_MODULE3 = [
   {k:'round', t:'t = 30.3 hr',
    why:'Her key prints 30.3 hr, to one decimal place. The answer is a time and carries no reciprocal unit; the age and weight given in the stem never enter it, because the plateau cancels out of any question asked as a percentage of steady state.'}],
  setup:{eq:'cp-infusing', pre:['thalf-first'], why:'"IV infusion with no loading dose" and "95% of the steady-state concentration", so the concentration-during-infusion line solved for t. Given t½ and the fraction of Css, asked t, so 0.95 = 1 − e^(−kt) rearranged to t = −{{frac:ln(0.05)|k}}. k first, from k = {{frac:0.693|t½}}, because the line wants k; age and weight are unused.'},
+ asks:'t',
  givens:[['age', '35 years old', 'not needed'], ['weight', '65 kg', 'not needed'], ['t½', '7 hours', 'gives k = {{frac:0.693|7}} = 0.099 hr⁻¹'], ['fraction of Css', '95%', 'so e^(−kt) = 0.05 and kt = −ln(0.05) = 3.00']],
  check:{t:'95 per cent of the plateau is reached between four and five half-lives of 7 hours, so t lies between 4 × 7 and 5 × 7 hr; 30.3 hr fits.', lo:28, hi:35},
  teach:[
@@ -1249,6 +1265,7 @@ const Q_MODULE3 = [
   {k:'round', t:'R = 14.86 mg/hr, recommended as 15 mg/hr',
    why:'Her key prints 14.86 mg/hr and then rounds it to 15 mg/hr as the practical recommendation, writing the two with an arrow between them. Either value falls inside the tolerance here.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"IV infusion" with a "desired steady-state plasma level", so the infusion block. Given Css, t½ and VD as a per cent of body weight, asked R, so Css = {{frac:R|Cl}} rearranged to R = Css·Cl. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD; the per cent and mcg/mL steps are unit conversions.'},
+ asks:'R',
  givens:[['age', '35 years old', 'not needed'], ['weight', '65 kg', 'with the percentage gives VD = 0.231 × 65 = 15.015 L'], ['t½', '7 hours', 'gives k = {{frac:0.693|7}} = 0.099 hr⁻¹'], ['VD', '23.1% of body weight', 'the fraction of 65 kg that is the volume'], ['Css', '10 mcg/mL', 'the target, as 10 mg/L, multiplied by k · VD']],
  check:{t:'VD is 23.1% of 65 kg, 15.015 L, and k is 0.693 over 7, 0.099 hr⁻¹, so Cl is about one and a half L/hr; 10 mg/L times that is about 15 mg/hr, and 14.86 fits.', lo:0},
  teach:[
@@ -1289,6 +1306,7 @@ const Q_MODULE3 = [
   {k:'round', t:'DL = 1000 mg',
    why:'Her key prints 1000 mg. The number comes out whole because the stated half-life and the summed clearance happen to make the volume of distribution exactly 100 L, so no rounding decision arises anywhere in the chain. The therapeutic range quoted in the stem is never used.'}],
  setup:{eq:'dl-rk', pre:['clt-sum','css','thalf-first'], why:'"IV bolus loading dose" so a "steady-state concentration" is "attained immediately", so the loading-dose-from-rate line. Given Css, t½ and the "renal and metabolic clearances", asked DL, so DL = {{frac:R|k}}. ClT first as the sum of the two clearances, then R = Css·ClT and k = {{frac:0.693|t½}}, because the line wants R and k.'},
+ asks:'DL',
  givens:[['window', '4 to 15 mg/L', 'not needed: the target 10 mg/L is stated separately'], ['Css', '10 mg/L', 'the target, multiplied by ClT for R = 115.5 mg/hr'], ['t½', '6 hours', 'gives k = {{frac:0.693|6}} = 0.1155 hr⁻¹, the denominator'], ['ClR', '5', 'in L/hr, added to the metabolic clearance'], ['ClM', '6.55 L/hr', 'added to ClR: ClT = 5 + 6.55 = 11.55 L/hr']],
  check:{t:'ClT = 5 + 6.55 = 11.55 L/hr and k = 0.1155 hr⁻¹, so VD is ClT over k, 100 L; a loading dose of 10 mg/L × 100 L is 1000 mg.', lo:0},
  teach:[
@@ -1334,6 +1352,7 @@ const Q_MODULE3 = [
   {k:'round', t:'DL = 320 mg',
    why:'Her printed answer is 320 mg, a whole number, as a dose that could actually be drawn up. The two routes differ by 0.014 mg, which is the rounding in her 0.1386 hr⁻¹, so either working reaches the same recommendation.'}],
  setup:{eq:'dl-css-vd', pre:[], why:'"IV loading dose" to "rapidly achieve a steady-state concentration", so the loading-dose-from-target line. Given Css and VD, asked DL, so DL = Css·VD directly. No hinge; the half-life is not needed on this route.'},
+ asks:'DL',
  givens:[['Css', '20 mg/L', 'the target concentration, one factor'], ['t½', '5 hours', 'not needed on the Css · VD route; it enters the R over k check'], ['VD', '16 L', 'the volume to fill, the other factor']],
  check:{t:'A loading dose fills the volume to the target: 20 mg/L × 16 L = 320 mg. The half-life is not needed, and R over k returns the same 320 mg.', lo:0},
  teach:[
@@ -1372,6 +1391,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 13.2 + 6.8 = 20 mg/L',
    why:'Her key prints 20 mg/L and marks it as Css. The two fractions sum to one because both terms have the same 20 mg/L coefficient, which is what a correctly sized loading dose produces: the concentration never moves off the target.'}],
  setup:{eq:'load-plus-infusion', pre:['thalf-first','cl-k-vd'], why:'"administered at 44.35 mg/hr WITH a 320 mg loading dose", so the loading-dose-and-infusion line. Given DL, R, VD, t½ and t, asked Cp, so Cp = ({{frac:DL|VD}})e^(−kt) + ({{frac:R|Cl}})(1 − e^(−kt)). k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because both terms want k and the infusion term wants Cl.'},
+ asks:'Cp',
  givens:[['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹, in both exponents'], ['VD', '16 L', 'the denominator of the bolus term; with k gives Cl = 2.218 L/hr'], ['R', '44.35 mg/hr', 'the numerator of the infusion plateau {{frac:44.35|2.218}}'], ['DL', '320 mg', 'over VD gives the bolus start {{frac:320|16}} = 20 mg/L'], ['t', '3 hours', 'the time in both exponents: kt = 0.1386 × 3']],
  check:{t:'320 mg over 16 L gives 20 mg/L at once, and the plateau 44.35 over 2.218 is also 20 mg/L, so the bolus and the infusion match and the level stays at 20 mg/L at every time, including 3 hr.', lo:20, hi:20},
  teach:[
@@ -1410,6 +1430,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Cp = 6.8 mg/L',
    why:'Her printed answer is 6.8 mg/L, to one decimal place. The next question in her set decays this figure for a further four hours, so it is the starting concentration for that part as well as the answer to this one.'}],
  setup:{eq:'cp-infusing', pre:['thalf-first','cl-k-vd'], why:'"infused" "WITHOUT a loading dose for 3 hours" and "at the end of the infusion", so the concentration-during-infusion line. Given R, t½, VD and t, asked Cp, so Cp = ({{frac:R|Cl}})(1 − e^(−kt)). k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because the line wants both Cl and k.'},
+ asks:'Cp',
  givens:[['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['VD', '16 L', 'with k gives Cl = 2.218 L/hr'], ['R', '44.35 mg/hr', 'the numerator of the plateau {{frac:44.35|2.218}} = 20 mg/L'], ['t', '3 hours', 'the infusion time in 1 − e^(−kt)']],
  check:{t:'Three hours is under one half-life of 5 hours, so the level is under half the plateau of 20 mg/L, below 10 mg/L; 6.8 mg/L fits.', lo:0, hi:10},
  teach:[
@@ -1447,6 +1468,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Css = 36.08 mg/L, printed as 36.1 mg/L',
    why:'Her working gives 36.08 mg/L and her answer line prints 36.1 mg/L. Carrying k unrounded gives 36.06 mg/L, which is the 0.02 difference between the two and is inside the tolerance set here.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"IV loading dose and a simultaneous IV infusion", asked the "steady-state concentration of the infusion", so the steady-state line, which carries no loading-dose term. Given R, t½ and VD, asked Css, so Css = {{frac:R|Cl}}. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because the line wants Cl.'},
+ asks:'Css',
  givens:[['DL', '500 mg', 'not needed: the plateau has no loading-dose term'], ['R', '75 mg/hr', 'the numerator of {{frac:R|Cl}}'], ['duration', '3 days', 'not needed: it only confirms steady state is reached'], ['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '12 L', 'with k gives Cl = 12 × 0.1733 = 2.0796 L/hr']],
  check:{t:'k is 0.693 over 4, 0.1733 hr⁻¹, and Cl is 12 × 0.1733 = 2.0796 L/hr; 75 over 2.0796 gives 36.08 mg/L. The 500 mg loading dose does not change the plateau, only how soon it is reached.', lo:0},
  teach:[
@@ -1478,6 +1500,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Css = 36.08 mg/L, printed as 36.1 mg/L',
    why:'Her key prints the same 36.1 mg/L for this part and shows no working, because the point of the part is that there is nothing new to compute.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"loading dose" changed alongside "the same 75 mg/hr infusion", asked the "steady-state concentration", so the steady-state line, which carries no loading-dose term. Given R, t½ and VD, asked Css, so Css = {{frac:R|Cl}}, unchanged. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD.'},
+ asks:'Css',
  givens:[['DL', '750 mg', 'not needed: the plateau has no loading-dose term'], ['DL before', '500 mg', 'not needed'], ['R', '75 mg/hr', 'the numerator of {{frac:R|Cl}}'], ['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '12 L', 'with k gives Cl = 12 × 0.1733 L/hr']],
  check:{t:'The plateau is R over Cl, 75 over (12 × 0.1733), 36.08 mg/L, with no loading-dose term; changing 500 mg to 750 mg changes the early levels, not the steady state.', lo:0},
  teach:[
@@ -1511,6 +1534,7 @@ const Q_MODULE3 = [
   {k:'round', t:'DL = 433 mg',
    why:'Her printed answer is 433 mg, a whole number. The 500 mg given in the stem is larger than this, which is why that patient starts above the plateau rather than at it.'}],
  setup:{eq:'dl-css-vd', pre:[], why:'"loading dose to achieve that steady-state concentration immediately" alongside an infusion, so the loading-dose block. Given Css and VD, asked DL, so DL = Css·VD. No hinge; DL = {{frac:R|k}} with k = {{frac:0.693|t½}} gives the same number from the rate.'},
+ asks:'DL',
  givens:[['R', '75 mg/hr', 'the numerator of the alternative {{frac:R|k}}'], ['Css', '36.1 mg/L', 'the target, one factor of Css · VD'], ['t½', '4 hours', 'gives k = 0.1733 hr⁻¹ for the R over k route'], ['VD', '12 L', 'the volume to fill, the other factor']],
  check:{t:'The loading dose fills 12 L to 36.1 mg/L: 36.1 × 12 = 433.2 mg, and 75 over 0.1733 must give the same number; 433 mg fits.', lo:0},
  teach:[
@@ -1544,6 +1568,7 @@ const Q_MODULE3 = [
   {k:'round', t:'t = 13.29 hr, printed as 13.3 hr',
    why:'Her working carries 13.29 hr and her answer line prints 13.3 hr, to one decimal place. Carrying k unrounded gives 13.288 hr, so her four-figure rate constant costs nothing at this precision.'}],
  setup:{eq:'cp-infusing', pre:['thalf-first'], why:'"infused at a constant rate with no loading dose" and "90% of the desired steady-state concentration", so the concentration-during-infusion line solved for t. Given t½ and the fraction of Css, asked t, so 0.90 = 1 − e^(−kt) rearranged to t = −{{frac:ln(0.10)|k}}. k first, from k = {{frac:0.693|t½}}, because the line wants k, not t½.'},
+ asks:'t',
  givens:[['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['fraction of Css', '90%', 'so e^(−kt) = 0.10 and kt = −ln(0.10) = 2.302585']],
  check:{t:'Ninety per cent of the plateau takes a little over three half-lives (three half-lives reach 87.5 per cent), so t lies between 3 × 4 and 4 × 4 hr, 12 to 16 hr; 13.29 fits.', lo:12, hi:16},
  teach:[
@@ -1575,6 +1600,7 @@ const Q_MODULE3 = [
   {k:'round', t:'Css = 72.15 mg/L, printed as 72.2 mg/L',
    why:'Her working carries 72.15 mg/L and her answer line prints 72.2 mg/L, which is twice the 36.08 mg/L of part a to within her rounding.'}],
  setup:{eq:'css', pre:['thalf-first','cl-k-vd'], why:'"infused at 150 mg/hr rather than 75 mg/hr", asked the "steady-state concentration", so the steady-state line. Given R, t½ and VD, asked Css, so Css = {{frac:R|Cl}} with the clearance unchanged. k first, from k = {{frac:0.693|t½}}, then Cl = k·VD, because the line wants Cl.'},
+ asks:'Css',
  givens:[['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '12 L', 'with k gives Cl = 2.0796 L/hr, unchanged'], ['R', '150 mg/hr', 'the new numerator of {{frac:R|Cl}}'], ['R before', '75 mg/hr', 'not needed for the number: the new rate is double it']],
  check:{t:'Css is R over Cl: 150 over 2.0796 L/hr gives 72.15 mg/L, exactly double what 75 mg/hr would give, because the clearance 2.0796 L/hr is unchanged.', lo:0},
  teach:[

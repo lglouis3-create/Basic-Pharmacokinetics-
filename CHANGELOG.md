@@ -2,6 +2,13 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (plan drill asks what is asked; pieces stack like the sheet)
+- The plan drill opens with "What is asked?": pick the symbol from six, then read its meaning and pick the unit.
+- After the line, it asks whether that line is printed on her sheet; the plan lists all six decisions.
+- Line options show the equation only until you pick; the names no longer give the answer away.
+- In Build it, the slots sit as the sheet prints the line, numerator over denominator; the bar is drawn, not placed.
+- Every calculation now names the quantity it asks for, so the drill can ask it back.
+
 ## 2026-10-07 (explanations that leave no question open)
 - Every concept explanation was read for the questions a learner could still ask, and the material now answers them.
 - Terms are defined where they are used, each rule carries its because, and reference numbers say where they come from.

@@ -92,10 +92,11 @@ with sync_playwright() as p:
     # --- building drill, by tapping
     pg.evaluate("eqSetChosen(['css']); eqStart('build')"); pg.wait_for_timeout(250)
     slots = pg.locator('.eqslot').count(); tiles = pg.locator('.eqtile').count()
-    ok(f'the build view offers {slots} slots and {tiles} pieces', slots == 3 and tiles > slots)
+    # R over Cl is drawn as a stacked fraction: two operand slots, the bar drawn rather than placed
+    ok(f'the build view offers {slots} slots and {tiles} pieces, stacked', slots == 2 and tiles > slots and pg.locator('.eqfrac').count() == 1)
     ok('Check is disabled while a slot is empty', pg.locator('#eqCheck').is_disabled())
     order = pg.evaluate("""() => {
-      const want = EQ_BY_ID['css'].tokens;
+      const want = EQ_BY_ID['css'].tokens.filter(t => !EQ_OP(t));
       return want.map(w => EQ.tray.findIndex(t => t.t === w));
     }""")
     for t in order:
@@ -103,14 +104,15 @@ with sync_playwright() as p:
     ok('placing every piece enables Check', not pg.locator('#eqCheck').is_disabled())
     pg.click('#eqCheck'); pg.wait_for_timeout(200)
     ok('the built equation is marked right', '✓ Correct' in pg.inner_text('#v-eq'))
-    ok('each slot is marked individually', pg.locator('.eqslot.ok').count() == 3)
+    ok('each slot is marked individually', pg.locator('.eqslot.ok').count() == 2)   # the two operand slots; the bar is structure
 
     # tapping a filled slot empties it again
     pg.evaluate("eqStart('build')"); pg.wait_for_timeout(200)
     pg.evaluate("eqPlace(EQ.tray[0].i)"); pg.wait_for_timeout(120)
-    filled = pg.evaluate("EQ.slots.filter(s => s !== null).length")
+    operand = "EQ.slots.filter((s, i) => s !== null && !EQ_OP(EQ_BY_ID['css'].tokens[i])).length"   # the '/' slot is pre-drawn, so only placed pieces are counted
+    filled = pg.evaluate(operand)
     pg.click('.eqslot.full'); pg.wait_for_timeout(120)
-    ok('tapping a filled slot clears it', filled == 1 and pg.evaluate("EQ.slots.filter(s => s !== null).length") == 0)
+    ok('tapping a filled slot clears it', filled == 1 and pg.evaluate(operand) == 0)
 
     # --- the picker
     pg.evaluate("EQ = null; renderEq()"); pg.wait_for_timeout(200)

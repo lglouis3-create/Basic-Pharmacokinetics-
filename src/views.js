@@ -3668,12 +3668,58 @@ function eqStart(mode){
         slots: [], tray: [], revealed: false, ok: false, typed: '', right: 0, asked: 0};
   eqLoad();
 }
+/* The build layout: the slots laid out the way the sheet prints the line,
+   numerator over denominator, read from the equation's `disp`. Each
+   operand token takes a slot; the '/' and '×' tokens are the structure and
+   are drawn as the fraction bar or the glue between slots, not placed. When
+   the pieces cannot be matched to the display (a piece that is itself a
+   ratio, or a line with no stacked display) the slots stay in a row. */
+const EQ_OP = t => /^(\/|&times;|×|\*)$/.test(String(t).trim());
+/* A piece that opens a bracket the next piece closes ("(AUCpo", "AUCIV)")
+   loses that stray bracket in the stacked layout, where the bar does the
+   grouping; a piece whose brackets balance keeps them. */
+const eqTileText = t => { const s = String(t), o = (s.match(/[(\[]/g) || []).length, c = (s.match(/[)\]]/g) || []).length;
+  return o === c ? s : s.replace(/^[(\[]+/, '').replace(/[)\]]+$/, ''); };
+const eqNorm = s => deEnt(String(s)).replace(/<[^>]+>/g, '').toLowerCase().replace(/[\s()\[\]×*\/]/g, '').replace(/−/g, '-');
+function eqLayout(e){
+  if(!e.disp || !/\{\{frac:/.test(e.disp)) return null;
+  const ops = e.tokens.map((t, i) => EQ_OP(t) ? null : i).filter(i => i !== null);   // operand indices in order
+  let pos = 0;
+  const take = target => {                       // consume operands whose joined text is the target
+    const out = []; let acc = '';
+    while(pos < ops.length && acc.length < target.length){
+      const n = eqNorm(e.tokens[ops[pos]]); if(!n){ pos++; continue; }
+      if(!target.startsWith(acc + n)) return null;
+      acc += n; out.push(ops[pos]); pos++;
+    }
+    return acc === target ? out : null;
+  };
+  const parts = [];
+  const re = /\{\{frac:([^|}]*)\|([^}]*)\}\}/g; let last = 0, m;
+  const plain = txt => {
+    if(!txt) return true;
+    const t = eqNorm(txt);
+    if(!t){ if(txt.trim()) parts.push({kind: 'glue', html: txt}); return true; }
+    const save = pos, got = take(t);
+    if(got){ parts.push({kind: 'row', idx: got}); return true; }
+    pos = save; parts.push({kind: 'glue', html: txt}); return true;   // text that is not a piece (ln, brackets)
+  };
+  while((m = re.exec(e.disp))){
+    if(!plain(e.disp.slice(last, m.index))) return null;
+    const num = take(eqNorm(m[1])); if(!num) return null;
+    const den = take(eqNorm(m[2])); if(!den) return null;
+    parts.push({kind: 'frac', num, den}); last = m.index + m[0].length;
+  }
+  if(!plain(e.disp.slice(last))) return null;
+  return pos === ops.length ? parts : null;
+}
 function eqLoad(){
   const e = EQ_BY_ID[EQ.queue[EQ.i]];
   EQ.revealed = false; EQ.ok = false; EQ.shown = false; EQ.overrode = false; EQ.typed = '';
   if(e && EQ.step === 'build'){
-    EQ.slots = e.tokens.map(() => null);
-    EQ.tray  = shuffle([...e.tokens, ...(e.lures || [])].map((t, i) => ({t, i})));
+    EQ.layout = eqLayout(e);
+    EQ.slots = e.tokens.map(t => EQ.layout && EQ_OP(t) ? t : null);   // the structure is drawn, not placed
+    EQ.tray  = shuffle([...e.tokens, ...(e.lures || [])].map((t, i) => ({t, i})).filter(x => !EQ.layout || !EQ_OP(x.t)));
   }
   renderEq();
 }
@@ -3700,18 +3746,22 @@ function eqDrillHTML(){
       : 'Write it out. Capitals, spaces, the order of the factors and how you write the multiplication do not matter.'}</p>`;
 
   if(building){
-    h += `<div class="eqbuild"><span class="eqlhs">${e.lhs} =</span>`;
-    EQ.slots.forEach((s, i) => {
+    const slotBtn = i => { const s = EQ.slots[i];
       const cls = EQ.revealed ? (normEq(eqPlain(s || '')) === normEq(eqPlain(e.tokens[i])) ? ' ok' : ' bad') : '';
-      h += `<button class="eqslot${cls}${s ? ' full' : ''}" data-slot="${i}"${EQ.revealed ? ' disabled' : ''}
-        aria-label="Position ${i + 1} of ${EQ.slots.length}">${s || '&nbsp;'}</button>`;
-    });
+      return `<button class="eqslot${cls}${s ? ' full' : ''}" data-slot="${i}"${EQ.revealed ? ' disabled' : ''}
+        aria-label="Position ${i + 1} of ${EQ.slots.length}">${s ? (EQ.layout ? eqTileText(s) : s) : '&nbsp;'}</button>`; };
+    h += `<div class="eqbuild"><span class="eqlhs">${e.lhs} =</span>`;
+    if(EQ.layout){
+      h += EQ.layout.map(p => p.kind === 'glue' ? `<span class="eqglue">${p.html}</span>`
+        : p.kind === 'row' ? p.idx.map(slotBtn).join('')
+        : `<span class="eqfrac"><span class="eqfn">${p.num.map(slotBtn).join('')}</span><span class="eqfd">${p.den.map(slotBtn).join('')}</span></span>`).join('');
+    }else EQ.slots.forEach((s, i) => { h += slotBtn(i); });
     h += `</div>`;
     if(!EQ.revealed){
       const placed = new Set(EQ.slots.map((_, i) => EQ.trayOf && EQ.trayOf[i]).filter(x => x != null));
       h += `<div class="eqtray">${EQ.tray.map(t =>
         `<button class="eqtile${placed.has(t.i) ? ' used' : ''}" data-tile="${t.i}"${
-          placed.has(t.i) ? ' disabled' : ''}>${t.t}</button>`).join('')}</div>`;
+          placed.has(t.i) ? ' disabled' : ''}>${EQ.layout ? eqTileText(t.t) : t.t}</button>`).join('')}</div>`;
     }
   }else{
     h += `<div class="eqtype"><span class="eqlhs">${e.lhs} =</span>
@@ -3814,7 +3864,7 @@ function eqDrillWire(el){
   }
   if(byId('eqCheck')) byId('eqCheck').onclick = eqCheck;
   if(byId('eqClear')) byId('eqClear').onclick = () => {
-    EQ.slots = EQ.slots.map(() => null); EQ.trayOf = {}; EQ.sel = null; renderEq();
+    EQ.slots = e.tokens.map(t => EQ.layout && EQ_OP(t) ? t : null); EQ.trayOf = {}; EQ.sel = null; renderEq();
   };
   if(byId('eqShow')) byId('eqShow').onclick = () => {
     EQ.revealed = true; EQ.ok = false; EQ.shown = true;
@@ -4068,11 +4118,55 @@ function planModels(q){
   return {main, acc};
 }
 const planNeeded = q => (q.givens || []).map((g, i) => /^not needed/i.test(g[2] || '') ? null : i).filter(i => i !== null);
+/* "What is asked?": the symbol of the quantity, from six; then its meaning
+   and the unit the answer carries. The lures are the quantities the same
+   module's stems ask for, so the choice is between neighbours. */
+const UNIT_POOL = ['mg/L', 'mcg/mL', 'mg', 'L', 'hr', 'min', 'hr⁻¹', 'L/hr', 'mL/min', '(mg/L)·hr', 'mg/hr', 'no units'];
+const normUnit = u => String(u || '').toLowerCase().replace(/\s+/g, '').replace(/·|\*/g, '.');
+function planAskOpts(q){
+  const mod = suPoolAll().filter(x => x.module === q.module && x.asks && ASKS[x.asks] && x.asks !== q.asks).map(x => x.asks);
+  const near = shuffle([...new Set(mod)]), rest = shuffle(Object.keys(ASKS).filter(k => k !== q.asks && !near.includes(k)));
+  return shuffle([q.asks, ...near, ...rest].slice(0, 6));
+}
+function planUnitOpts(q){
+  const seen = new Set([normUnit(q.units)]), out = [q.units];
+  const mod = shuffle([...new Set(suPoolAll().filter(x => x.module === q.module).map(x => x.units))]);
+  for(const u of [...mod, ...UNIT_POOL]){ if(out.length >= 6) break; if(!seen.has(normUnit(u))){ seen.add(normUnit(u)); out.push(u); } }
+  return shuffle(out);
+}
+const planHasAsk = q => !!(q.asks && ASKS[q.asks]);
+function planAskHTML(q, st, n){
+  st.askOpts ||= planAskOpts(q);
+  let h = `<p class="suask"><b>${n}. What is asked?</b> The symbol of the quantity the stem wants, before anything else.</p><div class="sumodels">${st.askOpts.map(k => {
+    const cls = st.ask == null ? '' : k === q.asks ? ' right' : k === st.ask ? ' wrong' : ' dim';
+    return `<button type="button" class="suopt sumodel${cls}" data-suask="${esc(k)}"${st.ask != null ? ' disabled' : ''}><span class="suname">${rich(ASKS[k][0])}</span></button>`; }).join('')}</div>`;
+  if(st.ask != null){
+    h += `<p class="verdict ${st.askOk ? 'ok' : 'bad'}">${st.askOk ? '✓ ' : `✗ Not ${rich(ASKS[st.ask][0])}: the stem asks for `}${rich(ASKS[q.asks][0])}</p>
+      <p class="sub">${rich(ASKS[q.asks][0])} is ${esc(ASKS[q.asks][1])}.</p>`;
+  }
+  return h;
+}
+function planUnitHTML(q, st, n){
+  st.unitOpts ||= planUnitOpts(q);
+  let h = `<p class="suask"><b>${n}. Which unit will the answer carry?</b></p><div class="sumodels">${st.unitOpts.map(u => {
+    const cls = st.unit == null ? '' : normUnit(u) === normUnit(q.units) ? ' right' : u === st.unit ? ' wrong' : ' dim';
+    return `<button type="button" class="suopt sumodel${cls}" data-suunit="${esc(u)}"${st.unit != null ? ' disabled' : ''}><span class="suname">${esc(u)}</span></button>`; }).join('')}</div>`;
+  if(st.unit != null) h += `<p class="verdict ${st.unitOk ? 'ok' : 'bad'}">${st.unitOk ? '✓ ' + esc(q.units) : `✗ Not ${esc(st.unit)}: the answer is in ${esc(q.units)}`}</p>`;
+  return h;
+}
+function planSheetHTML(q, st, n){
+  const e = EQ_BY_ID[q.setup.eq], printed = e.sheet === 'yes';
+  let h = `<p class="suask"><b>${n}. Is that line printed on her sheet?</b></p><div class="sumodels">${[['yes', 'Printed on the sheet'], ['no', 'Not printed: from memory, or reached from a printed line']].map(([k, label]) => {
+    const right = (k === 'yes') === printed, cls = st.sheet == null ? '' : right ? ' right' : k === st.sheet ? ' wrong' : ' dim';
+    return `<button type="button" class="suopt sumodel${cls}" data-susheet="${k}"${st.sheet != null ? ' disabled' : ''}><span class="suname">${esc(label)}</span></button>`; }).join('')}</div>`;
+  if(st.sheet != null) h += `<p class="verdict ${st.sheetOk ? 'ok' : 'bad'}">${st.sheetOk ? '✓ ' : '✗ '}${printed ? 'It is printed; find it on the sheet rather than recalling it.' : (e.must ? 'It is not printed; she said to know it.' : 'It is not printed; it is reached from a printed line.')}</p>`;
+  return h;
+}
 /* The model step and the givens step of a plan card; the line step is the
    set-up card's own options. */
-function planModelHTML(q, st){
+function planModelHTML(q, st, n){
   const {main, acc} = planModels(q);
-  let h = `<p class="suask"><b>1. Which dosing model?</b> From the stem's words, before any symbol.</p><div class="sumodels">${PLAN_MODELS.map(([k, name]) => {
+  let h = `<p class="suask"><b>${n}. Which dosing model?</b> From the stem's words.</p><div class="sumodels">${PLAN_MODELS.map(([k, name]) => {
     const cls = st.model == null ? '' : acc.has(k) ? ' right' : k === st.model ? ' wrong' : ' dim';
     return `<button type="button" class="suopt sumodel${cls}" data-sumodel="${k}"${st.model != null ? ' disabled' : ''}><span class="suname">${esc(name)}</span></button>`; }).join('')}</div>`;
   if(st.model != null){
@@ -4082,9 +4176,9 @@ function planModelHTML(q, st){
   }
   return h;
 }
-function planGivensHTML(q, st){
+function planGivensHTML(q, st, n){
   const need = new Set(planNeeded(q)), gs = q.givens || [];
-  let h = `<p class="suask"><b>3. Which givens does this line use?</b> Tick every value that enters the working, the hinge lines included; leave the rest.</p>
+  let h = `<p class="suask"><b>${n}. Which givens does this line use?</b> Tick every value that enters the working, the hinge lines included; leave the rest.</p>
     <div class="sugivs">${gs.map((g, i) => { const on = st.giv.has(i);
       const cls = !st.givChecked ? (on ? ' on' : '') : need.has(i) ? (on ? ' right' : ' missed') : (on ? ' wrong' : ' dim');
       return `<button type="button" class="suopt sugiv${cls}" data-sugiv="${i}" aria-pressed="${on}"${st.givChecked ? ' disabled' : ''}><span class="suname">${rich(g[0])} = ${esc(g[1])}</span>${st.givChecked ? `<span class="sueq surole">${rich(g[2])}</span>` : ''}</button>`; }).join('')}</div>`;
@@ -4116,7 +4210,8 @@ function suOptions(q){
 }
 /* The state for one stem, made on first sight and kept, so a layout change
    or a return never re-asks or re-rolls a stem already answered. */
-const suState = q => (SU.page[q.id] ||= {options: suOptions(q), picked: null, pickedId: null, ok: false, model: null, modelOk: false, giv: new Set(), givChecked: false, givOk: false});
+const suState = q => (SU.page[q.id] ||= {options: suOptions(q), picked: null, pickedId: null, ok: false, model: null, modelOk: false, giv: new Set(), givChecked: false, givOk: false,
+  ask: null, askOk: false, unit: null, unitOk: false, sheet: null, sheetOk: false});
 const suAnswered = st => st.picked != null || st.pickedId != null;
 /* Where the line is chosen from: four lines (the default) or the whole
    sheet, block by block as the exam hands it over, with the lines she said
@@ -4129,7 +4224,7 @@ function suSheetListHTML(q, st){
   const line = (html, id, name) => {
     if(!id || !EQ_BY_ID[id]) return `<span class="suopt suline nolink"><span class="sueq">${mathHTML(html)}</span></span>`;
     const cls = !done ? '' : isRight(id) ? ' right' : id === st.pickedId ? ' wrong' : ' dim';
-    return `<button type="button" class="suopt suline${cls}" data-suline="${esc(id)}"${done ? ' disabled' : ''}><span class="sueq">${mathHTML(html)}</span>${name ? `<span class="suname">${esc(name)}</span>` : ''}</button>`; };
+    return `<button type="button" class="suopt suline${cls}" data-suline="${esc(id)}"${done ? ' disabled' : ''}><span class="sueq">${mathHTML(html)}</span>${name && done ? `<span class="suname">${esc(name)}</span>` : ''}</button>`; };
   const groups = SHEET_MODEL_ORDER.map(model => [model, SHEET_LINES.filter(l => l.model === model)]).filter(([, ls]) => ls.length);
   const extra = EQUATIONS.filter(e => e.sheet === 'absent' && e.derive);
   const blocks = groups.map(([model, ls]) => ({title: model, items: ls.map(l => line(l.html, l.eq)), hit: ls.some(l => l.eq && isRight(l.eq))}))
@@ -4144,15 +4239,24 @@ function suQuestionHTML(q, st, idx){
   const e = EQ_BY_ID[q.setup.eq], plan = SU.mode === 'plan';
   let h = `<div class="card suq" data-suq="${idx}"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">${plan ? 'plan the problem' : 'set-up only'}</span></div>
     <div class="stem">${stemHTML(q.stem)}</div>`;
-  if(plan){ h += planModelHTML(q, st); if(st.model == null) return h + `</div>`; }
+  let step = 1;
+  if(plan){
+    if(planHasAsk(q)){
+      h += planAskHTML(q, st, step++); if(st.ask == null) return h + `</div>`;
+      h += planUnitHTML(q, st, step++); if(st.unit == null) return h + `</div>`;
+    }
+    h += planModelHTML(q, st, step++); if(st.model == null) return h + `</div>`;
+  }
+  const lineStep = plan ? step++ + '. ' : '';
   if(suFrom() === 'sheet'){
-    h += `<p class="suask"><b>${plan ? '2. ' : ''}Which line solves what is asked?</b> Find it on the sheet: open the block, then the line. No arithmetic.</p>` + suSheetListHTML(q, st);
+    h += `<p class="suask"><b>${lineStep}Which line solves what is asked?</b> Find it on the sheet: open the block, then the line. No arithmetic.</p>` + suSheetListHTML(q, st);
   }else{
-    h += `<p class="suask"><b>${plan ? '2. ' : ''}Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
+    /* names are shown only once answered: a name such as "Relative bioavailability" would give the line away */
+    h += `<p class="suask"><b>${lineStep}Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
     <div class="suopts">${st.options.map((o, i) => {
       const cls = !suAnswered(st) ? '' : o.id === e.id ? ' right' : i === st.picked ? ' wrong' : ' dim';
       return `<button type="button" class="suopt${cls}" data-suopt="${i}"${suAnswered(st) ? ' disabled' : ''}>
-        <span class="suname">${esc(o.name)}</span><span class="sueq">${eqShow(o)}</span></button>`; }).join('')}</div>`;
+        ${suAnswered(st) ? `<span class="suname">${esc(o.name)}</span>` : ''}<span class="sueq">${eqShow(o)}</span></button>`; }).join('')}</div>`;
   }
   if(suAnswered(st)){
     const chosen = st.pickedId != null ? EQ_BY_ID[st.pickedId] : st.options[st.picked];
@@ -4162,11 +4266,13 @@ function suQuestionHTML(q, st, idx){
       ${st.ok ? '' : `<p class="sub">You picked <b>${esc(chosen.name)}</b>, ${eqShow(chosen)}. It holds when: ${mathHTML(suFirstSentence(chosen.holds))}</p>`}
       <div class="suright"><b>${esc(e.name)}</b> <span class="sm">(${esc((SHEET_TAG[e.sheet] || SHEET_TAG.absent)[0])}${e.must ? '; she said to know it' : ''})</span><div class="sueqbig">${eqShow(e)}</div></div>`;
     if(plan && (q.givens || []).length){
-      h += planGivensHTML(q, st);
+      h += planSheetHTML(q, st, step++); if(st.sheet == null) return h + `</div></div>`;
+      h += planGivensHTML(q, st, step++);
       if(!st.givChecked) return h + `</div></div>`;
       h += `<div class="suplan"><h4>The plan</h4><ol>
+        ${planHasAsk(q) ? `<li>Asked: ${rich(ASKS[q.asks][0])}, ${esc(ASKS[q.asks][1])}; the answer is in ${esc(q.units)}.</li>` : ''}
         <li>${esc(PLAN_NAME[planModels(q).main])}: the ${esc(PLAN_NAME[planModels(q).main]).toLowerCase().startsWith('any') ? 'block' : 'block of the sheet'} to read from.</li>
-        <li>${eqShow(e)}, the line whose left side is what is asked${pre.length ? `, after ${pre.map(id => eqShow(EQ_BY_ID[id])).join(' and ')}` : ''}.</li>
+        <li>${eqShow(e)}, the line whose left side is what is asked${pre.length ? `, after ${pre.map(id => eqShow(EQ_BY_ID[id])).join(' and ')}` : ''}; ${e.sheet === 'yes' ? 'printed on the sheet' : 'not printed'}.</li>
         <li>Givens that enter: ${planNeeded(q).map(i => rich(q.givens[i][0])).join(', ') || 'none beyond the line'}.${(q.givens || []).length > planNeeded(q).length ? ` Set aside: ${(q.givens || []).map((g, i) => planNeeded(q).includes(i) ? null : rich(g[0])).filter(Boolean).join(', ')}.` : ''}</li>
         ${q.check && q.check.t ? `<li>Before computing: ${rich(q.check.t)}</li>` : ''}</ol></div>`;
     }
@@ -4187,7 +4293,7 @@ function suHTML(){
   const tally = `<span>${SU.right} of ${SU.asked} right</span>`;
   if(!q){
     const pct = SU.asked ? Math.round(100 * SU.right / SU.asked) : 0;
-    return `<h2>${SU.mode === 'plan' ? 'Plan the problem' : 'Set-up drill'}</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.${SU.mode === 'plan' ? ` <b>${SU.plans}</b> of ${SU.asked} plans complete: model, line and givens all right.` : ''}</p>
+    return `<h2>${SU.mode === 'plan' ? 'Plan the problem' : 'Set-up drill'}</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.${SU.mode === 'plan' ? ` <b>${SU.plans}</b> of ${SU.asked} plans complete: what is asked, its unit, the model, the line, whether it is printed, and the givens all right.` : ''}</p>
       ${suMixupsHTML()}
       <div class="btns"><button class="btn" data-suagain="1">Again, reshuffled</button><button class="btn ghost" data-suhome="1">Back to Equations</button></div></div>`;
   }
@@ -4245,6 +4351,15 @@ function suWire(el){
     if(e.target.closest('[data-suagain]')){ suStart((SU.mode === 'plan' ? 'plan:' : '') + SU.scope); return; }
     const redraw = (card) => { const idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
       if(!st) return null; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild); return {q, st}; };
+    const pa = e.target.closest('[data-suask]');
+    if(pa){ const card = pa.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(st && st.ask == null){ st.ask = pa.dataset.suask; st.askOk = st.ask === q.asks; redraw(card); } return; }
+    const pu = e.target.closest('[data-suunit]');
+    if(pu){ const card = pu.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(st && st.unit == null){ st.unit = pu.dataset.suunit; st.unitOk = normUnit(st.unit) === normUnit(q.units); redraw(card); } return; }
+    const ps = e.target.closest('[data-susheet]');
+    if(ps){ const card = ps.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(st && st.sheet == null){ st.sheet = ps.dataset.susheet; st.sheetOk = (st.sheet === 'yes') === (EQ_BY_ID[q.setup.eq].sheet === 'yes'); redraw(card); } return; }
     const pm = e.target.closest('[data-sumodel]');
     if(pm){ const card = pm.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
       if(st && st.model == null){ st.model = pm.dataset.sumodel; st.modelOk = planModels(q).acc.has(st.model); redraw(card); } return; }
@@ -4254,7 +4369,7 @@ function suWire(el){
     const pc = e.target.closest('[data-sugivcheck]');
     if(pc){ const card = pc.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
       if(st && !st.givChecked){ const need = planNeeded(q); st.givChecked = true; st.givOk = need.length === st.giv.size && need.every(i => st.giv.has(i));
-        if(st.modelOk && st.ok && st.givOk) SU.plans++; redraw(card); } return; }
+        if(st.modelOk && st.ok && st.givOk && st.sheetOk && (!planHasAsk(q) || (st.askOk && st.unitOk))) SU.plans++; redraw(card); } return; }
     const w = e.target.closest('[data-suwork]');
     if(w){ const q = byId(w.dataset.suwork); if(q){ SU = null; startSweepOf([q], 'One problem, from the set-up drill'); } }
   };
@@ -4289,7 +4404,7 @@ function suCardHTML(){
     <div class="frow suscope"><span class="olab">Plan</span>
       ${mods.map(m => `<button class="chip" data-su="plan:${m}">Module ${esc(modShort(m))}</button>`).join('')}
       <button class="chip" data-su="plan:all">All</button>
-      <small class="sm">Plan the whole problem: the dosing model from the stem's words, then the line, then which givens it uses. Still no arithmetic.</small></div>
+      <small class="sm">Plan the whole problem: what is asked and its unit, the dosing model from the stem's words, the line, whether the sheet prints it, and which givens it uses. Still no arithmetic.</small></div>
     <div class="frow suscope"><span class="olab">Choose from</span>
       <button class="chip" data-sufrom="four" aria-pressed="${suFrom() === 'four'}">Four lines</button>
       <button class="chip" data-sufrom="sheet" aria-pressed="${suFrom() === 'sheet'}">The whole sheet</button>

@@ -212,6 +212,10 @@ h3{font-size:16px;margin:22px 0 8px}
 .eqslot.full{border-style:solid;border-color:var(--accent);background:var(--paper)}
 .eqslot.ok{border-color:var(--ok);background:var(--ok-bg)}
 .eqslot.bad{border-color:var(--bad);background:var(--bad-bg)}
+.eqfrac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;gap:4px}
+.eqfrac .eqfn{display:flex;gap:4px;border-bottom:2px solid var(--text);padding-bottom:4px}
+.eqfrac .eqfd{display:flex;gap:4px}
+.eqglue{font-size:16px}
 /* the pieces on offer, correct ones and wrong ones together */
 .eqtray{display:flex;flex-wrap:wrap;gap:7px;padding:11px;border:1px solid var(--line-soft);
   border-radius:10px;background:var(--surface)}
@@ -1135,6 +1139,63 @@ const MISS_KINDS = [
   {id:'round',   label:'Rounding',         hint:'the working was right and the reported figure was not'},
 ];
 const MISS_LABEL = Object.fromEntries(MISS_KINDS.map(m => [m.id, m.label]));
+/* The quantity a calculation asks for, by key (`asks` on each numeric
+   question): the symbol as the sheet writes it and what it means in plain
+   words. The plan drill asks for the symbol first, then shows the meaning
+   and the unit the answer will carry. */
+const ASKS = {
+  k:        ['k',        'the first-order elimination rate constant: the fraction of the drug in the body removed per unit time'],
+  ka:       ['ka',       'the first-order absorption rate constant: the fraction of the drug at the absorption site taken up per unit time'],
+  k0:       ['k0',       'the zero-order rate constant: a fixed amount or concentration lost per unit time'],
+  thalf:    ['t½',       'the elimination half-life: the time for the amount or concentration to fall by one-half'],
+  thalfa:   ['t½a',      'the absorption half-life: the time for half of the drug at the absorption site to be absorbed'],
+  t:        ['t',        'a time: how long after the start, or how long until a level is reached'],
+  nhalf:    ['n',        'a count of half-lives'],
+  C0:       ['C0',       'the concentration at time zero: for an IV bolus the dose spread through the volume of distribution, for a solution its starting concentration'],
+  Cp:       ['Cp',       'the plasma concentration at a stated time'],
+  Css:      ['Css',      'the steady-state concentration of a constant infusion, where rate in equals rate out'],
+  Cmax:     ['Cmax',     'the peak concentration after one dose'],
+  Cmin:     ['Cmin',     'the lowest concentration after one dose, just before the next'],
+  Cmaxss:   ['Cmax∞',    'the peak concentration at steady state, just after a dose'],
+  Cminss:   ['Cmin∞',    'the trough concentration at steady state, just before the next dose'],
+  Cavgss:   ['Cavg∞',    'the average concentration over one dosing interval at steady state'],
+  Cpn:      ['Cp (n doses)', 'the concentration at a stated time after the nth dose'],
+  tmax:     ['tmax',     'the time of the peak after one oral dose'],
+  tmaxss:   ['tmax∞',    'the time of the peak within a dosing interval at steady state'],
+  D0:       ['D0',       'the dose given each time'],
+  DL:       ['DL',       'the loading dose: the amount that puts the target level in the body at once'],
+  Dpo:      ['Dpo',      'the oral dose'],
+  DB:       ['DB',       'the amount of drug in the body at a stated time'],
+  Davgss:   ['Davg∞',    'the average amount of drug in the body over one dosing interval at steady state'],
+  Du:       ['Du',       'the amount of unchanged drug recovered in the urine'],
+  R:        ['R',        'the infusion rate: amount delivered per unit time'],
+  rate:     ['dDB/dt',   'the rate of elimination: amount removed per unit time at a stated concentration'],
+  VD:       ['VD',       'the apparent volume of distribution: the volume that relates amount in the body to plasma concentration'],
+  Vp:       ['Vp',       'the volume of the central compartment'],
+  Vt:       ['Vt',       'the volume of the tissue compartment'],
+  ClT:      ['ClT',      'total body clearance: the volume of plasma cleared of drug per unit time'],
+  ClR:      ['ClR',      'renal clearance: the volume of plasma cleared of drug by the kidney per unit time'],
+  ClH:      ['ClH',      'hepatic (non-renal) clearance: total clearance less renal clearance'],
+  CrCl:     ['CrCl',     'creatinine clearance: the estimate of the glomerular filtration rate for this patient'],
+  IBW:      ['IBW',      'ideal body weight, from height and sex'],
+  fe:       ['fe',       'the fraction of the dose excreted unchanged in the urine'],
+  ke:       ['ke',       'the renal excretion rate constant: the renal share of k'],
+  F:        ['F',        'absolute bioavailability: the fraction of the dose reaching the circulation, against an IV dose'],
+  Frel:     ['Frel',     'relative bioavailability: the extent of one product against another, neither IV'],
+  AUC:      ['AUC',      'the area under the concentration–time curve: total exposure from one dose'],
+  AUCtau:   ['AUC over τ', 'the area under the curve over one dosing interval at steady state'],
+  alpha:    ['α',        'the distribution rate constant of a two-compartment drug'],
+  beta:     ['β',        'the elimination rate constant of a two-compartment drug'],
+  k12:      ['k12',      'the transfer rate constant from the central to the tissue compartment'],
+  k21:      ['k21',      'the transfer rate constant from the tissue to the central compartment'],
+  tau:      ['τ',        'the dosing interval'],
+  height:   ['height',   'the height, converted to the unit the formula wants'],
+  volume:   ['V',        'a volume of solution or of water'],
+  ratio:    ['ratio',    'a ratio or factor between two quantities'],
+  pct:      ['%',        'a percentage of a starting amount or of a plateau'],
+  coef:     ['F ka D0 / VD(ka − k)', 'the coefficient of the single oral dose equation: the factor in front of the bracket of exponentials, in concentration units'],
+};
+
 
 /* ==========================================================================
    STORAGE — namespaced per profile so several people can share one browser

@@ -532,6 +532,7 @@ const Q_MODULE5 = [
   {k:'round', t:'ka = 0.924 hr⁻¹',
    why:'Her worked value is 0.924 per hour, carried to three decimal places, which is the precision she uses for rate constants throughout this example.'}],
  setup:{eq:'thalf-abs', pre:[], why:'"half-life of absorption" names the oral absorption block of Module 5. t½a is given and ka is asked, so t½a = {{frac:0.693|ka}} is rearranged to ka = {{frac:0.693|t½a}}. No equation hinge; the half-life is converted from minutes to hours first.'},
+ asks:'ka',
  givens:[['t½a', '45 minutes', 'becomes 0.75 hr, the denominator of {{frac:0.693|t½a}}']],
  check:{t:'45 minutes is 0.75 hr, so ka is 0.693 over 0.75, a little under 1 per hour: 0.924 hr⁻¹. A half-life under an hour means ka above 0.693.', lo:0.693},
  teach:[
@@ -559,6 +560,7 @@ const Q_MODULE5 = [
   {k:'round', t:'k = 0.231 hr⁻¹',
    why:'Her worked value is 0.231 per hour, to three decimal places, matching the precision she uses for the absorption constant in the same problem.'}],
  setup:{eq:'thalf-first', pre:[], why:'"half-life of elimination" of the same oral drug names the first-order half-life line. t½ is given and k is asked, so t½ = {{frac:0.693|k}} is rearranged to k = {{frac:0.693|t½}}. No hinge.'},
+ asks:'k',
  givens:[['t½', '3 hours', 'the denominator of {{frac:0.693|t½}}']],
  check:{t:'k is 0.693 over 3, 0.231 hr⁻¹; a half-life over an hour means k below 0.693, and 3 × 0.231 returns 0.693.', lo:0, hi:0.693},
  teach:[
@@ -592,6 +594,7 @@ const Q_MODULE5 = [
   {k:'round', t:'tmax = 2 hours',
    why:'Her worked value is 2 hours, and the unrounded 2.0004 rounds to it. The time to peak depends only on the two rate constants, so the 22 L volume, the 500 mg dose and the 85 per cent bioavailability given in the stem play no part in this particular answer.'}],
  setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"single 500-mg oral dose" and "one-compartment model" name the oral block. The absorption and elimination half-lives are given and the time of the maximum concentration is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. ka and k first, from the two half-lives, because the line wants rate constants; VD, F and D0 are not used.'},
+ asks:'tmax',
  givens:[['VD', '22 L', 'not needed: tmax depends on ka and k only'], ['t½a', '45 minutes', 'becomes 0.75 hr, so ka = {{frac:0.693|0.75}} = 0.924 hr⁻¹'], ['t½', '3 hours', 'gives k = {{frac:0.693|3}} = 0.231 hr⁻¹'], ['F', '85%', 'not needed: it scales the concentration, not the time'], ['D0', '500-mg', 'not needed: the dose scales the concentration, not the time']],
  check:{t:'ka is four times k, so tmax is ln(4) over (ka − k), 1.3863 over 0.693, 2 hr; the peak must come after the 45-minute absorption half-life.', lo:0.75},
  teach:[
@@ -627,6 +630,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Cmax = 12.17 mg/L',
    why:'Her worked value is 12.17 milligrams per litre, to two decimal places, obtained by entering the whole expression in one pass. Entering it stepwise with the rounded intermediates shown here gives the same figure, so the order of the keystrokes does not matter.'}],
  setup:{eq:'oral-cp', pre:['thalf-abs', 'thalf-first', 'tmax'], why:'"single 500-mg oral dose", "bioavailable" and a VD name the oral block. F, D0, VD and the two half-lives are given and the "maximum concentration" is asked, so Cp = [F·ka·{{frac:D0|VD(ka − k)}}](e^(−kt) − e^(−ka·t)) at t = tmax. ka and k first from the half-lives, then tmax from {{frac:ln(ka ÷ k)|ka − k}}, because the line wants t.'},
+ asks:'Cmax',
  givens:[['VD', '22 L', 'in the denominator of the prefactor: 22 × 0.693 = 15.246'], ['t½a', '45 minutes', 'becomes 0.75 hr, so ka = {{frac:0.693|0.75}} = 0.924 hr⁻¹'], ['t½', '3 hours', 'gives k = {{frac:0.693|3}} = 0.231 hr⁻¹; ka − k = 0.693'], ['F', '85%', 'as 0.85 in the numerator of the prefactor'], ['D0', '500-mg', 'in the numerator: 0.85 × 500 × 0.924 = 392.7']],
  check:{t:'The prefactor is 25.758 mg/L and the bracket at the peak is 0.47248, under half, so Cmax is a little under half of 25.758, about 12.17 mg/L; it must be below the level the whole absorbed dose would give in 22 L.', lo:0, hi:19.3},
  teach:[
@@ -657,6 +661,7 @@ const Q_MODULE5 = [
   {k:'round', t:'t½ = 3.15 hr',
    why:'The division gives exactly 3.15 hours at the two decimal places she reports half-lives to in this module. The 70 kg weight in the stem plays no part in this calculation.'}],
  setup:{eq:'thalf-first', pre:[], why:'"single oral dose" fitting a "one-compartment open model" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. The two exponents are given and the "elimination half-life" is asked, so t½ = {{frac:0.693|k}}. k is the smaller exponent, read from the printed equation, because elimination is the slower process.'},
+ asks:'thalf',
  givens:[['weight', '70 kg', 'not needed'], ['coefficient', '75', 'not needed: the half-life comes from an exponent'], ['k', '0.22', 'the smaller exponent, in hr⁻¹, the denominator of {{frac:0.693|k}}'], ['ka', '2.75', 'not needed: the larger exponent is absorption']],
  check:{t:'The smaller exponent, 0.22 hr⁻¹, is k; 0.693 over 0.22 is a little over 3 hr, so 3.15 hr fits, and it must be longer than the absorption half-life from 2.75.', lo:0},
  teach:[
@@ -685,6 +690,7 @@ const Q_MODULE5 = [
   {k:'round', t:'t½a = 0.252 hr',
    why:'0.693 divided by 2.75 hr⁻¹ gives 0.252 hour, which is about 15 minutes. An absorption half-life this short means absorption is nearly complete within the first hour: 94 per cent of the dose is absorbed by then.'}],
  setup:{eq:'thalf-abs', pre:[], why:'"half-life of absorption" for the printed oral equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. The two exponents are given and t½a is asked, so t½a = {{frac:0.693|ka}}. ka is the larger exponent, read from the printed equation, because absorption is the faster process.'},
+ asks:'thalfa',
  givens:[['coefficient', '75', 'not needed: the half-life comes from an exponent'], ['k', '0.22', 'not needed: the smaller exponent is elimination'], ['ka', '2.75', 'the larger exponent, in hr⁻¹, the denominator of {{frac:0.693|ka}}']],
  check:{t:'The larger exponent, 2.75 hr⁻¹, is ka; 0.693 over 2.75 is about a quarter hour, 0.252 hr, about 15 minutes, far shorter than the elimination half-life.', lo:0},
  teach:[
@@ -716,6 +722,7 @@ const Q_MODULE5 = [
   {k:'round', t:'tmax = 1 hour',
    why:'Her worked value is one hour, and the unrounded figure of 0.9983 hour rounds to it. The peak therefore occurs about one hour after the dose, which is early because absorption is more than twelve times faster than elimination for this drug.'}],
  setup:{eq:'tmax', pre:[], why:'"single oral dose" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. ka and k are the larger and smaller exponents and tmax is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. No hinge; both rate constants are read straight off the equation.'},
+ asks:'tmax',
  givens:[['weight', '70 kg', 'not needed'], ['coefficient', '75', 'not needed: tmax depends on ka and k only'], ['k', '0.22', 'the smaller exponent, in hr⁻¹: the denominator of the ratio, subtracted below'], ['ka', '2.75', 'the larger exponent, in hr⁻¹: the numerator of the ratio; ka − k = 2.53']],
  check:{t:'ka over k is 12.5, so ln(12.5) = 2.5257 over 2.53 is just under 1 hr; the peak must come after the quarter-hour absorption half-life and before much elimination at k = 0.22 hr⁻¹.', lo:0.252},
  teach:[
@@ -749,6 +756,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Cmax = 55.4 mg/L',
    why:'Report 55.4 milligrams per litre, the value the equation gives at the peak. The tolerance is set narrowly enough to exclude 53.4, which does not follow from the equation at any time near the peak.'}],
  setup:{eq:'oral-cp', pre:['tmax'], why:'"single oral dose" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. The coefficient and both exponents are given and Cmax is asked, so the printed Cp line is evaluated at t = tmax. tmax first, from {{frac:ln(ka ÷ k)|ka − k}}, because the concentration line wants t.'},
+ asks:'Cmax',
  givens:[['weight', '70 kg', 'not needed'], ['coefficient', '75', 'in mg/L, multiplied by the bracket at tmax'], ['k', '0.22', 'the smaller exponent, in hr⁻¹: gives tmax and the e^(−0.22) term'], ['ka', '2.75', 'the larger exponent, in hr⁻¹: gives tmax and the e^(−2.75) term']],
  check:{t:'At tmax of about 1 hr the fast term e^(−2.75) is small, 0.06393, and e^(−0.22) is 0.80252, so Cmax is a little under four fifths of 75 mg/L; it must be below the coefficient 75.', lo:0, hi:75},
  teach:[
@@ -780,6 +788,7 @@ const Q_MODULE5 = [
   {k:'round', t:'VD = 6.30 L',
    why:'Report 6.3 L; the unrounded division gives 6.3043 litres. Litres is the only unit the arithmetic produces, since milligrams divided by milligrams per litre leaves litres.'}],
  setup:{eq:'oral-cp', pre:[], why:'"500-mg oral dose" that is "87% bioavailable" with the printed equation names the oral block. The coefficient, both exponents, F and D0 are given and VD is asked, so the prefactor F·ka·{{frac:D0|VD(ka − k)}} of the oral Cp line is set equal to 75 mg/L and rearranged for VD. No hinge; ka and k are the exponents.'},
+ asks:'VD',
  givens:[['coefficient', '75', 'in mg/L, set equal to the prefactor and moved to the denominator'], ['k', '0.22', 'the smaller exponent, in hr⁻¹: ka − k = 2.53'], ['ka', '2.75', 'the larger exponent, in hr⁻¹, in the numerator and in ka − k'], ['D0', '500-mg', 'in the numerator: 0.87 × 500 × 2.75 = 1196.25'], ['F', '87%', 'as 0.87 in the numerator']],
  check:{t:'The coefficient 75 mg/L equals F·ka·D0 over VD(ka − k). ka over (ka − k), 2.75 over 2.53, is a little over 1, so VD is a little over 0.87 × 500 over 75 mg/L, about 6 L; 6.30 L fits.', lo:5.8},
  teach:[
@@ -812,6 +821,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Cp = 31.11 mg/L',
    why:'Two decimal places matches the precision her worked concentrations carry in this module. The value is well below the peak of 55.4 mg/L, as it must be four hours after a peak at one hour.'}],
  setup:{eq:'oral-cp', pre:[], why:'"single oral dose" with the printed equation Cp = 75(e^(−0.22t) − e^(−2.75t)) names the oral block. The equation and t are given and Cp is asked, so the oral Cp line is evaluated at t = 4 hours with the printed prefactor and exponents. No hinge.'},
+ asks:'Cp',
  givens:[['coefficient', '75', 'in mg/L, multiplied by the bracket at 4 hr'], ['k', '0.22', 'in hr⁻¹: the exponent kt = 0.22 × 4 = 0.88'], ['ka', '2.75', 'in hr⁻¹: the exponent 2.75 × 4 = 11, a vanishing term'], ['t', '4 hours', 'the time in both exponents']],
  check:{t:'By 4 hr the absorption term e^(−11) is gone, so Cp is 75 × e^(−0.88) = 75 × 0.41478, about 31.11 mg/L; 4 hours is a little over one elimination half-life, so a little under half of 75.', lo:18.75, hi:37.5},
  teach:[
@@ -845,6 +855,7 @@ const Q_MODULE5 = [
   {k:'round', t:'ka = 0.462 hr⁻¹',
    why:'Her worked value is 0.462 per hour, to three decimal places, the same precision she uses for rate constants elsewhere in this lecture.'}],
  setup:{eq:'thalf-abs', pre:[], why:'"given orally" with a "half-life of absorption" names the oral block. t½a is given and ka is asked, so t½a = {{frac:0.693|ka}} is rearranged to ka = {{frac:0.693|t½a}}. No equation hinge; the half-life is converted from minutes to hours first.'},
+ asks:'ka',
  givens:[['t½a', '90 minutes', 'becomes 1.5 hr, the denominator of {{frac:0.693|t½a}}']],
  check:{t:'90 minutes is 1.5 hr, so ka is 0.693 over 1.5, 0.462 hr⁻¹; a half-life over an hour means ka below 0.693, and 1.5 × 0.462 returns 0.693.', lo:0, hi:0.693},
  teach:[
@@ -878,6 +889,7 @@ const Q_MODULE5 = [
   {k:'round', t:'tmax = 3.72 hours',
    why:'Her worked value is 3.7 hours, to one decimal place, and 3.72 is the same number carried one place further. This peak is much later than the one-hour peak of the earlier antibiotic because absorption here is only about three times faster than elimination rather than twelve.'}],
  setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"given by mouth" with a "half-life of absorption" and a "half-life of elimination" names the oral block. The two half-lives are given and the time of the peak is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. ka and k first, from the two half-lives, because the line wants rate constants; D0, F and VD are not used.'},
+ asks:'tmax',
  givens:[['D0', '500-mg', 'not needed: the dose scales the concentration, not the time'], ['F', '88%', 'not needed'], ['t½a', '90 minutes', 'becomes 1.5 hr, so ka = {{frac:0.693|1.5}} = 0.462 hr⁻¹'], ['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['VD', '20 L', 'not needed: tmax depends on ka and k only']],
  check:{t:'ka = 0.462 and k = 0.1386 hr⁻¹, a ratio of 3.3333; ln(3.3333) = 1.2040 over 0.3234 is about 3.72 hr. The peak comes after the 1.5-hr absorption half-life and before the 5-hour elimination half-life.', lo:1.5, hi:5},
  teach:[
@@ -913,6 +925,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Cmax = 13.13 mg/L',
    why:'Report 13.13 mg/L, or about 13 mg/L; two decimal places is the precision the parameters support. The peak sits well below the 22 mg/L the dose and volume would give on instant absorption, because elimination is already removing drug while absorption is still going on.'}],
  setup:{eq:'oral-cp', pre:['thalf-abs', 'thalf-first', 'tmax'], why:'"given by mouth", "bioavailable", two half-lives and a VD name the oral block. F, D0, VD, t½a and t½ are given and the "peak plasma concentration" is asked, so Cp = [F·ka·{{frac:D0|VD(ka − k)}}](e^(−kt) − e^(−ka·t)) at t = tmax. ka and k first from the half-lives, then tmax, because the line wants rate constants and t.'},
+ asks:'Cmax',
  givens:[['D0', '500-mg', 'in the numerator: 0.88 × 500 × 0.462 = 203.28'], ['F', '88%', 'as 0.88 in the numerator of the prefactor'], ['t½a', '90 minutes', 'becomes 1.5 hr, so ka = {{frac:0.693|1.5}} = 0.462 hr⁻¹'], ['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹; ka − k = 0.3234'], ['VD', '20 L', 'in the denominator of the prefactor: 20 × 0.3234 = 6.468']],
  check:{t:'The prefactor is 31.429 mg/L and the bracket at the peak is 0.41783, so Cmax is a little over two fifths of 31.429, about 13.13 mg/L; it must be below 0.88 × 500 over 20 = 22 mg/L.', lo:0, hi:22},
  teach:[
@@ -947,6 +960,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Cmax = 6.57 mg/L',
    why:'This is exactly half the 13.13 mg/L obtained with a 20 L volume, as it must be when the only change is a doubling of the volume in the denominator. Doubling the volume of distribution halves every concentration on the curve without moving the time at which the peak occurs.'}],
  setup:{eq:'oral-cp', pre:['thalf-abs','thalf-first','tmax'], why:'"same 500-mg oral dose" with a changed "volume of distribution" names the oral block. F, D0, ka, k and the new VD are given and the peak concentration is asked, so the oral Cp line is evaluated at t = tmax with the new VD. tmax first, from {{frac:ln(ka ÷ k)|ka − k}}, unchanged because VD is not in it.'},
+ asks:'Cmax',
  givens:[['D0', '500-mg', 'in the numerator of the prefactor, unchanged'], ['VD', '40 L', 'the new denominator of the prefactor: 40 × 0.3234 = 12.936'], ['VD before', '20 L', 'not needed for the number: the new volume is double it']],
  check:{t:'Doubling the volume halves the prefactor and leaves tmax and the bracket unchanged, so the peak halves: 15.714 × 0.41783 is about 6.57 mg/L, below 0.88 × 500 over 40 = 11 mg/L.', lo:0, hi:11},
  teach:[
@@ -983,6 +997,7 @@ const Q_MODULE5 = [
   {k:'round', t:'VD = 34.32 L, reported as 34.3 L',
    why:'Report 34.32 litres, or 34.3 to one decimal place. The unrounded division gives 34.3178 litres, and milligrams divided by milligrams per litre leaves litres.'}],
  setup:{eq:'oral-cp', pre:[], why:'"750-mg oral dose" that is "84% bioavailable" with the printed equation names the oral block. The coefficient, both exponents, F and D0 are given and VD is asked, so the prefactor F·ka·{{frac:D0|VD(ka − k)}} of the oral Cp line is set equal to 23.2 mg/L and rearranged for VD. No hinge; ka is the larger exponent, k the smaller.'},
+ asks:'VD',
  givens:[['D0', '750-mg', 'in the numerator: 0.84 × 750 × 0.872 = 549.36'], ['F', '84%', 'as 0.84 in the numerator'], ['coefficient', '23.2', 'in mg/L, set equal to the prefactor and moved to the denominator'], ['k', '0.182', 'the smaller exponent, in hr⁻¹: ka − k = 0.690'], ['ka', '0.872', 'the larger exponent, in hr⁻¹, in the numerator and in ka − k']],
  check:{t:'The coefficient 23.2 mg/L equals F·ka·D0 over VD(ka − k). ka over (ka − k), 0.872 over 0.690, is a little over 1, so VD is a little over 0.84 × 750 over 23.2 mg/L; 34.32 L fits.', lo:27.2},
  teach:[
@@ -1010,6 +1025,7 @@ const Q_MODULE5 = [
   {k:'round', t:'t½ = 3.8077 hr, reported as 3.8 hours',
    why:'Report 3.81 hours, or 3.8 to one decimal place. The unrounded division, 0.693 over 0.182 per hour, gives 3.8077 hours.'}],
  setup:{eq:'thalf-first', pre:[], why:'"750-mg oral dose" with the printed equation Cp = 23.2(e^(−0.182t) − e^(−0.872t)) names the oral block. The exponents are given and the "elimination half-life" is asked, so t½ = {{frac:0.693|k}}. k is the smaller exponent, read from the printed equation.'},
+ asks:'thalf',
  givens:[['D0', '750-mg', 'not needed: the half-life comes from an exponent'], ['coefficient', '23.2', 'not needed'], ['k', '0.182', 'the smaller exponent, in hr⁻¹, the denominator of {{frac:0.693|k}}'], ['ka', '0.872', 'not needed: the larger exponent is absorption']],
  check:{t:'The smaller exponent, 0.182 hr⁻¹, is k; 0.693 over 0.182 is a little under 4 hr, 3.8 hours, longer than the absorption half-life from 0.872.', lo:0},
  teach:[
@@ -1041,6 +1057,7 @@ const Q_MODULE5 = [
   {k:'round', t:'tmax = 2.27 hours',
    why:'Her worked value is 2.27 hours, to two decimal places. This peak is later than the one-hour peak of the earlier antibiotic because here the two rate constants are much closer together, so absorption and elimination stay in competition for longer.'}],
  setup:{eq:'tmax', pre:[], why:'"750-mg oral dose" with the printed equation Cp = 23.2(e^(−0.182t) − e^(−0.872t)) names the oral block. ka and k are the larger and smaller exponents and tmax is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. No hinge.'},
+ asks:'tmax',
  givens:[['D0', '750-mg', 'not needed: tmax depends on ka and k only'], ['coefficient', '23.2', 'not needed'], ['k', '0.182', 'the smaller exponent, in hr⁻¹: the denominator of the ratio, subtracted below'], ['ka', '0.872', 'the larger exponent, in hr⁻¹: the numerator of the ratio; ka − k = 0.690']],
  check:{t:'ka over k is 4.7912, so ln(4.7912) = 1.5667 over 0.690 is about 2.27 hr; the peak must come after the absorption half-life, 0.693 over 0.872, under an hour.', lo:0.795},
  teach:[
@@ -1073,6 +1090,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Cmax = 12.14 mg/L',
    why:'Her worked value is 12.14 milligrams per litre, which she also states as micrograms per millilitre, the two being numerically identical. Two decimal places matches the precision of the coefficients printed in the equation she supplies.'}],
  setup:{eq:'oral-cp', pre:['tmax'], why:'"750-mg oral dose" with the printed equation Cp = 23.2(e^(−0.182t) − e^(−0.872t)) names the oral block. The coefficient and both exponents are given and Cmax is asked, so the printed Cp line is evaluated at t = tmax. tmax first, from {{frac:ln(ka ÷ k)|ka − k}}, because the concentration line wants t.'},
+ asks:'Cmax',
  givens:[['D0', '750-mg', 'not needed: the printed equation already carries the dose'], ['coefficient', '23.2', 'in mg/L, multiplied by the bracket at tmax'], ['k', '0.182', 'the smaller exponent, in hr⁻¹: gives tmax and e^(−0.41314)'], ['ka', '0.872', 'the larger exponent, in hr⁻¹: gives tmax and e^(−1.97944)']],
  check:{t:'At tmax = 2.27 hr, e^(−0.41314) is 0.66157 and the absorption term 0.13815 is still present, so Cmax is a little over half of 23.2 mg/L; it must be below the coefficient 23.2.', lo:0, hi:23.2},
  teach:[
@@ -1103,6 +1121,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Cmax = 24.34 mg/L',
    why:'Recomputing the full equation with a 1000 mg dose gives 24.339 mg/L, which confirms the proportional route. Two decimal places matches the precision of the 12.17 mg/L she reports for the original dose.'}],
  setup:{eq:'oral-cp', pre:['tmax'], why:'"500-mg oral dose" with "85% bioavailability", a VD and two half-lives names the oral block. The peak at 500 mg is given and the peak at 1000 mg is asked; in Cp = [F·ka·{{frac:D0|VD(ka − k)}}](e^(−kt) − e^(−ka·t)) the dose sits only in the prefactor, so Cmax scales with D0. tmax is unchanged because D0 is not in it.'},
+ asks:'Cmax',
  givens:[['D0', '500-mg', 'the dose that gave the known peak: the denominator of the ratio'], ['VD', '22 L', 'not needed: unchanged, it cancels in the ratio'], ['t½a', '45 minutes', 'not needed: unchanged, so tmax and the bracket are unchanged'], ['t½', '3 hours', 'not needed: unchanged'], ['F', '85%', 'not needed: unchanged, it cancels in the ratio'], ['Cmax', '12.17 mg/L', 'the known peak, multiplied by the dose ratio'], ['D0 new', '1000 mg', 'the numerator of the ratio {{frac:1000|500}} = 2']],
  check:{t:'The dose sits only in the prefactor, so doubling 500 mg to 1000 mg doubles the peak: 2 × 12.17 = 24.34 mg/L, at the same tmax of 2 hr.', lo:24.34, hi:24.34},
  teach:[
@@ -1133,6 +1152,7 @@ const Q_MODULE5 = [
   {k:'round', t:'Ratio = 12.5',
    why:'The same figure comes from dividing 2.75 by 0.22 directly, which is the ratio that appears inside the logarithm in the time to peak. The absorption half-life is twelve and a half times the shorter.'}],
  setup:{eq:'none', pre:['thalf-abs', 'thalf-first'], why:'"absorption rate constant" and "elimination rate constant" name the oral block. ka and k are given and the factor by which t½a is shorter than t½ is asked. No catalog line gives a ratio; the working takes t½a = {{frac:0.693|ka}} and t½ = {{frac:0.693|k}} and divides, so the ratio of the half-lives is {{frac:ka|k}}.'},
+ asks:'ratio',
  givens:[['ka', '2.75 hr⁻¹', 'gives t½a = {{frac:0.693|2.75}} = 0.252 hr, the denominator of the ratio'], ['k', '0.22 hr⁻¹', 'gives t½ = {{frac:0.693|0.22}} = 3.15 hr, the numerator of the ratio']],
  check:{t:'Each half-life is 0.693 over its own constant, so the ratio of the half-lives is the ratio of the constants the other way up: 2.75 over 0.22 = 12.5. The factor is above 1 because absorption is the faster process.', lo:1},
  teach:[

@@ -383,6 +383,7 @@ const Q_MODULE2 = [
   {k:'round', t:'k = 0.9100 hr⁻¹',
    why:'Report rate constants to four decimal places. A k rounded early to one or two figures carries a large error into every later part of the problem, and four decimals is the precision her key prints for this one.'}],
  setup:{eq:'first-ln', pre:[], why:'"intravenous bolus injection" with a table of plasma concentrations, so the one-compartment IV bolus block with first-order decline. Given Cp at two times, asked the "elimination rate constant", so ln C = ln C0 − kt between the two points rearranged to k = {{frac:ln(Cp1 ÷ Cp2)|t2 − t1}}. No hinge.'},
+ asks:'k',
  givens:[['D0', '50 mg', 'not needed: k comes from two concentrations alone'], ['weight', '70-kg', 'not needed'], ['Cp₁', '1.59', 'the 1.0 hr concentration, in mg/L, the numerator of the ratio'], ['t₁', '1.0', 'the earlier time, in hr'], ['Cp₂', '0.64', 'the 2.0 hr concentration, the denominator of the ratio'], ['t₂', '2.0', 'the later time; t₂ − t₁ = 1.0 hr'], ['other points', '2.52, 1.00, 0.40, 0.25', 'not needed: the stem names the 1.0 and 2.0 hr pair']],
  check:{t:'From 1.0 to 2.0 hr the concentration falls 1.59 → 0.64 mg/L, more than half in one hour, so the half-life is under 1 hr and k is above 0.693 hr⁻¹; 0.91 fits.', lo:0.693},
  teach:[
@@ -422,6 +423,7 @@ const Q_MODULE2 = [
   {k:'round', t:'t½ = 0.76 hr',
    why:'The division gives 0.7615, which her key prints as 0.76 hr, two decimal places. Half-life must be reported in units of time and never in reciprocal time, a distinction she calls out by name in the exam review.'}],
  setup:{eq:'thalf-first', pre:[], why:'"intravenous bolus injection" with an "elimination rate constant", so the one-compartment IV bolus block. Given k, asked the "half-life of elimination", so t½ = {{frac:0.693|k}} directly. No hinge.'},
+ asks:'thalf',
  givens:[['k', '0.91 hr⁻¹', 'the denominator of {{frac:0.693|k}}']],
  check:{t:'A k above 0.693 hr⁻¹ means the half-life is under 1 hr, and 0.693 over 0.91 is about three quarters of an hour; 0.76 hr fits.', lo:0, hi:1},
  teach:[
@@ -462,6 +464,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Cp0 = 3.89 mg/L',
    why:'Her key prints 3.89 mg/L, three significant figures. The value is higher than the earliest measured concentration of 2.52 mg/L at 0.5 hr, which is the sanity check she asks for: the initial concentration should be the highest point.'}],
  setup:{eq:'first-exp', pre:[], why:'"intravenous bolus injection" with a rate constant and one sampled concentration, so the one-compartment first-order decline line. Given k, t and Cp, asked the "initial plasma concentration" Cp0, so Cp = Cp0 e^(−kt) rearranged to Cp0 = Cp e^(kt). No hinge.'},
+ asks:'C0',
  givens:[['D0', '50 mg', 'not needed: the decline is worked in concentration'], ['k', '0.91 hr⁻¹', 'the exponent kt = 0.91 × 2.5'], ['Cp', '0.40 mg/L', 'the sampled concentration, multiplied by e^(kt) = 9.7279'], ['t', '2.5 hours', 'the sample time in the exponent']],
  check:{t:'With k = 0.91 hr⁻¹ the half-life is about three quarters of an hour, so 2.5 hours is more than three half-lives: Cp0 is more than eight times 0.40 mg/L, and 3.89 mg/L fits.', lo:3.2},
  teach:[
@@ -503,6 +506,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Cp = 3.0985 mg/L, reported as 3.1 mg/L',
    why:'Her key prints 3.1 mg/L. Since a quarter of an hour is well under one half-life of 0.76 hr, the answer must lie between 3.89 and half of 3.89, which it does.'}],
  setup:{eq:'first-exp', pre:[], why:'"intravenous bolus injection" with an "initial plasma concentration", so the one-compartment first-order decline line. Given Cp0, k and t, asked Cp, so Cp = Cp0 e^(−kt) directly. The minutes become hours to match k; that is a unit conversion, not a hinge.'},
+ asks:'Cp',
  givens:[['Cp0', '3.89 mg/L', 'the starting concentration, multiplied by e^(−kt)'], ['k', '0.91 hr⁻¹', 'the exponent kt = 0.91 × 0.25'], ['t', '15 minutes', 'becomes 0.25 hr so the exponent is a pure number']],
  check:{t:'A quarter hour is about a third of the half-life of three quarters of an hour, so only about 20 per cent is lost: Cp sits a little under 3.89 mg/L and above half of it, and 3.1 mg/L fits.', lo:1.945, hi:3.89},
  teach:[
@@ -540,6 +544,7 @@ const Q_MODULE2 = [
   {k:'round', t:'VD = 12.853 L, reported as 12.85 L',
    why:'Her key prints 12.85 L, two decimal places. The patient weight of 70 kg is given in the stem and is not used, which is a habit of hers in these problems.'}],
  setup:{eq:'cp-db-vd', pre:[], why:'"intravenous bolus dose" with an "initial plasma concentration", so the one-compartment block at time zero. Given D0 and Cp0, asked the "apparent volume of distribution", so Cp = {{frac:DB|VD}} with DB = D0 at time zero, rearranged to VD = {{frac:D0|Cp0}}. No hinge.'},
+ asks:'VD',
  givens:[['D0', '50 mg', 'the numerator: the amount in the body at time zero'], ['Cp0', '3.89 mg/L', 'the denominator'], ['weight', '70-kg', 'not needed: VD comes from the dose and the concentration']],
  check:{t:'50 mg over 4 mg/L would be near 12 L, and 3.89 is a little under 4, so VD is a little over 12 L; 12.85 L fits, roughly a fifth of the 70-kg body weight.', lo:0},
  teach:[
@@ -578,6 +583,7 @@ const Q_MODULE2 = [
   {k:'round', t:'ClT = 11.694 L/hr, reported as 11.7 L/hr',
    why:'Her key prints 11.7 L/hr, three significant figures. Carrying both inputs unrounded, as VD = 12.8535 L and k = 0.91002 hr⁻¹, gives 11.697 L/hr, which rounds to the same value.'}],
  setup:{eq:'cl-k-vd', pre:[], why:'"total body clearance" from a "volume of distribution" and an "elimination rate constant", so the clearance line. Given k and VD, asked ClT, so ClT = k·VD directly. No hinge.'},
+ asks:'ClT',
  givens:[['VD', '12.85 L', 'one factor of the product k · VD'], ['k', '0.91 hr⁻¹', 'the other factor']],
  check:{t:'0.91 is a little under 1, so k × VD is a little under 12.85 L/hr; 11.7 L/hr fits.', lo:0, hi:12.85},
  teach:[
@@ -619,6 +625,7 @@ const Q_MODULE2 = [
   {k:'round', t:'DB = 3.2 mg by either route',
    why:'Her key gives 3.2 mg from both calculations. Reporting to two significant figures is what makes the two routes agree, which is her reason for showing them side by side.'}],
  setup:{eq:'cp-db-vd', pre:[], why:'"intravenous bolus dose" with a "volume of distribution" and a concentration "at 3 hours", so the amount, concentration and volume line. Given VD and Cp at the sampled time, asked the "amount of drug in the body" at that time, so Cp = {{frac:DB|VD}} rearranged to DB = VD·Cp. No hinge.'},
+ asks:'DB',
  givens:[['D0', '50 mg', 'not needed on the main route: the amount at 3 hr is VD · Cp'], ['VD', '12.85 L', 'one factor of DB = VD · Cp'], ['Cp', '0.25 mg/L', 'the 3-hour concentration, the other factor'], ['t', '3 hours', 'not needed on the main route; it enters only the e^(−kt) check']],
  check:{t:'Amount is volume times concentration: 12.85 L × 0.25 mg/L is a quarter of 12.85, about 3.2 mg; it must be far below the 50 mg given, after 3 hours of a sub-hour half-life.', lo:0, hi:50},
  teach:[
@@ -659,6 +666,7 @@ const Q_MODULE2 = [
   {k:'round', t:'t = 7.6 hr',
    why:'Her key gives 7.6 hr. The small gap between 7.6 and the exact 7.59 is the rounding already carried in the half-life of 0.76 hr, so both routes report the same answer at this precision.'}],
  setup:{eq:'first-exp', pre:['thalf-first'], why:'"intravenous bolus injection" and "99.9% of the drug to be eliminated", so the one-compartment first-order decline line solved for t. Given t½ and the fraction remaining, asked t, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}; the working counts this as 10 half-lives. k first, from k = {{frac:0.693|t½}}.'},
+ asks:'t',
  givens:[['t½', '0.76 hours', 'multiplied by the 10 half-lives that 99.9% elimination takes'], ['fraction', '99.9%', 'eliminated, which leaves 0.1%, one part in 1000: 10 half-lives']],
  check:{t:'99.9% eliminated leaves 0.1%, one part in 1000, which is ten halvings, so t = 10 × 0.76 hr = 7.6 hr.', lo:6.84, hi:7.6},
  teach:[
@@ -699,6 +707,7 @@ const Q_MODULE2 = [
   {k:'round', t:'k = 0.2769 hr⁻¹',
    why:'The quotient is 0.276936, which her key prints as 0.2769 hr⁻¹. She asks for three to four decimal places on k so that early truncation does not shift every downstream answer.'}],
  setup:{eq:'first-ln', pre:[], why:'"IV bolus injection" with concentrations at two times, so the one-compartment IV bolus block with first-order decline. Given Cp at 4 and 8 hours, asked the "elimination rate constant", so ln C = ln C0 − kt between the two points rearranged to k = {{frac:ln(Cp1 ÷ Cp2)|t2 − t1}}. No hinge.'},
+ asks:'k',
  givens:[['D0', '250 mg', 'not needed: k comes from two concentrations alone'], ['weight', '70-kg', 'not needed'], ['t₁', '4', 'the earlier time, in hr'], ['t₂', '8', 'the later time; t₂ − t₁ = 4 hr'], ['Cp₁', '6.6 mcg/mL', 'the numerator of the ratio, as 6.6 mg/L'], ['Cp₂', '2.18 mcg/mL', 'the denominator of the ratio, as 2.18 mg/L']],
  check:{t:'From 4 to 8 hr the concentration falls 6.6 → 2.18 mcg/mL, to about a third: more than halved but not quartered in 4 hr, so t½ is between 2 and 4 hr and k between 0.693 over 4 and 0.693 over 2; 0.2769 fits.', lo:0.1733, hi:0.3465},
  teach:[
@@ -744,6 +753,7 @@ const Q_MODULE2 = [
   {k:'round', t:'ClT = 2.95 L/hr',
    why:'Her key prints 2.95 L/hr, two decimal places. Carrying k unrounded as 0.17325 hr⁻¹ gives 2.9453 L/hr, which rounds to the same value.'}],
  setup:{eq:'cl-k-vd', pre:['thalf-first'], why:'"rapid IV injection" and "total body clearance", so the clearance line. Given t½ and VD as a per cent of body weight, asked ClT, so ClT = k·VD. k first, from k = {{frac:0.693|t½}}, because the line wants k, not t½; the pounds to kilograms and per cent to litres steps are unit conversions.'},
+ asks:'ClT',
  givens:[['weight', '187-pound', 'becomes 85.0 kg, then VD = 0.2 × 85.0 = 17.0 L'], ['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '20% of body weight', 'the fraction of 85.0 kg that is the volume, 17.0 L']],
  check:{t:'187 lb is 85.0 kg, so VD is 17.0 L, and k is 0.693 over 4, 0.1733 hr⁻¹; about a sixth of 17.0 L cleared each hour is a little under 3 L/hr, so 2.95 L/hr fits.', lo:0},
  teach:[
@@ -791,6 +801,7 @@ const Q_MODULE2 = [
   {k:'round', t:'DB = 72 mg',
    why:'Report 72 mg. Twelve hours is about one and a half half-lives of roughly 8.14 hr, so more than a quarter of 200 mg should remain, which 72 mg is.'}],
  setup:{eq:'amount-exp', pre:['cp-db-vd'], why:'"single IV dose" and "amount of drug in the body after 12 hours", so the first-order decline in amount. Given D0 and t, asked DB, so DB = D0 e^(−kt). k first: DB at 6 hours from Cp = {{frac:DB|VD}}, then that line rearranged to k = {{frac:ln(D0 ÷ DB)|t}}, as no k is given.'},
+ asks:'DB',
  givens:[['D0', '200 mg', 'the starting amount in D0 e^(−kt), and in ln(D0 over DB) for k'], ['weight', '80-kg', 'with the percentage gives VD = 8 L'], ['t', '6 hours', 'the sample time that fixes k'], ['Cp', '15 mg/L', 'with VD gives DB at 6 hr = 120 mg'], ['VD', '10% of body weight', 'the fraction of 80 kg that is the volume, 8 L'], ['t', '12 hours', 'the time asked, in the exponent of D0 e^(−kt)']],
  check:{t:'VD is 8 L, so 120 mg remains at 6 hr, 60% of the dose; the next 6 hr removes the same fraction, leaving 60% of 120 mg, 72 mg. The answer must sit below 120 mg.', lo:0, hi:120},
  teach:[
@@ -1211,6 +1222,7 @@ const Q_MODULE2 = [
   {k:'round', t:'t½β = 3.5 hr',
    why:'Her key prints 3.5 hr, one decimal place. Half-life must be reported in units of time, never in reciprocal time.'}],
  setup:{eq:'thalf-beta', pre:[], why:'"IV bolus dose" described by "A", "B", "α" and "β", so the two-compartment block. Given β, asked the "elimination half-life", so t½β = {{frac:0.693|β}} directly. No hinge.'},
+ asks:'thalf',
  givens:[['D0', '300-mg', 'not needed: the half-life comes from β alone'], ['A', '10.21 mg/L', 'not needed'], ['B', '8.53 mg/L', 'not needed'], ['α', '3.14 hr⁻¹', 'not needed: the fast slope describes distribution, not elimination'], ['β', '0.198 hr⁻¹', 'the denominator of {{frac:0.693|β}}']],
  check:{t:'0.693 over 0.198 is 0.693 over about a fifth, about 3.5 hr. The elimination half-life comes from β, the smaller slope, so it must be longer than 0.693 over 3.14, under a quarter hour.', lo:0.22},
  teach:[
@@ -1247,6 +1259,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Cp0 = 18.74 mg/L',
    why:'Her key prints 18.74 mg/L, to two decimal places, matching the precision the two intercepts were given to. No rounding happens before this line, because adding two exact figures introduces none. The unit is a concentration, not a rate, since both intercepts are concentrations and adding them cannot change what is being measured.'}],
  setup:{eq:'c0-ab', pre:[], why:'"IV bolus dose" described by A, B, α and β, so the two-compartment block. Given A and B, asked the "initial concentration of drug in the plasma", so Cp0 = A + B directly. No hinge.'},
+ asks:'C0',
  givens:[['D0', '300-mg', 'not needed: the intercepts already carry the dose'], ['A', '10.21 mg/L', 'the first intercept, added'], ['B', '8.53 mg/L', 'the second intercept, added'], ['α', '3.14 hr⁻¹', 'not needed: at t = 0 both exponentials equal 1'], ['β', '0.198 hr⁻¹', 'not needed']],
  check:{t:'Cp0 is the sum of the two intercepts, 10.21 + 8.53 = 18.74 mg/L, so it must be larger than either intercept alone.', lo:10.21},
  teach:[
@@ -1282,6 +1295,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Vp = 16.009 L, reported as 16 L',
    why:'Her key prints 16 L, rounded to the whole litre. The distribution and elimination rate constants play no part in this calculation, which is why the intercept route is the short one.'}],
  setup:{eq:'vp-ab', pre:[], why:'"IV bolus dose" described by A, B, α and β, so the two-compartment block. Given D0, A and B, asked the "volume of distribution of the central compartment", so Vp = {{frac:D0|A + B}} directly. No hinge.'},
+ asks:'Vp',
  givens:[['D0', '300-mg', 'the numerator of {{frac:D0|A + B}}'], ['A', '10.21 mg/L', 'half of the denominator A + B = 18.74 mg/L'], ['B', '8.53 mg/L', 'the other half of the denominator'], ['α', '3.14 hr⁻¹', 'not needed'], ['β', '0.198 hr⁻¹', 'not needed']],
  check:{t:'300 mg over 20 mg/L would be 15 L, and 18.74 is a little under 20, so Vp is a little over 15 L; 16 L fits.', lo:0, hi:29.4},
  teach:[
@@ -1319,6 +1333,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Cp = 11.138 mg/L, reported as 11.14 mg/L',
    why:'Report 11.14 mg/L; about 11 mg/L is the same answer rounded. As a check, the concentration at time zero is A + B = 30 mg/L, and 11.14 mg/L is well below it, as a later concentration must be.'}],
  setup:{eq:'biexp', pre:[], why:'"Cp = 12·e^(−5.8t) + 18·e^(−0.16t)" after an "IV bolus dose", so the two-compartment concentration line. Given A, α, B, β and t, asked Cp at 3 hours, so Cp = A e^(−αt) + B e^(−βt) directly. No hinge.'},
+ asks:'Cp',
  givens:[['A', '12', 'the first coefficient, in mg/L, multiplied by e^(−αt)'], ['α', '5.8', 'the fast slope, in hr⁻¹; its term is gone by 3 hr'], ['B', '18', 'the second coefficient, in mg/L, multiplied by e^(−βt)'], ['β', '0.16', 'the slow slope, in hr⁻¹: the exponent βt = 0.16 × 3'], ['t', '3 hours', 'the time in both exponents']],
  check:{t:'The fast term with α = 5.8 hr⁻¹ has vanished by 3 hr. The slow term has a half-life of 0.693 over 0.16, about 4 hr, so a little under half of 18 mg/L is lost: Cp lies between 9 and 18 mg/L, and 11.14 fits.', lo:9, hi:18},
  teach:[
@@ -1360,6 +1375,7 @@ const Q_MODULE2 = [
   {k:'round', t:'k = 0.272 hr⁻¹',
    why:'Report 0.272 per hour, to three decimal places. k is larger than beta, as it always is, because beta is slowed by drug returning from the tissue compartment.'}],
  setup:{eq:'k-overall', pre:[], why:'"IV bolus dose" described by A, B, α and β, so the two-compartment block. Given the two intercepts and two slopes, asked the "overall elimination rate constant k", so k = (A + B)αβ ÷ (Aβ + Bα) directly. No hinge.'},
+ asks:'k',
  givens:[['D0', '250-mg', 'not needed: k comes from the intercepts and slopes'], ['A', '8.45 mg/L', 'in A + B = 13.77 and in Aβ'], ['B', '5.32 mg/L', 'in A + B and in Bα'], ['α', '2.18 hr⁻¹', 'in αβ = 0.248520 and in Bα'], ['β', '0.114 hr⁻¹', 'in αβ and in Aβ']],
  check:{t:'The overall k always lies between the two slopes, above β = 0.114 hr⁻¹ and below α = 2.18 hr⁻¹, and 0.272 does; it sits nearer β because most of the decline follows the slow slope.', lo:0.114, hi:2.18},
  teach:[
@@ -1400,6 +1416,7 @@ const Q_MODULE2 = [
   {k:'round', t:'k21 = 0.912 hr⁻¹',
    why:'Her answer is 0.9 per hour, the same value to one decimal place. Three decimal places are carried here because the value feeds directly into the tissue volume, where rounding early would shift the result.'}],
  setup:{eq:'k21', pre:[], why:'"IV bolus dose" described by A, B, α and β, so the two-compartment block. Given the intercepts and slopes, asked the transfer constant "from the tissue compartment to the central compartment", so k21 = {{frac:Aβ + Bα|A + B}} directly. No hinge.'},
+ asks:'k21',
  givens:[['D0', '250-mg', 'not needed'], ['A', '8.45 mg/L', 'in Aβ in the numerator and in A + B = 13.77'], ['B', '5.32 mg/L', 'in Bα in the numerator and in A + B'], ['α', '2.18 hr⁻¹', 'in Bα = 11.5976'], ['β', '0.114 hr⁻¹', 'in Aβ = 0.96330']],
  check:{t:'k21 is a weighted average of the two slopes, A weighting β and B weighting α, so it must lie between 0.114 and 2.18 hr⁻¹; 0.912 does.', lo:0.114, hi:2.18},
  teach:[
@@ -1443,6 +1460,7 @@ const Q_MODULE2 = [
   {k:'round', t:'k12 = 1.109 hr⁻¹',
    why:'Her answer is 1.1 per hour, the same value to one decimal place. That k12 exceeds k21 here means the drug moves into tissue faster than it returns, which is consistent with an apparent tissue volume larger than the central volume.'}],
  setup:{eq:'k12', pre:[], why:'"IV bolus dose" described by A, B, α and β, so the two-compartment block. Given the intercepts and slopes, asked the transfer constant "from the central compartment to the tissue compartment", so k12 = AB(β − α)² ÷ [(A + B)(Aβ + Bα)] directly. No hinge.'},
+ asks:'k12',
  givens:[['D0', '250-mg', 'not needed'], ['A', '8.45 mg/L', 'in AB in the numerator, in A + B and Aβ in the denominator'], ['B', '5.32 mg/L', 'in AB = 44.954, in A + B and Bα'], ['α', '2.18 hr⁻¹', 'in (β − α)² = 4.268356 and in Bα'], ['β', '0.114 hr⁻¹', 'in (β − α)² and in Aβ']],
  check:{t:'The three microconstants add up to α + β, so k12 must be positive and smaller than 2.18 + 0.114 hr⁻¹; 1.109 fits, and k12 + k21 + k must return that sum.', lo:0, hi:2.294},
  teach:[
@@ -1483,6 +1501,7 @@ const Q_MODULE2 = [
   {k:'round', t:'t½ = 2.5 hr',
    why:'Her key prints 2.5 hr, to one decimal place. The later parts of this problem use 2.5 hr where a half-life is needed, so rounding here and rounding at the end give the same answers.'}],
  setup:{eq:'thalf-first', pre:[], why:'"IV bolus injection" with an "elimination rate constant", so the one-compartment IV bolus block. Given k, asked the "half-life of elimination", so t½ = {{frac:0.693|k}} directly. No hinge.'},
+ asks:'thalf',
  givens:[['D0', '250 mg', 'not needed: the half-life comes from k alone'], ['k', '0.2769 hr⁻¹', 'the denominator of {{frac:0.693|k}}']],
  check:{t:'0.693 over a quarter would be a little under 3 hr, and 0.2769 is a little more than a quarter, so t½ is about 2.5 hr.', lo:0, hi:2.77},
  teach:[
@@ -1517,6 +1536,7 @@ const Q_MODULE2 = [
   {k:'round', t:'C0 = 20 mg/L',
    why:'Her key prints 20 mg/L. She writes the working with the mcg/mL figure and the answer in mg/L without comment, because the two units carry the same number.'}],
  setup:{eq:'first-exp', pre:[], why:'"IV bolus injection" with a rate constant and one sampled concentration, so the one-compartment first-order decline line. Given k, t and Ct, asked the "initial plasma concentration" C0, so Ct = C0 e^(−kt) rearranged to C0 = Ct e^(kt). The mcg/mL to mg/L step is a unit conversion, not a hinge.'},
+ asks:'C0',
  givens:[['D0', '250 mg', 'not needed: the decline is worked in concentration'], ['k', '0.2769 hr⁻¹', 'the exponent kt = 0.2769 × 8'], ['Cp', '2.18 mcg/mL', 'the 8-hour concentration, as 2.18 mg/L, multiplied by e^(kt) = 9.1632'], ['t', '8 hours', 'the sample time in the exponent']],
  check:{t:'With k = 0.2769 hr⁻¹ the half-life is between 2 and 3 hr, so 8 hours is a little over three half-lives and C0 is a little over eight times 2.18 mg/L; 20 mg/L fits.', lo:17.44},
  teach:[
@@ -1550,6 +1570,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Ct = 18.66 mg/L',
    why:'Her key prints 18.66 mg/L, to two decimal places, matching the precision she carries on concentrations throughout this sheet.'}],
  setup:{eq:'first-exp', pre:[], why:'"IV bolus injection" with an "initial plasma concentration", so the one-compartment first-order decline line. Given C0, k and t, asked Ct, so Ct = C0 e^(−kt) directly. The minutes become hours to match k; that is a unit conversion, not a hinge.'},
+ asks:'Cp',
  givens:[['D0', '250 mg', 'not needed: C0 is already given'], ['C0', '20 mg/L', 'the starting concentration, multiplied by e^(−kt)'], ['k', '0.2769 hr⁻¹', 'the exponent kt = 0.2769 × 0.25'], ['t', '15 minutes', 'becomes 0.25 hr so the exponent is a pure number']],
  check:{t:'A quarter hour is a small fraction of a half-life of over 2 hr, so only about 7 per cent is lost: Ct sits a little under 20 mg/L and well above half of it, and 18.66 mg/L fits.', lo:10, hi:20},
  teach:[
@@ -1583,6 +1604,7 @@ const Q_MODULE2 = [
   {k:'round', t:'VD = 12.5 L',
    why:'Her key prints 12.5 L. The 70-kg weight is stated in the stem and never used in her solution, since the volume is asked for in litres rather than per kilogram.'}],
  setup:{eq:'cp-db-vd', pre:[], why:'"intravenous bolus dose" with an "initial plasma concentration", so the one-compartment block at time zero. Given D0 and C0, asked the "apparent volume of distribution", so Cp = {{frac:DB|VD}} with DB = D0 at time zero, rearranged to VD = {{frac:D0|C0}}. No hinge.'},
+ asks:'VD',
  givens:[['D0', '250 mg', 'the numerator: the amount in the body at time zero'], ['C0', '20 mg/L', 'the denominator'], ['weight', '70-kg', 'not needed: VD comes from the dose and the concentration']],
  check:{t:'250 mg over 20 mg/L is 12.5 L, roughly a fifth of the 70-kg body weight; VD must come out in litres.', lo:0},
  teach:[
@@ -1614,6 +1636,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Cl = 3.46 L/hr',
    why:'Her key prints 3.46 L/hr, to two decimal places, which is the precision she carries on clearances throughout this sheet. As a check, dividing the clearance by the volume returns the 0.2769 hr⁻¹ the set started from, so nothing has drifted through the six parts that lead here.'}],
  setup:{eq:'cl-k-vd', pre:[], why:'"total body clearance" from a "volume of distribution" and an "elimination rate constant", so the clearance line. Given k and VD, asked Cl, so Cl = k·VD directly. No hinge.'},
+ asks:'ClT',
  givens:[['VD', '12.5 L', 'one factor of the product k · VD'], ['k', '0.2769 hr⁻¹', 'the other factor']],
  check:{t:'0.2769 is a little over a quarter, so about a quarter of 12.5 L, roughly 3 L, is cleared each hour; 3.46 L/hr fits, and k below 1 keeps Cl below 12.5 L/hr.', lo:0, hi:12.5},
  teach:[
@@ -1646,6 +1669,7 @@ const Q_MODULE2 = [
   {k:'round', t:'Dt = 108.9 mg',
    why:'Her key prints 108.9 mg, to one decimal place, which is the precision she carries on amounts throughout this sheet. Three hours is 1.2 half-lives, so a shade under half the 250 mg should remain, and 108.9 mg is that shade under 125 mg.'}],
  setup:{eq:'amount-exp', pre:[], why:'"IV bolus injection" with an "elimination rate constant", asked the "amount of drug in the body 3 hours after", so the first-order decline written in amount. Given D0, k and t, asked Dt, so Dt = D0 e^(−kt) directly. No hinge.'},
+ asks:'DB',
  givens:[['D0', '250 mg', 'the starting amount, multiplied by e^(−kt)'], ['k', '0.2769 hr⁻¹', 'the exponent kt = 0.2769 × 3'], ['t', '3 hours', 'the time in the exponent']],
  check:{t:'With k = 0.2769 hr⁻¹ the half-life is between 2 and 3 hr, so 3 hours is a little over one half-life and a little under half of 250 mg remains; 108.9 mg fits, below half of the dose.', lo:62.5, hi:125},
  teach:[
@@ -1679,6 +1703,7 @@ const Q_MODULE2 = [
   {k:'round', t:'t = 25 hr',
    why:'Her key prints 25 hr and offers both routes, the equation and the ten half-lives. The 0.05 hr difference between them is the rounding in 2.5 hr.'}],
  setup:{eq:'first-exp', pre:['thalf-first'], why:'"intravenous bolus injection" and "99.9% of the drug to be eliminated", so the one-compartment first-order decline line solved for t. Given t½ and the fraction remaining, asked t, so C = C0 e^(−kt) rearranged to t = {{frac:ln(C0 ÷ C)|k}}; the working counts this as 10 half-lives. k first, from k = {{frac:0.693|t½}}.'},
+ asks:'t',
  givens:[['t½', '2.5 hours', 'multiplied by the 10 half-lives that 99.9% elimination takes'], ['fraction', '99.9%', 'eliminated, which leaves 0.1%, one part in 1000: 10 half-lives']],
  check:{t:'99.9% eliminated leaves 0.1%, one part in 1000, which is ten halvings, so t = 10 × 2.5 hr = 25 hr.', lo:22.5, hi:25},
  teach:[

@@ -53,6 +53,7 @@ const Q_QUIZZES = [
   {k:'round', t:'4.62 hr',
    why:'The quotient 0.693 divided by 0.15 is exactly 4.62, so rounding to the nearest hundredth changes nothing. Her key is 4.62 hr with a margin of 2%, which is 0.09 hr either way, so any answer from 4.53 to 4.71 scores. Two decimal places were asked for.'}],
  setup:{eq:'thalf-beta', pre:[], why:'"IV bolus dose" with A, B, α and β names the two-compartment block of Module 2. β is given and the "elimination half-life" is asked, so t½β = {{frac:0.693|β}}. No hinge; the dose, A, B and α are not used.'},
+ asks:'thalf',
  givens:[['D0', '250-mg IV bolus', 'not needed: half-life does not depend on the dose'], ['n', 'six healthy volunteers', 'not needed'], ['A', '10.16 mg/L', 'not needed: intercepts do not set the half-life'], ['B', '5.65 mg/L', 'not needed'], ['α', '3.59 hr⁻¹', 'not needed: the distribution phase is not the elimination half-life'], ['β', '0.15 hr⁻¹', 'the denominator of {{frac:0.693|β}}']],
  check:{t:'β = 0.15 hr⁻¹ removes about 15% an hour, so halving takes between 4 and 5 hours: {{frac:0.693|0.15}} = 4.62 hr. The elimination half-life uses the smaller exponent, β.', lo:0},
  teach:[
@@ -76,6 +77,7 @@ const Q_QUIZZES = [
   {k:'round', t:'1.72 mg/L',
    why:'Her key is 1.72 with a margin of 3%, so 1.67 to 1.77 scores. Rounding the exponent or e^(−0.6) early stays inside that margin; rounding B does not matter since it is given.'}],
  setup:{eq:'biexp', pre:[], why:'"IV bolus dose" with A, B, α and β names the two-compartment block. All four parameters and t are given and the "concentration of the drug in the plasma" at 4 hours is asked, so Cp = A·e^(−αt) + B·e^(−βt) is evaluated directly. No hinge.'},
+ asks:'Cp',
  givens:[['D0', '250-mg IV bolus', 'not needed: the equation already carries the dose'], ['A', '10.68 mg/L', 'the coefficient of e^(−αt)'], ['B', '3.13 mg/L', 'the coefficient of e^(−βt)'], ['α', '3.55 hr⁻¹', 'the exponent αt = 3.55 × 4 = 14.2'], ['β', '0.15 hr⁻¹', 'the exponent βt = 0.15 × 4 = 0.6'], ['t', '4 hours', 't in both exponentials']],
  check:{t:'By 4 hours the fast α term has vanished, so the level is the B term alone; 0.6 in the exponent leaves 0.5488 of the 3.13 mg/L B intercept: 1.72 mg/L, below 3.13 and above zero.', lo:0, hi:3.13},
  teach:[
@@ -120,6 +122,7 @@ const Q_QUIZZES = [
   {k:'round', t:'6.8 mg/L',
    why:'Her key is 6.8 with a margin of 2%, so 6.66 to 6.94 scores. The unrounded 6.77 rounds to 6.8 at one decimal place.'}],
  setup:{eq:'cp-after-stop', pre:['cl-k-vd'], why:'"infused intravenously" and "cessation of the infusion" name the infusion block of Module 3. VD, Cl, the concentration at stopping and t are given and Cp after stopping is asked, so Cp = Cpeak·e^(−kt). k first, from Cl = k·VD rearranged to k = {{frac:Cl|VD}}, because the line wants k, not Cl.'},
+ asks:'Cp',
  givens:[['VD', '22 L', 'the denominator of k = {{frac:Cl|VD}}'], ['Cl', '3.2 L/hr', 'the numerator of k = {{frac:3.2|22}} = 0.1455 hr⁻¹'], ['C(stop)', '14 mg/L', 'the level the decay starts from'], ['t', '5 hours following cessation', 't in e^(−kt)']],
  check:{t:'k = 0.1455 hr⁻¹ is a half-life a little under 5 hours, so 5 hours is just over one half-life and a bit under half of 14 mg/L remains: 6.8 mg/L, below 14.', lo:0, hi:14},
  teach:[
@@ -166,6 +169,7 @@ const Q_QUIZZES = [
   {k:'round', t:'60 mg/hr',
    why:'Rounding 59.8 mg/hr to the nearest whole number gives 60 mg/hr, because 0.8 rounds up. Her key is 60 with a margin of 2%, which is 1.2 mg/hr either way, so any answer from 58.8 to 61.2 scores. A whole number was asked for.'}],
  setup:{eq:'css', pre:['thalf-first', 'cl-k-vd'], why:'"infusion rate" to reach a "steady-state concentration" names the infusion block. Css, VD and t½ are given and R is asked, so Css = {{frac:R|Cl}} is rearranged to R = Css·Cl. k first, from the half-life, then Cl = k·VD, because the line wants Cl, not VD and t½.'},
+ asks:'R',
  givens:[['Css', '23 mcg/mL', 'written 23 mg/L, multiplied by clearance'], ['VD', '15 L', 'in Cl = kVD = 0.1733 × 15 = 2.599 L/hr'], ['t½', '4 hr', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹']],
  check:{t:'Clearance is 2.599 L/hr, and holding 23 mg in each litre cleared needs 23 × 2.599 = 59.8 mg/hr, so about 60 mg/hr. The rate is above zero.', lo:0},
  teach:[
@@ -191,6 +195,7 @@ const Q_QUIZZES = [
   {k:'round', t:'14.9 mg/L',
    why:'Rounding 14.92 mg/L to one decimal place gives 14.9 mg/L, because the second decimal, 2, rounds down. Her key is 14.9 with a margin of 2%, which is 0.3 mg/L either way, so any answer from 14.6 to 15.2 scores. One decimal place was asked for.'}],
  setup:{eq:'css', pre:['thalf-first', 'cl-k-vd'], why:'"continuous intravenous infusion at a rate of" names the infusion block. R, t½ and a per-kilogram VD are given and the "steady-state concentration" is asked, so Css = {{frac:R|Cl}}. k first, from the half-life, then Cl = k·VD, because the line wants Cl; the weight-based VD is a unit step, not an equation.'},
+ asks:'Css',
  givens:[['R', '38 mg/hr', 'the numerator'], ['age', '60 year-old', 'not needed: age does not enter Css'], ['weight', '154 pound', 'converted: {{frac:154|2.2}} = 70 kg, scales VD'], ['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '0.21 L/kg', 'scaled to 70 kg: 14.7 L; Cl = kVD = 2.547 L/hr']],
  check:{t:'Each hour 38 mg enters and 2.547 L is cleared, so the plateau is {{frac:38|2.547}}, about 15 mg/L: 14.9 mg/L, above zero.', lo:0},
  teach:[
@@ -297,6 +302,7 @@ const Q_QUIZZES = [
   {k:'round', t:'2.6 hr',
    why:'tmax = 2.621 hr rounds to 2.6 hr at one decimal place, as the stem asks. Her key is 2.6 with a margin of 3%, so 2.52 to 2.68 scores. The peak comes early relative to the 5.6-hour elimination half-life because absorption, with a 0.8-hour half-life, is the faster of the two processes.'}],
  setup:{eq:'tmax', pre:['thalf-abs', 'thalf-first'], why:'"single 1000-mg oral dose" with an "absorption half-life" and an "elimination half-life" names the oral block of Module 5. The two half-lives are given and the time of the "maximum concentration" is asked, so tmax = {{frac:ln(ka ÷ k)|ka − k}}. ka and k first, from the half-lives; F, VD and the dose are not used.'},
+ asks:'tmax',
  givens:[['D0', '1000-mg oral dose', 'not needed: tmax does not depend on the dose'], ['F', '83%', 'not needed: F scales the height of the curve, not its timing'], ['VD', '18 L', 'not needed: tmax has no volume in it'], ['absorption t½', '0.8 hours', 'gives ka = {{frac:0.693|0.8}} = 0.8663 hr⁻¹'], ['t½', '5.6 hours', 'gives k = {{frac:0.693|5.6}} = 0.1238 hr⁻¹']],
  check:{t:'Absorption half-life 0.8 hr against elimination 5.6 hr, 7 times slower: the peak comes a few absorption half-lives in and well before one elimination half-life of 5.6 hr: 2.6 hr.', lo:0},
  teach:[
@@ -320,6 +326,7 @@ const Q_QUIZZES = [
   {k:'round', t:'188.2 (mg/L)hr',
    why:'Her key is 188.2 with a margin of 3%, so 182.6 to 193.8 scores. The same answer comes from C0/k: C0 = 500/23 = 21.74 mg/L, and 21.74/0.1155 = 188.2.'}],
  setup:{eq:'cl-auc', pre:['thalf-first', 'cl-k-vd'], why:'"IV bolus dose" with a VD and a "half-life" names the clearance block of Module 4. D0, VD and t½ are given and the AUC is asked, so Cl = {{frac:D0|AUC}} is rearranged to AUC = {{frac:D0|Cl}}. k first, from the half-life, then Cl = k·VD, because the line wants Cl; the 75 kg is not used.'},
+ asks:'AUC',
  givens:[['D0', '500-mg IV bolus', 'the numerator'], ['VD', '23 L', 'in Cl = kVD = 0.1155 × 23 = 2.657 L/hr'], ['t½', '6.0 hr', 'gives k = {{frac:0.693|6.0}} = 0.1155 hr⁻¹'], ['weight', '75 kg', 'not needed: dose and volume are already whole-patient values']],
  check:{t:'C0 = {{frac:500|23}} is about 22 mg/L and AUC = {{frac:C0|k}} = {{frac:22|0.1155}}, which also comes to about 188 (mg/L)hr, agreeing with the clearance route.', lo:0},
  teach:[
@@ -343,6 +350,7 @@ const Q_QUIZZES = [
   {k:'round', t:'3.13 L/hr',
    why:'ClR = 3.13 L/hr at two decimal places, as the stem asks. Her key is 3.13 with a margin of 3%, so 3.04 to 3.22 scores. Renal clearance is 3.13 of the 4.389 L/hr total, which matches fe = 0.713: the kidney accounts for about 71 per cent of elimination and the remainder is non-renal.'}],
  setup:{eq:'none', pre:['thalf-first', 'cl-k-vd', 'cl-auc'], why:'"IV bolus injection" with "unchanged drug was recovered" names the renal clearance block of Module 4. D0, VD, t½ and Du∞ are given and "renal clearance" is asked. No catalog line is Du∞ over an area; the working uses ClR = {{frac:Du∞|AUC}} with AUC = {{frac:D0|Cl}}, Cl = k·VD and k from the half-life, which equals ClR = fe·ClT.'},
+ asks:'ClR',
  givens:[['D0', '1,000 mg', 'the numerator of AUC = {{frac:D0|kVD}}'], ['VD', '19 L', 'in Cl = kVD = 0.231 × 19 = 4.389 L/hr'], ['t½', '3 hours', 'gives k = {{frac:0.693|3}} = 0.231 hr⁻¹'], ['collection', '48 hours', 'not needed for the number: 16 half-lives, so the urine holds all unchanged drug'], ['Du∞', '713 mg', 'the numerator of ClR = {{frac:Du∞|AUC}}']],
  check:{t:'The kidney removed {{frac:713|1000}} of the dose, so renal clearance is that fraction of the total 4.389 L/hr, a little over 3 L/hr: 3.13 L/hr, below the total.', lo:0, hi:4.389},
  teach:[
@@ -366,6 +374,7 @@ const Q_QUIZZES = [
   {k:'round', t:'15.9 L',
    why:'VD = 15.94 L rounds to 15.9 L at one decimal place. Her key is 15.9 with a margin of 3%, so 15.4 to 16.4 scores. Leaving F out of the numerator gives {{frac:15.94|0.82}} = 19.4 L, too large; swapping ka and k makes (ka − k) negative and gives a negative volume, which cannot be right.'}],
  setup:{eq:'oral-cp', pre:[], why:'"oral administration of a single 500-mg dose" fitting a "one-compartment model" with a printed equation names the oral block. The coefficient, both exponents, F and D0 are given and VD is asked, so the prefactor F·ka·{{frac:D0|VD(ka − k)}} of the oral Cp line is set equal to 30 and rearranged for VD. No hinge; ka is the larger exponent.'},
+ asks:'VD',
  givens:[['D0', '500-mg dose', 'in the numerator F D0 ka'], ['coefficient', '30', 'in the denominator 30 × (ka − k)'], ['k', '0.133', 'the smaller exponent, elimination; in ka − k'], ['ka', '0.934', 'the larger exponent, absorption; in the numerator and in ka − k'], ['F', '82%', 'written 0.82, in the numerator'], ['units', 'mcg/mL for Cp and hr for time', 'mcg/mL = mg/L, so mg over mg/L gives litres']],
  check:{t:'The prefactor {{frac:F D0 ka|VD(ka − k)}} is 30 mg/L and ka over (ka − k) is a little above 1, so VD is a little above {{frac:0.82 × 500|30}}, roughly 14 L: 15.9 L, above zero.', lo:0},
  teach:[
@@ -418,6 +427,7 @@ const Q_QUIZZES = [
   {k:'round', t:'151.1',
    why:'Her key is 151.1 with a margin of 5%, so 143.5 to 158.7 scores. One decimal place was asked for, and Canvas took the number with no unit.'}],
  setup:{eq:'cmax-ss', pre:['thalf-first', 'cp-db-vd'], why:'"IV bolus injections" "every 8 hours" and "maximum steady-state concentration", so the repeated IV bolus block at steady state. Dose per kg, VD per kg, t½ and τ are given and Cmax∞ is asked, so Cmax∞ = {{frac:C0|1 − e^(−kτ)}}. k first from the half-life, and C0 from the scaled dose over the scaled volume.'},
+ asks:'Cmaxss',
  givens:[['D0', '17 mg/kg', 'scaled to 75 kg: 1275 mg, the numerator of C0'], ['weight', '75 kg', 'scales both the dose and the volume'], ['τ', 'every 8 hours', 'the exponent kτ = 0.1733 × 8 = 1.386'], ['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '15% of body weight', 'scaled to 75 kg: 11.25 L, the denominator of C0']],
  check:{t:'C0 is {{frac:17|0.15}} = 113.3 mg/L per dose and 8 hours is two half-lives, so a quarter is left at each new dose; the peak is C0 over 0.750, a third more than 113.3: 151.1, between 113.3 and 2 × 113.3.', lo:113.3, hi:226.6},
  teach:[
@@ -464,6 +474,7 @@ const Q_QUIZZES = [
   {k:'round', t:'10.6',
    why:'Her key is 10.6 with a margin of 5%, so 10.1 to 11.1 scores. A common wrong answer is 135.4, which comes from treating the two doses as a single bolus concentration; the drip ends far below its plateau.'}],
  setup:{eq:'cp-after-stop', pre:['thalf-first', 'cl-k-vd', 'cp-infusing'], why:'Two 2-hour infusions and a level "4 hours after the cessation of the second infusion": intermittent infusions, added. Dose, infusion time, t½ and VD are given and Cp is asked, so each end level decays from its own end time and the two are summed. k first, then Cl = k × VD, then the infusion line.'},
+ asks:'Cp',
  givens:[['D0', 'Four hundred milligrams', 'with the infusion time gives R = {{frac:400|2}} = 200 mg/hr'], ['infusion time', 'over a period of 2 hours', 'R = 200 mg/hr; t = 2 hr in 1 − e^(−kt)'], ['second start', 'Eight hours after the start of the first infusion', 'the second infusion runs 8 to 10 hr'], ['t½', 'approximately 4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', 'approximately 20 L', 'in Cl = kVD = 3.465 L/hr'], ['t', '4 hours after the cessation of the second infusion', 'the second term decays 4 hr, the first 12 hr']],
  check:{t:'Each infusion ends at 16.90 mg/L. Four hours is one half-life, so the second leaves 8.45; the first, 12 hours or three half-lives on, leaves an eighth, 2.11. The sum is between 8.45 and 2 × 16.90.', lo:8.45, hi:33.8},
  teach:[
@@ -510,6 +521,7 @@ const Q_QUIZZES = [
   {k:'round', t:'2.6',
    why:'Her key is 2.6 with a margin of 5%, so 2.5 to 2.7 scores. A common wrong answer is 17.1, a time to steady state or a decomposition time, not the time of the peak within an interval.'}],
  setup:{eq:'tmax-ss', pre:['thalf-first', 'thalf-abs'], why:'"oral dose … every 8 hours" and "when does the expected maximum concentration … at steady-state occur", so the multiple oral block, the time-of-peak line. Two half-lives and τ are given and tmax∞ is asked; F, VD, the dose and the weight are not in the line. k and ka first, each from its half-life.'},
+ asks:'tmaxss',
  givens:[['weight', '74-kg', 'not needed: tmax∞ has no volume in it'], ['D0', '750 mg', 'not needed: tmax∞ does not depend on the dose'], ['τ', 'every 8 hours', 'in 1 − e^(−kτ) and 1 − e^(−kaτ)'], ['F', '92%', 'not needed: F scales the height of the curve, not its timing'], ['VD', '0.29 L/kg', 'not needed'], ['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['absorption t½', '1.5 hour', 'gives ka = {{frac:0.693|1.5}} = 0.462 hr⁻¹']],
  check:{t:'The steady-state peak must fall inside the 8-hour interval and comes earlier than a first-dose peak, since drug from earlier doses is being eliminated while the new dose absorbs: 2.6 hours, between 0 and 8.', lo:0, hi:8},
  teach:[
@@ -552,6 +564,7 @@ const Q_QUIZZES = [
   {k:'round', t:'723',
    why:'Her key is 723 with a margin of 5%, so 687 to 759 scores. A common wrong answer is 500, which is what the numbers give without dividing by F and with a different interval; the whole number was asked for.'}],
  setup:{eq:'cavg-ss', pre:[], why:'"by mouth every 8 hours" and "average plasma drug concentration", so the multiple oral block, the average line. Cl, τ, F and the target Cavg∞ are given and the dose is asked, so Cavg∞ = {{frac:F × D0|Cl × τ}} is rearranged for D0. No hinge: clearance is given, so k and VD stay unused.'},
+ asks:'D0',
  givens:[['τ', 'every 8 hours', 'multiplies clearance: Cl × τ = 3.0 × 8 = 24 L'], ['F', '83%', 'written 0.83, the denominator'], ['absorption t½', '90 minutes', 'not needed: the average concentration does not depend on ka'], ['Cl', '3.0 L/hr', 'in the numerator with τ'], ['VD', 'approximately 25 L', 'not needed: clearance is given'], ['Cavg∞', '25 mg/L', 'the target, in the numerator']],
  check:{t:'Holding 25 mg/L while 24 L is cleared per interval needs 600 mg absorbed; with only 0.83 of the dose absorbed, the dose must be larger than 600 mg: {{frac:600|0.83}} = 723 mg.', lo:600},
  teach:[
@@ -575,6 +588,7 @@ const Q_QUIZZES = [
   {k:'round', t:'0.77',
    why:'Her key is 0.77 with a margin of 3%, so 0.75 to 0.79 scores. Two decimal places were asked for, as a decimal, not a percentage.'}],
  setup:{eq:'f-abs', pre:['thalf-first', 'cl-k-vd', 'div-cl-auc'], why:'"absolute bioavailability" with an oral AUC, t½ and VD and no IV AUC, so the bioavailability block. The IV AUC is not given, so it comes from DIV = Cl × AUCIV with Cl = k × VD; then Fabs is the ratio of the two areas, the doses being equal.'},
+ asks:'F',
  givens:[['D0', '500 mg', 'the numerator of AUCIV = {{frac:DIV|Cl}}; the dose ratio is 1'], ['AUCpo', '139 (mg/L)hr', 'the numerator of the area ratio'], ['t½', '4.5 hr', 'gives k = {{frac:0.693|4.5}} = 0.154 hr⁻¹'], ['VD', '18 L', 'in Cl = kVD = 0.154 × 18 = 2.772 L/hr']],
  check:{t:'Clearance 2.772 L/hr means the 500 mg would give 180.4 (mg/L)hr if all of it reached the blood; the oral 139 is about three-quarters of that, so F is about 0.77, between 0 and 1.', lo:0, hi:1},
  teach:[

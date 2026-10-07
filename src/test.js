@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -830,6 +830,8 @@ console.log('\n=== 10. Bank fields are plain text ===');
   /* the givens table and the sanity check: present on every numeric question, every value a number the stem states */
   const numsIn = txt => [...String(txt || '').replace(/,(?=\d{3}\b)/g, '').matchAll(/(^|[^A-Za-z\d.])(\d+(?:\.\d+)?)/g)].map(m => m[2]);
   const SMALL = new Set(['0.5', '0.25', '0.125', '0.693', '2.303', '1.44', '50', '75', '87.5', '90', '94', '95', '97', '99', '100', '1000', '60', '24']);
+  const noAsk = nums.filter(q => !q.asks || !X.ASKS[q.asks]).map(q => q.id);
+  if (noAsk.length) bad(`numeric questions without a valid asks key: ${noAsk.slice(0, 8).join(', ')} (${noAsk.length})`); else console.log(`  ok    every numeric question names the quantity it asks for (${Object.keys(X.ASKS).length} keys)`);
   const needWork = X.QUESTIONS.concat(X.EXTRAS).filter(q => X.qType(q) !== 'numeric' && q.options && q.sub === 'renalmech' && q.skill === 'apply' && /\d/.test(q.stem));   // a mechanism read from a number must show the comparison
   const noWork = needWork.filter(q => !Array.isArray(q.steps) || !q.steps.length).map(q => q.id);
   if (noWork.length) bad('renal-mechanism questions without the working that decides them: ' + noWork.join(', ')); else console.log(`  ok    every renal-mechanism decision carries its working (${needWork.length})`);
