@@ -2,6 +2,16 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (Weak spots: what fixes each kind of miss)
+- Under "Where the calculations go wrong", each kind of miss you have logged now names its repair and opens it.
+- Set-up misses open the set-up drill on the modules where the line was wrong, and the sheet map.
+- Unit misses open the units table; algebra misses open a typing drill on the lines behind those misses.
+- Rounding shows her rule: decimal places as stated, units on every answer, a dose rounded to a usable strength.
+- Lines mixed up in the set-up drill are listed on Weak spots, with the drill one tap away.
+- Every missed calculation card shows the line that solves it, a set-up chip and the Explain-more chips.
+- Reference links from a question landed one section early after the sheet map was added; they land right now.
+- The set-up card no longer offers a scope with no stems, so the empty-scope alert cannot appear.
+
 ## 2026-10-05 (concept questions in her shape)
 - Every concept question was read against her three graded quizzes: 169 checked, 75 rewritten.
 - Stems now take her forms ("Which term describes", "Which of the following best describes", "Which results if").

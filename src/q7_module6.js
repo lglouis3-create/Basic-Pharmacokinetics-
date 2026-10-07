@@ -167,13 +167,13 @@ const Q_MODULE6 = [
  stem:'Which of the following best describes the assumptions of the principle of superposition?',
  options:[
   {t:'first-order elimination, with pharmacokinetics unchanged by repeated doses', correct:true,
-   why:'Both slide assumptions are carried in one option, so the item becomes single-answer in the shape of her Quiz 4 item on intermittent infusions.'},
+   why:'Superposition predicts the concentration after many doses by adding single-dose curves, which is valid only if each dose behaves the same. First-order elimination makes each curve proportional to its dose, and unchanged pharmacokinetics means k (the elimination rate constant), VD (the volume of distribution) and clearance are the same for every dose.'},
   {t:'zero-order elimination, with pharmacokinetics unchanged by repeated doses',
-   why:'Reverses the first assumption only.'},
+   why:'Picking this reverses the first assumption. Zero-order elimination removes a fixed amount per hour whatever the concentration, so a second dose does not add its own curve to the first; the concentrations are not additive. Superposition needs first-order elimination, where a fixed fraction leaves per hour and every curve scales with its dose.'},
   {t:'first-order elimination, with the half-life shortening as drug accumulates',
-   why:'Reverses the second assumption only.'},
+   why:'Picking this reverses the second assumption. A half-life that shortens as drug accumulates means k (the elimination rate constant) changes between doses, so a later dose no longer gives the first-dose curve shifted in time. Superposition needs the pharmacokinetics, k, VD (the volume of distribution) and clearance, to stay the same for every dose.'},
   {t:'zero-order elimination, with the half-life shortening as drug accumulates',
-   why:'Reverses both assumptions.'}],
+   why:'Picking this reverses both assumptions. Zero-order elimination removes a fixed amount per hour, so doses do not add as independent curves, and a half-life that shortens with accumulation means the kinetics change from dose to dose. Superposition requires first-order elimination with k, VD and clearance unchanged by repeated dosing.'}],
  teach:[
   {t:'Superposition lets the concentration after many doses be predicted from the curve after one dose. It rests on two assumptions, and both are about the kinetics staying the same.'},
   M6_SUP, M6_CH],
@@ -213,7 +213,7 @@ const Q_MODULE6 = [
   {t:'The same k, from the same starting level',
    why:'The k is right and the starting level is not. If each dose at steady state started at the first-dose peak, no drug would have accumulated and the steady-state peak would equal the first-dose peak.'},
   {t:'A larger k, from a higher starting level',
-   why:'The causal clause is moved to why; the misreading kept is that more drug gives a larger k.'}],
+   why:'Picking this takes the accumulated drug for a faster elimination constant. k (the elimination rate constant) is {{frac:Cl|VD}}, clearance over volume of distribution, and more drug in the body changes neither. The rate of elimination in mg/hr is larger at steady state because more drug is present; the fraction removed per hour is unchanged.'}],
  teach:[
   {t:'The only difference between the first dose and a dose at steady state is the drug already in the body. The kinetics are the same, so the steady-state values can be worked from the first-dose values.'},
   M6_SUP, M6_ACCFAC],

@@ -216,11 +216,11 @@ const Q_MODULE5 = [
   {t:'the elimination rate is greater than the absorption rate, with drug still to be absorbed', correct:true,
    why:'After the peak the falling amount left in the gut can no longer keep pace with elimination, so the concentration declines, but absorption has not stopped. Both processes are still running, which is why this phase is named separately from the one that follows.'},
   {t:'the absorption rate is greater than the elimination rate',
-   why:'This is the absorption phase, the rising limb: more drug arrives from the gastrointestinal tract each hour than is removed, so the amount in the body grows.'},
+   why:'Picking this reads the post-absorption phase as the rising limb. Absorption faster than elimination describes the absorption phase before the peak: more drug arrives from the gastrointestinal tract each hour than is removed, so the amount in the body grows. After the peak the comparison runs the other way, with elimination the faster process.'},
   {t:'the absorption rate equals the elimination rate',
-   why:'This is the peak, a single instant: the concentration stops rising exactly when absorption and elimination balance, and that time is tmax.'},
+   why:'Picking this takes the peak for a phase. Equal rates hold at one instant only, tmax (the time of the peak), where the concentration stops rising because absorption and elimination balance. The post-absorption phase is the stretch after that instant, during which elimination is the faster of the two processes while absorption continues.'},
   {t:'absorption is complete and only elimination is occurring',
-   why:'This is the elimination phase that follows: once the gut has given up all the drug it will, the only remaining process is first-order elimination governed by k alone.'}],
+   why:'Picking this names the phase after the one asked for. Absorption complete with elimination alone is the elimination phase, governed by k (the elimination rate constant) only. In the post-absorption phase drug is still being absorbed from the gut, so ka (the absorption rate constant) and k are both still at work.'}],
  teach:[
   {h:'The idea', t:'The oral curve has three named phases, separated by two events.'},
   {h:'The phases in order', list:['Before the peak (absorption phase): absorption outruns elimination.', 'At the peak: the two rates are equal.', 'After the peak (post-absorption phase): elimination is the faster of the two, while absorption continues.', 'Once absorption is complete (complete elimination phase): the curve is pure elimination.']},
@@ -315,7 +315,7 @@ const Q_MODULE5 = [
   {t:'The half-life of the time to peak', correct:false,
    why:'Choosing this treats a property of a process as a property of a curve. Half-lives belong to first-order processes and are 0.693 divided by that process\'s rate constant, so this model has only an absorption and an elimination half-life. The time to peak is a single moment, not a decaying process. An unqualified t½ is 0.693 divided by k.'},
   {t:'The distribution half-life',
-   why:'Replaces "Both, since the two are equal for a one-compartment model", which carries its reasoning inside the option, with the neighbouring term from the two-compartment module.'}],
+   why:'Picking this carries a two-compartment term into a one-compartment oral model. A distribution half-life describes the fast early fall in concentration as drug moves from plasma into tissues, a process this model does not separate out. The two half-lives here are absorption, {{frac:0.693|ka}}, and elimination, {{frac:0.693|k}}, and an unqualified half-life is the elimination one.'}],
  teach:[
   {h:'The idea', list:['An oral model runs two first-order processes, so it has two half-lives.', 'Each is 0.693 divided by its own rate constant.']},
   {h:'The convention', list:['An unqualified half-life is the elimination half-life, because it belongs to the drug in the patient rather than to the formulation.', 'The absorption half-life is named explicitly whenever it is meant.']},
@@ -336,7 +336,7 @@ const Q_MODULE5 = [
   {t:'deciding whether elimination is zero order or first order',
    why:'Picking this treats the absorption parameters as reporting on the output side. The order of elimination is judged from the shape of the terminal decline, which is governed by k, not by ka, the time to peak or the peak. First-order elimination is assumed throughout this module, so these three parameters are not used to establish it.'},
   {t:'calculating the total body clearance',
-   why:'Clearance is found from the dose and the area under the curve, or from k and the volume of distribution. The absorption rate constant, the time to peak and the peak concentration describe the input side and do not give it.'}],
+   why:'Picking this takes the input parameters for the output side. Clearance (Cl) is found from the dose and the area under the curve, or as k × VD, the elimination rate constant times the volume of distribution. ka, tmax and Cmax describe how fast the drug arrives, not how fast the body removes it.'}],
  teach:[
   {h:'The idea', list:['ka (the absorption rate constant), tmax (the time to peak) and Cmax (the peak concentration) describe how quickly and how completely a formulation delivers its drug.']},
   {h:'What they are used for', list:['Predicting peaks and troughs in repeated dosing.', 'Comparing products for bioequivalence.', 'Choosing a route and a dosage form.', 'Assessing onset of action.', 'Relating the concentration to the pharmacological effect.']},
@@ -360,7 +360,7 @@ const Q_MODULE5 = [
   {t:'an increase in the absorption rate constant',
    why:'Picking this mistakes the rising rate for a rising constant. A rate constant is a fraction per time, hr⁻¹, with no milligrams in its units, so no quantity of drug can change it. What rises is the rate, the constant times the amount present. kₐ answers to the formulation and k to clearance and volume of distribution, since k = {{frac:Cl|V}}ᴅ.'},
   {t:'an increase in the elimination rate constant',
-   why:'k is a fraction per hour set by clearance and volume of distribution, k = {{frac:Cl|VD}}. The dose does not enter it: a larger dose raises the rate of elimination in mg/hr, because more drug is present, but not the constant.'}],
+   why:'Picking this takes a rising rate of elimination for a rising rate constant. k (the elimination rate constant) is a fraction per hour set by clearance and volume of distribution, k = {{frac:Cl|VD}}, which contain no dose. A larger dose raises the rate in mg/hr because more drug is present; the constant is unchanged.'}],
  teach:[
   {h:'A rate and a rate constant are different quantities', t:'Their units tell them apart.', list:['A rate is an amount per time, mg/hr: how many milligrams actually left this hour.', 'A rate constant is a fraction per time, hr⁻¹: what share of whatever is present leaves each hour.', 'They are tied by rate = constant × amount, and the units agree: hr⁻¹ × mg = mg/hr.', 'A constant whose units contain no milligrams cannot be changed by giving more milligrams.']},
   {h:'What doubling the dose does to each', fig:'rate_vs_constant', list:['Doubling the dose doubles the amount, so rate = k × amount doubles with it.', 'The constant is the ratio rate ÷ amount, and doubling both leaves that ratio where it was.', 'The figure marks three moments on two doses of one drug: 200 mg losing 40 mg/hr, 100 mg losing 20 mg/hr, and the 200 mg dose once it has fallen to 100 mg, losing 20 mg/hr again.', 'The rate tracks the amount present; k is 0.2 per hour at every one of them.']},

@@ -346,6 +346,46 @@ with sync_playwright() as p:
     ok('Show me offers no override', pg.locator('#eqRight').count() == 0)
     pg.evaluate("EQ = null")
 
+    print('\n=== Weak spots: repairs per kind of miss, Reference anchors ===')
+    pg.evaluate("Q = null; EQ = null; SU = null")
+    land = pg.evaluate("""(() => { const q = QUESTIONS.find(q => q.module === 2 && qType(q) === 'numeric');
+      const l = linksFor(q).find(x => x[0] === 'ref'); if(!l) return 'no ref link'; show('ref');
+      const t = document.getElementById(l[1]); return t ? t.textContent.trim() : 'no target'; })()""")
+    ok('a Module 2 question\'s Reference chip lands on the Module 2 heading, not the one before it: ' + land[:40], land.startswith('Module 2'))
+    ok('the sheet map is a Reference anchor', pg.evaluate("refAnchor('Her equation sheet')") == 'ref-0')
+    seed = pg.evaluate("""(() => { const pool = suPoolAll().filter(q => QUESTIONS.includes(q));
+      const a = pool.find(q => q.module === 2), b2 = pool.find(q => q.module === 3 && q.id !== a.id), c = pool.find(q => q.module === 5);
+      const n = DB.answers.length;
+      DB.answers.push({qid: a.id, result: 'wrong', missKind: 'setup', picked: '1', t: Date.now()});
+      DB.answers.push({qid: b2.id, result: 'wrong', missKind: 'algebra', picked: '1', t: Date.now()});
+      DB.answers.push({qid: c.id, result: 'wrong', missKind: 'unit', picked: '1', t: Date.now()});
+      DB.answers.push({qid: c.id, result: 'wrong', missKind: 'round', picked: '1', t: Date.now()});
+      show('gaps'); const el = document.getElementById('v-gaps');
+      const lines = [b2.setup.eq, ...(b2.setup.pre || [])].filter(id => EQ_BY_ID[id]);
+      return {n, ids: [a.id, b2.id, c.id], fixes: [...el.querySelectorAll('.fixrow b')].map(x => x.textContent),
+        setupChips: [...el.querySelectorAll('.fixrow [data-sheetsetup]')].map(x => x.dataset.sheetsetup),
+        unitJump: !!el.querySelector('.fixrow [data-jump^="ref:ref-"]'),
+        typeIds: (el.querySelector('.fixrow [data-eqtype]') || {dataset: {}}).dataset.eqtype, lines: lines.join(','),
+        cardLines: el.querySelectorAll('.missq .mline').length, cardChips: el.querySelectorAll('.missq .explainmore').length,
+        missed: el.querySelectorAll('.missq').length,
+        numMissed: [...new Set(DB.answers.filter(x => x.result === 'wrong').map(x => x.qid))].filter(id => byId(id) && qType(byId(id)) === 'numeric' && byId(id).setup && EQ_BY_ID[byId(id).setup.eq]).length}; })()""")
+    ok('one repair per kind of miss that happened: ' + ', '.join(seed['fixes']), seed['fixes'] == ['Set-up', 'Unit conversion', 'Algebra', 'Rounding'])
+    ok('the set-up repair offers the drill on the module where the line was wrong, and the sheet map', '2' in seed['setupChips'] and pg.evaluate("!!document.querySelector('#v-gaps .fixrow [data-jump=\"ref:ref-0\"]')"))
+    ok('the unit repair jumps into Reference', seed['unitJump'])
+    ok('the algebra repair names the lines behind the miss: ' + str(seed['typeIds']), seed['typeIds'] == seed['lines'])
+    ok('every missed calculation card shows the line that solves it and Explain-more chips', seed['cardLines'] == seed['numMissed'] >= 3 and seed['cardChips'] == seed['missed'] >= 3)
+    pg.click('#v-gaps .fixrow [data-eqtype]'); pg.wait_for_timeout(200)
+    ok('clicking it opens the typing drill on those lines', pg.evaluate("VIEW === 'eq' && EQ && EQ.mode === 'type' && EQ.queue.join(',')") == seed['lines'])
+    pg.evaluate("EQ = null; show('gaps')"); pg.wait_for_timeout(100)
+    pg.click('#v-gaps .fixrow [data-sheetsetup]'); pg.wait_for_timeout(200)
+    ok('the set-up chip starts the set-up drill on that module', pg.evaluate("VIEW === 'eq' && SU && SU.scope === '2' && SU.queue.every(q => q.module === 2)"))
+    pg.evaluate("SU = null; show('gaps')"); pg.wait_for_timeout(100)
+    pg.click('#v-gaps .missq [data-jump^="guide:"], #v-gaps .missq [data-jump^="ref:"]'); pg.wait_for_timeout(200)
+    ok('an Explain-more chip on a missed card jumps and offers the way back to Weak spots', pg.evaluate("VIEW !== 'gaps' && RET.length && RET[RET.length-1].view === 'gaps'"))
+    pg.evaluate("RET = []; DB.answers.splice(%d); save(); show('gaps')" % seed['n']); pg.wait_for_timeout(100)
+    ok('the set-up card offers no chip for a scope with no stems', pg.evaluate("""(() => { const keep = EXAM; const e3 = COURSE.exams.find(e => e.id === 3); if(!e3) return true;
+      EXAM = e3; const h = suCardHTML(); EXAM = keep; return suScopePool('exam:3').length ? true : !h.includes('data-su="exam:3"'); })()"""))
+
     ok('no uncaught error', not errs)
     if errs: print('   ', errs[:3])
     b.close()

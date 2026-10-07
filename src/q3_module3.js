@@ -123,7 +123,7 @@ const Q_MODULE3 = [
   {t:'Three to five half-lives', correct:true,
    why:'Each half-life closes half of the remaining gap to the plateau, so three half-lives reach 87.5 per cent of steady state and five reach about 96.9 per cent, close enough to treat the level as steady. The answer depends only on the half-life, so no other parameter appears.'},
   {t:'Three to five hours', correct:false,
-   why:'Nothing in the model fixes a number of hours: the approach is measured in half-lives, which differ between drugs. A drug with a one-hour half-life is effectively at steady state within five hours, while one with a twelve-hour half-life is nowhere near; quoting hours drops the only parameter that matters.'},
+   why:'Picking this reads the rule of three to five half-lives as a number of hours. The approach is measured in half-lives, which differ between drugs: one with a one-hour half-life is near steady state within five hours, while one with a twelve-hour half-life is far from it. Quoting hours drops the parameter that sets the time.'},
   {t:'Three to five times the infusion rate', correct:false,
    why:'The infusion rate is an amount per unit time and multiplying it by a number does not give a time. The rate sets how high the plateau is, not how long it takes to arrive. This confuses the two questions the infusion curve answers.'},
   {t:'It depends on the size of the loading dose', correct:false,
@@ -160,11 +160,11 @@ const Q_MODULE3 = [
   {t:'The time to reach steady state will not change.', correct:true,
    why:'The plateau is infusion rate divided by clearance, and clearance is constant for the patient, so doubling the rate doubles the plateau. The approach follows one minus e to the minus kt, which has no rate term, so the curve rises higher but reaches its new plateau at the same time.'},
   {t:'The time to reach steady state will double.',
-   why:'Replaces the compound option; this is the distractor she named in the Exam 1 review.'},
+   why:'Picking this reads the plateau and the time to reach it as moving together. Doubling the rate R doubles the steady-state concentration Css = {{frac:R|Cl}}, where Cl is clearance, but the approach follows 1 − e^(−kt), with k the elimination rate constant, and contains no rate term. The curve climbs twice as high in the same three to five half-lives.'},
   {t:'The time to reach steady state will be halved.',
-   why:'Replaces the compound option; the opposite direction.'},
+   why:'Picking this reads a faster input as a faster arrival at the plateau. The approach to steady state follows 1 − e^(−kt), where k is the elimination rate constant, and contains no rate term, so the time stays at three to five half-lives. A faster infusion reaches a higher plateau, Css = {{frac:R|Cl}}, in the same time.'},
   {t:'The steady-state concentration will not change.',
-   why:'Mixes the other quantity into the option list, as her Quiz 2 Q6 does; false because the steady-state concentration doubles with the rate.'}],
+   why:'This answer swaps the two quantities the infusion curve answers for. The steady-state concentration does change: Css = {{frac:R|Cl}} is proportional to the rate R, so doubling the rate doubles Css. What does not change is the time to reach it, which the half-life alone sets; the plateau moves and the clock does not.'}],
  teach:[
   {h:'The idea', list:[
     'Two parts of the infusion equation answer two different questions.',
@@ -198,7 +198,7 @@ const Q_MODULE3 = [
   {t:'The fraction of the dose remaining in the body at time t', correct:false,
    why:'The fraction remaining after a bolus is e to the minus kt, without the one minus in front, and it falls rather than rises. Subtracting it from one turns a decay into an accumulation. This answer imports the bolus expression without noticing that the bracket runs the other way.'},
   {t:'The clearance expressed as a fraction of the infusion rate', correct:false,
-   why:'Clearance already appears in the first factor and is a volume per unit time, not a fraction of anything. A dimensionless bracket made of an exponential cannot carry clearance. This comes from trying to attach every symbol in the equation to a named parameter rather than reading the structure.'},
+   why:'Picking this reads the bracket as a place where clearance must appear. Clearance already sits in the first factor, {{frac:R|Cl}}, and is a volume per unit time, not a fraction of anything. The bracket 1 − e^(−kt) contains only k, the elimination rate constant, and t, and is a pure number between zero and one.'},
   {t:'The time in half-lives since the infusion began', correct:false,
    why:'The bracket is a pure number between zero and one and can never be a time, whatever value t takes. Time enters inside the exponent, not as the value of the bracket. Confusing the two is what leads to answers with the wrong units.'}],
  teach:[
@@ -268,7 +268,7 @@ const Q_MODULE3 = [
   {t:'The approach to the plateau is asymptotic', correct:true,
    why:'The fraction of steady state reached is one minus e to the minus kt, and an exponential never reaches zero, so the fraction never reaches exactly one. Each half-life halves the remaining gap; at ten half-lives the shortfall is about one part in a thousand, so the level is treated as steady well before then.'},
   {t:'The concentration overshoots the plateau and falls back', correct:false,
-   why:'The original\'s first clause, that elimination speeds up as the concentration rises, is true on its own and is only made wrong by its reasoning tail; the false conclusion is stated directly instead.'},
+   why:'This answer confuses the shape of the approach with an oscillation. The concentration never overshoots: the rate of elimination rises with the concentration, so the gap between input and output closes smoothly and the curve flattens from below. There is no fall back because the concentration never exceeds Css, the steady-state concentration, during a constant infusion.'},
   {t:'The infusion pump cannot hold a truly constant rate', correct:false,
    why:'The statement is about the mathematics of the model, not about the equipment, and the model assumes a perfectly constant input. Even with an exactly constant rate the plateau is approached rather than attained. Reaching for a practical explanation here misses what the exponential is doing.'},
   {t:'The volume of distribution keeps increasing during the infusion', correct:false,
@@ -303,11 +303,11 @@ const Q_MODULE3 = [
   {t:'It declines by first-order elimination from the concentration at cessation', correct:true,
    why:'With no input, only first-order elimination remains: the same decay seen after a bolus. The concentration at cessation plays the part of the initial concentration, and t is counted from cessation rather than from the start; getting that peak value right is the main work.'},
   {t:'It continues to rise toward the steady-state concentration',
-   why:'States the second option\'s equation in words.'},
+   why:'Picking this reads a stopped infusion as one that is still running. The rise toward Css, the steady-state concentration, is driven by the input rate R; once R is zero there is nothing to drive it, and only first-order elimination, with rate constant k, remains. The concentration can only fall from the value it had at cessation.'},
   {t:'It declines from the steady-state concentration in every case',
-   why:'States the third option\'s equation in words.'},
+   why:'This answer treats every infusion as having reached its plateau before it stopped. The decline starts from Cpeak, the concentration at the moment of cessation. That equals Css only if the infusion ran for about three to five half-lives; an infusion stopped earlier decays from ({{frac:R|Cl}})(1 − e^(−kT)), where T is the infusion length and Cl clearance.'},
   {t:'It stays at the concentration reached at cessation',
-   why:'Replaces the sum-of-terms equation, which has no parallel in her items, with a plain misreading.'}],
+   why:'Picking this reads the end of input as the end of all change. Elimination does not stop when the pump does: the first-order output, k times the amount in the body, continues whatever the input, so the concentration falls from the moment the infusion ends. A level that stayed flat would need input to keep matching output.'}],
  teach:[
   {h:'The idea', list:[
     'Stopping an infusion removes the zero-order input and leaves the first-order output unchanged.',
@@ -340,7 +340,7 @@ const Q_MODULE3 = [
   {t:'The second has a lower steady-state concentration', correct:false,
    why:'Steady-state concentration is the infusion rate divided by clearance, and both patients have the same rate and the same drug, so both have the same Css. The second patient simply never got there. Confusing the plateau a regimen would reach with the level it actually reached is the specific error here.'},
   {t:'Both decay from the steady-state concentration', correct:false,
-   why:'Only an infusion run to steady state peaks at Css, and two half-lives leaves the concentration a quarter of the way short. Treating every post-infusion decay as starting from the plateau overestimates the second patient at every later time. This is the contrast she builds into consecutive parts of the same problem.'}],
+   why:'This answer treats every post-infusion decay as starting from the plateau. Only an infusion run to steady state peaks at Css, the steady-state concentration; two half-lives of infusion leave the concentration at 0.75 Css, a quarter short. Starting the second decay from Css overestimates that patient at every later time, by the same factor throughout.'}],
  teach:[
   {h:'The idea', list:[
     'After cessation both patients follow the same first-order decay, so only the starting concentration can differ.',
@@ -406,9 +406,9 @@ const Q_MODULE3 = [
   {t:'An appropriate loading dose is Css multiplied by the volume of distribution', correct:true,
    why:'Volume of distribution relates the amount in the body to the plasma concentration, so target concentration times volume gives the amount needed to produce that concentration. This route starts from the target rather than the rate, and it agrees with {{frac:R|k}} when the rate matches the target.'},
   {t:'The steady-state concentration is unchanged by the loading dose', correct:true,
-   why:'The plateau is the infusion rate divided by clearance, and a single bolus alters neither. The loading dose changes only the early part of the curve, and the bolus component decays away as the infusion component builds. She makes this the whole point of asking for the steady-state concentration twice with different loading doses.'},
+   why:'The plateau is the infusion rate divided by clearance, and a single bolus alters neither. The loading dose changes only the early part of the curve, and the bolus component decays away as the infusion component builds. Her practice problem asks for the steady-state concentration twice, with different loading doses, and the answer is the same both times.'},
   {t:'The loading dose shortens the elimination half-life', correct:false,
-   why:'Replaces the option her own words make defensible as true; half-life is a constant she lists as unchanged by dosing (09-02 poll debrief: "our clearance, our half-life, and our volume of distribution. These things are going to be constant"), and "To reduce the elimination half-life" is her own distractor on Quiz 2 Q4.'},
+   why:'Picking this reads the loading dose as something that acts on the drug rather than on the amount present. Half-life is 0.693 divided by k, the elimination rate constant, and k is a constant of the drug in the patient that no dose changes; she lists clearance, half-life and volume of distribution together as constants. A loading dose changes only how soon the target concentration is reached.'},
   {t:'The loading dose must be recalculated whenever the half-life changes', correct:false,
    why:'Choosing this confuses the loading dose with the maintenance rate. The loading dose fills the volume of distribution to the target, so it depends on Css and volume of distribution, not on clearance. In her renal failure example clearance and the maintenance rate fall, but the loading dose stays the same because the volume is unchanged.'}],
  teach:[
@@ -509,7 +509,7 @@ const Q_MODULE3 = [
   {t:'It starts high and falls more slowly than a bolus curve', correct:false,
    why:'Nothing is in the body when the infusion starts, so there is no high starting point to fall from. The rate of elimination is the same for the same drug in the same patient either way. This answer keeps the bolus shape and adjusts only its steepness.'},
   {t:'It is a straight line on linear axes for the whole infusion', correct:false,
-   why:'A straight rise would mean nothing was being eliminated, but first-order elimination begins as soon as drug is present and grows with the concentration. That growing removal is what bends the curve over into a plateau. Straight-line thinking here comes from applying the zero-order input to the whole system.'},
+   why:'Picking this reads the zero-order input as the behaviour of the whole system. A straight rise would mean nothing was being eliminated, but first-order elimination begins as soon as drug is present and grows with the concentration. That growing removal is what bends the curve over into a plateau: input is constant, output is not.'},
   {t:'It reaches its maximum concentration sooner than a bolus does', correct:false,
    why:'A bolus reaches its maximum at time zero, which cannot be beaten. An infusion approaches its maximum over three to five half-lives, and strictly never attains it. Reversing this is what a loading dose is given to correct.'}],
  teach:[
@@ -542,7 +542,7 @@ const Q_MODULE3 = [
   {t:'Clearance', correct:false,
    why:'Clearance is the elimination rate constant times the volume of distribution, both constant for the drug in the patient. A larger dose means more drug removed per hour but the same volume of plasma cleared per hour; confusing the rate of elimination with clearance makes this look right.'},
   {t:'Elimination half-life', correct:false,
-   why:'Half-life is 0.693 divided by the elimination rate constant, and neither term contains the dose. In first-order elimination, losing half takes the same time from a high or a low start; expecting more drug to take proportionally longer describes zero-order elimination.'},
+   why:'Picking this reads a larger amount as taking proportionally longer to remove, which describes zero-order elimination. Half-life is 0.693 divided by k, the elimination rate constant, and neither term contains the dose. In first-order elimination, losing half takes the same time from a high or a low start; a bigger dose starts higher and keeps the same half-life.'},
   {t:'Apparent volume of distribution', correct:false,
    why:'Picking this treats volume of distribution as a container that stretches with the dose. It is a proportionality constant describing how the drug distributes between plasma and the rest of the body; it belongs to the drug, not the dose. Giving more drug fills the same apparent volume to a higher concentration.'}],
  teach:[

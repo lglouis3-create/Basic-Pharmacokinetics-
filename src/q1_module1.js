@@ -439,7 +439,7 @@ const Q_MODULE1 = [
   {t:'Dosage form', correct:false,
    why:'Picking this attaches a formulation variable to pharmacodynamics. Concentration against dosage form belongs to biopharmaceutics, which links the drug product and its route to the rate and extent of absorption. Pharmacodynamics begins after the drug reaches its site of action, so the formulation is already behind it.'},
   {t:'Population group', correct:false,
-   why:'Differences between population groups are the subject of population pharmacokinetics, which Dr. Mosley lists as a subdivision of clinical pharmacokinetics. That is still a concentration-and-time discipline; it simply asks how the time course differs from one group to another. Nothing about it concerns response.'}],
+   why:'Picking this reads a subdivision of pharmacokinetics as the partner of pharmacodynamics. Differences between population groups are the subject of population pharmacokinetics, which Dr. Mosley lists under clinical pharmacokinetics. That discipline still pairs concentration with time; it asks how the time course differs from one group to another, and says nothing about response.'}],
  teach:[
   {h:'The idea', list:[
     'Pharmacokinetics and pharmacodynamics both start from drug concentration; they differ in what they pair it with.',
@@ -453,7 +453,7 @@ const Q_MODULE1 = [
     'Clinical pharmacokinetics applies pharmacokinetic methods to drug therapy for specific drugs.',
     'Population pharmacokinetics, a subdivision of clinical pharmacokinetics, asks how the time course differs from one population group to another.',
     'Toxicokinetics applies the same methods to drug safety evaluation studies.']},
-  {h:'The common error', t:'Pairing pharmacodynamics with time. Time is on the horizontal axis of every curve in this module, so it feels like the natural partner; for pharmacodynamics the partner is response.'},
+  {h:'The common error', t:'Pairing pharmacodynamics with time. Time is on the horizontal axis of every curve in this module, so it is the usual wrong partner; for pharmacodynamics the partner is response.'},
   {h:'Where to read more', t:'Shargel & Yu, chapters 1 (Introduction to Biopharmaceutics and Pharmacokinetics), 2 (Mathematical Fundamentals in Pharmacokinetics) and 11 (Chemical Kinetics of Pharmaceuticals).'}],
  teachImg:'slide_Introduction_p8',
  cite:'Introduction.pdf slide 8',
@@ -512,7 +512,7 @@ const Q_MODULE1 = [
   {t:'Its elimination half-life is shortened', correct:false,
    why:'Half-life is set by the elimination rate constant, the fraction of drug removed per unit time once it is in the body. A loss at the point of entry removes a quantity without changing that fraction, so the curve starts lower but falls at the same relative rate. This answer confuses how much arrives with how fast it leaves.'},
   {t:'Its route of administration becomes parenteral', correct:false,
-   why:'The route is how the drug was given, which does not change because of what the liver does to it afterwards. The drug in this stem was administered orally and remains an oral administration. First-pass effect is a reason to consider a different route, not a description of one.'}],
+   why:'Choosing this treats the consequence of first-pass metabolism as a change in the route itself. The route is how the drug was given, and the liver cannot alter it afterwards: the drug in this stem was swallowed and remains an oral dose. First-pass loss is a reason to consider a parenteral route, not a description of one.'}],
  teach:[
   {h:'The idea', list:[
     'First-pass effect: rapid metabolism of an orally administered drug before it reaches the general circulation.',
@@ -538,7 +538,7 @@ const Q_MODULE1 = [
   {t:'Serum', correct:true,
    why:'Serum is defined by the clotting step: the blood clots, the clot is removed, and what remains has neither the cells nor fibrinogen nor the other clotting factors. A concentration measured in this fraction is written with a subscript s.'},
   {t:'Plasma', correct:false,
-   why:'Plasma is the liquid left after centrifuging whole blood that was kept from clotting by an anticoagulant, so it still holds fibrinogen, the other clotting factors and all the proteins, including albumin. The difference from serum is whether clotting was prevented or allowed to run.'},
+   why:'Picking plasma reads the clotting step as a centrifugation step. Plasma is the liquid left after centrifuging whole blood that an anticoagulant kept from clotting, so it still holds fibrinogen, the other clotting factors and albumin. Serum is what remains once clotting is allowed to run and the clot is removed.'},
   {t:'Whole blood', correct:false,
    why:'Whole blood is the sample as drawn by venous puncture with an anticoagulant such as heparin or EDTA, and it contains all the cellular and protein elements. Nothing has been removed from it. Choosing it means stopping at the sample rather than at the fraction the description asks for.'}],
  teach:[
@@ -614,7 +614,7 @@ const Q_MODULE1 = [
   {t:'Replace the need to measure plasma concentrations', correct:false,
    why:'A model is fitted to measured concentrations and its parameters come from them, so measurement is what makes the model possible rather than what the model removes. Clinical pharmacokinetics applies these methods to specific drugs in specific patients, which requires samples. This option inverts the relationship between data and model.'},
   {t:'Study the adverse effects of drugs in the body',
-   why:'Replaces the three dropped keyed options; it is the slide 8 definition of clinical toxicology, a related discipline placed in the wrong role.'}],
+   why:'This answer confuses a purpose of pharmacokinetic models with the definition of clinical toxicology, the discipline that studies adverse effects of drugs in the body. A model relates concentration to time; it can correlate concentrations with toxic activity, but the study of the adverse effects themselves belongs to toxicology, not to the model.'}],
  teach:[
   {h:'The idea', list:[
     'A pharmacokinetic model is a set of assumptions that turns a few measured concentrations into a continuous description.',
@@ -704,7 +704,7 @@ const Q_MODULE1 = [
   {t:'Toxicology', correct:false,
    why:'A T for toxicology is the other addition mentioned, but it is added at the end rather than the front, giving ADMET. The question asks which step is placed before absorption, so the position is what decides the answer here. Both letters are genuine additions used elsewhere in the programme.'},
   {t:'Bioavailability', correct:false,
-   why:'Bioavailability is a measure of how much of a dose becomes systemically available rather than a process in a sequence, so it is not a step that could be added to the letters. It is a result of absorption and first-pass metabolism taken together.'},
+   why:'Choosing this treats a quantity as if it were a process. Bioavailability (F) is the fraction of a dose that becomes systemically available, a number between zero and one, not a step the drug passes through, so it cannot be added to a sequence of processes. It is the result of absorption and first-pass metabolism taken together.'},
   {t:'Disposition', correct:false,
    why:'Disposition is a grouping term for distribution and elimination, so it names steps that come after absorption rather than before it. Adding it to the front would reverse the order of the sequence it summarises.'}],
  teach:[
@@ -769,7 +769,7 @@ const Q_MODULE1 = [
   {t:'Proportional to the amount of drug remaining', correct:true,
    why:'The rate law {{frac:dC|dt}} = −kC makes the rate the rate constant times the concentration present, so it is fast at high concentrations and slows as they fall, which is why the linear plot curves. Integrating gives ln C = ln C0 − kt, or C = C0 e^(−kt).'},
   {t:'Constant and independent of the amount of drug remaining', correct:false,
-   why:'That is the zero-order definition, and it is the answer students give when they remember that something about the process is constant. What is constant in first order is the rate constant and the half-life, not the rate itself. The rate changes continuously throughout the time course.'},
+   why:'Picking this reads the word constant as applying to the rate. It is the zero-order definition. In first order what is constant is the rate constant k, the fraction removed per unit time, and so the half-life; the rate itself is k times the concentration and falls continuously as the concentration falls.'},
   {t:'Proportional to the elapsed time', correct:false,
    why:'Nothing in either rate law makes the rate depend on how long the process has been running. Time enters only through the amount of drug that has already been lost. This answer reads the horizontal axis of the graph as a cause rather than as a coordinate.'},
   {t:'Equal to the half-life divided by the rate constant', correct:false,
@@ -786,7 +786,7 @@ const Q_MODULE1 = [
     'Integrated: C = C0e^(-kt); ln C = ln C0 - kt; log C = log C0 - {{frac:kt|2.3}}.',
     'k carries reciprocal time, such as hr^-1, and is never negative.',
     'Half-life: t1/2 = {{frac:0.693|k}}, one number for the drug. This one is not on the equation sheet.']},
-  {h:'The common error', t:'Remembering that something is constant and picking a constant rate. In first order the rate constant and the half-life are constant; the rate keeps changing.'},
+  {h:'The common error', t:'Holding that something is constant and picking a constant rate. In first order the rate constant and the half-life are constant; the rate keeps changing.'},
   {h:'What the chapter adds', list:[
     'Chapter 2 gives the first-order rate constant its own units, 1/hr. No rate ever has these units.',
     'A rate is an amount per time. k is a fraction per time, and it becomes a rate only once it is multiplied by an amount.',
@@ -806,7 +806,7 @@ const Q_MODULE1 = [
   {t:'A constant rate of elimination', correct:false,
    why:'The rate of elimination is the rate constant multiplied by the concentration, so it changes continuously as the concentration falls; a constant rate of elimination is the zero-order property. Only 8 per cent of the class picked this when polled, holding the word constant and losing what it attaches to.'},
   {t:'dC/dt = −k', correct:false,
-   why:'This expression has no concentration term on the right-hand side, which is precisely what makes it the zero-order rate law. The first-order form is {{frac:dC|dt}} = −kC. Recognising the order from the differential equation means checking whether a concentration appears beside the rate constant.'},
+   why:'Choosing this treats the rate law as a shape to be matched rather than an equation to be read for its concentration term. {{frac:dC|dt}} = −k has no concentration on the right-hand side, which is exactly what makes it zero order. The first-order form is {{frac:dC|dt}} = −kC, with the concentration beside the rate constant k.'},
   {t:'Units of k of concentration or amount per unit time', correct:false,
    why:'Concentration or amount per unit time are the units of a zero-order constant, which is itself a rate. A first-order constant multiplies a concentration to give a rate, so its units are reciprocal time; this was the most popular wrong answer in the class poll, at 44 per cent.'}],
  teach:[
@@ -840,9 +840,9 @@ const Q_MODULE1 = [
   {t:'It is independent of the concentration of drug present',
    why:'This swaps the rate constant for the rate. The constant is a fixed number in reciprocal time, but the rate is that constant times the concentration, so it changes whenever the concentration changes; the class split fifty-fifty on this statement for this reason.'},
   {t:'It is constant over time',
-   why:'A constant rate, the same quantity lost per unit time whatever is present, is the zero-order case. In a first-order process the rate falls as the concentration falls, while the rate constant and the half-life stay constant.'},
+   why:'Picking this reads the constant half-life of a first-order process as a constant rate. A rate that stays the same over time, the same quantity lost per unit time, is the zero-order case. In first order the rate is k times the concentration and falls with it; only the rate constant k and the half-life stay fixed.'},
   {t:'It is set by the half-life alone',
-   why:'A constant half-life is a real first-order property, but it describes the time to lose a fixed proportion, not the quantity lost per unit time. Half of a large concentration is more than half of a small one over the same interval, so the rate has changed.'}],
+   why:'This answer confuses the time to lose a fixed proportion with the quantity lost per unit time. A constant half-life is a real first-order property, but half of a large concentration is more drug than half of a small one over the same interval, so the rate changes while the half-life does not.'}],
  teach:[
   {h:'The idea', list:[
     'In a first-order process, the rate and the rate constant behave differently as the concentration falls.',
@@ -907,9 +907,9 @@ const Q_MODULE1 = [
   {t:'It is 3.0 days', correct:true,
    why:'Half-life is 0.693 divided by the rate constant: {{frac:0.693|0.231}} per day gives 3.0. Dividing by reciprocal days leaves days, so the answer is a time; Dr. Mosley states that the reciprocal units belong to the rate constant, not to the half-life.'},
   {t:'It is 3.0 days to the minus one', correct:false,
-   why:'Reciprocal days are the units of the rate constant, which is what was given, not of the half-life, which is what was asked for. Dr. Mosley names this specific error: a half-life is a time, so it is days, not days to the minus one. Carrying the reciprocal across the division is what produces it.'},
+   why:'This answer carries the reciprocal unit of the rate constant across the division into the half-life. Reciprocal days are the units of k, the quantity given, not of the half-life, the quantity asked for. Dividing 0.693 by 0.231 per day gives 3.0 days: a half-life is a time, so it is days, not days to the minus one.'},
   {t:'It is 0.231 days', correct:false,
-   why:'The rate constant and the half-life are two different descriptions of the same decline, linked by the factor 0.693, and they are not equal to one another. Copying the given number across skips the relation entirely. The two also have different units, which is enough on its own to rule this out.'},
+   why:'Picking this reads the rate constant k as the half-life and copies the given number across with a changed unit. The two are different descriptions of the same decline, linked by t½ = {{frac:0.693|k}}, and are never equal. Here {{frac:0.693|0.231}} gives 3.0 days; 0.231 per day is a fraction per day, not a time.'},
   {t:'It cannot be found without the starting concentration', correct:false,
    why:'For a first-order process t½ = {{frac:0.693|k}}, with no starting concentration in it, which is why it is constant. The starting concentration is needed only for zero order, where t½ = {{frac:C0|2k}}, so picking this applies the zero-order relation to a first-order problem.'}],
  note:'The first-order half-life relation, t1/2 = {{frac:0.693|k}}, is not on the equation sheet.',
@@ -946,9 +946,9 @@ const Q_MODULE1 = [
   {t:'Zero order', correct:true,
    why:'From 20 to 40 minutes the amount falls from 89.0 to 73.0 mg, and from 40 to 60 minutes from 73.0 to 57.0 mg: 16.0 mg lost in each 20 minutes. Equal quantities lost in equal intervals (constant differences, not ratios) is the zero-order signature.'},
   {t:'First order',
-   why:'Every decomposition falls continuously, so that separates nothing; first order needs a constant ratio over equal intervals. Here {{frac:89.0|73.0}} is 1.22, {{frac:73.0|57.0}} is 1.28 and {{frac:57.0|34.0}} is 1.68, so the ratios climb and the process is not first order.'},
+   why:'Picking this reads a continuous fall as the first-order signature, but every decomposition falls continuously; first order needs a constant ratio over equal intervals. Over 20 minutes, {{frac:89.0|73.0}} is 1.22 and {{frac:73.0|57.0}} is 1.28; over 30 minutes, {{frac:57.0|34.0}} is 1.68 and then {{frac:34.0|10.0}} is 3.40. The ratios climb, so the process is not first order.'},
   {t:'Neither order fits the data',
-   why:'Unequal spacing adds arithmetic but does not prevent classification: take the difference or ratio over whatever interval separates the chosen points. Two pairs of points 20 minutes apart, 20 to 40 and 40 to 60 minutes, settle it immediately.'}],
+   why:'Choosing this treats the unequal spacing of the time points as a reason the data cannot be classified. Unequal spacing adds arithmetic, not ambiguity: take the difference or ratio over whatever interval separates the points. The two 20-minute pairs, 89.0 to 73.0 mg and 73.0 to 57.0 mg, each lose 16.0 mg: zero order.'}],
  teach:[
   {h:'The idea', list:[
     'To decide the order from a data set, find what stays constant between successive points.',
@@ -1548,11 +1548,11 @@ const Q_MODULE1 = [
   {t:'The extent of drug available for the body to use', correct:true,
    why:'Area under the curve combines how high the concentration went with how long it stayed there, so it measures total exposure rather than any single moment of it. It is used to determine the extent of drug absorption or the effectiveness of a given drug after administration by a particular route.'},
   {t:'The rate at which the drug is absorbed from the dosage form', correct:false,
-   why:'Rate of absorption is read from how quickly the curve rises and from the time of the peak, not from the area beneath it. Two formulations can produce the same area while reaching their peaks at different times. Area is an extent measure; rate is a shape measure.'},
+   why:'Picking this reads the area as a measure of how fast the curve was traced out. Rate of absorption is read from how quickly the curve rises and from the time of the peak, not from the area beneath it. Two formulations can give the same area while peaking at different times: area measures extent, shape measures rate.'},
   {t:'The half-life of the drug', correct:false,
    why:'Half-life comes from the slope of the declining part of the curve on semi-logarithmic axes, a separate reading from the area. A long half-life usually goes with a large area, but they are different quantities and neither can be computed from the other alone. This answer substitutes a related property for the one asked about.'},
   {t:'The minimum toxic concentration of the drug', correct:false,
-   why:'The minimum toxic concentration is a threshold level fixed by the drug and the patient, drawn as a horizontal line across the curve, and it does not come from the area. An area is a total, not a level. Nothing about integrating the curve produces a safety limit.'}],
+   why:'This answer confuses a total with a level. The minimum toxic concentration is a threshold fixed by the drug and the patient, drawn as a horizontal line across the curve, and the area beneath the curve does not produce it. Integrating concentration over time gives exposure in concentration times time; a safety limit is a concentration alone.'}],
  teach:[
   {h:'The idea', list:[
     'AUC (area under the concentration-versus-time curve) measures total exposure: the concentration integrated over time.',

@@ -1877,11 +1877,13 @@ function renderGaps(){
     const byKind = {};
     MISS_KINDS.forEach(k => byKind[k.id] = {n:0, marks:0});
     let unnamed = 0;
+    const missQs = {}; MISS_KINDS.forEach(k => missQs[k.id] = []);
     const numWrong = numAnswers.filter(a => a.result !== 'correct');
     for(const a of numWrong){
       if(!a.missKind || !byKind[a.missKind]){ unnamed++; continue; }
       byKind[a.missKind].n++;
       byKind[a.missKind].marks += markWeight(byId(a.qid));
+      missQs[a.missKind].push(byId(a.qid));
     }
     const numRight = numAnswers.length - numWrong.length;
     h += `<h3>Where the calculations go wrong</h3>
@@ -1897,7 +1899,39 @@ function renderGaps(){
     }
     h += `</tbody></table>`;
     if(unnamed) h += `<p class="sub">${unnamed} missed calculation${unnamed>1?'s':''} not yet named.</p>`;
+    /* One repair per kind of miss that has happened, each with the drill or
+       table that works on exactly that step. The setup repair is the drill
+       that asks only which line, on the modules where the line was wrong. */
+    const chip = (attr, label) => `<button type="button" class="chip" ${attr}>${esc(label)}</button>`;
+    const fixes = [];
+    if(missQs.setup.length){
+      const mods = [...new Set(missQs.setup.map(q => q.module))].sort((a, b) => a - b).filter(m => suScopePool(String(m)).length);
+      const map = refAnchor('Her equation sheet');
+      fixes.push(['Set-up', 'Decide which line answers the question before any number is written. The set-up drill asks only that, with her stems; the sheet map lists the words in a stem that call for each line.',
+        mods.map(m => chip(`data-sheetsetup="${m}"`, `Which equation: Module ${modShort(m)}`)).join('') + (map ? chip(`data-jump="ref:${map}"`, 'Sheet map') : '')]);
+    }
+    if(missQs.unit.length){
+      const u = refAnchor('Units,');
+      fixes.push(['Unit conversion', 'Write the unit on every quantity before the arithmetic and cancel the units on paper. The conversions this course keeps needing are in one table.',
+        u ? chip(`data-jump="ref:${u}"`, 'Units and conversions') : '']);
+    }
+    if(missQs.algebra.length){
+      const ids = [...new Set(missQs.algebra.flatMap(q => [q.setup && q.setup.eq, ...((q.setup && q.setup.pre) || [])]))].filter(id => EQ_BY_ID[id]);
+      fixes.push(['Algebra', 'Rearrange the line for the unknown before any number goes in. The lines behind these misses can be typed from memory until the rearrangement is automatic.',
+        ids.length ? chip(`data-eqtype="${ids.join(',')}"`, `Type the ${ids.length} line${ids.length > 1 ? 's' : ''} behind these misses`) : '']);
+    }
+    if(missQs.round.length){
+      fixes.push(['Rounding', 'Her rule: each question states how many decimal places it wants, every calculated answer on the exam carries its units, and a dose is rounded to a strength a patient can take.', '']);
+    }
+    if(fixes.length) h += `<h4>What fixes it</h4><div class="fixes">${fixes.map(([k, t, chips]) =>
+      `<div class="fixrow"><b>${esc(k)}</b><span>${esc(t)}</span>${chips ? `<div class="explainmore"><span>Go to:</span>${chips}</div>` : ''}</div>`).join('')}</div>`;
   }
+
+  /* ---- Lines mixed up in the set-up drill ------------------------------
+     The set-up drill keeps its own tally per equation line (SU_KEY), so the
+     lines most often chosen wrongly are listed here with the drill to hand. */
+  const mix = suMixupsHTML('h3');
+  if(mix) h += mix + `<p class="sub">From the set-up drill: how often each line was the right answer and another line was picked. ${suPoolAll().length ? '<button type="button" class="btn small" data-sheetsetup="all">Set-up drill, every module</button>' : ''}</p>`;
 
   /* ---- Which kind of question is failing ---------------------------------
      Every question declares what it asks the student to do. A miss on a recall
@@ -2048,6 +2082,9 @@ function renderGaps(){
         ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${esc(pickedTxt)}</div>` : ''}
         ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss</div>` : ''}
         <div class="mmeta">${esc(q.cite)} · missed ${s2.wrong||1}× · ${s2.box>=MASTER_BOX?'now mastered':'still in review'}</div>
+        ${qType(q)==='numeric' && q.setup && EQ_BY_ID[q.setup.eq] ? `<div class="mmeta mline">Line that solves it: ${eqShow(EQ_BY_ID[q.setup.eq])}${suScopePool(String(q.module)).length
+          ? ` <button type="button" class="chip" data-sheetsetup="${q.module}">Which equation: Module ${esc(modShort(q.module))}</button>` : ''}</div>` : ''}
+        ${explainHTML(q)}
       </div>`;
     }
   }
@@ -2199,11 +2236,15 @@ let SESSION_RETRY = [];
    module, and a button that drills the group. `picked` is an option index, an
    array of indices (select-all), the string typed (numeric) or a left-to-right
    map (matching), so each is read back in its own way. */
+/* The Reference page as it renders: the sheet map stands in for its
+   placeholder and adds a heading, so anchors ref-N are counted on this, not
+   on REFERENCE_HTML, or every link after the map would land one section early. */
+const refDocHTML = () => REFERENCE_HTML.replace('{{sheetmap}}', sheetMapHTML());
 let REF_HEADS = null;
+const refHeads = () => REF_HEADS ||= headsOf(refDocHTML());
+const refAnchor = start => { const h = refHeads().find(x => x.t.startsWith(start)); return h ? `ref-${h.i}` : null; };
 function refLinksFor(q){
-  REF_HEADS ||= [...REFERENCE_HTML.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>/g)]
-    .map((m, i) => ({i, t: deEnt(m[2].replace(/<[^>]+>/g, '')).trim()}));
-  return q.module == null ? [] : REF_HEADS.filter(h => new RegExp(`^Module ${q.module}[a-z]? `).test(h.t));
+  return q.module == null ? [] : refHeads().filter(h => new RegExp(`^Module ${q.module}[a-z]? `).test(h.t));
 }
 const plainMath = s => String(s || '').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '($1)/($2)');
 const clip = (s, n) => s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : s;
@@ -2966,7 +3007,7 @@ function renderDoc(el, html, prefix){
     if (t){ openAncestors(t); scrollToEl(t); }
   });
 }
-function renderRef(){ renderDoc($('#v-ref'), refFigures(REFERENCE_HTML.replace('{{sheetmap}}', sheetMapHTML())), 'ref'); }
+function renderRef(){ renderDoc($('#v-ref'), refFigures(refDocHTML()), 'ref'); }
 function renderTell(){ renderDoc($('#v-tell'), refFigures(TELL_HTML), 'tell'); }
 function renderGuide(){ renderDoc($('#v-guide'), refFigures(GUIDE_HTML), 'guide'); }
 
@@ -3838,6 +3879,8 @@ function sheetClick(e){
   if(d){ eqStartIds([d.dataset.sheetdrill], 'type'); show('eq'); return; }
   const s = e.target.closest && e.target.closest('[data-sheetsetup]');
   if(s){ suStart(s.dataset.sheetsetup); return; }
+  const t = e.target.closest && e.target.closest('[data-eqtype]');
+  if(t){ eqStartIds(t.dataset.eqtype.split(','), 'type'); show('eq'); return; }
 }
 /* The typing drill on a named list of equations, from the sheet map. */
 function eqStartIds(ids, mode){
@@ -3984,11 +4027,11 @@ function suHTML(){
   return h;
 }
 const suFirstSentence = t => { const m = /^[\s\S]*?\.(?=\s|$)/.exec(String(t || '')); return m ? m[0] : String(t || ''); };
-function suMixupsHTML(){
+function suMixupsHTML(tag = 'h4'){
   const s = suStats();
   const rows = Object.entries(s).filter(([id, r]) => EQ_BY_ID[id] && r.wrong).sort((a, b) => b[1].wrong - a[1].wrong).slice(0, 6);
   if(!rows.length) return '';
-  return `<h4>Lines you have mixed up most</h4><ul class="tlist">${rows.map(([id, r]) => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}: ${r.wrong} wrong of ${r.seen}</span></li>`).join('')}</ul>`;
+  return `<${tag}>Lines you have mixed up most</${tag}><ul class="tlist">${rows.map(([id, r]) => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}: ${r.wrong} wrong of ${r.seen}</span></li>`).join('')}</ul>`;
 }
 function suPick(card, i){
   const idx = card.dataset.suq;
@@ -4025,8 +4068,8 @@ function suCardHTML(){
     <div class="subrow"><span class="sname"><b>Set-up only: which equation?</b>
       <small>Her calculation stems, no arithmetic: pick the line that solves what is asked, then read why. ${n} stems; one at a time or ten to a page, as the Answer setting says.</small></span></div>
     <div class="frow suscope"><span class="olab">Drill</span>
-      ${live.map(z => `<button class="chip" data-su="quiz:${esc(z.id)}">${esc(z.name)}</button>`).join('')}
-      <button class="chip" data-su="exam:${EXAM.id}">Exam ${EXAM.id}</button>
+      ${live.filter(z => suScopePool('quiz:' + z.id).length).map(z => `<button class="chip" data-su="quiz:${esc(z.id)}">${esc(z.name)}</button>`).join('')}
+      ${suScopePool('exam:' + EXAM.id).length ? `<button class="chip" data-su="exam:${EXAM.id}">Exam ${EXAM.id}</button>` : ''}
       ${mods.map(m => `<button class="chip" data-su="${m}">Module ${esc(modShort(m))}</button>`).join('')}
       <button class="chip" data-su="all">All</button></div>
   </div></div>`;

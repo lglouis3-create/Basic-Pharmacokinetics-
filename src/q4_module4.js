@@ -1044,7 +1044,7 @@ const Q_MODULE4 = [
   {t:'Millilitres per minute', correct:true,
    why:'Creatinine clearance is a clearance, so it is a volume per unit time. The course convention is mL/min, the unit of the 120 to 130 mL/min reference range, and the comparison works only if both numbers share a unit. Dr. Mosley says not to report kilograms per milligram per decilitre.'},
   {t:'Kilograms per milligram per decilitre', correct:false,
-   why:'Picking this carries the input units (weight in kg, serum creatinine in mg/dL) through the arithmetic. They do not cancel into anything meaningful, because the Cockcroft-Gault equation is an empirical estimate, not a dimensional derivation. The result is still a clearance, reported in mL/min.'},
+   why:'Picking this carries the input units, kg of weight and mg/dL of serum creatinine, through the arithmetic as if the Cockcroft-Gault equation were a dimensional derivation. It is an empirical estimate: kg, mg and dL are not meant to combine, and the result is a clearance, a volume per unit time, reported in mL/min.'},
   {t:'Litres per hour', correct:false,
    why:'Picking this carries the total body clearance unit, litres per hour, across to this clearance. It is a valid volume-per-time unit, but the 120 to 130 mL/min reference range and the filtration rate of about 120 mL/min are both in mL/min, so a value in L/hr would need converting before comparison. Dr. Mosley asks for mL/min.'},
   {t:'Millilitres', correct:false,
