@@ -311,7 +311,7 @@ const Q_MODULE6 = [
 {id:'m6-c12', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
  topic:'multi', sub:'ssbolus', concept:'accumulation-factor', skill:'read',
  source:'both',
- stem:'In Cmax∞ = C0/(1 − e^(-kτ)), what does the factor 1/(1 − e^(-kτ)) account for?',
+ stem:'In Cmax∞ = {{frac:C0|1 − e^(-kτ)}}, what does the factor {{frac:1|1 − e^(-kτ)) account for?',
  options:[
   {t:'The drug accumulated in the body at steady state', correct:true,
    why:'Multiplying the first-dose peak C0 by this factor gives the steady-state peak, so the factor is how much higher the peak is once earlier doses have left drug behind. It is 1 only if nothing is left from one dose to the next.'},
@@ -322,7 +322,7 @@ const Q_MODULE6 = [
   {t:'The conversion from amount to concentration',
    why:'Choosing this mixes the accumulation factor up with VD. The conversion from amount to concentration is division by VD, which is already inside C0 = {{frac:D0|VD}}. This factor has no units.'}],
  teach:[
-  {t:'The same factor, 1/(1 − e^(-kτ)), appears in the steady-state maximum, the minimum and the concentration after n doses. Each time it carries the drug that has accumulated.'},
+  {t:'The same factor, {{frac:1|1 − e^(-kτ)}}, appears in the steady-state maximum, the minimum and the concentration after n doses. Each time it carries the drug that has accumulated.'},
   M6_ACCFAC, M6_EQ],
  teachImg:'slide_6RepetitiveIVBolus_p7',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',
@@ -362,7 +362,7 @@ const Q_MODULE6 = [
   {t:'It cannot be compared without the AUC',
    why:'Choosing this treats the AUC as the only route to the average. Cavg∞ can be found without an AUC from {{frac:FD0|VD kτ}}, and the shape of the curve alone puts it below the midpoint. The exponential decline is enough to answer.'}],
  teach:[
-  {t:'Cavg∞ is not (Cmax∞ + Cmin∞)/2. It is the area over one interval divided by τ, or FD0/(VD kτ). A first-order decline is exponential: it falls fast early and slowly late, so the average sits below the midpoint.'},
+  {t:'Cavg∞ is not {{frac:Cmax∞ + Cmin∞|2}}. It is the area over one interval divided by τ, or {{frac:FD0|VD kτ}}. A first-order decline is exponential: it falls fast early and slowly late, so the average sits below the midpoint.'},
   M6_FIG, M6_EQ],
  teachImg:'slide_6RepetitiveIVBolus_p8',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',
@@ -371,7 +371,7 @@ const Q_MODULE6 = [
 {id:'m6-c15', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
  topic:'multi', sub:'ssbolus', concept:'f-in-cavg', skill:'read',
  source:'both',
- stem:'Cavg∞ = FD0/(VD kτ) is used for a drug given by repeated IV bolus. What value does F take?',
+ stem:'Cavg∞ = {{frac:FD0|VD kτ}} is used for a drug given by repeated IV bolus. What value does F take?',
  options:[
   {t:'1', correct:true,
    why:'F is the fraction of the dose that reaches the systemic circulation. An IV bolus puts the whole dose into the circulation, so F = 1. F is written into the equation because the same average applies to repeated oral dosing, where F may be less than 1.'},
@@ -435,7 +435,7 @@ const Q_MODULE6 = [
 {id:'m6-c18', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
  topic:'multi', sub:'ndose', concept:'n-and-t', skill:'read',
  source:'both',
- stem:'In Cp = (D0/VD)[(1 − e^(-nkτ))/(1 − e^(-kτ))]e^(-kt), what are n and t?',
+ stem:'In Cp = {{frac:D0|VD}} × {{frac:1 − e^(-nkτ)|1 − e^(-kτ)}} × e^(-kt), what are n and t?',
  options:[
   {t:'n is the dose number; t is time since that dose', correct:true,
    why:'n counts which dose was just given, so 3 hours after the second dose n = 2. t is measured from that dose, not from the first one, so t = 3 hr. The bracket carries what has accumulated after n doses and e^(-kt) carries the decline since the last of them.'},
@@ -577,7 +577,7 @@ const Q_MODULE6 = [
  tol:0.2,
  steps:[
   {k:'setup', t:'Cmin∞ = Cmax∞e^(-kτ)',
-   why:'From the steady-state peak to the steady-state trough is one interval of first-order elimination, so C = C0e^(-kt) with Cmax∞ as the starting value and t = τ. This is the same as the equation C0e^(-kτ)/(1 − e^(-kτ)).'},
+   why:'From the steady-state peak to the steady-state trough is one interval of first-order elimination, so C = C0e^(-kt) with Cmax∞ as the starting value and t = τ. This is the same as the equation {{frac:C0 e^(-kτ)|1 − e^(-kτ)}}.'},
   {k:'algebra', t:'Cmin∞ = 53.3 mg/L × e^(-(0.693/4 hr)(8 hr)) = 53.3 × 0.25',
    why:'k is unchanged at steady state, 0.1733 hr⁻¹, and kτ = 1.386, a pure number. The interval is two half-lives, so the peak is halved twice.'},
   {k:'algebra', t:'Cmin∞ = 13.3 mg/L',
@@ -666,7 +666,7 @@ const Q_MODULE6 = [
    why:'31.7 mg/L, three significant figures as in her other values. It is higher than 29.7 mg/L at the same time after the second dose, because more drug has accumulated by steady state.'}],
  setup:{eq:'cp-ss', pre:['thalf-first'], why:'"every 8 hours by multiple IV bolus injections", "3 hours after injection of the last dose (assuming steady state was attained)": a concentration at time t within a steady-state interval. Cmax∞, t½ and t are given and Cp is asked; the first two factors of the line are Cmax∞, so Cp = Cmax∞e^(-kt). k first, from the half-life.'},
  teach:[
-  {t:'Once steady state is reached, the last intravenous (IV) bolus dose starts the same decline as every other dose, from Cmax∞, and nothing follows it. The same value comes from the steady-state equation, (D0/VD)[1/(1 − e^(-kτ))]e^(-kt).'},
+  {t:'Once steady state is reached, the last intravenous (IV) bolus dose starts the same decline as every other dose, from Cmax∞, and nothing follows it. The same value comes from the steady-state equation, {{frac:D0|VD}} × {{frac:1|1 − e^(-kτ)}} × e^(-kt).'},
   M6_NDOSE, M6_FIG],
  teachImg:'slide_6RepetitiveIVBolus_p17',
  audit:'The 09.23 recording ends before she states a value for Example 3. Her method is on record ("Last dose, we\'re gonna start at 53.3, and then it\'s just C0E minus KT") and so are both inputs, 53.3 mg/L and t = 3 hr from the printed stem; 31.7 is 53.34 × e^(-0.17325 × 3) = 31.72. The handwritten working on the Example 3 slide of the annotated copy writes the exponent with 8 in place of 3, which would give the trough, so that slide is not attached as the image.',
@@ -835,7 +835,7 @@ const Q_MODULE6 = [
    why:'Her keyed value, 42.37 mg/L. It lies between the trough, 19.59, and the peak, 78.31, and below their midpoint, 48.95, because the decline is exponential.'}],
  setup:{eq:'cavg-ss', pre:[], why:'"IV bolus every 8 hours", "average steady-state plasma drug concentration". D0, ClT and τ are given and Cavg∞ is asked, so Cavg∞ = {{frac:FD0|ClT τ}} with F = 1 for an IV dose. No hinge: the clearance is given, so neither k nor VD is needed.'},
  teach:[
-  {t:'Cavg∞ = FD0/(ClT τ) and FD0/(VD kτ) are the same equation, since ClT = kVD. Use whichever the given data fit.'},
+  {t:'Cavg∞ = {{frac:FD0|ClT τ}} and {{frac:FD0|VD kτ}} are the same equation, since ClT = kVD. Use whichever the given data fit.'},
   M6_EQ],
  cite:'Multiple-IV-Bolus-Practice-1---Solutions.pdf, question 1(f)',
  quote:'C∞avg = 1000mg / (2.95L/hr)(8hr) = 42.37mg/L'},
@@ -858,7 +858,7 @@ const Q_MODULE6 = [
    why:'Her keyed value is 721.61 mg, and 721.6 mg is the same to four significant figures. It lies between the minimum and maximum amounts at steady state, Dmin∞ = 1000 × {{frac:0.2502|0.7498}} = 333.7 mg and Dmax∞ = {{frac:1000|0.7498}} = 1333.7 mg.'}],
  setup:{eq:'cp-db-vd', pre:[], why:'"repeated IV bolus", "average amount of drug in the body during steady state". Cavg∞ and VD are given and Davg∞ is asked, so the amount-volume line Cp = {{frac:DB|VD}} rearranged to Davg∞ = Cavg∞ × VD. The amount line Davg∞ = {{frac:FD0|kτ}} gives the same number from D0, k and τ.'},
  teach:[
-  {t:'The amount forms of the steady-state equations are the concentration forms multiplied by VD. The same result comes from Davg∞ = FD0/(kτ) = 1000/(0.1732 × 8).'},
+  {t:'The amount forms of the steady-state equations are the concentration forms multiplied by VD. The same result comes from Davg∞ = {{frac:FD0|kτ}} = {{frac:1000|0.1732 × 8}}.'},
   M6_EQ],
  cite:'Multiple-IV-Bolus-Practice-1---Solutions.pdf, question 1(g)',
  quote:'D∞avg = (42.37mg/L)(17.03 L) = 721.61mg'},

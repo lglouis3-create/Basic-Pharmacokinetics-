@@ -550,7 +550,7 @@ const Q_MODULE7 = [
     'Then the ordinary ratio, with the dose correction equal to 1 because both doses were 500 mg.']},
   B_IVAUC,
   B_FABS],
- audit:'Activity sheet not posted in Drive; the stem is transcribed from the photograph on page 17 of the annotated deck. Her written working: AUC_IV = 500 mg/(25 L × 0.231 hr⁻¹) = 86.58 (written "mg/L", spoken "mg per liter times hour"); F = 70/86.58 = 0.8085; and by the second route F = (70)(25 L)(0.231 hr⁻¹)/500 mg = 0.8085. Recomputed: k = 0.231, AUC_IV = 86.580, F = 0.80851.',
+ audit:'Activity sheet not posted in Drive; the stem is transcribed from the photograph on page 17 of the annotated deck. Her written working: AUC_IV = {{frac:500 mg|25 L × 0.231 hr⁻¹}} = 86.58 (written "mg/L", spoken "mg per liter times hour"); F = 70/86.58 = 0.8085; and by the second route F = (70)(25 L)(0.231 hr⁻¹)/500 mg = 0.8085. Recomputed: k = 0.231, AUC_IV = 86.580, F = 0.80851.',
  cite:'7a---Bioavailability-and-Bioequivalence.pdf, In-Class Activity page 17, question 1(a); transcript 09-30',
  quote:'So I\'m getting about 81%. And recognize that F is a dimensionless number, right? Cause all of our units are are canceling.'},
 
@@ -574,7 +574,7 @@ const Q_MODULE7 = [
     'Half the dose, half the AUC: the expected answer before any arithmetic.',
     'The arithmetic confirms it because Cl is the same for both doses.']},
   B_IVAUC],
- audit:'Stem transcribed from the photograph on page 17 of the annotated deck; her written working is AUC = 250 mg/((25 L)(0.231 hr⁻¹)) = 43.29 (mg/L)hr. Recomputed: 43.290.',
+ audit:'Stem transcribed from the photograph on page 17 of the annotated deck; her written working is AUC = {{frac:250 mg|(25 L)(0.231 hr⁻¹)}} = 43.29 (mg/L)hr. Recomputed: 43.290.',
  cite:'7a---Bioavailability-and-Bioequivalence.pdf, In-Class Activity page 17, question 1(b); transcript 09-30',
  quote:'What do you expect it to be? Half, right? ... Because we expect for our linear pharmacokinetics, a proportional increase, decrease, or whatever, change. In the AUC as well as the concentration as we change the dose.'},
 
@@ -653,7 +653,7 @@ const Q_MODULE7 = [
     'There is more than one route to it; this is the shortest.']},
   B_IVAUC,
   B_FABS],
- audit:'Stem transcribed from the photograph on page 18 of the annotated deck. Her written working: AUC_IV = 500 mg/(2 L/hr) = 250 (mg/L)hr. Recomputed: 250.0.',
+ audit:'Stem transcribed from the photograph on page 18 of the annotated deck. Her written working: AUC_IV = {{frac:500 mg|2 L/hr}} = 250 (mg/L)hr. Recomputed: 250.0.',
  cite:'7a---Bioavailability-and-Bioequivalence.pdf, In-Class Activity page 18, question 3(b); transcript 09-30',
  quote:'the AUC of the drug following this 500 mg dose, you could take that dose and divide by the clearance that you just found. And you should get 250 mg per liter times an hour.'},
 

@@ -28,9 +28,9 @@ const Q_QUIZZES = [
   {t:'estimate of the time course of drug absorption, distribution, metabolism, and elimination', correct:false,
    why:'Picking this reads a definition of pharmacokinetics as the definition of one of its parameters. The time course of absorption, distribution, metabolism and elimination is what the whole discipline estimates. VD (apparent volume of distribution) has no time in it: its unit is litres, and it is the dose divided by the plasma concentration.'},
   {t:'proportionality constant relating the rate of drug absorption to the rate of drug elimination', correct:false,
-   why:'Picking this reads the phrase proportionality constant, which is on her slide, as licence to pair it with any two rates. No single constant relates absorption rate to elimination rate; each has its own rate constant, ka for absorption and k for elimination. VD is a proportionality constant between the amount of drug in the body and the plasma concentration.'},
+   why:'Picking this reads the phrase proportionality constant from her slide as licence to pair it with any two rates. No single constant relates absorption rate to elimination rate; each has its own constant, ka for absorption and k for elimination. VD is a proportionality constant between the amount in the body and the plasma concentration.'},
   {t:'physiological measure of the volume occupied by the peripheral compartments', correct:false,
-   why:'This answer confuses apparent with physiological and the whole body with its peripheral part. VD is apparent, a volume computed from dose and concentration, not a space that can be measured, and it describes the whole body. A one-compartment drug has a VD and no peripheral compartment at all, so VD cannot be a measure of peripheral compartments.'}],
+   why:'This answer confuses apparent with physiological and the whole body with its peripheral part. VD is apparent, a volume computed from dose and concentration rather than a measurable space, and it describes the whole body. A one-compartment drug has a VD and no peripheral compartment at all, so VD cannot measure peripheral compartments.'}],
  teach:[
   {h:'The idea', list:[
    'VD (apparent volume of distribution) = {{frac:D0|C0}}: the volume that would hold the whole dose at the concentration measured in plasma.',
@@ -83,7 +83,7 @@ const Q_QUIZZES = [
  stem:'Why is a loading dose used?',
  options:[
   {t:'To immediately obtain a therapeutic plasma concentration', correct:true,
-   why:'An infusion alone takes three to five half-lives to reach steady state. A loading dose puts the steady-state amount, Css × VD (the steady-state concentration times the apparent volume of distribution), into the body at once, so the therapeutic level is there from the start and the infusion then holds it by replacing what is eliminated.'},
+   why:'An infusion alone takes three to five half-lives to reach steady state. A loading dose puts the steady-state amount, Css × VD (the steady-state concentration times the apparent volume of distribution), into the body at once, so the therapeutic level is there from the start and the infusion then holds it.'},
   {t:'To reduce the adverse effects associated with the drug', correct:false,
    why:'Picking this reads a dosing device as a safety device. A loading dose raises the concentration faster, which brings any concentration-related adverse effect forward rather than reducing it. Total exposure at steady state is unchanged, because the plateau Css = {{frac:R|Cl}} depends on the infusion rate R and clearance Cl, not on the loading dose.'},
   {t:'To improve patient adherence', correct:false,
@@ -123,9 +123,9 @@ const Q_QUIZZES = [
  stem:'Which of the following results when the rate of infusion is increased?',
  options:[
   {t:'Steady-state concentration increases', correct:true,
-   why:'Css = {{frac:R|Cl}}, where Css is the steady-state concentration, R the infusion rate and Cl clearance. At the plateau the rate in, R, equals the rate out, Cl × Css; clearance is a constant of the drug in the patient, so a larger R must be balanced by a proportionally larger Css. Doubling the rate doubles Css.'},
+   why:'Css = {{frac:R|Cl}}, where Css is the steady-state concentration, R the infusion rate and Cl clearance. At the plateau the rate in, R, equals the rate out, Cl × Css; clearance is a constant for the patient, so a larger R must be balanced by a larger Css. Doubling the rate doubles Css.'},
   {t:'The time to reach steady-state increases', correct:false,
-   why:'Picking this reads a higher plateau as a longer climb. The approach to steady state follows 1 − e^(−kt), where k is the elimination rate constant, and contains no rate term, so it is complete in about three to five half-lives whatever the rate. A faster infusion climbs to a higher level in the same time.'},
+   why:'Picking this reads a higher plateau as a longer climb. The approach to steady state follows 1 − e^(−kt), where k is the elimination rate constant, and has no rate term, so it is complete in three to five half-lives whatever the rate. A faster infusion climbs to a higher level in the same time.'},
   {t:'Steady-state concentration decreases', correct:false,
    why:'This answer runs the direction of Css = {{frac:R|Cl}} backwards. More drug in per hour against the same clearance means a higher level, not a lower one: the rate out, Cl × Css, can only match a larger R if Css rises.'},
   {t:'The time to reach steady-state decreases', correct:false,
@@ -143,7 +143,7 @@ const Q_QUIZZES = [
  units:'mg/hr', answer:60, tol:1.2,
  steps:[
   {k:'setup', t:'R = Css × Cl = Css × k × VD',
-   why:'At steady state the rate in, R, equals the rate out, which is clearance Cl times the steady-state concentration Css, so R = Css × Cl. Clearance is not given, so it is built as Cl = k × VD, where k is the elimination rate constant and VD the apparent volume of distribution; both come from the stem.'},
+   why:'At steady state the rate in, R, equals the rate out, clearance Cl times the steady-state concentration Css, so R = Css × Cl. Clearance is not given, so it is built as Cl = k × VD, where k is the elimination rate constant and VD the apparent volume of distribution.'},
   {k:'unit', t:'23 mcg/mL = 23 mg/L',
    why:'Multiplying numerator and denominator by 1000 turns mcg/mL into mg/L, so the concentration multiplies a volume in litres to give milligrams, which is what mg/hr needs.'},
   {k:'algebra', t:'k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹; Cl = 0.1733 × 15 L = 2.599 L/hr',

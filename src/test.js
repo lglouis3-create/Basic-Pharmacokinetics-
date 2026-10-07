@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -355,6 +355,22 @@ console.log('\n=== 4b. Numeric miss kinds ===');
     const last = X.getDB().answers[X.getDB().answers.length-1];
     if (!ok || last.missKind !== 'unit') bad('naming the kind of miss did not reach the answer log');
     else console.log('  ok    a missed calculation records which kind of miss it was');
+    /* what the wrong number says: a synthetic question with two givens whose product is the key */
+    const dq = {id:'diag-probe', stem:'A drug has an average steady-state concentration of 42.37 mg/L and an apparent VD of 17.03 L. Calculate the amount of drug in the body.', answer:721.6, tol:2, units:'mg',
+                steps:[{k:'setup', t:'D = Cavg × VD'}, {k:'algebra', t:'k = 0.1155 hr⁻¹ (an intermediate for the probe)'}]};
+    const dx = (e) => (X.missDiagnosis(dq, e)[0] || {}).kind || 'none';
+    const want = [['2.49', 'algebra'], ['721600', 'unit'], ['0.7216', 'unit'], ['42.37', 'setup'], ['0.1155', 'setup'], ['0.001386', 'algebra'], ['500', 'setup'], ['43300', 'unit'], ['700', 'round'], ['721.6', 'none'], ['nonsense', 'none']];
+    const off = want.filter(([e, k]) => dx(e) !== k).map(([e, k]) => `${e}→${dx(e)} (expected ${k})`);
+    if (off.length) bad('the wrong-number diagnosis misreads: ' + off.join('; '));
+    else console.log('  ok    a wrong number is read for the slip behind it (givens swapped, unit factor, reciprocal, ln 2, stopped early, near miss)');
+    const dtext = X.missDiagnosis(dq, '2.49')[0].text;
+    if (!/42\.37 ÷ 17\.03/.test(dtext) || !/42\.37 × 17\.03/.test(dtext)) bad('the diagnosis does not quote the two givens and both operations: ' + dtext);
+    let keyed = 0; for (const q of QUESTIONS.filter(q => X.qType(q) === 'numeric')) if (X.missDiagnosis(q, String(q.answer)).length) keyed++;
+    if (keyed) bad(`${keyed} keyed answers are diagnosed as slips`);
+    record(nq, 'wrong', '2.49', 900);
+    X.setMissKind(nq, 'setup', 'algebra');
+    const last2 = X.getDB().answers[X.getDB().answers.length-1];
+    if (last2.missSuggest !== 'algebra' || last2.missKind !== 'setup') bad('the suggested kind is not kept beside the chosen kind');
     record(nq, 'correct', String(nq.answer), 900);
     if (X.setMissKind(nq, 'unit')) bad('a correct answer accepted a miss kind');
     else console.log('  ok    a correct answer takes no miss kind');

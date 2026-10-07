@@ -88,7 +88,7 @@ const Q_MODULE2 = [
   {t:'The overall elimination rate constant', correct:true,
    why:'An unsubscripted k combines every route of loss into one number: k = km + ke, metabolism plus excretion. Dr. Mosley says that k with no subscript is the overall rate constant for elimination, with all the processes included. Every calculation in this module that uses k uses that total.'},
   {t:'The rate constant for excretion only', correct:false,
-   why:'Picking this reads the bare k as the excretion constant, dropping the metabolic route. Excretion has its own symbol, ke, so that it can be separated from the total; k = km + ke, where km is the metabolism constant. Using ke in place of k underestimates how fast the drug leaves and inflates any half-life computed from it.'},
+   why:'Picking this reads the bare k as the excretion constant, dropping the metabolic route. Excretion has its own symbol, ke, so it can be separated from the total; k = km + ke, where km is the metabolism constant. Using ke for k underestimates how fast the drug leaves and inflates the half-life.'},
   {t:'The rate constant for metabolism only', correct:false,
    why:'Metabolism is km. Picking this makes the same substitution error as picking excretion, and it is often made because metabolism is the route students meet first. The sum of the two subscripted constants, not either one alone, is what the concentration-time data actually measure.'},
   {t:'The transfer rate constant between plasma and tissue', correct:false,
@@ -121,7 +121,7 @@ const Q_MODULE2 = [
   {t:'The base-ten logarithm form', correct:false,
    why:'This is the form that carries the 2.3, and it is the one she works away from rather than toward. Choosing it usually comes from having met semi-logarithmic graph paper first, which is base ten, and assuming the algebra must match the graph paper. The two forms describe the same line; only the scaling of the slope differs.'},
   {t:'The exponential form', correct:false,
-   why:'This answer confuses the form she uses in forward calculations with the one she names as preferred. The exponential form, Cp = Cp0·e^(−kt), carries a known concentration forward to a later time, but her stated preference is the natural-log form, whose slope is k directly. The exponential form also invites a sign error when solving back to Cp0.'},
+   why:'This answer confuses the form she uses in forward calculations with the one she names as preferred. The exponential form, Cp = Cp0·e^(−kt), carries a known concentration forward to a later time, but her stated preference is the natural-log form, whose slope is k. It also invites a sign error when solving back to Cp0.'},
   {t:'Whichever form the plotted axis uses', correct:false,
    why:'The axis of a plot decides how the data look, not which algebraic form you must solve with. A concentration measured at a time is the same number whichever equation you rearrange, so tying the choice of equation to the graph paper adds a constraint that does not exist.'}],
  teach:[
@@ -157,11 +157,11 @@ const Q_MODULE2 = [
   {t:'A hypothetical volume that would hold the whole dose', correct:true,
    why:'It is the hypothetical volume of body fluid needed to dissolve the total amount of drug at the concentration found in the blood. Because it is hypothetical, the number can exceed total body water, which no real volume can. Dr. Mosley says it is not an actual volume and that it depends on the drug.'},
   {t:'The total volume of blood and extracellular fluid present', correct:false,
-   why:'Picking this reads an apparent volume as an anatomical one. Blood and extracellular fluid are fixed physiological volumes of a few litres that do not change from drug to drug, whereas VD (apparent volume of distribution) does. A drug held almost entirely in tissue has a VD far larger than any body fluid space, which shows the two are different quantities.'},
+   why:'Picking this reads an apparent volume as an anatomical one. Blood and extracellular fluid are physiological volumes of a few litres, the same for every drug, whereas VD (apparent volume of distribution) varies with the drug. A drug held almost entirely in tissue has a VD far larger than any body fluid space.'},
   {t:'The volume of plasma completely cleared of drug each hour', correct:false,
    why:'That is the definition of clearance, and swapping the two is easy because both are quoted in units of volume. Clearance carries a time in its units and the volume of distribution does not, so checking whether the unit has a per-hour on it separates them immediately.'},
   {t:'The volume of the dosage form administered', correct:false,
-   why:'This answer confuses the volume injected with the volume the drug behaves as if it occupied. The injected volume is a property of the preparation, and changing the syringe volume would not change the concentration achieved. The volume of distribution is derived from the dose and the resulting plasma concentration, dose divided by concentration, never from the formulation.'}],
+   why:'This answer confuses the volume injected with the volume the drug behaves as if it occupied. The injected volume is a property of the preparation, and changing the syringe volume would not change the concentration achieved. The volume of distribution is derived from the dose and the resulting plasma concentration, never from the formulation.'}],
  teach:[
   {h:'The idea', list:[
     'VD (apparent volume of distribution) answers one question: how large a volume would hold the whole dose at the concentration measured in plasma?',
@@ -254,7 +254,7 @@ const Q_MODULE2 = [
   {t:'14 L', correct:true,
    why:'Expressing the volume of distribution as a percent of body weight uses the convention that a 1 L volume is assumed to equal the weight of 1 kg, so 20% of 70 kg is 14 kg of body weight and therefore 14 L. The answer is 14 L, not 14 kg, because the volume of distribution is a volume.'},
   {t:'14 kg', correct:false,
-   why:'This answer stops at the kilograms and never converts them into litres. The arithmetic is right: 20% of 70 kg is 14 kg of body weight. A volume of distribution is a volume, so the convention that 1 kg of body weight corresponds to 1 L is applied and 14 kg becomes 14 L; the kilogram is only the intermediate unit.'},
+   why:'This answer stops at the kilograms and never converts them into litres. The arithmetic is right: 20% of 70 kg is 14 kg of body weight. A volume of distribution is a volume, so the convention that 1 kg of body weight corresponds to 1 L is applied and 14 kg becomes 14 L.'},
   {t:'20 L', correct:false,
    why:'This takes the percentage figure itself as the answer and never multiplies it by the patient weight. A percent of body weight is not a volume until a weight is supplied, which is why the stem gives one.'},
   {t:'3.5 L', correct:false,
@@ -289,7 +289,7 @@ const Q_MODULE2 = [
   {t:'Excretion', correct:false,
    why:'Excretion names one route of loss, the removal of intact drug or metabolite, rather than a rate parameter with units. It answers where the drug goes, not how much volume is stripped of it per hour, so it cannot be the quantity the units describe.'},
   {t:'Elimination rate', correct:false,
-   why:'Picking this reads an amount per unit time as a volume per unit time. An elimination rate is milligrams per hour, and for a first-order drug it falls continuously as the concentration falls. Clearance is the volume of plasma stripped of drug per hour, which stays constant; multiplying clearance by the current concentration gives the rate.'},
+   why:'Picking this reads an amount per unit time as a volume per unit time. An elimination rate is milligrams per hour, and for a first-order drug it falls as the concentration falls. Clearance is the volume of plasma stripped of drug per hour and stays constant; multiplying clearance by the current concentration gives the rate.'},
   {t:'Biotransformation', correct:false,
    why:'Biotransformation is the chemical conversion of the drug to another species, so it is a process rather than a measurement. It contributes to clearance through hepatic metabolism, but it carries no volume-per-time meaning of its own.'}],
  teach:[
@@ -349,7 +349,7 @@ const Q_MODULE2 = [
     'Clearance is what fixes the dose: dose = clearance x AUC.']}],
  cite:'Basic Pharmacokinetics - 08-26 Lecture.txt (quiz debrief); confirmed 08-19 and 08-24 lectures',
  quote:'this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd.',
- audit:'The printed slide carries Cl = kVD without saying whether it is supplied; the note "equation will not be given on EXAM" on this copy of the deck is handwritten and is not used as the source. The rendered pages of Basic-Pharmacokinetics-Equations.pdf carry no Cl = kVD line (its clearance lines are ClT = FD0/AUC, the renal and hepatic split, and the nonlinear ClT = Vmax/(KM + Cp)), which agrees with her statement. The transcript statement, made three times across three lectures, is what an exam written from these lectures would key.'},
+ audit:'The printed slide carries Cl = kVD without saying whether it is supplied; the note "equation will not be given on EXAM" on this copy of the deck is handwritten and is not used as the source. The rendered pages of Basic-Pharmacokinetics-Equations.pdf carry no Cl = kVD line (its clearance lines are ClT = FD0/AUC, the renal and hepatic split, and the nonlinear ClT = {{frac:Vmax|KM + Cp}}), which agrees with her statement. The transcript statement, made three times across three lectures, is what an exam written from these lectures would key.'},
 
 {id:'m2-cl-3', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
  topic:'bolus1', sub:'cl', concept:'cl-constant', skill:'apply',
@@ -361,7 +361,7 @@ const Q_MODULE2 = [
   {t:'It increases in proportion to the plasma concentration present', correct:false,
    why:'The statement is false. Changing the concentration changes the rate of elimination in milligrams per hour, but the volume stripped per hour is unchanged. Selecting this confuses the rate with the clearance, which is the single most common error on this parameter.'},
   {t:'It is expressed in units of volume rather than volume per time', correct:false,
-   why:'Picking this reads clearance as a volume, the same kind of quantity as VD (apparent volume of distribution). Clearance is volume per unit time, usually litres per hour, and the per-hour is not optional: a quantity in plain litres is a volume of distribution. Dropping the time from the units is what collapses the two parameters into each other.'},
+   why:'Picking this reads clearance as a volume, like VD (apparent volume of distribution). Clearance is volume per unit time, usually litres per hour, and the per-hour is not optional: a quantity in plain litres is a volume of distribution. Dropping the time from the units collapses the two parameters into each other.'},
   {t:'It is the amount of drug eliminated per unit time',
    why:'This answer confuses clearance with the elimination rate, the neighbouring term she contrasts with it. The amount eliminated per unit time, in milligrams per hour, is clearance multiplied by the plasma concentration, so it falls as the concentration falls. Clearance, the volume of plasma cleared per hour, stays constant while that rate changes.'}],
  teach:[
@@ -826,7 +826,7 @@ const Q_MODULE2 = [
   {t:'They reach different tissues at different rates', correct:true,
    why:'Some drugs distribute at different rates into different tissue groups. Dr. Mosley describes the drug going to some organs first, before it is distributed uniformly through the body. The one-compartment assumption of instantaneous uniform distribution cannot represent that.'},
   {t:'They are eliminated by more than one route', correct:false,
-   why:'Picking this reads a second elimination route as a second compartment. Multiple routes are already handled inside the one-compartment model, where k, the overall elimination rate constant, is the sum of km (metabolism) and ke (excretion). Adding a route changes the size of k but not the shape of the plasma curve, so it cannot force a second compartment.'},
+   why:'Picking this reads a second elimination route as a second compartment. Multiple routes are handled inside the one-compartment model, where k, the overall elimination rate constant, is the sum of km (metabolism) and ke (excretion). Adding a route changes k but not the shape of the plasma curve, so it cannot force a second compartment.'},
   {t:'They follow zero-order rather than first-order elimination', correct:false,
    why:'This answer confuses kinetic order with compartment count, two separate questions. A zero-order decline is a straight line on linear axes and a curve on logarithmic axes; the two-compartment signature is a curve that is biphasic on logarithmic axes while remaining first order throughout. Neither description depends on the other.'},
   {t:'They are given by a route other than intravenous bolus', correct:false,
@@ -863,7 +863,7 @@ const Q_MODULE2 = [
   {t:'A zero-order elimination process', correct:false,
    why:'Picking this reads a bend on a logarithmic plot as a change of kinetic order. Zero-order elimination is a straight line on a linear scale and a smooth curve on a logarithmic one, never a two-slope bend. Both segments here are straight on the log scale, so both are first order with different rate constants.'},
   {t:'A drug given by oral administration', correct:false,
-   why:'This answer confuses the two-slope bend with the rise and fall of an oral curve. An oral curve rises to a peak before falling, because absorption competes with elimination at early times. The curve described here starts at its maximum and only ever falls, which identifies the input as a bolus; the bend is distribution, not absorption.'}],
+   why:'This answer confuses the two-slope bend with the rise and fall of an oral curve. An oral curve rises to a peak before falling, because absorption competes with elimination at early times. The curve here starts at its maximum and only falls, which identifies the input as a bolus; the bend is distribution, not absorption.'}],
  teach:[
   {h:'The idea', list:[
     'Check the axis before reading the line.',
@@ -892,11 +892,11 @@ const Q_MODULE2 = [
   {t:'Heart, brain, hepatic-portal system, kidney and endocrine glands', correct:true,
    why:'These are the highly perfused organs. They are the smallest share of body weight of the four groups while receiving the largest share of cardiac output, which is why drug reaches them first and why they dominate the early distribution phase.'},
   {t:'Skin and muscle',
-   why:'Picking this reads bulk as blood supply. Skin and muscle are about half the body weight and sit between the highly and the slowly perfused groups; their blood flow per gram is well below that of the heart, brain, liver and kidney. Their mass, not their perfusion, is what makes drug moving into them visible on the plasma curve.'},
+   why:'Picking this reads bulk as blood supply. Skin and muscle are half the body weight and sit between the highly and the slowly perfused groups; their blood flow per gram is well below that of heart, brain, liver and kidney. Their mass, not their perfusion, makes drug moving into them visible on the plasma curve.'},
   {t:'Adipose tissue and marrow',
    why:'This answer confuses where a lipophilic drug ends up with where blood reaches first. Fat and marrow are perfused more slowly than muscle, so lipophilic drugs keep accumulating there after the fast tissues have equilibrated. Slow perfusion means late uptake, the opposite of the group that receives the drug first.'},
   {t:'Bone, ligaments, tendons, cartilage, teeth and hair',
-   why:'Picking this reads the longest list of tissues as the most important one. Bone, ligaments, tendons, cartilage, teeth and hair are the slowly perfused group. Their blood supply is so low that drug entering them contributes little to the plasma curve over a typical sampling period, which is the opposite of the fast group asked for.'}],
+   why:'Picking this reads the longest list of tissues as the most important one. Bone, ligaments, tendons, cartilage, teeth and hair are the slowly perfused group. Their blood supply is so low that drug entering them contributes little to the plasma curve over a typical sampling period, the opposite of the fast group asked for.'}],
  teach:[
   {h:'The idea', list:[
     'The tissue groups are sorted by blood supply (perfusion).',
@@ -929,7 +929,7 @@ const Q_MODULE2 = [
   {t:'From both compartments at equal rates', correct:false,
    why:'Equal elimination from both compartments would collapse the distinction between them, since the two would then differ only in their transfer constants. The model is built precisely so that one compartment is the site of both measurement and elimination.'},
   {t:'From whichever compartment holds the higher concentration', correct:false,
-   why:'This answer confuses the rates in the model with its structure. Elimination is fixed where the model is drawn, with the rate constant k on the central compartment, and it does not move with the concentrations. The concentrations set the sizes of the transfer rates through k12 and k21 and of the elimination rate k·Cp, not the location of the exit.'}],
+   why:'This answer confuses the rates in the model with its structure. Elimination is fixed where the model is drawn, with the rate constant k on the central compartment, and does not move with the concentrations. The concentrations set the transfer rates k12·Cp and k21·Ct and the elimination rate k·Cp, not where the exit is.'}],
  teach:[
   {h:'The idea', list:[
     'The two-compartment open model has three arrows.',
@@ -960,11 +960,11 @@ const Q_MODULE2 = [
   {t:'Elimination of drug from the body', correct:true,
    why:'The first two terms mirror the tissue equation with the signs reversed: drug returning from tissue is a gain to the central compartment, and drug leaving for tissue is a loss. The third term, −k·Cp, has no match in the tissue equation because it is drug leaving the body, which happens only from the central compartment.'},
   {t:'Transfer of drug from the tissue compartment to the central compartment',
-   why:'Picking this reads the gain term k21·Ct as something only the central compartment sees. Transfer from tissue to central appears in both equations: as +k21·Ct in the central equation, where it is a gain, and as −k21·Ct in the tissue equation, where it is a loss. What leaves one compartment arrives in the other, so the term is shared.'},
+   why:'Picking this reads the gain term k21·Ct as something only the central compartment sees. Transfer from tissue to central appears in both equations: as +k21·Ct in the central equation, a gain, and as −k21·Ct in the tissue equation, a loss. What leaves one compartment arrives in the other, so the term is shared.'},
   {t:'Input of the bolus dose',
-   why:'Picking this reads the dose as a term that must appear somewhere in the equations. A bolus is instantaneous, so it enters as the initial condition, Cp at time zero, rather than as a term in the differential equation. Continuing input terms belong to infusion and oral models, where drug keeps arriving over time; neither equation here has one.'},
+   why:'Picking this reads the dose as a term that must appear in the equations. A bolus is instantaneous, so it enters as the initial condition, Cp at time zero, rather than as a term in the differential equation. Continuing input terms belong to infusion and oral models, where drug keeps arriving; neither equation has one.'},
   {t:'Binding of drug to plasma proteins',
-   why:'This answer confuses a process that acts on the drug with a term written in the model. Protein binding is not represented explicitly; its effect is absorbed into the volumes and the transfer constants k12 and k21. Nothing in either differential equation distinguishes bound from unbound drug, so binding cannot be the term that one equation has and the other lacks.'}],
+   why:'This answer confuses a process acting on the drug with a term in the model. Protein binding is not represented explicitly; its effect is absorbed into the volumes and the transfer constants k12 and k21. Neither equation distinguishes bound from unbound drug, so binding cannot be the term that only one of them carries.'}],
  teach:[
   {h:'The idea', list:[
     'A compartment differential equation is a balance: drug entering the compartment is positive and drug leaving is negative.',
@@ -994,7 +994,7 @@ const Q_MODULE2 = [
   {t:'Movement of drug between the two compartments', correct:true,
    why:'k12 is the transfer constant from compartment one (central) to compartment two (tissue), and k21 is the return. Dr. Mosley calls them transfer constants: how fast drug moves from the central to the peripheral compartment and back. Neither removes drug from the body.'},
   {t:'Elimination of drug by metabolism and by excretion', correct:false,
-   why:'Picking this reads a double subscript as naming two routes out of the body. Metabolism and excretion are km and ke, single-subscript constants that sum into k, the overall elimination rate constant. The double-subscript constants k12 and k21 describe movement within the body, so drug governed by them is still present and still counted in the total amount.'},
+   why:'Picking this reads a double subscript as naming two routes out of the body. Metabolism and excretion are km and ke, single-subscript constants that sum into k, the overall elimination rate constant. The double-subscript constants k12 and k21 describe movement within the body, so drug governed by them is still present and still counted.'},
   {t:'The slopes of the distribution and elimination phases', correct:false,
    why:'Those slopes are alpha and beta, which are hybrid constants derived from k, k12 and k21 together. The transfer constants are what the curve is fitted back to, not what is read off it, which is why the equation sheet gives expressions for k12 and k21 in terms of A, B, alpha and beta rather than the reverse.'},
   {t:'The volumes of the central and tissue compartments', correct:false,
@@ -1032,7 +1032,7 @@ const Q_MODULE2 = [
   {t:'A way of correcting for drug bound to plasma proteins', correct:false,
    why:'This answer confuses what the residuals represent with a correction for binding. The residual is the difference between what was observed early and what the elimination phase alone would have predicted, and that difference is drug moving into tissue during distribution. Protein binding appears nowhere in the procedure; the method separates two exponential phases.'},
   {t:'A technique for choosing which two data points give the rate constant', correct:false,
-   why:'Picking this reads a curve-fitting method as a rule for choosing points on a line. Picking two points off a straight line is the one-compartment calculation and needs no special method. Residuals exist because the early data are not on the terminal straight line at all, so no choice of two early points would give the elimination rate constant.'}],
+   why:'Picking this reads a curve-fitting method as a rule for choosing points on a line. Picking two points off a straight line is the one-compartment calculation and needs no special method. Residuals exist because the early data are not on the terminal straight line, so no two early points would give the elimination rate constant.'}],
  teach:[
   {h:'The idea', list:[
     'The method of residuals (feathering, peeling) separates two overlapping exponential processes.',
@@ -1098,7 +1098,7 @@ const Q_MODULE2 = [
   {t:'Distribution happens faster than elimination', correct:true,
    why:'Alpha is the rate constant of the distribution phase and beta that of the elimination phase, and a drug reaches its tissues faster than it leaves the body. Dr. Mosley says the distribution phase happens a lot faster than the elimination phase. This is also how to label the terms of an unlabelled equation.'},
   {t:'The distribution phase lasts longer than the elimination phase', correct:false,
-   why:'This answer reverses the link between a rate constant and the duration of its phase. The distribution phase is the shorter of the two, which is exactly why its rate constant is larger: a large rate constant means a short half-life, so the alpha term decays away quickly and leaves the slower beta term to govern the rest of the curve.'},
+   why:'This answer reverses the link between a rate constant and the duration of its phase. The distribution phase is the shorter of the two, hence the larger rate constant: a large rate constant means a short half-life, so the alpha term decays quickly and leaves the slower beta term to govern the curve.'},
   {t:'More drug is distributed than is eliminated', correct:false,
    why:'The relative size of alpha and beta says nothing about how much drug takes each path, only how fast each process runs. The amounts are governed by the intercepts A and B, and in some drugs B exceeds A even though beta is the smaller rate constant.'},
   {t:'Alpha is measured on a logarithmic scale and beta is not', correct:false,
@@ -1133,9 +1133,9 @@ const Q_MODULE2 = [
   {t:'Divide 0.693 by alpha', correct:false,
    why:'Alpha belongs to the distribution phase, and its half-life describes how quickly drug reaches the tissues rather than how quickly it leaves the body. She says outright that the half-life of the distribution phase is not what the course cares about.'},
   {t:'Divide 0.693 by the overall rate constant k', correct:false,
-   why:'This answer confuses the overall rate constant k with the terminal slope beta. The overall k is a composite computed from the intercepts and both exponents, describing elimination from the central compartment within the model. Beta is the terminal plasma slope, which governs the drug leaving the body, so {{frac:0.693|beta}} is the half-life and {{frac:0.693|k}} is a different number.'},
+   why:'This answer confuses the overall rate constant k with the terminal slope beta. The overall k is a composite of the intercepts and both exponents, describing elimination from the central compartment. Beta is the terminal plasma slope, which governs the drug leaving the body, so {{frac:0.693|beta}} is the half-life and {{frac:0.693|k}} is a different number.'},
   {t:'Divide 0.693 by the sum of alpha and beta', correct:false,
-   why:'Picking this reads the two exponents the way the two intercepts are read. Intercepts are summed, A + B giving the initial concentration, but rate constants belonging to different phases are never summed: alpha plus beta describes no process in the model. The half-life needs the one constant that governs the terminal decline, beta, in {{frac:0.693|beta}}.'}],
+   why:'Picking this reads the two exponents as the two intercepts are read. Intercepts are summed, A + B giving the initial concentration, but rate constants belonging to different phases are never summed: alpha plus beta describes no process in the model. The half-life needs the one constant that governs the terminal decline, beta, in {{frac:0.693|beta}}.'}],
  teach:[
   {h:'The idea', list:[
     'In a two-compartment drug, beta is the elimination rate constant.',

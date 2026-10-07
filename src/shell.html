@@ -496,6 +496,9 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
   padding:12px 14px;margin:0 0 14px}
 .misskind p{margin:0 0 9px;font-size:13.5px;color:#6B4200}
 .misskind .frow{display:flex;gap:7px;flex-wrap:wrap}
+.misskind .diag{margin:0 0 9px;padding:7px 9px;border-left:3px solid var(--warn);background:var(--paper);border-radius:0 6px 6px 0;font-size:13px;color:var(--text)}
+.misskind .diag b{color:#6B4200}
+.misskind button.suggest{border-color:var(--warn);box-shadow:inset 0 0 0 1px var(--warn)}
 .misskind button{font-size:13.5px;padding:6px 12px;border:1px solid var(--line);
   border-radius:999px;background:var(--paper);color:var(--text)}
 .misskind button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -1004,6 +1007,64 @@ function gradeNumeric(q, entered){
   const tol = tolOf(q);
   return Math.abs(v - q.answer) <= tol + Math.abs(tol) * FP_SLACK;
 }
+/* ==========================================================================
+   WHAT THE WRONG NUMBER SAYS
+   ==========================================================================
+   A wrong numeric answer is compared with the numbers that known slips
+   produce: a given copied across, a value from the middle of the working, two
+   givens combined the wrong way, the keyed answer upside down, off by ln 2,
+   off by a unit factor, with its sign reversed, or close but outside the
+   margin. Each match says what was done and which kind of miss that is. The
+   student still chooses the kind; this puts the evidence next to the buttons,
+   because a slip named wrongly sends the repair work to the wrong step. */
+const fmtN = v => String(+(+v).toPrecision(4));
+/* A student rounds to three figures, so a match is within 1% of a transformed key and within 0.6% of a value made from the givens or the working, where many candidates exist and a looser match would find one by chance. */
+const nearTo = (x, y, rel = 0.01) => isFinite(x) && isFinite(y) && Math.abs(x - y) <= Math.max(rel * Math.abs(y), 1e-9);
+const TIGHT = 0.006;
+function numbersIn(text){
+  const t = String(text || '').replace(/<[^>]+>/g, ' ').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, ' $1 / $2 ');
+  const out = [];
+  for(const m of t.matchAll(/(^|[^A-Za-z\d.])(\d+(?:\.\d+)?)/g)){ const v = parseFloat(m[2]); if(v && !out.includes(v)) out.push(v); }
+  return out;
+}
+function missDiagnosis(q, entered){
+  const e = parseNum(entered), A = q.answer;
+  if(!isFinite(e) || !isFinite(A) || gradeNumeric(q, entered)) return [];
+  const out = [], push = (kind, text) => { if(!out.some(d => d.kind === kind)) out.push({kind, text}); };
+  const givens = numbersIn(q.stem).filter(g => !nearTo(g, A));
+  const E = String(e), K = fmtN(A);
+  if(givens.some(g => nearTo(e, g, TIGHT))) push('setup', `${E} is a number from the stem carried across as the answer`);
+  (q.steps || []).forEach((st, i) => {
+    if(out.length) return;
+    const vals = numbersIn(st.t).filter(v => !nearTo(v, A) && !givens.some(g => nearTo(g, v)) && v !== 0.693 && v !== 2.303);
+    if(vals.some(v => nearTo(e, v, TIGHT))) push('setup', `${E} appears in the working at step ${i + 1}, so the working stopped there; the question asks for the quantity in the last step`);
+  });
+  const ops = (a, b) => [[a * b, `${fmtN(a)} × ${fmtN(b)}`], [a / b, `${fmtN(a)} ÷ ${fmtN(b)}`], [b / a, `${fmtN(b)} ÷ ${fmtN(a)}`],
+                         [a + b, `${fmtN(a)} + ${fmtN(b)}`], [a - b, `${fmtN(a)} − ${fmtN(b)}`], [b - a, `${fmtN(b)} − ${fmtN(a)}`]];
+  for(let i = 0; i < givens.length && !out.length; i++) for(let j = i + 1; j < givens.length && !out.length; j++){
+    const cs = ops(givens[i], givens[j]);
+    const hit = cs.find(([v]) => nearTo(e, v, TIGHT)); if(!hit) continue;
+    const key = cs.find(([v]) => nearTo(A, v, TIGHT));
+    if(key) push('algebra', `${E} is ${hit[1]}; the keyed ${K} is ${key[1]}. The right two givens, combined the wrong way round`);
+    else if(cs.indexOf(hit) < 3) push('setup', `${E} is ${hit[1]}, two givens combined in one step, which is not the line this question needs`);   // a sum or difference of givens is a chance match more often than a slip
+  }
+  if(nearTo(e, 1 / A)) push('algebra', `${E} is 1 ÷ ${K}, the keyed answer upside down, so the line was rearranged the wrong way`);
+  if(nearTo(e, A * 0.693)) push('setup', `${E} is ${K} × 0.693: a half-life stands where k belongs, or k where the half-life belongs`);
+  if(nearTo(e, A / 0.693)) push('setup', `${E} is ${K} ÷ 0.693: a half-life stands where k belongs, or k where the half-life belongs`);
+  const factors = [[1000, 'a unit prefix slipped: mg against µg or g, L against mL'], [1e6, 'a unit prefix slipped twice: g against µg'],
+                   [100, 'a fraction and a percentage swapped, or a decimal place'], [10, 'a decimal place or a unit prefix'],
+                   [60, 'minutes against hours'], [24, 'hours against days']];
+  for(const [f, why] of factors){
+    if(nearTo(e, A * f)) push('unit', `${E} is ${K} × ${f}: ${why}`);
+    else if(nearTo(e, A / f)) push('unit', `${E} is ${K} ÷ ${f}: ${why}`);
+  }
+  if(nearTo(e, -A)) push('algebra', `${E} is ${K} with its sign reversed`);
+  if(!out.length && Math.abs(e - A) <= 0.1 * Math.abs(A)){
+    const pct = Math.round(1000 * Math.abs(e - A) / Math.abs(A)) / 10;
+    push('round', `${E} is ${pct}% from the keyed ${K}, outside the margin of ±${fmtN(tolOf(q))}; a value in the working was rounded before the end`);
+  }
+  return out.slice(0, 2);
+}
 /* `picks` maps a left item to the right item chosen for it. Right only when
    every keyed pair is matched. */
 function gradeMatch(q, picks){
@@ -1201,12 +1262,14 @@ function markRight(q, qn){   // qn: the exact log entry to flip (a paper's), els
 /* Naming the kind of slip after a missed numeric question, or after a correct
    one the student marked as a guess. The answer is already logged by then, so
    this writes the kind onto that entry rather than logging a second one. */
-function setMissKind(q, kind){
+function setMissKind(q, kind, suggested){
   for(let i = DB.answers.length - 1; i >= 0; i--){
     const a = DB.answers[i];
     if(a.qid !== q.id) continue;
     if(a.result !== 'wrong' && a.result !== 'guessed') return false;
-    a.missKind = kind; save(); return true;
+    a.missKind = kind;
+    if(suggested) a.missSuggest = suggested; else delete a.missSuggest;   // what the number itself pointed to, kept beside the choice
+    save(); return true;
   }
   return false;
 }

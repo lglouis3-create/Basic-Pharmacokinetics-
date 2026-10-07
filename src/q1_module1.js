@@ -512,7 +512,7 @@ const Q_MODULE1 = [
   {t:'Its elimination half-life is shortened', correct:false,
    why:'Half-life is set by the elimination rate constant, the fraction of drug removed per unit time once it is in the body. A loss at the point of entry removes a quantity without changing that fraction, so the curve starts lower but falls at the same relative rate. This answer confuses how much arrives with how fast it leaves.'},
   {t:'Its route of administration becomes parenteral', correct:false,
-   why:'Choosing this treats the consequence of first-pass metabolism as a change in the route itself. The route is how the drug was given, and the liver cannot alter it afterwards: the drug in this stem was swallowed and remains an oral dose. First-pass loss is a reason to consider a parenteral route, not a description of one.'}],
+   why:'Choosing this treats the consequence of first-pass metabolism as a change in the route. The route is how the drug was given, and the liver cannot alter it afterwards: the drug was swallowed and remains an oral dose. First-pass loss is a reason to consider a parenteral route, not a description of one.'}],
  teach:[
   {h:'The idea', list:[
     'First-pass effect: rapid metabolism of an orally administered drug before it reaches the general circulation.',
@@ -704,7 +704,7 @@ const Q_MODULE1 = [
   {t:'Toxicology', correct:false,
    why:'A T for toxicology is the other addition mentioned, but it is added at the end rather than the front, giving ADMET. The question asks which step is placed before absorption, so the position is what decides the answer here. Both letters are genuine additions used elsewhere in the programme.'},
   {t:'Bioavailability', correct:false,
-   why:'Choosing this treats a quantity as if it were a process. Bioavailability (F) is the fraction of a dose that becomes systemically available, a number between zero and one, not a step the drug passes through, so it cannot be added to a sequence of processes. It is the result of absorption and first-pass metabolism taken together.'},
+   why:'Choosing this treats a quantity as if it were a process. Bioavailability (F) is the fraction of a dose that becomes systemically available, a number between zero and one, not a step the drug passes through, so it cannot be added to a sequence of processes. It results from absorption and first-pass metabolism together.'},
   {t:'Disposition', correct:false,
    why:'Disposition is a grouping term for distribution and elimination, so it names steps that come after absorption rather than before it. Adding it to the front would reverse the order of the sequence it summarises.'}],
  teach:[
@@ -806,7 +806,7 @@ const Q_MODULE1 = [
   {t:'A constant rate of elimination', correct:false,
    why:'The rate of elimination is the rate constant multiplied by the concentration, so it changes continuously as the concentration falls; a constant rate of elimination is the zero-order property. Only 8 per cent of the class picked this when polled, holding the word constant and losing what it attaches to.'},
   {t:'dC/dt = −k', correct:false,
-   why:'Choosing this treats the rate law as a shape to be matched rather than an equation to be read for its concentration term. {{frac:dC|dt}} = −k has no concentration on the right-hand side, which is exactly what makes it zero order. The first-order form is {{frac:dC|dt}} = −kC, with the concentration beside the rate constant k.'},
+   why:'Choosing this treats the rate law as a shape to match rather than an equation to read for its concentration term. {{frac:dC|dt}} = −k has no concentration on the right-hand side, which is exactly what makes it zero order. The first-order form is {{frac:dC|dt}} = −kC, with the concentration beside the rate constant k.'},
   {t:'Units of k of concentration or amount per unit time', correct:false,
    why:'Concentration or amount per unit time are the units of a zero-order constant, which is itself a rate. A first-order constant multiplies a concentration to give a rate, so its units are reciprocal time; this was the most popular wrong answer in the class poll, at 44 per cent.'}],
  teach:[
@@ -840,7 +840,7 @@ const Q_MODULE1 = [
   {t:'It is independent of the concentration of drug present',
    why:'This swaps the rate constant for the rate. The constant is a fixed number in reciprocal time, but the rate is that constant times the concentration, so it changes whenever the concentration changes; the class split fifty-fifty on this statement for this reason.'},
   {t:'It is constant over time',
-   why:'Picking this reads the constant half-life of a first-order process as a constant rate. A rate that stays the same over time, the same quantity lost per unit time, is the zero-order case. In first order the rate is k times the concentration and falls with it; only the rate constant k and the half-life stay fixed.'},
+   why:'Picking this reads the constant half-life of a first-order process as a constant rate. A rate that stays the same over time, the same quantity lost per unit time, is the zero-order case. In first order the rate is k times the concentration and falls with it; only k and the half-life stay fixed.'},
   {t:'It is set by the half-life alone',
    why:'This answer confuses the time to lose a fixed proportion with the quantity lost per unit time. A constant half-life is a real first-order property, but half of a large concentration is more drug than half of a small one over the same interval, so the rate changes while the half-life does not.'}],
  teach:[
@@ -907,7 +907,7 @@ const Q_MODULE1 = [
   {t:'It is 3.0 days', correct:true,
    why:'Half-life is 0.693 divided by the rate constant: {{frac:0.693|0.231}} per day gives 3.0. Dividing by reciprocal days leaves days, so the answer is a time; Dr. Mosley states that the reciprocal units belong to the rate constant, not to the half-life.'},
   {t:'It is 3.0 days to the minus one', correct:false,
-   why:'This answer carries the reciprocal unit of the rate constant across the division into the half-life. Reciprocal days are the units of k, the quantity given, not of the half-life, the quantity asked for. Dividing 0.693 by 0.231 per day gives 3.0 days: a half-life is a time, so it is days, not days to the minus one.'},
+   why:'This answer carries the reciprocal unit of the rate constant across the division into the half-life. Reciprocal days are the units of k, the quantity given, not of the half-life, the quantity asked for. Dividing 0.693 by 0.231 per day gives 3.0 days: a half-life is a time, days, not days to the minus one.'},
   {t:'It is 0.231 days', correct:false,
    why:'Picking this reads the rate constant k as the half-life and copies the given number across with a changed unit. The two are different descriptions of the same decline, linked by t½ = {{frac:0.693|k}}, and are never equal. Here {{frac:0.693|0.231}} gives 3.0 days; 0.231 per day is a fraction per day, not a time.'},
   {t:'It cannot be found without the starting concentration', correct:false,
@@ -1548,11 +1548,11 @@ const Q_MODULE1 = [
   {t:'The extent of drug available for the body to use', correct:true,
    why:'Area under the curve combines how high the concentration went with how long it stayed there, so it measures total exposure rather than any single moment of it. It is used to determine the extent of drug absorption or the effectiveness of a given drug after administration by a particular route.'},
   {t:'The rate at which the drug is absorbed from the dosage form', correct:false,
-   why:'Picking this reads the area as a measure of how fast the curve was traced out. Rate of absorption is read from how quickly the curve rises and from the time of the peak, not from the area beneath it. Two formulations can give the same area while peaking at different times: area measures extent, shape measures rate.'},
+   why:'Picking this reads the area as a measure of how fast the curve was traced out. Rate of absorption is read from how quickly the curve rises and when it peaks, not from the area beneath it. Two formulations can give the same area while peaking at different times: area measures extent, shape measures rate.'},
   {t:'The half-life of the drug', correct:false,
    why:'Half-life comes from the slope of the declining part of the curve on semi-logarithmic axes, a separate reading from the area. A long half-life usually goes with a large area, but they are different quantities and neither can be computed from the other alone. This answer substitutes a related property for the one asked about.'},
   {t:'The minimum toxic concentration of the drug', correct:false,
-   why:'This answer confuses a total with a level. The minimum toxic concentration is a threshold fixed by the drug and the patient, drawn as a horizontal line across the curve, and the area beneath the curve does not produce it. Integrating concentration over time gives exposure in concentration times time; a safety limit is a concentration alone.'}],
+   why:'This answer confuses a total with a level. The minimum toxic concentration is a threshold fixed by the drug and the patient, drawn as a horizontal line across the curve, and the area does not produce it. Integrating concentration over time gives exposure in concentration times time; a safety limit is a concentration alone.'}],
  teach:[
   {h:'The idea', list:[
     'AUC (area under the concentration-versus-time curve) measures total exposure: the concentration integrated over time.',

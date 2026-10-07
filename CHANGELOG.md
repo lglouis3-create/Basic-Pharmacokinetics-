@@ -2,6 +2,14 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (what the wrong number says)
+- A missed calculation is now read back before you name the kind of miss: what your number is, and which slip makes it.
+- It recognises givens combined the wrong way, a unit factor, the reciprocal, a missing 0.693, and a near miss.
+- The kind it points to is marked as suggested; you still choose, and both are kept when they differ.
+- Weak spots shows "the number itself pointed to algebra" beside your choice, so the repair goes to the right step.
+- 175 thin explanations were rewritten to name the misreading; the explanation report now flags 0 of 506.
+- Three Module 7a options carried another option's explanation; each now explains its own option.
+
 ## 2026-10-07 (Weak spots: what fixes each kind of miss)
 - Under "Where the calculations go wrong", each kind of miss you have logged now names its repair and opens it.
 - Set-up misses open the set-up drill on the modules where the line was wrong, and the sheet map.

@@ -346,6 +346,20 @@ with sync_playwright() as p:
     ok('Show me offers no override', pg.locator('#eqRight').count() == 0)
     pg.evaluate("EQ = null")
 
+    print('\n=== What the wrong number says ===')
+    pg.evaluate("Q = null; EQ = null; SU = null; startSweepOf([byId('m6-p1g')], 'probe')"); pg.wait_for_timeout(200)
+    pg.fill('#v-quiz #numIn', '2.49'); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+    diag = pg.evaluate("(() => { const d = document.querySelector('#v-quiz .misskind .diag'); return d ? d.textContent : ''; })()")
+    ok('a wrong number is read back: ' + diag[:60], '2.49 is 42.37 ÷ 17.03' in diag and 'points to algebra' in diag)
+    ok('the kind it points to is marked as suggested, and every kind stays choosable', pg.evaluate("document.querySelector('#v-quiz .misskind button.suggest').dataset.mk") == 'algebra' and pg.locator('#v-quiz .misskind button[data-mk]').count() == 4)
+    pg.click('#v-quiz .misskind button[data-mk="setup"]'); pg.wait_for_timeout(200)
+    last = pg.evaluate("DB.answers[DB.answers.length-1]")
+    ok('the student\'s choice is logged, with what the number pointed to beside it', last['missKind'] == 'setup' and last.get('missSuggest') == 'algebra')
+    ok('the feedback says both', 'The number itself pointed to algebra' in pg.inner_text('#v-quiz'))
+    pg.evaluate("show('gaps')"); pg.wait_for_timeout(150)
+    ok('Weak spots shows the disagreement on the missed card', 'the number itself pointed to algebra' in pg.inner_text('#v-gaps'))
+    pg.evaluate("DB.answers.pop(); save(); Q = null")
+
     print('\n=== Weak spots: repairs per kind of miss, Reference anchors ===')
     pg.evaluate("Q = null; EQ = null; SU = null")
     land = pg.evaluate("""(() => { const q = QUESTIONS.find(q => q.module === 2 && qType(q) === 'numeric');

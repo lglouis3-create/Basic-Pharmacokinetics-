@@ -303,7 +303,7 @@ for i, (D, Fp, V, k, ka, tau, ask) in enumerate([(500, 80, 60, 0.0866, 1.2, 12, 
        ('algebra', line, 'Each factor in the equation is filled in from the stem; the units reduce to the unit asked for.')], T_MO,
       {'avg': S('cavg-ss', ['cl-k-vd'], f'"orally every {tau} hours" with "F", VD, k and ka: multiple oral doses at steady state. F, D0, VD, k and τ are given and "the average plasma concentration at steady state" is asked, so Cavg,ss = {{{{frac:F D0|ClT τ}}}}, written as F D0 over VD k τ with Cl = k × VD. ka does not enter; no hinge.'),
        'min': S('cmin-ss-oral', [], f'"orally every {tau} hours" with "F", VD, k and ka: multiple oral doses at steady state. F, D0, VD, k, ka and τ are given and "the minimum plasma concentration at steady state" is asked, so the oral trough line Cmin,ss = [ka F D0/(VD(ka − k))][1/(1 − e^(−kτ))]e^(−kτ) is filled in directly. No hinge: both rate constants are given.'),
-       'tmax': S('tmax-ss', [], f'"orally every {tau} hours" with k and ka: multiple oral doses at steady state. k, ka and τ are given and "the time of the peak after a dose at steady state" is asked, so tmax,ss = [1/(ka − k)] ln[ka(1 − e^(−kτ))/(k(1 − e^(−ka τ)))]. F, D0 and VD do not enter; no hinge.')}[ask])
+       'tmax': S('tmax-ss', [], f'"orally every {tau} hours" with k and ka: multiple oral doses at steady state. k, ka and τ are given and "the time of the peak after a dose at steady state" is asked, so tmax,ss = [1/(ka − k)] ln[{{frac:ka(1 − e^(−kτ))|k(1 − e^(−ka τ))}}]. F, D0 and VD do not enter; no hinge.')}[ask])
 
 HEADER = '''/* ==========================================================================
    EXTRA PRACTICE (written for this drill)

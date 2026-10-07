@@ -1191,6 +1191,16 @@ function explainHTML(q){
   return ls.length ? `<div class="explainmore"><span>Explain more:</span>${ls.map(([v, a, t]) =>
     `<button type="button" class="chip" data-jump="${v}:${a}">${esc(t)}</button>`).join('')}</div>` : '';
 }
+/* The miss-kind buttons, with what the wrong number itself points to shown
+   above them and the kind it points to marked as suggested. */
+function missKindPrompt(q, entered, title, extra){
+  const dg = missDiagnosis(q, entered);
+  const sug = dg.length ? dg[0].kind : '';
+  return `<div class="misskind"><p><b>${title}</b>${title.endsWith('?') && !dg.length ? ' One click, then the working.' : ''}</p>
+    ${dg.length ? `<div class="diag"><b>From your number:</b> ${dg.map(d => esc(d.text)).join('. ')}. That points to <b>${esc((MISS_LABEL[sug] || '').toLowerCase())}</b>; choose it if that is what happened, or another kind if not.</div>` : ''}
+    <div class="frow">${MISS_KINDS.map(m =>
+      `<button data-mk="${m.id}"${extra || ''} data-sug="${esc(sug)}" aria-pressed="false" class="${m.id === sug ? 'suggest' : ''}" title="${esc(m.hint)}">${esc(m.label)}${m.id === sug ? ' (suggested)' : ''}</button>`).join('')}</div></div>`;
+}
 let RET = [];
 function jump(view, anchor){
   // a static tab is rebuilt on return, so the Explain-one cards open on it are noted and reopened
@@ -1324,7 +1334,7 @@ function wireAllCard(card){
       done(right ? 'correct' : 'wrong');
     };
   }
-  card.querySelectorAll('[data-mk]').forEach(b => b.onclick = () => { st.missKind = b.dataset.mk; setMissKind(q, st.missKind); refreshAllCard(q.id); });
+  card.querySelectorAll('[data-mk]').forEach(b => b.onclick = () => { st.missKind = b.dataset.mk; setMissKind(q, st.missKind, b.dataset.sug); refreshAllCard(q.id); });
   const bg = card.querySelector('[data-guess]');
   if(bg) bg.onclick = () => { markGuessed(q); st.guessed = true; refreshAllCard(q.id); };
   const br = card.querySelector('[data-right]');
@@ -1475,11 +1485,10 @@ function feedbackHTML(q, st){
         /* A correct answer marked as a guess is asked the same question: a
            student who guessed right still got stuck somewhere, and naming
            where is what makes the guess useful to Weak spots. */
-        h += `<div class="misskind"><p><b>${ok ? 'Where did you get stuck?' : 'Which kind of miss was this?'}</b> One click, then the working.</p>
-          <div class="frow">${MISS_KINDS.map(m =>
-            `<button data-mk="${m.id}" aria-pressed="false" title="${esc(m.hint)}">${esc(m.label)}</button>`).join('')}</div></div>`;
+        h += missKindPrompt(q, ok ? null : st.picked, ok ? 'Where did you get stuck?' : 'Which kind of miss was this?');
       }else{
-        if(!ok) h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[st.missKind]||'').toLowerCase()))} miss.</p>`;
+        if(!ok){ const lastA = DB.answers.slice().reverse().find(a => a.qid === q.id);
+          h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[st.missKind]||'').toLowerCase()))} miss.${lastA && lastA.missSuggest && lastA.missSuggest !== st.missKind ? ` The number itself pointed to ${esc((MISS_LABEL[lastA.missSuggest]||'').toLowerCase())}.` : ''}</p>`; }
         else if(st.guessed && st.missKind) h += `<p class="sub" style="margin:0 0 8px">Logged as a guess, stuck at ${esc((MISS_LABEL[st.missKind]||'').toLowerCase())}.</p>`;
         if(st.missKind === 'setup' && q.setup && q.setup.eq && EQ_BY_ID[q.setup.eq])
           h += `<p class="sub" style="margin:0 0 8px">The line this one needs: ${eqShow(EQ_BY_ID[q.setup.eq])} <button type="button" class="chip" data-sheetsetup="${q.module}">Set-up drill, Module ${esc(modShort(q.module))}</button></p>`;
@@ -1621,7 +1630,7 @@ function renderQuiz(){
     if(!sel.value) delete Q.picked[sel.dataset.l];
   }; });
   el.querySelectorAll('[data-mk]').forEach(b => b.onclick = () => {
-    Q.missKind = b.dataset.mk; setMissKind(Q.current, Q.missKind); renderQuiz();
+    Q.missKind = b.dataset.mk; setMissKind(Q.current, Q.missKind, b.dataset.sug); renderQuiz();
   });
   const bc = $('#btnCheck');
   if(bc) bc.onclick = kind === 'numeric' ? submitNumeric : kind === 'match' ? submitMatch : submitMulti;
@@ -2080,7 +2089,7 @@ function renderGaps(){
         <div class="mstem">${stemHTML(q.stem)}</div>
         <div class="mmeta" style="color:var(--ok);margin-bottom:4px">Answer: ${esc(correctTxt)}</div>
         ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${esc(pickedTxt)}</div>` : ''}
-        ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss</div>` : ''}
+        ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss${last.missSuggest && last.missSuggest !== last.missKind ? `; the number itself pointed to ${esc((MISS_LABEL[last.missSuggest]||'').toLowerCase())}` : ''}</div>` : ''}
         <div class="mmeta">${esc(q.cite)} · missed ${s2.wrong||1}× · ${s2.box>=MASTER_BOX?'now mastered':'still in review'}</div>
         ${qType(q)==='numeric' && q.setup && EQ_BY_ID[q.setup.eq] ? `<div class="mmeta mline">Line that solves it: ${eqShow(EQ_BY_ID[q.setup.eq])}${suScopePool(String(q.module)).length
           ? ` <button type="button" class="chip" data-sheetsetup="${q.module}">Which equation: Module ${esc(modShort(q.module))}</button>` : ''}</div>` : ''}
@@ -2813,8 +2822,7 @@ function renderExamResult(){
       if(!ok && !blankQ){
         const last = DB.answers.slice().reverse().find(a => a.qid === q.id);
         if(last && !last.missKind)
-          h += `<div class="misskind"><p><b>Which kind of miss was this?</b></p><div class="frow">${MISS_KINDS.map(m =>
-            `<button data-mk="${m.id}" data-qi="${i}" title="${esc(m.hint)}">${esc(m.label)}</button>`).join('')}</div></div>`;
+          h += missKindPrompt(q, p, 'Which kind of miss was this?', ` data-qi="${i}"`);
         else if(last && last.missKind)
           h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss.</p>`;
       }
@@ -2839,7 +2847,7 @@ function renderExamResult(){
   const cg = $('#cheerGo'); if(cg) cg.onclick = celebrate;
   $('#v-exam').querySelectorAll('button[data-mk]').forEach(b => b.onclick = () => {
     const q = EX.qs[+b.dataset.qi];
-    if(q && setMissKind(q, b.dataset.mk)) renderExamResult();
+    if(q && setMissKind(q, b.dataset.mk, b.dataset.sug)) renderExamResult();
   });
   $('#v-exam').querySelectorAll('button[data-right]').forEach(b => b.onclick = () => {
     const i = +b.dataset.right, q = EX.qs[i];
