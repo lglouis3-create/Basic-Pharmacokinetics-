@@ -501,6 +501,43 @@ with sync_playwright() as p:
     ok('the exam chip selects the active exam\'s modules only', pg.evaluate("eqChosen().length > 0 && eqChosen().every(id => examOf(EQ_BY_ID[id].module) === EXAM.id)"))
     pg.evaluate("eqSetChosen(EQ_MUST); show('topics')"); pg.wait_for_timeout(100)
 
+    print('\n=== Stopwatch on every calculation, time per kind on Weak spots ===')
+    pg.evaluate("Q = null; EQ = null; SU = null; EX = null; DB.settings.layout = 'one'; show('topics'); startSweepOf([byId('ws6-b3f')], 'probe')"); pg.wait_for_timeout(200)
+    ok('a calculation shows a running stopwatch', pg.locator('#v-quiz .qtimer[data-start]').count() == 1)
+    pg.evaluate("Q.startedAt -= 125000; const t = document.querySelector('#v-quiz .qtimer'); t.dataset.start = Q.startedAt; tickTimers()"); pg.wait_for_timeout(50)
+    ok('past 2 minutes it reads over 2:00', 'over 2:00' in pg.inner_text('#v-quiz .qtimer') and pg.evaluate("document.querySelector('#v-quiz .qtimer').classList.contains('over')"))
+    pg.fill('#v-quiz #numIn', '57.72'); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+    ok('after the answer it freezes on the time taken, and the log keeps it', 'took 2:0' in pg.inner_text('#v-quiz .qtimer') and pg.evaluate("DB.answers[DB.answers.length-1].ms") >= 125000)
+    pg.evaluate("DB.answers.pop(); save(); DB.settings.layout = 'all'; startSweepOf([byId('ws6-b3f'), byId('m6-p1g')], 'probe')"); pg.wait_for_timeout(250)
+    ok('on the one-page layout the stopwatch waits for the first click into the box', pg.locator('#v-quiz .qtimer.idle').count() == 2)
+    pg.locator('#v-quiz .allcard input.numin').first.focus(); pg.wait_for_timeout(100)
+    ok('and starts when the box is entered', pg.locator('#v-quiz .qtimer[data-start]').count() == 1)
+    pg.evaluate("DB.settings.layout = 'one'; Q = null")
+    pg.evaluate("startPaper([byId('ws6-b3f'), byId('m6-p1g')], 5, {title: 'probe', coverage: blueprintCoverage()}); show('exam'); renderExamQ()"); pg.wait_for_timeout(150)
+    ok('an exam calculation shows its own stopwatch', pg.locator('#v-exam .qtimer[data-start]').count() == 1)
+    pg.evaluate("EX.tMark -= 40000; document.getElementById('exNext').click()"); pg.wait_for_timeout(100)
+    pg.evaluate("EX.tMark -= 20000; document.getElementById('exPrev').click()"); pg.wait_for_timeout(100)
+    spent = pg.evaluate("EX.spent.map(x => Math.round(x / 1000))")
+    ok('time on each paper question accumulates while it is shown: %s s' % spent, spent[0] >= 40 and spent[1] >= 20)
+    pg.evaluate("EX = null")
+    seed = pg.evaluate("""(() => { window.__keep = DB.answers; DB.answers = []; const n = 0;
+      const t = CALC_TYPES.find(x => QUESTIONS.some(q => calcTypeOf(q) === x && x.module === 6));
+      const qs = QUESTIONS.filter(q => calcTypeOf(q) === t).slice(0, 3);
+      qs.forEach((q, i) => DB.answers.push({qid: q.id, concept: q.concept, result: i ? 'wrong' : 'correct', at: Date.now(), ms: 150000 + i * 10000}));
+      const u = CALC_TYPES.find(x => x.module === 2 && QUESTIONS.some(q => calcTypeOf(q) === x));
+      QUESTIONS.filter(q => calcTypeOf(q) === u).slice(0, 2).forEach(q => DB.answers.push({qid: q.id, concept: q.concept, result: 'correct', at: Date.now(), ms: 60000}));
+      DB.answers.push({qid: qs[0].id, concept: qs[0].concept, result: 'correct', at: Date.now(), ms: 30 * 60000});
+      show('gaps'); return {n, t: t.name, u: u.name}; })()""")
+    rows = pg.evaluate("[...document.querySelectorAll('#v-gaps .tchart .trow:not(.thead)')].map(r => r.querySelector('.tname').textContent.trim() + ' | ' + r.querySelector('.tval').textContent.trim())")
+    ok('Weak spots draws a bar per kind, slowest first, with the middle time: ' + '; '.join(rows)[:120], len(rows) == 2 and seed['t'] in rows[0] and '2:40' in rows[0] and 'over 2:00' in rows[0] and '1:00' in rows[1])
+    ok('the 30-minute answer is left out as time away', '3 timed' in rows[0])
+    ok('every bar carries the 2-minute line', pg.locator('#v-gaps .tchart .tpace').count() == 2)
+    work = pg.inner_text('#v-gaps .twork') if pg.locator('#v-gaps .twork').count() else ''
+    ok('the slow, often-missed kind heads "Work on these first" with a drill button', seed['t'] in work and pg.locator('#v-gaps .twork [data-ttype]').count() >= 1 and seed['u'] not in work)
+    pg.click('#v-gaps .twork [data-ttype]'); pg.wait_for_timeout(200)
+    ok('Drill this kind starts a drill of that kind of calculation', pg.evaluate("VIEW === 'quiz' && Q && Q.pool.every(q => calcTypeOf(q) && calcTypeOf(q).name === %r)" % seed['t']))
+    pg.evaluate("DB.answers = window.__keep; save(); Q = null; show('topics')"); pg.wait_for_timeout(100)
+
     print('\n=== Weak spots: repairs per kind of miss, Reference anchors ===')
     pg.evaluate("Q = null; EQ = null; SU = null")
     land = pg.evaluate("""(() => { const q = QUESTIONS.find(q => q.module === 2 && qType(q) === 'numeric');

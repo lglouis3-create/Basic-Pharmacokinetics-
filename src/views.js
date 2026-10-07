@@ -945,7 +945,7 @@ function nextQuestion(){
   const st0 = q && DB.concepts[q.concept];
   Q.status = !st0 || !(st0.seen > 0) ? 'new' : (st0.wrong > 0 && st0.box === 0) ? 'missed before' : 'review';
   Q.picked = q && qType(q) === 'match' ? {} : null;
-  Q.revealed = false; Q.missKind = null; Q.overrode = false; Q.startedAt = Date.now();
+  Q.revealed = false; Q.missKind = null; Q.overrode = false; Q.startedAt = Date.now(); Q.took = null;
   if(q && isMC(q)) Q.order = shuffle(q.options.map((o,i)=>i));
   else Q.order = [];
   renderQuiz();
@@ -1366,15 +1366,38 @@ function quizAllList(){
   // questions answered one at a time before switching are not asked again here
   return Q.allIds.filter(id => !(Q.doneIds && Q.doneIds.has(id) && !Q.allState[id]) && byId(id));
 }
+/* The stopwatch on every calculation. Her pace for a quiz calculation is
+   "2 minutes or less" (course.js, Quiz 4 said, transcript 09-30), so the
+   stopwatch shows that line: under it in green with the time, over it in red
+   with the words "over 2:00", never colour alone. */
+const PACE_MS = 120000;
+const AWAY_MS = 15 * 60000;   // a single answer longer than this is time away from the page, left out of the averages
+const fmtClock = ms => { const s = Math.max(0, Math.round(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+function timerHTML(start, took){
+  if(took != null) return `<span class="qtimer done ${took > PACE_MS ? 'over' : 'under'}" title="Her pace: 2 minutes or less per calculation">⏱ took ${fmtClock(took)}${took > PACE_MS ? ' · over 2:00' : ''}</span>`;
+  if(!start) return `<span class="qtimer idle" title="The stopwatch starts when you click into the answer box">⏱ starts when you begin</span>`;
+  const ms = Date.now() - start;
+  return `<span class="qtimer${ms > PACE_MS ? ' over' : ''}" data-start="${start}" title="Her pace: 2 minutes or less per calculation">⏱ ${fmtClock(ms)}</span>`;
+}
+function tickTimers(){
+  document.querySelectorAll('.qtimer[data-start]').forEach(el => {
+    const ms = Date.now() - +el.dataset.start;
+    el.textContent = '⏱ ' + fmtClock(ms) + (ms > PACE_MS ? ' · over 2:00' : '');
+    el.classList.toggle('over', ms > PACE_MS);
+  });
+}
 function allCardState(q){
+  /* on the one-page layout every card renders at once, so a calculation's
+     stopwatch starts when the student first clicks into its answer box */
   return Q.allState[q.id] ||= {picked: qType(q) === 'match' ? {} : null, revealed: false, missKind: null,
-    order: isMC(q) ? shuffle(q.options.map((o, i) => i)) : [], startedAt: Date.now()};
+    order: isMC(q) ? shuffle(q.options.map((o, i) => i)) : [], startedAt: qType(q) === 'numeric' ? null : Date.now()};
 }
 function allCardHTML(q, n, total){
   const st = allCardState(q), kind = qType(q), multi = isMulti(q);
   const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
   const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain, givensOpen: !!st.givensOpen, guessed: !!st.guessed};
   let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
+      kind === 'numeric' ? timerHTML(st.startedAt, st.revealed ? (st.took != null ? st.took : null) : null) : ''}${
       st.revealed ? `<span style="color:var(${ok ? '--ok' : '--bad'})">${ok ? 'right' : 'missed'}</span>` : ''}</div>
     <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -1391,8 +1414,9 @@ function wireAllCard(card){
   const q = byId(card.dataset.qid), st = allCardState(q), kind = qType(q), multi = isMulti(q);
   const done = result => {
     st.revealed = true; markDone(q.id);
-    record(q, result, kind === 'match' ? Object.assign({}, st.picked) : kind === 'numeric' ? String(st.picked == null ? '' : st.picked) : st.picked,
-           Date.now() - st.startedAt);
+    const ms = st.startedAt ? Date.now() - st.startedAt : undefined;
+    if(kind === 'numeric') st.took = ms != null ? ms : null;
+    record(q, result, kind === 'match' ? Object.assign({}, st.picked) : kind === 'numeric' ? String(st.picked == null ? '' : st.picked) : st.picked, ms);
     refreshAllCard(q.id);
   };
   if(!st.revealed){
@@ -1402,6 +1426,8 @@ function wireAllCard(card){
       else { st.picked = oi; done(q.options[oi].correct ? 'correct' : 'wrong'); }
     });
     const ni = card.querySelector('input.numin');
+    if(ni && !st.startedAt) ni.onfocus = () => { if(st.startedAt) return; st.startedAt = Date.now();
+      const t = card.querySelector('.qtimer'); if(t) t.outerHTML = timerHTML(st.startedAt); };
     if(ni){ ni.oninput = e => { st.picked = e.target.value; };
             ni.onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); card.querySelector('[data-check]').click(); } }; }
     card.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
@@ -1666,6 +1692,7 @@ function renderQuiz(){
     ${profTag(q.prof)}${originTag(q)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
+    ${qType(q) === 'numeric' ? timerHTML(Q.startedAt, Q.revealed ? Q.took : null) : ''}
     ${Q.status === 'missed before' ? '<span style="color:var(--bad)">missed before</span>' : `<span>${Q.status || 'new'}</span>`}
   </div>
   <div class="qprog">
@@ -1759,8 +1786,9 @@ function submitNumeric(){
   const ni = $('#v-quiz #numIn');
   if(ni) Q.picked = ni.value;
   Q.revealed = true; Q.guessedLogged = false;
+  Q.took = Date.now() - (Q.startedAt || Date.now());
   record(Q.current, gradeNumeric(Q.current, Q.picked) ? 'correct' : 'wrong',
-         String(Q.picked == null ? '' : Q.picked), Date.now() - (Q.startedAt||Date.now()));
+         String(Q.picked == null ? '' : Q.picked), Q.took);
   renderQuiz();
 }
 function submitMatch(){
@@ -2025,6 +2053,45 @@ function renderGaps(){
       `<div class="fixrow"><b>${esc(k)}</b><span>${esc(t)}</span>${chips ? `<div class="explainmore"><span>Go to:</span>${chips}</div>` : ''}</div>`).join('')}</div>`;
   }
 
+  /* ---- Time per kind of calculation --------------------------------------
+     The stopwatch time of every calculation answered, grouped by the kind of
+     calculation (CALC_TYPES), as a bar per kind: the middle (median) time,
+     so one long pause does not drag the bar, against her 2-minute line. The
+     kinds to work on are the ones over the line or below 70% right. */
+  const timedRows = {};
+  for(const a of DB.answers){
+    const q = byId(a.qid); if(!q || qType(q) !== 'numeric') continue;
+    const t = calcTypeOf(q); if(!t) continue;
+    const r = timedRows[t.id] ||= {t, times: [], n: 0, right: 0};
+    r.n++; if(a.result === 'correct') r.right++;
+    if(a.ms && a.ms <= AWAY_MS) r.times.push(a.ms);
+  }
+  const med = xs => { const s = xs.slice().sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+  const tRows = Object.values(timedRows).filter(r => r.times.length).map(r => Object.assign(r, {med: med(r.times)})).sort((x, y) => y.med - x.med);
+  if(tRows.length){
+    const top = Math.max(PACE_MS * 1.25, ...tRows.map(r => r.med)) * 1.05, pct = ms => (100 * ms / top).toFixed(1);
+    h += `<h3>Time per kind of calculation</h3>
+    <p class="sub">The middle time of your answers on each kind, from the stopwatch on every calculation. The dark line is her pace: 2 minutes or less per calculation. A single answer over 15 minutes is left out as time away.</p>
+    <div class="tchart" role="table" aria-label="Middle time per kind of calculation">
+      <div class="trow thead" role="row"><span role="columnheader">Kind</span><span role="columnheader">Middle time</span><span role="columnheader">Answers</span></div>
+      ${tRows.map(r => `<div class="trow" role="row" title="${esc(r.t.name)}: middle time ${fmtClock(r.med)} over ${r.times.length} timed; ${r.right} of ${r.n} right">
+        <span class="tname" role="cell"><small>Module ${esc(modShort(r.t.module))}</small> ${esc(r.t.name)}</span>
+        <span class="tbar" role="cell" aria-label="${fmtClock(r.med)}"><i style="width:${pct(r.med)}%"></i><b class="tpace" style="left:${pct(PACE_MS)}%"></b></span>
+        <span class="tval" role="cell"><b>${fmtClock(r.med)}</b>${r.med > PACE_MS ? ' <em>over 2:00</em>' : ''}<small>${r.times.length} timed · ${r.right} of ${r.n} right</small></span>
+      </div>`).join('')}
+      <div class="tlegend"><b class="tpace-key"></b> her pace, 2:00</div>
+    </div>`;
+    const work = tRows.filter(r => r.n >= 2 && (r.med > PACE_MS || r.right / r.n < 0.7))
+      .map(r => Object.assign(r, {score: (r.med > PACE_MS ? r.med / PACE_MS : 0) + 2 * (1 - r.right / r.n)})).sort((x, y) => y.score - x.score).slice(0, 3);
+    if(work.length) h += `<h4>Work on these first</h4><ul class="tlist twork">${work.map(r => {
+      const slow = r.med > PACE_MS, weak = r.right / r.n < 0.7;
+      const why = slow && weak ? `slower than her pace (${fmtClock(r.med)}) and ${r.right} of ${r.n} right: the line is not yet clear, so set it up first in the plan drill`
+                : slow ? `right ${r.right} of ${r.n} times but slower than her pace (${fmtClock(r.med)}): the choice of line is taking the time, so drill the set-up until it is quick`
+                : `${r.right} of ${r.n} right within her pace: the working is slipping, so redo these and read each step`;
+      return `<li><b>${esc(r.t.name)}</b> <small class="inl">Module ${esc(modShort(r.t.module))}</small><br>${esc(why.charAt(0).toUpperCase() + why.slice(1))}.
+        <span class="explainmore"><button type="button" class="chip" data-ttype="${esc(r.t.id)}">Drill this kind</button>${suScopePool(String(r.t.module)).length ? `<button type="button" class="chip" data-sheetsetup="plan:${r.t.module}">Plan drill, Module ${esc(modShort(r.t.module))}</button>` : ''}</span></li>`; }).join('')}</ul>`;
+  }
+
   /* ---- Lines mixed up in the set-up drill ------------------------------
      The set-up drill keeps its own tally per equation line (SU_KEY), so the
      lines most often chosen wrongly are listed here with the drill to hand. */
@@ -2179,7 +2246,7 @@ function renderGaps(){
         <div class="mmeta" style="color:var(--ok);margin-bottom:4px">Answer: ${esc(correctTxt)}</div>
         ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${esc(pickedTxt)}</div>` : ''}
         ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss${last.missSuggest && last.missSuggest !== last.missKind ? `; the number itself pointed to ${esc((MISS_LABEL[last.missSuggest]||'').toLowerCase())}` : ''}</div>` : ''}
-        <div class="mmeta">${esc(q.cite)} · missed ${s2.wrong||1}× · ${s2.box>=MASTER_BOX?'now mastered':'still in review'}</div>
+        <div class="mmeta">${esc(q.cite)} · missed ${s2.wrong||1}× · ${s2.box>=MASTER_BOX?'now mastered':'still in review'}${last && last.ms && qType(q)==='numeric' ? ` · took ${fmtClock(last.ms)}` : ''}</div>
         ${qType(q)==='numeric' && q.setup && EQ_BY_ID[q.setup.eq] ? `<div class="mmeta mline">Line that solves it: ${eqShow(EQ_BY_ID[q.setup.eq])}${suScopePool(String(q.module)).length
           ? ` <button type="button" class="chip" data-sheetsetup="${q.module}">Which equation: Module ${esc(modShort(q.module))}</button>` : ''}</div>` : ''}
         ${explainHTML(q)}
@@ -2191,6 +2258,10 @@ function renderGaps(){
   el.querySelectorAll('.tw').forEach(w => w.classList.toggle('wide', w.scrollWidth > w.clientWidth + 4));
   wireReviewPlan(el, plan);
 
+  el.querySelectorAll('[data-ttype]').forEach(b => b.onclick = () => {
+    const t = CALC_TYPES.find(x => x.id === b.dataset.ttype); if(!t) return;
+    startSweepOf(QUESTIONS.filter(q => calcTypeOf(q) === t), t.name);
+  });
   el.querySelectorAll('[data-next]').forEach(b => b.onclick = () => {
     const pl = pools.find(x=>x.key===b.dataset.pool);
     const pool = poolQuestions(pl);
@@ -2752,7 +2823,7 @@ function drawMixed(pool, n, nSata){
    reads: the select-all shares and blueprint coverage for an exam paper, or a
    `paper` id and `title` for a quiz practice paper. */
 function startPaper(qs, minutes, extra){
-  EX = Object.assign({from: VIEW, qs, i:0,
+  EX = Object.assign({from: VIEW, qs, i:0, spent: qs.map(() => 0), tIdx: null, tMark: 0,
         picks: qs.map(q => isMulti(q) ? [] : qType(q)==='match' ? {} : qType(q)==='numeric' ? '' : null),
         running:true, done:false,
         ends: Date.now() + minutes*60000,
@@ -2782,8 +2853,18 @@ function beginExam(){
 const fmt = ms => { const s = Math.max(0, Math.round(ms/1000));
   return String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
 
+/* Time on each question of a paper, one at a time: the clock runs on the
+   question shown and pauses when the student moves on, so going back adds
+   to the same question. On the one-page layout no question is "on", so
+   nothing is counted. */
+function examTick(next){
+  const now = Date.now();
+  if(EX.spent && EX.tIdx != null) EX.spent[EX.tIdx] += now - EX.tMark;
+  EX.tIdx = next; EX.tMark = now;
+}
 function renderExamQ(){
-  if(layoutOf() === 'all') return renderExamAll();
+  if(layoutOf() === 'all'){ if(EX.spent) examTick(null); return renderExamAll(); }
+  if(EX.spent) examTick(EX.i);
   const el = $('#v-exam'), q = EX.qs[EX.i], order = EX.orders[EX.i];
   const answered = EX.picks.filter((p, i) => !isBlank(EX.qs[i], p)).length;
   const kind = qType(q), multi = isMulti(q);
@@ -2795,6 +2876,7 @@ function renderExamQ(){
   <div class="qcard"><div class="qhead">${profTag(q.prof)}${multi ? '<span class="tag sata">select all that apply</span>' : ''}${
     kind==='numeric' ? '<span class="tag">calculation</span>' : ''}${
     kind==='match' ? '<span class="tag">matching</span>' : ''}<span class="spacer"></span>
+    ${kind === 'numeric' && EX.spent ? timerHTML(Date.now() - EX.spent[EX.i]) : ''}
     <span>no feedback until you submit</span></div>
   <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -2838,6 +2920,7 @@ function examRight(q, p){ return !isBlank(q, p) && gradeAnswer(q, p); }
 const examBlank = (q, p) => isBlank(q, p);
 function finishExam(){
   clearInterval(EX.timer);
+  if(EX.spent) examTick(null);
   EX.running = false; EX.done = true;
   EX.logQn = [];   // the log entry each answer made, so a later override flips that one and no other
   EX.qs.forEach((q,i)=>{
@@ -2845,7 +2928,7 @@ function finishExam(){
     const picked = isMulti(q) ? (p || []).slice().sort((a,b)=>a-b)
                  : qType(q)==='match' ? Object.assign({}, p)
                  : qType(q)==='numeric' ? String(p == null ? '' : p) : p;
-    EX.logQn[i] = record(q, examRight(q, p) ? 'correct' : 'wrong', picked).qn;
+    EX.logQn[i] = record(q, examRight(q, p) ? 'correct' : 'wrong', picked, EX.spent && EX.spent[i] > 0 ? EX.spent[i] : undefined).qn;
   });
   const right = EX.qs.filter((q, i) => examRight(q, EX.picks[i])).length;
   (DB.exams ||= []).push({at: Date.now(), exam: EX.paper || EXAM.id, right, total: EX.qs.length,
@@ -4434,6 +4517,7 @@ document.addEventListener('click', layoutClick); // the One at a time / All on o
 document.addEventListener('click', jumpClick);
 document.addEventListener('click', sheetClick);   // sheet map: print, drill a line, start the set-up drill
 document.addEventListener('click', drillBackClick); // the way back from every drill
+setInterval(tickTimers, 1000);                       // the stopwatch on every calculation on screen
 document.addEventListener('click', xpickClick);   // Tell apart: Why? chips
 document.addEventListener('change', xselChange);  // Tell apart: Explain one   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });

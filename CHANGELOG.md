@@ -2,6 +2,13 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (a stopwatch on every calculation)
+- Every calculation shows a stopwatch; past her 2-minute pace it reads "over 2:00", then it freezes on the time taken.
+- On the one-page layout each card's stopwatch starts when you click into its answer box.
+- Exam papers time each calculation while it is on screen; going back adds to the same question.
+- Weak spots draws your middle time per kind of calculation against the 2-minute line, slowest first.
+- "Work on these first" names the slow or often-missed kinds, with a drill of that kind and its Plan drill.
+
 ## 2026-10-07 (choose the unprinted lines)
 - Equations gains three chips: the 14 unprinted lines reached from the sheet, all 20 unprinted, and the exam's lines.
 
