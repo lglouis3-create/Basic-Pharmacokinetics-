@@ -1178,7 +1178,7 @@ const headsOf = html => [...html.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>/g)].map((
   const nav = /data-nav="([^"]*)"/.exec(m[1]);
   return {i, t: deEnt((nav ? nav[1] : m[2]).replace(/<[^>]+>/g, '')).trim()};
 });
-let GUIDE_HEADS = null;
+let GUIDE_HEADS = null, TELL_SECS = null;
 const REF_TOPIC_WORD = {multi: 'repeated', intermit: 'intermittent', multoral: 'oral'};
 function linksFor(q){
   const out = [];
@@ -1188,8 +1188,14 @@ function linksFor(q){
     const lettered = /^(\d+[a-z])\.(.+)$/.exec(o.n);   // 6a.1, 7a.2: a deck lettered after its module
     const mod = lettered ? lettered[1] : String(o.module), n = lettered ? lettered[2] : o.n;
     const g = GUIDE_HEADS.find(h => h.t.startsWith(`Module ${mod}, objective ${n} `));
-    if(g) out.push(['guide', `guide-${g.i}`, `Guide: ${objLabel(o)}`]);
+    if(g) out.push(['guide', `guide-${g.i}`, `Guide: ${clip(g.t.replace(/^Module \S+, objective \S+\s*[—:-]?\s*/, `Module ${mod}, obj. ${n}: `), 70)}`]);
   }
+  /* the Tell apart section whose rows carry the most of the question's own terms */
+  TELL_SECS ||= [...TELL_HTML.matchAll(/<h3([^>]*)>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3|$)/g)].map((m, i) => ({i, t: deEnt(m[2].replace(/<[^>]+>/g, '')).trim(), body: m[3].replace(/<[^>]+>/g, ' ').toLowerCase()}));
+  const terms = spotTerms(q);
+  let bestT = null, bestS = 2;
+  for(const s of TELL_SECS){ const sc = spotScore(s.body, terms); if(sc > bestS){ bestT = s; bestS = sc; } }
+  if(bestT) out.push(['tell', `tell-${bestT.i}`, `Tell apart: ${clip(bestT.t, 60)}`]);
   let refs = refLinksFor(q);
   if(refs.length > 1 && REF_TOPIC_WORD[q.topic]) refs = refs.filter(r => r.t.includes(REF_TOPIC_WORD[q.topic])).concat(refs).slice(0, 1);
   if(refs.length) out.push(['ref', `ref-${refs[0].i}`, `Reference: Module ${q.module}`]);
@@ -1201,10 +1207,46 @@ function linksFor(q){
   if(kindOf(q) === 'calc' && EQUATIONS.some(e => e.module === q.module)) out.push(['eq', `eq-m${q.module}`, `Equations: Module ${q.module}`]);
   return out;
 }
+/* The words that name what a question is about: the keyed option, the
+   concept id, the equation of the set-up line. A jump uses them to land on
+   the one line of the section that carries them, not on the heading. */
+const SPOT_STOP = new Set(['with', 'that', 'this', 'from', 'than', 'when', 'only', 'drug', 'drugs', 'dose', 'doses', 'given', 'after', 'into', 'more', 'less', 'same', 'over', 'under', 'between', 'about', 'which', 'what', 'their', 'there', 'then', 'also', 'both', 'each', 'every', 'patient', 'plasma', 'hour', 'hours', 'time', 'first', 'second', 'state', 'steady', 'constant', 'value', 'values', 'because', 'would', 'could', 'should', 'being', 'where', 'while', 'these', 'those', 'other', 'rate', 'defn', 'properties', 'data', 'calc', 'recall', 'apply', 'landmarks', 'depends', 'curve', 'order', 'from', 'read', 'figure', 'model', 'models', 'ssbolus', 'infer', 'inference', 'direction', 'decide']);
+function spotTerms(q){
+  const src = [];
+  if(q.options) q.options.filter(o => o.correct).forEach(o => src.push(o.t));
+  if(q.pairs) q.pairs.forEach(p => src.push(p.r));
+  if(q.setup && EQ_BY_ID[q.setup.eq]) src.push(EQ_BY_ID[q.setup.eq].name);
+  src.push(String(q.concept || '').replace(/-/g, ' '));
+  const words = src.join(' ').toLowerCase().replace(/<[^>]+>/g, ' ').replace(/[^a-z0-9½∞τ\s-]/g, ' ').split(/\s+/)
+    .map(w => w.replace(/^-+|-+$/g, '')).filter(w => w.length >= 4 && !SPOT_STOP.has(w) && !/^\d+$/.test(w));
+  const seenKey = new Set();                        // one term per word family: filtered, filtration and filter are one
+  return words.filter(w => { const k = spotKey(w); if(seenKey.has(k)) return false; seenKey.add(k); return true; }).slice(0, 12);
+}
+/* Words are compared by family, the first five letters of a word of six or
+   more, so "secreted" meets "secretion" and "filtered" meets "filtration". */
+const spotKey = w => w.length >= 6 ? w.slice(0, 5) : w;
+function spotScore(txt, terms){
+  const keys = new Set(String(txt).toLowerCase().replace(/[^a-z0-9½∞τ\s-]/g, ' ').split(/\s+/).filter(w => w.length >= 4).map(spotKey));
+  return terms.filter(w => keys.has(spotKey(w))).length;
+}
+/* Within the section landed on, the one line (list item, table row,
+   paragraph, step) that carries most of the terms; marked and scrolled to. */
+function spotlight(target, terms){
+  document.querySelectorAll('.spot').forEach(x => x.classList.remove('spot'));
+  if(!target || !terms || terms.length < 1) return null;
+  const box = target.closest('details.dsec, details.module, section') || target.parentElement;
+  if(!box) return null;
+  const cands = [...box.querySelectorAll('li, tr, p, .step, .eqrow, .smline, dd')].filter(el => !el.contains(target) && el.textContent.length < 700 && !el.querySelector('li, tr'));
+  let best = null, bestScore = Math.min(1, terms.length - 1);   // two families must meet, or the one family when the question has only one
+  for(const el of cands){ const s = spotScore(el.textContent, terms); if(s > bestScore){ best = el; bestScore = s; } }
+  if(!best) return null;
+  best.classList.add('spot'); openAncestors(best);
+  return best;
+}
 function explainHTML(q){
-  const ls = linksFor(q);
+  const ls = linksFor(q), terms = spotTerms(q);
   return ls.length ? `<div class="explainmore"><span>Explain more:</span>${ls.map(([v, a, t]) =>
-    `<button type="button" class="chip" data-jump="${v}:${a}">${esc(t)}</button>`).join('')}</div>` : '';
+    `<button type="button" class="chip" data-jump="${v}:${a}" data-terms="${esc(terms.join(' '))}">${esc(t)}</button>`).join('')}</div>` : '';
 }
 /* The miss-kind buttons, with what the wrong number itself points to shown
    above them and the kind it points to marked as suggested. */
@@ -1236,10 +1278,10 @@ function drillBackClick(e){
   show(v);
 }
 let RET = [];
-function jump(view, anchor){
+function jump(view, anchor, terms){
   // a static tab is rebuilt on return, so the Explain-one cards open on it are noted and reopened
   const open = [...document.querySelectorAll(`#v-${VIEW} select[data-xsel]`)].filter(s => s.value).map(s => [s.dataset.xsel, s.value]);
-  RET.push({view: VIEW, y: window.scrollY, open, label: ({exam: 'the exam', quiz: 'the question', gaps: 'Weak spots', terms: 'Terms', diag: 'Diagrams', tell: 'Tell apart', guide: 'Guides', ref: 'Reference'})[VIEW] || 'where you were'});
+  RET.push({view: VIEW, y: window.scrollY, open, label: ({exam: 'the exam', quiz: 'the question', gaps: 'Weak spots', terms: 'Terms', diag: 'Diagrams', tell: 'Tell apart', guide: 'Guides', ref: 'Reference', topics: 'Topics', eq: 'Equations'})[VIEW] || 'where you were'});
   if(view === 'eq'){ EQ = null; SU = null; }        // the anchors live on the picker, not in a running drill
   if(view === 'diag') DG_MOD = 'all';               // a filtered Diagrams tab may be hiding the target
   show(view);
@@ -1249,8 +1291,9 @@ function jump(view, anchor){
     if(t.tagName === 'DETAILS') t.open = true;
     /* Figures above the target take their height only once decoded, so the
        position is taken after they are, and checked again a moment later. */
+    const spot = spotlight(t, terms), goal = spot || t;   // the exact line when one carries the question's terms, else the heading
     const land = () => { const hd = ['header', '#nav'].reduce((s, sel) => { const n = document.querySelector(sel); return s + (n ? n.getBoundingClientRect().height : 0); }, 0);
-      window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - hd - 8); };
+      window.scrollTo(0, goal.getBoundingClientRect().top + window.scrollY - hd - (spot ? 118 : 8)); };   // room for the Back button and the heading above the marked line
     land();
     const imgs = [...document.querySelectorAll(`#v-${view} img`)].filter(i => !i.complete);
     Promise.all(imgs.map(i => i.decode ? i.decode().catch(() => {}) : null)).then(() => { land(); setTimeout(land, 150); });
@@ -1291,7 +1334,7 @@ function xpickClick(e){
 }
 function jumpClick(e){
   const b = e.target.closest && e.target.closest('[data-jump]'); if(!b) return;
-  const [v, a] = b.dataset.jump.split(':'); jump(v, a);
+  const [v, a] = b.dataset.jump.split(':'); jump(v, a, b.dataset.terms ? b.dataset.terms.split(' ') : null);
 }
 
 /* ==========================================================================

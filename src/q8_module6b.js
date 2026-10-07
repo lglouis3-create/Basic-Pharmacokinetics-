@@ -28,8 +28,8 @@ const B_INF = {h:'What one infusion does (Module 3)', list:[
   'The body removes drug by first-order elimination: the rate out is k (the elimination rate constant) times the amount in the body.',
   'So the concentration rises, and the rise slows as it goes, because the rate out grows as drug builds up.',
   'During the infusion: Cp = {{frac:R|VD k}} (1 - e^(-kt)), where VD is the apparent volume of distribution.',
-  '{{frac:R|VD k}} equals {{frac:R|Cl}}, where Cl is clearance. It is Css, the steady-state concentration the infusion would reach if it ran forever.',
-  '(1 - e^(-kt)) is the fraction of Css reached after infusing for a time t. Here t is the infusion time.',
+  '{{frac:R|VD k}} equals {{frac:R|Cl}}, where Cl is clearance, the volume of plasma cleared of drug per hour. It is Css, the steady-state concentration the infusion would reach if it ran forever, because at steady state the rate in, R, equals the rate out, Cl × Css (slide "Drug Concentration at Steady-State").',
+  '(1 - e^(-kt)) is the fraction of Css reached after infusing for a time t. Here t is the infusion time. The fraction is 0.5 after one half-life, 0.75 after two and 0.875 after three (her table on the slide "Drug Concentration Prior to Reaching Steady-State"), so a 2-hour infusion of a drug with a 4.6-hour half-life, as in her Example 4, stops at about a quarter of Css.',
   'R is the dose divided by the infusion duration.',
   'When the infusion stops, no more drug goes in, and only first-order elimination is left.',
   'After it stops: C = Cpeak e^(-kt). Cpeak is the concentration at the moment the infusion ended, and t is the time since it ended, not since it started.']};
@@ -71,7 +71,7 @@ const B_INF_FIG = [
 
 const B_ORAL_EQ = {h:'The multiple-oral-dose equations at steady state', list:[
   'Symbols: ka is the absorption rate constant, k the elimination rate constant, τ the dosing interval, F the bioavailability, D0 the dose and VD the apparent volume of distribution. ∞ marks steady state.',
-  'Time to peak: tmax∞ = {{frac:1|ka - k}} ln[{{frac:ka(1 - e^(-kτ))|k(1 - e^(-ka τ))}}]. It holds k, ka and τ; the single-dose tmax holds only k and ka.',
+  'Time to peak: tmax∞ = {{frac:1|ka - k}} ln[{{frac:ka(1 - e^(-kτ))|k(1 - e^(-ka τ))}}]. It holds k, ka and τ; the single-dose tmax holds only k and ka. The τ terms make the number inside the logarithm smaller, so tmax∞ is earlier than the first-dose tmax: drug left from earlier doses is being eliminated while the new dose is absorbed, so the rising and falling rates balance sooner (slide "Time to Peak at Steady State").',
   'Peak: Cmax∞ = {{frac:FD0|VD}} ({{frac:1|1 - e^(-kτ)}}) e^(-k tmax∞).',
   'The F and the tmax mark Cmax∞ as oral. A bolus peaks at the moment of the dose, so a bolus needs no tmax.',
   'Trough: Cmin∞ = {{frac:ka FD0|VD(ka - k)}} ({{frac:1|1 - e^(-kτ)}}) e^(-kτ).',
@@ -84,11 +84,14 @@ const B_ORAL_CMP = {h:'First dose against steady state: her tetracycline example
   [
     'Why they differ',
     'No drug in the body before the dose',
-    'Drug from earlier doses is still present; the peak comes earlier and higher']]}, after:'From the first dose to steady state, tmax falls and Cmax rises. How much Cmax rises depends on τ (the dosing interval): a very long interval leaves little accumulation.'};
+    'Drug from earlier doses is still present; the peak comes earlier and higher']]}, after:'From the first dose to steady state, tmax falls and Cmax rises. tmax falls because drug left from earlier doses is already being eliminated while the new dose is absorbed, so the rising and falling rates balance sooner. Cmax rises by the accumulation factor {{frac:1|1 - e^(-kτ)}}, 2.35 here; with a very long τ (dosing interval) little accumulates and it rises little. Her slide "Example 1" works the first dose and the steady state side by side.'};
 
 const B_PARAM = {h:'The two things a regimen can change', list:[
   'A dosage regimen adjusts the dose size and the dosing interval, τ.',
-  'It does not change k, the half-life, clearance or VD (apparent volume of distribution); these belong to the drug and the patient.'], table:{head:['Change', 'Steady-state concentration', 'Fluctuation, peak to trough', 'Patient compliance'], rows:[
+  'It does not change k, the half-life, clearance or VD (apparent volume of distribution); these belong to the drug and the patient.',
+  'Why the dose changes the swing: the trough is a fixed fraction, e^(-kτ), of the peak, so the gap between them is a fixed fraction of the peak and grows with it. In amounts, Chapter 9 notes that Dmax∞ − Dmin∞ always equals the dose, so doubling the dose doubles the swing.',
+  'Why the interval changes the swing: a longer τ gives each dose more time to be eliminated before the next, so e^(-kτ) is smaller, the trough falls further below the peak and less accumulates. A shorter τ cuts into the 3 to 5 half-lives a dose needs to be eliminated, so the level never gets near the bottom of the curve.',
+  'Compliance follows the number of doses a day: every 8 hours is 3 doses, every 4 hours is 6, and fewer doses are easier to keep to. Her slides "Altering Dose" and "Altering Dosing Interval" list the three effects for each change.'], table:{head:['Change', 'Steady-state concentration', 'Fluctuation, peak to trough', 'Patient compliance'], rows:[
   ['Increase the dose, same τ', 'Higher', 'Larger', 'Usually no change'],
   ['Decrease the dose, same τ', 'Lower', 'Smaller', 'Usually no change'],
   ['Increase τ, same dose (less often)', 'Lower', 'Larger', 'Better'],
@@ -785,7 +788,9 @@ const Q_MODULE6B = [
   {h:'The idea', list:[
     'Exam answers for dosing intervals and oral doses are to be stated as a clinician would write them.',
     'The interval should make sense to the patient.',
-    'The oral dose should be rounded to a strength that exists.']},
+    'The oral dose should be rounded to a strength that exists.',
+    'Her own roundings: 181.8 mg to 182 mg, or to 200 mg if 175 and 200 are the strengths made; 571.43 mg of ciprofloxacin to 575 or 600 mg; an infusion rate of 14.86 mg/hr to 15 mg/hr and a loading dose of 151.52 mg to 150 mg.',
+    'The contrast is the IV dose: it is drawn up by the nurse, so it can be given to the calculated milligram and is not rounded.']},
   B_PARAM],
  cite:'09.28 lecture',
  quote:'Don\'t tell me 17.29 mg for an oral dose. ... So, I\'m gonna ask you to round to something that makes more sense, right? 20 mg.'},
@@ -806,8 +811,10 @@ const Q_MODULE6B = [
  teach:[
   {h:'The idea', list:[
     'At steady state the curve swings between a peak and a trough every interval.',
-    'Both must stay between the two dashed lines of the therapeutic range.',
-    'Dose and interval are the two things a regimen can change to keep them there.']},
+    'Both must stay between the two dashed lines of the therapeutic range: the lower line is the minimum effective concentration (MEC), below which the drug does not act, and the upper line is the minimum toxic concentration (MTC), above which adverse effects appear (Introduction slide "Concentration versus Time Curve").',
+    'Dose and interval are the two things a regimen can change to keep them there.',
+    'Her Multiple IV Bolus Practice 2 is the worked case: a window of 2 to 10 mcg/mL, the steady-state peak assigned as 10 mg/L and the trough found to be 1.576 mg/L, below the floor, so the regimen fails at the trough and the interval is shortened from 8 to 6 hours, which lifts the trough to 2.5 mg/L.',
+    'The average cannot stand in for the pair: Chapter 9 gives 500 mg every 6 hours and 250 mg every 3 hours as two regimens with the same average, while the swing of the second is half as large (section "Multiple-Oral-Dose Regimen").']},
   B_PARAM],
  cite:'6a---Multiple-Oral-Doses.pdf, slide "Consider Peak and Trough"; 09.28 lecture',
  quote:'We wanna design a regimen that is going to be feasible for our patient to maintain.'},

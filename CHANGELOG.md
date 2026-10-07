@@ -2,6 +2,17 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (explanations that leave no question open)
+- Every concept explanation was read for the questions a learner could still ask, and the material now answers them.
+- Terms are defined where they are used, each rule carries its because, and reference numbers say where they come from.
+- Blocks name the slide or chapter section to read next, and how she has asked the point when her material shows it.
+- Two questions that asked about the equation sheet itself, not pharmacokinetics, were removed; the bank holds 504.
+
+## 2026-10-07 (Explain more lands on the exact line)
+- An Explain-more chip now lands on the one line that carries the question's own terms, marked "For this question".
+- Guide chips name the module, objective and title; a Tell apart chip appears when a table there carries the terms.
+- About three jumps in four land on a line; the rest land on the section heading as before.
+
 ## 2026-10-07 (concept questions that rest on a calculation show the working)
 - A multiple-choice question decided by a number now carries the working, the givens and the check under its options.
 - The renal-mechanism items reach ClR in mL/min and set it against GFR of about 120 mL/min, step by step.

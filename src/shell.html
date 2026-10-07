@@ -634,6 +634,9 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
 /* ---------- explain more ---------- */
 .explainmore{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0 0;font-size:13px;color:var(--text-dim)}
 .explainmore .chip{white-space:normal;text-align:left}
+.spot{position:relative;background:var(--warn-bg);outline:2px solid var(--warn);outline-offset:3px;border-radius:6px;animation:spotin .6s ease-out}
+.spot::before{content:'For this question';position:absolute;top:-22px;left:0;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#6B4200;background:var(--warn-bg);border:1px solid var(--warn);border-radius:6px;padding:1px 7px}
+@keyframes spotin{from{outline-color:transparent;background:transparent}}
 #backbtn{position:fixed;right:12px;top:120px;z-index:40;box-shadow:0 2px 10px rgba(0,0,0,.25);white-space:nowrap}
 
 /* ---------- answer layout ---------- */

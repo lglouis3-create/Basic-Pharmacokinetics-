@@ -100,10 +100,10 @@ const Q_MODULE3 = [
     'So the plateau is fixed by the infusion rate and the clearance, and by nothing else.']},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl clearance, k the elimination rate constant, VD the apparent volume of distribution.',
+    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl the clearance (the volume of plasma cleared of drug per unit time), k the elimination rate constant, VD the apparent volume of distribution.',
     'Raising R raises Css in proportion.',
     'Raising R does not change how long the plateau takes to arrive.',
-    'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
+    'Time to steady state is 3 to 5 half-lives, set by the half-life alone, because the fraction of the plateau reached, 1 − e^(−kt), contains only k and t.',
     'The approach is asymptotic (ever closer, never arriving), so steady state is neared rather than reached.']},
   {h:'Chapter 6: deriving the plateau', list:[
     'Steady state is the moment the plasma concentration (Cp) stops changing: {{frac:dCp|dt}} = 0.',
@@ -135,12 +135,16 @@ const Q_MODULE3 = [
     'One half-life gives 50 per cent, two give 75 per cent, three give 87.5 per cent.',
     'In practice the level is called steady after three to five half-lives.',
     'A more precise question, such as the time to 90 or 95 per cent, needs a calculation rather than this rule.']},
+  {h:'How she tests it', list:[
+    'The short answer she wants is "3 to 5 half-lives"; the precise versions come as calculations.',
+    'Time to 95% of Css: 0.95 = 1 − e^(−kt) gives kt = 3, so t = 4.32 half-lives, 30.3 hr for a 7-hour half-life (IV-Infusions-Practice-3---Solutions.pdf, part a; Chapter 6, Table 6-1).',
+    'Time to 90%: 0.9 = 1 − e^(−kt) gives t = {{frac:ln 10|k}}, 15.35 hr at k = 0.15 hr⁻¹ on her slide "Example 4".']},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl clearance, k the elimination rate constant, VD the apparent volume of distribution.',
+    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl the clearance (the volume of plasma cleared of drug per unit time), k the elimination rate constant, VD the apparent volume of distribution.',
     'Raising R raises Css in proportion.',
     'Raising R does not change how long the plateau takes to arrive.',
-    'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
+    'Time to steady state is 3 to 5 half-lives, set by the half-life alone, because the fraction of the plateau reached, 1 − e^(−kt), contains only k and t.',
     'The approach is asymptotic (ever closer, never arriving), so steady state is neared rather than reached.']},
   {h:'Chapter 6: deriving the plateau', list:[
     'Steady state is the moment the plasma concentration (Cp) stops changing: {{frac:dCp|dt}} = 0.',
@@ -171,12 +175,13 @@ const Q_MODULE3 = [
     'R over clearance (R is the infusion rate) sets how high the plateau sits, so it responds to the infusion rate.',
     'One minus e to the minus kt sets how far along the climb the concentration is, so it responds only to the elimination rate constant k, and so to the half-life.',
     'Changing the rate moves the plateau and leaves the time to reach it unchanged.']},
+  {h:'How she tests it', t:'Her Canvas quiz asks "Which of the following results when the rate of infusion is increased?" and keys "steady-state concentration increases"; the two distractors about the time to reach steady state, increases and decreases, are both wrong for the same reason.'},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl clearance, k the elimination rate constant, VD the apparent volume of distribution.',
+    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl the clearance (the volume of plasma cleared of drug per unit time), k the elimination rate constant, VD the apparent volume of distribution.',
     'Raising R raises Css in proportion.',
     'Raising R does not change how long the plateau takes to arrive.',
-    'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
+    'Time to steady state is 3 to 5 half-lives, set by the half-life alone, because the fraction of the plateau reached, 1 − e^(−kt), contains only k and t.',
     'The approach is asymptotic (ever closer, never arriving), so steady state is neared rather than reached.']},
   {h:'Chapter 6: deriving the plateau', list:[
     'Steady state is the moment the plasma concentration (Cp) stops changing: {{frac:dCp|dt}} = 0.',
@@ -210,7 +215,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'Before steady state: C = ({{frac:R|Cl}})(1 - e^(-kt)), where R is the infusion rate, Cl clearance, k the elimination rate constant and t the time infused.',
     '{{frac:R|Cl}} is Css, the steady-state concentration; the bracket is the fraction of Css reached.',
-    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n.',
+    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n, because t = n × t½ = n × {{frac:0.693|k}} makes e^(-kt) = e^(-0.693n) = (1/2)^n.',
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; counting is faster when the time is a whole number of half-lives.']},
   {h:'Chapter 6: why the curve bends', list:[
@@ -246,7 +251,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'Before steady state: C = ({{frac:R|Cl}})(1 - e^(-kt)), where R is the infusion rate, Cl clearance, k the elimination rate constant and t the time infused.',
     '{{frac:R|Cl}} is Css, the steady-state concentration; the bracket is the fraction of Css reached.',
-    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n.',
+    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n, because t = n × t½ = n × {{frac:0.693|k}} makes e^(-kt) = e^(-0.693n) = (1/2)^n.',
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; counting is faster when the time is a whole number of half-lives.']},
   {h:'Chapter 6: why the curve bends', list:[
@@ -281,10 +286,10 @@ const Q_MODULE3 = [
     'Three to five half-lives is the working answer; ten half-lives gives 99.9 per cent.']},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl clearance, k the elimination rate constant, VD the apparent volume of distribution.',
+    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl the clearance (the volume of plasma cleared of drug per unit time), k the elimination rate constant, VD the apparent volume of distribution.',
     'Raising R raises Css in proportion.',
     'Raising R does not change how long the plateau takes to arrive.',
-    'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
+    'Time to steady state is 3 to 5 half-lives, set by the half-life alone, because the fraction of the plateau reached, 1 − e^(−kt), contains only k and t.',
     'The approach is asymptotic (ever closer, never arriving), so steady state is neared rather than reached.']},
   {h:'Chapter 6: deriving the plateau', list:[
     'Steady state is the moment the plasma concentration (Cp) stops changing: {{frac:dCp|dt}} = 0.',
@@ -347,6 +352,7 @@ const Q_MODULE3 = [
     'An infusion run to steady state starts its decay at Css (the steady-state concentration).',
     'An infusion stopped earlier starts from Css multiplied by one minus e to the minus kt, with t the duration actually infused.',
     'Deciding which of the two applies is the first step in any post-cessation question.']},
+  {h:'How she tests it', t:'Her practice sets put the two cases side by side: IV Infusions Practice 3 part f decays from the end of a 4-hour infusion, 3.3 mg/L, and part g from Css, 10 mg/L, with the same k in both. Every post-cessation stem says whether a loading dose was given and how long the infusion ran.'},
   {h:'How the variables relate', list:[
     'Once the infusion stops there is no input, so the decline is C = Cpeak e^(-kt), with k the elimination rate constant and t counted from cessation.',
     'Cpeak is the concentration at the moment the infusion stopped.',
@@ -381,10 +387,11 @@ const Q_MODULE3 = [
     'The rate sets where the concentration settles, because the plateau is the rate divided by clearance.',
     'The loading dose sets how soon it gets there, by putting the steady-state amount into the body at once.',
     'So an appropriate loading dose is the amount in the body at steady state: Css (steady-state concentration) multiplied by the volume of distribution.']},
+  {h:'How she tests it', t:'Her Canvas quiz asks "Why is a loading dose used?" and keys "to immediately obtain a therapeutic plasma concentration"; the distractors are reducing adverse effects, improving adherence and reducing the elimination half-life.'},
   {h:'How the variables relate', list:[
     'DL (loading dose) = Css x VD: the steady-state concentration times the apparent volume of distribution.',
     'That is the amount the body holds at steady state, so the body starts as if it were already there.',
-    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), which holds only once an appropriate R has been chosen.',
+    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), because Css = {{frac:R|k x VD}} makes Css x VD = {{frac:R|k}}; this form holds only once R has been chosen to give the target Css.',
     'With a loading dose plus an infusion: C = ({{frac:DL|VD}})e^(-kt) + ({{frac:R|Cl}})(1 - e^(-kt)), where Cl is clearance.',
     'The first term is the bolus decaying and the second is the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
@@ -419,7 +426,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'DL (loading dose) = Css x VD: the steady-state concentration times the apparent volume of distribution.',
     'That is the amount the body holds at steady state, so the body starts as if it were already there.',
-    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), which holds only once an appropriate R has been chosen.',
+    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), because Css = {{frac:R|k x VD}} makes Css x VD = {{frac:R|k}}; this form holds only once R has been chosen to give the target Css.',
     'With a loading dose plus an infusion: C = ({{frac:DL|VD}})e^(-kt) + ({{frac:R|Cl}})(1 - e^(-kt)), where Cl is clearance.',
     'The first term is the bolus decaying and the second is the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
@@ -453,7 +460,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'DL (loading dose) = Css x VD: the steady-state concentration times the apparent volume of distribution.',
     'That is the amount the body holds at steady state, so the body starts as if it were already there.',
-    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), which holds only once an appropriate R has been chosen.',
+    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), because Css = {{frac:R|k x VD}} makes Css x VD = {{frac:R|k}}; this form holds only once R has been chosen to give the target Css.',
     'With a loading dose plus an infusion: C = ({{frac:DL|VD}})e^(-kt) + ({{frac:R|Cl}})(1 - e^(-kt)), where Cl is clearance.',
     'The first term is the bolus decaying and the second is the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
@@ -551,15 +558,13 @@ const Q_MODULE3 = [
     'Volume of distribution, elimination rate constant, half-life and clearance are constants of the drug in that patient, so the amount given does not change them.',
     'Only amounts and concentrations respond to the dose.']},
   {h:'How the variables relate', list:[
-    'R (the infusion rate) is a constant input, so input is zero order: a fixed amount per unit time.',
-    'Elimination is unchanged by the route, so output stays first order: a fixed fraction of what is present per unit time.',
-    'R is an amount per time, most often mg/hr.',
-    'The concentration starts at zero and climbs, because no drug is in the body when the infusion starts.']},
-  {h:'Chapter 6: the mass balance', list:[
-    'The amount of drug in the body (DB) changes at {{frac:dDB|dt}} = R − kDB, where k is the elimination rate constant.',
-    'R is a constant amount arriving each hour, so input is zero order.',
-    'kDB is the amount leaving each hour; it rises as DB rises, so output is first order.',
-    'Every infusion equation in the module comes from integrating this one statement.']}],
+    'C0 = {{frac:D0|VD}}: the initial concentration is the dose over the apparent volume of distribution, so doubling D0 doubles C0 and every later concentration with it.',
+    't½ = {{frac:0.693|k}} and Cl = k x VD contain no dose, so neither moves when the dose does.',
+    'VD is a proportionality constant between the amount in the body and the plasma concentration; a bigger dose raises both by the same factor and leaves their ratio unchanged.',
+    'The amount eliminated per hour, Cl x Cp, does rise with the dose; the volume cleared per hour, Cl, does not.']},
+  {h:'How she tests it', list:[
+    'The opening poll of the infusion deck asks this question in these words.',
+    'IV Bolus Practice 4 asks it in three parts: if the dose were doubled, what is the expected change in the half-life (none), in the clearance (none) and in the initial plasma concentration (it doubles, 24.19 to 48.387 mg/L in her key).']}],
  cite:'3IntravenousInfusions.pdf, opening poll slide',
  quote:'Which of the following would you expect to increase with an increase in IV bolus dose?'},
 
@@ -594,10 +599,10 @@ const Q_MODULE3 = [
     'Once those two constants are found, the calculation is one division.']},
   {h:'How the variables relate', list:[
     'At steady state the rate in equals the rate out, so the concentration stops changing.',
-    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl clearance, k the elimination rate constant, VD the apparent volume of distribution.',
+    'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl the clearance (the volume of plasma cleared of drug per unit time), k the elimination rate constant, VD the apparent volume of distribution.',
     'Raising R raises Css in proportion.',
     'Raising R does not change how long the plateau takes to arrive.',
-    'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
+    'Time to steady state is 3 to 5 half-lives, set by the half-life alone, because the fraction of the plateau reached, 1 − e^(−kt), contains only k and t.',
     'The approach is asymptotic (ever closer, never arriving), so steady state is neared rather than reached.']},
   {h:'Chapter 6: deriving the plateau', list:[
     'Steady state is the moment the plasma concentration (Cp) stops changing: {{frac:dCp|dt}} = 0.',
@@ -676,7 +681,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'Before steady state: C = ({{frac:R|Cl}})(1 - e^(-kt)), where R is the infusion rate, Cl clearance, k the elimination rate constant and t the time infused.',
     '{{frac:R|Cl}} is Css, the steady-state concentration; the bracket is the fraction of Css reached.',
-    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n.',
+    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n, because t = n × t½ = n × {{frac:0.693|k}} makes e^(-kt) = e^(-0.693n) = (1/2)^n.',
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; counting is faster when the time is a whole number of half-lives.']},
   {h:'Chapter 6: why the curve bends', list:[
@@ -802,7 +807,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'Before steady state: C = ({{frac:R|Cl}})(1 - e^(-kt)), where R is the infusion rate, Cl clearance, k the elimination rate constant and t the time infused.',
     '{{frac:R|Cl}} is Css, the steady-state concentration; the bracket is the fraction of Css reached.',
-    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n.',
+    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n, because t = n × t½ = n × {{frac:0.693|k}} makes e^(-kt) = e^(-0.693n) = (1/2)^n.',
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; counting is faster when the time is a whole number of half-lives.']},
   {h:'Chapter 6: why the curve bends', list:[
@@ -889,7 +894,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'DL (loading dose) = Css x VD: the steady-state concentration times the apparent volume of distribution.',
     'That is the amount the body holds at steady state, so the body starts as if it were already there.',
-    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), which holds only once an appropriate R has been chosen.',
+    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), because Css = {{frac:R|k x VD}} makes Css x VD = {{frac:R|k}}; this form holds only once R has been chosen to give the target Css.',
     'With a loading dose plus an infusion: C = ({{frac:DL|VD}})e^(-kt) + ({{frac:R|Cl}})(1 - e^(-kt)), where Cl is clearance.',
     'The first term is the bolus decaying and the second is the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
@@ -935,7 +940,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'DL (loading dose) = Css x VD: the steady-state concentration times the apparent volume of distribution.',
     'That is the amount the body holds at steady state, so the body starts as if it were already there.',
-    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), which holds only once an appropriate R has been chosen.',
+    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), because Css = {{frac:R|k x VD}} makes Css x VD = {{frac:R|k}}; this form holds only once R has been chosen to give the target Css.',
     'With a loading dose plus an infusion: C = ({{frac:DL|VD}})e^(-kt) + ({{frac:R|Cl}})(1 - e^(-kt)), where Cl is clearance.',
     'The first term is the bolus decaying and the second is the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
@@ -1014,7 +1019,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'Before steady state: C = ({{frac:R|Cl}})(1 - e^(-kt)), where R is the infusion rate, Cl clearance, k the elimination rate constant and t the time infused.',
     '{{frac:R|Cl}} is Css, the steady-state concentration; the bracket is the fraction of Css reached.',
-    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n.',
+    'After n half-lives that fraction is 1 - e^(-kt) = 1 - (1/2)^n, because t = n × t½ = n × {{frac:0.693|k}} makes e^(-kt) = e^(-0.693n) = (1/2)^n.',
     'So 50% after one half-life, 75% after two, 87.5% after three, 93.75% after four.',
     'Counting half-lives and using the exponential give the same answer; counting is faster when the time is a whole number of half-lives.']},
   {h:'Chapter 6: why the curve bends', list:[
@@ -1050,7 +1055,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'DL (loading dose) = Css x VD: the steady-state concentration times the apparent volume of distribution.',
     'That is the amount the body holds at steady state, so the body starts as if it were already there.',
-    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), which holds only once an appropriate R has been chosen.',
+    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), because Css = {{frac:R|k x VD}} makes Css x VD = {{frac:R|k}}; this form holds only once R has been chosen to give the target Css.',
     'With a loading dose plus an infusion: C = ({{frac:DL|VD}})e^(-kt) + ({{frac:R|Cl}})(1 - e^(-kt)), where Cl is clearance.',
     'The first term is the bolus decaying and the second is the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
@@ -1295,7 +1300,7 @@ const Q_MODULE3 = [
   {h:'How the variables relate', list:[
     'DL (loading dose) = Css x VD: the steady-state concentration times the apparent volume of distribution.',
     'That is the amount the body holds at steady state, so the body starts as if it were already there.',
-    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), which holds only once an appropriate R has been chosen.',
+    'Equivalently DL = {{frac:R|k}} (infusion rate over elimination rate constant), because Css = {{frac:R|k x VD}} makes Css x VD = {{frac:R|k}}; this form holds only once R has been chosen to give the target Css.',
     'With a loading dose plus an infusion: C = ({{frac:DL|VD}})e^(-kt) + ({{frac:R|Cl}})(1 - e^(-kt)), where Cl is clearance.',
     'The first term is the bolus decaying and the second is the infusion building; at any time they sum to the concentration.',
     'A correctly matched loading dose holds the concentration flat from the start.']},
@@ -1453,7 +1458,7 @@ const Q_MODULE3 = [
     'Css (steady-state concentration) = {{frac:R|Cl}} = {{frac:R|k x VD}}: R is the infusion rate, Cl clearance, k the elimination rate constant, VD the volume of distribution.',
     'Doubling R doubles Css; halving clearance doubles it too.',
     'The loading dose changes how quickly Css is reached, never what it is.',
-    'Time to steady state is 3 to 5 half-lives, set by the half-life alone.',
+    'Time to steady state is 3 to 5 half-lives, set by the half-life alone, because the fraction of the plateau reached, 1 − e^(−kt), contains only k and t.',
     '3 days at a 4-hour half-life is 18 half-lives, so the plateau is long since reached.']}],
  cite:'In-Class IV Infusions - Solutions.pdf, question 5, part a',
  quote:'Css = 75 mg/hr / [(12 L)(0.1733/hr)] = 36.08 mg/L'},

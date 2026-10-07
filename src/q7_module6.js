@@ -27,28 +27,37 @@
 /* Sections several questions share, written once. */
 const M6_ACCUM = {h:'What steady state is', list:[
   'With the same intravenous (IV) bolus dose at the same interval, each dose is added to what is left of the doses before it, so the peaks and troughs climb.',
-  'The climb stops when the drug eliminated over one interval equals one dose. From then on every dose reaches the same peak, Cmax∞, and falls to the same trough, Cmin∞. That repeating pattern is the plateau, also called steady state.',
-  'Time to plateau is 3 to 5 half-lives, not 3 to 5 doses, and it does not depend on the dose.',
-  'After the last dose, most of the drug is eliminated in another 3 to 5 half-lives.',
-  'The ∞ sign on a symbol means steady state.']};
+  'The climb stops when the drug eliminated over one interval equals one dose. Elimination is first order, so the amount removed per interval grows as the level climbs, until it matches the dose; from then on every dose reaches the same peak, Cmax∞, and falls to the same trough, Cmin∞. That repeating pattern is the plateau, also called steady state.',
+  'Time to plateau is 3 to 5 half-lives, not 3 to 5 doses. The count comes from the half-life table: each half-life closes half of the remaining gap to the plateau, so the level is 50 per cent of the way there after one half-life, 75 after two, 87.5 after three and about 97 after five.',
+  'The time does not depend on the dose, because a first-order rate is proportional to the amount present: a larger dose is eliminated faster in the same proportion, so it climbs to a higher plateau in the same number of half-lives.',
+  'After the last dose, most of the drug is eliminated in another 3 to 5 half-lives, by the same count read downwards: 12.5 per cent is left after three half-lives and about 3 per cent after five.',
+  'A constant-rate infusion (Module 3) reaches a flat plateau; a bolus regimen does not. Even at steady state the level jumps at each dose and falls between doses, and what repeats is the pattern of peak and trough.',
+  'The ∞ sign on a symbol means steady state.',
+  'Her slide "Drug accumulation with repeated administration" carries these statements in three lines; Chapter 9 opens with the same idea in its section "Drug Accumulation".']};
 
 const M6_SUP = {h:'Superposition and its two assumptions', list:[
+  'Superposition means laying curves on top of one another: the curve after any later dose is the first-dose curve shifted to the time of that dose, and the concentration at any time is the sum of what is left of every dose given so far. Her slide "Superposition" shows a section of the first curve placed on top of the later one.',
   'Assumption 1: the drug is eliminated by first-order kinetics. First order is also called linear pharmacokinetics.',
+  'First order is needed because a first-order process removes a fixed fraction of whatever is present per hour, so the drug from one dose is removed at the same fractional rate whether or not another dose is in the body, and the doses can be summed. A zero-order process removes a fixed amount per hour from all the drug present together, so its curves would not add.',
   'Assumption 2: the pharmacokinetics after one dose are not altered by later doses, so k, the half-life and clearance stay constant from dose to dose.',
-  'Under those two assumptions each dose follows its own C0e^(-kt) curve, and the concentration at any time is the sum of what is left of every dose given so far.',
-  'After a dose at steady state the concentration falls with the same k as after the first dose. It starts higher, at Cmax∞, because drug from the earlier doses is still in the body.']};
+  'Under those two assumptions each dose follows its own C0e^(-kt) curve. After a dose at steady state the concentration falls with the same k as after the first dose; it starts higher, at Cmax∞, because drug from the earlier doses is still in the body.',
+  'Accumulation is the result and superposition is the method: the peaks climb because each dose is added to what is left of the earlier ones, and superposition is the rule that allows those leftovers to be added.',
+  'Chapter 9, Table 9-1, does the sum column by column: the residual concentration of each earlier dose plus the new dose gives the total at each hour.']};
 
 const M6_EQ = {h:'The steady-state equations for repeated IV bolus doses', list:[
-  'Cmax∞ = {{frac:C0|1 - e^(-kτ)}}: the first-dose peak, C0 = {{frac:D0|VD}}, divided by (1 - e^(-kτ)).',
-  'Cmin∞ = {{frac:C0e^(-kτ)|1 - e^(-kτ)}}, which is Cmax∞ × e^(-kτ): the steady-state peak after one full interval of first-order decline.',
-  'Cavg∞ = {{frac:FD0|VD kτ}} = {{frac:FD0|ClT τ}}. F = 1 for an intravenous (IV) dose.',
+  'Cmax∞ = {{frac:C0|1 - e^(-kτ)}}: the first-dose peak, C0 = {{frac:D0|VD}}, divided by (1 - e^(-kτ)). It comes from the balance at the plateau: the peak P is the new dose, C0, plus what is left of the previous peak, P × e^(-kτ), so P = C0 + Pe^(-kτ) and P = {{frac:C0|1 - e^(-kτ)}}.',
+  'Cmin∞ = {{frac:C0e^(-kτ)|1 - e^(-kτ)}}, which is Cmax∞ × e^(-kτ): the steady-state peak after one full interval of first-order decline, because the trough is the level the moment before the next dose.',
+  'Cavg∞ = {{frac:FD0|VD kτ}} = {{frac:FD0|ClT τ}}. F = 1 for an intravenous (IV) dose. At steady state the amount eliminated in one interval equals the amount absorbed, FD0, and clearance (ClT, the volume of plasma cleared of drug per hour) times τ is the volume cleared in that interval, so the average is that amount over that volume.',
+  'k is the elimination rate constant, the fraction of the drug removed per hour; k = {{frac:0.693|t½}}, where 0.693 is ln 2, because the half-life is the time for the level to fall by half.',
   'τ (tau) is the dosing interval in hours, the time between doses. TID, three times a day, is τ = 8 hr.',
-  'The amount forms, Dmax∞, Dmin∞ and Davg∞, carry D0 where the concentration forms carry C0. Dividing an amount by VD gives the concentration.']};
+  'The amount forms, Dmax∞, Dmin∞ and Davg∞, carry D0 where the concentration forms carry C0. Dividing an amount by VD gives the concentration.',
+  'Her slides "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections" and "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections" set the three equations side by side; Chapter 9 derives them in its section "Repetitive Intravenous Injections".']};
 
 const M6_ACCFAC = {h:'The accumulation factor', list:[
-  'The factor {{frac:1|1 - e^(-kτ)}} is the accumulation factor: the steady-state peak divided by the first-dose peak.',
-  'It holds only k and τ, so it does not depend on the dose.',
-  'A shorter interval makes e^(-kτ) larger and the factor larger, which means more accumulation.'],
+  'The factor {{frac:1|1 - e^(-kτ)}} is the accumulation factor: the steady-state peak divided by the first-dose peak. Chapter 9 calls it the accumulation index R.',
+  'e^(-kτ) is the fraction of one dose still in the body at the end of an interval, and 1 - e^(-kτ) is the fraction eliminated during it. The factor is the reciprocal of the fraction eliminated because, at the plateau, the dose going in replaces exactly the fraction eliminated from the whole amount present, so the amount present is the dose divided by that fraction.',
+  'It holds only k and τ, so it does not depend on the dose: the dose scales every level on the curve and leaves the ratio unchanged.',
+  'A shorter interval makes e^(-kτ) larger and the factor larger, which means more accumulation. With τ equal to one half-life, e^(-kτ) = 0.5 and the factor is 2; with τ equal to two half-lives, as in her Example 1, e^(-kτ) = 0.25 and the factor is 1.33; with τ many half-lives long the factor is close to 1 and almost nothing accumulates.'],
   table:{head:['', 'First dose', 'At steady state'],
   rows:[['Drug already in the body when a dose is given', 'None', 'The steady-state trough, Cmin∞, left from earlier doses'],
         ['Peak', 'C0 = D0/VD', 'Cmax∞ = C0 × {{frac:1|1 - e^(-kτ)}}'],
@@ -65,13 +74,14 @@ const M6_FIG = {h:'Her Example 1 regimen drawn out', fig:'md_bolus', list:[
 const M6_CH = {h:'What the chapter adds', list:[
   'The accumulation index is R = Cmax∞ divided by the first-dose Cmax, which equals {{frac:1|1 - e^(-kτ)}}. It depends on k and τ and not on the dose.',
   'Time to steady state depends on the elimination half-life only. It does not depend on the dose, the dosing interval or the number of doses; changing the dose or the interval changes the plateau level, not how long it takes to reach it.',
-  'Fractions of steady state: 90 per cent at 3.3 half-lives, 95 per cent at 4.32 and 99 per cent at 6.6.',
+  'Fractions of steady state: 90 per cent at 3.3 half-lives, 95 per cent at 4.32 and 99 per cent at 6.6. Each comes from 1 - e^(-kt) set equal to the fraction and solved for t: 0.9 leaves e^(-kt) = 0.1, so kt = ln 10 = 2.303, and dividing by k = {{frac:0.693|t½}} gives 3.3 half-lives; 0.95 leaves e^(-kt) = 0.05, kt = 3, which is 4.32 half-lives.',
   'If each dose is given after the previous dose has been eliminated, there is no accumulation.',
-  'Superposition fails when the pharmacokinetics change with repeated doses: a change in the patient\'s pathophysiology, saturation of a drug carrier system, enzyme induction or enzyme inhibition.',
-  'Drugs with nonlinear pharmacokinetics are not predictable by superposition.']};
+  'Superposition fails when the pharmacokinetics change with repeated doses, so that k or clearance differs from one dose to the next: a change in the patient\'s pathophysiology, saturation of a drug carrier system, enzyme induction or enzyme inhibition.',
+  'Drugs with nonlinear pharmacokinetics, where elimination is no longer first order, are not predictable by superposition. These points are in the section "Drug Accumulation" of Chapter 9.']};
 
 const M6_NDOSE = {h:'Before steady state, and after the last dose', list:[
   'After n doses: Cp = {{frac:D0|VD}} ({{frac:1 - e^(-nkτ)|1 - e^(-kτ)}}) e^(-kt). n is the dose number just given; t is the time since that dose.',
+  'The bracket is the build-up after n doses. After two doses in her Example 1 it is {{frac:1 - 0.0625|1 - 0.25}} = 1.25, which is 1 + 0.25: the new dose plus the quarter of the first dose still present. After many doses it is the accumulation factor, 1.33 for that regimen.',
   'As n grows, e^(-nkτ) shrinks towards 0, the top of the bracket becomes 1 and the equation becomes the steady-state one: Cp = {{frac:D0|VD}} ({{frac:1|1 - e^(-kτ)}}) e^(-kt) = Cmax∞e^(-kt).',
   'After the last dose at steady state no more drug goes in, so the level falls from Cmax∞ by first-order elimination: C = Cmax∞e^(-kt).']};
 
@@ -196,6 +206,9 @@ const Q_MODULE6 = [
    why:'Choosing this carries a Module 5 term into the wrong place. Flip-flop describes an oral curve whose tail falls with ka because absorption is slower than elimination. It is about which of two first-order constants shows in the tail, not a name for first order itself.'}],
  teach:[
   {t:'Linear and first order name the same behaviour: a constant fraction removed per unit time, a constant half-life and a constant clearance. That is the first assumption of superposition.'},
+  {h:'Why the word linear', list:[
+    'The concentration and the area under the curve (AUC) are proportional to the dose: doubling the dose doubles C0 and doubles the AUC, so a plot of either against the dose is a straight line. Her Module 5 slide "Changing Dose" marks the AUC as directly proportional to the dose, with tmax unmoved.',
+    'Nonlinear pharmacokinetics is the case where that proportionality fails, for example when an enzyme or a carrier is saturated; Chapter 9 notes that such drugs are not predictable by superposition.']},
   M6_SUP],
  teachImg:'slide_6RepetitiveIVBolus_p4',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition"; 09.23 lecture',
@@ -259,7 +272,8 @@ const Q_MODULE6 = [
   {h:'Why it is not the midpoint', list:[
     'The average is an area divided by a time. The curve falls exponentially, quickly at first and then slowly, so it spends more of each interval at the lower concentrations.',
     'That makes the average lower than {{frac:Cmax∞ + Cmin∞|2}}.',
-    'Chapter 9 adds that the area over one interval at steady state equals the area from 0 to ∞ after a single dose.']},
+    'Chapter 9 adds that the area over one interval at steady state equals the area from 0 to ∞ after a single dose. Both areas belong to exactly one dose being eliminated: clearance is the dose over the AUC (Module 4 slide "Clearance"), and at steady state one dose is eliminated in each interval, so the interval holds the area of one dose.',
+    'Dividing that area by τ gives Cavg∞ = {{frac:FD0|ClT τ}}, the average without any exponential in it.']},
   M6_FIG],
  teachImg:'slide_6RepetitiveIVBolus_p4',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition"; 09.23 lecture',
@@ -342,7 +356,9 @@ const Q_MODULE6 = [
   {t:'One half-life after each dose',
    why:'Choosing this confuses the half-life with the dosing interval. One half-life after a dose the level is at half its peak, and it keeps falling. The trough depends on τ, not on the half-life alone.'}],
  teach:[
-  {t:'For an intravenous (IV) bolus the peak is at the time of the dose and the trough is at the end of the interval. The steady-state trough is therefore the steady-state peak after one interval of decline: Cmin∞ = Cmax∞e^(-kτ).'},
+  {t:'For an intravenous (IV) bolus the peak is at the time of the dose and the trough is at the end of the interval. The steady-state trough is therefore the steady-state peak after one interval of decline: Cmin∞ = Cmax∞e^(-kτ).', list:[
+    'For an oral dose the peak comes later, at tmax, because the drug has to be absorbed first.',
+    'The oral trough is still at the end of the interval, which is why the oral Cmin∞ also carries e^(-kτ) (6a slide "Peak, Trough and Average Plasma Concentrations at Steady State").']},
   M6_EQ, M6_FIG],
  teachImg:'slide_6RepetitiveIVBolus_p7',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',
@@ -393,7 +409,7 @@ const Q_MODULE6 = [
   {t:'e^(-kτ)',
    why:'Choosing this confuses F with the fraction remaining. e^(-kτ) is the fraction of a dose left after one interval, which appears in the minimum equations. F is the fraction absorbed, which for an IV dose is all of it.'}],
  teach:[
-  {t:'F is bioavailability from Module 5. It is in the average equation so that one equation serves both intravenous (IV) and oral repeated dosing.'},
+  {t:'F is bioavailability from Module 5: the fraction of the dose that reaches the plasma, measured as {{frac:AUCoral|AUCIV}} (Introduction slide "The Concept of Area Under The Curve (AUC)"). It multiplies the dose because only the absorbed part of a dose is eliminated and averaged, and it is in the average equation so that one equation serves both intravenous (IV) and oral repeated dosing.'},
   M6_EQ],
  teachImg:'slide_6RepetitiveIVBolus_p8',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',
@@ -953,6 +969,13 @@ const Q_MODULE6 = [
  check:{t:'The renal share of total clearance, fe = 0.656, cannot name the mechanism: a drug two-thirds renal could be secreted or reabsorbed. Only ClR against about 120 mL/min decides, and 34.72 is well below it.'},
  teach:[
   {t:'Comparing renal clearance with the glomerular filtration rate of 120 mL/min, from Module 4, gives the mechanism: about equal means filtration only, above means secretion as well, below means reabsorption.'},
+  {h:'Why the comparison works', list:[
+    'Glomerular filtration is the passive passage of drug from the blood into the kidney tubule across the glomerulus. Its rate, the glomerular filtration rate (GFR), averages 120 mL/min in a healthy adult, and 120 to 130 mL/min is read as normal when it is estimated by creatinine clearance (slides "Renal Excretion" and "Creatinine Clearance/GFR").',
+    'Renal clearance is the volume of plasma cleared of drug by the kidney per minute. Filtration alone would clear plasma at the filtration rate, so a drug that is only filtered has a renal clearance of about 120 mL/min.',
+    'Tubular reabsorption moves filtered drug from the tubule back into the blood. That drug was filtered but not removed, so the plasma cleared per minute is less than the plasma filtered, and renal clearance falls below the GFR (slide "Tubular Reabsorption").',
+    'Active tubular secretion carries drug from the blood into the tubule in addition to filtration, so more plasma is cleared per minute than filtration alone could clear, and renal clearance rises above the GFR (slide "Active Secretion").',
+    'Drug in the urine is the net result of filtration, secretion and reabsorption (slide "Renal Clearance"), so the comparison with the GFR, and not the renal share of total clearance, says which process is at work.',
+    'The clearances in the stem are per 70 kg and the 120 mL/min is an adult average, so they are compared as they stand; scaled to the 65-kg patient, 34.72 × 65 ÷ 70 = 32.2 mL/min, still far below 120. A Module 4 renal-mechanism part closing a Module 6 practice set is how she asked it.']},
   {h:'Renal clearance against the filtration rate', table:{head:['Renal clearance', 'Mechanism'], rows:[['About 120 mL/min', 'Filtration only'], ['Above 120 mL/min', 'Filtration and active secretion'], ['Below 120 mL/min', 'Filtration and reabsorption']]}}],
  cite:'Multiple-IV-Bolus-Practice-1---Solutions.pdf, question 1(i)',
  quote:'ClR = 34.72 mL/min < GFR 120 mL/min → glomerular filtration with tubular reabsorption'},

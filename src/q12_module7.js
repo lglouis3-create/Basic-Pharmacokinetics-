@@ -43,8 +43,8 @@ const B_FABS = {h:'The absolute bioavailability equations', list:[
   'AUCIV is the denominator because the IV (intravenous) dose is what the oral product is compared with. For an IV dose F is 1.',
   'The dose ratio is the other way up from the AUC ratio: the IV dose on top, the oral dose underneath. A larger oral dose would produce a larger AUC on its own, and the dose ratio removes that.',
   'When the oral and IV doses are the same the dose ratio is 1, and F is the AUC ratio alone.',
-  'DIV = Cl × AUCIV, where Cl is clearance. Rearranged, AUCIV = {{frac:DIV|Cl}}: an IV AUC can be found from the dose and the clearance without any plasma data.',
-  'Fabs × Dpo = Cl × AUCpo, so F = {{frac:Cl × AUCpo|Dpo}} gives the same answer from the oral AUC and the clearance.',
+  'DIV = Cl × AUCIV, where Cl is clearance, the volume of plasma cleared of drug per hour. It is the Module 4 line Cl = {{frac:D0|AUC}} rearranged: an IV dose is eliminated in full, and the area it leaves is the dose over the clearance. So AUCIV = {{frac:DIV|Cl}}: an IV AUC can be found from the dose and the clearance without any plasma data.',
+  'Fabs × Dpo = Cl × AUCpo is the same line written for the oral dose, where only the absorbed amount, F × Dpo, is eliminated; the Module 4 slide "Clearance" writes it as Cl = {{frac:FD0|AUC}} with F named the bioavailability factor. So F = {{frac:Cl × AUCpo|Dpo}} gives the same answer from the oral AUC and the clearance.',
   'All three are on the equation sheet. F is a ratio of two AUCs and two doses, so every unit cancels: F is dimensionless.']};
 
 const B_IVAUC = {h:'Finding an IV AUC without plasma data', list:[
@@ -80,13 +80,13 @@ const B_BE_FIG = {h:'Reading the bioequivalence example', fig:'slide_7a---Bioava
   'A product whose curve sits close to A in both its peak time and its area, neither differing significantly, would be considered bioequivalent to A. The two curves do not have to be identical.']};
 
 const B_FACT = {h:'Factors influencing bioavailability', list:[
-  'Physicochemical properties of the drug and formulation.',
+  'Physicochemical properties of the drug and formulation: the solubility, polymorphic form and particle size of the active ingredient, and the excipients and manufacture of the product that control its release (Introduction slide "Biopharmaceutic Considerations in Drug Product Design").',
   'Drug stability and pH effects.',
-  'Pre-systemic and first-pass metabolism.',
-  'Prodrugs.',
+  'Pre-systemic and first-pass metabolism: metabolism of an oral dose before it reaches the general circulation, mainly in the liver, which the blood from the gut passes through first. Drug metabolised there never becomes available, so F falls (Introduction slide "Key Terms").',
+  'Prodrugs: a drug given in an inactive form that the body has to convert to the active drug.',
   'Food effects.',
   'Effects of drug–drug interactions.',
-  'Efflux transporters.',
+  'Efflux transporters: membrane proteins that pump absorbed drug back out of the cell.',
   'Age: the body changes with age and its processes slow down.',
   'Disease state.'],
   after:'The first three are the ones that come to mind most often. Drugs and drug products can show low bioavailability for a variety of reasons, including formulation factors and the first-pass effect.'};
@@ -133,6 +133,8 @@ const Q_MODULE7 = [
   {h:'The idea', list:[
     'The textbook definition is rate and extent, although bioavailability is usually thought of as the extent.',
     'Extent: AUC. Rate: tmax.',
+    'AUC measures extent because, with clearance constant, AUC = {{frac:F × D0|Cl}} (Module 4 slide "Clearance"): the area is proportional to the amount of drug that reached the circulation.',
+    'tmax measures rate because tmax = {{frac:ln(ka/k)|ka − k}} holds the absorption rate constant ka: a faster absorption gives an earlier peak, and the dose does not move it (Module 5 slide "Effect of ka and k on Cmax, tmax, and AUC").',
     'Absolute and relative bioavailability are calculated from AUCs, so they compare extent; bioequivalence asks about the rate as well.']},
   B_TERMS,
   B_CMP],

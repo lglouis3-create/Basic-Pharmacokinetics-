@@ -451,6 +451,20 @@ with sync_playwright() as p:
     ok('the chain reaches the comparison with GFR and names why fe alone cannot decide', '28.3 mL/min against GFR' in txt and 'fe = 0.70 alone cannot name the mechanism' in txt)
     pg.evaluate("DB.answers.pop(); save(); Q = null; show('topics')"); pg.wait_for_timeout(100)
 
+    print('\n=== Explain more lands on the exact line ===')
+    pg.evaluate("Q = null; EQ = null; SU = null; RET = []; show('topics')")
+    terms = pg.evaluate("spotTerms(byId('m4-rm-5'))")
+    ok('a question yields the words that name it: ' + ' '.join(terms)[:60], len(terms) >= 2 and any(w.startswith(('secret', 'filt', 'reabs')) for w in terms))
+    links = pg.evaluate("linksFor(byId('m4-rm-5')).map(l => l[0] + '|' + l[2])")
+    ok('its links name the guide objective in full and a Tell apart section: ' + '; '.join(links)[:120], any(l.startswith('guide|Guide: Module 4, obj.') for l in links) and any(l.startswith('tell|Tell apart:') for l in links))
+    pg.evaluate("(() => { const l = linksFor(byId('m4-rm-5')).find(x => x[0] === 'ref'); jump(l[0], l[1], spotTerms(byId('m4-rm-5'))); })()"); pg.wait_for_timeout(300)
+    spot = pg.evaluate("(() => { const s = document.querySelector('#v-ref .spot'); if(!s) return null; const r = s.getBoundingClientRect(); return {text: s.textContent.trim().slice(0, 120), top: r.top, inView: r.top > 60 && r.top < window.innerHeight}; })()")
+    ok('the Reference jump marks the one line about the mechanism and scrolls it into view: ' + (spot['text'][:70] if spot else 'none'), bool(spot) and spot['inView'] and ('secretion' in spot['text'].lower() or 'reabsor' in spot['text'].lower() or 'filtration' in spot['text'].lower()))
+    pg.evaluate("RET = []; backBtn(); document.querySelectorAll('.spot').forEach(x => x.classList.remove('spot'))")
+    cover = pg.evaluate("""() => { let n = 0, hit = 0; for(const q of QUESTIONS){ for(const [v, a] of linksFor(q)){ n++; show(v); if(v === 'diag') DG_MOD = 'all'; const t = document.getElementById(a); if(t && spotlight(t, spotTerms(q))) hit++; } } document.querySelectorAll('.spot').forEach(x => x.classList.remove('spot')); return [hit, n]; }""")
+    ok('most jumps across the bank land on a line, not just a heading (%d of %d)' % (cover[0], cover[1]), cover[0] >= 0.65 * cover[1])
+    pg.evaluate("show('topics')"); pg.wait_for_timeout(100)
+
     print('\n=== Weak spots: repairs per kind of miss, Reference anchors ===')
     pg.evaluate("Q = null; EQ = null; SU = null")
     land = pg.evaluate("""(() => { const q = QUESTIONS.find(q => q.module === 2 && qType(q) === 'numeric');

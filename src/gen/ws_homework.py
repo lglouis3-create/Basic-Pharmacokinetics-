@@ -19,9 +19,11 @@ f4 = lambda x: f'{x:.4f}'
 NOTE = 'Her homework wording with different numbers, so this is not the graded answer.'
 
 T_ORDER = [{'h': 'Deciding the order from a table', 'list': [
-    'Zero order: the same amount is lost in each equal time step, so C against t is a straight line.',
-    'First order: the same fraction is lost in each equal time step, so ln C against t is a straight line.',
-    'Check equal time steps: constant differences mean zero order; constant ratios mean first order.']}]
+    'Zero order: the same amount is lost in each equal time step, because the rate does not depend on how much is present, so C against t is a straight line on ordinary axes; k0 is an amount or concentration per unit time.',
+    'First order: the same fraction is lost in each equal time step, because the rate is proportional to the amount remaining, so ln C against t is a straight line; k is a fraction per unit time, in reciprocal time.',
+    'Check equal time steps: constant differences mean zero order; constant ratios mean first order. A first-order table also shows a constant half-life, while a zero-order half-life, {{frac:A0|2k0}}, depends on the starting amount.',
+    'How she tests it: her data-table stems do not state the order. Her Homework 1 key reads it from the plot (ln C against t a straight line, so first order), and her Math Review 3 keys zero order as the drug decreasing at a constant amount per unit time.',
+    'Chapter 2, "Determination of Order": plot the data on a rectangular graph first; a straight line means zero order, and a curve that straightens on a semilog graph means first order.']}]
 T_K1 = [{'h': 'First order from two points', 'list': [
     'k = {{frac:ln(C1/C2)|t2 − t1}}, in reciprocal time.',
     't½ = {{frac:0.693|k}}.',
@@ -60,10 +62,12 @@ T_CRCL = [{'h': 'Creatinine clearance', 'list': [
     'CrCl = {{frac:(140 − age)(IBW)|72 × SCr}}, × 0.85 if female; reported in mL/min.']}]
 T_CL = [{'h': 'Clearance after an IV bolus', 'list': [
     'Dose and VD scale with weight: mg/kg × kg, L/kg × kg.',
-    'C = {{frac:D0|VD}} e^(−kt); AUC = {{frac:D0|ClT}} = {{frac:D0|kVD}}.',
-    'fe = {{frac:amount unchanged in urine|dose}}; ke = fe × k; ClR = fe × ClT; ClH = ClT − ClR.',
-    'Compare ClR in mL/min with a GFR of about 120 mL/min to name the renal mechanism.',
-    'Same AUC at a new clearance: new dose = AUC × new Cl.']}]
+    'C = {{frac:D0|VD}} e^(−kt); AUC = {{frac:D0|ClT}} = {{frac:D0|kVD}}, because the amount removed over all time, ClT × AUC, equals the dose given.',
+    'fe = {{frac:amount unchanged in urine|dose}}, no units; ke = fe × k; ClR = fe × ClT; ClH = ClT − ClR, because the kidney did the share fe of the elimination and clearances by separate routes add.',
+    'Compare ClR in mL/min with the GFR (glomerular filtration rate, the volume of plasma the glomeruli filter per minute, about 120 mL/min in a healthy adult): equal means filtration only; above means active secretion adds drug to the urine beyond what was filtered; below means some filtered drug is reabsorbed back into the blood.',
+    'fe says how much of the elimination is renal, not how the kidney does it; only ClR set against the GFR names the mechanism.',
+    'Same AUC at a new clearance: new dose = AUC × new Cl. With VD unchanged, t½ = {{frac:0.693 VD|Cl}}, so a lower clearance lengthens the half-life.',
+    'Her slides "Renal Excretion", "Active Secretion" and "Tubular Reabsorption" state the three cases; Chapter 15, "Filtration Only" and Table 15-2, compares a drug\'s renal clearance with inulin, which is filtered only.']}]
 T_ORAL = [{'h': 'One oral dose', 'list': [
     'k = 0.693/t½; ka = 0.693/t½ absorption, with the absorption half-life in hours.',
     'tmax = {{frac:ln(ka/k)|ka − k}}: it does not depend on the dose.',
@@ -87,7 +91,7 @@ S = ('1. A pharmacist dissolved 300 milligrams of a new antibiotic drug into a v
      f'Time (hr) | Drug (mcg/mL)\n{tab}\n\n')
 kk = ln(cs[1] / cs[6]) / 15; th = 0.693 / kk; c0 = cs[1] * e(kk * 1); vol = 300000 / c0
 p = [mc('hw1-1a', stem=S + 'a. Is the decomposition of this antibiotic a first-order or a zero-order process?', **M1, sub='decide', skill='order', concept='order-from-table',
-        options=[('First order', True, f'Over each 4-hour step from 4 to 16 hr the concentration falls by the same fraction ({f2(cs[3]/cs[4])}, {f2(cs[4]/cs[5])}, {f2(cs[5]/cs[6])}), so ln C against time is a straight line.'),
+        options=[('First order', True, f'Over each 4-hour step from 4 to 16 hr the concentration falls by the same fraction ({f2(cs[3]/cs[4])}, {f2(cs[4]/cs[5])}, {f2(cs[5]/cs[6])}), so ln C against time is a straight line. A constant fraction lost per equal time is first order, because the rate is proportional to the amount remaining.'),
                  ('Zero order', False, f'Picking this reads a falling concentration as a constant loss per hour. Zero order needs equal drops in equal times; from 4 to 8 hr the concentration falls {f1(cs[3]-cs[4])} mcg/mL but from 12 to 16 hr only {f1(cs[5]-cs[6])} mcg/mL. The drops shrink while the ratios stay constant, which is first order.'),
                  ('Neither: it needs a third plot', False, 'This answer treats the two orders as needing a third test to separate them. Two plots settle it: C against t curves downward, because the drop per step shrinks, and ln C against t is a straight line, because the fraction lost per step is constant; that straight line is the first-order signature.')],
         teach=T_ORDER, note=NOTE, cite=f'{H(1)}, problem 1a (her wording; numbers changed)'),
@@ -134,7 +138,7 @@ am = [A0 - k0 * t for t in ts2]
 tab2 = '\n'.join(f'{t:g} | {a:g}' for t, a in zip(ts2, am))
 S2 = f'2. Below is the decrease in the amount of drug as a function of time.\n\nTime (hr) | Drug A (mg)\n{tab2}\n\n'
 p = [mc('hw1-2a', stem=S2 + 'a. Does the decrease in the amount of drug A appear to be a zero-order or a first-order process?', **M1, sub='decide', skill='order', concept='order-from-table',
-        options=[('Zero order', True, f'Each 3-hour step from 3 to 12 hr loses the same {3*k0} mg, so the amount against time is a straight line on ordinary axes.'),
+        options=[('Zero order', True, f'Each 3-hour step from 3 to 12 hr loses the same {3*k0} mg, so the amount against time is a straight line on ordinary axes. A constant amount lost per equal time is zero order, because the rate does not depend on how much drug is left.'),
                  ('First order', False, f'Picking this reads any decline as first order. First order loses the same fraction per equal step, so successive ratios would be constant; from 3 to 6 hr the ratio is {f3(am[3]/am[4])}, from 9 to 12 hr {f3(am[5]/am[6])}. The fraction lost grows while the amount lost, {3*k0} mg per 3 hours, does not: zero order.'),
                  ('Cannot tell without logarithms', False, f'This answer treats the logarithmic plot as the only test of order. Equal drops in equal times, {3*k0} mg every 3 hours from 3 to 12 hr, already show that amount against time is a straight line on ordinary axes, the zero-order signature; a log plot would curve and add nothing.')],
         teach=T_ORDER, note=NOTE, cite=f'{H(1)}, problem 2a (her wording; numbers changed)'),
@@ -422,7 +426,7 @@ p = [num('hw4-2a', stem=S + 'a. What is the expected plasma concentration 10 hou
          check=dict(t=f'Seven-tenths of the drug leaves by the kidney, so renal clearance is seven-tenths of the total {f4(Cl4)} L/hr: {f3(clr4)} L/hr, below the total; in mL/min that is {f1(clr4m)}.', lo=0, hi=round(Cl4, 4)),
          teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2d (her wording; numbers changed)'),
      mc('hw4-2e', stem=S + SU + 'e. What is the probable mechanism for renal clearance of this drug?', **M4, sub='renalmech', skill='apply', concept='mechanism-from-clr',
-        options=[('Filtration with partial reabsorption', True, f'Renal clearance is {f1(clr4m)} mL/min, below a GFR of about 120 mL/min, so some filtered drug is returned to the blood.'),
+        options=[('Filtration with partial reabsorption', True, f'Renal clearance is {f1(clr4m)} mL/min, below the GFR, the glomerular filtration rate of about 120 mL/min. Filtration alone would clear plasma at that rate, so a smaller renal clearance means some filtered drug moved back from the tubule into the blood: filtration with partial reabsorption.'),
                  ('Filtration with active secretion', False, f'Picking this reads a drug that is mostly renal (fe = {f2(fe4)}) as one the kidney secretes. Active secretion adds drug to the urine on top of filtration, so renal clearance would exceed the GFR of about 120 mL/min; here ClR is {f1(clr4m)} mL/min, far below it, so drug is being taken back, not added.'),
                  ('Filtration only', False, f'This answer takes filtration as the whole mechanism although renal clearance is below GFR. Filtration alone clears unbound drug at the glomerular filtration rate, about 120 mL/min; a renal clearance of {f1(clr4m)} mL/min is far less, so most of the filtered drug returns to the blood by reabsorption.'),
                  ('Active secretion only', False, f'Picking this treats secretion as a route that can replace filtration. Every unbound drug in plasma is filtered at the glomerulus, so filtration is always present, and secretion added to it would raise renal clearance above the GFR of about 120 mL/min; {f1(clr4m)} mL/min is below GFR, which only reabsorption produces.')],

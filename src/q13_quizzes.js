@@ -35,6 +35,9 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'VD (apparent volume of distribution) = {{frac:D0|C0}}: the volume that would hold the whole dose at the concentration measured in plasma.',
    'The word hypothetical is in the definition because the number need not match any anatomical space.',
+   'A large VD means the drug is more concentrated in the tissues and less in the blood; a drug highly bound to plasma proteins, or held in the vessels, has a higher Cp and a smaller VD (second slide "Volume of Distribution").',
+   'VD given as a percentage of body weight is read as litres per kilogram, with 1 L taken as the weight of 1 kg: 25 per cent of body weight is 0.25 L/kg.',
+   'VD is a volume, in litres; clearance is a volume per time, in L/hr. VD says how widely the drug spreads, clearance how fast it is removed, and k = {{frac:Cl|VD}} links them (slide "Clearance, Elimination Half-Life, and Volume of Distribution").',
    'Her graded item used the slide definition as the key and built two distractors from the slide\'s own phrase "proportionality constant".']}],
  cite:'Canvas Quiz 2 (Modules 2–3), question 1; 2IVBolusAdministration.pdf, slide "Volume of Distribution"'},
 
@@ -98,7 +101,9 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'The time to steady state is set by the half-life alone: about five half-lives, whatever the rate.',
    'When that wait is too long, a loading dose DL = Css × VD supplies the steady-state amount at once.',
-   'The infusion rate is unchanged by the loading dose; it still sets the level that is held.']}],
+   'DL = Css × VD because Cp = {{frac:DB|VD}}: the amount in the body at the plateau is the target concentration times the volume it spreads through. The same dose comes from DL = {{frac:R|k}}, since Css = {{frac:R|kVD}}; her In-Class IV Infusions key shows both routes giving 320 mg (slide "IV Bolus Loading Dose and Continuous IV Infusion").',
+   'With the right loading dose the level stays flat at Css: the bolus part falls as C0e^(−kt) while the infusion part rises as Css(1 − e^(−kt)), and the two add to Css at every time. Her In-Class IV Infusions question 2: 13.2 + 6.8 = 20 mg/L at 3 hours.',
+   'The infusion rate is unchanged by the loading dose; it still sets the level that is held, Css = {{frac:R|Cl}}. A 500 mg or a 750 mg loading dose with the same 75 mg/hr infusion gives the same 36.1 mg/L at steady state (In-Class IV Infusions question 5).']}],
  cite:'Canvas Quiz 2 (Modules 2–3), question 4; 3IntravenousInfusions.pdf, slide "IV Bolus Loading Dose and Continuous IV Infusion"'},
 
 {id:'cq2-5', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
@@ -140,6 +145,8 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'The infusion rate sets the level: Css = {{frac:R|Cl}}.',
    'The half-life sets the time: about five half-lives to steady state, independent of the rate.',
+   'The fraction of Css reached after a time t is 1 − e^(−kt), which holds k and t only: 50 per cent after one half-life, 75 after two, 87.5 after three, 90 at 3.3 half-lives and 95 at 4.32 (slide "Drug Concentration Prior to Reaching Steady-State"; Chapter 6, Table 6-1). R is not in it, so a faster infusion climbs to a higher plateau over the same time.',
+   'Rate in equals rate out at the plateau: R = Cl × Css. Clearance belongs to the patient and the drug, so the only quantity free to balance a larger R is Css.',
    'The same question was her poll on 2 September and then a graded item.']}],
  cite:'Canvas Quiz 2 (Modules 2–3), question 6; 3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State"'},
 
@@ -210,7 +217,9 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'Elimination = excretion + biotransformation. Both remove the parent drug irreversibly; only biotransformation changes the molecule.',
-   'Distribution and absorption move unchanged drug and are not elimination.']}],
+   'Distribution and absorption move unchanged drug and are not elimination.',
+   'The kidney and the liver are the two major elimination organs, the kidney by excretion and the liver by metabolism (slides "Drug Elimination" and "Hepatic (Metabolic) Clearance"). Biotransformation of an oral dose before it reaches the general circulation is the first-pass effect, which lowers bioavailability (Introduction slide "Key Terms").',
+   'The definitions on her slide are the ones she quotes in a stem and asks the term for; here the words "chemically converted" settle it.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 1; 4---Clearance-and-Elimination.pdf slide 3'},
 
 {id:'cq3-2', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
@@ -227,7 +236,9 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'k = {{frac:Cl|VD}} and t½ = {{frac:0.693|k}}, so t½ = {{frac:0.693 × VD|Cl}}.',
-   'Clearance up, half-life down; clearance down, half-life up, as long as VD holds.',
+   'Clearance up, half-life down; clearance down, half-life up, as long as VD holds. The half-life is the time to remove half of the drug and clearance is how fast drug is removed, so faster removal takes less time.',
+   'Cl = kVD is the line she expects without the sheet (slide "Clearance, Elimination Half-Life, and Volume of Distribution"), and 0.693 is ln 2, because the half-life is the time for the level to fall to half.',
+   'Her Module 4 example of the direction: an antibiotic with VD 25 L has a clearance of 750 mL/min in a normal adult and 150 mL/min in partial renal failure, so its half-life is five times longer in the renal-failure patient; renal disease usually lowers clearance and lengthens the half-life.',
    'Read the direction the stem gives for clearance before deciding; do not substitute the direction renal disease usually takes.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 2; 4---Clearance-and-Elimination.pdf slide 21'},
 
@@ -246,7 +257,8 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'tmax is set by ka and k alone. Cmax is set by dose, F, VD and the two rate constants.',
-   'Changing the dose moves Cmax and AUC in proportion and leaves tmax unchanged.',
+   'Changing the dose moves Cmax and AUC in proportion and leaves tmax unchanged, because the dose multiplies both the absorption rate and the elimination rate by the same amount, so the two rates still cross at the same moment.',
+   'Her Module 5 slide "Changing Dose" draws several doses on one plot: tmax does not move and the AUC rises in direct proportion to the dose. The same point was her opening poll for multiple oral doses: increasing an oral dose gives no change in tmax.',
    'She pairs this with the Cmax item below: at the peak, absorption rate equals elimination rate.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 3; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Cp vs. Time for a Single Oral Dose"'},
 
@@ -266,6 +278,8 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Before tmax, absorption outpaces elimination and the curve rises. After tmax, elimination outpaces absorption and the curve falls.',
    'At tmax the two rates are equal and the curve is flat for an instant.',
+   'Why they are equal there: the amount in the body changes at the rate in minus the rate out, dDB/dt = rate of absorption − rate of elimination (slide "First-Order Absorption Model"). At the peak the concentration is momentarily not changing, so that difference is zero and the two rates match.',
+   'Both rates are first order: absorption at ka times the amount still at the absorption site, elimination at k times the amount in the body. The first falls as the site empties and the second rises as the body fills, which is why they cross once, at tmax.',
    'Depletion of the absorption site comes later and is not what defines the peak.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 4; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
@@ -383,7 +397,8 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'Her drawing on the single-dose curve adds two lines, the minimum toxic concentration (MTC) above and the minimum effective concentration (MEC) below: "our goal is that we want to stay in between these two lines."',
-   'A single dose stays between them only for a while. Multiple doses, or an infusion, hold the level there.',
+   'A single dose stays between them only for a while, because first-order elimination carries the level back below the MEC. Multiple doses, or an infusion, replace what is eliminated and hold the level there.',
+   'Dose and interval are then chosen so that the steady-state peak stays below the MTC and the trough above the MEC (6a slide "Consider Peak and Trough").',
    'The textbook states the same purpose: multiple-dosage or infusion regimens keep plasma levels within the therapeutic window.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 1; transcript, the MTC and MEC lines drawn on the single-dose curve (TRANSCRIPT_CUES.md); Shargel 7e Chapter 9, printout p. 1'},
 
@@ -429,6 +444,7 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Her rule: the only things a regimen can change are the size of the dose and the dosing interval; clearance and half-life are not choices.',
    'Slide "Altering Dosing Interval": decreasing the interval increases steady-state concentrations and decreases the peak-to-trough fluctuation, at the cost of compliance.',
+   'Why the interval does it: Cavg∞ = {{frac:F D0|Cl × τ}} has τ in the denominator, so a shorter interval raises the average; and a shorter interval leaves more of each dose in the body when the next arrives, e^(−kτ) larger, so the accumulation factor {{frac:1|1 − e^(−kτ)}} and the peak rise as well.',
    'Raising the dose also raises the level, but it is not among the options here.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 3; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations" and "Altering Dosing Interval"; 09.28 lecture'},
 
@@ -474,6 +490,7 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Dose up: higher Cmax, Cmin and Cavg, a bigger swing between peak and trough, usually no change in compliance.',
    'Dose does not move tmax (her poll: "no change in the tmax"), ka or clearance.',
+   'Why the swing grows with the dose: Dmax∞ − Dmin∞ equals the dose (Chapter 9, section "Repetitive Intravenous Injections"), so the gap between peak and trough scales with the dose, as every concentration in the regimen does.',
    'The parameters a regimen cannot change are the usual distractors: clearance, half-life, rate constants.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 5; 6a---Multiple-Oral-Doses.pdf, slides "Poll EV" (page 1) and "Altering Dose"; 09.28 lecture'},
 
@@ -519,6 +536,7 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Rationale slide: prevent high drug concentrations and accompanying side effects; many drugs are better tolerated when infused slowly over time than by IV bolus.',
    'Assumption: concentrations from successive infusions add (superposition), and each infusion follows the single-infusion equation with the same R, k and VD.',
+   'Why they add: elimination is first order, so the drug from each infusion is removed at the same fraction per hour whether or not the other is present, and each declines on its own clock from its own end. It is the same assumption as for repeated IV bolus doses (slide "Superposition").',
    'The three distractors each reverse a line of the rationale or move a drug property (half-life) that a route cannot move.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 7; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale" and "Administering One or More Doses by IV Infusion"; 09.28 lecture'},
 
@@ -582,6 +600,7 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'Absolute: against IV. Relative: against another product or route. Bioequivalence: two products of the same drug compared in both rate and extent.',
+   'The IV dose is the reference because the whole IV dose enters the circulation, so its F is 1 and its AUC is the area the full dose produces; the extravascular AUC is measured against it, Fabs = {{frac:AUCpo|AUCIV}} × {{frac:DIV|Dpo}}, and cannot come out above 1.',
    'She asks definitions by quoting the slide and asking for the term; the words "intravenous administration" settle this one.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 10; 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (page 5)'},
 

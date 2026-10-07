@@ -1528,7 +1528,7 @@ const GUIDE_HTML = `
 <li>The units she will mark: <q>I also want you to recognize that the units of creatinine clearance should be in milliliters per minute So don't give me kilograms per milligram per deciliter. Milliliters per minute.</q> (09-14)</li>
 </ul>
 
-<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 14, 15, 16, 17, 25; transcript 09-14; drill items m4-cr-1, m4-cr-2, m4-cr-4, m4-cr-5, m4-cr-6, m4-n-inches, m4-n-ibwf, m4-n-crcl; reference.js (equations not on the sheet); tell.js (renal against creatinine clearance).</p>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slides 14, 15, 16, 17, 25; transcript 09-14; drill items m4-cr-1, m4-cr-2, m4-cr-4, m4-cr-6, m4-n-inches, m4-n-ibwf, m4-n-crcl; reference.js (equations not on the sheet); tell.js (renal against creatinine clearance).</p>
 <p class="gsrc">Textbook: Shargel 8e Chapter 15, printout p. 11.</p>
 </section>
 
