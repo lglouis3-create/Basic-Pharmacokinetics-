@@ -2826,7 +2826,23 @@ function drawMixed(pool, n, nSata){
 /* Run a timed paper on the exam engine. `extra` carries what the result page
    reads: the select-all shares and blueprint coverage for an exam paper, or a
    `paper` id and `title` for a quiz practice paper. */
+/* On a paper, parts of one problem set sit together and in her order (a before
+   f), at the place the first of them was drawn; everything else keeps its
+   drawn position. */
+function paperOrder(qs){
+  const out = [], done = new Set();
+  qs.forEach(q => {
+    if(done.has(q.id)) return;
+    const c = CHAIN_OF[q.id];
+    if(!c){ out.push(q); done.add(q.id); return; }
+    const mates = qs.filter(x => CHAIN_OF[x.id] && CHAIN_OF[x.id].chain === c.chain)
+                    .sort((x, y) => CHAIN_OF[x.id].step - CHAIN_OF[y.id].step);
+    mates.forEach(x => { if(!done.has(x.id)){ out.push(x); done.add(x.id); } });
+  });
+  return out;
+}
 function startPaper(qs, minutes, extra){
+  qs = paperOrder(qs);
   EX = Object.assign({from: VIEW, qs, i:0, spent: qs.map(() => 0), tIdx: null, tMark: 0,
         picks: qs.map(q => isMulti(q) ? [] : qType(q)==='match' ? {} : qType(q)==='numeric' ? '' : null),
         running:true, done:false,

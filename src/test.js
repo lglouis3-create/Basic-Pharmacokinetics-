@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,CHAIN_OF,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -684,6 +684,32 @@ console.log('\n=== 5e. What an explanation may say ===');
     }
     if (dup.length) bad('build-it tray offers a lure that looks like a correct piece: ' + dup.join(' | '));
     else console.log('  ok    no build-it lure draws as the same tile as a correct piece, and every correct piece is in the tray');
+  }
+
+  /* A part of a problem set can be drawn alone (exam sim, quiz, adaptive), so a
+     part that needs an earlier part's result must carry it in the stem, as her
+     sets are reproduced here: "(The dose is the 550 mg recommended in part a.)". */
+  {
+    const POINTS = /\b(determined in part|as determined|in part [a-z]\b|from part [a-z]\b|you recommended in [a-z]\b)|\(above\)/i;
+    const CARRIED_RE = /\((?:[^()]|\([^()]*\))*\)/g;   // a bracket, allowing one inner bracket such as (mg/L)
+    const CARRIED = {test: s => (String(s).match(CARRIED_RE) || []).some(b => /\bparts? [a-z]\b/i.test(b) && /\d/.test(b))};
+    const loose = X.QUESTIONS.concat(X.EXTRAS).filter(q => {
+      const fromPart = (q.givens || []).some(g => /^parts? [a-z]\b/i.test(String(g[1])));
+      return (POINTS.test(q.stem) || fromPart) && !CARRIED.test(q.stem);
+    }).map(q => q.id);
+    if (loose.length) bad('a part that needs an earlier part does not carry its value in the stem: ' + loose.join(', '));
+    else console.log('  ok    every part that needs an earlier result carries it, so it can be answered when drawn alone');
+  }
+
+  /* A paper keeps the parts of one problem together and in order. */
+  {
+    const set = X.CHAINS.find(c => c.id === 'e2r-sheet'), byIdQ = Object.fromEntries(X.QUESTIONS.map(q => [q.id, q]));
+    const loose = X.QUESTIONS.find(q => !X.CHAIN_OF[q.id]);
+    const drawn = [byIdQ['e2r-3f'], loose, byIdQ['e2r-3a'], byIdQ['e2r-3d']];
+    const got = X.paperOrder(drawn).map(q => q.id);
+    const want = ['e2r-3a', 'e2r-3d', 'e2r-3f', loose.id];
+    if (!set || JSON.stringify(got) !== JSON.stringify(want)) bad(`paper order keeps problem parts together: got ${got.join(', ')}`);
+    else console.log('  ok    a paper puts the parts of one problem together, in her order');
   }
 
   /* Tables and fractions are markup, so a malformed one shows as raw text. */

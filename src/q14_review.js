@@ -172,7 +172,7 @@ const Q_REVIEW = [
 
 {id:'e2r-3d', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:7, lecture:'L10',
  topic:'bioavail', sub:'fabs', concept:'equiv-oral-dose', skill:'bioavail', source:'slide',
- stem:E2R_3 + ' d. What oral dose would provide the same extent of absorption as the 12 mg/kg IV dose?',
+ stem:E2R_3 + ' d. What oral dose would provide the same extent of absorption as the 12 mg/kg IV dose? (Part c: F = 0.75.)',
  units:'mg', answer:1200, tol:4,
  steps:[
   {k:'setup', t:'Dpo = {{frac:DIV|F}} (same extent means the same amount reaching the blood: F × Dpo = DIV)',
@@ -192,7 +192,7 @@ const Q_REVIEW = [
 
 {id:'e2r-3e', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'peak', concept:'cmax-oral', skill:'oral', source:'slide',
- stem:E2R_3 + ' e. What Cmax would you expect following the administration of the first oral dose in the amount you determined in part d if the absorption half-life is 75 minutes?',
+ stem:E2R_3 + ' e. What Cmax would you expect following the administration of the first oral dose in the amount you determined in part d if the absorption half-life is 75 minutes? (Parts c and d: F = 0.75 and an oral dose of 1200 mg.)',
  units:'mg/L', answer:47.8, tol:0.5,
  steps:[
   {k:'unit', t:'ka = {{frac:0.693|1.25 hr}} = 0.5544 hr⁻¹ (absorption rate constant); k = 0.1653 hr⁻¹ (from part a)',
@@ -219,7 +219,7 @@ const Q_REVIEW = [
 
 {id:'e2r-3f', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
  topic:'multoral', sub:'ossc', concept:'tau-for-cavg', skill:'multidose', source:'slide',
- stem:E2R_3 + ' f. What dosing interval would be appropriate to achieve an average steady-state concentration of 80 mcg/mL using the oral dose determined in part d?',
+ stem:E2R_3 + ' f. What dosing interval would be appropriate to achieve an average steady-state concentration of 80 mcg/mL using the oral dose determined in part d? (Parts c and d: F = 0.75 and an oral dose of 1200 mg.)',
  units:'hr', answer:6, tol:0.06,
  steps:[
   {k:'setup', t:'Cavg∞ = {{frac:FD0|ClT τ}}, solved for the interval: τ = {{frac:FD0|ClT × Cavg∞}}',
@@ -240,7 +240,7 @@ const Q_REVIEW = [
 
 {id:'e2r-3g', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
  topic:'multoral', sub:'ossc', concept:'tmax-ss', skill:'multidose', source:'slide',
- stem:E2R_3 + ' g. What is tmax at steady state if the dose determined in part d were administered per the dosing interval determined in part f? (The absorption half-life is 75 minutes.)',
+ stem:E2R_3 + ' g. What is tmax at steady state if the dose determined in part d were administered per the dosing interval determined in part f? (Parts d and f: 1200 mg every 6 hours. The absorption half-life is 75 minutes.)',
  units:'hr', answer:2.0, tol:0.05,
  steps:[
   {k:'setup', t:'tmax∞ = {{frac:1|ka − k}} ln[{{frac:ka(1 − e^(−kτ))|k(1 − e^(−ka τ))}}]',
@@ -265,7 +265,7 @@ const Q_REVIEW = [
 
 {id:'e2r-3h', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
  topic:'multoral', sub:'ossc', concept:'cmax-ss-oral', skill:'multidose', source:'slide',
- stem:E2R_3 + ' h. What is Cmax if the dose determined in part d were administered per the dosing interval determined in part f? (The absorption half-life is 75 minutes.)',
+ stem:E2R_3 + ' h. What is Cmax if the dose determined in part d were administered per the dosing interval determined in part f? (Parts c, d and f: F = 0.75 and 1200 mg every 6 hours. The absorption half-life is 75 minutes.)',
  units:'mg/L', answer:91.2, tol:0.7,
  steps:[
   {k:'setup', t:'Cmax∞ = {{frac:FD0|VD}} ({{frac:1|1 − e^(−kτ)}}) e^(−k tmax∞)',

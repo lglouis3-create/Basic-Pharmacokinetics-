@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (problem parts answerable on their own)
+- A part that needs an earlier answer now states it, e.g. "(Parts c and d: F = 0.75 and an oral dose of 1200 mg.)".
+- Exam sim and practice quizzes keep the parts of one problem together and in order (a before f).
+- A test fails if any part refers to another part without carrying its value.
+
 ## 2026-10-07 (build-it fixes; IV bolus, infusion and oral told apart)
 - Build it: a box you tap is now highlighted, so you can see where the next piece goes.
 - Build it: factors in another order (k × fe) are right with every box green; order still counts in a division.
