@@ -1603,7 +1603,7 @@ function feedbackHTML(q, st){
         else if(st.guessed && st.missKind) h += `<p class="sub" style="margin:0 0 8px">Logged as a guess, stuck at ${esc((MISS_LABEL[st.missKind]||'').toLowerCase())}.</p>`;
         if(st.missKind === 'setup' && q.setup && q.setup.eq && EQ_BY_ID[q.setup.eq])
           h += `<p class="sub" style="margin:0 0 8px">The line this one needs: ${eqShow(EQ_BY_ID[q.setup.eq])} <button type="button" class="chip" data-sheetsetup="${q.module}">Set-up drill, Module ${esc(modShort(q.module))}</button></p>`;
-        if(q.setup) h += eqDeriveHTML([q.setup.eq, ...(q.setup.pre || [])]);
+        if(q.setup) h += eqDeriveHTML([q.setup.eq, ...(q.setup.pre || [])], q);
         h += workedBlock(q);
       }
     }else if(kind === 'match'){
@@ -3880,7 +3880,7 @@ function eqDrillHTML(){
       h += `<h5 class="tsec">What each symbol is</h5><ul class="tlist">${
         e.symbols.map(s => `<li><b>${s[0]}</b> — ${s[1]}</li>`).join('')}</ul>`;
     if(e.holds) h += `<h5 class="tsec">When it holds</h5><p class="prose">${richHTML(e.holds)}</p>`;   // entities and {{frac}} render
-    if(e.derive) h += `<h5 class="tsec">Not on the sheet: how to get there</h5><p class="prose">${richHTML(e.derive)}</p>`;
+    if(e.derive) h += `<h5 class="tsec">Not on the sheet: how to get there</h5>${deriveBodyHTML(e)}`;
     if(e.must) h += `<p class="prose"><b>She said to memorise this one.</b> It is not on the equation sheet.</p>`;
     h += `<div class="cite">${esc(e.cite)}</div></div>`;
   }
@@ -4139,11 +4139,24 @@ function eqStartIds(ids, mode){
 /* A line the sheet does not print, with the way to reach it from a line
    that is printed (equations.js `derive`). Shown wherever a worked problem
    or a drill lands on such a line. */
-function eqDeriveHTML(ids){
+/* The steps from a printed line to an unprinted one, numbered, and the
+   condition for reaching for it. `derive` is a list of steps (a single
+   string is still accepted). */
+const deriveSteps = e => Array.isArray(e.derive) ? e.derive : [e.derive];
+function deriveBodyHTML(e){
+  return `<ol class="dsteps">${deriveSteps(e).map(s => `<li>${richHTML(s)}</li>`).join('')}</ol>${
+    e.use ? `<p class="duse"><b>When to use it:</b> ${richHTML(e.use)}</p>` : ''}`;
+}
+/* In a worked problem each unprinted line says why it is in this box: the
+   line that gives this problem's answer, or one used on the way to it. */
+function eqDeriveHTML(ids, q){
   const es = [...new Set(ids)].map(id => EQ_BY_ID[id]).filter(e => e && e.sheet !== 'yes' && e.derive);
   if(!es.length) return '';
-  return `<div class="derive"><h4>Not on the sheet: how to get there</h4><ul class="tlist">${es.map(e =>
-    `<li>${eqShow(e)} <span class="sm">${esc(e.name)}${e.must ? '; she said to know it' : ''}</span><br>${richHTML(e.derive)}</li>`).join('')}</ul></div>`;
+  const role = e => !q || !q.setup ? '' : e.id === q.setup.eq
+    ? 'This problem\'s answer comes from this line.' : 'This problem uses it on the way to the answer.';
+  return `<div class="derive"><h4>Not on the sheet: how to get there</h4><ul class="tlist dlist">${es.map(e =>
+    `<li><div class="dhead">${eqShow(e)} <span class="sm">${esc(e.name)}${e.must ? '; she said to know it' : ''}</span></div>${
+      role(e) ? `<p class="drole">${role(e)}</p>` : ''}${deriveBodyHTML(e)}</li>`).join('')}</ul></div>`;
 }
 
 /* ==========================================================================
@@ -4369,7 +4382,7 @@ function suQuestionHTML(q, st, idx){
     h += `<h4>Why this line</h4><ul class="tlist">${why.map(s => `<li>${rich(s)}</li>`).join('')}</ul>
       ${pre.length ? `<h4>Lines used on the way</h4><ul class="tlist">${pre.map(id => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}</span></li>`).join('')}</ul>` : ''}
       <h4>When it holds</h4><p class="sub">${mathHTML(e.holds || '')}</p>
-      ${eqDeriveHTML([e.id, ...pre])}
+      ${eqDeriveHTML([e.id, ...pre], q)}
       ${st.shown ? `<div class="suwork"><p class="verdict ok">Keyed answer ${fmtAns(q.answer)} ${esc(q.units || '')}</p>${workedBlock(q)}</div>` : ''}
       <div class="btns">${idx === 'one' ? `<button class="btn" data-sunext="1">Next</button>` : ''}
         <button class="btn ghost" data-sushow="1">${st.shown ? 'Hide the working' : 'Show the problem worked out'}</button>

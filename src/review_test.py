@@ -371,7 +371,7 @@ with sync_playwright() as p:
     pg.click('#v-quiz .misskind button[data-mk="setup"]'); pg.wait_for_timeout(200)
     ok('after the answer the table shows every role, distractors marked not needed', pg.locator('#v-quiz .givens .grole').count() == 7 and pg.locator('#v-quiz .givens .gskip').count() == 4)
     ok('the roles render fractions and the sanity check follows the working', pg.locator('#v-quiz .givens .frac').count() >= 1 and pg.locator('#v-quiz .sanity').count() == 1 and '10 → 5 → 2.5' in pg.inner_text('#v-quiz .sanity'))
-    ok('the trough question names the trough-from-peak line, not the C0 form', pg.evaluate("byId('ws6-b2g').setup.eq") == 'cmin-from-cmax' and 'Divide the two sheet lines' in pg.inner_text('#v-quiz .derive'))
+    ok('the trough question names the trough-from-peak line, not the C0 form', pg.evaluate("byId('ws6-b2g').setup.eq") == 'cmin-from-cmax' and 'the peak line with one more factor' in pg.inner_text('#v-quiz .derive') and 'When to use it' in pg.inner_text('#v-quiz .derive') and pg.locator('#v-quiz .derive .dsteps li').count() >= 3)
     pg.evaluate("DB.answers.pop(); save(); Q = null; suStart('6')"); pg.wait_for_timeout(200)
     pg.evaluate("SU.queue.unshift(SU.queue.splice(SU.queue.findIndex(q => q.id === 'ws6-b2g'), 1)[0]); SU.i = 0; renderEq()"); pg.wait_for_timeout(150)
     pg.evaluate("(() => { const q = SU.queue[0], st = suState(q); const i = st.options.findIndex(o => o.id === q.setup.eq); document.querySelector('#v-eq [data-suopt=\"' + i + '\"]').click(); })()"); pg.wait_for_timeout(150)
@@ -537,6 +537,19 @@ with sync_playwright() as p:
     pg.click('#v-gaps .twork [data-ttype]'); pg.wait_for_timeout(200)
     ok('Drill this kind starts a drill of that kind of calculation', pg.evaluate("VIEW === 'quiz' && Q && Q.pool.every(q => calcTypeOf(q) && calcTypeOf(q).name === %r)" % seed['t']))
     pg.evaluate("DB.answers = window.__keep; save(); Q = null; show('topics')"); pg.wait_for_timeout(100)
+
+    print('\n=== Not printed: steps, when to use, and why it is here ===')
+    pg.evaluate("Q = null; EQ = null; SU = null; DB.settings.layout = 'one'; show('topics'); startSweepOf([byId('hw5-2c')], 'probe')"); pg.wait_for_timeout(200)
+    ok('a trough question that gives the dose, not the peak, names the printed trough line', pg.evaluate("byId('hw5-2c').setup.eq") == 'cmin-ss' and pg.evaluate("byId('ws6-b3e').setup.eq") == 'cmin-ss' and pg.evaluate("byId('ws6-b4d').setup.eq") == 'cmin-ss')
+    pg.fill('#v-quiz #numIn', '16.01'); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+    box = pg.inner_text('#v-quiz .derive') if pg.locator('#v-quiz .derive').count() else ''
+    ok('its box no longer offers the peak-based line', 'Trough from the steady-state peak' not in box)
+    ok('the half-life line it does use is in numbered steps, with why it is here and when to use it', pg.locator('#v-quiz .derive .dsteps li').count() >= 4 and 'This problem uses it on the way to the answer.' in box and 'When to use it' in box)
+    ok('the working reads the printed trough line from C0, with no peak', 'C0 e^' in pg.evaluate("byId('hw5-2c').steps.map(s => s.t).join(' ')") and 'Cmax' not in pg.evaluate("byId('hw5-2c').steps.map(s => s.t).join(' ')"))
+    pg.evaluate("DB.answers.pop(); save(); Q = null; startSweepOf([byId('ws6-b2g')], 'probe')"); pg.wait_for_timeout(200)
+    pg.fill('#v-quiz #numIn', '2.5'); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+    ok('a trough question that gives the peak still names the peak line, as its answer line', 'This problem\'s answer comes from this line.' in pg.inner_text('#v-quiz .derive') and 'Only when the stem gives the steady-state peak' in pg.inner_text('#v-quiz .derive'))
+    pg.evaluate("DB.answers.pop(); save(); Q = null; show('topics')"); pg.wait_for_timeout(100)
 
     print('\n=== Weak spots: repairs per kind of miss, Reference anchors ===')
     pg.evaluate("Q = null; EQ = null; SU = null")

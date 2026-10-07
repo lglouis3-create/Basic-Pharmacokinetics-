@@ -866,6 +866,8 @@ console.log('\n=== 10. Bank fields are plain text ===');
   if (badGivens.length) bad('givens: ' + badGivens.slice(0, 8).join(' | ')); else if (!noGivens.length) console.log('  ok    every given quotes a value the stem states');
   if (badCheck.length) bad('check: ' + badCheck.slice(0, 8).join(' | ')); else if (!noCheck.length) console.log('  ok    every sanity check uses only numbers from the stem, the working or the answer');
   const noDerive = X.EQUATIONS.filter(e => e.sheet !== 'yes' && !e.derive).map(e => e.id);
+  const badDerive = X.EQUATIONS.filter(e => e.derive && (!Array.isArray(e.derive) || !e.derive.length || e.derive.some(s => typeof s !== 'string' || !s.trim()) || !e.use)).map(e => e.id);
+  if (badDerive.length) bad('derivations not written as numbered steps with a when-to-use line: ' + badDerive.join(', ')); else console.log('  ok    every derivation is numbered steps with a when-to-use line');
   if (noDerive.length) bad('equations the sheet does not print without a derivation: ' + noDerive.join(', ')); else console.log(`  ok    every equation the sheet does not print says how to reach it (${X.EQUATIONS.filter(e => e.derive).length})`);
   const none = nums.filter(q => q.setup && q.setup.eq === 'none').length;
   console.log(`  info  ${none} numeric question(s) have no catalog line for their final step and stay out of the set-up drill`);

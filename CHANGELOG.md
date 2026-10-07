@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (the printed trough line, and clearer "Not on the sheet" boxes)
+- Three trough questions that give the dose, not the peak, now use the printed trough line with C0.
+- Each "Not on the sheet" line is now numbered steps from a printed line, plus "When to use it".
+- In a worked problem each box says whether the line gives this answer or is used on the way to it.
+- The derivation of Cp after the last dose no longer calls an unprinted line a sheet line.
+
 ## 2026-10-07 (a stopwatch on every calculation)
 - Every calculation shows a stopwatch; past her 2-minute pace it reads "over 2:00", then it freezes on the time taken.
 - On the one-page layout each card's stopwatch starts when you click into its answer box.

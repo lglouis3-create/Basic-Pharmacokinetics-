@@ -75,7 +75,8 @@ T_ORAL = [{'h': 'One oral dose', 'list': [
     'AUC = {{frac:F D0|k VD}}: proportional to the dose.']}]
 T_MULTI = [{'h': 'Repeated IV bolus at steady state', 'list': [
     'C0 = {{frac:D0|VD}} for one dose; k = 0.693/t½.',
-    'Cmax∞ = {{frac:C0|1 − e^(−kτ)}}; Cmin∞ = Cmax∞ e^(−kτ).',
+    'Cmax∞ = {{frac:C0|1 − e^(−kτ)}} and Cmin∞ = {{frac:C0 e^(−kτ)|1 − e^(−kτ)}}, both printed and both read from C0.',
+    'When a stem gives the steady-state peak instead of the dose, the trough is one interval of decline from it: Cmin∞ = Cmax∞ e^(−kτ).',
     'Cavg∞ = {{frac:D0|VD k τ}}, below the midpoint of peak and trough.',
     'After the last dose the level falls from Cmax∞: C = Cmax∞ e^(−kt).']}]
 H = lambda n: f'Homework-{n}.pdf'
@@ -548,12 +549,14 @@ p = [num('hw5-2a', asks='Cavgss', stem=S + 'a. What is the average concentration
          check=dict(t=f'Six hours is two half-lives of {t6} hours, so a quarter of each dose remains at the next; the peak is C0 = {C06:g} mg/L over 1 − {f3(R6)}, a third more than {C06:g}: {f2(cmx)} mg/L, between {C06:g} and 2 × {C06:g}.', lo=C06, hi=2 * C06),
          teach=T_MULTI, note=NOTE, cite=f'{H(5)}, problem 2b (her wording; numbers changed)'),
      num('hw5-2c', asks='Cminss', stem=S + 'c. What is the minimum concentration of drug in the plasma at steady state?', units='mg/L', ans=round(cmn, 2), calc=cmn, **M6, sub='ssbolus', skill='multidose', concept='cmin-ss',
-         steps=[('setup', f'Cmin∞ = Cmax∞ e^(−kτ) = ({f2(cmx)} mg/L)({f3(R6)}) = {f2(cmn)} mg/L', f'Cmin∞, the steady-state trough, is the level just before the next dose: the steady-state peak Cmax∞ = {f2(cmx)} mg/L after one full interval τ = {tau} hr of first-order decline, so Cmin∞ = Cmax∞ e^(−kτ) with e^(−kτ) = {f3(R6)} from part b, a pure number, leaving mg/L: {f2(cmn)} mg/L, which is also Cmax∞ − C0.')],
-         setup=dict(eq='cmin-from-cmax', pre=['thalf-first', 'cp-db-vd', 'cmax-ss'], why='"Multiple IV bolus injections" at "steady state", with "the minimum concentration" asked. Cmax∞ from part b and kτ are known, so Cmin∞ = {{frac:C0 e^(−kτ)|1 − e^(−kτ)}}, which is Cmax∞ e^(−kτ): one interval of decline from the steady-state peak.'),
-         givens=[['weight', f'{w6} kg', 'scales dose and volume inside the part b peak'], ['D0', f'{dk} mg/kg', f'inside Cmax∞ = {f2(cmx)} mg/L from part b'],
-                 ['τ', f'every {tau} hours', f'the exponent kτ, with e^(−kτ) = {f3(R6)}'], ['duration', '36 hours', 'not needed for the number: steady state is reached'],
-                 ['t½', f'{t6} hours', f'gives k = {f3(k6)} hr⁻¹; {tau} hours is two half-lives'], ['VD', f'{int(vp*100)}% of body weight', 'inside the part b peak']],
-         check=dict(t=f'Six hours is two half-lives of {t6} hours, so the {f2(cmx)} mg/L peak halves twice to a quarter: {f2(cmx)} × {f3(R6)} = {f2(cmn)} mg/L, below the peak; it is also Cmax∞ − C0.', lo=0, hi=round(cmx, 2)),
+         steps=[('unit', f'D0 = ({dk} mg/kg)({w6} kg) = {D6} mg; VD = {vp} × {w6} kg = {V6:g} L; C0 = {{{{frac:{D6} mg|{V6:g} L}}}} = {C06:g} mg/L', f'The dose and the volume both scale with the {w6} kg weight, so C0, the rise in concentration each dose produces, is the dose over the volume.'),
+                ('setup', f'k = {{{{frac:0.693|{t6} hr}}}} = {f3(k6)} hr⁻¹; kτ = {f3(k6)} × {tau} = {k6*tau:.3f}; e^(−kτ) = {f4(R6)}', f'The printed trough line wants k and τ: k from the {t6}-hour half-life, and the {tau}-hour interval gives kτ, a pure number.'),
+                ('algebra', f'Cmin∞ = {{{{frac:C0 e^(−kτ)|1 − e^(−kτ)}}}} = {{{{frac:({C06:g} mg/L)({f4(R6)})|1 − {f4(R6)}}}}} = {f2(cmn)} mg/L', f'This is the printed trough line, read directly with C0 from the stem: no peak is needed. Part b reaches the same number as the {f2(cmx)} mg/L peak times e^(−kτ).')],
+         setup=dict(eq='cmin-ss', pre=['thalf-first', 'cp-db-vd'], why='"Multiple IV bolus injections" at "steady state", with "the minimum concentration" asked, so the repeated IV bolus block. The stem gives the dose, the volume, the half-life and τ, not the peak, so the printed trough line Cmin∞ = C0 e^(−kτ) over 1 − e^(−kτ) answers it directly. Hinges: k = 0.693 over t½ and C0 = D0 over VD.'),
+         givens=[['weight', f'{w6} kg', 'scales the dose and the volume'], ['D0', f'{dk} mg/kg', f'scaled to {D6} mg; C0 = {C06:g} mg/L, the numerator of the trough line'],
+                 ['τ', f'every {tau} hours', f'the exponent kτ, with e^(−kτ) = {f4(R6)}'], ['duration', '36 hours', 'not needed for the number: steady state is reached'],
+                 ['t½', f'{t6} hours', f'gives k = {f3(k6)} hr⁻¹; {tau} hours is two half-lives'], ['VD', f'{int(vp*100)}% of body weight', f'scaled to {V6:g} L, the denominator of C0']],
+         check=dict(t=f'Six hours is two half-lives of {t6} hours, so a quarter of each dose is left when the next goes in; the trough is C0 times {f4(R6)} over 1 − {f4(R6)}, a third of the {C06:g} mg/L C0: near {f2(cmn)} mg/L, and below C0.', lo=0, hi=C06),
          teach=T_MULTI, note=NOTE, cite=f'{H(5)}, problem 2c (her wording; numbers changed)'),
      num('hw5-2d', asks='Cp', stem=S + 'd. What is the expected concentration of drug in the plasma 8 hours after administration of the last dose?', units='mg/L', ans=round(c8, 2), calc=c8, **M6, sub='ndose', skill='multidose', concept='c-after-last-dose',
          steps=[('setup', f'C = Cmax∞ e^(−kt) = ({f2(cmx)} mg/L) e^(−({f3(k6)})(8)) = ({f2(cmx)})({f4(e(-k6*8))}) = {f2(c8)} mg/L', f'After the last dose nothing more is given, so the level follows C = C0 e^(−kt) from the steady-state peak Cmax∞ = {f2(cmx)} mg/L, the concentration the moment the last dose is in. kt = ({f3(k6)} hr⁻¹)(8 hr) = {k6*8:.3f}, a pure number, and e^(−{k6*8:.3f}) = {f4(e(-k6*8))} of the peak remains after 8 hours.')],
