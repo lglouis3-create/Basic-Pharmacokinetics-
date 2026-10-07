@@ -861,7 +861,7 @@ const kindLabel = (name, kind) => kind ? `${name} — ${KIND_LABEL[kind].toLower
    concepts return first, and it stops when nothing is due. */
 function startPool(pool, label){
   if(!pool.length){ alert('No questions match those filters.'); return; }
-  Q = {pool, label, since:Date.now(), current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
+  Q = {from: VIEW, pool, label, since:Date.now(), current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
 }
@@ -869,7 +869,7 @@ function startPool(pool, label){
    no scheduling gate. `scope` names a startSweep scope that can be repeated. */
 function startSweepOf(pool, label, scope){
   if(!pool.length){ alert('No questions match those filters.'); return; }
-  Q = {pool, label, scope, since:Date.now(), sweep: shuffle(pool.map(q => q.id)), i: 0,
+  Q = {from: VIEW, pool, label, scope, since:Date.now(), sweep: shuffle(pool.map(q => q.id)), i: 0,
        current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
@@ -885,7 +885,7 @@ function startChain(id){
   if(!c) return;
   const parts = c.parts.map(byId).filter(Boolean);
   if(!parts.length){ alert('That problem set has no questions yet.'); return; }
-  Q = {pool: parts, label: c.name, chain: c, since:Date.now(), sweep: parts.map(q => q.id), i: 0,
+  Q = {from: VIEW, pool: parts, label: c.name, chain: c, since:Date.now(), sweep: parts.map(q => q.id), i: 0,
        current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
   nextQuestion();
   show('quiz');
@@ -1216,6 +1216,25 @@ function missKindPrompt(q, entered, title, extra){
     <div class="frow">${MISS_KINDS.map(m =>
       `<button data-mk="${m.id}"${extra || ''} data-sug="${esc(sug)}" aria-pressed="false" class="${m.id === sug ? 'suggest' : ''}" title="${esc(m.hint)}">${esc(m.label)}${m.id === sug ? ' (suggested)' : ''}</button>`).join('')}</div></div>`;
 }
+/* One way back from every drill: a chip at the top that returns to the tab
+   the drill was started from. Inside the tab that owns the drill, the same
+   chip stops the drill and shows that tab's picker. */
+const VIEW_LABEL = {topics: 'Topics', quiz: 'Quiz', gaps: 'Weak spots', exam: 'Exam sim', guide: 'Guides', tell: 'Tell apart', terms: 'Terms', diag: 'Diagrams', eq: 'Equations', ref: 'Reference', settings: 'Settings'};
+function drillBackHTML(from, own, stopLabel, note){
+  const v = VIEW_LABEL[from] ? from : 'topics';
+  const label = v === own ? stopLabel : `← Back to ${VIEW_LABEL[v]}`;
+  return `<button type="button" class="chip drillback" data-drillback="${v}" data-own="${own}">${esc(label)}</button>${note ? `<span class="sm drillnote">${esc(note)}</span>` : ''}`;
+}
+function drillBackClick(e){
+  const b = e.target.closest && e.target.closest('[data-drillback]'); if(!b) return;
+  const v = b.dataset.drillback, own = b.dataset.own;
+  if(v === own){                                     // stop the drill and show its tab's picker
+    if(own === 'eq'){ SU = null; EQ = null; renderEq(); }
+    else if(own === 'quiz'){ Q = null; show('topics'); }
+    return;
+  }
+  show(v);
+}
 let RET = [];
 function jump(view, anchor){
   // a static tab is rebuilt on return, so the Explain-one cards open on it are noted and reopened
@@ -1374,7 +1393,7 @@ function renderQuizAll(){
   const el = $('#v-quiz'), list = quizAllList();
   Q.allShow ||= 40;
   const shown = list.slice(0, Q.allShow);
-  let h = `<div class="sessline">${sessStrip()}</div><div class="allhead"><b>${esc(Q.label)}</b><span id="allCount">${allCountText(list)}</span></div>
+  let h = `<div class="sessline">${drillBackHTML(Q.from, 'quiz', '← Back to Topics')}${sessStrip()}</div><div class="allhead"><b>${esc(Q.label)}</b><span id="allCount">${allCountText(list)}</span></div>
     <div class="laywrap">${layoutToggle()}</div>
     ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}`;
   h += shown.map((id, i) => allCardHTML(byId(id), i + 1, list.length)).join('');
@@ -1392,7 +1411,7 @@ function renderQuizAll(){
 function renderExamAll(){
   const el = $('#v-exam');
   const answered = EX.picks.filter((p, i) => !isBlank(EX.qs[i], p)).length;
-  let h = `<div class="examhead sticky"><span class="clock" id="exClock">${fmt(EX.ends - Date.now())}</span>
+  let h = `${EX.from && EX.from !== 'exam' ? `<div class="sessline">${drillBackHTML(EX.from, 'exam', '', 'the clock keeps running; the paper waits under Exam sim')}</div>` : ''}<div class="examhead sticky"><span class="clock" id="exClock">${fmt(EX.ends - Date.now())}</span>
     <span class="prog" id="exProg">${answered} of ${EX.qs.length} answered</span></div>
     <div class="laywrap">${layoutToggle()}</div>${shortfallNote(EX.coverage)}`;
   EX.qs.forEach((q, i) => {
@@ -1597,7 +1616,7 @@ function renderQuiz(){
   const pctDone = totalC ? Math.round(100*(totalC-left)/totalC) : 0;
   const ok = Q.revealed ? (Q.overrode || gradeAnswer(q, Q.picked)) : false;
 
-  let h = `<div class="sessline">${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
+  let h = `<div class="sessline">${drillBackHTML(Q.from, 'quiz', '← Back to Topics')}${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
     ${profTag(q.prof)}${originTag(q)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
@@ -2133,7 +2152,7 @@ function renderGaps(){
       ? pool.filter(q => !DB.concepts[q.concept] || !DB.concepts[q.concept].seen)
       : pool.filter(q => { const s2 = DB.concepts[q.concept]; return s2 && s2.seen && s2.box === 0; });
     if(!want.length) return;
-    Q = {pool:want, label:(b.dataset.next==='unseen' ? 'Not yet seen — ' : 'Redrill — ') + pl.name, since:Date.now(),
+    Q = {from: VIEW, pool:want, label:(b.dataset.next==='unseen' ? 'Not yet seen — ' : 'Redrill — ') + pl.name, since:Date.now(),
          sweep: shuffle(want.map(q=>q.id)), i:0,
          current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
     nextQuestion(); show('quiz');
@@ -2145,7 +2164,7 @@ function renderGaps(){
   if(d) d.onclick = () => {
     const pool = QUESTIONS.filter(q => missedIds.includes(q.id) ||
       missedIds.some(id => byId(id) && byId(id).concept === q.concept));
-    Q = {pool, label:'Missed concepts', since:Date.now(), sweep: shuffle(pool.map(q => q.id)), i:0,
+    Q = {from: VIEW, pool, label:'Missed concepts', since:Date.now(), sweep: shuffle(pool.map(q => q.id)), i:0,
          current:null, answered:0, lastId:null, examMode:false, picked:null, revealed:false};
     nextQuestion(); show('quiz');
   };
@@ -2687,7 +2706,7 @@ function drawMixed(pool, n, nSata){
    reads: the select-all shares and blueprint coverage for an exam paper, or a
    `paper` id and `title` for a quiz practice paper. */
 function startPaper(qs, minutes, extra){
-  EX = Object.assign({qs, i:0,
+  EX = Object.assign({from: VIEW, qs, i:0,
         picks: qs.map(q => isMulti(q) ? [] : qType(q)==='match' ? {} : qType(q)==='numeric' ? '' : null),
         running:true, done:false,
         ends: Date.now() + minutes*60000,
@@ -2722,7 +2741,7 @@ function renderExamQ(){
   const el = $('#v-exam'), q = EX.qs[EX.i], order = EX.orders[EX.i];
   const answered = EX.picks.filter((p, i) => !isBlank(EX.qs[i], p)).length;
   const kind = qType(q), multi = isMulti(q);
-  let h = `<div class="examhead">
+  let h = `${EX.from && EX.from !== 'exam' ? `<div class="sessline">${drillBackHTML(EX.from, 'exam', '', 'the clock keeps running; the paper waits under Exam sim')}</div>` : ''}<div class="examhead">
     <span class="clock" id="exClock">${fmt(EX.ends-Date.now())}</span>
     <span class="prog">Question ${EX.i+1} of ${EX.qs.length} · ${answered} answered</span>
   </div>
@@ -3598,7 +3617,7 @@ function eqPickerWire(el){
 function eqStart(mode){
   const ids = shuffle(eqChosen().slice());
   if(!ids.length) return;
-  EQ = {queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
+  EQ = {from: VIEW, queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
         slots: [], tray: [], revealed: false, ok: false, typed: '', right: 0, asked: 0};
   eqLoad();
 }
@@ -3617,7 +3636,7 @@ function eqDrillHTML(){
   if(!e) return eqDoneHTML();
   const st = eqStat(e.id);
   const building = EQ.step === 'build';
-  let h = `<div class="qcard"><div class="qhead">
+  let h = `<div class="sessline">${drillBackHTML(EQ.from, 'eq', '← Stop, choose equations')}</div><div class="qcard"><div class="qhead">
     <span>${esc(building ? 'Build it' : 'Type it out')}</span>
     <span class="spacer"></span>
     <span>${eqLearned(e.id) ? 'learned' : st.streak ? st.streak + ' of ' + EQ_STREAK + ' in a row' : 'not yet'}</span>
@@ -3925,7 +3944,7 @@ function eqStartIds(ids, mode){
   ids = ids.filter(id => EQ_BY_ID[id]);
   if(!ids.length) return;
   SU = null;                                        // a parked set-up drill would otherwise hide the typing drill
-  EQ = {queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
+  EQ = {from: VIEW, queue: ids, i: 0, mode, step: mode === 'mix' ? 'build' : mode,
         slots: [], tray: [], revealed: false, ok: false, typed: '', right: 0, asked: 0};
   eqLoad();
 }
@@ -3980,7 +3999,7 @@ function suStart(scope){
   const plan = /^plan:/.test(scope); scope = scope.replace(/^plan:/, '');
   const pool = shuffle(suScopePool(scope).slice());
   if(!pool.length){ alert('No set-up questions for that scope yet.'); return; }
-  SU = {queue: pool, i: 0, right: 0, asked: 0, plans: 0, scope, mode: plan ? 'plan' : 'line', page: {}};
+  SU = {from: VIEW, queue: pool, i: 0, right: 0, asked: 0, plans: 0, scope, mode: plan ? 'plan' : 'line', page: {}};
   show('eq');                                       // renders the drill once
 }
 /* ---- Plan the whole problem -------------------------------------------
@@ -4130,7 +4149,7 @@ function suHTML(){
     const page = SU.queue.slice(SU.i, SU.i + SU_PAGE);
     page.forEach(suState);
     const answered = page.filter(x => suAnswered(SU.page[x.id])).length;
-    h += `<div class="sessrow"><span>stems ${SU.i + 1} to ${SU.i + page.length} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
+    h += `<div class="sessline">${drillBackHTML(SU.from, 'eq', '← Stop, back to Equations')}</div><div class="sessrow"><span>stems ${SU.i + 1} to ${SU.i + page.length} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
       <span class="pbar"><i style="width:${Math.round(100 * SU.i / SU.queue.length)}%"></i></span>${tally}</div>
       <div class="laytogrow">${layoutToggle()}</div>`;
     h += page.map((x, k) => suQuestionHTML(x, SU.page[x.id], String(k))).join('');
@@ -4138,7 +4157,7 @@ function suHTML(){
       <button class="chip" data-suhome="1">Stop and return to Equations</button></div>`;
     return h;
   }
-  h += `<div class="sessrow"><span>question ${SU.i + 1} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
+  h += `<div class="sessline">${drillBackHTML(SU.from, 'eq', '← Stop, back to Equations')}</div><div class="sessrow"><span>question ${SU.i + 1} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
     <span class="pbar"><i style="width:${Math.round(100 * SU.i / SU.queue.length)}%"></i></span>${tally}</div>
     <div class="laytogrow">${layoutToggle()}</div>`;
   h += suQuestionHTML(q, suState(q), 'one');
@@ -4245,6 +4264,7 @@ document.addEventListener('click', zoomClick);   // tap any figure to enlarge it
 document.addEventListener('click', layoutClick); // the One at a time / All on one page chips
 document.addEventListener('click', jumpClick);
 document.addEventListener('click', sheetClick);   // sheet map: print, drill a line, start the set-up drill
+document.addEventListener('click', drillBackClick); // the way back from every drill
 document.addEventListener('click', xpickClick);   // Tell apart: Why? chips
 document.addEventListener('change', xselChange);  // Tell apart: Explain one   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });

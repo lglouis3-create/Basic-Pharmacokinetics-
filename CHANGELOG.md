@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (a way back from every drill)
+- Every drill opens with a Back chip at the top: quiz, equation typing, set-up and plan drill, exam paper.
+- It returns to the tab the drill was started from; on the drill's own tab it stops the drill instead.
+- Leaving a paper keeps the clock running and the paper waiting under Exam sim, and the chip says so.
+
 ## 2026-10-07 (find the line on the sheet; small fixes)
 - The set-up drill can offer the whole sheet instead of four lines: open the block, then pick the line.
 - The Back button after a jump now sits under the tab row, in view, instead of at the foot of the page.
