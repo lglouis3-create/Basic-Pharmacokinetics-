@@ -634,7 +634,7 @@ const EQUATIONS = [
  lures:['(1 &minus; e<sup>&minus;nkt</sup>)', 'e<sup>&minus;k&tau;</sup>', '(1 + e<sup>&minus;k&tau;</sup>)'],
  symbols:[['C<sub>p</sub>', 'plasma concentration, mg/L'], ['D<sub>0</sub>', 'the dose given each time, mg'],
           ['V<sub>D</sub>', 'apparent volume of distribution, L'], ['k', 'first-order elimination rate constant, hr&minus;1'],
-          ['n', 'the dose number just given'], ['t', 'time since that dose, hr'], ['&tau;', 'dosing interval, hr']],
+          ['n', 'how many doses have been given, counting the one just given'], ['t', 'time since that dose, hr'], ['&tau;', 'dosing interval, hr']],
  holds:'Repeated IV bolus (the whole dose into a vein at once, every &tau; hours) before steady state. Steady state is the plateau reached when each dose adds back what was lost over the interval. As n grows, e<sup>&minus;nk&tau;</sup> approaches 0 and this becomes the steady-state equation.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses"'},
 

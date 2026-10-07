@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (what n is, and where the n-dose bracket comes from)
+- The n-dose block labels every letter with its Example 2 value: n counts the doses given, t starts at the last dose.
+- Numbered steps build the bracket dose by dose (1, 1 + f, 1 + f + f²) and show the algebra that gives its fraction.
+- A second set of steps shows why the top of the bracket becomes 1 at steady state, checked against Table 9-4.
+- Example 2 working carries e^(−0.520) = 0.5945 so 40 × 1.25 × 0.5945 rounds to 29.7.
+
 ## 2026-10-07 (accumulation-factor question fixed)
 - The accumulation-factor question now shows its fraction stacked instead of as raw text.
 - Its F option explains that F = 1 for an IV bolus; the old line wrongly said F appears only in averages.

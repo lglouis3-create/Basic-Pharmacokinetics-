@@ -79,11 +79,34 @@ const M6_CH = {h:'What the chapter adds', list:[
   'Superposition fails when the pharmacokinetics change with repeated doses, so that k or clearance differs from one dose to the next: a change in the patient\'s pathophysiology, saturation of a drug carrier system, enzyme induction or enzyme inhibition.',
   'Drugs with nonlinear pharmacokinetics, where elimination is no longer first order, are not predictable by superposition. These points are in the section "Drug Accumulation" of Chapter 9.']};
 
-const M6_NDOSE = {h:'Before steady state, and after the last dose', list:[
-  'After n doses: Cp = {{frac:D0|VD}} ({{frac:1 - e^(-nkτ)|1 - e^(-kτ)}}) e^(-kt). n is the dose number just given; t is the time since that dose.',
-  'The bracket is the build-up after n doses. After two doses in her Example 1 it is {{frac:1 - 0.0625|1 - 0.25}} = 1.25, which is 1 + 0.25: the new dose plus the quarter of the first dose still present. After many doses it is the accumulation factor, 1.33 for that regimen.',
-  'As n grows, e^(-nkτ) shrinks towards 0, the top of the bracket becomes 1 and the equation becomes the steady-state one: Cp = {{frac:D0|VD}} ({{frac:1|1 - e^(-kτ)}}) e^(-kt) = Cmax∞e^(-kt).',
-  'After the last dose at steady state no more drug goes in, so the level falls from Cmax∞ by first-order elimination: C = Cmax∞e^(-kt).']};
+const M6_NDOSE = [
+ {h:'After n doses: what each letter is',
+  t:'Cp = {{frac:D0|VD}} ({{frac:1 - e^(-nkτ)|1 - e^(-kτ)}}) e^(-kt). Her Example 2 asks for the level 3 hours after the 2nd dose of 10 mg/kg every 8 hours, with t½ 4 hours and VD 25% of body weight; the right-hand column reads each letter from that problem.',
+  table:{head:['Symbol', 'What it is', 'Example 2'],
+   rows:[['{{frac:D0|VD}} = C0', 'The concentration one dose adds at the moment it goes in', '{{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L'],
+         ['n', 'How many doses have been given so far, counting the one just given. Her slide labels it "# of doses"', '2, the 2nd dose'],
+         ['t', 'Hours since the most recent dose, dose n. It runs from 0 to τ and is never counted from the first dose', '3 hr'],
+         ['τ', 'Hours between doses', '8 hr'],
+         ['k', 'The elimination rate constant, {{frac:0.693|t½}}', '{{frac:0.693|4 hr}} = 0.1733 hr⁻¹'],
+         ['e^(-kτ)', 'The fraction of a dose still in the body one interval after it went in. The textbook calls it f', '0.25, because 8 hours is two half-lives: 1 → 0.5 → 0.25'],
+         ['e^(-nkτ)', 'The fraction of the first dose still in the body n intervals after it went in, which is f multiplied by itself n times', '0.25 × 0.25 = 0.0625'],
+         ['e^(-kt)', 'The fraction of the peak after dose n that is left t hours later', 'e^(-0.1733 × 3) = e^(-0.520) = 0.5945']]},
+  after:'Put together: Cp = 40 mg/L × 1.25 × 0.5945 = 29.7 mg/L. The 1.25 is the bracket, and the steps below show where it comes from.'},
+ {h:'Why the bracket has that shape', ol:true, list:[
+  'Dose 1 goes in. The body holds one dose, so the peak is C0 × 1 = 40 mg/L.',
+  'One interval later (τ = 8 hr) dose 1 has fallen to f of itself, 40 × 0.25 = 10 mg/L. Dose 2 adds another 40, so the peak after dose 2 is C0(1 + f) = 40 × 1.25 = 50 mg/L.',
+  'After dose 3 the body holds the new dose (1), dose 2 one interval old (f) and dose 1 two intervals old (f²): C0(1 + f + f²) = 40 × (1 + 0.25 + 0.0625) = 40 × 1.3125 = 52.5 mg/L.',
+  'Each dose adds one more term, so after n doses the bracket is 1 + f + f² + … + f^(n−1): n terms, one for each dose, and the oldest dose is n − 1 intervals old.',
+  'Algebra shortens that sum. Call it S and multiply it by f: fS = f + f² + … + f^n. Subtract this from S: S − fS = 1 − f^n, because every term from f to f^(n−1) is in both lines and cancels.',
+  'Factor out S: S(1 − f) = 1 − f^n, so S = {{frac:1 - f^n|1 - f}}. Put back f = e^(-kτ) and f^n = e^(-nkτ): S = {{frac:1 - e^(-nkτ)|1 - e^(-kτ)}}, the bracket on her slide.',
+  'Check with two doses: {{frac:1 - 0.0625|1 - 0.25}} = {{frac:0.9375|0.75}} = 1.25, the same as 1 + 0.25 in step 2.']},
+ {h:'Why the top of the bracket becomes 1 at steady state', ol:true, list:[
+  'f is less than 1, so each power of f is smaller than the one before: f = 0.25, f² = 0.0625, f³ = 0.0156, f⁴ = 0.0039. In words, the first dose is almost gone after a few intervals.',
+  'The top of the bracket, 1 − f^n, therefore moves towards 1 as doses are added: 0.75, 0.9375, 0.9844, 0.9961 after doses 1 to 4.',
+  'Once f^n is too small to change the answer, the top is 1 and the bracket is {{frac:1|1 - e^(-kτ)}} = {{frac:1|0.75}} = 1.33, the accumulation factor. The textbook\'s Table 9-4 shows the same climb in amounts for a 1000-mg dose with f = 0.25: 1000, 1250, 1312, 1328, 1332 and 1333 mg after doses 1 to 6.',
+  'The equation is then the steady-state one: Cp = {{frac:D0|VD}} ({{frac:1|1 - e^(-kτ)}}) e^(-kt) = Cmax∞e^(-kt). For this regimen Cmax∞ = {{frac:40|0.75}} = 53.3 mg/L.']},
+ {h:'After the last dose', list:[
+  'After the last dose no more drug goes in, so the level falls from that peak by first-order elimination alone: at steady state C = Cmax∞e^(-kt), with t counted from the last dose.']}];
 
 const Q_MODULE6 = [
 
@@ -474,7 +497,7 @@ const Q_MODULE6 = [
    why:'This answer reads the equation backwards: it looks back at the doses already given, not forward. Doses still to come have not added any drug yet.'}],
  teach:[
   {t:'Two quantities place the time on the curve: n says which dose was last given, and t says how long ago it was given. For 3 hours after the second dose, n = 2 and t = 3 hr.'},
-  M6_NDOSE],
+  ...M6_NDOSE],
  teachImg:'slide_6RepetitiveIVBolus_p14',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses"; 09.23 lecture',
  quote:'So, in this one, the um N is 2, right? Because that\'s the dose number, the second dose, and the um lowercase t at the end of it is 3, because we\'re looking at the concentration 3 hours out.'},
@@ -494,7 +517,7 @@ const Q_MODULE6 = [
    why:'Choosing this confuses the n term with the accumulation factor, which is {{frac:1|1 − e^(-kτ)}}, with τ and not nτ. The n term approaches 1 and drops out, leaving the accumulation factor behind.'}],
  teach:[
   {t:'The n-dose equation and the steady-state equation are the same equation. Steady state is the limit reached when the dose number is large.'},
-  M6_NDOSE],
+  ...M6_NDOSE],
  teachImg:'slide_6RepetitiveIVBolus_p17',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Steady State"; 09.23 lecture',
  quote:'as N increases, that nation numerator portion up there reduces down to 1'},
@@ -514,7 +537,7 @@ const Q_MODULE6 = [
    why:'Choosing this carries the infusion build-up equation into a decline. 1 − e^(-kt) describes a rise towards a plateau, as during an infusion. After the last dose the level only falls.'}],
  teach:[
   {t:'After the last intravenous (IV) bolus dose the regimen is just first-order elimination from the steady-state peak: C = C0e^(-kt) with Cmax∞ as the starting value.'},
-  M6_NDOSE, M6_FIG],
+  ...M6_NDOSE, M6_FIG],
  teachImg:'slide_6RepetitiveIVBolus_p17',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Steady State"; 09.23 lecture',
  quote:'Last dose, we\'re gonna start at 53.3, and then it\'s just C0E minus KT.'},
@@ -676,9 +699,9 @@ const Q_MODULE6 = [
    why:'The kilograms cancel in {{frac:D0|VD}}, giving 40 mg/L. All times are in hours, so kτ = 0.1733 × 8 = 1.386 and each exponent is a pure number.'},
   {k:'algebra', t:'{{frac:1 - e^(-2(1.386))|1 - e^(-1.386)}} = {{frac:1 - 0.0625|1 - 0.25}} = {{frac:0.9375|0.75}} = 1.25',
    why:'e^(-2.772) = 0.25² = 0.0625. The bracket is how far the peak has risen after two doses: 1.25 times C0, against 1.33 at steady state.'},
-  {k:'algebra', t:'e^(-kt) = e^(-(0.1733 hr⁻¹)(3 hr)) = e^(-0.520) = 0.595',
+  {k:'algebra', t:'e^(-kt) = e^(-(0.1733 hr⁻¹)(3 hr)) = e^(-0.520) = 0.5945',
    why:'This is the decline for the 3 hours since the second dose. Three hours is less than one half-life, so the factor must lie between 1 and 0.5.'},
-  {k:'algebra', t:'Cp = 40 mg/L × 1.25 × 0.595 = 29.7 mg/L',
+  {k:'algebra', t:'Cp = 40 mg/L × 1.25 × 0.5945 = 29.7 mg/L',
    why:'40 × 1.25 = 50 mg/L is the peak just after the second dose: 40 from the new dose plus the 10 left from the first. Three hours of decline takes it to 29.7.'},
   {k:'round', t:'Cp = 29.7 mg/L',
    why:'Her value, 29.7 mg/L. It is below the 31.7 mg/L found 3 hours after a dose at steady state, because after two doses less drug has accumulated.'}],
@@ -688,7 +711,7 @@ const Q_MODULE6 = [
  check:{t:'Just after the 2nd dose the level is 40 plus the 10 mg/L left from the first, 50 mg/L; 3 hours is under one half-life, so the answer sits between 25 and 50 mg/L.', lo:25, hi:50},
  teach:[
   {t:'Before steady state, the n-dose equation for repeated intravenous (IV) bolus doses places the time: the bracket gives the peak after dose n and e^(-kt) gives the decline since then. Each piece is worked separately.'},
-  M6_NDOSE, M6_FIG],
+  ...M6_NDOSE, M6_FIG],
  teachImg:'slide_6RepetitiveIVBolus_p14',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 2"; slide "Plasma Drug Concentration at Any Time After n Doses"; 09.23 lecture',
  quote:'Now this one becomes an exercise in parentheses, etc. So I\'m gonna tell you I got 29.7 mg per liter.'},
@@ -703,19 +726,19 @@ const Q_MODULE6 = [
  steps:[
   {k:'setup', t:'C = Cmax∞e^(-kt), with t = 3 hr',
    why:'After the last dose no more drug goes in, so the level falls from the steady-state peak by first-order elimination alone.'},
-  {k:'algebra', t:'e^(-kt) = e^(-(0.693/4 hr)(3 hr)) = e^(-0.520) = 0.595',
+  {k:'algebra', t:'e^(-kt) = e^(-(0.1733 hr⁻¹)(3 hr)) = e^(-0.520) = 0.5945',
    why:'k = 0.1733 hr⁻¹ and t = 3 hr, so the exponent is a pure number. The time is the 3 hours after the last dose, not the 8-hour interval.'},
-  {k:'algebra', t:'C = 53.3 mg/L × 0.595 = 31.7 mg/L',
+  {k:'algebra', t:'C = 53.3 mg/L × 0.5945 = 31.7 mg/L',
    why:'Three hours is less than one half-life, so the level has fallen by less than half, and the answer must lie between 53.3 and 26.7 mg/L.'},
   {k:'round', t:'C = 31.7 mg/L',
    why:'31.7 mg/L, three significant figures as in her other values. It is higher than 29.7 mg/L at the same time after the second dose, because more drug has accumulated by steady state.'}],
  setup:{eq:'cp-ss', pre:['thalf-first'], why:'"every 8 hours by multiple IV bolus injections", "3 hours after injection of the last dose (assuming steady state was attained)": a concentration at time t within a steady-state interval. Cmax∞, t½ and t are given and Cp is asked; the first two factors of the line are Cmax∞, so Cp = Cmax∞e^(-kt). k first, from the half-life.'},
  asks:'Cp',
  givens:[['t½', 'approximately 4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '25% of body weight', 'not needed: the steady-state peak is given'], ['D0', '10 mg/kg', 'not needed: already inside the given peak'], ['τ', 'every 8 hours', 'not needed: the time asked is 3 hours, within the interval'], ['weight', '65-kg', 'not needed'], ['Cmax∞', '53.3 mg/L', 'the peak the level decays from'], ['t', '3 hours after injection', 't in e^(−kt)']],
- check:{t:'Three hours is under one half-life of 4 hours, so more than half of the 53.3 mg/L peak remains; 53.3 × 0.595 = 31.7 mg/L, below the peak and above half of it.', lo:26.6, hi:53.3},
+ check:{t:'Three hours is under one half-life of 4 hours, so more than half of the 53.3 mg/L peak remains; 53.3 × 0.5945 = 31.7 mg/L, below the peak and above half of it.', lo:26.6, hi:53.3},
  teach:[
   {t:'Once steady state is reached, the last intravenous (IV) bolus dose starts the same decline as every other dose, from Cmax∞, and nothing follows it. The same value comes from the steady-state equation, {{frac:D0|VD}} × {{frac:1|1 − e^(-kτ)}} × e^(-kt).'},
-  M6_NDOSE, M6_FIG],
+  ...M6_NDOSE, M6_FIG],
  teachImg:'slide_6RepetitiveIVBolus_p17',
  audit:'The 09.23 recording ends before she states a value for Example 3. Her method is on record ("Last dose, we\'re gonna start at 53.3, and then it\'s just C0E minus KT") and so are both inputs, 53.3 mg/L and t = 3 hr from the printed stem; 31.7 is 53.34 × e^(-0.17325 × 3) = 31.72. The handwritten working on the Example 3 slide of the annotated copy writes the exponent with 8 in place of 3, which would give the trough, so that slide is not attached as the image.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Example 3"; slide "Plasma Drug Concentration at Steady State"; 09.23 lecture',
@@ -743,7 +766,7 @@ const Q_MODULE6 = [
  check:{t:'Four hours after the dose is exactly one half-life of 4 hours, so the level is half the 53.3 mg/L peak: 53.3 × 0.5 = 26.7 mg/L, below the peak.', lo:0, hi:53.3},
  teach:[
   {t:'After the last intravenous (IV) bolus dose, when the time asked for is a whole number of half-lives, the answer can be found by halving, without the exponential.'},
-  M6_NDOSE],
+  ...M6_NDOSE],
  teachImg:'slide_6RepetitiveIVBolus_p17',
  audit:'She sets this as a question at the end of the 09.23 recording ("So it\'s 1, so 4 hours is 1 half-life. So if I ask you the concentration 4 hours after the last.") and the recording stops there. 26.7 is 53.34 × 0.5 = 26.67, from her own 53.3 mg/L and t½ of 4 hours.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Steady State"; 09.23 lecture',
@@ -957,7 +980,7 @@ const Q_MODULE6 = [
  check:{t:'k = 0.1732 hr⁻¹ is a 4-hour half-life, so 12 hours is three half-lives and the peak halves three times: 78.31 × 0.125 = 9.799 mg/L, an eighth of the peak and well below it.', lo:0, hi:78.31},
  teach:[
   {t:'After the last intravenous (IV) bolus dose, count half-lives from the steady-state peak. The interval τ plays no part once dosing has stopped.'},
-  M6_NDOSE],
+  ...M6_NDOSE],
  cite:'Multiple-IV-Bolus-Practice-1---Solutions.pdf, question 1(h)',
  quote:'C∞12 = (78.31 mg/L)e^−(12)(0.1732) = 9.799 mg/L'},
 

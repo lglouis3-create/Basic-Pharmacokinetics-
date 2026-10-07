@@ -2215,7 +2215,8 @@ const GUIDE_HTML = `
 <div class="geqline">build-up after n doses = {{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}</div>
 <div class="geqline">decay since dose n = e<sup>&minus;kt</sup></div>
 <ul class="tlist">
-<li>n is the dose number just given; t is the time since that dose (hr), not since the first dose.</li>
+<li>n is how many doses have been given, counting the one just given; t is the time since that dose (hr), not since the first dose.</li>
+<li>Why the build-up has that shape: with f = e<sup>&minus;k&tau;</sup>, the fraction of a dose left one interval later, the body just after dose n holds 1 + f + f<sup>2</sup> + &hellip; + f<sup>n&minus;1</sup> doses. That sum equals {{frac:1 &minus; f<sup>n</sup>|1 &minus; f}}, which is the bracket.</li>
 <li>When to use it: a concentration a stated time after the n-th dose, before steady state.</li>
 <li>As n grows, e<sup>&minus;nk&tau;</sup> falls towards 0, the build-up term becomes the accumulation factor r, and this becomes the steady-state line below.</li>
 <li>On the equation sheet: yes, in the multiple-dosing group.</li>

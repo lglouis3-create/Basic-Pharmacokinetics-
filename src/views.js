@@ -129,7 +129,7 @@ const GLOSS = [
 const teachParts = t => Array.isArray(t)
   ? t.filter(p => p && (p.t || p.fig || (p.list && p.list.length) || p.table))
       .map(p => ({h: p.h, t: p.t ? String(p.t) : '', list: (p.list || []).map(String), fig: p.fig || '',
-                  table: p.table || null, after: p.after ? String(p.after) : ''}))
+                  table: p.table || null, after: p.after ? String(p.after) : '', ol: !!p.ol}))
   : (t ? [{t: String(t), list: [], fig: '', table: null, after: ''}] : []);
 /* Everything a concept block says, as one string: each section's prose, its
    bullets and its table cells, so the term glosser and every check see all of it. */
@@ -151,7 +151,7 @@ function renderTeach(t, seen, self){
   return teachParts(t).map(p =>
     (p.h ? `<h5 class="tsec">${esc(p.h)}</h5>` : '') +
     (p.t ? `<p class="prose">${richHTML(gl(p.t))}</p>` : '') +
-    (p.list.length ? `<ul class="tlist">${p.list.map(li => `<li>${richHTML(gl(li))}</li>`).join('')}</ul>` : '') +
+    (p.list.length ? `<${p.ol ? 'ol' : 'ul'} class="tlist">${p.list.map(li => `<li>${richHTML(gl(li))}</li>`).join('')}</${p.ol ? 'ol' : 'ul'}>` : '') +
     (p.table ? compareTable(p.table) : '') +
     (p.fig && IMAGES[p.fig] ? `<img class="qimg tdimg" src="${IMAGES[p.fig]}" alt="Figure for this explanation">` : '') +
     (p.after ? `<p class="prose">${richHTML(gl(p.after))}</p>` : '')

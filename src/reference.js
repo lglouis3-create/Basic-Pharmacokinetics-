@@ -609,7 +609,7 @@ const REFERENCE_HTML = `
 <td>{{frac:FD<sub>0</sub>|V<sub>D</sub>k&tau;}} and D<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|k&tau;}}: yes, page 1. The Cl<sub>T</sub>&tau; form and the {{frac:AUC|&tau;}} form are not printed; Cl<sub>T</sub> = kV<sub>D</sub> turns the printed form into the first.</td></tr>
 
 <tr><td><b>C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}} ({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt</sup></b></td>
-<td>n the dose number just given; t the time since that dose (hr)</td>
+<td>n how many doses have been given, counting the one just given; t the time since that dose (hr)</td>
 <td>Before steady state. As n grows the top of the bracket becomes 1 and this becomes the steady-state equation.</td>
 <td>A concentration a stated time after the n-th dose. Her Example 2: 29.7 mg/L 3 hours after the 2nd dose.</td>
 <td>Yes, in the sheet's multiple-dosing group.</td></tr>
