@@ -19,11 +19,10 @@ f4 = lambda x: f'{x:.4f}'
 NOTE = 'Her homework wording with different numbers, so this is not the graded answer.'
 
 T_ORDER = [{'h': 'Deciding the order from a table', 'list': [
-    'Zero order: the same amount is lost in each equal time step, because the rate does not depend on how much is present, so C against t is a straight line on ordinary axes; k0 is an amount or concentration per unit time.',
-    'First order: the same fraction is lost in each equal time step, because the rate is proportional to the amount remaining, so ln C against t is a straight line; k is a fraction per unit time, in reciprocal time.',
-    'Check equal time steps: constant differences mean zero order; constant ratios mean first order. A first-order table also shows a constant half-life, while a zero-order half-life, {{frac:A0|2k0}}, depends on the starting amount.',
-    'How she tests it: her data-table stems do not state the order. Her Homework 1 key reads it from the plot (ln C against t a straight line, so first order), and her Math Review 3 keys zero order as the drug decreasing at a constant amount per unit time.',
-    'Chapter 2, "Determination of Order": plot the data on a rectangular graph first; a straight line means zero order, and a curve that straightens on a semilog graph means first order.']}]
+    'Zero order: the same amount is lost in each equal time step, so C against t is a straight line; k0 is an amount per unit time.',
+    'First order: the same fraction is lost in each equal time step, so ln C against t is a straight line; k is in reciprocal time.',
+    'A first-order table also shows a constant half-life; a zero-order half-life, {{frac:A0|2k0}}, depends on the starting amount.',
+    'Her data-table stems do not state the order; her Homework 1 key reads it from the plot.']}]
 T_K1 = [{'h': 'First order from two points', 'list': [
     'k = {{frac:ln(C1/C2)|t2 − t1}}, in reciprocal time.',
     't½ = {{frac:0.693|k}}.',
@@ -60,14 +59,21 @@ T_CRCL = [{'h': 'Creatinine clearance', 'list': [
     'Height in cm ÷ 2.54 = inches; count the inches over 60 and round to a whole inch, as her keys do.',
     'IBW: male 50 + 2.3 × (inches over 5 ft); female 45.5 + 2.3 × (inches over 5 ft).',
     'CrCl = {{frac:(140 − age)(IBW)|72 × SCr}}, × 0.85 if female; reported in mL/min.']}]
-T_CL = [{'h': 'Clearance after an IV bolus', 'list': [
-    'Dose and VD scale with weight: mg/kg × kg, L/kg × kg.',
-    'C = {{frac:D0|VD}} e^(−kt); AUC = {{frac:D0|ClT}} = {{frac:D0|kVD}}, because the amount removed over all time, ClT × AUC, equals the dose given.',
-    'fe = {{frac:amount unchanged in urine|dose}}, no units; ke = fe × k; ClR = fe × ClT; ClH = ClT − ClR, because the kidney did the share fe of the elimination and clearances by separate routes add.',
-    'Compare ClR in mL/min with the GFR (glomerular filtration rate, the volume of plasma the glomeruli filter per minute, about 120 mL/min in a healthy adult): equal means filtration only; above means active secretion adds drug to the urine beyond what was filtered; below means some filtered drug is reabsorbed back into the blood.',
-    'fe says how much of the elimination is renal, not how the kidney does it; only ClR set against the GFR names the mechanism.',
-    'Same AUC at a new clearance: new dose = AUC × new Cl. With VD unchanged, t½ = {{frac:0.693 VD|Cl}}, so a lower clearance lengthens the half-life.',
-    'Her slides "Renal Excretion", "Active Secretion" and "Tubular Reabsorption" state the three cases; Chapter 15, "Filtration Only" and Table 15-2, compares a drug\'s renal clearance with inulin, which is filtered only.']}]
+_CLH = 'Clearance after an IV bolus'
+_WT = 'Dose and VD scale with weight: mg/kg × kg, L/kg × kg.'
+T_CL_CT = [{'h': _CLH, 'list': [_WT, 'C = {{frac:D0|VD}} e^(−kt).']}]
+T_CL_AUC = [{'h': _CLH, 'list': [
+    'AUC = {{frac:D0|ClT}} = {{frac:D0|kVD}}, because the amount removed over all time, ClT × AUC, equals the dose given.',
+    'Same AUC at a new clearance: new dose = AUC × new Cl.']}]
+T_CL_RENAL = [{'h': _CLH, 'list': [
+    'fe = {{frac:amount unchanged in urine|dose}}, no units; ke = fe × k; ClR = fe × ClT; ClH = ClT − ClR.',
+    'The kidney did the share fe of the elimination, and clearances by separate routes add.']}]
+T_CL_MECH = [{'h': _CLH, 'list': [
+    'Compare ClR in mL/min with the GFR, the glomerular filtration rate, about 120 mL/min in a healthy adult: equal means filtration only, above means active secretion, below means reabsorption.',
+    'fe says how much of the elimination is renal, not how; only ClR set against the GFR names the mechanism.',
+    'Her slides "Renal Excretion", "Active Secretion" and "Tubular Reabsorption" state the three cases.']}]
+T_CL_HALF = [{'h': _CLH, 'list': [
+    'With VD unchanged, t½ = {{frac:0.693 VD|Cl}}, so a lower clearance lengthens the half-life.']}]
 T_ORAL = [{'h': 'One oral dose', 'list': [
     'k = 0.693/t½; ka = 0.693/t½ absorption, with the absorption half-life in hours.',
     'tmax = {{frac:ln(ka/k)|ka − k}}: it does not depend on the dose.',
@@ -106,7 +112,7 @@ p = [mc('hw1-1a', stem=S + 'a. Is the decomposition of this antibiotic a first-o
          check=dict(t=f'Between 2 and 8 hr the level falls from {cs[2]} to {cs[4]}, about half, so the half-life is near 6 hr and k near {{{{frac:0.693|6}}}}, a little over 0.115 hr⁻¹; the two-point slope gives {f4(kk)} hr⁻¹.', lo=0),
          teach=T_K1, note=NOTE, cite=f'{H(1)}, problem 1b (her wording; numbers changed)'),
      num('hw1-1c', asks='thalf', stem=S + 'c. What is the half-life t½?', units='hr', ans=round(th, 2), calc=0.693 / k, **M1, sub='half', skill='krate', concept='thalf-from-k',
-         steps=[('setup', f't½ = {{{{frac:0.693|k}}}} = {{{{frac:0.693|{f4(kk)} hr⁻¹}}}} = {f2(th)} hr', f'The half-life t½ is the time for C to fall to half, so e^(−k t½) = 0.5 and k t½ = ln 2 = 0.693, giving t½ = {{{{frac:0.693|k}}}}. With k = {f4(kk)} hr⁻¹ from part b, the reciprocal hours in the denominator invert to hours: {f2(th)} hr for every halving, whatever the starting concentration.')],
+         steps=[('setup', f't½ = {{{{frac:0.693|k}}}} = {{{{frac:0.693|{f4(kk)} hr⁻¹}}}} = {f2(th)} hr', f'The half-life t½ is the time for C to fall to half, so e^(−k t½) = 0.5 and k t½ = ln 2 = 0.693, giving t½ = {{{{frac:0.693|k}}}}. With k = {f4(kk)} hr⁻¹ from part b, the reciprocal hours in the denominator invert to hours: {f2(th)} hr for every halving.')],
          setup=dict(eq='thalf-first', pre=['first-ln'], why='Same first-order "decomposition" as part b, so the first-order block. k is known from part b and "the half-life t½" is asked, so t½ = 0.693/k, the first-order half-life line, is used directly.'),
          givens=[['D0', '300 milligrams', 'not needed: a first-order half-life does not depend on the amount'],
                  ['table', f'{cs[1]} mcg/mL at 1 hr and {cs[6]} mcg/mL at 16 hr', f'gave k = {f4(kk)} hr⁻¹ in part b, the denominator']],
@@ -153,7 +159,7 @@ p = [mc('hw1-2a', stem=S2 + 'a. Does the decrease in the amount of drug A appear
          teach=T_K0, note=NOTE, cite=f'{H(1)}, problem 2b (her wording; numbers changed)'),
      num('hw1-2c', asks='thalf', stem=S2 + 'c. What is the half-life t½?', units='hr', ans=round(A0 / (2 * k0), 2), calc=A0 / (2 * k0), **M1, sub='half', skill='krate', concept='zero-order-thalf',
          steps=[('setup', f'A0 = A + k0 t = {am[0]:g} mg + ({k0} mg/hr)(0.5 hr) = {A0} mg', f'The zero-order line A = A0 − k0 t rearranges to A0 = A + k0 t, with A0 the amount at time zero. The first entry, {am[0]:g} mg at 0.5 hr, has already lost k0 t = ({k0} mg/hr)(0.5 hr) = {k0*0.5:g} mg; adding it back gives A0 = {A0} mg for the half-life.'),
-                ('algebra', f't½ = {{{{frac:A0|2k0}}}} = {{{{frac:{A0} mg|2({k0} mg/hr)}}}} = {f2(A0/(2*k0))} hr', f'Half of A0 is {A0/2:g} mg, and at {k0} mg/hr that loss takes {{{{frac:{A0/2:g} mg|{k0} mg/hr}}}} = {f2(A0/(2*k0))} hr, which is t½ = {{{{frac:A0|2k0}}}}. The milligrams cancel and hours are left; unlike first order, this half-life grows with the starting amount, because a constant loss takes longer to remove half of a larger amount.')],
+                ('algebra', f't½ = {{{{frac:A0|2k0}}}} = {{{{frac:{A0} mg|2({k0} mg/hr)}}}} = {f2(A0/(2*k0))} hr', f'Half of A0 is {A0/2:g} mg, and at {k0} mg/hr that loss takes {{{{frac:{A0/2:g} mg|{k0} mg/hr}}}} = {f2(A0/(2*k0))} hr, which is t½ = {{{{frac:A0|2k0}}}}. Unlike first order, this half-life grows with the starting amount, because a constant loss takes longer to remove half of a larger amount.')],
          setup=dict(eq='thalf-zero', pre=['zero-line'], why='Zero-order "decrease in the amount of drug A", so the zero-order block. k0 from part b is known and "the half-life t½" is asked, so t½ = A0/2k0. A0 first, from the zero-order line rearranged to A0 = A + k0 t, because this half-life wants the starting amount, not a tabulated one.'),
          givens=[['A at 0.5 hr', f'{am[0]:g} mg', f'brought back 0.5 hr to A0 = {A0} mg, the numerator'],
                  ['table', f'{am[1]:g} mg at 1 hr and {am[7]:g} mg at 16 hr', f'gave k0 = {k0} mg/hr in part b, in the denominator 2k0']],
@@ -218,7 +224,7 @@ p = [num('hw2-1a', asks='thalf', stem=S + 'a. What is the half-life of this agen
          teach=T_BOLUS, note=NOTE, cite=f'{H(2)}, problem 1c (her wording; numbers changed)'),
      num('hw2-1d', asks='t', stem=S + 'd. How many hours following administration of the dose are required for 87.5% of the agent to be eliminated from the body?', units='hr', ans=round(3 * tb, 2), calc=3 * 0.693 / 0.12, **M2, skill='krate', concept='time-to-fraction',
          steps=[('setup', '87.5% eliminated leaves 12.5%: 100 → 50 → 25 → 12.5, three half-lives', '87.5% eliminated means 100 − 87.5 = 12.5% of the dose remains. With first-order elimination each half-life t½ removes half of what is left: 100% to 50% after one, to 25% after two, to 12.5% after three, so the time to 12.5% remaining is three half-lives.'),
-                ('algebra', f't = 3 × {f2(tb)} hr = {f2(3*tb)} hr', f'3 × {f3(tb)} hr = {f2(3*tb)} hr, with t½ from part a carried unrounded. The same result comes from C = C0 e^(−kt) with C over C0 = 0.125: t = {{{{frac:ln 8|k}}}} = {{{{frac:2.0794|{f4(kb)} hr⁻¹}}}} = {f2(ln(8)/kb)} hr. The time to a stated fraction eliminated depends on k alone, not on the dose.')],
+                ('algebra', f't = 3 × {f2(tb)} hr = {f2(3*tb)} hr', f'3 × {f3(tb)} hr = {f2(3*tb)} hr. The same result comes from C = C0 e^(−kt) with C over C0 = 0.125: t = {{{{frac:ln 8|k}}}} = {{{{frac:2.0794|{f4(kb)} hr⁻¹}}}} = {f2(ln(8)/kb)} hr. The time to a stated fraction eliminated depends on k alone, not on the dose.')],
          setup=dict(eq='first-exp', pre=['first-ln', 'thalf-first'], why='"IV bolus", "first-order" elimination. "87.5% of the agent to be eliminated" fixes the fraction left and the time is asked, so the exponential line C = C0 e^(−kt) solved for t applies. The working counts half-lives instead: 12.5% left is three half-lives, so t = 3 × t½ with t½ from part a.'),
          givens=[['weight', f'{lb}-lb', 'not needed: the time to a fraction does not depend on the dose'], ['D0', f'{dpk} mg/kg', 'not needed'],
                  ['fraction eliminated', '87.5%', 'leaves 12.5%, three half-lives'], ['table', f'{c1} and {c2} mcg/mL at 2 and 8 hours', f'gave t½ = {f2(tb)} hr in part a']],
@@ -399,7 +405,7 @@ p = [num('hw4-2a', asks='Cp', stem=S + 'a. What is the expected plasma concentra
                  ['weight', f'{wt4} kg', 'scales both the dose and the volume'], ['D0', f'{dpk4} mg/kg', f'scaled to {wt4} kg: {D4} mg, the numerator of C0'],
                  ['t', '10 hours after administration', 't in e^(−kt)']],
          check=dict(t=f'C0 = {{{{frac:{D4}|{V4:g}}}}} = {D4/V4:g} mg/L, and 10 hours is between one and two half-lives of {th4} hours, so between 0.25 × {D4/V4:g} and 0.5 × {D4/V4:g} mg/L remains: {f2(c10)} mg/L.', lo=0.25 * D4 / V4, hi=0.5 * D4 / V4),
-         teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2a (her wording; numbers changed)'),
+         teach=T_CL_CT, note=NOTE, cite=f'{H(4)}, problem 2a (her wording; numbers changed)'),
      num('hw4-2b', asks='AUC', stem=S + 'b. What is the expected AUC in this patient following this IV bolus dose?', units='(mg/L)·hr', ans=round(auc4, 1), calc=auc4, **M4, sub='clcalc', skill='clearance', concept='auc-from-cl',
          steps=[('setup', f'ClT = k × VD = ({f4(k4)} hr⁻¹)({V4:g} L) = {f4(Cl4)} L/hr', f'Total clearance ClT is the volume of plasma cleared of drug per hour; the fraction k = {f4(k4)} hr⁻¹ of the drug leaves each hour from a volume VD = {V4:g} L, so ClT = k × VD = ({f4(k4)} hr⁻¹)({V4:g} L) = {f4(Cl4)} L/hr, reciprocal hours times litres giving litres per hour.'),
                 ('algebra', f'AUC = {{{{frac:D0|ClT}}}} = {{{{frac:{D4} mg|{f4(Cl4)} L/hr}}}} = {f1(auc4)} (mg/L)·hr', f'AUC, the area under the concentration–time curve, is the total exposure from the dose; clearance removes drug at ClT × C, so over all time ClT × AUC = D0 and AUC = {{{{frac:D0|ClT}}}}. {{{{frac:{D4} mg|{f4(Cl4)} L/hr}}}}: dividing by L/hr multiplies by hr/L, so mg becomes (mg/L)·hr, {f1(auc4)} (mg/L)·hr.')],
@@ -407,7 +413,7 @@ p = [num('hw4-2a', asks='Cp', stem=S + 'a. What is the expected plasma concentra
          givens=[['t½', f'approximately {th4} hours', f'gives k = {f4(k4)} hr⁻¹, in ClT = kVD'], ['VD', f'{vkg} L/kg', f'scaled to {wt4} kg: {V4:g} L, in ClT = kVD = {f4(Cl4)} L/hr'],
                  ['weight', f'{wt4} kg', 'scales both the dose and the volume'], ['D0', f'{dpk4} mg/kg', f'scaled to {wt4} kg: {D4} mg, the numerator']],
          check=dict(t=f'AUC is also {{{{frac:C0|k}}}}: C0 = {D4/V4:g} mg/L over {f4(k4)} hr⁻¹ is about 433 (mg/L)·hr, agreeing with {D4} mg over {f4(Cl4)} L/hr: {f1(auc4)}.', lo=0),
-         teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2b (her wording; numbers changed)'),
+         teach=T_CL_AUC, note=NOTE, cite=f'{H(4)}, problem 2b (her wording; numbers changed)'),
      num('hw4-2c', asks='ke', stem=S + f'c. Urine samples were collected and analyzed for 48 hours following the dose. If {uri} mg of drug was recovered in the urine, what is the excretion rate constant of this agent?', units='hr⁻¹', ans=round(fe4 * k4, 4), calc=fe4 * k4, **M4, sub='clcalc', skill='clearance', concept='ke-from-fe',
          steps=[('setup', f'fe = {{{{frac:{uri} mg|{D4} mg}}}} = {f2(fe4)}', 'Forty-eight hours is eight half-lives, so the urine holds essentially all the unchanged drug that will be excreted.'),
                 ('algebra', f'ke = fe × k = ({f2(fe4)})({f4(k4)} hr⁻¹) = {f4(fe4*k4)} hr⁻¹', f'k = {f4(k4)} hr⁻¹ is the fraction of the drug in the body eliminated per hour by all routes; the kidney accounts for the fraction fe = {f2(fe4)} of that, so the excretion rate constant ke is that share of k: ({f2(fe4)})({f4(k4)} hr⁻¹) = {f4(fe4*k4)} hr⁻¹. fe has no units, so ke keeps hr⁻¹.')],
@@ -416,7 +422,7 @@ p = [num('hw4-2a', asks='Cp', stem=S + 'a. What is the expected plasma concentra
                  ['weight', f'{wt4} kg', f'scales the dose to {D4} mg, the denominator of fe'], ['D0', f'{dpk4} mg/kg', f'scaled to {wt4} kg: {D4} mg, the denominator of fe'],
                  ['collection', '48 hours', 'not needed for the number: eight half-lives, so all unchanged drug is in'], ['Du', f'{uri} mg', 'the numerator of fe']],
          check=dict(t=f'{uri} of {D4} mg, seven-tenths, left unchanged in urine, so the kidney does seven-tenths of the elimination: ke = {f2(fe4)} × {f4(k4)} = {f4(fe4*k4)} hr⁻¹, below k and above zero.', lo=0, hi=round(k4, 4)),
-         teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2c (her wording; numbers changed)'),
+         teach=T_CL_RENAL, note=NOTE, cite=f'{H(4)}, problem 2c (her wording; numbers changed)'),
      num('hw4-2d', asks='ClR', stem=S + SU + 'd. What is the renal clearance of this drug?', units='L/hr', ans=round(clr4, 3), calc=clr4, **M4, sub='clcalc', skill='clearance', concept='clr-from-fe',
          steps=[('setup', f'ClR = fe × ClT = ({f2(fe4)})({f4(Cl4)} L/hr) = {f3(clr4)} L/hr', f'Total clearance ClT = {f4(Cl4)} L/hr, from part b, is the plasma volume cleared per hour by all routes. The fraction fe = {f2(fe4)} found unchanged in urine is the share the kidney did, so renal clearance ClR = fe × ClT = ({f2(fe4)})({f4(Cl4)} L/hr) = {f3(clr4)} L/hr; fe has no units.'),
                 ('unit', f'{f3(clr4)} L/hr × {{{{frac:1000 mL|L}}}} × {{{{frac:1 hr|60 min}}}} = {f1(clr4m)} mL/min', f'L/hr to mL/min: × 1000 mL/L turns litres into millilitres and dividing by 60 min/hr turns hours into minutes, so {f3(clr4)} × 1000 = {clr4*1000:.0f} mL/hr and {{{{frac:{clr4*1000:.0f} mL/hr|60 min/hr}}}} = {f1(clr4m)} mL/min. In mL/min the renal clearance can be set beside the glomerular filtration rate, about 120 mL/min, in part e.')],
@@ -425,22 +431,22 @@ p = [num('hw4-2a', asks='Cp', stem=S + 'a. What is the expected plasma concentra
                  ['weight', f'{wt4} kg', 'scales dose and volume'], ['D0', f'{dpk4} mg/kg', f'scaled to {D4} mg, the denominator of fe'],
                  ['collection', '48 hours', 'not needed for the number: long enough to collect all unchanged drug'], ['Du', f'{uri} mg', f'the numerator of fe = {f2(fe4)}']],
          check=dict(t=f'Seven-tenths of the drug leaves by the kidney, so renal clearance is seven-tenths of the total {f4(Cl4)} L/hr: {f3(clr4)} L/hr, below the total; in mL/min that is {f1(clr4m)}.', lo=0, hi=round(Cl4, 4)),
-         teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2d (her wording; numbers changed)'),
+         teach=T_CL_RENAL, note=NOTE, cite=f'{H(4)}, problem 2d (her wording; numbers changed)'),
      mc('hw4-2e', stem=S + SU + 'e. What is the probable mechanism for renal clearance of this drug?', **M4, sub='renalmech', skill='apply', concept='mechanism-from-clr',
-        options=[('Filtration with tubular reabsorption', True, f'Renal clearance is {f1(clr4m)} mL/min, below the GFR, the glomerular filtration rate of about 120 mL/min. Filtration alone would clear plasma at that rate, so a smaller renal clearance means some filtered drug moved back from the tubule into the blood: filtration with partial reabsorption.'),
-                 ('Filtration with active secretion', False, f'Picking this reads a drug that is mostly renal (fe = {f2(fe4)}) as one the kidney secretes. Active secretion adds drug to the urine on top of filtration, so renal clearance would exceed the GFR of about 120 mL/min; here ClR is {f1(clr4m)} mL/min, far below it, so drug is being taken back, not added.'),
-                 ('Filtration only', False, f'This answer takes filtration as the whole mechanism although renal clearance is below GFR. Filtration alone clears unbound drug at the glomerular filtration rate, about 120 mL/min; a renal clearance of {f1(clr4m)} mL/min is far less, so most of the filtered drug returns to the blood by reabsorption.'),
-                 ('Active secretion only', False, f'Picking this treats secretion as a route that can replace filtration. Every unbound drug in plasma is filtered at the glomerulus, so filtration is always present, and secretion added to it would raise renal clearance above the GFR of about 120 mL/min; {f1(clr4m)} mL/min is below GFR, which only reabsorption produces.')],
-        steps=[('setup', f'D0 = ({dpk4} mg/kg)({wt4} kg) = {D4} mg; fe = {{{{frac:Du|D0}}}} = {{{{frac:{uri} mg|{D4} mg}}}} = {f2(fe4)}', f'fe is the fraction of the dose that reaches the urine unchanged. It says how much of the elimination is renal, {int(round(fe4*100))}%, and nothing about how the kidney does it: a drug can be {int(round(fe4*100))}% renal by filtration alone, by filtration with reabsorption, or with secretion.'),
-               ('setup', f'k = {{{{frac:0.693|{th4}}}}} = {f4(k4)} hr⁻¹; VD = ({vkg} L/kg)({wt4} kg) = {V4:g} L; ClT = kVD = ({f4(k4)})({V4:g}) = {f4(Cl4)} L/hr', 'The mechanism is read from renal clearance, and renal clearance is a share of total clearance, so total clearance comes first: the rate constant from the half-life and the volume scaled to the patient.'),
-               ('algebra', f'ClR = fe × ClT = {f2(fe4)} × {f4(Cl4)} L/hr = {f3(clr4)} L/hr', 'Renal clearance is the renal fraction of total clearance: the same fe that was only a fraction in step 1 now scales a clearance, which has units and a physiological reference to compare against.'),
-               ('unit', f'ClR = {f3(clr4)} L/hr × {{{{frac:1000 mL|1 L}}}} × {{{{frac:1 hr|60 min}}}} = {f1(clr4m)} mL/min', 'The glomerular filtration rate is quoted in mL/min, so renal clearance is put in the same unit before the two are compared; L cancels against mL per L and hr against hr per min.'),
-               ('setup', f'Compare: ClR = {f1(clr4m)} mL/min against GFR of about 120 mL/min; {f1(clr4m)} is below 120', 'Filtration alone would clear unbound drug at the GFR. A renal clearance below the GFR means some filtered drug is taken back into the blood, so the mechanism is filtration with partial reabsorption; above the GFR would mean secretion adds drug to the urine.')],
+        options=[('Filtration with tubular reabsorption', True, f'Renal clearance is {f1(clr4m)} mL/min, below the GFR, the glomerular filtration rate of about 120 mL/min. Filtration alone would clear plasma at that rate, so some filtered drug moved back into the blood: filtration with partial reabsorption.'),
+                 ('Filtration with active secretion', False, f'Picking this reads a mostly renal drug (fe = {f2(fe4)}) as one the kidney secretes. Secretion would push renal clearance above the GFR of about 120 mL/min; here ClR is {f1(clr4m)} mL/min, far below it.'),
+                 ('Filtration only', False, f'This answer takes filtration as the whole mechanism although renal clearance is below GFR. Filtration alone clears at about 120 mL/min; {f1(clr4m)} mL/min is far less, so most filtered drug is reabsorbed.'),
+                 ('Active secretion only', False, f'Picking this treats secretion as a route that can replace filtration. Filtration is always present, and secretion added to it would raise renal clearance above the GFR; {f1(clr4m)} mL/min is below it, which only reabsorption produces.')],
+        steps=[('setup', f'D0 = ({dpk4} mg/kg)({wt4} kg) = {D4} mg; fe = {{{{frac:Du|D0}}}} = {{{{frac:{uri} mg|{D4} mg}}}} = {f2(fe4)}', f'fe is the fraction of the dose reaching the urine unchanged. It says how much of the elimination is renal, {int(round(fe4*100))}%, not how the kidney does it.'),
+               ('setup', f'k = {{{{frac:0.693|{th4}}}}} = {f4(k4)} hr⁻¹; VD = ({vkg} L/kg)({wt4} kg) = {V4:g} L; ClT = kVD = ({f4(k4)})({V4:g}) = {f4(Cl4)} L/hr', 'The mechanism is read from renal clearance, a share of total clearance, so total clearance comes first: k from the half-life and the volume scaled to the patient.'),
+               ('algebra', f'ClR = fe × ClT = {f2(fe4)} × {f4(Cl4)} L/hr = {f3(clr4)} L/hr', 'Renal clearance is the renal fraction of total clearance: fe now scales a clearance, which has units and a physiological reference to compare against.'),
+               ('unit', f'ClR = {f3(clr4)} L/hr × {{{{frac:1000 mL|1 L}}}} × {{{{frac:1 hr|60 min}}}} = {f1(clr4m)} mL/min', 'The glomerular filtration rate is quoted in mL/min, so renal clearance is put in the same unit before the two are compared.'),
+               ('setup', f'Compare: ClR = {f1(clr4m)} mL/min against GFR of about 120 mL/min; {f1(clr4m)} is below 120', 'A renal clearance below the GFR means some filtered drug is taken back into the blood: filtration with partial reabsorption.')],
         givens=[['t½', f'approximately {th4} hours', f'gives k = {{{{frac:0.693|{th4}}}}} = {f4(k4)} hr⁻¹, on the way to ClT'], ['VD', f'{vkg} L/kg', f'scaled to {V4:g} L, inside ClT = kVD'],
                 ['weight', f'{wt4} kg', 'scales the dose and the volume'], ['D0', f'{dpk4} mg/kg', f'scaled to {D4} mg, the denominator of fe'],
                 ['collection', '48 hours', 'not needed for the number: long enough to collect all unchanged drug'], ['Du', f'{uri} mg', f'the numerator of fe = {f2(fe4)}']],
         check=dict(t=f'fe = {f2(fe4)} alone cannot name the mechanism: a drug with the same fe but a much shorter half-life would have a renal clearance above GFR and be secreted. Only ClR in mL/min set against about 120 mL/min decides, and {f1(clr4m)} is well below it.'),
-        teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2e (her wording; numbers changed)'),
+        teach=T_CL_MECH, note=NOTE, cite=f'{H(4)}, problem 2e (her wording; numbers changed)'),
      num('hw4-2f', asks='ClH', stem=S + SU + 'f. What is the hepatic clearance of this drug in this patient?', units='L/hr', ans=round(Cl4 - clr4, 3), calc=Cl4 - clr4, **M4, sub='clcalc', skill='clearance', concept='clh-from-clt',
          steps=[('setup', f'ClH = ClT − ClR = {f4(Cl4)} − {f3(clr4)} = {f3(Cl4-clr4)} L/hr', f'Total clearance ClT is the sum of the clearances by each route, ClT = ClR + ClH, so the hepatic clearance ClH is what remains after the renal clearance ClR from part d is subtracted: {f4(Cl4)} − {f3(clr4)} = {f3(Cl4-clr4)} L/hr, the fraction 1 − fe = {f2(1-fe4)} of the total.')],
          setup=dict(eq='clt-sum', pre=['thalf-first', 'cl-k-vd', 'fe', 'clr'], why='"Recovered in the urine" after an IV dose, so the renal block. ClR from part d and ClT from part b are known and "the hepatic clearance" is asked, so the clearance sum ClT = ClR + ClH is rearranged to ClH = ClT − ClR.'),
@@ -448,15 +454,15 @@ p = [num('hw4-2a', asks='Cp', stem=S + 'a. What is the expected plasma concentra
                  ['weight', f'{wt4} kg', 'scales dose and volume'], ['D0', f'{dpk4} mg/kg', 'the denominator of fe'],
                  ['collection', '48 hours', 'not needed for the number'], ['Du', f'{uri} mg', f'gave fe = {f2(fe4)} and ClR = {f3(clr4)} L/hr in part d, subtracted']],
          check=dict(t=f'The kidney does seven-tenths, so the liver does the other three-tenths of {f4(Cl4)} L/hr: {f3(Cl4-clr4)} L/hr, which is also {f4(Cl4)} − {f3(clr4)}; it is below the renal clearance and above zero.', lo=0, hi=round(clr4, 3)),
-         teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2f (her wording; numbers changed)'),
+         teach=T_CL_RENAL, note=NOTE, cite=f'{H(4)}, problem 2f (her wording; numbers changed)'),
      num('hw4-2g', asks='thalf', stem=S + f'g. If this drug were administered to a patient with partial renal failure and a clearance of {Cln} L/hr (assuming no change to the volume of distribution), what elimination half-life would you expect?', units='hr', ans=round(0.693 * V4 / Cln, 2), calc=0.693 * V4 / Cln, **M4, sub='clcalc', skill='krate', concept='thalf-from-cl-vd',
-         steps=[('setup', f't½ = {{{{frac:0.693 VD|Cl}}}} = {{{{frac:0.693({V4:g} L)|{Cln} L/hr}}}} = {f2(0.693*V4/Cln)} hr', f't½ = {{{{frac:0.693 VD|Cl}}}} combines Cl = k × VD with k = {{{{frac:0.693|t½}}}}. VD is unchanged at {V4:g} L, so (0.693)({V4:g} L) = {0.693*V4:.3f} L and {{{{frac:{0.693*V4:.3f} L|{Cln} L/hr}}}} = {f2(0.693*V4/Cln)} hr, the litres cancelling. Clearance fell from {f4(Cl4)} to {Cln} L/hr, about half, so the half-life about doubled from {th4} hr.')],
+         steps=[('setup', f't½ = {{{{frac:0.693 VD|Cl}}}} = {{{{frac:0.693({V4:g} L)|{Cln} L/hr}}}} = {f2(0.693*V4/Cln)} hr', f't½ = {{{{frac:0.693 VD|Cl}}}} combines Cl = k × VD with k = {{{{frac:0.693|t½}}}}. VD is unchanged at {V4:g} L, so (0.693)({V4:g} L) = {0.693*V4:.3f} L and {{{{frac:{0.693*V4:.3f} L|{Cln} L/hr}}}} = {f2(0.693*V4/Cln)} hr. Clearance fell from {f4(Cl4)} to {Cln} L/hr, about half, so the half-life about doubled from {th4} hr.')],
          setup=dict(eq='thalf-cl-vd', pre=[], why='"Partial renal failure and a clearance of" a stated value, with "no change to the volume of distribution". Cl and VD are known and the "elimination half-life" is asked, so t½ = 0.693 × VD/ClT, the half-life from volume and clearance, with the new clearance.'),
          givens=[['t½', f'approximately {th4} hours', 'the normal half-life, replaced by the new one; not in the line'], ['VD', f'{vkg} L/kg', f'scaled to {V4:g} L, unchanged, the numerator with 0.693'],
                  ['weight', f'{wt4} kg', f'scales the volume to {V4:g} L'], ['D0', f'{dpk4} mg/kg', 'not needed: half-life does not depend on the dose'],
                  ['new Cl', f'{Cln} L/hr', 'the denominator']],
          check=dict(t=f'Clearance fell to {Cln} L/hr, about half of normal, with the volume unchanged, so the half-life about doubles from {th4} hr: {f2(0.693*V4/Cln)} hr, above {th4}.', lo=th4),
-         teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2g (her wording; numbers changed)'),
+         teach=T_CL_HALF, note=NOTE, cite=f'{H(4)}, problem 2g (her wording; numbers changed)'),
      num('hw4-2h', asks='D0', stem=S + f'h. What dose would you recommend to provide the same AUC (as determined in part b) for this patient with partial renal failure and clearance of {Cln}L/hr?', units='mg', ans=round(auc4 * Cln, 1), calc=auc4 * Cln, **M4, sub='clcalc', skill='clearance', concept='dose-for-same-auc',
          steps=[('setup', f'D0 = AUC × Cl = ({f1(auc4)} (mg/L)·hr)({Cln} L/hr) = {f1(auc4*Cln)} mg', 'AUC = D0/Cl rearranged: a lower clearance needs a proportionally lower dose to give the same exposure.')],
          setup=dict(eq='cl-auc', pre=['thalf-first', 'cl-k-vd'], why='"The same AUC (as determined in part b)" at the "clearance" of the "partial renal failure" patient. AUC and the new Cl are known and the "dose" is asked, so Cl = D0/AUC is rearranged to D0 = AUC × Cl.'),
@@ -464,7 +470,7 @@ p = [num('hw4-2a', asks='Cp', stem=S + 'a. What is the expected plasma concentra
                  ['weight', f'{wt4} kg', f'scales the dose to {D4} mg, the normal dose'], ['D0', f'{dpk4} mg/kg', f'{D4} mg gave the AUC at normal clearance; the new dose is asked'],
                  ['new Cl', f'{Cln} L/hr', 'multiplied by the AUC']],
          check=dict(t=f'Dose and clearance scale together for the same AUC: clearance fell to {Cln} L/hr, about half of normal, so the dose falls to about half of the normal {dpk4} mg/kg × {wt4} kg: {f1(auc4*Cln)} mg, below it.', lo=0, hi=D4),
-         teach=T_CL, note=NOTE, cite=f'{H(4)}, problem 2h (her wording; numbers changed)')]
+         teach=T_CL_AUC, note=NOTE, cite=f'{H(4)}, problem 2h (her wording; numbers changed)')]
 chain('hw4-p2', src='homework', module=4, name='Homework 4, problem 2: clearance after an IV bolus (numbers changed)', setup=f't½ {th4} hr, VD {vkg} L/kg, {wt4} kg, {dpk4} mg/kg, {uri} mg in urine; parts a–h', parts=p)
 
 # ---------------------------------------------------------------- HW5 P1
@@ -484,7 +490,7 @@ p = [num('hw5-1a', asks='tmax', stem=S + 'a. When does the maximum concentration
          check=dict(t=f'Absorption, half-life 1 hour, is five times faster than elimination, half-life {te} hours, so the peak comes a few absorption half-lives in and before one elimination half-life: {f2(tm)} hr, between 1 and {te}.', lo=0),
          teach=T_ORAL, note=NOTE, cite=f'{H(5)}, problem 1a (her wording; numbers changed)'),
      num('hw5-1b', asks='Cmax', stem=S + 'b. What is the expected maximum concentration following this single oral dose?', units='mg/L', ans=round(cmax(D5), 2), calc=cmax(D5), **M5, sub='peak', skill='oral', concept='cmax-oral',
-         steps=[st_k, ('algebra', f'Cmax = {{{{frac:(0.9)({D5} mg)({f4(ka)} hr⁻¹)|({V5} L)({f4(ka-k5)} hr⁻¹)}}}} (e^(−({f4(k5)})({f2(tm)})) − e^(−({f4(ka)})({f2(tm)})))', f'The single oral dose equation Cp = {{{{frac:F ka D0|VD(ka − k)}}}} (e^(−kt) − e^(−ka t)) at t = tmax = {f2(tm)} hr; F = {F5} is the fraction absorbed, D0 = {D5} mg, VD = {V5} L. On top, (0.9)({D5})({f4(ka)}) = {F5*D5*ka:.2f} mg·hr⁻¹; below, ({V5})({f4(ka-k5)}) = {V5*(ka-k5):.3f} L·hr⁻¹; the reciprocal hours cancel, leaving mg/L.'),
+         steps=[st_k, ('algebra', f'Cmax = {{{{frac:(0.9)({D5} mg)({f4(ka)} hr⁻¹)|({V5} L)({f4(ka-k5)} hr⁻¹)}}}} (e^(−({f4(k5)})({f2(tm)})) − e^(−({f4(ka)})({f2(tm)})))', f'The single oral dose equation Cp = {{{{frac:F ka D0|VD(ka − k)}}}} (e^(−kt) − e^(−ka t)) at t = tmax = {f2(tm)} hr; F = {F5} is the fraction absorbed, D0 = {D5} mg, VD = {V5} L. On top, (0.9)({D5})({f4(ka)}) = {F5*D5*ka:.2f} mg·hr⁻¹; below, ({V5})({f4(ka-k5)}) = {V5*(ka-k5):.3f} L·hr⁻¹; the reciprocal hours cancel.'),
                 ('round', f'Cmax = ({f3(F5*D5*ka/(V5*(ka-k5)))})({f4(e(-k5*tm)-e(-ka*tm))}) = {f2(cmax(D5))} mg/L', f'{{{{frac:{F5*D5*ka:.2f}|{V5*(ka-k5):.3f}}}}} = {f3(F5*D5*ka/(V5*(ka-k5)))} mg/L is the coefficient. At tmax the elimination term e^(−({f4(k5)})({f2(tm)})) = {f4(e(-k5*tm))} and the absorption term e^(−({f4(ka)})({f2(tm)})) = {f4(e(-ka*tm))}; their difference, {f4(e(-k5*tm)-e(-ka*tm))}, times the coefficient gives Cmax = {f2(cmax(D5))} mg/L.')],
          setup=dict(eq='oral-cp', pre=['thalf-abs', 'thalf-first', 'tmax'], why='"Single" dose "administered orally" with "bioavailable", "absorption half-life", "elimination half-life" and "volume of distribution" given. "The expected maximum concentration" is asked, so the oral line Cp = [F ka D0/(VD(ka − k))](e^(−kt) − e^(−ka t)) is evaluated at t = tmax. ka, k and tmax first, from their half-lives and the tmax line.'),
          givens=[['D0', f'{D5}mg', 'in the numerator F ka D0'], ['F', f'{int(F5*100)}%', f'written {F5}, in the numerator'],

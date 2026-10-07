@@ -25,22 +25,15 @@ const Q_MODULE2 = [
   {t:'It enters at a constant rate and distributes uniformly', correct:false,
    why:'Picking this reads the input as an infusion. Constant-rate input is intravenous infusion, a zero-order process at the input end that belongs to a later module. The word bolus fixes the input as instantaneous, the whole dose in at time zero, so attaching a rate to it replaces the mode of administration the question names.'},
   {t:'It enters at once and stays in the plasma until elimination begins', correct:false,
-   why:'This adds a waiting period before elimination starts, which the model does not have. Dr. Mosley says all the drug goes in and all the drug goes out, and that as soon as the drug is in the body it starts immediately being eliminated. Confining the dose to plasma also confuses the plasma sample with the volume of distribution.'}],
+   why:'This adds a waiting period before elimination starts, which the model does not have. Dr. Mosley says that as soon as the drug is in the body it starts immediately being eliminated. Confining the dose to plasma also confuses the plasma sample with the volume of distribution.'}],
  teach:[
   {h:'The idea', list:[
     'The one-compartment open model makes two simplifications, both at time zero.',
     'Instantaneous input: the amount in the body at time zero is the whole dose.',
-    'Instantaneous, uniform distribution: one measured plasma concentration describes the whole body.',
+    'Instantaneous, uniform distribution: one measured plasma concentration describes the whole body. Blood takes a few minutes to circulate, so this holds in the model, not in the patient.',
     '"Open" means drug can leave, and it starts leaving from that same instant.',
-    'Everything else in this module follows from these two assumptions, including Cp = {{frac:DB|VD}} (plasma concentration = amount in the body ÷ apparent volume of distribution) and the exponential decay.']},
-  {h:'How the variables relate', list:[
-    'C = C0e^(-kt): C is the plasma concentration at time t, C0 the concentration at time zero, and k the elimination rate constant.',
-    'At time zero the whole dose is in the body.',
-    'C0 = {{frac:D0|VD}} (D0 is the dose; VD is the apparent volume of distribution), so the curve starts at its highest point and only falls.',
-    'An IV (intravenous) bolus with no model stated is treated as one compartment, first order.']},
-  {h:'What Chapter 12 adds', list:[
-    'The single compartment suits drugs that are polar (water-soluble), distribute rapidly through the body and are readily excreted in the urine; Chapter 13 gives the aminoglycosides, whose distribution is limited to extracellular water, as the example.',
-    'Blood takes a few minutes to circulate. So distribution is instantaneous in the model, not in the patient.']}],
+    'So C0 = {{frac:D0|VD}} (D0 is the dose, VD the apparent volume of distribution), and C = C0e^(−kt) only falls from there.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration".'}],
  teachImg:'slide_2IVBolusAdministra_p3',
  cite:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration"',
  quote:'the drug goes into the body all at once, like instantly all the drug is into the body and all the drug is instantly uniformly distributed throughout the body. Assumptions, simplifications, this does not happen.'},
@@ -65,17 +58,9 @@ const Q_MODULE2 = [
     'Three assumptions define the model, and each does a separate job.',
     'Instantaneous input fixes the starting amount: the whole dose.',
     'A single uniform compartment lets one measured plasma concentration represent the whole body.',
-    'Open means elimination runs the whole time.']},
-  {h:'The common error', list:[
-    'Treating the three as one claim. A wrong statement often keeps two of the assumptions and changes the third.']},
-  {h:'How the variables relate', list:[
-    'C = C0e^(-kt): C is the plasma concentration at time t, C0 the concentration at time zero, and k the elimination rate constant.',
-    'At time zero the whole dose is in the body.',
-    'C0 = {{frac:D0|VD}} (D0 is the dose; VD is the apparent volume of distribution), so the curve starts at its highest point and only falls.',
-    'An IV (intravenous) bolus with no model stated is treated as one compartment, first order.']},
-  {h:'What Chapter 12 adds', list:[
-    'The single compartment suits drugs that are polar (water-soluble), distribute rapidly through the body and are readily excreted in the urine; Chapter 13 gives the aminoglycosides, whose distribution is limited to extracellular water, as the example.',
-    'Blood takes a few minutes to circulate. So distribution is instantaneous in the model, not in the patient.']}],
+    'Open means elimination runs the whole time, from time zero.',
+    'A wrong statement often keeps two of the assumptions and changes the third.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration".'}],
  teachImg:'slide_2IVBolusAdministra_p3',
  cite:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration"',
  quote:'Assumes that the drug can enter and leave the body. Body acts like a single, uniform compartment'},
@@ -97,17 +82,9 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'Subscripts on rate constants name the route: km is metabolism and ke is excretion.',
     'The bare k is their sum, k = km + ke, so it is called the overall elimination rate constant.',
-    'A plasma sample cannot tell drug lost by one route from drug lost by another, so plasma data see only the total.',
-    'That is why a concentration-time slope gives k, not km or ke.',
-    'Module 4 splits the total from urine data: ke = fe × k, where fe is the fraction of the dose excreted unchanged, and km is the remainder (4---Clearance-and-Elimination.pdf, slide "Fraction of Drug Excreted and Renal Clearance").']},
-  {h:'How the variables relate', list:[
-    'C = C0e^(-kt): C is the plasma concentration at time t, C0 the concentration at time zero, and k the elimination rate constant.',
-    'At time zero the whole dose is in the body.',
-    'C0 = {{frac:D0|VD}} (D0 is the dose; VD is the apparent volume of distribution), so the curve starts at its highest point and only falls.',
-    'An IV (intravenous) bolus with no model stated is treated as one compartment, first order.']},
-  {h:'What Chapter 12 adds', list:[
-    'The single compartment suits drugs that are polar (water-soluble), distribute rapidly through the body and are readily excreted in the urine; Chapter 13 gives the aminoglycosides, whose distribution is limited to extracellular water, as the example.',
-    'Blood takes a few minutes to circulate. So distribution is instantaneous in the model, not in the patient.']}],
+    'A plasma sample cannot tell drug lost by one route from drug lost by another, so a concentration-time slope gives k, not km or ke.',
+    'Module 4 splits the total from urine data: ke = fe × k, where fe is the fraction of the dose excreted unchanged, and km is the remainder.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration".'}],
  teachImg:'slide_2IVBolusAdministra_p3',
  cite:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration"',
  quote:'KM is a rate constant for metabolism, KE is the rate constant for excretion … If you see K with no subscript, that is our overall rate constant for elimination.'},
@@ -120,29 +97,17 @@ const Q_MODULE2 = [
   {t:'The natural-logarithm form', correct:true,
    why:'She prefers the natural-log equations and adds that either one gets you there, so the base-ten form is not wrong, just not her route. The natural-log form needs no conversion factor, so the 2.3 never appears in her worked solutions.'},
   {t:'The base-ten logarithm form', correct:false,
-   why:'This is the form that carries the 2.3, and it is the one she works away from rather than toward. Choosing it usually comes from having met semi-logarithmic graph paper first, which is base ten, and assuming the algebra must match the graph paper. The two forms describe the same line; only the scaling of the slope differs.'},
+   why:'This is the form that carries the 2.3, and the one she works away from. Choosing it usually comes from having met semi-logarithmic graph paper first, which is base ten, and assuming the algebra must match it. The two forms describe the same line; only the scaling of the slope differs.'},
   {t:'The exponential form', correct:false,
    why:'This answer confuses the form she uses in forward calculations with the one she names as preferred. The exponential form, Cp = Cp0·e^(−kt), carries a known concentration forward to a later time, but her stated preference is the natural-log form, whose slope is k. It also invites a sign error when solving back to Cp0.'},
   {t:'Whichever form the plotted axis uses', correct:false,
    why:'The axis of a plot decides how the data look, not which algebraic form you must solve with. A concentration measured at a time is the same number whichever equation you rearrange, so tying the choice of equation to the graph paper adds a constraint that does not exist.'}],
  teach:[
   {h:'The idea', list:[
-    'The three forms are one relationship written three ways.',
-    'Cp is the plasma concentration, Cp0 its value at time zero, and k the elimination rate constant.',
+    'The three forms are one relationship written three ways. Cp is the plasma concentration, Cp0 its value at time zero, and k the elimination rate constant.',
     'Exponential form, Cp = Cp0·e^(−kt): predicts a concentration at a given time.',
-    'Natural-log form: a straight line, so its slope gives k directly.',
-    'Base-ten log form: suits semi-logarithmic graph paper. The 2.3 only converts between the two logarithm bases, since ln x = 2.303 log x (Chapter 2).']},
-  {h:'Her choice', list:[
-    'Nothing physical changes between the forms, so the choice is about which rearrangement is least error-prone.',
-    'She uses natural logs throughout.']},
-  {h:'How the variables relate', list:[
-    'C = C0e^(-kt): C is the plasma concentration at time t, C0 the concentration at time zero, and k the elimination rate constant.',
-    'At time zero the whole dose is in the body.',
-    'C0 = {{frac:D0|VD}} (D0 is the dose; VD is the apparent volume of distribution), so the curve starts at its highest point and only falls.',
-    'An IV (intravenous) bolus with no model stated is treated as one compartment, first order.']},
-  {h:'What Chapter 12 adds', list:[
-    'The single compartment suits drugs that are polar (water-soluble), distribute rapidly through the body and are readily excreted in the urine; Chapter 13 gives the aminoglycosides, whose distribution is limited to extracellular water, as the example.',
-    'Blood takes a few minutes to circulate. So distribution is instantaneous in the model, not in the patient.']}],
+    'Natural-log form, ln Cp = ln Cp0 − kt: a straight line whose slope gives k directly. She uses natural logs throughout.',
+    'Base-ten form: suits semi-logarithmic graph paper. The 2.3 only converts between the two bases, since ln x = 2.303 log x.']}],
  teachImg:'slide_2IVBolusAdministra_p21',
  cite:'2IVBolusAdministration.pdf, slide "Concentration of Drug in the Plasma, Cp"',
  quote:'this is my preferred equations down here with natural log, but either one gets you there.',
@@ -166,19 +131,10 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'VD (apparent volume of distribution) answers one question: how large a volume would hold the whole dose at the concentration measured in plasma?',
+    'VD = {{frac:D0|C0}}, the dose divided by the plasma concentration at time zero.',
     'If drug leaves the plasma for tissue, the measured plasma concentration is low, so the implied volume is large.',
-    'Nothing requires that volume to match an anatomical space, which is why it is called hypothetical and apparent.']},
-  {h:'How she tests it', t:'Her Canvas quiz asks "Which of the following best describes the volume of distribution?" and keys the slide definition word for word; two distractors reuse the phrase proportionality constant attached to the wrong quantities, such as the rate of absorption to the rate of elimination.'},
-  {h:'How the variables relate', list:[
-    'VD = {{frac:D0|C0}} (dose divided by the plasma concentration at time zero): the volume that would hold the whole dose at the measured concentration.',
-    'VD is apparent, not anatomical, so it can exceed total body water: it is a quotient, dose over concentration, and a drug held mostly in tissue leaves so little in plasma that the quotient outgrows any real fluid space.',
-    'The amount in the body at any time is A = VD x C, where C is the plasma concentration at that time.',
-    'In kinetics, body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
-  {h:'What Chapter 12 adds', list:[
-    'Clearance (Cl), VD and k (the elimination rate constant) are not independent of one another.',
-    'A change in body weight moves both Cl and VD, because both scale with body size. k stays almost unchanged.',
-    'A change in protein binding can move both VD and Cl; k = {{frac:Cl|VD}} changes only when the two move by different proportions.',
-    'Liver impairment moves k and Cl. VD stays the same if binding is unaffected.']}],
+    'Nothing requires that volume to match an anatomical space, so it can exceed total body water; that is why it is called hypothetical and apparent.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Volume of Distribution".'}],
  teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution"',
  quote:'The volume of distribution is a hypothetical volume of body fluid that would be required to dissolve the total amount of drug at the same concentration as that found in the blood.'},
@@ -191,7 +147,7 @@ const Q_MODULE2 = [
   {t:'The amount in the body and the plasma concentration', correct:true,
    why:'The slide calls it a proportionality constant relating the amount of drug in the body to the measured concentration in the biological fluid, and the relationship is written Cp = {{frac:DB|VD}}. Because it is a constant, the same value converts amount to concentration at any time after the dose, not only at time zero.'},
   {t:'The dose and the elimination rate constant', correct:false,
-   why:'Dose and elimination rate constant are independent of each other in a linear first-order system, so no constant links them. This answer usually comes from remembering that the volume of distribution appears in the clearance equation alongside k and assuming the pairing runs the other way.'},
+   why:'Dose and elimination rate constant are independent of each other in a linear first-order system, so no constant links them. Choosing this pairs the volume of distribution with k because the two sit side by side in the clearance equation, and assumes the pairing runs the other way.'},
   {t:'The plasma concentration and the elimination half-life', correct:false,
    why:'For a first-order process the half-life is the same at every concentration, so there is no proportionality between them to describe. That independence is one of the defining properties of first-order elimination, which makes this the exact opposite of a proportional relationship.'},
   {t:'The clearance and the area under the curve', correct:false,
@@ -199,19 +155,10 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'Calling VD (apparent volume of distribution) a proportionality constant is a statement about arithmetic, not anatomy.',
-    'The amount in the body and the plasma concentration are two readings of the same drug.',
-    'Amount = concentration × VD, and concentration = amount ÷ VD.',
-    'VD does not change with time, so either reading converts to the other at any point on the curve.']},
-  {h:'How the variables relate', list:[
-    'VD = {{frac:D0|C0}} (dose divided by the plasma concentration at time zero): the volume that would hold the whole dose at the measured concentration.',
-    'VD is apparent, not anatomical, so it can exceed total body water: it is a quotient, dose over concentration, and a drug held mostly in tissue leaves so little in plasma that the quotient outgrows any real fluid space.',
-    'The amount in the body at any time is A = VD x C, where C is the plasma concentration at that time.',
-    'In kinetics, body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
-  {h:'What Chapter 12 adds', list:[
-    'Clearance (Cl), VD and k (the elimination rate constant) are not independent of one another.',
-    'A change in body weight moves both Cl and VD, because both scale with body size. k stays almost unchanged.',
-    'A change in protein binding can move both VD and Cl; k = {{frac:Cl|VD}} changes only when the two move by different proportions.',
-    'Liver impairment moves k and Cl. VD stays the same if binding is unaffected.']}],
+    'The amount in the body and the plasma concentration are two readings of the same drug: amount = concentration × VD, and concentration = amount ÷ VD.',
+    'VD does not change with time, so either reading converts to the other at any point on the curve.',
+    'At time zero the amount is the whole dose, so VD = {{frac:D0|C0}}.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Volume of Distribution".'}],
  teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution"',
  quote:'we are talking about the volume distribution being a proportionality constant which relates the amount of drug into the in the body to whatever concentration we measure.'},
@@ -231,19 +178,10 @@ const Q_MODULE2 = [
    why:'Initial plasma concentration is the dose divided by the volume of distribution, so with the dose fixed a larger volume gives a lower initial concentration. Selecting this treats a larger distribution volume as if it meant more drug rather than more space for the same drug.'}],
  teach:[
   {h:'The idea', list:[
-    'VD (apparent volume of distribution) is worked out backwards from the plasma concentration.',
+    'VD (apparent volume of distribution) is worked out backwards from the plasma concentration: VD = {{frac:D0|C0}}.',
     'The dose is known, so a low plasma concentration means the drug is somewhere other than the sampled plasma. The arithmetic reports that as a large volume.',
     'The reverse case: a drug held in the vascular space, by plasma protein binding or poor tissue penetration, gives a high plasma concentration and a small volume.']},
-  {h:'How the variables relate', list:[
-    'VD = {{frac:D0|C0}} (dose divided by the plasma concentration at time zero): the volume that would hold the whole dose at the measured concentration.',
-    'VD is apparent, not anatomical, so it can exceed total body water: it is a quotient, dose over concentration, and a drug held mostly in tissue leaves so little in plasma that the quotient outgrows any real fluid space.',
-    'The amount in the body at any time is A = VD x C, where C is the plasma concentration at that time.',
-    'In kinetics, body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
-  {h:'What Chapter 12 adds', list:[
-    'Clearance (Cl), VD and k (the elimination rate constant) are not independent of one another.',
-    'A change in body weight moves both Cl and VD, because both scale with body size. k stays almost unchanged.',
-    'A change in protein binding can move both VD and Cl; k = {{frac:Cl|VD}} changes only when the two move by different proportions.',
-    'Liver impairment moves k and Cl. VD stays the same if binding is unaffected.']}],
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, second slide titled "Volume of Distribution".'}],
  teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution" (second slide of that title)',
  quote:'Large VD → more concentrated in extravascular tissues and less concentrated intravascularly. Drug highly bound to plasma proteins or remaining in the vascular region → higher Cp and smaller VD'},
@@ -254,7 +192,7 @@ const Q_MODULE2 = [
  stem:'A 70 kg patient is given a drug whose apparent volume of distribution is 20% of body weight. What is the volume of distribution?',
  options:[
   {t:'14 L', correct:true,
-   why:'Expressing the volume of distribution as a percent of body weight uses the convention that a 1 L volume is assumed to equal the weight of 1 kg, so 20% of 70 kg is 14 kg of body weight and therefore 14 L. The answer is 14 L, not 14 kg, because the volume of distribution is a volume.'},
+   why:'Expressing VD as a percent of body weight uses the convention that a 1 L volume equals the weight of 1 kg, so 20% of 70 kg is 14 kg of body weight and therefore 14 L. The answer is in litres, not kilograms, because the volume of distribution is a volume.'},
   {t:'14 kg', correct:false,
    why:'This answer stops at the kilograms and never converts them into litres. The arithmetic is right: 20% of 70 kg is 14 kg of body weight. A volume of distribution is a volume, so the convention that 1 kg of body weight corresponds to 1 L is applied and 14 kg becomes 14 L.'},
   {t:'20 L', correct:false,
@@ -271,19 +209,9 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'VD (apparent volume of distribution) can be quoted as an absolute volume, per kilogram of body weight, or as a percent of body weight.',
-    'The percent form uses the one-to-one assumption that 1 L corresponds to 1 kg. The conversion is then a single multiplication.',
-    'Body weight in pharmacokinetics is always in kilograms. Convert a weight in pounds first, then apply the percentage.']},
-  {h:'How she tests it', t:'She states VD four ways and rotates them: per kilogram (3 L/kg, 0.5 L/kg, 400 mL/kg), as a percent of body weight (20%, 23.1%), as an absolute volume (16 L, 12 L), or not at all, to be found as dose ÷ C0. A weight in pounds is divided by 2.2 first.'},
-  {h:'How the variables relate', list:[
-    'VD = {{frac:D0|C0}} (dose divided by the plasma concentration at time zero): the volume that would hold the whole dose at the measured concentration.',
-    'VD is apparent, not anatomical, so it can exceed total body water: it is a quotient, dose over concentration, and a drug held mostly in tissue leaves so little in plasma that the quotient outgrows any real fluid space.',
-    'The amount in the body at any time is A = VD x C, where C is the plasma concentration at that time.',
-    'In kinetics, body weight is in kilograms, and 1 kg of body weight is treated as 1 L.']},
-  {h:'What Chapter 12 adds', list:[
-    'Clearance (Cl), VD and k (the elimination rate constant) are not independent of one another.',
-    'A change in body weight moves both Cl and VD, because both scale with body size. k stays almost unchanged.',
-    'A change in protein binding can move both VD and Cl; k = {{frac:Cl|VD}} changes only when the two move by different proportions.',
-    'Liver impairment moves k and Cl. VD stays the same if binding is unaffected.']}],
+    'The percent form uses the assumption that 1 L corresponds to 1 kg, so the conversion is a single multiplication.',
+    'Body weight in pharmacokinetics is always in kilograms; a weight in pounds is divided by 2.2 first.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, second slide titled "Volume of Distribution".'}],
  teachImg:'slide_2IVBolusAdministra_p6',
  cite:'2IVBolusAdministration.pdf, slide "Volume of Distribution" (second slide of that title)',
  quote:'In expressing the apparent VD in terms of percent body weight, a 1-L volume is assumed to be equal to the weight of 1 kg.'},
@@ -304,24 +232,11 @@ const Q_MODULE2 = [
    why:'Biotransformation is the chemical conversion of the drug to another species, so it is a process rather than a measurement. It contributes to clearance through hepatic metabolism, but it carries no volume-per-time meaning of its own.'}],
  teach:[
   {h:'The idea', list:[
-    'Clearance (Cl) is defined without naming a mechanism, so it can describe the whole body at once.',
-    'Its units are volume per time: how much fluid is completely cleared of drug each hour, not how many milligrams leave.',
-    'The amount leaving per hour is clearance multiplied by the concentration present at that time.']},
-  {h:'The common error', list:[
-    'Confusing clearance (a volume per time, constant) with the elimination rate (an amount per time, which falls as the concentration falls).']},
-  {h:'How the variables relate', list:[
-    'Cl = k x VD (k is the elimination rate constant; VD is the apparent volume of distribution).',
-    'Also Cl = {{frac:D0|AUC}} (D0 is the dose; AUC is the area under the concentration-time curve).',
-    'Cl = k x VD comes from writing the elimination rate two ways: k x DB from the model ({{frac:dDB|dt}} = −kDB) and Cl x Cp from the definition; since DB = VD x Cp, the two agree only when Cl = k x VD (Chapter 15).',
-    'Cl = k x VD is not on the equation sheet.',
-    'The units are volume per time, such as L/hr: a volume cleared of drug per unit time.',
-    'Cl is constant for most drugs, because k and VD are both constants.',
-    'Rate of elimination = Cl x Cp, where Cp is the plasma concentration.']},
-  {h:'What Chapter 15 adds', list:[
-    'A clearance of 15 mL/min in a patient whose VD is 12 L means 15 mL of that 12 L is cleared of drug every minute.',
-    'Clearance is preferred to half-life clinically. A terminal half-life describes only the terminal phase.',
-    'Clearance accounts for every elimination process, whatever its mechanism.',
-    'Clearance is what fixes the dose: dose = clearance x AUC.']}],
+    'Clearance (Cl) is the volume of plasma cleared of drug per unit time. It names no mechanism, so it can describe the whole body at once.',
+    'Its units are volume per time, such as L/hr: how much fluid is completely cleared each hour, not how many milligrams leave.',
+    'The amount leaving per hour is the elimination rate, Cl × Cp, where Cp is the plasma concentration.',
+    'Cl = k × VD (k the elimination rate constant, VD the apparent volume of distribution); this one is not on the equation sheet. Also Cl = {{frac:D0|AUC}}.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Clearance".'}],
  teachImg:'slide_2IVBolusAdministra_p8',
  cite:'2IVBolusAdministration.pdf, slide "Clearance"',
  quote:'Volume of plasma that is cleared of drug per unit time'},
@@ -341,26 +256,11 @@ const Q_MODULE2 = [
    why:'This answer confuses clearance with the elimination rate, the neighbouring term she contrasts with it. The amount eliminated per unit time, in milligrams per hour, is clearance multiplied by the plasma concentration, so it falls as the concentration falls. Clearance, the volume of plasma cleared per hour, stays constant while that rate changes.'}],
  teach:[
   {h:'The idea', list:[
-    'Clearance (Cl) is valued because it stays constant while everything visible changes.',
-    'The plasma concentration falls, and the milligrams removed per hour fall with it. The volume of plasma cleared per hour does not change.',
-    'Two routes reach it: multiply the two constants k and VD, or divide the dose by the AUC (area under the whole curve).',
-    'Both routes give the same number, in volume per unit time.']},
-  {h:'How she tests it', t:'IV Bolus Practice 4 closes with "If the dose were doubled, what is the expected change in the clearance?" and her key reads: no change in clearance; clearance is constant for first-order processes. The same set keys no change in the half-life and a doubling of the initial concentration.'},
-  {h:'The common error', list:[
-    'Confusing the elimination rate (milligrams per hour, which falls with the concentration) with clearance (volume per hour, which does not).']},
-  {h:'How the variables relate', list:[
-    'Cl = k x VD (k is the elimination rate constant; VD is the apparent volume of distribution).',
-    'Also Cl = {{frac:D0|AUC}} (D0 is the dose; AUC is the area under the concentration-time curve).',
-    'Cl = k x VD comes from writing the elimination rate two ways: k x DB from the model ({{frac:dDB|dt}} = −kDB) and Cl x Cp from the definition; since DB = VD x Cp, the two agree only when Cl = k x VD (Chapter 15).',
-    'Cl = k x VD is not on the equation sheet.',
-    'The units are volume per time, such as L/hr: a volume cleared of drug per unit time.',
-    'Cl is constant for most drugs, because k and VD are both constants.',
-    'Rate of elimination = Cl x Cp, where Cp is the plasma concentration.']},
-  {h:'What Chapter 15 adds', list:[
-    'A clearance of 15 mL/min in a patient whose VD is 12 L means 15 mL of that 12 L is cleared of drug every minute.',
-    'Clearance is preferred to half-life clinically. A terminal half-life describes only the terminal phase.',
-    'Clearance accounts for every elimination process, whatever its mechanism.',
-    'Clearance is what fixes the dose: dose = clearance x AUC.']}],
+    'Clearance (Cl) is valued because it stays constant while the plasma concentration, and the milligrams removed per hour, fall.',
+    'Two routes reach it: multiply the two constants, Cl = k × VD, or divide the dose by the AUC (area under the whole curve), Cl = {{frac:D0|AUC}}.',
+    'Both routes give the same number, in volume per unit time. Cl = k × VD is not on the equation sheet.',
+    'Doubling the dose leaves clearance and half-life unchanged and doubles the initial concentration.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Clearance".'}],
  teachImg:'slide_2IVBolusAdministra_p8',
  cite:'2IVBolusAdministration.pdf, slide "Clearance"',
  quote:'what we like about clearance is that clearance. For most drugs in most situations, it is going to be a constant … a constant times a constant is a constant.'},
@@ -388,21 +288,9 @@ const Q_MODULE2 = [
  check:{t:'From 1.0 to 2.0 hr the concentration falls 1.59 → 0.64 mg/L, more than half in one hour, so the half-life is under 1 hr and k is above 0.693 hr⁻¹; 0.91 fits.', lo:0.693},
  teach:[
   {h:'The idea', list:[
-    'Every rate constant in this module comes from one operation: the natural log of the ratio of two concentrations, divided by the time between them.',
+    'Every rate constant in this module comes from one operation: k = {{frac:ln(C1 ÷ C2)|t2 − t1}}, the natural log of the ratio of two concentrations divided by the time between them.',
     'Put the earlier concentration on top. The ratio then exceeds one and the log is positive, matching the rule that a rate constant is never negative.',
-    'On data rounded to two decimal places, different pairs of points give slightly different k values. So the pair to use has to be stated.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'k then feeds the rest of the set: t½ = {{frac:0.693|k}}, the back-extrapolated C0, VD = {{frac:D0|C0}} and Cl = k × VD.']}],
  note:'Other neighbouring pairs of points in this table give k values from 0.893 to 0.940 hr⁻¹. All of them are accepted: the spread comes from rounding in the printed concentrations, not from a mistake in method.',
  audit:'Her key works the 1.0 hr and 2.0 hr points and prints 0.9100 hr⁻¹. The other adjacent pairs in the same table give 0.893 to 0.940 hr⁻¹, and a least-squares fit through all six points gives 0.922 hr⁻¹, so a student who picked a different pair has not made an error of method; the spread is measurement rounding in the printed concentrations, not a mistake. The tolerance is set wide enough to admit that spread.',
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part a',
@@ -428,22 +316,9 @@ const Q_MODULE2 = [
  check:{t:'A k above 0.693 hr⁻¹ means the half-life is under 1 hr, and 0.693 over 0.91 is about three quarters of an hour; 0.76 hr fits.', lo:0, hi:1},
  teach:[
   {h:'The idea', list:[
-    'Half-life (t½) and the elimination rate constant (k) are two readings of the same first-order decline, joined by ln 2 (0.693).',
-    'ln 2 is a fixed number and k is fixed for a given drug and patient, so the half-life is fixed too.',
-    'So the half-life does not depend on the starting concentration.',
-    'Its unit is always a time.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'Half-life (t½) and the elimination rate constant (k) are two readings of the same first-order decline, joined by ln 2: t½ = {{frac:0.693|k}}.',
+    'ln 2 is a fixed number and k is fixed for a given drug and patient, so the half-life is fixed too and does not depend on the starting concentration.',
+    'Its unit is always a time.']}],
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part b',
  quote:'t½ = 0.693 / 0.91 hr = 0.76 hr'},
 
@@ -456,7 +331,7 @@ const Q_MODULE2 = [
  tol:0.08,
  steps:[
   {k:'setup', t:'Cp0 = Cp·e^(+kt)',
-   why:'Going backwards along the curve from a measured point to time zero reverses the sign of the exponent in Cp = Cp0·e^(−kt). She warns that always throwing in the minus sign here gives a number lower than the one you started from, which cannot be right, because the initial concentration must be the highest point in the data set.'},
+   why:'Going backwards along the curve from a measured point to time zero reverses the sign of the exponent in Cp = Cp0·e^(−kt). Keeping the minus sign gives a number lower than the one you started from, which cannot be right: the initial concentration must be the highest point in the data set.'},
   {k:'algebra', t:'Cp0 = (0.40 mg/L)·e^(0.91 hr⁻¹ × 2.5 hr)',
    why:'Reciprocal hours multiplied by hours leaves the exponent dimensionless, which it must be. The 2.5 hr is the full elapsed time from the dose to the sample being extrapolated from, so the whole decline over that interval is undone in one step.'},
   {k:'algebra', t:'Cp0 = (0.40 mg/L)(9.7279) = 3.8912 mg/L',
@@ -469,23 +344,10 @@ const Q_MODULE2 = [
  check:{t:'With k = 0.91 hr⁻¹ the half-life is about three quarters of an hour, so 2.5 hours is more than three half-lives: Cp0 is more than eight times 0.40 mg/L, and 3.89 mg/L fits.', lo:3.2},
  teach:[
   {h:'The idea', list:[
-    'Back-extrapolation to time zero is the forward equation run in reverse. Only the sign of the exponent changes.',
+    'Back-extrapolation to time zero is the forward equation run in reverse, C0 = Ct·e^(+kt). Only the sign of the exponent changes.',
     'Any measured point on the line can be used, because it is the same line.',
-    'The result, C0, is the concentration that would have been measured if sampling had been instantaneous.']},
-  {h:'The common error', list:[
-    'Pairing the dose with the first measured sample. The extrapolated C0, not the first sample, pairs with the dose to give VD (apparent volume of distribution).']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'C0 is the concentration that would have been measured if sampling had been instantaneous.',
+    'The extrapolated C0, not the first sample, pairs with the dose to give VD (apparent volume of distribution).']}],
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part c',
  quote:'C₀ = (0.4 mg/L)e^(0.91)(2.5) = 3.89 mg/L'},
 
@@ -513,19 +375,7 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'Before Cp = Cp0·e^(−kt) can be evaluated, the time unit in the exponent must match the time unit in k (the elimination rate constant).',
     'This problem states the interval in minutes while k is per hour, so the minutes must be converted.',
-    'Once the exponent has no units, e^(−kt) is the fraction remaining. Multiply it by the starting concentration to finish.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'Once the exponent has no units, e^(−kt) is the fraction remaining. Multiply it by the starting concentration to finish.']}],
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part d',
  quote:'C₀.₂₅ = (3.89 mg/L)e^−(0.91)(0.25) = 3.1 mg/L'},
 
@@ -550,21 +400,8 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'VD (apparent volume of distribution) is always the amount in the body divided by the concentration at the same instant.',
-    'Time zero is the convenient instant: the amount is the whole dose, and the concentration is the back-extrapolated initial value.']},
-  {h:'The common error', list:[
-    'Dividing the full dose by a later measured concentration. That pairs an amount from one time with a concentration from another, the mismatch she warns about.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'Time zero is the convenient instant: the amount is the whole dose, and the concentration is the back-extrapolated initial value.',
+    'Dividing the full dose by a later measured concentration pairs an amount from one time with a concentration from another.']}],
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part e',
  quote:'V_D = 50 mg / 3.89 mg/L = 12.85 L'},
 
@@ -588,23 +425,10 @@ const Q_MODULE2 = [
  check:{t:'0.91 is a little under 1, so k × VD is a little under 12.85 L/hr; 11.7 L/hr fits.', lo:0, hi:12.85},
  teach:[
   {h:'The idea', list:[
-    'Clearance (Cl) is found by multiplying two parameters already in hand: Cl = k x VD.',
-    'k (the elimination rate constant) is the fraction of the body content that leaves per hour.',
-    'VD (the apparent volume of distribution) is how large the body content appears to be.',
+    'Clearance (Cl) is found by multiplying two parameters already in hand: Cl = k × VD. It is not on the equation sheet.',
+    'k (the elimination rate constant) is the fraction of the body content that leaves per hour; VD (the apparent volume of distribution) is how large the body content appears to be.',
     'Their product is the volume cleared of drug per hour.',
-    'Both inputs are constant for that drug in that patient, so clearance does not change as the concentration falls.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'Both inputs are constant for that drug in that patient, so clearance does not change as the concentration falls.']}],
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part f',
  quote:'Cl_T = (12.85 L)(0.91 hr⁻¹) = 11.7 L/hr'},
 
@@ -631,21 +455,9 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'The amount in the body at a stated time can be reached from either direction.',
-    'If the concentration at that time is known, multiply it by VD (the apparent volume of distribution).',
-    'If it is not, decay the dose forward with the exponential equation.',
-    'Both work because VD is constant and the decline is first order, so the two answers agree to within the rounding of the data.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'If the concentration at that time is known, multiply it by VD (the apparent volume of distribution): DB = VD × Cp.',
+    'If it is not, decay the dose forward: DB = D0·e^(−kt).',
+    'Both work because VD is constant and the decline is first order, so the two answers agree to within the rounding of the data.']}],
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part g',
  quote:'D₃ = (12.85 L)(0.25 mg/L) = 3.2 mg or D₃ = 50 mg · e^−(0.91)(3) = 3.2 mg'},
 
@@ -671,21 +483,9 @@ const Q_MODULE2 = [
  check:{t:'99.9% eliminated leaves 0.1%, one part in 1000, which is ten halvings, so t = 10 × 0.76 hr = 7.6 hr.', lo:6.84, hi:7.6},
  teach:[
   {h:'The idea', list:[
-    'A first-order process removes proportions, not amounts. So eliminating a fixed percentage takes a fixed number of half-lives, whatever the dose.',
-    'Ten half-lives for 99.9% recurs in every one of her bolus problem sets.',
-    'When the percentage is not a clean power of one half, put the fraction remaining into the exponential equation and solve for time.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'A first-order process removes proportions, not amounts, so eliminating a fixed percentage takes a fixed number of half-lives, whatever the dose.',
+    '99.9% eliminated leaves 0.1%, which is reached after 10 half-lives.',
+    'When the percentage is not a clean power of one half, put the fraction remaining into the exponential equation and solve for time: t = {{frac:ln(C0 ÷ C)|k}}.']}],
  cite:'IV-Bolus-Practice-1---Solutions.pdf, part h',
  quote:'First order processes, it is gonna take 10 half-lives for 99.9% of the drug to be eliminated from the body.'},
 
@@ -712,22 +512,9 @@ const Q_MODULE2 = [
  check:{t:'From 4 to 8 hr the concentration falls 6.6 → 2.18 mcg/mL, to about a third: more than halved but not quartered in 4 hr, so t½ is between 2 and 4 hr and k between 0.693 over 4 and 0.693 over 2; 0.2769 fits.', lo:0.1733, hi:0.3465},
  teach:[
   {h:'The idea', list:[
-    'The two-point slope calculation for k (the elimination rate constant) is the same whether the data come as a table or as two concentrations in a sentence.',
-    'Only the choice of which two numbers to use changes.']},
-  {h:'The common error', list:[
-    'The denominator is the difference between the two sampling times, not the time since the dose. This step is most often lost when the points are given in a sentence.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'The two-point slope for k (the elimination rate constant) is the same whether the data come as a table or as two concentrations in a sentence: k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
+    'The denominator is the difference between the two sampling times, not the time since the dose.',
+    'The dose and the body weight are not needed for k.']}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part a',
  quote:'k = −ln(6.6/2.18) / (4 − 8) hr = 0.2769 hr⁻¹'},
 
@@ -759,24 +546,10 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'With the weight in pounds, a clearance question has three steps before the final product.',
-    'First, convert the weight to kilograms.',
-    'Second, turn the per-kilogram or percent-of-body-weight volume into an absolute volume in litres.',
-    'Third, convert the half-life into a rate constant, k.',
-    'Only then does Cl = k·VD apply (Cl is clearance; VD is the apparent volume of distribution).']},
-  {h:'The common error', list:[
-    'Skipping any one step changes the answer by a whole factor, not by a rounding. Each step has its own unit check.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'First, convert the weight to kilograms by dividing by 2.2.',
+    'Second, turn the percent-of-body-weight volume into an absolute volume in litres, taking 1 kg as 1 L.',
+    'Third, convert the half-life into a rate constant: k = {{frac:0.693|t½}}.',
+    'Only then does Cl = k·VD apply. Skipping any one step changes the answer by a whole factor, not by a rounding.']}],
  cite:'IV-Bolus-Practice-3---Solutions.pdf, problem 1 part c',
  quote:'Cl_T = (17 L)(0.1733 hr⁻¹) = 2.95 L/hr'},
 
@@ -791,7 +564,7 @@ const Q_MODULE2 = [
   {k:'setup', t:'The amount left at 12 hr is DB = D0·e^(−kt), so the rate constant has to be recovered first from the measured 6-hour concentration by way of the volume of distribution',
    why:'No measurement exists at the time asked for, so the route runs through the rate constant. The one measured concentration becomes an amount only once VD is known, and VD is given as a percentage of body weight, not in litres. Naming the whole chain first keeps the three conversions in order.'},
   {k:'algebra', t:'VD = 10% of 80 kg = 8 L, using 1 L per 1 kg of body weight',
-   why:'The volume of distribution is stated as a percent of body weight, so the one-to-one litre-per-kilogram assumption converts it to an absolute volume. Dr. Mosley confirms 8 L with the class before going any further.'},
+   why:'The volume of distribution is stated as a percent of body weight, so the one-to-one litre-per-kilogram assumption converts it to an absolute volume of 8 L.'},
   {k:'algebra', t:'DB at 6 hr = VD · Cp = (8 L)(15 mg/L) = 120 mg',
    why:'The measured quantity is a concentration but the rate constant has to be found from two amounts or two concentrations of the same kind. Converting the 6-hour concentration into an amount lets it be compared directly with the 200 mg dose, which is the apples-to-apples step she insists on.'},
   {k:'algebra', t:'k = {{frac:ln(D0/D6)|t}} = {{frac:ln(200 mg / 120 mg)|6 hr}} = 0.08514 hr⁻¹',
@@ -806,21 +579,10 @@ const Q_MODULE2 = [
  check:{t:'VD is 8 L, so 120 mg remains at 6 hr, 60% of the dose; the next 6 hr removes the same fraction, leaving 60% of 120 mg, 72 mg. The answer must sit below 120 mg.', lo:0, hi:120},
  teach:[
   {h:'The idea', list:[
-    'The dose is an amount and the measured value is a concentration. A rate constant cannot come from the ratio of one to the other.',
+    'The dose is an amount and the measured value is a concentration, so a rate constant cannot come from the ratio of one to the other.',
     'VD (the apparent volume of distribution) converts between them, so it is found first, even though it is not what is asked for.',
-    'Once both quantities are amounts, the ordinary two-point slope calculation gives k.']},
-  {h:'How the variables relate', list:[
-    'From two plasma points: k = {{frac:ln(C1/C2)|t2 - t1}}, where k is the elimination rate constant.',
-    'Back-extrapolate to time zero: C0 = Cte^(kt). The exponent is positive because time runs backwards.',
-    'Then t1/2 = {{frac:0.693|k}}, VD = {{frac:D0|C0}}, Cl = k x VD, and A = VD x C at any time.',
-    'Symbols: t1/2 is the half-life, VD the apparent volume of distribution, D0 the dose, Cl the clearance, A the amount in the body.',
-    'Work in amounts or in concentrations throughout, never one against the other.',
-    'mg/L and mcg/mL are the same number, so no conversion is needed between them.']},
-  {h:'What Chapter 12 adds', list:[
-    'No sample can be drawn at time zero, so C0 has to be recovered from the samples that were taken.',
-    'The slope of ln C against time is k, from k = {{frac:ln(C1 ÷ C2)|t2 − t1}}.',
-    'Running one measured point back along that slope with C0 = Ct e^(kt) gives the intercept.',
-    'k names no route on its own. Split by urinary data it becomes k = kR + kNR: a renal part and everything else.']}],
+    'Once both quantities are amounts, the two-point slope gives k, and the dose is decayed forward to the time asked.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Practice" (one-compartment section).'}],
  teachImg:'slide_2IVBolusAdministra_p7',
  cite:'2IVBolusAdministration.pdf, slide "Practice" (one-compartment section)',
  quote:'estimate the amount of drug in the body after 12 hours',
@@ -843,21 +605,12 @@ const Q_MODULE2 = [
    why:'Picking this reads the compartment count as a property of the route. The multicompartment material in this module is taught for intravenous bolus administration, so the route cannot be what distinguishes it. A different route changes only the input function; the number of compartments is fixed by how fast the drug reaches its tissues.'}],
  teach:[
   {h:'The idea', list:[
-    'The number of compartments is decided by the shape of the plasma curve.',
-    'The curve reflects how quickly the drug reaches its various tissues.',
+    'The number of compartments is decided by the shape of the plasma curve, which reflects how quickly the drug reaches its various tissues.',
     'If everything equilibrates fast enough to look instantaneous, one compartment is enough.',
-    'If some tissues take up drug measurably more slowly, the plasma concentration falls steeply at first as drug moves into them, then more gently once that redistribution is complete.',
-    'Two compartments are needed to describe those two slopes.',
-    'Perfusion is blood supply: the organs that receive the most blood, heart, brain, liver and kidney, take up the drug first, and the tissue groups are ranked by it (slide "General Grouping of Tissues According to Blood Supply").']},
-  {h:'How the variables relate', list:[
-    'Two compartments appear when distribution is slow enough to see: a steep phase, then a shallower one.',
-    'On a semi-logarithmic plot (log concentration against time), one straight line means one compartment and a bend means two.',
-    'Drug is eliminated from the central compartment only.']},
-  {h:'What Chapter 13 adds', list:[
-    'During the distribution phase, the fall in plasma concentration mostly reflects drug moving within the body, not drug leaving it.',
-    'Elimination and distribution run at the same time throughout. Distribution is the faster of the two, so there is a net transfer out of the central compartment.',
-    'The central compartment is blood plus the highly perfused organs.',
-    'The kidney and liver are among those organs, so elimination is placed in the central compartment.']}],
+    'If some tissues take up drug measurably more slowly, the plasma concentration falls steeply at first as drug moves into them, then more gently once that distribution is complete.',
+    'Two compartments are needed to describe those two slopes; on a semi-logarithmic plot one straight line means one compartment and a bend means two.',
+    'Perfusion is blood supply: the most perfused organs, heart, brain, liver and kidney, take up the drug first.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "One- versus Two-Compartment Models".'}],
  teachImg:'slide_2IVBolusAdministra_p14',
  cite:'2IVBolusAdministration.pdf, slide "One- versus Two-Compartment Models"',
  quote:'Multi-compartment models describe the observation of some drugs that distribute at various rates into different tissue groups'},
@@ -880,16 +633,7 @@ const Q_MODULE2 = [
     'Check the axis before reading the line.',
     'On a logarithmic concentration scale, the number of straight segments equals the number of exponential terms in the equation.',
     'One segment: one compartment and one rate constant.',
-    'Two segments joined by a bend: two exponential terms, a fast one for distribution and a slow one for elimination. The model needs two compartments.']},
-  {h:'How the variables relate', list:[
-    'Two compartments appear when distribution is slow enough to see: a steep phase, then a shallower one.',
-    'On a semi-logarithmic plot (log concentration against time), one straight line means one compartment and a bend means two.',
-    'Drug is eliminated from the central compartment only.']},
-  {h:'What Chapter 13 adds', list:[
-    'During the distribution phase, the fall in plasma concentration mostly reflects drug moving within the body, not drug leaving it.',
-    'Elimination and distribution run at the same time throughout. Distribution is the faster of the two, so there is a net transfer out of the central compartment.',
-    'The central compartment is blood plus the highly perfused organs.',
-    'The kidney and liver are among those organs, so elimination is placed in the central compartment.']}],
+    'Two segments joined by a bend: two exponential terms, a fast one for distribution and a slow one for elimination. The model needs two compartments.']}],
  cite:'Basic Pharmacokinetics - 08-26 Lecture.txt (exam cue on graph reading)',
  quote:'if I give you a graph that looks something like this without the red and blue and just a log scale and I am telling you that it is an IV bolus dose … That should say to you that this is a two compartment model.',
  note:'On the exam the axis may not say that it is logarithmic. Values that go up by a factor of 10 at each gridline (1, 10, 100) mark a log scale.',
@@ -911,21 +655,12 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'The tissue groups are sorted by blood supply (perfusion).',
-    'The percent-of-body-weight column shows that mass and perfusion do not go together.',
-    'The organs that receive the drug first are only 9% of body weight. The tissues making up half the body weight receive it more slowly.',
+    'Mass and perfusion do not go together: the organs that receive the drug first are only 9% of body weight, while the tissues making up half the body weight receive it more slowly.',
     'The distribution phase of a two-compartment curve is the plasma concentration falling as drug moves from the small, fast group into the larger, slower ones.']},
-  {h:'How the variables relate', list:[
-    'Two compartments appear when distribution is slow enough to see: a steep phase, then a shallower one.',
-    'On a semi-logarithmic plot (log concentration against time), one straight line means one compartment and a bend means two.',
-    'Drug is eliminated from the central compartment only.']},
-  {h:'What Chapter 13 adds', list:[
-    'During the distribution phase, the fall in plasma concentration mostly reflects drug moving within the body, not drug leaving it.',
-    'Elimination and distribution run at the same time throughout. Distribution is the faster of the two, so there is a net transfer out of the central compartment.',
-    'The central compartment is blood plus the highly perfused organs.',
-    'The kidney and liver are among those organs, so elimination is placed in the central compartment.']}],
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "General Grouping of Tissues According to Blood Supply".'}],
  teachImg:'slide_2IVBolusAdministra_p15',
  cite:'2IVBolusAdministration.pdf, slide "General Grouping of Tissues According to Blood Supply"',
- note:'She called this table a general grouping and said not to memorise the percentages: know the order from most to least perfused. She added that the brain, although highly perfused, sits behind the blood–brain barrier, so many drugs do not reach it during distribution.',
+ note:'Know the order from most to least perfused, not the percentages. The brain, although highly perfused, sits behind the blood–brain barrier, so many drugs do not reach it during distribution.',
  audit:'Dr. Mosley tells the class not to memorise tables unless she says otherwise, and on this table specifically she says "general grouping of tissues, table, don\'t panic". She also adds a qualification that is not on the slide: the brain is listed as highly perfused, but the blood-brain barrier keeps many drugs out, so the brain is not necessarily seen in the distribution phase. An exam written from these lectures would test the perfusion ordering rather than the exact percentages.'},
 
 {id:'m2-mc-4', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L03',
@@ -944,22 +679,11 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'The two-compartment open model has three arrows.',
-    'k12: drug moves from the central compartment to the tissue compartment.',
-    'k21: drug moves back from tissue to central.',
+    'k12: drug moves from the central compartment to the tissue compartment. k21: drug moves back from tissue to central.',
     'k: drug leaves the body, from the central compartment.',
-    'The central compartment is also the one sampled. So plasma concentration reflects elimination directly, and tissue uptake only through its effect on the central concentration.',
-    'k is placed on the central compartment because the kidney and liver, where excretion and metabolism happen, are highly perfused organs and so belong to the central compartment (Chapter 13).']},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+    'k is placed there because the kidney and liver, where excretion and metabolism happen, are highly perfused organs and so belong to the central compartment.',
+    'The central compartment is also the one sampled, so plasma concentration reflects elimination directly, and tissue uptake only through its effect on the central concentration.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)".'}],
  teachImg:'slide_2IVBolusAdministra_p17',
  cite:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)"',
  quote:'if we have got a central compartment, it is going to and from that tissue compartment … and then that the drug is being eliminated from the central compartment only.'},
@@ -970,7 +694,7 @@ const Q_MODULE2 = [
  stem:'In the two-compartment open model, which process appears in the central-compartment equation dCp/dt = k21·Ct − k12·Cp − k·Cp but not in the tissue-compartment equation dCt/dt = k12·Cp − k21·Ct?',
  options:[
   {t:'Elimination of drug from the body', correct:true,
-   why:'The first two terms mirror the tissue equation with the signs reversed: drug returning from tissue is a gain to the central compartment, and drug leaving for tissue is a loss. The third term, −k·Cp, has no match in the tissue equation because it is drug leaving the body, which happens only from the central compartment.'},
+   why:'The first two terms mirror the tissue equation with the signs reversed: drug returning from tissue is a gain to the central compartment, and drug leaving for tissue a loss. The third term, −k·Cp, has no match because it is drug leaving the body, which happens only from the central compartment.'},
   {t:'Transfer of drug from the tissue compartment to the central compartment',
    why:'Picking this reads the gain term k21·Ct as something only the central compartment sees. Transfer from tissue to central appears in both equations: as +k21·Ct in the central equation, a gain, and as −k21·Ct in the tissue equation, a loss. What leaves one compartment arrives in the other, so the term is shared.'},
   {t:'Input of the bolus dose',
@@ -981,19 +705,8 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'A compartment differential equation is a balance: drug entering the compartment is positive and drug leaving is negative.',
     'The two transfer terms (k12 and k21) appear in both equations with opposite signs, because what leaves one compartment arrives in the other.',
-    'The elimination term, −k·Cp, appears only where the exit is: the central compartment.',
-    'That difference between the two equations is the structure of the model diagram.']},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+    'The elimination term, −k·Cp, appears only where the exit is: the central compartment.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)".'}],
  teachImg:'slide_2IVBolusAdministra_p17',
  cite:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)"',
  quote:'dCp/dt = k21·Ct − k12·Cp − k·Cp'},
@@ -1008,7 +721,7 @@ const Q_MODULE2 = [
   {t:'Elimination of drug by metabolism and by excretion', correct:false,
    why:'Picking this reads a double subscript as naming two routes out of the body. Metabolism and excretion are km and ke, single-subscript constants that sum into k, the overall elimination rate constant. The double-subscript constants k12 and k21 describe movement within the body, so drug governed by them is still present and still counted.'},
   {t:'The slopes of the distribution and elimination phases', correct:false,
-   why:'Those slopes are alpha and beta, which are hybrid constants derived from k, k12 and k21 together. The transfer constants are what the curve is fitted back to, not what is read off it, which is why the equation sheet gives expressions for k12 and k21 in terms of A, B, alpha and beta rather than the reverse.'},
+   why:'Picking this confuses the transfer constants with the slopes alpha and beta, which are hybrid constants derived from k, k12 and k21 together. The transfer constants are what the curve is fitted back to, which is why the equation sheet gives k12 and k21 in terms of A, B, alpha and beta.'},
   {t:'The volumes of the central and tissue compartments', correct:false,
    why:'Volumes are Vp and Vt and carry units of litres, whereas rate constants carry reciprocal time. The two are linked by Vt = Vp·{{frac:k12|k21}}, which is a relationship between them rather than an identity.'}],
  teach:[
@@ -1016,19 +729,8 @@ const Q_MODULE2 = [
     'Two kinds of rate constant act in this model, and the subscript tells them apart.',
     'One subscript or none means loss from the body: k, km (metabolism) and ke (excretion).',
     'A double subscript means movement between compartments, read from source to destination: k12 is central to tissue, k21 is tissue to central.',
-    'Transfer constants keep the drug in the body; elimination constants remove it.',
-    'alpha and beta are called hybrid constants because each is built from k, k12 and k21 together, so neither belongs to one arrow on the diagram; k12 and k21, the constants of single arrows, are the microconstants (Chapter 13).']},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+    'Transfer constants keep the drug in the body; elimination constants remove it.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)".'}],
  teachImg:'slide_2IVBolusAdministra_p17',
  cite:'2IVBolusAdministration.pdf, slide "Two-Compartment Open Model (IV Bolus Injection)"',
  quote:'our K12 and our K21. Remember, those are our transfer constants, so how fast is the drug going from one compartment or the central compartment to the peripheral compartment and back and forth.'},
@@ -1049,21 +751,10 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'The method of residuals (feathering, peeling) separates two overlapping exponential processes.',
-    'Late data lie on the elimination phase alone, because distribution has finished.',
-    'A straight line fitted to the late data and extrapolated back to time zero gives B and beta.',
+    'Late data lie on the elimination phase alone, because distribution has finished; a straight line through them, extrapolated back to time zero, gives B and beta.',
     'Subtracting that line from the observed early concentrations leaves the distribution part: the residuals.',
     'A straight line through the residuals gives A and alpha.']},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Method of Residuals".'}],
  cite:'2IVBolusAdministration.pdf, slide "Method of Residuals"',
  quote:'Residual plasma concentration (rapidly distributed a phase) is obtained by subtracting the extrapolated line from observed data',
  note:'She will not ask you to carry out the method of residuals. She supplies A, B, alpha and beta; know what the method is for.',
@@ -1084,22 +775,11 @@ const Q_MODULE2 = [
    why:'Transfer constants are k12 and k21 and carry reciprocal time. The equation sheet gives them in terms of A, B, alpha and beta, which shows that the two sets are different quantities rather than alternative names.'}],
  teach:[
   {h:'The idea', list:[
-    'A biexponential equation has four parameters in two pairs, one pair per phase.',
+    'A biexponential equation, C = Ae^(−αt) + Be^(−βt), has four parameters in two pairs, one pair per phase.',
     'The coefficient in front (A or B) is that phase extrapolated to time zero, in units of concentration.',
     'The rate constant in the exponent (alpha or beta) is the slope of that phase, in units of reciprocal time.',
-    'Reading the units is enough to assign all four correctly.']},
-  {h:'How she tests it', t:'Her practice sets and quizzes hand over A, B, alpha and beta, or the whole biexponential equation with "(Concentration is given in mcg/mL and time in hours)", and never name the model. The parts that follow are fixed: the elimination half-life from beta, the initial concentration A + B, the concentration at 4 hours, and the central volume as dose ÷ (A + B).'},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+    'At time zero both exponentials equal one, so C0 = A + B, and the central volume is Vc = {{frac:D0|A + B}}.']},
+  {h:'How she tests it', t:'She hands over A, B, alpha and beta, or the whole equation, and asks for the half-life from beta, A + B, a later concentration and the central volume.'}],
  teachImg:'slide_2IVBolusAdministra_p21',
  cite:'2IVBolusAdministration.pdf, slide "Concentration of Drug in the Central Compartment"',
  quote:'Is our B intercept. And The slope here is going to be our beta or our lowercase b. And the intercept here is going to be capital A and the slope is going to be A or alpha.'},
@@ -1121,18 +801,8 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'In a biexponential equation with no labels, the larger rate constant is distribution (alpha) and the smaller is elimination (beta).',
     'That ordering makes the curve steep first and shallow later, and puts beta on the terminal straight segment.',
-    'Dr. Mosley notes what would happen otherwise: if elimination were fast relative to distribution, the drug would never build to an effective concentration.']},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+    'If elimination were fast relative to distribution, the drug would never build to an effective concentration.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Concentration of Drug in the Central Compartment".'}],
  teachImg:'slide_2IVBolusAdministra_p21',
  cite:'2IVBolusAdministration.pdf, slide "Concentration of Drug in the Central Compartment"',
  quote:'Alpha bigger because the, the distribution phase is gonna happen a lot faster than an elimination phase'},
@@ -1147,26 +817,15 @@ const Q_MODULE2 = [
   {t:'Divide 0.693 by alpha', correct:false,
    why:'Alpha belongs to the distribution phase, and its half-life describes how quickly drug reaches the tissues rather than how quickly it leaves the body. She says outright that the half-life of the distribution phase is not what the course cares about.'},
   {t:'Divide 0.693 by the overall rate constant k', correct:false,
-   why:'This answer confuses the overall rate constant k with the terminal slope beta. The overall k is a composite of the intercepts and both exponents, describing elimination from the central compartment. Beta is the terminal plasma slope, which governs the drug leaving the body, so {{frac:0.693|beta}} is the half-life and {{frac:0.693|k}} is a different number.'},
+   why:'This answer confuses the overall rate constant k with the terminal slope beta. The overall k is a composite of the intercepts and both exponents, describing elimination from the central compartment. Beta governs the terminal plasma decline, so {{frac:0.693|beta}} is the half-life.'},
   {t:'Divide 0.693 by the sum of alpha and beta', correct:false,
-   why:'Picking this reads the two exponents as the two intercepts are read. Intercepts are summed, A + B giving the initial concentration, but rate constants belonging to different phases are never summed: alpha plus beta describes no process in the model. The half-life needs the one constant that governs the terminal decline, beta, in {{frac:0.693|beta}}.'}],
+   why:'Picking this sums the two exponents the way the two intercepts are summed. A + B gives the initial concentration, but rate constants of different phases are never summed: alpha plus beta describes no process in the model. The half-life needs beta alone, in {{frac:0.693|beta}}.'}],
  teach:[
   {h:'The idea', list:[
-    'In a two-compartment drug, beta is the elimination rate constant.',
-    'So the half-life relationship from module one applies unchanged, with beta in place of k: t½ = {{frac:0.693|beta}}.',
-    'The overall k on the equation sheet is a different quantity, computed from the intercepts and both exponents.',
-    'It describes elimination from the central compartment within the model, not the terminal decline of the whole curve.']},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+    'In a two-compartment drug, beta is the elimination rate constant, so the half-life relationship applies unchanged with beta in place of k: t½ = {{frac:0.693|beta}}.',
+    'An unqualified "half-life" in a two-compartment problem means the beta half-life.',
+    'The overall k on the equation sheet is a different quantity, so solving for it first gives a different number.']},
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Beta Half-life".'}],
  cite:'2IVBolusAdministration.pdf, slide "Beta Half-life"; Basic Pharmacokinetics - 08-26 Lecture.txt (exam cues on beta half-life)',
  quote:'we do not really care about the half-life of the distribution phase. We care about the half-life of the elimination phase … 0.693 over B or beta'},
 
@@ -1188,20 +847,9 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'A two-compartment model has more than one compartment, so it has more than one volume.',
-    'The central volume, Vp, pairs with the measured plasma concentration.',
-    'Vp can be reached from the intercepts or from the AUC (area under the curve).',
+    'The central volume, Vp, pairs with the measured plasma concentration. It can be reached from the intercepts or from the AUC (area under the curve).',
     'The tissue volume, Vt, has no measurable concentration behind it. It is derived from Vp and the ratio of the two transfer constants.']},
-  {h:'How the variables relate', list:[
-    'C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'A and B are intercepts in concentration units, found by extrapolating each phase back to time zero.',
-    'alpha is the distribution slope and beta the elimination slope. alpha is always the larger.',
-    'Elimination half-life = {{frac:0.693|beta}}. Do not solve for an overall k first.',
-    'At time zero both exponentials equal one, so C0 = A + B, and the central compartment volume is Vc = {{frac:D0|A + B}}, where D0 is the dose.']},
-  {h:'What Chapter 13 adds', list:[
-    'Drug builds up in the peripheral (tissue) compartment until its rate in equals its rate out. This is distribution equilibrium.',
-    'After that, the two compartments decline in parallel.',
-    'The drug then behaves as if it were in one compartment, with first-order elimination described by beta alone.',
-    'That is why {{frac:0.693|beta}} is the elimination half-life, and why the plasma curve can report on the tissue.']}],
+  {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "Apparent Volumes of Distribution".'}],
  teachImg:'slide_2IVBolusAdministra_p25',
  cite:'2IVBolusAdministration.pdf, slide "Apparent Volumes of Distribution"',
  quote:'Can calculate several different volumes of distribution for multi-compartment models'},
@@ -1229,18 +877,8 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'A two-compartment problem often gives four parameters when only one is needed.',
     'Sort them by unit: the two in reciprocal time are rate constants, and the two in concentration are intercepts.',
-    'The smaller rate constant is elimination (beta), and the elimination half-life follows in one division.',
-    'The intercepts and the dose belong to other parts of the problem.']},
-  {h:'How the variables relate', list:[
-    'Concentration at any time: substitute t into C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'Elimination half-life = {{frac:0.693|beta}}, read from the terminal slope alone.',
-    'Vc = {{frac:D0|A + B}} (D0 is the dose), using the concentration at time zero.',
-    'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
-  {h:'What Chapter 13 adds', list:[
-    'In the terminal phase, plasma and tissue concentrations fall together.',
-    'So a concentration computed on that stretch stands for the body, not only the sampling compartment.',
-    'Before distribution equilibrium, the plasma curve and the tissue curve are still separating.',
-    'So a concentration early in the curve needs both exponential terms; a late one effectively needs only the beta term.']}],
+    'The smaller rate constant is elimination (beta), and the elimination half-life, {{frac:0.693|beta}}, follows in one division.',
+    'An unqualified "half-life" in a two-compartment problem means the beta half-life. The intercepts and the dose belong to other parts of the problem.']}],
  cite:'IV-Bolus-Practice-3---Solutions.pdf, problem 2 part a',
  quote:'t½β = 0.693 / 0.198 hr⁻¹ = 3.5 hr'},
 
@@ -1266,17 +904,7 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'At time zero every exponential term equals one, so the initial plasma concentration is the sum of the intercepts, A + B.',
     'The result is a concentration, in the units of A and B, not of alpha or beta.',
-    'The dose divided by this same sum gives the volume of the central compartment.']},
-  {h:'How the variables relate', list:[
-    'Concentration at any time: substitute t into C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'Elimination half-life = {{frac:0.693|beta}}, read from the terminal slope alone.',
-    'Vc = {{frac:D0|A + B}} (D0 is the dose), using the concentration at time zero.',
-    'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
-  {h:'What Chapter 13 adds', list:[
-    'In the terminal phase, plasma and tissue concentrations fall together.',
-    'So a concentration computed on that stretch stands for the body, not only the sampling compartment.',
-    'Before distribution equilibrium, the plasma curve and the tissue curve are still separating.',
-    'So a concentration early in the curve needs both exponential terms; a late one effectively needs only the beta term.']}],
+    'The dose divided by this same sum gives the volume of the central compartment, Vc = {{frac:D0|A + B}}.']}],
  cite:'IV-Bolus-Practice-3---Solutions.pdf, problem 2 part b',
  quote:'C₀ = (10.21 + 8.53) mg/L = 18.74 mg/L'},
 
@@ -1302,17 +930,7 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'The central compartment volume is found like a one-compartment volume of distribution: dose over initial concentration, with A + B as the initial concentration.',
     'The other route on the equation sheet, Vp = {{frac:D0|k·AUC}}, reaches the same volume.',
-    'That route first needs the overall rate constant k, built from all four parameters. So it is kept for problems that give an AUC (area under the curve) instead of intercepts.']},
-  {h:'How the variables relate', list:[
-    'Concentration at any time: substitute t into C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'Elimination half-life = {{frac:0.693|beta}}, read from the terminal slope alone.',
-    'Vc = {{frac:D0|A + B}} (D0 is the dose), using the concentration at time zero.',
-    'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
-  {h:'What Chapter 13 adds', list:[
-    'In the terminal phase, plasma and tissue concentrations fall together.',
-    'So a concentration computed on that stretch stands for the body, not only the sampling compartment.',
-    'Before distribution equilibrium, the plasma curve and the tissue curve are still separating.',
-    'So a concentration early in the curve needs both exponential terms; a late one effectively needs only the beta term.']}],
+    'That route first needs the overall rate constant k, built from all four parameters, so it is kept for problems that give an AUC (area under the curve) instead of intercepts.']}],
  cite:'IV-Bolus-Practice-3---Solutions.pdf, problem 2 part d',
  quote:'V_c = 300 mg / (18.74 mg/L) = 16 L'},
 
@@ -1341,17 +959,8 @@ const Q_MODULE2 = [
     'A biexponential equation with no labels still identifies its own terms.',
     'The exponents are rate constants in reciprocal time; the larger one is always distribution.',
     'The coefficients are intercepts in units of concentration; either may be the larger.',
-    'Their sum is the concentration at time zero. This is a quick check that the equation has been read correctly before any time is substituted.']},
-  {h:'How the variables relate', list:[
-    'Concentration at any time: substitute t into C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'Elimination half-life = {{frac:0.693|beta}}, read from the terminal slope alone.',
-    'Vc = {{frac:D0|A + B}} (D0 is the dose), using the concentration at time zero.',
-    'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
-  {h:'What Chapter 13 adds', list:[
-    'In the terminal phase, plasma and tissue concentrations fall together.',
-    'So a concentration computed on that stretch stands for the body, not only the sampling compartment.',
-    'Before distribution equilibrium, the plasma curve and the tissue curve are still separating.',
-    'So a concentration early in the curve needs both exponential terms; a late one effectively needs only the beta term.']}],
+    'Their sum is the concentration at time zero, a check that the equation has been read correctly before any time is substituted.',
+    'Late in the curve only the beta term effectively remains, because the distribution term has decayed.']}],
  teachImg:'slide_2IVBolusAdministra_p7',
  cite:'2IVBolusAdministration.pdf, slide "Practice" (multicompartment section, theophylline)',
  quote:'The equation below describes theophylline kinetics in nine human volunteers. What is the plasma level of theophylline 3 hours after an IV bolus dose?'},
@@ -1383,17 +992,7 @@ const Q_MODULE2 = [
     'The overall rate constant k and the terminal slope beta are different numbers, and the model needs both.',
     'Beta is how fast the plasma concentration actually falls once distribution is over. It is slowed by drug coming back out of tissue.',
     'The overall k is elimination from the central compartment itself, which is why it is always the larger of the two.',
-    'The cross-product form of the expression combines both phases into one constant.']},
-  {h:'How the variables relate', list:[
-    'Concentration at any time: substitute t into C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'Elimination half-life = {{frac:0.693|beta}}, read from the terminal slope alone.',
-    'Vc = {{frac:D0|A + B}} (D0 is the dose), using the concentration at time zero.',
-    'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
-  {h:'What Chapter 13 adds', list:[
-    'In the terminal phase, plasma and tissue concentrations fall together.',
-    'So a concentration computed on that stretch stands for the body, not only the sampling compartment.',
-    'Before distribution equilibrium, the plasma curve and the tissue curve are still separating.',
-    'So a concentration early in the curve needs both exponential terms; a late one effectively needs only the beta term.']}],
+    'The elimination half-life still comes from beta, not from k.']}],
  teachImg:'slide_2IVBolusAdministra_p24',
  cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; in-class two-compartment practice sheet problem 1, answers read aloud in Basic Pharmacokinetics - 08-26 Lecture.txt',
  quote:'I got for the overall rate constant K 0.272 per hour.',
@@ -1423,19 +1022,8 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'Both transfer constants are computed from the same four parameters: A, B, alpha and beta.',
     'k21 is a weighted average of alpha and beta, so it falls between them.',
-    'k12 is not an average of the exponents, and no such range applies to it.']},
-  {h:'The common error', list:[
-    'A k21 larger than alpha or smaller than beta means the intercepts and exponents were paired the wrong way round in the cross product.']},
-  {h:'How the variables relate', list:[
-    'Concentration at any time: substitute t into C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'Elimination half-life = {{frac:0.693|beta}}, read from the terminal slope alone.',
-    'Vc = {{frac:D0|A + B}} (D0 is the dose), using the concentration at time zero.',
-    'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
-  {h:'What Chapter 13 adds', list:[
-    'In the terminal phase, plasma and tissue concentrations fall together.',
-    'So a concentration computed on that stretch stands for the body, not only the sampling compartment.',
-    'Before distribution equilibrium, the plasma curve and the tissue curve are still separating.',
-    'So a concentration early in the curve needs both exponential terms; a late one effectively needs only the beta term.']}],
+    'A k21 larger than alpha or smaller than beta means the intercepts and exponents were paired the wrong way round in the cross product.',
+    'k12 is not an average of the exponents, and no such range applies to it.']}],
  teachImg:'slide_2IVBolusAdministra_p24',
  cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; in-class two-compartment practice sheet problem 1, answers read aloud in Basic Pharmacokinetics - 08-26 Lecture.txt',
  quote:'And then from 2 to 1, 0.9 per hour.',
@@ -1467,17 +1055,7 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'Three expressions on the equation sheet convert the four fitted parameters (A, B, alpha, beta) into the three rate constants of the model diagram (k, k12, k21).',
     'All three share the cross product Aβ + Bα, so computing it once serves all of them.',
-    'The k12 expression is the only one with a squared term, which tells the three apart on the sheet.']},
-  {h:'How the variables relate', list:[
-    'Concentration at any time: substitute t into C = Ae^(-at) + Be^(-bt), with a for alpha and b for beta.',
-    'Elimination half-life = {{frac:0.693|beta}}, read from the terminal slope alone.',
-    'Vc = {{frac:D0|A + B}} (D0 is the dose), using the concentration at time zero.',
-    'An unqualified "half-life" in a two-compartment problem means the beta half-life.']},
-  {h:'What Chapter 13 adds', list:[
-    'In the terminal phase, plasma and tissue concentrations fall together.',
-    'So a concentration computed on that stretch stands for the body, not only the sampling compartment.',
-    'Before distribution equilibrium, the plasma curve and the tissue curve are still separating.',
-    'So a concentration early in the curve needs both exponential terms; a late one effectively needs only the beta term.']}],
+    'The k12 expression is the only one with a squared term, which tells the three apart on the sheet.']}],
  teachImg:'slide_2IVBolusAdministra_p24',
  cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; in-class two-compartment practice sheet problem 1, answers read aloud in Basic Pharmacokinetics - 08-26 Lecture.txt',
  quote:'And then transfer from 1 to 2, 1.1 per hour.',
@@ -1506,16 +1084,10 @@ const Q_MODULE2 = [
  check:{t:'0.693 over a quarter would be a little under 3 hr, and 0.2769 is a little more than a quarter, so t½ is about 2.5 hr.', lo:0, hi:2.77},
  teach:[
   {h:'The idea', list:[
-    'Half-life (t½) and the elimination rate constant (k) carry the same information in two forms.',
-    'Any part of this set that names one can be worked from the other.',
-    'k is the fraction of what is present that leaves per hour. t½ is how long that takes to remove half of it.',
-    'Neither depends on the dose, so doubling a dose leaves both unchanged.']},
-  {h:'How the variables relate', list:[
-    't½ = {{frac:0.693|k}}, and k = {{frac:0.693|t½}}.',
-    'k is a fraction per unit time; t½ is a time, so the two are reciprocal in character.',
-    'Neither changes with dose, so the same half-life describes 250 mg and 25 mg.',
-    'A larger k means a shorter half-life and faster elimination.',
-    '99.9 per cent of the dose is gone after 10 half-lives, which is part h of this set.']}],
+    'Half-life (t½) and the elimination rate constant (k) carry the same information in two forms: t½ = {{frac:0.693|k}}, and k = {{frac:0.693|t½}}.',
+    'k is the fraction of what is present that leaves per hour; t½ is how long that takes to remove half of it.',
+    'Neither depends on the dose, so the same half-life describes 250 mg and 25 mg.',
+    'A larger k means a shorter half-life and faster elimination.']}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part b',
  quote:'t½ = 0.693 / 0.2769 hr⁻¹ = 2.5 hr'},
 
@@ -1542,13 +1114,8 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'Every later part of this set runs off C0, the initial plasma concentration. An error here carries into VD (volume of distribution), clearance and the amount remaining.',
-    'Back-extrapolation uses one measured point and k, the elimination rate constant.',
-    'Either given point recovers the same intercept: from the 4-hour point, 6.6 multiplied by e^(0.2769 × 4) is also 20 mg/L.']},
-  {h:'How the variables relate', list:[
-    'Forward in time: Ct = C0e^(-kt). Backward to the intercept: C0 = Cte^(+kt).',
-    'The exponent is positive going back to time zero and negative going forward from it.',
-    'Any measured point on the line recovers the same C0 when the right t is used.',
-    'C0 is what pairs with the dose to give VD, so every later part of the set depends on it.',
+    'Backward to the intercept: C0 = Ct·e^(+kt). Forward in time: Ct = C0·e^(−kt).',
+    'Either given point recovers the same intercept: from the 4-hour point, 6.6 multiplied by e^(0.2769 × 4) is also 20 mg/L.',
     'mg/L and mcg/mL are the same number, so the units need no arithmetic.']}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part c',
  quote:'C₀ = (2.18 mg/L)e^(0.2769)(8) = 20 mg/L'},
@@ -1575,17 +1142,9 @@ const Q_MODULE2 = [
  check:{t:'A quarter hour is a small fraction of a half-life of over 2 hr, so only about 7 per cent is lost: Ct sits a little under 20 mg/L and well above half of it, and 18.66 mg/L fits.', lo:10, hi:20},
  teach:[
   {h:'The idea', list:[
-    'Ct = C0e^(-kt) needs t in the same unit of time as k, the elimination rate constant.',
+    'Ct = C0·e^(−kt) needs t in the same unit of time as k, so minutes have to become hours whenever k is in reciprocal hours.',
     'Fifteen minutes after a bolus, almost all of the dose is still in the body, so Ct stays close to C0 (the initial concentration).']},
-  {h:'The common error', list:[
-    'Using 15 where 0.25 belongs gives e^(−4.15), which is 0.32 mg/L rather than 18.66 mg/L.',
-    'The error is large enough to catch by asking whether the answer is plausible: any answer well below the intercept is clearly wrong.']},
-  {h:'How the variables relate', list:[
-    'Ct = C0e^(-kt), with t and k in matching units of time.',
-    'Minutes have to become hours whenever k is in reciprocal hours.',
-    'A short t relative to the half-life leaves Ct close to C0.',
-    'The amount in the body at that time is VD x Ct, where VD is the apparent volume of distribution.',
-    'The fraction remaining, e^(-kt), does not depend on the dose.']}],
+  {h:'The common error', t:'Using 15 where 0.25 belongs gives e^(−4.15), which is 0.32 mg/L rather than 18.66 mg/L. Any answer well below the intercept is wrong.'}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part d',
  quote:'C₀.₂₅ = (20 mg/L)e^−(0.2769)(0.25) = 18.66 mg/L'},
 
@@ -1610,13 +1169,8 @@ const Q_MODULE2 = [
  teach:[
   {h:'The idea', list:[
     'VD (apparent volume of distribution) is a proportionality constant between the amount in the body and the plasma concentration, not an anatomical volume.',
-    'At 12.5 L it is well under total body water for a 70-kg adult.',
-    'That describes a drug that stays largely in plasma and extracellular fluid rather than one that concentrates in tissue.']},
-  {h:'How the variables relate', list:[
-    'VD = {{frac:D0|C0}} at time zero (dose over initial concentration), and A = VD x C at any later time.',
-    'A larger VD gives a lower C0 for the same dose.',
-    'Cl = k x VD (clearance = elimination rate constant x VD), so the volume is needed for the next part of this set.',
-    'VD is apparent: it can exceed any real body volume when a drug leaves plasma for tissue.',
+    'VD = {{frac:D0|C0}} at time zero, and A = VD × C at any later time.',
+    'At 12.5 L it is well under total body water for a 70-kg adult, which describes a drug that stays largely in plasma and extracellular fluid rather than concentrating in tissue.',
     'The stated body weight is used only when the question asks for the volume per kilogram.']}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part e',
  quote:'V_D = 250 mg / (20 mg/L) = 12.5 L'},
@@ -1641,16 +1195,10 @@ const Q_MODULE2 = [
  check:{t:'0.2769 is a little over a quarter, so about a quarter of 12.5 L, roughly 3 L, is cleared each hour; 3.46 L/hr fits, and k below 1 keeps Cl below 12.5 L/hr.', lo:0, hi:12.5},
  teach:[
   {h:'The idea', list:[
-    'Clearance (Cl) and the elimination rate constant (k) describe the same elimination from two directions.',
+    'Clearance (Cl) and the elimination rate constant (k) describe the same elimination from two directions: Cl = k × VD, and k = {{frac:Cl|VD}}.',
     'k is a fraction per hour. It says nothing about how much drug that fraction represents.',
-    'Clearance multiplies k by VD (the apparent volume of distribution), so it carries the size of the patient as well as the speed of removal.',
-    'That is why two patients with the same half-life can need different doses.']},
-  {h:'How the variables relate', list:[
-    'Cl = k x VD, and k = {{frac:Cl|VD}}.',
-    'Clearance is in volume per time; k is per time alone.',
-    'The rate of elimination at any moment is Cl x C, so it falls as the concentration falls while Cl stays fixed.',
-    'A change in body size moves VD and Cl together and leaves k roughly where it was.',
-    'Cl x {{frac:t½|0.693}} recovers VD, which is a check on this part.']}],
+    'Clearance multiplies k by VD, so it carries the size of the patient as well as the speed of removal. That is why two patients with the same half-life can need different doses.',
+    'The rate of elimination at any moment is Cl × C, so it falls as the concentration falls while Cl stays fixed.']}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part f',
  quote:'Cl = (12.5 L)(0.2769 hr⁻¹) = 3.46 L/hr'},
 
@@ -1674,15 +1222,10 @@ const Q_MODULE2 = [
  check:{t:'With k = 0.2769 hr⁻¹ the half-life is between 2 and 3 hr, so 3 hours is a little over one half-life and a little under half of 250 mg remains; 108.9 mg fits, below half of the dose.', lo:62.5, hi:125},
  teach:[
   {h:'The idea', list:[
-    'The same exponential governs the amount in the body and the plasma concentration, so work in whichever the stem supplies.',
+    'The same exponential governs the amount in the body and the plasma concentration, Dt = D0·e^(−kt) and Ct = C0·e^(−kt), so work in whichever the stem supplies.',
     'Here the dose is given, so the amount route is one line.',
-    'The concentration route gives the same result: 0.4357 times 20 mg/L is 8.71 mg/L, and multiplying by the 12.5 L volume returns 108.9 mg.']},
-  {h:'How the variables relate', list:[
-    'Dt = D0e^(-kt) and Ct = C0e^(-kt) share the same exponent.',
-    'A = VD x C converts between the two at any time (A is the amount; VD is the apparent volume of distribution).',
-    'After one half-life half the dose is left; after two, a quarter.',
-    'The fraction remaining depends only on k and t, never on the dose.',
-    'Answering in amounts saves one multiplication when the dose is the quantity given.']}],
+    'The concentration route gives the same result: 0.4357 times 20 mg/L is 8.71 mg/L, and multiplying by the 12.5 L volume returns 108.9 mg.',
+    'The fraction remaining depends only on k and t, never on the dose.']}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part g',
  quote:'D₃ = (250 mg)e^−(0.2769)(3) = 108.9 mg'},
 
@@ -1695,7 +1238,7 @@ const Q_MODULE2 = [
  tol:0.8,
  steps:[
   {k:'setup', t:'99.9 per cent eliminated leaves 0.1 per cent, and a tenth of a per cent is reached after 10 half-lives',
-   why:'Each half-life halves what is left, so the fraction remaining after n half-lives is one over two to the n. Ten halvings give 1/1024, which is 0.098 per cent, just under the tenth of a per cent asked for. This is the count she uses every time this part appears.'},
+   why:'Each half-life halves what is left, so the fraction remaining after n half-lives is one over two to the n. Ten halvings give {{frac:1|1024}}, which is 0.098 per cent, just under the tenth of a per cent asked for.'},
   {k:'algebra', t:'t = 10 t½ = 10(2.5 hr) = 25 hr',
    why:'Multiplying the half-life by the number of halvings gives the elapsed time directly. No logarithm is needed once the count is recognised.'},
   {k:'algebra', t:'By the equation: t = {{frac:ln(100/0.1)|0.2769 hr⁻¹}} = {{frac:6.9078|0.2769 hr⁻¹}} = 24.95 hr',
@@ -1708,16 +1251,10 @@ const Q_MODULE2 = [
  check:{t:'99.9% eliminated leaves 0.1%, one part in 1000, which is ten halvings, so t = 10 × 2.5 hr = 25 hr.', lo:22.5, hi:25},
  teach:[
   {h:'The idea', list:[
-    'The ten-half-life count turns up twice in this course.',
-    'It is the time to eliminate 99.9 per cent of a dose.',
-    'Read the other way, it is the time an infusion needs to come within a tenth of a per cent of its steady-state concentration.',
-    'In practice the line is drawn earlier, at five to seven half-lives, where less than 5 and less than 1 per cent remain.']},
-  {h:'How the variables relate', list:[
-    'The fraction remaining after n half-lives is (1/2)^n, independent of the dose.',
+    'Ten half-lives is the time to eliminate 99.9 per cent of a dose, whatever the dose.',
     '1 half-life leaves 50 per cent, 2 leaves 25, 3 leaves 12.5, 7 leaves 0.78, 10 leaves 0.098.',
-    'By equation: t = {{frac:ln(A0/At)|k}}, which for 99.9 per cent is {{frac:ln(1000)|k}}.',
-    'Larger k means a shorter half-life and a shorter time to the same percentage.',
-    'The same count governs the approach to steady state during an infusion.']}],
+    'By equation: t = {{frac:ln(A0 ÷ At)|k}}, which for 99.9 per cent is {{frac:ln(1000)|k}}.',
+    'A larger k means a shorter half-life and a shorter time to the same percentage.']}],
  cite:'IV-Bolus-Practice-2---Solutions.pdf, part h',
  quote:'t = ln(100/0.1) / 0.2769 hr⁻¹ = 25 hr'},
 

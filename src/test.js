@@ -646,6 +646,30 @@ console.log('\n=== 5e. What an explanation may say ===');
   }
   if (!n) console.log('  ok    no explanation, option, step or note says where its facts were heard');
 
+  /* Length: an explanation long enough to bury its answer confuses more than it
+     teaches. Limits per question on what is read after answering; the n-dose
+     derivation the student asked for is exempt. */
+  {
+    const plainW = s => String(s || '').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '$1 $2').replace(/\{\{[^}]*\}\}/g, '').split(/\s+/).filter(Boolean).length;
+    const EXEMPT = /^(After n doses: what each letter is|Why the bracket has that shape|Why the top of the bracket becomes 1 at steady state)$/;
+    const LIM = {teach: 160, bullets: 7, bullet: 35, why: 55, total: 380};
+    const long = [];
+    for (const q of X.QUESTIONS.concat(X.EXTRAS)) {
+      const ps = X.teachParts(q.teach).filter(p => !EXEMPT.test(p.h || ''));
+      const items = ps.flatMap(p => [p.t, p.after, ...p.list].filter(Boolean));
+      const teachW = items.reduce((a, t) => a + plainW(t), 0) + ps.reduce((a, p) => a + (p.table ? p.table.head.concat(p.table.rows.flat()).reduce((b, c) => b + plainW(c), 0) : 0), 0);
+      const whys = (q.options || []).map(o => o.why).concat((q.steps || []).map(st => st.why));
+      const total = teachW + whys.reduce((a, t) => a + plainW(t), 0) + plainW(q.note);
+      if (teachW > LIM.teach) long.push(`${q.id}: concept block ${teachW} words`);
+      if (items.length > LIM.bullets) long.push(`${q.id}: concept block ${items.length} bullets`);
+      if (items.some(t => plainW(t) > LIM.bullet)) long.push(`${q.id}: a concept bullet over ${LIM.bullet} words`);
+      if (whys.some(t => plainW(t) > LIM.why)) long.push(`${q.id}: an explanation over ${LIM.why} words`);
+      if (total > LIM.total) long.push(`${q.id}: ${total} words after answering`);
+    }
+    if (long.length) bad(`explanations over the length limits (${long.length}): ` + long.slice(0, 8).join(' | '));
+    else console.log(`  ok    every explanation within the length limits (concept block ≤ ${LIM.teach} words, ≤ ${LIM.bullets} bullets; each why ≤ ${LIM.why} words; ≤ ${LIM.total} words in all)`);
+  }
+
   /* Tables and fractions are markup, so a malformed one shows as raw text. */
   let tb = 0, fr = 0;
   for (const q of X.QUESTIONS.concat(X.EXTRAS)) for (const p of X.teachParts(q.teach)) {

@@ -35,10 +35,7 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'VD (apparent volume of distribution) = {{frac:D0|C0}}: the volume that would hold the whole dose at the concentration measured in plasma.',
    'The word hypothetical is in the definition because the number need not match any anatomical space.',
-   'A large VD means the drug is more concentrated in the tissues and less in the blood; a drug highly bound to plasma proteins, or held in the vessels, has a higher Cp and a smaller VD (second slide "Volume of Distribution").',
-   'VD given as a percentage of body weight is read as litres per kilogram, with 1 L taken as the weight of 1 kg: 25 per cent of body weight is 0.25 L/kg.',
-   'VD is a volume, in litres; clearance is a volume per time, in L/hr. VD says how widely the drug spreads, clearance how fast it is removed, and k = {{frac:Cl|VD}} links them (slide "Clearance, Elimination Half-Life, and Volume of Distribution").',
-   'Her graded item used the slide definition as the key and built two distractors from the slide\'s own phrase "proportionality constant".']}],
+   'A large VD means the drug is more concentrated in the tissues and less in the blood; a drug highly bound to plasma proteins has a higher Cp and a smaller VD.']}],
  cite:'Canvas Quiz 2 (Modules 2–3), question 1; 2IVBolusAdministration.pdf, slide "Volume of Distribution"'},
 
 {id:'cq2-2', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L03',
@@ -94,7 +91,7 @@ const Q_QUIZZES = [
   {t:'To immediately obtain a therapeutic plasma concentration', correct:true,
    why:'An infusion alone takes three to five half-lives to reach steady state. A loading dose puts the steady-state amount, Css × VD (the steady-state concentration times the apparent volume of distribution), into the body at once, so the therapeutic level is there from the start and the infusion then holds it.'},
   {t:'To reduce the adverse effects associated with the drug', correct:false,
-   why:'Picking this reads a dosing device as a safety device. A loading dose raises the concentration faster, which brings any concentration-related adverse effect forward rather than reducing it. Total exposure at steady state is unchanged, because the plateau Css = {{frac:R|Cl}} depends on the infusion rate R and clearance Cl, not on the loading dose.'},
+   why:'Picking this reads a dosing device as a safety device. A loading dose raises the concentration faster, which brings any concentration-related adverse effect forward rather than reducing it. The plateau Css = {{frac:R|Cl}} depends on the infusion rate R and clearance Cl, not on the loading dose.'},
   {t:'To improve patient adherence', correct:false,
    why:'This answer confuses a kinetic quantity with a behavioural one. Adherence concerns how reliably a patient takes a regimen over days or weeks. A loading dose is a one-time amount, Css × VD, chosen so the target level exists from the first minute; it says nothing about how reliably later doses are taken.'},
   {t:'To reduce the elimination half-life', correct:false,
@@ -103,9 +100,8 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'The time to steady state is set by the half-life alone: about five half-lives, whatever the rate.',
    'When that wait is too long, a loading dose DL = Css × VD supplies the steady-state amount at once.',
-   'DL = Css × VD because Cp = {{frac:DB|VD}}: the amount in the body at the plateau is the target concentration times the volume it spreads through. The same dose comes from DL = {{frac:R|k}}, since Css = {{frac:R|kVD}}; her In-Class IV Infusions key shows both routes giving 320 mg (slide "IV Bolus Loading Dose and Continuous IV Infusion").',
-   'With the right loading dose the level stays flat at Css: the bolus part falls as C0e^(−kt) while the infusion part rises as Css(1 − e^(−kt)), and the two add to Css at every time. Her In-Class IV Infusions question 2: 13.2 + 6.8 = 20 mg/L at 3 hours.',
-   'The infusion rate is unchanged by the loading dose; it still sets the level that is held, Css = {{frac:R|Cl}}. A 500 mg or a 750 mg loading dose with the same 75 mg/hr infusion gives the same 36.1 mg/L at steady state (In-Class IV Infusions question 5).']}],
+   'DL = Css × VD because Cp = {{frac:DB|VD}}: the amount in the body at the plateau is the target concentration times the volume it spreads through.',
+   'With the right loading dose the level stays flat at Css: the bolus part falls as C0e^(−kt) while the infusion part rises as Css(1 − e^(−kt)), and the two add to Css at every time.']}],
  cite:'Canvas Quiz 2 (Modules 2–3), question 4; 3IntravenousInfusions.pdf, slide "IV Bolus Loading Dose and Continuous IV Infusion"'},
 
 {id:'cq2-5', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
@@ -148,9 +144,7 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'The infusion rate sets the level: Css = {{frac:R|Cl}}.',
    'The half-life sets the time: about five half-lives to steady state, independent of the rate.',
-   'The fraction of Css reached after a time t is 1 − e^(−kt), which holds k and t only: 50 per cent after one half-life, 75 after two, 87.5 after three, 90 at 3.3 half-lives and 95 at 4.32 (slide "Drug Concentration Prior to Reaching Steady-State"; Chapter 6, Table 6-1). R is not in it, so a faster infusion climbs to a higher plateau over the same time.',
-   'Rate in equals rate out at the plateau: R = Cl × Css. Clearance belongs to the patient and the drug, so the only quantity free to balance a larger R is Css.',
-   'The same question was her poll on 2 September and then a graded item.']}],
+   'The fraction of Css reached at time t is 1 − e^(−kt), which holds k and t only: 50 per cent after one half-life, 90 at 3.3 half-lives (slide "Drug Concentration Prior to Reaching Steady-State").']}],
  cite:'Canvas Quiz 2 (Modules 2–3), question 6; 3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State"'},
 
 {id:'cq2-7', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
@@ -185,7 +179,7 @@ const Q_QUIZZES = [
  units:'mg/L', answer:14.9, tol:0.3,
  steps:[
   {k:'setup', t:'Css = {{frac:R|Cl}} = {{frac:R|k × VD}}',
-   why:'At steady state the infusion rate R equals the elimination rate, which is clearance Cl times the steady-state concentration Css, so Css = {{frac:R|Cl}}. Clearance is not given, so it is built as Cl = k × VD, where k is the elimination rate constant and VD the apparent volume of distribution for this patient.'},
+   why:'At steady state the infusion rate R equals the elimination rate, which is clearance Cl times the steady-state concentration Css, so Css = {{frac:R|Cl}}. Clearance is not given, so it is built as Cl = k × VD, where k is the elimination rate constant and VD the apparent volume of distribution.'},
   {k:'unit', t:'154 {{frac:lb|2.2}} = 70 kg; VD = 0.21 L/kg × 70 kg = 14.7 L',
    why:'The volume is given per kilogram and the weight in pounds, so the weight is converted first and then scaled. Age and sex are stated and not used.'},
   {k:'algebra', t:'k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹; Cl = 0.1733 × 14.7 L = 2.547 L/hr',
@@ -223,8 +217,8 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Elimination = excretion + biotransformation. Both remove the parent drug irreversibly; only biotransformation changes the molecule.',
    'Distribution and absorption move unchanged drug and are not elimination.',
-   'The kidney and the liver are the two major elimination organs, the kidney by excretion and the liver by metabolism (slides "Drug Elimination" and "Hepatic (Metabolic) Clearance"). Biotransformation of an oral dose before it reaches the general circulation is the first-pass effect, which lowers bioavailability (Introduction slide "Key Terms").',
-   'The definitions on her slide are the ones she quotes in a stem and asks the term for; here the words "chemically converted" settle it.']}],
+   'The kidney and the liver are the two major elimination organs, the kidney by excretion and the liver by metabolism.',
+   'She quotes the slide definition and asks for the term; here the words "chemically converted" settle it.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 1; 4---Clearance-and-Elimination.pdf slide 3'},
 
 {id:'cq3-2', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
@@ -241,10 +235,8 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'k = {{frac:Cl|VD}} and t½ = {{frac:0.693|k}}, so t½ = {{frac:0.693 × VD|Cl}}.',
-   'Clearance up, half-life down; clearance down, half-life up, as long as VD holds. The half-life is the time to remove half of the drug and clearance is how fast drug is removed, so faster removal takes less time.',
-   'Cl = kVD is the line she expects without the sheet (slide "Clearance, Elimination Half-Life, and Volume of Distribution"), and 0.693 is ln 2, because the half-life is the time for the level to fall to half.',
-   'Her Module 4 example of the direction: an antibiotic with VD 25 L has a clearance of 750 mL/min in a normal adult and 150 mL/min in partial renal failure, so its half-life is five times longer in the renal-failure patient; renal disease usually lowers clearance and lengthens the half-life.',
-   'Read the direction the stem gives for clearance before deciding; do not substitute the direction renal disease usually takes.']}],
+   'Clearance up, half-life down; clearance down, half-life up, as long as VD holds.',
+   'The half-life is the time to remove half of the drug and clearance is how fast drug is removed, so faster removal takes less time.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 2; 4---Clearance-and-Elimination.pdf slide 21'},
 
 {id:'cq3-3', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
@@ -262,9 +254,8 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'tmax is set by ka and k alone. Cmax is set by dose, F, VD and the two rate constants.',
-   'Changing the dose moves Cmax and AUC in proportion and leaves tmax unchanged, because the dose multiplies both the absorption rate and the elimination rate by the same amount, so the two rates still cross at the same moment.',
-   'Her Module 5 slide "Changing Dose" draws several doses on one plot: tmax does not move and the AUC rises in direct proportion to the dose. The same point was her opening poll for multiple oral doses: increasing an oral dose gives no change in tmax.',
-   'At the peak itself, the rate of drug absorption equals the rate of drug elimination.']}],
+   'Changing the dose moves Cmax and AUC in proportion and leaves tmax unchanged: the dose multiplies the absorption rate and the elimination rate by the same amount.',
+   'Her slide "Changing Dose" draws several doses on one plot: tmax does not move.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 3; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Cp vs. Time for a Single Oral Dose"'},
 
 {id:'cq3-4', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
@@ -283,9 +274,8 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Before tmax, absorption outpaces elimination and the curve rises. After tmax, elimination outpaces absorption and the curve falls.',
    'At tmax the two rates are equal and the curve is flat for an instant.',
-   'Why they are equal there: the amount in the body changes at the rate in minus the rate out, dDB/dt = rate of absorption − rate of elimination (slide "First-Order Absorption Model"). At the peak the concentration is momentarily not changing, so that difference is zero and the two rates match.',
-   'Both rates are first order: absorption at ka times the amount still at the absorption site, elimination at k times the amount in the body. The first falls as the site empties and the second rises as the body fills, which is why they cross once, at tmax.',
-   'Depletion of the absorption site comes later and is not what defines the peak.']}],
+   'The amount in the body changes at the rate in minus the rate out, dDB/dt = rate of absorption − rate of elimination (slide "First-Order Absorption Model"); at the peak that difference is zero.',
+   'Both are first order: absorption at ka times the amount at the absorption site, elimination at k times the amount in the body. The first falls as the second rises, so they cross once.']}],
  cite:'Canvas Quiz 3 (Modules 4–5), question 4; 5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Plasma Level–Time Curve"'},
 
 {id:'cq3-5', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
@@ -320,7 +310,7 @@ const Q_QUIZZES = [
   {k:'setup', t:'AUC = {{frac:D0|Cl}} = {{frac:D0|k × VD}}',
    why:'For an IV dose the whole dose is eliminated, and clearance is dose over AUC, so AUC is dose over clearance. Clearance is not given and is built from k and VD. The 75 kg is not used because VD is given in litres already.'},
   {k:'algebra', t:'k = {{frac:0.693|6.0 hr}} = 0.1155 hr⁻¹; Cl = 0.1155 × 23 L = 2.657 L/hr',
-   why:'Cl (clearance) is not given, so it is built as k × VD: k (the elimination rate constant) = {{frac:0.693|6.0 hr}} = 0.1155 hr⁻¹ from the half-life, and VD (the volume of distribution) is 23 L. hr⁻¹ × L gives L/hr, the volume of plasma cleared of drug each hour: 0.1155 × 23 = 2.657 L/hr.'},
+   why:'Cl (clearance) is not given, so it is built as k × VD: k (the elimination rate constant) = {{frac:0.693|6.0 hr}} = 0.1155 hr⁻¹ from the half-life, and VD (the volume of distribution) is 23 L. hr⁻¹ × L gives L/hr: 0.1155 × 23 = 2.657 L/hr.'},
   {k:'algebra', t:'AUC = {{frac:500 mg|2.657 L/hr}} = 188.2 (mg/L)hr',
    why:'mg divided by L/hr is mg·hr/L, which is a concentration times a time, the unit of an area under a concentration curve.'},
   {k:'round', t:'188.2 (mg/L)hr',
@@ -344,7 +334,7 @@ const Q_QUIZZES = [
   {k:'setup', t:'ClR = {{frac:Du∞|AUC}}, with AUC = {{frac:D0|k × VD}}',
    why:'Renal clearance (ClR) is the amount excreted unchanged over the whole time course, Du∞, divided by the total AUC (area under the curve). The 48-hour collection is {{frac:48 hr|3 hr}} = 16 half-lives, so essentially all the drug has been eliminated and 713 mg is the total excreted unchanged.'},
   {k:'algebra', t:'k = {{frac:0.693|3 hr}} = 0.231 hr⁻¹; AUC = {{frac:1000 mg|0.231 hr⁻¹ × 19 L}} = {{frac:1000|4.389}} = 227.8 (mg/L)hr',
-   why:'The total AUC (area under the curve) is {{frac:D0|Cl}}, with Cl = k × VD. k (the elimination rate constant) = {{frac:0.693|3 hr}} = 0.231 hr⁻¹ from the half-life, and VD (the volume of distribution) is 19 L, so Cl = 0.231 × 19 = 4.389 L/hr. mg over L/hr leaves (mg/L)hr: {{frac:1000|4.389}} = 227.8.'},
+   why:'The total AUC is {{frac:D0|Cl}}, with Cl = k × VD. k (the elimination rate constant) = {{frac:0.693|3 hr}} = 0.231 hr⁻¹ from the half-life, and VD (the volume of distribution) is 19 L, so Cl = 0.231 × 19 = 4.389 L/hr. mg over L/hr leaves (mg/L)hr: {{frac:1000|4.389}} = 227.8.'},
   {k:'algebra', t:'ClR = {{frac:713 mg|227.8 (mg/L)hr}} = 3.13 L/hr',
    why:'ClR (renal clearance) = {{frac:Du∞|AUC}}, where Du∞ is the 713 mg recovered unchanged: mg divided by (mg/L)hr leaves L/hr, the volume of plasma cleared by the kidney each hour. The same answer comes from fe × ClT, with fe = {{frac:713|1000}} = 0.713 the fraction excreted unchanged: 0.713 × 4.389 = 3.13 L/hr.'},
   {k:'round', t:'3.13 L/hr',
@@ -370,9 +360,9 @@ const Q_QUIZZES = [
   {k:'unit', t:'mcg/mL = mg/L, so a dose in mg and a coefficient in mcg/mL give VD in L',
    why:'The concentration unit decides the volume unit. With Cp in mg/L and the dose in mg, the volume comes out in litres without any further conversion.'},
   {k:'algebra', t:'VD = {{frac:0.82 × 500 mg × 0.934 hr⁻¹|30 mg/L × (0.934 − 0.133) hr⁻¹}} = {{frac:382.9|24.03}} = 15.94 L',
-   why:'VD = {{frac:F × D0 × ka|30 × (ka − k)}}: the numerator 0.82 × 500 mg × 0.934 hr⁻¹ = 382.9 mg hr⁻¹, the denominator 30 mg/L × (0.934 − 0.133) hr⁻¹ = 30 × 0.801 = 24.03 (mg/L) hr⁻¹. The hr⁻¹ cancels top and bottom, and mg over mg/L leaves litres: {{frac:382.9|24.03}} = 15.94 L.'},
+   why:'The numerator 0.82 × 500 mg × 0.934 hr⁻¹ = 382.9 mg hr⁻¹, the denominator 30 mg/L × (0.934 − 0.133) hr⁻¹ = 30 × 0.801 = 24.03 (mg/L) hr⁻¹. The hr⁻¹ cancels top and bottom, and mg over mg/L leaves litres: {{frac:382.9|24.03}} = 15.94 L.'},
   {k:'round', t:'15.9 L',
-   why:'VD = 15.94 L rounds to 15.9 L at one decimal place. Her key is 15.9 with a margin of 3%, so 15.4 to 16.4 scores. Leaving F out of the numerator gives {{frac:15.94|0.82}} = 19.4 L, too large; swapping ka and k makes (ka − k) negative and gives a negative volume, which cannot be right.'}],
+   why:'VD = 15.94 L rounds to 15.9 L at one decimal place. Her key is 15.9 with a margin of 3%, so 15.4 to 16.4 scores. Leaving F out of the numerator gives {{frac:15.94|0.82}} = 19.4 L, too large; swapping ka and k makes (ka − k) negative and gives a negative volume.'}],
  setup:{eq:'oral-cp', pre:[], why:'"oral administration of a single 500-mg dose" fitting a "one-compartment model" with a printed equation names the oral block. The coefficient, both exponents, F and D0 are given and VD is asked, so the prefactor F·ka·{{frac:D0|VD(ka − k)}} of the oral Cp line is set equal to 30 and rearranged for VD. No hinge; ka is the larger exponent.'},
  asks:'VD',
  givens:[['D0', '500-mg dose', 'in the numerator F D0 ka'], ['coefficient', '30', 'in the denominator 30 × (ka − k)'], ['k', '0.133', 'the smaller exponent, elimination; in ka − k'], ['ka', '0.934', 'the larger exponent, absorption; in the numerator and in ka − k'], ['F', '82%', 'written 0.82, in the numerator'], ['units', 'mcg/mL for Cp and hr for time', 'mcg/mL = mg/L, so mg over mg/L gives litres']],
@@ -447,17 +437,16 @@ const Q_QUIZZES = [
   {t:'decrease the dosing interval', correct:true,
    why:'Dosing more often puts the next dose in before as much of the last has left, so the plateau rises. Of the two things a regimen can change, the dose and the interval, this is the interval change that raises the level.'},
   {t:'increase the clearance', correct:false,
-   why:'Picking this treats clearance as a dosing choice. Clearance (Cl) belongs to the patient and the drug; a regimen can change only the dose and the interval. A higher clearance would also lower the level, since Cavg∞ (the average steady-state concentration) = {{frac:F D0|Cl × τ}}, with F the bioavailable fraction, D0 the dose and τ the interval.'},
+   why:'Picking this treats clearance as a dosing choice. Clearance (Cl) belongs to the patient; a regimen can change only the dose and the interval. A higher clearance would lower the level: Cavg∞ (the average steady-state concentration) = {{frac:F D0|Cl × τ}}, with F the bioavailable fraction, D0 the dose and τ the interval.'},
   {t:'decrease the elimination half-life', correct:false,
    why:'Picking this treats the half-life as something the prescriber sets. The half-life is a property of the drug in the patient, {{frac:0.693|k}} with k the elimination rate constant, not a dosing choice. A shorter half-life would also mean faster loss between doses and a lower steady-state level, the opposite of what is asked.'}],
  teach:[
   {h:'The idea', list:[
    'Her rule: the only things a regimen can change are the size of the dose and the dosing interval; clearance and half-life are not choices.',
    'Slide "Altering Dosing Interval": decreasing the interval increases steady-state concentrations and decreases the peak-to-trough fluctuation, at the cost of compliance.',
-   'What that means for the numbers: Cmax∞, Cmin∞ and Cavg∞ all go up. The fluctuation that decreases is how far the level falls from peak to trough, because the next dose arrives before the level has fallen as far: the trough sits closer to the peak. In her Example 1 the trough is a quarter of the peak every 8 hours and half of it every 4 hours.',
-   'Why the interval does it: Cavg∞ = {{frac:F D0|Cl × τ}} has τ in the denominator, so a shorter interval raises the average; and a shorter interval leaves more of each dose in the body when the next arrives, e^(−kτ) larger, so the accumulation factor {{frac:1|1 − e^(−kτ)}} and the peak rise as well.',
-   'Raising the dose also raises the level, but it is not among the options here.']},
-  {h:'Her Example 1 three ways', fig:'dose_interval', list:['Every 8 hours, every 4 hours, and double the dose every 8 hours, on one concentration scale: the shorter interval raises all three lines and pulls the trough toward the peak; the larger dose raises all three and widens the gap.']}],
+   'Cmax∞, Cmin∞ and Cavg∞ all go up; the trough sits closer to the peak because the next dose arrives before the level has fallen as far.',
+   'Cavg∞ = {{frac:F D0|Cl × τ}} has τ in the denominator, and a shorter interval leaves more of each dose when the next arrives, so the accumulation factor {{frac:1|1 − e^(−kτ)}} rises.']},
+  {h:'Her Example 1 three ways', fig:'dose_interval', list:['Every 8 hours, every 4 hours, and double the dose every 8 hours: the shorter interval raises all three lines and pulls the trough toward the peak.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 3; 6a---Multiple-Oral-Doses.pdf, slides "Altering Steady-State Concentrations" and "Altering Dosing Interval"; 09.28 lecture'},
 
 {id:'cq4-4', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
@@ -474,7 +463,7 @@ const Q_QUIZZES = [
   {k:'algebra', t:'Times since each infusion ended: first ended at 2 hr, so 12 hr have passed at t = 14 hr; second ended at 10 hr, so 4 hr. Cp = 16.90 e^(−0.1733 × 12) + 16.90 e^(−0.1733 × 4) = 16.90 × 0.125 + 16.90 × 0.500 = 2.11 + 8.45 = 10.56 mg/L',
    why:'The second infusion started 8 hours after the first began, so it ran from 8 to 10 hours; 4 hours after its end is 14 hours. Twelve hours is three half-lives (one eighth left), four hours is one half-life (one half left).'},
   {k:'round', t:'10.6',
-   why:'Her key is 10.6 with a margin of 5%, so 10.1 to 11.1 scores. Leaving out the first infusion gives 8.45, too low; treating each infusion as a 400 mg bolus into 20 L gives 20 × 0.125 + 20 × 0.500 = 12.5, too high, because each 2-hour infusion ends at 16.90 mg/L, not at 20 mg/L.'}],
+   why:'Her key is 10.6 with a margin of 5%, so 10.1 to 11.1 scores. Leaving out the first infusion gives 8.45, too low; treating each infusion as a 400 mg bolus into 20 L gives 20 × 0.125 + 20 × 0.500 = 12.5, too high, because each 2-hour infusion ends at 16.90 mg/L.'}],
  setup:{eq:'cp-after-stop', pre:['thalf-first', 'cl-k-vd', 'cp-infusing'], why:'Two 2-hour infusions and a level "4 hours after the cessation of the second infusion": intermittent infusions, added. Dose, infusion time, t½ and VD are given and Cp is asked, so each end level decays from its own end time and the two are summed. k first, then Cl = k × VD, then the infusion line.'},
  asks:'Cp',
  givens:[['D0', 'Four hundred milligrams', 'with the infusion time gives R = {{frac:400|2}} = 200 mg/hr'], ['infusion time', 'over a period of 2 hours', 'R = 200 mg/hr; t = 2 hr in 1 − e^(−kt)'], ['second start', 'Eight hours after the start of the first infusion', 'the second infusion runs 8 to 10 hr'], ['t½', 'approximately 4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', 'approximately 20 L', 'in Cl = kVD = 3.465 L/hr'], ['t', '4 hours after the cessation of the second infusion', 'the second term decays 4 hr, the first 12 hr']],
@@ -492,7 +481,7 @@ const Q_QUIZZES = [
  stem:'Which of the following results if the dose is increased on a medication that is to be administered orally at regularly repeating intervals?',
  options:[
   {t:'Increased steady-state tmax', correct:false,
-   why:'Picking this reads a larger dose as a slower climb to the peak. tmax∞ (the time of the peak within an interval at steady state) depends on ka (the absorption rate constant), k (the elimination rate constant) and τ (the dosing interval) only. The dose multiplies the whole curve and does not move the peak time.'},
+   why:'Picking this reads a larger dose as a slower climb to the peak. tmax∞ (the time of the peak within an interval at steady state) depends on ka (the absorption rate constant), k (the elimination rate constant) and τ (the dosing interval) only. The dose scales the curve, not the peak time.'},
   {t:'Decreased rate of absorption', correct:false,
    why:'Picking this treats the absorption rate constant as adjustable by the dose. ka (the absorption rate constant) is a property of the drug and the dosage form. A larger dose means more drug absorbed per hour at the same ka, since the rate is ka × the amount at the absorption site.'},
   {t:'Increased steady-state Cmax', correct:true,
@@ -502,9 +491,8 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'Dose up: higher Cmax, Cmin and Cavg, a bigger swing between peak and trough, usually no change in compliance.',
-   'Dose does not move tmax (her poll: "no change in the tmax"), ka or clearance.',
-   'Why the swing grows with the dose: Dmax∞ − Dmin∞ equals the dose (Chapter 9, section "Repetitive Intravenous Injections"), so the gap between peak and trough scales with the dose, as every concentration in the regimen does. The trough stays the same fraction of the peak; it is the distance in mg/L that grows, 40 to 80 mg/L when her Example 1 dose doubles.',
-   'The parameters a regimen cannot change are the usual distractors: clearance, half-life, rate constants.']}],
+   'Dose does not move tmax, ka or clearance.',
+   'The swing grows because Dmax∞ − Dmin∞ equals the dose, so the gap between peak and trough scales with the dose. The trough stays the same fraction of the peak.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 5; 6a---Multiple-Oral-Doses.pdf, slides "Poll EV" (page 1) and "Altering Dose"; 09.28 lecture'},
 
 {id:'cq4-6', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
@@ -550,8 +538,7 @@ const Q_QUIZZES = [
   {h:'The idea', list:[
    'Rationale slide: prevent high drug concentrations and accompanying side effects; many drugs are better tolerated when infused slowly over time than by IV bolus.',
    'Assumption: concentrations from successive infusions add (superposition), and each infusion follows the single-infusion equation with the same R, k and VD.',
-   'Why they add: elimination is first order, so the drug from each infusion is removed at the same fraction per hour whether or not the other is present, and each declines on its own clock from its own end. It is the same assumption as for repeated IV bolus doses (slide "Superposition").',
-   'The three distractors each reverse a line of the rationale or move a drug property (half-life) that a route cannot move.']}],
+   'They add because elimination is first order: drug from each infusion is removed at the same fraction per hour whether or not the other is present (slide "Superposition").']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 7; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Rationale" and "Administering One or More Doses by IV Infusion"; 09.28 lecture'},
 
 {id:'cq4-8', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
@@ -586,7 +573,7 @@ const Q_QUIZZES = [
   {k:'algebra', t:'k = {{frac:0.693|4.5 hr}} = 0.154 hr⁻¹; Cl = 0.154 hr⁻¹ × 18 L = 2.772 L/hr; AUCIV = {{frac:500 mg|2.772 L/hr}} = 180.4 (mg/L)hr',
    why:'hr⁻¹ × L is L/hr, and mg over L/hr is mg·hr/L, the unit of an AUC. This is the area the same 500 mg would give intravenously.'},
   {k:'algebra', t:'Fabs = {{frac:139|180.4}} = 0.771',
-   why:'With equal doses the dose ratio is {{frac:500|500}} = 1 and drops out, leaving Fabs = {{frac:AUCpo|AUCIV}}. Both areas are in (mg/L)hr, so the unit cancels and F is a dimensionless fraction: {{frac:139|180.4}} = 0.771. The oral area is 77 per cent of the IV area, so 77 per cent of the oral dose reached the circulation.'},
+   why:'With equal doses the dose ratio is {{frac:500|500}} = 1 and drops out, leaving Fabs = {{frac:AUCpo|AUCIV}} = {{frac:139|180.4}} = 0.771, a dimensionless fraction. The oral area is 77 per cent of the IV area, so 77 per cent of the oral dose reached the circulation.'},
   {k:'round', t:'0.77',
    why:'Her key is 0.77 with a margin of 3%, so 0.75 to 0.79 scores. Two decimal places were asked for, as a decimal, not a percentage.'}],
  setup:{eq:'f-abs', pre:['thalf-first', 'cl-k-vd', 'div-cl-auc'], why:'"absolute bioavailability" with an oral AUC, t½ and VD and no IV AUC, so the bioavailability block. The IV AUC is not given, so it comes from DIV = Cl × AUCIV with Cl = k × VD; then Fabs is the ratio of the two areas, the doses being equal.'},
@@ -595,7 +582,7 @@ const Q_QUIZZES = [
  check:{t:'Clearance 2.772 L/hr means the 500 mg would give 180.4 (mg/L)hr if all of it reached the blood; the oral 139 is about three-quarters of that, so F is about 0.77, between 0 and 1.', lo:0, hi:1},
  teach:[
   {h:'The idea', list:[
-   'When the IV curve is not given, dose over clearance is the IV AUC: the in-class sheet asked it this way too.',
+   'When the IV curve is not given, dose over clearance is the IV AUC.',
    'Equal oral and IV doses make the dose ratio 1, so F is the ratio of the areas.',
    'Report F as a decimal with two places (0.77), or as 77%; never 0.771 when two places are asked.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 9; 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (equation) and the in-class activity of 09.30, question 3'},
@@ -616,8 +603,8 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'Absolute: against IV. Relative: against another product or route. Bioequivalence: two products of the same drug compared in both rate and extent.',
-   'The IV dose is the reference because the whole IV dose enters the circulation, so its F is 1 and its AUC is the area the full dose produces; the extravascular AUC is measured against it, Fabs = {{frac:AUCpo|AUCIV}} × {{frac:DIV|Dpo}}, and cannot come out above 1.',
-   'She asks definitions by quoting the slide and asking for the term; the words "intravenous administration" settle this one.']}],
+   'The IV dose is the reference because the whole IV dose enters the circulation, so its F is 1; Fabs = {{frac:AUCpo|AUCIV}} × {{frac:DIV|Dpo}} cannot come out above 1.',
+   'She quotes the slide definition and asks for the term; the words "intravenous administration" settle this one.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 10; 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (page 5)'},
 
 ];

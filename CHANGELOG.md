@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (shorter explanations)
+- Every explanation after an answer is shorter: median 311 words down to 199, longest 1069 down to 379.
+- Each concept block now answers its own question in at most 7 short bullets; repeated side topics are gone.
+- Shared blocks were split so each question gets only the part it needs; Reference and Guides keep the rest.
+- A length test now keeps concept blocks at 160 words or fewer and every explanation at 55 words or fewer.
+
 ## 2026-10-07 (her Exam 2 in-class review)
 - Her Exam 2 review sheet is a problem set on Module 6: all 14 items in her words, question 3 as parts a–h.
 - Every review calculation shows labeled steps; parts d and f round to 1200 mg and 6 hours as her keys do.
