@@ -666,6 +666,45 @@ const TELL_HTML = `
 <p class="gsrc">Source: 5---Pharmacokinetics-of-Oral-Absorption.pdf slide "Kinetics of Absorption"; transcript 09-21 cues 4, 5 and 8</p></div></template>
 
 <h3 data-exam="2">Repeated dosing</h3>
+<p class="sub"><b>Which of the three Module 6 regimens?</b> Her exam never names the module; the route words in the stem pick the line. One line serves IV bolus and oral alike: C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}}, with F = 1 for IV.</p>
+<table class="reftab"><thead><tr><th></th><th>Repeated IV bolus (deck 6)</th><th>Intermittent IV infusions (deck 6)</th><th>Multiple oral doses (deck 6a)</th></tr></thead><tbody>
+<tr><td>Words in the stem <button type="button" class="chip xwhy" data-xpick="regimens:words">Why?</button></td><td>"IV bolus injections … every 8 hours"</td><td>"infused … over a period of 2 hours", a second dose infused</td><td>"by mouth", "oral dose every 8 hours", F, absorption half-life</td></tr>
+<tr><td>Peak <button type="button" class="chip xwhy" data-xpick="regimens:peak">Why?</button></td><td>C<sub>max</sub><sup>&infin;</sup> = {{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}: no F, no t<sub>max</sub></td><td>End of each infusion: {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>), plus what earlier ones left</td><td>{{frac:FD<sub>0</sub>|V<sub>D</sub>}}({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt<sub>max</sub>&infin;</sup></td></tr>
+<tr><td>Trough or later level <button type="button" class="chip xwhy" data-xpick="regimens:trough">Why?</button></td><td>C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;k&tau;</sup>, at the end of the interval</td><td>Each infusion's end level &times; e<sup>&minus;kt</sup> since it stopped, then added</td><td>The oral C<sub>min</sub><sup>&infin;</sup> line, which carries k<sub>a</sub></td></tr>
+<tr><td>Time of the peak <button type="button" class="chip xwhy" data-xpick="regimens:tmax">Why?</button></td><td>The moment of the dose</td><td>The moment the infusion stops</td><td>t<sub>max</sub><sup>&infin;</sup>, from k, k<sub>a</sub> and &tau;; not the single-dose t<sub>max</sub></td></tr>
+</tbody></table>
+<div class="xpick"><label><b>Explain one:</b> <select data-xsel="regimens"><option value="">Choose a row</option>
+<option value="words">Words in the stem</option>
+<option value="peak">Peak</option>
+<option value="trough">Trough or later level</option>
+<option value="tmax">Time of the peak</option>
+</select></label><div class="xout" data-xout="regimens"></div></div>
+<template data-x="regimens:words"><div class="xexp"><h4>Reading the route from the stem</h4>
+<p><b>In one line:</b> The route words, not the module number, decide which block of the sheet to use.</p>
+<dl><dt>IV bolus</dt><dd>"IV bolus doses" or "IV bolus injections" at a fixed interval: the whole dose enters at once, so the peak is at the dose.</dd>
+<dt>Intermittent infusion</dt><dd>A dose "infused intravenously over a period of" hours: the dose is a rate, R = {{frac:D<sub>0</sub>|t<sub>inf</sub>}}, and each infusion rises before it falls.</dd>
+<dt>Oral</dt><dd>"by mouth" or "oral dose", usually with F and an absorption half-life: first order in and first order out.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> Her review question 3 starts with IV bolus doses (parts a and b) and switches to oral doses in parts e to h, asking "What is Cmax" without the word oral.</p>
+<p class="gsrc">Source: Exam 2 In-Class Review, questions 3 and 4; 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf; 6a---Multiple-Oral-Doses.pdf</p></div></template>
+<template data-x="regimens:peak"><div class="xexp"><h4>The steady-state peak by route</h4>
+<p><b>In one line:</b> The oral peak has two pieces the bolus peak lacks: F and e<sup>&minus;kt<sub>max</sub>&infin;</sup>.</p>
+<dl><dt>IV bolus</dt><dd>C<sub>max</sub><sup>&infin;</sup> = {{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}: the whole dose is in at the moment of injection, so the peak is the first-dose peak times the accumulation factor.</dd>
+<dt>Oral</dt><dd>C<sub>max</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>}}({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}})e<sup>&minus;kt<sub>max</sub>&infin;</sup>: only F of the dose arrives, and elimination runs while it is absorbed, which the e<sup>&minus;kt<sub>max</sub>&infin;</sup> factor accounts for.</dd>
+<dt>Infusion</dt><dd>Each infusion peaks when it stops: {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>) with t the infusion time, plus what is left of earlier infusions.</dd></dl>
+<p class="xtrap"><b>The common error:</b> using the bolus line for an oral regimen, which drops F and the e<sup>&minus;kt<sub>max</sub>&infin;</sup> factor.</p>
+<p class="gsrc">Source: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, steady-state IV bolus slide; 6a---Multiple-Oral-Doses.pdf, slide "Peak, Trough and Average Plasma Concentrations at Steady State"</p></div></template>
+<template data-x="regimens:trough"><div class="xexp"><h4>The trough, or a later level, by route</h4>
+<p><b>In one line:</b> Only the bolus trough is the peak times e<sup>&minus;k&tau;</sup>.</p>
+<dl><dt>IV bolus</dt><dd>C<sub>min</sub><sup>&infin;</sup> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;k&tau;</sup>: the level falls by first-order elimination for one whole interval after the dose.</dd>
+<dt>Oral</dt><dd>The oral C<sub>min</sub><sup>&infin;</sup> line carries k<sub>a</sub>, because absorption is still adding drug after the dose is swallowed.</dd>
+<dt>Infusion</dt><dd>Take each infusion's end level, multiply by e<sup>&minus;kt</sup> with t counted from when that infusion stopped, then add the infusions.</dd></dl>
+<p class="gsrc">Source: 6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, Example 4; 6a---Multiple-Oral-Doses.pdf, slide "Peak, Trough and Average Plasma Concentrations at Steady State"</p></div></template>
+<template data-x="regimens:tmax"><div class="xexp"><h4>When the peak happens</h4>
+<p><b>In one line:</b> Only the oral route needs a time-to-peak equation, and at steady state it is t<sub>max</sub><sup>&infin;</sup>.</p>
+<dl><dt>IV bolus</dt><dd>At the moment of the dose; nothing has to be absorbed.</dd>
+<dt>Infusion</dt><dd>At the moment the infusion stops; after that the level only falls.</dd>
+<dt>Oral</dt><dd>t<sub>max</sub><sup>&infin;</sup> = {{frac:1|k<sub>a</sub> &minus; k}}ln[{{frac:k<sub>a</sub>(1 &minus; e<sup>&minus;k&tau;</sup>)|k(1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>)}}], with &tau; in it; the single-dose t<sub>max</sub> has no &tau;, and t<sub>max</sub><sup>&infin;</sup> is generally shorter.</dd></dl>
+<p class="gsrc">Source: 6a---Multiple-Oral-Doses.pdf, slide "Time to Peak at Steady State"</p></div></template>
 <p class="sub">Pairs from repeated IV and oral dosing, separated by what each quantity counts or depends on. Symbols and examples in the table:</p>
 <ul class="tlist"><li>D<sub>0</sub>: the dose. V<sub>D</sub>: the volume of distribution, linking the amount in the body to the concentration. C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}: the first-dose peak.</li>
 <li>k: the elimination rate constant. F: the bioavailability, the fraction of the dose reaching the blood (1 for IV). R: the infusion rate in mg/hr. &infin;: at steady state. A half-life is the time for the concentration to fall by half.</li>

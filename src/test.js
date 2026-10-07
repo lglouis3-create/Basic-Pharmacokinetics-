@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -668,6 +668,22 @@ console.log('\n=== 5e. What an explanation may say ===');
     }
     if (long.length) bad(`explanations over the length limits (${long.length}): ` + long.slice(0, 8).join(' | '));
     else console.log(`  ok    every explanation within the length limits (concept block ≤ ${LIM.teach} words, ≤ ${LIM.bullets} bullets; each why ≤ ${LIM.why} words; ≤ ${LIM.total} words in all)`);
+  }
+
+  /* Build-it tray: in the stacked layout no lure may draw as the same tile as a
+     correct piece, or a right choice is marked wrong. */
+  {
+    const dup = [];
+    for (const e of X.EQUATIONS.filter(e => e.tokens && e.tokens.length)) {
+      const layout = !!X.eqLayout(e);
+      const right = new Set(e.tokens.map(t => X.eqNorm(X.eqTileText(t))));
+      const tray = X.eqTrayPieces(e, layout);
+      for (const p of tray) if (layout && p.i >= e.tokens.length && X.eqNorm(X.eqTileText(p.t)) && right.has(X.eqNorm(X.eqTileText(p.t)))) dup.push(`${e.id}: lure "${p.t}"`);
+      const placeable = e.tokens.filter(t => !(layout && /^(\/|&times;|×|\*)$/.test(String(t).trim())));
+      if (tray.filter(p => p.i < e.tokens.length).length !== placeable.length) dup.push(`${e.id}: a correct piece is missing from the tray`);
+    }
+    if (dup.length) bad('build-it tray offers a lure that looks like a correct piece: ' + dup.join(' | '));
+    else console.log('  ok    no build-it lure draws as the same tile as a correct piece, and every correct piece is in the tray');
   }
 
   /* Tables and fractions are markup, so a malformed one shows as raw text. */

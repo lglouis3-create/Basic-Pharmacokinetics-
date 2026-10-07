@@ -3807,13 +3807,26 @@ function eqLayout(e){
   if(!plain(e.disp.slice(last))) return null;
   return pos === ops.length ? parts : null;
 }
+/* The pieces offered for a build. In the stacked layout the bar does the
+   grouping and a tile is drawn without its stray bracket, so a lure that differs
+   from a correct piece only by a bracket ("(AUCIV" beside "AUCIV)") would draw as
+   the same tile and be marked wrong for a right choice: such lures are left out
+   there. Operators are drawn into the structure, not placed. */
+function eqTrayPieces(e, layout){
+  const tileKey = t => eqNorm(eqTileText(t));
+  const right = new Set(e.tokens.map(tileKey));
+  return [...e.tokens, ...(e.lures || [])].map((t, i) => ({t, i, lure: i >= e.tokens.length}))
+    .filter(x => !layout || !EQ_OP(x.t))
+    .filter(x => !(layout && x.lure && tileKey(x.t) && right.has(tileKey(x.t))))
+    .map(({t, i}) => ({t, i}));
+}
 function eqLoad(){
   const e = EQ_BY_ID[EQ.queue[EQ.i]];
   EQ.revealed = false; EQ.ok = false; EQ.shown = false; EQ.overrode = false; EQ.typed = '';
   if(e && EQ.step === 'build'){
     EQ.layout = eqLayout(e);
     EQ.slots = e.tokens.map(t => EQ.layout && EQ_OP(t) ? t : null);   // the structure is drawn, not placed
-    EQ.tray  = shuffle([...e.tokens, ...(e.lures || [])].map((t, i) => ({t, i})).filter(x => !EQ.layout || !EQ_OP(x.t)));
+    EQ.tray  = shuffle(eqTrayPieces(e, !!EQ.layout));
   }
   renderEq();
 }
@@ -3841,8 +3854,12 @@ function eqDrillHTML(){
 
   if(building){
     const slotBtn = i => { const s = EQ.slots[i];
-      const cls = EQ.revealed ? (normEq(eqPlain(s || '')) === normEq(eqPlain(e.tokens[i])) ? ' ok' : ' bad') : '';
-      return `<button class="eqslot${cls}${s ? ' full' : ''}" data-slot="${i}"${EQ.revealed ? ' disabled' : ''}
+      /* An accepted build is right in every slot, even when its factors sit in
+         another order than the printed line (k × fe for fe × k); only a wrong
+         build is marked slot by slot against the printed order. */
+      const cls = EQ.revealed ? (EQ.ok || normEq(eqPlain(s || '')) === normEq(eqPlain(e.tokens[i])) ? ' ok' : ' bad') : '';
+      const sel = !EQ.revealed && EQ.sel === i ? ' sel' : '';   // the box the next piece goes into
+      return `<button class="eqslot${cls}${s ? ' full' : ''}${sel}" data-slot="${i}" aria-pressed="${!!sel}"${EQ.revealed ? ' disabled' : ''}
         aria-label="Position ${i + 1} of ${EQ.slots.length}">${s ? (EQ.layout ? eqTileText(s) : s) : '&nbsp;'}</button>`; };
     h += `<div class="eqbuild"><span class="eqlhs">${e.lhs} =</span>`;
     if(EQ.layout){
@@ -3852,6 +3869,8 @@ function eqDrillHTML(){
     }else EQ.slots.forEach((s, i) => { h += slotBtn(i); });
     h += `</div>`;
     if(!EQ.revealed){
+      h += `<p class="sub eqhint">${EQ.sel != null ? 'Box selected: tap a piece to put it there, or tap the box again to unselect it.'
+        : 'Tap a piece to fill the next empty box, or tap a box first to choose where it goes. Tap a filled box to empty it.'}</p>`;
       const placed = new Set(EQ.slots.map((_, i) => EQ.trayOf && EQ.trayOf[i]).filter(x => x != null));
       h += `<div class="eqtray">${EQ.tray.map(t =>
         `<button class="eqtile${placed.has(t.i) ? ' used' : ''}" data-tile="${t.i}"${
@@ -3871,6 +3890,8 @@ function eqDrillHTML(){
     h += `<div class="why"><p class="verdict ${EQ.ok ? 'ok' : 'bad'}">${
       EQ.ok ? (EQ.overrode ? '✓ Counted as right' : '✓ Correct') : '✗ Not correct'}</p>
       <p class="eqanswer"><b>${eqShow(e)}</b></p>`;
+    if(EQ.ok && building && EQ.slots.some((s, i) => normEq(eqPlain(s || '')) !== normEq(eqPlain(e.tokens[i]))))
+      h += `<p class="prose">Your order is the same equation, because the pieces you swapped give the same result in either order (a product or a sum). Her sheet prints it in the order above.</p>`;
     if(!EQ.ok && !building && EQ.typed.trim())
       h += `<p class="prose">You wrote <code>${esc(EQ.typed.trim())}</code>, which reads as
         <code>${esc(normEq(EQ.typed))}</code> once capitals and spacing are set aside. Spelling and
@@ -3928,6 +3949,7 @@ function eqDrillWire(el){
      tapping is what has to work, since this is read on a phone. */
   el.querySelectorAll('.eqslot').forEach(b => b.onclick = () => {
     const i = +b.dataset.slot;
+    if(EQ.layout && EQ_OP(e.tokens[i])) return;  // a drawn operator is part of the structure, not a piece
     if(EQ.slots[i] !== null){                     // tapping a filled slot empties it
       EQ.slots[i] = null;
       if(EQ.trayOf) delete EQ.trayOf[i];

@@ -2,6 +2,13 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (build-it fixes; IV bolus, infusion and oral told apart)
+- Build it: a box you tap is now highlighted, so you can see where the next piece goes.
+- Build it: factors in another order (k × fe) are right with every box green; order still counts in a division.
+- Build it: no piece that only differs by a bracket, such as "(SCr)" beside "SCr", is offered as a lure.
+- Tell apart, Repeated dosing: IV bolus, intermittent infusion and oral regimens side by side.
+- IV-only lines now say "IV bolus" in their names; the average lines say "IV or oral". The oral deck is labelled 6a.
+
 ## 2026-10-07 (shorter explanations)
 - Every explanation after an answer is shorter: median 311 words down to 199, longest 1069 down to 379.
 - Each concept block now answers its own question in at most 7 short bullets; repeated side topics are gone.

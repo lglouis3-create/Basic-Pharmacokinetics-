@@ -106,6 +106,28 @@ with sync_playwright() as p:
     ok('the built equation is marked right', '✓ Correct' in pg.inner_text('#v-eq'))
     ok('each slot is marked individually', pg.locator('.eqslot.ok').count() == 2)   # the two operand slots; the bar is structure
 
+    # tapping an empty box selects it visibly, and the next piece goes there
+    pg.evaluate("eqStart('build')"); pg.wait_for_timeout(200)
+    pg.locator('.eqslot').nth(1).click(); pg.wait_for_timeout(120)
+    ok('a tapped empty box shows as selected', pg.locator('.eqslot.sel').count() == 1)
+    pg.locator('.eqtile:not([disabled])').first.click(); pg.wait_for_timeout(120)
+    ok('the next piece goes into the selected box', pg.evaluate("EQ.slots[EQ_BY_ID['css'].tokens.length - 1] !== null") and pg.locator('.eqslot.sel').count() == 0)
+
+    # factors in another order are the same product: right, and every box green
+    pg.evaluate("eqSetChosen(['fe-k']); eqStart('build')"); pg.wait_for_timeout(200)
+    for w in ['k', '&times;', 'f<sub>e</sub>']:
+        pg.evaluate("w => eqPlace(EQ.tray.find(t => t.t === w && !Object.values(EQ.trayOf || {}).includes(t.i)).i)", w); pg.wait_for_timeout(60)
+    pg.click('#eqCheck'); pg.wait_for_timeout(200)
+    ok('k × fe is accepted for fe × k with no box marked wrong', '✓ Correct' in pg.inner_text('#v-eq') and pg.locator('.eqslot.bad').count() == 0)
+
+    # where order matters it still counts: 0.693 over k is not k over 0.693
+    pg.evaluate("eqSetChosen(['thalf-first']); eqStart('build')"); pg.wait_for_timeout(200)
+    pg.evaluate("""() => { const want = EQ_BY_ID['thalf-first'].tokens.filter(t => !EQ_OP(t)).reverse();
+      want.forEach((w, n) => { const i = EQ.slots.findIndex((s, j) => s === null && !EQ_OP(EQ_BY_ID['thalf-first'].tokens[j]));
+        eqPlace(EQ.tray.find(t => t.t === w).i, i); }); }""")
+    pg.wait_for_timeout(120); pg.click('#eqCheck'); pg.wait_for_timeout(200)
+    ok('a division built upside down is marked not correct', '✗ Not correct' in pg.inner_text('#v-eq'))
+
     # tapping a filled slot empties it again
     pg.evaluate("eqStart('build')"); pg.wait_for_timeout(200)
     pg.evaluate("eqPlace(EQ.tray[0].i)"); pg.wait_for_timeout(120)

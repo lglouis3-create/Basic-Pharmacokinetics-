@@ -83,7 +83,7 @@ const COURSE = {
      label: 'Module 6: Intermittent IV infusions (28 Sep)',
      prof: 'Mosley', exam: 2, module: 6},
     {id: 'L09', deck: '6a---Multiple-Oral-Doses.pdf',
-     label: 'Module 6: Multiple oral doses (28 Sep)',
+     label: 'Module 6a: Multiple oral doses (28 Sep)',
      prof: 'Mosley', exam: 2, module: 6},
 
     /* Her deck numbers this lecture 7a; the syllabus chapter map had called it

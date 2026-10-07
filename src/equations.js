@@ -92,7 +92,7 @@ const EQUATIONS = [
  lhs:'CrCl', tokens:['(140 &minus; age)', '(IBW)', '/', '(72', '&times;', 'S<sub>Cr</sub>)'],
  disp:'{{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}}', typed:'CrCl = (140-age)(IBW)/(72*SCr)',
  also:['CrCl = (140-age)(IBW)/(72*SCr)*0.85', 'CrCl = ((140-age)(IBW)/(72*SCr))*0.85'],
- lures:['(140 + age)', 'age)', '(S<sub>Cr</sub>)', '0.85'],
+ lures:['(140 + age)', 'age)', '0.85'],
  symbols:[['age', 'years'], ['IBW', 'ideal body weight, kg: the weight from the height formula, used in place of the patient&rsquo;s actual weight'],
           ['S<sub>Cr</sub>', 'serum creatinine, mg/dL'], ['CrCl', 'creatinine clearance, an estimate of the patient&rsquo;s kidney function; reported in mL/min']],
  holds:'Multiply by 0.85 for a female patient. The answer is reported in mL/min even though the units do not cancel algebraically.',
@@ -505,7 +505,7 @@ const EQUATIONS = [
  use:'When an oral stem gives the absorption half-life and the line wants k<sub>a</sub>, or the reverse.',
  cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Kinetics of Absorption"'},
 /* ───────── Module 6 ───────── */
-{id:'db-tau', module:6, name:'Amount left after one dosing interval', sheet:'absent',
+{id:'db-tau', module:6, name:'Amount left after one dosing interval, IV bolus', sheet:'absent',
  lhs:'D<sub>B</sub>', tokens:['D<sub>0</sub>', 'e<sup>&minus;k&tau;</sup>'], typed:'DB = D0*e^(-k*tau)',
  also:['DB = D0e^(-kτ)'],
  lures:['e<sup>&minus;kt</sup>', '(1 &minus; e<sup>&minus;k&tau;</sup>)', '/'],
@@ -517,7 +517,7 @@ const EQUATIONS = [
  use:'When a stem asks how much of one dose is left when the next is due.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body Following Repeated IV Bolus Injections"'},
 
-{id:'dmax-ss', module:6, name:'Maximum amount at steady state', sheet:'yes',
+{id:'dmax-ss', module:6, name:'Maximum amount at steady state, IV bolus', sheet:'yes',
  lhs:'D<sub>max</sub><sup>&infin;</sup>', tokens:['D<sub>0</sub>', '/', '(1 &minus; e<sup>&minus;k&tau;</sup>)'],
  disp:'{{frac:D<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}', typed:'Dmax,ss = D0/(1 - e^(-k*tau))',
  also:['Dmax^inf = D0/(1 - e^(-k*tau))', 'Dmax∞ = D0/(1 - e^(-kτ))'],
@@ -527,7 +527,7 @@ const EQUATIONS = [
  holds:'Repeated IV bolus at a fixed dose and interval, first-order elimination (rate of loss proportional to the amount remaining), at steady state. Steady state is the plateau reached when each dose adds back exactly what was lost over the interval. {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} is the accumulation factor, how many times the single-dose amount the steady-state amount is.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"'},
 
-{id:'dmin-ss', module:6, name:'Minimum amount at steady state', sheet:'yes',
+{id:'dmin-ss', module:6, name:'Minimum amount at steady state, IV bolus', sheet:'yes',
  lhs:'D<sub>min</sub><sup>&infin;</sup>', tokens:['D<sub>0</sub>e<sup>&minus;k&tau;</sup>', '/', '(1 &minus; e<sup>&minus;k&tau;</sup>)'],
  disp:'{{frac:D<sub>0</sub>e<sup>&minus;k&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}', typed:'Dmin,ss = D0*e^(-k*tau)/(1 - e^(-k*tau))',
  also:['Dmin^inf = D0*e^(-k*tau)/(1 - e^(-k*tau))', 'Dmin∞ = D0e^(-kτ)/(1 - e^(-kτ))'],
@@ -538,7 +538,7 @@ const EQUATIONS = [
  holds:'Repeated IV bolus at a fixed dose and interval, first-order elimination, at steady state, the plateau reached when each dose adds back what was lost over the interval. The minimum comes at the end of the dosing interval, so it is the maximum amount at steady state multiplied by e<sup>&minus;k&tau;</sup>.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"'},
 
-{id:'davg-ss', module:6, name:'Average amount at steady state', sheet:'yes',
+{id:'davg-ss', module:6, name:'Average amount at steady state, IV or oral', sheet:'yes',
  lhs:'D<sub>avg</sub><sup>&infin;</sup>', tokens:['FD<sub>0</sub>', '/', 'k&tau;'],
  disp:'{{frac:FD<sub>0</sub>|k&tau;}}', typed:'Davg,ss = F*D0/(k*tau)',
  also:['Davg^inf = F*D0/(k*tau)', 'Davg∞ = FD0/(kτ)'],
@@ -549,7 +549,7 @@ const EQUATIONS = [
  holds:'Steady state, the plateau reached when each dose adds back what was lost over the interval. Not the average of the maximum and minimum amounts, because the decline between doses is exponential.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"'},
 
-{id:'cmax-ss', module:6, name:'Maximum concentration at steady state', sheet:'yes',
+{id:'cmax-ss', module:6, name:'Maximum concentration at steady state, IV bolus', sheet:'yes',
  lhs:'C<sub>max</sub><sup>&infin;</sup>', tokens:['C<sub>0</sub>', '/', '(1 &minus; e<sup>&minus;k&tau;</sup>)'],
  disp:'{{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}', typed:'Cmax,ss = C0/(1 - e^(-k*tau))',
  also:['Cmax^inf = C0/(1 - e^(-k*tau))', 'Cmax∞ = C0/(1 - e^(-kτ))', 'Cmax,ss = (D0/VD)/(1 - e^(-k*tau))'],
@@ -560,7 +560,7 @@ const EQUATIONS = [
  holds:'Repeated IV bolus at steady state, the plateau reached when each dose adds back what was lost over the interval. The first-dose peak divided by (1 &minus; e<sup>&minus;k&tau;</sup>), so it is always higher than C<sub>0</sub>.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"'},
 
-{id:'cmin-ss', module:6, name:'Minimum concentration at steady state', sheet:'yes',
+{id:'cmin-ss', module:6, name:'Minimum concentration at steady state, IV bolus', sheet:'yes',
  lhs:'C<sub>min</sub><sup>&infin;</sup>', tokens:['C<sub>0</sub>e<sup>&minus;k&tau;</sup>', '/', '(1 &minus; e<sup>&minus;k&tau;</sup>)'],
  disp:'{{frac:C<sub>0</sub>e<sup>&minus;k&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}', typed:'Cmin,ss = C0*e^(-k*tau)/(1 - e^(-k*tau))',
  also:['Cmin^inf = C0*e^(-k*tau)/(1 - e^(-k*tau))', 'Cmin∞ = C0e^(-kτ)/(1 - e^(-kτ))'],
@@ -571,7 +571,7 @@ const EQUATIONS = [
  holds:'Steady state, the plateau reached when each dose adds back what was lost over the interval, at the end of the interval. Equal to the steady-state maximum multiplied by e<sup>&minus;k&tau;</sup>, one interval of first-order decline, where the rate of loss is proportional to what remains.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"'},
 
-{id:'cmin-from-cmax', module:6, name:'Trough from the steady-state peak', sheet:'absent',
+{id:'cmin-from-cmax', module:6, name:'Trough from the steady-state peak, IV bolus', sheet:'absent',
  lhs:'C<sub>min</sub><sup>&infin;</sup>', tokens:['C<sub>max</sub><sup>&infin;</sup>', '&times;', 'e<sup>&minus;k&tau;</sup>'], typed:'Cmin,ss = Cmax,ss*e^(-k*tau)',
  also:['Cmin^inf = Cmax^inf*e^(-k*tau)', 'Cmin∞ = Cmax∞e^(-kτ)', 'Cmin∞ = Cmax∞ × e^(-kτ)'],
  lures:['/', '(1 &minus; e<sup>&minus;k&tau;</sup>)', 'C<sub>0</sub>', 'e<sup>&minus;kt</sup>'],
@@ -585,7 +585,7 @@ const EQUATIONS = [
  use:'Only when the stem gives the steady-state peak, such as "a steady-state peak of 10 mg/L". When it gives the dose and the volume instead, use the printed trough line with C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}: that is the direct route, and this line is not needed.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections" (the two lines divided)'},
 
-{id:'cp-after-last', module:6, name:'Concentration after the last dose at steady state', sheet:'absent',
+{id:'cp-after-last', module:6, name:'Concentration after the last dose at steady state, IV bolus', sheet:'absent',
  lhs:'C<sub>p</sub>', tokens:['C<sub>max</sub><sup>&infin;</sup>', '&times;', 'e<sup>&minus;kt</sup>'], typed:'Cp = Cmax,ss*e^(-k*t)',
  also:['Cp = Cmax^inf*e^(-k*t)', 'C = Cmax∞e^(-kt)', 'Cp = Cmax∞ × e^(-kt)'],
  lures:['/', '(1 &minus; e<sup>&minus;k&tau;</sup>)', 'C<sub>0</sub>', 'e<sup>&minus;k&tau;</sup>'],
@@ -599,7 +599,7 @@ const EQUATIONS = [
  use:'When a stem asks for the level some hours after the last dose at steady state. If it gives the peak, start there; if not, find the peak first from the printed line.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections" (the C<sub>p</sub> line with its first two factors read as the peak)'},
 
-{id:'cavg-ss', module:6, name:'Average concentration at steady state', sheet:'yes',
+{id:'cavg-ss', module:6, name:'Average concentration at steady state, IV or oral', sheet:'yes',
  lhs:'C<sub>avg</sub><sup>&infin;</sup>', tokens:['FD<sub>0</sub>', '/', 'Cl<sub>T</sub>&tau;'],
  disp:'{{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}}', typed:'Cavg,ss = F*D0/(ClT*tau)',
  also:['Cavg^inf = F*D0/(ClT*tau)', 'Cavg∞ = FD0/(ClTτ)', 'Cavg,ss = F*D0/(VD*k*tau)'],
@@ -626,7 +626,7 @@ const EQUATIONS = [
  use:'When a stem gives the area over one dosing interval at steady state instead of the dose.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition"'},
 
-{id:'cp-n', module:6, name:'Concentration at any time after n doses', sheet:'yes',
+{id:'cp-n', module:6, name:'Concentration at any time after n doses, IV bolus', sheet:'yes',
  lhs:'C<sub>p</sub>', tokens:['(D<sub>0</sub>/V<sub>D</sub>)', '&times;', '(1 &minus; e<sup>&minus;nk&tau;</sup>)', '/', '(1 &minus; e<sup>&minus;k&tau;</sup>)', '&times;', 'e<sup>&minus;kt</sup>'],
  disp:'{{frac:D<sub>0</sub>|V<sub>D</sub>}} ({{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt</sup>',
  typed:'Cp = (D0/VD)*((1 - e^(-n*k*tau))/(1 - e^(-k*tau)))*e^(-kt)',
@@ -638,7 +638,7 @@ const EQUATIONS = [
  holds:'Repeated IV bolus (the whole dose into a vein at once, every &tau; hours) before steady state. Steady state is the plateau reached when each dose adds back what was lost over the interval. As n grows, e<sup>&minus;nk&tau;</sup> approaches 0 and this becomes the steady-state equation.',
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Plasma Drug Concentration at Any Time After n Doses"'},
 
-{id:'cp-ss', module:6, name:'Concentration at any time at steady state', sheet:'absent',
+{id:'cp-ss', module:6, name:'Concentration at any time at steady state, IV bolus', sheet:'absent',
  lhs:'C<sub>p</sub>', tokens:['(D<sub>0</sub>/V<sub>D</sub>)', '&times;', '1', '/', '(1 &minus; e<sup>&minus;k&tau;</sup>)', '&times;', 'e<sup>&minus;kt</sup>'],
  disp:'{{frac:D<sub>0</sub>|V<sub>D</sub>}} ({{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}) e<sup>&minus;kt</sup>',
  typed:'Cp = (D0/VD)*(1/(1 - e^(-k*tau)))*e^(-kt)',
