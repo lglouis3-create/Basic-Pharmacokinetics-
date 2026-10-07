@@ -894,6 +894,15 @@ const Q_MODULE4 = [
    why:'Picking this stops at filtration without comparing the measured value with the reference. Filtration alone puts renal clearance at or near 120 mL/min, within a narrow tolerance such as 119 or 121. At 350 mL/min the value is nearly three times the filtration rate, so another process is adding drug to the lumen: active tubular secretion.'},
   {t:'It is neither filtered nor secreted', correct:false,
    why:'The error is treating renal clearance as a label for the route rather than a measured number. A drug handled by no renal process would have a renal clearance of zero, so any positive value means drug is reaching the urine. Read against the filtration rate of about 120 mL/min, 350 mL/min means filtration plus secretion.'}],
+ steps:[
+  {k:'setup', t:'Reference: filtration alone clears unbound drug at the GFR, about 120 mL/min',
+   why:'Renal clearance is filtration plus secretion minus reabsorption. Filtration on its own would give a renal clearance at the glomerular filtration rate, so the measured value is read against about 120 mL/min to see whether another process is adding or removing drug.'},
+  {k:'algebra', t:'{{frac:350 mL/min|120 mL/min}} = 2.92; 350 − 120 = 230 mL/min more than filtration supplies',
+   why:'The measured renal clearance is nearly three times the filtration rate, and 230 mL/min of plasma is being cleared each minute beyond what filtration can account for. That excess has to come from a process that adds drug to the tubular fluid.'},
+  {k:'setup', t:'Compare: ClR = 350 mL/min is above 120 mL/min, so filtration plus active tubular secretion',
+   why:'Above the GFR means drug is added to the lumen beyond filtration, which is active tubular secretion; below it would mean reabsorption, and at it, within a few mL/min, filtration alone. At 350 mL/min the only reading is filtration with secretion.'}],
+ givens:[['ClR', '350 mL/min', 'compared with the GFR of about 120 mL/min: above it']],
+ check:{t:'Reabsorption can only lower renal clearance below the filtration rate, and filtration alone cannot exceed about 120 mL/min, so a value of 350 mL/min, 2.92 times the GFR, can come from nothing but filtration plus secretion.'},
  teach:[
  {h:'The idea', t:'Renal clearance is read against the glomerular filtration rate of about 120 mL/min.', list:[
     'Above it: something adds drug to the lumen beyond filtration, which is active tubular secretion.',
@@ -1107,6 +1116,13 @@ const Q_MODULE4 = [
    why:'Creatinine clearance estimates kidney function and says nothing about metabolic capacity. A patient with a creatinine clearance of 30 mL/min may have a normal liver; then hepatic clearance is unchanged and only the renal part of total clearance has fallen.'},
   {t:'The apparent volume of distribution will be reduced in this patient', correct:false,
    why:'The volume of distribution is a property of how the drug distributes between plasma and tissue and is not what a creatinine clearance measures. Treating a clearance result as a statement about volume confuses the two constants that are multiplied together to give clearance in the first place.'}],
+ steps:[
+  {k:'setup', t:'Reference: a normal creatinine clearance is about 120 mL/min, the glomerular filtration rate',
+   why:'Creatinine is cleared by filtration, so its clearance estimates the glomerular filtration rate. A measured value is read against the normal figure of about 120 mL/min; the number alone says nothing until it is compared with that reference.'},
+  {k:'algebra', t:'{{frac:30 mL/min|120 mL/min}} = 0.25, so filtration is at a quarter of normal; 30 is below 120',
+   why:'The ratio of the measured to the normal clearance is the fraction of normal kidney function left: 0.25. A clearance of 30 mL/min means a quarter as much plasma is cleared of drug each minute, so a renally eliminated drug leaves more slowly and accumulates; VD is unchanged, so the half-life lengthens.'}],
+ givens:[['CrCl', '30 mL/min', 'compared with about 120 mL/min: {{frac:30|120}} = 0.25 of normal']],
+ check:{t:'A clearance is a rate of removal, so the direction of the comparison is fixed: 30 mL/min against about 120 means less removal per minute, never more, and {{frac:30|120}} = 0.25 of normal says how much less. It says nothing about the liver or the volume of distribution.'},
  teach:[
  {h:'The idea', list:[
     'Creatinine clearance (CrCl) estimates kidney function and is read against the 120 to 130 mL/min normal range.',

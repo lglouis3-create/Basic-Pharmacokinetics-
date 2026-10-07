@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (concept questions that rest on a calculation show the working)
+- A multiple-choice question decided by a number now carries the working, the givens and the check under its options.
+- The renal-mechanism items reach ClR in mL/min and set it against GFR of about 120 mL/min, step by step.
+- Each says why the shortcut does not decide it: fe says how much is renal, not how the kidney handles it.
+
 ## 2026-10-07 (a way back from every drill)
 - Every drill opens with a Back chip at the top: quiz, equation typing, set-up and plan drill, exam paper.
 - It returns to the tab the drill was started from; on the drill's own tab it stops the drill instead.

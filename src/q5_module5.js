@@ -458,6 +458,15 @@ const Q_MODULE5 = [
    why:'The label is right but the frequency is reversed. Disposition rate limiting is what most oral products do, and the single oral dose treatment assumes it unless a problem says otherwise. An absorption half-life of 0.25 hour against 3.15 hours is the ordinary pattern, not an exception.'},
   {t:'Absorption rate limiting, and it is the unusual case', correct:false,
    why:'Both halves are wrong. The shorter absorption half-life rules out absorption being rate limiting, and the description that does apply is the common one. This answer follows from comparing the two rate constants in the wrong direction and then attaching the frequency to that mistaken label.'}],
+ steps:[
+  {k:'setup', t:'ka = {{frac:0.693|0.25 hr}} = 2.772 hr⁻¹; k = {{frac:0.693|3.15 hr}} = 0.22 hr⁻¹',
+   why:'Each half-life is turned into its rate constant, 0.693 over the half-life, so the two processes can be compared as rates: absorption at 2.772 per hour and elimination at 0.22 per hour. The shorter half-life gives the larger constant.'},
+  {k:'algebra', t:'{{frac:3.15 hr|0.25 hr}} = 12.6, so elimination takes 12.6 times longer than absorption; ka is 12.6 times k',
+   why:'The ratio of the half-lives, which is also the ratio of the rate constants, says how far apart the two processes are: absorption is finished in a small fraction of the time elimination takes, so the drug is in long before much of it has left.'},
+  {k:'setup', t:'Compare: the longer half-life, 3.15 hr for elimination, is the slower process, so disposition is rate limiting; ka much larger than k is the usual case',
+   why:'The process with the longer half-life sets the pace of the curve, and here that is elimination (disposition), so the drug is disposition rate limited. Most oral products are made to absorb quickly, so ka much larger than k is the ordinary case, not the exception.'}],
+ givens:[['absorption t½', '0.25 hour', 'gives ka = {{frac:0.693|0.25}} = 2.772 hr⁻¹, the shorter half-life'], ['t½', '3.15 hours', 'gives k = {{frac:0.693|3.15}} = 0.22 hr⁻¹, the longer half-life']],
+ check:{t:'The label follows the slower process, not the faster: 3.15 hr is longer than 0.25 hr, so elimination, not absorption, limits the curve. Absorption rate limiting would need the absorption half-life to be the longer one, the flip-flop case of slowly released products.'},
  teach:[
   {h:'The idea', list:['Which term applies is a direct comparison of the two half-lives.', 'The process with the longer half-life is the rate-limiting one.']},
   {h:'Applied here', list:['An absorption half-life of a quarter of an hour against an elimination half-life of more than three hours means absorption is far the faster process.', 'So disposition is rate limiting.', 'That is the situation for most oral products, and the one the single-dose treatment assumes unless a problem says otherwise.']},

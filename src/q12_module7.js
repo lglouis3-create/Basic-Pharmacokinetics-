@@ -429,6 +429,17 @@ const Q_MODULE7 = [
    why:'Picking this stops at the AUC ratio. {{frac:115|132}} = 0.871 compares the areas but not the doses: the tablet was 500 mg against 400 mg IV, so its area was produced by a larger dose and has to be scaled by {{frac:400|500}} = 0.8 before comparison, giving 0.871 × 0.8 = 0.697, about 70 per cent.'},
   {t:'92%',
    why:'This has the dose ratio inverted: ({{frac:115|132}})({{frac:500|400}}) = 1.09, which would be rounded down to look plausible. The IV dose goes on top; a larger oral dose makes F smaller, not larger.'}],
+ steps:[
+  {k:'setup', t:'F = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}}) = ({{frac:115|132}})({{frac:400 mg|500 mg}})',
+   why:'Absolute bioavailability compares the tablet with the IV bolus, so the IV AUC is the denominator of the AUC ratio. The doses differ, 500 mg oral against 400 mg IV, so the dose ratio is needed, with the IV dose on top to remove the larger tablet dose.'},
+  {k:'unit', t:'Both AUCs are in (mg/L)hr and both doses in mg, so every unit cancels and F is dimensionless',
+   why:'The AUC ratio is (mg/L)hr over (mg/L)hr and the dose ratio is mg over mg; nothing remains, so F is a pure fraction between 0 and 1 and can be written as a decimal or as a per cent.'},
+  {k:'algebra', t:'{{frac:115|132}} = 0.871; {{frac:400|500}} = 0.8; F = 0.871 × 0.8 = 0.697',
+   why:'The tablet area is 0.871 of the IV area, but it came from a larger dose, 500 mg against 400 mg, so the area is scaled by 0.8 to what a 400 mg tablet would have given: 0.697 of the IV area.'},
+  {k:'round', t:'F = 0.697 = 69.7%, rounded to 70%; the AUC ratio alone would be 87%, and ({{frac:115|132}})({{frac:500|400}}) = 1.089 is over 1',
+   why:'The options are in whole per cents, so 0.697 is rounded to 70 per cent. Stopping at the AUC ratio gives 87 per cent, near the 85% distractor, and inverting the dose ratio gives 109 per cent, more than all of the dose, which is impossible.'}],
+ givens:[['Dpo', '500 mg', 'the denominator of the dose ratio'], ['AUCpo', '115 (mg/L)hr', 'the numerator of the AUC ratio'], ['DIV', '400 mg', 'the numerator of the dose ratio'], ['AUCIV', '132 (mg/L)hr', 'the denominator of the AUC ratio']],
+ check:{t:'F cannot exceed 1, so the dose ratio must make the tablet area smaller, not larger: 400 over 500, not 500 over 400, which gives 1.089. The AUC ratio alone, 0.871, ignores that the tablet dose was larger; 0.697 lies below it.'},
  teach:[
   {h:'The idea', list:[
     'Compare the AUCs with the IV AUC underneath, then correct for the doses with the IV dose on top.',

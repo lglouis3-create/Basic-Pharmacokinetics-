@@ -706,6 +706,17 @@ const Q_MODULE6B = [
    why:'Picking this reads a longer interval as more drug. The dose is unchanged at 500 mg and is given half as often, so the input per day halves and Cavg∞ (the average steady-state concentration), {{frac:F D0|Cl τ}}, falls as τ (the dosing interval) doubles. The levels are lower, with a larger gap between peak and trough.'},
   {t:'The same concentrations, the same swing, and better compliance',
    why:'Picking this leaves τ (the dosing interval) out of the average. Cavg∞ (the average steady-state concentration) is {{frac:F D0|Cl τ}}: with the same 500 mg dose and τ doubled from 4 to 8 hours, the average halves. The swing also grows, since each dose has 8 hours rather than 4 to be eliminated before the next arrives.'}],
+ steps:[
+  {k:'algebra', t:'Doses per day: {{frac:24 hr|4 hr}} = 6, so 6 × 500 mg = 3000 mg a day; {{frac:24 hr|8 hr}} = 3, so 3 × 500 mg = 1500 mg a day',
+   why:'The same 500 mg dose given every 8 hours instead of every 4 is half as many doses a day, so the daily input halves from 3000 to 1500 mg; the drug and the patient are unchanged, so clearance is unchanged and the level has to fall.'},
+  {k:'algebra', t:'Cavg∞ = {{frac:F D0|Cl τ}}: τ doubles from 4 to 8 hr, so Cavg∞ falls to {{frac:4|8}} = 0.5 of its value; the steady-state concentrations are lower',
+   why:'The average steady-state concentration carries the interval in its denominator, with the dose, F and clearance unchanged, so doubling τ halves the average. That is the lower-concentration part of the answer, taken directly from the equation.'},
+  {k:'setup', t:'Swing: Cmin∞ = Cmax∞ e^(−kτ); with τ = 8 hr the fraction left at the trough is e^(−8k) = (e^(−4k))², smaller than with τ = 4 hr, so the trough falls further below the peak',
+   why:'Each dose now has 8 hours rather than 4 to be eliminated before the next arrives: two intervals of decline instead of one. The fraction of the peak left at the trough is squared, so the gap between peak and trough grows: a larger swing.'},
+  {k:'setup', t:'Compare: lower average (half), larger swing (trough fraction squared), 3 doses a day instead of 6: lower concentrations, a larger swing, better compliance',
+   why:'The three parts of the answer each follow from the longer interval: the daily input halves, so the level is lower; the decline between doses is longer, so the swing is larger; three doses a day are easier to keep to than six, so compliance improves.'}],
+ givens:[['D0', '500-mg', 'unchanged: the same dose at both intervals'], ['τ', 'every 4 hours', 'the old interval: 6 doses a day'], ['τ new', 'every 8 hours', 'the new interval: 3 doses a day; Cavg∞ falls to {{frac:4|8}} = 0.5']],
+ check:{t:'The dose is unchanged, so the level cannot rise: the same 500 mg given half as often, 3 times a day instead of 6, halves the input, and each dose has twice as long to fall before the next. Average and trough both move down, the trough further.'},
  teach:[
   {h:'The idea', list:[
     'Method 2 for altering steady state: change the interval, keep the dose.',

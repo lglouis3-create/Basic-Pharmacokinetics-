@@ -259,6 +259,13 @@ const Q_MODULE2 = [
    why:'This takes the percentage figure itself as the answer and never multiplies it by the patient weight. A percent of body weight is not a volume until a weight is supplied, which is why the stem gives one.'},
   {t:'3.5 L', correct:false,
    why:'This divides the weight by 20 instead of taking 20% of it, which is the same as using 5% of body weight. The error comes from treating the 20 as a divisor because volume of distribution often appears in a denominator elsewhere.'}],
+ steps:[
+  {k:'unit', t:'20% of body weight = 0.20 L per kg, because 1 kg of body weight is taken as 1 L',
+   why:'A volume quoted as a percent of body weight rests on the convention that one kilogram of body weight corresponds to one litre, so 20% of the weight in kilograms is read directly as litres: 0.20 L for every kilogram the patient weighs.'},
+  {k:'algebra', t:'VD = (0.20)(70 kg) = 14 kg of body weight = 14 L',
+   why:'Multiplying the fraction by the weight gives 14 kg of body weight; by the one-to-one convention that is 14 L. The result is a volume, so it is written in litres, not kilograms, which is what the question asks for.'}],
+ givens:[['weight', '70 kg', 'multiplied by 0.20: (0.20)(70) = 14'], ['VD', '20% of body weight', '0.20 L per kg, by the convention 1 kg = 1 L']],
+ check:{t:'The answer has to be a volume in litres and smaller than the 70 kg weight, since 20% is a fifth: a fifth of 70 is 14. A result of 20 L would mean the percent was taken as the answer without the weight.'},
  teach:[
   {h:'The idea', list:[
     'VD (apparent volume of distribution) can be quoted as an absolute volume, per kilogram of body weight, or as a percent of body weight.',

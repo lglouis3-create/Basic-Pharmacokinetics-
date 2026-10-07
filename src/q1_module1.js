@@ -983,6 +983,17 @@ const Q_MODULE1 = [
    why:'Picking this reads any fall as zero order, but a falling concentration fits either order. Zero order needs equal losses over equal intervals, yet 61.1 mcg/mL is lost from 4 to 8 hours and only 35.1 mcg/mL from 8 to 12 hours; losses that shrink with the concentration are first-order behaviour.'},
   {t:'Neither order fits the data',
    why:'Spacing of the sampling times is a feature of the experiment rather than of the kinetics, and either order can be sampled at any times. Choosing pairs that are equally separated, such as 4 to 8 hours and 8 to 12 hours, removes the difficulty entirely. Nothing about uneven spacing points towards one order or the other.'}],
+ steps:[
+  {k:'setup', t:'Equal intervals from the table: 4.0 to 8.0 hr and 8.0 to 12.0 hr, each 4 hours long',
+   why:'Order is read from how the fall behaves over equal time intervals, so two adjacent 4-hour intervals are taken from the table. The uneven spacing of the other sampling times does not matter once equally separated pairs have been chosen.'},
+  {k:'algebra', t:'ΔC: 143.6 − 82.5 = 61.1 mcg/mL (4 to 8 hr); 82.5 − 47.4 = 35.1 mcg/mL (8 to 12 hr)',
+   why:'A zero-order process loses the same amount in each equal interval, so the differences in C are tested first. They are 61.1 and then 35.1 mcg/mL: the loss shrinks as the concentration falls, so C is not linear in time and the process is not zero order.'},
+  {k:'algebra', t:'Δln C: 4.9670 − 4.4128 = 0.5542 (4 to 8 hr); 4.4128 − 3.8586 = 0.5542 (8 to 12 hr)',
+   why:'A first-order process loses the same fraction in each equal interval, which makes ln C fall by the same amount. The two drops in ln C are identical, 0.5542 each 4 hours, so ln C is linear in time.'},
+  {k:'setup', t:'Compare: equal ΔC fails (61.1 against 35.1); equal Δln C holds (0.5542 against 0.5542), so first order, with k = {{frac:0.5542|4 hr}} = 0.1386 hr⁻¹',
+   why:'The column that falls by a constant amount over equal intervals names the order. It is the ln C column, so the decomposition is first order; the constant drop over 4 hours is the slope of the ln C line and gives the rate constant, 0.1386 hr⁻¹.'}],
+ givens:[['t', '0.5 to 16.0 hr', 'equal 4-hour intervals chosen: 4.0 to 8.0 and 8.0 to 12.0'], ['C', '143.6, 82.5, 47.4 mcg/mL', 'differences 61.1 then 35.1: unequal, so not zero order'], ['ln C', '4.9670, 4.4128, 3.8586', 'differences 0.5542 and 0.5542: equal, so first order'], ['other rows', '233.3 down to 27.2', 'not needed: unevenly spaced; any equally separated pair would do']],
+ check:{t:'A fall by itself does not name the order, since both orders fall. Equal differences in C over equal intervals mean zero order and equal differences in ln C mean first order; here 61.1 against 35.1 is unequal and 0.5542 against 0.5542 is equal.'},
  teach:[
   {h:'The idea', list:[
     'When a table gives a column of natural logarithms (ln C), that column is the test.',

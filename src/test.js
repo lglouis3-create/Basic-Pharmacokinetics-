@@ -170,6 +170,14 @@ for (const q of QUESTIONS.concat(X.EXTRAS)) {   // extra practice is held to the
       if (!s.why) bad(`${q.id}: step "${String(s.t).slice(0,30)}" has no why`);
     }
     if (q.options) warn(`${q.id}: numeric question also carries options, which are ignored`);
+  }
+  if (kind !== 'numeric' && q.steps !== undefined) {
+    // a concept question may carry the working it rests on; the same shape as a numeric one's
+    if (!Array.isArray(q.steps) || !q.steps.length) bad(`${q.id}: steps on a concept question must be a non-empty array`);
+    for (const s of q.steps || []) {
+      if (!['setup','unit','algebra','round'].includes(s.k)) bad(`${q.id}: step kind "${s.k}" is not setup/unit/algebra/round`);
+      if (!s.t || !s.why) bad(`${q.id}: a step on a concept question lacks its line or its why`);
+    }
   } else if (kind === 'match') {
     if (!Array.isArray(q.left) || q.left.length < 2) bad(`${q.id}: match question needs at least 2 left items`);
     if (!Array.isArray(q.right) || q.right.length < 2) bad(`${q.id}: match question needs at least 2 right items`);
@@ -822,10 +830,15 @@ console.log('\n=== 10. Bank fields are plain text ===');
   /* the givens table and the sanity check: present on every numeric question, every value a number the stem states */
   const numsIn = txt => [...String(txt || '').replace(/,(?=\d{3}\b)/g, '').matchAll(/(^|[^A-Za-z\d.])(\d+(?:\.\d+)?)/g)].map(m => m[2]);
   const SMALL = new Set(['0.5', '0.25', '0.125', '0.693', '2.303', '1.44', '50', '75', '87.5', '90', '94', '95', '97', '99', '100', '1000', '60', '24']);
+  const needWork = X.QUESTIONS.concat(X.EXTRAS).filter(q => X.qType(q) !== 'numeric' && q.options && q.sub === 'renalmech' && q.skill === 'apply' && /\d/.test(q.stem));   // a mechanism read from a number must show the comparison
+  const noWork = needWork.filter(q => !Array.isArray(q.steps) || !q.steps.length).map(q => q.id);
+  if (noWork.length) bad('renal-mechanism questions without the working that decides them: ' + noWork.join(', ')); else console.log(`  ok    every renal-mechanism decision carries its working (${needWork.length})`);
+  const withWork = X.QUESTIONS.concat(X.EXTRAS).filter(q => X.qType(q) !== 'numeric' && (q.givens || q.check));
   const noGivens = [], noCheck = [], badGivens = [], badCheck = [];
-  for (const q of nums) {
+  for (const q of nums.concat(withWork)) {
+    const isNum = X.qType(q) === 'numeric';
     const stemNums = new Set(numsIn(q.stem));
-    if (!Array.isArray(q.givens) || !q.givens.length) noGivens.push(q.id);
+    if (!Array.isArray(q.givens) || !q.givens.length){ if (isNum) noGivens.push(q.id); }
     else {
       if (q.givens.length > 10) badGivens.push(q.id + ': more than 10 givens');
       for (const g of q.givens) {
@@ -836,7 +849,7 @@ console.log('\n=== 10. Bank fields are plain text ===');
       }
     }
     const ck = q.check;
-    if (!ck || typeof ck.t !== 'string' || !ck.t.trim()) noCheck.push(q.id);
+    if (!ck || typeof ck.t !== 'string' || !ck.t.trim()){ if (isNum) noCheck.push(q.id); }
     else {
       const allowed = new Set([...stemNums, ...numsIn((q.steps || []).map(s => s.t).join(' ')), ...numsIn(String(q.answer)), ...numsIn(String(+(+q.answer).toPrecision(3))), ...numsIn(String(+(+q.answer).toPrecision(2))), ...SMALL]);
       for (const n of numsIn(ck.t)) if (!allowed.has(n) && !(Number.isInteger(+n) && +n <= 24)) badCheck.push(`${q.id}: check says ${n}, which is in neither the stem nor the working`);

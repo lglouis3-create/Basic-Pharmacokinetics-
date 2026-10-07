@@ -37,6 +37,8 @@ def mc(id, *, stem, options, teach, concept, skill, topic, sub, module, lecture,
              options=[dict(t=t, correct=True, why=w) if c else dict(t=t, why=w) for t, c, w in options],
              teach=teach, cite=cite)
     if note: q['note'] = note
+    if 'steps' in more:   # a concept question decided by a calculation carries its working like a numeric one
+        more['steps'] = [dict(k=k, t=t, why=wy) for k, t, wy in more['steps']]
     q.update(more)
     QS.append(q)
     return id

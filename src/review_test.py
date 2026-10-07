@@ -442,6 +442,15 @@ with sync_playwright() as p:
     ok('a paper started on Exam sim itself shows no such chip', pg.locator('#v-exam .drillback').count() == 0)
     pg.evaluate("EX = null; show('topics')"); pg.wait_for_timeout(100)
 
+    print('\n=== A concept question decided by a calculation shows the working ===')
+    pg.evaluate("Q = null; EQ = null; SU = null; DB.settings.layout = 'one'; show('topics'); startSweepOf([byId('hw4-2e')], 'probe')"); pg.wait_for_timeout(200)
+    ok('before the answer, no working shows', pg.locator('#v-quiz .steps').count() == 0)
+    pg.evaluate("(() => { const i = byId('hw4-2e').options.findIndex(o => o.correct); const n = Q.order.indexOf(i); document.querySelectorAll('#v-quiz .opt')[n].click(); })()"); pg.wait_for_timeout(300)
+    txt = pg.inner_text('#v-quiz')
+    ok('after it, the givens, five steps and the check follow the option explanations', pg.locator('#v-quiz .givens').count() == 1 and pg.locator('#v-quiz .step').count() == 5 and pg.locator('#v-quiz .sanity').count() == 1 and 'The answer rests on a calculation' in txt)
+    ok('the chain reaches the comparison with GFR and names why fe alone cannot decide', '28.3 mL/min against GFR' in txt and 'fe = 0.70 alone cannot name the mechanism' in txt)
+    pg.evaluate("DB.answers.pop(); save(); Q = null; show('topics')"); pg.wait_for_timeout(100)
+
     print('\n=== Weak spots: repairs per kind of miss, Reference anchors ===')
     pg.evaluate("Q = null; EQ = null; SU = null")
     land = pg.evaluate("""(() => { const q = QUESTIONS.find(q => q.module === 2 && qType(q) === 'numeric');

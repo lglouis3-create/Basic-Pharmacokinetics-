@@ -1548,6 +1548,9 @@ function feedbackHTML(q, st){
           <span class="wtxt"><b>${LETTERS[n]}. ${rich(o.t)}</b>${multi && chosen ? ' <i class="youpicked">you selected this</i>' : ''} — ${richHTML(glossify(esc(o.why), seen, self))}</span>
           </div>`;
       });
+      /* a concept question decided by a calculation carries that working, so
+         the answer is reached and not just stated */
+      if(Array.isArray(q.steps) && q.steps.length) h += `<p class="sub workintro">The answer rests on a calculation. The working:</p>${workedBlock(q)}`;
     }
 
     if(q.teach) h += `<div class="teach"><h4>The concept behind this</h4>${
@@ -2879,6 +2882,7 @@ function renderExamResult(){
           <span class="wtxt"><b>${LETTERS[n]}. ${rich(o.t)}</b>${chosen(oi)?' &nbsp;<i>(you picked this)</i>':''} — ${rich(o.why)}</span>
           </div>`;
       });
+      if(Array.isArray(q.steps) && q.steps.length) h += `<p class="sub workintro">The answer rests on a calculation. The working:</p>${workedBlock(q)}`;
     }
     if(q.teach) h += `<div class="teach"><h4>The concept behind this</h4>${
         q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${

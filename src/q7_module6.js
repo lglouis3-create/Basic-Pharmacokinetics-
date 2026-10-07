@@ -361,6 +361,17 @@ const Q_MODULE6 = [
    why:'Choosing this counts accumulation twice. Accumulation has already raised both the peak and the trough, and the midpoint is taken from those raised values. The shape of the decline between them is what puts the average below the midpoint.'},
   {t:'It cannot be compared without the AUC',
    why:'Choosing this treats the AUC as the only route to the average. Cavg∞ can be found without an AUC from {{frac:FD0|VD kτ}}, and the shape of the curve alone puts it below the midpoint. The exponential decline is enough to answer.'}],
+ steps:[
+  {k:'setup', t:'The midpoint {{frac:53.3 + 13.3|2}} = 33.3 mg/L is the average of a straight-line fall; a first-order fall is exponential, Cmax∞ e^(−kt)',
+   why:'Averaging the two ends assumes the level spends as much time above the midpoint as below it, which is true of a straight line. Between doses the level falls fast at first and slowly later, so it spends more of the interval below the midpoint.'},
+  {k:'algebra', t:'Fall over one interval: kτ = ln({{frac:Cmax∞|Cmin∞}}) = ln({{frac:53.3|13.3}}) = ln 4.008 = 1.388',
+   why:'Cmin∞ is Cmax∞ e^(−kτ), so the ratio of peak to trough gives the exponent kτ without k or τ being known separately: the peak is 4.008 times the trough, and ln 4.008 = 1.388 is how far the level falls, in e-folds, in one interval.'},
+  {k:'algebra', t:'Cavg∞ = {{frac:area over one interval|τ}} = {{frac:Cmax∞ − Cmin∞|kτ}} = {{frac:(53.3 − 13.3) mg/L|1.388}} = {{frac:40 mg/L|1.388}} = 28.8 mg/L',
+   why:'The area under an exponential fall from the peak to the trough is (Cmax∞ − Cmin∞) over k, and the average is that area over τ, so Cavg∞ is the drop in concentration over kτ: 40 mg/L over 1.388, which is 28.8 mg/L (28.9 with her unrounded k and τ).'},
+  {k:'setup', t:'Compare: Cavg∞ = 28.8 mg/L against the midpoint 33.3 mg/L; 33.3 − 28.8 = 4.5, so 28.8 is below 33.3: lower',
+   why:'The time average lies 4.5 mg/L below the midpoint because the exponential curve spends more of the interval near the trough than near the peak. Equal to the midpoint would need a straight-line, zero-order fall; higher is impossible for a falling exponential.'}],
+ givens:[['Cmax∞', '53.3 mg/L', 'the top of the fall; with Cmin∞ gives kτ = ln 4.008 = 1.388'], ['Cmin∞', '13.3 mg/L', 'the bottom of the fall; 53.3 − 13.3 = 40 mg/L is the drop'], ['midpoint', '33.3 mg/L', 'the number Cavg∞ = 28.8 mg/L is compared with']],
+ check:{t:'The midpoint 33.3 is the average of a straight-line fall; a first-order fall curves below that line, so its time average is lower. 1.388 is more than 1, so {{frac:40|1.388}} = 28.8 is less than the 40 mg/L drop and below 33.3.'},
  teach:[
   {t:'Cavg∞ is not {{frac:Cmax∞ + Cmin∞|2}}. It is the area over one interval divided by τ, or {{frac:FD0|VD kτ}}. A first-order decline is exponential: it falls fast early and slowly late, so the average sits below the midpoint.'},
   M6_FIG, M6_EQ],
@@ -931,6 +942,15 @@ const Q_MODULE6 = [
    why:'Choosing this reads a low clearance as plain filtration. Filtration alone would give a renal clearance about equal to the filtration rate, 120 mL/min. 34.72 mL/min is well below that.'},
   {t:'Hepatic metabolism',
    why:'Choosing this confuses renal clearance with the rest of total clearance. The question is about renal clearance, the part of total clearance done by the kidney. The non-renal part, 52.95 − 34.72 = 18.23 mL/min per 70 kg, is not a renal mechanism, and nothing in the question says which organ carries it.'}],
+ steps:[
+  {k:'setup', t:'ClR = 34.72 mL/min is read against the GFR, about 120 mL/min; ClT = 52.95 mL/min gives only the renal share, fe = {{frac:34.72|52.95}} = 0.656, and the non-renal part, 52.95 − 34.72 = 18.23 mL/min',
+   why:'The mechanism of renal clearance is found by comparing the renal clearance with the glomerular filtration rate, the clearance filtration alone would give. The total clearance includes the non-renal part and is not what the kidney is compared with.'},
+  {k:'algebra', t:'{{frac:34.72 mL/min|120 mL/min}} = 0.289; 120 − 34.72 = 85.28 mL/min less than filtration alone would clear',
+   why:'The kidney clears less than a third of the plasma volume that filtration alone would clear each minute: 85.28 mL/min of filtered plasma is, in effect, not cleared, which means drug filtered into the tubule is being returned to the blood.'},
+  {k:'setup', t:'Compare: ClR = 34.72 mL/min is below 120 mL/min, so glomerular filtration with tubular reabsorption',
+   why:'Below the GFR means some filtered drug is taken back, so the mechanism is filtration with reabsorption; above it would mean active secretion adding drug to the urine, and at it, within a few mL/min, filtration alone. The non-renal 18.23 mL/min is not a renal mechanism.'}],
+ givens:[['ClT', '52.95 mL/min per 70 kg', 'not needed for the mechanism: gives fe = 0.656 and the non-renal 18.23 mL/min'], ['ClR', '34.72 mL/min per 70 kg', 'compared with the GFR of about 120 mL/min: below it']],
+ check:{t:'The renal share of total clearance, fe = 0.656, cannot name the mechanism: a drug two-thirds renal could be secreted or reabsorbed. Only ClR against about 120 mL/min decides, and 34.72 is well below it.'},
  teach:[
   {t:'Comparing renal clearance with the glomerular filtration rate of 120 mL/min, from Module 4, gives the mechanism: about equal means filtration only, above means secretion as well, below means reabsorption.'},
   {h:'Renal clearance against the filtration rate', table:{head:['Renal clearance', 'Mechanism'], rows:[['About 120 mL/min', 'Filtration only'], ['Above 120 mL/min', 'Filtration and active secretion'], ['Below 120 mL/min', 'Filtration and reabsorption']]}}],
