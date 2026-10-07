@@ -664,6 +664,19 @@ console.log('\n=== 5e. What an explanation may say ===');
     fr += open;
     if (open !== good) bad(`${q.id}: a {{frac:...}} in its working is malformed`);
   }
+  /* Stems, options, explanations, notes, givens and checks: every {{ token closes. */
+  for (const q of X.QUESTIONS.concat(X.EXTRAS)) {
+    const strs = [q.stem, q.note, q.check && q.check.t, q.setup && q.setup.why]
+      .concat((q.options || []).flatMap(o => [o.t, o.why]), (q.steps || []).map(st => st.why),
+        (q.givens || []).flat(), (q.pairs || []).flatMap(pr => [pr.l, pr.r, pr.why]));
+    for (const t of strs) {
+      if (!t) continue;
+      const s = String(t), open = (s.match(/\{\{frac:/g) || []).length, good = (s.match(X.FRAC_RE) || []).length;
+      fr += open;
+      if (open !== good) bad(`${q.id}: a {{frac:...}} in its stem, options or explanations is malformed`);
+      if ((s.match(/\{\{/g) || []).length !== (s.match(/\}\}/g) || []).length) bad(`${q.id}: an unclosed {{ }} token: "${s.slice(0, 80)}"`);
+    }
+  }
   console.log(`  ok    ${tb} comparison tables have a cell for every column; ${fr} stacked fractions are well formed`);
 
   /* A CONTROL ON THE FORMULA FORMATTER. It sets typed formulas as the slides

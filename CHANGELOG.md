@@ -2,6 +2,10 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (accumulation-factor question fixed)
+- The accumulation-factor question now shows its fraction stacked instead of as raw text.
+- Its F option explains that F = 1 for an IV bolus; the old line wrongly said F appears only in averages.
+
 ## 2026-10-07 (what a dose change and an interval change each do)
 - The dose and interval explanations now say what moves: a shorter interval raises Cmax, Cmin and Cavg.
 - "Decreased fluctuation" is spelled out: the trough sits closer to the peak, not lower peaks or troughs.
