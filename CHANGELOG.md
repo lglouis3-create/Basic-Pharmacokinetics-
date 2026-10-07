@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (find the line on the sheet; small fixes)
+- The set-up drill can offer the whole sheet instead of four lines: open the block, then pick the line.
+- The Back button after a jump now sits under the tab row, in view, instead of at the foot of the page.
+- The Equations tab has Expand all and Collapse all for its modules.
+
 ## 2026-10-07 (plan the problem before any arithmetic)
 - The set-up drill gains a Plan mode: the dosing model from the stem's words, then the line, then the givens it uses.
 - Each step is judged as you go; the card ends with the plan written out and the estimate to check against.

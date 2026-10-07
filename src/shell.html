@@ -378,6 +378,12 @@ table.gap tr:last-child td{border-bottom:0}
 .tabhelp ol{margin:6px 0 2px;padding-left:20px} .tabhelp ol li{margin:5px 0;font-size:14px;line-height:1.5}
 .sucard .routine{margin:4px 0 10px}
 .sumodels,.sugivs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.susheet{display:grid;gap:6px;margin:0 0 10px}
+.sublock{border:1px solid var(--line);border-radius:var(--r);padding:0 10px}
+.sublock summary{cursor:pointer;font-weight:600;font-size:14px;padding:8px 0}.sublock summary small{color:var(--text-dim);font-weight:400;margin-left:6px}
+.sulines{display:grid;gap:6px;padding:0 0 10px}
+.suline{padding:7px 10px}.suline.nolink{cursor:default;color:var(--text-dim);border-style:dashed}
+.suline .suname{font-size:12px;color:var(--text-dim)}
 .sumodel,.sugiv{flex:0 1 auto;padding:7px 10px}
 .sugiv.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
 .sugiv.missed{border-color:var(--bad);border-style:dashed}
@@ -600,7 +606,6 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
 .cheeroffer{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--accent-bg);border-radius:var(--r);padding:10px 14px;margin:0 0 12px;font-size:14px}
 .cheerbox .frow{justify-content:flex-end;margin-top:10px}
 #lback{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:30;box-shadow:0 2px 10px rgba(0,0,0,.25);white-space:nowrap;background:var(--paper)}
-body:has(#backbtn) #lback{bottom:64px}
 .dgtoc{background:var(--paper);border:1px solid var(--line-soft);border-radius:var(--r);padding:10px 14px;margin:0 0 10px}
 .dgchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .dgchips .chip{text-decoration:none;max-width:100%;white-space:normal}
@@ -625,12 +630,11 @@ body:has(#backbtn) #lback{bottom:64px}
 .az:disabled{opacity:.35;cursor:default}
 .flash .fcscene{font-size:16px} .flash .fcterm{font-size:20px;font-weight:700;margin:10px 0 2px;color:var(--accent)}
 #tback{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;white-space:nowrap;z-index:20;box-shadow:0 2px 10px rgba(0,0,0,.25)}
-body:has(#backbtn) #xback, body:has(#backbtn) #tback{bottom:64px}
 
 /* ---------- explain more ---------- */
 .explainmore{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0 0;font-size:13px;color:var(--text-dim)}
 .explainmore .chip{white-space:normal;text-align:left}
-#backbtn{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:40;box-shadow:0 2px 10px rgba(0,0,0,.25);white-space:nowrap}
+#backbtn{position:fixed;right:12px;top:120px;z-index:40;box-shadow:0 2px 10px rgba(0,0,0,.25);white-space:nowrap}
 
 /* ---------- answer layout ---------- */
 .laytog{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--text-dim)}

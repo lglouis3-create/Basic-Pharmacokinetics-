@@ -1242,6 +1242,9 @@ function backBtn(){
   let b = document.getElementById('backbtn');
   if(!RET.length){ if(b) b.remove(); return; }
   if(!b){ b = document.createElement('button'); b.id = 'backbtn'; b.className = 'btn'; document.body.appendChild(b); }
+  /* pinned just under the header and the tab row, so it is in view wherever the jump lands */
+  const hd = ['header', '#nav'].reduce((s, sel) => { const n = document.querySelector(sel); return s + (n ? n.getBoundingClientRect().height : 0); }, 0);
+  b.style.top = Math.round(hd + 8) + 'px';
   b.textContent = `← Back to ${RET[RET.length - 1].label}`;
   b.onclick = () => {
     const r = RET.pop(); show(r.view);
@@ -3491,6 +3494,8 @@ function renderEq(){
   eqPickerWire(el);
 }
 
+const EQ_FOLD_KEY = NS + ':eqfold';
+const eqFold = () => LS.get(EQ_FOLD_KEY) === 'closed' ? 'closed' : 'open';   // the modules start open, as before
 function eqPickerHTML(){
   const chosen = new Set(eqChosen());
   const learned = [...chosen].filter(eqLearned).length;
@@ -3530,9 +3535,11 @@ function eqPickerHTML(){
 
   const mods = [...new Set(EQUATIONS.map(e => e.module))].sort((a,b) => a-b);
   const modName = m => (COURSE.topicsMenu.find(t => t.module === m) || {}).name || ('Module ' + m);
+  const fold = eqFold();
+  h += `<div class="foldbar"><span>Modules</span><button class="chip" data-eqfold="open" aria-pressed="${fold === 'open'}">Expand all</button><button class="chip" data-eqfold="closed" aria-pressed="${fold === 'closed'}">Collapse all</button></div>`;
   for(const m of mods){
     const es = EQUATIONS.filter(e => e.module === m);
-    h += `<details class="module" id="eq-m${m}" open><summary>
+    h += `<details class="module" id="eq-m${m}"${fold === 'open' ? ' open' : ''}><summary>
       <span class="mname">${esc(modName(m))}<small>${es.length} equations ·
         ${es.filter(e => chosen.has(e.id)).length} selected</small></span>
       <button class="chip" data-modpick="${m}" title="Add every equation of this module to the selection">Add all</button></summary><div class="mfoot">`;
@@ -3581,6 +3588,8 @@ function eqPickerWire(el){
   });
   el.querySelectorAll('button[data-start]').forEach(b => b.onclick = () => eqStart(b.dataset.start));
   el.querySelectorAll('button[data-su]').forEach(b => b.onclick = () => suStart(b.dataset.su));
+  el.querySelectorAll('button[data-sufrom]').forEach(b => b.onclick = () => { LS.set(SU_FROM_KEY, b.dataset.sufrom); renderEq(); });
+  el.querySelectorAll('button[data-eqfold]').forEach(b => b.onclick = () => { LS.set(EQ_FOLD_KEY, b.dataset.eqfold); renderEq(); });
 }
 
 /* A pass over the chosen equations. The queue is shuffled so the order they
@@ -4041,7 +4050,27 @@ function suOptions(q){
 }
 /* The state for one stem, made on first sight and kept, so a layout change
    or a return never re-asks or re-rolls a stem already answered. */
-const suState = q => (SU.page[q.id] ||= {options: suOptions(q), picked: null, ok: false, model: null, modelOk: false, giv: new Set(), givChecked: false, givOk: false});
+const suState = q => (SU.page[q.id] ||= {options: suOptions(q), picked: null, pickedId: null, ok: false, model: null, modelOk: false, giv: new Set(), givChecked: false, givOk: false});
+const suAnswered = st => st.picked != null || st.pickedId != null;
+/* Where the line is chosen from: four lines (the default) or the whole
+   sheet, block by block as the exam hands it over, with the lines she said
+   to know and the lines reachable from the sheet in two groups at the end. */
+const SU_FROM_KEY = NS + ':sufrom';
+const suFrom = () => LS.get(SU_FROM_KEY) === 'sheet' ? 'sheet' : 'four';
+function suSheetListHTML(q, st){
+  const rightId = q.setup.eq, same = suSame(rightId), done = suAnswered(st);
+  const isRight = id => id === rightId || same.has(id);
+  const line = (html, id, name) => {
+    if(!id || !EQ_BY_ID[id]) return `<span class="suopt suline nolink"><span class="sueq">${mathHTML(html)}</span></span>`;
+    const cls = !done ? '' : isRight(id) ? ' right' : id === st.pickedId ? ' wrong' : ' dim';
+    return `<button type="button" class="suopt suline${cls}" data-suline="${esc(id)}"${done ? ' disabled' : ''}><span class="sueq">${mathHTML(html)}</span>${name ? `<span class="suname">${esc(name)}</span>` : ''}</button>`; };
+  const groups = SHEET_MODEL_ORDER.map(model => [model, SHEET_LINES.filter(l => l.model === model)]).filter(([, ls]) => ls.length);
+  const extra = EQUATIONS.filter(e => e.sheet === 'absent' && e.derive);
+  const blocks = groups.map(([model, ls]) => ({title: model, items: ls.map(l => line(l.html, l.eq)), hit: ls.some(l => l.eq && isRight(l.eq))}))
+    .concat([{title: 'Not printed: the lines she said to know', items: SHEET_MISSING.map(l => line(l.html, l.eq)), hit: SHEET_MISSING.some(l => l.eq && isRight(l.eq))},
+             {title: 'Not printed: reached from a sheet line', items: extra.map(e => line(`${e.lhs} = ${e.disp || eqRhs(e)}`, e.id, e.name)), hit: extra.some(e => isRight(e.id))}]);
+  return `<div class="susheet">${blocks.map(b => `<details class="sublock"${done && b.hit ? ' open' : ''}><summary>${esc(b.title)} <small>${b.items.length}</small></summary><div class="sulines">${b.items.join('')}</div></details>`).join('')}</div>`;
+}
 /* The pick, the verdict and the reasons for one stem; `st` is the state
    that holds its options and pick (SU itself one at a time, a page entry
    on one page). */
@@ -4050,13 +4079,17 @@ function suQuestionHTML(q, st, idx){
   let h = `<div class="card suq" data-suq="${idx}"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">${plan ? 'plan the problem' : 'set-up only'}</span></div>
     <div class="stem">${stemHTML(q.stem)}</div>`;
   if(plan){ h += planModelHTML(q, st); if(st.model == null) return h + `</div>`; }
-  h += `<p class="suask"><b>${plan ? '2. ' : ''}Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
+  if(suFrom() === 'sheet'){
+    h += `<p class="suask"><b>${plan ? '2. ' : ''}Which line solves what is asked?</b> Find it on the sheet: open the block, then the line. No arithmetic.</p>` + suSheetListHTML(q, st);
+  }else{
+    h += `<p class="suask"><b>${plan ? '2. ' : ''}Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
     <div class="suopts">${st.options.map((o, i) => {
-      const cls = st.picked == null ? '' : o.id === e.id ? ' right' : i === st.picked ? ' wrong' : ' dim';
-      return `<button type="button" class="suopt${cls}" data-suopt="${i}"${st.picked != null ? ' disabled' : ''}>
+      const cls = !suAnswered(st) ? '' : o.id === e.id ? ' right' : i === st.picked ? ' wrong' : ' dim';
+      return `<button type="button" class="suopt${cls}" data-suopt="${i}"${suAnswered(st) ? ' disabled' : ''}>
         <span class="suname">${esc(o.name)}</span><span class="sueq">${eqShow(o)}</span></button>`; }).join('')}</div>`;
-  if(st.picked != null){
-    const chosen = st.options[st.picked];
+  }
+  if(suAnswered(st)){
+    const chosen = st.pickedId != null ? EQ_BY_ID[st.pickedId] : st.options[st.picked];
     const why = (String(q.setup.why || '').match(/[^.?!]+(?:[.?!]+|$)/g) || []).map(t => t.trim()).filter(Boolean);
     const pre = (q.setup.pre || []).filter(id => EQ_BY_ID[id]);
     h += `<div class="why"><p class="verdict ${st.ok ? 'ok' : 'bad'}">${st.ok ? '✓ That is the line' : '✗ Not that line'}</p>
@@ -4096,7 +4129,7 @@ function suHTML(){
   if(layoutOf() === 'all'){
     const page = SU.queue.slice(SU.i, SU.i + SU_PAGE);
     page.forEach(suState);
-    const answered = page.filter(x => SU.page[x.id].picked != null).length;
+    const answered = page.filter(x => suAnswered(SU.page[x.id])).length;
     h += `<div class="sessrow"><span>stems ${SU.i + 1} to ${SU.i + page.length} of ${SU.queue.length} · ${esc(suScopeLabel(SU.scope))}</span>
       <span class="pbar"><i style="width:${Math.round(100 * SU.i / SU.queue.length)}%"></i></span>${tally}</div>
       <div class="laytogrow">${layoutToggle()}</div>`;
@@ -4123,8 +4156,10 @@ function suPick(card, i){
   const idx = card.dataset.suq;
   const q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx];
   const st = q && SU.page[q.id];
-  if(!q || !st || st.picked != null) return;
-  st.picked = i; st.ok = st.options[i].id === q.setup.eq; SU.asked++; if(st.ok) SU.right++;
+  if(!q || !st || suAnswered(st)) return;
+  if(typeof i === 'string'){ st.pickedId = i; st.ok = i === q.setup.eq || suSame(q.setup.eq).has(i); }
+  else { st.picked = i; st.ok = st.options[i].id === q.setup.eq; }
+  SU.asked++; if(st.ok) SU.right++;
   suLog(q.setup.eq, st.ok);
   if(idx === 'one'){ renderEq(); return; }
   const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx);
@@ -4134,6 +4169,7 @@ function suPick(card, i){
 function suWire(el){
   el.onclick = e => {
     const o = e.target.closest('[data-suopt]'); if(o){ suPick(o.closest('[data-suq]'), +o.dataset.suopt); return; }
+    const sl = e.target.closest('[data-suline]'); if(sl){ suPick(sl.closest('[data-suq]'), sl.dataset.suline); return; }
     const sh = e.target.closest('[data-sushow]');
     if(sh){ const card = sh.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
       if(st){ st.shown = !st.shown; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild); } return; }
@@ -4188,6 +4224,10 @@ function suCardHTML(){
       ${mods.map(m => `<button class="chip" data-su="plan:${m}">Module ${esc(modShort(m))}</button>`).join('')}
       <button class="chip" data-su="plan:all">All</button>
       <small class="sm">Plan the whole problem: the dosing model from the stem's words, then the line, then which givens it uses. Still no arithmetic.</small></div>
+    <div class="frow suscope"><span class="olab">Choose from</span>
+      <button class="chip" data-sufrom="four" aria-pressed="${suFrom() === 'four'}">Four lines</button>
+      <button class="chip" data-sufrom="sheet" aria-pressed="${suFrom() === 'sheet'}">The whole sheet</button>
+      <small class="sm">${suFrom() === 'sheet' ? 'Every line, block by block, as the exam hands the sheet over: open the block you think is right, then pick the line.' : 'The right line and three others, drawn first from the same module.'}</small></div>
   </div></div>`;
 }
 
