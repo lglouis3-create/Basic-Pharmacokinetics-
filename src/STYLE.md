@@ -1706,3 +1706,76 @@ from the rendered pages.
 > - Drug Product Performance
 
 **Formats observed:** ten items, concept and numeric strictly alternating, one block per objective in deck order (why multiple dosing → repeated IV bolus → altering the regimen → intermittent infusions → altering the oral dose → steady-state tmax → intermittent rationale → dose for Cavg → absolute F → definition). Concept stems: "Why are … used?", "Which is the best option to …?", "Which of the following results if …?", "Which of the following best describes the assumptions …?", a slide definition quoted and the term asked. Four short options each, one correct, lower-case starts on three of five; distractors are the opposite direction and the parameters a regimen cannot change (clearance, half-life, rate of absorption). Numeric instruction now reads "Give your answer in <unit> rounded to the nearest tenth / whole number / hundredth **with no units**" (Quiz 3 said "You cannot enter units; number only"); margins ±5% on four items and ±3% on F. Every numeric stem carries at least one quantity that is not needed (weight and F on Q4-6, ka and VD on Q4-8). The exam, by her 30 September statement, does require units; the drill accepts a unit typed after the number.
+
+
+# Exam 2 — her in-class review
+
+## Source: "Exam 2 In-Class Review" (paper handout, photographed by the student 7 Oct 2026; no key printed)
+
+Four calculations, the third chained in eight parts (a–h), then ten concept items. An answer box beside every
+item; no rounding instruction and no "no units" line. The circles on the photographs are the student's own marks.
+Bank ids e2r-1 to e2r-14 (e2r-2m is the mechanism half of item 2). Stems verbatim, including "an decrease" in 14.
+
+> Circles on the sheet are the student's own marks, not a printed key.
+>
+> 1. Using the patient's ideal body weight, estimate the creatinine clearance of a 45-year-old female who weighs 154 lb, serum creatinine of 0.78 mg/dL, and stands 5'8" tall.
+>
+> 2. A drug was administered as a single IV bolus dose of 10 mg/kg to a 75-kg male volunteer. The drug has an elimination half-life of approximately 5 hours and volume of distribution of 2.3 L/kg. Urine samples were collected for 48 hours and upon analysis, 630 mg was recovered. What is the renal clearance in mL/min and probable mechanism of renal elimination?
+>
+> 3. An antibiotic is to be administered as 12 mg/kg IV bolus doses every 8 hours to a 75-kg patient. The antibiotic has a total body clearance of approximately 1.86 L/hr and an apparent volume of distribution that is 15% of body weight.
+>    a. What is the expected maximum steady-state concentration of this antibiotic in this patient?
+>    b. What dose would yield an average steady-state concentration of approximately 80 mcg/mL?
+>    c. If the AUC following a 500 mg oral dose of the antibiotic was 202 (mg/L)hr, what is the oral bioavailability of this antibiotic?
+>    d. What oral dose would provide the same extent of absorption as the 12 mg/kg IV dose?
+>    e. What Cmax would you expect following the administration of the first oral dose in the amount you determined in part d if the absorption half-life is 75 minutes?
+>    f. What dosing interval would be appropriate to achieve an average steady-state concentration of 80 mcg/mL using the oral dose determined in part d?
+>    g. What is tmax at steady state if the dose determined in part d were administered per the dosing interval determined in part f?
+>    h. What is Cmax if the dose determined in part d were administered per the dosing interval determined in part f?
+>
+> 4. Four hundred milligrams of an antibiotic was infused intravenously over a period of 2 hours. Eight hours after the start of the first infusion, a second 400-mg dose was infused again over a period of 2 hours. The half-life of the antibiotic is approximately 3.75 hours and the apparent volume of distribution is approximately 22 L. What is the plasma drug concentration 4 hours after the cessation of the second infusion?
+>
+> 5. What is creatinine clearance used to estimate?
+>    a. apparent volume of distribution  b. metabolic function  c. renal function  d. tubular reabsorption
+>
+> 6. Which of the following would you expect with a 2-fold increase in oral dose? (Select all that apply)
+>    a. Decreased AUC  b. Increased AUC  c. Decreased Cmax  d. Increased Cmax  e. Decreased tmax  f. Increased tmax
+>
+> 7. A new antibiotic is excreted by the kidney and has a renal clearance that is approximately 300 mL/min. What is the probable mechanism of renal excretion of this drug?
+>    a. Filtration only  b. Filtration with active secretion  c. Filtration with tubular reabsorption
+>
+> 8. Which term describes the rate and extent to which the active ingredient or active moiety is absorbed from a drug product and becomes available at the site of action?
+>    a. bioavailability  b. bioequivalence  c. pharmacodynamics  d. product performance
+>
+> 9. Which of the following would be expected following a decrease in the dosing interval with no change to the dose?
+>    a. decreased MTC  b. increased fluctuations between peak to trough concentrations  c. increased patient compliance  d. increased steady-state concentrations
+>
+> 10. The principle of superposition assumes that early doses of drug have no effect on the pharmacokinetics of subsequent doses.
+>    a. True  b. False
+>
+> 11. Which term below describes a comparison of the bioavailability of the active drug in the systemic circulation following extravascular administration with the bioavailability of the same drug following intravenous administration?
+>    a. absolute bioavailability  b. bioequivalence  c. drug product performance  d. relative bioavailability
+>
+> 12. Which of the following is true regarding the absorption phase following oral administration?
+>    a. drug at the absorption site has become depleted  b. the rate of drug elimination is faster than the rate of drug absorption  c. the rate of drug absorption is faster than the rate of drug elimination  d. the rate of drug absorption equals the rate of drug elimination
+>
+> 13. When does the minimum concentration of drug in the plasma occur with multiple IV bolus dosings?
+>    a. at the end of the dosing interval  b. in 3 to 5 half-lives  c. when the rate of absorption equals the rate of elimination  d. when the rate of absorption exceeds the rate of elimination
+>
+> 14. If there is an decrease in the total body clearance of an agent due to renal dysfunction, what is the expected change to the elimination half-life of that agent?
+>    a. the elimination half-life will decrease  b. the elimination half-life will increase  c. the elimination half-life will not change
+
+**Worked keys (computed from the stems; every printed line checked).**
+- 1: IBW = 45.5 + 2.3 × 8 = 63.9 kg; CrCl = (95)(63.9) ÷ (72 × 0.78) × 0.85 = 6070.5 ÷ 56.16 × 0.85 = 91.9 mL/min. SCr used as given; her slides state no rounding-up rule.
+- 2: D0 = 750 mg; k = 0.1386 hr⁻¹; VD = 172.5 L; ClT = 23.91 L/hr; fe = 630 ÷ 750 = 0.84; ClR = 20.08 L/hr = 334.7 mL/min, above 120 mL/min → filtration with active secretion. 48 hr = 9.6 half-lives, a complete collection.
+- 3a: D0 = 900 mg, VD = 11.25 L, k = 1.86 ÷ 11.25 = 0.16533 hr⁻¹, C0 = 80 mg/L, e^(−kτ) = 0.2664, Cmax∞ = 80 ÷ 0.7336 = 109.1 mg/L.
+- 3b: D0 = 80 mg/L × 1.86 L/hr × 8 hr = 1190.4 mg (15.9 mg/kg).
+- 3c: AUCIV = 500 ÷ 1.86 = 268.8 (mg/L)hr; F = 202 ÷ 268.8 = 0.75.
+- 3d: 900 ÷ 0.75 = 1200 mg (1197.7 mg with F unrounded), a strength that exists, per her BA-BE practice rounding.
+- 3e: ka = 0.693 ÷ 1.25 = 0.5544 hr⁻¹; tmax = 3.110 hr; Cmax = 113.99 × 0.4197 = 47.8 mg/L.
+- 3f: τ = 900 ÷ (1.86 × 80) = 6.05 hr → every 6 hours, per her practice ("from 8 to 6 hours").
+- 3g: tmax∞ at τ = 6 hr = 2.0 hr (2.02 hr at 6.05).
+- 3h: Cmax∞ = 80 × 1.5896 × 0.7170 = 91.2 mg/L (90.6 at 6.05 hr).
+- 4: k = 0.1848 hr⁻¹, ClT = 4.066 L/hr, R = 200 mg/hr, Cend = 15.20 mg/L; at 14 hr 1.655 + 7.258 = 8.9 mg/L. Quiz 4, question 4, with t½ 3.75 hr and VD 22 L.
+- 5 renal function; 6 increased AUC and increased Cmax; 7 filtration with active secretion; 8 bioavailability; 9 increased steady-state concentrations; 10 True; 11 absolute bioavailability; 12 the rate of drug absorption is faster than the rate of drug elimination; 13 at the end of the dosing interval; 14 the elimination half-life will increase.
+
+**Formats observed:** the calculations restate her worksheets and quizzes with new numbers (item 4 is Quiz 4, question 4; 3a is Quiz 4, question 2 with clearance given instead of a half-life). Units arrive as she always gives them: lb and feet-inches beside "using the patient's ideal body weight", mg/kg and L/kg, % of body weight, an absorption half-life in minutes, a target in mcg/mL. Item 2 asks a number and a mechanism in one stem. Item 3 chains IV bolus → oral bioavailability → equivalent oral dose → first-dose oral Cmax → interval for a target average → tmax∞ → Cmax∞, each later part "determined in part d/f". Concept stems: "What is X used to estimate?", "Which of the following would you expect with …? (Select all that apply)" with six paired increase/decrease options, "What is the probable mechanism …?" with three options, "Which term describes …?" quoting a slide definition, "Which of the following would be expected following …?" built from her slide "Altering Dosing Interval" (the distractors are the other half of that slide plus MTC), a True/False statement of a slide assumption, "Which of the following is true regarding …?", "When does … occur …?", and "If there is a … what is the expected change to …?" (Quiz 3, question 2, reversed in direction). Item 11 is Quiz 4, question 10, repeated.

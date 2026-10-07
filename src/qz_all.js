@@ -26,5 +26,6 @@ const QUESTIONS = [].concat(
   Q_QUIZZES,   // Her graded Canvas quizzes 2 and 3, word for word    (Exams 1, 2)
   Q_FIGURES,   // Figure reading, every module, drawn by figures.py    (Exams 1, 2)
   Q_WORKSHEETS,// Her daily practice sheets, Modules 4 and 5             (Exam 2)
-  Q_HOMEWORK   // Her homework wording, numbers changed, Modules 1–6     (Exams 1, 2)
+  Q_HOMEWORK,  // Her homework wording, numbers changed, Modules 1–6     (Exams 1, 2)
+  Q_REVIEW     // Her Exam 2 in-class review, word for word            (Exam 2)
 );

@@ -211,7 +211,7 @@ const Q_MODULE5 = [
 {id:'m5-c13', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'conc', concept:'oral-curve-phases', skill:'read',
  source:'both',
- stem:'Which of the following best describes the post-absorption phase of the plasma concentration curve after a single oral dose?',
+ stem:'Which of the following is true regarding the post-absorption phase following oral administration?',
  options:[
   {t:'the elimination rate is greater than the absorption rate, with drug still to be absorbed', correct:true,
    why:'After the peak the falling amount left in the gut can no longer keep pace with elimination, so the concentration declines, but absorption has not stopped. Both processes are still running, which is why this phase is named separately from the one that follows.'},
@@ -262,7 +262,7 @@ const Q_MODULE5 = [
 {id:'m5-c16', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'peak', concept:'tmax-dose-independent', skill:'apply',
  source:'both', dupOf:'m5-c15',
- stem:'The oral dose of a drug is increased from 250 mg to 500 mg. What happens to the time to peak?',
+ stem:'If there is a 2-fold increase in the oral dose of a drug, what is the expected change to the time to peak?',
  options:[
   {t:'It does not change', correct:true,
    why:'The dose multiplies the whole curve, so doubling it doubles every concentration, including the peak, while the moment absorption and elimination balance stays put. The time to peak contains only ka and k, and neither depends on dose: the taller curve peaks directly above the old one.'},
@@ -381,7 +381,7 @@ const Q_MODULE5 = [
 {id:'m5-c23', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'changes', concept:'ka-change-effects', skill:'apply',
  source:'both',
- stem:'A formulation change increases the absorption rate constant of a drug while the elimination rate constant is unchanged. What happens to the maximum concentration, the time to peak and the area under the curve?',
+ stem:'Which of the following would you expect with an increase in the absorption rate constant, with no change to the elimination rate constant?',
  options:[
   {t:'Cmax higher, tmax earlier, AUC relatively unchanged', correct:true,
    why:'All three follow from faster input. Drug arrives faster than it can leave, so the peak is higher; the rate in meets the rate out sooner, so it is earlier; and neither the amount absorbed nor clearance has changed, so the AUC stays where it was.'},
@@ -405,7 +405,7 @@ const Q_MODULE5 = [
 {id:'m5-c24', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'changes', concept:'k-change-effects', skill:'apply',
  source:'both',
- stem:'The elimination rate constant of a drug given orally increases while the absorption rate constant is unchanged. What happens to the maximum concentration, the time to peak and the area under the curve?',
+ stem:'Which of the following would you expect with an increase in the elimination rate constant of an oral drug, with no change to the absorption rate constant?',
  options:[
   {t:'Cmax lower, tmax earlier, AUC decreased', correct:true,
    why:'All three follow from faster removal. The level cannot build as high (lower Cmax), the rate out catches up with the rate in sooner (earlier tmax), and the higher clearance leaves less total exposure (lower AUC).'},
@@ -1137,7 +1137,7 @@ const Q_MODULE5 = [
 
 {id:'m5-n20', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:5, lecture:'L06',
  topic:'oral', sub:'extravasc', concept:'ka-from-absorption-halflife', skill:'krate',
- source:'both', dupOf:'m5-n01',
+ source:'both', dupOf:'m5-n01', lowYield:true,
  stem:'A drug has an absorption rate constant of 2.75 hr⁻¹ and an elimination rate constant of 0.22 hr⁻¹. By what factor is its absorption half-life shorter than its elimination half-life?',
  units:'no units',
  answer:12.5,

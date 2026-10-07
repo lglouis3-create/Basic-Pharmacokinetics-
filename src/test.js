@@ -149,7 +149,8 @@ for (const q of QUESTIONS.concat(X.EXTRAS)) {   // extra practice is held to the
       if (correct.length === q.options.length) bad(`${q.id}: select-all with no distractor`);
       if (q.options.length < 4) bad(`${q.id}: select-all with only ${q.options.length} options`);
     } else if (correct.length !== 1) bad(`${q.id}: ${correct.length} correct options (must be exactly 1)`);
-    if (q.options.length < 3) bad(`${q.id}: only ${q.options.length} options`);
+    const trueFalse = q.options.length === 2 && q.options.map(o => o.t).join('|') === 'True|False';   // her True/False format
+    if (q.options.length < 3 && !trueFalse) bad(`${q.id}: only ${q.options.length} options`);
     if (q.options.length > 10) bad(`${q.id}: ${q.options.length} options, more than the option letters can label`);
     for (const o of q.options) {
       if (!o.t) bad(`${q.id}: option with no text`);
@@ -469,7 +470,9 @@ console.log('\n=== 5c. Problem sets ===');
       /* A set is one vignette worked through, so its parts must come from the
          one module, and each must be answered with a number: a set whose parts
          drift across modules is two problems filed as one. */
-      if (q.module !== c.module) bad(`${id} is module ${q.module} but sits in problem set "${c.id}", declared module ${c.module}`);
+      /* Her review sheet is the one exception: she hands it out as one paper
+         across Modules 4–7a, so it is kept whole and marked as spanning them. */
+      if (!c.span && q.module !== c.module) bad(`${id} is module ${q.module} but sits in problem set "${c.id}", declared module ${c.module}`);
       /* A worksheet is reproduced as she handed it out, so its conceptual parts
          (the renal mechanism, whether a tablet is enough) stay in it. A lecture
          example worked in parts is calculation only. */

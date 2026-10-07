@@ -273,7 +273,7 @@ const Q_MODULE6B = [
 
 /* ---- Example 4, in parts ---- */
 
-{id:'m6b-n01', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08',
+{id:'m6b-n01', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L08', lowYield:true,
  topic:'intermit', sub:'why', concept:'infusion-rate-from-dose', skill:'infusion',
  source:'both',
  stem:'A 300-mg dose of an antibiotic is administered as an intravenous (IV) infusion over a period of 2 hours. What is the infusion rate?',
@@ -588,8 +588,8 @@ const Q_MODULE6B = [
    why:'Both carry τ (the dosing interval): tmax∞ (the time to peak at steady state) inside its logarithm, and Cmax∞ (the steady-state peak) through the accumulation factor and through tmax∞ itself. A new interval means a new time to peak and a new peak.'},
   {t:'k and ka',
    why:'This treats the rate constants as adjustable. They belong to the drug and the formulation; a regimen changes only the dose and the interval.'},
-  {t:'ClT and Cavg∞',
-   why:'Picking this treats total clearance (ClT) as something a regimen sets. ClT belongs to the patient and the drug and does not move when the interval changes. Cavg∞ (the average steady-state concentration) does change, since it is {{frac:F D0|ClT τ}} and τ has doubled, but ClT paired with it makes the option wrong.'},
+  {t:'ClT and VD',
+   why:'Picking this treats total clearance (ClT) and the volume of distribution (VD) as things a regimen sets. Both belong to the patient and the drug and do not move when the interval changes; they are inputs to every steady-state equation, not results of the regimen.'},
   {t:'Nothing at steady state',
    why:'This reads steady state as a fixed property of the drug. Steady state is a balance between what is given and what is cleared, and giving the same dose half as often halves the input.'}],
  teach:[
@@ -645,7 +645,7 @@ const Q_MODULE6B = [
  cite:'6a---Multiple-Oral-Doses.pdf, slide "Example 1"; 09.28 lecture',
  quote:'The expectation is that the steady-state concentration is gonna be higher than the first dose because there is drug that is accumulated in the body.'},
 
-{id:'m6b-c12', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
+{id:'m6b-c12', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09', lowYield:true,
  topic:'multoral', sub:'oeq', concept:'n-and-tau-in-oral', skill:'read',
  source:'both',
  stem:'The equation for the plasma concentration after n oral doses has the same prefactor {{frac:F ka D0|VD(ka − k)}} as the single-dose equation. What is new in it?',
@@ -689,7 +689,7 @@ const Q_MODULE6B = [
 {id:'m6b-c14', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
  topic:'multoral', sub:'oparam', concept:'increase-dose-effects', skill:'apply',
  source:'both',
- stem:'The oral dose of a drug is doubled and the dosing interval is kept the same. What happens at steady state?',
+ stem:'Which of the following would be expected at steady state if the oral dose of a drug is doubled with no change to the dosing interval?',
  options:[
   {t:'Higher concentrations and a larger swing between peak and trough', correct:true,
    why:'A larger dose raises every concentration in proportion, so the peak, trough and average all rise, and the peak-to-trough gap, a fixed fraction of the peak, grows with them. Compliance usually does not change, because the patient takes the same number of doses.'},
@@ -698,7 +698,7 @@ const Q_MODULE6B = [
   {t:'The same average concentration, reached sooner',
    why:'This confuses the dose with the half-life. The dose sets how high the plateau is, not how fast it is reached; steady state still takes 3 to 5 half-lives.'},
   {t:'A longer time to peak',
-   why:'This attaches the dose to tmax. Neither the single-dose tmax nor tmax∞ contains the dose, so doubling it leaves the timing alone. Choosing this attaches the dose to tmax.'}],
+   why:'Choosing this attaches the dose to tmax. Neither the single-dose tmax nor tmax∞ contains the dose, so doubling it leaves the timing alone.'}],
  teach:[
   {h:'The idea', list:[
     'Method 1 for altering steady state: change the dose, keep the interval.',
@@ -784,7 +784,7 @@ const Q_MODULE6B = [
  cite:'6a---Multiple-Oral-Doses.pdf, slide "Altering Dosing Interval, third slide"; Chapter 9, Multiple-Dosage Regimens, section Drug Accumulation',
  quote:'Equal doses of drug were given every 6 hours (upper curve) and every 8 hours (lower curve). ka and k remain constant.'},
 
-{id:'m6b-c18', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
+{id:'m6b-c18', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09', lowYield:true,
  topic:'multoral', sub:'oparam', concept:'clinical-rounding', skill:'apply',
  source:'transcript',
  stem:'A calculation gives a dosing interval of 3.72 hours and an oral dose of 17.29 mg. How should the regimen be written for the patient?',

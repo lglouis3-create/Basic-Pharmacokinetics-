@@ -2,6 +2,14 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (her Exam 2 in-class review)
+- Her Exam 2 review sheet is a problem set on Module 6: all 14 items in her words, question 3 as parts a–h.
+- Every review calculation shows labeled steps; parts d and f round to 1200 mg and 6 hours as her keys do.
+- New item forms from the sheet: a True/False statement and a six-option select-all on doubling an oral dose.
+- Concept stems across Modules 4–7a now use her review wording ("Which term describes…", "probable mechanism").
+- Renal-mechanism options now read "Filtration only / with active secretion / with tubular reabsorption".
+- Twelve asides she does not test are kept off the exam simulator; no answer key in the bank was wrong.
+
 ## 2026-10-07 (what n is, and where the n-dose bracket comes from)
 - The n-dose block labels every letter with its Example 2 value: n counts the doses given, t starts at the last dose.
 - Numbered steps build the bracket dose by dose (1, 1 + f, 1 + f + f²) and show the algebra that gives its fraction.

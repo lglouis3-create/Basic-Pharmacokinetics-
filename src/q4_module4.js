@@ -25,7 +25,7 @@ const Q_MODULE4 = [
 {id:'m4-rou-1', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'routes', concept:'elimination-defn', skill:'recall',
  source:'both',
- stem:'What does elimination of a drug refer to?',
+ stem:'Which of the following best describes drug elimination?',
  options:[
   {t:'Irreversible removal of drug by all routes', correct:true,
    why:'Two words carry the definition. Irreversible separates elimination from distribution, which moves drug to and from tissue without removing any. All routes means excretion and biotransformation both count, so one overall rate constant k can describe a drug leaving by several routes at once.'},
@@ -120,7 +120,7 @@ const Q_MODULE4 = [
 {id:'m4-cl-1', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'clcalc', concept:'clearance-definition', skill:'recall',
  source:'both',
- stem:'How is clearance defined?',
+ stem:'Which of the following best describes clearance?',
  options:[
   {t:'The volume of fluid removed of drug per unit time', correct:true,
    why:'Clearance is a volume cleared of drug per unit time, so its units are always a volume over a time, such as L/hr or mL/min. It describes elimination from the body or one organ without naming the processes involved, so it can be quoted even when the routes have not been separated.'},
@@ -964,7 +964,7 @@ const Q_MODULE4 = [
 {id:'m4-rm-5', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'renalmech', concept:'secretion-inference', skill:'apply',
  source:'both',
- stem:'A drug is found to have a renal clearance of 350 mL/min. What does this indicate about how the kidney handles it?',
+ stem:'A drug is excreted by the kidney and has a renal clearance of approximately 350 mL/min. What is the probable mechanism of renal excretion of this drug?',
  options:[
   {t:'It is filtered and also actively secreted', correct:true,
    why:'Glomerular filtration averages about 120 mL/min, so a renal clearance nearly three times that cannot come from filtration alone. Secretion is inferred when the rate of excretion exceeds the rate of filtration. Dr. Mosley uses 350 mL/min as her own example: transporters are moving the drug out faster than 120 mL/min.'},
@@ -1165,7 +1165,7 @@ const Q_MODULE4 = [
 {id:'m4-cr-6', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'crclcalc', concept:'low-crcl-meaning', skill:'apply',
  source:'both',
- stem:'A patient is found to have a creatinine clearance of 30 mL/min. What does this imply about how that patient will handle a drug eliminated largely by the kidney?',
+ stem:'Which of the following would you expect for a drug eliminated largely by the kidney in a patient with a creatinine clearance of 30 mL/min?',
  options:[
   {t:'The drug will be excreted more slowly and may accumulate', correct:true,
    why:'A creatinine clearance far below the 120 to 130 mL/min normal range means filtration is impaired, so a drug eliminated mainly by the kidney leaves more slowly. Clearance falls while the volume of distribution is unchanged, so the half-life lengthens. Whether the dose needs adjusting depends on the drug.'},
@@ -1210,7 +1210,7 @@ const Q_MODULE4 = [
 
 {id:'m4-n-inches', type:'numeric', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'crclcalc', concept:'height-conversion', skill:'crcl',
- source:'both',
+ source:'both', lowYield:true,
  stem:'A patient is 165 cm tall. What is this height in inches?',
  units:'inches',
  answer:64.96,
@@ -1599,7 +1599,7 @@ const Q_MODULE4 = [
 
 {id:'m4-io-2', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'ionization', concept:'henderson-hasselbalch-forms', skill:'read',
- source:'slide',
+ source:'slide', lowYield:true,
  stem:'Which pKa ranges describe weak acids and weak bases?',
  options:[
   {t:'Weak acids 3 to 8, weak bases 7.5 to 10.5', correct:true,

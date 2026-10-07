@@ -135,7 +135,7 @@ const Q_MODULE6 = [
 {id:'m6-c02', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
  topic:'multi', sub:'accum', concept:'plateau-dose-independent', skill:'apply',
  source:'both',
- stem:'The dose of a drug given by repeated IV bolus injection is doubled while the dosing interval is unchanged. What happens to the time needed to reach steady state?',
+ stem:'If the dose of a drug given by repeated IV bolus injection is doubled with no change to the dosing interval, what is the expected change to the time needed to reach steady state?',
  options:[
   {t:'It does not change', correct:true,
    why:'The time to steady state is set by the elimination half-life alone. Doubling the dose doubles the amount present and so doubles the first-order elimination rate, and the level approaches its new, doubled plateau in the same 3 to 5 half-lives.'},
@@ -175,7 +175,7 @@ const Q_MODULE6 = [
 {id:'m6-c04', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
  topic:'multi', sub:'accum', concept:'steady-state-defn', skill:'recall',
  source:'both',
- stem:'During repeated IV bolus dosing at a fixed dose and interval, what defines the plateau?',
+ stem:'Which of the following is true regarding the plateau during repeated IV bolus dosing at a fixed dose and interval?',
  options:[
   {t:'Every dose reaches the same peak and trough', correct:true,
    why:'At the plateau the maximum after each dose is the same, Cmax∞, and the minimum before each dose is the same, Cmin∞. The concentration still rises and falls within every interval; what stops changing is the pattern from one interval to the next.'},
@@ -257,7 +257,7 @@ const Q_MODULE6 = [
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition"; 09.23 lecture',
  quote:'It is the same kinetics, but now we just remember that we\'ve got drug that\'s accumulated in the body.'},
 
-{id:'m6-c08', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
+{id:'m6-c08', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07', lowYield:true,
  topic:'multi', sub:'superpos', concept:'superposition-failure', skill:'apply',
  source:'slide',
  stem:'For which drug would superposition fail to predict the concentrations after repeated doses?',
@@ -277,7 +277,7 @@ const Q_MODULE6 = [
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Superposition"; Chapter 9, Multiple-Dosage Regimens, section Drug Accumulation',
  quote:'the pharmacokinetics of the drug change after multiple dosing due to various factors, including changing pathophysiology in the patient, saturation of a drug carrier system, enzyme induction, and enzyme inhibition'},
 
-{id:'m6-c09', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
+{id:'m6-c09', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07', lowYield:true,
  topic:'multi', sub:'superpos', concept:'cav-auc-tau', skill:'read',
  source:'both',
  stem:'At steady state, the average plasma concentration is Cav∞ = [AUC] from t1 to t2, divided by τ. What do t1 and t2 mark?',
@@ -368,7 +368,7 @@ const Q_MODULE6 = [
 {id:'m6-c13', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
  topic:'multi', sub:'ssbolus', concept:'when-cmin', skill:'recall',
  source:'both',
- stem:'With repeated IV bolus dosing, when does the minimum concentration of each interval occur?',
+ stem:'When does the minimum concentration of drug in the plasma occur with multiple IV bolus dosing?',
  options:[
   {t:'At the end of the dosing interval', correct:true,
    why:'A bolus puts the whole dose in at once, so the level is highest just after the dose and falls by first-order elimination until the next dose. The lowest point is the moment before the next dose, at the end of the interval, which is why Cmin∞ carries e^(-kτ).'},
@@ -387,7 +387,7 @@ const Q_MODULE6 = [
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',
  quote:'the min occurs at the end of the dosing interval'},
 
-{id:'m6-c14', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
+{id:'m6-c14', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07', lowYield:true,
  topic:'multi', sub:'ssbolus', concept:'cavg-not-midpoint', skill:'tell',
  source:'both',
  stem:'At steady state Cmax∞ is 53.3 mg/L and Cmin∞ is 13.3 mg/L. How does Cavg∞ compare with (53.3 + 13.3)/2 = 33.3 mg/L?',
