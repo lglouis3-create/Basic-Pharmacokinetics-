@@ -2,6 +2,9 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (choose the unprinted lines)
+- Equations gains three chips: the 14 unprinted lines reached from the sheet, all 20 unprinted, and the exam's lines.
+
 ## 2026-10-07 (plan drill asks what is asked; pieces stack like the sheet)
 - The plan drill opens with "What is asked?": pick the symbol from six, then read its meaning and pick the unit.
 - After the line, it asks whether that line is printed on her sheet; the plan lists all six decisions.

@@ -3588,8 +3588,12 @@ function eqPickerHTML(){
   </div></div>`;
   h += suCardHTML();
 
+  const derived = EQUATIONS.filter(e => e.sheet !== 'yes' && !e.must), ex2 = EQUATIONS.filter(e => examOf(e.module) === EXAM.id);
   h += `<div class="filters"><div class="frow"><label>Choose</label>
     <button class="chip" data-pick="must">The ${EQ_MUST.length} she said to memorise</button>
+    <button class="chip" data-pick="derived" title="Not printed on her sheet, but reached from a printed line in a step or two">The ${derived.length} not printed but reached from the sheet</button>
+    <button class="chip" data-pick="unprinted">All ${EQ_MUST.length + derived.length} the sheet does not print</button>
+    <button class="chip" data-pick="exam">${esc(EXAM.name)}: ${ex2.length} lines</button>
     <button class="chip" data-pick="all">All ${EQUATIONS.length}</button>
     <button class="chip" data-pick="none">None</button>
     <button class="chip" data-pick="unlearned">Only the ones not yet learned</button>
@@ -3639,6 +3643,9 @@ function eqPickerWire(el){
   el.querySelectorAll('button[data-pick]').forEach(b => b.onclick = () => {
     const p = b.dataset.pick;
     eqSetChosen(p === 'must' ? EQ_MUST
+              : p === 'derived' ? EQUATIONS.filter(e => e.sheet !== 'yes' && !e.must).map(e => e.id)
+              : p === 'unprinted' ? EQUATIONS.filter(e => e.sheet !== 'yes').map(e => e.id)
+              : p === 'exam' ? EQUATIONS.filter(e => examOf(e.module) === EXAM.id).map(e => e.id)
               : p === 'all'  ? EQUATIONS.map(e => e.id)
               : p === 'none' ? []
               : /^m:/.test(p) ? EQUATIONS.filter(e => e.module === +p.slice(2)).map(e => e.id)

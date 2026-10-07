@@ -491,6 +491,16 @@ with sync_playwright() as p:
     ok('most jumps across the bank land on a line, not just a heading (%d of %d)' % (cover[0], cover[1]), cover[0] >= 0.65 * cover[1])
     pg.evaluate("show('topics')"); pg.wait_for_timeout(100)
 
+    print('\n=== Choosing the unprinted lines ===')
+    pg.evaluate("Q = null; EQ = null; SU = null; show('eq')"); pg.wait_for_timeout(150)
+    pg.click('#v-eq [data-pick="derived"]'); pg.wait_for_timeout(150)
+    ok('the derived chip selects every unprinted line that is not one she said to know (%d)' % pg.evaluate("eqChosen().length"), pg.evaluate("eqChosen().every(id => EQ_BY_ID[id].sheet !== 'yes' && !EQ_BY_ID[id].must) && eqChosen().length === EQUATIONS.filter(e => e.sheet !== 'yes' && !e.must).length"))
+    pg.click('#v-eq [data-pick="unprinted"]'); pg.wait_for_timeout(150)
+    ok('the unprinted chip adds the six she said to know', pg.evaluate("eqChosen().length === EQUATIONS.filter(e => e.sheet !== 'yes').length"))
+    pg.click('#v-eq [data-pick="exam"]'); pg.wait_for_timeout(150)
+    ok('the exam chip selects the active exam\'s modules only', pg.evaluate("eqChosen().length > 0 && eqChosen().every(id => examOf(EQ_BY_ID[id].module) === EXAM.id)"))
+    pg.evaluate("eqSetChosen(EQ_MUST); show('topics')"); pg.wait_for_timeout(100)
+
     print('\n=== Weak spots: repairs per kind of miss, Reference anchors ===')
     pg.evaluate("Q = null; EQ = null; SU = null")
     land = pg.evaluate("""(() => { const q = QUESTIONS.find(q => q.module === 2 && qType(q) === 'numeric');
