@@ -357,9 +357,9 @@ console.log('\n=== 4b. Numeric miss kinds ===');
     else console.log('  ok    a missed calculation records which kind of miss it was');
     /* what the wrong number says: a synthetic question with two givens whose product is the key */
     const dq = {id:'diag-probe', stem:'A drug has an average steady-state concentration of 42.37 mg/L and an apparent VD of 17.03 L. Calculate the amount of drug in the body.', answer:721.6, tol:2, units:'mg',
-                steps:[{k:'setup', t:'D = Cavg × VD'}, {k:'algebra', t:'k = 0.1155 hr⁻¹ (an intermediate for the probe)'}]};
+                steps:[{k:'setup', t:'D = Cavg × VD'}, {k:'algebra', t:'an amount of 350 mg on the way (an intermediate for the probe)'}]};
     const dx = (e) => (X.missDiagnosis(dq, e)[0] || {}).kind || 'none';
-    const want = [['2.49', 'algebra'], ['721600', 'unit'], ['0.7216', 'unit'], ['42.37', 'setup'], ['0.1155', 'setup'], ['0.001386', 'algebra'], ['500', 'setup'], ['43300', 'unit'], ['700', 'round'], ['721.6', 'none'], ['nonsense', 'none']];
+    const want = [['2.49', 'algebra'], ['721600', 'unit'], ['0.7216', 'unit'], ['42.37', 'setup'], ['350', 'setup'], ['0.001386', 'algebra'], ['500', 'setup'], ['43300', 'unit'], ['700', 'round'], ['721.6', 'none'], ['nonsense', 'none']];
     const off = want.filter(([e, k]) => dx(e) !== k).map(([e, k]) => `${e}→${dx(e)} (expected ${k})`);
     if (off.length) bad('the wrong-number diagnosis misreads: ' + off.join('; '));
     else console.log('  ok    a wrong number is read for the slip behind it (givens swapped, unit factor, reciprocal, ln 2, stopped early, near miss)');
@@ -819,6 +819,37 @@ console.log('\n=== 10. Bank fields are plain text ===');
   if (banned.length) bad('setup.why uses banned phrasing: ' + banned.slice(0, 6).join(', '));
   if (html.length) bad('setup.why carries an HTML tag: ' + html.slice(0, 6).join(', '));
   if (offModule.length) bad('setup line from a later module than the question: ' + offModule.slice(0, 6).join(', ')); else console.log('  ok    no set-up line comes from a later module than its question');
+  /* the givens table and the sanity check: present on every numeric question, every value a number the stem states */
+  const numsIn = txt => [...String(txt || '').replace(/,(?=\d{3}\b)/g, '').matchAll(/(^|[^A-Za-z\d.])(\d+(?:\.\d+)?)/g)].map(m => m[2]);
+  const SMALL = new Set(['0.5', '0.25', '0.125', '0.693', '2.303', '1.44', '50', '75', '87.5', '90', '94', '95', '97', '99', '100', '1000', '60', '24']);
+  const noGivens = [], noCheck = [], badGivens = [], badCheck = [];
+  for (const q of nums) {
+    const stemNums = new Set(numsIn(q.stem));
+    if (!Array.isArray(q.givens) || !q.givens.length) noGivens.push(q.id);
+    else {
+      if (q.givens.length > 10) badGivens.push(q.id + ': more than 10 givens');
+      for (const g of q.givens) {
+        if (!Array.isArray(g) || g.length !== 3 || g.some(x => typeof x !== 'string' || !x.trim())) { badGivens.push(q.id + ': a given is not [symbol, value, role]'); continue; }
+        for (const n of numsIn(g[1])) if (!stemNums.has(n)) badGivens.push(`${q.id}: value "${g[1]}" has ${n}, which the stem does not state`);
+        if (g[2].split(/\s+/).length > 16) badGivens.push(q.id + ': a role runs past 16 words');
+        if (BAN.test(g.join(' ')) || /<[a-z]/i.test(g.join(' '))) badGivens.push(q.id + ': a given carries banned phrasing or HTML');
+      }
+    }
+    const ck = q.check;
+    if (!ck || typeof ck.t !== 'string' || !ck.t.trim()) noCheck.push(q.id);
+    else {
+      const allowed = new Set([...stemNums, ...numsIn((q.steps || []).map(s => s.t).join(' ')), ...numsIn(String(q.answer)), ...numsIn(String(+(+q.answer).toPrecision(3))), ...numsIn(String(+(+q.answer).toPrecision(2))), ...SMALL]);
+      for (const n of numsIn(ck.t)) if (!allowed.has(n) && !(Number.isInteger(+n) && +n <= 24)) badCheck.push(`${q.id}: check says ${n}, which is in neither the stem nor the working`);
+      if (ck.t.split(/\s+/).length > 50) badCheck.push(q.id + ': check runs past 50 words');
+      if (BAN.test(ck.t) || /<[a-z]/i.test(ck.t)) badCheck.push(q.id + ': check carries banned phrasing or HTML');
+      if (ck.lo !== undefined && !(isFinite(ck.lo) && ck.lo <= q.answer)) badCheck.push(q.id + ': lo is not a number at or below the answer');
+      if (ck.hi !== undefined && !(isFinite(ck.hi) && ck.hi >= q.answer)) badCheck.push(q.id + ': hi is not a number at or above the answer');
+    }
+  }
+  if (noGivens.length) bad(`numeric questions without a givens table: ${noGivens.slice(0, 8).join(', ')}${noGivens.length > 8 ? ' …' : ''} (${noGivens.length})`); else console.log(`  ok    every numeric question lists what the stem gives (${nums.length})`);
+  if (noCheck.length) bad(`numeric questions without a sanity check: ${noCheck.slice(0, 8).join(', ')}${noCheck.length > 8 ? ' …' : ''} (${noCheck.length})`); else console.log('  ok    every numeric question carries a sanity check');
+  if (badGivens.length) bad('givens: ' + badGivens.slice(0, 8).join(' | ')); else if (!noGivens.length) console.log('  ok    every given quotes a value the stem states');
+  if (badCheck.length) bad('check: ' + badCheck.slice(0, 8).join(' | ')); else if (!noCheck.length) console.log('  ok    every sanity check uses only numbers from the stem, the working or the answer');
   const noDerive = X.EQUATIONS.filter(e => e.sheet !== 'yes' && !e.derive).map(e => e.id);
   if (noDerive.length) bad('equations the sheet does not print without a derivation: ' + noDerive.join(', ')); else console.log(`  ok    every equation the sheet does not print says how to reach it (${X.EQUATIONS.filter(e => e.derive).length})`);
   const none = nums.filter(q => q.setup && q.setup.eq === 'none').length;

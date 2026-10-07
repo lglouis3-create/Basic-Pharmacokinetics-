@@ -296,6 +296,8 @@ const Q_MODULE4 = [
   {k:'round', t:'Rate of elimination = 75 mcg/min',
    why:'Both inputs are exact as given, so the product is exact and no rounding is involved: 75 micrograms per minute.'}],
  setup:{eq:'rate-elim', pre:[], why:'"total body clearance" and "elimination rate" place this in the clearance block of Module 4. Cl and Cp are given and the rate of elimination is asked, so rate of elimination = Cl × Cp is used directly. No hinge; mL/min against mcg/mL multiply as given.'},
+ givens:[['ClT', '15 mL/min', 'one factor of Cl × Cp; the mL cancel against mcg/mL'], ['Cp', '5 mcg/mL', 'the other factor']],
+ check:{t:'15 mL of plasma cleared each minute, each carrying 5 mcg, is 15 × 5 = 75 mcg/min; the millilitres cancel.', lo:0},
  teach:[
  {h:'The idea', list:[
     'The rate of elimination is not a fixed property of a drug; it depends on how much drug is present.',
@@ -335,6 +337,8 @@ const Q_MODULE4 = [
   {k:'round', t:'Rate of elimination = 4.5 mg/hr',
    why:'The answer needs one decimal place and no leading zero. As a check, her answer of 75 mcg/min multiplied by 60 minutes is 4500 mcg/hr, which is the same 4.5 mg/hr.'}],
  setup:{eq:'rate-elim', pre:[], why:'"total body clearance" and "elimination rate" name the clearance block. Cl and Cp are given and the rate of elimination is asked "in milligrams per hour", so rate of elimination = Cl × Cp. No equation hinge; Cl is converted to L/hr and Cp to mg/L before the product.'},
+ givens:[['ClT', '15 mL/min', 'becomes 60 × 15 = 900 mL/hr = 0.9 L/hr'], ['Cp', '5 mcg/mL', 'becomes 5 mg/L, the other factor']],
+ check:{t:'75 mcg/min times 60 minutes is 4.5 mg/hr after dividing by 1000 mcg per mg; the number in mg/hr must be far smaller than the number in mcg/min.', lo:0},
  teach:[
  {h:'The idea', list:[
     'A clearance and a concentration can be multiplied only once they share a volume unit.',
@@ -376,6 +380,8 @@ const Q_MODULE4 = [
   {k:'round', t:'fe = 0.6, dimensionless',
    why:'Dr. Mosley asks the class directly what the units of fe are and confirms there are none, because an amount has been divided by an amount. Reporting 0.6 rather than .6 also satisfies her rule that a number smaller than one must carry a leading zero.'}],
  setup:{eq:'fe', pre:[], why:'"rapid IV injection" and "excreted unchanged in the urine" name the renal clearance block. D0 and the recovered amount Du∞ are given and fe is asked, so fe = {{frac:Du∞|F·D0}} with no bioavailability factor because the dose is IV. VD and the half-life are not used.'},
+ givens:[['D0', 'Five hundred mg', 'the denominator of {{frac:Du∞|D0}}, 500 mg'], ['VD', '15 L', 'not needed: fe is a ratio of two amounts'], ['t½', '8 hours', 'not needed for fe; it confirms 48 hours is six half-lives'], ['collection', '48 hours', 'not needed: it confirms the collection is complete'], ['Du∞', '300 mg', 'the numerator']],
+ check:{t:'300 of 500 mg is three fifths, 0.6; a fraction lies between 0 and 1, and 48 hours is six half-lives of 8 hours, so the collection is complete.', lo:0, hi:1},
  teach:[
  {h:'The idea', list:[
     'fe (fraction excreted unchanged) is the share of the dose that left the body as the unchanged parent drug.',
@@ -413,6 +419,8 @@ const Q_MODULE4 = [
   {k:'round', t:'Du∞ = 300 mg',
    why:'The figure matches the 300 mg her own example states was recovered, which is the check that the rearrangement was made correctly. The remaining 200 mg of the dose left the body by routes other than unchanged urinary excretion.'}],
  setup:{eq:'fe', pre:[], why:'"rapid IV injection" and "fraction excreted unchanged" name the renal clearance block. fe and D0 are given and the urinary amount Du∞ is asked, so fe = {{frac:Du∞|F·D0}} is rearranged to Du∞ = fe·D0, with no bioavailability factor because the dose is IV.'},
+ givens:[['D0', '500 mg', 'multiplied by fe'], ['fe', '0.6', 'the fraction of the dose that reaches the urine unchanged']],
+ check:{t:'0.6 of 500 mg is 300 mg; the recovered amount must be less than the 500 mg dose.', lo:0, hi:500},
  teach:[
  {h:'The idea', list:[
     'fe (fraction excreted unchanged) converts between the dose and the amount of unchanged parent drug that appears in urine, in either direction.',
@@ -448,6 +456,8 @@ const Q_MODULE4 = [
   {k:'round', t:'k = 0.0866 hr⁻¹',
    why:'Report 0.0866, to four decimal places, the precision she asks for on rate constants so that everyone carries the same value forward. The leading zero is required.'}],
  setup:{eq:'thalf-first', pre:[], why:'"rapid IV injection" and "elimination half-life" name a one-compartment first-order item. t½ is given and k is asked, so t½ = {{frac:0.693|k}} is rearranged to k = {{frac:0.693|t½}}. The VD, the urine collection and the recovered amount are not used.'},
+ givens:[['D0', 'Five hundred mg', 'not needed: k comes from the half-life alone'], ['VD', '15 L', 'not needed'], ['t½', '8 hours', 'the denominator of {{frac:0.693|t½}}'], ['collection', '48 hours', 'not needed'], ['Du∞', '300 mg', 'not needed']],
+ check:{t:'k is 0.693 over 8 hr, a little under a tenth per hour, 0.0866 hr⁻¹; k × 8 must return 0.693.', lo:0},
  teach:[
  {h:'The idea', list:[
     'Every clearance calculation in this example starts from k, the overall elimination rate constant.',
@@ -485,6 +495,8 @@ const Q_MODULE4 = [
   {k:'round', t:'ke = 0.052 hr⁻¹',
    why:'Her worked value is 0.052 per hour, rounded from 0.051975. The remaining 0.03465 per hour of the overall constant belongs to the routes other than unchanged excretion.'}],
  setup:{eq:'fe-k', pre:['fe', 'thalf-first'], why:'"rapid IV injection" and "unchanged drug was recovered" name the renal clearance block. D0, Du∞ and t½ are given and ke is asked, so ke = fe·k. fe first from fe = {{frac:Du∞|D0}}, and k first from the half-life, because the line wants fe and k, not Du∞ and t½.'},
+ givens:[['D0', 'Five hundred mg', 'the denominator of fe = {{frac:300|500}} = 0.6'], ['VD', '15 L', 'not needed: ke = fe × k uses no volume'], ['t½', '8 hours', 'gives k = {{frac:0.693|8}} = 0.086625 hr⁻¹'], ['collection', '48 hours', 'not needed: it confirms the collection is complete'], ['Du∞', '300 mg', 'the numerator of fe']],
+ check:{t:'ke is the renal share of k: 0.6 × 0.086625 = 0.052 hr⁻¹, so it must be smaller than k, 0.086625 hr⁻¹, and larger than half of it.', lo:0.0433, hi:0.0866},
  teach:[
  {h:'The idea', list:[
     'The overall elimination rate constant k is the sum of route-specific rate constants.',
@@ -523,6 +535,8 @@ const Q_MODULE4 = [
   {k:'round', t:'ClT = 1.3 L/hr',
    why:'Her worked value is 1.3 litres per hour, and she carries that rounded figure into the renal and hepatic parts that follow. Keeping her rounding is what reproduces her 0.78 and 0.52 exactly.'}],
  setup:{eq:'cl-k-vd', pre:['thalf-first'], why:'"rapid IV injection" with a VD and an "elimination half-life" names the clearance block. VD and t½ are given and ClT is asked, so ClT = k·VD. k first, from the half-life, because the line wants k, not t½; the urine figures are not used.'},
+ givens:[['D0', 'Five hundred mg', 'not needed: ClT = k × VD'], ['VD', '15 L', 'one factor of k × VD'], ['t½', '8 hours', 'gives k = {{frac:0.693|8}} = 0.086625 hr⁻¹, the other factor'], ['collection', '48 hours', 'not needed'], ['Du∞', '300 mg', 'not needed']],
+ check:{t:'k is 0.693 over 8, 0.086625 hr⁻¹, so a little under a tenth of the 15 L is cleared each hour: a little under one and a half L/hr, and 1.3 L/hr fits.', lo:0, hi:1.5},
  teach:[
  {h:'The idea', list:[
     'Total body clearance (ClT) can be built from either of two pairs: k and VD (apparent volume of distribution), as here, or the dose and the AUC (area under the curve).',
@@ -560,6 +574,8 @@ const Q_MODULE4 = [
   {k:'round', t:'ClR = 0.78 L/hr',
    why:'This is her printed value, obtained from her rounded total clearance of 1.3 L/hr. Carrying the unrounded 1.299375 L/hr instead gives 0.7796 L/hr, which rounds to the same 0.78.'}],
  setup:{eq:'clr', pre:['fe', 'thalf-first', 'cl-k-vd'], why:'"unchanged drug was recovered" after a "rapid IV injection" names the renal clearance block. D0, Du∞, VD and t½ are given and ClR is asked, so ClR = fe·ClT. fe first from {{frac:Du∞|D0}}, and ClT first from k·VD with k from the half-life, because the line wants fe and ClT.'},
+ givens:[['D0', 'Five hundred mg', 'the denominator of fe = {{frac:300|500}} = 0.6'], ['VD', '15 L', 'with k gives ClT = 0.086625 × 15 = 1.3 L/hr'], ['t½', '8 hours', 'gives k = {{frac:0.693|8}} = 0.086625 hr⁻¹'], ['collection', '48 hours', 'not needed: it confirms the collection is complete'], ['Du∞', '300 mg', 'the numerator of fe']],
+ check:{t:'ClT is 1.3 L/hr and 0.6 of it is renal: 0.78 L/hr. ClR must be less than ClT and, with fe above 0.5, more than half of it.', lo:0.65, hi:1.3},
  teach:[
  {h:'The idea', list:[
     'Renal clearance (ClR) is total clearance (ClT) scaled by fe, the fraction of the dose that leaves unchanged in urine.',
@@ -597,6 +613,8 @@ const Q_MODULE4 = [
   {k:'round', t:'ClH = 0.52 L/hr',
    why:'Her worked value is 0.52 litres per hour, set up as 1.3 minus 0.78. Using unrounded values throughout gives 0.51975 L/hr, which rounds to the same figure.'}],
  setup:{eq:'clt-sum', pre:['thalf-first', 'cl-k-vd', 'fe', 'clr'], why:'"rapid IV injection" and "unchanged drug was recovered" name the renal clearance block. D0, Du∞, VD and t½ are given and ClH is asked, so ClT = ClR + ClH is rearranged to ClH = ClT − ClR. ClT first from k·VD with k from the half-life, and ClR first from fe·ClT with fe from {{frac:Du∞|D0}}.'},
+ givens:[['D0', 'Five hundred mg', 'the denominator of fe = {{frac:300|500}} = 0.6'], ['VD', '15 L', 'with k gives ClT = 0.086625 × 15 = 1.3 L/hr'], ['t½', '8 hours', 'gives k = {{frac:0.693|8}} = 0.086625 hr⁻¹'], ['collection', '48 hours', 'not needed: it confirms the collection is complete'], ['Du∞', '300 mg', 'the numerator of fe, which gives ClR = 0.6 × 1.3 = 0.78 L/hr']],
+ check:{t:'ClT is 1.3 L/hr and ClR is 0.78 L/hr, so the rest, 0.52 L/hr, is hepatic; it is less than the renal part because fe is above 0.5, and less than ClT.', lo:0, hi:1.3},
  teach:[
  {h:'The idea', list:[
     'Hepatic clearance (ClH) is found by difference because it is the one part of the total that cannot be measured.',
@@ -634,6 +652,8 @@ const Q_MODULE4 = [
   {k:'round', t:'ClH = 0.52 L/hr',
    why:'Two decimal places matches the precision of the clearance it came from. Agreement between the two routes is the built-in check that the fraction was applied to the correct organ.'}],
  setup:{eq:'clh', pre:[], why:'"total body clearance" and "excreted unchanged in the urine" name the renal clearance block. ClT and fe are given and ClH is asked "using the fraction excreted unchanged rather than a subtraction", so ClH = (1 − fe)·ClT in one line. No hinge.'},
+ givens:[['ClT', '1.3 L/hr', 'multiplied by (1 − fe)'], ['fe', '0.6', 'so 1 − fe = 0.4 is the hepatic share']],
+ check:{t:'1 − fe is 0.4, so hepatic clearance is 0.4 × 1.3 = 0.52 L/hr, under half of ClT because more than half the dose leaves by the kidney.', lo:0, hi:0.65},
  teach:[
  {h:'The idea', list:[
     'The two hepatic clearance (ClH) formulas state the same additivity in two ways.',
@@ -676,6 +696,8 @@ const Q_MODULE4 = [
   {k:'round', t:'Rate = 43.3 mg/hr',
    why:'One decimal place follows the precision of the 1.3 L/hr clearance the rate was built from. This is the fastest the drug is ever eliminated, because the concentration is at its highest immediately after the injection and falls from there.'}],
  setup:{eq:'rate-elim', pre:['cp-db-vd', 'thalf-first', 'cl-k-vd'], why:'"rapid IV injection" with a VD and an "elimination half-life" names the clearance block. D0, VD and t½ are given and the "rate of elimination immediately after the dose" is asked, so rate of elimination = ClT·Cp. Cp first from {{frac:D0|VD}} at time zero, and ClT first from k·VD with k from the half-life.'},
+ givens:[['D0', 'Five hundred mg', 'over VD gives Cp0 = {{frac:500|15}} = 33.33 mg/L'], ['VD', '15 L', 'the denominator of Cp0, and a factor of ClT = k × VD = 1.3 L/hr'], ['t½', '8 hours', 'gives k = {{frac:0.693|8}} = 0.086625 hr⁻¹']],
+ check:{t:'Cp0 is 500 over 15, 33.33 mg/L, and ClT is 1.3 L/hr, so about 1.3 × 33.33 = 43.3 mg/hr. Equivalently k × D0: a little under a tenth of 500 mg per hour, under 50 mg/hr.', lo:0, hi:50},
  teach:[
  {h:'The idea', list:[
     'A rate of elimination is always tied to a concentration, so that concentration has to be found first.',
@@ -713,6 +735,8 @@ const Q_MODULE4 = [
   {k:'round', t:'t½ = 8.0 hours',
    why:'The answer returns the 8-hour half-life the same drug was given in the worked example, which is the check that the three parameters are mutually consistent. Half-life is reported in units of time only, never reciprocal time.'}],
  setup:{eq:'thalf-cl-vd', pre:[], why:'"total body clearance" and "volume of distribution" with "the relationship between clearance, half-life and volume of distribution" name the clearance block. ClT and VD are given and t½ is asked, so t½ = 0.693·{{frac:VD|ClT}} is used directly. No hinge.'},
+ givens:[['ClT', '1.3 L/hr', 'the denominator of {{frac:VD|ClT}}'], ['VD', '15 L', 'the numerator, multiplied by 0.693']],
+ check:{t:'VD over ClT, 15 over 1.3, is between 11 and 12 hr, and 0.693 of that is about 8 hr; the half-life is always shorter than VD over ClT.', lo:0, hi:11.54},
  teach:[
  {h:'The idea', list:[
     'Clearance, half-life and VD (apparent volume of distribution) describe one first-order system, so any two fix the third.',
@@ -1121,6 +1145,8 @@ const Q_MODULE4 = [
   {k:'round', t:'64.96 inches, called 65 inches',
    why:'Her worked value is 64.96 inches, which she rounds to 65 inches for the ideal body weight step. She warns separately that 64.5 inches means sixty-four and a half inches, not sixty-four feet and five inches, because students handle that figure inconsistently.'}],
  setup:{eq:'none', pre:[], why:'"165 cm tall" with the height asked "in inches" is the unit step that comes before the ideal body weight line of the Cockcroft-Gault block. No catalog equation fits; the working uses the identity 1 inch = 2.54 cm and divides the height in cm by 2.54.'},
+ givens:[['height', '165 cm', 'divided by 2.54 cm per inch']],
+ check:{t:'An inch is 2.54 cm, so 165 cm is 165 over 2.54, a little under 65 inches, about 5 ft 5 in; 64.96 fits.', lo:0},
  teach:[
  {h:'The idea', list:[
     'Ideal body weight (IBW) uses height as inches above five feet, so a metric height is converted first.',
@@ -1158,6 +1184,8 @@ const Q_MODULE4 = [
   {k:'round', t:'IBW = 57 kg',
    why:'Her worked value is 57 kg for this patient. The calculation uses ideal body weight, as the question specifies.'}],
  setup:{eq:'ibw-female', pre:[], why:'"female patient" and "ideal body weight" name the Cockcroft-Gault block. Height is given and IBW is asked, so IBWfemale = 45.5 + 2.3·(inches over 5 ft). The height is converted from cm to inches first, which is a unit step, not an equation.'},
+ givens:[['height', '165 cm', 'becomes 64.96, taken as 65 inches, so 5 inches over 5 ft'], ['sex', 'female', 'selects the 45.5 kg base']],
+ check:{t:'165 cm is 65 inches, 5 inches over 5 ft; 2.3 kg per inch adds 11.5 kg to 45.5, so 57 kg, above the 45.5 kg female base.', lo:45.5},
  teach:[
  {h:'The idea', list:[
     'Ideal body weight (IBW) is calculated from sex and height only, never from the patient’s actual weight.',
@@ -1196,6 +1224,8 @@ const Q_MODULE4 = [
   {k:'round', t:'IBW = 61.5 kg',
    why:'The result is in kilograms and carries one decimal place, which is as far as the 2.3 kg per inch supports. A female patient of the same height would come out at 57 kg, a difference of exactly the 4.5 kg between the two baselines.'}],
  setup:{eq:'ibw-male', pre:[], why:'"male patient" and "ideal body weight" name the Cockcroft-Gault block. Height in inches is given and IBW is asked, so IBWmale = 50 + 2.3·(inches over 5 ft). No hinge; the inches over 5 ft are the given height minus 60.'},
+ givens:[['height', '65 inches', 'minus 60 gives 5 inches over 5 ft, multiplied by 2.3'], ['sex', 'male', 'selects the 50 kg base']],
+ check:{t:'5 inches over 5 ft at 2.3 kg per inch adds 11.5 kg to the 50 kg base, 61.5 kg; a male IBW must exceed 50 kg.', lo:50},
  teach:[
  {h:'The idea', list:[
     'The male and female IBW (ideal body weight) formulas share the same slope, 2.3 kg per inch, and differ only in the starting value.',
@@ -1240,6 +1270,8 @@ const Q_MODULE4 = [
   {k:'round', t:'CrCl = 58.1 mL/min',
    why:'Her worked answer is about 58 millilitres per minute, and she corrects a student who reports 54, so 58.1 mL/min is the figure to carry. Creatinine clearance is always reported in millilitres per minute, not litres per hour, because that is the unit dosing tables are written against.'}],
  setup:{eq:'crcl', pre:['ibw-female'], why:'"creatinine clearance" "using the ideal body weight" of a "female" names the Cockcroft-Gault block. Age, SCr and height are given and CrCl is asked, so CrCl = (140 − age){{frac:IBW|72·SCr}}, times 0.85 for a female. IBW first, from IBWfemale = 45.5 + 2.3·(inches over 5 ft), because the line wants IBW, not the actual weight.'},
+ givens:[['age', '45-year-old', 'in 140 − age = 95'], ['sex', 'female', 'the 0.85 factor, and the 45.5 kg IBW base'], ['weight', '61 kg', 'not needed: the stem asks for the ideal body weight'], ['SCr', '1.1 mg/dL', 'in the denominator 72 × 1.1 = 79.2'], ['height', '165 cm', 'becomes 65 inches, so IBW = 45.5 + 2.3 × 5 = 57 kg']],
+ check:{t:'IBW is 57 kg; (140 − 45) × 57 over (72 × 1.1) is 68.37, and the female factor 0.85 brings it to 58.1 mL/min. The female value must be below the unadjusted 68.37.', lo:0, hi:68.37},
  teach:[
  {h:'The order of steps', list:[
     'Convert the height to inches.',
@@ -1281,6 +1313,8 @@ const Q_MODULE4 = [
   {k:'round', t:'CrCl = 68.4 mL/min',
    why:'Reported in millilitres per minute, as she requires for every creatinine clearance. The same patient treated as female gives 58.1 mL/min, and the ratio between the two is exactly the 0.85 factor.'}],
  setup:{eq:'crcl', pre:[], why:'"creatinine clearance" for a patient who "is male" names the Cockcroft-Gault block. Age, SCr and IBW are given and CrCl is asked, so CrCl = (140 − age){{frac:IBW|72·SCr}}, with no 0.85 factor because the patient is male. No hinge; IBW is supplied.'},
+ givens:[['age', '45-year-old', 'in 140 − age = 95'], ['SCr', '1.1 mg/dL', 'in the denominator 72 × 1.1 = 79.2'], ['IBW', '57 kg', 'multiplied by 95 in the numerator: 5415'], ['sex', 'male', 'no 0.85 factor']],
+ check:{t:'140 − 45 is 95, and 95 × 57 is 5415, over 72 × 1.1 = 79.2, about 68.4 mL/min; no 0.85 factor for a male, so this is above the female value.', lo:0},
  teach:[
  {h:'The idea', list:[
     'In the Cockcroft-Gault equation itself, sex enters only once: the 0.85 factor for a female, applied at the end.',
@@ -1321,6 +1355,8 @@ const Q_MODULE4 = [
   {k:'round', t:'k = 1.8 hr⁻¹',
    why:'One decimal place is what the two-figure inputs support. A rate constant this large corresponds to a half-life well under an hour, which is consistent with a drug whose clearance of 45 L/hr is far larger than its 25 L volume of distribution.'}],
  setup:{eq:'cl-k-vd', pre:[], why:'"actively secreted by the kidney" with a VD and a "clearance" names the clearance block. ClT and VD are given and k is asked "in reciprocal hours", so ClT = k·VD is rearranged to k = {{frac:ClT|VD}}. No equation hinge; the clearance is converted from mL/min to L/hr first.'},
+ givens:[['VD', '25 L', 'the denominator of {{frac:ClT|VD}}'], ['ClT', '750 mL/min', 'becomes 60 × 750 mL/hr = 45 L/hr, the numerator']],
+ check:{t:'750 mL/min is 45 L/hr, so 45 over 25 L is 1.8 per hour: nearly twice the volume is cleared every hour, a very fast drug with a half-life under half an hour.', lo:0},
  teach:[
  {h:'The idea', list:[
     'Clearance, the rate constant k and VD (volume of distribution) are linked by one product, ClT = k × VD, so any one follows from the other two.']},
@@ -1360,6 +1396,8 @@ const Q_MODULE4 = [
   {k:'round', t:'t½ = 23.1 minutes, which is 0.385 hours',
    why:'One decimal place matches the precision of the inputs. Expressed in hours the same figure is 0.385 hr, and the equivalent route through the rate constant gives 0.693 divided by 1.8 per hour, which is the same 0.385 hr.'}],
  setup:{eq:'thalf-cl-vd', pre:[], why:'"actively secreted by the kidney" with a VD and a "clearance" names the clearance block. VD and ClT are given and "the usual t½" is asked, so t½ = 0.693·{{frac:VD|ClT}} is used directly. No equation hinge; the clearance is converted from mL/min to L/min first.'},
+ givens:[['VD', '25 L', 'the numerator of {{frac:VD|ClT}}, multiplied by 0.693'], ['ClT', '750 mL/min', 'becomes 0.75 L/min, the denominator']],
+ check:{t:'VD over ClT is 25 over 0.75, a little over half an hour, and 0.693 of that is about 23 min; 23.1 min fits, shorter than VD over ClT.', lo:0, hi:33.3},
  teach:[
  {h:'The idea', list:[
     'Given clearance and VD (volume of distribution), the half-life follows directly: t½ = 0.693 × VD ÷ clearance.',
@@ -1399,6 +1437,8 @@ const Q_MODULE4 = [
   {k:'round', t:'t½ = 115.5 minutes, which is 1.925 hours',
    why:'One decimal place matches the inputs. The answer is a time, and it is longer than the normal 23.1 minutes, which is the direction impaired elimination must move the half-life in.'}],
  setup:{eq:'thalf-cl-vd', pre:[], why:'"partial renal failure" with a lower "clearance" and the same VD names the clearance block. VD and the new ClT are given and "the new t½" is asked, so t½ = 0.693·{{frac:VD|ClT}}. No equation hinge; the clearance is converted from mL/min to L/min first.'},
+ givens:[['VD', '25 L', 'the numerator of {{frac:VD|ClT}}, unchanged, multiplied by 0.693'], ['ClT', '150 mL/min', 'becomes 0.15 L/min, the denominator']],
+ check:{t:'VD over ClT is 25 L over 0.15 L/min, well over two hours, and 0.693 of that is a little under two hours, 115.5 min; 1.925 hours fits.', lo:0, hi:166.7},
  teach:[
  {h:'The idea', list:[
     'With VD (volume of distribution) unchanged, half-life is inversely proportional to clearance.',

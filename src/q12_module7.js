@@ -458,6 +458,8 @@ const Q_MODULE7 = [
   {k:'round', t:'F = 0.55',
    why:'Her value, 0.55: 55 per cent of the oral dose is available for the body to use, against all of an IV dose. Written as 0.55 or as 55 per cent, both are accepted; the F carries into the next part, the equivalent oral dose.'}],
  setup:{eq:'f-abs', pre:[], why:'"single oral tablet" against "a single IV bolus injection", so "absolute bioavailability". AUCpo, AUCIV, Dpo and DIV are given, with different doses, and Fabs is asked, so Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}}). No hinge: the units cancel in both ratios.'},
+ givens:[['n', '6 volunteers', 'not needed: the AUCs are already averages'], ['Dpo', '250 mg', 'the denominator of the dose ratio'], ['DIV', '100 mg', 'the numerator of the dose ratio'], ['AUCpo', '101.5 (mcg/mL)hr', 'the numerator of the area ratio'], ['AUCIV', '73.8 (mcg/mL)hr', 'the denominator of the area ratio']],
+ check:{t:'A 250 mg tablet gave only 1.3753 times the area of a 100 mg IV dose; dose for dose that is 1.3753 × 0.4 = 0.55. F must lie between 0 and 1.', lo:0, hi:1},
  teach:[
   {h:'The idea', list:[
     'The IV AUC underneath, the IV dose on top.',
@@ -485,6 +487,8 @@ const Q_MODULE7 = [
   {k:'round', t:'Dpo = 182 mg, to be rounded to a strength that exists',
    why:'Her value, 182 mg from 181.818. A tablet of 181.8 mg is not made, so the prescribed dose is rounded to a strength that is: 200 mg if 175 and 200 are the strengths available. The calculated figure is the one keyed here.'}],
  setup:{eq:'dpo-equiv', pre:[], why:'"absolute bioavailability ... 0.55", "oral dose ... equivalent to the 100 mg IV dose": equal AUC by both routes. F and DIV are given and Dpo is asked, so Dpo = {{frac:DIV|F}}, the absolute bioavailability line with the AUC ratio set to one. No hinge.'},
+ givens:[['F', '0.55', 'the denominator'], ['DIV', '100 mg', 'the numerator']],
+ check:{t:'Only 0.55 of an oral dose reaches the blood, so the oral dose has to be larger than the 100 mg IV dose, and less than twice it because F is above 0.5: 181.8 mg.', lo:100, hi:200},
  teach:[
   {h:'The idea', list:[
     'This is what the F is for: converting an IV regimen to an oral one.',
@@ -513,6 +517,8 @@ const Q_MODULE7 = [
   {k:'round', t:'Frel = 1.03',
    why:'Her value, 1.03. A relative F may exceed 1, because the reference is another formulation rather than the IV dose. The two products have similar extents; whether they are bioequivalent is not known, because their peak times are not.'}],
  setup:{eq:'f-rel', pre:[], why:'"relative bioavailability", "oral tablet" "compared to the oral solution", neither IV. AUCA, AUCB, DA and DB are given, with equal doses, and Frel is asked, so Frel = ({{frac:AUCA|AUCB}})({{frac:DB|DA}}) with the solution as B, the reference. No hinge: the dose ratio is one.'},
+ givens:[['n', '6 volunteers', 'not needed: the AUCs are already averages'], ['DA', '250 mg', 'the tablet dose; the dose ratio is 1'], ['volume', '5 mL', 'not needed: the solution volume does not enter'], ['DB', '250 mg', 'the solution dose; the dose ratio is 1'], ['AUCA', '101.5 (mcg/mL)hr', 'the numerator, the tablet'], ['AUCB', '98.76 (mcg/mL)hr', 'the denominator, the solution']],
+ check:{t:'Equal doses, so Frel is just the ratio of the areas; 101.5 is slightly larger than 98.76, so Frel comes out slightly above 1: 1.03. Relative bioavailability can exceed 1.', lo:0},
  teach:[
   {h:'The idea', list:[
     'The stem names the reference, and the reference goes underneath.',
@@ -544,6 +550,8 @@ const Q_MODULE7 = [
   {k:'round', t:'F = 0.81',
    why:'Her value, about 81 per cent. F is dimensionless because every unit cancelled. Written as 0.81 or 81 per cent.'}],
  setup:{eq:'f-abs', pre:['thalf-first','cl-k-vd','div-cl-auc'], why:'"oral administration of a single 500 mg tablet" with "500 mg IV bolus dose" data: "absolute bioavailability". AUCpo, the doses, t½ and VD are given and Fabs is asked, so Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}}). AUCIV first, from DIV = Cl × AUCIV rearranged, with k from the half-life and Cl = kVD, because no IV area is given.'},
+ givens:[['Dpo', '500 mg tablet', 'the denominator of the dose ratio, which is 1'], ['AUCpo', '70 mg h/L', 'the numerator of the area ratio'], ['DIV', '500 mg IV bolus', 'the numerator of the dose ratio, and of AUCIV = {{frac:DIV|Cl}}'], ['t½', '3 hours', 'gives k = {{frac:0.693|3}} = 0.231 hr⁻¹'], ['VD', '25 L', 'in Cl = kVD = 0.231 × 25 = 5.775 L/hr']],
+ check:{t:'Clearance 5.775 L/hr means 500 mg IV gives an area of {{frac:500|5.775}} = 86.58 (mg/L)hr; the oral 70 is below it, so F is below 1 and comfortably above 0.5: 0.81.', lo:0, hi:1},
  teach:[
   {h:'The idea', list:[
     'When the IV AUC is not given, clearance supplies it: AUCIV = DIV over Cl.',
@@ -569,6 +577,8 @@ const Q_MODULE7 = [
   {k:'round', t:'AUCIV = 43.29 (mg/L)hr',
    why:'Her value, 43.29: half of the 86.58 found for 500 mg, as expected. With linear pharmacokinetics a proportional change in the dose gives a proportional change in the AUC and in the concentrations.'}],
  setup:{eq:'div-cl-auc', pre:['thalf-first','cl-k-vd'], why:'"IV bolus dose", "expected AUC" for a new dose, so the IV dose-area line. DIV, t½ and VD are given and AUCIV is asked, so DIV = Cl × AUCIV rearranged to AUCIV = {{frac:DIV|Cl}}. k first, from the half-life, then Cl = kVD, because the line wants clearance, which does not change with the dose.'},
+ givens:[['t½', '3 hours', 'gives k = {{frac:0.693|3}} = 0.231 hr⁻¹'], ['VD', '25 L', 'in Cl = kVD = 5.775 L/hr'], ['reference dose', '500 mg', 'the dose that gave the known area; half of it is asked'], ['reference AUC', '86.58 (mg/L)hr', 'not needed for the line; halving it is the shortcut'], ['DIV', '250 mg', 'the numerator of {{frac:DIV|Cl}}']],
+ check:{t:'Clearance does not change with the dose, so AUC is proportional to dose: half of 500 mg gives half of 86.58, which is 43.29 (mg/L)hr, below 86.58.', lo:0, hi:86.58},
  teach:[
   {h:'The idea', list:[
     'Half the dose, half the AUC: the expected answer before any arithmetic.',
@@ -595,6 +605,8 @@ const Q_MODULE7 = [
   {k:'round', t:'Dpo = 571.43 mg, prescribed as a strength that exists, 575 or 600 mg',
    why:'Her value, 571.43 mg, is the number to get, and it is not a strength of ciprofloxacin: the marketed strengths are 250 and 500 mg. The dose is rounded to something that can be given, 600 mg or 575 mg; the calculated figure is the one keyed here.'}],
  setup:{eq:'dpo-equiv', pre:[], why:'"bioavailability ... 70%", "oral dose to achieve the same extent of absorption as a 400 mg IV bolus dose": equal AUC by both routes. F and DIV are given and Dpo is asked, so Dpo = {{frac:DIV|F}}, the absolute bioavailability line with the AUC ratio set to one. No hinge beyond writing the per cent as a fraction.'},
+ givens:[['F', '70%', 'written 0.70, the denominator'], ['DIV', '400 mg IV bolus dose', 'the numerator']],
+ check:{t:'With F = 0.70 about seven-tenths of an oral dose is absorbed, so the oral dose has to be larger than 400 mg but less than double it: {{frac:400|0.70}} = 571.43 mg.', lo:400, hi:800},
  teach:[
   {h:'The idea', list:[
     'IV to oral: divide the IV dose by F.',
@@ -623,6 +635,8 @@ const Q_MODULE7 = [
   {k:'round', t:'Cl = 2 L/hr',
    why:'Cl = 2 L/hr follows from the two readings taken from the equation: VD (the volume of distribution) = {{frac:500 mg|50 mg/L}} = 10 L and k = 0.2 hr⁻¹, so Cl = 0.2 × 10 = 2 L/hr. hr⁻¹ × L gives L/hr, the volume of plasma cleared of drug each hour.'}],
  setup:{eq:'cl-k-vd', pre:['first-exp','cp-db-vd'], why:'"500 mg IV bolus dose", with "Cp = 50e^(−0.2t)" given, and "clearance" asked. C0 and k are read from the first-order line Cp = C0e^(-kt), DIV is given, and Cl is asked, so Cl = kVD. VD first, from Cp = {{frac:DB|VD}} at time zero rearranged to VD = {{frac:DIV|C0}}, because the line wants VD.'},
+ givens:[['DIV', '500 mg IV bolus dose', 'the numerator of VD = {{frac:DIV|C0}}'], ['C0', '50 (the coefficient in Cp = 50e^(−0.2t))', 'the denominator of VD = {{frac:DIV|C0}}'], ['k', '0.2 (the exponent in Cp = 50e^(−0.2t))', 'multiplies VD: Cl = kVD']],
+ check:{t:'The 500 mg dose read against the 50 mg/L intercept gives VD = 10 L, and a fifth of that volume is cleared each hour: 0.2 × 10 = 2 L/hr, above zero.', lo:0},
  teach:[
   {h:'The idea', list:[
     'An IV equation hands over C0 and k.',
@@ -647,6 +661,8 @@ const Q_MODULE7 = [
   {k:'round', t:'AUCIV = 250 (mg/L)hr',
    why:'AUCIV = 250 (mg/L)hr: 500 mg over 2 L/hr, with mg over L/hr leaving (mg/L)hr. This IV area is the reference for the absolute bioavailability of an oral dose of the same drug, Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}}), where it sits in the denominator because the IV dose puts the whole dose into the circulation.'}],
  setup:{eq:'div-cl-auc', pre:[], why:'"500 mg IV bolus dose", "AUC ... following this 500 mg IV bolus dose": the IV dose-area line. DIV and Cl are given and AUCIV is asked, so DIV = Cl × AUCIV rearranged to AUCIV = {{frac:DIV|Cl}}. No hinge: the clearance is given.'},
+ givens:[['DIV', '500 mg IV bolus dose', 'the numerator'], ['equation', 'Cp = 50e^(−0.2t)', 'not needed: clearance is given, so C0 and k stay unused'], ['Cl', '2 L/hr', 'the denominator']],
+ check:{t:'AUC is also {{frac:C0|k}} = {{frac:50|0.2}} = 250 (mg/L)hr for a one-compartment bolus, so the two routes agree: 500 mg over 2 L/hr is 250.', lo:0},
  teach:[
   {h:'The idea', list:[
     'The dose divided by the clearance just found gives the IV AUC.',
@@ -674,6 +690,8 @@ const Q_MODULE7 = [
   {k:'round', t:'F = 0.75',
    why:'Her value, 75 per cent. Written as 0.75 or as 75 per cent; three quarters of the tablet dose becomes available for the body to use.'}],
  setup:{eq:'f-abs', pre:[], why:'"IV bolus dose" against "500-mg oral tablet dose", so "oral bioavailability" is absolute. AUCIV, AUCpo and the two equal doses are given and Fabs is asked, so Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}}) with the dose ratio one. No hinge: mcg hr/mL and (mg/L)hr are the same unit.'},
+ givens:[['DIV', '500 mg IV bolus dose', 'the numerator of the dose ratio, which is 1'], ['AUCIV', '250 (mg/L)hr', 'the denominator of the area ratio'], ['Dpo', '500-mg oral tablet dose', 'the denominator of the dose ratio, which is 1'], ['AUCpo', '188 mcg hr/mL', 'the numerator; mcg hr/mL is the same unit as (mg/L)hr']],
+ check:{t:'Equal doses, so F is just the area ratio: 188 is three-quarters of 250, so F is about 0.75. F must lie between 0 and 1.', lo:0, hi:1},
  teach:[
   {h:'The idea', list:[
     'Equal doses, so F is simply the oral AUC over the IV AUC.',
@@ -703,6 +721,8 @@ const Q_MODULE7 = [
   {k:'round', t:'F = 0.67',
    why:'Two thirds of the oral dose is available for the body to use, against all of an IV dose. Written as 0.67 or 67 per cent, never .67; the unrounded 0.667 is also accepted.'}],
  setup:{eq:'f-abs', pre:[], why:'"single oral tablet" against "a single IV bolus injection", so "absolute bioavailability". AUCpo, AUCIV, Dpo and DIV are given, with different doses, and Fabs is asked, so Fabs = ({{frac:AUCpo|AUCIV}})({{frac:DIV|Dpo}}). No hinge: the units cancel in both ratios.'},
+ givens:[['n', '6 volunteers', 'not needed: the AUCs are already averages'], ['Dpo', '300 mg', 'the denominator of the dose ratio'], ['DIV', '100 mg', 'the numerator of the dose ratio'], ['AUCpo', '90.6 (mcg/mL)hr', 'the numerator of the area ratio'], ['AUCIV', '45.3 (mcg/mL)hr', 'the denominator of the area ratio']],
+ check:{t:'The tablet gave exactly twice the IV area from three times the dose, so F = {{frac:2|3}} = 0.67. F must lie between 0 and 1.', lo:0, hi:1},
  teach:[
   {h:'The idea', list:[
     'IV AUC underneath, IV dose on top.',
@@ -730,6 +750,8 @@ const Q_MODULE7 = [
   {k:'round', t:'Frel = 0.90',
    why:'Written as 0.90 or 90 per cent. The extents are similar; whether the two products are bioequivalent would also need their peak times.'}],
  setup:{eq:'f-rel', pre:[], why:'"relative bioavailability", "oral tablet" "compared to the oral solution", neither IV. AUCA, AUCB, DA and DB are given, with equal doses, and Frel is asked, so Frel = ({{frac:AUCA|AUCB}})({{frac:DB|DA}}) with the solution as B, the reference. No hinge: the dose ratio is one.'},
+ givens:[['n', '6 volunteers', 'not needed: the AUCs are already averages'], ['DA', '500 mg', 'the tablet dose; the dose ratio is 1'], ['volume', '10 mL', 'not needed: the solution volume does not enter'], ['DB', '500 mg', 'the solution dose; the dose ratio is 1'], ['AUCA', '61.2 (mcg/mL)hr', 'the numerator, the tablet'], ['AUCB', '68.0 (mcg/mL)hr', 'the denominator, the solution']],
+ check:{t:'Equal doses, so Frel is just the ratio of the areas; 61.2 is a little below 68.0, so Frel comes out a little below 1: 0.90.', lo:0},
  teach:[
   {h:'The idea', list:[
     'The reference named in the question goes underneath.',

@@ -375,6 +375,16 @@ table.gap tr:last-child td{border-bottom:0}
 .tabhelp{background:var(--accent-bg);border-radius:var(--r);padding:8px 14px;margin:0 0 12px}
 .tabhelp summary{font-weight:600;cursor:pointer;font-size:14.5px}
 .tabhelp ul{margin:6px 0 2px;padding-left:18px} .tabhelp li{margin:4px 0;font-size:14px;line-height:1.5}
+.tabhelp ol{margin:6px 0 2px;padding-left:20px} .tabhelp ol li{margin:5px 0;font-size:14px;line-height:1.5}
+.sucard .routine{margin:4px 0 10px}
+.sumodels,.sugivs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.sumodel,.sugiv{flex:0 1 auto;padding:7px 10px}
+.sugiv.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.sugiv.missed{border-color:var(--bad);border-style:dashed}
+.sugiv .surole{display:block;font-size:12px;color:var(--text-dim);margin-top:3px}
+.suplan{border-left:3px solid var(--accent);background:var(--accent-bg);border-radius:0 var(--r) var(--r) 0;padding:8px 12px;margin:10px 0}
+.suplan h4{margin:0 0 6px;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.suplan ol{margin:0;padding-left:20px}.suplan li{margin:4px 0;font-size:14px}
 .examfacts{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:6px 14px;margin:0 0 12px}
 .efrow{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--line-soft);font-size:14px;line-height:1.5}
 .efrow:last-child{border-bottom:0}
@@ -506,6 +516,19 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
 .steps h4{margin:0 0 8px;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
 .step{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line-soft)}
 .step:last-child{border-bottom:0}
+.givens{margin:12px 0 0}
+.givens h4,.sanity h4{margin:0 0 6px;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.gtab{border-collapse:collapse;font-size:13.5px;width:100%;max-width:560px}
+.gtab td{padding:4px 8px 4px 0;vertical-align:top;border-bottom:1px solid var(--line-soft)}
+.gtab tr:last-child td{border-bottom:0}
+.gtab .gsym{white-space:nowrap;font-weight:600}
+.gtab .gval{white-space:nowrap}
+.gtab .grole{color:var(--text-dim)}
+.gtab .gskip{color:var(--text-dim);font-style:italic}
+@media (max-width:520px){.gtab,.gtab tbody,.gtab tr,.gtab td{display:block;width:auto}.gtab tr{padding:6px 0;border-bottom:1px solid var(--line-soft)}.gtab td{padding:1px 0;border:0}.gtab .gsym{display:inline-block;min-width:72px;padding-right:8px}.gtab .gval{display:inline-block}.gtab .grole{padding-left:72px}}
+.sanity{margin:12px 0 0;border-left:3px solid var(--ok);background:var(--paper);border-radius:0 6px 6px 0;padding:8px 10px}
+.sanity p{margin:0;font-size:13.5px}
+.givensrow{margin:6px 0 0}
 .step .stepk{flex:0 0 auto;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
   color:var(--text-dim);background:var(--surface);border:1px solid var(--line-soft);
   border-radius:999px;padding:2px 8px;margin-top:2px;min-width:62px;text-align:center}
@@ -1033,12 +1056,20 @@ function missDiagnosis(q, entered){
   const out = [], push = (kind, text) => { if(!out.some(d => d.kind === kind)) out.push({kind, text}); };
   const givens = numbersIn(q.stem).filter(g => !nearTo(g, A));
   const E = String(e), K = fmtN(A);
-  if(givens.some(g => nearTo(e, g, TIGHT))) push('setup', `${E} is a number from the stem carried across as the answer`);
-  (q.steps || []).forEach((st, i) => {
-    if(out.length) return;
-    const vals = numbersIn(st.t).filter(v => !nearTo(v, A) && !givens.some(g => nearTo(g, v)) && v !== 0.693 && v !== 2.303);
-    if(vals.some(v => nearTo(e, v, TIGHT))) push('setup', `${E} appears in the working at step ${i + 1}, so the working stopped there; the question asks for the quantity in the last step`);
-  });
+  /* Each number with the unit written after it, in the stem and in the working.
+     A working value counts only in the answer's own unit, so a stem's "80 kg"
+     and a step's "80 mg/L" are two quantities and the reading names the one
+     the student stopped at. */
+  const plain = txt => String(txt || '').replace(/<[^>]+>/g, ' ').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, ' $1 / $2 ');
+  const toks = txt => [...plain(txt).matchAll(/(^|[^A-Za-z\d.])(\d+(?:\.\d+)?)\s*(%|[A-Za-zµ][A-Za-zµ⁻¹²]*(?:\/[A-Za-zµ]+)?)?/g)]
+    .map(m => ({v: parseFloat(m[2]), u: (m[3] || '').toLowerCase(), raw: (m[2] + ' ' + (m[3] || '')).trim()})).filter(t => t.v && !nearTo(t.v, A));
+  const unit = String(q.units || '').toLowerCase().replace(/\s+/g, '');
+  const stemToks = toks(q.stem);
+  const work = (q.steps || []).flatMap((st, i) => toks(st.t + ' ' + (st.why || '')).filter(t => t.v !== 0.693 && t.v !== 2.303).map(t => Object.assign(t, {i})));
+  const wHit = work.find(t => nearTo(e, t.v, TIGHT) && t.u === unit && !stemToks.some(g => nearTo(g.v, t.v) && g.u === t.u));
+  const gHit = stemToks.find(t => nearTo(e, t.v, TIGHT));
+  if(wHit) push('setup', `${E} ${q.units || ''} is a value inside the working, at step ${wHit.i + 1}, so the working stopped there; the question asks for the quantity in the last step`);
+  else if(gHit) push('setup', `${E} is the stem's "${gHit.raw}" carried across as the answer${gHit.u && gHit.u !== unit ? `, as ${q.units} where the stem had ${gHit.raw.replace(/^[\d.]+\s*/, '')}` : ''}`);
   const ops = (a, b) => [[a * b, `${fmtN(a)} × ${fmtN(b)}`], [a / b, `${fmtN(a)} ÷ ${fmtN(b)}`], [b / a, `${fmtN(b)} ÷ ${fmtN(a)}`],
                          [a + b, `${fmtN(a)} + ${fmtN(b)}`], [a - b, `${fmtN(a)} − ${fmtN(b)}`], [b - a, `${fmtN(b)} − ${fmtN(a)}`]];
   for(let i = 0; i < givens.length && !out.length; i++) for(let j = i + 1; j < givens.length && !out.length; j++){
@@ -1046,7 +1077,7 @@ function missDiagnosis(q, entered){
     const hit = cs.find(([v]) => nearTo(e, v, TIGHT)); if(!hit) continue;
     const key = cs.find(([v]) => nearTo(A, v, TIGHT));
     if(key) push('algebra', `${E} is ${hit[1]}; the keyed ${K} is ${key[1]}. The right two givens, combined the wrong way round`);
-    else if(cs.indexOf(hit) < 3) push('setup', `${E} is ${hit[1]}, two givens combined in one step, which is not the line this question needs`);   // a sum or difference of givens is a chance match more often than a slip
+    else if(cs.indexOf(hit) < 3) push('setup', `${E} is ${hit[1]}, two givens combined in one step: a step on the way with the working stopped there, or a line this question does not need`);   // a sum or difference of givens is a chance match more often than a slip
   }
   if(nearTo(e, 1 / A)) push('algebra', `${E} is 1 ÷ ${K}, the keyed answer upside down, so the line was rearranged the wrong way`);
   if(nearTo(e, A * 0.693)) push('setup', `${E} is ${K} × 0.693: a half-life stands where k belongs, or k where the half-life belongs`);
@@ -1059,6 +1090,9 @@ function missDiagnosis(q, entered){
     else if(nearTo(e, A / f)) push('unit', `${E} is ${K} ÷ ${f}: ${why}`);
   }
   if(nearTo(e, -A)) push('algebra', `${E} is ${K} with its sign reversed`);
+  const ck = q.check || {};
+  if(!out.length && ((isFinite(ck.lo) && e < ck.lo) || (isFinite(ck.hi) && e > ck.hi)))
+    push('setup', `${E} lies outside what the stem allows${ck.t ? ': ' + (String(ck.t).match(/^.*?[.!?](?=\s|$)/) || [String(ck.t)])[0].replace(/[.!?]\s*$/, '') : ''}`);
   if(!out.length && Math.abs(e - A) <= 0.1 * Math.abs(A)){
     const pct = Math.round(1000 * Math.abs(e - A) / Math.abs(A)) / 10;
     push('round', `${E} is ${pct}% from the keyed ${K}, outside the margin of ±${fmtN(tolOf(q))}; a value in the working was rounded before the end`);

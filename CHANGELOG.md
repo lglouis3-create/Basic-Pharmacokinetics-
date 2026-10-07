@@ -2,6 +2,22 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (plan the problem before any arithmetic)
+- The set-up drill gains a Plan mode: the dosing model from the stem's words, then the line, then the givens it uses.
+- Each step is judged as you go; the card ends with the plan written out and the estimate to check against.
+- "How to go about any calculation" on the set-up card: asked symbol, model, line, givens, estimate, arithmetic.
+- Weak spots sends a set-up miss to the Plan drill on that module.
+- Two more unprinted lines in the catalog: the level after the last steady-state dose, and R from dose and time.
+- About forty set-ups now list the hinge lines their stems need (k from a half-life, C0 from the dose, fe from Du).
+
+## 2026-10-07 (what the stem gives, and does the number make sense)
+- Every calculation now lists what the stem gives: each value, its symbol, and the part it plays or "not needed".
+- Before answering, "List the givens" shows the symbols and values only, the first thing to write down.
+- After the working, "Does the number make sense?" gives the estimate or bound to check the result against.
+- A number outside the stem's bounds is read back as a set-up slip, with that check as the reason.
+- The trough-from-peak relation Cmin∞ = Cmax∞ e^(−kτ) joins the catalog, with the two sheet lines it comes from.
+- Five trough questions that give the steady-state peak now name that relation, not the C0 form of the sheet.
+
 ## 2026-10-07 (what the wrong number says)
 - A missed calculation is now read back before you name the kind of miss: what your number is, and which slip makes it.
 - It recognises givens combined the wrong way, a unit factor, the reciprocal, a missing 0.693, and a near miss.

@@ -988,6 +988,21 @@ function stepsBlock(q){
       <span class="stept">${rich(s.t)}<span class="stepwhy">${rich(s.why)}</span></span>
     </div>`).join('') + `</div>`;
 }
+/* What the stem gives (`givens`: symbol, value as the stem states it, and
+   the part it plays), and the sanity check (`check.t`, with optional bounds
+   lo/hi that the wrong-number diagnosis uses). Before the answer the roles
+   are hidden, so the table coaches listing the givens without naming the
+   line; after it, a given marked "not needed" shows which numbers were
+   there to be set aside. */
+function givensHTML(q, roles = true){
+  if(!Array.isArray(q.givens) || !q.givens.length) return '';
+  return `<div class="givens"><h4>What the stem gives</h4><table class="gtab"><tbody>${q.givens.map(([s, vv, r]) =>
+    `<tr><td class="gsym">${rich(s)}</td><td class="gval">${esc(vv)}</td>${roles ? `<td class="grole${/^not needed/i.test(r || '') ? ' gskip' : ''}">${rich(r || '')}</td>` : ''}</tr>`).join('')}</tbody></table></div>`;
+}
+function checkHTML(q){
+  return q.check && q.check.t ? `<div class="sanity"><h4>Does the number make sense?</h4><p>${rich(q.check.t)}</p></div>` : '';
+}
+const workedBlock = q => givensHTML(q) + stepsBlock(q) + checkHTML(q);
 function pairsBlock(q){
   return `<div class="steps"><h4>Each pair, and why</h4>` +
     (q.pairs||[]).map(p => `<div class="pairrow">
@@ -1293,7 +1308,7 @@ function allCardState(q){
 function allCardHTML(q, n, total){
   const st = allCardState(q), kind = qType(q), multi = isMulti(q);
   const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
-  const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain, guessed: !!st.guessed};
+  const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain, givensOpen: !!st.givensOpen, guessed: !!st.guessed};
   let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
       st.revealed ? `<span style="color:var(${ok ? '--ok' : '--bad'})">${ok ? 'right' : 'missed'}</span>` : ''}</div>
     <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
@@ -1337,6 +1352,8 @@ function wireAllCard(card){
   card.querySelectorAll('[data-mk]').forEach(b => b.onclick = () => { st.missKind = b.dataset.mk; setMissKind(q, st.missKind, b.dataset.sug); refreshAllCard(q.id); });
   const bg = card.querySelector('[data-guess]');
   if(bg) bg.onclick = () => { markGuessed(q); st.guessed = true; refreshAllCard(q.id); };
+  const gv = card.querySelector('[data-givens]');
+  if(gv) gv.onclick = () => { st.givensOpen = !st.givensOpen; refreshAllCard(q.id); };
   const br = card.querySelector('[data-right]');
   if(br) br.onclick = () => { if(markRight(q)){ st.overrode = true; st.missKind = null; refreshAllCard(q.id); } };
   card.querySelectorAll('[data-chainlink]').forEach(b => b.onclick = () => startChain(b.dataset.chainlink));
@@ -1420,6 +1437,9 @@ function answerInputsHTML(q, st){
   if(kind === 'numeric'){
     h += `<p class="sata">Type the number and check it. Anything within 2% of the keyed value counts, or her stated margin where that is wider. The unit may be typed after the number.</p>`;
     h += numericInput(q, st.picked, st.revealed, st.revealed ? (ok ? 'ok' : 'bad') : '');
+    /* the givens, symbol and value only, on request before the answer: the first thing to write down for any calculation */
+    if(!st.revealed && Array.isArray(q.givens) && q.givens.length)
+      h += `<p class="sub givensrow"><button type="button" class="btn small ghost" data-givens="1">${st.givensOpen ? 'Hide the givens' : 'List the givens'}</button></p>${st.givensOpen ? givensHTML(q, false) : ''}`;
   }else if(kind === 'match'){
     h += `<p class="sata">Choose the matching item for each row, then check. Marked right only when every row matches.</p>`;
     h += matchSelects(q, st.picked, st.revealed, st.revealed);
@@ -1493,7 +1513,7 @@ function feedbackHTML(q, st){
         if(st.missKind === 'setup' && q.setup && q.setup.eq && EQ_BY_ID[q.setup.eq])
           h += `<p class="sub" style="margin:0 0 8px">The line this one needs: ${eqShow(EQ_BY_ID[q.setup.eq])} <button type="button" class="chip" data-sheetsetup="${q.module}">Set-up drill, Module ${esc(modShort(q.module))}</button></p>`;
         if(q.setup) h += eqDeriveHTML([q.setup.eq, ...(q.setup.pre || [])]);
-        h += stepsBlock(q);
+        h += workedBlock(q);
       }
     }else if(kind === 'match'){
       h += pairsBlock(q);
@@ -1594,7 +1614,7 @@ function renderQuiz(){
 
   const multi = isMulti(q);
   const picks = multi ? (Q.picked || []) : null;
-  const cst = {picked:Q.picked, order:Q.order, revealed:Q.revealed, missKind:Q.missKind, ok, overrode:Q.overrode, inChain:!!Q.chain, guessed:!!Q.guessedLogged};
+  const cst = {picked:Q.picked, order:Q.order, revealed:Q.revealed, missKind:Q.missKind, ok, overrode:Q.overrode, inChain:!!Q.chain, givensOpen:!!Q.givensOpen, guessed:!!Q.guessedLogged};
   h += answerInputsHTML(q, cst);
   if(Q.revealed) h += feedbackHTML(q, cst);
   h += `</div><div class="qfoot">`;
@@ -1635,6 +1655,7 @@ function renderQuiz(){
   const bc = $('#btnCheck');
   if(bc) bc.onclick = kind === 'numeric' ? submitNumeric : kind === 'match' ? submitMatch : submitMulti;
   const bn = $('#btnNext'); if(bn) bn.onclick = () => { Q.answered++; Q.lastId = Q.current.id; nextQuestion(); };
+  const gv = el.querySelector('[data-givens]'); if(gv) gv.onclick = () => { Q.givensOpen = !Q.givensOpen; renderQuiz(); };
   const bg = $('#btnGuess'); if(bg) bg.onclick = () => {
     markGuessed(Q.current);
     Q.guessedLogged = true;
@@ -1917,7 +1938,7 @@ function renderGaps(){
       const mods = [...new Set(missQs.setup.map(q => q.module))].sort((a, b) => a - b).filter(m => suScopePool(String(m)).length);
       const map = refAnchor('Her equation sheet');
       fixes.push(['Set-up', 'Decide which line answers the question before any number is written. The set-up drill asks only that, with her stems; the sheet map lists the words in a stem that call for each line.',
-        mods.map(m => chip(`data-sheetsetup="${m}"`, `Which equation: Module ${modShort(m)}`)).join('') + (map ? chip(`data-jump="ref:${map}"`, 'Sheet map') : '')]);
+        mods.map(m => chip(`data-sheetsetup="plan:${m}"`, `Plan the problem: Module ${modShort(m)}`)).join('') + (map ? chip(`data-jump="ref:${map}"`, 'Sheet map') : '')]);
     }
     if(missQs.unit.length){
       const u = refAnchor('Units,');
@@ -2826,7 +2847,7 @@ function renderExamResult(){
         else if(last && last.missKind)
           h += `<p class="sub" style="margin:0 0 8px">Logged as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss.</p>`;
       }
-      h += stepsBlock(q);
+      h += workedBlock(q);
     }else if(kind === 'match'){
       h += pairsBlock(q);
     }else{
@@ -3947,10 +3968,57 @@ const suScopeLabel = scope => scope === 'all' ? 'every module'
   : /^quiz:/.test(scope) ? ((COURSE.quizzes || []).find(z => z.id === scope.slice(5)) || {}).name || 'the quiz'
   : /^exam:/.test(scope) ? 'Exam ' + scope.slice(5) : 'Module ' + modShort(+scope);
 function suStart(scope){
+  const plan = /^plan:/.test(scope); scope = scope.replace(/^plan:/, '');
   const pool = shuffle(suScopePool(scope).slice());
   if(!pool.length){ alert('No set-up questions for that scope yet.'); return; }
-  SU = {queue: pool, i: 0, right: 0, asked: 0, scope, page: {}};
+  SU = {queue: pool, i: 0, right: 0, asked: 0, plans: 0, scope, mode: plan ? 'plan' : 'line', page: {}};
   show('eq');                                       // renders the drill once
+}
+/* ---- Plan the whole problem -------------------------------------------
+   Three decisions before any arithmetic, in the order the routine gives
+   them: the dosing model from the stem's words, the line whose left side is
+   the asked symbol, and which of the stem's givens that line uses. The
+   model a stem belongs to is the block its topic lives in; a Module 1 or
+   Module 4 stem that names a route also accepts that route's block. */
+const PLAN_MODELS = [
+  ['kin', 'Any route: order of elimination, half-life, AUC'], ['bolus1', 'Single IV bolus, one compartment'], ['bolus2', 'Single IV bolus, two compartments'],
+  ['infusion', 'Constant IV infusion'], ['clearance', 'Any route: clearance and renal function'], ['oral', 'Single oral dose'],
+  ['multi', 'Repeated IV bolus'], ['intermit', 'Intermittent IV infusions'], ['multoral', 'Multiple oral doses'], ['bioavail', 'Bioavailability: two routes or two products compared']];
+const PLAN_NAME = Object.fromEntries(PLAN_MODELS);
+const PLAN_TOPIC = {orders: 'kin', auc: 'kin', bolus1: 'bolus1', bolus2: 'bolus2', infusion: 'infusion', clearance: 'clearance', oral: 'oral', multi: 'multi', intermit: 'intermit', multoral: 'multoral', bioavail: 'bioavail'};
+function planModels(q){
+  const main = PLAN_TOPIC[q.topic] || 'kin', acc = new Set([main]);
+  if(main === 'kin' || main === 'clearance'){ const s = String(q.stem).toLowerCase();
+    if(/bolus/.test(s)) acc.add('bolus1'); if(/infus/.test(s)) acc.add('infusion'); if(/\boral|tablet|capsule/.test(s)) acc.add('oral'); }
+  return {main, acc};
+}
+const planNeeded = q => (q.givens || []).map((g, i) => /^not needed/i.test(g[2] || '') ? null : i).filter(i => i !== null);
+/* The model step and the givens step of a plan card; the line step is the
+   set-up card's own options. */
+function planModelHTML(q, st){
+  const {main, acc} = planModels(q);
+  let h = `<p class="suask"><b>1. Which dosing model?</b> From the stem's words, before any symbol.</p><div class="sumodels">${PLAN_MODELS.map(([k, name]) => {
+    const cls = st.model == null ? '' : acc.has(k) ? ' right' : k === st.model ? ' wrong' : ' dim';
+    return `<button type="button" class="suopt sumodel${cls}" data-sumodel="${k}"${st.model != null ? ' disabled' : ''}><span class="suname">${esc(name)}</span></button>`; }).join('')}</div>`;
+  if(st.model != null){
+    const first = suFirstSentence(String(q.setup.why || ''));
+    h += `<p class="verdict ${st.modelOk ? 'ok' : 'bad'}">${st.modelOk ? '✓ ' + esc(PLAN_NAME[main]) : `✗ Not ${esc(PLAN_NAME[st.model] || '')}: this stem is ${esc(PLAN_NAME[main])}`}</p>
+      ${first ? `<p class="sub">${rich(first)}</p>` : ''}`;
+  }
+  return h;
+}
+function planGivensHTML(q, st){
+  const need = new Set(planNeeded(q)), gs = q.givens || [];
+  let h = `<p class="suask"><b>3. Which givens does this line use?</b> Tick every value that enters the working, the hinge lines included; leave the rest.</p>
+    <div class="sugivs">${gs.map((g, i) => { const on = st.giv.has(i);
+      const cls = !st.givChecked ? (on ? ' on' : '') : need.has(i) ? (on ? ' right' : ' missed') : (on ? ' wrong' : ' dim');
+      return `<button type="button" class="suopt sugiv${cls}" data-sugiv="${i}" aria-pressed="${on}"${st.givChecked ? ' disabled' : ''}><span class="suname">${rich(g[0])} = ${esc(g[1])}</span>${st.givChecked ? `<span class="sueq surole">${rich(g[2])}</span>` : ''}</button>`; }).join('')}</div>`;
+  if(!st.givChecked) h += `<div class="btns"><button type="button" class="btn" data-sugivcheck="1">Check the givens</button></div>`;
+  else {
+    const extra = [...st.giv].filter(i => !need.has(i)).length, left = [...need].filter(i => !st.giv.has(i)).length;
+    h += `<p class="verdict ${st.givOk ? 'ok' : 'bad'}">${st.givOk ? '✓ The right givens, and the right ones set aside' : `✗ ${left ? left + ' needed given' + (left > 1 ? 's' : '') + ' left out' : ''}${left && extra ? ', ' : ''}${extra ? extra + ' not needed' : ''}`}</p>`;
+  }
+  return h;
 }
 /* Three other lines: first from the same module (minus the hinges the
    working uses, which would be defensible picks), then from the modules
@@ -3973,15 +4041,16 @@ function suOptions(q){
 }
 /* The state for one stem, made on first sight and kept, so a layout change
    or a return never re-asks or re-rolls a stem already answered. */
-const suState = q => (SU.page[q.id] ||= {options: suOptions(q), picked: null, ok: false});
+const suState = q => (SU.page[q.id] ||= {options: suOptions(q), picked: null, ok: false, model: null, modelOk: false, giv: new Set(), givChecked: false, givOk: false});
 /* The pick, the verdict and the reasons for one stem; `st` is the state
    that holds its options and pick (SU itself one at a time, a page entry
    on one page). */
 function suQuestionHTML(q, st, idx){
-  const e = EQ_BY_ID[q.setup.eq];
-  let h = `<div class="card suq" data-suq="${idx}"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">set-up only</span></div>
-    <div class="stem">${stemHTML(q.stem)}</div>
-    <p class="suask"><b>Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
+  const e = EQ_BY_ID[q.setup.eq], plan = SU.mode === 'plan';
+  let h = `<div class="card suq" data-suq="${idx}"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">${plan ? 'plan the problem' : 'set-up only'}</span></div>
+    <div class="stem">${stemHTML(q.stem)}</div>`;
+  if(plan){ h += planModelHTML(q, st); if(st.model == null) return h + `</div>`; }
+  h += `<p class="suask"><b>${plan ? '2. ' : ''}Which line solves what is asked?</b> Pick the equation; no arithmetic.</p>
     <div class="suopts">${st.options.map((o, i) => {
       const cls = st.picked == null ? '' : o.id === e.id ? ' right' : i === st.picked ? ' wrong' : ' dim';
       return `<button type="button" class="suopt${cls}" data-suopt="${i}"${st.picked != null ? ' disabled' : ''}>
@@ -3992,12 +4061,21 @@ function suQuestionHTML(q, st, idx){
     const pre = (q.setup.pre || []).filter(id => EQ_BY_ID[id]);
     h += `<div class="why"><p class="verdict ${st.ok ? 'ok' : 'bad'}">${st.ok ? '✓ That is the line' : '✗ Not that line'}</p>
       ${st.ok ? '' : `<p class="sub">You picked <b>${esc(chosen.name)}</b>, ${eqShow(chosen)}. It holds when: ${mathHTML(suFirstSentence(chosen.holds))}</p>`}
-      <div class="suright"><b>${esc(e.name)}</b> <span class="sm">(${esc((SHEET_TAG[e.sheet] || SHEET_TAG.absent)[0])}${e.must ? '; she said to know it' : ''})</span><div class="sueqbig">${eqShow(e)}</div></div>
-      <h4>Why this line</h4><ul class="tlist">${why.map(s => `<li>${mathHTML(esc(s))}</li>`).join('')}</ul>
+      <div class="suright"><b>${esc(e.name)}</b> <span class="sm">(${esc((SHEET_TAG[e.sheet] || SHEET_TAG.absent)[0])}${e.must ? '; she said to know it' : ''})</span><div class="sueqbig">${eqShow(e)}</div></div>`;
+    if(plan && (q.givens || []).length){
+      h += planGivensHTML(q, st);
+      if(!st.givChecked) return h + `</div></div>`;
+      h += `<div class="suplan"><h4>The plan</h4><ol>
+        <li>${esc(PLAN_NAME[planModels(q).main])}: the ${esc(PLAN_NAME[planModels(q).main]).toLowerCase().startsWith('any') ? 'block' : 'block of the sheet'} to read from.</li>
+        <li>${eqShow(e)}, the line whose left side is what is asked${pre.length ? `, after ${pre.map(id => eqShow(EQ_BY_ID[id])).join(' and ')}` : ''}.</li>
+        <li>Givens that enter: ${planNeeded(q).map(i => rich(q.givens[i][0])).join(', ') || 'none beyond the line'}.${(q.givens || []).length > planNeeded(q).length ? ` Set aside: ${(q.givens || []).map((g, i) => planNeeded(q).includes(i) ? null : rich(g[0])).filter(Boolean).join(', ')}.` : ''}</li>
+        ${q.check && q.check.t ? `<li>Before computing: ${rich(q.check.t)}</li>` : ''}</ol></div>`;
+    }
+    h += `<h4>Why this line</h4><ul class="tlist">${why.map(s => `<li>${rich(s)}</li>`).join('')}</ul>
       ${pre.length ? `<h4>Lines used on the way</h4><ul class="tlist">${pre.map(id => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}</span></li>`).join('')}</ul>` : ''}
       <h4>When it holds</h4><p class="sub">${mathHTML(e.holds || '')}</p>
       ${eqDeriveHTML([e.id, ...pre])}
-      ${st.shown ? `<div class="suwork"><p class="verdict ok">Keyed answer ${fmtAns(q.answer)} ${esc(q.units || '')}</p>${stepsBlock(q)}</div>` : ''}
+      ${st.shown ? `<div class="suwork"><p class="verdict ok">Keyed answer ${fmtAns(q.answer)} ${esc(q.units || '')}</p>${workedBlock(q)}</div>` : ''}
       <div class="btns">${idx === 'one' ? `<button class="btn" data-sunext="1">Next</button>` : ''}
         <button class="btn ghost" data-sushow="1">${st.shown ? 'Hide the working' : 'Show the problem worked out'}</button>
         <button class="btn ghost" data-suwork="${esc(q.id)}">Work it yourself in the quiz</button>
@@ -4010,11 +4088,11 @@ function suHTML(){
   const tally = `<span>${SU.right} of ${SU.asked} right</span>`;
   if(!q){
     const pct = SU.asked ? Math.round(100 * SU.right / SU.asked) : 0;
-    return `<h2>Set-up drill</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.</p>
+    return `<h2>${SU.mode === 'plan' ? 'Plan the problem' : 'Set-up drill'}</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.${SU.mode === 'plan' ? ` <b>${SU.plans}</b> of ${SU.asked} plans complete: model, line and givens all right.` : ''}</p>
       ${suMixupsHTML()}
       <div class="btns"><button class="btn" data-suagain="1">Again, reshuffled</button><button class="btn ghost" data-suhome="1">Back to Equations</button></div></div>`;
   }
-  let h = `<h2>Set-up drill</h2>`;
+  let h = `<h2>${SU.mode === 'plan' ? 'Plan the problem' : 'Set-up drill'}</h2>`;
   if(layoutOf() === 'all'){
     const page = SU.queue.slice(SU.i, SU.i + SU_PAGE);
     page.forEach(suState);
@@ -4062,11 +4140,36 @@ function suWire(el){
     const n = e.target.closest('[data-sunext]');
     if(n){ SU.i += n.dataset.sunext === 'page' ? Math.min(SU_PAGE, SU.queue.length - SU.i) : 1; renderEq(); window.scrollTo(0, 0); return; }
     if(e.target.closest('[data-suhome]')){ SU = null; renderEq(); return; }
-    if(e.target.closest('[data-suagain]')){ suStart(SU.scope); return; }
+    if(e.target.closest('[data-suagain]')){ suStart((SU.mode === 'plan' ? 'plan:' : '') + SU.scope); return; }
+    const redraw = (card) => { const idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(!st) return null; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild); return {q, st}; };
+    const pm = e.target.closest('[data-sumodel]');
+    if(pm){ const card = pm.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(st && st.model == null){ st.model = pm.dataset.sumodel; st.modelOk = planModels(q).acc.has(st.model); redraw(card); } return; }
+    const pg = e.target.closest('[data-sugiv]');
+    if(pg){ const card = pg.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(st && !st.givChecked){ const i = +pg.dataset.sugiv; st.giv.has(i) ? st.giv.delete(i) : st.giv.add(i); redraw(card); } return; }
+    const pc = e.target.closest('[data-sugivcheck]');
+    if(pc){ const card = pc.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
+      if(st && !st.givChecked){ const need = planNeeded(q); st.givChecked = true; st.givOk = need.length === st.giv.size && need.every(i => st.giv.has(i));
+        if(st.modelOk && st.ok && st.givOk) SU.plans++; redraw(card); } return; }
     const w = e.target.closest('[data-suwork]');
     if(w){ const q = byId(w.dataset.suwork); if(q){ SU = null; startSweepOf([q], 'One problem, from the set-up drill'); } }
   };
 }
+/* The order of work for any calculation, as the worked feedback now enforces
+   it: what is asked first, the model, the line whose left side is the asked
+   symbol, the givens sorted, an estimate, then the arithmetic and the units.
+   Written from the two slips seen most in worked pages: a line chosen for the
+   symbols on hand rather than for the quantity asked, and a given or a
+   mid-working value reported as the answer. */
+const CALC_ROUTINE_HTML = `<details class="tabhelp routine"><summary>How to go about any calculation</summary><ol>
+  <li><b>Write the symbol of what is asked</b> before anything else: C<sub>min</sub><sup>&infin;</sup>, C<sub>avg</sub><sup>&infin;</sup>, k, t&frac12;, D<sub>0</sub>. The line is the one with that symbol on the left.</li>
+  <li><b>Name the dosing model</b> from the stem's words: single IV bolus, infusion, oral, repeated bolus, intermittent infusion, repeated oral. That names the block of the sheet.</li>
+  <li><b>Pick the line in that block whose left side is the asked symbol.</b> Not the line whose right side holds the numbers already in hand: D<sub>0</sub> over V<sub>D</sub> is the first-dose peak, never an average or a trough.</li>
+  <li><b>List the givens with their symbols</b> and cross out the ones the line does not use. A given the stem states but the line does not need is there to be set aside.</li>
+  <li><b>Estimate before computing.</b> Count half-lives (two half-lives leave a quarter), and set bounds: a trough lies below its peak, an average between trough and peak, F at or below 1.</li>
+  <li><b>Then the arithmetic, the units and the decimal places</b> she asked for. If the number falls outside the estimate, the line is wrong, not the calculator.</li></ol></details>`;
 /* The card on the Equations picker that starts the drill. */
 function suCardHTML(){
   const pool = suPoolAll(), n = pool.length;
@@ -4075,11 +4178,16 @@ function suCardHTML(){
   return `<div class="topic sweepcard sucard"><div class="subs">
     <div class="subrow"><span class="sname"><b>Set-up only: which equation?</b>
       <small>Her calculation stems, no arithmetic: pick the line that solves what is asked, then read why. ${n} stems; one at a time or ten to a page, as the Answer setting says.</small></span></div>
+    ${CALC_ROUTINE_HTML}
     <div class="frow suscope"><span class="olab">Drill</span>
       ${live.filter(z => suScopePool('quiz:' + z.id).length).map(z => `<button class="chip" data-su="quiz:${esc(z.id)}">${esc(z.name)}</button>`).join('')}
       ${suScopePool('exam:' + EXAM.id).length ? `<button class="chip" data-su="exam:${EXAM.id}">Exam ${EXAM.id}</button>` : ''}
       ${mods.map(m => `<button class="chip" data-su="${m}">Module ${esc(modShort(m))}</button>`).join('')}
       <button class="chip" data-su="all">All</button></div>
+    <div class="frow suscope"><span class="olab">Plan</span>
+      ${mods.map(m => `<button class="chip" data-su="plan:${m}">Module ${esc(modShort(m))}</button>`).join('')}
+      <button class="chip" data-su="plan:all">All</button>
+      <small class="sm">Plan the whole problem: the dosing model from the stem's words, then the line, then which givens it uses. Still no arithmetic.</small></div>
   </div></div>`;
 }
 
