@@ -1387,8 +1387,9 @@ function tickTimers(){
   });
 }
 function allCardState(q){
-  /* on the one-page layout every card renders at once, so a calculation's
-     stopwatch starts when the student first clicks into its answer box */
+  /* on the one-page layout every card renders at once, so a calculation is
+     timed only when the student presses its Start timer button; an answer
+     given without it is not timed and stays out of the time chart */
   return Q.allState[q.id] ||= {picked: qType(q) === 'match' ? {} : null, revealed: false, missKind: null,
     order: isMC(q) ? shuffle(q.options.map((o, i) => i)) : [], startedAt: qType(q) === 'numeric' ? null : Date.now()};
 }
@@ -1397,7 +1398,9 @@ function allCardHTML(q, n, total){
   const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
   const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain, givensOpen: !!st.givensOpen, guessed: !!st.guessed};
   let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
-      kind === 'numeric' ? timerHTML(st.startedAt, st.revealed ? (st.took != null ? st.took : null) : null) : ''}${
+      kind !== 'numeric' ? '' : st.revealed ? (st.took != null ? timerHTML(null, st.took) : '')
+        : st.startedAt ? timerHTML(st.startedAt)
+        : '<button type="button" class="qtimer qtstart" data-timerstart="1" title="Time this calculation; skip it and the answer is not timed">⏱ Start timer</button>'}${
       st.revealed ? `<span style="color:var(${ok ? '--ok' : '--bad'})">${ok ? 'right' : 'missed'}</span>` : ''}</div>
     <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -1425,9 +1428,10 @@ function wireAllCard(card){
       if(multi){ const p = st.picked || []; st.picked = p.includes(oi) ? p.filter(x => x !== oi) : [...p, oi]; refreshAllCard(q.id); }
       else { st.picked = oi; done(q.options[oi].correct ? 'correct' : 'wrong'); }
     });
+    const ts = card.querySelector('[data-timerstart]');
+    if(ts) ts.onclick = () => { if(st.startedAt) return; st.startedAt = Date.now(); ts.outerHTML = timerHTML(st.startedAt);
+      const ni2 = card.querySelector('input.numin'); if(ni2) ni2.focus(); };
     const ni = card.querySelector('input.numin');
-    if(ni && !st.startedAt) ni.onfocus = () => { if(st.startedAt) return; st.startedAt = Date.now();
-      const t = card.querySelector('.qtimer'); if(t) t.outerHTML = timerHTML(st.startedAt); };
     if(ni){ ni.oninput = e => { st.picked = e.target.value; };
             ni.onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); card.querySelector('[data-check]').click(); } }; }
     card.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {

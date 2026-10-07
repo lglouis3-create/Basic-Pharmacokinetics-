@@ -2,6 +2,9 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-07 (Start timer on the one-page layout)
+- On the one-page layout each calculation has a Start timer button; an answer given without it is not timed.
+
 ## 2026-10-07 (the printed trough line, and clearer "Not on the sheet" boxes)
 - Three trough questions that give the dose, not the peak, now use the printed trough line with C0.
 - Each "Not on the sheet" line is now numbered steps from a printed line, plus "When to use it".
