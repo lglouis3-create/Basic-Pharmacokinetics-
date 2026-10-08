@@ -3823,6 +3823,43 @@ function eqLayout(e){
   if(!plain(e.disp.slice(last))) return null;
   return pos === ops.length ? parts : null;
 }
+/* Her questions that this line solves, for "How she asks it": the ones whose
+   set-up names this line as the one that gives the answer first, then those
+   that use it on the way. Her graded quizzes and her review sheet lead, then
+   her worksheets, homework and slide examples; extra practice is left out. */
+const EQ_EX_ORDER = ['Canvas quiz', 'In-class activity', 'Daily practice sheet', 'Homework', 'Slide example', 'Slides', 'Lecture', 'Poll', 'Other'];
+function eqExamples(e){
+  const rank = q => (/^e2r/.test(q.id) ? -1 : EQ_EX_ORDER.indexOf(originOf(q)));
+  const ok = q => q.setup && Array.isArray(q.steps) && q.steps.length && !q.lowYield;
+  const main = QUESTIONS.filter(q => ok(q) && q.setup.eq === e.id);
+  const via = QUESTIONS.filter(q => ok(q) && q.setup.eq !== e.id && (q.setup.pre || []).includes(e.id));
+  const sort = a => a.sort((x, y) => rank(x) - rank(y) || x.id.localeCompare(y.id));
+  return {main: sort(main), via: sort(via)};
+}
+/* What to watch out for, read from the question itself: the numbers she put
+   in to be set aside and the unit conversions its working needed. The size
+   check already shows above, in the worked block. */
+function eqWatchList(q){
+  const out = [];
+  (q.givens || []).filter(g => /^not needed/i.test(g[2] || '')).slice(0, 3).forEach(g =>
+    out.push(`<b>Set aside</b> ${rich(g[0])} = ${esc(g[1])}: ${rich(String(g[2]).replace(/^not needed:?\s*/i, '') || 'it does not enter this line')}`));
+  (q.steps || []).filter(s => s.k === 'unit').slice(0, 2).forEach(s => out.push(`<b>Units</b> ${rich(s.t)}`));
+  return out;
+}
+function eqHowHTML(e){
+  const {main, via} = eqExamples(e), pool = main.length ? main : via;
+  if(!pool.length) return `<div class="eqhow"><h5 class="tsec">How she asks it</h5><p class="prose">None of her questions in the drill is solved with this line yet.</p></div>`;
+  const at = ((EQ && EQ.exIdx) || 0) % pool.length, q = pool[at];
+  const ans = qType(q) === 'numeric' ? `<p class="prose"><b>Answer:</b> ${esc(fmtAns(q.answer))} ${esc(q.units || '')}</p>` : '';
+  const watch = eqWatchList(q);
+  return `<div class="eqhow"><h5 class="tsec">How she asks it ${originTag(q)}</h5>
+    ${main.length ? '' : '<p class="sub">No question of hers is answered by this line alone; here it is one step on the way.</p>'}
+    <p class="stem">${rich(q.stem)}</p>${ans}${workedBlock(q)}
+    ${watch.length ? `<h5 class="tsec">Watch out for</h5><ul class="tlist">${watch.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
+    <p class="sub">${pool.length > 1 ? `Question ${at + 1} of ${pool.length} that use this line.` : 'The only question of hers that uses this line.'}</p>
+    ${pool.length > 1 ? '<button class="btn ghost" id="eqExNext" type="button">Another of her questions</button>' : ''}</div>`;
+}
+
 /* The pieces offered for a build. In the stacked layout the bar does the
    grouping and a tile is drawn without its stray bracket, so a lure that differs
    from a correct piece only by a bracket ("(AUCIV" beside "AUCIV)") would draw as
@@ -3838,7 +3875,7 @@ function eqTrayPieces(e, layout){
 }
 function eqLoad(){
   const e = EQ_BY_ID[EQ.queue[EQ.i]];
-  EQ.revealed = false; EQ.ok = false; EQ.shown = false; EQ.overrode = false; EQ.typed = '';
+  EQ.revealed = false; EQ.ok = false; EQ.shown = false; EQ.overrode = false; EQ.typed = ''; EQ.howOpen = false; EQ.exIdx = 0;
   if(e && EQ.step === 'build'){
     EQ.layout = eqLayout(e);
     EQ.slots = e.tokens.map(t => EQ.layout && EQ_OP(t) ? t : null);   // the structure is drawn, not placed
@@ -3923,7 +3960,10 @@ function eqDrillHTML(){
     if(e.holds) h += `<h5 class="tsec">When it holds</h5><p class="prose">${richHTML(e.holds)}</p>`;   // entities and {{frac}} render
     if(e.derive) h += `<h5 class="tsec">Not on the sheet: how to get there</h5>${deriveBodyHTML(e)}`;
     if(e.must) h += `<p class="prose"><b>She said to memorise this one.</b> It is not on the equation sheet.</p>`;
-    h += `<div class="cite">${esc(e.cite)}</div></div>`;
+    h += `<div class="cite">${esc(e.cite)}</div>`;
+    h += EQ.howOpen ? eqHowHTML(e)
+      : `<p><button class="btn ghost" id="eqHow" type="button">How she asks it: one of her questions, worked</button></p>`;
+    h += `</div>`;
   }
   h += `</div><div class="qfoot">`;
   if(!EQ.revealed){
@@ -4004,6 +4044,8 @@ function eqDrillWire(el){
     renderEq();
   };
   if(byId('eqRight')) byId('eqRight').onclick = eqMarkRight;
+  if(byId('eqHow')) byId('eqHow').onclick = () => { EQ.howOpen = true; renderEq(); };
+  if(byId('eqExNext')) byId('eqExNext').onclick = () => { EQ.exIdx = (EQ.exIdx || 0) + 1; renderEq(); };
   if(byId('eqNext')) byId('eqNext').onclick = () => {
     /* In the alternating mode the same equation is typed straight after it has
        been built, so the piece order is still in mind when the typing is asked

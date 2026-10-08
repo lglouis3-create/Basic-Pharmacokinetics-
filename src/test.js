@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,CHAIN_OF,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -710,6 +710,21 @@ console.log('\n=== 5e. What an explanation may say ===');
     const want = ['e2r-3a', 'e2r-3d', 'e2r-3f', loose.id];
     if (!set || JSON.stringify(got) !== JSON.stringify(want)) bad(`paper order keeps problem parts together: got ${got.join(', ')}`);
     else console.log('  ok    a paper puts the parts of one problem together, in her order');
+  }
+
+  /* "How she asks it" in the equation drill: every line renders, and the lines
+     on the Exam 2 blueprint mostly have a question of hers behind them. */
+  {
+    let withMain = 0, withAny = 0, broken = [];
+    for (const e of X.EQUATIONS) {
+      try { const h = X.eqHowHTML(e); if (!/How she asks it/.test(h)) broken.push(e.id); } catch (err) { broken.push(e.id + ' (' + err.message + ')'); }
+      const ex = X.eqExamples(e);
+      if (ex.main.length) withMain++;
+      if (ex.main.length || ex.via.length) withAny++;
+      if (ex.main.concat(ex.via).some(q => q.id.startsWith('x-'))) broken.push(e.id + ': offers extra practice as her question');
+    }
+    if (broken.length) bad('"How she asks it" fails for: ' + broken.join(', '));
+    else console.log(`  ok    "How she asks it" renders for all ${X.EQUATIONS.length} lines; ${withMain} answer one of her questions, ${withAny} are used in one`);
   }
 
   /* Tables and fractions are markup, so a malformed one shows as raw text. */

@@ -2,6 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-08 (equations: how she asks each one)
+- Equation drill: after Check or Show me, "How she asks it" shows one of her questions that uses the line, fully worked.
+- It lists what to watch out for in that question: the numbers she adds to be set aside and the unit conversions.
+- "Another of her questions" steps through every question that uses the line, her quizzes and review sheet first.
+
 ## 2026-10-08 (Module 6 cards name their deck)
 - Module 6 calculation cards and topics now say "Deck 6" or "Deck 6a", so the multiple oral doses card is easy to find.
 

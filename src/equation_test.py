@@ -106,6 +106,11 @@ with sync_playwright() as p:
     ok('the built equation is marked right', '✓ Correct' in pg.inner_text('#v-eq'))
     ok('each slot is marked individually', pg.locator('.eqslot.ok').count() == 2)   # the two operand slots; the bar is structure
 
+    # after checking, one of her questions that uses the line can be opened, worked
+    ok('"How she asks it" is offered after checking', pg.locator('#eqHow').count() == 1)
+    pg.click('#eqHow'); pg.wait_for_timeout(200)
+    ok('it shows her stem with the working and the size check', pg.locator('.eqhow .stem').count() == 1 and pg.locator('.eqhow .steps .step').count() > 0)
+
     # tapping an empty box selects it visibly, and the next piece goes there
     pg.evaluate("eqStart('build')"); pg.wait_for_timeout(200)
     pg.locator('.eqslot').nth(1).click(); pg.wait_for_timeout(120)
