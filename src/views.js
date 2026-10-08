@@ -3876,6 +3876,7 @@ function eqTrayPieces(e, layout){
 function eqLoad(){
   const e = EQ_BY_ID[EQ.queue[EQ.i]];
   EQ.revealed = false; EQ.ok = false; EQ.shown = false; EQ.overrode = false; EQ.typed = ''; EQ.howOpen = false; EQ.exIdx = 0;
+  EQ.trayOf = {}; EQ.sel = null;   // a new equation starts with no piece placed and no box chosen
   if(e && EQ.step === 'build'){
     EQ.layout = eqLayout(e);
     EQ.slots = e.tokens.map(t => EQ.layout && EQ_OP(t) ? t : null);   // the structure is drawn, not placed

@@ -2,6 +2,9 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-08 (build-it: no greyed pieces after Next)
+- Build it: after Next, pieces from the previous equation no longer show greyed out and untappable in the new one.
+
 ## 2026-10-08 (equations: how she asks each one)
 - Equation drill: after Check or Show me, "How she asks it" shows one of her questions that uses the line, fully worked.
 - It lists what to watch out for in that question: the numbers she adds to be set aside and the unit conversions.

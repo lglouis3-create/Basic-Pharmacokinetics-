@@ -111,8 +111,16 @@ with sync_playwright() as p:
     pg.click('#eqHow'); pg.wait_for_timeout(200)
     ok('it shows her stem with the working and the size check', pg.locator('.eqhow .stem').count() == 1 and pg.locator('.eqhow .steps .step').count() > 0)
 
+    # moving on with Next starts the new equation with a clean tray: nothing greyed out that was not placed
+    pg.evaluate("eqSetChosen(['css', 'cl-k-vd', 'thalf-first', 'crcl']); eqStart('build')"); pg.wait_for_timeout(200)
+    for _ in range(3):
+        pg.evaluate("() => { while(EQ.slots.some(s => s === null)){ const t = EQ.tray.find(x => !Object.values(EQ.trayOf || {}).includes(x.i)); if(!t) break; eqPlace(t.i); } }")
+        pg.wait_for_timeout(80); pg.click('#eqCheck'); pg.wait_for_timeout(120); pg.click('#eqNext'); pg.wait_for_timeout(150)
+        grey = pg.locator('.eqtile[disabled]').count(); filled = pg.evaluate("EQ.slots.filter((s, i) => s !== null && !(EQ.layout && EQ_OP(EQ_BY_ID[EQ.queue[EQ.i]].tokens[i]))).length")
+        ok(f'after Next, no piece is greyed out before it is placed ({grey} greyed, {filled} placed)', grey == 0 and filled == 0 and pg.locator('.eqslot.sel').count() == 0)
+
     # tapping an empty box selects it visibly, and the next piece goes there
-    pg.evaluate("eqStart('build')"); pg.wait_for_timeout(200)
+    pg.evaluate("eqSetChosen(['css']); eqStart('build')"); pg.wait_for_timeout(200)
     pg.locator('.eqslot').nth(1).click(); pg.wait_for_timeout(120)
     ok('a tapped empty box shows as selected', pg.locator('.eqslot.sel').count() == 1)
     pg.locator('.eqtile:not([disabled])').first.click(); pg.wait_for_timeout(120)
