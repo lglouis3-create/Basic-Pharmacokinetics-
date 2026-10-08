@@ -113,7 +113,7 @@ const TOPICS = [
     cite:'5---Pharmacokinetics-of-Oral-Absorption.pdf slide 2, bullet 4'}]},
 
  /* ───────── Module 6 — no questions in this file ───────── */
- {id:'multi', name:'Multiple dosing: repeated IV bolus', prof:'Mosley',
+ {id:'multi', name:'Multiple dosing: repeated IV bolus (deck 6)', prof:'Mosley',
   cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Objectives"',
   subs:[
    {id:'accum', name:'Drug accumulation and steady state',
@@ -125,7 +125,7 @@ const TOPICS = [
    {id:'ndose', name:'Concentration after n doses and after the last dose',
     cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Plasma Drug Concentration at Any Time After n Doses" to "Example 3"'}]},
 
- {id:'intermit', name:'Multiple dosing: intermittent IV infusions', prof:'Mosley',
+ {id:'intermit', name:'Multiple dosing: intermittent IV infusions (deck 6)', prof:'Mosley',
   cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Intermittent Intravenous Infusions"',
   subs:[
    {id:'why', name:'Why, and the equation for one infusion',
@@ -133,7 +133,7 @@ const TOPICS = [
    {id:'add', name:'Adding the infusions on a time line',
     cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slides "Example 4" to "Summary"'}]},
 
- {id:'multoral', name:'Multiple dosing: oral doses', prof:'Mosley',
+ {id:'multoral', name:'Multiple dosing: oral doses (deck 6a)', prof:'Mosley',
   cite:'6a---Multiple-Oral-Doses.pdf, slide "Objectives"',
   subs:[
    {id:'oeq', name:'The multiple-oral-dose equations',
@@ -382,11 +382,11 @@ const CALC_TYPES = [
   {module:5, id:'m5-k', name:'Absorption and elimination rate constants and half-lives', match:['oral/extravasc:krate', 'oral/conc:krate', 'oral/changes:krate'], example:'m5-n01'},
   {module:5, id:'m5-conc', name:'Concentration, F and volume from the oral equation', match:['oral/conc', 'oral/extravasc'], example:'m5-n10'},
   {module:5, id:'m5-peak', name:'Peak concentration and time to peak', match:['oral/peak', 'oral/changes'], example:'m5-n03'},
-  {module:6, id:'m6-ss', name:'Repeated IV bolus: peak, trough and average at steady state', match:['multi/ssbolus'], example:'m6-n03'},
-  {module:6, id:'m6-n', name:'Repeated IV bolus: after n doses and after the last dose', match:['multi/ndose'], example:'m6-n06'},
-  {module:6, id:'m6-inf1', name:'One intermittent infusion: rate and the end-of-infusion level', match:['intermit/why'], example:'m6b-n02'},
-  {module:6, id:'m6-infadd', name:'Adding infusions on a time line', match:['intermit/add'], example:'m6b-n03'},
-  {module:6, id:'m6-oral', name:'Multiple oral doses: peak, trough, time to peak and average', match:['multoral/ossc'], example:'m6b-n12'},
+  {module:6, id:'m6-ss', name:'Deck 6 · Repeated IV bolus: peak, trough and average at steady state', match:['multi/ssbolus'], example:'m6-n03'},
+  {module:6, id:'m6-n', name:'Deck 6 · Repeated IV bolus: after n doses and after the last dose', match:['multi/ndose'], example:'m6-n06'},
+  {module:6, id:'m6-inf1', name:'Deck 6 · One intermittent infusion: rate and the end-of-infusion level', match:['intermit/why'], example:'m6b-n02'},
+  {module:6, id:'m6-infadd', name:'Deck 6 · Adding infusions on a time line', match:['intermit/add'], example:'m6b-n03'},
+  {module:6, id:'m6-oral', name:'Deck 6a · Multiple oral doses: peak, trough, time to peak and average', match:['multoral/ossc'], example:'m6b-n12'},
   {module:7, id:'m7-fabs', name:'Absolute bioavailability from two AUCs, and the equivalent oral dose', match:['bioavail/fabs'], example:'m7-n01'},
   {module:7, id:'m7-frel', name:'Relative bioavailability of one formulation against another', match:['bioavail/frel'], example:'m7-n03'},
 ];

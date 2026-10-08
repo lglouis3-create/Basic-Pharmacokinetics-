@@ -2,6 +2,9 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-08 (Module 6 cards name their deck)
+- Module 6 calculation cards and topics now say "Deck 6" or "Deck 6a", so the multiple oral doses card is easy to find.
+
 ## 2026-10-07 (problem parts answerable on their own)
 - A part that needs an earlier answer now states it, e.g. "(Parts c and d: F = 0.75 and an oral dose of 1200 mg.)".
 - Exam sim and practice quizzes keep the parts of one problem together and in order (a before f).
