@@ -826,7 +826,7 @@ const Q_MODULE6 = [
  setup:{eq:'first-exp', pre:[], why:'"IV bolus every 8 hours", "minimum plasma drug concentration of the first dose": the trough at the end of the first interval. Cmax, k and τ are given and Cmin is asked, so the first-order decline C = C0e^(-kt) with t = τ. No hinge: k is given.'},
  asks:'Cmin',
  givens:[['D0', 'One gram', 'not needed: already inside the given peak'], ['τ', 'every 8 hours', 'the time in e^(−kτ), with kτ = 0.1732 × 8 = 1.386'], ['C0', '58.72 mg/L', 'the first-dose peak the trough is read down from'], ['k', '0.1732 hr⁻¹', 'the exponent kτ']],
- check:{t:'k = 0.1732 hr⁻¹ means a half-life of {{frac:0.693|0.1732}} = 4 hr, so 8 hours is two half-lives and a quarter of the peak remains: 58.72 × 0.25 = 14.69 mg/L, below the 58.72 mg/L peak.', lo:0, hi:58.72},
+ check:{t:'k = 0.1732 hr⁻¹ means a half-life of {{frac:0.693|0.1732}} = 4 hr, so 8 hours is two half-lives and a quarter of the peak remains: 58.72 × 0.25 is just under 14.69 mg/L, below the 58.72 mg/L peak.', lo:0, hi:58.72},
  teach:[
   {t:'The first-dose trough of an intravenous (IV) bolus is single-dose decline over one interval.'},
   {h:'The fraction left', list:['e^(-kτ) is the fraction of one dose still in the body at the end of an interval. With τ equal to two half-lives, e^(-kτ) = 0.25.']}],
@@ -878,7 +878,7 @@ const Q_MODULE6 = [
  setup:{eq:'cmin-from-cmax', pre:[], why:'"IV bolus every 8 hours", "minimum steady-state plasma drug concentration". Cmax∞, k and τ are given and Cmin∞ is asked; Cmin∞ is Cmax∞ multiplied by e^(-kτ), which is the line C0e^(-kτ) over (1 - e^(-kτ)). No hinge: k is given.'},
  asks:'Cminss',
  givens:[['τ', 'every 8 hours', 'the time in e^(−kτ)'], ['Cmax∞', '78.31 mg/L', 'the steady-state peak the trough is read down from'], ['k', '0.1732 hr⁻¹', 'the exponent kτ = 0.1732 × 8 = 1.386']],
- check:{t:'Eight hours is two half-lives at k = 0.1732 hr⁻¹, so a quarter of the peak remains: 78.31 × 0.25 = 19.59 mg/L. A trough lies below its peak.', lo:0, hi:78.31},
+ check:{t:'Eight hours is two half-lives at k = 0.1732 hr⁻¹, so a quarter of the peak remains: 78.31 × 0.25 is just under 19.59 mg/L. A trough lies below its peak.', lo:0, hi:78.31},
  teach:[
   {t:'Peak to trough at steady state is the same decline as after the first dose, starting higher.'},
   {h:'The trough equation', list:[M6_CMIN]}],
@@ -955,7 +955,7 @@ const Q_MODULE6 = [
  setup:{eq:'cp-after-last', pre:[], why:'"IV bolus every 8 hours", "12 hours after the last dose, assuming steady-state levels": a concentration at time t after a steady-state dose. Cmax∞, k and t are given and Cp is asked; the first two factors of the line are Cmax∞, so Cp = Cmax∞e^(-kt). No hinge: k is given.'},
  asks:'Cp',
  givens:[['τ', 'every 8 hours', 'not needed: the time asked is counted from the last dose'], ['Cmax∞', '78.31 mg/L', 'the peak the level decays from'], ['k', '0.1732 hr⁻¹', 'the exponent kt = 0.1732 × 12 = 2.078'], ['t', '12 hours after the last dose', 't in e^(−kt)']],
- check:{t:'k = 0.1732 hr⁻¹ is a 4-hour half-life, so 12 hours is three half-lives and the peak halves three times: 78.31 × 0.125 = 9.799 mg/L, an eighth of the peak and well below it.', lo:0, hi:78.31},
+ check:{t:'k = 0.1732 hr⁻¹ is a 4-hour half-life, so 12 hours is three half-lives and the peak halves three times: 78.31 × 0.125 is just under 9.799 mg/L, an eighth of the peak and well below it.', lo:0, hi:78.31},
  teach:[
   {t:'After the last intravenous (IV) bolus dose, count half-lives from the steady-state peak. The interval τ plays no part once dosing has stopped.'},
   ...M6_NDOSE],

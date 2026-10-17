@@ -944,7 +944,7 @@ const Q_MODULE2 = [
  steps:[
   {k:'setup', t:'Cp = A·e^(−αt) + B·e^(−βt), with A = 12 mg/L, α = 5.8 hr⁻¹, B = 18 mg/L, β = 0.16 hr⁻¹',
    why:'The coefficients and exponents are read straight off the equation. The larger rate constant, 5.8 hr⁻¹, is distribution, so the 12 mg/L in front of it is A; the smaller pair is elimination. Here B exceeds A, which is allowed: the ordering rule applies to the exponents, not to the intercepts.'},
-  {k:'algebra', t:'First term: (12 mg/L)·e^(−5.8 × 3) = (12 mg/L)(2.76e−8) = 0.00000033 mg/L',
+  {k:'algebra', t:'First term: (12 mg/L)·e^(−5.8 × 3) = (12 mg/L)(2.78e−8) = 0.00000033 mg/L',
    why:'The exponent is −17.4, so the distribution term has effectively disappeared by 3 hours. Its half-life is only 0.12 hr, so three hours is about twenty-five distribution half-lives.'},
   {k:'algebra', t:'Second term: (18 mg/L)·e^(−0.16 × 3) = (18 mg/L)(0.61878) = 11.138 mg/L',
    why:'The exponent is −0.48 and e raised to it is 0.61878. The beta half-life is 4.33 hr, so at 3 hours somewhat more than half of the 18 mg/L intercept should remain, which it does.'},
