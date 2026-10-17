@@ -962,7 +962,7 @@ const Q_MODULE3 = [
 {id:'inf-n19', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'load', concept:'loading-dose-for-css', skill:'loading',
  source:'slide', dupOf:'inf-n12',
- stem:'You are asked to recommend an IV loading dose that will rapidly achieve a steady-state concentration of 20 mg/L. The half-life of the drug is 5 hours and the volume of distribution is 16 L. What loading dose do you recommend?',
+ stem:'You are asked to recommend an IV loading dose that will rapidly achieve a steady-state concentration of 20 mg/L. The half-life of the drug is 5 hours and the volume of distribution is 16 L. What loading dose do you recommend? (Part a: R = 44.35 mg/hr.)',
  units:'mg',
  answer:320,
  tol:8,

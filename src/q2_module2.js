@@ -1232,7 +1232,7 @@ const Q_MODULE2 = [
 {id:'m2-n-999b', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
  topic:'bolus1', sub:'calc', concept:'time-for-999-percent', skill:'krate',
  source:'slide', dupOf:'m2-n-999a',
- stem:'An antibiotic given by intravenous bolus injection has an elimination half-life of 2.5 hours. How much time is required for 99.9% of the drug to be eliminated from the body?',
+ stem:'An antibiotic given by intravenous bolus injection has an elimination half-life of 2.5 hours. How much time is required for 99.9% of the drug to be eliminated from the body? (Part a: k = 0.2769 hr⁻¹.)',
  units:'hr',
  answer:25,
  tol:0.8,

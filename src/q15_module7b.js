@@ -498,7 +498,7 @@ const Q_MODULE7B = [
 
 {id:'pd-ex-c', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'teff', concept:'teff-dose-change', skill:'pkpd', source:'slide',
- stem:PD_EX + ' What is the new teff for this drug if the dose were increased by a factor of two to 500 mg?',
+ stem:PD_EX + ' What is the new teff for this drug if the dose were increased by a factor of two to 500 mg? (Part a: teff = 26.35 hr for a single 250-mg IV dose.)',
  units:'hr', answer:30.97, tol:0.31,
  steps:[
   {k:'setup', t:'C0 = {{frac:500 mg|24 L}} = 20.83 mg/L; Ceff = 0.2 mcg/mL = 0.2 mg/L',
@@ -662,7 +662,7 @@ const Q_MODULE7B = [
 
 {id:'pd-p1b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'teff', concept:'teff-dose-change', skill:'pkpd', source:'slide',
- stem:PD_P1 + ' b. What is the new teff or for this drug if the dose were increased by a factor of four to 2000 mg?',
+ stem:PD_P1 + ' b. What is the new teff or for this drug if the dose were increased by a factor of four to 2000 mg? (Part a: teff = 8.69 hr for a single 500-mg IV bolus dose.)',
  units:'hr', answer:18.69, tol:0.19,
  steps:[
   {k:'setup', t:'C0 = {{frac:2000 mg|15 L}} = 133.3 mg/L; k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹; Ceff = 10 mg/L',
@@ -738,7 +738,7 @@ const Q_MODULE7B = [
 
 {id:'pd-p3b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'teff', concept:'teff-dose-change', skill:'pkpd', source:'slide',
- stem:PD_P3 + ' b. What is the expected duration of action of this antibiotic in this patient if the dose were doubled?',
+ stem:PD_P3 + ' b. What is the expected duration of action of this antibiotic in this patient if the dose were doubled? (Part a: teff = 11.56 hr at 20 mg/kg.)',
  units:'hr', answer:15.16, tol:0.15,
  steps:[
   {k:'setup', t:'Doubled dose: 40 mg/kg; C0 = {{frac:40 mg/kg|0.3 L/kg}} = 133.3 mg/L; Ceff = 7.2 mg/L',

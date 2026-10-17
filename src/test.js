@@ -701,6 +701,35 @@ console.log('\n=== 5e. What an explanation may say ===');
     else console.log('  ok    every part that needs an earlier result carries it, so it can be answered when drawn alone');
   }
 
+  /* The same rule read from the working: an earlier part's numeric answer that a
+     later part's steps use, but do not produce with "=", must be stated in that
+     part's stem at the precision the steps print. Answers are matched at 0 to 4
+     decimals within 0.05 per cent, and only with three or more significant digits. */
+  {
+    const by = Object.fromEntries(X.QUESTIONS.concat(X.EXTRAS).map(q => [q.id, q]));
+    const plain = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '($1)/($2)');
+    const forms = v => [0, 1, 2, 3, 4].map(d => (+v).toFixed(d))
+      .filter((t, i, a) => a.indexOf(t) === i && Math.abs(+t - v) <= Math.abs(v) * 0.0005 + 1e-12 && t.replace(/\D/g, '').replace(/^0+/, '').length >= 3);
+    const esc = t => t.replace(/\./g, '\\.');
+    const unstated = [];
+    for (const c of X.CHAINS) {
+      const parts = (c.parts || []).map(id => by[id]).filter(Boolean);
+      parts.forEach((q, i) => {
+        const work = (q.steps || []).map(s => plain(s.t)).join(' ; ');
+        const stemNums = (plain(q.stem).match(/\d[\d,]*\.?\d*/g) || []).map(n => +n.replace(/,/g, ''));
+        for (const p of parts.slice(0, i)) {
+          if (p.type !== 'numeric') continue;
+          const t = forms(p.answer).find(t => new RegExp('(^|[^0-9.])' + esc(t) + '(?![0-9])').test(work)
+            && !new RegExp('[=≈]\\s*' + esc(t) + '(?![0-9])').test(work)
+            && !stemNums.some(x => x.toFixed((t.split('.')[1] || '').length) === t));
+          if (t) unstated.push(`${q.id} uses ${p.id} = ${t}`);
+        }
+      });
+    }
+    if (unstated.length) bad(`a part's working uses an earlier part's result that its stem does not state (${unstated.length}): ` + unstated.join(', '));
+    else console.log('  ok    every earlier result a part\'s working uses is stated in that part\'s stem');
+  }
+
   /* A paper keeps the parts of one problem together and in order. */
   {
     const set = X.CHAINS.find(c => c.id === 'e2r-sheet'), byIdQ = Object.fromEntries(X.QUESTIONS.map(q => [q.id, q]));

@@ -8,6 +8,7 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - A Quiz 5 card (Mon 19 Oct) on Topics: what she said to prepare, drills and a timed practice quiz.
 - Modules 7b (PK-PD) and 8 (nonlinear) appear in the menus; their questions are being added.
 - Worked steps on 27 questions now print arithmetic that follows from the numbers shown.
+- 45 problem parts now state the earlier results they use, so each can be answered when met alone.
 
 ## 2026-10-08 (build-it: no greyed pieces after Next)
 - Build it: after Next, pieces from the previous equation no longer show greyed out and untappable in the new one.
