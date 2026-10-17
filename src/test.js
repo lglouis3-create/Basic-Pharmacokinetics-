@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -1042,6 +1042,53 @@ console.log('\n=== 10. Bank fields are plain text ===');
   const sheetYes = X.EQUATIONS.filter(e => e.sheet === 'yes').map(e => e.id), mapped = new Set(L.flatMap(l => [l.eq, ...(l.alsoEq || [])]));
   const unmapped = sheetYes.filter(id => !mapped.has(id));
   if (unmapped.length) bad(`equations marked "on the sheet" that no sheet line carries: ${unmapped.join(', ')}`); else console.log(`  ok    every equation marked on the sheet appears on a sheet line (${sheetYes.length})`);
+})();
+
+/* Textbook chapters atop Guides: every card carries the card-writer's fields,
+   every quote is non-empty, and the section renders with each card and fold. */
+console.log('\n=== Textbook reading cards ===');
+(() => {
+  const RS = X.READINGS;
+  if (!RS.length) { bad('READINGS is empty: no reading card was built'); return; }
+  const REQ = ['id','title','source','file','lecture','kind','about','sections','lecture_use','read_for',
+               'beyond_lecture','terms','discussed_in_class','her_words','truncated','module','date'];
+  const isStr = v => typeof v === 'string' && v.trim().length > 0;
+  for (const r of RS) {
+    const miss = REQ.filter(k => !(k in r));
+    if (miss.length) { bad(`reading ${r.id}: missing ${miss.join(', ')}`); continue; }
+    const probs = [];
+    for (const k of ['id','title','file','lecture','kind','about']) if (!isStr(r[k])) probs.push(k + ' empty');
+    if (!['chapter','article','guideline'].includes(r.kind)) probs.push('kind ' + r.kind);
+    const sents = (r.about.match(/[.!?](\s|$)/g) || []).length;
+    if (sents < 3 || sents > 5) probs.push(`about has ${sents} sentences, not 3 to 5`);
+    const arr = (k, lo, hi) => { const a = r[k]; if (!Array.isArray(a)) return probs.push(k + ' not a list');
+      if (a.length < lo || a.length > hi) probs.push(`${k} has ${a.length}, not ${lo} to ${hi}`);
+      if (a.some(x => !isStr(x))) probs.push(k + ' has an empty entry'); };
+    arr('read_for', 5, 10); arr('beyond_lecture', 3, 8);
+    if (!Array.isArray(r.sections) || !r.sections.length || r.sections.some(x => !isStr(x))) probs.push('sections empty');
+    if (!Array.isArray(r.terms) || r.terms.length < 5 || r.terms.length > 12 || r.terms.some(t => !isStr(t.term) || !isStr(t.chapter_definition)))
+      probs.push('terms must be 5 to 12 {term, chapter_definition}, none empty');
+    if (!Array.isArray(r.lecture_use) || r.lecture_use.some(u => !isStr(u.point) || !isStr(u.lecture_evidence) || !isStr(u.date)))
+      probs.push('a lecture_use entry lacks its point, quote or date');
+    if (!Array.isArray(r.her_words) || r.her_words.some(w => !isStr(w.t) || !isStr(w.date))) probs.push('a her_words quote or its date is empty');
+    if (typeof r.discussed_in_class !== 'boolean' || typeof r.truncated !== 'boolean') probs.push('discussed_in_class and truncated must be true or false');
+    if (!r.discussed_in_class && (r.lecture_use.length || r.her_words.length)) probs.push('lecture quotes on a reading marked not discussed');
+    if (probs.length) bad(`reading ${r.id}: ${probs.join('; ')}`);
+    else console.log(`  ok    ${r.id}: all fields present (${r.read_for.length} read-for, ${r.terms.length} terms, ${r.lecture_use.length} lecture matches, ${r.her_words.length} quotes)`);
+  }
+  const html = X.readingsHTML(() => true);
+  const missingCard = RS.filter(r => !html.includes(`id="rd-${r.id}"`)).map(r => r.id);
+  const folds = ['About','Sections','Read for','Terms it defines','Beyond the lecture'];
+  const noFold = folds.filter(f => !html.includes(`<summary>${f}</summary>`));
+  if (!/<h2>Textbook chapters<\/h2>/.test(html) || missingCard.length || noFold.length || /undefined|NaN/.test(html))
+    bad(`the Textbook chapters section does not render: missing cards ${missingCard.join(', ') || 'none'}, folds ${noFold.join(', ') || 'none'}`);
+  else console.log(`  ok    the Textbook chapters section renders ${RS.length} card(s) with their folds`);
+  const chipsOn = (html.match(/data-rdjump=/g) || []).length, chipsOff = (X.readingsHTML(() => false).match(/data-rdjump=/g) || []).length;
+  if (chipsOff || chipsOn !== RS.reduce((n, r) => n + (r.guide || []).length, 0)) bad(`guide chips drawn without their target (${chipsOff}) or missing with it (${chipsOn})`);
+  else console.log('  ok    a guide chip is drawn only when its guide section exists');
+  const badLead = RS.filter(r => (X.rdLead(r.about)[0].match(/[.!?](\s|$)/g) || []).length !== 2).map(r => r.id);
+  if (badLead.length) bad(`card lead is not two sentences: ${badLead.join(', ')}`);
+  else console.log('  ok    each card leads with two sentences');
 })();
 
 console.log(`\n${fails ? 'FAILURES: '+fails : 'All checks passed'}${warns ? '  (warnings: '+warns+')' : ''}\n`);

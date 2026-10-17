@@ -3,6 +3,7 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-17 (exam papers survive a reload; concept statuses)
+- Guides: a Textbook chapters card for Chapter 22 (PK-PD): what it covers, sections to read, terms it defines.
 - Exam sim: a paper in progress is saved on every answer; a reload brings it back with the same clock.
 - A paper whose time ran out while the page was closed is submitted when the page opens again.
 - Weak spots: a card per weak concept with its status and counts, Practice this concept, and spaced-review checks.

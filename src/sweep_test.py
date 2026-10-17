@@ -6,7 +6,8 @@ answers (right, wrong, guessed; multiple choice, numeric and matching) so
 Weak spots and the review plan have content, then opens every tab and checks
 no page error, no sideways scroll, and no "undefined" or "NaN" on screen. It
 also answers a matching question at each width and checks every dropdown fits
-the screen, and steps through each step-through figure.
+the screen, and steps through each step-through figure. The Textbook chapters
+section atop Guides is checked at 390 and 1100 px with its folds closed and open.
 
 The drill has no dark theme of its own; the dark pass checks the page still
 renders under a dark system setting.
@@ -119,15 +120,61 @@ def concept_check(b, shots):
             ctx.close()
 
 
+def readings_check(b, shots):
+    """The Textbook chapters section atop Guides at 390 and 1100 px, light and dark,
+    with every fold closed and then open: present, every card inside the width, no sideways scroll."""
+    path = pathlib.Path(course_output()).resolve()
+    for scheme in ('light', 'dark'):
+        for w in (390, 1100):
+            ctx = b.new_context(viewport={'width': w, 'height': 900}, color_scheme=scheme)
+            page = ctx.new_page()
+            errs = []
+            page.on('pageerror', lambda e: errs.append(str(e)))
+            page.add_init_script("window.prompt = () => 'Readings'; window.alert = () => {}")
+            page.goto(path.as_uri())
+            page.wait_for_timeout(600)
+            page.evaluate("show('guide')")
+            page.wait_for_timeout(250)
+            print(f'\n=== Guides, Textbook chapters: {w} px, {scheme} ===')
+            n = page.evaluate("typeof READINGS === 'undefined' ? 0 : READINGS.length")
+            for state in ('folded', 'open'):
+                if state == 'open':
+                    page.evaluate("document.querySelectorAll('#v-guide .rdfold').forEach(d => d.open = true)")
+                    page.wait_for_timeout(150)
+                info = page.evaluate("""() => { const s = document.querySelector('#v-guide .rdsec');
+                  if (!s) return null;
+                  const cards = [...s.querySelectorAll('.rdcard')];
+                  return {first: document.querySelector('#v-guide').firstElementChild === s, n: cards.length,
+                    over: cards.filter(c => c.getBoundingClientRect().right > innerWidth + 0.5 || c.scrollWidth > c.clientWidth + 1).map(c => c.id),
+                    sw: document.documentElement.scrollWidth, txt: s.innerText}; }""")
+                check(bool(info) and info['first'] and info['n'] == n and n > 0,
+                      f'{state}: the section is first on Guides with {n} card(s)', str(info and {k: info[k] for k in ('first', 'n')}))
+                if not info:
+                    continue
+                check(not info['over'] and info['sw'] <= w, f'{state}: cards fit the width, no sideways scroll',
+                      f"scrollWidth {info['sw']}, past the edge: {info['over']}")
+                bad = [x for x in ('undefined', 'NaN') if x in info['txt']]
+                check(not bad, f'{state}: no undefined or NaN in the section', ', '.join(bad))
+                if shots:
+                    pathlib.Path(shots).mkdir(parents=True, exist_ok=True)
+                    box = page.evaluate("""() => { const r = document.querySelector('#v-guide .rdsec').getBoundingClientRect();
+                      return {x: 0, y: r.top + scrollY - 8, width: innerWidth, height: Math.min(r.height + 16, 6000)}; }""")
+                    page.screenshot(path=f'{shots}/readings-{scheme}-{w}-{state}.png', full_page=True, clip=box)
+            check(not errs, 'no page errors', '; '.join(errs[:2]))
+            ctx.close()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--shots', help='write a screenshot of every tab here')
     ap.add_argument('--concept-shots', help='write a screenshot of the Weak spots concepts section here')
+    ap.add_argument('--readings-shots', help='write screenshots of the Textbook chapters section here')
     a = ap.parse_args()
     path = pathlib.Path(course_output()).resolve()
     with sync_playwright() as p:
         b = p.chromium.launch()
         concept_check(b, a.concept_shots)
+        readings_check(b, a.readings_shots)
         for scheme in ('light', 'dark'):
             for w in (375, 1100):
                 ctx = b.new_context(viewport={'width': w, 'height': 900}, color_scheme=scheme)

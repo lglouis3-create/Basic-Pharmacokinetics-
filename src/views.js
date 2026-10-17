@@ -3490,7 +3490,65 @@ function renderDoc(el, html, prefix){
 }
 function renderRef(){ renderDoc($('#v-ref'), refFigures(refDocHTML()), 'ref'); }
 function renderTell(){ renderDoc($('#v-tell'), refFigures(TELL_HTML), 'tell'); }
-function renderGuide(){ renderDoc($('#v-guide'), refFigures(GUIDE_HTML), 'guide'); }
+function renderGuide(){
+  const el = $('#v-guide');
+  renderDoc(el, refFigures(GUIDE_HTML), 'guide');
+  mountReadings(el);
+}
+
+/* ---------- Textbook chapters: one card per reading (readings.js, from gen/readings.py) ----------
+   A card shows its title, source line and the first two sentences of "about";
+   the rest opens in folds. Its chips jump to a module's guide section, and a chip
+   is drawn only when the Guides tab has a heading that starts with its module
+   ("Module 7b"), so a module whose guide is not written yet shows no chip. */
+const RD_LIST = () => typeof READINGS === 'undefined' ? [] : READINGS;
+const rdLead = t => { const m = String(t || '').match(/^((?:[^.!?]*[.!?]\)?\s+){1,2})([\s\S]*)$/);
+  return m && m[2].trim() ? [m[1].trim(), m[2].trim()] : [String(t || ''), '']; };
+const rdHeadRe = mod => new RegExp('^\\s*Module ' + mod.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![0-9a-z])', 'i');
+function rdCardHTML(r, hasTarget){
+  const fold = (title, inner) => inner ? `<details class="rdfold"><summary>${title}</summary><div class="rdbody">${inner}</div></details>` : '';
+  const li = arr => arr && arr.length ? `<ul>${arr.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+  const use = (r.lecture_use || []).length ? `<ul>${r.lecture_use.map(u => `<li><b>${esc(u.point)}</b>${u.chapter_location ? ` <small>(${esc(u.chapter_location)})</small>` : ''}${u.lecture_evidence ? `<div class="rdq">“${esc(u.lecture_evidence)}” <small>${esc(u.date || '')}</small></div>` : ''}</li>`).join('')}</ul>` : '';
+  const words = (r.her_words || []).length ? `<ul>${r.her_words.map(w => `<li>“${esc(w.t)}”${w.date ? ` <small>${esc(w.date)}</small>` : ''}</li>`).join('')}</ul>` : '';
+  const terms = (r.terms || []).length ? `<ul>${r.terms.map(t => `<li><b>${esc(t.term)}</b>: ${esc(t.chapter_definition)}</li>`).join('')}</ul>` : '';
+  const [lead, rest] = rdLead(r.about);
+  const chips = (r.guide || []).filter(([mod]) => hasTarget(mod))
+    .map(([mod, label]) => `<button type="button" class="chip" data-rdjump="${esc(mod)}">${esc(label)}</button>`).join('');
+  const status = r.discussed_in_class ? 'Discussed in class' : 'Assigned reading';
+  return `<div class="rdcard" id="rd-${esc(r.id)}">
+    <div class="rdhead"><b>${esc(r.title)}</b> <span class="rdtag">${esc(status)}</span></div>
+    <div class="rdsrc">${esc(r.source || '')}${r.lecture ? ` · ${esc(r.lecture)}` : ''}${r.truncated ? ' · summary from a partial text' : ''}</div>
+    <p class="rdlead">${esc(lead)}</p>${r.numbering_note ? `<p class="rdnote">${esc(r.numbering_note)}</p>` : ''}
+    ${chips ? `<div class="rdchips">${chips}</div>` : ''}
+    ${fold('About', rest ? `<p>${esc(r.about)}</p>` : '')}
+    ${fold('Sections', li(r.sections))}
+    ${fold('Read for', li(r.read_for))}
+    ${fold('Where the lecture used it', use)}
+    ${fold('Her words', words)}
+    ${fold('Terms it defines', terms)}
+    ${fold('Beyond the lecture', li(r.beyond_lecture))}
+  </div>`;
+}
+function readingsHTML(hasTarget){
+  const RS = RD_LIST(); if(!RS.length) return '';
+  const has = hasTarget || (() => false);
+  return `<div class="rdsec" id="readings"><h2>Textbook chapters</h2>
+    <p class="sub">What each assigned chapter covers, the sections closest to the module, and the terms it defines. Folded parts open on tap.</p>
+    ${RS.map(r => rdCardHTML(r, has)).join('')}</div>`;
+}
+function mountReadings(el){
+  if(!el || !el.querySelectorAll || !RD_LIST().length) return;
+  const heads = [...el.querySelectorAll('h2, h3')];
+  const target = mod => heads.find(h => rdHeadRe(mod).test(h.textContent || ''));
+  const box = document.createElement('div');
+  box.innerHTML = readingsHTML(mod => !!target(mod));
+  const sec = box.firstElementChild; if(!sec) return;
+  el.insertBefore(sec, el.firstChild);
+  sec.querySelectorAll('[data-rdjump]').forEach(b => b.onclick = () => {
+    const t = target(b.dataset.rdjump); if(!t) return;
+    openAncestors(t); scrollToEl(t);
+  });
+}
 
 /* ==========================================================================
    SETTINGS
