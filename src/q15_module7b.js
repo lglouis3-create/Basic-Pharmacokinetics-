@@ -456,6 +456,42 @@ const Q_MODULE7B = [
  teach:[PD_T_DOSEFOR],
  cite:PD_DECK + ', slide 8 (dose to double teff)'},
 
+{id:'pd-c23', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
+ topic:'pkpd', sub:'teff', concept:'teff-form-choice', skill:'apply', source:'slide',
+ stem:'A single IV bolus dose, the apparent volume of distribution, the minimum effective concentration and the elimination half-life are given, but not k. Which form of the duration-of-activity equation takes these quantities as they are given?',
+ options:[
+  {t:'The 1.44 t½ form', correct:true,
+   why:'teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}) takes the half-life directly, because 1.44 = {{frac:1|0.693}} stands in for {{frac:1|k}}. No k has to be worked out first.'},
+  {t:'The natural-log form, divided by k',
+   why:'Choosing this skips a step the stem leaves open. teff = {{frac:ln C0 − ln Ceff|k}} needs k, so k = {{frac:0.693|t½}} would have to come first; it gives the same teff, by one more line.'},
+  {t:'The base-10 log form, divided by k',
+   why:'Choosing this adds two conversions. The 2.3 turns base-10 logarithms into natural ones and the division still needs k, which the stem does not give.'},
+  {t:'D0 = Ceff × VD × e^(k teff)',
+   why:'Choosing this solves for the wrong quantity. That line gives the dose for a chosen duration; here the dose is given and the duration is asked.'}],
+ teach:[{h:'Picking the teff form', list:[
+  'A k in the stem: teff = {{frac:ln C0 − ln Ceff|k}}, with C0 = {{frac:D0|VD}}.',
+  'A half-life in the stem: teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}), or k = {{frac:0.693|t½}} first.',
+  'All forms give the same duration; the base-10 form needs the 2.3.']}],
+ cite:PD_DECK + ', slides 6 "Relationship Between Dose and Duration of Activity (teff)" and 9 "Effect of Dose and Elimination Half-life on Duration of Activity"'},
+
+{id:'pd-c24', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
+ topic:'pkpd', sub:'teff', concept:'double-dose-c0', skill:'apply', source:'slide',
+ stem:'The IV bolus dose of a drug that follows linear, first-order, one-compartment pharmacokinetics is doubled, from 250 mg to 500 mg, with VD = 24 L. What happens to C0, the plasma concentration just after the dose?',
+ options:[
+  {t:'It doubles, from 10.42 to 20.83 mg/L', correct:true,
+   why:'C0 = {{frac:D0|VD}}: {{frac:250 mg|24 L}} = 10.42 mg/L and {{frac:500 mg|24 L}} = 20.83 mg/L. The level is in proportion to the dose; it is the duration that gains only one half-life.'},
+  {t:'It rises by one half-life\'s worth',
+   why:'Choosing this moves the duration rule onto the level. teff gains one half-life when the dose doubles because the dose sits inside a logarithm; C0 has no logarithm, so it doubles.'},
+  {t:'It stays the same; only the duration changes',
+   why:'Choosing this keeps VD in mind and drops the dose. VD is unchanged, but C0 = {{frac:D0|VD}} has the dose on top, so twice the dose gives twice the level.'},
+  {t:'It rises by a factor of ln 2',
+   why:'Choosing this takes the ln 2 from the duration. Doubling adds {{frac:ln 2|k}} to teff; the level itself rises by a factor of 2.'}],
+ teach:[{h:'Doubling an IV bolus', list:[
+  'C0 = {{frac:D0|VD}}: twice the dose, twice the level just after the dose.',
+  'teff = {{frac:ln C0 − ln Ceff|k}}: twice C0 adds {{frac:ln 2|k}}, one half-life, to the duration.',
+  'Her slide problem: 26.35 hr at 250 mg, 30.97 hr at 500 mg.']}],
+ cite:PD_DECK + ', slides 6 and 8 (her working of the slide 7 "Practice Problem", 250 mg and 500 mg into 24 L)'},
+
 /* ═══════════════ SLIDE 7 PRACTICE PROBLEM, WORKED ON SLIDE 8 ═══════════ */
 
 {id:'pd-ex-a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',

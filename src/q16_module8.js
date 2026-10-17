@@ -363,7 +363,7 @@ const Q_MODULE8 = [
  steps:[
   {k:'setup', t:'Vmax = {{frac:R(KM + Css)|Css}}',
    why:'The dose-rate line solved for Vmax, with one dose and the steady-state concentration that dose produced; the other pair gives the same value.'},
-  {k:'algebra', t:'Vmax = {{frac:(300 mg/day)(5.913 + 5.1) mg/L|5.1 mg/L}} = {{frac:3303.9|5.1}} = 647.83 mg/day',
+  {k:'algebra', t:'Vmax = {{frac:(300 mg/day)(5.91304 + 5.1) mg/L|5.1 mg/L}} = {{frac:3303.91|5.1}} = 647.83 mg/day',
    why:'KM is carried unrounded, 5.913 mg/L: her 647.83 mg/day comes from it, and KM rounded to 5.91 gives 647.6 mg/day. mg/L cancels and Vmax keeps the units of the dose, mg/day. The 500 mg/day with 20 mg/L pair gives 500 × 25.913 over 20 = 647.83 mg/day as well.'},
   {k:'round', t:'Vmax = 647.8 mg/day',
    why:'647.83 mg/day to one decimal place. Her sheet keeps 647.83 mg/day and carries it into the dose, half-life, clearance and Css of parts b to d.'}],
@@ -703,7 +703,7 @@ const Q_MODULE8 = [
  stem:'Drugs that display Michaelis-Menten saturation kinetics will often exhibit zero-order kinetics at low concentrations and first-order kinetics at high concentrations.',
  options:[
   {t:'True',
-   why:'Choosing this reverses the two ends. Well below KM the rate is (Vmax/KM) × Cp, proportional to concentration, which is first order; well above KM the rate equals Vmax whatever the concentration, which is zero order.'},
+   why:'Choosing this reverses the two ends. Well below KM the rate is {{frac:Vmax|KM}} × Cp, proportional to concentration, which is first order; well above KM the rate equals Vmax whatever the concentration, which is zero order.'},
   {t:'False', correct:true,
    why:'The statement has the orders the other way round. At low concentrations, Cp much less than KM, elimination looks first order; at high concentrations, Cp much greater than KM, the enzyme runs at Vmax and elimination looks zero order.'}],
  teach:[NL_ORDER],
@@ -791,7 +791,7 @@ const Q_MODULE8 = [
   {t:'KM',
    why:'Choosing this swaps the two Michaelis-Menten parameters. KM, the Michaelis constant, reflects the capacity of the enzyme system and is a concentration, mg/L; it is not a rate.'},
   {t:'k′',
-   why:'Choosing this takes the low-concentration constant for the maximum. k′ = Vmax/KM is the first-order constant that applies only when Cp is much less than KM; it is not the top rate.'},
+   why:'Choosing this takes the low-concentration constant for the maximum. k′ = {{frac:Vmax|KM}} is the first-order constant that applies only when Cp is much less than KM; it is not the top rate.'},
   {t:'R',
    why:'Choosing this mixes the dose rate with the elimination ceiling. R is the amount given per unit time; at steady state it equals the elimination rate at Css, which is always below Vmax.'}],
  teach:[{h:'The two parameters', list:[
@@ -824,7 +824,7 @@ const Q_MODULE8 = [
  options:[
   {t:'It equals Vmax, so elimination is zero order', correct:true,
    why:'With Cp much greater than KM, KM is negligible in KM + Cp, the Cp terms cancel, and −dCp/dt = Vmax, a constant. A rate independent of concentration is zero order: more drug is not removed any faster.'},
-  {t:'It equals (Vmax/KM) × Cp, so elimination is first order',
+  {t:'It equals {{frac:Vmax|KM}} × Cp, so elimination is first order',
    why:'Choosing this applies the low-concentration limit at the wrong end. Dropping Cp from KM + Cp is allowed only when Cp is much less than KM; here it is KM that drops out.'},
   {t:'It rises in proportion to Cp, as for most drugs',
    why:'Choosing this carries first-order behaviour into saturation. Once the enzyme is saturated, adding drug cannot raise the rate above Vmax, so the rate no longer follows Cp.'},
@@ -838,12 +838,12 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'kmcp', concept:'nl-low-conc', skill:'apply', source:'both',
  stem:'Which of the following is true regarding the rate of elimination of a saturable drug when the plasma concentration (Cp) is much less than the Michaelis constant (KM)?',
  options:[
-  {t:'It equals (Vmax/KM) × Cp = k′Cp, so elimination looks first order', correct:true,
-   why:'With Cp much less than KM, Cp is negligible in KM + Cp, leaving (Vmax/KM) × Cp. Vmax and KM are both constants, so their ratio is a constant k′, and a rate proportional to Cp is first order.'},
+  {t:'It equals {{frac:Vmax|KM}} × Cp = k′Cp, so elimination looks first order', correct:true,
+   why:'With Cp much less than KM, Cp is negligible in KM + Cp, leaving {{frac:Vmax|KM}} × Cp. Vmax and KM are both constants, so their ratio is a constant k′, and a rate proportional to Cp is first order.'},
   {t:'It equals Vmax, so elimination is zero order',
    why:'Choosing this applies the high-concentration limit at the wrong end. The rate equals Vmax only when Cp is much greater than KM and KM drops out.'},
   {t:'It does not depend on Vmax',
-   why:'Choosing this drops Vmax along with Cp. Only Cp is negligible in the denominator; Vmax stays in the numerator and sets k′ = Vmax/KM.'},
+   why:'Choosing this drops Vmax along with Cp. Only Cp is negligible in the denominator; Vmax stays in the numerator and sets k′ = {{frac:Vmax|KM}}.'},
   {t:'It is zero, because too little drug is present to bind the enzyme',
    why:'Choosing this reads a low concentration as no elimination. A low concentration gives a proportionally low rate, k′Cp, which is the first-order behaviour of curve B.'}],
  teach:[NL_ORDER],
@@ -993,7 +993,23 @@ const Q_MODULE8 = [
  teach:[{h:'Summary', list:[
    'Saturable or dose-dependent pharmacokinetics: nonlinear changes in plasma concentrations and AUC with increases in dose or multiple administrations.',
    'Clearance and half-life are usually not constant within nonlinear processes.']}],
- cite:NL_DECK + ', slide 19 "Summary"'}
+ cite:NL_DECK + ', slide 19 "Summary"'},
+
+{id:'nl-c19', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-vmax-either-pair', skill:'apply', source:'both',
+ stem:'A patient reached a steady state of 10 mg/L on 6 mg/kg/day and 20 mg/L on 8 mg/kg/day, and KM was found to be 10 mg/L. Which dose and concentration are used to calculate Vmax?',
+ options:[
+  {t:'Either pair, kept together; both give 12 mg/kg/day', correct:true,
+   why:'Vmax = {{frac:R(KM + Css)|Css}}: {{frac:8(10 + 20)|20}} = 12 and {{frac:6(10 + 10)|10}} = 12 mg/kg/day. The second pair is a check on the first.'},
+  {t:'Only the higher dose with its concentration',
+   why:'Choosing this treats one pair as the right one. Both pairs satisfy the same Michaelis-Menten line for the same patient, so each gives the same Vmax.'},
+  {t:'One pair\'s dose with the other pair\'s concentration',
+   why:'Choosing this mixes the pairs. A dose belongs with the steady state it produced: 8 with 10 mg/L gives 16 and 6 with 20 mg/L gives 9 mg/kg/day, neither of them Vmax.'},
+  {t:'The average dose with the average concentration',
+   why:'Choosing this treats the line as linear. Css rises out of proportion to R: 7 mg/kg/day gives {{frac:7 × 10|12 − 7}} = 14 mg/L, not 15, so only a measured pair can be used.'}],
+ teach:[NL_DIRECT],
+ quote:'you should get the same answer regardless of which way you use it',
+ cite:NL_DECK + ', slides 14 and 15 (her second Example); transcript 10-14'},
 ];
 
 CHAINS.push(

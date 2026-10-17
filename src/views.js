@@ -1039,7 +1039,7 @@ function termQuestions(){
   const out = [];
   for(const t of TERMS){
     const ds = termDistractors(t, 3);
-    const base = {prof: 'Mosley', tier: 'new', exam: t.module <= 3 ? 1 : 2, module: t.module, lecture: t.lecture,
+    const base = {prof: 'Mosley', tier: 'new', exam: (COURSE.lectures.find(l => l.module === t.module) || {exam: t.module <= 3 ? 1 : 2}).exam, module: t.module, lecture: t.lecture,
       topic: 'terms', sub: t.group, concept: 'term:' + t.id, skill: 'term', source: t.src || 'slide', cite: t.cite, termId: t.id,
       teach: [{h: termName(t), list: [t.def, ...(t.hook ? [t.hook] : [])]}]};
     const named = (o, right) => ({t: o.term, correct: right, why: right ? `${termName(o)}: ${o.gist}` : `${termName(o)} means something else: ${o.gist}`});
@@ -1087,7 +1087,9 @@ function renderTerms(){
   const groupChips = `<div class="frow">${['all', ...TERM_GROUPS].map(g => `<button class="chip" data-tgroup="${esc(g)}" aria-pressed="${TV.group === g}">${g === 'all' ? 'All groups' : esc(g)}</button>`).join('')}</div>`;
   const modeTabs = `<div class="mtabs">${[['gloss', 'Glossary'], ['flash', 'Flashcards'], ['quiz', 'Quiz me']].map(([m, l]) =>
     `<button class="mtab" data-tmode="${m}" aria-pressed="${TV.mode === m}">${l}</button>`).join('')}</div>`;
-  const mods = [...new Set(TERMS.map(t => t.module))].sort((a, b) => a - b);
+  // in the Topics menu's order, so 7b (module 9) sits between 7a and 8
+  const menuAt = m => { const i = COURSE.topicsMenu.findIndex(x => x.module === m); return i < 0 ? 99 + m : i; };
+  const mods = [...new Set(TERMS.map(t => t.module))].sort((a, b) => menuAt(a) - menuAt(b));
   const modChips = `<div class="frow">${['all', ...mods].map(m => `<button class="chip" data-tmod="${m}" aria-pressed="${TV.module === m}">${m === 'all' ? 'All modules' : 'Module ' + esc(modShort(m))}</button>`).join('')}</div>`;
   let h = `<h2>Terms</h2><p class="sub">${TERMS.length} terms from her slides, Modules 1 to ${esc(modShort(mods[mods.length - 1]))}.</p>
   <details class="tabhelp" open><summary>What this tab is for</summary><ul>
@@ -1198,13 +1200,13 @@ function linksFor(q){
   if(bestT) out.push(['tell', `tell-${bestT.i}`, `Tell apart: ${clip(bestT.t, 60)}`]);
   let refs = refLinksFor(q);
   if(refs.length > 1 && REF_TOPIC_WORD[q.topic]) refs = refs.filter(r => r.t.includes(REF_TOPIC_WORD[q.topic])).concat(refs).slice(0, 1);
-  if(refs.length) out.push(['ref', `ref-${refs[0].i}`, `Reference: Module ${q.module}`]);
+  if(refs.length) out.push(['ref', `ref-${refs[0].i}`, `Reference: Module ${modShort(q.module)}`]);
   const figKeys = [q.img, ...(Array.isArray(q.teach) ? q.teach.map(p => p && p.fig) : [])].filter(Boolean);
   for(const k of figKeys){
     const d = DIAGRAMS.flatMap(g => g.figs).find(f => f.key === k);
     if(d){ out.push(['diag', `dg-${k}`, `Diagram: ${d.name}`]); break; }
   }
-  if(kindOf(q) === 'calc' && EQUATIONS.some(e => e.module === q.module)) out.push(['eq', `eq-m${q.module}`, `Equations: Module ${q.module}`]);
+  if(kindOf(q) === 'calc' && EQUATIONS.some(e => e.module === q.module)) out.push(['eq', `eq-m${q.module}`, `Equations: Module ${modShort(q.module)}`]);
   return out;
 }
 /* The words that name what a question is about: the keyed option, the
@@ -2417,7 +2419,8 @@ let REF_HEADS = null;
 const refHeads = () => REF_HEADS ||= headsOf(refDocHTML());
 const refAnchor = start => { const h = refHeads().find(x => x.t.startsWith(start)); return h ? `ref-${h.i}` : null; };
 function refLinksFor(q){
-  return q.module == null ? [] : refHeads().filter(h => new RegExp(`^Module ${q.module}[a-z]? `).test(h.t));
+  // by the module's printed label (7a, 7b), so module 9 finds its "Module 7b" section and 7a does not take it
+  return q.module == null ? [] : refHeads().filter(h => new RegExp(`^Module ${modShort(q.module)}[a-z]? `).test(h.t));
 }
 const plainMath = s => String(s || '').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '($1)/($2)');
 const clip = (s, n) => s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : s;
@@ -3159,7 +3162,7 @@ function foldDoc(el, prefix){
   const grouped = items.filter(x => (x.kind === 'sec' || x.kind === 'mod') && x.exam !== 'general');
   const firstGrouped = items.indexOf(grouped[0]);
   items.filter((x, n) => x.exam === 'general' && (x.kind === 'sec' || x.kind === 'mod') && n < firstGrouped).forEach(x => out.appendChild(x.node));
-  const keys = [...new Set(grouped.map(x => x.exam))].sort((a, b) => ['1', 'both', '2'].indexOf(a) - ['1', 'both', '2'].indexOf(b));
+  const keys = [...new Set(grouped.map(x => x.exam))].sort((a, b) => ['1', 'both', '2', '3'].indexOf(a) - ['1', 'both', '2', '3'].indexOf(b));
   const secCount = x => x.kind === 'mod' ? x.node.querySelectorAll('details.dsec').length : 1;
   for(const key of keys){
     const run = grouped.filter(x => x.exam === key);

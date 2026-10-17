@@ -11,6 +11,8 @@
    The Terms tab draws three questions per term from these fields at load
    (views.js, termQuestions): scene to term, term to meaning, definition to
    term. They live outside QUESTIONS, like Extra practice.
+   Module 7b terms carry module 9, as its question file does; the Terms tab
+   shows them as 7b.
    ========================================================================== */
 const TERMS = [
  {
@@ -1433,6 +1435,333 @@ const TERMS = [
   ],
   "quote": "B is the reference standard or the comparator, right? So, in our um absolute example, our reference standard would be our IV bolus.",
   "cite": "7a---Bioavailability-and-Bioequivalence.pdf, slides 9, 12 (PDF page numbering; deck prints no slide numbers); transcript 09-30",
+  "src": "both"
+ },
+ {
+  "id": "exposure-response",
+  "term": "Exposure-response relationship",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "The relationship between pharmacokinetics (PK) and pharmacodynamics (PD), also referred to as the concentration-response or concentration-effect relationship. This information is used to determine the safety and efficacy of drugs in drug approval, to understand their benefit-risk, and to derive dosing information.",
+  "gist": "The PK-PD link between how much drug is present and the response.",
+  "scene": "Data linking the drug levels patients reach to the responses they show are used during drug approval to judge safety and efficacy and to set the dosing information.",
+  "hook": "Her slide gives it three uses: safety and efficacy in drug approval, benefit-risk, and dosing information.",
+  "confuse": [
+   "pharmacodynamics",
+   "pharmacokinetics",
+   "clinical-pharmacokinetics"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slide 3 (PDF page numbering)",
+  "src": "slide"
+ },
+ {
+  "id": "maximum-effect",
+  "term": "Maximum effect (Emax)",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "As the dose increases, the drug concentration at the receptor site increases, and the pharmacologic response increases up to a maximum effect. On a plot of response against log dose, the maximum response is reached when all receptors become saturated.",
+  "gist": "The largest response the drug gives, reached when all receptors are saturated.",
+  "scene": "On a plot of response against log dose the curve levels off at the top: a higher dose still raises the concentration, but the response no longer rises.",
+  "hook": "On an ordinary dose axis the same dose change gives a large increase in response at low doses and a small one near the top.",
+  "confuse": [
+   "sigmoid-log-dose-curve",
+   "intensity",
+   "minimum-effective-concentration"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides 4, 5, 11 (PDF page numbering); Shargel 8e Chapter 22 for the symbol",
+  "src": "slide"
+ },
+ {
+  "id": "sigmoid-log-dose-curve",
+  "term": "Sigmoid log dose-response curve (S-curve)",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "Pharmacologic response versus log dose type of plots have been shown to follow a sigmoid type of curve with maximum response peaking when all receptors become saturated.",
+  "gist": "S-shaped plot of response against log dose, nearly straight in the middle.",
+  "scene": "Response is plotted against the logarithm of the dose: it starts flat, rises through a nearly straight middle portion, and levels off at the top.",
+  "hook": "Its straight middle, plotted as effect against log concentration, has slope m, the m in E = E0 - {{frac:kmt|2.3}}.",
+  "confuse": [
+   "maximum-effect",
+   "semi-log-scale",
+   "intensity"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides 5, 11 (PDF page numbering)",
+  "src": "slide"
+ },
+ {
+  "id": "onset-time",
+  "term": "Onset time",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "On a plot of plasma level against time, the time at which the rising plasma level first reaches the minimum effective concentration (MEC).",
+  "gist": "When the rising plasma level first reaches the minimum effective concentration.",
+  "scene": "After a dose, the plasma level climbs from zero; the moment it crosses the dashed MEC line is marked on the time axis.",
+  "hook": "It is a time read along the MEC line, like the duration; intensity is a height above that line.",
+  "confuse": [
+   "duration-of-action",
+   "intensity",
+   "tmax"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slide 4 (PDF page numbering)",
+  "src": "slide"
+ },
+ {
+  "id": "duration-of-action",
+  "term": "Duration of action (teff)",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "The time the plasma level stays at or above the minimum effective concentration (MEC, Ceff): the time the drug is in an effective therapeutic range. After a single IV bolus, teff = {{frac:ln C0 - ln Ceff|k}}, with C0 = {{frac:D0|VD}}.",
+  "gist": "Time the plasma level stays at or above the MEC; also called duration of activity.",
+  "scene": "One IV bolus of an antibiotic keeps the plasma level at or above 0.2 mg/L for 26.35 hours; doubling the dose stretches that to 30.97 hours.",
+  "hook": "Doubling the dose adds one half-life to it, not twice the time; doubling the half-life at the same dose doubles it.",
+  "confuse": [
+   "onset-time",
+   "intensity",
+   "half-life"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides 4, 6, 7, 8, 9, 12 (PDF page numbering)",
+  "src": "slide"
+ },
+ {
+  "id": "intensity",
+  "term": "Intensity (of effect)",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "On a plot of plasma level against time, how far the peak plasma level rises above the minimum effective concentration (MEC). With the onset and the duration, it depends on the dose and the pharmacokinetics of the drug.",
+  "gist": "How far the peak plasma level rises above the MEC.",
+  "scene": "On a plasma level curve, an arrow runs from the dashed MEC line up to the peak of the curve.",
+  "hook": "A height, not a time: onset and duration are read along the time axis.",
+  "confuse": [
+   "duration-of-action",
+   "onset-time",
+   "cmax"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slide 4 (PDF page numbering)",
+  "src": "slide"
+ },
+ {
+  "id": "minimum-toxic-concentration",
+  "term": "Minimum toxic concentration (MTC)",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "The upper dashed line on a plot of plasma level against time, above the minimum effective concentration (MEC). Levels above it are where toxicity is seen, and toxic can mean different things for different drugs.",
+  "gist": "Plasma level above which toxicity appears; the top of the therapeutic window.",
+  "scene": "A second dashed line is drawn above the effective level on a plasma level curve; a peak that rises past it is where problems start.",
+  "hook": "Ceff in the duration-of-action equations is the MEC, never this upper line.",
+  "confuse": [
+   "minimum-effective-concentration",
+   "therapeutic-window",
+   "cmax"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slide 4 (PDF page numbering); Introduction.pdf, PDF page 10 (no printed number); transcript 08-17",
+  "src": "both"
+ },
+ {
+  "id": "therapeutic-window",
+  "term": "Therapeutic window",
+  "module": 9,
+  "lecture": "L11",
+  "group": "PK-PD relationship",
+  "def": "The range of plasma levels between the minimum effective concentration (MEC) and the minimum toxic concentration (MTC); the goal of dosing is to keep the level between these two lines.",
+  "gist": "Plasma level range between the MEC and the MTC.",
+  "scene": "A seizure drug's levels are kept between about 10 and 20 mg/L: below that it does not work, above it adverse effects appear.",
+  "hook": "Phenytoin has a narrow one, which together with its nonlinear kinetics is why its dose is adjusted with care.",
+  "confuse": [
+   "minimum-effective-concentration",
+   "minimum-toxic-concentration",
+   "steady-state"
+  ],
+  "cite": "7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides 4, 6 (PDF page numbering); transcript 08-17, 10-14",
+  "src": "both"
+ },
+ {
+  "id": "linear-pharmacokinetics",
+  "term": "Linear pharmacokinetics",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "Models whose parameters do not change when different or multiple doses of a drug are given. Most drugs follow this, with first-order elimination: the rate of elimination is faster when there is more drug in the body.",
+  "gist": "Half-life and clearance stay the same at every dose.",
+  "scene": "Doubling a drug's dose doubles its AUC and leaves its half-life and clearance where they were.",
+  "hook": "Superposition depends on it: the first dose can be carried forward to steady state because the parameters have not changed.",
+  "confuse": [
+   "nonlinear-pharmacokinetics",
+   "first-order",
+   "superposition"
+  ],
+  "cite": "8 - Nonlinear PK.pdf, slide 3 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "nonlinear-pharmacokinetics",
+  "term": "Nonlinear pharmacokinetics",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "Models in which increased doses or chronic administration cause deviations from the profile observed with single doses of the same drug: the half-life and clearance change, and small changes in dose can give big changes in concentration.",
+  "gist": "Parameters change with dose or chronic dosing; small dose changes, big concentration changes.",
+  "scene": "Raising a patient's daily dose from 6 to 8 mg/kg/day doubles the steady-state level, from 10 to 20 mg/L.",
+  "hook": "Phenytoin is the course's prototype.",
+  "confuse": [
+   "linear-pharmacokinetics",
+   "saturable-pharmacokinetics",
+   "zero-order"
+  ],
+  "quote": "small changes in dose will lead to big changes in concentration.",
+  "cite": "8 - Nonlinear PK.pdf, slides 3, 14, 19 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "saturable-pharmacokinetics",
+  "term": "Saturable pharmacokinetics (dose-dependent)",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "Refers to processes that result in nonlinear changes in plasma concentrations and AUC with increases in dose or multiple administrations of the dose. The elimination half-life changes as the dose is increased, and the AUC is disproportional to the amount of bioavailable drug.",
+  "gist": "Processes giving nonlinear changes in concentration and AUC as the dose rises.",
+  "scene": "Above a certain dose, a drug's AUC climbs off the straight line it followed at lower doses, and its half-life lengthens.",
+  "hook": "Other drugs needing the same enzyme or carrier system can affect the saturation, and the ratio of metabolites can change with the dose.",
+  "confuse": [
+   "nonlinear-pharmacokinetics",
+   "capacity-limited-process",
+   "michaelis-menten-kinetics"
+  ],
+  "cite": "8 - Nonlinear PK.pdf, slides 5, 6, 19 (PDF page numbering)",
+  "src": "slide"
+ },
+ {
+  "id": "capacity-limited-process",
+  "term": "Capacity-limited process",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "A process carried out by an enzyme or carrier system that has a maximum rate, Vmax. Saturation of capacity-limited processes may be affected by other drugs requiring the same enzyme or carrier-mediated system.",
+  "gist": "A process with a top rate set by its enzyme or carrier system.",
+  "scene": "The amount of drug in the body after an IV dose falls faster when the enzyme system's top rate is 200 mg/hr than when it is 100 mg/hr.",
+  "hook": "The higher the Vmax, with KM kept the same, the faster the drug leaves the body.",
+  "confuse": [
+   "saturable-pharmacokinetics",
+   "maximum-elimination-rate",
+   "michaelis-menten-kinetics"
+  ],
+  "cite": "8 - Nonlinear PK.pdf, slides 6, 9 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "michaelis-menten-kinetics",
+  "term": "Michaelis-Menten kinetics",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "The rate law of saturable-enzymatic elimination, -{{frac:dCp|dt}} = {{frac:Vmax Cp|KM + Cp}}: the rate depends on the plasma concentration Cp and on the two constants Vmax and KM.",
+  "gist": "Saturable enzyme rate law: first order at low Cp, zero order at high.",
+  "scene": "An elimination rate equals Vmax times Cp, divided by KM plus Cp: in proportion to concentration when levels are low, constant when they are high.",
+  "hook": "Her poll keyed False the statement that such drugs are zero order at low and first order at high concentrations.",
+  "confuse": [
+   "zero-order",
+   "first-order",
+   "saturable-pharmacokinetics"
+  ],
+  "quote": "Low concentrations looks like 1st order, high concentrations looks like zero order, OK?",
+  "cite": "8 - Nonlinear PK.pdf, slide 8 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "maximum-elimination-rate",
+  "term": "Maximum elimination rate (Vmax)",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "The maximum elimination rate of a saturable process: as fast as the body will eliminate the drug. A rate, in units of concentration or amount per time, such as mg/day or mg/kg/day.",
+  "gist": "Fastest rate a saturable process can eliminate drug; amount or concentration per time.",
+  "scene": "However high the concentration climbs, a patient's body removes no more than 900 mg of the drug a day.",
+  "hook": "A constant for a given drug in a given patient, and different from one patient to another.",
+  "confuse": [
+   "michaelis-constant",
+   "dose-rate",
+   "elimination-rate-constant"
+  ],
+  "cite": "8 - Nonlinear PK.pdf, slides 7, 8, 9 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "michaelis-constant",
+  "term": "Michaelis constant (KM)",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "The constant reflecting the capacity of the enzyme system in a saturable process. Its units are concentration (mg/L), so it can be compared directly with the plasma concentration Cp.",
+  "gist": "Constant in concentration units reflecting the capacity of the enzyme system.",
+  "scene": "A patient's two daily doses and their steady-state levels give 10 mg/L: levels well below that are eliminated close to first order, levels well above it at a constant rate.",
+  "hook": "Calculated first by the direct method, and always in mg/L, never as a rate.",
+  "confuse": [
+   "maximum-elimination-rate",
+   "steady-state",
+   "minimum-effective-concentration"
+  ],
+  "cite": "8 - Nonlinear PK.pdf, slides 7, 8, 13 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "dose-rate",
+  "term": "Dose rate (R)",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "R in R = {{frac:Vmax Css|KM + Css}}: the amount of drug given per unit time, such as mg/day or mg/kg/day, that holds a nonlinear drug at the steady-state concentration Css.",
+  "gist": "Amount of drug given per unit time, such as mg/day; not a single dose.",
+  "scene": "A 65 kg patient is told to take 430 mg every day to hold an average plasma level of 24 mg/L.",
+  "hook": "A per-kilogram rate is multiplied by the weight; an amount with no interval is not an answer.",
+  "confuse": [
+   "infusion-rate",
+   "maximum-elimination-rate",
+   "loading-dose"
+  ],
+  "quote": "please don't tell me 6.62 mg per kilogram per day.",
+  "cite": "8 - Nonlinear PK.pdf, slides 11, 12 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "direct-method",
+  "term": "Direct method (KM and Vmax)",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "Two different dose rates are given to the same patient, each to steady state, and the steady-state concentration each produced is measured. The two dose-rate lines combine to give KM, then Vmax comes from either pair.",
+  "gist": "KM from two dose rates and their steady states, then Vmax.",
+  "scene": "A patient's daily dose was raised from 6 to 8 mg/kg/day; the two steady-state levels, 10 and 20 mg/L, give 10 mg/L and 12 mg/kg/day for her two constants.",
+  "hook": "Either pair gives the same Vmax; mixing one pair's rate with the other pair's level does not.",
+  "confuse": [
+   "michaelis-constant",
+   "maximum-elimination-rate",
+   "steady-state"
+  ],
+  "cite": "8 - Nonlinear PK.pdf, slides 13, 14, 15 (PDF page numbering); transcript 10-14",
+  "src": "both"
+ },
+ {
+  "id": "phenytoin",
+  "term": "Phenytoin",
+  "module": 8,
+  "lecture": "L12",
+  "group": "Nonlinear pharmacokinetics",
+  "def": "The prototypical nonlinear drug of this course: once a certain level is reached, small changes in dose lead to big changes in concentration. It also has a narrow therapeutic window, about 10 to 20 mg/L.",
+  "gist": "Prototype nonlinear drug, with a narrow therapeutic window of about 10 to 20 mg/L.",
+  "scene": "A seizure patient's steady-state level rose from 7.2 to 18 mg/L when her daily dose went from 300 to 500 mg.",
+  "hook": "Its steady state takes 2 to 3 weeks to reach, not 3 to 5 half-lives.",
+  "confuse": [
+   "nonlinear-pharmacokinetics",
+   "therapeutic-window",
+   "saturable-pharmacokinetics"
+  ],
+  "cite": "8 - Nonlinear PK.pdf, slide 3 (PDF page numbering); Nonlinear-Solutions-1.pdf; transcript 10-14",
   "src": "both"
  }
 ];

@@ -24,13 +24,18 @@
    Objective counts: Module 1 five, Module 2 six (three on each of the deck's
    two objectives slides), Module 3 seven, Module 4 five, Module 5 four,
    Module 6 three, plus two on the 6a multiple-oral deck, Module 7a
-   (bioavailability and bioequivalence, lectured 30 September) four.
+   (bioavailability and bioequivalence, lectured 30 September) four,
+   Module 7b (PK-PD, 12 October) two, Module 8 (nonlinear, 14 October) four.
+   Module 7b is numbered 9 in the question files; its <h2> carries
+   data-exam="3" so the tab files it under the final, not under Exam 2.
+   Module 7b rests on its deck, her solved practice sheets and Shargel 8e
+   Chapter 22.
    Module 6 also draws on Chapter 9, Multiple-Dosage Regimens, and says so
    where it does.
    ========================================================================== */
 const GUIDE_HTML = `
 <h2>Objective guides</h2>
-<p class="sub">One section per objective on her objectives slides, in her order, Modules 1 to 7a. Nothing here is scored.</p>
+<p class="sub">One section per objective on her objectives slides, in her order, Modules 1 to 7a, then 7b and 8. Nothing here is scored.</p>
 <details class="tabhelp" open><summary>What this tab is for</summary><ul>
 <li><b>Learn an objective before drilling it.</b> Each section teaches one objective from nothing: <b>In plain words</b>, <b>Terms to know</b>, <b>Equations</b> with their symbols and whether each is on the exam sheet.</li>
 <li><b>Worked example</b> runs one of her own problems line by line; <b>How she tests it</b> lists her question formats and the traps in them.</li>
@@ -1930,8 +1935,8 @@ const GUIDE_HTML = `
 <li>Elimination rate constant: k = {{frac:0.693|3 hr}} = 0.231 hr<sup>&minus;1</sup></li>
 <li>Time to peak: t<sub>max</sub> = {{frac:ln(0.924 &divide; 0.231)|(0.924 &minus; 0.231) hr<sup>&minus;1</sup>}} = {{frac:ln 4|0.693 hr<sup>&minus;1</sup>}} = {{frac:1.386|0.693}} hr = <b>2 hr</b></li>
 <li>The fraction in front: {{frac:(0.85)(500 mg)(0.924 hr<sup>&minus;1</sup>)|(22 L)(0.693 hr<sup>&minus;1</sup>)}} = {{frac:392.7|15.246}} = 25.76 mg/L</li>
-<li>The bracket at t = 2 hr: e<sup>&minus;(0.231)(2)</sup> &minus; e<sup>&minus;(0.924)(2)</sup> = 0.630 &minus; 0.157 = 0.472</li>
-<li>Peak: C<sub>max</sub> = (25.76 mg/L)(0.472) = <b>12.17 mg/L</b></li>
+<li>The bracket at t = 2 hr: e<sup>&minus;(0.231)(2)</sup> &minus; e<sup>&minus;(0.924)(2)</sup> = 0.6300 &minus; 0.1576 = 0.4724</li>
+<li>Peak: C<sub>max</sub> = (25.76 mg/L)(0.4724) = <b>12.17 mg/L</b></li>
 </ol>
 
 <h4>How she tests it</h4>
@@ -2246,8 +2251,8 @@ const GUIDE_HTML = `
 <ol class="gsteps">
 <li>Two doses is not steady state, so use the n-dose line with n = 2 and t = 3 hr; the first-dose part is 40 mg/L.</li>
 <li>Build-up after 2 doses: {{frac:1 &minus; e<sup>&minus;2(1.386)</sup>|1 &minus; e<sup>&minus;1.386</sup>}} = {{frac:1 &minus; 0.0625|1 &minus; 0.25}} = 1.25, so the peak after dose 2 is 40 &times; 1.25 = 50 mg/L.</li>
-<li>Decay for 3 hours: e<sup>&minus;(0.1733)(3)</sup> = e<sup>&minus;0.520</sup> = 0.595.</li>
-<li>Multiply the parts: C<sub>p</sub> = 40 mg/L &times; 1.25 &times; 0.595 = 29.7 mg/L.</li>
+<li>Decay for 3 hours: e<sup>&minus;(0.1733)(3)</sup> = e<sup>&minus;0.520</sup> = 0.5945.</li>
+<li>Multiply the parts: C<sub>p</sub> = 40 mg/L &times; 1.25 &times; 0.5945 = 29.7 mg/L.</li>
 </ol>
 <p class="prose">Answer: <b>29.7 mg/L</b>.</p>
 
@@ -2506,7 +2511,7 @@ const GUIDE_HTML = `
 <li>{{frac:F D<sub>0</sub>|V<sub>D</sub>}} is the absorbed dose spread through V<sub>D</sub>: 1.667 mg/L for tetracycline.</li>
 <li>r<sub>k</sub> raises it for the drug left from earlier doses: &times; 2.35.</li>
 <li>e<sup>&minus;kt<sub>max</sub>&infin;</sup> is the decline from the time of the dose to the peak at t<sub>max</sub><sup>&infin;</sup>: &times; 0.867.</li>
-<li>Putting t = 2.06 hr into the full steady-state curve (P, r<sub>k</sub>, r<sub>a</sub>) gives the same 3.39 mg/L.</li>
+<li>Putting t = 2.06 hr into the full steady-state curve (P, r<sub>k</sub>, r<sub>a</sub>) gives the same 3.40 mg/L.</li>
 <li>F and t<sub>max</sub><sup>&infin;</sup> mark this line as oral. Take them away and the repeated-bolus peak, {{frac:D<sub>0</sub>|V<sub>D</sub>}} &times; r<sub>k</sub>, is left. &tau; alone does not tell the two apart.</li>
 <li>On the equation sheet: yes.</li>
 </ul>
@@ -2544,8 +2549,8 @@ const GUIDE_HTML = `
 <li>Prefactor: P = {{frac:(0.75)(0.9)(250 mg)|(112.5 L)(0.8307)}} = {{frac:168.75|93.45}} = 1.806 mg/L.</li>
 <li>First-dose C<sub>max</sub>: 1.806 &times; (e<sup>&minus;0.0693 &times; 3.09</sup> &minus; e<sup>&minus;0.9 &times; 3.09</sup>) = 1.806 &times; (0.807 &minus; 0.062) = 1.806 &times; 0.745 = <b>1.35 mg/L</b>.</li>
 <li>Steady-state pieces: e<sup>&minus;0.0693 &times; 8</sup> = 0.574, so 1 &minus; e<sup>&minus;k&tau;</sup> = 0.426 and r<sub>k</sub> = 2.35; e<sup>&minus;0.9 &times; 8</sup> = 0.0007, so 1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup> = 0.999.</li>
-<li>t<sub>max</sub><sup>&infin;</sup> = {{frac:1|0.8307}} ln[12.99 &times; {{frac:0.426|0.999}}] = {{frac:ln(5.53)|0.8307}} = {{frac:1.710|0.8307}} = <b>2.06 hr</b>, about an hour earlier than the first dose.</li>
-<li>C<sub>max</sub><sup>&infin;</sup> = {{frac:(0.75)(250 mg)|112.5 L}} &times; 2.35 &times; e<sup>&minus;0.0693 &times; 2.06</sup> = 1.667 &times; 2.35 &times; 0.867 = <b>3.39 mg/L</b>.</li>
+<li>t<sub>max</sub><sup>&infin;</sup> = {{frac:1|0.8307}} ln[12.99 &times; {{frac:0.426|0.999}}] = {{frac:ln(5.539)|0.8307}} = {{frac:1.712|0.8307}} = <b>2.06 hr</b>, about an hour earlier than the first dose.</li>
+<li>C<sub>max</sub><sup>&infin;</sup> = {{frac:(0.75)(250 mg)|112.5 L}} &times; 2.35 &times; e<sup>&minus;0.0693 &times; 2.06</sup> = 1.667 &times; 2.35 &times; 0.867 = <b>3.40 mg/L</b>.</li>
 <li>C<sub>min</sub><sup>&infin;</sup> = P &times; r<sub>k</sub> &times; e<sup>&minus;k&tau;</sup> = 1.806 &times; 2.35 &times; 0.574 = <b>2.44 mg/L</b>.</li>
 <li>C<sub>avg</sub><sup>&infin;</sup> = {{frac:(0.75)(250 mg)|(112.5 L)(0.0693 hr<sup>&minus;1</sup>)(8 hr)}} = {{frac:187.5 mg|62.37 L}} = <b>3.01 mg/L</b>.</li>
 <li>Check the pattern: the steady-state peak (3.39) is higher than the first-dose peak (1.35) and comes earlier (2.06 against 3.09 hr); even the trough (2.44) is above the first-dose peak.</li>
@@ -2561,7 +2566,7 @@ const GUIDE_HTML = `
 <li>Second trap: putting the first-dose t<sub>max</sub> (3.1 hr) into C<sub>max</sub><sup>&infin;</sup>. The steady-state peak needs t<sub>max</sub><sup>&infin;</sup>, which depends on k, k<sub>a</sub> and &tau;.</li>
 <li>Direction questions: t<sub>max</sub><sup>&infin;</sup> is shorter than the first-dose t<sub>max</sub>; C<sub>max</sub><sup>&infin;</sup> is expected to be higher, because drug has accumulated.</li>
 <li>Her opening poll: increasing an oral dose gives no change in t<sub>max</sub>, because t<sub>max</sub> holds only k and k<sub>a</sub>.</li>
-<li>Her spoken steady-state peak was 3.3 mg/L; the inputs give 3.39 mg/L (3.4 rounded), with t<sub>max</sub><sup>&infin;</sup> taken as either 2.06 or 2.1 hr.</li>
+<li>Her spoken steady-state peak was 3.3 mg/L; the inputs give 3.40 mg/L with t<sub>max</sub><sup>&infin;</sup> = 2.06 hr and 3.39 mg/L with 2.1 hr.</li>
 <li>On where to find the lines, she pointed to the bottom of the right-hand column or the back of the sheet; on the current copy the oral steady-state lines are on page 2.</li>
 </ul>
 
@@ -2947,5 +2952,428 @@ const GUIDE_HTML = `
 <li><q>We might round it to 200 if there's a 175 or something that makes sense as opposed to 181.</q></li>
 </ul>
 <p class="gsrc">Sources: 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (equations), "Practice Problem" with her working, In-Class Activity pages 17 and 18, PollEv page 19; BasicPharmacokineticsEquations.pdf page 2; transcript 09-30.</p>
+</section>
+
+<h2 data-exam="3">Module 7b - PK-PD Relationship</h2>
+<ul class="tlist">
+<li>Two objectives, from the "Objectives" slide of the 7b deck; one lecture, 12 October.</li>
+<li>Pharmacokinetics (PK) gives the plasma concentration over time; pharmacodynamics (PD) links that concentration to a response. This module puts the two together.</li>
+<li>The calculation is the duration of activity, t<sub>eff</sub>: how long one IV bolus keeps the plasma level at or above the minimum effective concentration. It uses the first-order IV bolus line from Module 2.</li>
+<li>The final exam on 27 October puts 25% of its questions on this module and Module 8.</li>
+</ul>
+
+<section class="gobj" id="gobj-m7b-1">
+<h3 data-nav="Module 7b, objective 1 &mdash; Describe the intensification of pharmacologic response increases with drug concentrations and/or dose up to a maximum response">Module 7b - Objective 1</h3>
+<div class="gbar"><span>Objective</span><b>Describe the intensification of pharmacologic response increases with drug concentrations and/or dose up to a maximum response</b><i>7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides "Pharmacodynamics", "Relationship of Dose to Pharmacologic Effect", "Typical Log Dose-versus-Pharmacologic Response Curves" and "Summary"</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Pharmacodynamics (PD) is the relationship between the drug concentration at the site of action, the receptor, and the pharmacologic response that is observed.</li>
+<li>The link between pharmacokinetics (PK) and PD is also called the exposure-response, concentration-response or concentration-effect relationship.</li>
+<li>Exposure-response information is used in drug approval to judge safety, efficacy and benefit-risk, and to derive dosing information.</li>
+<li>As the dose increases, the concentration at the receptor site increases, and the response increases, but only up to a maximum effect.</li>
+<li>Response plotted against dose on an ordinary axis rises steeply at low doses and then flattens. The same dose change gives a large increase in response at low doses and a small one near the maximum.</li>
+<li>Response plotted against log dose is a sigmoid (S-shaped) curve. The maximum is reached when all receptors are saturated, so more drug cannot raise the response further.</li>
+<li>The middle of that S is close to a straight line. Plotted as effect against log concentration it is a straight line with slope m.</li>
+<li>After an IV bolus, in that straight range, the effect falls in a straight line with time, at a speed set by k (the elimination rate constant) and m together.</li>
+<li>On a plasma level against time curve, three features of the effect are read against the minimum effective concentration (MEC): when it starts (onset), how long it lasts (duration) and how high the peak goes above it (intensity).</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Pharmacodynamics (PD)</dt><dd>The relationship between drug concentration at the site of action (receptor) and the observed pharmacologic response.</dd>
+<dt>Exposure-response relationship</dt><dd>Another name for the PK-PD relationship; also concentration-response or concentration-effect relationship.</dd>
+<dt>Maximum effect (E<sub>max</sub>)</dt><dd>The largest response the drug gives; on the log dose plot it is reached when all receptors are saturated.</dd>
+<dt>Minimum effective concentration (MEC, also written C<sub>eff</sub>)</dt><dd>The lowest plasma level at which the effect appears, in mcg/mL or mg/L (the two are the same number).</dd>
+<dt>Minimum toxic concentration (MTC)</dt><dd>The upper dashed line on the plasma level against time plot; above it toxicity appears.</dd>
+<dt>Therapeutic window</dt><dd>The range between the MEC and the MTC; the goal is to keep the level inside it.</dd>
+<dt>Onset time</dt><dd>The time at which the rising plasma level first reaches the MEC.</dd>
+<dt>Duration (duration of action, t<sub>eff</sub>)</dt><dd>The time the plasma level stays at or above the MEC: the time the drug is in its effective range, in hours.</dd>
+<dt>Intensity</dt><dd>How far the peak plasma level rises above the MEC.</dd>
+<dt>Slope m</dt><dd>The slope of the straight line of pharmacologic effect against log drug concentration.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">E = E<sub>0</sub> &minus; {{frac:kmt|2.3}}</div>
+<ul class="tlist">
+<li>E is the pharmacologic effect at time t (hours) after the dose; E<sub>0</sub> the effect at time zero; k the first-order elimination rate constant (hr<sup>&minus;1</sup>); m the slope of effect against log concentration.</li>
+<li>The 2.3 is there because the effect line uses base-10 logarithms: it combines E = m log C + e with the base-10 IV bolus line, log C = log C<sub>0</sub> &minus; {{frac:kt|2.3}}.</li>
+<li>When to use it: a question about how the effect, not the concentration, changes with time after an IV bolus. A larger k or a larger m makes the effect fall faster.</li>
+<li>On the equation sheet: yes, page 2, left column, under the bioavailability lines.</li>
+</ul>
+</div>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>None of her practice sheets, her poll or her in-class activity puts numbers on this objective.</li>
+<li>It is asked as concept items, in her usual forms: "Which term describes…", "Which of the following is true regarding…", true/false and select-all.</li>
+<li>Definitions: pharmacodynamics, and the other names for the PK-PD relationship (exposure-response, concentration-response, concentration-effect). A select-all can list its three uses in drug approval.</li>
+<li>Reading the dose plots: on an ordinary dose axis the smallest gain in response for a given dose change is near the maximum; on a log dose axis the curve is an S.</li>
+<li>The reason the response stops rising is that all receptors are saturated. A higher dose then raises the concentration without raising the response.</li>
+<li>Reading the plasma level curve: onset, duration and intensity are each measured against the MEC. Intensity is a height above the MEC, duration a length of time above it.</li>
+<li>In E = E<sub>0</sub> &minus; {{frac:kmt|2.3}}, m is a slope, not a mass or a concentration, and the effect falls in a straight line with time.</li>
+</ul>
+<p class="gsrc">Sources: 7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides "Pharmacodynamics", "Relationship of Dose to Pharmacologic Effect" (with her notes "large increase early, then plateaus" and "time the drug is in an effective therapeutic range"), "Typical Log Dose-versus-Pharmacologic Response Curves" and "Summary"; BasicPharmacokineticsEquations.pdf page 2; Shargel 8e Chapter 22 for E = m log C + e.</p>
+</section>
+
+<section class="gobj" id="gobj-m7b-2">
+<h3 data-nav="Module 7b, objective 2 &mdash; Describe the effect of changing drug dose and/or drug elimination half-life on the duration of drug response">Module 7b - Objective 2</h3>
+<div class="gbar"><span>Objective</span><b>Describe the effect of changing drug dose and/or drug elimination half-life on the duration of drug response</b><i>7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides "Relationship Between Dose and Duration of Activity (teff)", "Practice Problem" with her working, "Effect of Dose and Elimination Half-life on Duration of Activity", "Effect of Elimination Half-life on Duration of Activity", the PollEv and the In-Class Activity</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>The duration of activity, t<sub>eff</sub>, is how long a single IV bolus keeps the plasma level at or above C<sub>eff</sub>, the minimum effective concentration (MEC). Every one of her problems is a one-compartment open model with first-order elimination.</li>
+<li>It comes from the IV bolus line C = C<sub>0</sub>e<sup>&minus;kt</sup>: set C to C<sub>eff</sub> and solve for t. C<sub>0</sub> is the level just after the bolus, the dose D<sub>0</sub> divided by the volume of distribution V<sub>D</sub>.</li>
+<li>The sheet prints t<sub>eff</sub> three ways: with base-10 logs, with natural logs (ln), and with the half-life. They give the same answer; the stem decides which is quickest.</li>
+<li>The dose sits inside the logarithm. Doubling the dose adds {{frac:ln 2|k}} = {{frac:0.693|k}}, which is one half-life, to t<sub>eff</sub>. It does not double t<sub>eff</sub>. Four times the dose adds two half-lives.</li>
+<li>The half-life multiplies the whole expression. Doubling the half-life at the same dose doubles t<sub>eff</sub>.</li>
+<li>Liver or kidney disease that lowers elimination prolongs the half-life. The drug is retained longer, the duration of activity increases, and so does the possibility of toxicity.</li>
+<li>Plotted against dose, t<sub>eff</sub> rises steeply at low doses and then flattens: each further increase in dose adds less duration.</li>
+<li>Turned round, the dose for a target duration is D<sub>0</sub> = C<sub>eff</sub>V<sub>D</sub>e<sup>kt<sub>eff</sub></sup>. The target time is in an exponent, so doubling a long duration needs a very large dose.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Duration of activity (t<sub>eff</sub>)</dt><dd>Also "duration of action": the time the plasma level stays at or above C<sub>eff</sub> after a single IV bolus, in hours.</dd>
+<dt>Minimum effective concentration (MEC, C<sub>eff</sub>)</dt><dd>The lowest plasma level that gives the effect. Given in mcg/mL, which equals mg/L.</dd>
+<dt>Initial concentration (C<sub>0</sub>)</dt><dd>The plasma level just after the bolus: C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}, in mg/L.</dd>
+<dt>Dose (D<sub>0</sub>) and volume of distribution (V<sub>D</sub>)</dt><dd>The IV bolus dose in mg, and the apparent volume of distribution in L. Given per kg (mg/kg and L/kg), the kilograms cancel in C<sub>0</sub>.</dd>
+<dt>Elimination rate constant (k) and half-life (t<sub>&frac12;</sub>)</dt><dd>k in hr<sup>&minus;1</sup>; t<sub>&frac12;</sub> = {{frac:0.693|k}} in hours.</dd>
+<dt>1.44</dt><dd>{{frac:1|0.693}}, which turns {{frac:1|k}} into 1.44 t<sub>&frac12;</sub>.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">t<sub>eff</sub> = {{frac:ln C<sub>0</sub> &minus; ln C<sub>eff</sub>|k}}, &nbsp; with C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}</div>
+<ul class="tlist">
+<li>C<sub>0</sub> and C<sub>eff</sub> in the same units (mg/L); k in hr<sup>&minus;1</sup>; t<sub>eff</sub> in hours. The difference of two logs is the log of the ratio {{frac:C<sub>0</sub>|C<sub>eff</sub>}}, which is how she wrote it on her working: ln of the ratio, divided by k.</li>
+<li>When to use it: the stem gives k, or an equation such as C<sub>p</sub> = 50e<sup>&minus;0.2t</sup> from which C<sub>0</sub> and k are read directly.</li>
+<li>On the equation sheet: yes, page 2, left column, written with D<sub>0</sub> over V<sub>D</sub> inside the first log.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t<sub>eff</sub> = {{frac:2.3(log C<sub>0</sub> &minus; log C<sub>eff</sub>)|k}}</div>
+<ul class="tlist">
+<li>The same relation in base-10 logs; 2.3 converts base-10 logarithms to natural ones.</li>
+<li>When to use it: only if base-10 logs are preferred. Because 2.3 rounds 2.303, it gives a slightly smaller number: 26.32 hr instead of 26.35 hr for her slide problem.</li>
+<li>On the equation sheet: yes, page 2, the line above the natural-log form.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t<sub>eff</sub> = 1.44 t<sub>&frac12;</sub> ln({{frac:D<sub>0</sub>|V<sub>D</sub>C<sub>eff</sub>}})</div>
+<ul class="tlist">
+<li>t<sub>&frac12;</sub> the elimination half-life in hours; D<sub>0</sub> in mg; V<sub>D</sub> in L; C<sub>eff</sub> in mg/L, so the ratio inside the ln has no units.</li>
+<li>When to use it: the stem gives the half-life rather than k, or asks what a change in half-life does. It shows at a glance that t<sub>eff</sub> is in direct proportion to t<sub>&frac12;</sub>.</li>
+<li>On the equation sheet: yes, page 2, the last line of the left column.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">D<sub>0</sub> = C<sub>eff</sub> V<sub>D</sub> e<sup>kt<sub>eff</sub></sup></div>
+<ul class="tlist">
+<li>The dose in mg that keeps the level at or above C<sub>eff</sub> for a target t<sub>eff</sub>. The exponent is positive: the dose must be larger than C<sub>eff</sub>V<sub>D</sub>.</li>
+<li>When to use it: "What dose would yield a duration of action of 12 hours?" or "what dose is required to double t<sub>eff</sub>?". Report it per kg when the stem doses per kg.</li>
+<li>On the equation sheet: no. It is C<sub>eff</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}e<sup>&minus;kt</sup> solved for D<sub>0</sub>, as on her working.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her slide "Practice Problem": the MEC of an antibiotic is 0.2 mcg/mL; one-compartment open model, V<sub>D</sub> 24 L, k 0.15 h<sup>&minus;1</sup>. What is the t<sub>eff</sub> of a single 250 mg IV dose, and what happens when the dose is raised?</p>
+<ol class="gsteps">
+<li>Units first: 0.2 mcg/mL is 0.2 mg/L. C<sub>0</sub> = {{frac:250 mg|24 L}} = 10.42 mg/L.</li>
+<li>k is given, so use the natural-log form. The ratio is {{frac:C<sub>0</sub>|C<sub>eff</sub>}} = {{frac:10.42|0.2}} = 52.08, so t<sub>eff</sub> = {{frac:ln 52.08|0.15 hr<sup>&minus;1</sup>}} = {{frac:3.953|0.15}} = <b>26.35 hr</b>.</li>
+<li>Double the dose to 500 mg: C<sub>0</sub> = 20.83 mg/L and t<sub>eff</sub> = 30.97 hr. The gain is 30.97 &minus; 26.35 = 4.62 hr, which is {{frac:0.693|0.15}}, one half-life.</li>
+<li>Four times the dose, 1000 mg: t<sub>eff</sub> = 35.60 hr, two half-lives (9.24 hr) longer than at 250 mg.</li>
+<li>Her follow-up: what dose doubles t<sub>eff</sub> to 2 &times; 26.35 = 52.7 hr? D<sub>0</sub> = (0.2 mg/L)(24 L)e<sup>(0.15)(52.7)</sup> = 4.8 &times; 2710.8 = 13,012 mg, about <b>13 g</b>: about 52 times the dose for twice the duration.</li>
+</ol>
+<p class="prose">Her Practice 3, the half-life form: a 75 kg patient, 20 mg/kg IV bolus, V<sub>D</sub> 0.3 L/kg, t<sub>&frac12;</sub> 3.6 hr, MEC 7.2 mcg/mL. The duration of action, and the duration if the dose were doubled?</p>
+<ol class="gsteps">
+<li>The kilograms cancel: C<sub>0</sub> = {{frac:20 mg/kg|0.3 L/kg}} = 66.67 mg/L.</li>
+<li>t<sub>eff</sub> = ln({{frac:66.67|7.2}}) &times; {{frac:3.6 hr|0.693}} = 2.226 &times; 5.195 = <b>11.56 hr</b>.</li>
+<li>Doubled dose: C<sub>0</sub> = {{frac:40|0.3}} = 133.3 mg/L and t<sub>eff</sub> = <b>15.16 hr</b>, an increase of 3.6 hr, one half-life, as she marked on the sheet.</li>
+</ol>
+
+<h4>Picture it</h4>
+{{fig:pd_teff_dose|Her slide problem drawn on a log axis: 250 mg and 500 mg of the same antibiotic, with the MEC of 0.2 mg/L as a dashed line. The doubled dose crosses the MEC 4.62 hours later, one half-life.}}
+<p class="prose">On a log axis the two declines are parallel straight lines, because k is the same. Doubling the dose lifts the line by the same distance everywhere, so the crossing of the MEC moves later by one half-life.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Her poll, true or false: "Doubling the IV bolus dose of a drug that follows linear, first-order pharmacokinetics results in a 2-fold increase in the duration of activity." Her key: <b>False</b>; doubling adds one half-life.</li>
+<li>Every stem names a one-compartment open model, first-order elimination and a single IV bolus. The duration is asked as "teff", "duration of action" or "duration of activity"; the MEC as "MEC", "Ceff" or "minimum effective concentration".</li>
+<li>Each set pairs a t<sub>eff</sub> with a dose change (doubled, or four times) and states the change in half-lives. Practice 1: t<sub>eff</sub> 8.69 hr at 500 mg, 18.69 hr at 2000 mg, a gain of 10 hr, which is 2 t<sub>&frac12;</sub> of 5 hr.</li>
+<li>Or she asks the dose for a target duration. In-Class Activity 1: t<sub>&frac12;</sub> 3 hr, V<sub>D</sub> 25 L, MEC 1.2 mcg/mL; for 12 hours, D<sub>0</sub> = (1.2 mg/L)(25 L)e<sup>(0.231)(12)</sup> = 479.72 mg.</li>
+<li>Weight can come in pounds (Practice 2: 165 lb is 75 kg) or as mg/kg doses with an L/kg volume; give a per-kg answer when the stem doses per kg (Practice 2: 777.5 mg, 10.4 mg/kg).</li>
+<li>She uses all three t<sub>eff</sub> forms on her sheets and keeps k to four decimals (0.1386 hr<sup>&minus;1</sup> for a 5 hr half-life).</li>
+<li>Usual wrong answers: doubling t<sub>eff</sub> for a doubled dose; converting the MEC as if the number changed (0.2 mcg/mL is 0.2 mg/L); e<sup>&minus;kt</sup> instead of e<sup>+kt</sup> in the dose line; a base-10 log in the ln form.</li>
+<li>Her homework for this module starts with the AUC of the bolus, from the dose and the clearance kV<sub>D</sub> (Module 4), before the duration parts.</li>
+</ul>
+<p class="gsrc">Sources: 7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides "Relationship Between Dose and Duration of Activity (teff)", "Practice Problem" and her working on the next slide, "Effect of Dose and Elimination Half-life on Duration of Activity", "Effect of Elimination Half-life on Duration of Activity", the PollEv slide and the In-Class Activity "PK-PD"; PK-PD-Practice-1, 2 and 3 Solutions; Homework-7.pdf problem 1 (its parts only); BasicPharmacokineticsEquations.pdf page 2.</p>
+</section>
+
+<h2>Module 8 - Nonlinear Pharmacokinetics</h2>
+<ul class="tlist">
+<li>Four objectives, from the "Objectives" slide of the nonlinear deck; one lecture, 14 October, the last topic of the course.</li>
+<li>Every module before this one assumed first-order elimination, where the half-life and the clearance stay the same whatever the dose. Here they change with the concentration.</li>
+<li>Phenytoin is the course's example of a nonlinear drug; her two solved practice sheets and her homework are phenytoin patients.</li>
+<li>Two new constants carry the module: V<sub>max</sub>, the maximum elimination rate, and K<sub>M</sub>, the Michaelis constant.</li>
+<li>The final exam on 27 October puts 25% of its questions on this module and Module 7b.</li>
+</ul>
+
+<section class="gobj" id="gobj-m8-1">
+<h3 data-nav="Module 8, objective 1 &mdash; Differentiate between linear and non-linear pharmacokinetics">Module 8 - Objective 1</h3>
+<div class="gbar"><span>Objective</span><b>Differentiate between linear and non-linear pharmacokinetics</b><i>8 - Nonlinear PK.pdf, slides "Linear vs. Nonlinear Pharmacokinetics", the two figure slides after it, "Saturation Kinetics" and "Summary"</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>Most drugs are eliminated by a first-order process: the rate of elimination is faster when there is more drug in the body. That is linear pharmacokinetics, and it is what the course has used until now.</li>
+<li>In linear pharmacokinetics the parameters, such as the half-life and the clearance, do not change when different or multiple doses are given. That is why a first dose can be carried forward to steady state by superposition.</li>
+<li>In nonlinear pharmacokinetics, increased doses or chronic administration cause deviations from the profile seen with single doses. The half-life and the clearance change, and a small change in dose can give a large change in concentration.</li>
+<li>The cause is saturation: an enzyme or carrier system that can only work so fast. Nonlinear processes can occur in absorption, distribution, metabolism or excretion; this module deals with elimination.</li>
+<li>The signs of saturation kinetics: elimination is nonlinear; the half-life changes as the dose increases; the AUC is not proportional to the bioavailable dose.</li>
+<li>Two more signs: other drugs needing the same enzyme or carrier system can affect the saturation; and the composition or ratio of the metabolites can change with the dose.</li>
+<li>On a log plot of plasma level against time, a high dose (curve A) bends before it becomes straight, while a low dose (curve B) is straight like a first-order drug (curve C). The terminal slopes of A and B are the same.</li>
+<li>On a plot of AUC against dose, the saturable drug follows the proportional line up to a certain dose and then rises above it: the AUC is no longer directly proportional to the dose.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Linear pharmacokinetics</dt><dd>Parameters do not change when different or multiple doses of a drug are given; first-order elimination.</dd>
+<dt>Nonlinear pharmacokinetics</dt><dd>Increased doses or chronic administration cause deviations from the profile observed with single doses of the same drug.</dd>
+<dt>Saturable (dose-dependent, capacity-limited) pharmacokinetics</dt><dd>Processes that give nonlinear changes in plasma concentration and AUC as the dose increases or is repeated.</dd>
+<dt>Area under the curve (AUC)</dt><dd>The area under the plasma concentration against time curve; for a linear drug it is proportional to the dose.</dd>
+<dt>Phenytoin</dt><dd>The prototype nonlinear drug in this course; it also has a narrow therapeutic window, about 10 to 20 mg/L.</dd>
+</dl>
+
+<h4>Picture it</h4>
+{{fig:nl_css_rate|Steady-state concentration against daily dose rate for her slide Example (K<sub>M</sub> 10 mg/L, V<sub>max</sub> 12 mg/kg/day). The dashed line, from the 6 mg/kg/day pair, is what a linear drug would do; the saturable drug rises above it and climbs steeply as the rate nears V<sub>max</sub>.}}
+<p class="prose">A one-third rise in dose rate, 6 to 8 mg/kg/day, doubles the steady-state level from 10 to 20 mg/L. A linear drug would have gone only to 13.3 mg/L.</p>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Her written question on Solutions 2: "What is the difference between linear and non-linear pharmacokinetics?" The answer is the parameters: unchanged with dose in linear, changed by increased doses or chronic administration in nonlinear.</li>
+<li>A select-all on the signs of saturation kinetics from the slide: half-life changing with dose, AUC out of proportion, competing drugs, metabolite ratio.</li>
+<li>The figure of curves A, B and C: which is the first-order drug, which is the low dose, and that the terminal slopes of A and B match.</li>
+<li>The AUC against dose figure: the saturable curve leaves the straight line above a certain dose.</li>
+<li>The trap is to swap the words: linear is not zero order, and nonlinear is not simply first order. A saturable drug behaves as first order at low concentrations and as zero order at high ones (objective 2).</li>
+<li>The summary statement "Clearance and half-life are usually not constant within nonlinear pharmacokinetics processes" is a true/false candidate: true.</li>
+</ul>
+<p class="gsrc">Sources: 8 - Nonlinear PK.pdf, slides "Linear vs. Nonlinear Pharmacokinetics" (her note "most drugs follow this", "Ex. phenytoin"), the plasma level-time and AUC-versus-dose figure slides with her notes, "Saturation Kinetics" and "Summary"; Nonlinear-Solutions-2.pdf question 2; transcript 10-14.</p>
+</section>
+
+<section class="gobj" id="gobj-m8-2">
+<h3 data-nav="Module 8, objective 2 &mdash; Discuss the relationship between KM and Cp in describing elimination from saturable kinetic processes">Module 8 - Objective 2</h3>
+<div class="gbar"><span>Objective</span><b>Discuss the relationship between KM and Cp in describing elimination from saturable kinetic processes</b><i>8 - Nonlinear PK.pdf, slides "Parameters", "Saturable-Enzymatic Elimination Processes", the capacity-limited figure, "Dependence of Elimination Half-Life on Dose" and "Dependence of Clearance on Dose"</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>A saturable elimination follows Michaelis-Menten kinetics: the rate depends on the plasma concentration C<sub>p</sub>, and also on two constants, V<sub>max</sub> and K<sub>M</sub>.</li>
+<li>V<sub>max</sub> is the maximum elimination rate: the fastest the body can eliminate the drug. It is a rate, in concentration or amount per time.</li>
+<li>K<sub>M</sub> is the Michaelis constant, which reflects the capacity of the enzyme system. Its units are concentration, so it can be compared directly with C<sub>p</sub>.</li>
+<li>For a given drug in a given patient, V<sub>max</sub> and K<sub>M</sub> are constants. They differ from one patient to another.</li>
+<li>When C<sub>p</sub> is much less than K<sub>M</sub>, C<sub>p</sub> is negligible in the denominator. The rate is a constant times C<sub>p</sub>: it depends on concentration, so elimination looks first order.</li>
+<li>When C<sub>p</sub> is much greater than K<sub>M</sub>, K<sub>M</sub> is negligible and the concentrations cancel. The rate equals V<sub>max</sub>, independent of concentration: zero order.</li>
+<li>So as the dose is increased, elimination starts to lose its first-order behaviour, and the drug accumulates because the body cannot go faster than V<sub>max</sub>. A higher V<sub>max</sub>, with K<sub>M</sub> the same, removes the drug faster.</li>
+<li>The half-life rises as C<sub>p</sub> rises, and the clearance falls, because C<sub>p</sub> is added to K<sub>M</sub>. For a first-order drug, t<sub>&frac12;</sub> = {{frac:0.693|k}} and Cl = kV<sub>D</sub>, neither of which depends on concentration.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Michaelis-Menten kinetics</dt><dd>The rate law of a saturable enzyme process; here, saturable elimination.</dd>
+<dt>Maximum elimination rate (V<sub>max</sub>)</dt><dd>As fast as the body will eliminate the drug; units of concentration or amount per time, such as mg/day or mg/kg/day.</dd>
+<dt>Michaelis constant (K<sub>M</sub>)</dt><dd>Reflects the capacity of the enzyme system; units of concentration, mg/L.</dd>
+<dt>Plasma concentration (C<sub>p</sub>)</dt><dd>The drug level in plasma, mg/L, compared with K<sub>M</sub>.</dd>
+<dt>k&prime;</dt><dd>{{frac:V<sub>max</sub>|K<sub>M</sub>}}, the constant that multiplies C<sub>p</sub> when C<sub>p</sub> is much less than K<sub>M</sub>.</dd>
+<dt>Total body clearance (Cl<sub>T</sub>) and half-life (t<sub>&frac12;</sub>)</dt><dd>Cl<sub>T</sub> in L/day and t<sub>&frac12;</sub> in days with V<sub>max</sub> in mg/day; both now depend on C<sub>p</sub>.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">&minus;{{frac:dC<sub>p</sub>|dt}} = {{frac:V<sub>max</sub>C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}</div>
+<ul class="tlist">
+<li>The rate of elimination, as a change in concentration with time. When C<sub>p</sub> is much greater than K<sub>M</sub> it becomes V<sub>max</sub>; when C<sub>p</sub> is much less than K<sub>M</sub> it becomes {{frac:V<sub>max</sub>|K<sub>M</sub>}}C<sub>p</sub> = k&prime;C<sub>p</sub>.</li>
+<li>When to use it: questions on the order of elimination at high or low concentration. It is not used for numbers on her sheets.</li>
+<li>On the equation sheet: no. The sheet's dose-rate line comes from it.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">t<sub>&frac12;</sub> = V<sub>D</sub>({{frac:0.693|V<sub>max</sub>}})(K<sub>M</sub> + C<sub>p</sub>)</div>
+<ul class="tlist">
+<li>V<sub>D</sub> the volume of distribution in L (L/kg times the weight); V<sub>max</sub> in mg/day; K<sub>M</sub> and C<sub>p</sub> in mg/L. The result is in days.</li>
+<li>When to use it: "the half-life when the plasma concentration is 15 mg/L". C<sub>p</sub> is the stated concentration.</li>
+<li>On the equation sheet: yes, page 2, right column. It is the only half-life line the sheet prints.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">Cl<sub>T</sub> = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}</div>
+<ul class="tlist">
+<li>mg/day divided by mg/L gives L/day; she accepts L/hr as well.</li>
+<li>When to use it: the total body clearance at a stated concentration. C<sub>p</sub> is in the denominator, so clearance falls as the concentration rises.</li>
+<li>On the equation sheet: yes, page 2, the last line of the right column.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her Solutions 2: a 75 kg patient, V<sub>D</sub> 0.75 L/kg, with K<sub>M</sub> 9 mg/L and V<sub>max</sub> 500 mg/day (from part a). The half-life and the total body clearance at 15 mg/L and at 21 mg/L?</p>
+<ol class="gsteps">
+<li>V<sub>D</sub> in litres: 0.75 L/kg &times; 75 kg = 56.25 L.</li>
+<li>At 15 mg/L: t<sub>&frac12;</sub> = (56.25 L)({{frac:0.693|500 mg/day}})(9 + 15 mg/L) = <b>1.87 days</b>; Cl<sub>T</sub> = {{frac:500 mg/day|(9 + 15) mg/L}} = <b>20.8 L/day</b>.</li>
+<li>At 21 mg/L: t<sub>&frac12;</sub> = (56.25)({{frac:0.693|500}})(9 + 21) = <b>2.34 days</b>; Cl<sub>T</sub> = {{frac:500|9 + 21}} = <b>16.7 L/day</b>.</li>
+<li>Read the pair: the higher concentration has the longer half-life and the lower clearance, which is her written question 3 on the same sheet.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Her poll, true or false: "Drugs that display Michaelis-Menten saturation kinetics will often exhibit zero-order kinetics at low concentrations and first-order kinetics at high concentrations." Her key: <b>False</b>.</li>
+<li>Her written question 3 on Solutions 2: "What changes in t&frac12; and ClT are usually observed with increased concentrations of drugs that exhibit nonlinear pharmacokinetics?" t<sub>&frac12;</sub> increases and Cl<sub>T</sub> decreases.</li>
+<li>Definitions: which term is the maximum elimination rate (V<sub>max</sub>) and which the constant in concentration units that reflects enzyme capacity (K<sub>M</sub>). K<sub>M</sub> is not a rate.</li>
+<li>Every sheet asks the half-life and the clearance "when the plasma concentration is 15 mg/L"; Solutions 2 also asks them at 21 mg/L. Either measured steady-state level could be asked instead, and each gives a slightly different value.</li>
+<li>Units she checks: V<sub>D</sub> converted from L/kg to L first; t<sub>&frac12;</sub> in days and Cl<sub>T</sub> in L/day when V<sub>max</sub> is in mg/day.</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>Should have been false, right? Low concentrations looks like 1st order, high concentrations looks like zero order, OK?</q></li>
+</ul>
+<p class="gsrc">Sources: 8 - Nonlinear PK.pdf, slides "Parameters" (her notes "as fast body will eliminate", "units: conc./time"), "Saturable-Enzymatic Elimination Processes" with her notes, the capacity-limited figure (V<sub>max</sub> 100 and 200 mg/hr), "Dependence of Elimination Half-Life on Dose" and "Dependence of Clearance on Dose"; the PollEv; Nonlinear-Solutions-2.pdf; BasicPharmacokineticsEquations.pdf page 2; transcript 10-14.</p>
+</section>
+
+<section class="gobj" id="gobj-m8-3">
+<h3 data-nav="Module 8, objective 3 &mdash; Calculate the Vmax and KM after multiple dosing in a patient">Module 8 - Objective 3</h3>
+<div class="gbar"><span>Objective</span><b>Calculate the Vmax and KM after multiple dosing in a patient</b><i>8 - Nonlinear PK.pdf, slides "In Vitro Determination of KM and Vmax", "In Vivo Determination of KM and Vmax", "Determination of KM and Vmax by Direct Method", "Example" and her working</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>V<sub>max</sub> and K<sub>M</sub> can be found in test tubes (in vitro) by plotting enzyme experiments, but that is not something a clinician does. In a patient they are found from the patient's own levels.</li>
+<li>The drug is given at one dose rate until steady state, the level is measured, then a second dose rate is given and its steady state measured. Both pairs come from one patient, so they share one V<sub>max</sub> and one K<sub>M</sub>.</li>
+<li>Writing the dose-rate line once for each pair and combining the two gives K<sub>M</sub> directly. This is the direct method, and K<sub>M</sub> always comes first.</li>
+<li>With K<sub>M</sub> known, V<sub>max</sub> comes from either pair. Both pairs must give the same V<sub>max</sub>, so the second pair is a check.</li>
+<li>The rate units cancel in the K<sub>M</sub> line, leaving mg/L. V<sub>max</sub> keeps the units of the dose rate: mg/day, or mg/kg/day when the doses were given per kilogram.</li>
+<li>Steady state here takes much longer than for a linear drug: depending on the drug, 2 to 3 weeks, not 3 to 5 half-lives. Each measured level must be a steady-state level.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Dose rate (R<sub>1</sub>, R<sub>2</sub>)</dt><dd>The two daily doses, amount per unit time (mg/day or mg/kg/day).</dd>
+<dt>Steady-state concentration (C<sub>1</sub>, C<sub>2</sub>)</dt><dd>The steady-state level each dose rate produced, mg/L.</dd>
+<dt>Direct method</dt><dd>K<sub>M</sub> from two dose rates in the same patient and their steady-state levels, then V<sub>max</sub> from either pair.</dd>
+<dt>In vitro and in vivo</dt><dd>In vitro: in the lab, in test tubes. In vivo: in the patient.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">K<sub>M</sub> = {{frac:R<sub>2</sub> &minus; R<sub>1</sub>|a<sub>1</sub> &minus; a<sub>2</sub>}}, &nbsp; with a<sub>1</sub> = {{frac:R<sub>1</sub>|C<sub>1</sub>}} and a<sub>2</sub> = {{frac:R<sub>2</sub>|C<sub>2</sub>}}</div>
+<ul class="tlist">
+<li>R<sub>1</sub> with C<sub>1</sub> is the first pair, R<sub>2</sub> with C<sub>2</sub> the second. Each a is a rate divided by its own concentration. The top is in mg/day and the bottom in mg/day per mg/L, so K<sub>M</sub> comes out in mg/L.</li>
+<li>When to use it: two daily doses, each with the steady-state concentration it produced, and the question asks K<sub>M</sub>.</li>
+<li>On the equation sheet: yes, page 2, right column, written with the two ratios in brackets in the denominator.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">V<sub>max</sub> = {{frac:R(K<sub>M</sub> + C<sub>ss</sub>)|C<sub>ss</sub>}}</div>
+<ul class="tlist">
+<li>R and C<sub>ss</sub> from the same pair; V<sub>max</sub> in the units of R.</li>
+<li>When to use it: once K<sub>M</sub> is known. Do not mix one pair's R with the other pair's C<sub>ss</sub>.</li>
+<li>On the equation sheet: no. It is the sheet's R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}} multiplied by (K<sub>M</sub> + C<sub>ss</sub>) and divided by C<sub>ss</sub>.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her slide Example: a 72 kg patient on 6 mg/kg/day reached a steady state of 10 mg/L, lower than desired; on 8 mg/kg/day the steady state was 20 mg/L, higher than desired. Calculate K<sub>M</sub> and V<sub>max</sub>.</p>
+<ol class="gsteps">
+<li>K<sub>M</sub> first: a<sub>1</sub> = {{frac:6|10}} = 0.6 and a<sub>2</sub> = {{frac:8|20}} = 0.4, so K<sub>M</sub> = {{frac:8 &minus; 6 mg/kg/day|0.6 &minus; 0.4}} = {{frac:2|0.2}} = <b>10 mg/L</b>.</li>
+<li>V<sub>max</sub> from the second pair: {{frac:(8 mg/kg/day)(10 + 20 mg/L)|20 mg/L}} = <b>12 mg/kg/day</b>.</li>
+<li>Check with the first pair: {{frac:(6)(10 + 10)|10}} = 12 mg/kg/day, the same, as it must be.</li>
+<li>The doses were per kilogram, so V<sub>max</sub> is per kilogram; the 72 kg is used only when a dose for this patient is asked (objective 4).</li>
+</ol>
+<p class="prose">Her Solutions 1, in mg/day: 300 mg/day gave 5.1 mg/L and 500 mg/day gave 20 mg/L.</p>
+<ol class="gsteps">
+<li>K<sub>M</sub> = {{frac:500 &minus; 300|58.82 &minus; 25}} = {{frac:200|33.82}} = <b>5.91 mg/L</b>, since {{frac:300|5.1}} = 58.82 and {{frac:500|20}} = 25.</li>
+<li>V<sub>max</sub> = {{frac:(300 mg/day)(5.913 + 5.1)|5.1}} = <b>647.8 mg/day</b>, with K<sub>M</sub> carried unrounded; her sheet writes 647.83.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>The two-dose stem: dose 1 and its steady state, "Because the ... concentration was well below the therapeutic range", dose 2 and its steady state. Then K<sub>M</sub>, then V<sub>max</sub>, as separate parts or as one part asking both.</li>
+<li>Her In-Class Practice 2 and 3 split them: K<sub>M</sub> from 350 mg/day (9.2 mg/L) and 450 mg/day (20 mg/L) is 6.43 mg/L, then V<sub>max</sub> from that K<sub>M</sub>, about 595 mg/day from either pair.</li>
+<li>Doses can be per kilogram (the slide Example) or per day (her sheets, where the weight serves only the volume of distribution).</li>
+<li>The usual errors: putting a rate unit on K<sub>M</sub>; subtracting the ratios the wrong way round, which makes K<sub>M</sub> negative; and pairing one dose rate with the other dose's concentration in the V<sub>max</sub> line.</li>
+<li>A concept item can ask what the direct method needs: two different dose rates in the same patient and the steady-state concentration each produced.</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>I wrote this twice because you should get the same answer regardless of which way you use it.</q></li>
+</ul>
+<p class="gsrc">Sources: 8 - Nonlinear PK.pdf, slides "In Vitro Determination of KM and Vmax" (her note "in test tube"), "In Vivo Determination of KM and Vmax", "Determination of KM and Vmax by Direct Method", "Example" and her working on the next slide; Nonlinear-Solutions-1.pdf; In-Class Practice, Nonlinear PK, questions 2 and 3; BasicPharmacokineticsEquations.pdf page 2; transcript 10-14.</p>
+</section>
+
+<section class="gobj" id="gobj-m8-4">
+<h3 data-nav="Module 8, objective 4 &mdash; Estimate the dose for a nonlinear drug such as phenytoin in multiple-dose regimens">Module 8 - Objective 4</h3>
+<div class="gbar"><span>Objective</span><b>Estimate the dose for a nonlinear drug such as phenytoin in multiple-dose regimens</b><i>8 - Nonlinear PK.pdf, slides "In Vivo Determination of KM and Vmax", "Example" (both), and her working on the closing pages</i></div>
+
+<h4>In plain words</h4>
+<ul class="tlist">
+<li>At steady state the dose rate R equals the rate of saturable elimination at that level, so R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}. With V<sub>max</sub> and K<sub>M</sub> known, a target C<sub>ss</sub> gives the daily dose rate.</li>
+<li>R is a dose rate: an amount per unit time, such as mg/day. An answer of "1000 mg" with no interval is not a regimen.</li>
+<li>When V<sub>max</sub> is given per kilogram, R comes out per kilogram; multiply by the weight for the patient's dose.</li>
+<li>Turned round, a new dose rate gives the steady-state level it will produce: C<sub>ss</sub> = {{frac:RK<sub>M</sub>|V<sub>max</sub> &minus; R}}. As R approaches V<sub>max</sub> the denominator shrinks, so a small increase in dose gives a large rise in C<sub>ss</sub>.</li>
+<li>This is why phenytoin is dosed carefully: it is nonlinear and has a narrow therapeutic window, about 10 to 20 mg/L. Levels are measured and the dose adjusted for the individual patient.</li>
+<li>Steady state takes 2 to 3 weeks for such a drug, so the C<sub>ss</sub> in these lines is a level reached much later than 3 to 5 half-lives.</li>
+</ul>
+
+<h4>Terms to know</h4>
+<dl class="gterms">
+<dt>Dose rate (R)</dt><dd>The amount of drug given per unit time, mg/day or mg/kg/day; not a single dose.</dd>
+<dt>Steady-state concentration (C<sub>ss</sub>)</dt><dd>The average plasma level once dosing and elimination balance, mg/L; 15 mg/L is the target on every one of her sheets.</dd>
+<dt>Therapeutic window</dt><dd>The range between the minimum effective and the minimum toxic concentration; for phenytoin about 10 to 20 mg/L.</dd>
+</dl>
+
+<h4>Equations</h4>
+<div class="geq">
+<div class="geqline">R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}</div>
+<ul class="tlist">
+<li>V<sub>max</sub> in mg/day or mg/kg/day; K<sub>M</sub> and C<sub>ss</sub> in mg/L, which cancel; R in the units of V<sub>max</sub>.</li>
+<li>When to use it: the daily dose for a target steady state, once K<sub>M</sub> and V<sub>max</sub> are known (given, or from objective 3).</li>
+<li>On the equation sheet: yes, page 2, the first line of the right column.</li>
+</ul>
+</div>
+<div class="geq">
+<div class="geqline">C<sub>ss</sub> = {{frac:RK<sub>M</sub>|V<sub>max</sub> &minus; R}}</div>
+<ul class="tlist">
+<li>The same symbols. Multiply out R(K<sub>M</sub> + C<sub>ss</sub>) = V<sub>max</sub>C<sub>ss</sub>, gather the C<sub>ss</sub> terms, RK<sub>M</sub> = C<sub>ss</sub>(V<sub>max</sub> &minus; R), and divide.</li>
+<li>When to use it: "What steady-state concentration should be achieved if the dose were 400 mg daily?"</li>
+<li>On the equation sheet: no. She worked the rearrangement from the sheet's R line, step by step.</li>
+</ul>
+</div>
+
+<h4>Worked example</h4>
+<p class="prose">Her first slide Example: K<sub>M</sub> = 5 mg/L and V<sub>max</sub> = 8 mg/kg/day. The daily dose rate for an average plasma concentration of 24 mg/L in a 65 kg patient?</p>
+<ol class="gsteps">
+<li>R = {{frac:(8 mg/kg/day)(24 mg/L)|(5 + 24) mg/L}} = {{frac:192|29}} = 6.62 mg/kg/day.</li>
+<li>Per patient: 6.62 mg/kg/day &times; 65 kg = <b>430 mg/day</b>.</li>
+</ol>
+<p class="prose">Her Solutions 1, with K<sub>M</sub> 5.91 mg/L and V<sub>max</sub> 647.83 mg/day (objective 3): the dose for 15 mg/L, and the steady state on 450 mg daily?</p>
+<ol class="gsteps">
+<li>R = {{frac:(647.83)(15)|5.91 + 15}} = 464.73 mg/day, which she gave as <b>465 mg/day</b>.</li>
+<li>C<sub>ss</sub> = {{frac:(450)(5.91)|647.83 &minus; 450}} = {{frac:2659.5|197.83}} = 13.44, written <b>13.5 mg/L</b> on her sheet (13.45 with K<sub>M</sub> and V<sub>max</sub> unrounded).</li>
+<li>Compare: 450 mg/day is about 97% of 465 mg/day, but the level is 13.5 mg/L instead of 15 mg/L.</li>
+</ol>
+
+<h4>How she tests it</h4>
+<ul class="tlist">
+<li>Every sheet asks a daily dose for 15 mg/L at steady state, then the steady state at a third dose (400 mg daily on the In-Class Practice: 11.5 mg/L).</li>
+<li>Rounding: to the nearest ten when the stem says so (her slide Example 2: 518.4 mg/day becomes 520 mg/day); otherwise to a dose that can be given (465, 460, 315 mg/day). She accepts the unrounded number in this course.</li>
+<li>A per-kilogram V<sub>max</sub> needs the weight at the end; a per-day V<sub>max</sub> does not, and the weight then serves only V<sub>D</sub>.</li>
+<li>The answer is a rate in mg/day. A bare amount, or a per-kilogram rate left for a patient, is the error she named.</li>
+<li>Concept items: what R means (the dose rate), how long steady state takes (2 to 3 weeks), and the result of a small dose increase near saturation (a disproportionately large rise in C<sub>ss</sub>).</li>
+<li>Her homework for this module repeats the In-Class Practice shape: K<sub>M</sub>, V<sub>max</sub>, a dose for a target steady state rounded to the nearest ten, the half-life and clearance on that dose, and the steady state at another dose.</li>
+</ul>
+
+<h4>In her words</h4>
+<ul class="tlist">
+<li><q>And if I'm your patient, please don't tell me 6.62 mg per kilogram per day. Tell me how many, tell me what I need.</q></li>
+</ul>
+<p class="gsrc">Sources: 8 - Nonlinear PK.pdf, slides "In Vivo Determination of KM and Vmax" (her notes "R represents our dose rate (amt per unit time)" and "it will take longer to reach steady state"), "Example" (both, with her working) and the rearrangement for C<sub>ss</sub> on the closing pages; Nonlinear-Solutions-1.pdf and 2.pdf; In-Class Practice, Nonlinear PK; Homework-7.pdf question 2 (its parts only); BasicPharmacokineticsEquations.pdf page 2; transcript 10-14.</p>
 </section>
 `;

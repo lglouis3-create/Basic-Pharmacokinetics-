@@ -9,6 +9,16 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - Modules 7b (PK-PD) and 8 (nonlinear) appear in the menus; their questions are being added.
 - Worked steps on 27 questions now print arithmetic that follows from the numbers shown.
 - 45 problem parts now state the earlier results they use, so each can be answered when met alone.
+- Guides: Module 7b (two objectives) and Module 8 (four), each with worked examples from her sheets.
+- Tell apart: two new tables, teff and the dose for PK-PD, and linear against nonlinear for Module 8.
+- Terms: 18 new terms, among them MEC/MTC, teff, therapeutic window, Vmax, KM and Michaelis-Menten.
+- Reference: equation tables for Modules 7b and 8, matching page 2 of her equation sheet.
+- Topics: calculation cards for teff, the dose for a duration, KM and Vmax, dose rate, t½ and clearance.
+- Diagrams: a doubled IV bolus against the MEC, and Css against dose rate for a saturable drug.
+- Explain more under 7b questions now names Module 7b and finds its Guide and Reference sections.
+- Three new questions: which teff form to use, C0 when the dose doubles, and Vmax from either pair.
+- Worked lines on Guides, Reference and Tell apart now follow from the numbers they show.
+- Equation symbols print the unit as hr⁻¹; Module 7b and 8 terms are filed under the final.
 
 ## 2026-10-08 (build-it: no greyed pieces after Next)
 - Build it: after Next, pieces from the previous equation no longer show greyed out and untappable in the new one.

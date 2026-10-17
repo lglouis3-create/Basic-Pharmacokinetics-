@@ -517,6 +517,59 @@ FIGS['flipflop'] = ('One drug given as an immediate-release and an extended-rele
                     ff.svg('Immediate against extended release: which constant sets the slope of the tail'))
 
 
+# ---- Module 7b: doubling an IV bolus and the duration of activity ----------
+# Her "Practice Problem" slide (7b---Pharmacokinetics-and-Pharmacodynamics.pdf):
+# MEC 0.2 mcg/mL, VD 24 L, k 0.15 hr^-1; 250 mg and her amended 500 mg. The
+# crossings of the MEC are her worked teff values, 26.35 and 30.97 hr, and the
+# gap is 0.693/0.15 = 4.62 hr, one half-life.
+def _teff(D):
+    return math.log(D / 24 / 0.2) / 0.15
+
+
+pt = Plot(40, [0.1, 1, 10, 100], log=True, ylabel='Plasma drug concentration (mg/L)')
+pt.frame([0, 10, 20, 30, 40]).hline(0.2)
+pt.curve(lambda t: 500 / 24 * math.exp(-0.15 * t), color=AMBER)
+pt.curve(lambda t: 250 / 24 * math.exp(-0.15 * t), color=BLUE)
+for D, c in ((250, BLUE), (500, AMBER)):
+    pt.vline(_teff(D), 0.2, color=c); pt.points([_teff(D)], [0.2], color=c)
+pt.text(_teff(250) - 0.6, 0.2, '26.35 hr', size=15, color=BLUE, anchor='end', dy=20)
+pt.text(_teff(500) + 0.6, 0.2, '30.97 hr', size=15, color=AMBER, anchor='start', dy=-10)
+pt.label(1, 0.24, 'MEC 0.2 mg/L')
+pt.label(13, 40, '500 mg', color=AMBER, swatch=True)
+pt.label(13, 20, '250 mg', color=BLUE, swatch=True)
+pt.note('Gap at the MEC: 4.62 hr, one half-life')
+FIGS['pd_teff_dose'] = ('One IV bolus of 250 mg and of 500 mg on a log axis, with the minimum effective concentration: the duration of activity of each',
+                        pt.svg('Doubling an IV bolus moves the crossing of the MEC one half-life later'))
+
+
+# ---- Module 8: steady-state level against daily dose rate, saturable ------
+# Her second "Example" slide (8 - Nonlinear PK.pdf): KM 10 mg/L, Vmax 12
+# mg/kg/day; her measured pairs 6 -> 10 and 8 -> 20 mg/L and her target pair
+# 7.2 -> 15 mg/L lie on Css = R KM / (Vmax - R). The dashed line starts at the
+# first pair and is what a linear drug would do from there: Css in proportion to R.
+pn = Plot(12, [0, 10, 20, 30, 40, 50, 60], xlabel='Daily dose rate, R (mg/kg/day)',
+          ylabel='Steady-state concentration (mg/L)')
+pn.frame([0, 2, 4, 6, 8, 10, 12])
+pn.curve(lambda r: 10 / 6 * r, color=AMBER, dash='6 5', x0=6)
+_rmax = 12 * 60 / 70                          # where Css reaches the top of the axis, 60 mg/L
+_pts = []
+for _i in range(261):
+    _r = _rmax * _i / 260
+    _pts.append(f'{pn.px(_r):.1f},{pn.py(_r * 10 / (12 - _r)):.1f}')
+pn.parts.append(f'<polyline points="{" ".join(_pts)}" fill="none" stroke="{BLUE}" stroke-width="2" '
+                f'stroke-linecap="round" stroke-linejoin="round"/>')
+pn.vline(12, 60)
+pn.points([6, 7.2, 8], [10, 15, 20])
+pn.text(6.15, 10, '6 → 10', size=14, dy=20)
+pn.text(7.05, 15, '7.2 → 15', size=14, anchor='end', dy=-2)
+pn.text(8.15, 20, '8 → 20', size=14, dy=4)
+pn.text(11.85, 55, 'Vmax 12', size=14, color=DIM, anchor='end')
+pn.label(0.4, 52, 'saturable drug', color=BLUE, swatch=True)
+pn.label(0.4, 44, 'linear, in proportion to R from 6 → 10', color=AMBER, swatch=True)
+FIGS['nl_css_rate'] = ('Steady-state concentration against daily dose rate for a saturable drug, against a straight line for a linear one',
+                       pn.svg('Css rising steeply as the dose rate nears Vmax'))
+
+
 # ---- the three input types -------------------------------------------------
 def input_panel(fn, title, line, stop=None):
     pan = Plot(16, [0, 5, 10], xlabel='Time', ylabel='Concentration',

@@ -44,9 +44,12 @@ with sync_playwright() as p:
     pg.goto(OUT.as_uri()); pg.wait_for_timeout(700)
     print('\n=== Folded sections ===')
     pg.evaluate("show('ref')"); pg.wait_for_timeout(200)
+    # three groups: Exam 1, Exam 2, and the final's new material (Modules 7b and 8)
     ok('Reference opens with its sections folded and grouped by exam',
-       pg.locator('#v-ref details.dsec').count() >= 10 and pg.locator('#v-ref details.dsec[open]').count() == 0 and pg.locator('#v-ref details.dgrp').count() == 2)
-    ok('the exam being prepared for is the open group', pg.evaluate("document.querySelector('#v-ref details.dgrp[data-examgrp=\"doc-2\"]').open") is True and pg.evaluate("document.querySelector('#v-ref details.dgrp[data-examgrp=\"doc-1\"]').open") is False)
+       pg.locator('#v-ref details.dsec').count() >= 10 and pg.locator('#v-ref details.dsec[open]').count() == 0 and pg.locator('#v-ref details.dgrp').count() == 3)
+    # the group of the exam being prepared for (EXAM.id) is open and every other group is folded
+    ok('the exam being prepared for is the open group', pg.evaluate("""() => { const g = [...document.querySelectorAll('#v-ref details.dgrp[data-examgrp]')];
+        return g.length > 1 && g.every(d => d.open === (d.dataset.examgrp === 'doc-' + EXAM.id)); }""") is True)
     pg.click('#v-ref [data-fold="open"]'); pg.wait_for_timeout(150)
     ok('Expand all opens every section', pg.locator('#v-ref details.dsec:not([open])').count() == 0)
     pg.reload(); pg.wait_for_timeout(600); pg.evaluate("show('ref')"); pg.wait_for_timeout(200)
@@ -54,7 +57,7 @@ with sync_playwright() as p:
     pg.evaluate("show('guide')"); pg.wait_for_timeout(200)
     ok('Guides folds each objective inside its module', pg.locator('#v-guide details.dmod').count() >= 8 and pg.locator('#v-guide details.dsec').count() >= 30)
     pg.evaluate("show('tell')"); pg.wait_for_timeout(200)
-    ok('Tell apart has an Exam 1, a both-exams and an Exam 2 group', pg.locator('#v-tell details.dgrp').count() == 3)
+    ok('Tell apart has an Exam 1, a both-exams, an Exam 2 and a final group', pg.locator('#v-tell details.dgrp').count() == 4)
     pg.evaluate("show('settings')"); pg.wait_for_timeout(200)
     ok('the change log in Settings starts folded', pg.evaluate("document.getElementById('changelog').open") is False)
     pg.evaluate("['guide','ref','tell','diag'].forEach(p => LS.set(FOLD_KEY + p, 'open'))"); pg.evaluate("show('topics')"); pg.wait_for_timeout(200)

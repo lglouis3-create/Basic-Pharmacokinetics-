@@ -353,6 +353,13 @@ const OBJECTIVES = [
   {module:7, n:'7a.2', text:'Distinguish between relative bioavailability and absolute bioavailability', subs:['bioavail/defs', 'bioavail/frel']},
   {module:7, n:'7a.3', text:'Discuss factors that can influence bioavailability', subs:['bioavail/factors']},
   {module:7, n:'7a.4', text:'Estimate bioavailability of a dose given route of administration, dosage form, etc.', subs:['bioavail/fabs', 'bioavail/frel']},
+  /* Module 7b is module 9 in the bank; 'n' carries its deck letter, as 6a and 7a do */
+  {module:9, n:'7b.1', text:'Describe the intensification of pharmacologic response increases with drug concentrations and/or dose up to a maximum response', subs:['pkpd/pd', 'pkpd/doseresp']},
+  {module:9, n:'7b.2', text:'Describe the effect of changing drug dose and/or drug elimination half-life on the duration of drug response', subs:['pkpd/teff', 'pkpd/dosefor', 'pkpd/thalf']},
+  {module:8, n:'1', text:'Differentiate between linear and non-linear pharmacokinetics', subs:['nonlin/linear']},
+  {module:8, n:'2', text:'Discuss the relationship between KM and Cp in describing elimination from saturable kinetic processes', subs:['nonlin/kmcp']},
+  {module:8, n:'3', text:'Calculate the Vmax and KM after multiple dosing in a patient', subs:['nonlin/kmvmax']},
+  {module:8, n:'4', text:'Estimate the dose for a nonlinear drug such as phenytoin in multiple-dose regimens', subs:['nonlin/dose']},
 ];
 
 /* The kinds of calculation each module asks, in the order they are taught.
@@ -389,6 +396,12 @@ const CALC_TYPES = [
   {module:6, id:'m6-oral', name:'Deck 6a · Multiple oral doses: peak, trough, time to peak and average', match:['multoral/ossc'], example:'m6b-n12'},
   {module:7, id:'m7-fabs', name:'Absolute bioavailability from two AUCs, and the equivalent oral dose', match:['bioavail/fabs'], example:'m7-n01'},
   {module:7, id:'m7-frel', name:'Relative bioavailability of one formulation against another', match:['bioavail/frel'], example:'m7-n03'},
+  {module:9, id:'m7b-auc', name:'AUC of the IV bolus, from the dose and the clearance', match:['pkpd:auc'], example:'hw7-1a'},
+  {module:9, id:'m7b-teff', name:'Duration of activity (teff) of one IV bolus, and after a dose change', match:['pkpd/teff'], example:'pd-ex-a'},
+  {module:9, id:'m7b-dose', name:'The IV bolus dose for a target duration of activity', match:['pkpd/dosefor'], example:'pd-ex-d'},
+  {module:8, id:'m8-rate', name:'Daily dose rate for a target steady state, and the steady state from a dose rate', match:['nonlin/dose'], example:'nl-ex1'},
+  {module:8, id:'m8-kmvmax', name:'KM by the direct method from two dose rates, then Vmax', match:['nonlin/kmvmax'], example:'nl-ex2a'},
+  {module:8, id:'m8-thcl', name:'Half-life and clearance at a stated concentration', match:['nonlin/kmcp'], example:'nl-p1c-t'},
 ];
 
 

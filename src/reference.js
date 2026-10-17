@@ -17,7 +17,7 @@
    ========================================================================== */
 const REFERENCE_HTML = `
 <h2>Reference</h2>
-<p class="sub">Every equation this course uses, Modules 1 to 7a. Nothing here is scored.</p>
+<p class="sub">Every equation this course uses, Modules 1 to 7a, then 7b and 8. Nothing here is scored.</p>
 <details class="tabhelp" open><summary>What this tab is for</summary><ul>
 <li><b>Look an equation up while working a problem:</b> each one with its symbols, units, the condition it holds under, and whether the exam equation sheet carries it.</li>
 <li><b>First comes the map of her equation sheet:</b> every line in print order, coloured by module, with the words in a stem that call for it; it prints on its own.</li>
@@ -46,7 +46,7 @@ const REFERENCE_HTML = `
 <li>The absorption half-life comes from k<sub>a</sub>, the first-order absorption rate constant.</li>
 <li>Not on the sheet. The only sheet line that solves for a half-life is the nonlinear one on page 2, t&frac12; = V<sub>D</sub>{{frac:0.693|V<sub>max</sub>}}(K<sub>M</sub> + C<sub>p</sub>).</li>
 <li>In that line V<sub>D</sub> is the apparent volume of distribution (the volume that relates the amount of drug in the body to the measured concentration) and C<sub>p</sub> the plasma concentration.</li>
-<li>V<sub>max</sub> and K<sub>M</sub> are the two constants of nonlinear elimination, which is final exam material and not part of Modules 1 to 7a.</li>
+<li>V<sub>max</sub> and K<sub>M</sub> are the two constants of nonlinear elimination, Module 8.</li>
 </ul></td></tr>
 
 <tr><td><b>Clearance from k and V<sub>D</sub></b>, clearance (Cl) being the volume of plasma cleared of drug per unit time<br>Cl = k &times; V<sub>D</sub></td>
@@ -625,7 +625,7 @@ const REFERENCE_HTML = `
 <ul class="tlist">
 <li>k = {{frac:0.693|4 hr}} = 0.1733 hr<sup>&minus;1</sup>. The interval is two half-lives, so e<sup>&minus;k&tau;</sup> = 0.25 and the accumulation factor {{frac:1|1 &minus; 0.25}} = 1.33.</li>
 <li>First dose: C<sub>0</sub> = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L (1 L taken as 1 kg), falling to 40 &times; 0.25 = 10 mg/L at 8 hr.</li>
-<li>At steady state: 40 &times; 1.33 = 53.3, 53.3 &times; 0.25 = 13.3, and an average of {{frac:40 mg/L|0.1733 hr<sup>&minus;1</sup> &times; 8 hr}} = 28.9 mg/L.</li>
+<li>At steady state: 40 &times; 1.333 = 53.3, 53.3 &times; 0.25 = 13.3, and an average of {{frac:40 mg/L|0.1733 hr<sup>&minus;1</sup> &times; 8 hr}} = 28.9 mg/L.</li>
 </ul>
 {{fig:md_bolus|Her Example 1 regimen: six doses, then none. The dashed curve is the first dose on its own.}}
 {{steps:md_bolus_steps}}
@@ -825,6 +825,128 @@ const REFERENCE_HTML = `
 <tr><td>Test and reference product</td><td>Comparison of the bioavailability of the same active pharmaceutical ingredient from one drug product (test) to a second drug product (reference).</td><td><i>"B is the reference standard or the comparator, right? So, in our um absolute example, our reference standard would be our IV bolus."</i></td></tr>
 </tbody></table>
 
+<h3 data-exam="3">Module 7b &mdash; PK-PD relationship and duration of activity</h3>
+<ul class="tlist">
+<li>Pharmacodynamics links the concentration at the receptor to the response; the response rises with dose up to a maximum effect.</li>
+<li>The calculation is the duration of activity, t<sub>eff</sub>: how long one IV bolus keeps the plasma level at or above C<sub>eff</sub>, the minimum effective concentration (MEC). It is the Module 2 line C = C<sub>0</sub>e<sup>&minus;kt</sup> solved for t.</li>
+<li>Every stem is a single IV bolus of a drug in a one-compartment open model with first-order elimination. The MEC is given in mcg/mL, which is the same number in mg/L.</li>
+<li>The four lines her equation sheet prints for this module are the last four of page 2, left column. The dose line is not printed.</li>
+</ul>
+
+<table class="reftab"><thead><tr>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+
+<tr><td><b>E = E<sub>0</sub> &minus; {{frac:kmt|2.3}}</b></td>
+<td>E the effect at time t (hr); E<sub>0</sub> the effect at time zero; k the elimination rate constant (hr<sup>&minus;1</sup>); m the slope of effect against log concentration</td>
+<td>After an IV bolus, in the range where effect against log concentration is a straight line. The 2.3 is there because that line is in base-10 logs.</td>
+<td>How the effect, not the concentration, changes with time: it falls in a straight line, faster for a larger k or m.</td>
+<td>Yes, page 2, left column.</td></tr>
+
+<tr><td><b>t<sub>eff</sub> = {{frac:2.3[log C<sub>0</sub> &minus; log C<sub>eff</sub>]|k}}</b>, with C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}</td>
+<td>t<sub>eff</sub> in hr; D<sub>0</sub> the dose (mg); V<sub>D</sub> the volume of distribution (L); C<sub>0</sub> and C<sub>eff</sub> in mg/L; k in hr<sup>&minus;1</sup></td>
+<td>The duration in base-10 logs. Same relation as the ln line; the 2.3 rounds 2.303, so the answer comes out a little smaller.</td>
+<td>Her slide problem, 250 mg into 24 L, MEC 0.2 mg/L, k 0.15 hr<sup>&minus;1</sup>: 26.32 hr by this line, 26.35 hr by the ln line.</td>
+<td>Yes, page 2, with D<sub>0</sub> over V<sub>D</sub> written inside the first log.</td></tr>
+
+<tr><td><b>t<sub>eff</sub> = {{frac:ln C<sub>0</sub> &minus; ln C<sub>eff</sub>|k}}</b>, with C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}</td>
+<td>The same symbols; ln C<sub>0</sub> &minus; ln C<sub>eff</sub> is the ln of {{frac:C<sub>0</sub>|C<sub>eff</sub>}}</td>
+<td>The stem gives k, or an equation such as C<sub>p</sub> = 50e<sup>&minus;0.2t</sup> from which C<sub>0</sub> and k are read.</td>
+<td><ul class="tlist">
+<li>Her slide problem: {{frac:250 mg|24 L}} = 10.42 mg/L, ln of {{frac:10.42|0.2}} over 0.15 = 26.35 hr; at 500 mg 30.97 hr; at 1000 mg 35.60 hr.</li>
+<li>Practice 1 (k 0.1386 hr<sup>&minus;1</sup>): 8.69 hr at 500 mg, 18.69 hr at 2000 mg.</li>
+</ul></td>
+<td>Yes, page 2.</td></tr>
+
+<tr><td><b>t<sub>eff</sub> = 1.44t&frac12; ln({{frac:D<sub>0</sub>|V<sub>D</sub>C<sub>eff</sub>}})</b></td>
+<td>t&frac12; the elimination half-life (hr); 1.44 = {{frac:1|0.693}}; the ratio inside the ln has no units</td>
+<td>The stem gives the half-life. t<sub>eff</sub> is in direct proportion to t&frac12;, and the dose is inside the ln.</td>
+<td><ul class="tlist">
+<li>In-Class Activity 1: 1.44(3 hr) ln({{frac:250|25 &times; 1.2}}) = 9.16 hr; her sheet writes 9.15.</li>
+<li>Practice 3: 11.56 hr at 20 mg/kg; 15.16 hr at 40 mg/kg, one half-life (3.6 hr) more.</li>
+</ul></td>
+<td>Yes, page 2, the last line of the left column.</td></tr>
+
+<tr><td><b>D<sub>0</sub> = C<sub>eff</sub>V<sub>D</sub>e<sup>kt<sub>eff</sub></sup></b></td>
+<td>D<sub>0</sub> the dose for a target duration (mg); t<sub>eff</sub> the target (hr)</td>
+<td>"What dose would yield a duration of action of 12 hours?" The exponent is positive. Each added half-life of duration doubles the dose.</td>
+<td><ul class="tlist">
+<li>In-Class Activity 1(b): (1.2 mg/L)(25 L)e<sup>(0.231)(12)</sup> = 479.72 mg.</li>
+<li>Doubling her slide problem's 26.35 hr: (0.2 mg/L)(24 L)e<sup>(0.15)(52.7)</sup> = 13,012 mg, about 13 g.</li>
+<li>Practice 2: 777.5 mg, given as 10.4 mg/kg.</li>
+</ul></td>
+<td>No. C<sub>eff</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}e<sup>&minus;kt<sub>eff</sub></sup> solved for D<sub>0</sub>, as on her working.</td></tr>
+</tbody></table>
+
+<p><b>What moves the duration of activity.</b></p>
+<table class="reftab"><thead><tr>
+<th style="width:30%">Change</th><th style="width:30%">Effect on t<sub>eff</sub></th><th>Why</th></tr></thead><tbody>
+<tr><td>Dose doubled</td><td>One half-life longer, not twice as long</td><td>The dose is inside the logarithm: ln 2 divided by k is {{frac:0.693|k}}, one t&frac12;. Her poll keys "a 2-fold increase in the duration of activity" False.</td></tr>
+<tr><td>Dose four times</td><td>Two half-lives longer</td><td>Two doublings. Practice 1: 8.69 to 18.69 hr, 10 hr, with t&frac12; 5 hr.</td></tr>
+<tr><td>Half-life doubled, same dose</td><td>Twice as long</td><td>t&frac12; multiplies the whole expression. Liver or kidney disease that lowers elimination prolongs t&frac12;, the duration, and the possibility of toxicity.</td></tr>
+<tr><td>Target duration doubled</td><td>A very large dose</td><td>The duration is in the exponent of the dose line: 250 mg gives 26.35 hr; 52.7 hr needs about 13 g.</td></tr>
+</tbody></table>
+
+<h3>Module 8 &mdash; nonlinear pharmacokinetics</h3>
+<ul class="tlist">
+<li>A saturable (capacity-limited) elimination follows Michaelis-Menten kinetics: first order when the plasma concentration C<sub>p</sub> is much less than K<sub>M</sub>, zero order when it is much greater.</li>
+<li>Two constants for one drug in one patient: V<sub>max</sub>, the maximum elimination rate (mg/day or mg/kg/day), and K<sub>M</sub>, the Michaelis constant (mg/L). The half-life and the clearance are not constant; both depend on C<sub>p</sub>.</li>
+<li>Steady state takes 2 to 3 weeks for such a drug, not 3 to 5 half-lives.</li>
+<li>The four lines her equation sheet prints are page 2, right column. Two lines her sheets use, V<sub>max</sub> from one pair and C<sub>ss</sub> from a dose rate, are rearrangements of the first.</li>
+<li>Rounding: to the nearest ten when asked; <i>"Now, if you give me 518.4, again, it's OK for this class."</i></li>
+</ul>
+
+<table class="reftab"><thead><tr>
+<th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
+
+<tr><td><b>&minus;{{frac:dC<sub>p</sub>|dt}} = {{frac:V<sub>max</sub>C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}</b></td>
+<td>C<sub>p</sub> the plasma concentration (mg/L); V<sub>max</sub> the maximum elimination rate; K<sub>M</sub> the Michaelis constant (mg/L)</td>
+<td>Any saturable elimination. C<sub>p</sub> much greater than K<sub>M</sub>: rate = V<sub>max</sub>, zero order. C<sub>p</sub> much less than K<sub>M</sub>: rate = {{frac:V<sub>max</sub>|K<sub>M</sub>}}C<sub>p</sub>, first order.</td>
+<td>The order at high and at low concentration; her poll keys the reversed statement False.</td>
+<td>No. The dose-rate line is built from it.</td></tr>
+
+<tr><td><b>R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}</b></td>
+<td>R the dose rate (mg/day or mg/kg/day); C<sub>ss</sub> the steady-state concentration (mg/L)</td>
+<td>The daily dose for a target C<sub>ss</sub>, once V<sub>max</sub> and K<sub>M</sub> are known. A V<sub>max</sub> per kg gives R per kg, then times the weight.</td>
+<td><ul class="tlist">
+<li>Her first Example: {{frac:(8)(24)|5 + 24}} = 6.62 mg/kg/day; for 65 kg, 6.62 &times; 65 = 430 mg/day.</li>
+<li>Solutions 1: 464.73, given as 465 mg/day; Solutions 2: 312.5, given as 315 mg/day.</li>
+</ul></td>
+<td>Yes, page 2, right column, first line.</td></tr>
+
+<tr><td><b>K<sub>M</sub> = {{frac:R<sub>2</sub> &minus; R<sub>1</sub>|a<sub>1</sub> &minus; a<sub>2</sub>}}</b>, with a<sub>1</sub> = {{frac:R<sub>1</sub>|C<sub>1</sub>}}, a<sub>2</sub> = {{frac:R<sub>2</sub>|C<sub>2</sub>}}</td>
+<td>R<sub>1</sub>, R<sub>2</sub> two dose rates in one patient; C<sub>1</sub>, C<sub>2</sub> the steady states they gave (mg/L); K<sub>M</sub> in mg/L</td>
+<td>The direct method: two doses and two steady-state levels. K<sub>M</sub> always comes first. The rate units cancel.</td>
+<td><ul class="tlist">
+<li>Her second Example: {{frac:8 &minus; 6|0.6 &minus; 0.4}} = 10 mg/L.</li>
+<li>Solutions 1: 5.91 mg/L; Solutions 2: 9 mg/L; In-Class Practice: 6.43 and 14.4 mg/L.</li>
+</ul></td>
+<td>Yes, page 2, written with R<sub>1</sub> over C<sub>1</sub> minus R<sub>2</sub> over C<sub>2</sub> in brackets.</td></tr>
+
+<tr><td><b>V<sub>max</sub> = {{frac:R(K<sub>M</sub> + C<sub>ss</sub>)|C<sub>ss</sub>}}</b></td>
+<td>R and C<sub>ss</sub> from one pair; V<sub>max</sub> in the units of R</td>
+<td>After K<sub>M</sub>. Either pair gives the same answer; mixing the pairs does not.</td>
+<td>Her second Example: {{frac:8(10 + 20)|20}} = {{frac:6(10 + 10)|10}} = 12 mg/kg/day. Solutions 1: 647.83 mg/day; In-Class Practice 4: 900 mg/day.</td>
+<td>No. The R line rearranged.</td></tr>
+
+<tr><td><b>C<sub>ss</sub> = {{frac:RK<sub>M</sub>|V<sub>max</sub> &minus; R}}</b></td>
+<td>The same symbols</td>
+<td>The steady state a new dose rate will give. As R nears V<sub>max</sub> a small dose increase gives a large rise in C<sub>ss</sub>.</td>
+<td>In-Class Practice 4e: {{frac:(400)(14.4)|900 &minus; 400}} = 11.5 mg/L. Solutions 1(d): 13.5 mg/L on 450 mg daily.</td>
+<td>No. The R line rearranged: RK<sub>M</sub> + RC<sub>ss</sub> = V<sub>max</sub>C<sub>ss</sub>, so RK<sub>M</sub> = C<sub>ss</sub>(V<sub>max</sub> &minus; R).</td></tr>
+
+<tr><td><b>t&frac12; = V<sub>D</sub>({{frac:0.693|V<sub>max</sub>}})(K<sub>M</sub> + C<sub>p</sub>)</b></td>
+<td>V<sub>D</sub> in L (L/kg times the weight); V<sub>max</sub> in mg/day; t&frac12; in days</td>
+<td>"The half-life when the plasma concentration is 15 mg/L": C<sub>p</sub> is the stated level. Rises as C<sub>p</sub> rises.</td>
+<td>In-Class Practice 4d: 46.2 L &times; {{frac:0.693|900}} &times; 29.4 = 1.05 days. Solutions 2: 1.87 days at 15 mg/L, 2.34 days at 21 mg/L.</td>
+<td>Yes, page 2; the only half-life line on the sheet.</td></tr>
+
+<tr><td><b>Cl<sub>T</sub> = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}</b></td>
+<td>Cl<sub>T</sub> the total body clearance; mg/day over mg/L gives L/day</td>
+<td>The clearance at a stated level. Falls as C<sub>p</sub> rises, because C<sub>p</sub> is in the denominator. <i>"You can change it to liters per hour if you want to"</i>.</td>
+<td>In-Class Practice 4d: {{frac:900|29.4}} = 30.6 L/day. Solutions 2: 20.8 L/day at 15 mg/L, 16.7 L/day at 21 mg/L.</td>
+<td>Yes, page 2, last line of the right column.</td></tr>
+</tbody></table>
+
 <h3>The equation sheet as a whole</h3>
 <ul class="tlist">
 <li>BasicPharmacokineticsEquations.pdf runs to two pages.</li>
@@ -841,7 +963,9 @@ const REFERENCE_HTML = `
 <li>A, B: the intercepts, and a, b the slopes, of a two-compartment curve.</li>
 <li>V<sub>D</sub>: the apparent volume of distribution, the volume relating the amount in the body to the measured concentration. V<sub>p</sub> and V<sub>t</sub>: the central and tissue volumes.</li>
 <li>Cl: clearance, the volume of plasma cleared of drug per unit time. Cl<sub>T</sub> total; Cl<sub>R</sub> renal; Cl<sub>H</sub> hepatic.</li>
-<li>R: the constant infusion rate, amount per time.</li>
+<li>R: the constant infusion rate, amount per time; in the nonlinear lines, the daily dose rate.</li>
+<li>E, E<sub>0</sub>, m: the effect, the effect at time zero, and the slope of effect against log concentration. t<sub>eff</sub>: the duration of activity; C<sub>eff</sub>: the minimum effective concentration.</li>
+<li>V<sub>max</sub>: the maximum elimination rate. K<sub>M</sub>: the Michaelis constant, a concentration.</li>
 <li>F: the bioavailability, the fraction of the dose reaching the plasma. F<sub>abs</sub> measured against an IV dose; F<sub>rel</sub> against a reference product B. f<sub>e</sub>: the fraction of the dose excreted unchanged.</li>
 <li>AUC: the area under the concentration-time curve, estimated by the trapezoidal rule (half the sum of two neighbouring concentrations times the time between them).</li>
 <li>t<sub>max</sub>: the time of the peak. &tau;: the dosing interval. n: the number of doses given.</li>
@@ -868,8 +992,8 @@ const REFERENCE_HTML = `
 <li>Also the multiple-oral-dose C<sub>p</sub>, C<sub>max</sub>, C<sub>min</sub> and t<sub>max</sub> at steady state, on page 2.</li>
 </ul></td><td>Module 6, all three parts: repeated IV bolus, intermittent infusions, multiple oral doses</td></tr>
 <tr><td>Bioavailability</td><td>F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}}{{frac:D<sub>IV</sub>|D<sub>po</sub>}}; F<sub>rel</sub> = {{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}}{{frac:D<sub>B</sub>|D<sub>A</sub>}}; D<sub>IV</sub> = (Cl)(AUC<sub>IV</sub>); F<sub>abs</sub>D<sub>po</sub> = (Cl)(AUC<sub>po</sub>)</td><td>Module 7a</td></tr>
-<tr><td>Shelf life and stability</td><td>An E and E<sub>0</sub> log-decline line, and three t<sub>eff</sub> forms including t<sub>eff</sub> = 1.44 t&frac12; ln[{{frac:D<sub>0</sub>|C<sub>eff</sub>V<sub>D</sub>}}]</td><td>Chemical kinetics; not lectured in Modules 1 to 5</td></tr>
-<tr><td>Nonlinear pharmacokinetics</td><td>R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}; K<sub>M</sub> from two rate and concentration pairs; t&frac12; = {{frac:0.693(K<sub>M</sub> + C<sub>p</sub>)V<sub>D</sub>|V<sub>max</sub>}}; Cl<sub>T</sub> = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}</td><td>Final exam material; the symbols in these two rows are not defined in Modules 1 to 7a</td></tr>
+<tr><td>PK-PD, effect and duration of activity</td><td>E = E<sub>0</sub> &minus; {{frac:kmt|2.3}}, and three t<sub>eff</sub> forms including t<sub>eff</sub> = 1.44 t&frac12; ln[{{frac:D<sub>0</sub>|C<sub>eff</sub>V<sub>D</sub>}}]</td><td>Module 7b</td></tr>
+<tr><td>Nonlinear pharmacokinetics</td><td>R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}; K<sub>M</sub> from two rate and concentration pairs; t&frac12; = {{frac:0.693(K<sub>M</sub> + C<sub>p</sub>)V<sub>D</sub>|V<sub>max</sub>}}; Cl<sub>T</sub> = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}</td><td>Module 8</td></tr>
 </tbody></table>
 
 <ul class="tlist">
