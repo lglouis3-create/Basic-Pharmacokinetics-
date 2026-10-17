@@ -131,4 +131,4 @@ R3 was set aside as not a priority for this course. The rest:
 - **R6:** `src/README.md`, "Delivery": the "pages build and deployment" workflow run for the pushed commit is the confirmation; the Pages REST endpoint and the site are not reachable from a cloud session.
 - **R7:** a scheduled task, "PHAR 4221 daily material check", 06:52 America/Chicago, 18 to 27 October. It was created without the Google Drive connector, which has to be added to it in the claude.ai scheduled-task settings before it can list files.
 - **R8:** Weak spots, Concepts: statuses, a card per weak concept, Practice this concept and spaced-review checks; the box-3 count is labelled "on long review".
-- **R9:** a Textbook chapters card for Chapter 22 at the top of Guides. Chapter 18 has no card: the Drive connector refuses files over 10 MB and the chapter PDF is 43 MB, so none of its pages was read.
+- **R9:** Textbook chapters cards for Chapter 22 and Chapter 18 at the top of Guides, in original wording with printed page citations. The Drive connector refuses files over 10 MB, so Chapter 18 (43 MB) was read from four split PDFs the student supplied; all 46 pages were rendered and read.
