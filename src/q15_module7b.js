@@ -51,7 +51,6 @@ const PD_T_PD = {h:'Pharmacodynamics and exposure–response', list:[
   'Pharmacodynamics (PD): the relationship between drug concentration at the site of action, the receptor, and the observed pharmacologic response.',
   'Pharmacokinetics (PK) turns the dose into a concentration over time; PD turns that concentration into a response.',
   'The PK–PD relationship is also called the exposure–response, concentration–response or concentration–effect relationship.',
-  'Exposure: a dose, or a measure of concentration such as Cmax, Css or AUC (area under the curve).',
   'Exposure–response information is used to determine safety and efficacy in drug approval, to understand benefit–risk, and to derive dosing information.']};
 
 const PD_T_DOSE = {h:'Dose, concentration and response', list:[
@@ -64,7 +63,7 @@ const PD_T_DOSE = {h:'Dose, concentration and response', list:[
 const PD_T_CURVE = {h:'Reading the plasma level–time curve', list:[
   'MEC (minimum effective concentration, Ceff): the lowest plasma level that gives the effect. MTC (minimum toxic concentration): the level above which toxicity appears.',
   'Onset time: when the rising level first reaches the MEC.',
-  'Duration (teff): the time the level stays at or above the MEC, the time the drug is in its effective range.',
+  'Duration (teff): the time the level stays at or above the MEC.',
   'Intensity: how far the peak rises above the MEC.']};
 
 const PD_T_EFFECT = {h:'Effect against time after an IV bolus', list:[
@@ -122,10 +121,10 @@ const Q_MODULE7B = [
 
 {id:'pd-c02', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', multi:true,
  topic:'pkpd', sub:'pd', concept:'exposure-response-names', skill:'recall', source:'slide',
- stem:'The relationship between PK and PD is also referred to as which of the following? (Select all that apply)',
+ stem:'The relationship between pharmacokinetics (PK) and pharmacodynamics (PD) is also referred to as which of the following? (Select all that apply)',
  options:[
   {t:'exposure–response relationship', correct:true,
-   why:'Exposure is the dose or a concentration measure such as AUC; response is the pharmacologic observation. Joining them is the PK–PD relationship under its most common name.'},
+   why:'Exposure is the pharmacokinetic side and response the pharmacologic observation. Joining them is the PK–PD relationship under its most common name.'},
   {t:'concentration–response relationship', correct:true,
    why:'This names the same link with the plasma concentration as the measure of exposure: as the concentration at the receptor rises, the response rises toward its maximum.'},
   {t:'concentration–effect relationship', correct:true,
@@ -160,7 +159,7 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'doseresp', concept:'response-up-to-max', skill:'recall', source:'slide',
  stem:'Which of the following is true regarding the relationship of dose to pharmacologic effect?',
  options:[
-  {t:'As the dose increases, the drug concentration at the receptor site increases, and the response increases up to a maximum effect.', correct:true,
+  {t:'Response rises with dose up to a maximum effect', correct:true,
    why:'More dose puts more drug at the receptor, so more receptors are occupied and the response grows; once all are occupied the response cannot rise further, which sets the maximum effect.'},
   {t:'The response increases in direct proportion to the dose at every dose.',
    why:'Choosing this extends the steep low-dose part of the curve to every dose. Near the top a further dose change gives only a small increase, and the response levels off at its maximum.'},
@@ -191,7 +190,7 @@ const Q_MODULE7B = [
  stem:'Which term describes the time that the plasma drug level stays at or above the minimum effective concentration (MEC) after a single dose?',
  options:[
   {t:'Duration of action', correct:true,
-   why:'Duration is read along the time axis between the two crossings of the MEC: from the onset, where the rising level first reaches the MEC, to the time it falls back below it. This is teff, the time the drug is in its effective range.'},
+   why:'Duration is read along the time axis between the two crossings of the MEC: from the onset, where the rising level first reaches the MEC, to the time it falls back below it. This is teff, the duration of activity.'},
   {t:'Onset time',
    why:'Choosing this takes the start of the effect for its length. Onset time is the single moment the rising curve first reaches the MEC; duration is the whole span from there until the level falls back below the MEC.'},
   {t:'Intensity',
@@ -220,12 +219,12 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'doseresp', concept:'log-dose-sigmoid', skill:'read', source:'slide',
  stem:'Which of the following describes a plot of pharmacologic response against log dose?',
  options:[
-  {t:'A sigmoid (S-shaped) curve, with the maximum response reached when all receptors become saturated', correct:true,
+  {t:'A sigmoid (S-shaped) curve', correct:true,
    why:'A log axis spreads out the low doses and compresses the high ones, so the response curve becomes an S: flat at the bottom, near straight in the middle, flat at the top where all receptors are saturated.'},
   {t:'A curve that rises steeply from zero and flattens to a plateau',
    why:'Choosing this describes the same data on a linear dose axis. Against dose itself the response rises steeply and flattens; taking the logarithm of the dose turns that curve into an S shape.'},
   {t:'A straight line at every dose',
-   why:'Choosing this extends the middle of the curve to its ends. Only the middle portion, about 20% to 80% of the maximum response, is close to a straight line; the curve flattens at the bottom and at the top.'},
+   why:'Choosing this extends the middle of the curve to its ends. Only the middle portion is close to a straight line; the curve flattens at the bottom and at the top.'},
   {t:'A curve that rises to a peak and falls back to zero',
    why:'Choosing this takes the plasma level–time curve for the dose–response curve. Concentration against time rises and falls after a dose; response against log dose rises and stays at its maximum.'}],
  teach:[PD_T_DOSE],
@@ -250,7 +249,7 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'doseresp', concept:'effect-slope-m', skill:'read', source:'slide',
  stem:'In the equation E = E0 − {{frac:kmt|2.3}}, what does m represent?',
  options:[
-  {t:'The slope of the line of pharmacologic effect against log drug concentration', correct:true,
+  {t:'The slope of effect against log concentration', correct:true,
    why:'In the straight middle portion of the log curve, E = m log C + e, with m the slope. Putting in log C = log C0 − {{frac:kt|2.3}} carries m into the time equation, so the effect falls at slope {{frac:km|2.3}}.'},
   {t:'The mass of drug in the body at time t',
    why:'Choosing this reads m as an amount. The amount in the body is DB; m is a slope, the change in effect per unit change in log concentration, carried over from E = m log C + e.'},
@@ -265,7 +264,7 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'doseresp', concept:'effect-declines-linearly', skill:'apply', source:'slide',
  stem:'Which of the following is true regarding the decline of pharmacologic effect with time after a single IV bolus dose, as described by E = E0 − {{frac:kmt|2.3}}?',
  options:[
-  {t:'The effect declines in a straight line with time, faster for a drug with a larger k', correct:true,
+  {t:'It falls in a straight line, faster with a larger k', correct:true,
    why:'E = E0 − ({{frac:km|2.3}})t is a straight line in t with slope {{frac:km|2.3}}. A larger k (faster elimination) or a larger m (a steeper response) makes it fall faster; a longer half-life keeps the effect longer.'},
   {t:'The effect declines exponentially, by the same fraction each hour',
    why:'Choosing this carries the concentration curve over to the effect. Concentration falls by the same fraction each hour; the effect follows log concentration, which falls in a straight line, so the effect does too.'},
@@ -282,7 +281,7 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'teff', concept:'ceff-meaning', skill:'read', source:'slide',
  stem:'In the duration-of-activity equation teff = {{frac:ln C0 − ln Ceff|k}}, with C0 = {{frac:D0|VD}}, what does Ceff represent?',
  options:[
-  {t:'The minimum effective concentration (MEC) in plasma', correct:true,
+  {t:'The minimum effective concentration', correct:true,
    why:'Ceff is the lowest plasma level that gives the effect. teff is the time C = C0e^(−kt) takes to fall from C0 to Ceff, because below Ceff the drug no longer acts.'},
   {t:'The minimum toxic concentration (MTC)',
    why:'Choosing this takes the upper threshold for the lower one. The MTC is the level above which toxicity appears; the effect lasts while the level is at or above the MEC, so the MEC is where the duration ends.'},
@@ -300,7 +299,7 @@ const Q_MODULE7B = [
   {t:'True',
    why:'Choosing this treats duration as proportional to dose. The dose sits inside a logarithm, teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}), so doubling it adds ln 2 over k, one half-life, to teff instead of doubling it.'},
   {t:'False', correct:true,
-   why:'Doubling D0 doubles C0, and the level needs exactly one half-life to fall from 2C0 back to C0; after that it follows the old curve. teff grows by one t½: 26.35 hr becomes 30.97 hr in her slide 8 example.'}],
+   why:'Doubling D0 doubles C0, and the level needs exactly one half-life to fall from 2C0 back to C0; after that it follows the old curve. teff grows by one t½: 26.35 hr becomes 30.97 hr when 250 mg is doubled to 500 mg (VD 24 L, k 0.15 hr⁻¹).'}],
  teach:[PD_T_TEFF],
  cite:PD_DECK + ', slide 12, PollEv (keyed False)'},
 
@@ -308,14 +307,14 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'teff', concept:'dose-double-teff', skill:'apply', source:'slide',
  stem:'What is the expected change in the duration of activity (teff) when the single IV bolus dose of a drug with first-order elimination is doubled?',
  options:[
-  {t:'teff increases by one elimination half-life', correct:true,
+  {t:'teff rises by one half-life', correct:true,
    why:'teff = {{frac:ln C0 − ln Ceff|k}}. Doubling D0 doubles C0 and adds ln 2 to the top, so teff rises by {{frac:0.693|k}}, exactly one t½. Each further doubling of the dose adds one more half-life.'},
   {t:'teff doubles',
-   why:'Choosing this treats teff as proportional to D0, the poll statement she keys false. D0 is inside the logarithm, so 2D0 adds {{frac:ln 2|k}} = {{frac:0.693|k}} = t½ to teff rather than doubling it.'},
+   why:'Choosing this treats teff as proportional to D0. D0 is inside the logarithm, so 2D0 adds {{frac:ln 2|k}} = {{frac:0.693|k}} = t½ to teff rather than doubling it.'},
   {t:'teff does not change',
    why:'Choosing this treats duration as a fixed property of the drug, like the half-life. The half-life does not change with dose, but teff does: a higher C0 takes longer to fall to Ceff.'},
   {t:'teff increases by two half-lives',
-   why:'Choosing this takes a factor of four for a factor of two. Doubling adds one half-life; quadrupling, two doublings, adds two, as in her Practice 1, where 500 to 2000 mg adds 10 hr, two half-lives of 5 hr.'}],
+   why:'Choosing this takes a factor of four for a factor of two. Doubling adds one half-life; quadrupling, two doublings, adds two: for a drug with a 5-hr half-life, 500 to 2000 mg adds 10 hr, two half-lives.'}],
  teach:[PD_T_TEFF],
  cite:PD_DECK + ', slide 9 "Effect of Dose and Elimination Half-life on Duration of Activity"; PK-PD-Practice-1---Solutions.pdf'},
 
@@ -323,10 +322,10 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'teff', concept:'teff-dose-curve', skill:'read', source:'slide',
  stem:'On a plot of duration of activity (teff) against IV bolus dose, which of the following describes the curve?',
  options:[
-  {t:'It rises steeply at low doses and then flattens, each further increase in dose adding less duration', correct:true,
-   why:'teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}) is a logarithm of the dose: steep while doses are small, then flatter. On the slide 9 plot teff passes 4 hours by about 4 mg/kg but is still under 6 hours at 16 mg/kg.'},
+  {t:'It rises steeply, then flattens', correct:true,
+   why:'teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}) is a logarithm of the dose: steep while doses are small, then flatter. For one such drug, teff passes 4 hours by about 4 mg/kg but is still under 6 hours at 16 mg/kg.'},
   {t:'A straight line through the origin',
-   why:'Choosing this treats teff as proportional to dose, the poll statement she keys false. teff follows ln D0, so equal increases in dose add less and less duration.'},
+   why:'Choosing this treats teff as proportional to dose. teff follows ln D0, so equal increases in dose add less and less duration.'},
   {t:'A sigmoid curve that levels off at a maximum duration',
    why:'Choosing this carries the log dose–response S-curve over to duration. Duration has no ceiling set by receptors: ln D0 keeps rising slowly, so teff keeps growing by one half-life per doubling of the dose.'},
   {t:'A curve that falls as the dose increases',
@@ -338,7 +337,7 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'teff', concept:'teff-derivation', skill:'read', source:'slide',
  stem:'The duration-of-activity equation is C = C0e^(−kt) solved for t. Which substitutions turn it into teff = {{frac:ln C0 − ln Ceff|k}}?',
  options:[
-  {t:'C is set to Ceff, the minimum effective concentration, and C0 to {{frac:D0|VD}}', correct:true,
+  {t:'C is set to Ceff, and C0 to {{frac:D0|VD}}', correct:true,
    why:'Ceff = C0e^(−k teff), so e^(k teff) = {{frac:C0|Ceff}} and k teff = ln C0 − ln Ceff. C0 = {{frac:D0|VD}} because the whole bolus is in VD at time zero.'},
   {t:'C is set to the MTC, and C0 to {{frac:D0|VD}}',
    why:'Choosing this ends the duration at the toxic threshold. The effect lasts until the level falls to the minimum effective concentration; the MTC is the ceiling the peak is kept under.'},
@@ -360,7 +359,7 @@ const Q_MODULE7B = [
   {t:'1.44 t½ equals {{frac:1|k}}', correct:true,
    why:'k = {{frac:0.693|t½}}, so dividing by k is multiplying by {{frac:t½|0.693}} = 1.44 t½; that is why the third form takes the half-life directly.'},
   {t:'teff is directly proportional to the dose',
-   why:'Choosing this takes the dose out of the logarithm. D0 sits inside ln, so doubling it adds one half-life to teff; the poll statement that doubling the dose doubles the duration is false.'},
+   why:'Choosing this takes the dose out of the logarithm. D0 sits inside ln, so doubling it adds one half-life to teff; doubling the dose does not double the duration.'},
   {t:'They apply to any route, including a single oral dose',
    why:'Choosing this drops the conditions they are built on. They solve C = C0e^(−kt) with C0 = {{frac:D0|VD}}, which holds for a single IV bolus in a one-compartment model, not for a dose with an absorption phase.'}],
  teach:[{h:'Three forms, one relation', list:[
@@ -373,20 +372,20 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'teff', concept:'teff-conditions', skill:'recall', source:'slide',
  stem:'Which of the following is true regarding the conditions under which teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}) gives the duration of activity?',
  options:[
-  {t:'A single IV bolus dose of a drug that follows a one-compartment open model with first-order elimination', correct:true,
-   why:'Each of her duration problems states these conditions. Together they make C = C0e^(−kt), with C0 = {{frac:D0|VD}}, the curve that teff is solved from.'},
+  {t:'One IV bolus, one compartment, first order', correct:true,
+   why:'teff is solved from C = C0e^(−kt), with C0 = {{frac:D0|VD}}. That curve holds when a single IV bolus puts the whole dose in at time zero, the drug follows a one-compartment open model, and elimination is first order with one constant k.'},
   {t:'A single oral dose, with F included in the dose',
    why:'Choosing this assumes the oral curve can be read the same way. An oral dose has an absorption phase, so the level does not start at {{frac:D0|VD}} and fall from time zero; the equation is built on the IV bolus decline.'},
   {t:'A constant IV infusion at steady state',
    why:'Choosing this carries an infusion level into a single-dose equation. At steady state the level holds at Css while the infusion runs; teff measures how long one bolus stays above Ceff as it falls.'},
   {t:'Any drug, whatever the order of its elimination',
-   why:'Choosing this drops first-order elimination. The equation needs one constant k so that C = C0e^(−kt) holds; her poll item specifies linear, first-order pharmacokinetics for the same reason.'}],
+   why:'Choosing this drops first-order elimination. The equation needs one constant k so that C = C0e^(−kt) holds; the rule that each doubling of the dose adds one half-life also rests on linear, first-order pharmacokinetics.'}],
  teach:[PD_T_TEFF],
  cite:PD_DECK + ', slides 7 "Practice Problem", 9 and 12'},
 
 {id:'pd-c19', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', multi:true,
  topic:'pkpd', sub:'teff', concept:'what-moves-teff', skill:'apply', source:'slide',
- stem:'Which of the following would be expected to lengthen the duration of activity (teff) of a single IV bolus dose? (Select all that apply)',
+ stem:'Which of the following would be expected to lengthen the duration of activity (teff) of a single IV bolus dose? Each option changes only the quantity it names; the half-life is unchanged unless the option says otherwise. (Select all that apply)',
  options:[
   {t:'Increasing the dose', correct:true,
    why:'A larger dose raises C0 = {{frac:D0|VD}}, so the level starts further above Ceff and takes longer to fall to it: one more half-life of duration for every doubling of the dose.'},
@@ -408,7 +407,7 @@ const Q_MODULE7B = [
 
 {id:'pd-c20', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'thalf', concept:'thalf-double-teff', skill:'apply', source:'slide',
- stem:'What is the expected change in the duration of activity of a single IV bolus dose if the elimination half-life doubles and the dose does not change?',
+ stem:'What is the expected change in the duration of activity of a single IV bolus dose if decreased elimination doubles the elimination half-life, with the dose and the volume of distribution unchanged?',
  options:[
   {t:'teff doubles', correct:true,
    why:'In teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}), t½ multiplies the whole expression and nothing else changes, so teff is directly proportional to t½: twice the half-life, twice the duration.'},
@@ -421,7 +420,7 @@ const Q_MODULE7B = [
  teach:[PD_T_THALF],
  cite:PD_DECK + ', slide 9 "Effect of Dose and Elimination Half-life on Duration of Activity"'},
 
-{id:'pd-c21', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', multi:true,
+{id:'pd-c21', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', multi:true, dupOf:'pd-c19',
  topic:'pkpd', sub:'thalf', concept:'disease-prolongs-thalf', skill:'apply', source:'slide',
  stem:'In certain disease states, pathophysiologic changes in hepatic or renal function decrease the elimination of a drug. Which of the following would be expected? (Select all that apply)',
  options:[
@@ -434,7 +433,7 @@ const Q_MODULE7B = [
   {t:'An increased possibility of drug toxicity', correct:true,
    why:'The same retention that lengthens the effect raises the levels that follow each dose, so the possibility of toxicity increases along with the duration of activity.'},
   {t:'A shorter duration of activity',
-   why:'Choosing this reverses the direction. Decreased elimination prolongs t½, and a longer t½ lengthens teff; a shorter duration follows from faster elimination, such as increased metabolism.'},
+   why:'Choosing this reverses the direction. Decreased elimination prolongs t½, and a longer t½ lengthens teff; a shorter duration would need faster elimination, the opposite of this change.'},
   {t:'An increased elimination rate constant',
    why:'Choosing this reverses the link between elimination and k. k is the fraction eliminated per unit time; decreased elimination lowers k, which is what prolongs t½ = {{frac:0.693|k}}.'}],
  teach:[PD_T_THALF],
@@ -446,10 +445,10 @@ const Q_MODULE7B = [
  topic:'pkpd', sub:'dosefor', concept:'dose-to-double-teff', skill:'apply', source:'slide',
  stem:'Which of the following is true regarding the IV bolus dose needed to double the duration of activity (teff) of a drug?',
  options:[
-  {t:'The dose must be doubled for every added half-life of duration, so doubling a long teff needs a very large dose', correct:true,
-   why:'D0 = Ceff × VD × e^(k teff). On slide 8, 250 mg gives 26.35 hr, about 5.7 half-lives of 4.62 hr; doubling it to 52.7 hr needs about 52 times the dose, 13 g.'},
+  {t:'The dose doubles per added half-life of teff', correct:true,
+   why:'D0 = Ceff × VD × e^(k teff), so each added half-life of duration doubles the dose. For an antibiotic with VD 24 L, k 0.15 hr⁻¹ and Ceff 0.2 mcg/mL, 250 mg gives 26.35 hr, about 5.7 half-lives of 4.62 hr; doubling it to 52.7 hr needs about 52 times the dose, 13 g.'},
   {t:'Twice the dose doubles teff',
-   why:'Choosing this treats teff as proportional to dose, the poll statement she keys false. Twice the dose adds only one half-life, 4.62 hr in the slide 8 example, to a 26.35-hr duration.'},
+   why:'Choosing this treats teff as proportional to dose. Twice the dose adds only one half-life to teff: for that antibiotic, 4.62 hr on top of a 26.35-hr duration.'},
   {t:'It is found from D0 = {{frac:Ceff × VD|e^(k teff)}}',
    why:'Choosing this inverts the exponential. From Ceff = {{frac:D0|VD}}e^(−k teff), multiplying both sides by VD e^(k teff) gives D0 = Ceff × VD × e^(k teff); dividing would make a longer teff need a smaller dose.'},
   {t:'The dose needed does not depend on the half-life',
@@ -470,7 +469,7 @@ const Q_MODULE7B = [
    why:'C0, the concentration just after an IV bolus, is the whole dose spread through the apparent volume of distribution VD. The effect lasts while the level falls from here to Ceff.'},
   {k:'algebra', t:'teff = {{frac:ln C0 − ln Ceff|k}} = {{frac:ln(10.42 ÷ 0.2)|0.15 hr⁻¹}} = {{frac:ln 52.08|0.15}} = {{frac:3.953|0.15 hr⁻¹}}',
    why:'This is C = C0e^(−kt) solved for the time at which C reaches Ceff. The stem gives k directly, so the natural-log form needs no half-life; ln C0 − ln Ceff is the log of their ratio.'},
-  {k:'round', t:'teff = 26.35 hr (t½ = {{frac:0.693|0.15}} = 4.62 hr)',
+  {k:'round', t:'t½ = {{frac:0.693|0.15}} = 4.62 hr; teff = 26.35 hr',
    why:'3.953 ÷ 0.15 hr⁻¹ = 26.35 hr, her value. The ratio 52.08 lies between 2 to the 5th and 2 to the 6th, so the duration is between 5 and 6 half-lives of 4.62 hr.'}],
  setup:{eq:'pd-teff-ln', pre:['cp-db-vd'], why:'"teff", "a single 250-mg IV dose", an MEC and a first-order elimination rate constant: the natural-log duration line, which takes k as given. C0 = D0 over VD first.'},
  asks:'t',
@@ -486,14 +485,14 @@ const Q_MODULE7B = [
  steps:[
   {k:'setup', t:'C0 = {{frac:1000 mg|24 L}} = 41.67 mg/L; Ceff = 0.2 mcg/mL = 0.2 mg/L',
    why:'Four times the dose gives four times C0, because VD does not change with the dose. 1 mcg/mL equals 1 mg/L, so Ceff goes in as 0.2 mg/L.'},
-  {k:'algebra', t:'teff = {{frac:ln(41.67 ÷ 0.2)|0.15 hr⁻¹}} = {{frac:ln 208.3|0.15}} = {{frac:5.339|0.15 hr⁻¹}} = 35.60 hr',
+  {k:'algebra', t:'teff = {{frac:ln(41.67 ÷ 0.2)|0.15 hr⁻¹}} = {{frac:ln 208.33|0.15}} = {{frac:5.3391|0.15 hr⁻¹}} = 35.594 hr',
    why:'The same natural-log duration line with the new C0. The ratio C0 ÷ Ceff is four times larger, so its logarithm is larger by ln 4 = 1.386, not four times larger.'},
-  {k:'round', t:'teff = 35.60 hr: 35.60 − 26.35 = 9.24 hr = 2 × 4.62 hr',
-   why:'A factor of four is two doublings, and each doubling of the dose adds one half-life, 4.62 hr, to the 26.35 hr of the 250-mg dose. Four times the dose gives far less than four times the duration.'}],
+  {k:'round', t:'35.594 − 26.352 = 9.242 hr = 2 × 4.621 hr; teff = 35.6 hr',
+   why:'A factor of four is two doublings, and each doubling of the dose adds one half-life, 4.621 hr, to the 26.352 hr of the 250-mg dose. 35.594 hr is 35.6 hr to one decimal place. Four times the dose gives far less than four times the duration.'}],
  setup:{eq:'pd-teff-ln', pre:['cp-db-vd'], why:'"The new teff" at 1000 mg, with k given: the natural-log duration line again with the new C0 = D0 over VD.'},
  asks:'t',
  givens:[['D0', '1000 mg', 'four times 250 mg, so C0 is four times larger'], ['Ceff', '0.2 mcg/mL', 'equals 0.2 mg/L'], ['VD', '24 L', 'unchanged by the dose'], ['k', '0.15 h–1', 'unchanged by the dose']],
- check:{t:'Four times the dose adds two half-lives, 2 × 4.62 hr, to the 26.35 hr of part a: 35.60 hr, far short of four times 26.35.', lo:26.35, hi:105.4},
+ check:{t:'Four times the dose adds two half-lives, 2 × 4.621 hr, to the 26.352 hr of part a: 35.6 hr, far short of four times the duration.', lo:26.35, hi:105.4},
  teach:[PD_T_TEFF],
  cite:PD_DECK + ', slide 7 "Practice Problem", worked on slide 8'},
 
@@ -506,14 +505,14 @@ const Q_MODULE7B = [
    why:'Twice the dose gives twice C0, because VD, the apparent volume of distribution, does not change with the dose. 1 mcg/mL equals 1 mg/L, so Ceff is 0.2 mg/L.'},
   {k:'algebra', t:'teff = {{frac:ln(20.83 ÷ 0.2)|0.15 hr⁻¹}} = {{frac:ln 104.2|0.15}} = {{frac:4.646|0.15 hr⁻¹}} = 30.97 hr',
    why:'The natural-log duration line with the doubled C0. Its logarithm grows by ln 2 = 0.693, and 0.693 ÷ 0.15 hr⁻¹ is the half-life, 4.62 hr.'},
-  {k:'round', t:'teff = 30.97 hr: 30.97 − 26.35 = 4.62 hr, one half-life',
+  {k:'round', t:'30.97 − 26.35 = 4.62 hr, one half-life; teff = 30.97 hr',
    why:'Each time the dose is doubled the duration gains one more half-life, 4.62 hr: 26.35 hr becomes 30.97 hr, not 52.7 hr, because the dose sits inside the logarithm.'}],
  setup:{eq:'pd-teff-ln', pre:['cp-db-vd'], why:'"The new teff" at 500 mg, with k given: the natural-log duration line with the doubled C0 = D0 over VD.'},
  asks:'t',
  givens:[['D0', '500 mg', 'twice 250 mg, so C0 doubles'], ['Ceff', '0.2 mcg/mL', 'equals 0.2 mg/L'], ['VD', '24 L', 'unchanged by the dose'], ['k', '0.15 h–1', 'unchanged by the dose']],
  check:{t:'Doubling the dose adds one half-life, 4.62 hr, to 26.35 hr: 30.97 hr, well short of twice 26.35.', lo:26.35, hi:52.7},
  teach:[PD_T_TEFF],
- note:'Slide 7 prints a factor of four, 1000 mg; her worked slide 8 amends the bullet to a factor of two, 500 mg, and works both doses.',
+ note:'The printed problem asks for a factor of four, 1000 mg; her worked answer changes it to a factor of two, 500 mg, and works both doses.',
  cite:PD_DECK + ', slide 7 "Practice Problem", amended and worked on slide 8'},
 
 {id:'pd-ex-d', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
@@ -525,16 +524,16 @@ const Q_MODULE7B = [
    why:'Doubling the duration means the level must still be at Ceff 52.7 hours after the dose, so the time goes into the dose line as 52.7 hr.'},
   {k:'algebra', t:'Ceff = {{frac:D0|VD}} e^(−k teff), so D0 = Ceff × VD × e^(k teff)',
    why:'C = C0e^(−kt) with C0 = D0 over VD, written at the moment the level reaches Ceff, then multiplied through by VD e^(k teff) to leave the dose on its own.'},
-  {k:'algebra', t:'D0 = (0.2 mg/L)(24 L) e^((0.15)(52.7)) = 4.8 mg × e^7.905 = 4.8 mg × 2711 = 13,012 mg',
+  {k:'algebra', t:'D0 = (0.2 mg/L)(24 L) e^((0.15)(52.7)) = 4.8 mg × e^7.905 = 4.8 mg × 2710.8 = 13,012 mg',
    why:'0.2 mcg/mL is 0.2 mg/L; mg/L × L leaves mg. The exponent kt = 0.15 hr⁻¹ × 52.7 hr = 7.905 has no units, and e^7.905 is the factor the level must fall by over 52.7 hours.'},
-  {k:'round', t:'D0 = 13,012 mg ≈ 13 g',
+  {k:'round', t:'D0 = 13,012 mg, rounded to 13 g',
    why:'Her answer is 13 g, about 52 times the 250-mg dose: the extra 26.35 hours is 5.7 more half-lives of 4.62 hr, and each half-life of duration needs the dose doubled once.'}],
  setup:{eq:'pd-dose-teff', pre:['pd-teff-ln'], why:'"What dose is required to double teff": the target duration is 52.7 hr, so the dose line D0 = Ceff × VD × e^(k teff), which is C = C0e^(−kt) solved for the dose.'},
  asks:'D0',
  givens:[['teff', '26.35 hr', 'doubled to 52.7 hr, the target duration'], ['Ceff', '0.2 mcg/mL', 'equals 0.2 mg/L, the level at the target time'], ['VD', '24 L', 'multiplies Ceff to give 4.8 mg'], ['k', '0.15 h–1', 'in the exponent k teff']],
  check:{t:'Doubling the dose adds only one half-life, so doubling a 26.35-hr duration needs far more than twice 250 mg: 13 g is more than 50 times it.', lo:0.5},
  teach:[PD_T_DOSEFOR],
- note:'Worked with teff = 52.7 hr, as on slide 8; carrying 52.70 hr unrounded gives 13.02 g. Both are 13 g.',
+ note:'Worked with teff = 52.7 hr, as she rounds it; carrying teff unrounded, 52.705 hr, gives 13.02 g. Both are 13 g.',
  cite:PD_DECK + ', slide 8 (what dose is required to double teff, 26.35 hr)'},
 
 /* ═══════════════ IN-CLASS ACTIVITY, SLIDE 13 ═══════════════════════════ */
@@ -591,7 +590,7 @@ const Q_MODULE7B = [
    why:'1 mcg/mL equals 1 mg/L, because multiplying top and bottom by 1000 turns mcg into mg and mL into L; the MEC can then be set against C0 = 50 mg/L directly.'},
   {k:'algebra', t:'teff = {{frac:ln C0 − ln Ceff|k}} = {{frac:ln(50 ÷ 5)|0.2 hr⁻¹}} = {{frac:ln 10|0.2}} = {{frac:2.303|0.2 hr⁻¹}} = 11.51 hr',
    why:'The level has to fall tenfold, from 50 to 5 mg/L. With k read off the equation the natural-log form needs no half-life.'},
-  {k:'round', t:'teff = 11.51 hr (t½ = {{frac:0.693|0.2}} = 3.465 hr)',
+  {k:'round', t:'t½ = {{frac:0.693|0.2}} = 3.465 hr; teff = 11.51 hr',
    why:'The half-life form gives 1.44 (3.465 hr) ln 10 = 11.49 hr, because 1.44 is rounded from 1 ÷ 0.693; both are the same answer within the margin.'}],
  setup:{eq:'pd-teff-ln', pre:['cp-db-vd'], why:'"Duration of action" of the 500 mg bolus whose equation gives C0 = 50 and k = 0.2: the natural-log duration line, with C0 read off the equation.'},
  asks:'t',
@@ -606,9 +605,9 @@ const Q_MODULE7B = [
  stem:'2. ' + PD_IC2 + ' b. What dose would double the duration of action found in part a? (Part a: minimum effective concentration 5 mcg/mL; duration of action 11.51 hr.)',
  units:'mg', answer:5000, tol:50,
  steps:[
-  {k:'setup', t:'Target teff = 2 × 11.51 hr = 23.03 hr; VD = {{frac:500 mg|50 mg/L}} = 10 L; k = 0.2 hr⁻¹',
-   why:'Doubling the duration means the level must still be at the MEC 23.03 hours after the dose. VD and k come from the equation and do not change with the dose.'},
-  {k:'algebra', t:'D0 = Ceff × VD × e^(k teff) = (5 mg/L)(10 L) e^((0.2)(23.03)) = 50 mg × e^4.605',
+  {k:'setup', t:'Target teff = 2 × 11.513 hr = 23.03 hr; VD = {{frac:500 mg|50 mg/L}} = 10 L; k = 0.2 hr⁻¹',
+   why:'Doubling the duration means the level must still be at the MEC 23.03 hours after the dose; part a unrounded is 11.513 hr. VD and k come from the equation and do not change with the dose.'},
+  {k:'algebra', t:'D0 = Ceff × VD × e^(k teff) = (5 mg/L)(10 L) e^((0.2)(23.026)) = 50 mg × e^4.605',
    why:'C = C0e^(−kt) solved for the dose at the moment the level reaches Ceff. 5 mcg/mL is 5 mg/L, and mg/L × L leaves 50 mg, the amount in the body at the MEC.'},
   {k:'algebra', t:'e^4.605 = 100, so D0 = 50 mg × 100 = 5000 mg',
    why:'At 500 mg the level falls tenfold over 11.51 hr; over twice the time it must fall tenfold twice, a hundredfold, so C0 must be 100 × 5 = 500 mg/L.'},
@@ -624,19 +623,19 @@ const Q_MODULE7B = [
 
 {id:'pd-ic2c', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'teff', concept:'teff-dose-change', skill:'pkpd', source:'slide',
- stem:'2. ' + PD_IC2 + ' c. What is the expected change in the duration of action following a single 250 mg IV bolus dose instead of the 500 mg IV bolus dose? (Part a: minimum effective concentration 5 mcg/mL; duration of action 11.51 hr.)',
+ stem:'2. ' + PD_IC2 + ' c. What is the expected change in the duration of action following a single 250 mg IV bolus dose instead of the 500 mg IV bolus dose? (Part a: minimum effective concentration 5 mcg/mL; duration of action 11.51 hr. Give the size of the change.)',
  units:'hr shorter', answer:3.47, tol:0.03,
  steps:[
-  {k:'setup', t:'C0 at 250 mg = {{frac:250 mg|10 L}} = 25 mg/L; teff = {{frac:ln(25 ÷ 5)|0.2 hr⁻¹}} = {{frac:1.609|0.2}} = 8.05 hr',
+  {k:'setup', t:'C0 at 250 mg = {{frac:250 mg|10 L}} = 25 mg/L; teff = {{frac:ln(25 ÷ 5)|0.2 hr⁻¹}} = {{frac:1.6094|0.2}} = 8.047 hr',
    why:'VD = 10 L from part a does not change with the dose, so half the dose gives half of C0, 25 mg/L. The level then has to fall only fivefold to reach the MEC of 5 mg/L.'},
-  {k:'algebra', t:'Change = 8.05 hr − 11.51 hr = −3.47 hr',
+  {k:'algebra', t:'Change = 8.047 hr − 11.513 hr = −3.466 hr',
    why:'Halving the dose takes away one doubling, and each doubling adds one half-life of duration: t½ = {{frac:0.693|0.2 hr⁻¹}} = 3.47 hr.'},
   {k:'round', t:'The duration is 3.47 hr shorter, one half-life',
-   why:'The change is a decrease of one half-life, 3.47 hr, whatever the starting duration; it is not half of 11.51 hr.'}],
+   why:'−3.466 hr is 3.47 hr shorter to two decimal places: a decrease of one half-life, whatever the starting duration; it is not half of 11.51 hr.'}],
  setup:{eq:'pd-teff-half', pre:['thalf-first'], why:'"Expected change in the duration" when the dose is halved: in teff = 1.44 t½ ln of the dose ratio, halving D0 removes ln 2, one half-life, from teff.'},
  asks:'t',
  givens:[['D0', '250 mg', 'half of 500 mg, so one doubling less'], ['k', '0.2t', 'k = 0.2 hr⁻¹, so t½ = 3.47 hr'], ['Ceff', '5 mcg/mL', 'equals 5 mg/L'], ['teff', '11.51 hr', 'the 500 mg duration, compared against']],
- check:{t:'Half the dose removes one half-life, 3.47 hr, from 11.51 hr, leaving 8.05 hr: shorter, but not halved.', lo:0, hi:11.51},
+ check:{t:'Half the dose removes one half-life, 3.466 hr, from 11.513 hr, leaving 8.047 hr: shorter, but not halved.', lo:0, hi:11.51},
  teach:[PD_T_TEFF],
  note:'Keyed as the size of the change; the duration falls, from 11.51 hr to 8.05 hr. Left unworked on the activity sheet; worked from her stem.',
  cite:'In-Class Activity "PK-PD", problem 2c (' + PD_DECK + ', slide 13)'},
@@ -701,7 +700,7 @@ const Q_MODULE7B = [
 
 {id:'pd-p2b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'dosefor', concept:'dose-for-teff', skill:'pkpd', source:'slide',
- stem:PD_P2 + ' What dose would you recommend to attain a teff of 12 hours?',
+ stem:PD_P2 + ' What dose would you recommend to attain a teff of 12 hours? (Give the dose per kilogram.)',
  units:'mg/kg', answer:10.4, tol:0.1,
  steps:[
   {k:'unit', t:'165 lb ÷ 2.2 = 75 kg; VD = 0.15 L/kg × 75 kg = 11.25 L; k = {{frac:0.693|4.75 hr}} = 0.1459 hr⁻¹',
@@ -746,7 +745,7 @@ const Q_MODULE7B = [
    why:'Twice the dose gives twice C0, because the volume of distribution does not change with the dose. 7.2 mcg/mL equals 7.2 mg/L, the MEC.'},
   {k:'algebra', t:'teff = {{frac:(3.6 hr) ln(133.3 ÷ 7.2)|0.693}} = {{frac:(3.6 hr) ln 18.52|0.693}} = {{frac:(3.6 hr)(2.919)|0.693}} = 15.16 hr',
    why:'The same half-life form with the doubled C0. The logarithm grows by ln 2 = 0.693, and 3.6 hr × 0.693 ÷ 0.693 is exactly one half-life, 3.6 hr.'},
-  {k:'round', t:'teff = 15.16 hr; 15.16 − 11.56 = 3.6 hr, one half-life',
+  {k:'round', t:'15.16 − 11.56 = 3.6 hr, one half-life; teff = 15.16 hr',
    why:'Her key: "Increase of one half-life", 3.6 hr. Doubling the dose adds one half-life to the duration; it does not double it.'}],
  setup:{eq:'pd-teff-half', pre:['cp-db-vd'], why:'"If the dose were doubled": the half-life form of the duration line again, with C0 doubled; t½ and the MEC do not change.'},
  asks:'t',
@@ -759,7 +758,7 @@ const Q_MODULE7B = [
 
 {id:'hw7-1a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'pd', concept:'auc-iv-exposure', skill:'auc', source:'slide',
- stem:PD_HW + ' a. What is the AUC following the IV bolus dose?',
+ stem:PD_HW + ' a. What is the AUC (area under the curve) following the IV bolus dose?',
  units:'(mg/L)·hr', answer:346.3, tol:3.5,
  steps:[
   {k:'unit', t:'D0 = 12 mg/kg × 70 kg = 840 mg; VD = 0.25 L/kg × 70 kg = 17.5 L',
@@ -783,7 +782,7 @@ const Q_MODULE7B = [
 
 {id:'hw7-1b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'teff', concept:'teff-calc', skill:'pkpd', source:'slide',
- stem:PD_HW + ' b. If the MEC is 4 mg/L, what is the duration of activity of this drug in this volunteer?',
+ stem:PD_HW + ' b. If the minimum effective concentration (MEC) is 4 mg/L, what is the duration of activity of this drug in this volunteer?',
  units:'hr', answer:17.93, tol:0.18,
  steps:[
   {k:'setup', t:'C0 = {{frac:D0|VD}} = {{frac:12 mg/kg|0.25 L/kg}} = 48 mg/L; k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹',
@@ -802,14 +801,14 @@ const Q_MODULE7B = [
 
 {id:'hw7-1c', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'teff', concept:'teff-dose-change', skill:'pkpd', source:'slide',
- stem:PD_HW + ' c. What is the duration of activity if the dose were 6 mg/kg? (Part b: MEC = 4 mg/L; duration of activity 17.93 hr at 12 mg/kg.)',
+ stem:PD_HW + ' c. What is the duration of activity if the dose were 6 mg/kg? (Part b: minimum effective concentration (MEC) = 4 mg/L; duration of activity 17.93 hr at 12 mg/kg.)',
  units:'hr', answer:12.93, tol:0.13,
  steps:[
   {k:'setup', t:'C0 = {{frac:6 mg/kg|0.25 L/kg}} = 24 mg/L; k = 0.1386 hr⁻¹; Ceff = 4 mg/L',
    why:'Half the dose gives half of C0, because the volume does not change with the dose; k and the MEC are the same as in part b.'},
   {k:'algebra', t:'teff = {{frac:ln(24 ÷ 4)|0.1386 hr⁻¹}} = {{frac:ln 6|0.1386}} = {{frac:1.792|0.1386 hr⁻¹}} = 12.93 hr',
    why:'The level now has to fall only sixfold, from 24 to 4 mg/L, to reach the MEC, instead of twelvefold, so the duration is shorter than in part b.'},
-  {k:'round', t:'teff = 12.93 hr: 17.93 − 12.93 = 5 hr, one half-life',
+  {k:'round', t:'17.93 − 12.93 = 5 hr, one half-life; teff = 12.93 hr',
    why:'Halving the dose removes one doubling, and each doubling adds one half-life, so 5 hr comes off the duration; the 17.93 hr is not halved.'}],
  setup:{eq:'pd-teff-ln', pre:['thalf-first', 'cp-db-vd'], why:'"Duration of activity if the dose were 6 mg/kg": the same natural-log duration line with the new C0; k and the MEC do not change.'},
  asks:'t',
@@ -821,7 +820,7 @@ const Q_MODULE7B = [
 
 {id:'hw7-1d', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
  topic:'pkpd', sub:'dosefor', concept:'dose-for-teff', skill:'pkpd', source:'slide',
- stem:PD_HW + ' d. What dose would provide a duration of action of 10 hours? (Part b: MEC = 4 mg/L.)',
+ stem:PD_HW + ' d. What dose would provide a duration of action of 10 hours? (Part b: minimum effective concentration (MEC) = 4 mg/L.)',
  units:'mg', answer:279.9, tol:2.8,
  steps:[
   {k:'unit', t:'VD = 0.25 L/kg × 70 kg = 17.5 L; k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹',
@@ -842,7 +841,7 @@ const Q_MODULE7B = [
 ];
 
 CHAINS.push(
- {id:'pd-example', src:'example', module:9, name:'Slide 7 Practice Problem: an antibiotic with MEC 0.2 mcg/mL',
+ {id:'pd-example', src:'example', module:9, name:'An antibiotic with an MEC of 0.2 mcg/mL',
   setup:'V<sub>D</sub> 24 L, k 0.15 h<sup>&minus;1</sup>: t<sub>eff</sub> for 250 mg, 1000 mg and 500 mg, then the dose that doubles t<sub>eff</sub>',
   parts:['pd-ex-a', 'pd-ex-b', 'pd-ex-c', 'pd-ex-d']},
  {id:'pd-inclass-1', src:'inclass', module:9, name:'In-Class Activity PK-PD, problem 1: a 250 mg IV bolus',

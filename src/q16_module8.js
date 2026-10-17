@@ -72,7 +72,8 @@ const NL_ORDER = {h:'KM against Cp', list:[
 
 /* Stems her multi-part problems share. */
 const NL_EX2 = 'After receiving a drug that displays nonlinear kinetics at a dose of 6 mg/kg/day for some time, the steady-state plasma concentration in a 72 kg patient was determined to be 10 mg/L. Since this concentration was lower than the desired steady-state concentration, the dose was increased to 8 mg/kg/day. This dose increase resulted in a steady-state plasma concentration of 20 mg/L, which was greater than the desired steady-state concentration. Calculate Vmax, KM, and a dose rate that should achieve a steady-state plasma concentration of 15 mg/L.';
-const NL_IC2 = '2. When a 25 year-old, 75 kg patient was taking a daily oral dose of 350 mg, his steady state plasma concentration was 9.2 mg/L. When the daily dose was increased to 450 mg, a steady-state plasma concentration of 20 mg/L resulted. What is the KM of this drug in this patient?';
+const NL_IC2_CASE = '2. When a 25 year-old, 75 kg patient was taking a daily oral dose of 350 mg, his steady state plasma concentration was 9.2 mg/L. When the daily dose was increased to 450 mg, a steady-state plasma concentration of 20 mg/L resulted.';
+const NL_IC2 = NL_IC2_CASE + ' What is the KM of this drug in this patient?';
 const NL_IC4 = '4. A 66-kg patient is receiving phenytoin for the treatment of seizures. When she was taking a daily oral dose of 300 mg phenytoin, her steady-state plasma concentration was 7.2 mg/L. Because the phenytoin plasma concentration was well below the therapeutic range, the patient\'s dose was increased to 500 mg phenytoin, which resulted in a steady-state plasma concentration of 18 mg/L. (Assume that the absolute bioavailability of phenytoin is 100% and the volume of distribution is 0.7 L/kg.)';
 const NL_P1 = '1. A 143 lb, 21-year-old woman is receiving phenytoin for the treatment of seizures. When she was taking a daily oral dose of 300 mg phenytoin, her steady-state plasma concentration was 5.1 mg/L. Because the phenytoin plasma concentration was well below the therapeutic range, the patient\'s dose was increased to 500 mg phenytoin, which resulted in a steady-state plasma concentration of 20 mg/L. (Assume that the absolute bioavailability of phenytoin is 100% and the volume of distribution is 0.7 L/kg.)';
 const NL_P2 = '1. A 75-kg, 32-year-old female has been taking 200 mg phenytoin daily. Because her average phenytoin plasma concentration was only 6 mg/L, her dose was increased to 350 mg/day. The steady-state average phenytoin concentration was then found to be 21 mg/L. (Volume of distribution = 0.75 L/kg and F = 1)';
@@ -157,13 +158,13 @@ const Q_MODULE8 = [
   {k:'unit', t:'R = 7.2 mg/kg/day × 72 kg = 518.4 mg/day',
    why:'The 72 kg weight turns the per-kilogram rate into a daily dose for this patient. The weight is used only here; KM and Vmax were found without it.'},
   {k:'round', t:'R = 518.4 mg/day, about 520 mg/day to the nearest 10',
-   why:'518.4 mg/day is accepted as it stands. When a stem asks for the nearest 10 it becomes 520 mg/day, and for the nearest 5 it becomes 515 mg/day.'}],
+   why:'518.4 mg/day is accepted as it stands. When a stem asks for the nearest 10, and also for the nearest 5, it becomes 520 mg/day.'}],
  setup:{eq:'nl-rate', pre:['nl-km', 'nl-vmax'], why:'"a dose rate that should achieve a steady-state plasma concentration of 15 mg/L": the dose-rate line with the KM and Vmax of parts a and b, then times 72 kg.'},
  asks:'R',
  givens:[['KM', '10 mg/L', 'from part a'], ['Vmax', '12 mg/kg/day', 'from part b'], ['Css', '15 mg/L', 'the target'], ['weight', '72 kg', 'turns mg/kg/day into mg/day']],
  check:{t:'15 mg/L lies between 10 and 20 mg/L, so the rate must lie between 6 and 8 mg/kg/day: 7.2 mg/kg/day, or 518.4 mg/day for 72 kg.', lo:432, hi:576},
  teach:[NL_RATE],
- note:'Her worked slide writes 518.4 mg/day ≈ 520 mg/day; both are accepted.',
+ note:'Her worked answer writes 518.4 mg/day ≈ 520 mg/day; both are accepted.',
  cite:NL_DECK + ', slides 14 "Example" and 15; transcript 10-14'},
 
 /* ═══════════════ IN-CLASS PRACTICE ═══════════════════════════════════ */
@@ -176,7 +177,7 @@ const Q_MODULE8 = [
   {k:'setup', t:'R = {{frac:Vmax × Css|KM + Css}}',
    why:'KM and Vmax are given, and the target Css is 15 mg/L, so the nonlinear dose-rate line answers directly. Vmax is already in mg/day, so no weight is needed.'},
   {k:'algebra', t:'R = {{frac:(584 mg/day)(15 mg/L)|(6.9 + 15) mg/L}} = {{frac:8760|21.9}} = 400.0 mg/day',
-   why:'mg/L cancels and leaves mg/day, the units of Vmax. Copying 584 as 548 gives 375.3 mg/day, so each given value is checked against the stem before dividing.'},
+   why:'mg/L cancels top and bottom and leaves mg/day, the units of Vmax, so R comes out as a daily dose rate. The target Css appears on top and again, added to KM, on the bottom, which keeps R below Vmax for any target.'},
   {k:'round', t:'R = 400 mg/day',
    why:'400.0 mg/day exactly. It is below the 584 mg/day Vmax, as every dose rate that reaches a steady state must be.'}],
  setup:{eq:'nl-rate', pre:[], why:'"What daily dose rate … would provide a steady-state concentration of 15 mg/L", with KM and Vmax given: the nonlinear dose-rate line.'},
@@ -206,7 +207,7 @@ const Q_MODULE8 = [
 
 {id:'nl-ic3', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
  topic:'nonlin', sub:'kmvmax', concept:'nl-vmax', skill:'nonlin', source:'both',
- stem:NL_IC2 + ' 3. Based on the KM found in the previous question, what is the patient\'s Vmax? (Question 2: KM = 6.43 mg/L.)',
+ stem:NL_IC2_CASE + ' 3. Based on the KM found in the previous question, what is the patient\'s Vmax? (Question 2: KM = 6.43 mg/L.)',
  units:'mg/day', answer:595, tol:6,
  steps:[
   {k:'setup', t:'Vmax = {{frac:R(KM + Css)|Css}}',
@@ -313,7 +314,7 @@ const Q_MODULE8 = [
  setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the total body clearance when the plasma concentration is 15 mg/L": the nonlinear clearance line at Cp = 15 mg/L.'},
  asks:'ClT',
  givens:[['Cp', '15 mg/L', 'added to KM in the denominator'], ['KM', '14.4 mg/L', 'from part a'], ['Vmax', '900 mg/day', 'from part b'], ['VD', '0.7 L/kg', 'not needed for clearance']],
- check:{t:'At 15 mg/L, KM + Cp is 29.4 mg/L, about twice KM, so clearance is about half its low-concentration limit, Vmax over KM: 30.6 L/day.', lo:0, hi:62.5},
+ check:{t:'At 15 mg/L, KM + Cp is 29.4 mg/L, about twice KM, so clearance is well below Vmax ÷ KM: 30.6 L/day.', lo:0, hi:62.5},
  teach:[NL_DEP],
  cite:NL_IC + ', question 4d; ' + NL_DECK + ', slide 18 "Dependence of Clearance on Dose"'},
 
@@ -362,10 +363,10 @@ const Q_MODULE8 = [
  steps:[
   {k:'setup', t:'Vmax = {{frac:R(KM + Css)|Css}}',
    why:'The dose-rate line solved for Vmax, with one dose and the steady-state concentration that dose produced; the other pair gives the same value.'},
-  {k:'algebra', t:'Vmax = {{frac:(300 mg/day)(5.91 + 5.1) mg/L|5.1 mg/L}} = {{frac:3303|5.1}} = 647.8 mg/day',
-   why:'mg/L cancels and Vmax keeps the units of the dose, mg/day. The 500 mg/day with 20 mg/L pair gives 500 × 25.91 over 20 = 647.8 mg/day as well.'},
-  {k:'round', t:'Vmax = 647.83 mg/day',
-   why:'Kept to two decimals, as her sheet does, so that the dose, half-life, clearance and Css of parts b to d agree with hers.'}],
+  {k:'algebra', t:'Vmax = {{frac:(300 mg/day)(5.913 + 5.1) mg/L|5.1 mg/L}} = {{frac:3303.9|5.1}} = 647.83 mg/day',
+   why:'KM is carried unrounded, 5.913 mg/L: her 647.83 mg/day comes from it, and KM rounded to 5.91 gives 647.6 mg/day. mg/L cancels and Vmax keeps the units of the dose, mg/day. The 500 mg/day with 20 mg/L pair gives 500 × 25.913 over 20 = 647.83 mg/day as well.'},
+  {k:'round', t:'Vmax = 647.8 mg/day',
+   why:'647.83 mg/day to one decimal place. Her sheet keeps 647.83 mg/day and carries it into the dose, half-life, clearance and Css of parts b to d.'}],
  setup:{eq:'nl-vmax', pre:['nl-km'], why:'"Calculate the patient\'s Vmax", after KM: the dose-rate line solved for Vmax.'},
  asks:'Vmax',
  givens:[['KM', '5.91 mg/L', 'from the KM half of part a'], ['R1', '300 mg', 'the dose used'], ['C1', '5.1 mg/L', 'its own steady state']],
@@ -425,7 +426,7 @@ const Q_MODULE8 = [
  setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the total body clearance when the plasma concentration is 15 mg/L": the nonlinear clearance line.'},
  asks:'ClT',
  givens:[['Cp', '15 mg/L', 'added to KM in the denominator'], ['KM', '5.91 mg/L', 'from part a'], ['Vmax', '647.83 mg/day', 'from part a'], ['weight', '143 lb', 'not needed for clearance']],
- check:{t:'Clearance at 15 mg/L is below its low-concentration limit, Vmax over KM, because KM + Cp, 20.91 mg/L, is larger than KM alone: 30.98 L/day.', lo:0, hi:109.6},
+ check:{t:'Clearance at 15 mg/L is well below Vmax ÷ KM, because KM + Cp, 20.91 mg/L, is larger than KM alone: 30.98 L/day.', lo:0, hi:109.6},
  teach:[NL_DEP],
  cite:NL_S1 + ', part c; ' + NL_DECK + ', slide 18'},
 
@@ -436,8 +437,8 @@ const Q_MODULE8 = [
  steps:[
   {k:'setup', t:'Css = {{frac:R × KM|Vmax − R}}',
    why:'The dose-rate line solved for Css: multiplying out gives R × KM + R × Css = Vmax × Css, so R × KM = Css(Vmax − R), then divide by (Vmax − R).'},
-  {k:'algebra', t:'Css = {{frac:(450 mg/day)(5.91 mg/L)|(647.83 − 450) mg/day}} = {{frac:2659.5|197.83}} = 13.45 mg/L',
-   why:'mg/day cancels and leaves mg/L. The denominator subtracts the dose from Vmax; adding them gives 2.4 mg/L, below even the 5.1 mg/L that 300 mg produced.'},
+  {k:'algebra', t:'Css = {{frac:(450 mg/day)(5.913 mg/L)|(647.83 − 450) mg/day}} = {{frac:2660.9|197.83}} = 13.45 mg/L',
+   why:'KM is carried unrounded, 5.913 mg/L; with 5.91 the quotient is 13.44 and would round to 13.4. mg/day cancels and leaves mg/L. The denominator subtracts the dose from Vmax; adding them gives 2.4 mg/L, below even the 5.1 mg/L that 300 mg produced.'},
   {k:'round', t:'Css = 13.5 mg/L',
    why:'13.45 mg/L to one decimal place is 13.5 mg/L, her sheet\'s value. It lies between the 5.1 and 20 mg/L of the two measured doses.'}],
  setup:{eq:'nl-css', pre:['nl-rate'], why:'"What will be the steady-state concentration … if the dose were 450 mg daily": the dose-rate line solved for Css.'},
@@ -568,7 +569,7 @@ const Q_MODULE8 = [
   {k:'algebra', t:'ClT = {{frac:500 mg/day|(9 + 21) mg/L}} = {{frac:500|30}} = 16.67 L/day',
    why:'mg/day over mg/L leaves L/day. The larger concentration makes the denominator larger, so the clearance is smaller than the 20.8 L/day at 15 mg/L.'},
   {k:'round', t:'ClT = 16.7 L/day',
-   why:'16.67 L/day to one decimal place. Clearance falls and half-life rises together as concentration rises, the pattern her slides on dose dependence describe.'}],
+   why:'16.67 L/day to one decimal place. Clearance falls and half-life rises together as concentration rises, because both depend on KM + Cp.'}],
  setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the total body clearance … at 21 mg/L": the nonlinear clearance line at the second concentration.'},
  asks:'ClT',
  givens:[['Cp', '21 mg/L', 'added to KM in the denominator'], ['KM', '9 mg/L', 'from part a'], ['Vmax', '500 mg/day', 'from part a']],
@@ -671,7 +672,7 @@ const Q_MODULE8 = [
  setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the … clearance … while she is taking the dose … to achieve … 14 mg/L": the nonlinear clearance line at Cp = 14 mg/L.'},
  asks:'ClT',
  givens:[['Cp', '14 mg/L', 'added to KM in the denominator'], ['KM', '5.215 mg/L', 'from part a'], ['Vmax', '453.7 mg/day', 'from part b']],
- check:{t:'Clearance at 14 mg/L is below its low-concentration limit, Vmax over KM, because KM + Cp, 19.215 mg/L, is larger than KM alone: 23.61 L/day.', lo:0, hi:87.0},
+ check:{t:'Clearance at 14 mg/L is well below Vmax ÷ KM, because KM + Cp, 19.215 mg/L, is larger than KM alone: 23.61 L/day.', lo:0, hi:87.0},
  teach:[NL_DEP],
  note:NL_HWNOTE,
  cite:NL_H7 + ', part d; ' + NL_DECK + ', slide 18'},
@@ -685,8 +686,8 @@ const Q_MODULE8 = [
    why:'The dose-rate line solved for Css: multiplying out gives R × KM + R × Css = Vmax × Css, so R × KM = Css(Vmax − R), then divide by (Vmax − R).'},
   {k:'algebra', t:'Css = {{frac:(300 mg/day)(5.215 mg/L)|(453.7 − 300) mg/day}} = {{frac:1564.5|153.7}} = 10.18 mg/L',
    why:'mg/day cancels and leaves mg/L. The denominator is Vmax minus the dose; adding them gives 2.1 mg/L, below the 6.4 mg/L that 250 mg produced.'},
-  {k:'round', t:'Css = 10.2 mg/L',
-   why:'10.18 mg/L. 300 mg/day is 20% above 250 mg/day, yet Css rises 59% from 6.4 mg/L: the steep rise of a saturable drug.'}],
+  {k:'round', t:'Css = 10.18 mg/L',
+   why:'10.18 mg/L to two decimal places. 300 mg/day is 20% above 250 mg/day, yet Css rises 59% from 6.4 mg/L: the steep rise of a saturable drug.'}],
  setup:{eq:'nl-css', pre:['nl-rate'], why:'"the expected steady state concentration if this patient were to take 300 mg/day": the dose-rate line solved for Css.'},
  asks:'Css',
  givens:[['R', '300 mg/day', 'the new dose rate'], ['KM', '5.215 mg/L', 'from part a'], ['Vmax', '453.7 mg/day', 'from part b']],
@@ -712,14 +713,14 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'linear', concept:'nl-linear-vs-nonlinear', skill:'tell', source:'both',
  stem:'2. What is the difference between linear and non-linear pharmacokinetics?',
  options:[
-  {t:'In linear pharmacokinetics the parameters do not change when different or multiple doses are given; in nonlinear pharmacokinetics, increased doses or chronic administration change them', correct:true,
-   why:'Linear models keep half-life and clearance fixed at every dose, which is what lets the first dose predict steady state. In nonlinear models a larger dose or chronic dosing changes the half-life and clearance, and a small dose change can give a large concentration change.'},
+  {t:'Linear parameters stay fixed with dose; nonlinear ones change with dose', correct:true,
+   why:'In linear pharmacokinetics the parameters do not change when different or multiple doses are given, so half-life and clearance stay fixed. In nonlinear pharmacokinetics a larger dose or chronic administration changes them, and a small dose change can give a large concentration change.'},
   {t:'Linear pharmacokinetics is zero order and nonlinear pharmacokinetics is first order',
    why:'Choosing this reverses the labels. Linear pharmacokinetics is the first-order elimination of most drugs; a saturable, nonlinear drug looks first order at low concentrations and zero order at high ones.'},
   {t:'In nonlinear pharmacokinetics the AUC rises in direct proportion to the dose',
    why:'Choosing this attaches the linear property to the wrong model. Proportional AUC (area under the curve) is curve C, dose-independent kinetics; with saturable elimination the AUC deviates from proportionality once the dose passes a certain point.'},
   {t:'Nonlinear processes affect absorption only, never elimination',
-   why:'Choosing this narrows saturation to one step. A saturable process can occur anywhere in absorption, distribution, metabolism and excretion, and the course examples, such as phenytoin, are saturable elimination.'}],
+   why:'Choosing this narrows saturation to one step. A saturable process can occur anywhere in absorption, distribution, metabolism and excretion, and phenytoin, the usual example, shows saturable elimination.'}],
  teach:[{h:'Linear and nonlinear', list:[
    'Linear: parameters such as half-life and clearance do not change when different or multiple doses of a drug are given. Most drugs follow this.',
    'Nonlinear (saturable, dose-dependent, capacity-limited): increased doses or chronic administration cause deviations from the single-dose profile. Example: phenytoin.',
@@ -749,13 +750,13 @@ const Q_MODULE8 = [
    why:'With saturable elimination t½ = VD(0.693/Vmax)(KM + Cp), so a higher dose, giving a higher Cp, gives a longer half-life. In linear kinetics the half-life does not change with dose.'},
   {t:'AUC is disproportional to the amount of bioavailable drug', correct:true,
    why:'Once elimination saturates, a larger dose is cleared more slowly, so the AUC (area under the curve) rises more than in proportion to the dose, curve A against the straight curve C.'},
-  {t:'Saturation may be affected by other drugs requiring the same enzyme or carrier-mediated system', correct:true,
+  {t:'Other drugs using the same enzyme or carrier can affect saturation', correct:true,
    why:'Two drugs that need the same enzyme or carrier compete for its limited capacity, so one can push the other toward saturation: a drug–drug interaction through a shared system.'},
-  {t:'The composition or ratio of the metabolites may be affected by a change in dose', correct:true,
+  {t:'Metabolite ratios may change with dose', correct:true,
    why:'If one metabolic route saturates at a higher dose while others do not, the share of drug going down each route changes, and so does the mix of metabolites.'},
-  {t:'Clearance stays constant as the dose is increased',
+  {t:'Clearance stays constant as the dose is increased, whatever the concentration',
    why:'Choosing this carries the linear rule into saturation kinetics. ClT = Vmax/(KM + Cp) falls as Cp rises, so clearance is usually not constant within nonlinear processes.'},
-  {t:'AUC increases in direct proportion to the dose',
+  {t:'AUC increases in direct proportion to the dose at every dose given',
    why:'Choosing this describes curve C, dose-independent kinetics, rather than saturable kinetics. With saturation the AUC versus dose line bends upward once the dose passes a certain point.'}],
  teach:[{h:'Saturation kinetics', list:[
    'Elimination kinetics is nonlinear, and the elimination half-life changes as dose is increased.',
@@ -771,11 +772,11 @@ const Q_MODULE8 = [
   {t:'Phenytoin', correct:true,
    why:'Phenytoin shows saturable elimination: once its level passes a certain point, small changes in dose lead to big changes in concentration. It also has a narrow therapeutic window, so its dose is set from the patient\'s own KM and Vmax.'},
   {t:'Procainamide',
-   why:'Choosing this picks a familiar drug from earlier problems. Procainamide was dosed with first-order lines, a fixed half-life and volume, in the single oral dose practice; that is linear pharmacokinetics.'},
+   why:'Choosing this picks a drug worked with first-order lines. Procainamide is given a fixed half-life and volume of distribution, which is linear pharmacokinetics; phenytoin is the example of saturable elimination.'},
   {t:'Ciprofloxacin',
-   why:'Choosing this picks a familiar drug from the bioavailability problems. Ciprofloxacin was used there for an equivalent oral dose from F, a linear calculation; it is not the example of saturable elimination.'},
+   why:'Choosing this picks a drug worked with linear lines. Ciprofloxacin is given an equivalent oral dose from F, the bioavailable fraction, a linear calculation; it is not the example of saturable elimination.'},
   {t:'Cefprozil',
-   why:'Choosing this picks a familiar drug from the clearance problems. Cefprozil was dosed there from creatinine clearance with first-order lines; its renal elimination was treated as linear, not saturable.'}],
+   why:'Choosing this picks a drug dosed from creatinine clearance. Cefprozil is dosed with first-order lines, its renal elimination treated as linear, not saturable.'}],
  teach:[{h:'Phenytoin', list:[
    'The usual example of nonlinear pharmacokinetics: small changes in dose lead to big changes in concentration once a certain level is reached.',
    'It has a narrow therapeutic window, so the dose rate is set from the patient\'s KM and Vmax, found from two dose rates and their steady-state levels.']}],
@@ -814,13 +815,14 @@ const Q_MODULE8 = [
  teach:[{h:'KM', list:[
    'KM is the Michaelis constant: it reflects the capacity of the enzyme system and has units of concentration.',
    'KM and Cp share units, so they can be compared: Cp far below KM gives first-order behaviour, Cp far above KM gives zero-order behaviour.']}],
+ audit:'Slide 8 prints KM = Michaelis constant (units of concentration), keyed here. The 10.14 lecture says of KM "the units here ... are gonna be concentration per unit time" and calls it "not really a constant ... a hybrid constant"; later in the same lecture she says KM is "in concentration terms, so milligrams per liter". Slide printed text keyed.',
  cite:NL_DECK + ', slides 7 "Parameters" and 8; transcript 10-14'},
 
-{id:'nl-c08', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+{id:'nl-c08', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-c01',
  topic:'nonlin', sub:'kmcp', concept:'nl-high-conc', skill:'apply', source:'both',
- stem:'Which of the following is true regarding the rate of elimination of a saturable drug when Cp is much greater than KM?',
+ stem:'Which of the following is true regarding the rate of elimination of a saturable drug when the plasma concentration (Cp) is much greater than the Michaelis constant (KM)?',
  options:[
-  {t:'It equals Vmax and does not depend on concentration, so elimination is zero order', correct:true,
+  {t:'It equals Vmax, so elimination is zero order', correct:true,
    why:'With Cp much greater than KM, KM is negligible in KM + Cp, the Cp terms cancel, and −dCp/dt = Vmax, a constant. A rate independent of concentration is zero order: more drug is not removed any faster.'},
   {t:'It equals (Vmax/KM) × Cp, so elimination is first order',
    why:'Choosing this applies the low-concentration limit at the wrong end. Dropping Cp from KM + Cp is allowed only when Cp is much less than KM; here it is KM that drops out.'},
@@ -832,9 +834,9 @@ const Q_MODULE8 = [
   {h:'Why it matters', list:['With increasing doses elimination starts to look zero order, so further dose increases accumulate in the body.']}],
  cite:NL_DECK + ', slide 8 "Saturable-Enzymatic Elimination Processes"; transcript 10-14'},
 
-{id:'nl-c09', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+{id:'nl-c09', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-c01',
  topic:'nonlin', sub:'kmcp', concept:'nl-low-conc', skill:'apply', source:'both',
- stem:'Which of the following is true regarding the rate of elimination of a saturable drug when Cp is much less than KM?',
+ stem:'Which of the following is true regarding the rate of elimination of a saturable drug when the plasma concentration (Cp) is much less than the Michaelis constant (KM)?',
  options:[
   {t:'It equals (Vmax/KM) × Cp = k′Cp, so elimination looks first order', correct:true,
    why:'With Cp much less than KM, Cp is negligible in KM + Cp, leaving (Vmax/KM) × Cp. Vmax and KM are both constants, so their ratio is a constant k′, and a rate proportional to Cp is first order.'},
@@ -869,7 +871,7 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'linear', concept:'nl-auc-dose', skill:'read', source:'slide',
  stem:'Area under the plasma level–time curve versus dose: curve A is a drug that exhibits a saturable elimination process and curve C represents dose-independent kinetics. Which of the following is true regarding these curves?',
  options:[
-  {t:'Up to a certain dose the curves coincide; above it, the AUC of curve A rises more than in proportion to the dose', correct:true,
+  {t:'Above a certain dose the AUC of curve A rises more than proportionally', correct:true,
    why:'At low doses the saturable drug is eliminated first order, so its AUC is proportional to dose like curve C. Past the saturation point clearance falls, so each extra milligram adds more area and curve A bends upward.'},
   {t:'The AUC of curve A rises in direct proportion to the dose at every dose',
    why:'Choosing this describes curve C, dose-independent kinetics. Curve A follows the straight line only until a certain dose and then deviates from it.'},
@@ -885,16 +887,16 @@ const Q_MODULE8 = [
 
 {id:'nl-c12', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
  topic:'nonlin', sub:'kmcp', concept:'nl-vmax-effect', skill:'apply', source:'slide',
- stem:'The amount of drug in the body versus time for a capacity-limited drug following an IV dose was generated using a Vmax of 100 mg/hr and of 200 mg/hr, with KM kept constant. What is the probable result of the higher Vmax?',
+ stem:'The amount of drug in the body versus time for a capacity-limited drug following an IV dose was generated using a maximum elimination rate (Vmax) of 100 mg/hr and of 200 mg/hr, with the Michaelis constant (KM) kept constant. What is the probable result of the higher Vmax?',
  options:[
   {t:'The amount of drug in the body falls faster', correct:true,
-   why:'Vmax is the maximum elimination rate, so doubling it lets the enzyme system remove drug faster at every amount; on the slide the 200 mg/hr curve reaches low amounts in about half the time of the 100 mg/hr curve.'},
+   why:'Vmax is the maximum elimination rate, so doubling it lets the enzyme system remove drug faster at every amount; the 200 mg/hr curve reaches low amounts in about half the time of the 100 mg/hr curve.'},
   {t:'The amount of drug in the body falls more slowly',
    why:'Choosing this runs the effect the wrong direction. A larger Vmax is a larger elimination capacity, so the drug leaves faster, not more slowly.'},
   {t:'The elimination is unchanged, because KM is kept constant',
    why:'Choosing this treats KM as the only parameter that matters. The rate is Vmax × Cp/(KM + Cp), so with KM fixed, a larger Vmax still gives a larger rate at every concentration.'},
   {t:'The elimination becomes first order at every amount',
-   why:'Choosing this mixes the size of Vmax with the order. Whether elimination looks first or zero order depends on Cp against KM, which the slide holds constant, not on how large Vmax is.'}],
+   why:'Choosing this mixes the size of Vmax with the order. Whether elimination looks first or zero order depends on Cp against KM, not on how large Vmax is.'}],
  teach:[{h:'Vmax and the rate', list:[
    '−{{frac:dCp|dt}} = {{frac:Vmax × Cp|KM + Cp}}: with KM fixed, the rate at any concentration scales with Vmax.',
    'The higher the Vmax, the faster the drug leaves the body.']}],
@@ -904,7 +906,7 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'dose', concept:'nl-ss-time', skill:'recall', source:'transcript',
  stem:'Which of the following is true regarding steady state for a nonlinear drug such as phenytoin?',
  options:[
-  {t:'Depending on the drug, it can take 2 to 3 weeks to reach, longer than the 3 to 5 half-lives of linear pharmacokinetics', correct:true,
+  {t:'It can take 2 to 3 weeks, depending on the drug', correct:true,
    why:'The steady state of a nonlinear drug differs from the linear one: depending on the drug, it takes about 2 to 3 weeks to reach what is clinically taken as steady state, rather than 3 to 5 half-lives.'},
   {t:'It is reached after 3 to 5 half-lives, as with a constant infusion',
    why:'Choosing this carries the linear rule into nonlinear kinetics. The 3 to 5 half-life rule assumes a fixed half-life; here the half-life changes with concentration and steady state takes longer.'},
@@ -921,7 +923,7 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'dose', concept:'nl-r-def', skill:'recall', source:'both',
  stem:'Which of the following describes R in R = {{frac:Vmax × Css|KM + Css}}?',
  options:[
-  {t:'The dose rate: the amount of drug given per unit time, such as mg/day', correct:true,
+  {t:'The dose rate, an amount per unit time', correct:true,
    why:'R is how fast drug is put into the body, an amount per unit time. At steady state it equals the rate of elimination, which is why it sits on the left of the Michaelis-Menten line with Css in place of Cp.'},
   {t:'A single dose, in mg',
    why:'Choosing this drops the time from the rate. A dose with no interval cannot set a steady state; R is reported as, for example, 430 mg/day, never as 430 mg alone.'},
@@ -936,7 +938,7 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'kmvmax', concept:'nl-direct-needs', skill:'recall', source:'both',
  stem:'Which of the following is needed to calculate a patient\'s KM by the direct method?',
  options:[
-  {t:'Two different dose rates in the same patient and the steady-state concentration each produced', correct:true,
+  {t:'Two dose rates and the steady-state level each gave', correct:true,
    why:'KM and Vmax are both unknown, so two equations are needed: R1 with C1 and R2 with C2, written for the same patient and the same drug, combine to give KM = (R2 − R1)/((R1/C1) − (R2/C2)).'},
   {t:'One dose rate and the steady-state concentration it produced',
    why:'Choosing this stops one step short. One pair gives one equation with two unknowns, Vmax and KM; it gives Vmax only once KM is known.'},
@@ -951,7 +953,7 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'dose', concept:'nl-small-dose-change', skill:'apply', source:'both',
  stem:'What is the probable result of a small increase in the daily dose of phenytoin in a patient whose elimination is near saturation?',
  options:[
-  {t:'A disproportionately large increase in the steady-state concentration', correct:true,
+  {t:'A disproportionately large rise in steady-state level', correct:true,
    why:'Css = R × KM/(Vmax − R). As R nears Vmax the denominator shrinks fast, so a small rise in R gives a large rise in Css: in one phenytoin patient, 300 to 500 mg/day took Css from 5.1 to 20 mg/L.'},
   {t:'A proportional increase in the steady-state concentration',
    why:'Choosing this carries linear pharmacokinetics into a saturable drug. Proportional change needs constant clearance; here clearance falls as the concentration rises.'},
@@ -966,7 +968,7 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'kmvmax', concept:'nl-params-constant', skill:'recall', source:'transcript',
  stem:'Which of the following is true regarding Vmax and KM?',
  options:[
-  {t:'For a given drug in a given patient they are constants, but they differ from one patient to another', correct:true,
+  {t:'Constant for one patient, different between patients', correct:true,
    why:'Vmax and KM describe the patient\'s enzyme system for that drug, so they stay fixed for that patient. They vary between patients, which is why they are found from the patient\'s own dose rates and levels.'},
   {t:'They change with every dose, like the half-life and clearance',
    why:'Choosing this mixes the parameters with the quantities built from them. Half-life and clearance change with Cp; Vmax and KM, the constants in those lines, do not.'},
@@ -977,6 +979,7 @@ const Q_MODULE8 = [
  teach:[{h:'Constants of the patient', list:[
    'Vmax and KM are constants for a given drug in a given patient and differ between patients.',
    'Published ranges give an estimate; the direct method finds the patient\'s own values from two dose rates and their steady-state concentrations.']}],
+ audit:'Distractor "KM is a rate, in units of concentration per time" matches the 10.14 lecture saying KM units "are gonna be concentration per unit time"; slide 8 prints KM in units of concentration, and she later says KM is in concentration terms, mg/L. Slide keyed.',
  cite:'transcript 10-14 (on ' + NL_DECK + ', slides 7 "Parameters" and 11)'},
 
 {id:'nl-c18', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
@@ -994,9 +997,9 @@ const Q_MODULE8 = [
 ];
 
 CHAINS.push(
- {id:'nl-examples', src:'example', module:8, name:'Nonlinear PK slide examples',
-  setup:'Dose rate from KM 5 mg/L and Vmax 8 mg/kg/day; then 6 and 8 mg/kg/day giving 10 and 20 mg/L in a 72 kg patient: KM, Vmax, dose rate for 15 mg/L',
-  parts:['nl-ex1', 'nl-ex2a', 'nl-ex2b', 'nl-ex2c']},
+ {id:'nl-example-2', src:'example', module:8, name:'A 72 kg patient at 6 and 8 mg/kg/day',
+  setup:'6 and 8 mg/kg/day giving 10 and 20 mg/L: KM, Vmax, then the dose rate for 15 mg/L',
+  parts:['nl-ex2a', 'nl-ex2b', 'nl-ex2c']},
  {id:'nl-inclass', src:'inclass', module:8, name:'In-Class Practice, Nonlinear PK',
   setup:'A dose rate from KM and Vmax; KM and Vmax from 350 and 450 mg; then phenytoin, 300 and 500 mg giving 7.2 and 18 mg/L in a 66-kg patient, parts a–e',
   parts:['nl-ic1', 'nl-ic2', 'nl-ic3', 'nl-ic4a', 'nl-ic4b', 'nl-ic4c', 'nl-ic4d-t', 'nl-ic4d-cl', 'nl-ic4e']},
