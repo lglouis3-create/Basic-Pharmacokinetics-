@@ -8,8 +8,8 @@
  "printed": "8e, Chapter 22",
  "syllabus_chapter": "Chapter 21",
  "matches_syllabus": false,
- "numbering_note": "The syllabus lists Chapter 21 for PK-PD, the previous edition's number. The 8e chapter is 22, and its text still cross-references Equations 21.4, 21.8 and 21.23 where it means 22.4, 22.8 and 22.23. Page numbers below are the PDF's pages.",
- "about": "This chapter describes how the exposures of a drug over time (dose, concentrations, dosing regimens) can be related to the desirable and undesirable effects of the drug. Pharmacodynamics (PD) refers to the relationship between drug concentration at the site of action (receptor) and the observed pharmacologic response, and the relationship between PK and PD is referred to as the exposure−response, drug concentration−response, or drug concentration−effect relationship. The chapter defines exposure, response and effect, describes how PK–PD information is integrated in drug development, and covers drug−receptor theory, the relationship of dose to pharmacologic response, and the effect of dose and elimination half-life on the duration of activity after a single IV bolus injection. It then covers substance abuse potential, drug tolerance and physical dependency, hypersensitivity, biomarkers and surrogate endpoints, MIC-based PK–PD indices for antimicrobials, and the Emax, sigmoid Emax, linear, log-linear, direct effect, effect compartment, indirect response and systems pharmacodynamic models, with the nesiritide and micafungin cases. Its summary states that pharmacologic response versus log dose−type plots have been shown to follow a sigmoid type of curve (S-curve), with maximum response peaking when all receptors become saturated.",
+ "numbering_note": "The syllabus lists Chapter 21 for PK-PD, the previous edition's number. In the 8th edition the chapter is 22, and its text still points to Equations 21.4, 21.8 and 21.23 where it means 22.4, 22.8 and 22.23. Page numbers below are the printed page numbers, which match the PDF's pages 1 to 50.",
+ "about": "Chapter 22 links a drug's exposure over time, meaning its dose, its concentrations and its dosing regimen, to the wanted and unwanted effects it produces (p1). It treats pharmacodynamics as the link between the concentration at the receptor and the response that is observed, and it names the PK–PD link the exposure–response or concentration–effect relationship (p1-2). After defining exposure, response and effect and showing where PK–PD data enter drug development, it covers receptor theory, how dose relates to response, and how the dose and the elimination half-life set the duration of action after one IV bolus (p2-13). Next come abuse potential, tolerance and dependence, hypersensitivity, biomarkers and surrogate endpoints, MIC-based indices for antimicrobials, and the Emax, sigmoid Emax, linear, log-linear, effect compartment, indirect response and systems models, ending with the nesiritide and micafungin cases (p13-40). The summary describes the response plotted against log dose as an S-shaped curve that reaches its maximum when the receptors are saturated (p40).",
  "sections": [
   "Chapter Objectives (p1)",
   "Pharmacokinetics and Pharmacodynamics: Definitions for Exposure, Response, and Effect; PK–PD Information Flow in Drug Development; Drug−Receptor Interaction (p1-5)",
@@ -28,38 +28,74 @@
  ],
  "lecture_use": [],
  "read_for": [
-  "Pharmacokinetics and Pharmacodynamics (p1-2): pharmacodynamics (PD) refers to the relationship between drug concentration at the site of action (receptor) and the observed pharmacologic response, and the relationship between PK and PD is referred to as the exposure−response, drug concentration−response, or drug concentration−effect relationship.",
-  "Relationship of Dose to Pharmacologic Response (p6), Figs. 22-4 and 22-5: as the dose increases, the pharmacologic response increases up to a maximum; response against dose on a linear scale generally gives a hyperbolic curve with maximum response at the plateau, and the same data on a log-linear scale give a sigmoid curve.",
-  "Fig. 22-6 and Equations 22.1 to 22.4 (p7-8): E = m log C + e; after an intravenous dose in a one-compartment model the pharmacologic effect declines linearly with time, with a slope of k·m/2.3.",
-  "Relationship between Dose and Duration of Activity (teff), Single IV Bolus Injection (p9), Equations 22.5 and 22.6: the duration of drug action is obtained using Ceff, the minimum effective drug concentration; a doubling of the dose will not result in a doubling of the effective duration of pharmacologic action.",
-  "Practice Problem (p10): MEC 0.1 µg/mL, VD 10 L and k 1.0 h−1; a 10-fold increase in the dose, from 100 mg to 1000 mg, increases teff by only 50%.",
-  "Effect of Both Dose and Elimination Half-Life on the Duration of Activity (p10-11), Equations 22.7 and 22.8 and Fig. 22-9: an increase in t1/2 increases teff in direct proportion, an increase in the dose D0 does not, and a nonlinear increase in teff is observed as dose increases.",
-  "Effect of Elimination Half-Life on Duration of Activity (p11-13), Table 22-2 and Fig. 22-10: pathophysiologic changes in hepatic or renal function prolong t1/2, which increases teff and the possibility of drug toxicity; in Table 22-2 a 100% increase in t1/2 gives a 100% increase in teff, while doubling the dose from 2 to 4 mg/kg raises teff from 3.24 to 3.98 hours, an increase of 22.8%.",
-  "Chapter Summary (p40): pharmacologic response versus log dose−type plots follow a sigmoid type of curve (S-curve), with maximum response peaking when all receptors become saturated."
+  "Pharmacokinetics and Pharmacodynamics (p1-2): pharmacodynamics is the link between drug concentration at the receptor and the observed response, and the PK–PD link goes by several names, among them exposure–response and concentration–effect.",
+  "Relationship of Dose to Pharmacologic Response (p6), Figures 22-4 and 22-5: the response rises with dose until it reaches a maximum; against dose on a linear axis the curve is hyperbolic with a plateau, and against log dose the same data form a sigmoid curve.",
+  "Figure 22-6 and Equations 22.1 to 22.4 (p7-8): within the linear part of the curve the effect is a straight-line function of log concentration, E = m log C + e, so after an IV dose in a one-compartment model the effect falls linearly with time at a slope of k·m/2.3.",
+  "Relationship between Dose and Duration of Activity, Single IV Bolus Injection (p9), Equations 22.5 and 22.6: the duration of action, teff, is the time for the concentration to fall to the minimum effective concentration, Ceff; doubling the dose does not double teff, while doubling t½ lengthens it in proportion.",
+  "Practice Problem (p10): with an MEC of 0.1 µg/mL, VD of 10 L and k of 1.0 h⁻¹, a tenfold dose increase from 100 to 1000 mg lengthens teff by only 50%.",
+  "Effect of Both Dose and Elimination Half-Life on the Duration of Activity (p10-11), Equations 22.7 and 22.8 and Figure 22-9: teff grows in direct proportion to t½ but not to the dose, and it climbs nonlinearly as the dose rises.",
+  "Effect of Elimination Half-Life on Duration of Activity (p11-13), Figure 22-10 and Table 22-2: liver or kidney disease that prolongs t½ lengthens teff and adds to the risk of toxicity; in Table 22-2 doubling t½ doubles teff (3.24 to 6.48 h at 2 mg/kg), while raising the dose from 2 to 4 mg/kg takes teff only to 3.98 h, 22.8% more.",
+  "Chapter Summary (p40): the response plotted against log dose traces an S-shaped curve whose maximum comes when the receptors are saturated."
  ],
  "beyond_lecture": [
-  "Drug−Receptor Interaction (p4-5), Table 22-1 and Fig. 22-3: types of receptors, the assumptions of the receptor occupancy model, and agonists, partial agonists, inverse agonists and antagonists.",
-  "PK–PD Information Flow in Drug Development (p2-4), Figs. 22-1 and 22-2: how PK–PD information is used in preclinical testing and in Phase I, II and III clinical trials.",
-  "Substance Abuse Potential, Drug Tolerance and Physical Dependency, and Hypersensitivity and Adverse Response (p13-15): the rate of drug absorption and abuse potential, PK and PD tolerance, tachyphylaxis, withdrawal symptoms, and allergic responses for which no dose−response relationship has been established.",
-  "Biological Markers (Biomarkers) (p15-17): biomarkers, surrogate endpoints and clinical endpoints, with bone mineral density and blood pressure as examples.",
-  "Noncompartmental PK–PD Models (p18-21), Figs. 22-12 to 22-14 and Table 22-4: the MIC-based indices Cmax/MIC, AUC/MIC (AUIC) and %T>MIC, and concentration-dependent against time-dependent killing.",
-  "Emax Drug-Concentration Effect Model and the linear, log-linear, additive and proportional drug effect models (p21-26), Equations 22.12 to 22.25: Emax and EC50 derived from receptor occupancy theory, and the sigmoidal Emax (Hill) model.",
-  "Direct Effect Model, Effect Compartment or Link Model, and Indirect Response Models (p27-37): the effect compartment and ke0, anticlockwise hysteresis and clockwise proteresis loops, and the four basic indirect response models built on kin and kout.",
-  "Systems Pharmacodynamic Models and PK–PD Models and Their Role in Drug Approval and Labeling (p37-39), with the nesiritide and micafungin cases."
+  "Drug−Receptor Interaction (p4-5), Table 22-1 and Figure 22-3: the kinds of receptors, the assumptions behind the occupancy model, and how agonists, partial agonists, inverse agonists and antagonists differ.",
+  "PK–PD Information Flow in Drug Development (p2-4), Figures 22-1 and 22-2: where PK–PD data are used, from preclinical testing through Phase I, II and III trials.",
+  "Substance Abuse Potential, Drug Tolerance and Physical Dependency, Hypersensitivity and Adverse Response (p13-15): faster absorption tied to greater abuse potential, PK against PD tolerance, tachyphylaxis, withdrawal, and allergic reactions with no established dose–response relationship.",
+  "Biological Markers (p15-17): how a biomarker, a surrogate endpoint and a clinical endpoint differ, with bone mineral density and blood pressure as examples.",
+  "Noncompartmental PK–PD Models (p18-21), Figures 22-12 to 22-14 and Table 22-4: the MIC-based indices Cmax/MIC, AUC/MIC (AUIC) and %T>MIC, and killing that depends on concentration against killing that depends on time.",
+  "Emax and related concentration–effect models (p21-26), Equations 22.12 to 22.25: Emax and EC50 derived from receptor occupancy, the sigmoid Emax (Hill) model, linear and log-linear models, and additive or proportional baseline effects.",
+  "Direct Effect, Effect Compartment and Indirect Response Models (p27-37): ke0 and the effect site, anticlockwise hysteresis and clockwise proteresis loops, and the four standard indirect response models built on kin and kout.",
+  "Systems Pharmacodynamic Models and the role of PK–PD models in approval and labeling (p37-40), with the nesiritide and micafungin cases."
  ],
  "terms": [
-  {"term": "Pharmacodynamics (PD)", "chapter_definition": "The relationship between drug concentration at the site of action (receptor) and the observed pharmacologic response."},
-  {"term": "Exposure", "chapter_definition": "Any dose or drug input into the body, or a measure of acute or integrated drug concentrations in plasma or other biological fluid (eg, Cmax, Cmin, Css, AUC)."},
-  {"term": "Response (R)", "chapter_definition": "A direct measure of the pharmacologic observation; for example, diastolic blood pressure measured at some time point."},
-  {"term": "Effect (E)", "chapter_definition": "A change in the biological response from one time to another; a derived or calculated value from an observed response."},
-  {"term": "Agonist", "chapter_definition": "An agent that interacts with a receptor, producing effects similar to that of an endogenous ligand."},
-  {"term": "Partial agonist", "chapter_definition": "An agent that produces a response similar to an agonist but cannot reach a maximal response as that of an agonist."},
-  {"term": "Antagonist", "chapter_definition": "An agent that blocks the effect of an agonist by binding to the receptor, thereby inhibiting the effect of an endogenous ligand or agonist."},
-  {"term": "Inverse agonist", "chapter_definition": "An agent that selectively binds to the inactive form of the receptor and shifts the conformational equilibrium towards the inactive state."},
-  {"term": "Ceff (MEC)", "chapter_definition": "The minimum effective drug concentration, used to obtain the duration of drug action, teff."},
-  {"term": "Emax and EC50", "chapter_definition": "Emax is the maximum possible effect that can be produced by a drug; EC50 is the sensitivity or potency parameter, the drug concentration producing 50% of Emax."},
-  {"term": "Hill coefficient (γ)", "chapter_definition": "The slope term of the sigmoidal Emax model, which describes the steepness of the effect−concentration relationship."},
-  {"term": "Hysteresis loop", "chapter_definition": "When the maximum drug effect occurs later than the time of maximum plasma concentration, the effect vs plasma concentration graph depicts a loop; it is anticlockwise when the mechanism is delayed drug effect and clockwise when the mechanism is tolerance development."}
+  {
+   "term": "Pharmacodynamics (PD)",
+   "chapter_definition": "The link between how much drug is present where it acts, at the receptor, and the response that is observed (p1)."
+  },
+  {
+   "term": "Exposure",
+   "chapter_definition": "Any dose or input of drug, or any measure of short-term or cumulative concentration in plasma or another body fluid, such as Cmax, Cmin, Css or AUC (p2)."
+  },
+  {
+   "term": "Response (R)",
+   "chapter_definition": "A quantity measured directly as the pharmacologic observation, such as diastolic blood pressure at a given time (p2)."
+  },
+  {
+   "term": "Effect (E)",
+   "chapter_definition": "A value calculated from responses: the change in a response between two times, such as the change from baseline in diastolic pressure (p2)."
+  },
+  {
+   "term": "Agonist",
+   "chapter_definition": "A drug that acts on a receptor to produce effects like those of the body's own ligand; morphine at the µ opioid receptor is the example (p5)."
+  },
+  {
+   "term": "Partial agonist",
+   "chapter_definition": "A drug that produces an agonist-like response but cannot reach the agonist's maximum; buspirone is the example (p5)."
+  },
+  {
+   "term": "Antagonist",
+   "chapter_definition": "A drug that binds the receptor and so stops an agonist, or the body's own ligand, from acting; atenolol is the example (p5)."
+  },
+  {
+   "term": "Inverse agonist",
+   "chapter_definition": "A drug that binds preferentially to the receptor's inactive form and shifts the balance toward that state; famotidine is the example (p5)."
+  },
+  {
+   "term": "Ceff (MEC)",
+   "chapter_definition": "The minimum effective concentration; after an IV bolus, the duration of action teff is the time for the concentration to fall to it (p9-10)."
+  },
+  {
+   "term": "Emax and EC50",
+   "chapter_definition": "Emax is the largest effect the drug can produce; EC50, the potency or sensitivity parameter, is the concentration that gives half of Emax (p22)."
+  },
+  {
+   "term": "Hill coefficient (γ)",
+   "chapter_definition": "The added parameter of the sigmoid Emax model, also called the slope term, which sets how steep the effect–concentration curve is (p22)."
+  },
+  {
+   "term": "Hysteresis loop",
+   "chapter_definition": "The loop traced when effect is plotted against plasma concentration and the peak effect comes after the peak concentration; it runs anticlockwise for a delayed effect and clockwise, called proteresis, when tolerance develops (p29-30, p45)."
+  }
  ],
  "discussed_in_class": false,
  "her_words": [],

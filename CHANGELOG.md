@@ -7,6 +7,7 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - Module 8 (nonlinear): 51 questions, 32 of them calculations, in 5 problem sets from her sheets.
 - Guides: Module 7b (two objectives) and Module 8 (four), each with worked examples from her sheets.
 - Guides: a Textbook chapters card for Chapter 22 (PK-PD): what it covers, sections to read, terms it defines.
+- Guides: a Textbook chapters card for Chapter 18 (nonlinear); both chapter cards now restate the book in new wording.
 - Tell apart: two new tables, teff and the dose for PK-PD, and linear against nonlinear for Module 8.
 - Terms: 18 new terms, among them MEC/MTC, teff, therapeutic window, Vmax, KM and Michaelis-Menten.
 - Reference: equation tables for Modules 7b and 8, matching page 2 of her equation sheet.

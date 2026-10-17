@@ -36,10 +36,11 @@ supplied from AccessPharmacy are the 8th edition except one, and the numbering d
 | Chapter 8 | Oral absorption | `Shargel8e-Ch16-Drug-Absorption.pdf` (30 pp) | 8e Chapter 16, Pharmacokinetics of Drug Absorption |
 | Chapter 9 | Multiple dosing | `Shargel7e-Ch09-Multiple-Dosage-Regimens.pdf` (33 pp) | 7e Chapter 9, Multiple-Dosage Regimens (the file's own header says 7e) |
 | Chapter 21 | PK-PD | `Shargel8e-Ch22-PK-PD-Relationship.pdf` (50 pp) | 8e Chapter 22 (its text still cross-references equations as 21.x) |
-| Chapter 10 | Nonlinear PK | `Chapter18_NonlinearPharmacokinetics.pdf` (Google Drive, 46 pp, not in `src/decks/readings/`) | Chapter 18 per its page headers; edition not confirmed (see below) |
+| Chapter 10 | Nonlinear PK | `Chapter18_NonlinearPK_Part1_Pages01-12.pdf` to `_Part4_Pages37-46.pdf` (46 pp in four parts) | 8e Chapter 18, Nonlinear Pharmacokinetics (page 1 prints "8e") |
 
 The 7e-to-8e match for Chapters 15 and 16 is by title and topic against the syllabus
-line; the Chapter 22 match is confirmed by the chapter's own cross-references. The
+line; the Chapter 22 match is confirmed by the chapter's own cross-references, and the Chapter 18
+match by its title, which is the syllabus line's topic. The
 bioavailability chapter (syllabus Chapter 16) has not been supplied.
 
 ### Chapter 15 (8e) objectives, as printed
@@ -117,23 +118,58 @@ effect, clockwise for tolerance (FAQ answer, p45).
 Nothing from this chapter is in the bank yet. Her deck and transcript for 12 October decide the
 module number and what is tested; the chapter supplies definitions and the keyed answers above.
 
-## Chapter 18: Nonlinear Pharmacokinetics (the syllabus's Chapter 10)
+## Chapter 18 (8e): Nonlinear Pharmacokinetics (the syllabus's Chapter 10)
 
-File: `Chapter18_NonlinearPharmacokinetics.pdf`, Google Drive file id 1gvicJRdE0yJJNjCyvBh-6vkEBXDlXOay,
-43,179,720 bytes, 46 pages, an AccessPharmacy export downloaded 16 Oct 2026. Reading for the
-14 October nonlinear lecture (Module 8; Quiz 5 on 19 October).
+Files: `src/decks/readings/Chapter18_NonlinearPK_Part1_Pages01-12.pdf`, `_Part2_Pages13-24.pdf`,
+`_Part3_Pages25-36.pdf` and `_Part4_Pages37-46.pdf`, with `Chapter18_Reading_Guide.txt`: the 46-page
+AccessPharmacy export (downloaded 16 Oct 2026) split into four files under 10 MB each. Authors Leon Shargel
+and Murray P. Ducharme. Reading for the 14 October nonlinear lecture (Module 8; Quiz 5 on 19 October), so it
+feeds the final (27 Oct).
 
-The pages are scanned images with no text layer: the Drive text export returns only the page header
-and footer, "Chapter 18: Nonlinear Pharmacokinetics, Leon Shargel; Murray P. Ducharme", "Page n / 46".
-That header prints the chapter number but not the edition, so the edition is not confirmed.
+The body text, equations and figures are drawn as vector artwork: text extraction returns only the header
+and the "Page n / 46" footer, so every page was rendered to an image and read. Citations use that printed
+page number, which is also the page's place in the 46-page sequence.
 
-Numbering conflict: the syllabus lists "Chapter 10" for nonlinear pharmacokinetics, a 7th-edition
-number; the supplied file is Chapter 18, so the two numbers do not match.
+Edition: page 1 prints "Shargel and Yu's Applied Biopharmaceutics and Pharmacokinetics, 8e", and every
+figure credit says Eighth Edition, so this is the 8th edition. Numbering conflict: the syllabus lists
+"Chapter 10", the 7th-edition number; the topic and title are the same, so treat them as one chapter. Its
+own cross-references (Chapter 15 for clearance, Chapter 21 for pharmacogenetics) fit the 8e numbering.
 
-Not read yet. The Drive connector refuses to download the file (its limit is 10 MB), so the pages
-could not be rendered and read, and the Guides tab has no Chapter 18 card. To add one, put the PDF in
-`src/decks/readings/`, render its pages to images, write `src/readings/ch18.json` from them, and run
-`python3 gen/readings.py` (its META already lists ch18 for Module 8).
+Section map (printed pages): objectives and introduction, Table 18-1 of drugs by saturable step, Figures
+18-1 and 18-2 (high and low dose curves; AUC against dose) p1-4; Michaelis-Menten elimination, Eq 18.1-18.3,
+zero order above KM and first order below it, Tables 18-2 and 18-3 and two practice problems p4-8; IV bolus
+with capacity-limited elimination, Eq 18.4-18.6, the effect of Vmax and of KM on elimination time (Figures
+18-3 and 18-4, Tables 18-4 and 18-5), practice problems p8-12; in vitro KM and Vmax from 1/v against 1/C and
+two other plots (Eq 18.7-18.10, Table 18-6 and 18-7, Figures 18-5 to 18-8) p12-16; KM and Vmax in a
+phenytoin patient by three graphs and by two simultaneous equations (Eq 18.11-18.15, Figures 18-9 to 18-11)
+p16-20; meaning of KM and Vmax, Figure 18-12 p20-21; half-life and clearance against dose (Eq 18.16-18.25)
+p21-22; polymorphism, valproic acid binding, paroxetine p22-24; mixed elimination, niacin, infusion and
+oral input with saturable elimination (Eq 18.26-18.29) p24-26; chronopharmacokinetics, autoinduction,
+autoinhibition, circadian rhythms (Table 18-8) p26-28; toxicity and population analysis p28-29;
+bioavailability p29; saturable protein binding (Eq 18.30-18.34, Figures 18-14 to 18-16, Table 18-9)
+p29-33; judging linearity from AUC against dose (Figures 18-17 and 18-18, Table 18-10) p33-36;
+transporters (Table 18-11) p36-38; summary p38-39; learning questions p39-41; answers p41-43;
+references and bibliography p43-46.
+
+Numbers recomputed from the rendered pages: Table 18-3, k' = 0.9/0.8 = 1.125, printed 1.1 per hour, and
+t1/2 = 0.693/1.1 = 0.63 h (p7). Practice problem, KM 100 mg/L, Vmax 50 mg/h: (200 + 100 ln 2)/50 = 5.39 h for
+400 mg and (160 + 100 ln 2)/50 = 4.59 h for 320 mg (p12). Phenytoin patient: KM = (300 - 150)/(150/8.6 -
+300/25.1) = 150/5.490 = 27.3 mg/L, Vmax = 150(27.3 + 8.6)/8.6 = 626 mg/d, and the dose for 11.3 mg/L is
+630 x 11.3/(27 + 11.3) = 186 mg/d (p17, p20).
+
+Printing slips found while reading (state them, do not teach from them): p3 says curve C of Figure 18-1
+follows nonlinear kinetics at all doses, while the caption on p4 calls it the first-order elimination of a
+different drug; the caption of Figure 18-5 gives KM = 0.5 umol/mL where the text and Table 18-6 give 5
+(p13-14); the second practice problem on p12 prints the 5-mg line without the factor 100 that its result
+of 1.49 h needs; p20 pairs 300 mg/d with 8.6 mg/L, which p16 gives for 150 mg/d.
+
+Against her deck: her half-life line is t1/2 = 0.693 VD(KM + Cp)/Vmax with Vmax in mg/day (slide
+"Dependence of Elimination Half-Life on Dose"); the chapter's Eq 18.16 is 0.693(KM + Cp)/Vmax with Vmax as
+a concentration per time (p21). Her clearance line, Vmax/(KM + Cp), matches Eq 18.24 (p22). The bank follows
+her slide.
+
+The card is `src/readings/ch18.json`. Every field restates the chapter in new wording with its printed
+page; no sentence, table or figure of the book is copied, because the drill is shared.
 
 ## Reading cards on the Guides tab
 
@@ -141,4 +177,6 @@ could not be rendered and read, and the Guides tab has no Chapter 18 card. To ad
 sections, read for, lecture use with exact transcript quotes, her words, terms, beyond the lecture).
 `python3 gen/readings.py` writes `readings.js`; the build puts the cards under "Textbook chapters" at
 the top of Guides. Chapter 22's card has no lecture quotes: the 12 October lecture has no transcript,
-so its "Read for" names the chapter sections closest to the 7b deck.
+so its "Read for" names the chapter sections closest to the 7b deck. Chapter 18's card lists 15 places the
+14 October lecture used the chapter, each with her exact words and the chapter page. Both cards restate the
+book in new wording; neither copies its sentences, tables or figures.

@@ -10,8 +10,8 @@ const READINGS = [
   "printed": "8e, Chapter 22",
   "syllabus_chapter": "Chapter 21",
   "matches_syllabus": false,
-  "numbering_note": "The syllabus lists Chapter 21 for PK-PD, the previous edition's number. The 8e chapter is 22, and its text still cross-references Equations 21.4, 21.8 and 21.23 where it means 22.4, 22.8 and 22.23. Page numbers below are the PDF's pages.",
-  "about": "This chapter describes how the exposures of a drug over time (dose, concentrations, dosing regimens) can be related to the desirable and undesirable effects of the drug. Pharmacodynamics (PD) refers to the relationship between drug concentration at the site of action (receptor) and the observed pharmacologic response, and the relationship between PK and PD is referred to as the exposure−response, drug concentration−response, or drug concentration−effect relationship. The chapter defines exposure, response and effect, describes how PK–PD information is integrated in drug development, and covers drug−receptor theory, the relationship of dose to pharmacologic response, and the effect of dose and elimination half-life on the duration of activity after a single IV bolus injection. It then covers substance abuse potential, drug tolerance and physical dependency, hypersensitivity, biomarkers and surrogate endpoints, MIC-based PK–PD indices for antimicrobials, and the Emax, sigmoid Emax, linear, log-linear, direct effect, effect compartment, indirect response and systems pharmacodynamic models, with the nesiritide and micafungin cases. Its summary states that pharmacologic response versus log dose−type plots have been shown to follow a sigmoid type of curve (S-curve), with maximum response peaking when all receptors become saturated.",
+  "numbering_note": "The syllabus lists Chapter 21 for PK-PD, the previous edition's number. In the 8th edition the chapter is 22, and its text still points to Equations 21.4, 21.8 and 21.23 where it means 22.4, 22.8 and 22.23. Page numbers below are the printed page numbers, which match the PDF's pages 1 to 50.",
+  "about": "Chapter 22 links a drug's exposure over time, meaning its dose, its concentrations and its dosing regimen, to the wanted and unwanted effects it produces (p1). It treats pharmacodynamics as the link between the concentration at the receptor and the response that is observed, and it names the PK–PD link the exposure–response or concentration–effect relationship (p1-2). After defining exposure, response and effect and showing where PK–PD data enter drug development, it covers receptor theory, how dose relates to response, and how the dose and the elimination half-life set the duration of action after one IV bolus (p2-13). Next come abuse potential, tolerance and dependence, hypersensitivity, biomarkers and surrogate endpoints, MIC-based indices for antimicrobials, and the Emax, sigmoid Emax, linear, log-linear, effect compartment, indirect response and systems models, ending with the nesiritide and micafungin cases (p13-40). The summary describes the response plotted against log dose as an S-shaped curve that reaches its maximum when the receptors are saturated (p40).",
   "sections": [
    "Chapter Objectives (p1)",
    "Pharmacokinetics and Pharmacodynamics: Definitions for Exposure, Response, and Effect; PK–PD Information Flow in Drug Development; Drug−Receptor Interaction (p1-5)",
@@ -30,73 +30,73 @@ const READINGS = [
   ],
   "lecture_use": [],
   "read_for": [
-   "Pharmacokinetics and Pharmacodynamics (p1-2): pharmacodynamics (PD) refers to the relationship between drug concentration at the site of action (receptor) and the observed pharmacologic response, and the relationship between PK and PD is referred to as the exposure−response, drug concentration−response, or drug concentration−effect relationship.",
-   "Relationship of Dose to Pharmacologic Response (p6), Figs. 22-4 and 22-5: as the dose increases, the pharmacologic response increases up to a maximum; response against dose on a linear scale generally gives a hyperbolic curve with maximum response at the plateau, and the same data on a log-linear scale give a sigmoid curve.",
-   "Fig. 22-6 and Equations 22.1 to 22.4 (p7-8): E = m log C + e; after an intravenous dose in a one-compartment model the pharmacologic effect declines linearly with time, with a slope of k·m/2.3.",
-   "Relationship between Dose and Duration of Activity (teff), Single IV Bolus Injection (p9), Equations 22.5 and 22.6: the duration of drug action is obtained using Ceff, the minimum effective drug concentration; a doubling of the dose will not result in a doubling of the effective duration of pharmacologic action.",
-   "Practice Problem (p10): MEC 0.1 µg/mL, VD 10 L and k 1.0 h−1; a 10-fold increase in the dose, from 100 mg to 1000 mg, increases teff by only 50%.",
-   "Effect of Both Dose and Elimination Half-Life on the Duration of Activity (p10-11), Equations 22.7 and 22.8 and Fig. 22-9: an increase in t1/2 increases teff in direct proportion, an increase in the dose D0 does not, and a nonlinear increase in teff is observed as dose increases.",
-   "Effect of Elimination Half-Life on Duration of Activity (p11-13), Table 22-2 and Fig. 22-10: pathophysiologic changes in hepatic or renal function prolong t1/2, which increases teff and the possibility of drug toxicity; in Table 22-2 a 100% increase in t1/2 gives a 100% increase in teff, while doubling the dose from 2 to 4 mg/kg raises teff from 3.24 to 3.98 hours, an increase of 22.8%.",
-   "Chapter Summary (p40): pharmacologic response versus log dose−type plots follow a sigmoid type of curve (S-curve), with maximum response peaking when all receptors become saturated."
+   "Pharmacokinetics and Pharmacodynamics (p1-2): pharmacodynamics is the link between drug concentration at the receptor and the observed response, and the PK–PD link goes by several names, among them exposure–response and concentration–effect.",
+   "Relationship of Dose to Pharmacologic Response (p6), Figures 22-4 and 22-5: the response rises with dose until it reaches a maximum; against dose on a linear axis the curve is hyperbolic with a plateau, and against log dose the same data form a sigmoid curve.",
+   "Figure 22-6 and Equations 22.1 to 22.4 (p7-8): within the linear part of the curve the effect is a straight-line function of log concentration, E = m log C + e, so after an IV dose in a one-compartment model the effect falls linearly with time at a slope of k·m/2.3.",
+   "Relationship between Dose and Duration of Activity, Single IV Bolus Injection (p9), Equations 22.5 and 22.6: the duration of action, teff, is the time for the concentration to fall to the minimum effective concentration, Ceff; doubling the dose does not double teff, while doubling t½ lengthens it in proportion.",
+   "Practice Problem (p10): with an MEC of 0.1 µg/mL, VD of 10 L and k of 1.0 h⁻¹, a tenfold dose increase from 100 to 1000 mg lengthens teff by only 50%.",
+   "Effect of Both Dose and Elimination Half-Life on the Duration of Activity (p10-11), Equations 22.7 and 22.8 and Figure 22-9: teff grows in direct proportion to t½ but not to the dose, and it climbs nonlinearly as the dose rises.",
+   "Effect of Elimination Half-Life on Duration of Activity (p11-13), Figure 22-10 and Table 22-2: liver or kidney disease that prolongs t½ lengthens teff and adds to the risk of toxicity; in Table 22-2 doubling t½ doubles teff (3.24 to 6.48 h at 2 mg/kg), while raising the dose from 2 to 4 mg/kg takes teff only to 3.98 h, 22.8% more.",
+   "Chapter Summary (p40): the response plotted against log dose traces an S-shaped curve whose maximum comes when the receptors are saturated."
   ],
   "beyond_lecture": [
-   "Drug−Receptor Interaction (p4-5), Table 22-1 and Fig. 22-3: types of receptors, the assumptions of the receptor occupancy model, and agonists, partial agonists, inverse agonists and antagonists.",
-   "PK–PD Information Flow in Drug Development (p2-4), Figs. 22-1 and 22-2: how PK–PD information is used in preclinical testing and in Phase I, II and III clinical trials.",
-   "Substance Abuse Potential, Drug Tolerance and Physical Dependency, and Hypersensitivity and Adverse Response (p13-15): the rate of drug absorption and abuse potential, PK and PD tolerance, tachyphylaxis, withdrawal symptoms, and allergic responses for which no dose−response relationship has been established.",
-   "Biological Markers (Biomarkers) (p15-17): biomarkers, surrogate endpoints and clinical endpoints, with bone mineral density and blood pressure as examples.",
-   "Noncompartmental PK–PD Models (p18-21), Figs. 22-12 to 22-14 and Table 22-4: the MIC-based indices Cmax/MIC, AUC/MIC (AUIC) and %T>MIC, and concentration-dependent against time-dependent killing.",
-   "Emax Drug-Concentration Effect Model and the linear, log-linear, additive and proportional drug effect models (p21-26), Equations 22.12 to 22.25: Emax and EC50 derived from receptor occupancy theory, and the sigmoidal Emax (Hill) model.",
-   "Direct Effect Model, Effect Compartment or Link Model, and Indirect Response Models (p27-37): the effect compartment and ke0, anticlockwise hysteresis and clockwise proteresis loops, and the four basic indirect response models built on kin and kout.",
-   "Systems Pharmacodynamic Models and PK–PD Models and Their Role in Drug Approval and Labeling (p37-39), with the nesiritide and micafungin cases."
+   "Drug−Receptor Interaction (p4-5), Table 22-1 and Figure 22-3: the kinds of receptors, the assumptions behind the occupancy model, and how agonists, partial agonists, inverse agonists and antagonists differ.",
+   "PK–PD Information Flow in Drug Development (p2-4), Figures 22-1 and 22-2: where PK–PD data are used, from preclinical testing through Phase I, II and III trials.",
+   "Substance Abuse Potential, Drug Tolerance and Physical Dependency, Hypersensitivity and Adverse Response (p13-15): faster absorption tied to greater abuse potential, PK against PD tolerance, tachyphylaxis, withdrawal, and allergic reactions with no established dose–response relationship.",
+   "Biological Markers (p15-17): how a biomarker, a surrogate endpoint and a clinical endpoint differ, with bone mineral density and blood pressure as examples.",
+   "Noncompartmental PK–PD Models (p18-21), Figures 22-12 to 22-14 and Table 22-4: the MIC-based indices Cmax/MIC, AUC/MIC (AUIC) and %T>MIC, and killing that depends on concentration against killing that depends on time.",
+   "Emax and related concentration–effect models (p21-26), Equations 22.12 to 22.25: Emax and EC50 derived from receptor occupancy, the sigmoid Emax (Hill) model, linear and log-linear models, and additive or proportional baseline effects.",
+   "Direct Effect, Effect Compartment and Indirect Response Models (p27-37): ke0 and the effect site, anticlockwise hysteresis and clockwise proteresis loops, and the four standard indirect response models built on kin and kout.",
+   "Systems Pharmacodynamic Models and the role of PK–PD models in approval and labeling (p37-40), with the nesiritide and micafungin cases."
   ],
   "terms": [
    {
     "term": "Pharmacodynamics (PD)",
-    "chapter_definition": "The relationship between drug concentration at the site of action (receptor) and the observed pharmacologic response."
+    "chapter_definition": "The link between how much drug is present where it acts, at the receptor, and the response that is observed (p1)."
    },
    {
     "term": "Exposure",
-    "chapter_definition": "Any dose or drug input into the body, or a measure of acute or integrated drug concentrations in plasma or other biological fluid (eg, Cmax, Cmin, Css, AUC)."
+    "chapter_definition": "Any dose or input of drug, or any measure of short-term or cumulative concentration in plasma or another body fluid, such as Cmax, Cmin, Css or AUC (p2)."
    },
    {
     "term": "Response (R)",
-    "chapter_definition": "A direct measure of the pharmacologic observation; for example, diastolic blood pressure measured at some time point."
+    "chapter_definition": "A quantity measured directly as the pharmacologic observation, such as diastolic blood pressure at a given time (p2)."
    },
    {
     "term": "Effect (E)",
-    "chapter_definition": "A change in the biological response from one time to another; a derived or calculated value from an observed response."
+    "chapter_definition": "A value calculated from responses: the change in a response between two times, such as the change from baseline in diastolic pressure (p2)."
    },
    {
     "term": "Agonist",
-    "chapter_definition": "An agent that interacts with a receptor, producing effects similar to that of an endogenous ligand."
+    "chapter_definition": "A drug that acts on a receptor to produce effects like those of the body's own ligand; morphine at the µ opioid receptor is the example (p5)."
    },
    {
     "term": "Partial agonist",
-    "chapter_definition": "An agent that produces a response similar to an agonist but cannot reach a maximal response as that of an agonist."
+    "chapter_definition": "A drug that produces an agonist-like response but cannot reach the agonist's maximum; buspirone is the example (p5)."
    },
    {
     "term": "Antagonist",
-    "chapter_definition": "An agent that blocks the effect of an agonist by binding to the receptor, thereby inhibiting the effect of an endogenous ligand or agonist."
+    "chapter_definition": "A drug that binds the receptor and so stops an agonist, or the body's own ligand, from acting; atenolol is the example (p5)."
    },
    {
     "term": "Inverse agonist",
-    "chapter_definition": "An agent that selectively binds to the inactive form of the receptor and shifts the conformational equilibrium towards the inactive state."
+    "chapter_definition": "A drug that binds preferentially to the receptor's inactive form and shifts the balance toward that state; famotidine is the example (p5)."
    },
    {
     "term": "Ceff (MEC)",
-    "chapter_definition": "The minimum effective drug concentration, used to obtain the duration of drug action, teff."
+    "chapter_definition": "The minimum effective concentration; after an IV bolus, the duration of action teff is the time for the concentration to fall to it (p9-10)."
    },
    {
     "term": "Emax and EC50",
-    "chapter_definition": "Emax is the maximum possible effect that can be produced by a drug; EC50 is the sensitivity or potency parameter, the drug concentration producing 50% of Emax."
+    "chapter_definition": "Emax is the largest effect the drug can produce; EC50, the potency or sensitivity parameter, is the concentration that gives half of Emax (p22)."
    },
    {
     "term": "Hill coefficient (γ)",
-    "chapter_definition": "The slope term of the sigmoidal Emax model, which describes the steepness of the effect−concentration relationship."
+    "chapter_definition": "The added parameter of the sigmoid Emax model, also called the slope term, which sets how steep the effect–concentration curve is (p22)."
    },
    {
     "term": "Hysteresis loop",
-    "chapter_definition": "When the maximum drug effect occurs later than the time of maximum plasma concentration, the effect vs plasma concentration graph depicts a loop; it is anticlockwise when the mechanism is delayed drug effect and clockwise when the mechanism is tolerance development."
+    "chapter_definition": "The loop traced when effect is plotted against plasma concentration and the peak effect comes after the peak concentration; it runs anticlockwise for a delayed effect and clockwise, called proteresis, when tolerance develops (p29-30, p45)."
    }
   ],
   "discussed_in_class": false,
@@ -108,6 +108,208 @@ const READINGS = [
    [
     "Module 7b",
     "Guide: Module 7b, PK-PD"
+   ]
+  ]
+ },
+ {
+  "id": "ch18",
+  "title": "Chapter 18: Nonlinear Pharmacokinetics",
+  "source": "Shargel and Yu's Applied Biopharmaceutics and Pharmacokinetics, 8e, Chapter 18 (Leon Shargel; Murray P. Ducharme)",
+  "file": "src/decks/readings/Chapter18_NonlinearPK_Part1_Pages01-12.pdf, Part2_Pages13-24, Part3_Pages25-36 and Part4_Pages37-46 (46 pages in four parts)",
+  "lecture": "Wed 14 Oct, Module 8: Nonlinear pharmacokinetics",
+  "kind": "chapter",
+  "printed": "8e, Chapter 18",
+  "syllabus_chapter": "Chapter 10",
+  "matches_syllabus": false,
+  "numbering_note": "The syllabus lists Chapter 10 for nonlinear pharmacokinetics, a 7th-edition number. These pages are Chapter 18 of the 8th edition (page 1 prints the book title with \"8e\", and the figure credits say Eighth Edition) under the same title, so they are the same topic. Page numbers below are the printed page numbers, 1 to 46.",
+  "about": "Chapter 18 explains how a drug's pharmacokinetics stop being linear when a process that handles it, such as an enzyme, a carrier or a binding protein, nears saturation, and it separates nonlinearity tied to dose from nonlinearity that develops with time (p1, p3). Its main tool is the Michaelis–Menten equation, in which Vmax and KM set the elimination rate, so that elimination acts as first order when the concentration is far below KM and as zero order when it is far above (p4-7). It then works through elimination after an IV bolus, the graphic and two-dose methods for finding KM and Vmax with phenytoin as the patient example, and the way half-life, clearance and AUC shift with dose (p8-22). Later sections take up mixed elimination and other routes of input, chronopharmacokinetics and autoinduction, saturable protein binding, judging linearity from AUC against dose, and transporters (p22-38). The summary names phenytoin, which saturates its own CYP2C9 metabolism at standard clinical doses, as the classic dose-dependent drug and carbamazepine, which induces its own metabolism over time, as the time-dependent one (p39).",
+  "sections": [
+   "Chapter Objectives (p1)",
+   "Introduction, with Table 18-1 and Figures 18-1 and 18-2 (p1-4)",
+   "Saturable Enzyme Elimination Processes, with two practice problems (p4-8)",
+   "Drug Elimination by Capacity-Limited Pharmacokinetics: One-Compartment Model, IV Bolus Injection, with practice problems (p8-12)",
+   "Determination of KM and Vmax; in patients; by the direct method; interpretation of KM and Vmax (p12-21)",
+   "Dependence of Elimination Half-Life on Dose; Dependence of Clearance on Dose; Nonlinearity in Protein Binding; Clinical Focus on paroxetine (p21-24)",
+   "Drugs Distributed as One-Compartment Model and Eliminated by Nonlinear Pharmacokinetics: mixed elimination, Clinical Focus on niacin, zero-order input, first-order absorption (p24-26)",
+   "Chronopharmacokinetics and Time-Dependent Pharmacokinetics; Circadian Rhythms; Clinical and Adverse Toxicity Due to Nonlinear Pharmacokinetics (p26-29)",
+   "Bioavailability of Drugs That Follow Nonlinear Pharmacokinetics (p29)",
+   "Nonlinear Pharmacokinetics Due to Drug–Protein Binding; One-Compartment Model Drug with Saturable Protein Binding (p29-33)",
+   "Determination of Linearity in Data Analysis, with Table 18-10 (p33-36)",
+   "Dose-Dependent Pharmacokinetics: Role of Transporters, with Table 18-11 (p36-38)",
+   "Chapter Summary (p38-39); Learning Questions (p39-41); Answers (p41-43); References and Bibliography (p43-46)"
+  ],
+  "lecture_use": [
+   {
+    "point": "Linear models keep half-life and clearance fixed across doses; nonlinear ones do not",
+    "chapter_location": "Introduction, p1",
+    "lecture_evidence": "So, the big difference here, linear, our pro our parameters don't change, non-linear, they do.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "A saturable step can sit anywhere in absorption, distribution, metabolism or excretion",
+    "chapter_location": "Introduction and Table 18-1, p1-2",
+    "lecture_evidence": "This non-linear saturable processes can occur anywhere throughout that adme cycle, right?",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Phenytoin as the course's example of a nonlinear drug",
+    "chapter_location": "p8, p16 and Chapter Summary, p39",
+    "lecture_evidence": "The one that most frequently thought about when we think about non-linear pharmacokinetics is phenytoin.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Curves A and B are one drug at a high and a low dose; the low dose looks first order, like curve C",
+    "chapter_location": "Figure 18-1, p3-4",
+    "lecture_evidence": "So B looks like first order, right? Because we've said C is a 1st order, so B looks like 1st order, OK?",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "AUC against dose leaves the straight line once elimination saturates",
+    "chapter_location": "Figure 18-2, p4",
+    "lecture_evidence": "So the area under the curve is no longer directly proportional to the increase in dose.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Saturation can be affected by other drugs that need the same enzyme",
+    "chapter_location": "List of saturation characteristics, p3",
+    "lecture_evidence": "Um, saturation of kinetics can be affected by other drugs requiring the same enzyme system.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "KM described as a hybrid constant rather than a true constant",
+    "chapter_location": "Equation 18.1, p5",
+    "lecture_evidence": "Is Michaela's constant, but it's not really a constant, it's kind of a hybrid constant.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Cp far below KM: the rate depends on concentration (first order)",
+    "chapter_location": "Equation 18.3 and Table 18-3, p6-7",
+    "lecture_evidence": "So, at low concentrations, the rate depends on concentration.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Cp far above KM: the rate equals Vmax (zero order)",
+    "chapter_location": "Equation 18.2 and Table 18-2, p5-6",
+    "lecture_evidence": "What do we call that when it's independent of concentration? Zero order, right?",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Same KM, Vmax of 100 against 200 mg/h",
+    "chapter_location": "Figure 18-3 and Table 18-4, p9-10",
+    "lecture_evidence": "So, the higher the VMAX, the faster we're gonna get the drug out of the body.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "KM and Vmax found in vitro from reaction rates",
+    "chapter_location": "Determination of KM and Vmax, Equations 18.7 and 18.8, p13",
+    "lecture_evidence": "Do you know what in vitro means? It, it's something that you're gonna do in the lab in some test tubes.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Dose rate at steady state, R = Vmax·Css/(KM + Css)",
+    "chapter_location": "Equation 18.11, p16",
+    "lecture_evidence": "So, this is our basic equation. It's the Michaelis Minon just um tweaked a little bit for us.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Two dose rates and their steady-state levels solved together for KM, then Vmax",
+    "chapter_location": "Direct method, Equation 18.15, p19-20",
+    "lecture_evidence": "So, two different rates, same drug, same VMAX, and same KM, we combine them to solve for KM.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Half-life changes with concentration",
+    "chapter_location": "Equation 18.16, p21",
+    "lecture_evidence": "So this says that as concentration changes, the half-life is going to change.",
+    "date": "Wed 14 Oct"
+   },
+   {
+    "point": "Clearance falls as concentration rises",
+    "chapter_location": "Equation 18.24, p22",
+    "lecture_evidence": "So, concentration, as concentration increases, what's gonna happen to our clearance? It's gonna decrease.",
+    "date": "Wed 14 Oct"
+   }
+  ],
+  "read_for": [
+   "Introduction and Table 18-1 (p1-2): nonlinear behaviour is a departure, at higher or repeated doses, from the profile seen with a single low dose, called dose-dependent or time-dependent by its cause; the table groups example drugs by the step that saturates (absorption, distribution, renal elimination, metabolism, biliary excretion), with phenytoin under both protein binding and metabolism.",
+   "Saturation characteristics (p3): elimination that is not simple first order and may mix zero and first order, a half-life that grows with dose, an AUC out of proportion to dose, competition from drugs that use the same enzyme or carrier, and a metabolite pattern that shifts with dose.",
+   "Figures 18-1 and 18-2 (p3-4): a large IV bolus of the saturable drug falls slowly at first and faster later, ending with the low dose's terminal slope; a projection from the low-dose curve alone underestimates concentration and duration after a doubled dose; AUC against dose curves upward for saturable elimination and stays straight for dose-independent kinetics.",
+   "Equations 18.1 to 18.3 with Tables 18-2 and 18-3 (p4-7): in the Michaelis–Menten rate law KM is the concentration giving half of Vmax; far above KM the rate levels off at Vmax, a zero-order process; far below KM the rate is Vmax/KM times Cp, a first-order constant k′ (1.1 h⁻¹ when KM is 0.8 µg/mL and Vmax 0.9 µg/mL/h, so t½ is 0.63 h).",
+   "Equations 18.4 to 18.6, Figures 18-3 and 18-4, Tables 18-4 and 18-5 (p8-11): the time for an IV bolus amount to fall from D0 to Dt; a 400-mg dose reaches 20 mg in 2.46 h with Vmax 200 mg/h and in 4.93 h with Vmax 100 mg/h, and in 3.03 h when KM rises from 38 to 76 mg/L.",
+   "Practice problems (p12): with KM 100 mg/L and Vmax 50 mg/h, halving a 400-mg dose takes 5.39 h and a 320-mg dose 4.59 h, while 10-mg and 5-mg doses take nearly the same time (1.49 and 1.44 h) because those amounts lie far below KM.",
+   "Determination of KM and Vmax (p13-15), Equations 18.8 to 18.10 and Figures 18-6 to 18-8: rate data plotted as 1/v against 1/C (intercept 1/Vmax, slope KM/Vmax), as C/v against C, or as v against v/C, the last two spreading the points more evenly.",
+   "Determination of KM and Vmax in patients and by the direct method (p16-20), Equations 18.11 to 18.15 and Figures 18-9 to 18-11: at steady state the dosing rate equals the metabolic rate, and no plateau is reached if the rate exceeds Vmax; the phenytoin patient on 150 and 300 mg/d (8.6 and 25.1 mg/L) gives KM 27.3 mg/L and Vmax 626 mg/d by calculation, about 27 mg/L and 630 mg/d by graph, and 186 mg/d for an 11.3 mg/L target.",
+   "Interpretation of KM and Vmax (p20-21), Figure 18-12: KM marks the level at which metabolism runs at half of Vmax; patient values span about 1 to 15 mg/L for KM and 100 to 1000 mg/d for Vmax; with Vmax held constant, a lower KM gives a faster rate, saturation at a lower concentration and larger swings in concentration on dose changes.",
+   "Dependence of half-life and clearance on dose (p21-22), Equations 18.16 and 18.21 to 18.24: t½ = 0.693(KM + Cp)/Vmax lengthens as Cp rises; clearance, Vmax/(KM + Cp), falls as Cp rises; for one IV bolus the mean clearance is the dose divided by the AUC, and it depends on the dose."
+  ],
+  "beyond_lecture": [
+   "Polymorphism, protein binding and paroxetine (p22-24), Figure 18-13: slow metabolizers of metoprolol and timolol reach much higher levels and AUCs; valproic acid's binding to albumin saturates; paroxetine's CYP2D6 saturation and inhibition.",
+   "Mixed elimination and other inputs (p24-26), Equations 18.26 to 18.29: a first-order and a saturable pathway in parallel (salicylate's glucuronide against its glycine conjugate), niacin's saturable pathways, constant IV infusion and first-order absorption with saturable elimination.",
+   "Chronopharmacokinetics and time-dependent pharmacokinetics (p26-28), Table 18-8: day and night changes in exposure, autoinduction (carbamazepine, cyclophosphamide, ifosfamide), autoinhibition by troleandomycin, circadian rhythms, verapamil, and blood-pressure dippers.",
+   "Clinical and adverse toxicity and bioavailability (p28-29): nonlinearity missed in narrow-dose studies, its detection by population analysis (fluvoxamine; piperacillin/tazobactam found linear), and superposition, which holds for linear drugs, no longer predicting exposure from later doses, with levodopa's carrier-based absorption.",
+   "Drug–protein binding (p29-33), Figures 18-14 to 18-16, Table 18-9, Equations 18.30 to 18.34: free concentration, albumin as a \"high-capacity, low affinity\" binder saturated only at gram doses, valproic acid's free fraction rising from 10% at 40 µg/mL to 18.5% at 130 µg/mL, and an abrupt rise in free drug past the binding limit.",
+   "Determination of linearity in data analysis (p33-36), Figures 18-17 and 18-18, Table 18-10: a three-dose AUC regression with R² of 0.97 that misses the origin, the questions it raises, and oral against IV data.",
+   "Role of transporters (p36-38), Table 18-11: regional pharmacokinetics and the influx and efflux transporters that can make absorption or elimination nonlinear."
+  ],
+  "terms": [
+   {
+    "term": "Nonlinear pharmacokinetics",
+    "chapter_definition": "Kinetics in which plasma concentrations change out of proportion when the dose changes or as time passes, because parameters a linear model treats as fixed do change (p1, p39)."
+   },
+   {
+    "term": "Dose-dependent and time-dependent nonlinearity",
+    "chapter_definition": "The two kinds the chapter names: the first linked to the size of the dose, the second to a change in absorption, distribution or elimination over a period of time, such as enzyme induction (p1, p3, p26)."
+   },
+   {
+    "term": "Capacity-limited (saturation) kinetics",
+    "chapter_definition": "Elimination or absorption through an enzyme or carrier that can be saturated, so the process may be a mix of zero- and first-order behaviour (p3)."
+   },
+   {
+    "term": "Vmax",
+    "chapter_definition": "The highest elimination rate the saturable process can reach; at concentrations well above KM the rate stays at this value (p5-6)."
+   },
+   {
+    "term": "KM (Michaelis constant)",
+    "chapter_definition": "The concentration, or amount in the body, at which the rate is half of Vmax; the chapter calls it a hybrid of forward and backward reaction rates, not an elimination constant, and gives it units of concentration (p5, p43)."
+   },
+   {
+    "term": "k′",
+    "chapter_definition": "The first-order rate constant of a saturable process when Cp is much smaller than KM, equal to Vmax divided by KM (p6-7)."
+   },
+   {
+    "term": "Mean clearance (CLav)",
+    "chapter_definition": "The average clearance over the whole course of one IV bolus dose, found as the dose divided by the AUC; it changes with the dose (p21-22)."
+   },
+   {
+    "term": "Chronopharmacokinetics",
+    "chapter_definition": "Changes in pharmacokinetics that follow the time of day or another time pattern, such as differences between the active and the sleeping part of the day (p26)."
+   },
+   {
+    "term": "Autoinduction",
+    "chapter_definition": "A drug raising, with repeated doses, the enzymes or transporters that eliminate it, so its clearance increases and its steady-state level is lower than the first dose predicts (p27)."
+   },
+   {
+    "term": "Autoinhibition (product inhibition)",
+    "chapter_definition": "A metabolite blocking the enzymes that form it, so the parent drug's metabolism slows as the metabolite accumulates; troleandomycin is the example (p27)."
+   },
+   {
+    "term": "Free drug concentration (Cf)",
+    "chapter_definition": "The unbound concentration, the total concentration times one minus the fraction bound; it is always below the total for a bound drug (p31)."
+   },
+   {
+    "term": "Regional pharmacokinetics",
+    "chapter_definition": "Study of a drug's behaviour in one region of the body, such as the absorption site, to bring out the role of local transporters (p37)."
+   }
+  ],
+  "discussed_in_class": true,
+  "her_words": [],
+  "truncated": false,
+  "module": "8",
+  "date": "Wed 14 Oct",
+  "guide": [
+   [
+    "Module 8",
+    "Guide: Module 8, nonlinear PK"
    ]
   ]
  }
