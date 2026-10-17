@@ -38,12 +38,16 @@ DATA_FILES = ['course.js',
               'q9_worksheets.js',  # her daily practice sheets as problem sets (after q1: appends to CHAINS)
               'q10_homework.js',   # her homework wording, numbers changed (appends to CHAINS)
               'q14_review.js',     # her Exam 2 in-class review, verbatim (appends to CHAINS)
+              'q15_module7b.js',   # Module 7b: PK-PD relationship (pushes its topic into TOPICS)
+              'q16_module8.js',    # Module 8: nonlinear pharmacokinetics (pushes its topic into TOPICS)
               'q11_extra.js',      # extra practice written for this drill: EXTRAS, never in QUESTIONS
               'qz_all.js']       # must stay last: builds QUESTIONS
 
 # The content files: data the engine reads, but not questions. They are
 # concatenated after the banks and before the views.
 CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
+                 'eq_pkpd.js',     # Module 7b lines, pushed onto EQUATIONS
+                 'eq_nonlin.js',   # Module 8 lines, pushed onto EQUATIONS
                  'sheet.js',       # her equation sheet line by line (the sheet map under Reference)
                  'reference.js',
                  'tell.js',

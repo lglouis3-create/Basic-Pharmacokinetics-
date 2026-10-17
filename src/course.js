@@ -41,6 +41,8 @@ const COURSE = {
     {module: 5, name: 'Module 5 - Single Oral Administration'},
     {module: 6, name: 'Module 6 - Multiple Dosings'},
     {module: 7, name: 'Module 7a - Bioavailability and Bioequivalence'},
+    {module: 9, name: 'Module 7b - PK-PD Relationship'},
+    {module: 8, name: 'Module 8 - Nonlinear Pharmacokinetics'},
     {view: 'eq',  name: 'Equations'},
   ],
 
@@ -91,6 +93,15 @@ const COURSE = {
     {id: 'L10', deck: '7a---Bioavailability-and-Bioequivalence.pdf',
      label: 'Module 7a: Bioavailability and bioequivalence (30 Sep)',
      prof: 'Mosley', exam: 2, module: 7},
+    /* After Exam 2. Her Canvas files PK-PD as 7b, inside the Module 7 folder;
+       the drill numbers it 9 so its quiz and exam scope stay apart from 7a,
+       and the Topics menu shows it as 7b. Nonlinear is her Module 8. */
+    {id: 'L11', deck: '7b---Pharmacokinetics-and-Pharmacodynamics.pdf',
+     label: 'Module 7b: PK-PD relationship (12 Oct)',
+     prof: 'Mosley', exam: 3, module: 9},
+    {id: 'L12', deck: '8 - Nonlinear PK.pdf',
+     label: 'Module 8: Nonlinear pharmacokinetics (14 Oct)',
+     prof: 'Mosley', exam: 3, module: 8},
   ],
 
   exams: [
@@ -146,29 +157,31 @@ const COURSE = {
     {id: 3,
      name: 'Final Exam',
      date: '2026-10-27',
-     when: '2026-10-27T07:50',   // syllabus: Tuesday 27 October, 7:50–9:50
-     questions: 40,          // ASSUMED same shape as exams 1 and 2; not published.
-     minutes: 120,           // syllabus: Tuesday 27 October, 7:50–9:50
-     sata: 4,                // ASSUMED.
-     blurb: 'Tue 27 October, 7:50–9:50, worth 33%. Cumulative, plus PK–PD and ' +
-            'nonlinear pharmacokinetics. Question count and mark split are ' +
-            'not published; this drill assumes the same 40-question shape and ' +
-            'weights the earlier material at half the paper.',
+     when: '2026-10-27T07:50',   // transcript 10-14: starts 7:50 unless she announces 8:00
+     questions: 40,          // transcript 10-14: "same format, 40 questions"
+     minutes: 120,           // syllabus and transcript 10-14: "the full 2 hours"
+     sata: 4,                // ASSUMED, as for Exams 1 and 2.
+     blurb: 'Tue 27 October, 7:50 (she may move it to 8:00). Cumulative: 40 questions, ' +
+            '20 multiple choice and 20 fill in the blank, with 25% on the two lectures ' +
+            'after Exam 2, PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct). ' +
+            'How the other 30 questions divide between Exam 1 and Exam 2 material is not ' +
+            'published; this drill splits them evenly.',
      facts: [
-       ['When', 'Tue 27 October, 7:50–9:50'],
+       ['When', 'Tue 27 October, 7:50 for the full 2 hours; she may move the start to 8:00, and if she does not say so it is 7:50'],
        ['Weight', '33% of the course grade'],
-       ['Covers', 'Cumulative, plus PK–PD and nonlinear pharmacokinetics'],
-       ['Mark split', 'Question count and split not published; this drill assumes the 40-question shape and weights the earlier material at half the paper'],
+       ['Shape', '40 questions: 20 multiple choice and 20 fill in the blank, the same format as Exams 1 and 2'],
+       ['New material', '25%, about 10 questions, on PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct): "25% new stuff, but the new isn\'t even really new"'],
+       ['The rest', 'Cumulative: Modules 1 to 7a. The split between Exam 1 and Exam 2 material is not published; this drill uses 15 and 15'],
      ],
      pools: [
-       {key: 'f-e1',  name: 'Exam 1 material (Modules 1–3)',  marks: 10, filter: {exam: 1}},
-       {key: 'f-e2',  name: 'Exam 2 material (Modules 4–9)',  marks: 10, filter: {exam: 2}},
-       {key: 'f-pkpd', name: 'PK–PD relationship',            marks: 8,  filter: {module: 10}},
-       {key: 'f-nl',  name: 'Nonlinear pharmacokinetics',     marks: 12, filter: {module: 11}},
+       {key: 'f-e1',  name: 'Exam 1 material (Modules 1–3)',   marks: 15, filter: {exam: 1}},
+       {key: 'f-e2',  name: 'Exam 2 material (Modules 4–7a)',  marks: 15, filter: {exam: 2}},
+       {key: 'f-pkpd', name: 'Module 7b — PK-PD relationship', marks: 5,  filter: {module: 9}},
+       {key: 'f-nl',  name: 'Module 8 — Nonlinear pharmacokinetics', marks: 5, filter: {module: 8}},
      ]},
   ],
 
-  activeExam: 2,
+  activeExam: 3,
 
   /* What a question asks you to DO. `kind` is 'concept' where the skill is a
      way of understanding and 'calc' where it is a way of computing; the drill
@@ -199,6 +212,8 @@ const COURSE = {
     {id: 'oral',      label: 'Oral absorption — Cmax, tmax, ka',       short: 'Oral',      kind: 'calc'},
     {id: 'multidose', label: 'Repeated dosing — peak, trough, average', short: 'Multi-dose', kind: 'calc'},
     {id: 'bioavail', label: 'Bioavailability — absolute, relative, equivalent dose', short: 'Bioavail', kind: 'calc'},
+    {id: 'pkpd',     label: 'PK-PD — effect, Emax, EC50 and exposure targets', short: 'PK-PD', kind: 'calc'},
+    {id: 'nonlin',   label: 'Nonlinear — Vmax, KM, dose rate and steady state', short: 'Nonlinear', kind: 'calc'},
     {id: 'term', label: 'Terms and definitions', short: 'Terms', kind: 'concept'},
   ],
 
@@ -207,6 +222,25 @@ const COURSE = {
      `modules` are the ones she said it covers; `said` is what she told the
      class to prepare, each line from the transcript named in `src`. */
   quizzes: [
+    {id: 'q5', name: 'Quiz 5',
+     // Mon 19 Oct, her last quiz, then an in-class review (transcript 10-14). She did not
+     // state its scope; the card assumes the material since Exam 2 (PK-PD and nonlinear).
+     // Class starts at 8:00 (transcript 09-23); Quiz 3 ran 24 minutes, Quiz 5's length is not stated.
+     when: '2026-10-19T08:00', minutes: 24,
+     modules: [9, 8],
+     covers: 'Her last quiz, then an in-class review. Scope not stated; this card assumes the two lectures since Exam 2: PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct).',
+     quote: 'Next session, we have our last quiz, quiz number 5, and then we will do kind of an in-class review.',
+     said: [
+       'Nonlinear: with C<sub>p</sub> well below K<sub>M</sub> the drug behaves first order; well above K<sub>M</sub> it behaves zero order. Her poll put it the other way round and the answer was false.',
+       'V<sub>max</sub> and K<sub>M</sub> are constants for a given drug and patient; V<sub>max</sub> is a rate (amount per time), K<sub>M</sub> a concentration.',
+       'From two dose rates and their steady-state levels, find K<sub>M</sub>, then V<sub>max</sub>, then a dose rate for a target C<sub>ss</sub>: "brush up on your algebra skills because we\'re gonna take this equation and rearrange it and solve for every piece of this."',
+       'Give a dose rate as amount per time, for the patient: 6.62 mg/kg/day for 65 kg is 430 mg/day; "I don\'t wanna just see 1000 mg."',
+       'Half-life and clearance change with concentration: t<sub>½</sub> = V<sub>D</sub>({{frac:0.693|V<sub>max</sub>}})(K<sub>M</sub> + C<sub>p</sub>) and Cl = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}, so clearance falls as concentration rises.',
+       'A nonlinear steady state takes 2 to 3 weeks to reach, not 3 to 5 half-lives.',
+       'Rounding: "Don\'t panic if I ask you to round to the nearest 10": 518.4 mg/day to the nearest 10 is 520.',
+       'The final: 40 questions, 20 multiple choice and 20 fill in the blank, 25% on PK-PD and nonlinear.',
+     ],
+     src: 'transcript 10-14 (quiz, review, final format, nonlinear content and her worked examples); transcript 09-23 (8 am start, 24-minute Quiz 3)'},
     {id: 'q4', name: 'Quiz 4',
      // Sat 5 Oct 2026 (graded set in STYLE.md, bank ids cq4-1 to cq4-10: ten items at 10 points,
      // five concept and five numeric, ±5% margins, ±3% on F). The card hides once the quiz is past.
