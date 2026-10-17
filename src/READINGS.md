@@ -2,7 +2,7 @@
 
 The required text is Shargel and Yu's Applied Biopharmaceutics & Pharmacokinetics, 8th edition
 (syllabus, "Texts/Materials"). The bank is written from her decks and transcripts; a chapter is the
-third tier when sources conflict (prescribing information, then her slides and lecture, then the text).
+fourth tier when sources conflict (BANK_SPEC.md, "The source rule": her worked solution, her correction in lecture, the slide, then the text).
 Chapter PDFs the student supplies go in `src/decks/readings/` (gitignored, like the decks).
 
 ## Chapter map from the syllabus (SyllabusF26---PHAR-4221---Basic-Pharmacokinetics.pdf, "Class meeting schedule/outline")
@@ -36,6 +36,7 @@ supplied from AccessPharmacy are the 8th edition except one, and the numbering d
 | Chapter 8 | Oral absorption | `Shargel8e-Ch16-Drug-Absorption.pdf` (30 pp) | 8e Chapter 16, Pharmacokinetics of Drug Absorption |
 | Chapter 9 | Multiple dosing | `Shargel7e-Ch09-Multiple-Dosage-Regimens.pdf` (33 pp) | 7e Chapter 9, Multiple-Dosage Regimens (the file's own header says 7e) |
 | Chapter 21 | PK-PD | `Shargel8e-Ch22-PK-PD-Relationship.pdf` (50 pp) | 8e Chapter 22 (its text still cross-references equations as 21.x) |
+| Chapter 10 | Nonlinear PK | `Chapter18_NonlinearPharmacokinetics.pdf` (Google Drive, 46 pp, not in `src/decks/readings/`) | Chapter 18 per its page headers; edition not confirmed (see below) |
 
 The 7e-to-8e match for Chapters 15 and 16 is by title and topic against the syllabus
 line; the Chapter 22 match is confirmed by the chapter's own cross-references. The
@@ -115,3 +116,29 @@ effect, clockwise for tolerance (FAQ answer, p45).
 
 Nothing from this chapter is in the bank yet. Her deck and transcript for 12 October decide the
 module number and what is tested; the chapter supplies definitions and the keyed answers above.
+
+## Chapter 18: Nonlinear Pharmacokinetics (the syllabus's Chapter 10)
+
+File: `Chapter18_NonlinearPharmacokinetics.pdf`, Google Drive file id 1gvicJRdE0yJJNjCyvBh-6vkEBXDlXOay,
+43,179,720 bytes, 46 pages, an AccessPharmacy export downloaded 16 Oct 2026. Reading for the
+14 October nonlinear lecture (Module 8; Quiz 5 on 19 October).
+
+The pages are scanned images with no text layer: the Drive text export returns only the page header
+and footer, "Chapter 18: Nonlinear Pharmacokinetics, Leon Shargel; Murray P. Ducharme", "Page n / 46".
+That header prints the chapter number but not the edition, so the edition is not confirmed.
+
+Numbering conflict: the syllabus lists "Chapter 10" for nonlinear pharmacokinetics, a 7th-edition
+number; the supplied file is Chapter 18, so the two numbers do not match.
+
+Not read yet. The Drive connector refuses to download the file (its limit is 10 MB), so the pages
+could not be rendered and read, and the Guides tab has no Chapter 18 card. To add one, put the PDF in
+`src/decks/readings/`, render its pages to images, write `src/readings/ch18.json` from them, and run
+`python3 gen/readings.py` (its META already lists ch18 for Module 8).
+
+## Reading cards on the Guides tab
+
+`src/readings/<id>.json` holds one card per chapter (fields from the reading-card writer: about,
+sections, read for, lecture use with exact transcript quotes, her words, terms, beyond the lecture).
+`python3 gen/readings.py` writes `readings.js`; the build puts the cards under "Textbook chapters" at
+the top of Guides. Chapter 22's card has no lecture quotes: the 12 October lecture has no transcript,
+so its "Read for" names the chapter sections closest to the 7b deck.

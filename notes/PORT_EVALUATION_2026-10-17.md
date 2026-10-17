@@ -119,3 +119,16 @@ Evaluation only. Sources read: `lglouis3-create/Intro-Pharmacology-` at `origin/
 1. **R1** step-arithmetic check and calculation verifier: it targets the error type that reached the bank and the final will be mostly calculation.
 2. **R2** Exam sim persistence: the final paper is 120 minutes on a phone or iPad.
 3. **R3** verbatim marker and check: her own items are the closest model of her exam wording.
+
+## 5. Applied (2026-10-17)
+
+R3 was set aside as not a priority for this course. The rest:
+
+- **R1:** `src/step_check.js` (a gate) recomputes every printed `expression = value` in the bank and, since the merge, in the Guides, Reference, Tell apart and Terms pages; `.claude/agents/calc-bank-verifier.md` and `verify-fix-applier.md`. It found 29 slips in the bank, all fixed, and on the teaching pages 8 printed results that did not follow and 3 lines whose units or chain read ambiguously, all rewritten; no keyed answer changed.
+- **R2:** Exam sim saves a paper on every pick and move under `<ns>:exam:<profile>`, restores it at start-up, and submits a paper whose time ran out; `browser_test.py` checks reload, expiry and New paper.
+- **R4:** `src/BANK_SPEC.md`, "The source rule": her worked solution, her correction in lecture, the slide, then the textbook.
+- **R5:** `.claude/agents/learning-presentation-specialist.md`. A blind trial on the build before 4fcf901 reported the greyed-tile defect first; its other findings are fixed (`notes/UX_TRIAL_2026-10-17.md`), and its cefprozil finding led to a test that found 45 problem parts using an earlier result without stating it.
+- **R6:** `src/README.md`, "Delivery": the "pages build and deployment" workflow run for the pushed commit is the confirmation; the Pages REST endpoint and the site are not reachable from a cloud session.
+- **R7:** a scheduled task, "PHAR 4221 daily material check", 06:52 America/Chicago, 18 to 27 October. It was created without the Google Drive connector, which has to be added to it in the claude.ai scheduled-task settings before it can list files.
+- **R8:** Weak spots, Concepts: statuses, a card per weak concept, Practice this concept and spaced-review checks; the box-3 count is labelled "on long review".
+- **R9:** a Textbook chapters card for Chapter 22 at the top of Guides. Chapter 18 has no card: the Drive connector refuses files over 10 MB and the chapter PDF is 43 MB, so none of its pages was read.

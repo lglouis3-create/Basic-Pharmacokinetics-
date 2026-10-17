@@ -468,7 +468,7 @@ def main():
             // every pool that contributed drew only its own questions
             const strays = EX.qs.filter(q => !poolOf(q)).map(q => q.id);
             out.strays = strays.slice(0, 4);
-            clearInterval(EX.timer); EX = null;
+            clearInterval(EX.timer); EX = null; clearExam();
             return out;
         }""")
         check(exam['paper'] == exam['available'],
@@ -487,6 +487,50 @@ def main():
             print(f"        {exam['drawn']} of {exam['total']} marks drawn, {exam['missing']} not yet coverable")
         else:
             skip('blueprint shortfall notice', 'the bank covers the whole blueprint')
+
+        # A paper survives a reload: the same questions, the same picks, the
+        # same place and the same clock end; a paper whose time ran out while
+        # the page was closed is submitted when the page opens again.
+        answer3 = """() => {
+            DB.settings.layout = 'one'; show('exam');
+            document.getElementById('startExam').click();
+            for (let k = 0; k < 3; k++) {
+                const q = EX.qs[EX.i];
+                if (qType(q) === 'numeric') {
+                    const inp = document.getElementById('numIn');
+                    inp.value = '12.5'; inp.dispatchEvent(new Event('input', {bubbles: true}));
+                } else if (qType(q) === 'match') {
+                    const s = document.querySelector('#v-exam .matchgrid select');
+                    s.value = s.options[1].value; s.dispatchEvent(new Event('change', {bubbles: true}));
+                } else document.querySelector('#v-exam .opt').click();
+                document.getElementById('exNext').click();
+            }
+            return {ids: EX.qs.map(q => q.id), picks: JSON.stringify(EX.picks), i: EX.i, ends: EX.ends,
+                    papers: (DB.exams || []).length};
+        }"""
+        before = page.evaluate(answer3)
+        page.evaluate("window.onbeforeunload = null")
+        page.reload(); page.wait_for_function("typeof VIEW !== 'undefined' && !!VIEW"); page.wait_for_timeout(300)
+        after = page.evaluate("""() => EX ? {ids: EX.qs.map(q => q.id), picks: JSON.stringify(EX.picks), i: EX.i,
+            ends: EX.ends, running: EX.running, view: VIEW, clock: !!document.getElementById('exClock')} : null""")
+        check(after is not None and after['ids'] == before['ids'] and after['picks'] == before['picks']
+              and after['i'] == before['i'] and after['ends'] == before['ends'] and after['running'],
+              'a paper in progress comes back after a reload with its questions, picks, place and clock end',
+              str(after and {k: after[k] == before.get(k) for k in ('ids', 'picks', 'i', 'ends')}))
+        check(bool(after) and after['view'] == 'exam' and after['clock'],
+              'after a reload the page opens on the running paper')
+        page.evaluate("""() => { const k = EXKEY(), x = JSON.parse(LS.get(k)); x.ends = Date.now() - 1000;
+                                 LS.set(k, JSON.stringify(x)); clearInterval(EX.timer); EX = null; }""")
+        page.reload(); page.wait_for_function("typeof VIEW !== 'undefined' && !!VIEW"); page.wait_for_timeout(300)
+        expired = page.evaluate("() => ({done: !!(EX && EX.done), papers: (DB.exams || []).length, view: VIEW})")
+        check(expired['done'] and expired['papers'] == before['papers'] + 1 and expired['view'] == 'exam',
+              'a paper whose time ran out while the page was closed is submitted and shown on reopening', str(expired))
+        page.evaluate("() => document.getElementById('exAgain').click()")
+        page.reload(); page.wait_for_function("typeof VIEW !== 'undefined' && !!VIEW"); page.wait_for_timeout(300)
+        cleared = page.evaluate("() => ({ex: EX, saved: LS.get(EXKEY()), view: VIEW})")
+        check(cleared['ex'] is None and cleared['saved'] is None and cleared['view'] == 'topics',
+              '"New paper" clears the saved paper', str(cleared))
+        page.evaluate("['guide','ref','tell','diag'].forEach(p => LS.set(FOLD_KEY + p, 'open'))")
 
         # The app is opened from disk, where a browser can give the page an
         # opaque origin and make localStorage throw on the first read.

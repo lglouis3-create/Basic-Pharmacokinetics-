@@ -537,7 +537,7 @@ pt.text(_teff(500) + 0.6, 0.2, '30.97 hr', size=15, color=AMBER, anchor='start',
 pt.label(1, 0.24, 'MEC 0.2 mg/L')
 pt.label(13, 40, '500 mg', color=AMBER, swatch=True)
 pt.label(13, 20, '250 mg', color=BLUE, swatch=True)
-pt.note('Gap at the MEC: 4.62 hr, one half-life')
+pt.label(13, 9, 'Gap at the MEC: 4.62 hr, one half-life')
 FIGS['pd_teff_dose'] = ('One IV bolus of 250 mg and of 500 mg on a log axis, with the minimum effective concentration: the duration of activity of each',
                         pt.svg('Doubling an IV bolus moves the crossing of the MEC one half-life later'))
 

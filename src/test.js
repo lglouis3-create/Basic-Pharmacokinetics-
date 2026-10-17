@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,whySentences,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -383,6 +383,61 @@ console.log('\n=== 4b. Numeric miss kinds ===');
     record(nq, 'correct', String(nq.answer), 900);
     if (X.setMissKind(nq, 'unit')) bad('a correct answer accepted a miss kind');
     else console.log('  ok    a correct answer takes no miss kind');
+  }
+}
+
+console.log('\n=== 4c. Concept statuses and spaced review ===');
+{
+  /* Synthetic logs on one concept with two wordings: each answer is
+     [question index, result, minutes after the start]. A gap of 30 minutes or
+     more starts a new session. */
+  const byC = {}; QUESTIONS.forEach(q => (byC[q.concept] ||= []).push(q));
+  const two = Object.values(byC).find(a => a.length > 1);
+  if (!two) warn('no concept has two wordings, so concept mastery is untested');
+  else {
+    const MIN = 60000, t0 = Date.now() - 2 * 86400000;
+    const log = (rows, start = t0) => rows.map(([i, result, m], k) => ({qid: two[i].id, concept: two[i].concept, result, at: start + m * MIN, qn: k + 1}));
+    const recOf = (rows, start) => { const G = X.conceptLog(log(rows, start)); return X.conceptRecord(G[two[0].concept]); };
+    const cases = [
+      ['one miss is unfamiliar', [[0, 'wrong', 0]], 'unfamiliar'],
+      ['a correct answer marked "I guessed" is a miss', [[0, 'guessed', 0]], 'unfamiliar'],
+      ['one right answer never masters', [[0, 'correct', 0]], 'learning'],
+      ['two misses are struggling', [[0, 'wrong', 0], [1, 'correct', 1], [0, 'wrong', 2]], 'struggling'],
+      ['under 60% on the last attempts is struggling', [[0, 'correct', 0], [1, 'wrong', 1]], 'struggling'],
+      ['missed, then the last 2 solid, is improving', [[0, 'wrong', 0], [1, 'correct', 1], [0, 'correct', 2]], 'improving'],
+      ['three solid on one question is not mastered', [[0, 'correct', 0], [0, 'correct', 60], [0, 'correct', 120]], 'learning'],
+      ['three solid on two questions in one session is not mastered', [[0, 'correct', 0], [1, 'correct', 5], [0, 'correct', 10]], 'learning'],
+      ['three solid on two questions across two sessions is mastered', [[0, 'correct', 0], [1, 'correct', 5], [0, 'correct', 120]], 'mastered'],
+      ['a guess in the last three blocks mastery', [[0, 'correct', 0], [1, 'correct', 5], [0, 'guessed', 120]], 'learning'],
+      ['a miss after mastery is returning', [[0, 'correct', 0], [1, 'correct', 5], [0, 'correct', 120], [1, 'wrong', 600]], 'returning'],
+      ['returning, then the last 2 solid, is improving', [[0, 'correct', 0], [1, 'correct', 5], [0, 'correct', 120], [1, 'wrong', 600], [0, 'correct', 601], [1, 'correct', 602]], 'improving'],
+      ['returning, then 3 solid, is mastered again', [[0, 'correct', 0], [1, 'correct', 5], [0, 'correct', 120], [1, 'wrong', 600], [0, 'correct', 601], [1, 'correct', 602], [0, 'correct', 603]], 'mastered'],
+    ];
+    const off = cases.map(([name, rows, want]) => { const r = recOf(rows); return r.s === want ? null : `${name}: got ${r.s}, expected ${want}`; }).filter(Boolean);
+    if (off.length) off.forEach(m => bad('concept status — ' + m));
+    else console.log(`  ok    the status rules hold on ${cases.length} synthetic logs (unfamiliar, struggling, improving, mastered, returning, learning)`);
+    const M = [[0, 'correct', 0], [1, 'correct', 5], [0, 'correct', 120]];
+    const m0 = recOf(M), m1 = recOf(M.concat([[1, 'correct', 200]]));
+    const lastAt = t0 + 120 * MIN;
+    if (m0.box !== X.MASTER_BOX || m0.dueAt !== lastAt + X.DAYS[X.MASTER_BOX] * 86400000 || m0.dueQ !== 3 + X.CRAM[X.MASTER_BOX]) bad(`mastery sets box ${m0.box}, due ${m0.dueAt}/${m0.dueQ}; expected box ${X.MASTER_BOX} at the scheduler's intervals`);
+    else if (m1.box !== X.MASTER_BOX + 1) bad(`a solid answer after mastery left box at ${m1.box}`);
+    else console.log('  ok    mastery starts the spaced check at the mastery box, and each further solid answer moves it up one');
+    const DBx = X.getDB(), mode = DBx.settings.mode;
+    DBx.concepts = {}; DBx.settings.mode = 'long';
+    const old = recOf(M, Date.now() - 40 * 86400000), fresh = recOf(M, Date.now() - 3 * 60 * MIN);
+    if (!X.conceptDue(two[0].concept, old)) bad('a concept mastered 40 days ago is not due for its spaced check');
+    else if (X.conceptDue(two[0].concept, fresh)) bad('a concept mastered minutes ago is already due for its spaced check');
+    else console.log('  ok    a mastered concept comes due at its box interval, not before');
+    DBx.settings.mode = mode;
+    const S = rows => { const G = X.conceptLog(log(rows)), l = G[two[0].concept]; return X.statusLine(two[0].concept, X.conceptRecord(l), X.conceptStats(l)); };
+    const line = S([[0, 'wrong', 0], [1, 'correct', 1], [0, 'wrong', 2], [1, 'guessed', 3], [0, 'correct', 4]]);
+    if (line !== '3 misses in 5 attempts, last 5 at 40% (1 of them a correct answer marked as a guess)') bad('the struggling evidence line reads: ' + line);
+    else console.log('  ok    the evidence line gives exact counts: ' + line);
+    const ghost = X.conceptLog([{qid: 'no-such-question', concept: 'gone', result: 'wrong', at: t0, qn: 1}]);
+    if (Object.keys(ghost).length) bad('an answer to a question no longer in the bank reached a concept record');
+    const titles = Object.keys(byC).map(c => X.conceptTitle(c)).filter(t => !t || /undefined|NaN/.test(t));
+    if (titles.length) bad(`concept titles that read wrongly: ${titles.slice(0, 5).join(', ')}`);
+    else console.log(`  ok    every concept has a readable title (${Object.keys(byC).length}; e.g. "${X.conceptTitle(two[0].concept)}")`);
   }
 }
 
@@ -730,6 +785,16 @@ console.log('\n=== 5e. What an explanation may say ===');
     else console.log('  ok    every earlier result a part\'s working uses is stated in that part\'s stem');
   }
 
+  /* "Why this line" shows the set-up reasoning one sentence per bullet; a
+     decimal point or a fraction token never splits a sentence. */
+  {
+    const torn = X.QUESTIONS.concat(X.EXTRAS).filter(q => q.setup && q.setup.why)
+      .filter(q => X.whySentences(q.setup.why).some(t => (t.match(/\{\{/g) || []).length !== (t.match(/\}\}/g) || []).length || /^\d/.test(t)))
+      .map(q => q.id);
+    if (torn.length) bad('a set-up reason splits inside a number or a fraction: ' + torn.slice(0, 8).join(', '));
+    else console.log('  ok    every set-up reason splits into whole sentences (no fraction or decimal cut)');
+  }
+
   /* A paper keeps the parts of one problem together and in order. */
   {
     const set = X.CHAINS.find(c => c.id === 'e2r-sheet'), byIdQ = Object.fromEntries(X.QUESTIONS.map(q => [q.id, q]));
@@ -1016,6 +1081,53 @@ console.log('\n=== 10. Bank fields are plain text ===');
   const sheetYes = X.EQUATIONS.filter(e => e.sheet === 'yes').map(e => e.id), mapped = new Set(L.flatMap(l => [l.eq, ...(l.alsoEq || [])]));
   const unmapped = sheetYes.filter(id => !mapped.has(id));
   if (unmapped.length) bad(`equations marked "on the sheet" that no sheet line carries: ${unmapped.join(', ')}`); else console.log(`  ok    every equation marked on the sheet appears on a sheet line (${sheetYes.length})`);
+})();
+
+/* Textbook chapters atop Guides: every card carries the card-writer's fields,
+   every quote is non-empty, and the section renders with each card and fold. */
+console.log('\n=== Textbook reading cards ===');
+(() => {
+  const RS = X.READINGS;
+  if (!RS.length) { bad('READINGS is empty: no reading card was built'); return; }
+  const REQ = ['id','title','source','file','lecture','kind','about','sections','lecture_use','read_for',
+               'beyond_lecture','terms','discussed_in_class','her_words','truncated','module','date'];
+  const isStr = v => typeof v === 'string' && v.trim().length > 0;
+  for (const r of RS) {
+    const miss = REQ.filter(k => !(k in r));
+    if (miss.length) { bad(`reading ${r.id}: missing ${miss.join(', ')}`); continue; }
+    const probs = [];
+    for (const k of ['id','title','file','lecture','kind','about']) if (!isStr(r[k])) probs.push(k + ' empty');
+    if (!['chapter','article','guideline'].includes(r.kind)) probs.push('kind ' + r.kind);
+    const sents = (r.about.match(/[.!?](\s|$)/g) || []).length;
+    if (sents < 3 || sents > 5) probs.push(`about has ${sents} sentences, not 3 to 5`);
+    const arr = (k, lo, hi) => { const a = r[k]; if (!Array.isArray(a)) return probs.push(k + ' not a list');
+      if (a.length < lo || a.length > hi) probs.push(`${k} has ${a.length}, not ${lo} to ${hi}`);
+      if (a.some(x => !isStr(x))) probs.push(k + ' has an empty entry'); };
+    arr('read_for', 5, 10); arr('beyond_lecture', 3, 8);
+    if (!Array.isArray(r.sections) || !r.sections.length || r.sections.some(x => !isStr(x))) probs.push('sections empty');
+    if (!Array.isArray(r.terms) || r.terms.length < 5 || r.terms.length > 12 || r.terms.some(t => !isStr(t.term) || !isStr(t.chapter_definition)))
+      probs.push('terms must be 5 to 12 {term, chapter_definition}, none empty');
+    if (!Array.isArray(r.lecture_use) || r.lecture_use.some(u => !isStr(u.point) || !isStr(u.lecture_evidence) || !isStr(u.date)))
+      probs.push('a lecture_use entry lacks its point, quote or date');
+    if (!Array.isArray(r.her_words) || r.her_words.some(w => !isStr(w.t) || !isStr(w.date))) probs.push('a her_words quote or its date is empty');
+    if (typeof r.discussed_in_class !== 'boolean' || typeof r.truncated !== 'boolean') probs.push('discussed_in_class and truncated must be true or false');
+    if (!r.discussed_in_class && (r.lecture_use.length || r.her_words.length)) probs.push('lecture quotes on a reading marked not discussed');
+    if (probs.length) bad(`reading ${r.id}: ${probs.join('; ')}`);
+    else console.log(`  ok    ${r.id}: all fields present (${r.read_for.length} read-for, ${r.terms.length} terms, ${r.lecture_use.length} lecture matches, ${r.her_words.length} quotes)`);
+  }
+  const html = X.readingsHTML(() => true);
+  const missingCard = RS.filter(r => !html.includes(`id="rd-${r.id}"`)).map(r => r.id);
+  const folds = ['About','Sections','Read for','Terms it defines','Beyond the lecture'];
+  const noFold = folds.filter(f => !html.includes(`<summary>${f}</summary>`));
+  if (!/<h2>Textbook chapters<\/h2>/.test(html) || missingCard.length || noFold.length || /undefined|NaN/.test(html))
+    bad(`the Textbook chapters section does not render: missing cards ${missingCard.join(', ') || 'none'}, folds ${noFold.join(', ') || 'none'}`);
+  else console.log(`  ok    the Textbook chapters section renders ${RS.length} card(s) with their folds`);
+  const chipsOn = (html.match(/data-rdjump=/g) || []).length, chipsOff = (X.readingsHTML(() => false).match(/data-rdjump=/g) || []).length;
+  if (chipsOff || chipsOn !== RS.reduce((n, r) => n + (r.guide || []).length, 0)) bad(`guide chips drawn without their target (${chipsOff}) or missing with it (${chipsOn})`);
+  else console.log('  ok    a guide chip is drawn only when its guide section exists');
+  const badLead = RS.filter(r => (X.rdLead(r.about)[0].match(/[.!?](\s|$)/g) || []).length !== 2).map(r => r.id);
+  if (badLead.length) bad(`card lead is not two sentences: ${badLead.join(', ')}`);
+  else console.log('  ok    each card leads with two sentences');
 })();
 
 console.log(`\n${fails ? 'FAILURES: '+fails : 'All checks passed'}${warns ? '  (warnings: '+warns+')' : ''}\n`);

@@ -42,6 +42,7 @@ where the last good one was. The output path is
 | `build.py` | The assembler. `DATA_FILES` at the top is the concatenation order. |
 | `test.js` | Bank integrity, the manifest, the pool resolver, every question type's grading, the blueprint draw, the scheduler rules, storage namespacing. **Gate: exits 1 on failure.** |
 | `style_check.js` | Flags rejected phrasing in every explanatory field, and reports citation coverage. **Gate.** |
+| `step_check.js` | Recomputes every `expression = value` printed in steps, option and givens notes, setup and check text, and checks the last step's value against the key and tolerance. **Gate.** |
 | `render_test.js` | Renders every view and every question type against stub DOM sinks; fails on `undefined`, `NaN`, `[object Object]` or unbalanced markup. **Gate.** |
 | `explain_check.js` | Scores how well each question explains itself, worst-first by severity × exam weight. **Report only, always exits 0.** |
 | `cite_check.py` | Checks every cited slide number against the real deck. **Skips** when no PDFs are present. |
@@ -60,7 +61,7 @@ where the last good one was. The output path is
 ## The checks, in order
 
 ```
-python3 build.py && node test.js && node style_check.js && node render_test.js
+python3 build.py && node test.js && node style_check.js && node render_test.js && node step_check.js
 node explain_check.js
 python3 cite_check.py
 python3 browser_test.py
@@ -85,6 +86,23 @@ installed there: a newer package looks for a build it does not have and refuses
 to launch, so pin it (`pip install playwright==<version>`) to match.
 Every check reads the built filename out of `course.js`; none of them names the
 course.
+
+Builds and the checks share one output file, `/mnt/user-data/outputs/<output>`.
+When more than one worktree or agent builds at once, run each build with the
+checks that read it under one lock, for example
+`flock <scratchpad>/build.lock sh -c 'python3 build.py && node test.js'`.
+
+## Delivery
+
+Commits go to `main` and to the work branch; no pull request. GitHub Pages
+serves `main`. A push is delivered only when Pages has deployed that commit:
+list the workflow runs of the repository (GitHub MCP `actions_list`,
+`list_workflow_runs`; the run named "pages build and deployment") and wait until
+the run whose `head_sha` is the pushed commit shows `status: completed` and
+`conclusion: success`, usually under a minute. Then name that commit in the
+report. A failed run, or none for the commit after five minutes, is reported
+as such. The Pages REST endpoint (`/pages/builds/latest`) and the site itself
+are not reachable from a cloud session, so the workflow run is the record.
 
 ---
 

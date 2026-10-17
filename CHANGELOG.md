@@ -2,23 +2,32 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
-## 2026-10-17 (final exam set up; Quiz 5 card)
-- The final is the active exam: 40 questions (20 multiple choice, 20 fill in), 25% on PK-PD and nonlinear.
-- Exam sim draws 15 Exam 1, 15 Exam 2, 5 PK-PD and 5 nonlinear questions; the 15/15 split is assumed.
-- A Quiz 5 card (Mon 19 Oct) on Topics: what she said to prepare, drills and a timed practice quiz.
-- Modules 7b (PK-PD) and 8 (nonlinear) appear in the menus; their questions are being added.
-- Worked steps on 27 questions now print arithmetic that follows from the numbers shown.
-- 45 problem parts now state the earlier results they use, so each can be answered when met alone.
+## 2026-10-17 (Modules 7b and 8; papers survive a reload; concept statuses)
+- Module 7b (PK-PD): 43 questions, 19 of them calculations, in 7 problem sets from her slides and sheets.
+- Module 8 (nonlinear): 51 questions, 32 of them calculations, in 5 problem sets from her sheets.
 - Guides: Module 7b (two objectives) and Module 8 (four), each with worked examples from her sheets.
+- Guides: a Textbook chapters card for Chapter 22 (PK-PD): what it covers, sections to read, terms it defines.
 - Tell apart: two new tables, teff and the dose for PK-PD, and linear against nonlinear for Module 8.
 - Terms: 18 new terms, among them MEC/MTC, teff, therapeutic window, Vmax, KM and Michaelis-Menten.
 - Reference: equation tables for Modules 7b and 8, matching page 2 of her equation sheet.
 - Topics: calculation cards for teff, the dose for a duration, KM and Vmax, dose rate, t½ and clearance.
 - Diagrams: a doubled IV bolus against the MEC, and Css against dose rate for a saturable drug.
-- Explain more under 7b questions now names Module 7b and finds its Guide and Reference sections.
-- Three new questions: which teff form to use, C0 when the dose doubles, and Vmax from either pair.
-- Worked lines on Guides, Reference and Tell apart now follow from the numbers they show.
+- Exam sim: a paper in progress is saved on every answer; a reload brings it back with the same clock.
+- A paper whose time ran out while the page was closed is submitted when the page opens again.
+- Weak spots: a card per weak concept with its status and counts, Practice this concept, and spaced-review checks.
+- The count of concepts with three correct answers on separate days is now labelled "on long review".
+- Worked steps on 27 questions and lines on the Guides, Reference and Tell apart pages now follow from their numbers.
+- 45 problem parts now state the earlier results they use, so each can be answered when met alone.
+- Set-up drill: "Why this line" no longer cuts a sentence at a decimal point inside a fraction.
+- Plan the problem: the count shows lines right and plans right in every step separately.
+- Build it boxes and plan buttons are at least 44 px tall for tapping on a phone.
 - Equation symbols print the unit as hr⁻¹; Module 7b and 8 terms are filed under the final.
+
+## 2026-10-17 (final exam set up; Quiz 5 card)
+- The final is the active exam: 40 questions (20 multiple choice, 20 fill in), 25% on PK-PD and nonlinear.
+- Exam sim draws 15 Exam 1, 15 Exam 2, 5 PK-PD and 5 nonlinear questions; the 15/15 split is assumed.
+- A Quiz 5 card (Mon 19 Oct) on Topics: what she said to prepare, drills and a timed practice quiz.
+- Modules 7b (PK-PD) and 8 (nonlinear) appear in the menus.
 
 ## 2026-10-08 (build-it: no greyed pieces after Next)
 - Build it: after Next, pieces from the previous equation no longer show greyed out and untappable in the new one.

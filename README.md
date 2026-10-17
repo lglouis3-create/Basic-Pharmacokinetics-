@@ -11,19 +11,21 @@ Live at <https://lglouis3-create.github.io/Basic-Pharmacokinetics-/>
 
 ## What is in the bank
 
-504 questions, 316 of them calculations, drawn from Dr. Mosley's decks, the
+620 questions, 379 of them calculations, drawn from Dr. Mosley's decks, the
 lecture recordings, her in-class activities and her practice sheets with their
 answer keys.
 
 | Module | Topic | Questions | Exam |
 |---|---|---:|---|
 | 1 | Introduction and math review | 53 | Exam 1 |
-| 2 | IV bolus, one- and multi-compartment | 60 | Exam 1 |
-| 3 | Intravenous infusions | 54 | Exam 1 |
-| 4 | Drug elimination and clearance | 80 | Exam 2 |
-| 5 | Single oral administration | 77 | Exam 2 |
-| 6 | Multiple dosing: IV bolus, intermittent infusion, oral | 123 | Exam 2 |
-| 7a | Bioavailability and bioequivalence | 33 | Exam 2 |
+| 2 | IV bolus, one- and multi-compartment | 62 | Exam 1 |
+| 3 | Intravenous infusions | 59 | Exam 1 |
+| 4 | Drug elimination and clearance | 89 | Exam 2 |
+| 5 | Single oral administration | 84 | Exam 2 |
+| 6 | Multiple dosing: IV bolus, intermittent infusion, oral | 140 | Exam 2 |
+| 7a | Bioavailability and bioequivalence | 39 | Exam 2 |
+| 7b | Pharmacokinetics and pharmacodynamics | 43 | Final |
+| 8 | Nonlinear pharmacokinetics | 51 | Final |
 
 Modules not yet lectured are not in the bank. The exam simulator draws only
 what exists and states on screen how much of the paper it cannot yet cover,
@@ -41,6 +43,7 @@ python3 build.py        # writes the single HTML file
 node test.js            # bank integrity, blueprint coverage, scheduler rules
 node style_check.js     # stem wording, banned phrasing, citation coverage
 node render_test.js     # every view renders
+node step_check.js      # recomputes the arithmetic printed in every step
 node explain_check.js   # report: ranks weak explanations by exam weight
 python3 cite_check.py   # needs the decks under decks/; SKIPs without them
 python3 browser_test.py # Chromium: answers every question, visits every view

@@ -24,9 +24,23 @@ from, it does not go in the file. Do not supply a value from your own
 pharmacokinetics knowledge, do not round a number she left unrounded, and do
 not infer a figure the source did not state.
 
-Where the slide, the transcript and her worked solution disagree, write the
-question from the slide, and record both readings and the one keyed in an
-`audit` field. Do not adjudicate silently.
+Where the sources disagree, key the question from the first of these that
+covers the point, and record every reading and the one keyed in an `audit`
+field. Do not adjudicate silently.
+
+1. Her worked solution (a solved practice sheet, homework key or quiz key) for
+   a calculation: her exams are built from her own problem sets, so her
+   solution is what an exam written by her keys.
+2. A correction she made in lecture (transcript): m5-n13 keys the 20 L she
+   worked the problem with, not the 40 L printed on the sheet.
+3. The printed slide, for definitions, statements and anything she did not
+   work or correct.
+4. The textbook chapter (READINGS.md), only where 1 to 3 are silent, and never
+   to overrule her.
+
+When the keyed reading differs from what the student can see (her printed
+sheet or slide), say so in `note` as well, without naming where it was heard.
+When none of the four gives a figure, the figure is left out.
 
 `note` and `audit` are different fields. `audit` is for whoever checks the
 bank: where a figure came from, which reading of a garbled caption was used,

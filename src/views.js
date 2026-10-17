@@ -682,7 +682,7 @@ function renderTopics(){
     const id = +b.dataset.exam, ex = COURSE.exams.find(e => e.id === id);
     const k = b.dataset.k || null;
     const label = kindLabel((ex ? ex.name : 'Exam') + ' recap', k);
-    if(b.dataset.how === 'paper'){ if(EX && EX.done) EX = null; chooseExam(id); show('exam'); return; }
+    if(b.dataset.how === 'paper'){ if(EX && EX.done){ EX = null; clearExam(); } chooseExam(id); show('exam'); return; }
     if(b.dataset.how === 'sweep') startSweepOf(narrow(examQuestions(id), k), label);
     else startPool(narrow(examQuestions(id), k), label);
   });
@@ -1516,11 +1516,11 @@ function renderExamAll(){
       card.querySelectorAll('.opt').forEach(o => { const v = +o.dataset.o, sel = multi ? EX.picks[i].includes(v) : EX.picks[i] === v;
         o.className = 'opt' + (multi ? ' multi' : '') + (sel ? (multi ? ' on' : ' pick-ok') : ''); o.setAttribute('aria-pressed', sel);
         if(multi) o.querySelector('.k').textContent = sel ? '☑' : '☐'; });
-      prog();
+      prog(); saveExam();
     });
-    const ni = card.querySelector('input.numin'); if(ni) ni.oninput = e => { EX.picks[i] = e.target.value; prog(); };
+    const ni = card.querySelector('input.numin'); if(ni) ni.oninput = e => { EX.picks[i] = e.target.value; prog(); saveExam(); };
     card.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
-      const p = Object.assign({}, EX.picks[i]); if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l]; EX.picks[i] = p; prog(); });
+      const p = Object.assign({}, EX.picks[i]); if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l]; EX.picks[i] = p; prog(); saveExam(); });
   });
   $('#exEnd').onclick = () => { if(confirm('Submit the paper and see your score?')) finishExam(); };
 }
@@ -1851,9 +1851,9 @@ function progressHTML(m, pool){
       <span class="meter cov"><i style="width:${pa}%"></i></span>
       <span class="counts">${done ? `<em class="done">✓ all ${an.total} answered</em>` : `${an.n}/${an.total} answered`}${
         sn.n ? ` · <em style="color:${pctCol(sn.pct)}">${sn.pct}%</em> right` : ''}</span></span>
-    <span class="mrow2" title="Mastered means three correct answers on separate review days; the light part is concepts answered right and waiting for their next review">
+    <span class="mrow2" title="On long review means three correct answers on separate review days; the light part is concepts answered right and waiting for their next review">
       <span class="meter"><b style="width:${pw}%"></b><i style="width:${pm}%"></i></span>
-      <span class="counts">${m.mastered}/${m.total} mastered${m.onway ? ` · ${m.onway} on the way` : ''}</span></span>
+      <span class="counts">${m.mastered}/${m.total} on long review${m.onway ? ` · ${m.onway} on the way` : ''}</span></span>
   </span>`;
 }
 /* What this drill session produced, against everything before it. */
@@ -1959,12 +1959,12 @@ function renderGaps(){
     <div><b style="color:var(--ok)">${Math.round(100*right/tot)}%</b><span>correct</span></div>
     <div><b style="color:var(--bad)">${wrong}</b><span>missed</span></div>
     <div><b style="color:var(--warn)">${guess}</b><span>guessed</span></div>
-    <div><b>${m.mastered}</b><span>of ${m.total} concepts mastered</span></div>
+    <div><b>${m.mastered}</b><span>of ${m.total} concepts on long review</span></div>
   </div>
-  <p class="sub">A concept counts as mastered after three correct answers on separate review days, so that number stays low in the first week however well you score. The accuracy figures move at once.</p>`;
+  <p class="sub">A concept goes on long review after three correct answers on separate review days, so that number stays low in the first week however well you score. The accuracy figures move at once. Mastered, under Concepts below, has its own rule.</p>`;
 
-  const plan = reviewPlan();
-  h += sessionCard() + plan.html;
+  const plan = reviewPlan(), cg = conceptGroups();
+  h += sessionCard() + conceptSection(cg) + plan.html;
   h += progressSection();
 
   /* ---- What to do next ------------------------------------------------
@@ -1995,7 +1995,7 @@ function renderGaps(){
         ? `<button class="btn small" data-next="unseen" data-pool="${esc(pl.key)}">Start these</button>` : '<i>none</i>'}</div>
       <div class="nextrow"><span>${open.length} missed or guessed, still open</span>${open.length
         ? `<button class="btn small amber" data-next="open" data-pool="${esc(pl.key)}">Redrill</button>` : '<i>none</i>'}</div>
-      <div class="nextrow"><span>${done.length} mastered</span><i>${cs.length ? Math.round(100*done.length/cs.length) : 0}%</i></div>
+      <div class="nextrow"><span>${done.length} on long review</span><i>${cs.length ? Math.round(100*done.length/cs.length) : 0}%</i></div>
     </div>`;
   }
   h += `</div>`;
@@ -2263,6 +2263,7 @@ function renderGaps(){
   el.innerHTML = h;
   el.querySelectorAll('.tw').forEach(w => w.classList.toggle('wide', w.scrollWidth > w.clientWidth + 4));
   wireReviewPlan(el, plan);
+  wireConcepts(el, cg);
 
   el.querySelectorAll('[data-ttype]').forEach(b => b.onclick = () => {
     const t = CALC_TYPES.find(x => x.id === b.dataset.ttype); if(!t) return;
@@ -2400,6 +2401,227 @@ function sessionCard(){
     ${missed.length ? `<button class="btn small" id="retrySess">Retry the ${missed.length} missed this session</button>` : ''}</div>`;
 }
 let SESSION_RETRY = [];
+
+/* ==========================================================================
+   CONCEPTS
+   ==========================================================================
+   Weak spots also reads each concept (q.concept: one idea behind several
+   wordings) from all of its answers. The record is derived from DB.answers on
+   every render, so the log stays the source of truth and an answer flipped by
+   "No, I was right" or "I guessed that one" is read as it now stands. A miss is
+   a wrong answer or a correct one marked as a guess (result 'guessed': "I
+   guessed that one" in the quiz, "Not sure" on a flashcard); solid is
+   'correct'. Sessions are the 30-minute-gap runs sessionLog() uses, over the
+   whole log.
+     unfamiliar  seen once, missed once
+     struggling  2 or more misses, or under 60% on the last 5 with 2 or more attempts
+     improving   missed before, last 2 solid, not mastered
+     mastered    3 or more solid answers on 2 or more different questions in 2 or
+                 more sessions, no miss in the last 3 (one right answer never masters)
+     returning   was mastered, then missed
+     learning    right so far, or one slip after solid answers: not weak, not mastered
+   A mastered concept gets a spaced check on the pace in use: box MASTER_BOX at
+   mastery, one box up per further solid answer, due DAYS[box] days (or CRAM[box]
+   questions answered) after the last solid answer; it is listed as due once
+   that and the scheduler's own record for the concept are both due. */
+const RECENT_N = 5;
+let CQ = null;   // concept -> its questions: the bank, the extra practice and the term questions
+function conceptQs(c){
+  if(!CQ){
+    CQ = {};
+    QUESTIONS.concat(typeof EXTRAS === 'undefined' ? [] : EXTRAS, typeof TERM_QS === 'undefined' ? [] : TERM_QS)
+      .forEach(q => (CQ[q.concept] ||= []).push(q));
+  }
+  return CQ[c] || [];
+}
+/* The log grouped by concept, in time order, each answer with its question
+   and its session index. An answer whose question is no longer in the bank is
+   left out. */
+function conceptLog(answers){
+  const g = {};
+  let sid = 0, prev = null;
+  for(const a of (answers || DB.answers).slice().sort((x, y) => x.at - y.at)){
+    if(prev != null && a.at - prev >= SESSION_GAP) sid++;
+    prev = a.at;
+    const q = byId(a.qid); if(!q) continue;
+    (g[q.concept] ||= []).push(Object.assign({}, a, {sid, q}));
+  }
+  return g;
+}
+const masteredBy = list => { const sol = list.filter(solid);
+  return sol.length >= 3 && new Set(sol.map(a => a.qid)).size >= 2 && new Set(sol.map(a => a.sid)).size >= 2 && list.slice(-3).every(solid); };
+/* One concept's status from its answers (conceptLog order), with the spaced
+   check of a mastered concept in the scheduler's own fields (box, dueAt, dueQ)
+   so isDue() reads it. r = 1 once it has been mastered and then missed. */
+function conceptRecord(list){
+  const top = DAYS.length - 1;
+  let was = false, r = 0, box = 0, dueAt = 0, dueQ = 0;
+  const due = a => { dueAt = a.at + DAYS[box] * DAY_MS; dueQ = (a.qn || 0) + CRAM[box]; };
+  list.forEach((a, i) => {
+    if(was){
+      if(solid(a)){ box = Math.min(top, box + 1); due(a); }
+      else { was = false; r = 1; }
+    }else if(masteredBy(list.slice(0, i + 1))){ was = true; box = MASTER_BOX; due(a); }
+  });
+  const n = list.length, misses = list.filter(a => !solid(a)).length, recent = list.slice(-RECENT_N);
+  const accR = recent.length ? recent.filter(solid).length / recent.length : 1;
+  let s;
+  if(was) s = 'mastered';
+  else if(!misses) s = 'learning';
+  else if(n >= 2 && list.slice(-2).every(solid)) s = 'improving';
+  else if(r) s = 'returning';
+  else if(misses >= 2 || (recent.length >= 2 && accR < 0.6)) s = 'struggling';
+  else if(n === 1) s = 'unfamiliar';
+  else s = 'learning';   // one slip after two or more solid answers: not weak on this evidence
+  return {s, r, box, dueAt, dueQ};
+}
+/* _isDue: "Ask everything" makes isDue() always true, which would list every
+   mastered concept as due; the check keeps its real interval in that mode. */
+const conceptDue = (c, rec) => rec.s === 'mastered' && _isDue(rec) && (!DB.concepts[c] || _isDue(DB.concepts[c]));
+function checkWhen(c, rec){
+  const s2 = DB.concepts[c] || {};
+  if(cram()){ const n = Math.max(rec.dueQ, s2.dueQ || 0) - DB.qn; return n <= 0 ? 'due now' : `due after ${n} more question${n === 1 ? '' : 's'}`; }
+  const d = Math.ceil((Math.max(rec.dueAt, s2.dueAt || 0) - Date.now()) / DAY_MS);
+  return d <= 0 ? 'due now' : `due in ${d} day${d === 1 ? '' : 's'}`;
+}
+/* The wrong choices in one wrong answer, keyed so repeats can be counted. A
+   term question shuffles its options when the page loads, so a stored index
+   does not name the same option after a reload: those are left out. */
+function wrongPicks(q, a){
+  const p = a.picked;
+  if(a.result !== 'wrong' || p === undefined || p === null || q.termId) return [];
+  const kind = qType(q);
+  if(kind === 'numeric') return [];
+  if(kind === 'match') return (q.pairs || []).filter(pr => p[pr.l] && p[pr.l] !== pr.r).map(pr =>
+    ({k: q.id + ':' + pr.l + '>' + p[pr.l], t: `${pr.l} → ${p[pr.l]}`, why: `${pr.l} goes with ${pr.r}.${pr.why ? ' ' + pr.why : ''}`}));
+  return [].concat(p).filter(i => q.options && q.options[i] && !q.options[i].correct)
+    .map(i => ({k: q.id + ':' + i, t: q.options[i].t, why: q.options[i].why || ''}));
+}
+/* Everything a card states, counted from the concept's answers. */
+function conceptStats(list){
+  const recent = list.slice(-RECENT_N), sol = list.filter(solid), miss = list.filter(a => !solid(a));
+  const picks = {};
+  for(const a of list) for(const w of wrongPicks(a.q, a)){ const P = picks[w.k] ||= Object.assign({n: 0, at: 0}, w); P.n++; P.at = Math.max(P.at, a.at); }
+  const errs = Object.values(picks).sort((x, y) => y.n - x.n || y.at - x.at);
+  const kinds = {};
+  for(const a of miss) if(a.missKind && MISS_LABEL[a.missKind]) kinds[a.missKind] = (kinds[a.missKind] || 0) + 1;
+  const topKind = Object.entries(kinds).sort((x, y) => y[1] - x[1])[0];
+  return {n: list.length, misses: miss.length, guessed: list.filter(a => a.result === 'guessed').length,
+    recentN: recent.length, recentPct: recent.length ? Math.round(100 * recent.filter(solid).length / recent.length) : 0,
+    sessions: new Set(list.map(a => a.sid)).size, solidN: sol.length, solidQs: new Set(sol.map(a => a.qid)).size,
+    solidSess: new Set(sol.map(a => a.sid)).size, errs, recurring: errs.filter(x => x.n > 1),
+    numMiss: miss.filter(a => qType(a.q) === 'numeric').length, topKind: topKind ? {id: topKind[0], n: topKind[1]} : null,
+    lastMiss: miss.length ? miss[miss.length - 1].at : 0, q: (miss.length ? miss[miss.length - 1] : list[list.length - 1]).q};
+}
+const STATUS_WORD = {unfamiliar: 'Unfamiliar', struggling: 'Struggling', improving: 'Improving', mastered: 'Mastered', returning: 'Returning', learning: 'Learning'};
+const nMiss = n => n === 1 ? '1 miss' : `${n} misses`;
+const nOf = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+/* The evidence line under a concept's status, in exact counts. */
+function statusLine(c, rec, st){
+  const guess = st.guessed ? ` (${st.guessed} of them a correct answer marked as a guess)` : '';
+  const last = `last ${st.recentN} at ${st.recentPct}%`;
+  switch(rec.s){
+    case 'unfamiliar': return 'seen once, missed once' + (st.guessed ? ' (a correct answer marked as a guess)' : '');
+    case 'struggling': return `${nMiss(st.misses)} in ${nOf(st.n, 'attempt')}, ${last}${guess}`;
+    case 'returning':  return `was mastered, then missed: ${nMiss(st.misses)} in ${nOf(st.n, 'attempt')}, ${last}${guess}`;
+    case 'improving':  return `${nMiss(st.misses)} in ${nOf(st.n, 'attempt')}, last 2 correct`;
+    case 'mastered':   return `${st.solidN} correct on ${nOf(st.solidQs, 'question')} across ${nOf(st.solidSess, 'session')}, no miss in the last 3; spaced check ${checkWhen(c, rec)}`;
+    default:           return `${st.solidN} correct, ${nMiss(st.misses)}; not yet mastered`;
+  }
+}
+/* A concept's name: a term's own name, an extra-practice kind's name, else
+   the concept id read as words with the sheet's symbols (vd -> VD). */
+const CONCEPT_WORDS = {vd: 'VD', cl: 'Cl', clr: 'ClR', crcl: 'CrCl', gfr: 'GFR', ibw: 'IBW', bw: 'body weight', cmax: 'Cmax', cmin: 'Cmin',
+  tmax: 'tmax', c0: 'C0', cp: 'Cp', css: 'Css', cavg: 'Cavg', cav: 'Cav', auc: 'AUC', aucs: 'AUCs', k: 'k', ka: 'ka', ke: 'ke', kvd: 'k × VD',
+  thalf: 't½', tau: 'τ', f: 'F', fe: 'fe', frel: 'Frel', fabs: 'Fabs', alpha: 'α', beta: 'β', vp: 'Vp', db: 'DB', d0: 'D0', davg: 'Davg',
+  r: 'R', mec: 'MEC', pk: 'PK', pd: 'PD', adme: 'ADME', iv: 'IV', ph: 'pH', ss: 'steady state', '999': '99.9%', halflife: 'half-life',
+  halflives: 'half-lives', onecpt: 'one-compartment', multicpt: 'multicompartment', cpt: 'compartment', defn: 'definition', def: 'definition',
+  conc: 'concentration', bioavail: 'bioavailability', biexp: 'biexponential', equiv: 'equivalent', rel: 'relative', params: 'parameters',
+  calc: 'calculation', diffeq: 'differential equation', cockcroft: 'Cockcroft', gault: 'Gault', henderson: 'Henderson', hasselbalch: 'Hasselbalch'};
+function conceptTitle(c){
+  if(/^term:/.test(c)){ const t = TERM_BY[c.slice(5)]; if(t) return 'Term: ' + termName(t); }
+  if(/^x-/.test(c) && typeof CALC_TYPES !== 'undefined'){ const t = CALC_TYPES.find(x => x.id === c.slice(2)); if(t) return 'Extra practice: ' + t.name; }
+  const w = c.split('-').map(t => CONCEPT_WORDS[t.toLowerCase()] || t).join(' ');
+  return w.charAt(0).toUpperCase() + w.slice(1);
+}
+/* Where it sits: topic and subtopic of its first question. */
+function conceptWhere(c){
+  const q = conceptQs(c)[0]; if(!q) return '';
+  const t = TOPICS.find(x => x.id === q.topic), sb = t && (t.subs || []).find(x => x.id === q.sub);
+  if(t) return sb ? `${t.name} — ${sb.name}` : t.name;
+  return q.termId ? `Terms — ${q.sub}` : '';
+}
+/* Questions for a concept drill: wordings never answered first, then the one
+   answered longest ago. */
+function conceptPick(c, n){
+  const recent = recentById(), lastAt = q => { const r = recent[q.id]; return r ? r[r.length - 1].at : 0; };
+  return shuffle(conceptQs(c).slice()).sort((x, y) => lastAt(x) - lastAt(y)).slice(0, n);
+}
+/* Every concept answered, with its record and counts, sorted into the groups
+   the section shows. Strugglers (struggling and returning) first, by misses x
+   how recent the last miss is x what one question in its pool is worth. */
+function conceptGroups(){
+  const G = conceptLog(), now = Date.now();
+  const cs = Object.keys(G).map(c => ({c, rec: conceptRecord(G[c]), st: conceptStats(G[c])}));
+  const weight = x => x.st.misses / (1 + (now - x.st.lastMiss) / DAY_MS) * (1 + markWeight(x.st.q));
+  const byMiss = (x, y) => y.st.lastMiss - x.st.lastMiss;
+  const of = s => cs.filter(x => s.includes(x.rec.s));
+  const strug = of(['struggling', 'returning']).sort((x, y) => weight(y) - weight(x));
+  const unfam = of(['unfamiliar']).sort(byMiss), impr = of(['improving']).sort(byMiss);
+  const mastered = of(['mastered']);
+  return {all: cs, strug, unfam, impr, weak: strug.concat(unfam, impr), mastered, learning: of(['learning']),
+          due: mastered.filter(x => conceptDue(x.c, x.rec))};
+}
+function conceptCard(x){
+  const {c, rec, st} = x;
+  let h = `<div class="ccard s-${rec.s}"><div class="chead"><b>${esc(conceptTitle(c))}</b><span class="cstat s-${rec.s}">${STATUS_WORD[rec.s]}</span></div>`;
+  const where = conceptWhere(c);
+  if(where) h += `<div class="cwhere">${esc(where)}</div>`;
+  h += `<div class="cwhy">${esc(STATUS_WORD[rec.s])}: ${esc(statusLine(c, rec, st))}</div>`;
+  const errs = st.recurring.length ? st.recurring : st.errs.slice(0, 1);
+  for(const e of errs) h += `<div class="pw"><b>${e.n > 1 ? `You chose this ${e.n} times:` : 'You chose:'}</b> ${rich(e.t)}${
+    e.why ? `<span class="pwhy">Why it is not the answer: ${rich(clip(plainMath(e.why), 400))}</span>` : ''}</div>`;
+  if(st.numMiss) h += `<div class="pw">${st.topKind
+    ? `<b>Most common kind of miss:</b> ${esc(MISS_LABEL[st.topKind.id])} (${st.topKind.n} of ${nOf(st.numMiss, 'missed calculation')})`
+    : `<b>Kind of miss:</b> not yet named on ${st.numMiss === 1 ? 'the missed calculation' : `the ${st.numMiss} missed calculations`}`}</div>`;
+  if(!errs.length && !st.numMiss && st.guessed) h += `<div class="pw"><b>Correct, but marked as a guess${st.guessed > 1 ? ` ${st.guessed} times` : ''}.</b></div>`;
+  h += `<div class="planbtns"><button class="btn small" data-cpractice="${esc(c)}">Practice this concept</button></div></div>`;
+  return h;
+}
+const conceptRow = x => `<div class="crow"><span><b>${esc(conceptTitle(x.c))}</b><small>${esc(statusLine(x.c, x.rec, x.st))}</small></span>
+  <button class="btn small ghost" data-ccheck="${esc(x.c)}">Check</button></div>`;
+function conceptSection(g){
+  if(!g.all.length) return '';
+  let h = `<h3>Concepts</h3>
+  <p class="sub">Each status counts every wording of the concept. A miss is a wrong answer, or a correct one marked as a guess. ${
+    [[g.strug, 'struggling or returning'], [g.unfam, 'unfamiliar'], [g.impr, 'improving'], [g.learning, 'learning'], [g.mastered, 'mastered']]
+      .filter(([l]) => l.length).map(([l, w]) => `${l.length} ${w}`).join(' · ')}.</p>
+  <details class="clegend"><summary>What each status means</summary><ul>
+    <li><b>Unfamiliar:</b> seen once, missed once.</li>
+    <li><b>Struggling:</b> 2 or more misses, or under 60% on the last 5 with 2 or more attempts.</li>
+    <li><b>Improving:</b> missed before, the last 2 correct, not yet mastered.</li>
+    <li><b>Mastered:</b> 3 or more correct answers on 2 or more different questions in 2 or more sessions, no miss in the last 3. One correct answer never masters.</li>
+    <li><b>Returning:</b> was mastered, then missed.</li>
+    <li><b>Learning:</b> correct so far, or one miss after correct answers; not weak, not yet mastered.</li>
+    <li>A session ends after 30 minutes with no answer. A mastered concept comes back for a spaced check at the intervals of the review schedule in Settings.</li></ul></details>`;
+  if(g.due.length) h += `<h4>Due for spaced review (${g.due.length})</h4><div class="sesscard">${g.due.map(conceptRow).join('')}
+    <div class="planbtns"><button class="btn small" id="cdueAll">${g.due.length === 1 ? 'Run the check' : `Run the ${g.due.length} checks, one question each`}</button></div></div>`;
+  if(g.weak.length){
+    const shown = g.weak.slice(0, 8), rest = g.weak.slice(8);
+    h += shown.map(conceptCard).join('');
+    if(rest.length) h += `<details class="cmore"><summary>${nOf(rest.length, 'more weak concept')}</summary>${rest.map(conceptCard).join('')}</details>`;
+  }else h += `<div class="empty">No concept is weak on the answers so far.</div>`;
+  if(g.mastered.length) h += `<details class="cmore"><summary>Mastered (${g.mastered.length})</summary><div class="sesscard">${g.mastered.map(conceptRow).join('')}</div></details>`;
+  return h;
+}
+function wireConcepts(el, g){
+  el.querySelectorAll('[data-cpractice]').forEach(b => b.onclick = () => {
+    const c = b.dataset.cpractice; startSweepOf(conceptPick(c, 3), 'Concept: ' + conceptTitle(c)); });
+  el.querySelectorAll('[data-ccheck]').forEach(b => b.onclick = () => {
+    const c = b.dataset.ccheck; startSweepOf(conceptPick(c, 1), 'Spaced review: ' + conceptTitle(c)); });
+  const all = el.querySelector('#cdueAll');
+  if(all) all.onclick = () => startSweepOf(g.due.flatMap(x => conceptPick(x.c, 1)), 'Spaced review');
+}
 
 /* ==========================================================================
    WHAT TO REVIEW NEXT
@@ -2702,6 +2924,59 @@ function modelTableHTML(rows){
    ========================================================================== */
 let EX = null;
 
+/* The paper in progress is saved under <ns>:exam:<profile> on every pick and
+   move, so a reload or a tab the browser discarded brings it back with its
+   clock still running. A paper whose time ran out while the page was closed
+   is submitted when it is restored. A submitted paper stays saved, result
+   page and all, until "New paper". */
+const EXKEY = () => NS + ':exam:' + PROFILE;
+const EX_KEEP = ['qs', 'i', 'spent', 'picks', 'running', 'done', 'ends', 'orders',
+                 'paper', 'title', 'sata', 'coverage', 'logQn', 'rightOv'];
+function saveExam(){
+  if(!EX || !PROFILE) return;
+  const x = {};
+  EX_KEEP.forEach(k => { if(EX[k] !== undefined) x[k] = EX[k]; });
+  x.qs = EX.qs.map(q => q.id);
+  LS.set(EXKEY(), JSON.stringify(x));
+}
+function clearExam(){ LS.del(EXKEY()); }
+/* A saved pick is kept only when it still has the shape its question takes:
+   the bank may have changed between the save and the reload. */
+function pickFits(q, p){
+  const n = (q.options || []).length;
+  if(isMulti(q)) return Array.isArray(p) && p.every(k => Number.isInteger(k) && k >= 0 && k < n);
+  if(qType(q) === 'match') return !!p && typeof p === 'object' && !Array.isArray(p);
+  if(qType(q) === 'numeric') return typeof p === 'string';
+  return p === null || (Number.isInteger(p) && p >= 0 && p < n);
+}
+function loadExam(){
+  let x;
+  try { x = JSON.parse(LS.get(EXKEY()) || 'null'); } catch(e){ return null; }
+  if(!x || !Array.isArray(x.qs) || !x.qs.length || !Number.isFinite(+x.ends)) return null;
+  const qs = x.qs.map(byId);
+  if(qs.some(q => !q)) return null;
+  const n = qs.length, arr = a => Array.isArray(a) && a.length === n;
+  if(!arr(x.picks) || !arr(x.orders) || !qs.every((q, k) => pickFits(q, x.picks[k]))) return null;
+  const perm = (o, q) => !isMC(q) ? Array.isArray(o) && !o.length
+    : Array.isArray(o) && o.length === q.options.length && o.slice().sort((a, b) => a - b).every((v, k) => v === k);
+  if(!qs.every((q, k) => perm(x.orders[k], q))) return null;
+  return Object.assign(x, {from: 'exam', qs, i: Math.max(0, Math.min(n - 1, Math.floor(+x.i) || 0)),
+    spent: arr(x.spent) ? x.spent.map(v => +v || 0) : qs.map(() => 0), tIdx: null, tMark: 0,
+    ends: +x.ends, running: !!x.running && !x.done, done: !!x.done});
+}
+/* Start-up: bring back this profile's paper. Returns 'running', 'expired'
+   (submitted just now) or 'done' (a result page kept from before), so the
+   page opens on Exam sim only when there is something new to see. */
+function restoreExam(){
+  if(EX && EX.timer) clearInterval(EX.timer);
+  EX = loadExam();
+  if(!EX){ clearExam(); return null; }
+  if(!EX.running) return 'done';
+  if(Date.now() >= EX.ends){ finishExam(); return 'expired'; }
+  startClock();
+  return 'running';
+}
+
 /* How many marks of the blueprint the bank can and cannot currently cover. A
    pool holding nothing at all is reported here like any other short pool: its
    marks land in `missing` and its name appears in the notice. */
@@ -2851,6 +3126,10 @@ function startPaper(qs, minutes, extra){
         running:true, done:false,
         ends: Date.now() + minutes*60000,
         orders: qs.map(q => isMC(q) ? shuffle(q.options.map((o,k)=>k)) : [])}, extra || {});
+  startClock();
+  saveExam();
+}
+function startClock(){
   const tick = setInterval(()=>{
     if(!EX || !EX.running || EX.timer !== tick) return clearInterval(tick);
     if(Date.now() >= EX.ends){ finishExam(); return; }
@@ -2888,6 +3167,7 @@ function examTick(next){
 function renderExamQ(){
   if(layoutOf() === 'all'){ if(EX.spent) examTick(null); return renderExamAll(); }
   if(EX.spent) examTick(EX.i);
+  saveExam();   // every pick and every move in the one-at-a-time layout comes through here
   const el = $('#v-exam'), q = EX.qs[EX.i], order = EX.orders[EX.i];
   const answered = EX.picks.filter((p, i) => !isBlank(EX.qs[i], p)).length;
   const kind = qType(q), multi = isMulti(q);
@@ -2927,11 +3207,11 @@ function renderExamQ(){
     else EX.picks[EX.i] = oi;
     renderExamQ(); });
   const ni = el.querySelector('#numIn');
-  if(ni) ni.oninput = e => { EX.picks[EX.i] = e.target.value; };
+  if(ni) ni.oninput = e => { EX.picks[EX.i] = e.target.value; saveExam(); };
   el.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
     const p = Object.assign({}, EX.picks[EX.i]);
     if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l];
-    EX.picks[EX.i] = p;
+    EX.picks[EX.i] = p; saveExam();
   });
   $('#exPrev').onclick = ()=>{ if(EX.i>0){EX.i--; renderExamQ();} };
   $('#exNext').onclick = ()=>{ if(EX.i<EX.qs.length-1){EX.i++; renderExamQ();} else finishExam(); };
@@ -2957,7 +3237,7 @@ function finishExam(){
   (DB.exams ||= []).push({at: Date.now(), exam: EX.paper || EXAM.id, right, total: EX.qs.length,
                           blank: EX.qs.filter((q, i) => examBlank(q, EX.picks[i])).length});
   if(DB.exams.length > 100) DB.exams.splice(0, DB.exams.length - 100);
-  save();
+  save(); saveExam();
   renderExamResult();
 }
 /* After a paper is submitted the result page offers a short clip, one of
@@ -3039,7 +3319,7 @@ function renderExamResult(){
     h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${srcFlag(q)}${esc(q.cite)}</div>${explainHTML(q)}</div></div>`;
   });
   $('#v-exam').innerHTML = h;
-  $('#exAgain').onclick = ()=>{ EX=null; renderExam(); };
+  $('#exAgain').onclick = ()=>{ EX=null; clearExam(); renderExam(); };
   const cg = $('#cheerGo'); if(cg) cg.onclick = celebrate;
   $('#v-exam').querySelectorAll('button[data-mk]').forEach(b => b.onclick = () => {
     const q = EX.qs[+b.dataset.qi];
@@ -3048,7 +3328,7 @@ function renderExamResult(){
   $('#v-exam').querySelectorAll('button[data-right]').forEach(b => b.onclick = () => {
     const i = +b.dataset.right, q = EX.qs[i];
     if(!q || !markRight(q, EX.logQn ? EX.logQn[i] : undefined)) return;
-    (EX.rightOv ||= {})[i] = true;
+    (EX.rightOv ||= {})[i] = true; saveExam();
     const last = (DB.exams || [])[DB.exams.length - 1];
     if(last && last.exam === (EX.paper || EXAM.id)) last.right = Math.min(last.total, last.right + 1);
     save(); renderExamResult();
@@ -3213,7 +3493,65 @@ function renderDoc(el, html, prefix){
 }
 function renderRef(){ renderDoc($('#v-ref'), refFigures(refDocHTML()), 'ref'); }
 function renderTell(){ renderDoc($('#v-tell'), refFigures(TELL_HTML), 'tell'); }
-function renderGuide(){ renderDoc($('#v-guide'), refFigures(GUIDE_HTML), 'guide'); }
+function renderGuide(){
+  const el = $('#v-guide');
+  renderDoc(el, refFigures(GUIDE_HTML), 'guide');
+  mountReadings(el);
+}
+
+/* ---------- Textbook chapters: one card per reading (readings.js, from gen/readings.py) ----------
+   A card shows its title, source line and the first two sentences of "about";
+   the rest opens in folds. Its chips jump to a module's guide section, and a chip
+   is drawn only when the Guides tab has a heading that starts with its module
+   ("Module 7b"), so a module whose guide is not written yet shows no chip. */
+const RD_LIST = () => typeof READINGS === 'undefined' ? [] : READINGS;
+const rdLead = t => { const m = String(t || '').match(/^((?:[^.!?]*[.!?]\)?\s+){1,2})([\s\S]*)$/);
+  return m && m[2].trim() ? [m[1].trim(), m[2].trim()] : [String(t || ''), '']; };
+const rdHeadRe = mod => new RegExp('^\\s*Module ' + mod.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![0-9a-z])', 'i');
+function rdCardHTML(r, hasTarget){
+  const fold = (title, inner) => inner ? `<details class="rdfold"><summary>${title}</summary><div class="rdbody">${inner}</div></details>` : '';
+  const li = arr => arr && arr.length ? `<ul>${arr.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+  const use = (r.lecture_use || []).length ? `<ul>${r.lecture_use.map(u => `<li><b>${esc(u.point)}</b>${u.chapter_location ? ` <small>(${esc(u.chapter_location)})</small>` : ''}${u.lecture_evidence ? `<div class="rdq">“${esc(u.lecture_evidence)}” <small>${esc(u.date || '')}</small></div>` : ''}</li>`).join('')}</ul>` : '';
+  const words = (r.her_words || []).length ? `<ul>${r.her_words.map(w => `<li>“${esc(w.t)}”${w.date ? ` <small>${esc(w.date)}</small>` : ''}</li>`).join('')}</ul>` : '';
+  const terms = (r.terms || []).length ? `<ul>${r.terms.map(t => `<li><b>${esc(t.term)}</b>: ${esc(t.chapter_definition)}</li>`).join('')}</ul>` : '';
+  const [lead, rest] = rdLead(r.about);
+  const chips = (r.guide || []).filter(([mod]) => hasTarget(mod))
+    .map(([mod, label]) => `<button type="button" class="chip" data-rdjump="${esc(mod)}">${esc(label)}</button>`).join('');
+  const status = r.discussed_in_class ? 'Discussed in class' : 'Assigned reading';
+  return `<div class="rdcard" id="rd-${esc(r.id)}">
+    <div class="rdhead"><b>${esc(r.title)}</b> <span class="rdtag">${esc(status)}</span></div>
+    <div class="rdsrc">${esc(r.source || '')}${r.lecture ? ` · ${esc(r.lecture)}` : ''}${r.truncated ? ' · summary from a partial text' : ''}</div>
+    <p class="rdlead">${esc(lead)}</p>${r.numbering_note ? `<p class="rdnote">${esc(r.numbering_note)}</p>` : ''}
+    ${chips ? `<div class="rdchips">${chips}</div>` : ''}
+    ${fold('About', rest ? `<p>${esc(r.about)}</p>` : '')}
+    ${fold('Sections', li(r.sections))}
+    ${fold('Read for', li(r.read_for))}
+    ${fold('Where the lecture used it', use)}
+    ${fold('Her words', words)}
+    ${fold('Terms it defines', terms)}
+    ${fold('Beyond the lecture', li(r.beyond_lecture))}
+  </div>`;
+}
+function readingsHTML(hasTarget){
+  const RS = RD_LIST(); if(!RS.length) return '';
+  const has = hasTarget || (() => false);
+  return `<div class="rdsec" id="readings"><h2>Textbook chapters</h2>
+    <p class="sub">What each assigned chapter covers, the sections closest to the module, and the terms it defines. Folded parts open on tap.</p>
+    ${RS.map(r => rdCardHTML(r, has)).join('')}</div>`;
+}
+function mountReadings(el){
+  if(!el || !el.querySelectorAll || !RD_LIST().length) return;
+  const heads = [...el.querySelectorAll('h2, h3')];
+  const target = mod => heads.find(h => rdHeadRe(mod).test(h.textContent || ''));
+  const box = document.createElement('div');
+  box.innerHTML = readingsHTML(mod => !!target(mod));
+  const sec = box.firstElementChild; if(!sec) return;
+  el.insertBefore(sec, el.firstChild);
+  sec.querySelectorAll('[data-rdjump]').forEach(b => b.onclick = () => {
+    const t = target(b.dataset.rdjump); if(!t) return;
+    openAncestors(t); scrollToEl(t);
+  });
+}
 
 /* ==========================================================================
    SETTINGS
@@ -3308,10 +3646,11 @@ function renderSettings(){
   $('#btnProf').onclick = () => {
     const n = $('#profIn').value.trim() || 'default';
     if(n === PROFILE) return;
-    if(EX && EX.running && !confirm('A paper is in progress and will be discarded. Switch profile anyway?')) return;
+    if(EX && EX.running && !confirm('A paper is in progress. It stays saved under this profile, with its clock running. Switch profile anyway?')) return;
+    if(EX && EX.running){ if(EX.spent && EX.tIdx != null) examTick(EX.tIdx); saveExam(); }
     setProfile(n);
-    // a new name means a new history, so nothing from the last person's session carries over
-    Q = null; if(EX){ clearInterval(EX.timer); EX = null; }
+    // a new name means a new history, so nothing from the last person's session carries over; their own paper, if any, comes back
+    Q = null; restoreExam();
     renderSettings();
   };
   $('#btnExport').onclick = ()=>{
@@ -4426,6 +4765,10 @@ function suSheetListHTML(q, st){
 /* The pick, the verdict and the reasons for one stem; `st` is the state
    that holds its options and pick (SU itself one at a time, a page entry
    on one page). */
+/* The set-up reasoning as one bullet per sentence. A sentence ends at . ? or !
+   followed by a space, so a decimal point (0.693) inside a fraction token
+   never splits a sentence, and neither does the ellipsis in a quoted phrase. */
+const whySentences = txt => String(txt || '').split(/(?<!\.\.)(?<=[.?!])\s+/).map(t => t.trim()).filter(Boolean);
 function suQuestionHTML(q, st, idx){
   const e = EQ_BY_ID[q.setup.eq], plan = SU.mode === 'plan';
   let h = `<div class="card suq" data-suq="${idx}"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">${plan ? 'plan the problem' : 'set-up only'}</span></div>
@@ -4451,7 +4794,7 @@ function suQuestionHTML(q, st, idx){
   }
   if(suAnswered(st)){
     const chosen = st.pickedId != null ? EQ_BY_ID[st.pickedId] : st.options[st.picked];
-    const why = (String(q.setup.why || '').match(/[^.?!]+(?:[.?!]+|$)/g) || []).map(t => t.trim()).filter(Boolean);
+    const why = whySentences(q.setup.why);
     const pre = (q.setup.pre || []).filter(id => EQ_BY_ID[id]);
     h += `<div class="why"><p class="verdict ${st.ok ? 'ok' : 'bad'}">${st.ok ? '✓ That is the line' : '✗ Not that line'}</p>
       ${st.ok ? '' : `<p class="sub">You picked <b>${esc(chosen.name)}</b>, ${eqShow(chosen)}. It holds when: ${mathHTML(suFirstSentence(chosen.holds))}</p>`}
@@ -4481,7 +4824,7 @@ function suQuestionHTML(q, st, idx){
 }
 function suHTML(){
   const q = SU.queue[SU.i];
-  const tally = `<span>${SU.right} of ${SU.asked} right</span>`;
+  const tally = `<span>${suTally()}</span>`;
   if(!q){
     const pct = SU.asked ? Math.round(100 * SU.right / SU.asked) : 0;
     return `<h2>${SU.mode === 'plan' ? 'Plan the problem' : 'Set-up drill'}</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.${SU.mode === 'plan' ? ` <b>${SU.plans}</b> of ${SU.asked} plans complete: what is asked, its unit, the model, the line, whether it is printed, and the givens all right.` : ''}</p>
@@ -4515,6 +4858,11 @@ function suMixupsHTML(tag = 'h4'){
   if(!rows.length) return '';
   return `<${tag}>Lines you have mixed up most</${tag}><ul class="tlist">${rows.map(([id, r]) => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}: ${r.wrong} wrong of ${r.seen}</span></li>`).join('')}</ul>`;
 }
+/* The running count. In Plan the problem the line can be right while another
+   step of the plan is wrong, so the two are counted apart. */
+const suTally = () => SU.mode === 'plan'
+  ? `${SU.right} of ${SU.asked} lines right · ${SU.plans} plans right in every step`
+  : `${SU.right} of ${SU.asked} right`;
 function suPick(card, i){
   const idx = card.dataset.suq;
   const q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx];
@@ -4527,7 +4875,7 @@ function suPick(card, i){
   if(idx === 'one'){ renderEq(); return; }
   const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx);
   card.replaceWith(fresh.firstElementChild);
-  const tally = document.querySelector('#v-eq .sessrow span:last-child'); if(tally) tally.textContent = `${SU.right} of ${SU.asked} right`;
+  const tally = document.querySelector('#v-eq .sessrow span:last-child'); if(tally) tally.textContent = suTally();
 }
 function suWire(el){
   el.onclick = e => {
@@ -4541,7 +4889,8 @@ function suWire(el){
     if(e.target.closest('[data-suhome]')){ SU = null; renderEq(); return; }
     if(e.target.closest('[data-suagain]')){ suStart((SU.mode === 'plan' ? 'plan:' : '') + SU.scope); return; }
     const redraw = (card) => { const idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
-      if(!st) return null; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild); return {q, st}; };
+      if(!st) return null; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild);
+      const tally = document.querySelector('#v-eq .sessrow span:last-child'); if(tally) tally.textContent = suTally(); return {q, st}; };
     const pa = e.target.closest('[data-suask]');
     if(pa){ const card = pa.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
       if(st && st.ask == null){ st.ask = pa.dataset.suask; st.askOk = st.ask === q.asks; redraw(card); } return; }
@@ -4622,6 +4971,12 @@ setInterval(tickTimers, 1000);                       // the stopwatch on every c
 document.addEventListener('click', xpickClick);   // Tell apart: Why? chips
 document.addEventListener('change', xselChange);  // Tell apart: Explain one   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
+// the browser asks before a reload or close while a paper is running (the paper is saved, but the clock runs on)
+window.addEventListener('beforeunload', e => { if(EX && EX.running){ e.preventDefault(); e.returnValue = ''; } });
+// time on the question shown is banked before the tab goes to the background, where a phone may discard it
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden' && EX && EX.running){ if(EX.spent && EX.tIdx != null) examTick(EX.tIdx); saveExam(); }
+});
 /* Theme: System (no attribute), Light or Dark, kept per browser. */
 const THEME_KEY = NS + ':theme';
 function applyTheme(t){
@@ -4634,4 +4989,4 @@ function applyTheme(t){
   if(ts){ ts.value = saved; ts.onchange = () => { LS.set(THEME_KEY, ts.value); applyTheme(ts.value); }; }
 }
 askProfile();
-show('topics');
+{ const ex = restoreExam(); show(ex === 'running' || ex === 'expired' ? 'exam' : 'topics'); }

@@ -53,7 +53,8 @@ CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
                  'tell.js',
                  'guide.js',
                  'diagrams.js',   # the Diagrams tab: groups and how to read each graph
-                 'glossary.js']   # the Terms tab: TERMS, one object per term
+                 'glossary.js',   # the Terms tab: TERMS, one object per term
+                 'readings.js']   # textbook chapter cards atop Guides (gen/readings.py)
 
 # Everything that has to parse before a build is allowed to proceed. Derived
 # from the two lists above rather than named again, so adding a file cannot
