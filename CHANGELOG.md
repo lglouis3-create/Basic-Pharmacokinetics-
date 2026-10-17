@@ -7,6 +7,7 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - Exam sim draws 15 Exam 1, 15 Exam 2, 5 PK-PD and 5 nonlinear questions; the 15/15 split is assumed.
 - A Quiz 5 card (Mon 19 Oct) on Topics: what she said to prepare, drills and a timed practice quiz.
 - Modules 7b (PK-PD) and 8 (nonlinear) appear in the menus; their questions are being added.
+- A new check recomputes each calculation printed in the worked steps and flags a result its inputs do not give.
 
 ## 2026-10-08 (build-it: no greyed pieces after Next)
 - Build it: after Next, pieces from the previous equation no longer show greyed out and untappable in the new one.

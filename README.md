@@ -41,6 +41,7 @@ python3 build.py        # writes the single HTML file
 node test.js            # bank integrity, blueprint coverage, scheduler rules
 node style_check.js     # stem wording, banned phrasing, citation coverage
 node render_test.js     # every view renders
+node step_check.js      # recomputes the arithmetic printed in every step
 node explain_check.js   # report: ranks weak explanations by exam weight
 python3 cite_check.py   # needs the decks under decks/; SKIPs without them
 python3 browser_test.py # Chromium: answers every question, visits every view
