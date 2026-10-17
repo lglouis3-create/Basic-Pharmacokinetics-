@@ -4762,6 +4762,10 @@ function suSheetListHTML(q, st){
 /* The pick, the verdict and the reasons for one stem; `st` is the state
    that holds its options and pick (SU itself one at a time, a page entry
    on one page). */
+/* The set-up reasoning as one bullet per sentence. A sentence ends at . ? or !
+   followed by a space, so a decimal point (0.693) inside a fraction token
+   never splits a sentence, and neither does the ellipsis in a quoted phrase. */
+const whySentences = txt => String(txt || '').split(/(?<!\.\.)(?<=[.?!])\s+/).map(t => t.trim()).filter(Boolean);
 function suQuestionHTML(q, st, idx){
   const e = EQ_BY_ID[q.setup.eq], plan = SU.mode === 'plan';
   let h = `<div class="card suq" data-suq="${idx}"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}<span class="tag">${plan ? 'plan the problem' : 'set-up only'}</span></div>
@@ -4787,7 +4791,7 @@ function suQuestionHTML(q, st, idx){
   }
   if(suAnswered(st)){
     const chosen = st.pickedId != null ? EQ_BY_ID[st.pickedId] : st.options[st.picked];
-    const why = (String(q.setup.why || '').match(/[^.?!]+(?:[.?!]+|$)/g) || []).map(t => t.trim()).filter(Boolean);
+    const why = whySentences(q.setup.why);
     const pre = (q.setup.pre || []).filter(id => EQ_BY_ID[id]);
     h += `<div class="why"><p class="verdict ${st.ok ? 'ok' : 'bad'}">${st.ok ? '✓ That is the line' : '✗ Not that line'}</p>
       ${st.ok ? '' : `<p class="sub">You picked <b>${esc(chosen.name)}</b>, ${eqShow(chosen)}. It holds when: ${mathHTML(suFirstSentence(chosen.holds))}</p>`}
@@ -4817,7 +4821,7 @@ function suQuestionHTML(q, st, idx){
 }
 function suHTML(){
   const q = SU.queue[SU.i];
-  const tally = `<span>${SU.right} of ${SU.asked} right</span>`;
+  const tally = `<span>${suTally()}</span>`;
   if(!q){
     const pct = SU.asked ? Math.round(100 * SU.right / SU.asked) : 0;
     return `<h2>${SU.mode === 'plan' ? 'Plan the problem' : 'Set-up drill'}</h2><div class="card"><p><b>${SU.right} of ${SU.asked}</b> lines chosen correctly (${pct}%) for ${esc(suScopeLabel(SU.scope))}.${SU.mode === 'plan' ? ` <b>${SU.plans}</b> of ${SU.asked} plans complete: what is asked, its unit, the model, the line, whether it is printed, and the givens all right.` : ''}</p>
@@ -4851,6 +4855,11 @@ function suMixupsHTML(tag = 'h4'){
   if(!rows.length) return '';
   return `<${tag}>Lines you have mixed up most</${tag}><ul class="tlist">${rows.map(([id, r]) => `<li>${eqShow(EQ_BY_ID[id])} <span class="sm">${esc(EQ_BY_ID[id].name)}: ${r.wrong} wrong of ${r.seen}</span></li>`).join('')}</ul>`;
 }
+/* The running count. In Plan the problem the line can be right while another
+   step of the plan is wrong, so the two are counted apart. */
+const suTally = () => SU.mode === 'plan'
+  ? `${SU.right} of ${SU.asked} lines right · ${SU.plans} plans right in every step`
+  : `${SU.right} of ${SU.asked} right`;
 function suPick(card, i){
   const idx = card.dataset.suq;
   const q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx];
@@ -4863,7 +4872,7 @@ function suPick(card, i){
   if(idx === 'one'){ renderEq(); return; }
   const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx);
   card.replaceWith(fresh.firstElementChild);
-  const tally = document.querySelector('#v-eq .sessrow span:last-child'); if(tally) tally.textContent = `${SU.right} of ${SU.asked} right`;
+  const tally = document.querySelector('#v-eq .sessrow span:last-child'); if(tally) tally.textContent = suTally();
 }
 function suWire(el){
   el.onclick = e => {
@@ -4877,7 +4886,8 @@ function suWire(el){
     if(e.target.closest('[data-suhome]')){ SU = null; renderEq(); return; }
     if(e.target.closest('[data-suagain]')){ suStart((SU.mode === 'plan' ? 'plan:' : '') + SU.scope); return; }
     const redraw = (card) => { const idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
-      if(!st) return null; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild); return {q, st}; };
+      if(!st) return null; const fresh = document.createElement('div'); fresh.innerHTML = suQuestionHTML(q, st, idx); card.replaceWith(fresh.firstElementChild);
+      const tally = document.querySelector('#v-eq .sessrow span:last-child'); if(tally) tally.textContent = suTally(); return {q, st}; };
     const pa = e.target.closest('[data-suask]');
     if(pa){ const card = pa.closest('[data-suq]'), idx = card.dataset.suq, q = idx === 'one' ? SU.queue[SU.i] : SU.queue[SU.i + +idx], st = q && SU.page[q.id];
       if(st && st.ask == null){ st.ask = pa.dataset.suask; st.askOk = st.ask === q.asks; redraw(card); } return; }

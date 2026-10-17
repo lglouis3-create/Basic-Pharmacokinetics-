@@ -8,6 +8,9 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - A paper whose time ran out while the page was closed is submitted when the page opens again.
 - Weak spots: a card per weak concept with its status and counts, Practice this concept, and spaced-review checks.
 - The count of concepts with three correct answers on separate days is now labelled "on long review".
+- Set-up drill: "Why this line" no longer cuts a sentence at a decimal point inside a fraction.
+- Plan the problem: the count shows lines right and plans right in every step separately.
+- Build it boxes and plan buttons are at least 44 px tall for tapping on a phone.
 
 ## 2026-10-17 (final exam set up; Quiz 5 card)
 - The final is the active exam: 40 questions (20 multiple choice, 20 fill in), 25% on PK-PD and nonlinear.

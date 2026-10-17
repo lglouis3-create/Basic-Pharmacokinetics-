@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,whySentences,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -754,6 +754,16 @@ console.log('\n=== 5e. What an explanation may say ===');
     }).map(q => q.id);
     if (loose.length) bad('a part that needs an earlier part does not carry its value in the stem: ' + loose.join(', '));
     else console.log('  ok    every part that needs an earlier result carries it, so it can be answered when drawn alone');
+  }
+
+  /* "Why this line" shows the set-up reasoning one sentence per bullet; a
+     decimal point or a fraction token never splits a sentence. */
+  {
+    const torn = X.QUESTIONS.concat(X.EXTRAS).filter(q => q.setup && q.setup.why)
+      .filter(q => X.whySentences(q.setup.why).some(t => (t.match(/\{\{/g) || []).length !== (t.match(/\}\}/g) || []).length || /^\d/.test(t)))
+      .map(q => q.id);
+    if (torn.length) bad('a set-up reason splits inside a number or a fraction: ' + torn.slice(0, 8).join(', '));
+    else console.log('  ok    every set-up reason splits into whole sentences (no fraction or decimal cut)');
   }
 
   /* A paper keeps the parts of one problem together and in order. */
