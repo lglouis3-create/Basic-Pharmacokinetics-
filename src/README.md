@@ -42,6 +42,7 @@ where the last good one was. The output path is
 | `build.py` | The assembler. `DATA_FILES` at the top is the concatenation order. |
 | `test.js` | Bank integrity, the manifest, the pool resolver, every question type's grading, the blueprint draw, the scheduler rules, storage namespacing. **Gate: exits 1 on failure.** |
 | `style_check.js` | Flags rejected phrasing in every explanatory field, and reports citation coverage. **Gate.** |
+| `step_check.js` | Recomputes every `expression = value` printed in steps, option and givens notes, setup and check text, and checks the last step's value against the key and tolerance. **Gate.** |
 | `render_test.js` | Renders every view and every question type against stub DOM sinks; fails on `undefined`, `NaN`, `[object Object]` or unbalanced markup. **Gate.** |
 | `explain_check.js` | Scores how well each question explains itself, worst-first by severity × exam weight. **Report only, always exits 0.** |
 | `cite_check.py` | Checks every cited slide number against the real deck. **Skips** when no PDFs are present. |
@@ -60,7 +61,7 @@ where the last good one was. The output path is
 ## The checks, in order
 
 ```
-python3 build.py && node test.js && node style_check.js && node render_test.js
+python3 build.py && node test.js && node style_check.js && node render_test.js && node step_check.js
 node explain_check.js
 python3 cite_check.py
 python3 browser_test.py
