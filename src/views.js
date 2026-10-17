@@ -682,7 +682,7 @@ function renderTopics(){
     const id = +b.dataset.exam, ex = COURSE.exams.find(e => e.id === id);
     const k = b.dataset.k || null;
     const label = kindLabel((ex ? ex.name : 'Exam') + ' recap', k);
-    if(b.dataset.how === 'paper'){ if(EX && EX.done) EX = null; chooseExam(id); show('exam'); return; }
+    if(b.dataset.how === 'paper'){ if(EX && EX.done){ EX = null; clearExam(); } chooseExam(id); show('exam'); return; }
     if(b.dataset.how === 'sweep') startSweepOf(narrow(examQuestions(id), k), label);
     else startPool(narrow(examQuestions(id), k), label);
   });
@@ -1514,11 +1514,11 @@ function renderExamAll(){
       card.querySelectorAll('.opt').forEach(o => { const v = +o.dataset.o, sel = multi ? EX.picks[i].includes(v) : EX.picks[i] === v;
         o.className = 'opt' + (multi ? ' multi' : '') + (sel ? (multi ? ' on' : ' pick-ok') : ''); o.setAttribute('aria-pressed', sel);
         if(multi) o.querySelector('.k').textContent = sel ? '☑' : '☐'; });
-      prog();
+      prog(); saveExam();
     });
-    const ni = card.querySelector('input.numin'); if(ni) ni.oninput = e => { EX.picks[i] = e.target.value; prog(); };
+    const ni = card.querySelector('input.numin'); if(ni) ni.oninput = e => { EX.picks[i] = e.target.value; prog(); saveExam(); };
     card.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
-      const p = Object.assign({}, EX.picks[i]); if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l]; EX.picks[i] = p; prog(); });
+      const p = Object.assign({}, EX.picks[i]); if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l]; EX.picks[i] = p; prog(); saveExam(); });
   });
   $('#exEnd').onclick = () => { if(confirm('Submit the paper and see your score?')) finishExam(); };
 }
@@ -2699,6 +2699,59 @@ function modelTableHTML(rows){
    ========================================================================== */
 let EX = null;
 
+/* The paper in progress is saved under <ns>:exam:<profile> on every pick and
+   move, so a reload or a tab the browser discarded brings it back with its
+   clock still running. A paper whose time ran out while the page was closed
+   is submitted when it is restored. A submitted paper stays saved, result
+   page and all, until "New paper". */
+const EXKEY = () => NS + ':exam:' + PROFILE;
+const EX_KEEP = ['qs', 'i', 'spent', 'picks', 'running', 'done', 'ends', 'orders',
+                 'paper', 'title', 'sata', 'coverage', 'logQn', 'rightOv'];
+function saveExam(){
+  if(!EX || !PROFILE) return;
+  const x = {};
+  EX_KEEP.forEach(k => { if(EX[k] !== undefined) x[k] = EX[k]; });
+  x.qs = EX.qs.map(q => q.id);
+  LS.set(EXKEY(), JSON.stringify(x));
+}
+function clearExam(){ LS.del(EXKEY()); }
+/* A saved pick is kept only when it still has the shape its question takes:
+   the bank may have changed between the save and the reload. */
+function pickFits(q, p){
+  const n = (q.options || []).length;
+  if(isMulti(q)) return Array.isArray(p) && p.every(k => Number.isInteger(k) && k >= 0 && k < n);
+  if(qType(q) === 'match') return !!p && typeof p === 'object' && !Array.isArray(p);
+  if(qType(q) === 'numeric') return typeof p === 'string';
+  return p === null || (Number.isInteger(p) && p >= 0 && p < n);
+}
+function loadExam(){
+  let x;
+  try { x = JSON.parse(LS.get(EXKEY()) || 'null'); } catch(e){ return null; }
+  if(!x || !Array.isArray(x.qs) || !x.qs.length || !Number.isFinite(+x.ends)) return null;
+  const qs = x.qs.map(byId);
+  if(qs.some(q => !q)) return null;
+  const n = qs.length, arr = a => Array.isArray(a) && a.length === n;
+  if(!arr(x.picks) || !arr(x.orders) || !qs.every((q, k) => pickFits(q, x.picks[k]))) return null;
+  const perm = (o, q) => !isMC(q) ? Array.isArray(o) && !o.length
+    : Array.isArray(o) && o.length === q.options.length && o.slice().sort((a, b) => a - b).every((v, k) => v === k);
+  if(!qs.every((q, k) => perm(x.orders[k], q))) return null;
+  return Object.assign(x, {from: 'exam', qs, i: Math.max(0, Math.min(n - 1, Math.floor(+x.i) || 0)),
+    spent: arr(x.spent) ? x.spent.map(v => +v || 0) : qs.map(() => 0), tIdx: null, tMark: 0,
+    ends: +x.ends, running: !!x.running && !x.done, done: !!x.done});
+}
+/* Start-up: bring back this profile's paper. Returns 'running', 'expired'
+   (submitted just now) or 'done' (a result page kept from before), so the
+   page opens on Exam sim only when there is something new to see. */
+function restoreExam(){
+  if(EX && EX.timer) clearInterval(EX.timer);
+  EX = loadExam();
+  if(!EX){ clearExam(); return null; }
+  if(!EX.running) return 'done';
+  if(Date.now() >= EX.ends){ finishExam(); return 'expired'; }
+  startClock();
+  return 'running';
+}
+
 /* How many marks of the blueprint the bank can and cannot currently cover. A
    pool holding nothing at all is reported here like any other short pool: its
    marks land in `missing` and its name appears in the notice. */
@@ -2848,6 +2901,10 @@ function startPaper(qs, minutes, extra){
         running:true, done:false,
         ends: Date.now() + minutes*60000,
         orders: qs.map(q => isMC(q) ? shuffle(q.options.map((o,k)=>k)) : [])}, extra || {});
+  startClock();
+  saveExam();
+}
+function startClock(){
   const tick = setInterval(()=>{
     if(!EX || !EX.running || EX.timer !== tick) return clearInterval(tick);
     if(Date.now() >= EX.ends){ finishExam(); return; }
@@ -2885,6 +2942,7 @@ function examTick(next){
 function renderExamQ(){
   if(layoutOf() === 'all'){ if(EX.spent) examTick(null); return renderExamAll(); }
   if(EX.spent) examTick(EX.i);
+  saveExam();   // every pick and every move in the one-at-a-time layout comes through here
   const el = $('#v-exam'), q = EX.qs[EX.i], order = EX.orders[EX.i];
   const answered = EX.picks.filter((p, i) => !isBlank(EX.qs[i], p)).length;
   const kind = qType(q), multi = isMulti(q);
@@ -2924,11 +2982,11 @@ function renderExamQ(){
     else EX.picks[EX.i] = oi;
     renderExamQ(); });
   const ni = el.querySelector('#numIn');
-  if(ni) ni.oninput = e => { EX.picks[EX.i] = e.target.value; };
+  if(ni) ni.oninput = e => { EX.picks[EX.i] = e.target.value; saveExam(); };
   el.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
     const p = Object.assign({}, EX.picks[EX.i]);
     if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l];
-    EX.picks[EX.i] = p;
+    EX.picks[EX.i] = p; saveExam();
   });
   $('#exPrev').onclick = ()=>{ if(EX.i>0){EX.i--; renderExamQ();} };
   $('#exNext').onclick = ()=>{ if(EX.i<EX.qs.length-1){EX.i++; renderExamQ();} else finishExam(); };
@@ -2954,7 +3012,7 @@ function finishExam(){
   (DB.exams ||= []).push({at: Date.now(), exam: EX.paper || EXAM.id, right, total: EX.qs.length,
                           blank: EX.qs.filter((q, i) => examBlank(q, EX.picks[i])).length});
   if(DB.exams.length > 100) DB.exams.splice(0, DB.exams.length - 100);
-  save();
+  save(); saveExam();
   renderExamResult();
 }
 /* After a paper is submitted the result page offers a short clip, one of
@@ -3036,7 +3094,7 @@ function renderExamResult(){
     h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${srcFlag(q)}${esc(q.cite)}</div>${explainHTML(q)}</div></div>`;
   });
   $('#v-exam').innerHTML = h;
-  $('#exAgain').onclick = ()=>{ EX=null; renderExam(); };
+  $('#exAgain').onclick = ()=>{ EX=null; clearExam(); renderExam(); };
   const cg = $('#cheerGo'); if(cg) cg.onclick = celebrate;
   $('#v-exam').querySelectorAll('button[data-mk]').forEach(b => b.onclick = () => {
     const q = EX.qs[+b.dataset.qi];
@@ -3045,7 +3103,7 @@ function renderExamResult(){
   $('#v-exam').querySelectorAll('button[data-right]').forEach(b => b.onclick = () => {
     const i = +b.dataset.right, q = EX.qs[i];
     if(!q || !markRight(q, EX.logQn ? EX.logQn[i] : undefined)) return;
-    (EX.rightOv ||= {})[i] = true;
+    (EX.rightOv ||= {})[i] = true; saveExam();
     const last = (DB.exams || [])[DB.exams.length - 1];
     if(last && last.exam === (EX.paper || EXAM.id)) last.right = Math.min(last.total, last.right + 1);
     save(); renderExamResult();
@@ -3305,10 +3363,11 @@ function renderSettings(){
   $('#btnProf').onclick = () => {
     const n = $('#profIn').value.trim() || 'default';
     if(n === PROFILE) return;
-    if(EX && EX.running && !confirm('A paper is in progress and will be discarded. Switch profile anyway?')) return;
+    if(EX && EX.running && !confirm('A paper is in progress. It stays saved under this profile, with its clock running. Switch profile anyway?')) return;
+    if(EX && EX.running){ if(EX.spent && EX.tIdx != null) examTick(EX.tIdx); saveExam(); }
     setProfile(n);
-    // a new name means a new history, so nothing from the last person's session carries over
-    Q = null; if(EX){ clearInterval(EX.timer); EX = null; }
+    // a new name means a new history, so nothing from the last person's session carries over; their own paper, if any, comes back
+    Q = null; restoreExam();
     renderSettings();
   };
   $('#btnExport').onclick = ()=>{
@@ -4619,6 +4678,12 @@ setInterval(tickTimers, 1000);                       // the stopwatch on every c
 document.addEventListener('click', xpickClick);   // Tell apart: Why? chips
 document.addEventListener('change', xselChange);  // Tell apart: Explain one   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
+// the browser asks before a reload or close while a paper is running (the paper is saved, but the clock runs on)
+window.addEventListener('beforeunload', e => { if(EX && EX.running){ e.preventDefault(); e.returnValue = ''; } });
+// time on the question shown is banked before the tab goes to the background, where a phone may discard it
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden' && EX && EX.running){ if(EX.spent && EX.tIdx != null) examTick(EX.tIdx); saveExam(); }
+});
 /* Theme: System (no attribute), Light or Dark, kept per browser. */
 const THEME_KEY = NS + ':theme';
 function applyTheme(t){
@@ -4631,4 +4696,4 @@ function applyTheme(t){
   if(ts){ ts.value = saved; ts.onchange = () => { LS.set(THEME_KEY, ts.value); applyTheme(ts.value); }; }
 }
 askProfile();
-show('topics');
+{ const ex = restoreExam(); show(ex === 'running' || ex === 'expired' ? 'exam' : 'topics'); }

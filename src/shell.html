@@ -1252,6 +1252,7 @@ const LS = (() => {
             catch(e){ return null; } },
     set(k, v){ try { if(ok) localStorage.setItem(k, v); else mem[k] = v; return true; }
                catch(e){ mem[k] = v; return false; } },
+    del(k){ try { if(ok) localStorage.removeItem(k); } catch(e){} delete mem[k]; },
   };
 })();
 

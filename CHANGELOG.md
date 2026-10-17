@@ -2,6 +2,10 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-17 (exam papers survive a reload)
+- Exam sim: a paper in progress is saved on every answer; a reload brings it back with the same clock.
+- A paper whose time ran out while the page was closed is submitted when the page opens again.
+
 ## 2026-10-17 (final exam set up; Quiz 5 card)
 - The final is the active exam: 40 questions (20 multiple choice, 20 fill in), 25% on PK-PD and nonlinear.
 - Exam sim draws 15 Exam 1, 15 Exam 2, 5 PK-PD and 5 nonlinear questions; the 15/15 split is assumed.

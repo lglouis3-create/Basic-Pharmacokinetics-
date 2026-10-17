@@ -2,7 +2,7 @@
 
 The required text is Shargel and Yu's Applied Biopharmaceutics & Pharmacokinetics, 8th edition
 (syllabus, "Texts/Materials"). The bank is written from her decks and transcripts; a chapter is the
-third tier when sources conflict (prescribing information, then her slides and lecture, then the text).
+fourth tier when sources conflict (BANK_SPEC.md, "The source rule": her worked solution, her correction in lecture, the slide, then the text).
 Chapter PDFs the student supplies go in `src/decks/readings/` (gitignored, like the decks).
 
 ## Chapter map from the syllabus (SyllabusF26---PHAR-4221---Basic-Pharmacokinetics.pdf, "Class meeting schedule/outline")
