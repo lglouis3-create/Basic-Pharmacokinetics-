@@ -3517,7 +3517,8 @@ function rdCardHTML(r, hasTarget){
   const [lead, rest] = rdLead(r.about);
   const chips = (r.guide || []).filter(([mod]) => hasTarget(mod))
     .map(([mod, label]) => `<button type="button" class="chip" data-rdjump="${esc(mod)}">${esc(label)}</button>`).join('');
-  const status = r.discussed_in_class ? 'Discussed in class' : 'Assigned reading';
+  // "discussed" only when her own words refer to the reading; a lecture on the same topic is labelled as that
+  const status = (r.her_words || []).length ? 'Discussed in class' : (r.lecture_use || []).length ? 'Topic covered in lecture' : 'Assigned reading';
   return `<div class="rdcard" id="rd-${esc(r.id)}">
     <div class="rdhead"><b>${esc(r.title)}</b> <span class="rdtag">${esc(status)}</span></div>
     <div class="rdsrc">${esc(r.source || '')}${r.lecture ? ` · ${esc(r.lecture)}` : ''}${r.truncated ? ' · summary from a partial text' : ''}</div>
