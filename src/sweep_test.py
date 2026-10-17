@@ -47,14 +47,87 @@ SEED = """() => {
 
 TABS = ['topics', 'quiz', 'gaps', 'exam', 'guide', 'tell', 'terms', 'diag', 'eq', 'ref', 'settings']
 
+# Weak spots, Concepts: one multiple-choice concept missed three times with the
+# same wrong option (struggling), one numeric concept missed once with a named
+# kind (unfamiliar), and one concept with two wordings answered right three
+# times across two sessions ten days ago (mastered, its spaced check due).
+CONCEPT_SEED = """() => {
+  DB.answers = []; DB.concepts = {}; DB.qn = 0; DB.settings.mode = 'long';
+  const byC = {}; QUESTIONS.forEach(q => (byC[q.concept] ||= []).push(q));
+  const mcq = QUESTIONS.find(q => qType(q) === 'mc' && !isMulti(q) && q.options.some(o => !o.correct && o.why));
+  const num = QUESTIONS.find(q => qType(q) === 'numeric' && q.concept !== mcq.concept);
+  const two = Object.values(byC).find(a => a.length > 1 && a[0].concept !== mcq.concept && a[0].concept !== num.concept);
+  const now = Date.now(), MIN = 60000, old = now - 10 * 86400000;
+  const add = (q, result, at, picked, missKind) => { DB.qn++; const a = {qid: q.id, concept: q.concept, result, at, qn: DB.qn};
+    if (picked !== undefined) a.picked = picked; if (missKind) a.missKind = missKind; DB.answers.push(a); };
+  add(two[0], 'correct', old); add(two[1], 'correct', old + 5 * MIN); add(two[0], 'correct', old + 120 * MIN);
+  const w = mcq.options.findIndex(o => !o.correct && o.why), r = mcq.options.findIndex(o => o.correct);
+  [[w, 'wrong'], [r, 'correct'], [w, 'wrong'], [w, 'wrong']].forEach(([p, res], k) => add(mcq, res, now - (10 - k) * MIN, p));
+  add(num, 'wrong', now - 5 * MIN, '1.234', 'unit');
+  save();
+  return {struggling: conceptTitle(mcq.concept), mastered: conceptTitle(two[0].concept)};
+}"""
+
+
+def concept_check(b, shots):
+    """The Concepts section of Weak spots at phone and desktop width, light and dark."""
+    path = pathlib.Path(course_output()).resolve()
+    for scheme in ('light', 'dark'):
+        for w in (390, 1100):
+            ctx = b.new_context(viewport={'width': w, 'height': 900}, color_scheme=scheme)
+            page = ctx.new_page()
+            errs = []
+            page.on('pageerror', lambda e: errs.append(str(e)))
+            page.add_init_script("window.prompt = () => 'Concepts'; window.alert = () => {}")
+            page.goto(path.as_uri())
+            page.wait_for_timeout(700)
+            names = page.evaluate(CONCEPT_SEED)
+            page.evaluate("show('gaps')")
+            page.wait_for_timeout(250)
+            page.evaluate("document.querySelectorAll('#v-gaps details.cmore, #v-gaps details.clegend').forEach(d => d.open = true)")
+            page.wait_for_timeout(100)
+            print(f'\n=== Weak spots, concepts: {w} px, {scheme} ===')
+            cards = page.evaluate("""() => [...document.querySelectorAll('#v-gaps .ccard')].map(c => ({
+              t: c.querySelector('.chead b').textContent, s: c.querySelector('.cstat').textContent, txt: c.innerText,
+              r: c.getBoundingClientRect().right}))""")
+            strug = [c for c in cards if c['t'] == names['struggling']]
+            check(bool(strug) and strug[0]['s'] == 'Struggling', f"struggling card shown ({names['struggling']})",
+                  f"cards: {[(c['t'], c['s']) for c in cards]}")
+            check(bool(strug) and 'You chose this 3 times' in strug[0]['txt'] and 'Why it is not the answer' in strug[0]['txt'],
+                  'the wrong option chosen 3 times is shown with its why')
+            check(bool(strug) and '3 misses in 4 attempts, last 4 at 25%' in strug[0]['txt'], 'the evidence line gives exact counts')
+            check(any('Most common kind of miss: Unit conversion' in c['txt'] for c in cards), 'a numeric concept shows its most common kind of miss')
+            txt = page.inner_text('#v-gaps')
+            check(f"Mastered (1)" in txt and names['mastered'] in txt, f"mastered concept folded away ({names['mastered']})")
+            check('Due for spaced review (1)' in txt, 'the mastered concept is listed as due for spaced review')
+            bad = [x for x in ('undefined', 'NaN') if x in txt]
+            check(not bad, 'no undefined or NaN on Weak spots', ', '.join(bad))
+            sw = page.evaluate('[document.documentElement.scrollWidth, window.innerWidth]')
+            over = [c['t'] for c in cards if c['r'] > w + 0.5]
+            check(sw[0] <= sw[1] and not over, 'concept cards fit the width', f'scrollWidth {sw[0]}, past the edge: {over}')
+            if shots:
+                pathlib.Path(shots).mkdir(parents=True, exist_ok=True)
+                box = page.evaluate("""() => { const hs = [...document.querySelectorAll('#v-gaps h3')], i = hs.findIndex(h => h.textContent === 'Concepts');
+                  const top = hs[i].getBoundingClientRect().top + scrollY, end = hs[i + 1] ? hs[i + 1].getBoundingClientRect().top + scrollY : top + 1200;
+                  return {x: 0, y: top - 8, width: innerWidth, height: end - top}; }""")
+                page.screenshot(path=f'{shots}/concepts-{scheme}-{w}.png', full_page=True, clip=box)
+            page.evaluate("document.querySelector('#v-gaps [data-cpractice]').click()")
+            page.wait_for_timeout(200)
+            check(page.evaluate("VIEW === 'quiz' && Q && Q.label.startsWith('Concept: ') && Q.sweep.every(id => byId(id).concept === byId(Q.sweep[0]).concept)"),
+                  'Practice this concept opens a quiz on that concept')
+            check(not errs, 'no page errors', '; '.join(errs[:2]))
+            ctx.close()
+
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--shots', help='write a screenshot of every tab here')
+    ap.add_argument('--concept-shots', help='write a screenshot of the Weak spots concepts section here')
     a = ap.parse_args()
     path = pathlib.Path(course_output()).resolve()
     with sync_playwright() as p:
         b = p.chromium.launch()
+        concept_check(b, a.concept_shots)
         for scheme in ('light', 'dark'):
             for w in (375, 1100):
                 ctx = b.new_context(viewport={'width': w, 'height': 900}, color_scheme=scheme)
