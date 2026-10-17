@@ -87,6 +87,23 @@ to launch, so pin it (`pip install playwright==<version>`) to match.
 Every check reads the built filename out of `course.js`; none of them names the
 course.
 
+Builds and the checks share one output file, `/mnt/user-data/outputs/<output>`.
+When more than one worktree or agent builds at once, run each build with the
+checks that read it under one lock, for example
+`flock <scratchpad>/build.lock sh -c 'python3 build.py && node test.js'`.
+
+## Delivery
+
+Commits go to `main` and to the work branch; no pull request. GitHub Pages
+serves `main`. A push is delivered only when Pages has deployed that commit:
+list the workflow runs of the repository (GitHub MCP `actions_list`,
+`list_workflow_runs`; the run named "pages build and deployment") and wait until
+the run whose `head_sha` is the pushed commit shows `status: completed` and
+`conclusion: success`, usually under a minute. Then name that commit in the
+report. A failed run, or none for the commit after five minutes, is reported
+as such. The Pages REST endpoint (`/pages/builds/latest`) and the site itself
+are not reachable from a cloud session, so the workflow run is the record.
+
 ---
 
 ## Adding a lecture
