@@ -15,8 +15,11 @@
    "Usually asked for" cells of reference.js and the `holds` text of
    equations.js in a few words; nothing new is asserted.
 
-   `module` 0 marks a line not lectured in Modules 1 to 7a (stability on
-   page 2, and the four nonlinear lines, which are final-exam material).
+   No line is now marked `module` 0 (not lectured). The four lines on page
+   2 once labelled stability are the PK-PD lines of Module 7b (module 9,
+   7b---Pharmacokinetics-and-Pharmacodynamics.pdf) and link to eq_pkpd.js.
+   The four nonlinear lines on page 2, right column, are Module 8
+   (8 - Nonlinear PK.pdf, lectured 14 Oct) and link to eq_nonlin.js.
 
    Plain strings with HTML; {{frac:top|bottom}} stacks a ratio.
    ========================================================================== */
@@ -207,39 +210,39 @@ const SHEET_LINES = [
  html: 'F<sub>rel</sub> = ({{frac:AUC<sub>A</sub>|AUC<sub>B</sub>}})({{frac:D<sub>B</sub>|D<sub>A</sub>}})',
  when: '"Relative bioavailability": one formulation "compared to" a named reference, no IV.',
  need: 'The two AUCs and the two doses; B is the reference.'},
-{c: 3, module: 0, eq: null, model: 'Stability, not lectured', asks: 'Shelf life',
+{c: 3, module: 9, eq: 'pd-effect-time', model: 'PK-PD, effect against time', asks: 'Effect',
  html: 'E = E<sub>0</sub> &minus; {{frac:kmt|2.3}}',
- when: 'Stability and shelf life; not lectured in Modules 1 to 7a.',
- need: 'Left as printed.'},
-{c: 3, module: 0, eq: null, model: 'Stability, not lectured', asks: 'Shelf life',
+ when: 'Effect after an IV bolus falling in a straight line with time.',
+ need: 'E<sub>0</sub>, k, m (the slope of effect against log concentration) and t.'},
+{c: 3, module: 9, eq: 'pd-teff-log', model: 'PK-PD, duration of action', asks: 't<sub>eff</sub>',
  html: 't<sub>eff</sub> = {{frac:2.3[log(D<sub>0</sub>/V<sub>D</sub>) &minus; log C<sub>eff</sub>]|k}}',
- when: 'Duration of effect; not lectured in Modules 1 to 7a.',
- need: 'Left as printed.'},
-{c: 3, module: 0, eq: null, model: 'Stability, not lectured', asks: 'Shelf life',
+ when: 'Duration of action of a single IV bolus, in base-10 logs.',
+ need: 'D<sub>0</sub>, V<sub>D</sub>, the minimum effective concentration and k.'},
+{c: 3, module: 9, eq: 'pd-teff-ln', model: 'PK-PD, duration of action', asks: 't<sub>eff</sub>',
  html: 't<sub>eff</sub> = {{frac:[ln(D<sub>0</sub>/V<sub>D</sub>) &minus; ln C<sub>eff</sub>]|k}}',
  when: 'The same relation in natural logs.',
- need: 'Left as printed.'},
-{c: 3, module: 0, eq: null, model: 'Stability, not lectured', asks: 'Shelf life',
+ need: 'D<sub>0</sub>, V<sub>D</sub>, the minimum effective concentration and k.'},
+{c: 3, module: 9, eq: 'pd-teff-half', model: 'PK-PD, duration of action', asks: 't<sub>eff</sub>',
  html: 't<sub>eff</sub> = 1.44t<sub>1/2</sub> ln({{frac:D<sub>0</sub>|V<sub>D</sub>C<sub>eff</sub>}})',
  when: 'The same relation written with the half-life.',
- need: 'Left as printed.'},
+ need: 'D<sub>0</sub>, V<sub>D</sub>, the minimum effective concentration and t<sub>1/2</sub>.'},
 /* ---- page 2, right column --------------------------------------------- */
-{c: 4, module: 0, eq: null, model: 'Nonlinear, not lectured', asks: 'Nonlinear',
+{c: 4, module: 8, eq: 'nl-rate', alsoEq: ['nl-vmax', 'nl-css'], model: 'Nonlinear', asks: 'R, Vmax or Css',
  html: 'R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}',
- when: 'Nonlinear pharmacokinetics (Module 9, final exam); not yet lectured.',
- need: 'Left as printed.'},
-{c: 4, module: 0, eq: null, model: 'Nonlinear, not lectured', asks: 'Nonlinear',
+ when: 'A saturable (Michaelis-Menten) drug such as phenytoin at steady state: a daily dose rate for a target Css; solved for Vmax once KM is known, or for Css from a new dose.',
+ need: 'KM and Vmax and the target Css; Vmax in mg/kg/day gives R in mg/kg/day, times the weight.'},
+{c: 4, module: 8, eq: 'nl-km', model: 'Nonlinear', asks: 'KM',
  html: 'K<sub>M</sub> = {{frac:R<sub>2</sub> &minus; R<sub>1</sub>|R<sub>1</sub>/C<sub>1</sub> &minus; R<sub>2</sub>/C<sub>2</sub>}}',
- when: 'Nonlinear; not yet lectured.',
- need: 'Left as printed.'},
-{c: 4, module: 0, eq: null, model: 'Nonlinear, not lectured', asks: 'Nonlinear',
+ when: 'Two daily doses in the same patient and the steady-state concentration each produced (the direct method).',
+ need: 'R1 with C1 and R2 with C2; the rate units cancel and leave mg/L.'},
+{c: 4, module: 8, eq: 'nl-thalf', model: 'Nonlinear', asks: 't½',
  html: 't<sub>1/2</sub> = V<sub>D</sub>({{frac:0.693|V<sub>max</sub>}})(K<sub>M</sub> + C<sub>p</sub>)',
- when: 'Nonlinear; not yet lectured. The only half-life line the sheet prints.',
- need: 'Left as printed.'},
-{c: 4, module: 0, eq: null, model: 'Nonlinear, not lectured', asks: 'Nonlinear',
+ when: 'The half-life "when the plasma concentration is" a stated value; it rises as the concentration rises. The only half-life line the sheet prints.',
+ need: 'VD in litres (L/kg times the weight), Vmax, KM and the stated Cp.'},
+{c: 4, module: 8, eq: 'nl-cl', model: 'Nonlinear', asks: 'ClT',
  html: 'Cl<sub>T</sub> = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}',
- when: 'Nonlinear; not yet lectured.',
- need: 'Left as printed.'},
+ when: 'Total body clearance at a stated concentration; it falls as the concentration rises.',
+ need: 'Vmax, KM and the stated Cp; mg/day over mg/L gives L/day.'},
 ];
 
 /* The lines she said she does not supply, to print beside the map. */

@@ -1779,3 +1779,168 @@ Bank ids e2r-1 to e2r-14 (e2r-2m is the mechanism half of item 2). Stems verbati
 - 5 renal function; 6 increased AUC and increased Cmax; 7 filtration with active secretion; 8 bioavailability; 9 increased steady-state concentrations; 10 True; 11 absolute bioavailability; 12 the rate of drug absorption is faster than the rate of drug elimination; 13 at the end of the dosing interval; 14 the elimination half-life will increase.
 
 **Formats observed:** the calculations restate her worksheets and quizzes with new numbers (item 4 is Quiz 4, question 4; 3a is Quiz 4, question 2 with clearance given instead of a half-life). Units arrive as she always gives them: lb and feet-inches beside "using the patient's ideal body weight", mg/kg and L/kg, % of body weight, an absorption half-life in minutes, a target in mcg/mL. Item 2 asks a number and a mechanism in one stem. Item 3 chains IV bolus → oral bioavailability → equivalent oral dose → first-dose oral Cmax → interval for a target average → tmax∞ → Cmax∞, each later part "determined in part d/f". Concept stems: "What is X used to estimate?", "Which of the following would you expect with …? (Select all that apply)" with six paired increase/decrease options, "What is the probable mechanism …?" with three options, "Which term describes …?" quoting a slide definition, "Which of the following would be expected following …?" built from her slide "Altering Dosing Interval" (the distractors are the other half of that slide plus MTC), a True/False statement of a slide assumption, "Which of the following is true regarding …?", "When does … occur …?", and "If there is a … what is the expected change to …?" (Quiz 3, question 2, reversed in direction). Item 11 is Quiz 4, question 10, repeated.
+
+# Module 7b — Relationship between pharmacokinetics and pharmacodynamics
+
+## Source: `7b---Pharmacokinetics-and-Pharmacodynamics.pdf`, slide 7 "Practice Problem" (printed stem), worked on slide 8
+
+> The minimum effective concentration (MEC or Ceff) in plasma for a certain antibiotic is 0.2 mcg/mL. The drug follows a one-compartment open model and has an apparent volume of distribution of 24 L and a first-order elimination rate constant of 0.15 h–1.
+> • What is the teff for a single 250-mg IV dose of this antibiotic?
+> • What is the new teff or for this drug if the dose were increased by a factor of four to 1000 mg?
+
+**Her answers (written on slide 8):** derivation first, C = C0e^−kt → e^kt = C0/C → k teff = ln(C0/C) → teff = ln(C0/C)/k; teff = ln((250/24)/0.2)/0.15 hr⁻¹ = 26.35 hr. The second bullet is amended on the slide ("four to 1000 mg" struck through, "two", "500 mg" written) and both doses are worked: teff@500 mg = 30.97 hr, 30.97 − 26.35 = 4.62 hr; teff@1000 mg = 35.60 hr; "every time we double the dose we get an additional ½ life [one half-life]". Follow-up written below: "26.35 hr × 2 = 52.7 hr — what dose is required to double teff (26.35 hr)?" Ceff = (D0/VD)e^−kt → D0 = Ceff VD e^kt = 0.2 mg/L (24 L) e^(0.15)(52.7) = 13 g.
+*Recompute:* 26.3523, 30.9733, 35.5943 hr; 30.97 − 26.35 = 4.621 = 0.693/0.15 → **match**. Dose: 0.2 × 24 × e^7.905 = 13,012 mg (13,021 mg with teff unrounded) → **13 g, match**.
+
+## Source: `7b---Pharmacokinetics-and-Pharmacodynamics.pdf`, slide 12, PollEv
+
+> Doubling the IV bolus dose of a drug that follows linear, first-order pharmacokinetics results in a 2-fold increase in the duration of activity. True / False
+
+**Her key:** False (highlighted). Annotation on slide 9: "each time we double the dose, we'll get an additional t½"; "what happens if t½ increases, what happens to duration of action?"
+
+## Source: In-Class Activity "PK-PD" (photographed on slide 13 of the annotated deck)
+
+> 1. A drug with an elimination half-life of 3 hours, apparent volume of distribution of 25 L, and minimum effective concentration of 1.2 mcg/mL is to be administered as a single 250 mg IV bolus dose.
+> a. What is the duration of action of this dose?
+> b. What dose would yield a duration of action of 12 hours?
+>
+> 2. The equation for concentration of drug in the plasma as a function of time following a 500 mg IV bolus dose was found to be: Cp = 50e^−0.2t
+> a. What is the duration of action of a single 500 mg IV bolus dose if the minimum effective concentration is 5 mcg/mL?
+> b. What dose would double the duration of action found in part a?
+> c. What is the expected **change** in the duration of action following a single 250 mg IV bolus dose instead of the 500 mg IV bolus dose?
+
+**Written on the sheet:** 1a: k = 0.693/3 hr = 0.231 hr⁻¹; teff = 1.44 t½ ln(D0/VDCeff) → 1.44(3 hr) ln(250 mg/(25 · 1.2 mg/L)) = 9.15. 1b: Ceff = (D0/VD)e^−kt; D0 = Ceff VD e^kt = 1.2 mg/L (25 L) e^(0.231)(12) = 479.72 mg. 2a: k = 0.2, t½ = 0.693/0.2 = 3.465 h, VD = D0/Cp = 500 mg/50 mg/L = 10 L, 1.44(3.465) ln(500 mg/… (unfinished). 2b, 2c: blank.
+*Recompute:* 1a: 1.44 × 3 × ln 8.333 = 9.160 hr (9.179 hr with k = 0.231) → written 9.15, **within 0.1%; drill keys 9.16, accepts all three**. 1b: 479.717 mg → **match**. 2a: ln(50/5)/0.2 = 11.513 hr (11.489 by 1.44 t½). 2b: 5 × 10 × e^(0.2 × 23.03) = 5000 mg (tenfold the dose for twice the duration). 2c: ln(25/5)/0.2 = 8.047 hr; change −3.466 hr = one half-life shorter. 2a–c keys worked from her stem; no key of hers.
+
+## Source: `PK-PD-Practice-1---Solutions.pdf` ("PHAR 4221 Daily Practice PK-PD Solutions 1")
+
+> A certain antibiotic that follows a one-compartment open model has an apparent volume of distribution of approximately 15 L and a first-order elimination half-life of approximately 5 hours and is characterized by a minimum effective concentration of 10 mcg/mL.
+> a. What is the teff for a single 500-mg IV bolus dose of this antibiotic?
+> b. What is the new teff or for this drug if the dose were increased by a factor of four to 2000 mg?
+
+**Keyed answers:** (a) teff = ln((500/15)/10)/0.1386 hr⁻¹ = 8.69 hr; (b) teff = ln((2000/15)/10)/0.1386 hr⁻¹ = 18.69 hr; Δteff = (18.69 − 8.69) hr = 10 hr → 2 t½.
+*Recompute:* 8.687, 18.689 hr, Δ 10.00 hr → **match**.
+
+## Source: `PK-PD-Practice-2---Solutions.pdf` ("PHAR 4221 Daily Practice PK-PD Practice 2")
+
+> What is the expected teff in a 165-pound male for a single IV dose of an antibiotic that is dosed at 5 mg/kg and has a minimum effective concentration of 12 mcg/mL? The drug follows a one-compartment open model and has an apparent volume of distribution that is 0.15L/kg and elimination half-life of 4.75 hours. What dose would you recommend to attain a teff of 12 hours?
+
+**Keyed answers:** teff = ln((375/11.25)/(12))/0.1459 hr⁻¹ = 7 hr (boxed); C0 = (12 mg/L)e^0.1459(12) = 69.11 mg/L × 11.25 L = 777.5 mg → 10.4 mg/kg (boxed).
+*Recompute:* 75 kg, 375 mg, 11.25 L, k = 0.14589; teff 7.003 hr; C0 69.11 mg/L, 777.49 mg, 10.37 mg/kg → **match**.
+
+## Source: `PK-PD-Practice-3---Solutions.pdf` ("PHAR 4221 Daily Practice PK-PD Practice 3")
+
+> A 75-kg patient is to receive a single 20-mg/kg IV bolus dose of an antibiotic. The antibiotic follows a one-compartment open model, has an apparent volume of distribution that is approximately 0.3 L/kg, a first-order elimination half-life of approximately 3.6 hours, and is characterized by a minimum effective concentration of 7.2 mcg/mL.
+> a. What is the expected duration of action of this antibiotic in this patient?
+> b. What is the expected duration of action of this antibiotic in this patient if the dose were doubled?
+
+**Keyed answers:** (a) teff = ln((20/0.3)/7.2) 3.6 hr/0.693 = 11.56 hr; (b) teff = ln((40/0.3)/7.2) 3.6 hr/0.693 = 15.16 hr; "Increase of one half-life → 3.6 hr" (red).
+*Recompute:* 11.562, 15.162 hr, Δ 3.601 hr → **match**.
+
+## Source: `Homework-7.pdf`, problem 1 (graded homework; the PK-PD item; problem 2 is nonlinear)
+
+> 1. A 75-kg volunteer received a single IV bolus dose of an investigational drug. The drug was administered at a dose of 15 mg/kg. The drug has an apparent volume of distribution that is 0.3 L/kg and an elimination half-life approximately 4 hours .
+> a. What is the AUC following the IV bolus dose?
+> b. If the MEC is 3.75 mg/L, what is the duration of activity of this drug in this volunteer?
+> c. What is the duration of activity if the dose were 7.5 mg/kg?
+> d. What dose would provide a duration of action of 8 hours?
+
+No posted key; the file is the student's submitted work. Following the q10_homework.js rule (graded homework: her wording, numbers changed), the drill uses 70 kg, 12 mg/kg, 0.25 L/kg, t½ 5 hr, MEC 4 mg/L, 6 mg/kg, 10 hours: AUC 346.3 (mg/L)·hr, teff 17.93 hr, 12.93 hr, dose 279.9 mg (4.0 mg/kg).
+
+**Formats observed:** every duration stem names the model ("one-compartment open model", "first-order elimination") and a single IV bolus; the MEC is given in mcg/mL and worked in mg/L, labelled "MEC", "Ceff" or "minimum effective concentration", and once in mg/L (homework). She asks the duration as "teff", "duration of action" or "duration of activity" interchangeably. Weight is given in pounds (Practice 2) or kg with mg/kg dosing and L/kg volume (Practice 3, homework), where the kilograms cancel in C0. Each set pairs a teff with a dose change (×2 or ×4) and states the change as a count of half-lives (Δteff = 10 hr → 2 t½; "Increase of one half-life → 3.6 hr"), or asks the dose for a target duration, worked as D0 = Ceff VD e^(k teff) and reported per kg when the stem doses per kg. She uses all three teff forms: ln with k (Practice 1, 2, slide 8), t½/0.693 (Practice 3), 1.44 t½ (in-class). k to four decimals (0.1386, 0.1459). The poll is True/False on dose-doubling.
+
+# Module 8 — Nonlinear pharmacokinetics (lecture 14 Oct 2026, final exam)
+
+## Source: `8 - Nonlinear PK.pdf`, slides "Example" (printed stems), 10.14 lecture
+
+> **Example (slide 12).** Given that KM = 5 mg/L and Vmax = 8 mg/kg/day, calculate the required daily dose rate to achieve an average plasma concentration of 24 mg/L in a 65 kg patient.
+
+**Her answer (written on slide 12, spoken in the 10.14 lecture):** R = (8 mg/kg/day · 24 mg/L)/((5 + 24) mg/L) = 6.62 mg/kg/day × 65 kg = 430 mg/day; "if I'm your patient, please don't tell me 6.62 mg per kilogram per day ... tell me what I need"; "I don't wanna just see 1000 mg". *Recompute:* 6.6207 mg/kg/day, 430.34 mg/day → **matches**.
+
+> **Example (slide 14).** After receiving a drug that displays nonlinear kinetics at a dose of 6 mg/kg/day for some time, the steady-state plasma concentration in a 72 kg patient was determined to be 10 mg/L. Since this concentration was lower than the desired steady-state concentration, the dose was increased to 8 mg/kg/day. This dose increase resulted in a steady-state plasma concentration of 20 mg/L, which was greater than the desired steady-state concentration. Calculate Vmax, KM, and a dose rate that should achieve a steady-state plasma concentration of 15 mg/L.
+
+**Her answers (slide 15):** KM = (8 − 6) mg/kg/day / ((6/10) − (8/20)) (mg/kg/day)/(mg/L) = 10 mg/L; Vmax = R(KM + Css)/Css = 8 mg/kg/day (10 + 20) mg/L / 20 mg/L = 12 mg/kg/day, and with the other pair 6 (10 + 10)/10 = 12 mg/kg/day, "regardless of which rate that's used should reach same answer"; R = 12 mg/kg/day · 15 mg/L / (10 + 15) mg/L = 7.2 mg/kg/day × 72 kg = 518.4 mg/day ≈ 520 mg/day. Spoken: "Don't panic if I ask you to round to the nearest 10 ... 520 or if I said the nearest 5 be 515. Now, if you give me 518.4, again, it's OK for this class." *Recompute:* 10.000, 12.000, 518.40 → **matches**.
+
+## Source: In-Class Practice, Nonlinear PK (14 Oct) — sheet not posted; stems read from the photographs on pages 20 and 21 of the annotated deck
+
+> 1. What daily dose rate of a non-linear drug would provide a steady-state concentration of 15 mg/L? In this patient, the KM is 6.9 mg/L and the Vmax is 584 mg/day.
+
+> 2. When a 25 year-old, 75 kg patient was taking a daily oral dose of 350 mg, his steady state plasma concentration was 9.2 mg/L. When the daily dose was increased to 450 mg, a steady-state plasma concentration of 20 mg/L resulted. What is the KM of this drug in this patient?
+
+> 3. Based on the KM found in the previous question, what is the patient's Vmax?
+
+> 4. A 66-kg patient is receiving phenytoin for the treatment of seizures. When she was taking a daily oral dose of 300 mg phenytoin, her steady-state plasma concentration was 7.2 mg/L. Because the phenytoin plasma concentration was well below the therapeutic range, the patient's dose was increased to 500 mg phenytoin, which resulted in a steady-state plasma concentration of 18 mg/L. (Assume that the absolute bioavailability of phenytoin is 100% and the volume of distribution is 0.7 L/kg.)
+> a. Calculate the patient's KM
+> b. Calculate the patient's Vmax
+> c. Recommend a daily dose of phenytoin for this patient to achieve a phenytoin plasma concentration of 15 mg/L at steady state.
+> d. Calculate the half-life and the total body clearance when the plasma concentration is 15 mg/L.
+> e. What steady-state concentration should be achieved if the dose were 400 mg daily?
+
+The sheet prints R = VmaxCss/(KM + Css) beside question 1 and the three direct-method lines (R1, R2, KM) beside question 2. The blue working on the photographs is the student's (Q1 miscopies 584 as 548 → 375.34 mg/day; Q2 rounds to 4.6 and 6 mg/kg/day and writes 6.2; Q3 writes 585.87 mg/day).
+
+**Her answers (spoken in the 10.14 lecture):**
+- 1: "I came up with 400 mg per day." *Recompute:* 584 × 15/21.9 = 400.00 → **matches**.
+- 2: "I came up with 6.43 ... our KM is going to be in um concentration terms, so milligrams per liter." *Recompute:* 100/(38.043 − 22.5) = 6.4336 → **matches**.
+- 3: rendered "5095 mg per day" and then "505 mg per per day"; "I did it both with using both different rates and concentrations". *Recompute:* 450(6.43 + 20)/20 = 594.7; 350(6.43 + 9.2)/9.2 = 594.6 → **differs from the words as rendered**; 505 cannot come from the stem by either pair, and "5095" reads as "595" with a stray digit. The drill keys 595 mg/day and says so in the question's note.
+- 4a: "14.4 mg per liter". *Recompute:* 200/(41.667 − 27.778) = 14.400 → **matches**.
+- 4b: "I got 900 mg per day". *Recompute:* 300 × 21.6/7.2 = 900; 500 × 32.4/18 = 900 → **matches**.
+- 4c: "460 mg per day". *Recompute:* 900 × 15/29.4 = 459.18 → 460 (nearest ten) → **matches**.
+- 4d: "Half-Life, I got 1.05 day ... the clearance. I got 30.6 L per day. You can change it to liters per hour if you want to." *Recompute:* VD = 0.7 × 66 = 46.2 L; t½ = 46.2(0.693/900)(29.4) = 1.0459 → 1.05 day; ClT = 900/29.4 = 30.61 L/day → **matches**. She adds: "I could have asked you half-life and clearance at 7.2 or half-life and clearance at 18 because we expect that they're gonna be different."
+- 4e: "I came up with 11.5 mg per liter". *Recompute:* 400 × 14.4/(900 − 400) = 11.52 → **matches**. She then worked the rearrangement on the board: R·KM + R·Css = Vmax·Css → R·KM = Css(Vmax − R) → Css = R·KM/(Vmax − R).
+
+**PollEv (true/false, before the sheet):** "Drugs that display Michaelis-Menten saturation kinetics will often exhibit zero-order kinetics at low concentrations and first-order kinetics at high concentrations." Keyed **False**: "Most of you guys thought that it was false ... Should have been false, right? Low concentrations looks like 1st order, high concentrations looks like zero order."
+
+## Source: `Nonlinear-Solutions-1.pdf` ("PHAR 4221 Daily Practice Nonlinear Solutions 1")
+
+> 1. A 143 lb, 21-year-old woman is receiving phenytoin for the treatment of seizures. When she was taking a daily oral dose of 300 mg phenytoin, her steady-state plasma concentration was 5.1 mg/L. Because the phenytoin plasma concentration was well below the therapeutic range, the patient's dose was increased to 500 mg phenytoin, which resulted in a steady-state plasma concentration of 20 mg/L. (Assume that the absolute bioavailability of phenytoin is 100% and the volume of distribution is 0.7 L/kg.)
+> a. Calculate the patient's Vmax and KM.
+> b. Recommend a daily dose of phenytoin for this patient to achieve a phenytoin plasma concentration of 15 mg/L at steady state.
+> c. Calculate the half-life and the total body clearance when the plasma concentration is 15 mg/L.
+> d. What will be the steady-state concentration that should be achieved if the dose were 450 mg daily?
+
+**Keyed answers:** (a) KM = (500 − 300 mg/day)/((300/5.1) − (500/20)) = 5.91 mg/L; Vmax = (300 mg/day)(5.91 + 5.1)/5.1 = 647.83 mg/day; (b) R = (647.83)(15)/(5.91 + 15) = 464.73 ⇒ 465 mg/day; (c) t½ = (0.693/647.83)(5.91 + 15)(0.7 L/kg)(65 kg) = 1.02 day; ClT = 647.83/(5.91 + 15) = 30.98 L/day; (d) Css = (450)(5.91)/(647.83 − 450) = 13.5 mg/L.
+
+*Recompute:* KM 5.9130; Vmax 647.826; R 464.66; weight 143/2.2 = 65 kg, VD 45.5 L, t½ 1.0179; ClT 30.977; Css 13.45 (her 13.5) → **match** (13.45 rounds to 13.5).
+
+**Formats observed:** weight in pounds, converted only for the half-life; VD in L/kg; Vmax and KM asked together in one part; half-life and clearance asked together "when the plasma concentration is 15 mg/L"; the dose rounded to 465 mg/day with no rounding instruction. One page.
+
+## Source: `Nonlinear-Solutions-2.pdf` ("PHAR 4221 Daily Practice Nonlinear Solutions 2")
+
+> 1. A 75-kg, 32-year-old female has been taking 200 mg phenytoin daily. Because her average phenytoin plasma concentration was only 6 mg/L, her dose was increased to 350 mg/day. The steady-state average phenytoin concentration was then found to be 21 mg/L. (Volume of distribution = 0.75 L/kg and F = 1)
+> a. Calculate the patient's Vmax and KM.
+> b. Recommend a daily dose of phenytoin for this patient to achieve a phenytoin plasma concentration of 15 mg/L at steady state.
+> c. Calculate the half-life and the total body clearance when the plasma concentration is 15 mg/L and at 21 mg/L.
+> 2. What is the difference between linear and non-linear pharmacokinetics?
+> 3. What changes in t½ and ClT are usually observed with increased concentrations of drugs that exhibit nonlinear pharmacokinetics?
+
+**Keyed answers:** (a) KM = (350 − 200)/((200/6) − (350/21)) = 9 mg/L; Vmax = 350(9 + 21)/21 = 500 mg/day; (b) R = 500(15)/(9 + 15) = 312.5 → 315 mg/day; (c) t½15 = (0.693/500)(9 + 15)(0.75)(75) = 1.87 days; t½21 = 2.34 days; ClT15 = 500/(9 + 15) = 20.8 L/day; the second clearance, labelled "ClT 15" on the sheet, = 500/(9 + 21) = 16.7 L/day. Questions 2 and 3 carry no written key.
+
+*Recompute:* 9.000, 500.0, 312.5 (her 315), 1.8711, 2.3389, 20.833, 16.667 → **match** (315 is 312.5 rounded up to the nearest 5; the sheet's "ClT 15" label on the 21 mg/L line is a typo).
+
+**Formats observed:** doses as "200 mg phenytoin daily" and "350 mg/day"; "average" steady-state concentration; F stated as "F = 1"; half-life and clearance at two named concentrations, showing both change; two written concept questions after the calculation.
+
+## Source: `Homework-7.pdf`, question 2 (nonlinear; question 1 belongs to Module 7b)
+
+> 2. A 68-kg, 28-year-old female is receiving phenytoin for the treatment of seizures. When this patient was taking a daily oral dose of 300 mg, her steady state plasma concentration was 9.12 mg/L. The daily dose was increased to 400 mg which resulted in a steady-state plasma concentration of 21.8 mg/L. Assume 100% bioavailability and an apparent volume of distribution that is equal to 70% of body weight.
+> a. What is this patient's KM?
+> b. What is the Vmax in this patient?
+> c. What is the daily dose rate of phenytoin that should achieve a steady state phenytoin plasma concentration of 15 mg/L in this patient? (Round to the nearest ten)
+> d. What is the half-life and clearance in this patient while she is taking the dose that you recommended above to achieve a steady state concentration of 15 mg/L?
+> e. What is the expected steady state concentration if this patient were to take 325 mg/day?
+
+No posted key; the file is the student's submitted work. Following the q10_homework.js rule (graded homework: her wording, numbers changed), the drill uses 72 kg, 31 years, 250 and 350 mg giving 6.4 and 17.6 mg/L, a 14 mg/L target and 300 mg/day in e: KM 5.21 mg/L, Vmax 453.7 mg/day, 330 mg/day, 1.48 days and 23.61 L/day, 10.18 mg/L.
+
+**Formats observed:** VD "equal to 70% of body weight"; "(Round to the nearest ten)"; part d points back to "the dose that you recommended above", taken at the 15 mg/L target.
+
+## Formats observed across the module
+
+- The two-dose stem: dose 1 and its steady state, "Because the ... concentration was well below the therapeutic range", dose 2 and its steady state; then KM, Vmax, a dose for 15 mg/L, t½ and ClT at 15 mg/L, and Css at a third dose. 15 mg/L is the target in every sheet.
+- KM always first, by the direct method; Vmax from either pair, and she says both pairs must agree.
+- Vmax given per kilogram (mg/kg/day) in the slide examples, so the dose rate is multiplied by the weight at the end; per day (mg/day) on the sheets, where the weight serves only VD.
+- Units she insists on: KM in mg/L; Vmax and R in mg/day or mg/kg/day; clearance in L/day ("You can change it to liters per hour if you want to"); t½ in days.
+- Rounding: nearest ten when asked (Homework 7c, slide 15's 520), otherwise to a givable dose (465, 315, 460); the unrounded value "is OK for this class".
+- Concept forms: a true/false poll on the order at low and high concentration; two written questions (difference between linear and nonlinear; direction of t½ and ClT with concentration).
+- Steady state for a nonlinear drug: "anywhere from 2 to 3 weeks", not 3 to 5 half-lives (spoken on slide 11).
+
+## Files that could not be fully used
+
+- `Chapter18_NonlinearPharmacokinetics.pdf` (Shargel, 43 MB): the Drive text extraction returns only page headers (46 image-only pages, no text layer), so no definition from it is used; every claim in the module rests on the deck, her sheets and the transcript.

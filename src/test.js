@@ -979,7 +979,7 @@ console.log('\n=== 10. Bank fields are plain text ===');
   if (cols.join(',') !== '21,15,12,4') bad(`sheet columns hold ${cols.join(', ')} lines; the sheet prints 21, 15, 12 and 4`);
   const badSheet = L.concat(X.SHEET_MISSING).flatMap(l => [l.eq, ...(l.alsoEq || [])]).filter(id => id && !E[id]);
   if (badSheet.length) bad('sheet map names an equation id that does not exist: ' + badSheet.join(', ')); else console.log('  ok    every sheet-map drill link points at a real equation');
-  const badMod = L.filter(l => ![0, 1, 2, 3, 4, 5, 6, 7].includes(l.module)).length;
+  const badMod = L.filter(l => ![0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(l.module)).length;
   if (badMod) bad(`${badMod} sheet line(s) carry an unknown module`);
   const fracs = L.concat(X.SHEET_MISSING).map(l => l.html + l.when + (l.need || '')).join(' ');
   const open = (fracs.match(/\{\{frac:/g) || []).length, good = (fracs.match(/\{\{frac:[^|}]*\|[^}]*\}\}/g) || []).length;
