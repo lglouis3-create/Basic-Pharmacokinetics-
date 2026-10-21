@@ -10,6 +10,11 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - Quiz 5 (Modules 7b and 8, 19 Oct): her eight Canvas questions word for word, with her keys.
 - Module 8: Nonlinear Practice 3 and 4 added as problem sets, keyed from her sheets.
 - Homework 1–5 and 7 now also in her own numbers; the changed-number sets stay as extra practice.
+- Worksheets tab: every handout, quiz and slide set by module and kind of activity, with its date and problem numbers.
+- Worksheets: Open original and Download original link the drill owner's Google Drive copy; nothing is copied here.
+- Worksheets: a printable PDF of each set, her problems with room to work, and the same PDF with solutions after it.
+- Each solution is marked "Her key" or "Worked by the drill"; homework has a second PDF pair with changed numbers.
+- Under every answer: "From:" the document and problem number, with links to its worksheet and the original.
 
 ## 2026-10-17 (Modules 7b and 8; papers survive a reload; concept statuses)
 - Module 7b (PK-PD): 43 questions, 19 of them calculations, in 7 problem sets from her slides and sheets.

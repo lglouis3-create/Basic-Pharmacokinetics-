@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,whySentences,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,whySentences,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB,sheetHTML,sheetFiles,sheetPlan,sharedLead,dropCarry,fromLineHTML,SRC_LIST,SRC_OF,setNumbers};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -1128,6 +1128,53 @@ console.log('\n=== Textbook reading cards ===');
   const badLead = RS.filter(r => (X.rdLead(r.about)[0].match(/[.!?](\s|$)/g) || []).length !== 2).map(r => r.id);
   if (badLead.length) bad(`card lead is not two sentences: ${badLead.join(', ')}`);
   else console.log('  ok    each card leads with two sentences');
+})();
+
+console.log('\n=== Worksheets: print markup per source (views.js sheetHTML) ===');
+(() => {
+  const S = X.SRC_LIST, files = X.sheetFiles();
+  if (!S.length) { warn('no SOURCES in the build'); return; }
+  // every source with questions has its worksheet and solutions; homework with both numberings has the changed pair
+  for (const s of S) {
+    if (!(s.items || []).length) continue;
+    const mine = files.filter(f => f.src === s.id).map(f => f.mode);
+    const plan = X.sheetPlan(s);
+    const want = ['worksheet', 'solutions'].concat(plan.changed.length ? ['changed-worksheet', 'changed-solutions'] : []);
+    const miss = want.filter(m => !mine.includes(m));
+    if (miss.length) bad(`source ${s.id}: no ${miss.join(', ')} file`);
+    if (s.type === 'homework' && plan.main.some(g => g.kind === 'changed') && plan.changed.length) bad(`source ${s.id}: changed numbers on the main worksheet`);
+    if (s.type === 'homework' && plan.main.some(g => g.kind === 'original') && plan.main.some(g => g.kind === 'changed')) bad(`source ${s.id}: both numberings on one worksheet`);
+  }
+  let parts = 0, bads = 0;
+  for (const f of files) {
+    const h = X.sheetHTML(f.src, f.mode);
+    const n = (h.match(/class="wspart/g) || []).length, labs = (h.match(/data-label="[^"]+"/g) || []).length;
+    parts += f.sol ? 0 : n;
+    const probs = [];
+    if (!n) probs.push('no parts');
+    if (labs !== n) probs.push(`${n - labs} part(s) without a label`);
+    if (/\bundefined\b|\bNaN\b|\[object /.test(h)) probs.push('undefined/NaN in the markup');
+    if (/\((?:Parts?|Questions?) [^()]{0,40}: /.test(h.replace(/<[^>]+>/g, '').split('Solutions')[0])) probs.push('a carried-value bracket is printed');
+    if (!f.sol && /Answer:|Her key|Worked by the drill|class="wssol/.test(h)) probs.push('solutions on the worksheet');
+    if (f.sol && (h.match(/<b>Answer:<\/b>/g) || []).length !== n) probs.push('not one answer per part');
+    if (probs.length) { bad(`${f.path}: ${probs.join('; ')}`); bads++; }
+  }
+  if (!bads) console.log(`  ok    ${files.length} sheets render, ${parts} worksheet parts each labelled, no answers on a worksheet, one answer per part on its solutions`);
+  // the shared case text stops at a sentence, and each part keeps its own question
+  const a = 'A 70-kg man got 500 mg. Plasma levels were taken. a. What is k?', b = 'A 70-kg man got 500 mg. Plasma levels were taken. b. What is t1/2?';
+  const cut = X.sharedLead([a, b]);
+  if (a.slice(0, cut).trim() !== 'A 70-kg man got 500 mg. Plasma levels were taken.') bad(`sharedLead cut at "${a.slice(0, cut)}"`);
+  else if ((() => { const p = ['Determine the following from the data provided: 1. Total body clearance. What is ClT?',
+                                'Determine the following from the data provided: 1. Total body clearance, renal. What is ClR?'];
+                     return !/provided:\s*$/.test(p[0].slice(0, X.sharedLead(p))); })())
+    bad('sharedLead cuts after a list marker');
+  else console.log('  ok    shared case text ends at a sentence, never after a list marker');
+  if (X.dropCarry('What is VD? (Part a: k = 0.1 hr⁻¹; part c: AUC = 432.9 (mg/L)·hr.)') !== 'What is VD?') bad('dropCarry leaves a carried-value bracket');
+  else console.log('  ok    carried-value brackets are left off the printed part');
+  // the From line under an answer
+  const ids = Object.keys(X.SRC_OF), noLine = ids.filter(id => { const q = X.byId(id); return q && !/From: .+Worksheet<\/a>/.test(X.fromLineHTML(q)); });
+  if (noLine.length) bad(`${noLine.length} question(s) with a source and no From line: ${noLine.slice(0, 5).join(', ')}`);
+  else console.log(`  ok    ${ids.length} questions name their source and link its worksheet`);
 })();
 
 console.log(`\n${fails ? 'FAILURES: '+fails : 'All checks passed'}${warns ? '  (warnings: '+warns+')' : ''}\n`);

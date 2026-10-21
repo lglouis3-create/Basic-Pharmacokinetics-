@@ -287,7 +287,7 @@ function poolFor(topicId, subId){
     matchesFilter(q));
 }
 
-const VIEWS = ['topics','quiz','gaps','exam','guide','tell','terms','diag','eq','ref','settings'];
+const VIEWS = ['topics','quiz','gaps','exam','sheets','guide','tell','terms','diag','eq','ref','settings'];
 function show(v){
   VIEW = v;
   { const lb = document.getElementById('lback'); if(lb) lb.remove(); }
@@ -297,7 +297,7 @@ function show(v){
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
   ({topics:renderTopics, quiz:renderQuiz, gaps:renderGaps, exam:renderExam,
-    guide:renderGuide, tell:renderTell, terms:renderTerms, diag:renderDiagrams, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
+    sheets:renderSheets, guide:renderGuide, tell:renderTell, terms:renderTerms, diag:renderDiagrams, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
 }
 
 /* ==========================================================================
@@ -1263,7 +1263,7 @@ function missKindPrompt(q, entered, title, extra){
 /* One way back from every drill: a chip at the top that returns to the tab
    the drill was started from. Inside the tab that owns the drill, the same
    chip stops the drill and shows that tab's picker. */
-const VIEW_LABEL = {topics: 'Topics', quiz: 'Quiz', gaps: 'Weak spots', exam: 'Exam sim', guide: 'Guides', tell: 'Tell apart', terms: 'Terms', diag: 'Diagrams', eq: 'Equations', ref: 'Reference', settings: 'Settings'};
+const VIEW_LABEL = {topics: 'Topics', quiz: 'Quiz', gaps: 'Weak spots', exam: 'Exam sim', sheets: 'Worksheets', guide: 'Guides', tell: 'Tell apart', terms: 'Terms', diag: 'Diagrams', eq: 'Equations', ref: 'Reference', settings: 'Settings'};
 function drillBackHTML(from, own, stopLabel, note){
   const v = VIEW_LABEL[from] ? from : 'topics';
   const label = v === own ? stopLabel : `← Back to ${VIEW_LABEL[v]}`;
@@ -1470,7 +1470,7 @@ function renderQuizAll(){
   const shown = list.slice(0, Q.allShow);
   let h = `<div class="sessline">${drillBackHTML(Q.from, 'quiz', '← Back to Topics')}${sessStrip()}</div><div class="allhead"><b>${esc(Q.label)}</b><span id="allCount">${allCountText(list)}</span></div>
     <div class="laywrap">${layoutToggle()}</div>
-    ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}`;
+    ${Q.chain && Q.chain.setup ? `<p class="cset">${Q.chain.setup}</p>` : ''}`;
   h += shown.map((id, i) => allCardHTML(byId(id), i + 1, list.length)).join('');
   if(list.length > shown.length) h += `<p style="text-align:center"><button class="btn ghost" id="allMore">Show ${Math.min(40, list.length - shown.length)} more</button></p>`;
   if(!list.length) h += `<div class="empty">Every question in this drill has been answered.</div>`;
@@ -1640,6 +1640,7 @@ function feedbackHTML(q, st){
         from the start</button></p>`;
     h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${
         srcFlag(q)}${esc(q.cite)}</div>`;
+    h += fromLineHTML(q);
     h += explainHTML(q);
     h += `</div>`;
   return h;
@@ -1708,7 +1709,7 @@ function renderQuiz(){
     <span>${Q.sweep ? `${Q.sweep.length - Q.i} to go` : `${left} concept${left===1?'':'s'} to go`}</span>
   </div>
   <div class="qbody">
-    ${Q.chain ? `<p class="cset">${Q.chain.setup}</p>` : ''}
+    ${Q.chain && (Q.chain.setupOf ? Q.chain.setupOf[q.id] : Q.chain.setup) ? `<p class="cset">${Q.chain.setupOf ? Q.chain.setupOf[q.id] : Q.chain.setup}</p>` : ''}
     <div class="stem">${stemHTML(q.stem)}</div>`;
 
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -3316,7 +3317,7 @@ function renderExamResult(){
     if(q.teach) h += `<div class="teach"><h4>The concept behind this</h4>${
         q.teachImg && IMAGES[q.teachImg] ? `<img class="qimg tdimg" src="${IMAGES[q.teachImg]}" alt="Figure from the lecture slide">` : ''}${
         renderTeach(q.teach)}</div>`;
-    h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${srcFlag(q)}${esc(q.cite)}</div>${explainHTML(q)}</div></div>`;
+    h += `<div class="cite">${q.quote ? `<span class="quote">“${esc(q.quote)}”</span>` : ''}${srcFlag(q)}${esc(q.cite)}</div>${fromLineHTML(q)}${explainHTML(q)}</div></div>`;
   });
   $('#v-exam').innerHTML = h;
   $('#exAgain').onclick = ()=>{ EX=null; clearExam(); renderExam(); };
@@ -4951,6 +4952,288 @@ function suCardHTML(){
       <button class="chip" data-sufrom="sheet" aria-pressed="${suFrom() === 'sheet'}">The whole sheet</button>
       <small class="sm">${suFrom() === 'sheet' ? 'Every line, block by block, as the exam hands the sheet over: open the block you think is right, then pick the line.' : 'The right line and three others, drawn first from the same module.'}</small></div>
   </div></div>`;
+}
+
+/* ==========================================================================
+   WORKSHEETS
+   ==========================================================================
+   Every original document the bank's problem sets and quiz items come from
+   (SOURCES, written by gen/sources.py), listed under its module and activity
+   type, with links to the student's own copy in Google Drive, a printable
+   worksheet, the same worksheet with solutions, and the problem sets in the
+   drill.
+
+   The PDFs are made at build time by gen/sheets.py: it loads the built page,
+   prints sheetHTML(source, mode) for every file sheetFiles() names, and
+   writes it to the path sheetPath() gives. The tab and the answer panels link
+   the same paths, so a link cannot point at a file the build did not write.
+
+   Homework comes in two sets of numbers. A set named "(original numbers)" (or
+   whose parts are hwo*, hw7o-*, nl-hwo-*) is her sheet; a set named "(changed
+   numbers)" is the drill's re-numbered copy. The worksheet carries the
+   original numbers, and the changed numbers get a second worksheet pair for
+   extra practice. Where only changed numbers exist the worksheet carries
+   those, and says so.
+   ========================================================================== */
+const SRC_LIST = typeof SOURCES === 'undefined' ? [] : SOURCES;
+const SRC_OF = typeof SOURCE_OF === 'undefined' ? {} : SOURCE_OF;
+const SRC_BY = Object.fromEntries(SRC_LIST.map(s => [s.id, s]));
+const SRC_TYPES = [['daily-practice', 'Daily practice sheets'], ['in-class', 'In-class activities'], ['homework', 'Homework'],
+  ['quiz', 'Canvas quizzes'], ['review', 'Review sets'], ['example', 'Lecture slides: worked examples'], ['lecture-slides', 'Lecture slides']];
+const SRC_TYPE_ONE = {'daily-practice': 'Daily practice sheet', 'in-class': 'In-class activity', homework: 'Homework',
+  quiz: 'Canvas quiz', review: 'Review set', example: 'Lecture slides, worked examples', 'lecture-slides': 'Lecture slides'};
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/* An ISO date as "12 Oct 2026"; a blank date stays blank and is shown as "No date". */
+const srcDate = d => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ''); return m ? `${+m[3]} ${MONTHS[+m[2] - 1]} ${m[1]}` : ''; };
+const driveView = id => `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
+const driveDown = id => `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
+const srcModName = m => (COURSE.topicsMenu.find(t => t.module === m) || {}).name || ('Module ' + modShort(m));
+const sheetPath = (s, variant, sol) =>
+  `sheets/module-${modShort(s.module).toLowerCase()}/${s.id}-${variant === 'changed' ? 'changed-' : ''}${sol ? 'solutions' : 'worksheet'}.pdf`;
+
+/* original | changed | '' for a problem set, from its name or its part ids */
+function setNumbers(c){
+  if(/\(changed numbers\)/i.test(c.name || '')) return 'changed';
+  if(/\(original numbers\)/i.test(c.name || '') || /^(hwo|hw7o-|nl-hwo-)/.test(c.id)
+     || (c.parts.length && c.parts.every(id => /^(hwo|hw7o-|nl-hwo-)/.test(id)))) return 'original';
+  return '';
+}
+const srcLabel = id => (SRC_OF[id] || {}).label || '';
+/* The worksheet's groups: one per problem set (the parts that come from this
+   source, in her order), then each quiz item that sits in no set. */
+function sheetPlan(s){
+  const sets = (s.chains || []).map(id => (typeof CHAINS === 'undefined' ? [] : CHAINS).find(c => c.id === id)).filter(Boolean)
+    .map(c => ({chain: c, ids: c.parts.filter(id => SRC_OF[id] && SRC_OF[id].src === s.id && byId(id)), kind: setNumbers(c)}))
+    .filter(g => g.ids.length);
+  const orig = sets.filter(g => g.kind === 'original');
+  let changed = sets.filter(g => g.kind === 'changed'), main = sets.filter(g => g.kind !== 'changed');
+  if(orig.length){
+    // an older set of the same problem in her numbers is already on the sheet: leave it off
+    const have = new Set(orig.flatMap(g => g.ids.map(srcLabel)));
+    const dup = main.filter(g => !g.kind && g.ids.every(id => have.has(srcLabel(id))));
+    main = main.filter(g => !dup.includes(g));
+    changed = changed.concat(dup.filter(g => g.ids.every(id => /^(hw\d|hw7-|nl-hw-)/.test(id))));
+  }
+  let mainChanged = false;
+  if(!main.length && changed.length){ main = changed; changed = []; mainChanged = true; }
+  const inSet = new Set(sets.flatMap(g => g.ids));
+  (s.items || []).forEach(it => { if(!inSet.has(it.q) && byId(it.q)) main.push({chain: null, ids: [it.q], kind: ''}); });
+  // her numbering decides the order of the problems where every one is numbered; examples keep the deck's order
+  const num = g => { const m = /\d+/.exec(srcLabel(g.ids[0])); return m ? +m[0] : null; };
+  const order = gs => s.type !== 'example' && gs.every(g => num(g) != null)
+    ? gs.map((g, i) => [g, i]).sort((a, b) => num(a[0]) - num(b[0]) || a[1] - b[1]).map(x => x[0]) : gs;
+  return {main: order(main), changed: order(changed), mainChanged};
+}
+const sheetGroups = (s, variant) => sheetPlan(s)[variant === 'changed' ? 'changed' : 'main'];
+const sheetVariants = s => { const p = sheetPlan(s); return p.main.length ? (p.changed.length ? ['main', 'changed'] : ['main']) : []; };
+/* Every PDF the build writes: [{src, variant, sol, path}]. */
+function sheetFiles(){
+  const out = [];
+  SRC_LIST.forEach(s => sheetVariants(s).forEach(v => [false, true].forEach(sol =>
+    out.push({src: s.id, variant: v, sol, mode: (v === 'changed' ? 'changed-' : '') + (sol ? 'solutions' : 'worksheet'), path: sheetPath(s, v, sol)}))));
+  return out;
+}
+/* Which worksheet a question is printed on, for the links under its answer. */
+const SHEET_OF = (() => {
+  const m = {};
+  SRC_LIST.forEach(s => { const p = sheetPlan(s);
+    ['main', 'changed'].forEach(v => p[v].forEach(g => g.ids.forEach(id => { if(!m[id]) m[id] = {s, variant: v}; }))); });
+  return m;
+})();
+
+/* ---- the text of a part on paper ----------------------------------------- */
+/* "(Part a: k = 0.1198 hr⁻¹.)": the value an earlier part found, carried so a
+   part can be answered alone in the drill. On paper the parts are worked in
+   order, so the bracket is left out. */
+const CARRY_RE = /\s*\((?:Parts?|Questions?|Problems?)\s[^():]{0,40}:\s(?:[^()]|\([^()]*\))*\)/g;
+const dropCarry = t => String(t || '').replace(CARRY_RE, '');
+/* Where the text the parts share ends: the longest common start of their
+   stems, cut back to the end of a sentence (or a paragraph), never after a
+   list marker such as "1." or "a.", and leaving every part some text. */
+function sharedLead(stems){
+  if(stems.length < 2) return 0;
+  const a = stems[0];
+  let n = 0;
+  while(n < a.length && stems.every(s => s[n] === a[n])) n++;
+  for(let i = n; i > 0; i--){
+    const head = a.slice(0, i);
+    const sentence = /[.?!:]\s+$/.test(head) && !/(?:^|\s)\(?(?:\d{1,2}|[a-z])[.)]\s+$/.test(head);
+    if(!(sentence || /\n\s*\n\s*$/.test(head))) continue;
+    if(stems.every(s => s.slice(i).trim().length)) return head.trim().length >= 20 ? i : 0;
+  }
+  return 0;
+}
+/* Her part letter at the start of a part's own text ("a. What is ...") is the
+   label already printed beside it. */
+function dropMarker(t, label){
+  const m = /^\s*\(?(\d{1,2}|[a-z])[.)]\s+/i.exec(t), e = /(\d{1,2}|[a-z])\)?$/i.exec(label || '');
+  return m && e && m[1].toLowerCase() === e[1].toLowerCase() ? t.slice(m[0].length) : t;
+}
+/* A fixed order for the options, from the question id, so the worksheet and
+   its solutions letter them alike on every build. */
+function wsOrder(q){
+  let h = 2166136261;
+  for(const ch of q.id) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+  const idx = (q.options || []).map((o, i) => i);
+  for(let i = idx.length - 1; i > 0; i--){ h = Math.imul(h ^ (h >>> 13), 1103515245) + 12345 >>> 0; const j = h % (i + 1); [idx[i], idx[j]] = [idx[j], idx[i]]; }
+  return idx;
+}
+const isCalcPart = q => kindOf(q) === 'calc' || (qType(q) !== 'match' && Array.isArray(q.steps) && q.steps.length > 0);
+/* Her key, or worked by the drill: her key only where the source is her own
+   solved sheet or annotated slide and nothing recorded on the question says
+   the value was computed here, chosen here, or only heard. */
+const DRILL_WORKED = /no worked answer|without a worked answer|does not record|stated no final value|did not state|ends before she states|not one she asks|computed here|chosen here|recording stops|does not work|applied to that example|her spoken values/i;
+function solvedBy(q, s){
+  if(!s || s.key !== 'instructor') return 'drill';
+  const a = String(q.audit || ''), t = a + ' ' + String(q.note || '');
+  if(DRILL_WORKED.test(t)) return 'drill';
+  if(/recording|aloud|spoken/i.test(a) && !/written working|her key|her sheet|worked on the|worked answers/i.test(a + ' ' + (s.note || ''))) return 'drill';
+  return 'her';
+}
+const SOLVED_LABEL = {her: 'Her key', drill: 'Worked by the drill'};
+const imgHTML = key => key && IMAGES[key] ? `<img class="wsimg" src="${IMAGES[key]}" alt="Figure for this problem">` : '';
+
+function sheetPartHTML(q, label, text, withImg){
+  const calc = isCalcPart(q), kind = qType(q);
+  let h = `<div class="wspart${calc ? ' calc' : ''}" data-qid="${esc(q.id)}" data-label="${esc(label)}">
+    <div class="wsq${label.length > 10 ? ' stack' : ''}"><span class="wslab">${esc(label)}</span><div class="wstext">${stemHTML(text)}</div></div>`;
+  if(withImg) h += imgHTML(q.img);
+  if(kind === 'match'){
+    h += `<div class="wsmatch"><ol class="wsleft">${(q.left || []).map(l => `<li>${rich(l)} <span class="wsblank">________</span></li>`).join('')}</ol>
+      <ol class="wsright" type="A">${(q.right || []).map(r => `<li>${rich(r)}</li>`).join('')}</ol></div>`;
+  }else if(kind !== 'numeric' && Array.isArray(q.options)){
+    h += `<ol class="wsopts" type="A">${wsOrder(q).map(i => `<li>${rich(q.options[i].t)}</li>`).join('')}</ol>`;
+  }
+  return h + `<div class="wswork${calc ? '' : ' short'}"></div></div>`;
+}
+function sheetSolHTML(q, label, s){
+  const kind = qType(q), by = solvedBy(q, s);
+  let ans;
+  if(kind === 'numeric') ans = `${esc(fmtAns(q.answer))} ${esc(q.units || '')}`;
+  else if(kind === 'match') ans = (q.pairs || []).map(p => `${rich(p.l)} → ${rich(p.r)}`).join('; ');
+  else { const ord = wsOrder(q);
+    ans = ord.map((oi, n) => q.options[oi].correct ? `${LETTERS[n]}. ${rich(q.options[oi].t)}` : null).filter(Boolean).join('; '); }
+  let h = `<div class="wssp" data-qid="${esc(q.id)}"><p class="wsshead"><span class="wslab">${esc(label)}</span><span class="wsby ${by}">${SOLVED_LABEL[by]}</span></p>
+    <p class="wsans"><b>Answer:</b> ${ans}</p>`;
+  if(kind === 'numeric') h += workedBlock(q);
+  else if(kind === 'match') h += pairsBlock(q);
+  else {
+    if(Array.isArray(q.steps) && q.steps.length) h += workedBlock(q);
+    const right = (q.options || []).filter(o => o.correct && o.why);
+    if(right.length) h += `<div class="wswhy">${right.map(o => `<p>${rich(o.why)}</p>`).join('')}</div>`;
+  }
+  if(q.note) h += `<p class="wsnote">${rich(q.note)}</p>`;
+  return h + `</div>`;
+}
+/* The print markup for one file: mode is worksheet, solutions,
+   changed-worksheet or changed-solutions. The solutions file is the
+   worksheet's pages, then the solutions after a page break. */
+function sheetHTML(sourceId, mode){
+  const s = SRC_BY[sourceId];
+  if(!s) return '';
+  const variant = /^changed-/.test(mode || '') ? 'changed' : 'main', sol = /solutions$/.test(mode || '');
+  const plan = sheetPlan(s), groups = plan[variant === 'changed' ? 'changed' : 'main'];
+  const changedNums = variant === 'changed' || plan.mainChanged;
+  const date = srcDate(s.date);
+  let h = `<article class="wsdoc" data-src="${esc(s.id)}" data-mode="${esc(mode)}"><div class="wshead">
+    <h1>${esc(s.title.replace(/\s*\(solutions\)\s*$/i, ''))}${variant === 'changed' ? ' — changed numbers (extra practice)' : ''}</h1>
+    <p class="wsmeta">${esc(srcModName(s.module))} · ${esc(SRC_TYPE_ONE[s.type] || s.type)} · ${date ? esc(date) : 'No date'}</p>
+    ${changedNums ? `<p class="wsmeta">The numbers on this sheet are changed from her sheet.</p>` : ''}
+    <p class="wsname"><span>Name <i></i></span><span>Date <i></i></span></p></div>`;
+  const parts = [];
+  groups.forEach((g, gi) => {
+    const qs = g.ids.map(byId);
+    const stems = qs.map(q => dropCarry(q.stem));
+    const cut = g.ids.length > 1 ? sharedLead(stems) : 0;
+    const imgs = [...new Set(qs.map(q => q.img).filter(k => k && IMAGES[k]))];
+    const sharedImg = imgs.length === 1 && qs.every(q => q.img === imgs[0]) && qs.length > 1 ? imgs[0] : null;
+    h += `<section class="wsgroup">`;
+    if(cut) h += `<div class="wscase">${stemHTML(stems[0].slice(0, cut).trim())}${sharedImg ? imgHTML(sharedImg) : ''}</div>`;
+    else if(sharedImg) h += `<div class="wscase">${imgHTML(sharedImg)}</div>`;
+    qs.forEach((q, i) => {
+      const label = srcLabel(q.id) || String(i + 1);
+      const text = dropMarker(stems[i].slice(cut).trim(), label);
+      h += sheetPartHTML(q, label, text, !sharedImg && !!q.img);
+      parts.push([q, label]);
+    });
+    h += `</section>`;
+  });
+  if(sol){
+    h += `<section class="wssol"><h2 class="wssolh">Solutions</h2>
+      <p class="wsmeta">${esc(SOLVED_LABEL.her)}: the answer and working on her own solved sheet or annotated slide. ${esc(SOLVED_LABEL.drill)}: the drill's own working${s.key === 'instructor' ? ', where her sheet gives no worked value' : ''}.</p>
+      ${parts.map(([q, label]) => sheetSolHTML(q, label, s)).join('')}</section>`;
+  }
+  return h + `</article>`;
+}
+
+/* ---- where a question came from, under its answer ------------------------ */
+function fromLineHTML(q){
+  const so = SRC_OF[q.id], s = so && SRC_BY[so.src];
+  if(!s) return '';
+  const on = SHEET_OF[q.id], links = [];
+  if(on || sheetVariants(s).length) links.push(`<a href="${esc(sheetPath(s, on ? on.variant : 'main', false))}" target="_blank" rel="noopener">Worksheet</a>`);
+  if(s.drive) links.push(`<a href="${esc(driveView(s.drive.id))}" target="_blank" rel="noopener">Original</a>`);
+  return `<p class="fromline">From: ${esc(s.title)}, ${esc(so.label)}${links.length ? ' · ' + links.join(' · ') : ''}</p>`;
+}
+
+/* ---- the tab --------------------------------------------------------------- */
+/* Her problem sets for one worksheet, in order, as one run in the drill. A
+   single whole set starts as that set; several run one after another. */
+function startSheetSet(id, variant){
+  const s = SRC_BY[id]; if(!s) return;
+  const groups = sheetGroups(s, variant), ids = groups.flatMap(g => g.ids);
+  if(!ids.length){ alert('That worksheet has no questions in the drill yet.'); return; }
+  if(groups.length === 1 && groups[0].chain && groups[0].ids.length === groups[0].chain.parts.length) return startChain(groups[0].chain.id);
+  const setupOf = {};
+  groups.forEach(g => g.ids.forEach(i => { setupOf[i] = g.chain ? g.chain.setup : ''; }));
+  const c = {id: 'src:' + id + ':' + variant, name: s.title + (variant === 'changed' ? ', changed numbers' : ''), setup: '', setupOf, parts: ids};
+  Q = {from: VIEW, pool: ids.map(byId), label: c.name, chain: c, since: Date.now(), sweep: ids.slice(), i: 0,
+       current: null, answered: 0, lastId: null, examMode: false, picked: null, revealed: false};
+  nextQuestion();
+  show('quiz');
+}
+const pdfLink = (href, text) => `<a class="btn small ghost" href="${esc(href)}" target="_blank" rel="noopener">${text}</a>`;
+function srcCardHTML(s){
+  const plan = sheetPlan(s), date = srcDate(s.date);
+  const labels = [...new Set(plan.main.concat(plan.changed).flatMap(g => g.ids.map(srcLabel)))];
+  let h = `<div class="srccard" id="src-${esc(s.id)}"><div class="srctop"><b>${esc(s.title)}</b><small>${date ? esc(date) : 'No date'}</small></div>`;
+  h += `<div class="srcrow"><span class="srcrlab">Original</span><span class="srcbtns">`;
+  if(s.drive) h += pdfLink(driveView(s.drive.id), 'Open original') + pdfLink(driveDown(s.drive.id), 'Download original');
+  else h += `<span class="srcmiss">${esc(s.missing || 'No original on file.')}</span>`;
+  h += `</span></div>`;
+  if(s.drive && s.key === 'student-work') h += `<p class="srcsub">Original: a completed copy, with the owner's working on it.</p>`;
+  if(plan.main.length){
+    h += `<div class="srcrow"><span class="srcrlab">${plan.mainChanged ? 'Worksheet, changed numbers' : 'Worksheet'}</span><span class="srcbtns">${
+      pdfLink(sheetPath(s, 'main', false), 'Worksheet (PDF)')}${pdfLink(sheetPath(s, 'main', true), 'Worksheet with solutions (PDF)')}<button class="btn small" data-srcgo="${esc(s.id)}" data-var="main">Practice in the drill</button></span></div>`;
+  }else h += `<p class="srcsub">No worksheet: ${esc(s.missing || 'no questions from this document are in the drill yet.')}</p>`;
+  if(plan.changed.length)
+    h += `<div class="srcrow"><span class="srcrlab">Changed numbers (extra practice)</span><span class="srcbtns">${
+      pdfLink(sheetPath(s, 'changed', false), 'Worksheet (PDF)')}${pdfLink(sheetPath(s, 'changed', true), 'Worksheet with solutions (PDF)')}<button class="btn small" data-srcgo="${esc(s.id)}" data-var="changed">Practice in the drill</button></span></div>`;
+  if(labels.length) h += `<p class="srcprobs"><span class="srcrlab">Problems</span> ${labels.map(esc).join(', ')}</p>`;
+  if(s.note) h += `<p class="srcsub">${esc(s.note)}</p>`;
+  return h + `</div>`;
+}
+function renderSheets(){
+  const el = $('#v-sheets');
+  let h = `<h2>Worksheets</h2>
+    <p class="sub">Every document the drill's problems come from, by module and then by kind of activity. Each has a worksheet to print or write on (her problems, with room to work) and the same worksheet with solutions, as PDFs.</p>
+    <p class="srcnote">Open original and Download original open the copy kept in the drill owner's Google Drive, so they work only for an account that folder is shared with. The originals are not copied onto this site, because the course materials may not be shared publicly; the worksheets below carry the same problems.</p>`;
+  const mods = COURSE.topicsMenu.filter(m => m.module != null);
+  mods.forEach(m => {
+    const here = SRC_LIST.filter(s => s.module === m.module);
+    if(!here.length) return;
+    h += `<section class="srcmod"><h3>${esc(m.name)}</h3>`;
+    SRC_TYPES.forEach(([t, name]) => {
+      const list = here.filter(s => s.type === t);
+      if(list.length) h += `<h4>${esc(name)}</h4>${list.map(srcCardHTML).join('')}`;
+    });
+    h += `</section>`;
+  });
+  const lost = SRC_LIST.filter(s => !mods.some(m => m.module === s.module));
+  if(lost.length) h += `<section class="srcmod"><h3>Other</h3>${lost.map(srcCardHTML).join('')}</section>`;
+  if(!SRC_LIST.length) h += `<div class="empty">No source documents are listed yet.</div>`;
+  el.innerHTML = h;
+  el.querySelectorAll('[data-srcgo]').forEach(b => b.onclick = () => startSheetSet(b.dataset.srcgo, b.dataset.var));
 }
 
 /* ==========================================================================

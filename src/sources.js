@@ -169,6 +169,7 @@ const SOURCES = [
   "type": "quiz",
   "module": 9,
   "modules": [
+   8,
    9
   ],
   "date": "2026-10-19",
@@ -179,12 +180,45 @@ const SOURCES = [
   "key": "student-work",
   "note": "",
   "chains": [],
-  "items": [],
-  "missing": "Bank items not added yet (cq5-1, cq5-2, ...); rerun gen/sources.py after they land."
+  "items": [
+   {
+    "q": "cq5-1",
+    "label": "Question 1"
+   },
+   {
+    "q": "cq5-2",
+    "label": "Question 2"
+   },
+   {
+    "q": "cq5-3",
+    "label": "Question 3"
+   },
+   {
+    "q": "cq5-4",
+    "label": "Question 4"
+   },
+   {
+    "q": "cq5-5",
+    "label": "Question 5"
+   },
+   {
+    "q": "cq5-6",
+    "label": "Question 6"
+   },
+   {
+    "q": "cq5-7",
+    "label": "Question 7"
+   },
+   {
+    "q": "cq5-8",
+    "label": "Question 8"
+   }
+  ],
+  "missing": ""
  },
  {
   "id": "ic-m3",
-  "title": "In-Class Activity: IV Infusions (solutions)",
+  "title": "In-Class Activity: IV Infusions",
   "type": "in-class",
   "module": 3,
   "modules": [
@@ -780,8 +814,11 @@ const SOURCES = [
   "chains": [
    "m1-antibiotic",
    "hw1-p1",
+   "hwo1-p1",
    "hw1-p2",
-   "hw1-p3"
+   "hwo1-p2",
+   "hw1-p3",
+   "hwo1-p3"
   ],
   "items": [
    {
@@ -813,6 +850,26 @@ const SOURCES = [
     "label": "1e"
    },
    {
+    "q": "hwo1-1a",
+    "label": "1a"
+   },
+   {
+    "q": "hwo1-1b",
+    "label": "1b"
+   },
+   {
+    "q": "hwo1-1c",
+    "label": "1c"
+   },
+   {
+    "q": "hwo1-1d",
+    "label": "1d"
+   },
+   {
+    "q": "hwo1-1e",
+    "label": "1e"
+   },
+   {
     "q": "hw1-2a",
     "label": "2a"
    },
@@ -825,11 +882,31 @@ const SOURCES = [
     "label": "2c"
    },
    {
+    "q": "hwo1-2a",
+    "label": "2a"
+   },
+   {
+    "q": "hwo1-2b",
+    "label": "2b"
+   },
+   {
+    "q": "hwo1-2c",
+    "label": "2c"
+   },
+   {
     "q": "hw1-3a",
     "label": "3a"
    },
    {
     "q": "hw1-3b",
+    "label": "3b"
+   },
+   {
+    "q": "hwo1-3a",
+    "label": "3a"
+   },
+   {
+    "q": "hwo1-3b",
     "label": "3b"
    }
   ],
@@ -852,7 +929,9 @@ const SOURCES = [
   "note": "",
   "chains": [
    "hw2-p1",
-   "hw2-p2"
+   "hwo2-p1",
+   "hw2-p2",
+   "hwo2-p2"
   ],
   "items": [
    {
@@ -880,6 +959,30 @@ const SOURCES = [
     "label": "1f"
    },
    {
+    "q": "hwo2-1a",
+    "label": "1a"
+   },
+   {
+    "q": "hwo2-1b",
+    "label": "1b"
+   },
+   {
+    "q": "hwo2-1c",
+    "label": "1c"
+   },
+   {
+    "q": "hwo2-1d",
+    "label": "1d"
+   },
+   {
+    "q": "hwo2-1e",
+    "label": "1e"
+   },
+   {
+    "q": "hwo2-1f",
+    "label": "1f"
+   },
+   {
     "q": "hw2-2a",
     "label": "2a"
    },
@@ -893,6 +996,22 @@ const SOURCES = [
    },
    {
     "q": "hw2-2d",
+    "label": "2d"
+   },
+   {
+    "q": "hwo2-2a",
+    "label": "2a"
+   },
+   {
+    "q": "hwo2-2b",
+    "label": "2b"
+   },
+   {
+    "q": "hwo2-2c",
+    "label": "2c"
+   },
+   {
+    "q": "hwo2-2d",
     "label": "2d"
    }
   ],
@@ -914,7 +1033,8 @@ const SOURCES = [
   "key": "student-work",
   "note": "",
   "chains": [
-   "hw3-p1"
+   "hw3-p1",
+   "hwo3-p1"
   ],
   "items": [
    {
@@ -956,6 +1076,46 @@ const SOURCES = [
    {
     "q": "hw3-j",
     "label": "j"
+   },
+   {
+    "q": "hwo3-a",
+    "label": "a"
+   },
+   {
+    "q": "hwo3-b",
+    "label": "b"
+   },
+   {
+    "q": "hwo3-c",
+    "label": "c"
+   },
+   {
+    "q": "hwo3-d",
+    "label": "d"
+   },
+   {
+    "q": "hwo3-e",
+    "label": "e"
+   },
+   {
+    "q": "hwo3-f",
+    "label": "f"
+   },
+   {
+    "q": "hwo3-g",
+    "label": "g"
+   },
+   {
+    "q": "hwo3-h",
+    "label": "h"
+   },
+   {
+    "q": "hwo3-i",
+    "label": "i"
+   },
+   {
+    "q": "hwo3-j",
+    "label": "j"
    }
   ],
   "missing": ""
@@ -977,7 +1137,9 @@ const SOURCES = [
   "note": "The blank question sheet.",
   "chains": [
    "hw4-p1",
-   "hw4-p2"
+   "hwo4-p1",
+   "hw4-p2",
+   "hwo4-p2"
   ],
   "items": [
    {
@@ -986,6 +1148,14 @@ const SOURCES = [
    },
    {
     "q": "hw4-1crcl",
+    "label": "Problem 1"
+   },
+   {
+    "q": "hwo4-1ibw",
+    "label": "Problem 1"
+   },
+   {
+    "q": "hwo4-1crcl",
     "label": "Problem 1"
    },
    {
@@ -1019,6 +1189,38 @@ const SOURCES = [
    {
     "q": "hw4-2h",
     "label": "2h"
+   },
+   {
+    "q": "hwo4-2a",
+    "label": "2a"
+   },
+   {
+    "q": "hwo4-2b",
+    "label": "2b"
+   },
+   {
+    "q": "hwo4-2c",
+    "label": "2c"
+   },
+   {
+    "q": "hwo4-2d",
+    "label": "2d"
+   },
+   {
+    "q": "hwo4-2e",
+    "label": "2e"
+   },
+   {
+    "q": "hwo4-2f",
+    "label": "2f"
+   },
+   {
+    "q": "hwo4-2g",
+    "label": "2g"
+   },
+   {
+    "q": "hwo4-2h",
+    "label": "2h"
    }
   ],
   "missing": ""
@@ -1041,7 +1243,9 @@ const SOURCES = [
   "note": "",
   "chains": [
    "hw5-p1",
-   "hw5-p2"
+   "hwo5-p1",
+   "hw5-p2",
+   "hwo5-p2"
   ],
   "items": [
    {
@@ -1069,6 +1273,30 @@ const SOURCES = [
     "label": "1f"
    },
    {
+    "q": "hwo5-1a",
+    "label": "1a"
+   },
+   {
+    "q": "hwo5-1b",
+    "label": "1b"
+   },
+   {
+    "q": "hwo5-1c",
+    "label": "1c"
+   },
+   {
+    "q": "hwo5-1d",
+    "label": "1d"
+   },
+   {
+    "q": "hwo5-1e",
+    "label": "1e"
+   },
+   {
+    "q": "hwo5-1f",
+    "label": "1f"
+   },
+   {
     "q": "hw5-2a",
     "label": "2a"
    },
@@ -1082,6 +1310,22 @@ const SOURCES = [
    },
    {
     "q": "hw5-2d",
+    "label": "2d"
+   },
+   {
+    "q": "hwo5-2a",
+    "label": "2a"
+   },
+   {
+    "q": "hwo5-2b",
+    "label": "2b"
+   },
+   {
+    "q": "hwo5-2c",
+    "label": "2c"
+   },
+   {
+    "q": "hwo5-2d",
     "label": "2d"
    }
   ],
@@ -1105,7 +1349,9 @@ const SOURCES = [
   "note": "",
   "chains": [
    "hw7-p1",
-   "nl-hw7"
+   "hw7o-p1",
+   "nl-hw7",
+   "nl-hwo7"
   ],
   "items": [
    {
@@ -1122,6 +1368,22 @@ const SOURCES = [
    },
    {
     "q": "hw7-1d",
+    "label": "1d"
+   },
+   {
+    "q": "hw7o-1a",
+    "label": "1a"
+   },
+   {
+    "q": "hw7o-1b",
+    "label": "1b"
+   },
+   {
+    "q": "hw7o-1c",
+    "label": "1c"
+   },
+   {
+    "q": "hw7o-1d",
     "label": "1d"
    },
    {
@@ -1147,13 +1409,37 @@ const SOURCES = [
    {
     "q": "nl-hw-e",
     "label": "2e"
+   },
+   {
+    "q": "nl-hwo-a",
+    "label": "2a"
+   },
+   {
+    "q": "nl-hwo-b",
+    "label": "2b"
+   },
+   {
+    "q": "nl-hwo-c",
+    "label": "2c"
+   },
+   {
+    "q": "nl-hwo-d-t",
+    "label": "2d"
+   },
+   {
+    "q": "nl-hwo-d-cl",
+    "label": "2d"
+   },
+   {
+    "q": "nl-hwo-e",
+    "label": "2e"
    }
   ],
   "missing": ""
  },
  {
   "id": "dp-m1-1",
-  "title": "Introduction and Math Review Practice 1 (solutions)",
+  "title": "Introduction and Math Review Practice 1",
   "type": "daily-practice",
   "module": 1,
   "modules": [
@@ -1208,7 +1494,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m2-1",
-  "title": "IV Bolus Practice 1 (solutions)",
+  "title": "IV Bolus Practice 1",
   "type": "daily-practice",
   "module": 2,
   "modules": [
@@ -1262,7 +1548,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m2-2",
-  "title": "IV Bolus Practice 2 (solutions)",
+  "title": "IV Bolus Practice 2",
   "type": "daily-practice",
   "module": 2,
   "modules": [
@@ -1316,7 +1602,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m3-3",
-  "title": "IV Infusions Practice 3 (solutions)",
+  "title": "IV Infusions Practice 3",
   "type": "daily-practice",
   "module": 3,
   "modules": [
@@ -1346,7 +1632,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m4-1",
-  "title": "Clearance & Elimination Practice 1 (solutions)",
+  "title": "Clearance & Elimination Practice 1",
   "type": "daily-practice",
   "module": 4,
   "modules": [
@@ -1412,7 +1698,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m4-2",
-  "title": "Clearance & Elimination Practice 2 (solutions)",
+  "title": "Clearance & Elimination Practice 2",
   "type": "daily-practice",
   "module": 4,
   "modules": [
@@ -1454,7 +1740,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m4-3",
-  "title": "Clearance & Elimination Practice 3 (solutions)",
+  "title": "Clearance & Elimination Practice 3",
   "type": "daily-practice",
   "module": 4,
   "modules": [
@@ -1508,7 +1794,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m4-4",
-  "title": "Clearance & Elimination Practice 4 (solutions)",
+  "title": "Clearance & Elimination Practice 4",
   "type": "daily-practice",
   "module": 4,
   "modules": [
@@ -1546,7 +1832,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m5-1",
-  "title": "Single Oral Practice 1 (solutions)",
+  "title": "Single Oral Practice 1",
   "type": "daily-practice",
   "module": 5,
   "modules": [
@@ -1620,7 +1906,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m5-2",
-  "title": "Single Oral Practice 2 (solutions)",
+  "title": "Single Oral Practice 2",
   "type": "daily-practice",
   "module": 5,
   "modules": [
@@ -1674,7 +1960,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m5-3",
-  "title": "Single Oral Practice 3 (solutions)",
+  "title": "Single Oral Practice 3",
   "type": "daily-practice",
   "module": 5,
   "modules": [
@@ -1724,7 +2010,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m6-b1",
-  "title": "Multiple IV Bolus Practice 1 (solutions)",
+  "title": "Multiple IV Bolus Practice 1",
   "type": "daily-practice",
   "module": 6,
   "modules": [
@@ -1778,7 +2064,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m6-b2",
-  "title": "Multiple IV Bolus Practice 2 (solutions)",
+  "title": "Multiple IV Bolus Practice 2",
   "type": "daily-practice",
   "module": 6,
   "modules": [
@@ -1828,7 +2114,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m6-b3",
-  "title": "Multiple IV Bolus Practice 3 (solutions)",
+  "title": "Multiple IV Bolus Practice 3",
   "type": "daily-practice",
   "module": 6,
   "modules": [
@@ -1882,7 +2168,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m6-b4",
-  "title": "Multiple IV Bolus Practice 4 (solutions)",
+  "title": "Multiple IV Bolus Practice 4",
   "type": "daily-practice",
   "module": 6,
   "modules": [
@@ -1924,7 +2210,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m6-i1",
-  "title": "Multiple IV Infusions & Multiple Oral Practice 1 (solutions)",
+  "title": "Multiple IV Infusions & Multiple Oral Practice 1",
   "type": "daily-practice",
   "module": 6,
   "modules": [
@@ -1998,7 +2284,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m6-i2",
-  "title": "Multiple IV Infusions & Multiple Oral Practice 2 (solutions)",
+  "title": "Multiple IV Infusions & Multiple Oral Practice 2",
   "type": "daily-practice",
   "module": 6,
   "modules": [
@@ -2048,7 +2334,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m6-i3",
-  "title": "Multiple IV Infusions & Multiple Oral Practice 3 (solutions)",
+  "title": "Multiple IV Infusions & Multiple Oral Practice 3",
   "type": "daily-practice",
   "module": 6,
   "modules": [
@@ -2102,7 +2388,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m7-1",
-  "title": "BA-BE Practice 1 (solutions)",
+  "title": "BA-BE Practice 1",
   "type": "daily-practice",
   "module": 7,
   "modules": [
@@ -2132,7 +2418,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m7-2",
-  "title": "BA-BE Practice 2 (solutions)",
+  "title": "BA-BE Practice 2",
   "type": "daily-practice",
   "module": 7,
   "modules": [
@@ -2162,7 +2448,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m7-3",
-  "title": "BA-BE Practice 3 (solutions)",
+  "title": "BA-BE Practice 3",
   "type": "daily-practice",
   "module": 7,
   "modules": [
@@ -2196,7 +2482,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m7b-1",
-  "title": "PK-PD Practice 1 (solutions)",
+  "title": "PK-PD Practice 1",
   "type": "daily-practice",
   "module": 9,
   "modules": [
@@ -2226,7 +2512,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m7b-2",
-  "title": "PK-PD Practice 2 (solutions)",
+  "title": "PK-PD Practice 2",
   "type": "daily-practice",
   "module": 9,
   "modules": [
@@ -2256,7 +2542,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m7b-3",
-  "title": "PK-PD Practice 3 (solutions)",
+  "title": "PK-PD Practice 3",
   "type": "daily-practice",
   "module": 9,
   "modules": [
@@ -2286,7 +2572,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m8-1",
-  "title": "Nonlinear Practice 1 (solutions)",
+  "title": "Nonlinear Practice 1",
   "type": "daily-practice",
   "module": 8,
   "modules": [
@@ -2332,7 +2618,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m8-2",
-  "title": "Nonlinear Practice 2 (solutions)",
+  "title": "Nonlinear Practice 2",
   "type": "daily-practice",
   "module": 8,
   "modules": [
@@ -2390,7 +2676,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m8-3",
-  "title": "Nonlinear Practice 3 (solutions)",
+  "title": "Nonlinear Practice 3",
   "type": "daily-practice",
   "module": 8,
   "modules": [
@@ -2440,7 +2726,7 @@ const SOURCES = [
  },
  {
   "id": "dp-m8-4",
-  "title": "Nonlinear Practice 4 (solutions)",
+  "title": "Nonlinear Practice 4",
   "type": "daily-practice",
   "module": 8,
   "modules": [
@@ -3018,6 +3304,38 @@ const SOURCE_OF = {
   "src": "quiz-4",
   "label": "Question 10"
  },
+ "cq5-1": {
+  "src": "quiz-5",
+  "label": "Question 1"
+ },
+ "cq5-2": {
+  "src": "quiz-5",
+  "label": "Question 2"
+ },
+ "cq5-3": {
+  "src": "quiz-5",
+  "label": "Question 3"
+ },
+ "cq5-4": {
+  "src": "quiz-5",
+  "label": "Question 4"
+ },
+ "cq5-5": {
+  "src": "quiz-5",
+  "label": "Question 5"
+ },
+ "cq5-6": {
+  "src": "quiz-5",
+  "label": "Question 6"
+ },
+ "cq5-7": {
+  "src": "quiz-5",
+  "label": "Question 7"
+ },
+ "cq5-8": {
+  "src": "quiz-5",
+  "label": "Question 8"
+ },
  "inf-n14": {
   "src": "ic-m3",
   "label": "Question 1"
@@ -3410,6 +3728,26 @@ const SOURCE_OF = {
   "src": "hw-1",
   "label": "1e"
  },
+ "hwo1-1a": {
+  "src": "hw-1",
+  "label": "1a"
+ },
+ "hwo1-1b": {
+  "src": "hw-1",
+  "label": "1b"
+ },
+ "hwo1-1c": {
+  "src": "hw-1",
+  "label": "1c"
+ },
+ "hwo1-1d": {
+  "src": "hw-1",
+  "label": "1d"
+ },
+ "hwo1-1e": {
+  "src": "hw-1",
+  "label": "1e"
+ },
  "hw1-2a": {
   "src": "hw-1",
   "label": "2a"
@@ -3422,11 +3760,31 @@ const SOURCE_OF = {
   "src": "hw-1",
   "label": "2c"
  },
+ "hwo1-2a": {
+  "src": "hw-1",
+  "label": "2a"
+ },
+ "hwo1-2b": {
+  "src": "hw-1",
+  "label": "2b"
+ },
+ "hwo1-2c": {
+  "src": "hw-1",
+  "label": "2c"
+ },
  "hw1-3a": {
   "src": "hw-1",
   "label": "3a"
  },
  "hw1-3b": {
+  "src": "hw-1",
+  "label": "3b"
+ },
+ "hwo1-3a": {
+  "src": "hw-1",
+  "label": "3a"
+ },
+ "hwo1-3b": {
   "src": "hw-1",
   "label": "3b"
  },
@@ -3454,6 +3812,30 @@ const SOURCE_OF = {
   "src": "hw-2",
   "label": "1f"
  },
+ "hwo2-1a": {
+  "src": "hw-2",
+  "label": "1a"
+ },
+ "hwo2-1b": {
+  "src": "hw-2",
+  "label": "1b"
+ },
+ "hwo2-1c": {
+  "src": "hw-2",
+  "label": "1c"
+ },
+ "hwo2-1d": {
+  "src": "hw-2",
+  "label": "1d"
+ },
+ "hwo2-1e": {
+  "src": "hw-2",
+  "label": "1e"
+ },
+ "hwo2-1f": {
+  "src": "hw-2",
+  "label": "1f"
+ },
  "hw2-2a": {
   "src": "hw-2",
   "label": "2a"
@@ -3467,6 +3849,22 @@ const SOURCE_OF = {
   "label": "2c"
  },
  "hw2-2d": {
+  "src": "hw-2",
+  "label": "2d"
+ },
+ "hwo2-2a": {
+  "src": "hw-2",
+  "label": "2a"
+ },
+ "hwo2-2b": {
+  "src": "hw-2",
+  "label": "2b"
+ },
+ "hwo2-2c": {
+  "src": "hw-2",
+  "label": "2c"
+ },
+ "hwo2-2d": {
   "src": "hw-2",
   "label": "2d"
  },
@@ -3510,11 +3908,59 @@ const SOURCE_OF = {
   "src": "hw-3",
   "label": "j"
  },
+ "hwo3-a": {
+  "src": "hw-3",
+  "label": "a"
+ },
+ "hwo3-b": {
+  "src": "hw-3",
+  "label": "b"
+ },
+ "hwo3-c": {
+  "src": "hw-3",
+  "label": "c"
+ },
+ "hwo3-d": {
+  "src": "hw-3",
+  "label": "d"
+ },
+ "hwo3-e": {
+  "src": "hw-3",
+  "label": "e"
+ },
+ "hwo3-f": {
+  "src": "hw-3",
+  "label": "f"
+ },
+ "hwo3-g": {
+  "src": "hw-3",
+  "label": "g"
+ },
+ "hwo3-h": {
+  "src": "hw-3",
+  "label": "h"
+ },
+ "hwo3-i": {
+  "src": "hw-3",
+  "label": "i"
+ },
+ "hwo3-j": {
+  "src": "hw-3",
+  "label": "j"
+ },
  "hw4-1ibw": {
   "src": "hw-4",
   "label": "Problem 1"
  },
  "hw4-1crcl": {
+  "src": "hw-4",
+  "label": "Problem 1"
+ },
+ "hwo4-1ibw": {
+  "src": "hw-4",
+  "label": "Problem 1"
+ },
+ "hwo4-1crcl": {
   "src": "hw-4",
   "label": "Problem 1"
  },
@@ -3550,6 +3996,38 @@ const SOURCE_OF = {
   "src": "hw-4",
   "label": "2h"
  },
+ "hwo4-2a": {
+  "src": "hw-4",
+  "label": "2a"
+ },
+ "hwo4-2b": {
+  "src": "hw-4",
+  "label": "2b"
+ },
+ "hwo4-2c": {
+  "src": "hw-4",
+  "label": "2c"
+ },
+ "hwo4-2d": {
+  "src": "hw-4",
+  "label": "2d"
+ },
+ "hwo4-2e": {
+  "src": "hw-4",
+  "label": "2e"
+ },
+ "hwo4-2f": {
+  "src": "hw-4",
+  "label": "2f"
+ },
+ "hwo4-2g": {
+  "src": "hw-4",
+  "label": "2g"
+ },
+ "hwo4-2h": {
+  "src": "hw-4",
+  "label": "2h"
+ },
  "hw5-1a": {
   "src": "hw-5",
   "label": "1a"
@@ -3574,6 +4052,30 @@ const SOURCE_OF = {
   "src": "hw-5",
   "label": "1f"
  },
+ "hwo5-1a": {
+  "src": "hw-5",
+  "label": "1a"
+ },
+ "hwo5-1b": {
+  "src": "hw-5",
+  "label": "1b"
+ },
+ "hwo5-1c": {
+  "src": "hw-5",
+  "label": "1c"
+ },
+ "hwo5-1d": {
+  "src": "hw-5",
+  "label": "1d"
+ },
+ "hwo5-1e": {
+  "src": "hw-5",
+  "label": "1e"
+ },
+ "hwo5-1f": {
+  "src": "hw-5",
+  "label": "1f"
+ },
  "hw5-2a": {
   "src": "hw-5",
   "label": "2a"
@@ -3590,6 +4092,22 @@ const SOURCE_OF = {
   "src": "hw-5",
   "label": "2d"
  },
+ "hwo5-2a": {
+  "src": "hw-5",
+  "label": "2a"
+ },
+ "hwo5-2b": {
+  "src": "hw-5",
+  "label": "2b"
+ },
+ "hwo5-2c": {
+  "src": "hw-5",
+  "label": "2c"
+ },
+ "hwo5-2d": {
+  "src": "hw-5",
+  "label": "2d"
+ },
  "hw7-1a": {
   "src": "hw-7",
   "label": "1a"
@@ -3603,6 +4121,22 @@ const SOURCE_OF = {
   "label": "1c"
  },
  "hw7-1d": {
+  "src": "hw-7",
+  "label": "1d"
+ },
+ "hw7o-1a": {
+  "src": "hw-7",
+  "label": "1a"
+ },
+ "hw7o-1b": {
+  "src": "hw-7",
+  "label": "1b"
+ },
+ "hw7o-1c": {
+  "src": "hw-7",
+  "label": "1c"
+ },
+ "hw7o-1d": {
   "src": "hw-7",
   "label": "1d"
  },
@@ -3627,6 +4161,30 @@ const SOURCE_OF = {
   "label": "2d"
  },
  "nl-hw-e": {
+  "src": "hw-7",
+  "label": "2e"
+ },
+ "nl-hwo-a": {
+  "src": "hw-7",
+  "label": "2a"
+ },
+ "nl-hwo-b": {
+  "src": "hw-7",
+  "label": "2b"
+ },
+ "nl-hwo-c": {
+  "src": "hw-7",
+  "label": "2c"
+ },
+ "nl-hwo-d-t": {
+  "src": "hw-7",
+  "label": "2d"
+ },
+ "nl-hwo-d-cl": {
+  "src": "hw-7",
+  "label": "2d"
+ },
+ "nl-hwo-e": {
   "src": "hw-7",
   "label": "2e"
  },
