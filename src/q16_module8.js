@@ -6,8 +6,8 @@
    with her two worked Examples (slides 12 and 14, worked on slides 12 and
    15), her In-Class Practice sheet (not posted; photographed on pages 20
    and 21 of the annotated deck, stems printed, keys spoken in the 10.14
-   lecture), her PollEv true/false, her two solved Daily Practice sheets
-   (Nonlinear-Solutions-1.pdf, Nonlinear-Solutions-2.pdf) and question 2 of
+   lecture), her PollEv true/false, her four solved Daily Practice sheets
+   (Nonlinear-Solutions-1.pdf to Nonlinear-Solutions-4.pdf) and question 2 of
    Homework-7.pdf (its stem only; the file is a student's submission). Also
    sourced: the 10.14 lecture transcript, cited as "transcript 10-14".
 
@@ -20,7 +20,13 @@
    (459.2); 4d 1.05 day (1.046) and 30.6 L/day; 4e 11.5 mg/L (11.52).
    Solutions 1: 5.91 mg/L, 647.83 mg/day, 465 (464.7), 1.02 day, 30.98 L/day,
    13.5 mg/L (13.45). Solutions 2: 9 mg/L, 500 mg/day, 315 (312.5), 1.87 and
-   2.34 days, 20.8 and 16.7 L/day. Homework 7 question 2 keeps her wording
+   2.34 days, 20.8 and 16.7 L/day. Solutions 3 (Nonlinear-Solutions-3.pdf):
+   9.4 mg/L (9.377), 571 mg/day (571.2 from KM 9.4), 1.3 days (1.312) and
+   28.8 L/day at 300 mg/day, 2.1 days (2.081) and 18.2 L/day at 400 mg/day,
+   350 mg/day (351.02, nearest 10 mg). Solutions 4 (Nonlinear-Solutions-4.pdf,
+   headed "Nonlinear Practice 4"): 9 mg/L, 600 mg/day, 0.989 day (0.9896) and
+   33.33 L/day at 300 mg/day, 1.48 days (1.484) and 22.22 L/day at 400
+   mg/day, 375 mg/day. Homework 7 question 2 keeps her wording
    with new inputs (72 kg; 250 and 350 mg giving 6.4 and 17.6 mg/L; target
    14 mg/L; 300 mg/day in e), as gen/ws_homework.py does for graded homework:
    5.21 mg/L, 453.7 mg/day, 330 mg/day (330.6, nearest ten), 1.48 days,
@@ -77,14 +83,20 @@ const NL_IC2 = NL_IC2_CASE + ' What is the KM of this drug in this patient?';
 const NL_IC4 = '4. A 66-kg patient is receiving phenytoin for the treatment of seizures. When she was taking a daily oral dose of 300 mg phenytoin, her steady-state plasma concentration was 7.2 mg/L. Because the phenytoin plasma concentration was well below the therapeutic range, the patient\'s dose was increased to 500 mg phenytoin, which resulted in a steady-state plasma concentration of 18 mg/L. (Assume that the absolute bioavailability of phenytoin is 100% and the volume of distribution is 0.7 L/kg.)';
 const NL_P1 = '1. A 143 lb, 21-year-old woman is receiving phenytoin for the treatment of seizures. When she was taking a daily oral dose of 300 mg phenytoin, her steady-state plasma concentration was 5.1 mg/L. Because the phenytoin plasma concentration was well below the therapeutic range, the patient\'s dose was increased to 500 mg phenytoin, which resulted in a steady-state plasma concentration of 20 mg/L. (Assume that the absolute bioavailability of phenytoin is 100% and the volume of distribution is 0.7 L/kg.)';
 const NL_P2 = '1. A 75-kg, 32-year-old female has been taking 200 mg phenytoin daily. Because her average phenytoin plasma concentration was only 6 mg/L, her dose was increased to 350 mg/day. The steady-state average phenytoin concentration was then found to be 21 mg/L. (Volume of distribution = 0.75 L/kg and F = 1)';
+const NL_P3 = '1. A 78-kg, 28 year old male is receiving phenytoin for the treatment of seizures. When this patient was taking a daily oral dose of 300 mg, his steady state plasma concentration was 10.4 mg/L. The dose was increased to 400 mg which resulted in a steady-state plasma concentration of 22 mg/L. Assume 100% bioavailability and an apparent volume of distribution that is equal to 70% of body weight.';
+const NL_P4 = 'A 68-kg, 28-year-old female is receiving phenytoin for the treatment of seizures. When this patient was taking a daily oral dose of 300 mg, her steady state plasma concentration was 9 mg/L. The dose was increased to 400 mg which resulted in a steady-state plasma concentration of 18 mg/L. Assume 100% bioavailability and an apparent volume of distribution that is equal to 70% of body weight.';
 const NL_HW = '2. A 72-kg, 31-year-old female is receiving phenytoin for the treatment of seizures. When this patient was taking a daily oral dose of 250 mg, her steady state plasma concentration was 6.4 mg/L. The daily dose was increased to 350 mg which resulted in a steady-state plasma concentration of 17.6 mg/L. Assume 100% bioavailability and an apparent volume of distribution that is equal to 70% of body weight.';
 
 const NL_DECK = '8 - Nonlinear PK.pdf';
 const NL_IC = 'In-Class Practice, Nonlinear PK (14 Oct 2026; photographed on pages 20 and 21 of ' + NL_DECK + '; keys from transcript 10-14)';
 const NL_S1 = 'Nonlinear-Solutions-1.pdf';
 const NL_S2 = 'Nonlinear-Solutions-2.pdf';
+const NL_S3 = 'Nonlinear-Solutions-3.pdf';
+const NL_S4 = 'Nonlinear-Solutions-4.pdf';
 const NL_H7 = 'Homework-7.pdf, question 2';
 const NL_HWNOTE = 'Her homework wording with different numbers, so this is not the graded answer.';
+const NL_HWO = '2. A 68-kg, 28-year-old female is receiving phenytoin for the treatment of seizures. When this patient was taking a daily oral dose of 300 mg, her steady state plasma concentration was 9.12 mg/L. The daily dose was increased to 400 mg which resulted in a steady-state plasma concentration of 21.8 mg/L. Assume 100% bioavailability and an apparent volume of distribution that is equal to 70% of body weight.';
+const NL_HWONOTE = 'Her homework with her own numbers. She gave no key for it, so this answer is computed from her stem.';
 
 const Q_MODULE8 = [
 
@@ -578,6 +590,273 @@ const Q_MODULE8 = [
  note:'Her sheet labels this second clearance "ClT 15"; its working uses 21 mg/L.',
  cite:NL_S2 + ', question 1c; ' + NL_DECK + ', slide 18'},
 
+/* ═══════════════ DAILY PRACTICE: SOLUTIONS 3 ═════════════════════════ */
+
+{id:'nl-p3a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-km-direct', skill:'nonlin', source:'slide',
+ stem:NL_P3 + ' a. Calculate KM',
+ units:'mg/L', answer:9.4, tol:0.1,
+ steps:[
+  {k:'setup', t:'KM = {{frac:R2 − R1|(R1/C1) − (R2/C2)}}, with R1 = 300 mg/day, C1 = 10.4 mg/L, R2 = 400 mg/day, C2 = 22 mg/L',
+   why:'Two daily doses in the same patient and the steady-state concentration each produced: the direct method. The 78 kg weight and the 70% volume play no part in KM; they are needed only for the half-life in parts c and d.'},
+  {k:'algebra', t:'KM = {{frac:400 − 300|(300/10.4) − (400/22)}} = {{frac:100|28.846 − 18.182}} = {{frac:100|10.664}} = 9.377 mg/L',
+   why:'Each dose over its own concentration, the earlier pair first so that the denominator is positive. The mg/day cancel top and bottom and mg/L moves to the top, so KM comes out as a concentration.'},
+  {k:'round', t:'KM = 9.4 mg/L',
+   why:'9.377 mg/L to one decimal place is 9.4 mg/L, her sheet\'s value, which her sheet carries into Vmax and every later part. The unrounded 9.377 mg/L is also accepted.'}],
+ setup:{eq:'nl-km', pre:[], why:'"a daily oral dose of 300 mg" giving "10.4 mg/L", then "400 mg" giving "22 mg/L", and "Calculate KM": the direct-method line.'},
+ asks:'Km',
+ givens:[['R1', '300 mg', 'the first daily dose'], ['C1', '10.4 mg/L', 'steady state on 300 mg'], ['R2', '400 mg', 'the increased daily dose'], ['C2', '22 mg/L', 'steady state on 400 mg'], ['weight', '78-kg', 'not needed for KM']],
+ check:{t:'A one-third rise in dose more than doubled the concentration, from 10.4 to 22 mg/L, so elimination is saturable; KM is a concentration: 9.4 mg/L.', lo:0, hi:22},
+ teach:[NL_DIRECT],
+ cite:NL_S3 + ', part a'},
+
+{id:'nl-p3b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-vmax', skill:'nonlin', source:'slide',
+ stem:NL_P3 + ' b. Calculate Vmax (Part a: KM = 9.4 mg/L.)',
+ units:'mg/day', answer:571, tol:5.7,
+ steps:[
+  {k:'setup', t:'Vmax = {{frac:R(KM + Css)|Css}}',
+   why:'The dose-rate line solved for Vmax: multiply both sides by (KM + Css) and divide by Css. With KM known from part a, one dose and the steady-state concentration it produced are enough.'},
+  {k:'algebra', t:'Vmax = {{frac:(300 mg/day)(9.4 + 10.4) mg/L|10.4 mg/L}} = {{frac:5940|10.4}} = 571.2 mg/day',
+   why:'Her sheet uses the first pair, 300 mg/day with its own 10.4 mg/L. mg/L cancels and Vmax keeps the units of the dose, mg/day.'},
+  {k:'algebra', t:'Check: {{frac:(400 mg/day)(9.4 + 22) mg/L|22 mg/L}} = {{frac:12 560|22}} = 570.9 mg/day',
+   why:'The second pair agrees within rounding, as it must for one patient with one Vmax. With KM unrounded, 9.377 mg/L, both pairs give 570.5 mg/day, inside the same tolerance.'},
+  {k:'round', t:'Vmax = 571 mg/day',
+   why:'571.2 mg/day to the nearest milligram per day is her sheet\'s 571 mg/day, which her sheet carries into the half-life, clearance and dose of parts c to e.'}],
+ setup:{eq:'nl-vmax', pre:['nl-km'], why:'"Calculate Vmax" with KM from part a: the dose-rate line solved for Vmax, with either dose and its own steady-state concentration.'},
+ asks:'Vmax',
+ givens:[['KM', '9.4 mg/L', 'from part a, added to Css'], ['R1', '300 mg', 'the dose used'], ['C1', '10.4 mg/L', 'its own steady state'], ['R2, C2', '400 mg, 22 mg/L', 'the check pair']],
+ check:{t:'Vmax must exceed 400 mg/day, the higher dose, because that dose reached a steady state: 571 mg/day.', lo:400},
+ teach:[NL_DIRECT],
+ cite:NL_S3 + ', part b'},
+
+{id:'nl-p3c-t', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-thalf', skill:'nonlin', source:'slide',
+ stem:NL_P3 + ' c. Calculate the half-life and clearance in this patient at steady-state while he is taking 300 mg/day. What is the half-life? (Part a: KM = 9.4 mg/L; part b: Vmax = 571 mg/day.)',
+ units:'days', answer:1.3, tol:0.02,
+ steps:[
+  {k:'unit', t:'VD = 0.7 L/kg × 78 kg = 54.6 L',
+   why:'"70% of body weight" is read as 0.7 L/kg, taking 1 L as 1 kg, so the volume is 0.7 times the 78 kg weight, in litres, which the half-life line needs.'},
+  {k:'setup', t:'t½ = VD({{frac:0.693|Vmax}})(KM + Cp), at Cp = 10.4 mg/L',
+   why:'On 300 mg/day the patient is at the steady state that dose produced, 10.4 mg/L, and the half-life of a saturable drug is calculated at its concentration.'},
+  {k:'algebra', t:'t½ = 54.6 L × {{frac:0.693|571 mg/day}} × (9.4 + 10.4) mg/L = 1.312 days',
+   why:'L × mg/L gives mg, which cancels the mg of mg/day and leaves days. Leaving the volume as 0.7 gives 0.017, a result per kilogram, not a time.'},
+  {k:'round', t:'t½ = 1.3 days',
+   why:'1.312 days to one decimal place, as her sheet gives it. On 400 mg/day the same line gives a longer half-life, because KM + Cp is larger while Vmax stays fixed.'}],
+ setup:{eq:'nl-thalf', pre:['nl-km', 'nl-vmax'], why:'"the half-life … at steady-state while he is taking 300 mg/day": the nonlinear half-life line at the 10.4 mg/L that dose produced, VD from 70% of 78 kg.'},
+ asks:'thalf',
+ givens:[['weight', '78-kg', 'VD = 0.7 × 78 = 54.6 L'], ['VD', '70% of body weight', '0.7 L/kg'], ['Cp', '10.4 mg/L', 'the steady state on 300 mg/day'], ['KM', '9.4 mg/L', 'from part a'], ['Vmax', '571 mg/day', 'from part b']],
+ check:{t:'Vmax is in mg/day, so the half-life comes out in days: 1.312 days, more than one day and less than two.', lo:0.5, hi:2},
+ teach:[NL_DEP],
+ cite:NL_S3 + ', part c; ' + NL_DECK + ', slide 17'},
+
+{id:'nl-p3c-cl', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-clearance', skill:'nonlin', source:'slide',
+ stem:NL_P3 + ' c. Calculate the half-life and clearance in this patient at steady-state while he is taking 300 mg/day. What is the clearance? (Part a: KM = 9.4 mg/L; part b: Vmax = 571 mg/day.)',
+ units:'L/day', answer:28.8, tol:0.29,
+ steps:[
+  {k:'setup', t:'ClT = {{frac:Vmax|KM + Cp}}, at Cp = 10.4 mg/L',
+   why:'On 300 mg/day the patient is at 10.4 mg/L, and the clearance of a saturable drug is calculated at its concentration, which sits in the denominator.'},
+  {k:'algebra', t:'ClT = {{frac:571 mg/day|(9.4 + 10.4) mg/L}} = {{frac:571|19.8}} = 28.84 L/day',
+   why:'mg/day over mg/L leaves L/day, a volume of plasma cleared per unit time. The weight and the volume of distribution are not needed for clearance.'},
+  {k:'round', t:'ClT = 28.8 L/day',
+   why:'28.84 L/day to one decimal place, her sheet\'s value. On 400 mg/day the clearance is lower, because the larger Cp makes the denominator larger.'}],
+ setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the … clearance … at steady-state while he is taking 300 mg/day": the nonlinear clearance line at the 10.4 mg/L that dose produced.'},
+ asks:'ClT',
+ givens:[['Cp', '10.4 mg/L', 'the steady state on 300 mg/day'], ['KM', '9.4 mg/L', 'from part a'], ['Vmax', '571 mg/day', 'from part b'], ['weight', '78-kg', 'not needed for clearance']],
+ check:{t:'KM + Cp, 19.8 mg/L, is about twice KM, so clearance is about half of Vmax ÷ KM: 28.84 L/day.', lo:0, hi:60.7},
+ teach:[NL_DEP],
+ cite:NL_S3 + ', part c; ' + NL_DECK + ', slide 18'},
+
+{id:'nl-p3d-t', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-thalf', skill:'nonlin', source:'slide',
+ stem:NL_P3 + ' d. Calculate the half-life and clearance in this patient at steady-state while he is taking 400 mg/day. What is the half-life? (Part a: KM = 9.4 mg/L; part b: Vmax = 571 mg/day.)',
+ units:'days', answer:2.1, tol:0.03,
+ steps:[
+  {k:'unit', t:'VD = 0.7 L/kg × 78 kg = 54.6 L',
+   why:'"70% of body weight" is read as 0.7 L/kg, so the volume is 0.7 times the 78 kg weight, in litres. It does not change with the dose; only KM + Cp does.'},
+  {k:'setup', t:'t½ = VD({{frac:0.693|Vmax}})(KM + Cp), at Cp = 22 mg/L',
+   why:'On 400 mg/day the patient is at the steady state that dose produced, 22 mg/L, so the half-life line is evaluated at that concentration.'},
+  {k:'algebra', t:'t½ = 54.6 L × {{frac:0.693|571 mg/day}} × (9.4 + 22) mg/L = 2.081 days',
+   why:'The same line as in part c with Cp = 22 mg/L. L × mg/L gives mg, which cancels against mg/day and leaves days.'},
+  {k:'round', t:'t½ = 2.1 days',
+   why:'2.081 days to one decimal place, her sheet\'s value. A one-third rise in dose took the half-life from 1.3 to 2.1 days, because Cp rose from 10.4 to 22 mg/L.'}],
+ setup:{eq:'nl-thalf', pre:['nl-km', 'nl-vmax'], why:'"the half-life … at steady-state while he is taking 400 mg/day": the nonlinear half-life line at the 22 mg/L that dose produced.'},
+ asks:'thalf',
+ givens:[['weight', '78-kg', 'VD = 0.7 × 78 = 54.6 L'], ['VD', '70% of body weight', '0.7 L/kg'], ['Cp', '22 mg/L', 'the steady state on 400 mg/day'], ['KM', '9.4 mg/L', 'from part a'], ['Vmax', '571 mg/day', 'from part b']],
+ check:{t:'The half-life at 22 mg/L must be longer than at 10.4 mg/L, because KM + Cp is larger: 2.081 days.', lo:1.3, hi:3},
+ teach:[NL_DEP],
+ cite:NL_S3 + ', part d; ' + NL_DECK + ', slide 17'},
+
+{id:'nl-p3d-cl', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-clearance', skill:'nonlin', source:'slide',
+ stem:NL_P3 + ' d. Calculate the half-life and clearance in this patient at steady-state while he is taking 400 mg/day. What is the clearance? (Part a: KM = 9.4 mg/L; part b: Vmax = 571 mg/day.)',
+ units:'L/day', answer:18.2, tol:0.18,
+ steps:[
+  {k:'setup', t:'ClT = {{frac:Vmax|KM + Cp}}, at Cp = 22 mg/L',
+   why:'The same clearance line as in part c, now at the 22 mg/L that 400 mg/day produced, because the clearance of a saturable drug changes with concentration.'},
+  {k:'algebra', t:'ClT = {{frac:571 mg/day|(9.4 + 22) mg/L}} = {{frac:571|31.4}} = 18.18 L/day',
+   why:'mg/day over mg/L leaves L/day. The larger concentration makes the denominator larger, so the clearance is smaller than on 300 mg/day.'},
+  {k:'round', t:'ClT = 18.2 L/day',
+   why:'18.18 L/day to one decimal place, her sheet\'s value. Clearance falls and half-life rises together as the dose rises, because both depend on KM + Cp.'}],
+ setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the … clearance … at steady-state while he is taking 400 mg/day": the nonlinear clearance line at 22 mg/L.'},
+ asks:'ClT',
+ givens:[['Cp', '22 mg/L', 'the steady state on 400 mg/day'], ['KM', '9.4 mg/L', 'from part a'], ['Vmax', '571 mg/day', 'from part b']],
+ check:{t:'Clearance at 22 mg/L must be below its value at 10.4 mg/L, because Cp is in the denominator: 18.18 L/day.', lo:0, hi:28.8},
+ teach:[NL_DEP],
+ cite:NL_S3 + ', part d; ' + NL_DECK + ', slide 18'},
+
+{id:'nl-p3e', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'dose', concept:'nl-dose-rate', skill:'nonlin', source:'slide',
+ stem:NL_P3 + ' e. What is the daily phenytoin dose that should achieve a steady-state phenytoin plasma concentration of 15 mg/L in this patient? Please round to the nearest 10 mg. (Part a: KM = 9.4 mg/L; part b: Vmax = 571 mg/day.)',
+ units:'mg/day', answer:350, tol:1,
+ steps:[
+  {k:'setup', t:'R = {{frac:Vmax × Css|KM + Css}}',
+   why:'The patient\'s own KM and Vmax, from parts a and b, with the target of 15 mg/L as Css, in the nonlinear dose-rate line. Vmax is in mg/day, so no weight is needed.'},
+  {k:'algebra', t:'R = {{frac:(571 mg/day)(15 mg/L)|(15 + 9.4) mg/L}} = {{frac:8565|24.4}} = 351.02 mg/day',
+   why:'mg/L cancels and leaves mg/day. 15 mg/L lies between the 10.4 and 22 mg/L measured, so the dose lies between the 300 and 400 mg/day he took.'},
+  {k:'round', t:'R = 350 mg/day',
+   why:'The stem asks for the nearest 10 mg, so 351.02 mg/day is reported as 350 mg/day, as her sheet gives it. 350 mg/day is a dose that can be given and holds Css close to 15 mg/L.'}],
+ setup:{eq:'nl-rate', pre:['nl-km', 'nl-vmax'], why:'"the daily phenytoin dose that should achieve a steady-state … concentration of 15 mg/L": the dose-rate line with the KM and Vmax of parts a and b.'},
+ asks:'R',
+ givens:[['KM', '9.4 mg/L', 'from part a'], ['Vmax', '571 mg/day', 'from part b'], ['Css', '15 mg/L', 'the target'], ['rounding', 'nearest 10 mg', '351.02 becomes 350']],
+ check:{t:'15 mg/L lies between 10.4 and 22 mg/L, so the dose lies between 300 and 400 mg/day: 350 mg/day.', lo:300, hi:400},
+ teach:[NL_RATE],
+ cite:NL_S3 + ', part e'},
+
+/* ═══════════════ DAILY PRACTICE: SOLUTIONS 4 ═════════════════════════ */
+
+{id:'nl-p4a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-km-direct', skill:'nonlin', source:'slide',
+ stem:NL_P4 + ' a. Calculate KM',
+ units:'mg/L', answer:9, tol:0.09,
+ steps:[
+  {k:'setup', t:'KM = {{frac:R2 − R1|(R1/C1) − (R2/C2)}}, with R1 = 300 mg/day, C1 = 9 mg/L, R2 = 400 mg/day, C2 = 18 mg/L',
+   why:'Two daily doses in the same patient and the steady-state concentration each produced: the direct method. The 68 kg weight and the 70% volume are needed only for the half-life in parts c and d.'},
+  {k:'algebra', t:'KM = {{frac:400 − 300|(300/9) − (400/18)}} = {{frac:100|33.333 − 22.222}} = {{frac:100|11.111}} = 9.000 mg/L',
+   why:'Each dose over its own concentration, the earlier pair first so that the denominator is positive. The mg/day cancel and leave mg/L, a concentration.'},
+  {k:'round', t:'KM = 9 mg/L',
+   why:'9.000 mg/L exactly, because 33.333 − 22.222 is one ninth of 100. Here KM equals the 9 mg/L measured on 300 mg/day.'}],
+ setup:{eq:'nl-km', pre:[], why:'"a daily oral dose of 300 mg" giving "9 mg/L", then "400 mg" giving "18 mg/L", and "Calculate KM": the direct-method line.'},
+ asks:'Km',
+ givens:[['R1', '300 mg', 'the first daily dose'], ['C1', '9 mg/L', 'steady state on 300 mg'], ['R2', '400 mg', 'the increased daily dose'], ['C2', '18 mg/L', 'steady state on 400 mg'], ['weight', '68-kg', 'not needed for KM']],
+ check:{t:'A one-third rise in dose doubled the concentration, from 9 to 18 mg/L, so elimination is saturable; KM is a concentration: 9 mg/L.', lo:0, hi:18},
+ teach:[NL_DIRECT],
+ cite:NL_S4 + ', part a'},
+
+{id:'nl-p4b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-vmax', skill:'nonlin', source:'slide',
+ stem:NL_P4 + ' b. Calculate Vmax (Part a: KM = 9 mg/L.)',
+ units:'mg/day', answer:600, tol:6,
+ steps:[
+  {k:'setup', t:'Vmax = {{frac:R(KM + Css)|Css}}',
+   why:'The dose-rate line solved for Vmax: multiply both sides by (KM + Css) and divide by Css, using one dose and the steady-state concentration it produced.'},
+  {k:'algebra', t:'Vmax = {{frac:(400 mg/day)(18 + 9) mg/L|18 mg/L}} = {{frac:10 800|18}} = 600 mg/day',
+   why:'Her sheet uses the second pair, 400 mg/day with its own 18 mg/L. mg/L cancels and Vmax keeps the units of the dose, mg/day.'},
+  {k:'algebra', t:'Check: {{frac:(300 mg/day)(9 + 9) mg/L|9 mg/L}} = {{frac:5400|9}} = 600 mg/day',
+   why:'The first pair gives the same 600 mg/day, as it must for one patient with one Vmax. Pairing 300 mg/day with 18 mg/L instead gives 450 mg/day, a mismatched pair.'}],
+ setup:{eq:'nl-vmax', pre:['nl-km'], why:'"Calculate Vmax" with KM from part a: the dose-rate line solved for Vmax, with either dose and its own steady-state concentration.'},
+ asks:'Vmax',
+ givens:[['KM', '9 mg/L', 'from part a, added to Css'], ['R2', '400 mg', 'the dose used'], ['C2', '18 mg/L', 'its own steady state'], ['R1, C1', '300 mg, 9 mg/L', 'the check pair']],
+ check:{t:'Vmax must exceed 400 mg/day, the higher dose, because that dose reached a steady state: 600 mg/day.', lo:400},
+ teach:[NL_DIRECT],
+ cite:NL_S4 + ', part b'},
+
+{id:'nl-p4c-t', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-thalf', skill:'nonlin', source:'slide',
+ stem:NL_P4 + ' c. Calculate the half-life and clearance in this patient at steady-state while she is taking 300 mg/day. What is the half-life? (Part a: KM = 9 mg/L; part b: Vmax = 600 mg/day.)',
+ units:'days', answer:0.989, tol:0.01,
+ steps:[
+  {k:'unit', t:'VD = 0.7 L/kg × 68 kg = 47.6 L',
+   why:'"70% of body weight" is read as 0.7 L/kg, taking 1 L as 1 kg, so the volume is 0.7 times the 68 kg weight, in litres, which the half-life line needs.'},
+  {k:'setup', t:'t½ = VD({{frac:0.693|Vmax}})(KM + Cp), at Cp = 9 mg/L',
+   why:'On 300 mg/day the patient is at the steady state that dose produced, 9 mg/L, and the half-life of a saturable drug is calculated at its concentration.'},
+  {k:'algebra', t:'t½ = 47.6 L × {{frac:0.693|600 mg/day}} × (9 + 9) mg/L = 0.9896 days',
+   why:'L × mg/L gives mg, which cancels the mg of mg/day and leaves days. Leaving the volume as 0.7 gives 0.015, a result per kilogram, not a time.'},
+  {k:'round', t:'t½ = 0.989 days',
+   why:'Her sheet writes 0.989 day. 0.9896 days to three decimal places is 0.990, and both are accepted. On 400 mg/day the half-life is longer, because KM + Cp is larger.'}],
+ setup:{eq:'nl-thalf', pre:['nl-km', 'nl-vmax'], why:'"the half-life … at steady-state while she is taking 300 mg/day": the nonlinear half-life line at the 9 mg/L that dose produced, VD from 70% of 68 kg.'},
+ asks:'thalf',
+ givens:[['weight', '68-kg', 'VD = 0.7 × 68 = 47.6 L'], ['VD', '70% of body weight', '0.7 L/kg'], ['Cp', '9 mg/L', 'the steady state on 300 mg/day'], ['KM', '9 mg/L', 'from part a'], ['Vmax', '600 mg/day', 'from part b']],
+ check:{t:'Vmax is in mg/day, so the half-life comes out in days: 0.9896 days, just under one day.', lo:0.5, hi:1.48},
+ teach:[NL_DEP],
+ note:'Her sheet writes 0.989 day; the arithmetic gives 0.9896 day, which is 0.990 to three decimal places. Both are accepted.',
+ cite:NL_S4 + ', part c; ' + NL_DECK + ', slide 17'},
+
+{id:'nl-p4c-cl', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-clearance', skill:'nonlin', source:'slide',
+ stem:NL_P4 + ' c. Calculate the half-life and clearance in this patient at steady-state while she is taking 300 mg/day. What is the clearance? (Part a: KM = 9 mg/L; part b: Vmax = 600 mg/day.)',
+ units:'L/day', answer:33.33, tol:0.33,
+ steps:[
+  {k:'setup', t:'ClT = {{frac:Vmax|KM + Cp}}, at Cp = 9 mg/L',
+   why:'On 300 mg/day the patient is at 9 mg/L, and the clearance of a saturable drug is calculated at its concentration, which sits in the denominator.'},
+  {k:'algebra', t:'ClT = {{frac:600 mg/day|(9 + 9) mg/L}} = {{frac:600|18}} = 33.33 L/day',
+   why:'mg/day over mg/L leaves L/day, a volume of plasma cleared per unit time. The weight and the volume of distribution are not needed for clearance.'},
+  {k:'round', t:'ClT = 33.33 L/day',
+   why:'To two decimal places, as her sheet gives it. On 400 mg/day the clearance is lower, because the larger Cp makes the denominator larger.'}],
+ setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the … clearance … at steady-state while she is taking 300 mg/day": the nonlinear clearance line at the 9 mg/L that dose produced.'},
+ asks:'ClT',
+ givens:[['Cp', '9 mg/L', 'the steady state on 300 mg/day'], ['KM', '9 mg/L', 'from part a'], ['Vmax', '600 mg/day', 'from part b'], ['weight', '68-kg', 'not needed for clearance']],
+ check:{t:'At 9 mg/L, Cp equals KM, so KM + Cp is twice KM and clearance is half of Vmax ÷ KM: 33.33 L/day.', lo:0, hi:66.7},
+ teach:[NL_DEP],
+ cite:NL_S4 + ', part c; ' + NL_DECK + ', slide 18'},
+
+{id:'nl-p4d-t', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-thalf', skill:'nonlin', source:'slide',
+ stem:NL_P4 + ' d. Calculate the half-life and clearance in this patient at steady-state while she is taking 400 mg/day. What is the half-life? (Part a: KM = 9 mg/L; part b: Vmax = 600 mg/day.)',
+ units:'days', answer:1.48, tol:0.015,
+ steps:[
+  {k:'unit', t:'VD = 0.7 L/kg × 68 kg = 47.6 L',
+   why:'"70% of body weight" is read as 0.7 L/kg, so the volume is 0.7 times the 68 kg weight, in litres. It does not change with the dose; only KM + Cp does.'},
+  {k:'setup', t:'t½ = VD({{frac:0.693|Vmax}})(KM + Cp), at Cp = 18 mg/L',
+   why:'On 400 mg/day the patient is at the steady state that dose produced, 18 mg/L, so the half-life line is evaluated at that concentration.'},
+  {k:'algebra', t:'t½ = 47.6 L × {{frac:0.693|600 mg/day}} × (9 + 18) mg/L = 1.484 days',
+   why:'The same line as in part c with Cp = 18 mg/L. KM + Cp goes from 18 to 27 mg/L, so the half-life grows by the same ratio, one and a half times.'},
+  {k:'round', t:'t½ = 1.48 days',
+   why:'1.484 days to two decimal places, her sheet\'s value: longer than the 0.989 day on 300 mg/day, because the half-life of a nonlinear drug lengthens as the concentration rises.'}],
+ setup:{eq:'nl-thalf', pre:['nl-km', 'nl-vmax'], why:'"the half-life … at steady-state while she is taking 400 mg/day": the nonlinear half-life line at the 18 mg/L that dose produced.'},
+ asks:'thalf',
+ givens:[['weight', '68-kg', 'VD = 0.7 × 68 = 47.6 L'], ['VD', '70% of body weight', '0.7 L/kg'], ['Cp', '18 mg/L', 'the steady state on 400 mg/day'], ['KM', '9 mg/L', 'from part a'], ['Vmax', '600 mg/day', 'from part b']],
+ check:{t:'The half-life at 18 mg/L must be longer than at 9 mg/L, because KM + Cp is larger: 1.484 days.', lo:0.989, hi:3},
+ teach:[NL_DEP],
+ cite:NL_S4 + ', part d; ' + NL_DECK + ', slide 17'},
+
+{id:'nl-p4d-cl', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-clearance', skill:'nonlin', source:'slide',
+ stem:NL_P4 + ' d. Calculate the half-life and clearance in this patient at steady-state while she is taking 400 mg/day. What is the clearance? (Part a: KM = 9 mg/L; part b: Vmax = 600 mg/day.)',
+ units:'L/day', answer:22.22, tol:0.22,
+ steps:[
+  {k:'setup', t:'ClT = {{frac:Vmax|KM + Cp}}, at Cp = 18 mg/L',
+   why:'The same clearance line as in part c, now at the 18 mg/L that 400 mg/day produced, because the clearance of a saturable drug changes with concentration.'},
+  {k:'algebra', t:'ClT = {{frac:600 mg/day|(9 + 18) mg/L}} = {{frac:600|27}} = 22.22 L/day',
+   why:'mg/day over mg/L leaves L/day. The larger concentration makes the denominator larger, so the clearance is smaller than the 33.33 L/day on 300 mg/day.'},
+  {k:'round', t:'ClT = 22.22 L/day',
+   why:'To two decimal places, as her sheet gives it. Clearance falls and half-life rises together as the dose rises, because both depend on KM + Cp.'}],
+ setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the … clearance … at steady-state while she is taking 400 mg/day": the nonlinear clearance line at 18 mg/L.'},
+ asks:'ClT',
+ givens:[['Cp', '18 mg/L', 'the steady state on 400 mg/day'], ['KM', '9 mg/L', 'from part a'], ['Vmax', '600 mg/day', 'from part b']],
+ check:{t:'Clearance at 18 mg/L must be below its value at 9 mg/L, because Cp is in the denominator: 22.22 L/day.', lo:0, hi:33.33},
+ teach:[NL_DEP],
+ cite:NL_S4 + ', part d; ' + NL_DECK + ', slide 18'},
+
+{id:'nl-p4e', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'dose', concept:'nl-dose-rate', skill:'nonlin', source:'slide',
+ stem:NL_P4 + ' e. What is the daily phenytoin dose that should achieve a steady-state phenytoin plasma concentration of 15 mg/L in this patient? (Part a: KM = 9 mg/L; part b: Vmax = 600 mg/day.)',
+ units:'mg/day', answer:375, tol:3.75,
+ steps:[
+  {k:'setup', t:'R = {{frac:Vmax × Css|KM + Css}}',
+   why:'The patient\'s own KM and Vmax, from parts a and b, with the target of 15 mg/L as Css, in the nonlinear dose-rate line. Vmax is in mg/day, so no weight is needed.'},
+  {k:'algebra', t:'R = {{frac:(600 mg/day)(15 mg/L)|(9 + 15) mg/L}} = {{frac:9000|24}} = 375 mg/day',
+   why:'mg/L cancels and leaves mg/day. 15 mg/L lies between the 9 and 18 mg/L measured, so the dose lies between the 300 and 400 mg/day she took.'},
+  {k:'round', t:'R = 375 mg/day',
+   why:'Exactly 375 mg/day, her sheet\'s value; this stem asks for no rounding. It is below the 600 mg/day Vmax, as every dose rate that reaches a steady state must be.'}],
+ setup:{eq:'nl-rate', pre:['nl-km', 'nl-vmax'], why:'"the daily phenytoin dose that should achieve a steady-state … concentration of 15 mg/L": the dose-rate line with the KM and Vmax of parts a and b.'},
+ asks:'R',
+ givens:[['KM', '9 mg/L', 'from part a'], ['Vmax', '600 mg/day', 'from part b'], ['Css', '15 mg/L', 'the target']],
+ check:{t:'15 mg/L lies between 9 and 18 mg/L, so the dose lies between 300 and 400 mg/day: 375 mg/day.', lo:300, hi:400},
+ teach:[NL_RATE],
+ cite:NL_S4 + ', part e'},
+
 /* ═══════════════ HOMEWORK 7, QUESTION 2 ══════════════════════════════ */
 
 {id:'nl-hw-a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
@@ -695,6 +974,128 @@ const Q_MODULE8 = [
  teach:[NL_CSS],
  note:NL_HWNOTE,
  cite:NL_H7 + ', part e'},
+
+/* ═══════════════ HOMEWORK 7, QUESTION 2 (HER NUMBERS) ═════════════════
+   Her stem as printed. No key of hers; computed from the stem by the method
+   of the changed-number parts above: KM 6.87 mg/L (6.875 carried), Vmax
+   526.1 mg/day, 360 mg/day (360.8, nearest ten), 1.37 days, 24.05 L/day,
+   11.11 mg/L. Each part carries dupOf its changed-number twin. */
+
+{id:'nl-hwo-a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-hw-a',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-km-direct', skill:'nonlin', source:'slide',
+ stem:NL_HWO + ' a. What is this patient\'s KM?',
+ units:'mg/L', answer:6.87, tol:0.07,
+ steps:[
+  {k:'setup', t:'KM = {{frac:R2 − R1|(R1/C1) − (R2/C2)}}, with R1 = 300 mg/day, C1 = 9.12 mg/L, R2 = 400 mg/day, C2 = 21.8 mg/L',
+   why:'Two daily doses in the same patient and the steady-state concentration each produced: the direct method for KM.'},
+  {k:'algebra', t:'KM = {{frac:400 − 300|(300/9.12) − (400/21.8)}} = {{frac:100|32.895 − 18.349}} = {{frac:100|14.546}}',
+   why:'Each dose over its own concentration, carried to three decimals because the two ratios are close and rounding them early moves KM noticeably.'},
+  {k:'round', t:'KM = 6.87 mg/L',
+   why:'(mg/day) over (mg/day per mg/L) leaves mg/L, a concentration. The unrounded 6.875 mg/L is carried into Vmax and the later parts.'}],
+ setup:{eq:'nl-km', pre:[], why:'"300 mg" giving "9.12 mg/L", then "400 mg" giving "21.8 mg/L", and "What is this patient\'s KM": the direct-method line.'},
+ asks:'Km',
+ givens:[['R1', '300 mg', 'the first daily dose'], ['C1', '9.12 mg/L', 'steady state on 300 mg'], ['R2', '400 mg', 'the increased daily dose'], ['C2', '21.8 mg/L', 'steady state on 400 mg'], ['weight', '68-kg', 'not needed for KM']],
+ check:{t:'A one-third rise in dose more than doubled the concentration, so the drug is near saturation; KM is a concentration: 6.87 mg/L.', lo:0},
+ teach:[NL_DIRECT],
+ note:NL_HWONOTE,
+ cite:NL_H7 + ', part a (her wording and numbers)'},
+
+{id:'nl-hwo-b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-hw-b',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-vmax', skill:'nonlin', source:'slide',
+ stem:NL_HWO + ' b. What is the Vmax in this patient? (Part a: KM = 6.875 mg/L.)',
+ units:'mg/day', answer:526.1, tol:5.3,
+ steps:[
+  {k:'setup', t:'Vmax = {{frac:R(KM + Css)|Css}}',
+   why:'The dose-rate line solved for Vmax: multiply both sides by (KM + Css) and divide by Css, using one dose and the steady-state concentration it produced.'},
+  {k:'algebra', t:'Vmax = {{frac:(400 mg/day)(6.875 + 21.8) mg/L|21.8 mg/L}} = {{frac:11470|21.8}} = 526.1 mg/day',
+   why:'mg/L cancels and Vmax keeps the units of the dose, mg/day. The 300 mg/day with 9.12 mg/L pair gives 526.1 mg/day as well.'},
+  {k:'round', t:'Vmax = 526.1 mg/day',
+   why:'526.14 mg/day to one decimal place. It is above the 400 mg/day dose, as it must be for a dose that reached a steady state.'}],
+ setup:{eq:'nl-vmax', pre:['nl-km'], why:'"What is the Vmax in this patient": the dose-rate line solved for Vmax, with KM from part a.'},
+ asks:'Vmax',
+ givens:[['KM', '6.875 mg/L', 'from part a'], ['R2', '400 mg', 'the dose used'], ['C2', '21.8 mg/L', 'its own steady state']],
+ check:{t:'Vmax must exceed the 400 mg/day dose that reached a steady state: 526.1 mg/day.', lo:400},
+ teach:[NL_DIRECT],
+ note:NL_HWONOTE,
+ cite:NL_H7 + ', part b (her wording and numbers)'},
+
+{id:'nl-hwo-c', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-hw-c',
+ topic:'nonlin', sub:'dose', concept:'nl-dose-rate', skill:'nonlin', source:'slide',
+ stem:NL_HWO + ' c. What is the daily dose rate of phenytoin that should achieve a steady state phenytoin plasma concentration of 15 mg/L in this patient? (Round to the nearest ten) (Part a: KM = 6.875 mg/L; part b: Vmax = 526.1 mg/day.)',
+ units:'mg/day', answer:360, tol:1,
+ steps:[
+  {k:'setup', t:'R = {{frac:Vmax × Css|KM + Css}}',
+   why:'The patient\'s own KM and Vmax, from parts a and b, with the target of 15 mg/L, in the nonlinear dose-rate line.'},
+  {k:'algebra', t:'R = {{frac:(526.1 mg/day)(15 mg/L)|(6.875 + 15) mg/L}} = {{frac:7891.5|21.875}} = 360.8 mg/day',
+   why:'mg/L cancels and leaves mg/day. 15 mg/L lies between 9.12 and 21.8 mg/L, so the dose lies between 300 and 400 mg/day.'},
+  {k:'round', t:'R = 360 mg/day',
+   why:'The stem asks for the nearest ten, so 360.8 mg/day is reported as 360 mg/day, a dose that can be given and that keeps Css near 15 mg/L.'}],
+ setup:{eq:'nl-rate', pre:['nl-km', 'nl-vmax'], why:'"the daily dose rate … that should achieve a steady state … of 15 mg/L": the dose-rate line with the KM and Vmax of parts a and b.'},
+ asks:'R',
+ givens:[['KM', '6.875 mg/L', 'from part a'], ['Vmax', '526.1 mg/day', 'from part b'], ['Css', '15 mg/L', 'the target'], ['rounding', 'nearest ten', '360.8 becomes 360']],
+ check:{t:'15 mg/L lies between 9.12 and 21.8 mg/L, so the dose lies between 300 and 400 mg/day: 360 mg/day.', lo:300, hi:400},
+ teach:[NL_RATE],
+ note:NL_HWONOTE,
+ cite:NL_H7 + ', part c (her wording and numbers)'},
+
+{id:'nl-hwo-d-t', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-hw-d-t',
+ topic:'nonlin', sub:'kmcp', concept:'nl-thalf', skill:'nonlin', source:'slide',
+ stem:NL_HWO + ' d. What is the half-life and clearance in this patient while she is taking the dose that you recommended above to achieve a steady state concentration of 15 mg/L? What is the half-life? (Part c: 360 mg/day for 15 mg/L; part a: KM = 6.875 mg/L; part b: Vmax = 526.1 mg/day.)',
+ units:'days', answer:1.37, tol:0.014,
+ steps:[
+  {k:'unit', t:'VD = 0.70 × 68 kg = 47.6 L',
+   why:'"70% of body weight" is read as 0.7 L/kg, taking 1 L as 1 kg, so the volume is 0.7 times the 68 kg weight, in litres.'},
+  {k:'setup', t:'t½ = VD({{frac:0.693|Vmax}})(KM + Cp), at Cp = 15 mg/L',
+   why:'The recommended dose was chosen to give 15 mg/L, so the half-life is calculated at that concentration; at another concentration it would differ.'},
+  {k:'algebra', t:'t½ = 47.6 L × {{frac:0.693|526.1 mg/day}} × (6.875 + 15) mg/L = 1.372 days',
+   why:'L × mg/L gives mg, which cancels against mg/day and leaves days. Using the volume as 0.7 gives 0.02, a result per kilogram.'},
+  {k:'round', t:'t½ = 1.37 days',
+   why:'1.372 days to two decimal places. The rounded 360 mg/day dose gives 14.9 mg/L and 1.36 days, within the same tolerance.'}],
+ setup:{eq:'nl-thalf', pre:['nl-km', 'nl-vmax'], why:'"the half-life … while she is taking the dose … to achieve … 15 mg/L": the nonlinear half-life line at Cp = 15 mg/L, VD from 70% of 68 kg.'},
+ asks:'thalf',
+ givens:[['weight', '68-kg', 'VD = 0.7 × 68 = 47.6 L'], ['VD', '70% of body weight', '0.7 L/kg'], ['Cp', '15 mg/L', 'the concentration the dose achieves'], ['KM', '6.875 mg/L', 'from part a'], ['Vmax', '526.1 mg/day', 'from part b']],
+ check:{t:'Vmax is in mg/day, so the half-life comes out in days: 1.372 days, more than one day and less than two.', lo:0.5, hi:3},
+ teach:[NL_DEP],
+ note:NL_HWONOTE,
+ cite:NL_H7 + ', part d (her wording and numbers); ' + NL_DECK + ', slide 17'},
+
+{id:'nl-hwo-d-cl', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-hw-d-cl',
+ topic:'nonlin', sub:'kmcp', concept:'nl-clearance', skill:'nonlin', source:'slide',
+ stem:NL_HWO + ' d. What is the half-life and clearance in this patient while she is taking the dose that you recommended above to achieve a steady state concentration of 15 mg/L? What is the clearance? (Part c: 360 mg/day for 15 mg/L; part a: KM = 6.875 mg/L; part b: Vmax = 526.1 mg/day.)',
+ units:'L/day', answer:24.05, tol:0.24,
+ steps:[
+  {k:'setup', t:'ClT = {{frac:Vmax|KM + Cp}}, at Cp = 15 mg/L',
+   why:'The recommended dose was chosen to give 15 mg/L, and the clearance of a saturable drug is calculated at its concentration.'},
+  {k:'algebra', t:'ClT = {{frac:526.1 mg/day|(6.875 + 15) mg/L}} = {{frac:526.1|21.875}} = 24.05 L/day',
+   why:'mg/day over mg/L leaves L/day, a volume of plasma cleared per unit time. The volume of distribution is not needed for clearance.'},
+  {k:'round', t:'ClT = 24.05 L/day',
+   why:'To two decimal places. A higher dose would raise Cp and lower this clearance, because Cp is in the denominator.'}],
+ setup:{eq:'nl-cl', pre:['nl-km', 'nl-vmax'], why:'"the … clearance … while she is taking the dose … to achieve … 15 mg/L": the nonlinear clearance line at Cp = 15 mg/L.'},
+ asks:'ClT',
+ givens:[['Cp', '15 mg/L', 'added to KM in the denominator'], ['KM', '6.875 mg/L', 'from part a'], ['Vmax', '526.1 mg/day', 'from part b']],
+ check:{t:'Clearance at 15 mg/L is well below Vmax ÷ KM, because KM + Cp, 21.875 mg/L, is larger than KM alone: 24.05 L/day.', lo:0, hi:76.5},
+ teach:[NL_DEP],
+ note:NL_HWONOTE,
+ cite:NL_H7 + ', part d (her wording and numbers); ' + NL_DECK + ', slide 18'},
+
+{id:'nl-hwo-e', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12', dupOf:'nl-hw-e',
+ topic:'nonlin', sub:'dose', concept:'nl-css', skill:'nonlin', source:'slide',
+ stem:NL_HWO + ' e. What is the expected steady state concentration if this patient were to take 325 mg/day? (Part a: KM = 6.875 mg/L; part b: Vmax = 526.1 mg/day.)',
+ units:'mg/L', answer:11.11, tol:0.12,
+ steps:[
+  {k:'setup', t:'Css = {{frac:R × KM|Vmax − R}}',
+   why:'The dose-rate line solved for Css: multiplying out gives R × KM + R × Css = Vmax × Css, so R × KM = Css(Vmax − R), then divide by (Vmax − R).'},
+  {k:'algebra', t:'Css = {{frac:(325 mg/day)(6.875 mg/L)|(526.1 − 325) mg/day}} = {{frac:2234.4|201.1}} = 11.11 mg/L',
+   why:'mg/day cancels and leaves mg/L. The denominator is Vmax minus the dose; adding them gives 2.6 mg/L, below the 9.12 mg/L that 300 mg produced.'},
+  {k:'round', t:'Css = 11.11 mg/L',
+   why:'11.11 mg/L to two decimal places. 325 mg/day is 8% above 300 mg/day, yet Css rises 22% from 9.12 mg/L: the steep rise of a saturable drug.'}],
+ setup:{eq:'nl-css', pre:['nl-rate'], why:'"the expected steady state concentration if this patient were to take 325 mg/day": the dose-rate line solved for Css.'},
+ asks:'Css',
+ givens:[['R', '325 mg/day', 'the new dose rate'], ['KM', '6.875 mg/L', 'from part a'], ['Vmax', '526.1 mg/day', 'from part b']],
+ check:{t:'325 mg/day is above the 300 mg/day that gave 9.12 mg/L and below the dose that gives 15 mg/L, so Css lies between them: 11.11 mg/L.', lo:9.12, hi:15},
+ teach:[NL_CSS],
+ note:NL_HWONOTE,
+ cite:NL_H7 + ', part e (her wording and numbers)'},
 
 /* ═══════════════ CONCEPT ITEMS ═══════════════════════════════════════ */
 
@@ -1025,7 +1426,16 @@ CHAINS.push(
  {id:'nl-prac2', src:'practice', module:8, name:'Nonlinear Practice 2',
   setup:'Phenytoin, 75-kg woman, 200 and 350 mg/day giving 6 and 21 mg/L, VD 0.75 L/kg; parts a–c, then two concept questions',
   parts:['nl-p2a-km', 'nl-p2a-vm', 'nl-p2b', 'nl-p2c-t15', 'nl-p2c-t21', 'nl-p2c-cl15', 'nl-p2c-cl21', 'nl-c02', 'nl-c03']},
- {id:'nl-hw7', src:'homework', module:8, name:'Homework 7, question 2',
+ {id:'nl-prac3', src:'practice', module:8, name:'Nonlinear Practice 3',
+  setup:'Phenytoin, 78-kg man, 300 and 400 mg giving 10.4 and 22 mg/L, VD 70% of body weight; parts a–e',
+  parts:['nl-p3a', 'nl-p3b', 'nl-p3c-t', 'nl-p3c-cl', 'nl-p3d-t', 'nl-p3d-cl', 'nl-p3e']},
+ {id:'nl-prac4', src:'practice', module:8, name:'Nonlinear Practice 4',
+  setup:'Phenytoin, 68-kg woman, 300 and 400 mg giving 9 and 18 mg/L, VD 70% of body weight; parts a–e',
+  parts:['nl-p4a', 'nl-p4b', 'nl-p4c-t', 'nl-p4c-cl', 'nl-p4d-t', 'nl-p4d-cl', 'nl-p4e']},
+ {id:'nl-hw7', src:'homework', module:8, name:'Homework 7, question 2 (changed numbers)',
   setup:'Phenytoin, 72-kg woman, 250 and 350 mg giving 6.4 and 17.6 mg/L, VD 70% of body weight; parts a–e',
-  parts:['nl-hw-a', 'nl-hw-b', 'nl-hw-c', 'nl-hw-d-t', 'nl-hw-d-cl', 'nl-hw-e']}
+  parts:['nl-hw-a', 'nl-hw-b', 'nl-hw-c', 'nl-hw-d-t', 'nl-hw-d-cl', 'nl-hw-e']},
+ {id:'nl-hwo7', src:'homework', module:8, name:'Homework 7, question 2 (original numbers)',
+  setup:'Phenytoin, 68-kg woman, 300 and 400 mg giving 9.12 and 21.8 mg/L, VD 70% of body weight; parts a–e',
+  parts:['nl-hwo-a', 'nl-hwo-b', 'nl-hwo-c', 'nl-hwo-d-t', 'nl-hwo-d-cl', 'nl-hwo-e']}
 );

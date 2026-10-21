@@ -8,6 +8,8 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - Final exam: total clearance, ideal body weight and Cockcroft-Gault are to be known without the sheet.
 - Questions from her final review are tagged "Final exam review".
 - Quiz 5 (Modules 7b and 8, 19 Oct): her eight Canvas questions word for word, with her keys.
+- Module 8: Nonlinear Practice 3 and 4 added as problem sets, keyed from her sheets.
+- Homework 1–5 and 7 now also in her own numbers; the changed-number sets stay as extra practice.
 
 ## 2026-10-17 (Modules 7b and 8; papers survive a reload; concept statuses)
 - Module 7b (PK-PD): 43 questions, 19 of them calculations, in 7 problem sets from her slides and sheets.

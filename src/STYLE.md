@@ -1407,7 +1407,7 @@ All other listed source files were read successfully and are fully transcribed a
 > c. What is the minimum concentration of drug in the plasma at steady state?
 > d. What is the expected concentration of drug in the plasma 8 hours after administration of the last dose?
 
-Graded homework with no posted key, so the drill does not work it. Question 1 of the same sheet is a Module 5 single-oral-dose set.
+Graded homework with no posted key. The drill works it twice, as it does the rest of Homework 1–5: with her numbers, computed from her stem (Cavg∞ 49.19 mg/L, Cmax∞ 90.92 mg/L, Cmin∞ 22.74 mg/L, and 22.74 mg/L 8 hours after the last dose), and with changed numbers as extra practice. Question 1 of the same sheet is a Module 5 single-oral-dose set.
 
 ## Source: `6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf`, Example 4 (printed stem), 09.28 lecture
 
@@ -1844,7 +1844,7 @@ Bank ids e2r-1 to e2r-14 (e2r-2m is the mechanism half of item 2). Stems verbati
 > c. What is the duration of activity if the dose were 7.5 mg/kg?
 > d. What dose would provide a duration of action of 8 hours?
 
-No posted key; the file is the student's submitted work. Following the q10_homework.js rule (graded homework: her wording, numbers changed), the drill uses 70 kg, 12 mg/kg, 0.25 L/kg, t½ 5 hr, MEC 4 mg/L, 6 mg/kg, 10 hours: AUC 346.3 (mg/L)·hr, teff 17.93 hr, 12.93 hr, dose 279.9 mg (4.0 mg/kg).
+No posted key; the file is the student's submitted work. As q10_homework.js does for graded homework, the drill carries it twice: with her numbers, computed from her stem (AUC 288.6 (mg/L)·hr, teff 14.95 hr, 10.95 hr, dose 337.4 mg, 4.50 mg/kg), and in her wording with changed numbers as extra practice (70 kg, 12 mg/kg, 0.25 L/kg, t½ 5 hr, MEC 4 mg/L, 6 mg/kg, 10 hours: AUC 346.3 (mg/L)·hr, teff 17.93 hr, 12.93 hr, dose 279.9 mg (4.0 mg/kg)).
 
 **Formats observed:** every duration stem names the model ("one-compartment open model", "first-order elimination") and a single IV bolus; the MEC is given in mcg/mL and worked in mg/L, labelled "MEC", "Ceff" or "minimum effective concentration", and once in mg/L (homework). She asks the duration as "teff", "duration of action" or "duration of activity" interchangeably. Weight is given in pounds (Practice 2) or kg with mg/kg dosing and L/kg volume (Practice 3, homework), where the kilograms cancel in C0. Each set pairs a teff with a dose change (×2 or ×4) and states the change as a count of half-lives (Δteff = 10 hr → 2 t½; "Increase of one half-life → 3.6 hr"), or asks the dose for a target duration, worked as D0 = Ceff VD e^(k teff) and reported per kg when the stem doses per kg. She uses all three teff forms: ln with k (Practice 1, 2, slide 8), t½/0.693 (Practice 3), 1.44 t½ (in-class). k to four decimals (0.1386, 0.1459). The poll is True/False on dose-doubling.
 
@@ -1927,7 +1927,7 @@ The sheet prints R = VmaxCss/(KM + Css) beside question 1 and the three direct-m
 > d. What is the half-life and clearance in this patient while she is taking the dose that you recommended above to achieve a steady state concentration of 15 mg/L?
 > e. What is the expected steady state concentration if this patient were to take 325 mg/day?
 
-No posted key; the file is the student's submitted work. Following the q10_homework.js rule (graded homework: her wording, numbers changed), the drill uses 72 kg, 31 years, 250 and 350 mg giving 6.4 and 17.6 mg/L, a 14 mg/L target and 300 mg/day in e: KM 5.21 mg/L, Vmax 453.7 mg/day, 330 mg/day, 1.48 days and 23.61 L/day, 10.18 mg/L.
+No posted key; the file is the student's submitted work. As q10_homework.js does for graded homework, the drill carries it twice: with her numbers, computed from her stem (KM 6.87 mg/L, Vmax 526.1 mg/day, 360 mg/day, 1.37 days and 24.05 L/day, 11.11 mg/L), and in her wording with changed numbers as extra practice (72 kg, 31 years, 250 and 350 mg giving 6.4 and 17.6 mg/L, a 14 mg/L target and 300 mg/day in e: KM 5.21 mg/L, Vmax 453.7 mg/day, 330 mg/day, 1.48 days and 23.61 L/day, 10.18 mg/L).
 
 **Formats observed:** VD "equal to 70% of body weight"; "(Round to the nearest ten)"; part d points back to "the dose that you recommended above", taken at the 15 mg/L target.
 
@@ -1944,3 +1944,274 @@ No posted key; the file is the student's submitted work. Following the q10_homew
 ## Files that could not be fully used
 
 - `Chapter18_NonlinearPharmacokinetics.pdf` (Shargel, 43 MB): the Drive text extraction returns only page headers (46 image-only pages, no text layer), so no definition from it is used; every claim in the module rests on the deck, her sheets and the transcript.
+
+## Source: `Nonlinear-Solutions-3.pdf` ("PHAR 4221 Daily Practice Nonlinear Solutions 3")
+
+> 1. A 78-kg, 28 year old male is receiving phenytoin for the treatment of seizures. When this patient was taking a daily oral dose of 300 mg, his steady state plasma concentration was 10.4 mg/L. The dose was increased to 400 mg which resulted in a steady-state plasma concentration of 22 mg/L. Assume 100% bioavailability and an apparent volume of distribution that is equal to 70% of body weight.
+> a. Calculate KM
+> b. Calculate Vmax
+> c. Calculate the half-life and clearance in this patient at steady-state while he is taking 300 mg/day.
+> d. Calculate the half-life and clearance in this patient at steady-state while he is taking 400 mg/day.
+> e. What is the daily phenytoin dose that should achieve a steady-state phenytoin plasma concentration of 15 mg/L in this patient? Please round to the nearest 10 mg.
+
+**Keyed answers (typed equations, answers boxed in red):** (a) KM = (400 − 300) mg/day / ((300/10.4) − (400/22)) (mg/day)/(mg/L) = 9.4 mg/L; (b) Vmax = (300 mg/day)(9.4 + 10.4) mg/L / 10.4 mg/L = 571 mg/day; (c) t½300 = (0.693/571 mg/day)(9.4 + 10.4) mg/L (0.7 L/kg)(78 kg) = 1.3 days; ClT300 = 571 mg/day / (9.4 + 10.4 mg/L) = 28.8 L/day; (d) t½400 = (0.693/571)(9.4 + 22)(0.7)(78) = 2.1 days; ClT400 = 571/(9.4 + 22) = 18.2 L/day; (e) R = (571 mg/day)(15 mg/L)/(15 + 9.4) mg/L = 351.02 mg/day → 350 mg/day.
+
+*Recompute:* KM = 100/(28.846 − 18.182) = 9.3770 (her 9.4); Vmax from KM 9.4: 300 × 19.8/10.4 = 571.15, 400 × 31.4/22 = 570.91 (from KM 9.3770 both pairs give 570.49; her 571); VD = 0.7 × 78 = 54.6 L; t½300 = 1.3121 (her 1.3); ClT300 = 28.838 (her 28.8); t½400 = 2.0807 (her 2.1); ClT400 = 18.185 (her 18.2); R = 8565/24.4 = 351.02 → 350 (nearest ten) → **match**. Her rounding of KM to 9.4 before Vmax moves Vmax by under 0.2%; the drill keys her 571 and accepts 570.5.
+
+**Formats observed:** VD "equal to 70% of body weight", worked as (0.7 L/kg)(78 kg); KM and Vmax as separate parts a and b; half-life and clearance at each of the two measured doses ("while he is taking 300 mg/day", "400 mg/day"), evaluated at that dose's own steady-state level, with subscripts t½300, ClT300; the 15 mg/L target with "Please round to the nearest 10 mg"; KM rounded to one decimal and carried rounded. One page; same wording as Homework 7 question 2 with a different patient and different numbers.
+
+## Source: `Nonlinear-Solutions-4.pdf` ("PHAR 4221 Daily Practice Nonlinear Practice 4")
+
+> A 68-kg, 28-year-old female is receiving phenytoin for the treatment of seizures. When this patient was taking a daily oral dose of 300 mg, her steady state plasma concentration was 9 mg/L. The dose was increased to 400 mg which resulted in a steady-state plasma concentration of 18 mg/L. Assume 100% bioavailability and an apparent volume of distribution that is equal to 70% of body weight.
+> a. Calculate KM
+> b. Calculate Vmax
+> c. Calculate the half-life and clearance in this patient at steady-state while she is taking 300 mg/day.
+> d. Calculate the half-life and clearance in this patient at steady-state while she is taking 400 mg/day.
+> e. What is the daily phenytoin dose that should achieve a steady-state phenytoin plasma concentration of 15 mg/L in this patient?
+
+**Keyed answers (boxed):** (a) KM = (400 − 300) mg/day / ((300/9) − (400/18)) = 9 mg/L; (b) Vmax = 400 mg/day (18 + 9) mg/L / 18 mg/L = 600 mg/day; (c) t½ = (0.693/600 mg/day)(9 + 9) mg/L (0.7 L/kg)(68 kg) = 0.989 day; ClT = 600 mg/day / (9 + 9) mg/L = 33.33 L/day; (d) t½ = (0.693/600)(9 + 18)(0.7)(68) = 1.48 day; ClT = 600/(9 + 18) = 22.22 L/day; (e) R = (600 mg/day)(15 mg/L)/(9 + 15) mg/L = 375 mg/day.
+
+*Recompute:* KM = 100/(33.333 − 22.222) = 9.0000; Vmax = 10 800/18 = 600.00 (first pair 300 × 18/9 = 600.00); VD = 47.6 L; t½ at 9 mg/L = 0.98960 (her 0.989; 0.990 to three decimals); ClT = 33.333; t½ at 18 mg/L = 1.4844; ClT = 22.222; R = 9000/24 = 375.00 → **match** (0.989 is 0.9896 cut at the third decimal; the drill keys 0.989 and accepts 0.990, and says so in the note).
+
+**Formats observed:** headed "Nonlinear Practice 4" though the file is named Solutions 4; no question number; same patient description as Homework 7 question 2 (68-kg, 28-year-old female, 300 then 400 mg) with different levels (9 and 18 mg/L, not 9.12 and 21.8); Vmax worked from the second pair; the parts c and d half-life and clearance at each dose's own steady state; the dose for 15 mg/L with no rounding instruction, and it comes out exact.
+
+## Source: `Quiz 5 Review.pdf` (the student's own review notes, made 19 Oct 2026; not her quiz)
+
+Two iPad notebook pages. Page 1 is the student's handwritten Module 7b notes ("double IV bolus that follows 1st order → DOESN'T result in a 2-fold increase"; "1st one: adds one ½ life to teff; 2nd: doubles teff"; "duration is not proportional to dose"; "Terms: onset time → when rising level 1st reaches the MEC; duration →; intensity → how far the peak rises above MEC"). Page 2 pastes four PollEv items with a green highlight on one option each. No Quiz 5 question, no Quiz 5 key and no grade is in the file. The four items are her PollEv slides from `Final-Exam-Review-10.19.pdf` ("Top 10 Basic PK Things to Know"), pages 3, 10, 17 and 25, where the polls show no answer; the green highlights are the student's marks.
+
+> Which of the following is characteristic of first-order processes? a constant half-life / a constant rate of elimination / dC/dt = -k / units of k of (concentration or amount)/time
+
+Student's highlight: a constant half-life. *Recompute:* first order has t½ = 0.693/k, constant → **agrees** (already in the bank as m1-ord-c03).
+
+> The renal clearance of an antibiotic was estimated to be 45 mL/min. What can be inferred from this information? The drug is filtered and actively secreted. / The drug is filtered and reabsorbed. / There is some evidence of renal impairment.
+
+Student's highlight: filtered and reabsorbed. *Recompute:* 45 mL/min is below the glomerular filtration rate, so net reabsorption → **agrees**.
+
+> What is the bioavailability of a 500 mg tablet which yielded an AUC of 115 (mg/L)hr compared to a 400 mg IV bolus dose that yielded an AUC of 132 (mg/L)hr? 50% / 70% / 85% / 92%
+
+Student's highlight: 70%. *Recompute:* (115/132)(400/500) = 0.697 → **agrees** (already in the bank in q12_module7.js; the class answered 70%).
+
+> What is the plasma concentration at the end of a 2 hour infusion of a drug with a t½ of 3 hours and a VD of 18 L at a rate of 50 mg/hr? 3.03 mg/L / 4.45 mg/L / 4.81 mg/L / 31.5 mg/L
+
+Student's highlight: 4.45 mg/L. *Recompute:* k = 0.693/3 = 0.231 hr⁻¹; 50/(0.231 × 18) × (1 − e^(−0.462)) = 12.025 × 0.36998 = 4.449 → **agrees** (her page 26 then carries 4.45 into two infusions: 4.45e^−(0.231×4) + 4.45e^−(0.231×10) = 2.2 mg/L).
+
+**Formats observed:** none of hers beyond the review deck's PollEv forms; this file adds no item of hers. The four polls belong with the Final Exam Review ingest, keyed from her deck and the 10.19 lecture, not from the student's highlights.
+
+## Source: Canvas Quiz 5, Modules 7b and 8 (graded set; file `Quiz 5 - Module 7b/8.pdf`, sat 19 Oct 2026)
+
+Eight questions, four on PK-PD (Module 7b, duration of action only) and four on nonlinear
+pharmacokinetics (Module 8); within each module two concept items, then two numeric. The file is
+a four-page transcription of the graded screenshots ("Questions and recorded quiz feedback"), with
+a text layer; it shows the Canvas key of every item. The keys below are hers, each numeric key
+recomputed from its stem. Bank ids cq5-1 to cq5-8. Stems and options word for word, including
+"There is a no change" (Q5-1), "a single IV bolus injections" (Q5-4) and "8.7 mg/L.When" (Q5-8).
+
+**Q5-1 — multiple choice, effect of a parameter change (three options).**
+> For a drug that displays linear, first-order pharmacokinetics, what is the impact on duration of activity if there is an increase in elimination half-life?
+> - There is a no change to the duration of activity.
+> - Duration of activity will increase. ✔
+> - Duration of activity will decrease.
+
+*Recompute:* teff = 1.44 t½ ln(D0 ÷ (VD × Ceff)); t½ multiplies the whole line, so teff rises in proportion → **B matches**.
+
+**Q5-2 — multiple choice, doubling the dose.**
+> Which of the following results when the IV bolus dose of a drug displaying linear, first-order pharmacokinetics is doubled?
+> - The half-life is decreased by half
+> - The duration of action is doubled
+> - The half-life is doubled
+> - The duration of action is increased by one half-life ✔
+
+*Recompute:* teff = (ln C0 − ln Ceff) ÷ k; 2D0 adds ln 2 ÷ k = t½ → **D matches**.
+
+**Q5-3 — numeric, duration of action after one IV bolus.**
+> What is the duration of action following a 604 mg IV bolus dose of a drug that displays linear, first-order pharmacokinetics? The half-life of elimination is 5 hours, apparent volume of distribution is 18 L, and minimum effective concentration is 6 mcg/mL.
+> **Provide your answer in hours rounded to the nearest tenth (one decimal place) with no units.**
+> Key **12.4**, margin ±5%. *Recompute:* k = 0.693 ÷ 5 = 0.1386 hr⁻¹, C0 = 604 ÷ 18 = 33.56 mg/L, teff = ln(33.56 ÷ 6) ÷ 0.1386 = 1.721 ÷ 0.1386 = 12.42 hr (1.44 t½ form 12.39; ln 2 form 12.42) → **matches**.
+
+**Q5-4 — numeric, dose for a target duration.**
+> What dose of a medication, that is to be administered as a single IV bolus injections would provide a duration of action of 20 hours in a 75 kg patient? The drug displays linear, first-order pharmacokinetics, has an elimination half-life of 5.8 hours, apparent volume of distribution of 0.25 L/kg, and a minimum effective concentration of 4 mg/L.
+> **Provide your answer in mg rounded to the nearest whole number with no units.**
+> Key **818**, margin ±5%. *Recompute:* VD = 18.75 L, k = 0.693 ÷ 5.8 = 0.1195 hr⁻¹, D0 = 4 × 18.75 × e^(0.1195 × 20) = 75 × 10.91 = 818.2 mg → **matches** (with ln 2 in place of 0.693: 818.6, rounds to 819, within the margin).
+
+**Q5-5 — multiple choice, order of elimination at low concentration.**
+> Which of the following is true for a medication that displays nonlinear pharmacokinetics?
+> - At low concentrations of drug in the plasma relative to Vmax, the elimination rate depends on concentration.
+> - At low concentrations of drug in the plasma relative to KM, the elimination rate is independent of concentration.
+> - At low concentrations of drug in the plasma relative to KM, the elimination rate depends on the concentration. ✔
+> - At low concentrations of drug in the plasma relative to Vmax, the elimination rate is independent of concentration.
+
+*Recompute:* Cp ≪ KM gives rate = (Vmax ÷ KM) × Cp, first order → **C matches**.
+
+**Q5-6 — multiple choice, "Which of the following is true regarding …?"**
+> Which of the following is true regarding drugs that display nonlinear pharmacokinetics?
+> - Parameters do not change when different or multiple doses of a drug are given
+> - Half-life changes as dose is increased ✔
+> - The principle of superposition applies at steady-state.
+> - The AUC is proportional to the amount of bioavailable drug.
+
+*Recompute:* t½ = VD(0.693 ÷ Vmax)(KM + Cp) rises with Cp; slide "Saturation Kinetics" → **B matches**. The three distractors are linear properties.
+
+**Q5-7 — numeric, nonlinear dose rate for a target Css.**
+> What daily dose rate of a non-linear drug would provide a steady-state concentration of 15 mg/L? In this patient, the KM is 7.9 mg/L and the Vmax is 625 mg/day.
+> **Provide your answer in mg/day rounded to the nearest five with no units.**
+> Key **409**, margin ±5%. *Recompute:* R = 625 × 15 ÷ (7.9 + 15) = 9375 ÷ 22.9 = 409.4 mg/day → **matches the whole number**; the nearest five is 410, which the key does not show. 389 to 430 scores, so 410 also scores. The bank keys 409 with a note.
+
+**Q5-8 — numeric, KM by the direct method.**
+> When a 25 year-old, 75 kg patient was taking a daily oral dose of 350 mg, his steady state plasma concentration was 8.7 mg/L.When the daily dose was increased to 450 mg, a steady-state plasma concentration of 20.6 mg/L resulted. What is the KM of this drug in this patient?
+> **Provide your answer in mg/L rounded to the nearest tenth (one decimal place) with no units.**
+> Key **5.4**, margin ±5%. *Recompute:* KM = (450 − 350) ÷ (350 ÷ 8.7 − 450 ÷ 20.6) = 100 ÷ (40.23 − 21.84) = 100 ÷ 18.39 = 5.44 mg/L → **matches**. (Age and weight are not used.)
+
+**Formats observed:** eight items, two modules, each module concept-concept-numeric-numeric
+(Quiz 4 alternated). Concept stems: "what is the impact on … if there is an increase in …?" with
+three options (no change / increase / decrease), "Which of the following results when … is
+doubled?", "Which of the following is true for/regarding …?" with four options built as pairs (KM
+or Vmax × depends or independent; or one nonlinear property against three linear ones). Numeric
+instruction now reads "**Provide** your answer in <unit> rounded to the nearest tenth (one decimal
+place) / whole number / five with no units" (Quiz 4 said "Give your answer"); "nearest five" is new
+and its key was not rounded to five. Margins ±5% on all four. Q5-7 and Q5-8 are her In-Class
+Practice (Nonlinear PK) questions 1 and 2 with new numbers (KM 6.9 → 7.9, Vmax 584 → 625; 9.2 →
+8.7 and 20 → 20.6 mg/L), stems otherwise the same, including the unused age and weight in Q5-8.
+Q5-3 and Q5-4 follow her In-Class Activity "PK-PD" problem 1 (duration from t½, VD, MEC; then
+the dose for a target duration, here with VD in L/kg). Nothing on Emax, EC50, the log dose–response
+curve or nonlinear half-life and clearance numbers was asked.
+
+Bank duplicates: Q5-1 dupOf pd-c20, Q5-2 dupOf pd-c14, Q5-5 dupOf nl-c09, Q5-6 dupOf nl-c04; the
+numeric items have new numbers and no dupOf.
+
+# Final exam — her in-class review (19 Oct)
+
+## Source: `Final-Exam-Review-10.19.pdf` (26 pages, images only) and the 19 Oct lecture (after Quiz 5)
+
+Title page "Top 10 Basic PK Things to Know", then ten statements counted down from 10 to 1, each followed by a PollEv
+question or a slide she worked, and spoken follow-ups. The poll captures show the vote count (the tick badge) but no
+distribution; the class response is as she read it out. No key is printed; every key below is hers, spoken.
+Bank ids fr-1 to fr-12f, set `fr-sheet` (src 'review', module 8, span). Stems verbatim; fr-2 writes e^-0.9t as
+e^(-0.9t) so the exponent sets.
+
+> **10. Differentiate between zero and first-order processes.** (slide 2)
+>
+> Spoken: "DCDT looking at the graphs, knowing the units, knowing fundamentally the difference in terms of the rate of processes." "If I give you a little table of data, know how to determine whether it's 0 or 1st."
+>
+> **PollEv (slide 3).** Which of the following is characteristic of first-order processes?
+> a constant half-life / a constant rate of elimination / dC/dt = -k / units of k of (concentration or amount)/time
+>
+> Slides 4 and 5: "Zero-Order Reactions: Amount or concentration of drug decreases at a constant rate", dC/dt = −k, C = C0 − kt; "First-Order Reactions: Amount or concentration of drug decreases at a rate that is proportional to the amount of drug remaining", dC/dt = −kC, log C = log C0 − kt/2.3 → C = C0·10^(−kt/2.3), ln C = ln C0 − kt → C = C0e^(−kt).
+
+**Class response:** "most of you guys said a constant half-life, right? A constant rate of elimination. Some of you guys thought that DCDT is equal to minus K and units of K." (badge 0 on the capture)
+**Her key:** a constant half-life: "0.693 over K gives us our half-life, right? Rate of elimination is constantly changing. DCDT is equal to minus KC. And appropriate units of k are reciprocal time." On a graph with ticks 1, 10, 100, 1000: "that is a log scale ... So this would not be zero order, it would be 1st order".
+*Recompute:* no number. → fr-1.
+
+> **9. Calculate and know what these basic parameters tell us: k, t½, VD, Cp** (slide 6)
+>
+> Spoken: k "is a rate constant ... If it's KC, then that means that the process is going to be dependent on the concentration ... If it's just K all by itself, it's independent of concentration. If it's got some subscript. That tells you ... what process K is describing, metabolism, excretion, absorption"; half-life "is a time ... the time that it takes for half of whatever you've got to be eliminated, or ... for an IV infusion, it is the time that it takes to get to half of the steady-state concentration"; "The apparent volume of distribution. What is that? Why is it apparent?"; Cp "is the concentration specifically of drug in the plasma".
+>
+> **PollEv (slide 7).** 400 mg of a drug was administered by IV bolus injection. The equation describing the drug in the body is given as Cp =(40 mg/L)e^-0.9t. What is the apparent volume of distribution of this drug?
+> 10 L / 20 L / 40 L / 50 L
+
+**Class response:** "most of you guys thought 10 L." (locked, badge 0)
+**Her key:** 10 L: "we're taking this 400 mg and dividing it by the 40 mg per liter".
+*Recompute:* 400 ÷ 40 = 10.000 L → **matches**. → fr-2.
+
+> **Slide 8 (her worked reading).** "Cefoxitin Plasma Conc." (micrograms/ml) against time (hrs), points labelled (200), (93), (44), (21), (10), (4.9), (2.3), (1.1) at 0 to 7 hr, linear axis (the Introduction.pdf slide 20 plot).
+
+**Her answer:** "Half-Life is the time that it takes to go to half, so half of 100 is roughly 50, so 93 down to 44. For this example, one hour."
+*Recompute:* ln(93/44) = 0.7484 hr⁻¹ → t½ = 0.926 hr; the seven one-hour steps give 0.905 to 0.972 hr; ln(200/1.1)/7 → 0.932 hr → **differs from the estimate by 0.07 hr**; the drill keys her 1 hour, tolerance 0.1 hr, and the note says 0.93 hr is accepted. → fr-3.
+
+> **8. Calculate/explain total clearance, renal clearance, and hepatic clearance** (slide 9)
+>
+> Spoken: "Total clearance, and I think that is one of the equations that I expect you to know. It's not on your equation sheet, but you know it, right? Renal clearance, how do we calculate it? Hepatic clearance, how do we calculate it? How do we think about the process of renal clearance? How do we estimate a patient's renal function?"
+>
+> **PollEv (slide 10).** The renal clearance of an antibiotic was estimated to be 45 mL/min. What can be inferred from this information?
+> (A) The drug is filtered and actively secreted. (B) The drug is filtered and reabsorbed. (C) There is some evidence of renal impairment.
+
+**Class response:** 63 responses on the capture; distribution not shown.
+**Her key:** B: "So the drug is filtered and reabsorbed, OK? The inference is that we've got reabsorption going on."
+*Recompute:* 45 ÷ 120 = 0.375, below the GFR of about 120 mL/min → reabsorption → **matches**. → fr-4.
+
+> **PollEv (slide 11).** Hepatic clearance is most readily approximated with creatinine clearance.
+> True / False
+
+**Class response:** 1 response on the capture; not read out.
+**Her key:** False: "That should be false. ... how do we approximate hepatic clearance? Total minus renal. Why do we do it that way? Yeah, it's it, there's not an easier way to do it, right?" Creatinine clearance "calculates an individual's renal function, and again, one of the equations or two of the equations that I want you to know, remember in this class, we're only gonna use the ideal body weight, so that means that I expect you to know the ideal body weight equation as well as the Cockroth Gault [Cockcroft-Gault]."
+*Recompute:* no number. → fr-5.
+
+> **7. Calculate and interpret steady state plasma concentrations, peaks and troughs, averages, tmax** (slide 12)
+>
+> **PollEv (slide 13).** What is the expected maximum steady state plasma concentration following multiple IV bolus dosing every 12 hours of 300 mg of a drug with a t½ of 4 hours and VD of 16 L?
+> 18.7 mg/L / 21.4 mg/L / 32.6 mg/L / None of the above
+>
+> Spoken follow-ups: "What is the minimum? At steady state." "When does the max occur? ... when you give the dose, right? What happens in 3 to 5 half-lives? ... that's when we reach our steady state". "When do we need a T-Max? Only for oral, right?"
+
+**Class response:** not read out (locked, badge 0). The same poll ran on 30 Sep ("most of you guys thought that it was B").
+**Her key:** 21.4 mg/L ("You should have gotten 21.4 mg per liter"); minimum 2.7 mg/L ("2.7, OK. Anybody else get 2.7?"). Her route: "CMax of first dose ... It's your dose of volume distribution divided by what's accumulated in the body" (superposition).
+*Recompute:* k = 0.17325 hr⁻¹, C0 = 18.75 mg/L, e^(−2.079) = 0.12506, Cmax∞ = 18.75 ÷ 0.87494 = 21.430 → 21.4; Cmin∞ = 21.430 × 0.12506 = 2.680 → 2.7 → **matches**. 18.7 is the first-dose C0 (18.75); 32.6 would need e^(−kτ) = 0.4248, τ = 4.94 hr. → fr-6a, fr-6b.
+
+> **6. Identify Cp v. T curves for each type of administration** (slide 14)
+>
+> **PollEv (slide 15).** Which type of drug input is depicted by this curve? [plasma level rising from zero to a labelled "Steady-state level"; Shargel, Applied Biopharmaceutics & Pharmacokinetics, 5th ed.]
+> (A) instantaneous input (B) first-order input (C) zero-order input
+
+**Class response:** 14 responses on the capture; not read out.
+**Her key:** C: "I was looking for zero order. What does zero order mean? Same Same rate. Non-changing. ... Constant, right? So a constant rate of input." Then: "instantaneous in, 1st order out is our bolus, 1st order in, 1st order out is our oral, our conventional oral, and then 0 order in, 1st order out is our IV infusion."
+*Recompute:* no number. → fr-7 (drawn infusion curve), fr-7m (her three pairs, as a match).
+
+> **5. Discuss and calculate bioavailability given appropriate parameters** (slide 16)
+>
+> **PollEv (slide 17).** What is the bioavailability of a 500 mg tablet which yielded an AUC of 115 (mg/L)hr compared to a 400 mg IV bolus dose that yielded an AUC of 132 (mg/L)hr?
+> (A) 50% (B) 70% (C) 85% (D) 92%
+>
+> Spoken follow-up: "And if the bioavailability is 70%. What oral dose would provide similar therapeutic activity as the 400 mg bolus dose? Round to the nearest 5."
+
+**Class response:** "most of you guys thought 70%." (capture taken at 0 votes per bar). Same poll as 30 Sep (m7-c15).
+**Her key:** 70%; oral dose "570? Everybody get 570?"
+*Recompute:* (115/132)(400/500) = 0.69697 → 70% → **matches**; 400 ÷ 0.70 = 571.43 → 570 to the nearest 5 → **matches**; with F unrounded 400 ÷ 0.69697 = 573.91 → 575 → **differs by one step of 5**; the drill keys her 570 (tolerance 5 accepts 575) and the note says so. → fr-8a, fr-8b.
+
+> **4. Differentiate between linear and nonlinear kinetics** (slide 18)
+>
+> **PollEv (slide 19).** Drugs that display Michaelis-Menten saturation kinetics will often exhibit zero-order kinetics at low concentrations and first-order kinetics at high concentrations.
+> (A) True (B) False
+
+**Class response:** "most of you guys thought that that was false." (badge 0) Same stem as her 14 Oct poll (nl-c01).
+**Her key:** False: "And that was indeed false, right? At high concentrations, then the process proceeds according to VM max, right? VMAX is a constant for a given drug given patient."
+*Recompute:* no number. → fr-9.
+
+> **3. Understand the significance of AUC** (slide 20)
+>
+> Spoken: "Tells about, tell tells us about the extent of drug that's available for the body to use, so the extent of drug absorbed or extent available. ... And way back when we did the trapezoidal rule, we haven't done it since because we have some other ways to calculate AUC."
+>
+> **PollEv (slide 21).** The trapezoidal rule provides a simple way to estimate the AUC.
+> (A) True (B) False
+
+**Class response:** 34 responses on the capture; not read out.
+**Her key:** not spoken. Keyed True from her Module 1 objective 5, "Determine the area under the curve for a provided data set using the trapezoidal rule", and her 17 Aug description of it.
+*Recompute:* no number. → fr-10.
+
+> **2. Determine the duration of action, time to reach steady-state, time to reach maximum concentration, and time required for most drug to be eliminated from the body** (slide 22)
+>
+> Spoken: "So know how to rearrange to solve for time."
+>
+> **PollEv (slide 23).** What is the duration of action for a 1 g IV bolus dose with a VD = 12.5 L, t½ = 4hr and MEC= 20 mg/L ?
+> 4 hours / 8 hours / 12 hours / None of the above
+>
+> Spoken follow-up: "And if we were to give 500 mg instead of 1 g, what would the duration of action be?"
+
+**Class response:** "most of you guys thought that it was 8 hours" (locked, badge 0).
+**Her key:** 8 hours, "and that is the correct answer"; 500 mg: "4 hours, right?"
+*Recompute:* C0 = 1000 ÷ 12.5 = 80 mg/L; ln(80/20) ÷ 0.17325 = 8.002 hr → 8 → **matches**; C0 = 40 mg/L, ln 2 ÷ 0.17325 = 4.001 hr → 4 → **matches**. → fr-11a, fr-11b.
+
+> **1. Calculate the concentration of drug in the plasma following IV bolus administration, IV infusion, extravascular administration** (slide 24)
+>
+> **PollEv (slide 25).** What is the plasma concentration at the end of a 2 hour infusion of a drug with a t½ of 3 hours and a VD of 18 L at a rate of 50 mg/hr?
+> (A) 3.03 mg/L (B) 4.45 mg/L (C) 4.81 mg/L (D) 31.5 mg/L
+>
+> Spoken follow-ups: "What is the concentration 3 hours after cessation?" "If Another 2 hour infusion was started and let's see, 6 hours. After the first infusion, what is the concentration 4 hours after cessation of the second infusion?" "What if we were to continue this infusion? At this rate, What would the steady state concentration be?" "If we. Infuse it at a rate of 100 mg per hour, what would the steady state concentration be?" "How long does it take to get to ..."
+>
+> Slide 26 (her board): time line 0, 2 (4.45), 6, 8 (4.45), 12 circled; 4.45e^−(0.231×4) + 4.45e^−(0.231×10) = 2.2 mg/L.
+
+**Class response:** 1 response on the capture; not read out.
+**Her keys:** "4.45 mg per liter"; 3 hours after cessation "2.2"; second infusion "I got 2.2 again"; steady state "12.02 ... twelve-ish", "let's say 12"; at 100 mg/hr "24"; time to either steady state "3 to 5 half-lifes, right? So changing the rate. Just changes the concentration. It does not change the time that it takes to get to that steady-state concentration".
+*Recompute:* k = 0.231 hr⁻¹, Cl = 4.158 L/hr, Css = 12.025 mg/L; Cend = 12.025 × 0.36998 = 4.449 → 4.45 → **matches**; 4.449 × e^(−0.693) = 2.225 → 2.2 → **matches**; 4.449 × 0.39693 + 4.449 × 0.09926 = 1.766 + 0.442 = 2.208 → 2.2 → **matches**; Css 12.025 → 12 (her 12.02) → **matches**; 100 ÷ 4.158 = 24.05 → 24 → **matches**; 3 to 5 half-lives = 9 to 15 hr either rate. The spoken timing of the second infusion is garbled ("6 hours. After the first infusion"; "another 16 hours after the start of the first"); her board fixes it at 6 hours after the start of the first. → fr-12a to fr-12f.
+
+**Logistics (end of the session).** "I have not talked to Doctor Smith, so right now, we are still scheduled for 7:50. Um, I will try to catch her sometime between now and next Tuesday, day of exam. I will let you know via in person or in Canvas." "Wednesday. Remember is the optional day. ... I will not have a PowerPoint. I will answer questions. I will ask questions, um, but ... we will start at 8:30 instead of 8. ... we will be here from 8:30 until 9:30."
+
+**Formats observed:** each statement of what she expects is followed by one PollEv item with three or four options or True/False, and one or more follow-ups asked out loud that change one input or ask the next quantity (the trough after the peak, the equivalent oral dose after F, the duration at half the dose, the level after cessation, a second infusion, the steady state at the same and at double the rate). Two polls are repeated word for word from earlier lectures: the bioavailability poll (30 Sep) and the Michaelis-Menten true/false (14 Oct); the Cmax∞ poll also ran on 30 Sep. Rounding is stated in the spoken follow-up when it matters ("Round to the nearest 5"). Equations she said to know without the sheet: total clearance, ideal body weight and Cockcroft-Gault.

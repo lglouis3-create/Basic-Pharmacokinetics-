@@ -99,6 +99,8 @@ const PD_P2 = 'What is the expected teff in a 165-pound male for a single IV dos
 const PD_P3 = 'A 75-kg patient is to receive a single 20-mg/kg IV bolus dose of an antibiotic. The antibiotic follows a one-compartment open model, has an apparent volume of distribution that is approximately 0.3 L/kg, a first-order elimination half-life of approximately 3.6 hours, and is characterized by a minimum effective concentration of 7.2 mcg/mL.';
 const PD_HW = '1. A 70-kg volunteer received a single IV bolus dose of an investigational drug. The drug was administered at a dose of 12 mg/kg. The drug has an apparent volume of distribution that is 0.25 L/kg and an elimination half-life approximately 5 hours.';
 const PD_HW_NOTE = 'Her homework wording with different numbers, so this is not the graded answer.';
+const PD_HWO = '1. A 75-kg volunteer received a single IV bolus dose of an investigational drug. The drug was administered at a dose of 15 mg/kg. The drug has an apparent volume of distribution that is 0.3 L/kg and an elimination half-life approximately 4 hours .';
+const PD_HWO_NOTE = 'Her homework with her own numbers. She gave no key for it, so this answer is computed from her stem.';
 
 const Q_MODULE7B = [
 
@@ -873,7 +875,96 @@ const Q_MODULE7B = [
  check:{t:'10 hours is two half-lives of 5 hr, so the dose is 4 times the 70 mg at the MEC: 279.9 mg.', lo:70, hi:840},
  teach:[PD_T_DOSEFOR],
  note:PD_HW_NOTE,
- cite:'Homework-7.pdf, problem 1d (her wording; numbers changed)'}
+ cite:'Homework-7.pdf, problem 1d (her wording; numbers changed)'},
+
+/* ═══════════════ HOMEWORK 7, PROBLEM 1 (HER NUMBERS) ═══════════════
+   Her stem as printed. No key of hers; every answer is computed from the
+   stem by the method of the changed-number parts above, k = 0.693/4 carried
+   in full: AUC 288.60 (mg/L)·hr, teff 14.95 hr, 10.95 hr, 337.4 mg. Each part
+   carries dupOf its changed-number twin, so a paper never holds both. */
+
+{id:'hw7o-1a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', dupOf:'hw7-1a',
+ topic:'pkpd', sub:'pd', concept:'auc-iv-exposure', skill:'auc', source:'slide',
+ stem:PD_HWO + ' a. What is the AUC following the IV bolus dose?',
+ units:'(mg/L)·hr', answer:288.6, tol:2.9,
+ steps:[
+  {k:'unit', t:'D0 = 15 mg/kg × 75 kg = 1125 mg; VD = 0.3 L/kg × 75 kg = 22.5 L',
+   why:'Dose and volume are both per kilogram, so each is multiplied by the 75-kg weight; the kilograms cancel and leave mg and L.'},
+  {k:'setup', t:'k = {{frac:0.693|4 hr}} = 0.17325 hr⁻¹; ClT = k × VD = 0.17325 × 22.5 L = 3.898 L/hr',
+   why:'Clearance is not given, so it is built from the half-life and the volume: Cl = kVD, total body clearance. hr⁻¹ × L leaves L/hr.'},
+  {k:'algebra', t:'AUC = {{frac:F D0|ClT}} = {{frac:1125 mg|3.898 L/hr}} = 288.6 (mg/L)·hr',
+   why:'AUC, the area under the concentration–time curve, from Cl = {{frac:F D0|AUC}} rearranged. F = 1 for an IV bolus, because the whole dose goes directly into the blood. mg over L/hr leaves (mg/L)·hr.'},
+  {k:'round', t:'AUC = 288.6 (mg/L)·hr = {{frac:C0|k}} = {{frac:50 mg/L|0.17325 hr⁻¹}}',
+   why:'The AUC is the total exposure from this one dose, the quantity an exposure–response relationship sets against the effect.'}],
+ setup:{eq:'cl-auc', pre:['thalf-first', 'cl-k-vd'], why:'"AUC following the IV bolus dose" with dose, volume and half-life given: AUC = F D0 over Cl, with Cl = kVD first and F = 1.'},
+ asks:'AUC',
+ givens:[['weight', '75-kg', 'scales the dose and the volume'], ['D0', '15 mg/kg', '× 75 kg = 1125 mg'], ['VD', '0.3 L/kg', '× 75 kg = 22.5 L'], ['t½', 'approximately 4 hours', 'k = 0.17325 hr⁻¹ for Cl = kVD']],
+ check:{t:'AUC = C0 ÷ k, with C0 = 1125 ÷ 22.5 = 50 mg/L and k = 0.17325 hr⁻¹: 288.6 (mg/L)·hr.', lo:0},
+ teach:[{h:'AUC after an IV bolus', list:[
+  'AUC = {{frac:F D0|Cl}}, with F = 1 for an IV bolus and Cl = k × VD.',
+  'The same AUC is {{frac:C0|k}}, because C0 = {{frac:D0|VD}}.',
+  'AUC is a measure of exposure: the dose or concentration side of the exposure–response relationship.']}],
+ note:PD_HWO_NOTE,
+ cite:'Homework-7.pdf, problem 1a (her wording and numbers)'},
+
+{id:'hw7o-1b', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', dupOf:'hw7-1b',
+ topic:'pkpd', sub:'teff', concept:'teff-calc', skill:'pkpd', source:'slide',
+ stem:PD_HWO + ' b. If the MEC is 3.75 mg/L, what is the duration of activity of this drug in this volunteer?',
+ units:'hr', answer:14.95, tol:0.15,
+ steps:[
+  {k:'setup', t:'C0 = {{frac:D0|VD}} = {{frac:15 mg/kg|0.3 L/kg}} = 50 mg/L; k = {{frac:0.693|4 hr}} = 0.17325 hr⁻¹',
+   why:'Dose and volume are both per kilogram, so the kilograms cancel in C0: 1125 mg over 22.5 L is the same 50 mg/L. k comes from the half-life.'},
+  {k:'algebra', t:'teff = {{frac:ln C0 − ln Ceff|k}} = {{frac:ln(50 ÷ 3.75)|0.17325 hr⁻¹}} = {{frac:ln 13.33|0.17325}} = {{frac:2.590|0.17325 hr⁻¹}}',
+   why:'The duration is the time the level takes to fall from C0 to the MEC, the minimum effective concentration; the logarithm of their ratio over k gives that time.'},
+  {k:'round', t:'teff = 14.95 hr',
+   why:'2.590 ÷ 0.17325 = 14.95 hr: between 3 and 4 half-lives of 4 hr, because the 13.33-fold fall lies between 8 and 16.'}],
+ setup:{eq:'pd-teff-ln', pre:['thalf-first', 'cp-db-vd'], why:'"Duration of activity" with an MEC, the minimum effective concentration: the natural-log duration line, with C0 = D0 over VD and k from the half-life.'},
+ asks:'t',
+ givens:[['Ceff', '3.75 mg/L', 'the MEC, where the duration ends'], ['D0', '15 mg/kg', 'over 0.3 L/kg gives C0 = 50 mg/L'], ['VD', '0.3 L/kg', 'the denominator of C0'], ['t½', 'approximately 4 hours', 'k = 0.17325 hr⁻¹'], ['weight', '75-kg', 'cancels in C0']],
+ check:{t:'C0 ÷ Ceff = 13.33 lies between 8 and 16, so teff is between 3 and 4 half-lives of 4 hr: 14.95 hr.', lo:12, hi:16},
+ teach:[PD_T_TEFF],
+ note:PD_HWO_NOTE,
+ cite:'Homework-7.pdf, problem 1b (her wording and numbers)'},
+
+{id:'hw7o-1c', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', dupOf:'hw7-1c',
+ topic:'pkpd', sub:'teff', concept:'teff-dose-change', skill:'pkpd', source:'slide',
+ stem:PD_HWO + ' c. What is the duration of activity if the dose were 7.5 mg/kg? (Part b: MEC = 3.75 mg/L; duration of activity 14.95 hr at 15 mg/kg.)',
+ units:'hr', answer:10.95, tol:0.11,
+ steps:[
+  {k:'setup', t:'C0 = {{frac:7.5 mg/kg|0.3 L/kg}} = 25 mg/L; k = 0.17325 hr⁻¹; Ceff = 3.75 mg/L',
+   why:'Half the dose gives half of C0, because the volume does not change with the dose; k and the MEC are the same as in part b.'},
+  {k:'algebra', t:'teff = {{frac:ln(25 ÷ 3.75)|0.17325 hr⁻¹}} = {{frac:ln 6.667|0.17325}} = {{frac:1.897|0.17325 hr⁻¹}} = 10.95 hr',
+   why:'The level now has to fall only 6.667-fold, from 25 to 3.75 mg/L, to reach the MEC, instead of 13.33-fold, so the duration is shorter than in part b.'},
+  {k:'round', t:'14.95 − 10.95 = 4 hr, one half-life; teff = 10.95 hr',
+   why:'Halving the dose removes one doubling, and each doubling adds one half-life, so 4 hr comes off the duration; the 14.95 hr is not halved.'}],
+ setup:{eq:'pd-teff-ln', pre:['thalf-first', 'cp-db-vd'], why:'"Duration of activity if the dose were 7.5 mg/kg": the same natural-log duration line with the new C0; k and the MEC do not change.'},
+ asks:'t',
+ givens:[['D0', '7.5 mg/kg', 'half of 15 mg/kg, so C0 halves to 25 mg/L'], ['Ceff', '3.75 mg/L', 'the MEC from part b'], ['VD', '0.3 L/kg', 'unchanged by the dose'], ['t½', 'approximately 4 hours', 'the amount teff falls by']],
+ check:{t:'Half the dose removes one half-life, 4 hr, from 14.95 hr: 10.95 hr, not half of 14.95.', lo:7.475, hi:14.95},
+ teach:[PD_T_TEFF],
+ note:PD_HWO_NOTE,
+ cite:'Homework-7.pdf, problem 1c (her wording and numbers)'},
+
+{id:'hw7o-1d', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', dupOf:'hw7-1d',
+ topic:'pkpd', sub:'dosefor', concept:'dose-for-teff', skill:'pkpd', source:'slide',
+ stem:PD_HWO + ' d. What dose would provide a duration of action of 8 hours? (Part b: MEC = 3.75 mg/L.)',
+ units:'mg', answer:337.4, tol:3.4,
+ steps:[
+  {k:'unit', t:'VD = 0.3 L/kg × 75 kg = 22.5 L; k = {{frac:0.693|4 hr}} = 0.17325 hr⁻¹',
+   why:'The dose line wants the patient\'s volume in L, so the per-kilogram volume is multiplied by 75 kg; the half-life gives k for the exponent.'},
+  {k:'algebra', t:'D0 = Ceff × VD × e^(k teff) = (3.75 mg/L)(22.5 L) e^((0.17325)(8)) = 84.38 mg × e^1.386',
+   why:'C = C0e^(−kt) with C0 = D0 over VD, solved for the dose at the moment the level reaches the MEC. mg/L × L leaves 84.38 mg, the amount in the body at the MEC.'},
+  {k:'algebra', t:'e^1.386 = 3.999, so D0 = 84.38 mg × 3.999 = 337.4 mg',
+   why:'8 hours is two half-lives of 4 hr, so the level falls fourfold over that time and the dose must be four times the 84.38 mg at the MEC.'},
+  {k:'round', t:'D0 = 337.4 mg (4.50 mg/kg for 75 kg)',
+   why:'337.4 mg, or 4.50 mg/kg in the per-kilogram form the stem doses in; a lower dose than the 15 mg/kg, because 8 hours is shorter than the duration at 15 mg/kg.'}],
+ setup:{eq:'pd-dose-teff', pre:['thalf-first'], why:'"What dose would provide a duration of action of 8 hours": the dose line D0 = Ceff × VD × e^(k teff), with VD scaled to 75 kg and k from the half-life.'},
+ asks:'D0',
+ givens:[['teff', '8 hours', 'the target duration, in the exponent'], ['Ceff', '3.75 mg/L', 'the MEC from part b'], ['VD', '0.3 L/kg', '× 75 kg = 22.5 L'], ['t½', 'approximately 4 hours', 'k = 0.17325 hr⁻¹'], ['weight', '75-kg', 'scales the volume']],
+ check:{t:'8 hours is two half-lives of 4 hr, so the dose is 4 times the 84.38 mg at the MEC: 337.4 mg.', lo:84.375, hi:1125},
+ teach:[PD_T_DOSEFOR],
+ note:PD_HWO_NOTE,
+ cite:'Homework-7.pdf, problem 1d (her wording and numbers)'}
 ];
 
 CHAINS.push(
@@ -895,7 +986,10 @@ CHAINS.push(
  {id:'pd-practice-3', src:'practice', module:9, name:'PK-PD Practice 3: a 75-kg patient at 20 mg/kg',
   setup:'V<sub>D</sub> 0.3 L/kg, t&frac12; 3.6 hr, MEC 7.2 mcg/mL: the duration of action, then with the dose doubled',
   parts:['pd-p3a', 'pd-p3b']},
- {id:'hw7-p1', src:'homework', module:9, name:'Homework 7, problem 1: an investigational drug by IV bolus (numbers changed)',
+ {id:'hw7-p1', src:'homework', module:9, name:'Homework 7, problem 1: an investigational drug by IV bolus (changed numbers)',
   setup:'70 kg, 12 mg/kg, V<sub>D</sub> 0.25 L/kg, t&frac12; 5 hr: AUC, the duration at an MEC of 4 mg/L, at half the dose, and the dose for 10 hours',
-  parts:['hw7-1a', 'hw7-1b', 'hw7-1c', 'hw7-1d']}
+  parts:['hw7-1a', 'hw7-1b', 'hw7-1c', 'hw7-1d']},
+ {id:'hw7o-p1', src:'homework', module:9, name:'Homework 7, problem 1: an investigational drug by IV bolus (original numbers)',
+  setup:'75 kg, 15 mg/kg, V<sub>D</sub> 0.3 L/kg, t&frac12; 4 hr: AUC, the duration at an MEC of 3.75 mg/L, at half the dose, and the dose for 8 hours',
+  parts:['hw7o-1a', 'hw7o-1b', 'hw7o-1c', 'hw7o-1d']}
 );
