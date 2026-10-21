@@ -1556,10 +1556,12 @@ const PROF_CLASS = {};
 COURSE.professors.forEach((p, i) => { PROF_CLASS[p] = ['sik', 'yen'][i] || ''; });
 /* Where a question comes from, read off its id and its citation: her daily
    practice sheets, her slides, an in-class activity, a homework, a Canvas
-   quiz, a poll, the lecture audio, or extra practice written for this drill. */
+   quiz, her final exam review, a poll, the lecture audio, or extra practice
+   written for this drill. */
 function originOf(q){
   const c = q.cite || '', id = q.id || '';
   if(/^cq/.test(id)) return 'Canvas quiz';
+  if(/^fr-/.test(id)) return 'Final exam review';
   if(/^x/.test(id) || q.extra) return 'Extra practice';
   if(/^hw/.test(id) || /Homework/i.test(c)) return 'Homework';
   if(/In-Class/i.test(c)) return 'In-class activity';

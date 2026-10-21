@@ -970,3 +970,74 @@ No other polls found.
 - Quiz 4 on Monday: this lecture plus multiple dosing (IV bolus, intermittent infusion, oral); definitions and the why; a few calculations of 2 minutes or less each.
 - Exam 2 on Thursday: cumulative in that multiple-dose problems need the single-dose skills, not in re-asking Exam 1's conceptual items; Exam 3 completely cumulative; weights 27 / 27 / 33 per cent.
 - Practice problems to be posted; homework posted the next day, due Sunday night.
+
+---
+
+## 10. `Transcript_10.19.txt` — Quiz 5, then the final exam review (19 Oct)
+
+Deck: `Final-Exam-Review-10.19.pdf` ("Top 10 Basic PK Things to Know"; images only). Bank ids fr-1 to fr-12f, set `fr-sheet`; STYLE.md section "Final exam — her in-class review (19 Oct)" holds every poll verbatim.
+
+### 10.1 Exam and quiz cues
+
+1. Final exam time: > "I have not talked to Doctor Smith, so right now, we are still scheduled for 7:50. Um, I will try to catch her sometime between now and next Tuesday, day of exam. I will let you know via in person or in Canvas."
+2. Optional session: > "Wednesday. Remember is the optional day. We will. I will not have a PowerPoint. I will answer questions. I will ask questions, um, but I, we will start at 8:30 instead of 8. OK. So if you want to come and hang out, we will be here from 8:30 until 9:30."
+3. Not on the equation sheet, total clearance: > "Total clearance, and I think that is one of the equations that I expect you to know. It's not on your equation sheet, but you know it, right?"
+4. Not on the equation sheet, IBW and Cockcroft-Gault: > "one of the equations or two of the equations that I want you to know, remember in this class, we're only gonna use the ideal body weight, so that means that I expect you to know the ideal body weight equation as well as the Cockroth Gault." `[likely: Cockcroft-Gault]`
+5. Orders from data: > "If I give you a little table of data, know how to determine whether it's 0 or 1st, OK?"
+6. Rearranging for time: > "Duration of action, time to reach steady state, time to reach maximum concentration, time required for most of the drug to be eliminated from the body. So know how to rearrange to solve for time."
+7. Graph estimates: > "Remember way back we looked at this graph and we estimated half-life ... know how to estimate. From the graph".
+8. Quiz 5 (on Canvas, before the review; equation sheets collected afterwards): her pre-quiz questions were linear against nonlinear ("half-life and clearance change"), KM, a rate "of like milligrams per day", "low dose first order and high dose zero order", "You brushed up on your algebra over the break, move things around a little bit", and PK-PD: > "what happens if we double dose? ... You get one half-life." After the quiz: > "for those of you that missed the question that we just talked about before the quiz, I know who you are ... KM and concentration."
+9. Quiz rules: > "Please do not navigate away from the Canvas page." Scratch paper and an equation sheet are handed out; everything else put away > "except, of course, your FSOP approved calculator, your writing implement."
+
+**Exam cue count: 9**
+
+### 10.2 Her exact wording for terms and definitions
+
+- k: > "whenever you see a k, it is a rate constant ... is it KC, then that means that the process is going to be dependent on the concentration that's there. If it's just K all by itself, it's independent of concentration. If it's got some subscript. That tells you ... what process K is describing, metabolism, excretion, absorption, etc."
+- Half-life: > "It is a time, right? The time that it takes for half of whatever you've got to be eliminated, or if we're going this way for an IV infusion, it is the time that it takes to get to half of the steady-state concentration, OK? It is a time."
+- Cp: > "that is the concentration specifically of drug in the plasma ... It could be CAB, so concentration in the blood ... or concentration in the serum, but most of the time we're talking concentration of drug in the plasma" `[likely: CAP = Cp, CAB = Cb]`
+- Creatinine clearance: > "It calculates an individual's renal function".
+- Hepatic clearance: > "how do we approximate hepatic clearance? Total minus renal. Why do we do it that way? Yeah, it's it, there's not an easier way to do it, right?"
+- AUC: > "tells us about the extent of drug that's available for the body to use, so the extent of drug absorbed or extent available."
+- Zero order: > "What does zero order mean? Same Same rate. Non-changing. ... Constant, right? So a constant rate of input."
+- Input and output: > "instantaneous in, 1st order out is our bolus, 1st order in, 1st order out is our oral, our conventional oral, and then 0 order in, 1st order out is our IV infusion." and > "Most of drugs are gonna be eliminated via first order".
+- Vmax: > "At high concentrations, then the process proceeds according to VM max, right? VMAX is a constant for a given drug given patient."
+- Infusion rate and time to steady state: > "changing the rate. Just changes the concentration. It does not change the time that it takes to get to that steady-state concentration".
+- Superposition: > "that principle of superposition that says you can take that first dose and move it over to steady state because we've got drug accumulated in the body."
+
+### 10.3 Worked examples she does aloud
+
+- Cefoxitin plot (deck page 8): > "half of 100 is roughly 50, so 93 down to 44. For this example, one hour." Points 0.93 hr by ln(93/44).
+- Multiple IV bolus follow-up: minimum at steady state "2.7".
+- Equivalent oral dose: 400 mg ÷ 0.70, "Round to the nearest 5", "570".
+- Duration at half the dose: "if we were to give 500 mg instead of 1 g ... 4 hours".
+- Infusion follow-ups: "3 hours after cessation ... 2.2"; second 2-hour infusion, "4 hours after cessation of the second", her board (deck page 26): 4.45e^−(0.231×4) + 4.45e^−(0.231×10) = 2.2 mg/L; continued at 50 mg/hr "12.02 ... let's say 12"; at 100 mg/hr "24"; either rate "3 to 5 half-lifes".
+`[?]` The start of the second infusion is spoken as "6 hours. After the first infusion" and then "another 16 hours after the start of the first"; the board time line (0, 2, 6, 8, 12) shows 6 hours after the start of the first.
+
+### 10.4 Poll / clicker questions
+
+| Deck page | Stem (short) | Class response as read out | Her key |
+|---|---|---|---|
+| 3 | characteristic of first-order processes | most: a constant half-life and a constant rate of elimination; some: dC/dt = −k | a constant half-life |
+| 7 | 400 mg IV bolus, Cp = (40 mg/L)e^-0.9t, VD? | most: 10 L | 10 L |
+| 10 | renal clearance 45 mL/min, inferred? | 63 votes, not read out | filtered and reabsorbed |
+| 11 | hepatic clearance approximated with CrCl, T/F | not read out | False |
+| 13 | Cmax∞, 300 mg every 12 hr, t½ 4 hr, VD 16 L | not read out | 21.4 mg/L (minimum 2.7) |
+| 15 | type of drug input, curve rising to a steady-state level | 14 votes, not read out | zero-order input |
+| 17 | F, 500 mg tablet AUC 115 vs 400 mg IV AUC 132 | most: 70% | 70% (oral dose 570 mg) |
+| 19 | Michaelis-Menten: zero order at low, first at high, T/F | most: false | False |
+| 21 | trapezoidal rule estimates AUC, T/F | 34 votes, not read out | not spoken |
+| 23 | duration, 1 g IV bolus, VD 12.5 L, t½ 4 hr, MEC 20 mg/L | most: 8 hours | 8 hours (500 mg: 4 hours) |
+| 25 | end of a 2-hr infusion, t½ 3 hr, VD 18 L, 50 mg/hr | 1 vote, not read out | 4.45 mg/L |
+
+### 10.5 Where she explains a concept differently from the slide
+
+- The deck's ten statements carry no equations; she names out loud which equations are not on the sheet (total clearance, IBW, Cockcroft-Gault).
+- Statement 7 lists tmax with the steady-state quantities; she adds that tmax is needed "Only for oral".
+- Statement 3 (AUC) prints nothing about the trapezoidal rule; she says it has not been used since Module 1 "because we have some other ways to calculate AUC".
+
+### 10.6 Exam format
+
+- Final: still 7:50 on Tuesday 27 October unless she announces otherwise in person or on Canvas.
+- Wednesday 21 October: optional, no slides, questions both ways, 8:30 to 9:30.
+- No change to the 40-question format given on 14 Oct.

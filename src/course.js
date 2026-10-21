@@ -157,17 +157,21 @@ const COURSE = {
     {id: 3,
      name: 'Final Exam',
      date: '2026-10-27',
-     when: '2026-10-27T07:50',   // transcript 10-14: starts 7:50 unless she announces 8:00
+     when: '2026-10-27T07:50',   // transcript 10-19: "right now, we are still scheduled for 7:50" unless she announces otherwise
      questions: 40,          // transcript 10-14: "same format, 40 questions"
      minutes: 120,           // syllabus and transcript 10-14: "the full 2 hours"
      sata: 4,                // ASSUMED, as for Exams 1 and 2.
-     blurb: 'Tue 27 October, 7:50 (she may move it to 8:00). Cumulative: 40 questions, ' +
-            '20 multiple choice and 20 fill in the blank, with 25% on the two lectures ' +
-            'after Exam 2, PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct). ' +
-            'How the other 30 questions divide between Exam 1 and Exam 2 material is not ' +
-            'published; this drill splits them evenly.',
+     blurb: 'Tue 27 October, 7:50, unless she announces a change in person or on Canvas. ' +
+            'Cumulative: 40 questions, 20 multiple choice and 20 fill in the blank, with 25% on ' +
+            'the two lectures after Exam 2, PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct). ' +
+            'Know total clearance, ideal body weight and Cockcroft-Gault without the equation sheet. ' +
+            'Wed 21 October, 8:30 to 9:30: an optional question session. How the other 30 questions ' +
+            'divide between Exam 1 and Exam 2 material is not published; this drill splits them evenly.',
      facts: [
-       ['When', 'Tue 27 October, 7:50 for the full 2 hours; she may move the start to 8:00, and if she does not say so it is 7:50'],
+       ['When', 'Tue 27 October, 7:50 for the full 2 hours. It stays 7:50 unless she announces a change in person or on Canvas'],
+       ['Before it', 'Wed 21 October, 8:30 to 9:30: an optional session with no slides; she answers questions and asks some'],
+       ['Not on the sheet', 'Total clearance, ideal body weight and Cockcroft-Gault: "we\'re only gonna use the ideal body weight"'],
+       ['What she expects', 'Zero and first order; k, t½, VD and Cp; total, renal and hepatic clearance; steady-state peaks, troughs, averages and tmax; Cp against time for each route; bioavailability; linear and nonlinear; AUC; duration of action and the times to steady state, to the peak and to elimination; Cp after IV bolus, IV infusion and extravascular doses'],
        ['Weight', '33% of the course grade'],
        ['Shape', '40 questions: 20 multiple choice and 20 fill in the blank, the same format as Exams 1 and 2'],
        ['New material', '25%, about 10 questions, on PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct): "25% new stuff, but the new isn\'t even really new"'],
@@ -223,8 +227,10 @@ const COURSE = {
      class to prepare, each line from the transcript named in `src`. */
   quizzes: [
     {id: 'q5', name: 'Quiz 5',
-     // Mon 19 Oct, her last quiz, then an in-class review (transcript 10-14). She did not
-     // state its scope; the card assumes the material since Exam 2 (PK-PD and nonlinear).
+     // Mon 19 Oct, her last quiz, then an in-class review (transcript 10-14). Before it she
+     // took questions on linear against nonlinear, KM, dose rates in mg/day, low dose first
+     // order and high dose zero order, and doubling a PK-PD dose (transcript 10-19), so the
+     // card's scope, the material since Exam 2, stands. The card hides itself after the quiz.
      // Class starts at 8:00 (transcript 09-23); Quiz 3 ran 24 minutes, Quiz 5's length is not stated.
      when: '2026-10-19T08:00', minutes: 24,
      modules: [9, 8],

@@ -2,6 +2,12 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-21 (final exam review)
+- Final exam review (19 Oct): 21 questions, her polls word for word with her keys, as one set under Module 8.
+- Final exam: 7:50 on 27 Oct unless she announces a change; optional session Wed 21 Oct, 8:30 to 9:30.
+- Final exam: total clearance, ideal body weight and Cockcroft-Gault are to be known without the sheet.
+- Questions from her final review are tagged "Final exam review".
+
 ## 2026-10-17 (Modules 7b and 8; papers survive a reload; concept statuses)
 - Module 7b (PK-PD): 43 questions, 19 of them calculations, in 7 problem sets from her slides and sheets.
 - Module 8 (nonlinear): 51 questions, 32 of them calculations, in 5 problem sets from her sheets.

@@ -4168,11 +4168,11 @@ function eqLayout(e){
 }
 /* Her questions that this line solves, for "How she asks it": the ones whose
    set-up names this line as the one that gives the answer first, then those
-   that use it on the way. Her graded quizzes and her review sheet lead, then
+   that use it on the way. Her graded quizzes and her two reviews lead, then
    her worksheets, homework and slide examples; extra practice is left out. */
 const EQ_EX_ORDER = ['Canvas quiz', 'In-class activity', 'Daily practice sheet', 'Homework', 'Slide example', 'Slides', 'Lecture', 'Poll', 'Other'];
 function eqExamples(e){
-  const rank = q => (/^e2r/.test(q.id) ? -1 : EQ_EX_ORDER.indexOf(originOf(q)));
+  const rank = q => (/^(e2r|fr)-/.test(q.id) ? -1 : EQ_EX_ORDER.indexOf(originOf(q)));
   const ok = q => q.setup && Array.isArray(q.steps) && q.steps.length && !q.lowYield;
   const main = QUESTIONS.filter(q => ok(q) && q.setup.eq === e.id);
   const via = QUESTIONS.filter(q => ok(q) && q.setup.eq !== e.id && (q.setup.pre || []).includes(e.id));

@@ -40,6 +40,7 @@ DATA_FILES = ['course.js',
               'q14_review.js',     # her Exam 2 in-class review, verbatim (appends to CHAINS)
               'q15_module7b.js',   # Module 7b: PK-PD relationship (pushes its topic into TOPICS)
               'q16_module8.js',    # Module 8: nonlinear pharmacokinetics (pushes its topic into TOPICS)
+              'q17_final_review.js',  # her final exam review, 19 Oct, verbatim polls (appends to CHAINS)
               'q11_extra.js',      # extra practice written for this drill: EXTRAS, never in QUESTIONS
               'qz_all.js']       # must stay last: builds QUESTIONS
 
