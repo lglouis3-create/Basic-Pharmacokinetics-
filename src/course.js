@@ -109,7 +109,7 @@ const COURSE = {
      name: 'Exam 1',
      date: '2026-09-11',
      when: '2026-09-11T10:00',   // syllabus: Friday 11 September, 10:00–12:00
-     questions: 40,          // stated by Louis: 40 questions, 20 conceptual + 20 math
+     questions: 40,          // stated by the student: 40 questions, 20 conceptual + 20 math
      minutes: 120,           // syllabus: Friday 11 September, 10:00–12:00
      sata: 4,                // ASSUMED. Select-all questions appear; the count is not published.
      blurb: 'Fri 11 September. Modules 1–3: kinetic orders and the maths, ' +

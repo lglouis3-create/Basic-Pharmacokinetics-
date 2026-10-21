@@ -9,7 +9,7 @@
 
    Every number below is hers: the two worked examples printed on the deck and
    the two in-class practice problems she works aloud at the end of the same
-   lecture. The deck is Louis's annotated copy, so the extract carries his
+   lecture. The deck is the student's annotated copy, so the extract carries their
    handwriting alongside the printed slide; no figure in this file is taken
    from the handwriting. Where the handwriting and her spoken arithmetic
    disagree the question is written from the printed slide plus her own

@@ -51,7 +51,7 @@ student should do: her printed sheet says 40 L but she worked the problem with
 shown to the student says where a fact was heard. test.js fails on words such
 as transcript, caption, aloud or handwritten in any displayed field.
 
-The decks are Louis's own annotated copies, so the text extract contains his
+The decks are the student's own annotated copies, so the text extract contains their
 handwriting OCR'd into nonsense alongside the printed slide. **Printed slide
 text is a source. OCR'd handwriting is not** — it is unreliable enough that a
 number read out of it can be wrong by an order of magnitude. Where a

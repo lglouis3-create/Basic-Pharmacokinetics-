@@ -13,7 +13,7 @@
    500 mg worked example prints as slide 22 but is taught between slides 11
    and 12, because she moved it forward in class and said so.
 
-   The handwritten annotations on Louis's copy of this deck are not used as a
+   The handwritten annotations on the student's copy of this deck are not used as a
    source anywhere in this file.
 
    TOPICS is declared in q1_module1.js, not here.
