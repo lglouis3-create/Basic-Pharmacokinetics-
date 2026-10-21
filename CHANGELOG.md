@@ -7,6 +7,7 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - Final exam: 7:50 on 27 Oct unless she announces a change; optional session Wed 21 Oct, 8:30 to 9:30.
 - Final exam: total clearance, ideal body weight and Cockcroft-Gault are to be known without the sheet.
 - Questions from her final review are tagged "Final exam review".
+- Quiz 5 (Modules 7b and 8, 19 Oct): her eight Canvas questions word for word, with her keys.
 
 ## 2026-10-17 (Modules 7b and 8; papers survive a reload; concept statuses)
 - Module 7b (PK-PD): 43 questions, 19 of them calculations, in 7 problem sets from her slides and sheets.

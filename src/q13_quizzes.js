@@ -1,7 +1,9 @@
 /* ==========================================================================
-   HER GRADED CANVAS QUIZZES — Quiz 2 (Modules 2–3), Quiz 3 (Modules 4–5) and Quiz 4 (Modules 6–7a)
+   HER GRADED CANVAS QUIZZES — Quiz 2 (Modules 2–3), Quiz 3 (Modules 4–5), Quiz 4 (Modules 6–7a)
+   and Quiz 5 (Modules 7b and 8)
    ==========================================================================
-   Sixteen items from Quizzes 2 and 3, plus ten from Quiz 4 (5 Oct 2026), each a screenshot of a graded Canvas question with the key
+   Sixteen items from Quizzes 2 and 3, ten from Quiz 4 (5 Oct 2026) and eight from Quiz 5
+   (19 Oct 2026, its own note below), each a screenshot of a graded Canvas question with the key
    marked, supplied by the student on 4 Oct 2026 (files Quiz2-Modules2-3-
    graded.pdf and Quiz3-Modules4-5-graded.pdf, kept with the decks). Each
    quiz was eight questions at 12.5 points: four word-only concept items and
@@ -606,5 +608,189 @@ const Q_QUIZZES = [
    'The IV dose is the reference because the whole IV dose enters the circulation, so its F is 1; Fabs = {{frac:AUCpo|AUCIV}} × {{frac:DIV|Dpo}} cannot come out above 1.',
    'She quotes the slide definition and asks for the term; the words "intravenous administration" settle this one.']}],
  cite:'Canvas Quiz 4 (Modules 6–7a), question 10; 7a---Bioavailability-and-Bioequivalence.pdf, slide "Absolute Bioavailability" (page 5)'},
+
+/* ---- Quiz 5 (Modules 7b and 8), sat 19 Oct 2026: eight items, four on PK-PD (duration of
+   action) and four on nonlinear pharmacokinetics, each module two concept then two numeric.
+   Numeric instruction: "Provide your answer in <unit> rounded to the nearest tenth (one decimal
+   place) / whole number / five with no units", margin ±5% on all four. Supplied as a transcription
+   of the graded screenshots ("Quiz 5 - Module 7b/8.pdf") with the Canvas key of every item shown;
+   stems and options word for word, including "There is a no change" (question 1), "a single IV
+   bolus injections" (question 4) and the missing space in "8.7 mg/L.When" (question 8). Every
+   numeric key recomputed from its stem; question 7's key, 409, is the whole-number dose rate,
+   although its instruction asks for the nearest five (410). */
+
+{id:'cq5-1', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
+ topic:'pkpd', sub:'thalf', concept:'thalf-double-teff', skill:'apply', dupOf:'pd-c20',
+ source:'slide',
+ stem:'For a drug that displays linear, first-order pharmacokinetics, what is the impact on duration of activity if there is an increase in elimination half-life?',
+ options:[
+  {t:'There is a no change to the duration of activity.', correct:false,
+   why:'Picking this treats the duration as set by the dose alone. In teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}) the half-life multiplies the whole expression, so a longer t½ with the same dose and volume keeps the level above the minimum effective concentration (MEC) for longer.'},
+  {t:'Duration of activity will increase.', correct:true,
+   why:'A longer half-life means slower elimination, so the level takes longer to fall from C0 to the MEC. teff is in direct proportion to t½: twice the half-life, twice the duration, as when decreased renal or hepatic function prolongs t½.'},
+  {t:'Duration of activity will decrease.', correct:false,
+   why:'Picking this reverses the direction. A longer t½ means a smaller elimination rate constant k, so the level falls more slowly and stays at or above the MEC for longer, not shorter.'}],
+ teach:[
+  {h:'The idea', list:[
+   'teff = 1.44 t½ ln({{frac:D0|VD × Ceff}}): t½ multiplies everything, so teff changes in direct proportion to the half-life.',
+   'The dose sits inside the logarithm: doubling the dose adds one half-life to teff; it does not double it.',
+   'Decreased renal or hepatic elimination prolongs t½, prolongs the effect, and raises the possibility of toxicity.']}],
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 1; 7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides 9 "Effect of Dose and Elimination Half-life on Duration of Activity" and 10 "Effect of Elimination Half-life on Duration of Activity"'},
+
+{id:'cq5-2', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
+ topic:'pkpd', sub:'teff', concept:'dose-double-teff', skill:'apply', dupOf:'pd-c14',
+ source:'slide',
+ stem:'Which of the following results when the IV bolus dose of a drug displaying linear, first-order pharmacokinetics is doubled?',
+ options:[
+  {t:'The half-life is decreased by half', correct:false,
+   why:'Picking this treats the half-life as dose-dependent. In linear, first-order pharmacokinetics t½ = {{frac:0.693|k}} and k does not change with the dose; a half-life that changes with dose is the mark of a saturable, nonlinear drug.'},
+  {t:'The duration of action is doubled', correct:false,
+   why:'Picking this treats the duration as proportional to the dose. The dose is inside a logarithm, teff = {{frac:ln C0 − ln Ceff|k}}, so doubling it adds ln 2 over k, one half-life, rather than doubling teff.'},
+  {t:'The half-life is doubled', correct:false,
+   why:'Picking this moves the half-life with the dose. A larger dose raises every concentration, but first-order elimination removes the same fraction per hour, so the half-life stays the same; the duration is what changes.'},
+  {t:'The duration of action is increased by one half-life', correct:true,
+   why:'Doubling D0 doubles C0, and the level needs exactly one half-life to fall from 2C0 back to C0, after which it follows the original curve. teff rises by {{frac:0.693|k}}, one t½; each further doubling adds one more half-life.'}],
+ teach:[
+  {h:'The idea', list:[
+   'teff = {{frac:ln C0 − ln Ceff|k}} with C0 = {{frac:D0|VD}}: 2D0 adds ln 2 to the top, so teff grows by {{frac:0.693|k}}, one half-life.',
+   'In linear, first-order kinetics the half-life does not move with the dose; the duration does.',
+   'For an antibiotic with VD 24 L and k 0.15 hr⁻¹, 250 mg lasts 26.35 hr and 500 mg lasts 30.97 hr: 4.62 hr more, one half-life.']}],
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 2; 7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides 9 "Effect of Dose and Elimination Half-life on Duration of Activity" and 12 (PollEv)'},
+
+{id:'cq5-3', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
+ topic:'pkpd', sub:'teff', concept:'teff-calc', skill:'pkpd',
+ stem:'What is the duration of action following a 604 mg IV bolus dose of a drug that displays linear, first-order pharmacokinetics? The half-life of elimination is 5 hours, apparent volume of distribution is 18 L, and minimum effective concentration is 6 mcg/mL. Provide your answer in hours rounded to the nearest tenth (one decimal place) with no units.',
+ units:'hr', answer:12.4, tol:0.62,
+ steps:[
+  {k:'unit', t:'Ceff = 6 mcg/mL = 6 mg/L',
+   why:'1 mcg/mL equals 1 mg/L, because multiplying top and bottom by 1000 turns mcg into mg and mL into L. With the dose in mg and the volume in L, C0 then comes out in the same unit as Ceff.'},
+  {k:'setup', t:'teff = {{frac:ln C0 − ln Ceff|k}}, with C0 = {{frac:D0|VD}} and k = {{frac:0.693|t½}}',
+   why:'"Duration of action" after one IV bolus, with t½, VD and the minimum effective concentration given: the natural-log duration line, the time the level takes to fall from C0 to Ceff.'},
+  {k:'algebra', t:'k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹; C0 = {{frac:604 mg|18 L}} = 33.56 mg/L',
+   why:'The half-life gives k, the fraction of the drug eliminated per hour, in hr⁻¹. C0 is the whole bolus spread through VD at time zero, the level the decline starts from; mg over L is mg/L, the unit of Ceff.'},
+  {k:'algebra', t:'teff = {{frac:ln(33.56 ÷ 6)|0.1386 hr⁻¹}} = {{frac:ln 5.593|0.1386}} = {{frac:1.721|0.1386 hr⁻¹}} = 12.42 hr',
+   why:'The level has to fall 5.593-fold before the effect ends; its natural log divided by k gives hours. The half-life form, 1.44 × 5 hr × 1.721 = 12.39 hr, gives the same tenth.'},
+  {k:'round', t:'12.4',
+   why:'Her key is 12.4 with a margin of 5%, so 11.8 to 13.0 scores. Using base-10 logs without the 2.3 gives {{frac:0.7476|0.1386}} = 5.39 hr, far too short; one decimal place was asked for, with no unit.'}],
+ setup:{eq:'pd-teff-ln', pre:['thalf-first', 'cp-db-vd'], why:'"Duration of action following a 604 mg IV bolus dose", with t½, VD and the MEC given: the natural-log duration line, with k from the half-life and C0 = D0 over VD.'},
+ asks:'t',
+ givens:[['D0', '604 mg', 'the numerator of C0'], ['t½', '5 hours', 'gives k = {{frac:0.693|5}} = 0.1386 hr⁻¹'], ['VD', '18 L', 'divides the dose: C0 = 33.56 mg/L'], ['Ceff', '6 mcg/mL', 'equals 6 mg/L, the MEC']],
+ check:{t:'C0 ÷ Ceff = 5.593 is between 4 and 8, so teff is between two and three half-lives of 5 hr: 12.4 hr, between 10 and 15.', lo:10, hi:15},
+ teach:[
+  {h:'The idea', list:[
+   'teff is the time C = C0e^(−kt) takes to fall from C0 = {{frac:D0|VD}} to Ceff, the minimum effective concentration.',
+   'Each halving of the ratio C0 ÷ Ceff is one half-life of duration, so the ratio between 4 and 8 puts teff between 2 and 3 half-lives.',
+   'mcg/mL and mg/L are the same concentration, so the MEC needs no conversion factor.']}],
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 3; 7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slides 6 "Relationship Between Dose and Duration of Activity (teff)" and 7 "Practice Problem"'},
+
+{id:'cq5-4', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11',
+ topic:'pkpd', sub:'dosefor', concept:'dose-for-teff', skill:'pkpd',
+ stem:'What dose of a medication, that is to be administered as a single IV bolus injections would provide a duration of action of 20 hours in a 75 kg patient? The drug displays linear, first-order pharmacokinetics, has an elimination half-life of 5.8 hours, apparent volume of distribution of 0.25 L/kg, and a minimum effective concentration of 4 mg/L. Provide your answer in mg rounded to the nearest whole number with no units.',
+ units:'mg', answer:818, tol:41,
+ steps:[
+  {k:'unit', t:'VD = 0.25 L/kg × 75 kg = 18.75 L; k = {{frac:0.693|5.8 hr}} = 0.1195 hr⁻¹',
+   why:'The volume is given per kilogram, so it is scaled to the 75 kg patient first. The dose line has k in its exponent, so the half-life is turned into k.'},
+  {k:'setup', t:'Ceff = {{frac:D0|VD}} e^(−k teff), so D0 = Ceff × VD × e^(k teff)',
+   why:'C = C0e^(−kt) with C0 = D0 over VD, written at the moment the level reaches the MEC, 20 hours after the dose, then solved for the dose.'},
+  {k:'algebra', t:'D0 = (4 mg/L)(18.75 L) e^((0.1195)(20)) = 75 mg × e^2.390 = 75 mg × 10.91 = 818.2 mg',
+   why:'mg/L × L leaves mg: 75 mg is the amount in the body when the level is at the MEC. k teff has no units, and the dose must be e^2.390 = 10.91 times that 75 mg.'},
+  {k:'round', t:'818',
+   why:'Her key is 818 with a margin of 5%, so 777 to 859 scores. With ln 2 in place of 0.693 the dose is 818.6 mg, which rounds to 819 and also scores. Dividing by the exponential instead gives {{frac:75|10.91}} = 6.9 mg, far too small.'}],
+ setup:{eq:'pd-dose-teff', pre:['thalf-first'], why:'"What dose … would provide a duration of action of 20 hours": the dose line D0 = Ceff × VD × e^(k teff), with VD scaled to 75 kg and k from the half-life.'},
+ asks:'D0',
+ givens:[['teff', '20 hours', 'the target duration, in the exponent'], ['weight', '75 kg', 'scales the volume: 0.25 × 75 = 18.75 L'], ['t½', '5.8 hours', 'gives k = 0.1195 hr⁻¹'], ['VD', '0.25 L/kg', '× 75 kg = 18.75 L'], ['Ceff', '4 mg/L', 'the MEC; times VD gives 75 mg']],
+ check:{t:'20 hr is between 3 and 4 half-lives of 5.8 hr, and each half-life doubles the dose, so the dose is between 8 and 16 times the 75 mg at the MEC: 818 mg.', lo:600, hi:1200},
+ teach:[
+  {h:'The idea', list:[
+   'Ceff × VD is the amount in the body at the moment the effect ends; the dose is that amount times e^(k teff).',
+   'Each added half-life of duration doubles the dose, because the target duration is in the exponent.',
+   'Scale a per-kilogram volume to the patient before using it.']}],
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 4; 7b---Pharmacokinetics-and-Pharmacodynamics.pdf, slide 8 (dose for a target duration) and the In-Class Activity on slide 13'},
+
+{id:'cq5-5', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmcp', concept:'nl-low-conc', skill:'apply', dupOf:'nl-c09',
+ source:'both',
+ stem:'Which of the following is true for a medication that displays nonlinear pharmacokinetics?',
+ options:[
+  {t:'At low concentrations of drug in the plasma relative to Vmax, the elimination rate depends on concentration.', correct:false,
+   why:'Picking this compares the concentration with the wrong parameter. Vmax is a rate, an amount per time, so a plasma concentration cannot be low or high relative to it; the order of elimination is read from Cp against KM, which has units of concentration.'},
+  {t:'At low concentrations of drug in the plasma relative to KM, the elimination rate is independent of concentration.', correct:false,
+   why:'Picking this reverses the two ends. A rate independent of concentration is zero order, which holds when Cp is much greater than KM and the enzyme runs at Vmax. Well below KM the rate is {{frac:Vmax|KM}} × Cp, which follows the concentration.'},
+  {t:'At low concentrations of drug in the plasma relative to KM, the elimination rate depends on the concentration.', correct:true,
+   why:'With Cp much less than KM, Cp is negligible in KM + Cp and the rate is {{frac:Vmax|KM}} × Cp = k′Cp. Vmax and KM are constants, so the rate is proportional to Cp: first-order behaviour.'},
+  {t:'At low concentrations of drug in the plasma relative to Vmax, the elimination rate is independent of concentration.', correct:false,
+   why:'Picking this pairs the wrong parameter with the zero-order end. Vmax is a rate, not a concentration, so Cp is not compared with it; zero order applies when Cp is much greater than KM, not at low concentrations.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Rate of elimination = {{frac:Vmax × Cp|KM + Cp}}.',
+   'Cp much less than KM: the rate is {{frac:Vmax|KM}} × Cp, proportional to Cp, so first order.',
+   'Cp much greater than KM: the rate is Vmax, a constant, so zero order, and further dose increases accumulate.',
+   'KM and Cp share units of concentration, which is why they are the pair compared; Vmax is a rate.']}],
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 5; 8 - Nonlinear PK.pdf, slides 7 "Parameters" and 8 "Saturable-Enzymatic Elimination Processes"'},
+
+{id:'cq5-6', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'linear', concept:'nl-saturation-features', skill:'recall', dupOf:'nl-c04',
+ source:'slide',
+ stem:'Which of the following is true regarding drugs that display nonlinear pharmacokinetics?',
+ options:[
+  {t:'Parameters do not change when different or multiple doses of a drug are given', correct:false,
+   why:'Picking this takes the definition of linear pharmacokinetics for nonlinear. With a nonlinear drug an increased dose or chronic administration changes the parameters: clearance falls and the half-life lengthens as the concentration rises.'},
+  {t:'Half-life changes as dose is increased', correct:true,
+   why:'With saturable elimination t½ = VD({{frac:0.693|Vmax}})(KM + Cp), so a larger dose, giving a higher Cp, gives a longer half-life. It is one of the characteristics of saturation kinetics.'},
+  {t:'The principle of superposition applies at steady-state.', correct:false,
+   why:'Picking this carries a linear rule into saturation kinetics. Superposition adds the curves of separate doses, which needs each dose to lose the same fraction per hour; once elimination saturates, a later dose is cleared more slowly, so the curves do not simply add.'},
+  {t:'The AUC is proportional to the amount of bioavailable drug.', correct:false,
+   why:'Picking this describes dose-independent kinetics. With saturable elimination the AUC (area under the curve) is disproportional to the amount of bioavailable drug: past a certain dose it rises more than in proportion.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Linear: parameters such as half-life and clearance do not change when different or multiple doses are given.',
+   'Saturation kinetics: half-life changes as dose is increased, and the AUC is disproportional to the amount of bioavailable drug.',
+   't½ = VD({{frac:0.693|Vmax}})(KM + Cp) rises with Cp; Cl = {{frac:Vmax|KM + Cp}} falls with Cp.']}],
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 6; 8 - Nonlinear PK.pdf, slides 3 "Linear vs. Nonlinear Pharmacokinetics" and 6 "Saturation Kinetics"'},
+
+{id:'cq5-7', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'dose', concept:'nl-dose-rate', skill:'nonlin',
+ stem:'What daily dose rate of a non-linear drug would provide a steady-state concentration of 15 mg/L? In this patient, the KM is 7.9 mg/L and the Vmax is 625 mg/day. Provide your answer in mg/day rounded to the nearest five with no units.',
+ units:'mg/day', answer:409, tol:20.4,
+ steps:[
+  {k:'setup', t:'R = {{frac:Vmax × Css|KM + Css}}',
+   why:'KM and Vmax are given, and the target Css is 15 mg/L, so the nonlinear dose-rate line answers directly. Vmax is already in mg/day, so no weight is needed.'},
+  {k:'algebra', t:'R = {{frac:(625 mg/day)(15 mg/L)|(7.9 + 15) mg/L}} = {{frac:9375|22.9}} = 409.4 mg/day',
+   why:'mg/L cancels top and bottom and leaves mg/day, the units of Vmax. The target Css is on top and again, added to KM, on the bottom, which keeps R below Vmax for any target.'},
+  {k:'round', t:'R = 409 mg/day',
+   why:'Her key is 409, the whole number; the instruction asks for the nearest five, which is 410. The margin of 5% takes 389 to 430, so both score. Leaving KM out of the bottom gives Vmax itself, 625, far too high.'}],
+ setup:{eq:'nl-rate', pre:[], why:'"What daily dose rate … would provide a steady-state concentration of 15 mg/L", with KM and Vmax given: the nonlinear dose-rate line.'},
+ asks:'R',
+ givens:[['Css', '15 mg/L', 'the target, top and bottom'], ['KM', '7.9 mg/L', 'added to Css in the denominator'], ['Vmax', '625 mg/day', 'the numerator; units of R']],
+ check:{t:'Css is about two-thirds of KM + Css (15 of 22.9), so R is about two-thirds of 625: near 410 mg/day, below Vmax.', lo:0, hi:625},
+ teach:[
+  {h:'The idea', list:[
+   'At steady state the dose rate equals the elimination rate: R = {{frac:Vmax × Css|KM + Css}}.',
+   'R is always below Vmax; a dose rate at or above Vmax never reaches a steady state.',
+   'Give the dose rate as an amount per day, rounded as the stem asks.']}],
+ note:'Canvas shows 409 as the key, although the stem asks for the nearest five (410). Both are within the ±5% margin, so either scores here.',
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 7; In-Class Practice, Nonlinear PK, question 1 (the same stem with KM 6.9 mg/L and Vmax 584 mg/day); 8 - Nonlinear PK.pdf, slide 11 "In Vivo Determination of KM and Vmax"'},
+
+{id:'cq5-8', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
+ topic:'nonlin', sub:'kmvmax', concept:'nl-km-direct', skill:'nonlin',
+ stem:'When a 25 year-old, 75 kg patient was taking a daily oral dose of 350 mg, his steady state plasma concentration was 8.7 mg/L.When the daily dose was increased to 450 mg, a steady-state plasma concentration of 20.6 mg/L resulted. What is the KM of this drug in this patient? Provide your answer in mg/L rounded to the nearest tenth (one decimal place) with no units.',
+ units:'mg/L', answer:5.4, tol:0.27,
+ steps:[
+  {k:'setup', t:'KM = {{frac:R2 − R1|(R1/C1) − (R2/C2)}}, with R1 = 350 mg/day, C1 = 8.7 mg/L, R2 = 450 mg/day, C2 = 20.6 mg/L',
+   why:'Two daily doses in the same patient and the steady-state concentration each produced: the direct method. The 75 kg weight and the age are not needed when the doses stay in mg/day.'},
+  {k:'algebra', t:'KM = {{frac:450 − 350|(350/8.7) − (450/20.6)}} = {{frac:100|40.23 − 21.84}} = {{frac:100|18.39}} = 5.438 mg/L',
+   why:'Each dose over its own concentration: 350 over 8.7 is 40.23 and 450 over 20.6 is 21.84. (mg/day) over (mg/day per mg/L) leaves mg/L, a concentration, the unit of KM.'},
+  {k:'round', t:'KM = 5.4 mg/L',
+   why:'Her key is 5.4 with a margin of 5%, so 5.13 to 5.67 scores. Pairing each dose with the other dose\'s concentration makes the bottom negative and gives a negative KM, which cannot be right.'}],
+ setup:{eq:'nl-km', pre:[], why:'"a daily oral dose of 350 mg" giving "8.7 mg/L", then "450 mg" giving "20.6 mg/L", and "What is the KM": the direct-method line.'},
+ asks:'Km',
+ givens:[['R1', '350 mg', 'the first daily dose'], ['C1', '8.7 mg/L', 'steady state on 350 mg'], ['R2', '450 mg', 'the increased daily dose'], ['C2', '20.6 mg/L', 'steady state on 450 mg'], ['weight', '75 kg', 'not needed: the doses stay in mg/day'], ['age', '25 year-old', 'not needed']],
+ check:{t:'Raising the dose from 350 to 450 mg more than doubled the concentration, from 8.7 to 20.6 mg/L, the mark of saturation; KM is a concentration: 5.4 mg/L.', lo:0, hi:20.6},
+ teach:[
+  {h:'The idea', list:[
+   'Two dose rates and their steady-state levels in one patient give KM by the direct method; Vmax follows from either pair.',
+   'Divide each dose by its own concentration; the larger dose has the smaller ratio, so the bottom is positive.',
+   'A small rise in dose giving a large rise in concentration is the sign of saturable elimination.']}],
+ cite:'Canvas Quiz 5 (Modules 7b and 8), question 8; In-Class Practice, Nonlinear PK, question 2 (the same stem with 9.2 and 20 mg/L); 8 - Nonlinear PK.pdf, slide 13 "Determination of KM and Vmax by Direct Method"'},
 
 ];
