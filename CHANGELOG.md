@@ -3,7 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
-- Guides and walkthroughs: corrections from the textbook and transcripts (loading dose, fluctuation, F, Module 8 wording).
+- Guides and walkthroughs: corrections checked against the textbook and her transcripts.
+- Scratch paper: calculation questions in Quiz and Exam sim open a page to write on.
 - Exam 3 (final): starts 8:00 a.m. Tue 27 Oct, per her announcement; 40 questions, 25% not tested before.
 - Exam review: Thu 29 Oct, 8:15 to 8:45 a.m., P2 classroom.
 - Quiz 1 (26 Aug, Modules 1–2): her five items with her answers from the review that day, plus a worksheet PDF.

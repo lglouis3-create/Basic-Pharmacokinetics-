@@ -6,7 +6,9 @@ Opens a worksheet with a calculation from the Worksheets tab and checks: the wor
 drawn with the mouse lands in that problem's ink, is drawn on its canvas and saved; undo, redo, the eraser and
 Clear page work; once a Pencil touches, a finger scrolls instead of writing; the writing and the room come back
 after a reload; Save as PDF prints the worksheet alone with the ink on it; Show solutions opens the solutions;
-the page never scrolls sideways and nothing logs an error.
+the page never scrolls sideways and nothing logs an error. Then scratch paper: a calculation question in a quiz
+and on an exam paper opens its stem over a 720 px work area with no solutions; the writing is kept for the quiz,
+and a new exam paper starts with clean scratch paper.
 
     python3 ink_test.py
 """
@@ -137,11 +139,64 @@ def run(browser, width, height):
     page.close()
 
 
+def scratch(browser, width, height):
+    print(f'\n=== scratch paper at {width} px ===')
+    page = browser.new_page(viewport={'width': width, 'height': height})
+    errs = []
+    page.on('pageerror', lambda e: errs.append(str(e)))
+    page.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
+    page.add_init_script("window.prompt = () => 'InkTest'; window.confirm = () => true; window.print = () => {};")
+    page.goto(PAGE); page.wait_for_timeout(900)
+    page.evaluate("Object.keys(localStorage).filter(k => k.includes(':ink')).forEach(k => localStorage.removeItem(k))")
+    qid = page.evaluate("(() => { const q = QUESTIONS.find(q => qType(q) === 'numeric'); show('quiz'); startSweepOf([q], 'one', 'filtered'); return q.id; })()")
+    page.wait_for_timeout(300)
+    btn = '#v-quiz .inkscratch'
+    check(page.locator(btn).count() == 1, f'a calculation question in the quiz has Scratch paper ({qid})')
+    page.click(btn); page.wait_for_selector('#ink .inkpaper .wsdoc')
+    info = page.evaluate("""[document.querySelector('#ink .wsq').textContent.length > 20,
+        Math.round(document.querySelector('#ink .wswork').getBoundingClientRect().height),
+        !!document.querySelector('#ink [data-inksol]'), INK.variant]""")
+    check(info[0] and info[1] >= 719 and not info[2] and info[3] == 'scratch', f'it shows the stem over a 720 px work area, no solutions {info}')
+    stroke(page, '#ink .wspart[data-ink="work"]', 60, 260, 260, 300)
+    n = page.evaluate("(INK.data.parts.work || []).length")
+    check(n == 1, f'a stroke lands on the scratch paper ({n})')
+    page.click('#ink [data-inkdone]')
+    kept = page.evaluate(f"inkCount('q:{qid}', 'scratch')")
+    check(kept == 1 and page.evaluate("!document.getElementById('ink')"), f'Done closes it and the writing is kept ({kept})')
+    # on an exam paper
+    ex = page.evaluate("""(() => { show('exam'); document.getElementById('startExam').click();
+        const i = EX.qs.findIndex(q => qType(q) === 'numeric'); if (i < 0) return null; EX.i = i; renderExam(); return [i, EX.ends]; })()""")
+    check(ex is not None, 'the exam paper has a calculation question')
+    if ex:
+        page.wait_for_timeout(200)
+        b = page.locator('#v-exam .inkscratch').first
+        var = b.get_attribute('data-var')
+        check(var == f'exam:{ex[1]}', f'its Scratch paper belongs to this paper ({var})')
+        b.click(); page.wait_for_selector('#ink .inkpaper .wsdoc')
+        check(not page.evaluate("!!document.querySelector('#ink [data-inksol]')"), 'no solutions on an exam paper')
+        clk = page.evaluate("(document.querySelector('#ink .inkclock') || {}).textContent || ''")
+        check(':' in clk, f'the time left on the paper shows over the scratch paper ({clk!r})')
+        stroke(page, '#ink .wspart[data-ink="work"]', 60, 260, 260, 300)
+        page.click('#ink [data-inkdone]')
+        old = page.evaluate("Object.keys(localStorage).filter(k => k.includes(':ink:q:') && k.includes(':exam:')).length")
+        page.evaluate("""(() => { EX.ends += 1000; const i = EX.qs.findIndex(q => qType(q) === 'numeric'); EX.i = i; renderExam(); })()""")
+        page.locator('#v-exam .inkscratch').first.click(); page.wait_for_selector('#ink .inkpaper .wsdoc')
+        fresh = page.evaluate("[(INK.data.parts.work || []).length, Object.keys(localStorage).filter(k => k.includes(':ink:q:') && k.includes(':exam:')).length]")
+        page.click('#ink [data-inkdone]')
+        check(old == 1 and fresh[0] == 0 and fresh[1] <= 1, f'a new paper starts with clean scratch paper and the old one is cleared ({old}, {fresh})')
+    wide = page.evaluate("document.documentElement.scrollWidth - innerWidth")
+    check(wide <= 1, f'no sideways scroll ({wide})')
+    check(not errs, f'no page or console errors at {width} px', '; '.join(errs[:3]))
+    page.close()
+
+
 def main():
     with sync_playwright() as p:
         browser = p.chromium.launch()
         run(browser, 820, 1180)
         run(browser, 390, 844)
+        scratch(browser, 820, 1180)
+        scratch(browser, 390, 844)
         browser.close()
     print(f'\n{len(fails)} failure(s)' if fails else '\nall writing checks passed')
     sys.exit(1 if fails else 0)

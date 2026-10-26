@@ -958,12 +958,16 @@ const srcFlag = q => q.source==='transcript' ? '<span class="srcflag">from lectu
                    : q.source==='both'       ? '<span class="srcflag">slides and lecture audio</span>' : '';
 
 /* ---- shared input rendering, used by the quiz and the exam alike ---------- */
-function numericInput(q, value, disabled, state){
+// scratch: 'scratch' in practice, 'exam' on a paper: a Scratch paper button opens the worksheet writing layer
+// over the question (Write on a worksheet, below)
+function numericInput(q, value, disabled, state, scratch){
+  const sv = scratch === 'exam' && EX ? 'exam:' + EX.ends : scratch;
   return `<div class="numrow${state ? ' ' + state : ''}">
     <input class="numin" type="text" inputmode="decimal" id="numIn"
       value="${esc(value == null ? '' : value)}"${disabled ? ' disabled' : ''}
       aria-label="Your answer in ${esc(q.units)}" placeholder="number">
-    <span class="units">${esc(q.units)}</span>
+    <span class="units">${esc(q.units)}</span>${sv ? `
+    <button type="button" class="chip inkscratch" data-ink="q:${esc(q.id)}" data-var="${esc(sv)}">✍️ Scratch paper</button>` : ''}
   </div>`;
 }
 function matchSelects(q, picks, disabled, showMarks){
@@ -1495,7 +1499,7 @@ function renderExamAll(){
     h += `<div class="qcard allcard" data-ei="${i}"><div class="qhead">${profTag(q.prof)}<span>Question ${i + 1} of ${EX.qs.length}</span>${
       multi ? '<span class="tag sata">select all that apply</span>' : ''}</div><div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
-    if(kind === 'numeric') h += numericInput(q, EX.picks[i], false, '');
+    if(kind === 'numeric') h += numericInput(q, EX.picks[i], false, '', 'exam');
     else if(kind === 'match') h += matchSelects(q, EX.picks[i], false, false);
     else EX.orders[i].forEach((oi, n) => {
       const sel = multi ? EX.picks[i].includes(oi) : EX.picks[i] === oi;
@@ -1534,7 +1538,7 @@ function answerInputsHTML(q, st){
   let h = '';
   if(kind === 'numeric'){
     h += `<p class="sata">Type the number and check it. Anything within 2% of the keyed value counts, or her stated margin where that is wider. The unit may be typed after the number.</p>`;
-    h += numericInput(q, st.picked, st.revealed, st.revealed ? (ok ? 'ok' : 'bad') : '');
+    h += numericInput(q, st.picked, st.revealed, st.revealed ? (ok ? 'ok' : 'bad') : '', 'scratch');
     /* the givens, symbol and value only, on request before the answer: the first thing to write down for any calculation */
     if(!st.revealed && Array.isArray(q.givens) && q.givens.length)
       h += `<p class="sub givensrow"><button type="button" class="btn small ghost" data-givens="1">${st.givensOpen ? 'Hide the givens' : 'List the givens'}</button></p>${st.givensOpen ? givensHTML(q, false) : ''}`;
@@ -3186,7 +3190,7 @@ function renderExamQ(){
   <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
   if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
   if(kind === 'numeric'){
-    h += numericInput(q, EX.picks[EX.i], false, '');
+    h += numericInput(q, EX.picks[EX.i], false, '', 'exam');
   }else if(kind === 'match'){
     h += matchSelects(q, EX.picks[EX.i], false, false);
   }else{
@@ -5524,25 +5528,35 @@ function inkSave(){
 function inkMark(root){
   root.querySelectorAll('[data-ink]').forEach(b => { const n = inkCount(b.dataset.ink, b.dataset.var); b.textContent = n ? '✍️ Continue writing' : '✍️ Write on it'; });
 }
+// a question's scratch paper (id 'q:<question id>'): its stem over one tall work area, no solutions; a paper's
+// scratch (variant 'exam:<end time>') is cleared when the next paper starts
+function inkQuestionHTML(q){
+  return `<div class="wsdoc"><div class="wspart calc" data-qid="work"><div class="wsq stack"><span class="wslab">Scratch paper</span><div>${stemHTML(q.stem)}${q.units ? ` <span class="units">(answer in ${esc(q.units)})</span>` : ''}</div></div><div class="wswork tall"></div></div></div>`;
+}
 function inkOpen(id, variant){
-  const s = SRC_BY[id]; if(!s) return;
+  const q = id.startsWith('q:') ? byId(id.slice(2)) : null;
+  const s = q ? {title: 'scratch paper'} : SRC_BY[id]; if(!s || (id.startsWith('q:') && !q)) return;
+  if(q && variant.startsWith('exam:')) try {
+    const pre = NS + ':ink:q:', keep = ':' + variant;
+    Object.keys(localStorage).forEach(k => { if(k.startsWith(pre) && k.includes(':exam:') && !k.endsWith(keep)) localStorage.removeItem(k); });
+  } catch(e){}
   if(typeof gwStop === 'function') gwStop();
   const prefs = (() => { try { return JSON.parse(LS.get(NS + ':ink-prefs') || '{}'); } catch(e){ return {}; } })();
   INK = {id, variant, data: inkLoad(id, variant), tool: 'pen', color: prefs.color || INK_COLORS[0][0], size: prefs.size || 2,
          pencil: 'pencil' in prefs ? !!prefs.pencil : matchMedia('(pointer: coarse)').matches, undo: [], redo: [], scrollY: scrollY};
   const mode = variant === 'changed' ? 'changed-worksheet' : 'worksheet', solMode = variant === 'changed' ? 'changed-solutions' : 'solutions';
-  const sol = (sheetHTML(id, solMode).match(/<section class="wssol">[\s\S]*<\/section>/) || [''])[0];
+  const sol = q ? '' : (sheetHTML(id, solMode).match(/<section class="wssol">[\s\S]*<\/section>/) || [''])[0];
   const ov = document.createElement('div'); ov.id = 'ink'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Write on ' + s.title);
   ov.innerHTML = `<div class="inkbar" role="toolbar" aria-label="Writing tools">
-      <button type="button" class="btn small" data-inkdone>✓ Done</button>
+      <button type="button" class="btn small" data-inkdone>✓ Done</button>${q && variant.startsWith('exam:') ? '<span class="inkgrp"><b class="inkclock" aria-label="Time left on the paper"></b></span>' : ''}
       <span class="inkgrp">${INK_COLORS.map(([c, n]) => `<button type="button" class="inkc" data-inkcolor="${c}" aria-label="${n} pen" style="--c:${c}"></button>`).join('')}</span>
       <span class="inkgrp"><button type="button" class="chip" data-inktool="pen">✏️ Pen</button><button type="button" class="chip" data-inktool="hl">🖍 Highlight</button><button type="button" class="chip" data-inktool="erase">⌫ Eraser</button></span>
       <span class="inkgrp"><button type="button" class="chip" data-inksize="1.5">Fine</button><button type="button" class="chip" data-inksize="2.5">Medium</button><button type="button" class="chip" data-inksize="4">Bold</button></span>
       <span class="inkgrp"><button type="button" class="chip" data-inkundo aria-label="Undo">↶ Undo</button><button type="button" class="chip" data-inkredo aria-label="Redo">↷ Redo</button></span>
-      <span class="inkgrp"><button type="button" class="chip" data-inkpencil aria-pressed="false">Pencil only</button><button type="button" class="chip" data-inksol aria-expanded="false">Show solutions</button><button type="button" class="chip" data-inkpdf>Save as PDF</button><button type="button" class="chip" data-inkclear>Clear page</button></span>
+      <span class="inkgrp"><button type="button" class="chip" data-inkpencil aria-pressed="false">Pencil only</button>${q ? '' : '<button type="button" class="chip" data-inksol aria-expanded="false">Show solutions</button>'}<button type="button" class="chip" data-inkpdf>Save as PDF</button><button type="button" class="chip" data-inkclear>Clear page</button></span>
       <span class="inkwarn" hidden>This browser is not saving: the writing lasts only until the page closes. Save as PDF to keep it.</span>
     </div>
-    <div class="inkpaper">${sheetHTML(id, mode)}<div class="inksol" hidden>${sol}</div></div>`;
+    <div class="inkpaper">${q ? inkQuestionHTML(q) : sheetHTML(id, mode)}<div class="inksol" hidden>${sol}</div></div>`;
   document.body.appendChild(ov); document.body.classList.add('inking');
   ov.tabIndex = -1;
   // a drawing layer on the name line and on every problem, with More room under each problem's work area
@@ -5558,11 +5572,13 @@ function inkOpen(id, variant){
     inkWire(c, el, key);
   });
   inkTools(); inkSave();
+  const clk = ov.querySelector('.inkclock');
+  if(clk){ const t = () => { clk.textContent = '⏱ ' + fmt(Math.max(0, EX ? EX.ends - Date.now() : 0)); }; t(); INK.clock = setInterval(t, 1000); }
   const ro = new ResizeObserver(es => es.forEach(e => inkSize(e.target)));
   regions.forEach(([el]) => el && ro.observe(el)); INK.ro = ro;
   ov.scrollTop = 0; ov.focus && ov.focus();
 }
-const inkBase = w => w.classList.contains('short') ? 200 : 480;   // on screen: a calculation gets 480 px to work in, a short answer 200
+const inkBase = w => w.classList.contains('short') ? 200 : w.classList.contains('tall') ? 720 : 480;   // on screen: a calculation gets 480 px to work in, a short answer 200
 function inkSize(el){
   const c = el.querySelector(':scope > canvas.inkcv'); if(!c) return;
   const r = el.getBoundingClientRect(), dpr = Math.min(3, devicePixelRatio || 1);
@@ -5653,12 +5669,13 @@ function inkTools(){
 }
 function inkClose(){
   if(!INK) return;
-  inkSave(); if(INK.ro) INK.ro.disconnect();
+  inkSave(); if(INK.ro) INK.ro.disconnect(); if(INK.clock) clearInterval(INK.clock);
   const y = INK.scrollY, id = INK.id; INK = null;
   const ov = document.getElementById('ink'); if(ov) ov.remove();
   document.body.classList.remove('inking');
   const tab = document.getElementById('v-sheets'); if(tab) inkMark(tab);
   scrollTo(0, y); const card = document.getElementById('src-' + id); if(card){ const b = card.querySelector('[data-ink]'); if(b) b.focus({preventScroll: true}); }
+  else { const b = [...document.querySelectorAll('.inkscratch')].find(x => x.dataset.ink === id && x.offsetParent); if(b) b.focus({preventScroll: true}); }
 }
 // Save as PDF: the canvases are swapped for pictures of themselves, so the ink prints with the worksheet
 // (the pictures show only in print, so they can stay until the next Save as PDF or until the worksheet closes)
@@ -5686,7 +5703,7 @@ document.addEventListener('click', e => {
   if(b.matches('[data-inksol]')){ const s = document.querySelector('#ink .inksol'); s.hidden = !s.hidden; b.setAttribute('aria-expanded', String(!s.hidden)); b.textContent = s.hidden ? 'Show solutions' : 'Hide solutions'; return; }
   if(b.matches('[data-inkpdf]')) return inkPrint();
   if(b.matches('[data-inkclear]')){
-    if(!confirm('Clear all the writing on this worksheet?')) return;
+    if(!confirm('Clear all the writing on this page?')) return;
     INK.undo.push({k: 'clear', key: '_', prev: JSON.stringify(INK.data.parts)}); INK.redo = []; INK.data.parts = {};
     inkSave(); document.querySelectorAll('#ink .inkreg').forEach(inkDraw); return inkTools();
   }
