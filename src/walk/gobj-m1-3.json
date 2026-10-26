@@ -3,62 +3,62 @@
  "title": "Fundamental pharmacokinetic terms",
  "segs": [
   {
+   "text": "Module one, objective three. Fundamental pharmacokinetic terms, used in every later module. C p is the plasma concentration, the drug level measured in plasma. After an oral dose, C p rises from zero to a peak and then falls, because the drug has to get into the systemic circulation before it can be measured there. After an I V bolus, a single dose injected into a vein all at once, C p is highest at time zero and only falls. The aim of dosing is to keep C p above the level that works and below the level that harms; she said, Our goal is that we want to stay in between these two lines.",
    "slide": "intro:9",
-   "reading": null,
-   "text": "Module one, objective three. Fundamental pharmacokinetic terms. These are the working words of the whole course, and later modules use them without redefining them. After an oral dose, the plasma concentration, C p, rises from zero to a peak and then falls; after an I V bolus it is highest at time zero and only falls. The aim of dosing is to keep it above the level that works and below the level that harms.",
    "card": [
     {
+     "at": 2,
+     "m": "C<sub>p</sub>: plasma drug concentration, e.g. mg/L or mcg/mL"
+    },
+    {
      "at": 3,
-     "m": "oral: C<sub>p</sub> zero → peak → falls; IV bolus: highest at time zero"
+     "m": "oral: C<sub>p</sub> zero → peak → falls"
     },
     {
      "at": 4,
-     "m": "above the level that works, below the level that harms"
+     "m": "IV bolus: highest at time zero, then only falls"
+    },
+    {
+     "at": 5,
+     "m": "aim: above the level that works, below the level that harms"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "The lower line is the minimum effective concentration, M E C, the concentration that must be met or exceeded for the desired pharmacologic response. The upper line is the minimum toxic concentration, M T C, above which adverse effects start. So a level below the M E C gives no desired response, a level above the M T C gives adverse effects, and the range between them is the therapeutic window. The effect starts when the rising curve reaches the M E C and lasts until the falling curve drops back to it. A third term, the minimum inhibitory concentration, M I C, is used for antibiotics: the lowest concentration needed to kill or inhibit the bacteria.",
    "slide": "intro:9",
-   "reading": null,
-   "text": "The lower line on the concentration time curve is the minimum effective concentration, M E C. It is the concentration that must be met or exceeded for the desired pharmacologic response. The upper line is the minimum toxic concentration, M T C, the concentration above which adverse effects start, and what counts as toxic differs between drugs. A third term, the minimum inhibitory concentration, M I C, is used for antibiotics. It is the lowest concentration needed to kill or inhibit the bacteria.",
    "card": [
     {
      "at": 0,
-     "m": "MEC: lower line, met or exceeded for response"
+     "m": "MEC: lower line; met or exceeded for the desired response"
+    },
+    {
+     "at": 1,
+     "m": "MTC: upper line; adverse effects start above it"
     },
     {
      "at": 2,
-     "m": "MTC: upper line, adverse effects start"
+     "m": "C<sub>p</sub> below MEC: no desired response   C<sub>p</sub> above MTC: adverse effects"
+    },
+    {
+     "at": 2,
+     "m": "therapeutic window: between MEC and MTC"
     },
     {
      "at": 3,
-     "m": "MIC: antibiotics, kill or inhibit bacteria"
-    }
-   ]
-  },
-  {
-   "slide": "intro:10",
-   "reading": null,
-   "text": "Her questions word the stem as the property and ask for the name, and every option is a real term from the same family. Her poll asked which concentration must be met or exceeded for the desired response. It offered steady state, minimum toxic, minimum effective and minimum inhibitory concentration. Steady state is the plateau concentration reached when the rate of drug going in equals the rate going out. The answer is minimum effective concentration.",
-   "card": [
-    {
-     "at": 1,
-     "m": "met or exceeded for the desired response?"
-    },
-    {
-     "at": 3,
-     "m": "✗ steady state &nbsp; ✗ MTC &nbsp; ✗ MIC"
+     "m": "onset: C<sub>p</sub> reaches MEC   duration: until C<sub>p</sub> falls back to MEC"
     },
     {
      "at": 4,
-     "m": "MEC ✓"
+     "m": "MIC: antibiotics, kill or inhibit bacteria"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Elimination is the irreversible loss of drug from the body by all routes, so metabolism and excretion are both forms of elimination. Disposition is everything that happens to a drug after it is absorbed into the systemic circulation: distribution and elimination. So the two terms differ by distribution: if distribution is included, the term is disposition. The first pass effect is the rapid metabolism of an oral drug, mainly by the liver, before it reaches the general circulation.",
    "slide": "intro:5",
-   "reading": null,
-   "text": "Elimination is the irreversible loss of drug from the body by all routes, so metabolism and excretion are both forms of elimination. Disposition is everything that happens to a drug after it is absorbed into the systemic circulation, that is, distribution and elimination. So to tell the two apart, check whether distribution is included. If it is, the term is disposition.",
    "card": [
     {
      "at": 0,
@@ -67,36 +67,48 @@
     {
      "at": 1,
      "m": "disposition = distribution + elimination"
-    }
-   ]
-  },
-  {
-   "slide": "intro:5",
-   "reading": null,
-   "text": "The first pass effect is the rapid metabolism of an oral drug, mainly by the liver, before it reaches the general circulation. It lowers the bioavailability. Bioavailability, F, is a measure of the systemic availability of a drug. F is the fraction of the dose that reaches the plasma, and it has no units.",
-   "card": [
-    {
-     "at": 0,
-     "m": "first-pass: oral drug, liver, before general circulation"
     },
     {
-     "at": 1,
-     "m": "first-pass → lower F"
+     "at": 2,
+     "m": "distribution included → disposition"
     },
     {
      "at": 3,
-     "m": "F: fraction reaching plasma, no units"
+     "m": "first-pass: oral drug metabolized, mainly by the liver, before the general circulation"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Bioavailability, F, is a measure of the systemic availability of a drug: the fraction of the dose that reaches the plasma, a number with no units. The more of an oral dose the liver metabolizes on this first pass, the less of it reaches the circulation, so F is lower. In her example, a thousand milligram tablet with only five hundred milligrams available for the body to use has an F of one half. F returns in objective five, where it comes from comparing areas under the curve.",
+   "slide": "intro:5",
+   "card": [
+    {
+     "at": 0,
+     "m": "F: fraction of the dose reaching the plasma, no units"
+    },
+    {
+     "at": 1,
+     "m": "more first-pass metabolism → lower F"
+    },
+    {
+     "at": 2,
+     "m": "e.g. her tablet: {{frac:500 mg|1000 mg}} = 0.5"
+    },
+    {
+     "at": 3,
+     "m": "F from AUC: objective 5"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Drug levels are measured in a fluid sample, most often from blood. Whole blood is venous blood with an anticoagulant such as heparin, with all its cells and proteins. Serum is the liquid left after blood clots and the clot is removed, so it has no cells, no fibrinogen and no other clotting factors. Plasma is the liquid after anticoagulated blood is centrifuged, so it has no cells but all the proteins, including albumin. Serum or plasma is used most, because they contain fewer components for the drug to interact with than whole blood does. A plasma level can stand for the tissues because drug in plasma is taken to be in equilibrium with them, so a change in plasma concentration reflects a change in tissue concentration.",
    "slide": "intro:11",
-   "reading": null,
-   "text": "Drug levels are measured in a fluid sample. Whole blood is venous blood with an anticoagulant such as heparin or E D T A, and it contains all the cellular and protein elements. Serum is the liquid left after blood is allowed to clot and the clot is removed, so it has no cells, no fibrinogen and no other clotting factors. Plasma is the liquid supernatant after centrifuging non clotted, anticoagulated blood, so it has no cells but all the proteins, including albumin.",
    "card": [
     {
      "at": 1,
-     "m": "whole blood: anticoagulant, all elements"
+     "m": "whole blood: anticoagulant, all cells and proteins"
     },
     {
      "at": 2,
@@ -105,27 +117,59 @@
     {
      "at": 3,
      "m": "plasma: anticoagulated, centrifuged, all proteins"
-    }
-   ]
-  },
-  {
-   "slide": "intro:11",
-   "reading": null,
-   "text": "Serum or plasma is used most, because they contain fewer components for the drug to interact with than whole blood does. Her poll asked which sample is most commonly used for drug measurement: saliva, urine, whole blood, or serum or plasma. The answer is serum or plasma, even though all four are possible samples. C p is the drug concentration in plasma, C s in serum, and a plain C is unspecified, so take it as whichever fluid applies.",
-   "card": [
+    },
     {
-     "at": 0,
+     "at": 4,
      "m": "serum or plasma: fewer components to interact with"
     },
     {
+     "at": 5,
+     "m": "plasma in equilibrium with tissues: C<sub>p</sub> change → tissue change"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her questions word the stem as the property and ask for the name, and every option is a real term of the same kind. Her poll asked which concentration must be met or exceeded for the desired pharmacologic response, and offered steady state, minimum toxic, minimum effective and minimum inhibitory concentration. The answer is minimum effective concentration. Minimum toxic is the upper line where harm starts, minimum inhibitory is the antibiotic term, and steady state is the plateau reached when the rate of drug going in equals the rate going out.",
+   "slide": "intro:10",
+   "card": [
+    {
+     "at": 1,
+     "m": "met or exceeded for the desired response?"
+    },
+    {
      "at": 2,
-     "m": "most common sample: serum or plasma ✓"
+     "m": "MEC ✓"
     },
     {
      "at": 3,
-     "m": "C<sub>p</sub> plasma &nbsp; C<sub>s</sub> serum &nbsp; C unspecified (mg/L, mcg/mL)"
+     "m": "✗ MTC: harm   ✗ MIC: antibiotics   ✗ steady state: rate in = rate out"
     }
-   ]
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her second poll asked which sample is most commonly used for drug measurement: saliva, urine, whole blood, or serum or plasma. The answer is serum or plasma, although, as she said, all of these are options. In the notation, C p is the concentration in plasma, C s in serum, and a plain C is unspecified, so take it as whichever fluid applies. For elimination against disposition, the check is distribution: a stem that includes distribution describes disposition.",
+   "slide": "intro:11",
+   "card": [
+    {
+     "at": 0,
+     "m": "most common sample?"
+    },
+    {
+     "at": 1,
+     "m": "serum or plasma ✓ (all four possible)"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> plasma   C<sub>s</sub> serum   C unspecified"
+    },
+    {
+     "at": 3,
+     "m": "includes distribution → disposition"
+    }
+   ],
+   "fig": null
   }
  ]
 }

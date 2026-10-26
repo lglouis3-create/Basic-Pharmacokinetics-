@@ -3,161 +3,212 @@
  "title": "Volume of distribution and clearance",
  "segs": [
   {
+   "text": "Module two, objective two. Volume of distribution and clearance. The apparent volume of distribution, V D, is the volume the amount of drug in the body would have to dissolve in to give the concentration measured in plasma. It is not a real body space, which is why it is called apparent. She said, It's not an actual volume, it depends on the drug. V D is a proportionality constant: the amount in the body equals V D times the plasma concentration at the same time. Clearance, Cl T, is the volume of plasma cleared of drug per unit of time, in liters per hour. It measures elimination without saying how the drug is removed, and it is also called drug, systemic or total body clearance.",
    "slide": "ivb:5",
-   "reading": null,
-   "text": "Module two, objective two. Two key parameters, volume of distribution and clearance. The apparent volume of distribution, V D, is the volume the amount of drug in the body would have to dissolve in to give the concentration measured in plasma. It is not a real body space, which is why it is called apparent. It is a proportionality constant between the amount of drug in the body and the plasma concentration. So V D equals D B, the amount in the body, divided by C p, the plasma concentration at the same time. For a bolus, the amount in the body at time zero is the dose, so V D also equals D zero over C zero, which finds V D from a dose and an initial concentration.",
    "card": [
     {
      "at": 2,
-     "m": "V<sub>D</sub>: apparent volume, not a real body space"
+     "m": "V<sub>D</sub> (L): the volume the amount in the body would dissolve in to give the measured C<sub>p</sub>"
+    },
+    {
+     "at": 3,
+     "m": "apparent: not a real body space"
     },
     {
      "at": 5,
+     "m": "amount in body = V<sub>D</sub> × C<sub>p</sub>, at the same time"
+    },
+    {
+     "at": 6,
+     "m": "Cl<sub>T</sub> (L/hr): volume of plasma cleared of drug per unit time"
+    },
+    {
+     "at": 7,
+     "m": "drug, systemic or total body clearance; mechanism not named"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Why does V D differ between drugs? Only plasma is sampled. If most of a dose leaves the blood for the tissues, little of it stays in plasma, so the measured concentration is low and the volume needed to explain it is large. A drug held in the blood, for example by binding to plasma proteins, keeps a high plasma concentration, so its V D is small; only unbound drug moves easily into the tissues. V D does not change with the dose. It changes only when the patient changes in a serious way, such as pregnancy or volume overload.",
+   "slide": "ivb:6",
+   "card": [
+    {
+     "at": 1,
+     "m": "only plasma is sampled"
+    },
+    {
+     "at": 2,
+     "m": "drug in tissues → low C<sub>p</sub> → large V<sub>D</sub>"
+    },
+    {
+     "at": 3,
+     "m": "bound to plasma proteins → high C<sub>p</sub> → small V<sub>D</sub>"
+    },
+    {
+     "at": 4,
+     "m": "dose ↑: V<sub>D</sub> unchanged"
+    },
+    {
+     "at": 5,
+     "m": "V<sub>D</sub> changes: pregnancy, volume overload"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "The relation is V D equals D B over C p. Turned around, C zero equals D zero over V D: V D is on the bottom, so at the same dose a larger V D gives a lower starting concentration. Her lecture example puts one hundred milligrams into volumes of one, ten and one hundred liters, which give one hundred, ten and one milligram per liter. The amount is the same, but these would be three different drugs, and the larger the V D, the lower the plasma concentration. The amount in the body is known only at time zero, when it is the dose, so V D is found as D zero over C zero, never as the dose over a later concentration.",
+   "slide": "ivb:5",
+   "card": [
+    {
+     "at": 0,
      "m": "V<sub>D</sub> = {{frac:D<sub>B</sub>|C<sub>p</sub>}}"
     },
     {
-     "at": 6,
-     "m": "at time zero: V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}}"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:6",
-   "reading": null,
-   "text": "A drug that leaves the blood for the tissues has a low plasma concentration, and so a large V D. A drug held in the blood, for example by binding to plasma proteins, has a small V D. V D is given in liters, in liters per kilogram, or as a percent of body weight. For a percent, one liter is taken as equal to one kilogram. So ten percent of an eighty kilogram patient is eight liters. She said, in kinetics, our body weight is always in kilograms.",
-   "card": [
-    {
-     "at": 0,
-     "m": "leaves blood for tissues → low C<sub>p</sub> → large V<sub>D</sub>"
-    },
-    {
      "at": 1,
-     "m": "held in blood, protein bound → small V<sub>D</sub>"
-    },
-    {
-     "at": 3,
-     "m": "percent of body weight: 1 L = 1 kg"
-    },
-    {
-     "at": 4,
-     "m": "10% × 80 kg = <b>8 L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:5",
-   "reading": null,
-   "text": "Her lecture example puts the same one hundred milligram dose into three different volumes of distribution. The relation is the same one rearranged: C zero equals D zero divided by V D. With a V D of one liter, one hundred milligrams over one liter gives one hundred milligrams per liter. With ten liters, one hundred milligrams over ten liters gives ten milligrams per liter. With one hundred liters, one hundred milligrams over one hundred liters gives one milligram per liter. Milligrams divided by liters leaves milligrams per liter each time. The amount of drug is the same, but these would be three different drugs, and the larger the V D, the lower the plasma concentration.",
-   "card": [
-    {
-     "at": 1,
-     "m": "C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}"
+     "m": "C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}: V<sub>D</sub> ↑ → C<sub>0</sub> ↓"
     },
     {
      "at": 2,
-     "m": "{{frac:100 mg|1 L}} = <b>100 mg/L</b>"
+     "m": "{{frac:100 mg|1 L}} = <b>100 mg/L</b>; {{frac:100 mg|10 L}} = <b>10 mg/L</b>; {{frac:100 mg|100 L}} = <b>1 mg/L</b>"
     },
     {
      "at": 3,
-     "m": "{{frac:100 mg|10 L}} = <b>10 mg/L</b>"
+     "m": "same dose: V<sub>D</sub> × 10 → C<sub>0</sub> ÷ 10"
     },
     {
      "at": 4,
-     "m": "{{frac:100 mg|100 L}} = <b>1 mg/L</b>"
-    },
-    {
-     "at": 6,
-     "m": "larger V<sub>D</sub> → lower C<sub>p</sub>"
+     "m": "V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}}, both at t = 0"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "ivb:8",
-   "reading": null,
-   "text": "Clearance, Cl T, is the volume of plasma cleared of drug per unit time. It measures elimination without saying how the drug is removed. It is also called drug, systemic or total body clearance. Clearance equals k times V D, where k is the elimination rate constant in per hour and V D is in liters. Per hour times liters leaves liters per hour, the unit a clearance must have. This line is not on the equation sheet. She said, I want you to take this one with you to your grave along with the half-life equation.",
+   "text": "What sets clearance is the ability of the eliminating organs to remove the drug, and what sets V D is how the drug distributes; the elimination rate constant k follows from these two. Clearance is a fixed volume of plasma cleared per hour. A larger or smaller V D does not change that volume per hour, but it changes the fraction of the drug that the volume holds. Only drug that is not bound to plasma proteins can be cleared; bound drug is part of the measured concentration but is not removed. The amount removed per hour, an amount per time, is clearance times the concentration, so it falls as the level falls, while clearance stays the same.",
+   "slide": "ivb:9",
    "card": [
     {
      "at": 0,
-     "m": "Cl: volume of plasma cleared of drug per unit time"
+     "m": "Cl: set by the eliminating organs; V<sub>D</sub>: set by distribution"
+    },
+    {
+     "at": 0,
+     "m": "Cl and V<sub>D</sub> set by the body → k follows"
+    },
+    {
+     "at": 2,
+     "m": "V<sub>D</sub> ↑, same Cl: same L/hr cleared, smaller fraction of the drug"
     },
     {
      "at": 3,
-     "m": "Cl = k × V<sub>D</sub>"
+     "m": "only unbound drug is cleared"
     },
     {
      "at": 4,
-     "m": "hr<sup>&minus;1</sup> × L = L/hr"
+     "m": "amount removed per hr = Cl × C<sub>p</sub>: falls with C<sub>p</sub>; Cl constant"
+    },
+    {
+     "at": 4,
+     "m": "e.g. Cl 4 L/hr: C<sub>p</sub> 10 mg/L → 40 mg/hr; 5 mg/L → 20 mg/hr"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "The relation is Cl T equals k times V D. She said, I want you to take this one with you to your grave along with the half-life equation. Turned around, k equals Cl T over V D: the volume cleared per hour divided by the whole volume is the fraction removed per hour. Clearance is on the top, so at the same V D a higher clearance gives a larger k and a shorter half-life. V D is on the bottom, so at the same clearance a larger V D gives a smaller k and a longer half-life. Per hour times liters leaves liters per hour. She said, a constant times a constant is a constant. So clearance stays the same when the dose or the concentration changes.",
+   "slide": "ivb:8",
+   "card": [
+    {
+     "at": 0,
+     "m": "Cl<sub>T</sub> = k × V<sub>D</sub> &nbsp; (not on the sheet)"
+    },
+    {
+     "at": 2,
+     "m": "k = {{frac:Cl<sub>T</sub>|V<sub>D</sub>}}: fraction removed per hr"
+    },
+    {
+     "at": 3,
+     "m": "e.g. V<sub>D</sub> 20 L: Cl 4 → k 0.2 hr<sup>−1</sup>, t½ 3.47 hr; Cl 8 → k 0.4 hr<sup>−1</sup>, t½ 1.73 hr"
+    },
+    {
+     "at": 4,
+     "m": "e.g. Cl 4 L/hr: V<sub>D</sub> 20 → 40 L: k 0.2 → 0.1 hr<sup>−1</sup>, t½ 3.47 → 6.93 hr"
     },
     {
      "at": 5,
-     "m": "not on the equation sheet"
+     "m": "hr<sup>−1</sup> × L = L/hr"
+    },
+    {
+     "at": 7,
+     "m": "dose or C<sub>p</sub> ↑: Cl unchanged"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "The second form is Cl T equals D zero over A U C, the area under the plasma concentration time curve from zero to infinity. The dose is on the top and A U C on the bottom, and clearance does not change with the dose, so doubling the dose doubles the A U C. That is her second reason to value clearance, after its constancy: it links the dose directly to the area under the curve, which measures the extent of drug available to the body. Milligrams over milligram hours per liter leaves liters per hour. On the equation sheet the form has F, the fraction absorbed, on the top, and F is one for an I V dose.",
    "slide": "ivb:8",
-   "reading": null,
-   "text": "The second form is Cl T equals D zero divided by A U C from zero to infinity, the area under the plasma concentration time curve. Use it when a dose and an A U C are given instead of k and V D. Milligrams divided by milligram hours per liter leaves liters per hour. On the equation sheet it is written Cl T equals F D zero over A U C, where F, the fraction absorbed, is one for I V. Clearance is useful for two reasons: it stays constant, and it links the dose directly to the area under the curve. Clearance and V D are both constants for a given drug in a given patient, so changing the dose or the concentration does not change them.",
    "card": [
     {
      "at": 0,
-     "m": "Cl<sub>T</sub> = {{frac:D<sub>0</sub>|AUC<sub>0</sub><sup>&infin;</sup>}}"
+     "m": "Cl<sub>T</sub> = {{frac:D<sub>0</sub>|AUC<sub>0</sub><sup>∞</sup>}}"
     },
     {
-     "at": 2,
+     "at": 1,
+     "m": "D<sub>0</sub> × 2, Cl same → AUC × 2"
+    },
+    {
+     "at": 3,
      "m": "{{frac:mg|mg·hr/L}} = L/hr"
     },
     {
-     "at": 3,
+     "at": 4,
      "m": "sheet: Cl<sub>T</sub> = {{frac:FD<sub>0</sub>|AUC}}, F = 1 for IV"
-    },
-    {
-     "at": 5,
-     "m": "Cl and V<sub>D</sub>: constant in a given patient"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Her questions test this constancy. When the I V bolus dose increases, only the plasma concentration increases; clearance, half-life and V D stay the same. If the dose is doubled, the half-life and the clearance do not change and the initial concentration doubles. The statement that clearance increases as concentration increases is false: the amount removed per hour rises with the concentration, but clearance does not. In a poll, the parameter that describes elimination as a volume of fluid cleared of drug per unit time is clearance, not biotransformation, elimination rate or excretion.",
    "slide": "inf:1",
-   "reading": null,
-   "text": "Her questions test that constancy. One asks which value increases when the I V bolus dose increases. Only the plasma concentration does; clearance, half-life and V D stay the same. At the end of calculation problems she asks what doubling the dose does to the half-life, the clearance and the initial concentration: no change, no change, doubled. A true or false item says that clearance increases as concentration increases. That is false, because clearance is a constant.",
-   "card": [
-    {
-     "at": 2,
-     "m": "dose ↑ → C<sub>p</sub> ↑; Cl, t&frac12;, V<sub>D</sub> unchanged"
-    },
-    {
-     "at": 3,
-     "m": "dose × 2: t&frac12; same, Cl same, C<sub>0</sub> × 2"
-    },
-    {
-     "at": 5,
-     "m": "✗ clearance rises with concentration"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:10",
-   "reading": null,
-   "text": "A single best answer poll asks which parameter describes elimination as volume of fluid cleared of drug per unit time. The answer is clearance, not biotransformation, elimination rate or excretion. In calculations the usual trap is the unit of V D. It can arrive per kilogram, such as three liters per kilogram, as a percent of body weight, as liters, or not at all, to be found as dose divided by C zero. A percent or per kilogram V D must be multiplied by the weight in kilograms, and the answer is in liters, not kilograms. From the fish tank model of clearance, the part she uses is that only free, unbound drug can be cleared, and protein bound drug cannot.",
    "card": [
     {
      "at": 1,
-     "m": "✓ clearance &nbsp; ✗ biotransformation ✗ elimination rate ✗ excretion"
+     "m": "dose ↑ → C<sub>p</sub> ↑; Cl, t½, V<sub>D</sub> unchanged"
+    },
+    {
+     "at": 2,
+     "m": "dose × 2: t½ same, Cl same, C<sub>0</sub> × 2"
     },
     {
      "at": 3,
-     "m": "V<sub>D</sub>: L/kg, % body weight, L, or {{frac:D<sub>0</sub>|C<sub>0</sub>}}"
+     "m": "clearance rises with concentration: <b>false</b>"
     },
     {
      "at": 4,
-     "m": "L/kg or % × weight in kg → L"
+     "m": "✓ clearance; not biotransformation, elimination rate or excretion"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "In calculations the usual trap is the unit of V D. It can arrive in liters, per kilogram, as a percent of body weight, or not at all, to be found as dose over C zero. A per kilogram or percent value is multiplied by the weight in kilograms, taking one liter as one kilogram, and the answer is in liters: ten percent of an eighty kilogram patient is eight liters. She said, in kinetics, our body weight is always in kilograms. In her final review poll, four hundred milligrams with C p equal to forty milligrams per liter times e to the minus zero point nine t gives a V D of ten liters; the zero point nine is k and is not used.",
+   "slide": "ivb:6",
+   "card": [
+    {
+     "at": 1,
+     "m": "V<sub>D</sub>: L, L/kg, % body weight, or {{frac:D<sub>0</sub>|C<sub>0</sub>}}"
     },
     {
-     "at": 5,
-     "m": "only free drug is cleared"
+     "at": 2,
+     "m": "1 L = 1 kg: 10% × 80 kg = <b>8 L</b>"
+    },
+    {
+     "at": 4,
+     "m": "V<sub>D</sub> = {{frac:400 mg|40 mg/L}} = <b>10 L</b>; 0.9 hr<sup>−1</sup> is k, not used"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

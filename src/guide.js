@@ -1949,7 +1949,7 @@ const GUIDE_HTML = `
 <li>Her answers: practice 1 (500 mg, F 88%, t&frac12;<sub>a</sub> 90 min, t&frac12; 5 hr, V<sub>D</sub> changed live from 40 L to 20 L) gives t<sub>max</sub> 3.7 hr and C<sub>max</sub> about 13 mg/L.</li>
 <li>Practice 2 (C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>) mg/L, so k<sub>a</sub> = 0.872 and k = 0.182 hr<sup>&minus;1</sup>) gives t<sub>max</sub> 2.27 hr and C<sub>max</sub> 12.14 mg/L.</li>
 <li>Example 2 (C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>, so k<sub>a</sub> = 2.75 and k = 0.22 hr<sup>&minus;1</sup>) gives t<sub>max</sub> 1 hr and C<sub>max</sub> 55.4 mg/L.</li>
-<li>Source conflict: for Example 2 she says 55.4 mg/L, which is what 75(e<sup>&minus;0.22</sup> &minus; e<sup>&minus;2.75</sup>) gives at t = 1 hr. The 53.4 mg/L written on the annotated slide does not follow from the equation.</li>
+<li>For Example 2 she says 55.4 mg/L, which is what 75(e<sup>&minus;0.22</sup> &minus; e<sup>&minus;2.75</sup>) gives at t = 1 hr.</li>
 </ul>
 
 <h4>In her words</h4>
@@ -2629,7 +2629,7 @@ const GUIDE_HTML = `
 <li>Fluctuation: each dose now has 8 hr instead of 4 hr to be eliminated, so the trough falls to a smaller fraction of the peak. The fluctuation gets larger.</li>
 <li>Compliance: every 8 hours is 3 doses a day instead of 6, which is easier to keep to.</li>
 <li>Answer: <b>lower steady-state concentration, larger peak-to-trough fluctuation, better patient compliance</b>. The part she confirmed in class was the lower steady-state concentration.</li>
-<li>Second case, stating a regimen: a calculation gives 17.29 mg every 3.72 hours. Write it as a strength and interval the patient can use, such as <b>20 mg every 4 hours</b>.</li>
+<li>Second case, stating a regimen: a calculated interval such as 3.72 hours does not make sense to a patient, and a calculated oral dose such as 17.29 mg is rounded to a strength that can be given, such as <b>20 mg</b> (her two examples, 28 Sep; 17.29 mg is fine as an IV dose).</li>
 </ol>
 
 <h4>How she tests it</h4>

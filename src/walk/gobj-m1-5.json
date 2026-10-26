@@ -3,134 +3,217 @@
  "title": "Area under the curve by the trapezoidal rule",
  "segs": [
   {
+   "text": "Module one, objective five. The area under the curve, by the trapezoidal rule. A U C is the area under the plot of plasma concentration against time. It tells you the extent of drug that is available for the body to use: how much drug, not how fast. Its units are a concentration times a time, such as microgram hours per milliliter. There is rarely an equation for the curve, only a table of measured points, so the area is estimated from those points.",
    "slide": "intro:26",
-   "reading": null,
-   "text": "Module one, objective five. The area under the curve, by the trapezoidal rule. Plot concentration against time, and the area under that curve, the A U C, tells you the extent of drug that is available for the body to use. Its units are concentration times time, for example microgram hours per milliliter. You rarely have an equation for the curve, only a table of measured points, so the trapezoidal rule estimates the area from those points.",
    "card": [
     {
      "at": 2,
-     "m": "AUC: extent of drug available"
+     "m": "AUC: area under C<sub>p</sub> against time"
     },
     {
      "at": 3,
-     "m": "units: concentration &times; time (mcg&middot;hr/mL)"
+     "m": "AUC: extent of drug available (how much, not how fast)"
     },
     {
      "at": 4,
-     "m": "table of points → trapezoidal rule"
+     "m": "units: concentration × time, e.g. mcg·hr/mL"
+    },
+    {
+     "at": 5,
+     "m": "table of points → estimate the area"
     }
-   ]
+   ],
+   "fig": {
+    "key": "auc_steps",
+    "at": [
+     [
+      5,
+      1
+     ]
+    ]
+   }
   },
   {
+   "text": "The trapezoidal rule joins each pair of neighbouring points with a straight line, which splits the area into strips. Each strip is a trapezoid, and its area is the average of its two concentrations times the time between them. She said, take this curve and break it up into little segments and then determine the area of each of those segments and add them up. The rule does not depend on the shape of the curve, so it works for any concentration time table, from any route. It does assume a straight line between points, so where the points are widely spaced on a curved stretch the estimate is less accurate, and the more points there are, the more accurate the area becomes.",
    "slide": "intro:28",
-   "reading": null,
-   "text": "Join each pair of neighbouring points with a straight line. Each strip underneath is a trapezoid. Its area is the average of the two concentrations times the time between them: C n minus one plus C n, over two, times t n minus t n minus one. The two concentrations bound the segment, in micrograms per milliliter, and the width is in hours, so each strip comes out in microgram hours per milliliter. A U C total is the sum of the A U C of every segment, and the rule works for any concentration time table, from any route.",
    "card": [
     {
-     "at": 2,
-     "m": "AUC = {{frac:C<sub>n&minus;1</sub> + C<sub>n</sub>|2}} &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)"
+     "at": 1,
+     "m": "strip area = average height × width"
     },
     {
      "at": 3,
-     "m": "mcg/mL &times; hr = mcg&middot;hr/mL"
+     "m": "any curve shape, any route"
+    },
+    {
+     "at": 4,
+     "m": "straight line between points: wide spacing → more error; more points → more accurate"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "The A U C of one segment equals C n minus one plus C n, over two, times t n minus t n minus one. The two concentrations are added and divided by two, so that two is not hours; it averages the heights at the two ends of the strip. The time difference is the width, read from the time column, so a wider strip or higher concentrations give a larger area. A concentration in micrograms per milliliter times a width in hours gives microgram hours per milliliter. A U C total is the sum of the A U C of every segment.",
+   "slide": "intro:28",
+   "card": [
+    {
+     "at": 0,
+     "m": "AUC = {{frac:C<sub>n−1</sub> + C<sub>n</sub>|2}} × (t<sub>n</sub> − t<sub>n−1</sub>)"
+    },
+    {
+     "at": 1,
+     "m": "the 2 averages two heights; it is not hours"
+    },
+    {
+     "at": 2,
+     "m": "wider strip or higher C → larger area"
+    },
+    {
+     "at": 3,
+     "m": "mcg/mL × hr = mcg·hr/mL"
     },
     {
      "at": 4,
      "m": "AUC<sub>total</sub> = sum of the segments"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Her slide example gives plasma levels at six times, from half an hour to five hours, and asks for the A U C from hours two to four. The trapezoidal rule answers it, because only measured points are given. The first step is choosing the rows: only those inside two to four hours count, eighteen point four at two hours, eleven point one at three and six point seven seven at four, in micrograms per milliliter. The half hour and one hour rows are before the interval, and the five hour row is after it. That makes two segments, each one hour wide.",
    "slide": "intro:29",
-   "reading": null,
-   "text": "Her slide example. Plasma levels were thirty eight point nine, thirty point three, eighteen point four, eleven point one, six point seven seven and four point one zero micrograms per milliliter, at zero point five, one, two, three, four and five hours. What is the A U C from hours two to four? The first step is choosing the rows. Only the rows inside two to four hours count: two hours at eighteen point four, three hours at eleven point one, and four hours at six point seven seven. The zero point five hour row is before the interval and the five hour row is beyond it. That makes two segments, each one hour wide.",
-   "card": [
-    {
-     "at": 1,
-     "m": "t: 0.5, 1, 2, 3, 4, 5 hr"
-    },
-    {
-     "at": 1,
-     "m": "C: 38.9, 30.3, 18.4, 11.1, 6.77, 4.10 mcg/mL"
-    },
-    {
-     "at": 2,
-     "m": "AUC from 2 to 4 hr?"
-    },
-    {
-     "at": 4,
-     "m": "2 hr: 18.4 &nbsp; 3 hr: 11.1 &nbsp; 4 hr: 6.77"
-    },
-    {
-     "at": 6,
-     "m": "two segments, 1 hr each"
-    }
-   ]
-  },
-  {
-   "slide": "intro:29",
-   "reading": null,
-   "text": "Segment two to three hours: eighteen point four plus eleven point one, over two, times one hour, is fourteen point seven five microgram hours per milliliter. Segment three to four hours: eleven point one plus six point seven seven, over two, times one hour, is eight point nine three five microgram hours per milliliter. Each strip is micrograms per milliliter times hours, so the units carry through the sum. Add them: fourteen point seven five plus eight point nine three five is twenty three point six eight five. So the A U C from two to four hours is twenty three point seven microgram hours per milliliter.",
    "card": [
     {
      "at": 0,
-     "m": "2 → 3 hr: {{frac:18.4 + 11.1|2}} &times; 1 hr = 14.75 mcg&middot;hr/mL"
+     "m": "t: 0.5, 1, 2, 3, 4, 5 hr"
     },
     {
-     "at": 1,
-     "m": "3 → 4 hr: {{frac:11.1 + 6.77|2}} &times; 1 hr = 8.935 mcg&middot;hr/mL"
+     "at": 0,
+     "m": "C: 38.9, 30.3, 18.4, 11.1, 6.77, 4.10 mcg/mL"
+    },
+    {
+     "at": 0,
+     "m": "AUC from 2 to 4 hr?"
+    },
+    {
+     "at": 2,
+     "m": "2 hr: 18.4   3 hr: 11.1   4 hr: 6.77 mcg/mL"
     },
     {
      "at": 3,
+     "m": "✗ 0.5, 1 and 5 hr rows"
+    },
+    {
+     "at": 4,
+     "m": "two segments, 1 hr each"
+    }
+   ],
+   "fig": {
+    "key": "auc_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The strip from two to three hours is fourteen point seven five microgram hours per milliliter. The strip from three to four hours is eight point nine three five, smaller because the concentrations are lower over the same width. Added, they give twenty three point seven microgram hours per milliliter. That is the extent of drug available between two and four hours only; the earlier and later stretches of the curve would add more area.",
+   "slide": "intro:29",
+   "card": [
+    {
+     "at": 0,
+     "m": "2 → 3 hr: {{frac:18.4 + 11.1|2}} × 1 hr = 14.75 mcg·hr/mL"
+    },
+    {
+     "at": 1,
+     "m": "3 → 4 hr: {{frac:11.1 + 6.77|2}} × 1 hr = 8.935 mcg·hr/mL"
+    },
+    {
+     "at": 2,
      "m": "14.75 + 8.935 = 23.685"
     },
     {
-     "at": 4,
-     "m": "<b>AUC = 23.7 mcg&middot;hr/mL</b>"
+     "at": 2,
+     "m": "<b>AUC = 23.7 mcg·hr/mL</b>"
+    },
+    {
+     "at": 3,
+     "m": "AUC from 2 to 4 hr only"
     }
-   ]
+   ],
+   "fig": {
+    "key": "auc_steps",
+    "at": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      5
+     ]
+    ]
+   }
   },
   {
+   "text": "Her questions give a table and an interval named in hours. Use only the trapezoids between rows inside that interval, not the whole table and not an extrapolated tail. Check each width from the time column: where sampling times are uneven, as from half an hour to one hour, a segment is half an hour wide, not one hour. When a student asked whether the two on the bottom is hours, she said, No, two is not hours. Give the units as concentration times time, microgram hours per milliliter. A concept question asks what A U C tells you: the extent of drug available, how much, while how fast shows in the peak concentration, C max, and the time of the peak, t max.",
    "slide": "intro:29",
-   "reading": null,
-   "text": "Her questions give a table and an interval named in hours. Use only the trapezoids between rows inside that interval, not the whole table and not an extrapolated tail. Check each width from the time column. Where sampling times are uneven, as from zero point five to one hour, a segment is half an hour wide, not one hour. She says the units aloud rather than printing them, so give them as concentration times time. A concept question asks what A U C tells you: the extent of drug available for the body to use.",
    "card": [
     {
      "at": 1,
-     "m": "✗ whole table &nbsp; ✗ extrapolated tail"
+     "m": "✗ whole table   ✗ extrapolated tail"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "0.5 → 1 hr: width 0.5 hr"
     },
     {
+     "at": 3,
+     "m": "the 2 is not hours"
+    },
+    {
      "at": 4,
-     "m": "units: mcg&middot;hr/mL"
+     "m": "units: mcg·hr/mL"
     },
     {
      "at": 5,
-     "m": "AUC: extent of drug available"
+     "m": "AUC: extent   C<sub>max</sub>, t<sub>max</sub>: rate"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "A U C returns later in the course. Bioavailability, F, the fraction of an oral dose that enters the plasma, equals A U C oral over A U C I V. The oral area is on the top, so the smaller it is compared with the I V area, the smaller the fraction that entered the plasma. When the doses differ, the equation sheet corrects for them: F equals A U C p o over A U C I V, times D I V over D p o, where p o means by mouth. Clearance, the volume of plasma cleared of drug per unit time, also links the dose to the A U C, in Module two.",
    "slide": "intro:27",
-   "reading": null,
-   "text": "A U C comes back later in the course. Comparing oral and I V A U C gives bioavailability, F, the fraction of an oral dose that enters the plasma, with no units. F equals A U C oral over A U C I V. The equation sheet has it in the dose corrected form: F equals A U C p o over A U C I V, times D I V over D p o, where p o means by mouth and the two D terms are the I V and oral doses in milligrams. Clearance, the volume of plasma cleared of drug per unit time, also links the dose to the A U C.",
    "card": [
     {
-     "at": 2,
+     "at": 1,
      "m": "F = {{frac:AUC<sub>oral</sub>|AUC<sub>IV</sub>}}"
     },
     {
+     "at": 2,
+     "m": "smaller AUC<sub>oral</sub> relative to AUC<sub>IV</sub> → smaller F"
+    },
+    {
      "at": 3,
-     "m": "F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}"
+     "m": "F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} × {{frac:D<sub>IV</sub>|D<sub>po</sub>}}"
     },
     {
      "at": 4,
-     "m": "clearance: links dose to AUC"
+     "m": "clearance: links dose to AUC (Module 2)"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

@@ -3,6 +3,10 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- Guides: all 42 walkthroughs rewritten concept first: what happens and why, then the formula, with figures.
+- Six new step-by-step figures built from her examples.
+- A page left open offers Reload when a newer version is published; progress is kept.
+- A paper chosen before its exam moves on to the next exam once that exam is over.
 - Guides and walkthroughs: corrections checked against the textbook and her transcripts.
 - Scratch paper: calculation questions in Quiz and Exam sim open a page to write on.
 - Worksheets: everything in its module's folder; a multi-module quiz or homework is in each.

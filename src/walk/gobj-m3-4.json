@@ -3,9 +3,8 @@
  "title": "Loading doses with an infusion",
  "segs": [
   {
+   "text": "Module three, objective four. Calculating a loading dose to give with an intravenous infusion. A loading dose, D L, is an I V bolus given at the same moment the infusion starts. Its aim is to put C p, the plasma concentration, at the target steady state concentration, C s s, from the start, instead of after three to five half-lives. V D, the apparent volume of distribution, is the volume that relates the amount of drug in the body to C p. R is the infusion rate, an amount per hour, and k is the fraction of the drug present eliminated each hour.",
    "slide": "inf:15",
-   "reading": null,
-   "text": "Module three, objective four. Calculating loading doses to be used with an intravenous infusion. A loading dose, D L, is an I V bolus given at the same moment the infusion starts. Its size should equal the amount of drug the body holds at steady state. That amount is the target steady state concentration, C s s, times the apparent volume of distribution, V D.",
    "card": [
     {
      "at": 2,
@@ -13,18 +12,96 @@
     },
     {
      "at": 3,
-     "m": "D<sub>L</sub> = amount in the body at steady state"
+     "m": "aim: C<sub>p</sub> = C<sub>ss</sub> from the start"
     },
     {
      "at": 4,
-     "m": "= C<sub>ss</sub> × V<sub>D</sub>"
+     "m": "amount in the body = C<sub>p</sub> × V<sub>D</sub>"
+    },
+    {
+     "at": 5,
+     "m": "R: mg/hr; k: hr<sup>−1</sup>"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "At steady state the body holds a fixed amount of drug, C s s times V D. A loading dose of exactly that amount gives the body at once what the infusion alone would reach only after three to five half-lives. The bolus part of the level then falls by first order elimination. The infusion part rises toward C s s. Because the dose matches the amount at steady state, what the bolus part loses each hour the infusion part gains, so their sum stays flat at C s s. She said, we want our loading dose to look like the amount of drug that should be in the body at steady state.",
    "slide": "inf:15",
-   "reading": null,
-   "text": "So D L equals C s s times V D. Milligrams per liter times liters leaves milligrams, a dose. This route is used whenever a target C s s and a volume are given, and it does not depend on any rate. It is on the equation sheet, page one, directly under the R and k form. One unit to watch: one microgram per milliliter equals one milligram per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "amount at steady state = C<sub>ss</sub> × V<sub>D</sub>"
+    },
+    {
+     "at": 1,
+     "m": "D<sub>L</sub> = that amount, at once"
+    },
+    {
+     "at": 2,
+     "m": "bolus part: falls, first order"
+    },
+    {
+     "at": 3,
+     "m": "infusion part: rises"
+    },
+    {
+     "at": 4,
+     "m": "sum: flat at C<sub>ss</sub>"
+    }
+   ],
+   "fig": {
+    "key": "loading_steps",
+    "at": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The loading dose follows the volume and the target. A larger V D needs a larger dose to bring the larger volume to the same target, and a higher target needs a proportionally larger dose. Clearance is not in it, so when renal failure lowers the clearance, the rate must fall but the loading dose stays the same: in her Practice four it is one thousand milligrams both times. The loading dose does not move the plateau either, because the plateau is R over clearance: in question five of her in-class set, a seven hundred fifty milligram loading dose with seventy five milligrams per hour still gives thirty six point one milligrams per liter.",
+   "slide": "inf:15",
+   "card": [
+    {
+     "at": 1,
+     "m": "V<sub>D</sub> larger → D<sub>L</sub> larger; target C<sub>ss</sub> doubled → D<sub>L</sub> doubled"
+    },
+    {
+     "at": 2,
+     "m": "Cl falls: R falls, D<sub>L</sub> unchanged (1000 mg both times)"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>ss</sub> = {{frac:R|Cl}}: no D<sub>L</sub>"
+    },
+    {
+     "at": 3,
+     "m": "her in-class set, question 5: 750 mg + 75 mg/hr → C<sub>ss</sub> 36.1 mg/L, as without it"
+    }
+   ],
+   "fig": {
+    "key": "loading_steps",
+    "at": [
+     [
+      3,
+      4
+     ]
+    ]
+   }
+  },
+  {
+   "text": "D L equals C s s times V D. A concentration times a volume gives an amount, so the result is in milligrams, a dose. This line holds no rate, so it applies whenever a target and a volume are given; it is on the equation sheet, under the R and k form. A second route is D L equals R over k. R over k is C s s times clearance over k, and clearance over k is V D, so the two routes agree only when R was itself chosen to give the target. She warned that a rate picked out of the air gives a poor loading dose.",
+   "slide": "inf:15",
    "card": [
     {
      "at": 0,
@@ -36,139 +113,119 @@
     },
     {
      "at": 2,
-     "m": "no rate in it"
+     "m": "no rate in it; on the sheet"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>L</sub> = {{frac:R|k}}; {{frac:mg/hr|hr<sup>−1</sup>}} = mg"
     },
     {
      "at": 4,
-     "m": "1 mcg/mL = 1 mg/L"
+     "m": "{{frac:R|k}} = C<sub>ss</sub> × {{frac:Cl|k}} = C<sub>ss</sub> × V<sub>D</sub> only if R gives the target"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "With both running, C p at a time t after the start of therapy is the bolus part plus the infusion part. The bolus part is D L over V D, times e to the minus k t, and it falls. The infusion part is R over k V D, times one minus e to the minus k t, and it rises. When D L over V D equals C s s, the two parts add to C s s at every time. The equation sheet carries the two parts separately, as the first order line and the infusion line.",
    "slide": "inf:15",
-   "reading": null,
-   "text": "A second route divides the infusion rate R by the elimination rate constant k. D L equals R over k, and milligrams per hour divided by per hour leaves milligrams. It gives the right dose only if R was itself chosen to give the target C s s. A rate picked without that check gives a poor loading dose.",
-   "card": [
-    {
-     "at": 1,
-     "m": "D<sub>L</sub> = {{frac:R|k}}"
-    },
-    {
-     "at": 1,
-     "m": "{{frac:mg/hr|hr<sup>&minus;1</sup>}} = mg"
-    },
-    {
-     "at": 2,
-     "m": "only if R gives the target C<sub>ss</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "inf:15",
-   "reading": null,
-   "text": "After it is given, the bolus part of the concentration falls by first order elimination while the infusion part rises, and the two are added. The bolus part is D L over V D, times e to the minus k t. The infusion part is R over k V D, times one minus e to the minus k t. Both parts are in milligrams per liter, and t is the time since the start of therapy, in hours. The equation sheet carries the two parts separately, as the first order C line and the infusion line, not as one line.",
    "card": [
     {
      "at": 0,
-     "m": "C<sub>p</sub> = bolus part + infusion part"
+     "m": "C<sub>p</sub> = bolus part + infusion part; t from the start of therapy"
     },
     {
      "at": 1,
-     "m": "bolus: {{frac:D<sub>L</sub>|V<sub>D</sub>}} e<sup>&minus;kt</sup>"
+     "m": "bolus: {{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>−kt</sup>"
     },
     {
      "at": 2,
-     "m": "infusion: {{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)"
+     "m": "infusion: {{frac:R|kV<sub>D</sub>}}(1 − e<sup>−kt</sup>)"
     },
     {
      "at": 3,
-     "m": "t: from the start of therapy"
+     "m": "{{frac:D<sub>L</sub>|V<sub>D</sub>}} = C<sub>ss</sub>: C<sub>ss</sub>e<sup>−kt</sup> + C<sub>ss</sub>(1 − e<sup>−kt</sup>) = C<sub>ss</sub>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "loading_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      3
+     ]
+    ]
+   }
   },
   {
+   "text": "Her slide Example seven: a physician wants to infuse at twenty milligrams per hour, k is zero point one six per hour, V D is ten liters, and the question asks the loading dose that reaches twelve point five micrograms per milliliter immediately. Both routes apply, and their agreement shows whether this rate suits the target. Rate over k gives one hundred twenty five milligrams. Twelve point five micrograms per milliliter is twelve point five milligrams per liter, and times ten liters it again gives one hundred twenty five milligrams. They agree because this rate gives a plateau of exactly twelve point five milligrams per liter.",
    "slide": "inf:17",
-   "reading": null,
-   "text": "Her slide Example seven. A physician wants to infuse at twenty milligrams per hour. The elimination rate constant is zero point one six per hour, and V D is ten liters. The question asks what loading dose reaches twelve point five micrograms per milliliter immediately. First route, rate over k: twenty milligrams per hour divided by zero point one six per hour. The hours cancel, and D L is one hundred twenty five milligrams.",
    "card": [
     {
-     "at": 1,
-     "m": "R = 20 mg/hr"
+     "at": 0,
+     "m": "R = 20 mg/hr, k = 0.16 hr<sup>−1</sup>, V<sub>D</sub> = 10 L"
     },
     {
-     "at": 2,
-     "m": "k = 0.16 hr<sup>&minus;1</sup>, V<sub>D</sub> = 10 L"
-    },
-    {
-     "at": 3,
+     "at": 0,
      "m": "target 12.5 mcg/mL: D<sub>L</sub> = ?"
     },
     {
-     "at": 4,
-     "m": "D<sub>L</sub> = {{frac:20 mg/hr|0.16 hr<sup>&minus;1</sup>}}"
+     "at": 2,
+     "m": "D<sub>L</sub> = {{frac:20 mg/hr|0.16 hr<sup>−1</sup>}} = 125 mg"
     },
     {
-     "at": 5,
-     "m": "<b>D<sub>L</sub> = 125 mg</b>"
-    }
-   ]
-  },
-  {
-   "slide": "inf:17",
-   "reading": null,
-   "text": "Second route: twelve point five micrograms per milliliter is twelve point five milligrams per liter. So D L is twelve point five milligrams per liter times ten liters, again one hundred twenty five milligrams. The routes agree because this rate is the one that gives twelve point five milligrams per liter. C s s is twenty milligrams per hour divided by zero point one six per hour times ten liters, which is twelve point five milligrams per liter.",
-   "card": [
-    {
-     "at": 0,
+     "at": 3,
      "m": "12.5 mcg/mL = 12.5 mg/L"
     },
     {
-     "at": 1,
+     "at": 3,
      "m": "D<sub>L</sub> = 12.5 mg/L × 10 L = <b>125 mg</b>"
     },
     {
-     "at": 3,
-     "m": "C<sub>ss</sub> = {{frac:20 mg/hr|0.16 hr<sup>&minus;1</sup> × 10 L}} = 12.5 mg/L ✓"
-    }
-   ]
-  },
-  {
-   "slide": "inf:15",
-   "reading": null,
-   "text": "How she tests it. She asks for the loading dose and the infusion rate together, as one recommendation for one patient, in either order. Either route earns the answer, and she shows both, joined with or. In one of her review problems, a C s s of twenty four milligrams per liter and a V D of about twenty two liters give a D L of twenty four times twenty two, five hundred twenty eight milligrams. The answer is a dose, so it is in milligrams.",
-   "card": [
-    {
-     "at": 1,
-     "m": "D<sub>L</sub> and R together"
-    },
-    {
-     "at": 3,
-     "m": "D<sub>L</sub> = 24 mg/L × 22 L = <b>528 mg</b>"
-    },
-    {
      "at": 4,
-     "m": "a dose: mg"
+     "m": "C<sub>ss</sub> = {{frac:20 mg/hr|0.16 hr<sup>−1</sup> × 10 L}} = 12.5 mg/L ✓"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "inf:15",
-   "reading": null,
-   "text": "A renal failure part changes clearance and leaves V D alone, so R moves and D L does not. In her Practice four, R is one hundred fifteen point five, then eighty five point five milligrams per hour, and D L is one thousand milligrams both times. The trap is using D L equals R over k with a rate that was never matched to the target concentration.",
+   "text": "How she tests it: she asks for the loading dose and the infusion rate together and accepts either route, joined with or. A loading dose is a dose, so the answer is in milligrams; she said, it's a dose, so we're looking for milligrams. In her review a C s s of twenty four milligrams per liter and a V D of about twenty two liters give five hundred twenty eight milligrams. In her in-class set the stem's five hundred milligram loading dose is deliberately not the right one; the right one is thirty six point one times twelve, four hundred thirty three milligrams. The trap is R over k with a rate that was never matched to the target.",
+   "slide": null,
    "card": [
     {
      "at": 0,
-     "m": "renal failure: Cl changes, V<sub>D</sub> does not"
+     "m": "D<sub>L</sub> and R together; either route"
     },
     {
      "at": 1,
-     "m": "R: 115.5 → 85.5 mg/hr; &nbsp; D<sub>L</sub>: 1000 mg both times"
+     "m": "D<sub>L</sub>: mg, not mg/L"
     },
     {
      "at": 2,
-     "m": "✗ {{frac:R|k}} with an unmatched R"
+     "m": "D<sub>L</sub> = 24 mg/L × 22 L = <b>528 mg</b>"
+    },
+    {
+     "at": 3,
+     "m": "stem: 500 mg, not the right dose"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>L</sub> = 36.1 mg/L × 12 L = <b>433 mg</b>"
+    },
+    {
+     "at": 4,
+     "m": "wrong: {{frac:R|k}} with an R not matched to the target"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

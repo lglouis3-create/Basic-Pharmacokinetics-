@@ -1,149 +1,200 @@
 {
  "id": "gobj-m7b-2",
- "title": "Dose, half-life and duration of activity",
+ "title": "Dose, half life and duration of activity",
  "segs": [
   {
+   "text": "Module seven B, objective two. How dose and half life change the duration of the response. The duration of activity, t eff, is how long a single I V bolus keeps the plasma level at or above C eff, the minimum effective concentration, also called the M E C. Every one of her problems is a one compartment open model with first order elimination, so after the bolus the level falls by the same fraction each hour. C zero is the level just after the bolus, the dose D zero divided by the volume of distribution, V D.",
    "slide": "pd:6",
-   "reading": null,
-   "text": "Module seven B, objective two. How dose and half life change the duration of the response. The duration of activity, t eff, is how long a single I V bolus keeps the plasma level at or above C eff, the minimum effective concentration. Every one of her problems is a one compartment open model with first order elimination. So t eff comes from the I V bolus line, C equals C zero e to the minus k t: set C to C eff and solve for t. C zero is the level just after the bolus, the dose D zero divided by the volume of distribution V D.",
    "card": [
     {
      "at": 2,
-     "m": "t<sub>eff</sub>: time with C ≥ C<sub>eff</sub> after one IV bolus"
+     "m": "t<sub>eff</sub>: time the level stays at or above C<sub>eff</sub> after one IV bolus"
+    },
+    {
+     "at": 3,
+     "m": "one compartment, first order: the same fraction lost each hour"
     },
     {
      "at": 4,
-     "m": "C = C<sub>0</sub>e<sup>&minus;kt</sup>, set C = C<sub>eff</sub>, solve for t"
-    },
-    {
-     "at": 5,
      "m": "C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "pd:6",
-   "reading": null,
-   "text": "The sheet prints t eff three ways, and they give the same answer. In natural logs, t eff equals the natural log of C zero minus the natural log of C eff, divided by k. That difference of logs is the natural log of the ratio C zero over C eff, so the ratio has no units, and dividing by k per hour gives hours. In base ten logs, t eff is two point three times log C zero minus log C eff, over k. Because two point three rounds two point three zero three, it gives a slightly smaller number: twenty six point three two hours instead of twenty six point three five for her slide problem.",
-   "card": [
-    {
-     "at": 1,
-     "m": "t<sub>eff</sub> = {{frac:ln C<sub>0</sub> &minus; ln C<sub>eff</sub>|k}}"
-    },
-    {
-     "at": 2,
-     "m": "= {{frac:ln(C<sub>0</sub>/C<sub>eff</sub>)|k}} &nbsp; {{frac:mg/L|mg/L}} ÷ hr<sup>&minus;1</sup> = hr"
-    },
-    {
-     "at": 3,
-     "m": "t<sub>eff</sub> = {{frac:2.3(log C<sub>0</sub> &minus; log C<sub>eff</sub>)|k}}"
-    },
-    {
-     "at": 4,
-     "m": "2.3 vs 2.303: 26.32 hr vs 26.35 hr"
-    }
-   ]
-  },
-  {
+   "text": "With first order elimination the level halves every half life. So t eff is the number of halvings from C zero down to C eff, times the half life. Doubling the dose doubles C zero, and a level twice as high needs exactly one more halving to reach the same C eff. So each doubling of the dose adds one half life to t eff; it does not double t eff, and four times the dose adds two half lives. She wrote, each time we double the dose, we'll get an additional half life. A larger V D gives a lower C zero, and a higher C eff leaves fewer halvings, so either one shortens t eff.",
    "slide": "pd:9",
-   "reading": null,
-   "text": "The third form uses the half life. t eff equals one point four four times t half times the natural log of D zero over V D times C eff. One point four four is one over zero point six nine three, which turns one over k into one point four four half lives. The dose sits inside the logarithm, so doubling the dose adds the natural log of two over k, zero point six nine three over k, which is one half life. It does not double t eff, and four times the dose adds two half lives. The half life multiplies the whole expression, so doubling the half life at the same dose doubles t eff.",
-   "card": [
-    {
-     "at": 1,
-     "m": "t<sub>eff</sub> = 1.44 t<sub>&frac12;</sub> ln({{frac:D<sub>0</sub>|V<sub>D</sub>C<sub>eff</sub>}})"
-    },
-    {
-     "at": 2,
-     "m": "1.44 = {{frac:1|0.693}}"
-    },
-    {
-     "at": 3,
-     "m": "2 × D<sub>0</sub> → + {{frac:ln 2|k}} = + {{frac:0.693|k}} = + 1 t<sub>&frac12;</sub>"
-    },
-    {
-     "at": 4,
-     "m": "4 × D<sub>0</sub> → + 2 t<sub>&frac12;</sub>"
-    },
-    {
-     "at": 5,
-     "m": "2 × t<sub>&frac12;</sub> → 2 × t<sub>eff</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "pd:10",
-   "reading": null,
-   "text": "Liver or kidney disease that lowers elimination prolongs the half life. The drug is retained longer, so the duration of activity increases, and so does the possibility of toxicity. With the dose, the gain shrinks: plotted against dose, t eff rises steeply at low doses and then flattens, because each added milligram adds less duration: only a doubling adds one more half life.",
    "card": [
     {
      "at": 0,
-     "m": "liver or kidney disease → t<sub>&frac12;</sub> ↑"
+     "m": "every t<sub>½</sub>: the level halves"
     },
     {
      "at": 1,
-     "m": "→ t<sub>eff</sub> ↑, toxicity risk ↑"
+     "m": "t<sub>eff</sub> = number of halvings from C<sub>0</sub> to C<sub>eff</sub> × t<sub>½</sub>"
     },
     {
      "at": 2,
-     "m": "t<sub>eff</sub> vs dose: steep, then flat; each doubling adds one t<sub>&frac12;</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "pd:7",
-   "reading": null,
-   "text": "Her slide Practice Problem. An antibiotic has an M E C of zero point two micrograms per milliliter, a V D of twenty four liters and a k of zero point one five per hour. What is t eff after a single two hundred fifty milligram I V dose? Zero point two micrograms per milliliter is zero point two milligrams per liter. C zero is two hundred fifty milligrams over twenty four liters, ten point four two milligrams per liter. k is given, so use the natural log form. The ratio, ten point four two over zero point two, is fifty two point zero eight. Its natural log, three point nine five three, over zero point one five per hour gives twenty six point three five hours.",
-   "card": [
-    {
-     "at": 1,
-     "m": "MEC 0.2 mcg/mL, V<sub>D</sub> 24 L, k 0.15 hr<sup>&minus;1</sup>, D<sub>0</sub> 250 mg"
+     "m": "2 × D<sub>0</sub> → 2 × C<sub>0</sub> → one more halving"
     },
     {
      "at": 3,
-     "m": "0.2 mcg/mL = 0.2 mg/L"
+     "m": "each doubling: + 1 t<sub>½</sub>; 4 × D<sub>0</sub>: + 2 t<sub>½</sub>"
     },
     {
-     "at": 4,
-     "m": "C<sub>0</sub> = {{frac:250 mg|24 L}} = 10.42 mg/L"
-    },
-    {
-     "at": 6,
-     "m": "{{frac:C<sub>0</sub>|C<sub>eff</sub>}} = {{frac:10.42|0.2}} = 52.08"
-    },
-    {
-     "at": 7,
-     "m": "<b>t<sub>eff</sub> = {{frac:ln 52.08|0.15 hr<sup>&minus;1</sup>}} = {{frac:3.953|0.15}} = 26.35 hr</b>"
+     "at": 5,
+     "m": "V<sub>D</sub> larger or C<sub>eff</sub> higher → t<sub>eff</sub> shorter"
     }
-   ]
+   ],
+   "fig": {
+    "key": "bolus1_steps",
+    "at": [
+     [
+      0,
+      5
+     ]
+    ]
+   }
   },
   {
-   "slide": "pd:7",
-   "reading": null,
-   "text": "Now double the dose to five hundred milligrams. C zero is twenty point eight three milligrams per liter, and t eff is thirty point nine seven hours. The gain is thirty point nine seven minus twenty six point three five, four point six two hours. That is zero point six nine three over zero point one five, one half life, not a doubling. Four times the dose, one thousand milligrams, gives thirty five point six zero hours, two half lives, or nine point two four hours, longer than at two hundred fifty milligrams.",
+   "text": "The half life sets the length of each halving. Doubling the half life at the same dose keeps the same number of halvings, each twice as long, so t eff doubles. Liver or kidney disease that lowers elimination prolongs the half life, so the drug is retained longer, and both the duration of activity and the possibility of toxicity increase. The dose works differently: plotted against dose, t eff rises steeply at low doses and then flattens, because each added milligram adds less duration, and it takes a doubling of the dose to add one more half life.",
+   "slide": "pd:10",
    "card": [
     {
      "at": 1,
-     "m": "500 mg: C<sub>0</sub> = 20.83 mg/L → t<sub>eff</sub> = 30.97 hr"
+     "m": "2 × t<sub>½</sub>, same dose → 2 × t<sub>eff</sub>"
+    },
+    {
+     "at": 1,
+     "m": "e.g. textbook table: 2 × t<sub>½</sub>: 3.24 → 6.48 hr; 2 × dose: 3.24 → 3.98 hr"
     },
     {
      "at": 2,
-     "m": "30.97 &minus; 26.35 = 4.62 hr"
+     "m": "liver or kidney disease → t<sub>½</sub> longer → t<sub>eff</sub> longer, toxicity risk higher"
     },
     {
      "at": 3,
-     "m": "{{frac:0.693|0.15}} = 4.62 hr = 1 t<sub>&frac12;</sub>"
+     "m": "t<sub>eff</sub> against dose: steep, then flat; each doubling adds one t<sub>½</sub>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "t eff comes from the I V bolus line, C equals C zero e to the minus k t, with C set to C eff and solved for t. In natural logs, t eff is the natural log of C zero over C eff, divided by k. With the half life, t eff is one point four four, which is one over zero point six nine three, times t half times the natural log of D zero over V D times C eff. The dose is inside the log, so doubling it adds the natural log of two over k, one half life, while the half life multiplies everything, so t eff is in proportion to it. The base ten form gives a slightly smaller number.",
+   "slide": "pd:6",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>eff</sub> = C<sub>0</sub>e<sup>−kt</sup>, solve for t"
+    },
+    {
+     "at": 1,
+     "m": "t<sub>eff</sub> = {{frac:ln(C<sub>0</sub>/C<sub>eff</sub>)|k}}, in hr"
+    },
+    {
+     "at": 2,
+     "m": "t<sub>eff</sub> = 1.44 t<sub>½</sub> ln({{frac:D<sub>0</sub>|V<sub>D</sub> C<sub>eff</sub>}}), 1.44 = {{frac:1|0.693}}"
+    },
+    {
+     "at": 3,
+     "m": "2 × D<sub>0</sub> → + {{frac:ln 2|k}} = + {{frac:0.693|k}} = + 1 t<sub>½</sub>"
+    },
+    {
+     "at": 3,
+     "m": "t<sub>eff</sub> proportional to t<sub>½</sub>"
     },
     {
      "at": 4,
-     "m": "<b>1000 mg: t<sub>eff</sub> = 35.60 hr</b> (+ 2 t<sub>&frac12;</sub> = 9.24 hr)"
+     "m": "t<sub>eff</sub> = {{frac:2.3(log C<sub>0</sub> − log C<sub>eff</sub>)|k}}: 26.32 hr against 26.35 hr"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Her review poll gave a one gram I V bolus, a V D of twelve point five liters, a half life of four hours and an M E C of twenty milligrams per liter. C zero is eighty milligrams per liter, which halves to forty and then to twenty, two halvings, so t eff is eight hours, her key. With five hundred milligrams, C zero is forty, one halving, four hours. Halving the dose halved the duration here only because forty is exactly twice the M E C, so the shorter duration was itself one half life. Doubling still added one half life, so the statement that doubling the dose doubles t eff is still false, as her key says.",
+   "slide": "pd:12",
+   "card": [
+    {
+     "at": 0,
+     "m": "D<sub>0</sub> = 1000 mg, V<sub>D</sub> = 12.5 L, t<sub>½</sub> = 4 hr, MEC = 20 mg/L"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>0</sub> = {{frac:1000 mg|12.5 L}} = 80 mg/L"
+    },
+    {
+     "at": 1,
+     "m": "80 → 40 → 20: 2 halvings × 4 hr = <b>8 hr</b>"
+    },
+    {
+     "at": 2,
+     "m": "500 mg: C<sub>0</sub> = 40 mg/L → 20: 1 halving = <b>4 hr</b>"
+    },
+    {
+     "at": 3,
+     "m": "40 mg/L = 2 × MEC: the 500 mg t<sub>eff</sub> is exactly 1 t<sub>½</sub>"
+    },
+    {
+     "at": 4,
+     "m": "e.g. 2 g: C<sub>0</sub> = 160 mg/L, 3 halvings = 12 hr, not 16"
+    },
+    {
+     "at": 4,
+     "m": "2 × dose → 2 × t<sub>eff</sub>: <b>False</b>"
+    }
+   ],
+   "fig": {
+    "key": "teff_halvings_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      4,
+      4
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Her slide practice problem gives an antibiotic an M E C of zero point two micrograms per milliliter, the same number in milligrams per liter, a V D of twenty four liters and a k of zero point one five per hour. For a two hundred fifty milligram dose, k is given, so the natural log form is quickest. C zero is about fifty two times the M E C, and t eff is twenty six point three five hours. Five hundred milligrams gives thirty point nine seven hours, four point six two hours more, which is one half life, and one thousand milligrams adds a second, to about thirty five point six hours.",
    "slide": "pd:7",
-   "reading": null,
-   "text": "Her follow up asks what dose doubles t eff, to two times twenty six point three five, fifty two point seven hours. Turned round, the dose for a target duration is D zero equals C eff times V D times e to the plus k t eff. C eff times V D is zero point two milligrams per liter times twenty four liters, four point eight milligrams, because the liters cancel. e to the zero point one five times fifty two point seven is two thousand seven hundred ten point eight. Four point eight times that is thirteen thousand twelve milligrams, about thirteen grams. That is about fifty two times the dose for twice the duration, because the target time is in an exponent.",
+   "card": [
+    {
+     "at": 0,
+     "m": "MEC 0.2 mcg/mL = 0.2 mg/L; V<sub>D</sub> 24 L; k 0.15 hr<sup>−1</sup>"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>0</sub> = {{frac:250 mg|24 L}} = 10.42 mg/L; {{frac:10.42|0.2}} = 52.08"
+    },
+    {
+     "at": 2,
+     "m": "<b>t<sub>eff</sub> = {{frac:ln 52.08|0.15 hr<sup>−1</sup>}} = {{frac:3.953|0.15}} = 26.35 hr</b>"
+    },
+    {
+     "at": 3,
+     "m": "500 mg: C<sub>0</sub> = 20.83 mg/L → 30.97 hr; + 4.62 hr = {{frac:0.693|0.15}} = 1 t<sub>½</sub>"
+    },
+    {
+     "at": 3,
+     "m": "1000 mg: 35.59 hr (her working 35.60) = 26.35 + 2 × 4.62"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her follow up asks the dose that doubles t eff, to fifty two point seven hours. Turned around, the dose for a target duration is D zero equals C eff times V D times e to the plus k t eff. The exponent is positive because the dose must be larger than C eff times V D, the amount that would give exactly the M E C at the start. The target time is in the exponent, so each added half life of duration doubles the dose. The answer is about thirteen grams, fifty two times the dose for twice the duration; doubling the half life would do the same at two hundred fifty milligrams.",
+   "slide": "pd:7",
    "card": [
     {
      "at": 0,
@@ -155,7 +206,7 @@
     },
     {
      "at": 2,
-     "m": "(0.2 mg/L)(24 L) = 4.8 mg"
+     "m": "C<sub>eff</sub> V<sub>D</sub> = (0.2 mg/L)(24 L) = 4.8 mg"
     },
     {
      "at": 3,
@@ -163,63 +214,60 @@
     },
     {
      "at": 4,
-     "m": "<b>D<sub>0</sub> = 4.8 × 2710.8 = 13,012 mg ≈ 13 g</b>"
-    },
-    {
-     "at": 5,
-     "m": "≈ 52 × the dose for 2 × the duration"
-    }
-   ]
-  },
-  {
-   "slide": "pd:9",
-   "reading": null,
-   "text": "Her Practice three uses the half life form. A seventy five kilogram patient gets a twenty milligram per kilogram I V bolus, with a V D of zero point three liters per kilogram, a half life of three point six hours, and an M E C of seven point two micrograms per milliliter, which is seven point two milligrams per liter. The kilograms cancel, so C zero is twenty over zero point three, sixty six point six seven milligrams per liter. The natural log of sixty six point six seven over seven point two is two point two two six. Three point six hours over zero point six nine three is five point one nine five hours. Their product, t eff, is eleven point five six hours.",
-   "card": [
-    {
-     "at": 1,
-     "m": "20 mg/kg, V<sub>D</sub> 0.3 L/kg, t<sub>&frac12;</sub> 3.6 hr, MEC 7.2 mcg/mL = 7.2 mg/L"
-    },
-    {
-     "at": 2,
-     "m": "C<sub>0</sub> = {{frac:20 mg/kg|0.3 L/kg}} = 66.67 mg/L"
-    },
-    {
-     "at": 3,
-     "m": "ln({{frac:66.67|7.2}}) = 2.226"
+     "m": "<b>D<sub>0</sub> = 4.8 mg × 2710.8 = 13,012 mg ≈ 13 g</b>, about 52 × 250 mg"
     },
     {
      "at": 4,
-     "m": "{{frac:3.6 hr|0.693}} = 5.195 hr"
-    },
-    {
-     "at": 5,
-     "m": "<b>t<sub>eff</sub> = 2.226 × 5.195 = 11.56 hr</b>"
+     "m": "2 × t<sub>½</sub> at 250 mg: t<sub>eff</sub> = 52.7 hr"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "pd:12",
-   "reading": null,
-   "text": "Doubling that dose gives a C zero of one hundred thirty three point three milligrams per liter and a t eff of fifteen point one six hours, an increase of three point six hours, one half life. Her poll asked, true or false, whether doubling the I V bolus dose of a linear, first order drug gives a two fold increase in the duration of activity. Her key is false, because doubling adds one half life. Other wrong answers she sees: converting the M E C as if the number changed, e to the minus k t in the dose line, and a base ten log in the natural log form.",
+   "text": "Her practice three uses the half life form: a twenty milligram per kilogram I V bolus, a V D of zero point three liters per kilogram, a half life of three point six hours and an M E C of seven point two milligrams per liter. The kilograms cancel, so C zero is sixty six point six seven milligrams per liter, and t eff is eleven point five six hours. The doubled dose gives fifteen point one six hours, three point six hours more, one half life.",
+   "slide": "pd:9",
    "card": [
     {
      "at": 0,
-     "m": "C<sub>0</sub> = {{frac:40|0.3}} = 133.3 mg/L → <b>t<sub>eff</sub> = 15.16 hr</b> (+ 3.6 hr = 1 t<sub>&frac12;</sub>)"
+     "m": "20 mg/kg, V<sub>D</sub> 0.3 L/kg, t<sub>½</sub> 3.6 hr, MEC 7.2 mcg/mL = 7.2 mg/L"
     },
     {
      "at": 1,
-     "m": "poll: 2 × dose → 2 × t<sub>eff</sub>?"
+     "m": "C<sub>0</sub> = {{frac:20 mg/kg|0.3 L/kg}} = 66.67 mg/L"
+    },
+    {
+     "at": 1,
+     "m": "<b>t<sub>eff</sub> = ln({{frac:66.67|7.2}}) × {{frac:3.6 hr|0.693}} = 2.226 × 5.195 = 11.56 hr</b>"
     },
     {
      "at": 2,
-     "m": "<b>False</b>: + 1 t<sub>&frac12;</sub>"
+     "m": "2 × dose: C<sub>0</sub> = 133.3 mg/L → <b>15.16 hr</b>, + 3.6 hr = 1 t<sub>½</sub>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her poll asked, true or false, whether doubling the I V bolus dose of a linear, first order drug gives a two fold increase in the duration of activity, and her key is false. On her quiz, doubling the dose adds one half life to the duration; it doubles neither the duration nor the half life. C zero does double with the dose; only the duration gains less. Other wrong answers she sees: changing the number when converting the M E C, e to the minus k t in the dose line, and a base ten log in the natural log form.",
+   "slide": "pd:12",
+   "card": [
+    {
+     "at": 0,
+     "m": "poll: 2 × dose → 2 × t<sub>eff</sub>? <b>False</b>"
+    },
+    {
+     "at": 1,
+     "m": "2 × dose: + 1 t<sub>½</sub>; t<sub>½</sub> unchanged"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>0</sub> doubles, e.g. 10.42 → 20.83 mg/L"
     },
     {
      "at": 3,
-     "m": "✗ MEC number changed &nbsp; ✗ e<sup>&minus;kt</sup> in D<sub>0</sub> line &nbsp; ✗ log in ln form"
+     "m": "wrong: MEC number changed; e<sup>−kt</sup> in the D<sub>0</sub> line; log in the ln form"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

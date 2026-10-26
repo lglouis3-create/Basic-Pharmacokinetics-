@@ -3,203 +3,252 @@
  "title": "Peak concentration and time to peak after one oral dose",
  "segs": [
   {
+   "text": "Module five, objective three. The peak concentration and the time to peak after a single oral dose. t max is the time after the dose at which the plasma concentration is highest, and C max is that highest concentration. Before the peak, absorption is faster than elimination, so the level rises. At the peak the rate in equals the rate out. After it, elimination is faster, so the level falls.",
    "slide": "oral:12",
-   "reading": null,
-   "text": "Module five, objective three. The peak concentration and the time to peak after a single oral dose. t max is the time after the dose at which the plasma concentration is highest, and C max is that highest concentration. At the peak, the rate in equals the rate out. t max depends only on the two rate constants, k a and k. The dose, F and V D do not appear, so changing the dose does not move t max.",
    "card": [
     {
      "at": 2,
-     "m": "t<sub>max</sub>: time of the peak (hr) &nbsp; C<sub>max</sub>: the peak (mg/L)"
+     "m": "t<sub>max</sub>: time of the peak, hr &nbsp; C<sub>max</sub>: the peak, mg/L"
     },
     {
      "at": 3,
-     "m": "at the peak: rate in = rate out"
-    },
-    {
-     "at": 5,
-     "m": "t<sub>max</sub>: k<sub>a</sub> and k only, no dose"
-    }
-   ]
-  },
-  {
-   "slide": "oral:12",
-   "reading": null,
-   "text": "t max equals the natural log of k a divided by k, all divided by k a minus k, and it is on the equation sheet, page one. With both constants per hour, t max comes out in hours. There is no separate C max equation for a single oral dose. You find t max, then put it in for t in the C p equation, which is why t max always comes first, even when only C max is asked. The sheet's other C max lines contain tau, the dosing interval, and belong to multiple dosing. Both equations need rate constants, not half-lives, each one zero point six nine three divided by the half-life of its own process.",
-   "card": [
-    {
-     "at": 0,
-     "m": "t<sub>max</sub> = {{frac:ln(k<sub>a</sub> &divide; k)|k<sub>a</sub> &minus; k}}"
-    },
-    {
-     "at": 3,
-     "m": "C<sub>max</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}} &times; (e<sup>&minus;k t<sub>max</sub></sup> &minus; e<sup>&minus;k<sub>a</sub> t<sub>max</sub></sup>)"
+     "m": "before t<sub>max</sub>: rate in &gt; rate out"
     },
     {
      "at": 4,
-     "m": "C<sub>max</sub> lines with &tau;: multiple dosing"
+     "m": "at t<sub>max</sub>: rate in = rate out"
     },
     {
      "at": 5,
-     "m": "k<sub>a</sub> = {{frac:0.693|t&frac12;<sub>a</sub>}} &nbsp; k = {{frac:0.693|t&frac12;}}"
+     "m": "after t<sub>max</sub>: rate out &gt; rate in"
     }
-   ]
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      3
+     ]
+    ]
+   }
   },
   {
-   "slide": "oral:13",
-   "reading": null,
-   "text": "Her slide Example one. V D is twenty two liters, the absorption half-life is forty five minutes, the elimination half-life is three hours, and the drug is eighty five percent bioavailable in one compartment. What is the peak after a single five hundred milligram dose, and when does it occur? First put both half-lives in hours, so forty five minutes is zero point seven five hours. k a is zero point six nine three divided by zero point seven five hours, which is zero point nine two four per hour. k is zero point six nine three divided by three hours, which is zero point two three one per hour.",
+   "text": "The time of the peak depends only on the two rate constants, k a and k. The dose, F and V D multiply every point of the curve by the same number, so they raise or lower the whole curve together and cannot move the time of its peak. She said, t max depends solely on k and k a. A larger k a brings drug in faster, so the peak comes earlier and is higher; in a textbook problem, the formulation with the larger k a reaches its peak about an hour sooner. A larger k also brings the peak earlier, but lower, because drug leaves faster and the level cannot build as high.",
+   "slide": "oral:19",
    "card": [
     {
-     "at": 1,
-     "m": "V<sub>D</sub> = 22 L, t&frac12;<sub>a</sub> = 45 min, t&frac12; = 3 hr, F = 0.85"
+     "at": 0,
+     "m": "t<sub>max</sub>: k<sub>a</sub> and k only"
     },
     {
-     "at": 2,
-     "m": "D<sub>0</sub> = 500 mg; find t<sub>max</sub>, C<sub>max</sub>"
+     "at": 1,
+     "m": "D<sub>0</sub>, F, V<sub>D</sub>: scale the whole curve; t<sub>max</sub> unchanged"
     },
     {
      "at": 3,
+     "m": "k<sub>a</sub> up → t<sub>max</sub> earlier, C<sub>max</sub> higher"
+    },
+    {
+     "at": 3,
+     "m": "e.g. (Ch 16) k 0.3 hr<sup>−1</sup>: k<sub>a</sub> 1 hr<sup>−1</sup> → ≈ 1.7 hr; k<sub>a</sub> 0.45 hr<sup>−1</sup> → ≈ 2.7 hr"
+    },
+    {
+     "at": 4,
+     "m": "k up → t<sub>max</sub> earlier, C<sub>max</sub> lower"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Because only the two constants matter, swapping them gives the same t max. In the textbook table, a k a of zero point one with a k of zero point two per hour, and a k a of zero point two with a k of zero point one, both peak at six point nine three hours. C max and A U C differ, though, because k, which sets the clearance, has changed.",
+   "slide": "oral:12",
+   "card": [
+    {
+     "at": 0,
+     "m": "swap k<sub>a</sub> and k → same t<sub>max</sub>"
+    },
+    {
+     "at": 1,
+     "m": "k<sub>a</sub> 0.1, k 0.2 and k<sub>a</sub> 0.2, k 0.1 hr<sup>−1</sup>: t<sub>max</sub> 6.93 hr both (Ch 16 Table 16-2)"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>max</sub> 2.50 vs 5.00 mcg/mL; AUC 50 vs 100 mcg·hr/mL"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "t max equals the natural log of k a over k, divided by k a minus k. Only rate constants appear, so a dose change cannot move t max, and swapping k a and k turns both the log and the difference negative, so the signs cancel and t max is the same. There is no separate C max line for a single oral dose: t max is put in for t in the C p equation, which is why t max always comes first. She said, If you are asked for C max, and I will ask you for C max, you must find t max first. Both lines need rate constants, not half-lives, in the same time unit.",
+   "slide": "oral:12",
+   "card": [
+    {
+     "at": 0,
+     "m": "t<sub>max</sub> = {{frac:ln(k<sub>a</sub> ÷ k)|k<sub>a</sub> − k}}"
+    },
+    {
+     "at": 1,
+     "m": "no D<sub>0</sub>, F or V<sub>D</sub>"
+    },
+    {
+     "at": 1,
+     "m": "swap: ln(k ÷ k<sub>a</sub>) = −ln(k<sub>a</sub> ÷ k), &nbsp; k − k<sub>a</sub> = −(k<sub>a</sub> − k)"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>max</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> − k)}} × (e<sup>−k t<sub>max</sub></sup> − e<sup>−k<sub>a</sub> t<sub>max</sub></sup>)"
+    },
+    {
+     "at": 4,
+     "m": "rate constants, same time unit (hr)"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her slide Example one: V D is twenty two liters, the absorption half-life forty five minutes, the elimination half-life three hours, and F eighty five percent, and the peak after a single five hundred milligram dose, and its time, are asked. t max comes first, so both half-lives go to hours and then to rate constants: k a is zero point nine two four and k is zero point two three one per hour. k a is four times k, and t max comes out at two hours.",
+   "slide": "oral:13",
+   "card": [
+    {
+     "at": 0,
+     "m": "V<sub>D</sub> = 22 L, t½<sub>a</sub> = 45 min, t½ = 3 hr, F = 0.85, D<sub>0</sub> = 500 mg"
+    },
+    {
+     "at": 0,
+     "m": "find t<sub>max</sub>, then C<sub>max</sub>"
+    },
+    {
+     "at": 1,
      "m": "45 min = 0.75 hr"
     },
     {
-     "at": 4,
-     "m": "k<sub>a</sub> = {{frac:0.693|0.75 hr}} = 0.924 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 5,
-     "m": "k = {{frac:0.693|3 hr}} = 0.231 hr<sup>&minus;1</sup>"
-    }
-   ]
-  },
-  {
-   "slide": "oral:12",
-   "reading": null,
-   "text": "t max comes first. k a divided by k is zero point nine two four over zero point two three one, which is four, and the natural log of four is one point three eight six. The bottom is zero point nine two four minus zero point two three one, which is zero point six nine three per hour. One point three eight six divided by zero point six nine three per hour gives a t max of two hours. The ratio inside the log has no unit, so one over per hour leaves hours.",
-   "card": [
-    {
      "at": 1,
-     "m": "t<sub>max</sub> = {{frac:ln(0.924 &divide; 0.231)|(0.924 &minus; 0.231) hr<sup>&minus;1</sup>}}"
+     "m": "k<sub>a</sub> = {{frac:0.693|0.75 hr}} = 0.924 hr<sup>−1</sup> &nbsp; k = {{frac:0.693|3 hr}} = 0.231 hr<sup>−1</sup>"
     },
     {
      "at": 2,
-     "m": "= {{frac:ln 4|0.693 hr<sup>&minus;1</sup>}} = {{frac:1.386|0.693}} hr"
+     "m": "t<sub>max</sub> = {{frac:ln(0.924 ÷ 0.231)|(0.924 − 0.231) hr<sup>−1</sup>}} = {{frac:ln 4|0.693 hr<sup>−1</sup>}} = {{frac:1.386|0.693}} hr"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "<b>t<sub>max</sub> = 2 hr</b>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
   },
   {
+   "text": "Then C max is the C p equation at two hours, and the fraction in front needs V D. She said, Do not forget the volume of distribution. The fraction is twenty five point seven six milligrams per liter, and the bracket at two hours is zero point four seven two four. C max is twelve point one seven milligrams per liter, two hours after the dose. The peak is below the fraction in front, as on every oral curve, because the bracket, drug in minus drug out, is less than one.",
    "slide": "oral:13",
-   "reading": null,
-   "text": "Next the fraction in front, which needs V D. She said, Do not forget the volume of distribution. The top is zero point eight five times five hundred milligrams times zero point nine two four per hour, which is three hundred ninety two point seven. The bottom is twenty two liters times zero point six nine three per hour, which is fifteen point two four six. The per hour cancels, leaving milligrams per liter. Three hundred ninety two point seven divided by fifteen point two four six is twenty five point seven six milligrams per liter.",
    "card": [
     {
      "at": 0,
-     "m": "{{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}}"
+     "m": "{{frac:(0.85)(500 mg)(0.924 hr<sup>−1</sup>)|(22 L)(0.693 hr<sup>−1</sup>)}} = {{frac:392.7|15.246}} = 25.76 mg/L"
     },
     {
      "at": 2,
-     "m": "{{frac:(0.85)(500 mg)(0.924 hr<sup>&minus;1</sup>)|(22 L)(0.693 hr<sup>&minus;1</sup>)}}"
+     "m": "e<sup>−(0.231)(2)</sup> − e<sup>−(0.924)(2)</sup> = 0.6300 − 0.1576 = 0.4724"
     },
     {
      "at": 3,
-     "m": "= {{frac:392.7|15.246}}"
-    },
-    {
-     "at": 5,
-     "m": "= 25.76 mg/L"
-    }
-   ]
-  },
-  {
-   "slide": "oral:13",
-   "reading": null,
-   "text": "Then the bracket, with t equal to t max, two hours. e to the minus zero point two three one times two is zero point six three zero zero. e to the minus zero point nine two four times two is zero point one five seven six. The difference is zero point four seven two four, with no unit. C max is twenty five point seven six milligrams per liter times zero point four seven two four, which is twelve point one seven milligrams per liter, two hours after the dose.",
-   "card": [
-    {
-     "at": 1,
-     "m": "e<sup>&minus;(0.231)(2)</sup> = 0.6300"
-    },
-    {
-     "at": 2,
-     "m": "e<sup>&minus;(0.924)(2)</sup> = 0.1576"
-    },
-    {
-     "at": 3,
-     "m": "0.6300 &minus; 0.1576 = 0.4724"
-    },
-    {
-     "at": 4,
      "m": "C<sub>max</sub> = (25.76 mg/L)(0.4724) = <b>12.17 mg/L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "oral:15",
-   "reading": null,
-   "text": "When the parameters come as a finished equation, she wants the same two answers, and the exponents give the constants. In her slide Example two, C p equals seventy five e to the minus zero point two two t minus seventy five e to the minus two point seven five t. So k a is two point seven five and k is zero point two two per hour, which gives a t max of one hour. Put t max into the given equation, and C max is fifty five point four milligrams per liter.",
-   "card": [
-    {
-     "at": 1,
-     "m": "C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>"
-    },
-    {
-     "at": 2,
-     "m": "k<sub>a</sub> = 2.75, k = 0.22 hr<sup>&minus;1</sup> &rarr; t<sub>max</sub> = 1 hr"
-    },
-    {
-     "at": 3,
-     "m": "C<sub>max</sub> = 75(e<sup>&minus;0.22</sup> &minus; e<sup>&minus;2.75</sup>) = <b>55.4 mg/L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "oral:12",
-   "reading": null,
-   "text": "Her in class practice two works the same way. Twenty three point two, times e to the minus zero point one eight two t minus e to the minus zero point eight seven two t, gives k a as zero point eight seven two and k as zero point one eight two per hour. Its t max is two point two seven hours, and its C max is twelve point one four milligrams per liter.",
-   "card": [
-    {
-     "at": 1,
-     "m": "C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>) mg/L"
-    },
-    {
-     "at": 1,
-     "m": "k<sub>a</sub> = 0.872, k = 0.182 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 2,
-     "m": "t<sub>max</sub> = 2.27 hr &nbsp; C<sub>max</sub> = <b>12.14 mg/L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "oral:12",
-   "reading": null,
-   "text": "The traps. The first is using a half-life where a rate constant belongs. In her practice one, the one point five hours is the absorption half-life, so k a is zero point six nine three divided by one point five hours, which is zero point four six two per hour. The absorption half-life is often given in minutes and the elimination half-life in hours, so the first step is converting to hours. The second trap is leaving V D out of the fraction in front. Practice one, with a V D of twenty liters, gives a t max of three point seven hours and a C max of about thirteen milligrams per liter.",
-   "card": [
-    {
-     "at": 1,
-     "m": "✗ half-life used as a rate constant"
-    },
-    {
-     "at": 2,
-     "m": "k<sub>a</sub> = {{frac:0.693|1.5 hr}} = 0.462 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 3,
-     "m": "minutes &rarr; hours first"
     },
     {
      "at": 4,
-     "m": "✗ V<sub>D</sub> left out of the fraction"
+     "m": "12.17 &lt; 25.76 mg/L: bracket &lt; 1"
+    }
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      4
+     ]
+    ]
+   }
+  },
+  {
+   "text": "When the equation is given already worked out, the exponents give the constants and the same two answers follow. In her Example two, k a is two point seven five and k zero point two two per hour, so t max is one hour, and one hour in the given equation gives a C max of fifty five point four milligrams per liter. Her in class practice two, twenty three point two times the bracket of e to the minus zero point one eight two t and e to the minus zero point eight seven two t, gives a t max of two point two seven hours and a C max of twelve point one four milligrams per liter.",
+   "slide": "oral:15",
+   "card": [
+    {
+     "at": 0,
+     "m": "given equation: exponents → k<sub>a</sub>, k"
     },
     {
-     "at": 5,
-     "m": "practice 1: t<sub>max</sub> = 3.7 hr, C<sub>max</sub> about 13 mg/L"
+     "at": 1,
+     "m": "t<sub>max</sub> = {{frac:ln(2.75 ÷ 0.22)|2.53 hr<sup>−1</sup>}} = 1 hr"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>max</sub> = 75(e<sup>−0.22</sup> − e<sup>−2.75</sup>) = 75(0.8025 − 0.0639) = <b>55.4 mg/L</b>"
+    },
+    {
+     "at": 2,
+     "m": "k<sub>a</sub> = 0.872, k = 0.182 hr<sup>−1</sup>"
+    },
+    {
+     "at": 2,
+     "m": "t<sub>max</sub> = 2.27 hr, &nbsp; C<sub>max</sub> = <b>12.14 mg/L</b>"
     }
-   ]
+   ],
+   "fig": null
+  },
+  {
+   "text": "Quiz three asked what is true of the time to reach the maximum concentration, and the key is that it depends on the absorption and elimination rate constants, not on the dose. Another quiz item gave a dose, F and V D that were not needed; its half-lives of zero point eight and five point six hours give a t max of two point six hours. In her practice one, the one point five hours is the absorption half-life, so k a is zero point six nine three over one point five hours, zero point four six two per hour. Absorption half-lives often come in minutes and go to hours first, and leaving V D out of the fraction is the other common error.",
+   "slide": "oral:12",
+   "card": [
+    {
+     "at": 0,
+     "m": "Quiz 3: t<sub>max</sub> <b>depends on k<sub>a</sub> and k</b>"
+    },
+    {
+     "at": 0,
+     "m": "✗ t<sub>max</sub> changes with the dose"
+    },
+    {
+     "at": 1,
+     "m": "Quiz 3: k<sub>a</sub> 0.866, k 0.124 hr<sup>−1</sup>: t<sub>max</sub> = {{frac:ln 7|0.7425 hr<sup>−1</sup>}} = <b>2.6 hr</b>; dose, F, V<sub>D</sub> not used"
+    },
+    {
+     "at": 2,
+     "m": "✗ half-life as a rate constant: k<sub>a</sub> = {{frac:0.693|1.5 hr}} = 0.462 hr<sup>−1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "minutes → hours first"
+    },
+    {
+     "at": 3,
+     "m": "✗ V<sub>D</sub> left out"
+    }
+   ],
+   "fig": null
   }
  ]
 }

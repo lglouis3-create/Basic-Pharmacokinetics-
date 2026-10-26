@@ -3,9 +3,8 @@
  "title": "The purpose of a loading dose",
  "segs": [
   {
+   "text": "Module three, objective five. Why a loading dose is given. An infusion alone takes three to five half-lives to approach C s s, its steady state concentration, so the patient sits below the target for that time. A loading dose, D L, is an I V bolus that puts in at once the amount of drug the infusion would take that long to build up. So C p, the plasma concentration, reaches C s s almost immediately, and the infusion, at its rate R, then only has to replace what is eliminated each hour. She said, the loading dose helps us to reach that steady state concentration, like almost immediately.",
    "slide": "inf:16",
-   "reading": null,
-   "text": "Module three, objective five. The purpose of a loading dose. An infusion alone takes three to five half-lives to approach its steady state concentration, C s s, so the patient sits below the target for that time. A loading dose, D L, puts in at once the amount of drug that would otherwise take three to five half-lives to build up. So C s s is reached almost immediately.",
    "card": [
     {
      "at": 2,
@@ -17,170 +16,204 @@
     },
     {
      "at": 4,
-     "m": "C<sub>ss</sub> almost immediately"
+     "m": "C<sub>p</sub> = C<sub>ss</sub> almost at once; R replaces what leaves"
     }
-   ]
+   ],
+   "fig": {
+    "key": "loading_steps",
+    "at": [
+     [
+      2,
+      4
+     ]
+    ]
+   }
   },
   {
+   "text": "The loading dose changes when the target is reached, and nothing else. The plateau is R over clearance, and the dose is not in it, so the level the patient is held at is set by the infusion rate. The half-life depends on the clearance and V D, the apparent volume of distribution, so the loading dose does not change it either. The textbook adds the other side: a loading dose reaches the target quickly but cannot hold it, which needs the right infusion rate, and a higher infusion rate gives a higher plateau, not an earlier arrival at the same one.",
    "slide": "inf:16",
-   "reading": null,
-   "text": "When D L is chosen correctly, the falling bolus curve and the rising infusion curve add to a flat line at C s s throughout therapy. Adding the concentrations from the bolus and the infusion at the same time to get the total is called superposition. Too large a loading dose starts the level above the plateau, and it falls to it. Too small a loading dose starts the level below the plateau, and it rises to it. The plateau itself is set by the infusion.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>ss</sub> = {{frac:R|Cl}}: set by R, not by D<sub>L</sub>"
+    },
+    {
+     "at": 2,
+     "m": "t<sub>½</sub>: unchanged by D<sub>L</sub>"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>L</sub> reaches the target; R holds it"
+    },
+    {
+     "at": 3,
+     "m": "higher R: higher plateau, same time"
+    }
+   ],
+   "fig": {
+    "key": "loading_steps",
+    "at": [
+     [
+      1,
+      4
+     ]
+    ]
+   }
+  },
+  {
+   "text": "When D L is chosen correctly, the falling bolus curve and the rising infusion curve add to a flat line at C s s; adding the two at the same time is called superposition. Too large a loading dose starts the level above the plateau, and it falls to it. Too small a loading dose starts the level below the plateau, and it rises to it, though sooner than with no loading dose at all. The plateau itself is set by the infusion. She said, you got to choose wisely on the loading dose.",
+   "slide": "inf:16",
    "card": [
     {
      "at": 0,
-     "m": "bolus ↓ + infusion ↑ = flat at C<sub>ss</sub>"
+     "m": "bolus falls + infusion rises = flat at C<sub>ss</sub>"
     },
     {
-     "at": 1,
+     "at": 0,
      "m": "superposition: add the two at the same time"
     },
     {
-     "at": 2,
+     "at": 1,
      "m": "D<sub>L</sub> too large: starts above, falls to C<sub>ss</sub>"
     },
     {
-     "at": 3,
-     "m": "D<sub>L</sub> too small: starts below, rises to C<sub>ss</sub>"
-    },
-    {
-     "at": 4,
-     "m": "plateau set by the infusion"
-    }
-   ]
-  },
-  {
-   "slide": "inf:18",
-   "reading": null,
-   "text": "Her slide Example eight. A loading dose of two hundred eighty eight milligrams is given with an infusion of fifty milligrams per hour. The half-life is four hours and the apparent volume of distribution, V D, is twelve liters, and the question asks C p, the plasma concentration, at two and at four hours. First the elimination rate constant, from the first order half-life relation. k is zero point six nine three over four hours, which is zero point one seven three two five per hour.",
-   "card": [
-    {
-     "at": 1,
-     "m": "D<sub>L</sub> = 288 mg, R = 50 mg/hr"
-    },
-    {
      "at": 2,
-     "m": "t<sub>&frac12;</sub> = 4 hr, V<sub>D</sub> = 12 L; &nbsp; C<sub>p</sub> at 2 and 4 hr = ?"
+     "m": "D<sub>L</sub> too small: starts below, rises to C<sub>ss</sub>, sooner than with none"
     },
     {
      "at": 3,
-     "m": "k = {{frac:0.693|t<sub>&frac12;</sub>}}"
-    },
-    {
-     "at": 4,
-     "m": "k = {{frac:0.693|4 hr}} = 0.17325 hr<sup>&minus;1</sup>"
+     "m": "plateau: set by the infusion"
     }
-   ]
+   ],
+   "fig": {
+    "key": "loading_steps",
+    "at": [
+     [
+      0,
+      3
+     ]
+    ]
+   }
   },
   {
-   "slide": "inf:18",
-   "reading": null,
-   "text": "The bolus part at two hours is the loading dose spread through V D, then declining by first order. Two hundred eighty eight milligrams over twelve liters is twenty four milligrams per liter. k times t is zero point one seven three two five per hour times two hours, and e to the minus that product is zero point seven zero seven two. Twenty four milligrams per liter times zero point seven zero seven two is sixteen point nine seven milligrams per liter.",
+   "text": "The sum says the same: C p equals D L over V D times e to the minus k t, plus C s s times one minus e to the minus k t, where k is the fraction eliminated per hour. Rearranged, C p equals C s s plus the difference between the starting level, D L over V D, and C s s, times e to the minus k t. If the starting level equals C s s, the difference is zero and C p is C s s at every time. If it is larger, the difference is positive and shrinks by first order, so the level falls to the plateau; if it is smaller, the difference is negative and the level rises to it.",
+   "slide": "inf:16",
    "card": [
     {
      "at": 0,
-     "m": "bolus part: C<sub>0</sub>e<sup>&minus;kt</sup>"
+     "m": "C<sub>p</sub> = {{frac:D<sub>L</sub>|V<sub>D</sub>}}e<sup>−kt</sup> + C<sub>ss</sub>(1 − e<sup>−kt</sup>)"
     },
     {
      "at": 1,
-     "m": "C<sub>0</sub> = {{frac:288 mg|12 L}} = 24 mg/L"
+     "m": "C<sub>p</sub> = C<sub>ss</sub> + (C<sub>0</sub> − C<sub>ss</sub>)e<sup>−kt</sup>, C<sub>0</sub> = {{frac:D<sub>L</sub>|V<sub>D</sub>}}"
     },
     {
      "at": 2,
-     "m": "e<sup>&minus;(0.17325)(2)</sup> = 0.7072"
+     "m": "C<sub>0</sub> = C<sub>ss</sub>: C<sub>p</sub> = C<sub>ss</sub> throughout"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>0</sub> &gt; C<sub>ss</sub>: falls to it; C<sub>0</sub> &lt; C<sub>ss</sub>: rises to it"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her slide Example eight: a two hundred eighty eight milligram loading dose is given with an infusion of fifty milligrams per hour, the half-life is four hours, V D is twelve liters, and the question asks C p at two and at four hours. The sum of the two parts answers it, and it shows whether this dose holds the plateau. k comes from the half-life: zero point one seven three two five per hour. The bolus part starts at twenty four milligrams per liter and has fallen to sixteen point nine seven by two hours. The plateau of the infusion is twenty four point zero five milligrams per liter, and by two hours the infusion part has reached seven point zero four.",
+   "slide": "inf:18",
+   "card": [
+    {
+     "at": 0,
+     "m": "D<sub>L</sub> = 288 mg, R = 50 mg/hr, t<sub>½</sub> = 4 hr, V<sub>D</sub> = 12 L"
+    },
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> at 2 and 4 hr = ?"
+    },
+    {
+     "at": 2,
+     "m": "k = {{frac:0.693|4 hr}} = 0.17325 hr<sup>−1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>0</sub> = {{frac:288 mg|12 L}} = 24 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "e<sup>−(0.17325)(2)</sup> = 0.7072"
     },
     {
      "at": 3,
      "m": "24 mg/L × 0.7072 = 16.97 mg/L"
-    }
-   ]
-  },
-  {
-   "slide": "inf:18",
-   "reading": null,
-   "text": "The plateau of the infusion is the rate divided by the clearance, k times V D. Fifty milligrams per hour divided by zero point one seven three two five per hour times twelve liters is twenty four point zero five milligrams per liter. The infusion part at two hours is that plateau times the fraction reached, one minus zero point seven zero seven two, which is zero point two nine two eight. Twenty four point zero five milligrams per liter times zero point two nine two eight is seven point zero four milligrams per liter.",
-   "card": [
-    {
-     "at": 0,
-     "m": "C<sub>ss</sub> = {{frac:R|kV<sub>D</sub>}}"
-    },
-    {
-     "at": 1,
-     "m": "C<sub>ss</sub> = {{frac:50 mg/hr|0.17325 hr<sup>&minus;1</sup> × 12 L}} = 24.05 mg/L"
-    },
-    {
-     "at": 2,
-     "m": "1 &minus; 0.7072 = 0.2928"
-    },
-    {
-     "at": 3,
-     "m": "24.05 mg/L × 0.2928 = 7.04 mg/L"
-    }
-   ]
-  },
-  {
-   "slide": "inf:18",
-   "reading": null,
-   "text": "Add the parts: sixteen point nine seven plus seven point zero four is twenty four point zero one milligrams per liter, which she gives as twenty four. Four hours is exactly one half-life. The bolus part is twenty four times one half, twelve milligrams per liter, and the infusion part is twenty four point zero five times one half, twelve point zero two. The sum is again twenty four milligrams per liter, the same as the plateau.",
-   "card": [
-    {
-     "at": 0,
-     "m": "C<sub>p</sub>(2 hr) = 16.97 + 7.04 = 24.01 mg/L"
-    },
-    {
-     "at": 0,
-     "m": "<b>C<sub>p</sub>(2 hr) ≈ 24 mg/L</b>"
-    },
-    {
-     "at": 1,
-     "m": "4 hr = 1 half-life"
-    },
-    {
-     "at": 2,
-     "m": "24 × 0.5 = 12.00 mg/L &nbsp; 24.05 × 0.5 = 12.02 mg/L"
-    },
-    {
-     "at": 3,
-     "m": "<b>C<sub>p</sub>(4 hr) = 24 mg/L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "inf:16",
-   "reading": null,
-   "text": "Why it stays flat. The amount of drug in the body at steady state is R divided by k: fifty milligrams per hour over zero point one seven three two five per hour, which is two hundred eighty eight point six milligrams. So the two hundred eighty eight milligram dose matches the amount held at steady state. She said, We want the loading dose to look like the amount of drug that's in the body at steady state. In class she reworked this example with three hundred eighty eight milligrams, and got about thirty milligrams per liter at two hours against a plateau of twenty four, the too high case.",
-   "card": [
-    {
-     "at": 1,
-     "m": "{{frac:R|k}} = {{frac:50 mg/hr|0.17325 hr<sup>&minus;1</sup>}} = 288.6 mg"
-    },
-    {
-     "at": 2,
-     "m": "288 mg ≈ amount at steady state ✓"
     },
     {
      "at": 4,
-     "m": "388 mg → ~30 mg/L at 2 hr: too high"
+     "m": "C<sub>ss</sub> = {{frac:50 mg/hr|0.17325 hr<sup>−1</sup> × 12 L}} = 24.05 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "24.05 mg/L × (1 − 0.7072) = 24.05 × 0.2928 = 7.04 mg/L"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "inf:16",
-   "reading": null,
-   "text": "How she tests it. The purpose is the reasoning attached to the loading dose calculations of objective four, not a separate item. As a one sentence answer: the loading dose puts in at once the amount that would otherwise take three to five half-lives to accumulate. A perturbation part asks how long a new steady state takes after renal failure. The answer is in half-lives of the new, longer half-life, four point three two of them for ninety five percent in her Practice three.",
+   "text": "Their sum is twenty four milligrams per liter at two hours, the same as the plateau. Four hours is one half-life, so the bolus part is half of twenty four and the infusion part half of the plateau, and the sum is again twenty four. It stays flat because the dose matches the amount held at steady state: R over k is two hundred eighty eight point six milligrams. She said, We want the loading dose to look like the amount of drug that's in the body at steady state. In class she reworked this example with three hundred eighty eight milligrams and got about thirty milligrams per liter at two hours against a plateau of twenty four: the level started above the plateau and was falling to it.",
+   "slide": "inf:18",
    "card": [
+    {
+     "at": 0,
+     "m": "C<sub>p</sub>(2 hr) = 16.97 + 7.04 = 24.01 ≈ <b>24 mg/L</b>"
+    },
+    {
+     "at": 1,
+     "m": "4 hr = 1 half-life: 12.00 + 12.02 = <b>24 mg/L</b>"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:R|k}} = {{frac:50 mg/hr|0.17325 hr<sup>−1</sup>}} = 288.6 mg ≈ 288 mg ✓"
+    },
+    {
+     "at": 4,
+     "m": "388 mg: C<sub>0</sub> = 32.3 mg/L; 2 hr: 24.05 + (32.33 − 24.05)(0.7072) = 29.9 ≈ 30 mg/L, falling to 24"
+    }
+   ],
+   "fig": {
+    "key": "loading_miss_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      4,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Her graded quiz asked, Why is a loading dose used? The keyed answer is to immediately obtain a therapeutic plasma concentration; reducing adverse effects, improving adherence and reducing the half-life are wrong, because a loading dose changes when the target is reached, not the half-life and not the plateau. As a one sentence answer: the loading dose puts in at once the amount that would otherwise take three to five half-lives to accumulate. A renal failure part asks how long a new steady state takes; it is counted in the new, longer half-lives, four point three two of them for ninety five percent in her Practice three. Objective four gives the two routes to the dose itself.",
+   "slide": null,
+   "card": [
+    {
+     "at": 1,
+     "m": "✓ to immediately obtain a therapeutic C<sub>p</sub>"
+    },
+    {
+     "at": 1,
+     "m": "wrong: adverse effects, adherence, a shorter t<sub>½</sub>"
+    },
     {
      "at": 2,
      "m": "D<sub>L</sub>: at once, what takes 3 to 5 half-lives"
     },
     {
      "at": 3,
-     "m": "renal failure: new, longer t<sub>&frac12;</sub>"
-    },
-    {
-     "at": 4,
-     "m": "95%: 4.32 new half-lives"
+     "m": "renal failure: 95% at 4.32 of the new, longer half-lives"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

@@ -3,130 +3,162 @@
  "title": "Product performance, bioavailability and bioequivalence",
  "segs": [
   {
-   "text": "Module seven A, objective one. Drug product performance, bioavailability, and bioequivalence. A tablet or capsule only works if the drug leaves the dosage form. Drug product performance is that release step: the drug substance coming out of the product so that it can be absorbed. That release is what leads to the bioavailability of the drug substance.",
+   "text": "Module seven A, objective one. Drug product performance, bioavailability and bioequivalence. Drug product performance is the release of the drug substance from the drug product, the step that leads to its bioavailability. It comes first because drug that stays in the tablet is never absorbed. She said, If the drug does not release from dosage form, then the drug will not be available for the body to use.",
    "slide": "ba:3",
-   "reading": null,
    "card": [
     {
-     "at": 3,
+     "at": 2,
      "m": "drug product performance: release of the drug substance from the product"
     },
     {
+     "at": 3,
+     "m": "release → absorption → systemic circulation"
+    },
+    {
      "at": 4,
-     "m": "release → absorption → bioavailability"
+     "m": "no release: no drug available"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "text": "Bioavailability is the rate and extent to which the active ingredient is absorbed from the product and becomes available at the site of action. Extent is measured by the area under the curve, A U C. Rate is measured by the time of the peak, t max. Most of this course uses bioavailability as a fraction, F, the share of a dose that reaches the systemic circulation. F has no units, and F is one for an intravenous dose. That fraction is the extent half of the definition.",
+   "text": "Bioavailability is the rate and extent to which the active ingredient is absorbed from a product and becomes available at the site of action. Extent is how much of the dose gets into the systemic circulation, and rate is how fast. Extent is read from the area under the plasma level against time curve, A U C, a concentration times a time. The area is proportional to the amount of unchanged drug that reaches the circulation, so in the same person more drug in gives more area. F, the fraction of the dose that reaches the circulation, is the extent half; it has no units and is one for an I V dose.",
    "slide": "ba:4",
-   "reading": null,
    "card": [
     {
      "at": 0,
-     "m": "bioavailability = rate + extent"
+     "m": "bioavailability = rate and extent of absorption"
     },
     {
      "at": 1,
+     "m": "extent: how much gets in. rate: how fast"
+    },
+    {
+     "at": 2,
      "m": "extent: AUC, in (mg/L)hr"
     },
     {
-     "at": 2,
+     "at": 3,
+     "m": "same patient: more drug in → larger AUC"
+    },
+    {
+     "at": 4,
+     "m": "F = fraction reaching the circulation, no units; F<sub>IV</sub> = 1"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Rate is read from t max, the time of the peak. At first absorption brings drug in faster than elimination removes it, so the level rises. At the peak the two rates are equal, so faster absorption gets there sooner, at a smaller t max. More drug absorbed at the same speed gives a larger area, the same t max. t max equals the natural log of k a over k, divided by k a minus k, with k a and k the absorption and elimination rate constants: no F, no dose. A U C equals F times the dose, D zero, over k times the volume of distribution, V D, with F on top and no k a, so changing k a alone moves the peak, not the area.",
+   "slide": "ba:4",
+   "card": [
+    {
+     "at": 0,
      "m": "rate: t<sub>max</sub>, in hr"
     },
     {
+     "at": 2,
+     "m": "at t<sub>max</sub>: rate of absorption = rate of elimination"
+    },
+    {
+     "at": 2,
+     "m": "faster absorption → smaller t<sub>max</sub>"
+    },
+    {
      "at": 3,
-     "m": "F = fraction of the dose absorbed, no units; F<sub>IV</sub> = 1"
+     "m": "more absorbed, same speed: AUC larger, t<sub>max</sub> unchanged"
+    },
+    {
+     "at": 4,
+     "m": "t<sub>max</sub> = {{frac:ln(k<sub>a</sub>/k)|k<sub>a</sub> − k}}: no F, no dose"
+    },
+    {
+     "at": 5,
+     "m": "AUC = {{frac:F D<sub>0</sub>|k V<sub>D</sub>}}: F on top, no k<sub>a</sub> → k<sub>a</sub> alone moves t<sub>max</sub>, not AUC"
     }
-   ]
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
   },
   {
-   "text": "Bioequivalence compares the same active ingredient from two products. The test product is the one under study, and the reference product is the standard or originator product it is compared with. They are bioequivalent when there is no significant difference in the rate and extent to which the active ingredient becomes available at the site of action, at the same molar dose, under similar conditions. The words that carry the meaning are absence of a significant difference, same molar dose, and rate and extent. She said, It's the absence of a significant difference. So they don't have to be exactly the same, but they just can't be too different.",
+   "text": "Bioequivalence compares the same active ingredient in two products, a test product and the reference, the standard or originator it is compared with. They are bioequivalent when there is no significant difference in the rate and extent of availability at the site of action, at the same molar dose under similar conditions. Since bioavailability has two parts, both must match: the area and the peak time. She said, It's the absence of a significant difference. So they don't have to be exactly the same, but they just can't be too different.",
    "slide": "ba:12",
-   "reading": null,
    "card": [
     {
-     "at": 1,
+     "at": 0,
      "m": "test against reference: same active ingredient"
     },
     {
-     "at": 2,
+     "at": 1,
      "m": "no significant difference in rate and extent"
     },
     {
-     "at": 2,
+     "at": 1,
      "m": "same molar dose, similar conditions"
+    },
+    {
+     "at": 2,
+     "m": "bioequivalent: AUC similar and t<sub>max</sub> similar"
     },
     {
      "at": 4,
      "m": "similar, not identical"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "text": "Her slide example puts three formulations of one drug, A, B and C, on one plasma level against time plot. A and B have the same A U C, and C has half the A U C of A. The question is which pairs are bioequivalent. Compare extent first: A and B enclose the same area, and C encloses half the area of A. Then compare rate: A and C peak at the same time, and B peaks later than A.",
+   "text": "Her bioequivalence example puts three formulations of one drug, A, B and C, on one plot. A and B enclose the same area, so the same amount got in, but B peaks later, so it got in more slowly. A and C peak at the same time, but C encloses half the area, so C delivered half as much drug at the same speed. So A and B differ in rate, A and C in extent, and no pair is bioequivalent. A fourth curve she drew close to A, with about the same peak time and area, is the one she called bioequivalent.",
    "slide": "ba:13",
-   "reading": null,
    "card": [
     {
      "at": 1,
-     "m": "AUC<sub>A</sub> = AUC<sub>B</sub>"
-    },
-    {
-     "at": 1,
-     "m": "AUC<sub>C</sub> = 0.5 AUC<sub>A</sub>"
-    },
-    {
-     "at": 3,
-     "m": "extent: A = B; C = &frac12; A"
-    },
-    {
-     "at": 4,
-     "m": "rate: t<sub>max</sub> of A = C; B later"
-    }
-   ]
-  },
-  {
-   "text": "A against B: same extent, different rate, so they are not bioequivalent. A against C: same rate, different extent, so not bioequivalent either. So none of A, B and C is bioequivalent to another. A fourth curve drawn close to A, peaking at about the same time with about the same area, is the one she called bioequivalent, because it is similar in both, not identical in either. The area answers extent, the peak time answers rate, and bioequivalence needs both to match.",
-   "slide": "ba:13",
-   "reading": null,
-   "card": [
-    {
-     "at": 0,
-     "m": "A against B: same AUC, different t<sub>max</sub> ✗"
-    },
-    {
-     "at": 1,
-     "m": "A against C: same t<sub>max</sub>, half the AUC ✗"
+     "m": "A, B: AUC<sub>A</sub> = AUC<sub>B</sub>; B peaks later"
     },
     {
      "at": 2,
+     "m": "A, C: same t<sub>max</sub>; AUC<sub>C</sub> = ½ AUC<sub>A</sub>"
+    },
+    {
+     "at": 3,
      "m": "<b>none of A, B and C is bioequivalent to another</b>"
     },
     {
-     "at": 3,
-     "m": "curve close to A in AUC and t<sub>max</sub> ✓"
+     "at": 4,
+     "m": "D: close to A in AUC and t<sub>max</sub> ✓"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "text": "Because bioequivalence needs rate as well as extent, two products with the same A U C are not shown to be bioequivalent until their peak times are also shown to be similar. She said, these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate. A relative bioavailability study compares two formulations of the same drug by their A U Cs, which is extent. A bioequivalence study is a specialized relative bioavailability study that compares rate as well.",
+   "text": "In her items, the rate and extent of absorption from one product is bioavailability, a comparison of two products is bioequivalence, and the release step is drug product performance. Two products with similar F values are not shown to be bioequivalent, because F and A U C give extent only. She said, these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate. A bioequivalence study is a specialized relative bioavailability study, the comparison of objective two, that compares rate as well as extent.",
    "slide": "ba:12",
-   "reading": null,
    "card": [
     {
      "at": 0,
-     "m": "same AUC alone: bioequivalence not shown"
+     "m": "one product: bioavailability. two products: bioequivalence. release: product performance"
     },
     {
-     "at": 2,
-     "m": "relative bioavailability study: extent, by AUC"
+     "at": 1,
+     "m": "similar F: extent only, rate unknown → bioequivalence not shown"
     },
     {
      "at": 3,
-     "m": "bioequivalence study: extent + rate"
+     "m": "bioequivalence study: relative bioavailability study + rate"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

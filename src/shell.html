@@ -1103,6 +1103,15 @@ let EXAM = null, POOLS = [], TOTAL_MARKS = 0, EXAM_SATA = 0;
 /* Which paper the drill is preparing for. COURSE.activeExam is the default;
    a student can choose another (Exam view or Settings), and the choice is
    kept with their progress. Every pool, weight and draw below follows it. */
+/* A paper chosen before its exam was sat gives way to the course's current paper once that exam is over, so the
+   drill moves on with the course; a paper chosen after its exam (to review it) is kept. */
+const examEnds = e => new Date(e.when || e.date + 'T23:59').getTime() + (e.minutes || 0) * 60000;
+function pickExam(){
+  const s = COURSE.exams.find(e => e.id === DB.settings.exam);
+  if(!s) return COURSE.activeExam;
+  const over = Date.now() > examEnds(s), chosenAfter = DB.settings.examAt && DB.settings.examAt > examEnds(s);
+  return over && !chosenAfter && s.id !== COURSE.activeExam ? COURSE.activeExam : s.id;
+}
 function setActiveExam(id){
   EXAM = COURSE.exams.find(e => e.id === id)
       || COURSE.exams.find(e => e.id === COURSE.activeExam) || COURSE.exams[0];
@@ -1468,7 +1477,7 @@ function load(){
     const raw = LS.get(keyFor(PROFILE));
     DB = raw ? Object.assign(BLANK(), JSON.parse(raw)) : BLANK();
   }catch(e){ DB = BLANK(); }
-  setActiveExam(DB.settings.exam || COURSE.activeExam);
+  setActiveExam(pickExam());
 }
 let saveTimer=null;
 function save(){

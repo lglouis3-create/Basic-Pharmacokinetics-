@@ -3,7 +3,7 @@
  "title": "Finding V max and K M in a patient",
  "segs": [
   {
-   "text": "Module eight, objective three. Finding V max and K M in a patient. C p is the plasma concentration, the drug level. The enzymes that eliminate the drug can only work so fast; V max, the fastest rate they reach, is a rate: an amount or concentration per unit of time. K M is the drug level at which the elimination rate is half of V max. Since C p and K M are both concentrations, a level is low or high only when compared with K M. V max and K M are constant in one patient but differ between patients. In her slide example, K M is ten milligrams per liter and V max is twelve milligrams per kilogram per day.",
+   "text": "Module eight, objective three. Finding V max and K M in a patient. C p is the plasma concentration, the drug level. V max, the fastest rate at which the enzymes can eliminate the drug, is a rate: an amount or concentration per unit of time. K M is the drug level at which the elimination rate is half of V max. Since C p and K M are both concentrations, a level is low or high only when compared with K M. She said, We can compare because they've got the same units. V max and K M are constant in one patient but differ between patients. Her slide example gives K M ten milligrams per liter and V max twelve milligrams per kilogram per day.",
    "slide": "nonlin:7",
    "card": [
     {
@@ -19,15 +19,19 @@
      "m": "K<sub>M</sub>: the concentration at which rate = ½ V<sub>max</sub>, mg/L"
     },
     {
+     "at": 4,
+     "m": "K<sub>M</sub> on the C<sub>p</sub> axis; V<sub>max</sub> on the rate axis"
+    },
+    {
      "at": 5,
      "m": "compare C<sub>p</sub> with K<sub>M</sub> (both mg/L)"
     },
     {
-     "at": 6,
+     "at": 7,
      "m": "constants in one patient, different between patients"
     },
     {
-     "at": 7,
+     "at": 8,
      "m": "her example: K<sub>M</sub> 10 mg/L, V<sub>max</sub> 12 mg/kg/day"
     }
    ],
@@ -234,11 +238,11 @@
   },
   {
    "slide": "nonlin:13",
-   "text": "Pair one is the lower dose rate. Each ratio on the bottom, a dose rate divided by its own level, is the patient's clearance at that level, V max over K M plus C s s, from objective two. Clearance falls as the level rises, so the lower dose has the larger ratio. The top takes the higher dose rate minus the lower, and the bottom takes the lower dose's ratio minus the higher dose's, so both differences are positive and so is K M. The units leave a concentration. For her pairs the ratios are zero point six and zero point four, and K M is ten milligrams per liter.",
+   "text": "Pair one is the lower dose rate. Each ratio on the bottom, a dose rate divided by its own level, is the patient's clearance per kilogram at that level, V max over K M plus C s s, from objective two. Clearance falls as the level rises, so the lower dose has the larger ratio. The top takes the higher dose rate minus the lower, and the bottom takes the lower dose's ratio minus the higher dose's, so both differences are positive and so is K M. The units leave a concentration. For her pairs the ratios are zero point six and zero point four, and K M is ten milligrams per liter.",
    "card": [
     {
      "at": 1,
-     "m": "{{frac:R|C<sub>ss</sub>}} = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>ss</sub>}} = Cl<sub>T</sub>, clearance"
+     "m": "{{frac:R|C<sub>ss</sub>}} = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>ss</sub>}} = Cl<sub>T</sub>, clearance (per kg here)"
     },
     {
      "at": 2,
@@ -309,7 +313,7 @@
   },
   {
    "slide": "nonlin:15",
-   "text": "The usual errors come from the same lines. K M is a concentration, so a rate unit on K M is wrong. Subtracting the ratios in the wrong order makes K M negative. In the V max line, one pair's dose rate goes with that same pair's level, never with the other pair's level. The seventy two kilograms are used only when a dose for this patient is asked, in objective four.",
+   "text": "The usual errors come from the same lines. K M is a concentration, so a rate unit on K M is wrong. A level called low relative to V max is wrong in any option, because V max is a rate, read on the rate axis, and a level is compared only with K M, on the concentration axis. Subtracting the ratios in the wrong order makes K M negative. In the V max line, one pair's dose rate goes with that same pair's level, never with the other pair's level. The seventy two kilograms are used only when a dose for this patient is asked, in objective four.",
    "card": [
     {
      "at": 1,
@@ -317,10 +321,14 @@
     },
     {
      "at": 2,
-     "m": "(R<sub>1</sub>/C<sub>1</sub>) − (R<sub>2</sub>/C<sub>2</sub>), in that order"
+     "m": "✗ low relative to V<sub>max</sub>: a rate, not a level"
     },
     {
      "at": 3,
+     "m": "(R<sub>1</sub>/C<sub>1</sub>) − (R<sub>2</sub>/C<sub>2</sub>), in that order"
+    },
+    {
+     "at": 4,
      "m": "V<sub>max</sub>: R and C<sub>ss</sub> from the same pair"
     }
    ]

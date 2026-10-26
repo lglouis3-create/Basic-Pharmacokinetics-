@@ -3,51 +3,89 @@
  "title": "Parameters from concentration versus time data",
  "segs": [
   {
+   "text": "Module two, objective three. Calculating parameters from concentration versus time data. Given a dose and one or two measured plasma concentrations, you find the patient's elimination rate constant k, the half-life, the concentration at time zero, C zero, the volume of distribution, the clearance, and amounts at stated times. The half-life is the time for the concentration or the amount to fall by half; for a first order drug it is the same at any level. Each value is used to find the next, so the order is k, then half-life, then C zero, then V D, then clearance and amounts.",
    "slide": "ivb:4",
-   "reading": null,
-   "text": "Module two, objective three. Calculating parameters from concentration versus time data. Given a dose and one or two measured plasma concentrations, you work out the patient's elimination rate constant, half-life, starting concentration, volume of distribution and clearance. Each value feeds the next, so the order matters: k first, then half-life, then C zero, then V D, then clearance and amounts. Compare like with like. A rate constant comes from two amounts or from two concentrations, never from an amount and a concentration together. V D is the converter between the two, because an amount equals V D times a concentration.",
    "card": [
     {
-     "at": 3,
-     "m": "k → t&frac12; → C<sub>0</sub> → V<sub>D</sub> → Cl<sub>T</sub>, amounts"
-    },
-    {
-     "at": 5,
-     "m": "k from two amounts or two concentrations, never mixed"
-    },
-    {
-     "at": 6,
-     "m": "amount = V<sub>D</sub> × concentration"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:4",
-   "reading": null,
-   "text": "The rate constant k equals l n C one minus l n C two, divided by t two minus t one. With amounts, k equals l n D zero minus l n D B, divided by t. Either way k is in per hour, and it is the slope of l n C p against time with the sign changed. Half-life equals zero point six nine three divided by k. Per hour in the bottom leaves hours. This line is not on the equation sheet, and she named it as one to memorise. It is the same at any concentration for a first order drug.",
-   "card": [
-    {
-     "at": 0,
-     "m": "k = {{frac:ln C<sub>1</sub> &minus; ln C<sub>2</sub>|t<sub>2</sub> &minus; t<sub>1</sub>}}"
-    },
-    {
-     "at": 1,
-     "m": "k = {{frac:ln D<sub>0</sub> &minus; ln D<sub>B</sub>|t}}"
+     "at": 2,
+     "m": "given: D<sub>0</sub> and one or two C<sub>p</sub> values"
     },
     {
      "at": 3,
-     "m": "t&frac12; = {{frac:0.693|k}}"
+     "m": "t½ (hr): time to fall by half; the same at any level"
     },
     {
      "at": 4,
-     "m": "{{frac:1|hr<sup>&minus;1</sup>}} = hr"
+     "m": "k → t½ → C<sub>0</sub> → V<sub>D</sub> → Cl<sub>T</sub>, amounts"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Why does k come first? After a bolus the log of the concentration falls on a straight line, and k is the slope of that line with the sign changed, so any two points on the line give k. Two different pairs give nearly the same value. The two points must be of the same kind, two concentrations or two amounts. A dose in milligrams divided by a concentration in milligrams per liter leaves liters, not a fraction remaining, so it cannot give k. V D links the two kinds, because the amount equals V D times the concentration at the same time.",
    "slide": "ivb:4",
-   "reading": null,
-   "text": "When no sample was taken at time zero, C zero equals C t times e to the k t, where C t is a measured concentration at time t. The exponent is positive because you are going back in time, so C zero must be higher than every sampled point. For an amount rather than a concentration, D B equals D zero times e to the minus k t, or D B equals V D times C t. Both routes give the same answer, and she accepts either.",
+   "card": [
+    {
+     "at": 1,
+     "m": "ln C<sub>p</sub> vs t: straight line, slope −k"
+    },
+    {
+     "at": 3,
+     "m": "two concentrations, or two amounts"
+    },
+    {
+     "at": 4,
+     "m": "{{frac:mg|mg/L}} = L, not a fraction"
+    },
+    {
+     "at": 5,
+     "m": "amount = V<sub>D</sub> × C, same time"
+    }
+   ],
+   "fig": {
+    "key": "bolus1_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The relation is k equals l n C one minus l n C two, over t two minus t one: the drop in log concentration divided by the time between the samples. A larger drop over the same time gives a larger k. With amounts, k equals l n D zero minus l n D B, over t. The half-life equals zero point six nine three over k, which she expects memorised. k is on the bottom, so a larger k gives a shorter half-life, and per hour on the bottom leaves hours.",
+   "slide": "ivb:4",
+   "card": [
+    {
+     "at": 0,
+     "m": "k = {{frac:ln C<sub>1</sub> − ln C<sub>2</sub>|t<sub>2</sub> − t<sub>1</sub>}}"
+    },
+    {
+     "at": 1,
+     "m": "larger drop, same time → larger k"
+    },
+    {
+     "at": 2,
+     "m": "k = {{frac:ln D<sub>0</sub> − ln D<sub>B</sub>|t}}"
+    },
+    {
+     "at": 3,
+     "m": "t½ = {{frac:0.693|k}} (not on the sheet)"
+    },
+    {
+     "at": 4,
+     "m": "k ↑ → t½ ↓; {{frac:1|hr<sup>−1</sup>}} = hr"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "C zero is rarely measured, because a sample cannot be drawn at the instant of injection, so the line is extended back to time zero: C zero equals C t times e to the k t. Going back in time makes the exponent positive, so C zero is higher than every sampled concentration. Then V D equals D zero over C zero, both at time zero, because the times must match, and clearance is k times V D. In the calculation clearance comes last, but in the body clearance and V D are what is set, and k follows from them. An amount at a later time is D zero times e to the minus k t, or V D times the concentration then; she accepts either.",
+   "slide": "ivb:5",
    "card": [
     {
      "at": 0,
@@ -55,151 +93,154 @@
     },
     {
      "at": 1,
-     "m": "+kt: back in time, C<sub>0</sub> above every point"
+     "m": "+kt: back in time, C<sub>0</sub> above every sample"
     },
     {
      "at": 2,
-     "m": "D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;kt</sup> &nbsp; or &nbsp; D<sub>B</sub> = V<sub>D</sub> × C<sub>t</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:7",
-   "reading": null,
-   "text": "Her deck practice. A two hundred milligram I V dose is given to an eighty kilogram man. At six hours the plasma level is fifteen milligrams per liter, and V D is ten percent of body weight. Find the amount in the body at twelve hours, and the half-life. First convert V D to liters, using one liter per kilogram: zero point one zero times eighty kilograms is eight liters. Next, turn the six hour concentration into an amount, so it can be compared with the two hundred milligram dose. D B equals eight liters times fifteen milligrams per liter, which is one hundred twenty milligrams, because liters cancel and milligrams remain.",
-   "card": [
-    {
-     "at": 1,
-     "m": "D<sub>0</sub> = 200 mg; 80 kg"
-    },
-    {
-     "at": 2,
-     "m": "C = 15 mg/L at 6 hr; V<sub>D</sub> = 10% of body weight"
-    },
-    {
-     "at": 4,
-     "m": "V<sub>D</sub> = 0.10 × 80 kg = 8 L"
-    },
-    {
-     "at": 6,
-     "m": "D<sub>B</sub> = 8 L × 15 mg/L = 120 mg at 6 hr"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:7",
-   "reading": null,
-   "text": "Now k comes from the two amounts. k equals l n two hundred minus l n one hundred twenty, divided by six hours, which is zero point zero eight five per hour. The amount at twelve hours is D zero times e to the minus k t. That is two hundred milligrams times e to the minus zero point zero eight five times twelve. The exponential is zero point three six, so the amount is seventy two milligrams.",
-   "card": [
-    {
-     "at": 1,
-     "m": "k = {{frac:ln 200 &minus; ln 120|6 hr}} = 0.085 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 2,
-     "m": "D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;kt</sup>"
+     "m": "V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}}; Cl<sub>T</sub> = k × V<sub>D</sub>"
     },
     {
      "at": 3,
-     "m": "= 200 mg × e<sup>&minus;(0.085)(12)</sup>"
+     "m": "in the body: Cl and V<sub>D</sub> set, k = {{frac:Cl|V<sub>D</sub>}} follows"
     },
     {
      "at": 4,
-     "m": "= 200 × 0.36 = <b>72 mg</b>"
+     "m": "D<sub>B</sub> = D<sub>0</sub>e<sup>−kt</sup> or D<sub>B</sub> = V<sub>D</sub> × C<sub>t</sub>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "bolus1_steps",
+    "at": [
+     [
+      0,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   }
   },
   {
+   "text": "Her first practice problem gives two hundred milligrams by I V bolus to an eighty kilogram man, fifteen milligrams per liter at six hours, and a V D of ten percent of body weight. It asks the amount in the body at twelve hours and the half-life. The dose is an amount and the six hour value is a concentration, so one must be converted before k can be found. V D converts the concentration: V D is eight liters, and the amount in the body at six hours is one hundred twenty milligrams.",
    "slide": "ivb:7",
-   "reading": null,
-   "text": "The half-life is zero point six nine three divided by zero point zero eight five per hour, which is eight point one five hours. Carrying k unrounded, at zero point zero eight five one four per hour, gives eight point one four hours. The seventy two milligrams is the same either way. Her added question asks the concentration at twelve hours. Seventy two milligrams divided by eight liters is nine milligrams per liter.",
    "card": [
     {
      "at": 0,
-     "m": "t&frac12; = {{frac:0.693|0.085 hr<sup>&minus;1</sup>}} = <b>8.15 hr</b>"
+     "m": "D<sub>0</sub> = 200 mg; 80 kg; C = 15 mg/L at 6 hr; V<sub>D</sub> = 10% of body weight"
+    },
+    {
+     "at": 2,
+     "m": "200 mg and 15 mg/L: not the same kind"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>D</sub> = 0.10 × 80 kg = 8 L"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>B</sub> = 8 L × 15 mg/L = <b>120 mg</b> at 6 hr"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Two amounts now give k: two hundred milligrams at time zero and one hundred twenty at six hours, so k is zero point zero eight five per hour. The amount at twelve hours comes from D zero times e to the minus k t, and is seventy two milligrams. A check: zero point six of the drug remains after six hours, so after twelve hours zero point six of zero point six remains, and zero point three six of two hundred milligrams is seventy two. The half-life is eight point one five hours. Her added question asks the concentration at twelve hours: seventy two milligrams in eight liters is nine milligrams per liter. Read whether the question asks for an amount or a concentration.",
+   "slide": "ivb:7",
+   "card": [
+    {
+     "at": 0,
+     "m": "k = {{frac:ln 200 − ln 120|6 hr}} = 0.085 hr<sup>−1</sup>"
     },
     {
      "at": 1,
-     "m": "k = 0.08514 hr<sup>&minus;1</sup> → 8.14 hr"
+     "m": "D<sub>B</sub> = 200 mg × e<sup>−(0.085)(12)</sup> = 200 × 0.36 = <b>72 mg</b>"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:120|200}} = 0.6; 0.6 × 0.6 = 0.36; 0.36 × 200 mg = 72 mg ✓"
+    },
+    {
+     "at": 3,
+     "m": "t½ = {{frac:0.693|0.085 hr<sup>−1</sup>}} = <b>8.15 hr</b> (k unrounded 0.08514 → 8.14 hr)"
     },
     {
      "at": 4,
      "m": "C = {{frac:72 mg|8 L}} = <b>9 mg/L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:4",
-   "reading": null,
-   "text": "Her review problem. A one hundred fifty four pound woman gets a fifteen milligram per kilogram I V bolus. Levels are thirty two point eight five micrograms per milliliter at two hours, and nine point three two micrograms per milliliter at eight hours. Both are concentrations, so k comes straight from them. l n thirty two point eight five minus l n nine point three two is one point two five nine eight. The points are eight minus two, six hours apart. One point two five nine eight divided by six hours gives k of zero point two one per hour. The half-life is zero point six nine three over zero point two one per hour, which is three point three hours.",
-   "card": [
-    {
-     "at": 2,
-     "m": "32.85 mcg/mL at 2 hr; 9.32 mcg/mL at 8 hr"
-    },
-    {
-     "at": 4,
-     "m": "k = {{frac:ln 32.85 &minus; ln 9.32|8 &minus; 2 hr}}"
-    },
-    {
-     "at": 6,
-     "m": "= {{frac:1.2598|6 hr}} = <b>0.21 hr<sup>&minus;1</sup></b>"
-    },
-    {
-     "at": 7,
-     "m": "t&frac12; = {{frac:0.693|0.21 hr<sup>&minus;1</sup>}} = <b>3.3 hr</b>"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:5",
-   "reading": null,
-   "text": "The dose needs the weight in kilograms. One kilogram is two point two pounds, so one hundred fifty four pounds divided by two point two is seventy kilograms. Fifteen milligrams per kilogram times seventy kilograms is one thousand fifty milligrams. Next, run back to time zero: C zero equals thirty two point eight five times e to the zero point two one times two, which is fifty micrograms per milliliter. That is fifty milligrams per liter, because micrograms per milliliter and milligrams per liter are the same number. Then V D is one thousand fifty milligrams over fifty milligrams per liter, which is twenty one liters.",
-   "card": [
-    {
-     "at": 1,
-     "m": "{{frac:154 lb|2.2 lb/kg}} = 70 kg"
-    },
-    {
-     "at": 2,
-     "m": "D<sub>0</sub> = 15 mg/kg × 70 kg = 1050 mg"
-    },
-    {
-     "at": 3,
-     "m": "C<sub>0</sub> = 32.85 × e<sup>(0.21)(2)</sup> = <b>50 mcg/mL</b>"
-    },
-    {
-     "at": 4,
-     "m": "50 mcg/mL = 50 mg/L"
     },
     {
      "at": 5,
-     "m": "V<sub>D</sub> = {{frac:1050 mg|50 mg/L}} = <b>21 L</b>"
+     "m": "amount (mg) or concentration (mg/L)?"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "ivb:8",
-   "reading": null,
-   "text": "Last, clearance is k times V D. Zero point two one per hour times twenty one liters is four point four one liters per hour. Her questions run as one patient and a chain of small parts, from k and half-life through C zero, V D and clearance to an amount at a stated hour. Fifteen minutes must be converted to zero point two five hours, and ninety nine point nine percent eliminated always means ten half-lives. Weight in pounds with a milligram per kilogram dose tests the two point two conversion, and every later part depends on it. The usual trap is dividing the dose by a concentration to get k. Convert one first, so both are amounts or both are concentrations.",
+   "text": "Her exam one review problem gives a one hundred fifty four pound woman a fifteen milligram per kilogram I V bolus, with thirty two point eight five micrograms per milliliter at two hours and nine point three two at eight hours. Both values are concentrations, so k comes straight from them, zero point two one per hour, and the half-life is three point three hours. The dose needs the weight in kilograms, seventy, so the dose is one thousand fifty milligrams. Extending the line back two hours gives a C zero of fifty micrograms per milliliter, which is fifty milligrams per liter, since the two units give the same number. V D is twenty one liters, and clearance is four point four one liters per hour.",
+   "slide": "ivb:4",
    "card": [
     {
      "at": 0,
-     "m": "Cl<sub>T</sub> = k × V<sub>D</sub>"
+     "m": "154 lb; 15 mg/kg; 32.85 mcg/mL at 2 hr, 9.32 mcg/mL at 8 hr"
     },
     {
      "at": 1,
-     "m": "= 0.21 hr<sup>&minus;1</sup> × 21 L = <b>4.41 L/hr</b>"
+     "m": "k = {{frac:ln 32.85 − ln 9.32|8 − 2 hr}} = {{frac:1.2598|6 hr}} = <b>0.21 hr<sup>−1</sup></b>"
+    },
+    {
+     "at": 1,
+     "m": "t½ = {{frac:0.693|0.21 hr<sup>−1</sup>}} = <b>3.3 hr</b>"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:154 lb|2.2 lb/kg}} = 70 kg; D<sub>0</sub> = 15 mg/kg × 70 kg = 1050 mg"
     },
     {
      "at": 3,
-     "m": "15 min = 0.25 hr; 99.9% eliminated = 10 half-lives"
+     "m": "C<sub>0</sub> = 32.85 × e<sup>(0.21)(2)</sup> = <b>50 mcg/mL = 50 mg/L</b> &gt; 32.85 ✓"
+    },
+    {
+     "at": 4,
+     "m": "V<sub>D</sub> = {{frac:1050 mg|50 mg/L}} = <b>21 L</b>"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>T</sub> = 0.21 hr<sup>−1</sup> × 21 L = <b>4.41 L/hr</b>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her questions run as one patient and a series of small parts, and on the exam an earlier part cannot be revisited. Weight in pounds with a milligram per kilogram dose tests the two point two conversion, and every later part depends on it. Fifteen minutes is zero point two five hours. Ninety nine point nine percent eliminated means ten half-lives, because each half-life halves what is left. Keep k to three or four decimal places until the end, write a zero before a leading decimal point, and give units. The usual error is dividing the dose by a concentration to get k; convert one of them first.",
+   "slide": "ivb:10",
+   "card": [
+    {
+     "at": 1,
+     "m": "lb ÷ 2.2 = kg, first"
+    },
+    {
+     "at": 2,
+     "m": "15 min = 0.25 hr"
+    },
+    {
+     "at": 3,
+     "m": "99.9% eliminated = 10 half-lives (0.5<sup>10</sup> ≈ 0.001)"
+    },
+    {
+     "at": 4,
+     "m": "k to 3 or 4 decimals; 0.21, not .21; units"
     },
     {
      "at": 5,
-     "m": "✗ {{frac:dose|concentration}} for k"
+     "m": "wrong: k from {{frac:dose|concentration}}"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

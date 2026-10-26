@@ -3,9 +3,8 @@
  "title": "Factors that influence bioavailability",
  "segs": [
   {
-   "text": "Module seven A, objective three. Factors that can influence bioavailability. F is the fraction of a dose that reaches the systemic circulation, with no units, and it is one for an I V dose. These factors change F, most often lowering it. They sit in the product, on the way into the circulation, and in the patient. Her list has nine entries.",
+   "text": "Module seven A, objective three. Factors that can influence bioavailability. F is the fraction of a dose that reaches the systemic circulation, with no units, and it is one for an I V dose. An oral dose has to leave the product, dissolve, survive the stomach and gut, cross the gut wall and pass the liver before it reaches the circulation, and F counts only what arrives. These factors change how much arrives, so they can lower F or raise it. Her list has nine entries: in the product, on the way into the circulation, and in the patient.",
    "slide": "ba:14",
-   "reading": null,
    "card": [
     {
      "at": 2,
@@ -13,64 +12,80 @@
     },
     {
      "at": 3,
-     "m": "factors change F, most often lower it"
+     "m": "product → dissolved → gut → gut wall → liver → circulation: F counts what arrives"
     },
     {
      "at": 4,
+     "m": "factors change how much arrives: F can go down or up"
+    },
+    {
+     "at": 5,
      "m": "the product; on the way in; the patient"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "text": "First, the product: the physicochemical properties of the drug and the formulation, drug stability and p H effects, and prodrugs. A prodrug is a drug given in an inactive form that the body must convert to the active drug, usually so that more of the active drug reaches the circulation. She singled out the ones that come to mind most often: the physical and chemical properties of the drug itself, what p H does to it once it is in the body, first pass metabolism, and stability.",
+   "text": "First, the product. The physicochemical properties of the drug and the formulation, such as solubility, dissolution rate and particle size, decide how much drug dissolves and can be absorbed, and a better formulation can raise F. A drug that breaks down in acid is partly destroyed in the low p H of the stomach, so stability and p H effects lower its oral F. A prodrug is usually an inactive form that the body converts to the active drug, used to improve solubility or stability, or to raise the active drug's availability by decreasing first pass metabolism. She singled out the physical and chemical properties of the drug, what p H does to it in the body, first pass metabolism, and stability.",
    "slide": "ba:14",
-   "reading": null,
-   "card": [
-    {
-     "at": 0,
-     "m": "physicochemical properties, formulation"
-    },
-    {
-     "at": 0,
-     "m": "stability, pH effects"
-    },
-    {
-     "at": 1,
-     "m": "prodrug: inactive form → converted to active drug"
-    },
-    {
-     "at": 2,
-     "m": "most often: properties, pH, first-pass, stability"
-    }
-   ]
-  },
-  {
-   "text": "Next, on the way in: pre systemic and first pass metabolism. Pre systemic metabolism is any metabolism that happens before the drug reaches the systemic circulation. First pass metabolism is metabolism of an oral dose, mainly by the liver, before the drug reaches the systemic circulation, so it lowers F. Also on the way in are food effects, drug drug interactions, and efflux transporters, which are membrane proteins that pump absorbed drug back out of the cell.",
-   "slide": "ba:14",
-   "reading": null,
    "card": [
     {
      "at": 1,
-     "m": "pre-systemic: before the systemic circulation"
+     "m": "properties, formulation: how much dissolves and can be absorbed"
     },
     {
      "at": 2,
-     "m": "first-pass: oral dose, mainly the liver → F lower"
+     "m": "acid-labile drug: degraded in the stomach → F lower"
     },
     {
      "at": 3,
-     "m": "food effects; drug-drug interactions; efflux transporters"
+     "m": "prodrug: usually inactive → active; for solubility, stability, or less first-pass"
+    },
+    {
+     "at": 4,
+     "m": "most often: properties, pH, first-pass, stability"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "text": "Last, the patient: age and disease state. She said, Yeah, because our bodies change as we age, and yes, everything slows down. Her summary ties the list together. Low bioavailability has a variety of causes, including formulation factors and the first pass effect, and it bears on the drug's safety and efficacy.",
-   "slide": "ba:15",
-   "reading": null,
+   "text": "Next, the way in. Pre systemic metabolism is any metabolism before the drug reaches the systemic circulation, and first pass metabolism is the liver acting on an oral dose on its way from the gut. Absorbed is not the same as available: the textbook's propranolol is almost completely absorbed, but first pass metabolism leaves only about a quarter of it to reach the circulation. Food can lower F, raise it, or leave it unchanged, and a second drug that inhibits the metabolizing enzymes raises F while one that induces them lowers it. Efflux transporters are membrane proteins that pump absorbed drug back out of the cell, so they reduce how much gets through.",
+   "slide": "ba:14",
    "card": [
     {
-     "at": 0,
-     "m": "the patient: age, disease state"
+     "at": 1,
+     "m": "pre-systemic: any loss before the systemic circulation"
+    },
+    {
+     "at": 1,
+     "m": "first-pass: the liver, on an oral dose"
+    },
+    {
+     "at": 2,
+     "m": "propranolol: almost all absorbed, about 25% reaches the circulation"
+    },
+    {
+     "at": 3,
+     "m": "food: lower, higher or no change"
+    },
+    {
+     "at": 3,
+     "m": "enzyme inhibitor → F higher; inducer → F lower"
+    },
+    {
+     "at": 4,
+     "m": "efflux transporters: pump drug back out → less gets through"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Last, the patient: age and disease state. She said, Yeah, because our bodies change as we age, and yes, everything slows down. The textbook says bioavailability can change with age and with disease state, so these patient factors can raise F or lower it. Her summary names the two causes of low bioavailability she stresses, formulation factors and the first pass effect, and ties bioavailability to the drug's safety and efficacy.",
+   "slide": "ba:15",
+   "card": [
+    {
+     "at": 2,
+     "m": "age, disease state: can raise or lower F (textbook)"
     },
     {
      "at": 3,
@@ -80,49 +95,54 @@
      "at": 3,
      "m": "→ safety and efficacy"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "text": "Her reading of the first practice problem from objective two shows what a low F means. A two hundred fifty milligram oral tablet gave an A U C of one hundred one point five microgram hours per milliliter, against a one hundred milligram I V bolus with an A U C of seventy three point eight microgram hours per milliliter. So the tablet's F is one hundred one point five over seventy three point eight, times one hundred milligrams over two hundred fifty milligrams, which is zero point five five.",
+   "text": "Her first practice problem in objective two gave a tablet an F of zero point five five. So from a one thousand milligram tablet about five hundred fifty milligrams reaches the circulation, while one thousand milligrams given I V is all available. The oral problems earlier in the course had F values of about zero point seven to zero point nine. She said, we're losing almost half the drug giving it orally, right? A low F raises the question of whether oral is the best route, and it raises the oral dose needed to match an I V dose, because that dose must make up for what is lost.",
    "slide": "ba:7",
-   "reading": null,
    "card": [
     {
+     "at": 0,
+     "m": "F = 0.55 (objective two)"
+    },
+    {
      "at": 1,
-     "m": "tablet: 250 mg, AUC 101.5 (mcg/mL)hr; IV: 100 mg, AUC 73.8 (mcg/mL)hr"
+     "m": "oral: 0.55 × 1000 mg = <b>550 mg</b>"
+    },
+    {
+     "at": 1,
+     "m": "IV: F = 1 → all 1000 mg"
     },
     {
      "at": 2,
-     "m": "F = {{frac:101.5|73.8}} &times; {{frac:100 mg|250 mg}} = 0.55"
-    }
-   ]
-  },
-  {
-   "text": "What does that number mean for a one thousand milligram tablet? The amount available from the tablet is zero point five five times one thousand milligrams, five hundred fifty milligrams. The same one thousand milligrams given I V has an F of one, so all one thousand milligrams is available for the body to use. In the oral problems so far in the course, F was about zero point seven, zero point eight or zero point nine. At zero point five five almost half the dose is lost, so whether oral is the best way to give this drug is open to question. A low F raises the oral dose needed to match an I V dose.",
-   "slide": "ba:7",
-   "reading": null,
-   "card": [
-    {
-     "at": 1,
-     "m": "oral: 0.55 &times; 1000 mg = <b>550 mg</b>"
-    },
-    {
-     "at": 2,
-     "m": "IV: F = 1 → all 1000 mg available"
-    },
-    {
-     "at": 3,
-     "m": "earlier oral problems: F about 0.7, 0.8, 0.9"
+     "m": "earlier oral problems: F about 0.7 to 0.9"
     },
     {
      "at": 4,
-     "m": "0.55: almost half the dose lost"
+     "m": "low F → larger oral dose to match IV (objective four)"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her items keep F apart from what happens after the drug arrives. A low F is keyed to first pass metabolism and formulation factors, not to the half life, the volume of distribution, or a low clearance. F is the fraction that gets into the circulation, while clearance and half life act after it gets there, so they change the area under the curve, not F. Write F as zero point five five or fifty five percent. She said, just a little reminder, there should be no leading decimals, OK?",
+   "slide": "ba:14",
+   "card": [
+    {
+     "at": 1,
+     "m": "low F: first-pass, formulation. not t<sub>½</sub>, V<sub>D</sub> or clearance"
     },
     {
-     "at": 5,
-     "m": "low F → larger oral dose to match IV"
+     "at": 2,
+     "m": "F: how much enters. Cl, t<sub>½</sub>: act after → change AUC, not F"
+    },
+    {
+     "at": 3,
+     "m": "write 0.55 or 55%"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

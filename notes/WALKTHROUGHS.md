@@ -56,6 +56,20 @@ Last updated 2026-10-26.
 - Reading and transcript notes for every module, for the rewrite of the other 41 sections, are in the session
   scratchpad (gw/readnotes/*.md); the writer brief is rewritten concept first (gw/BRIEF.md).
 
+## All 42 rewritten concept first (2026-10-26, evening)
+- Seven writer agents rewrote every section to the v2 brief (session scratchpad gw/BRIEF.md): what happens and why,
+  then the formula spoken once, the arithmetic on the card; comparisons like with like (a level only against KM);
+  abbreviations spoken as letters with on-screen glosses; textbook statements with page references from the
+  reading notes; her slides and keys win conflicts. Seven reviewer agents checked every sentence, quote and number
+  (gw/VERIFY_BRIEF2.md, findings in gw/verify2); no worked number was wrong; about 90 wording, quote, slide and
+  figure-sync fixes were applied. 42 sections, 321 parts, 33,902 words.
+- New step figures for the narration (figures.py, listed in diagrams.js): orders_steps, two_rates_steps,
+  renal_steps, loading_miss_steps, teff_halvings_steps, nl_frac_steps.
+- Guide corrections that came out of the review: Example 2 Cmax is 55.4 mg/L on the solved page (the 53.4 note
+  was an OCR misread, removed); the 3.72 hr interval and the 17.29 mg dose are two separate examples of hers.
+- Recording estimate on these scripts: 180,584 characters, about 180,566 credits (ElevenLabs priced a 609-character
+  part at 608.94 credits, 11.07 cents), about 3,283 cents. Not recorded; waiting for approval.
+
 ## Open
 - Recording: not done. Estimate 159,586 characters; at the Intro Pharmacology walkthrough rate (1,850.92 cents for
   101,801 credits) about 2,901.55 cents, assuming one credit per character. Planned voice: the one used there

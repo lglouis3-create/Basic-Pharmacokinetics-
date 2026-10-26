@@ -3,63 +3,151 @@
  "title": "Orders of reaction and parameters from data",
  "segs": [
   {
+   "text": "Module one, objective four. Orders of reaction, and parameters from a data set. The rate of a process is the amount or concentration lost per unit of time. The order says whether that rate depends on how much drug is present: in zero order it does not, and in first order it does. The rate constant, k, is a fixed number, not the rate itself, and the half-life is the time for the level to fall by half. An I V bolus, a single dose injected into a vein all at once, is taken as first order; a data table has to be tested.",
    "slide": "intro:19",
-   "reading": null,
-   "text": "Module one, objective four. Orders of reaction, and parameters from a data set. In a zero order process the same amount of drug is lost every hour, however much is left. In a first order process the same fraction is lost every hour, so more is lost per hour when more drug is present. When a stem says I V bolus, a single dose injected into a vein all at once, assume first order. When it gives a data table, you decide the order yourself.",
    "card": [
     {
      "at": 2,
-     "m": "zero order: same amount lost per hour"
+     "m": "rate = {{frac:dC|dt}}: concentration lost per time, e.g. mg/L per hr"
     },
     {
      "at": 3,
-     "m": "first order: same fraction lost per hour"
+     "m": "zero order: rate does not depend on C   first order: rate depends on C"
     },
     {
      "at": 4,
-     "m": "IV bolus → first order"
+     "m": "k: rate constant, fixed; not the rate"
+    },
+    {
+     "at": 4,
+     "m": "t<sub>½</sub>: time to fall by half, e.g. hr"
     },
     {
      "at": 5,
-     "m": "data table → decide the order"
+     "m": "IV bolus → first order   data table → decide"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "intro:21",
-   "reading": null,
-   "text": "For zero order, d C by d t equals minus k, and C equals C zero minus k t. That k is in milligrams per milliliter per hour, and the line is straight on linear axes. For first order, d C by d t equals minus k C, so the rate depends on the concentration present. Then C equals C zero times e to the minus k t, and the natural log of C equals the natural log of C zero minus k t. That k is in per hour, so k t has no units, and the line is straight on a semilog axis. Axis marks of one, ten, one hundred and one thousand mean a log scale, labelled or not.",
+   "text": "In a zero order process the same amount or concentration is lost every hour, however much drug is left. She said, It doesn't matter if we start at a thousand milligrams or if we start at ten milligrams, the rate of elimination is going to be constant. Because a fixed amount is lost from a shrinking level, the fraction lost each hour grows as the level falls. On linear axes the fall is a straight line, and its slope is the rate. A lower starting level halves sooner, because less has to be lost at the same rate, so the half-life is not constant.",
+   "slide": "intro:20",
    "card": [
     {
      "at": 0,
-     "m": "zero: {{frac:dC|dt}} = &minus;k &nbsp; C = C<sub>0</sub> &minus; kt"
-    },
-    {
-     "at": 1,
-     "m": "k in (mg/mL)/hr; straight on linear axes"
+     "m": "zero order: same amount lost per hour"
     },
     {
      "at": 2,
-     "m": "first: {{frac:dC|dt}} = &minus;kC"
+     "m": "fixed amount per hour → the fraction lost grows as C falls"
+    },
+    {
+     "at": 2,
+     "m": "e.g. her table, 12 hr each: 206 → 134 mg/mL loses 72 (35%); 134 → 62 loses 72 (54%)"
     },
     {
      "at": 3,
-     "m": "C = C<sub>0</sub>e<sup>&minus;kt</sup> &nbsp; ln C = ln C<sub>0</sub> &minus; kt"
+     "m": "linear axes: straight line; slope = rate"
     },
     {
      "at": 4,
-     "m": "k in hr<sup>&minus;1</sup>; straight on a semilog axis"
+     "m": "t<sub>½</sub> shorter from a lower start"
     },
     {
-     "at": 5,
-     "m": "1, 10, 100, 1000 → log scale"
+     "at": 4,
+     "m": "e.g. 6 (mg/mL)/hr: 350 → 175 takes 29.2 hr; 175 → 87.5 takes 14.6 hr"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "intro:24",
-   "reading": null,
-   "text": "Her practice set: a solution sampled at two, six, twelve, twenty four, thirty six and forty eight hours gave two hundred ninety four point three, two hundred eight point one, one hundred twenty three point eight, forty three point eight, fifteen point five and five point five milligrams per liter. It asks for k, C zero, the half-life and the time to ninety percent decomposed. Equal ratios over equal time spans mean first order, and equal differences per hour mean zero order. From twelve to twenty four hours, one hundred twenty three point eight over forty three point eight is two point eight three. From twenty four to thirty six hours, forty three point eight over fifteen point five is two point eight three. Equal ratios, so first order.",
+   "text": "In a first order process the same fraction is lost every hour, so more drug is lost per hour when more drug is present. The rate is fastest at the top of the curve, where the concentration is highest, and slows as the concentration falls. In her practice table the ratio was the same over two equal spans, yet the loss fell from eighty to about twenty eight milligrams per liter. On linear axes this is a curve, and on a semilog axis it is a straight line. Halving is always the same fraction, so it always takes the same time: the half-life is constant.",
+   "slide": "intro:21",
+   "card": [
+    {
+     "at": 0,
+     "m": "first order: same fraction lost per hour"
+    },
+    {
+     "at": 1,
+     "m": "rate highest at the top, falls with C"
+    },
+    {
+     "at": 2,
+     "m": "e.g. 12 → 24 hr: 123.8 → 43.8 mg/L, lost 80.0, ratio 2.83"
+    },
+    {
+     "at": 2,
+     "m": "24 → 36 hr: 43.8 → 15.5 mg/L, lost 28.3, ratio 2.83"
+    },
+    {
+     "at": 3,
+     "m": "linear axes: curve   semilog axis: straight line"
+    },
+    {
+     "at": 4,
+     "m": "t<sub>½</sub> constant: e.g. 350 → 175 and 175 → 87.5 mg/L both take 8 hr"
+    }
+   ],
+   "fig": {
+    "key": "orders_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The rate and the rate constant are different quantities. For zero order, d C by d t equals minus k: the rate is k itself, with no C in it, so k is a rate, in concentration or amount per time. For first order, d C by d t equals minus k times C: k stays fixed while C falls, so the rate falls, and k is in reciprocal time, such as per hour. She said, If it's just K all by itself, it's independent of concentration. The minus sign shows only that the level is falling; k is never negative.",
+   "slide": "intro:21",
+   "card": [
+    {
+     "at": 1,
+     "m": "zero: {{frac:dC|dt}} = −k; k in (mg/mL)/hr or mg/hr"
+    },
+    {
+     "at": 2,
+     "m": "first: {{frac:dC|dt}} = −kC; k in hr<sup>−1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "k C in the rate: depends on C   k alone: does not"
+    },
+    {
+     "at": 4,
+     "m": "k never negative; the minus sign = falling"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "For first order, the half-life equals zero point six nine three over k. No concentration appears in it, so the half-life does not depend on concentration, and with k on the bottom a larger k gives a shorter half-life. She said, A constant divided by a constant is a constant. For zero order, the half-life equals C zero over two k, with the starting concentration, C zero, on the top, so a lower start gives a shorter half-life.",
+   "slide": "intro:22",
+   "card": [
+    {
+     "at": 0,
+     "m": "first: t<sub>½</sub> = {{frac:0.693|k}}"
+    },
+    {
+     "at": 1,
+     "m": "no C → t<sub>½</sub> constant; larger k → shorter t<sub>½</sub>"
+    },
+    {
+     "at": 3,
+     "m": "zero: t<sub>½</sub> = {{frac:C<sub>0</sub>|2k}}; lower C<sub>0</sub> → shorter t<sub>½</sub>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her practice set gives six concentrations over forty eight hours and asks for k, C zero, the half-life and the time to ninety percent decomposed. The order comes first: equal ratios over equal time spans mean a fixed fraction lost, first order, and equal differences per hour mean zero order. Here the ratio is two point eight three over both twelve hour spans, so the table is first order. k comes from the natural log of C at two points, because the natural log of C falls along a straight line whose slope is minus k; the six and twenty four hour points give zero point zero eight six six per hour.",
+   "slide": "intro:21",
    "card": [
     {
      "at": 0,
@@ -70,192 +158,179 @@
      "m": "C: 294.3, 208.1, 123.8, 43.8, 15.5, 5.5 mg/L"
     },
     {
+     "at": 0,
+     "m": "find k, C<sub>0</sub>, t<sub>½</sub>, time to 90% decomposed"
+    },
+    {
      "at": 1,
-     "m": "find k, C<sub>0</sub>, t<sub>&frac12;</sub>, time to 90% decomposed"
+     "m": "equal ratios → first   equal differences per hr → zero"
     },
     {
      "at": 2,
-     "m": "equal ratios: first &nbsp; equal differences: zero"
+     "m": "{{frac:123.8|43.8}} = 2.83   {{frac:43.8|15.5}} = 2.83 → <b>first order</b>"
     },
     {
      "at": 3,
-     "m": "12 → 24 hr: {{frac:123.8|43.8}} = 2.83"
-    },
-    {
-     "at": 4,
-     "m": "24 → 36 hr: {{frac:43.8|15.5}} = 2.83"
-    },
-    {
-     "at": 5,
-     "m": "<b>first order</b>"
-    }
-   ]
-  },
-  {
-   "slide": "intro:21",
-   "reading": null,
-   "text": "For k, take the six hour and twenty four hour points. The first order line is k equals the natural log of C one minus the natural log of C two, over t two minus t one, with C one the earlier point so that k comes out positive. The natural log of two hundred eight point one is five point three three eight zero, and the natural log of forty three point eight is three point seven seven nine six. The difference, one point five five eight four, is divided by twenty four minus six, eighteen hours. That gives zero point zero eight six five eight, so k is zero point zero eight six six per hour, because the logs have no units and the bottom is in hours.",
-   "card": [
-    {
-     "at": 1,
-     "m": "k = {{frac:ln C<sub>1</sub> &minus; ln C<sub>2</sub>|t<sub>2</sub> &minus; t<sub>1</sub>}}"
-    },
-    {
-     "at": 2,
-     "m": "= {{frac:ln 208.1 &minus; ln 43.8|24 &minus; 6 hr}} = {{frac:5.3380 &minus; 3.7796|18 hr}}"
+     "m": "k = {{frac:ln C<sub>1</sub> − ln C<sub>2</sub>|t<sub>2</sub> − t<sub>1</sub>}}"
     },
     {
      "at": 3,
-     "m": "= {{frac:1.5584|18 hr}} = 0.08658"
-    },
-    {
-     "at": 4,
-     "m": "<b>k = 0.0866 hr<sup>&minus;1</sup></b>"
-    }
-   ]
-  },
-  {
-   "slide": "intro:21",
-   "reading": null,
-   "text": "Next, C zero, worked back from the twelve hour point. For first order, C zero equals C times e to the plus k t. The sign is plus because C zero must be larger than any later concentration. k t is zero point zero eight six six per hour times twelve hours, which is one point zero three nine two, with no units. e to the one point zero three nine two is two point eight two seven. One hundred twenty three point eight times two point eight two seven is three hundred forty nine point nine eight, so C zero is three hundred fifty milligrams per liter.",
-   "card": [
-    {
-     "at": 1,
-     "m": "C<sub>0</sub> = C e<sup>+kt</sup>"
+     "m": "= {{frac:ln 208.1 − ln 43.8|24 hr − 6 hr}} = {{frac:5.3380 − 3.7796|18 hr}} = {{frac:1.5584|18 hr}} = 0.08658"
     },
     {
      "at": 3,
-     "m": "kt = 0.0866 hr<sup>&minus;1</sup> &times; 12 hr = 1.0392"
-    },
-    {
-     "at": 4,
-     "m": "e<sup>1.0392</sup> = 2.827"
-    },
-    {
-     "at": 5,
-     "m": "C<sub>0</sub> = 123.8 mg/L &times; 2.827 = 349.98"
-    },
-    {
-     "at": 5,
-     "m": "<b>C<sub>0</sub> = 350 mg/L</b>"
+     "m": "<b>k = 0.0866 hr<sup>−1</sup></b>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "orders_steps",
+    "at": [
+     [
+      1,
+      2
+     ]
+    ]
+   }
   },
   {
+   "text": "C zero comes from working back from the twelve hour point with a plus sign, because it must exceed every later level: three hundred fifty milligrams per liter. The half-life, zero point six nine three over k, is eight hours. For ninety percent decomposed, ten percent remains, so C zero cancels and the time is the natural log of ten over k, twenty six point six hours. When the percent remaining is a power of one half, she counts half-lives instead: with a half-life of eight hours, losing eighty seven point five percent of seven hundred fifty milligrams leaves one eighth, which takes three half-lives, twenty four hours, whatever the starting amount.",
    "slide": "intro:22",
-   "reading": null,
-   "text": "The first order half-life is zero point six nine three over k. Zero point six nine three over zero point zero eight six six per hour is eight point zero zero two, so eight hours. She said, I expect you to give me half-life in units of time. For ninety percent decomposed, ten percent remains, so C is one tenth of C zero. The time to fall to C is the natural log of C zero minus the natural log of C, over k, so C zero cancels and the time is the natural log of ten over k. That is two point three zero two six over zero point zero eight six six per hour, twenty six point five eight nine, so twenty six point six hours.",
    "card": [
     {
      "at": 0,
-     "m": "t<sub>&frac12;</sub> = {{frac:0.693|k}}"
+     "m": "C<sub>0</sub> = C e<sup>+kt</sup>; kt = 0.0866 hr<sup>−1</sup> × 12 hr = 1.0392"
+    },
+    {
+     "at": 0,
+     "m": "C<sub>0</sub> = 123.8 mg/L × e<sup>1.0392</sup> = 123.8 × 2.827 = 349.98"
+    },
+    {
+     "at": 0,
+     "m": "<b>C<sub>0</sub> = 350 mg/L</b>   ✓ above 294.3"
     },
     {
      "at": 1,
-     "m": "= {{frac:0.693|0.0866 hr<sup>&minus;1</sup>}} = 8.002 &nbsp; <b>t<sub>&frac12;</sub> = 8 hr</b>"
+     "m": "t<sub>½</sub> = {{frac:0.693|0.0866 hr<sup>−1</sup>}} = 8.002 → <b>8 hr</b>"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "90% decomposed → 10% remains: C = 0.1 C<sub>0</sub>"
     },
     {
-     "at": 4,
-     "m": "t = {{frac:ln C<sub>0</sub> &minus; ln C|k}} = {{frac:ln 10|k}}"
+     "at": 2,
+     "m": "t = {{frac:ln C<sub>0</sub> − ln C|k}} = {{frac:ln 10|k}} = {{frac:2.3026|0.0866 hr<sup>−1</sup>}} = 26.589 → <b>26.6 hr</b>"
     },
     {
-     "at": 5,
-     "m": "= {{frac:2.3026|0.0866 hr<sup>&minus;1</sup>}} = 26.589 &nbsp; <b>t = 26.6 hr</b>"
+     "at": 3,
+     "m": "87.5% lost = 3 t<sub>½</sub> = 3 × 8 hr = <b>24 hr</b>; the 750 mg is not used"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "intro:22",
-   "reading": null,
-   "text": "Where the percentage lost is a power of one half, count half-lives instead. One half-life leaves fifty percent, two leave twenty five, and three leave twelve point five. With an eight hour half-life, seven hundred fifty milligrams decomposing by eighty seven point five percent takes three half-lives, twenty four hours, and the seven hundred fifty milligrams is not needed. Her true or false items pair rate with half-life. First order: the rate changes with concentration, and the half-life is constant. Zero order: the rate is constant, and the half-life depends on C zero.",
-   "card": [
-    {
-     "at": 1,
-     "m": "1 t<sub>&frac12;</sub> → 50% left &nbsp; 2 → 25% &nbsp; 3 → 12.5%"
-    },
-    {
-     "at": 2,
-     "m": "t<sub>&frac12;</sub> = 8 hr, 87.5% decomposed"
-    },
-    {
-     "at": 2,
-     "m": "3 &times; 8 hr = <b>24 hr</b>"
-    },
-    {
-     "at": 4,
-     "m": "first: rate changes, t<sub>&frac12;</sub> constant"
-    },
-    {
-     "at": 5,
-     "m": "zero: rate constant, t<sub>&frac12;</sub> depends on C<sub>0</sub>"
-    }
-   ]
-  },
-  {
+   "text": "The same stem with a zero order table falls from three hundred thirty eight to sixty two milligrams per milliliter. The losses are twenty four in four hours and thirty six in six hours, both six per hour, so it is zero order. k is the fall in concentration over the time it took, six milligrams per milliliter per hour, and working back two hours gives C zero, three hundred fifty milligrams per milliliter. The half-life, C zero over two k, is twenty nine point two hours, and ninety percent decomposed takes fifty two point five hours.",
    "slide": "intro:20",
-   "reading": null,
-   "text": "The same stem with a zero order table, at the same six times: three hundred thirty eight, three hundred fourteen, two hundred seventy eight, two hundred six, one hundred thirty four and sixty two milligrams per milliliter. Three hundred thirty eight minus three hundred fourteen is twenty four milligrams per milliliter in four hours, and three hundred fourteen minus two hundred seventy eight is thirty six in six hours. Both are six per hour, so zero order. For zero order, k equals C one minus C two, over t two minus t one. From the two and twenty four hour points, three hundred thirty eight minus two hundred six is one hundred thirty two milligrams per milliliter, over twenty two hours, so k is six milligrams per milliliter per hour.",
    "card": [
+    {
+     "at": 0,
+     "m": "t: 2, 6, 12, 24, 36, 48 hr"
+    },
     {
      "at": 0,
      "m": "C: 338, 314, 278, 206, 134, 62 mg/mL"
     },
     {
      "at": 1,
-     "m": "338 &minus; 314 = 24 mg/mL in 4 hr &nbsp; 314 &minus; 278 = 36 mg/mL in 6 hr"
-    },
-    {
-     "at": 2,
-     "m": "both 6 (mg/mL)/hr → <b>zero order</b>"
-    },
-    {
-     "at": 3,
-     "m": "k = {{frac:C<sub>1</sub> &minus; C<sub>2</sub>|t<sub>2</sub> &minus; t<sub>1</sub>}}"
-    },
-    {
-     "at": 4,
-     "m": "= {{frac:338 &minus; 206|24 &minus; 2}} = {{frac:132 mg/mL|22 hr}}"
-    },
-    {
-     "at": 4,
-     "m": "<b>k = 6 (mg/mL)/hr</b>"
-    }
-   ]
-  },
-  {
-   "slide": "intro:22",
-   "reading": null,
-   "text": "Working back, C zero equals C plus k t: three hundred thirty eight plus six times two, three hundred fifty milligrams per milliliter. The zero order half-life is C zero over two k. It comes from C equals C zero minus k t with C set to half of C zero, so a lower starting concentration gives a shorter half-life. Here it is three hundred fifty over two times six, which is three hundred fifty over twelve, twenty nine point one seven, so twenty nine point two hours, because milligrams per milliliter cancel. For ninety percent decomposed, ten percent of three hundred fifty is thirty five milligrams per milliliter. The time is three hundred fifty minus thirty five, over six: three hundred fifteen over six, fifty two point five hours.",
-   "card": [
-    {
-     "at": 0,
-     "m": "C<sub>0</sub> = C + kt = 338 + 6 &times; 2 = 338 + 12"
-    },
-    {
-     "at": 0,
-     "m": "<b>C<sub>0</sub> = 350 mg/mL</b>"
+     "m": "338 − 314 = 24 mg/mL in 4 hr   314 − 278 = 36 mg/mL in 6 hr"
     },
     {
      "at": 1,
-     "m": "t<sub>&frac12;</sub> = {{frac:C<sub>0</sub>|2k}}"
+     "m": "both 6 (mg/mL)/hr → <b>zero order</b>"
+    },
+    {
+     "at": 2,
+     "m": "k = {{frac:C<sub>1</sub> − C<sub>2</sub>|t<sub>2</sub> − t<sub>1</sub>}} = {{frac:338 − 206 mg/mL|24 hr − 2 hr}} = {{frac:132 mg/mL|22 hr}} → <b>k = 6 (mg/mL)/hr</b>"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>0</sub> = C + kt = 338 + 6 × 2 → <b>C<sub>0</sub> = 350 mg/mL</b>"
     },
     {
      "at": 3,
-     "m": "= {{frac:350 mg/mL|2 &times; 6 (mg/mL)/hr}} = {{frac:350|12}} = 29.17 &nbsp; <b>t<sub>&frac12;</sub> = 29.2 hr</b>"
+     "m": "t<sub>½</sub> = {{frac:350 mg/mL|2 × 6 (mg/mL)/hr}} = {{frac:350|12}} = 29.17 → <b>29.2 hr</b>"
+    },
+    {
+     "at": 3,
+     "m": "10% of 350 = 35 mg/mL; t = {{frac:350 − 35 mg/mL|6 (mg/mL)/hr}} = {{frac:315|6}} → <b>52.5 hr</b>"
+    }
+   ],
+   "fig": {
+    "key": "orders_steps",
+    "at": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      5
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Her Quiz one items test exactly this. A rate that depends on concentration means first order: the half-life is independent of concentration, and d C by d t equals minus k C. A rate independent of concentration means zero order: the half-life depends on concentration, and d C by d t equals minus k. Her zero order item is keyed as a rate independent of the amount in the body; for first order she said, The rate is highest at the top of the curve when the concentration is highest. In her poll on first order, thirty eight percent chose the key, a constant half-life, and forty four percent chose units of k of concentration per time, which are zero order units.",
+   "slide": "intro:22",
+   "card": [
+    {
+     "at": 1,
+     "m": "rate depends on C → first order: t<sub>½</sub> independent ✓   {{frac:dC|dt}} = −kC ✓"
+    },
+    {
+     "at": 2,
+     "m": "rate independent of C → zero order: t<sub>½</sub> depends on C<sub>0</sub>   {{frac:dC|dt}} = −k"
+    },
+    {
+     "at": 3,
+     "m": "first: rate highest at the top   zero: rate independent of the amount"
     },
     {
      "at": 4,
-     "m": "10% of 350 = 35 mg/mL"
+     "m": "first order: constant t<sub>½</sub> ✓"
     },
     {
-     "at": 5,
-     "m": "t = {{frac:350 &minus; 35|6}} = {{frac:315|6}} &nbsp; <b>t = 52.5 hr</b>"
+     "at": 4,
+     "m": "✗ constant rate   ✗ {{frac:dC|dt}} = −k   ✗ k in concentration per time: all zero order"
     }
-   ]
+   ],
+   "fig": null
+  },
+  {
+   "text": "An axis marked one, ten, one hundred, one thousand is a log scale even when it is not labelled, so a straight line on it means first order. She said, I expect you to give me half-life in units of time. Working back to C zero uses a plus sign, and k is kept to three or four decimal places. Both orders return in Module eight: some drugs are eliminated by first order at drug levels well below a concentration called K M, and near zero order well above it.",
+   "slide": "intro:24",
+   "card": [
+    {
+     "at": 0,
+     "m": "1, 10, 100, 1000 → log axis; straight line → first order"
+    },
+    {
+     "at": 1,
+     "m": "t<sub>½</sub> in hr or days, never hr<sup>−1</sup>"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>0</sub>: plus sign   k: 3 to 4 decimals"
+    },
+    {
+     "at": 3,
+     "m": "Module 8: C<sub>p</sub> ≪ K<sub>M</sub> → first order   C<sub>p</sub> ≫ K<sub>M</sub> → near zero order"
+    }
+   ],
+   "fig": null
   }
  ]
 }

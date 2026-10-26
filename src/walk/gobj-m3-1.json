@@ -1,11 +1,10 @@
 {
  "id": "gobj-m3-1",
- "title": "The pharmacokinetics of an IV infusion",
+ "title": "The pharmacokinetics of an I V infusion",
  "segs": [
   {
+   "text": "Module three, objective one. What happens to a drug given by I V infusion. An intravenous infusion runs drug into a vein at a constant rate for a set time, instead of giving it all at once as an I V bolus. The infusion rate, R, is the amount of drug put in per unit of time, most often milligrams per hour. A constant rate in is a zero order input, because it stays the same whatever the concentration. Elimination stays first order, exactly as after a bolus: a fixed fraction of the drug present leaves each hour, and that fraction is the elimination rate constant, k.",
    "slide": "inf:3",
-   "reading": null,
-   "text": "Module three, objective one. The pharmacokinetics of a drug given by I V infusion. An intravenous infusion runs drug into a vein at a constant rate for a set time, instead of giving it all at once as an I V bolus. The infusion rate, R, is the amount of drug put in per unit time, most often milligrams per hour. A constant rate of input is a zero order process, because it runs at the same rate whatever the concentration.",
    "card": [
     {
      "at": 2,
@@ -13,74 +12,137 @@
     },
     {
      "at": 3,
-     "m": "R = amount per time, mg/hr"
+     "m": "R: amount per time, mg/hr"
     },
     {
      "at": 4,
-     "m": "input: zero order"
+     "m": "input: zero order, R constant"
+    },
+    {
+     "at": 5,
+     "m": "elimination: first order; k = fraction leaving per hour, hr<sup>−1</sup>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      4,
+      1
+     ]
+    ]
+   }
   },
   {
+   "text": "She said, the only thing that's changing here is the input. At the start no drug is in the body, so C p, the plasma concentration, is zero and almost nothing leaves. The amount leaving each hour is k times the amount in the body, so it grows as drug builds up. While R is larger than the amount leaving each hour, drug accumulates and C p rises. The rise slows as the amount leaving each hour approaches R, and when the two are equal the level stops changing: this plateau is steady state, and its level is C s s, the steady state concentration.",
    "slide": "inf:3",
-   "reading": null,
-   "text": "Elimination stays first order, exactly as after a bolus. A fixed fraction of the drug present leaves per unit time, set by the elimination rate constant k, in per hour. The drug has not changed, only the way it enters the body has. The plasma concentration, C p, starts at zero and rises toward a plateau called steady state. At steady state, the rate of drug going in equals the rate going out, and the plateau concentration is C s s, in milligrams per liter.",
-   "card": [
-    {
-     "at": 0,
-     "m": "elimination: first order, k in hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 3,
-     "m": "C<sub>p</sub>: from zero, rising to a plateau"
-    },
-    {
-     "at": 4,
-     "m": "steady state: rate in = rate out → C<sub>ss</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "inf:12",
-   "reading": null,
-   "text": "Cessation means stopping the continuous infusion. After it there is no more input, so C p falls by ordinary first order elimination, and drug only leaves the body. She said, Our input is zero order, constant in, first order out. When we stop the in, then it's just out. The words constant rate or continuous infusion signal this pattern: zero order input with first order elimination.",
    "card": [
     {
      "at": 1,
-     "m": "after cessation: no input, first-order fall"
+     "m": "start: C<sub>p</sub> = 0, almost nothing leaves"
     },
     {
      "at": 2,
-     "m": "zero order in, first order out"
+     "m": "amount out per hour = k × amount in the body: grows as C<sub>p</sub> grows"
+    },
+    {
+     "at": 3,
+     "m": "R &gt; amount out per hour → C<sub>p</sub> rises"
     },
     {
      "at": 4,
-     "m": "constant rate, continuous infusion → zero order in"
+     "m": "R = amount out per hour → plateau, C<sub>ss</sub>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      4,
+      2
+     ]
+    ]
+   }
   },
   {
-   "slide": "inf:19",
-   "reading": null,
-   "text": "The point of infusing is precise control of the plasma concentration. With the basic parameters, you can predict C p at any time during or after the infusion. This objective is the frame for every calculation in the module, so it shows up inside multi part problems. Her stems read as clinical requests in the second person, such as you are asked to recommend, with a patient vignette, an indication and a body weight.",
+   "text": "Her opening poll for this module asked what rises when an I V bolus dose is raised. Only the concentration does; the clearance, the volume of plasma emptied of drug each hour, the half-life and the apparent volume of distribution stay the same, because they describe how this patient handles the drug, not how much was given. The same holds for an infusion: a higher R gives higher concentrations, and at the plateau the amount eliminated each hour equals the new R. k and the clearance do not change with R.",
+   "slide": "inf:1",
    "card": [
     {
      "at": 0,
+     "m": "her poll: bolus dose raised → what rises?"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> rises; Cl, t<sub>½</sub>, V<sub>D</sub> unchanged"
+    },
+    {
+     "at": 2,
+     "m": "textbook: R 30 → 40 mg/hr; amount out per hour at the plateau 30 → 40 mg/hr"
+    },
+    {
+     "at": 3,
+     "m": "k, Cl: unchanged by R"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Cessation means stopping the infusion. After it nothing comes in, so C p falls by first order elimination alone, the same fall as after a bolus. The fraction lost each hour is still k, so on a log plot the fall has the same slope whether the infusion stopped at steady state or before it. She said, Our input is zero order, constant in, first order out. When we stop the in, then it's just out.",
+   "slide": "inf:12",
+   "card": [
+    {
+     "at": 1,
+     "m": "after cessation: no input, first order fall"
+    },
+    {
+     "at": 2,
+     "m": "stopped at or before steady state: same k, same slope"
+    },
+    {
+     "at": 4,
+     "m": "zero order in, first order out; stop → only out"
+    }
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      1,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Why infuse at all? A constant input gives precise control of C p, and the textbook adds that for a drug with a narrow therapeutic window, such as heparin, it avoids wide swings between the highest and lowest levels. With R, k and the volume or the clearance known, C p can be predicted at any time during or after the infusion, and every calculation in this module does that.",
+   "slide": "inf:19",
+   "card": [
+    {
+     "at": 1,
      "m": "infusion: precise control of C<sub>p</sub>"
     },
     {
      "at": 1,
-     "m": "predict C<sub>p</sub> during or after the infusion"
+     "m": "narrow window, e.g. heparin: no wide peak and trough swings"
+    },
+    {
+     "at": 2,
+     "m": "R, k, V<sub>D</sub> or Cl → C<sub>p</sub> at any time"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Her practice problem asks for the rate of an infusion in two forms. Two hundred milligrams of an analgesic are dissolved in five hundred milliliters of five percent dextrose and run over twenty four hours. R is an amount per time, so it is the amount infused divided by the time it runs: eight point three three milligrams per hour. A pump is set in volume per time, so the same division uses the five hundred milliliters instead, and the hours are converted to minutes. The result, zero point three five milliliters per minute, is the same infusion described by the volume of solution instead of the amount of drug.",
    "slide": "inf:3",
-   "reading": null,
-   "text": "Her practice problem: two hundred milligrams of an analgesic are dissolved in five hundred milliliters of five percent dextrose and infused over twenty four hours. Find the rate in milligrams per hour, and in milliliters per minute. The rate is the amount infused divided by the time it runs. So R equals two hundred milligrams over twenty four hours, which is eight point three three milligrams per hour.",
    "card": [
     {
-     "at": 0,
+     "at": 1,
      "m": "200 mg in 500 mL, over 24 hr"
     },
     {
@@ -88,48 +150,77 @@
      "m": "R = {{frac:amount|time}}"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "R = {{frac:200 mg|24 hr}} = <b>8.33 mg/hr</b>"
-    }
-   ]
-  },
-  {
-   "slide": "inf:3",
-   "reading": null,
-   "text": "For the pump, use the volume instead of the drug amount. Five hundred milliliters over twenty four hours is twenty point eight three milliliters per hour. Then convert hours to minutes by multiplying by one hour per sixty minutes. Hours cancel, and the result is zero point three four seven milliliters per minute, which she reports as zero point three five milliliters per minute. The compounding detail, two hundred milligrams in five hundred milliliters, is in her stem for this later part.",
-   "card": [
+    },
     {
-     "at": 1,
+     "at": 3,
      "m": "{{frac:500 mL|24 hr}} = 20.83 mL/hr"
     },
     {
-     "at": 2,
-     "m": "{{frac:500 mL|24 hr}} × {{frac:1 hr|60 min}}"
+     "at": 3,
+     "m": "{{frac:500 mL|24 hr}} × {{frac:1 hr|60 min}} = 0.347 mL/min"
     },
     {
-     "at": 3,
-     "m": "= 0.347 mL/min → <b>0.35 mL/min</b>"
+     "at": 4,
+     "m": "<b>0.35 mL/min</b>"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Three rates in this module have three different units, and mixing them up is the common error. R is how much drug goes in each hour, in milligrams per hour; k is what fraction of the drug present leaves each hour, in per hour; and the clearance is how many liters of plasma are emptied of drug each hour, in liters per hour. A zero order input does not make a zero order drug: in her review poll the infusion was the zero order input, and elimination was first order after a bolus, an oral dose and an infusion alike. The words constant rate or continuous infusion signal this pattern.",
    "slide": null,
-   "reading": null,
-   "text": "Weight may come in pounds and V D, the apparent volume of distribution, in liters per kilogram, so convert before using them. V D is the volume that relates the amount of drug in the body to the plasma concentration. In her solution, one hundred ten pounds became fifty kilograms, because one kilogram is two point two pounds. Three liters per kilogram then became one hundred fifty liters, three liters per kilogram times fifty kilograms.",
    "card": [
     {
      "at": 1,
-     "m": "V<sub>D</sub>: links amount in body to C<sub>p</sub>"
+     "m": "R: amount per time, mg/hr"
+    },
+    {
+     "at": 1,
+     "m": "k: fraction per time, hr<sup>−1</sup>"
+    },
+    {
+     "at": 1,
+     "m": "Cl: volume per time, L/hr"
+    },
+    {
+     "at": 2,
+     "m": "bolus: all at once in; oral: first order in; infusion: zero order in"
+    },
+    {
+     "at": 2,
+     "m": "all three: first order out"
+    },
+    {
+     "at": 3,
+     "m": "constant rate, continuous infusion → zero order in, first order out"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her stems also need unit work first. V D, the apparent volume of distribution, is the volume that relates the amount of drug in the body to C p, and it may be given per kilogram. In her solution one hundred ten pounds became fifty kilograms, since one kilogram is two point two pounds, and three liters per kilogram then became one hundred fifty liters. Objective two explains the plateau, objective seven the fall after stopping, and objectives four and five add a loading dose so the patient does not wait for the climb.",
+   "slide": null,
+   "card": [
+    {
+     "at": 1,
+     "m": "V<sub>D</sub>: links the amount in the body to C<sub>p</sub>; may be L/kg"
     },
     {
      "at": 2,
      "m": "{{frac:110 lb|2.2 lb/kg}} = 50 kg"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "V<sub>D</sub> = 3 L/kg × 50 kg = <b>150 L</b>"
+    },
+    {
+     "at": 3,
+     "m": "→ plateau (obj. 2), fall after stopping (obj. 7), loading dose (obj. 4, 5)"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

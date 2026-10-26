@@ -179,6 +179,9 @@ const TOPICS = /*__TOPICS__*/[];"""
             fh.write(shell)
         os.replace(tmp_out, out)
         print(f'wrote {out}  ({len(shell)/1024/1024:.2f} MB)')
+        # beside the page, the build time alone: an open page fetches it to learn that a newer copy is published
+        with open(os.path.join(os.path.dirname(out), 'version.json'), 'w', encoding='utf-8') as fh:
+            json.dump({'built': built}, fh)
 
 
 if __name__ == '__main__':

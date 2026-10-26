@@ -3,172 +3,208 @@
  "title": "Plasma concentration after a single oral dose",
  "segs": [
   {
+   "text": "Module five, objective two. The plasma concentration after a single oral dose. C p is the plasma concentration of drug at a time t after the dose, in milligrams per liter. One equation gives it at any time from five inputs: F, the fraction of the dose absorbed; the dose, D zero; V D, the volume of distribution; k a, the absorption rate constant; and k, the elimination rate constant. It applies to a single oral dose in one compartment, with first order absorption and first order elimination.",
    "slide": "oral:10",
-   "reading": null,
-   "text": "Module five, objective two. Plasma concentration after a single oral dose. One equation gives the plasma concentration, C p, at any time after a single oral dose, as long as you know F, the dose, V D, k a and k. F is the fraction of the dose absorbed, V D the volume of distribution, k a the absorption rate constant, and k the elimination rate constant. C p comes out in milligrams per liter, the dose is in milligrams, V D is in liters, both rate constants are per hour, and t is the hours since the dose. It applies to a single oral dose in one compartment, with first order absorption and first order elimination, and it is on the equation sheet, page one.",
    "card": [
     {
      "at": 2,
-     "m": "C<sub>p</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}} &times; (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)"
+     "m": "C<sub>p</sub>: plasma concentration at time t, mg/L"
     },
     {
      "at": 3,
-     "m": "F: fraction absorbed &nbsp; V<sub>D</sub>: volume of distribution"
+     "m": "F: fraction absorbed &nbsp; D<sub>0</sub>: dose, mg &nbsp; V<sub>D</sub>: L"
     },
     {
      "at": 3,
-     "m": "k<sub>a</sub>: absorption &nbsp; k: elimination"
+     "m": "k<sub>a</sub>: absorption &nbsp; k: elimination, hr<sup>−1</sup>"
     },
     {
      "at": 4,
-     "m": "C<sub>p</sub> mg/L, D<sub>0</sub> mg, V<sub>D</sub> L, k<sub>a</sub> and k hr<sup>&minus;1</sup>, t hr"
+     "m": "one dose, one compartment, first order in and out"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "The equation is built as drug in minus drug out. Inside its bracket are two exponentials that start equal, so at time zero the bracket is zero and the oral curve starts at zero concentration. k a is the larger constant, so the absorption term shrinks fast and the elimination term, with k, shrinks slowly. Early on the difference between them grows, which is the rise; once the absorption term is nearly gone, the curve follows the elimination term alone, which is the slow fall.",
    "slide": "oral:10",
-   "reading": null,
-   "text": "Inside the bracket, e to the minus k t is drug going out, and the bracket as a whole is drug in minus drug out. At time zero the bracket is e to the zero minus e to the zero, which is zero, so the oral curve starts at zero concentration and has to rise. The fraction in front is not C zero, a starting concentration. It lumps F, the dose, k a, V D and the difference of the rate constants into one number. She said, this big portion right here does not represent C zero.",
    "card": [
     {
      "at": 0,
-     "m": "bracket = drug in &minus; drug out"
+     "m": "bracket: e<sup>−kt</sup> − e<sup>−k<sub>a</sub>t</sup> = drug in minus drug out"
     },
     {
      "at": 1,
-     "m": "t = 0: e<sup>0</sup> &minus; e<sup>0</sup> = 0, so the curve starts at zero"
+     "m": "t = 0: e<sup>0</sup> − e<sup>0</sup> = 0, so C<sub>p</sub> starts at 0"
     },
     {
      "at": 2,
-     "m": "{{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}} is not C<sub>0</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "oral:15",
-   "reading": null,
-   "text": "In her problems the equation often arrives with that fraction already worked out as one leading number, P, in milligrams per liter. Her slide Example two gives C p equals seventy five e to the minus zero point two two t, minus seventy five e to the minus two point seven five t, so P is seventy five. The larger exponent is k a, two point seven five per hour, and the smaller is k, zero point two two per hour. To find V D, set P equal to the fraction and rearrange. V D equals F times k a times the dose, divided by P times k a minus k. That line is the page one equation rearranged, and V D comes out in liters.",
-   "card": [
-    {
-     "at": 1,
-     "m": "C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup> &nbsp; P = 75"
-    },
-    {
-     "at": 2,
-     "m": "larger: k<sub>a</sub> = 2.75 hr<sup>&minus;1</sup> &nbsp; smaller: k = 0.22 hr<sup>&minus;1</sup>"
+     "m": "e<sup>−k<sub>a</sub>t</sup>: falls fast &nbsp; e<sup>−kt</sup>: falls slowly"
     },
     {
      "at": 3,
-     "m": "P = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}}"
+     "m": "rise, then the fall follows k alone"
+    }
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      2,
+      4
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The fraction in front combines F, the dose, k a, V D and the difference of the rate constants into one number. It is not C zero, the starting concentration of an I V bolus, because the bracket is always less than one, so no point on the oral curve reaches it. She said, this big portion right here does not represent C zero. F and the dose sit on the top, so doubling the dose doubles C p at every time, and V D sits on the bottom, so a larger volume gives a lower curve. The textbook adds that the timing of the curve, when it rises and falls, is set by k a and k alone.",
+   "slide": "oral:10",
+   "card": [
+    {
+     "at": 0,
+     "m": "{{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> − k)}}: one number"
+    },
+    {
+     "at": 1,
+     "m": "not C<sub>0</sub>: the bracket is always &lt; 1"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>0</sub> × 2 → every C<sub>p</sub> × 2; e.g. her Example 1, 500 → 1000 mg: front number 25.76 → 51.52 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>D</sub> up → every C<sub>p</sub> down"
     },
     {
      "at": 4,
-     "m": "V<sub>D</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|P (k<sub>a</sub> &minus; k)}}"
+     "m": "timing: k<sub>a</sub> and k only"
     }
-   ]
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      1,
+      4
+     ]
+    ]
+   }
   },
   {
+   "text": "The equation reads: C p equals F times k a times D zero, over V D times k a minus k, all times e to the minus k t minus e to the minus k a t. C p comes out in milligrams per liter with the dose in milligrams, V D in liters, both rate constants per hour and t in hours since the dose, and the line is on the equation sheet, page one.",
    "slide": "oral:10",
-   "reading": null,
-   "text": "Her in class practice two. A seven hundred fifty milligram oral dose, eighty four percent bioavailable, gives C p equals twenty three point two, times e to the minus zero point one eight two t minus e to the minus zero point eight seven two t, in milligrams per liter with t in hours. Find V D and the half-life of elimination. First read the rate constants off the exponents. The larger is k a, zero point eight seven two per hour, and the smaller is k, zero point one eight two per hour. The eighty four percent is used as a decimal, so F is zero point eight four.",
    "card": [
     {
-     "at": 1,
-     "m": "C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>) mg/L &nbsp; D<sub>0</sub> = 750 mg"
+     "at": 0,
+     "m": "C<sub>p</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> − k)}} × (e<sup>−kt</sup> − e<sup>−k<sub>a</sub>t</sup>)"
     },
-    {
-     "at": 2,
-     "m": "find: V<sub>D</sub> and t&frac12;"
-    },
-    {
-     "at": 4,
-     "m": "k<sub>a</sub> = 0.872 hr<sup>&minus;1</sup> &nbsp; k = 0.182 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 5,
-     "m": "F = 84% = 0.84"
-    }
-   ]
-  },
-  {
-   "slide": "oral:10",
-   "reading": null,
-   "text": "Set the leading number equal to the fraction. Twenty three point two milligrams per liter equals zero point eight four, times seven hundred fifty milligrams, times zero point eight seven two per hour, all divided by V D times zero point eight seven two minus zero point one eight two per hour. That difference is zero point six nine zero per hour. Rearrange so V D stands alone, with twenty three point two moving to the bottom.",
-   "card": [
     {
      "at": 1,
-     "m": "23.2 mg/L = {{frac:(0.84)(750 mg)(0.872 hr<sup>&minus;1</sup>)|V<sub>D</sub> (0.872 &minus; 0.182) hr<sup>&minus;1</sup>}}"
-    },
-    {
-     "at": 2,
-     "m": "0.872 &minus; 0.182 = 0.690 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 3,
-     "m": "V<sub>D</sub> = {{frac:(0.84)(750 mg)(0.872 hr<sup>&minus;1</sup>)|(23.2 mg/L)(0.690 hr<sup>&minus;1</sup>)}}"
+     "m": "C<sub>p</sub> mg/L, D<sub>0</sub> mg, V<sub>D</sub> L, k<sub>a</sub> and k hr<sup>−1</sup>, t hr; on the sheet, p. 1"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "oral:10",
-   "reading": null,
-   "text": "The top is zero point eight four times seven hundred fifty milligrams times zero point eight seven two per hour, which is five hundred forty nine point three six. The bottom is twenty three point two milligrams per liter times zero point six nine zero per hour, which is sixteen point zero zero eight. The per hour cancels, and milligrams divided by milligrams per liter leaves liters. Five hundred forty nine point three six divided by sixteen point zero zero eight is thirty four point three two liters, which she reports as thirty four point three liters.",
-   "card": [
-    {
-     "at": 1,
-     "m": "V<sub>D</sub> = {{frac:549.36|16.008}} L"
-    },
-    {
-     "at": 2,
-     "m": "{{frac:mg|mg/L}} = L"
-    },
-    {
-     "at": 3,
-     "m": "= 34.32 L &rarr; <b>V<sub>D</sub> = 34.3 L</b>"
-    }
-   ]
-  },
-  {
+   "text": "In her problems the equation often arrives with the fraction already worked out as one leading number, P, in milligrams per liter, and a question asks for a parameter inside it. Her slide Example two gives C p equals seventy five e to the minus zero point two two t, minus seventy five e to the minus two point seven five t. She expects the larger exponent to be read as k a, and the textbook explains why: most oral drugs have shorter absorption half-lives than elimination half-lives. To find V D, P is set equal to the fraction and the line is rearranged: V D equals F times k a times D zero, over P times k a minus k.",
    "slide": "oral:15",
-   "reading": null,
-   "text": "The second answer is the half-life. With no qualifier, half-life means the elimination half-life, so it uses k, the smaller exponent. t half equals zero point six nine three divided by k. She says this one is never on the equation sheet. Zero point six nine three divided by zero point one eight two per hour is three point eight hours, because one over per hour leaves hours.",
    "card": [
     {
+     "at": 0,
+     "m": "P: the leading number, mg/L"
+    },
+    {
      "at": 1,
+     "m": "C<sub>p</sub> = 75e<sup>−0.22t</sup> − 75e<sup>−2.75t</sup>: P = 75"
+    },
+    {
+     "at": 2,
+     "m": "larger exponent = k<sub>a</sub> = 2.75 hr<sup>−1</sup>; smaller = k = 0.22 hr<sup>−1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "P = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> − k)}}"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>D</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|P (k<sub>a</sub> − k)}}"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her in class practice two: a seven hundred fifty milligram oral dose, eighty four percent bioavailable, gives C p equals twenty three point two times the bracket of e to the minus zero point one eight two t and e to the minus zero point eight seven two t, and V D and the half-life of elimination are asked. The exponents give k a, zero point eight seven two per hour, and k, zero point one eight two per hour. V D is asked with P, F and the dose given, so the rearranged line answers it, and V D is thirty four point three liters. So each milligram per liter in the plasma corresponds to about thirty four milligrams of drug in the body.",
+   "slide": "oral:10",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> = 23.2(e<sup>−0.182t</sup> − e<sup>−0.872t</sup>) mg/L, D<sub>0</sub> = 750 mg, F = 0.84"
+    },
+    {
+     "at": 1,
+     "m": "k<sub>a</sub> = 0.872 hr<sup>−1</sup>, k = 0.182 hr<sup>−1</sup>"
+    },
+    {
+     "at": 1,
+     "m": "0.872 − 0.182 = 0.690 hr<sup>−1</sup>"
+    },
+    {
+     "at": 2,
+     "m": "V<sub>D</sub> = {{frac:(0.84)(750 mg)(0.872 hr<sup>−1</sup>)|(23.2 mg/L)(0.690 hr<sup>−1</sup>)}} = {{frac:549.36|16.008}} L"
+    },
+    {
+     "at": 2,
+     "m": "= 34.32 L → <b>V<sub>D</sub> = 34.3 L</b>"
+    },
+    {
+     "at": 3,
+     "m": "amount in body = C<sub>p</sub> × V<sub>D</sub>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "The second answer is the half-life, and with no qualifier that means the elimination half-life, so it uses k, the smaller exponent. She said, If it's just T one half, then your assumption is that I'm looking for the half-life of elimination. The half-life equals zero point six nine three over k, a line she says is never on the equation sheet, and here it is three point eight hours.",
+   "slide": "oral:15",
+   "card": [
+    {
+     "at": 0,
      "m": "no qualifier: elimination half-life, use k"
     },
     {
      "at": 2,
-     "m": "t&frac12; = {{frac:0.693|k}}"
+     "m": "t½ = {{frac:0.693|k}}"
     },
     {
-     "at": 4,
-     "m": "t&frac12; = {{frac:0.693|0.182 hr<sup>&minus;1</sup>}} = <b>3.8 hr</b>"
+     "at": 2,
+     "m": "t½ = {{frac:0.693|0.182 hr<sup>−1</sup>}} = <b>3.8 hr</b>"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "In her slide Example two, five hundred milligrams at eighty seven percent bioavailability gives a V D of six point three liters. Quiz three gave thirty times the bracket of e to the minus zero point one three three t and e to the minus zero point nine three four t, a five hundred milligram dose and eighty two percent bioavailability, and keyed fifteen point nine liters. Dividing the dose by thirty, as if thirty were C zero, gives sixteen point seven, close enough to look right, and that is the trap. The other traps are leaving out V D and losing the k a minus k term when rearranging.",
    "slide": "oral:15",
-   "reading": null,
-   "text": "How she tests it. She gives the two exponential equation with the fraction already worked out and asks for something inside it, most often V D, with F and the dose supplied. She expects you to pick the larger exponent as k a without being told. Units are fixed in a sentence of the stem, such as assume units of micrograms per milliliter for C p and hours for time, and milligrams per liter is numerically the same. In her slide Example two, five hundred milligrams at eighty seven percent bioavailability gives a V D of six point three liters. The usual traps are reading the leading number as C zero, leaving out V D, and losing the k a minus k term.",
    "card": [
     {
+     "at": 0,
+     "m": "Example 2: V<sub>D</sub> = {{frac:(0.87)(500)(2.75)|(75)(2.53)}} = <b>6.3 L</b>"
+    },
+    {
+     "at": 1,
+     "m": "Quiz 3: V<sub>D</sub> = {{frac:(0.82)(500)(0.934)|(30)(0.934 − 0.133)}} = <b>15.9 L</b>"
+    },
+    {
      "at": 2,
-     "m": "larger exponent = k<sub>a</sub>"
+     "m": "✗ 500 ÷ 30 = 16.7 (P read as C<sub>0</sub>)"
     },
     {
      "at": 3,
-     "m": "mg/L = mcg/mL"
-    },
-    {
-     "at": 4,
-     "m": "Example 2: D<sub>0</sub> = 500 mg, F = 0.87 &rarr; V<sub>D</sub> = 6.3 L"
-    },
-    {
-     "at": 5,
-     "m": "✗ P read as C<sub>0</sub> &nbsp; ✗ V<sub>D</sub> left out &nbsp; ✗ (k<sub>a</sub> &minus; k) lost"
+     "m": "✗ V<sub>D</sub> left out &nbsp; ✗ (k<sub>a</sub> − k) lost"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

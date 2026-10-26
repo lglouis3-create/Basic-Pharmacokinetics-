@@ -3,47 +3,58 @@
  "title": "Response rises with dose, up to a maximum",
  "segs": [
   {
+   "text": "Module seven B, objective one. How the response rises with dose, up to a maximum. Pharmacokinetics, P K, relates the drug concentration to time, and pharmacodynamics, P D, relates the concentration at the site of action, the receptor, to the pharmacologic response that is observed. She said, Pharmacodynamics is the relationship between drug concentration and pharmacological response. The link between them is also called the exposure response, concentration response or concentration effect relationship, and it is used in drug approval to judge safety, efficacy and benefit risk, and to derive dosing information.",
    "slide": "pd:3",
-   "reading": null,
-   "text": "Module seven B, objective one. How the response rises with dose, up to a maximum. Pharmacodynamics, or P D, is the relationship between the drug concentration at the site of action, the receptor, and the pharmacologic response that is observed. The link between pharmacokinetics, or P K, and P D has other names: the exposure response, concentration response or concentration effect relationship. Exposure response information is used in drug approval to judge safety, efficacy and benefit risk, and to derive dosing information.",
    "card": [
+    {
+     "at": 2,
+     "m": "PK: concentration against time"
+    },
     {
      "at": 2,
      "m": "PD: concentration at the receptor → observed response"
     },
     {
-     "at": 3,
+     "at": 4,
      "m": "PK–PD = exposure-response = concentration-response = concentration-effect"
     },
     {
      "at": 4,
      "m": "drug approval: safety, efficacy, benefit-risk, dosing"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "As the dose increases, the concentration at the receptor site increases, and the response increases, but only up to a maximum effect, E max. The maximum comes when all the receptors are saturated, that is, all are occupied by drug. Past that point a higher dose still raises the concentration at the receptor site, but with no free receptors left the response does not rise. Plotted against dose on an ordinary axis, the response rises steeply at low doses and then flattens. So the same added dose gives a large gain in response at low doses, where many receptors are free, and the smallest gain near the maximum.",
    "slide": "pd:4",
-   "reading": null,
-   "text": "As the dose increases, the concentration at the receptor site increases, and the response increases, but only up to a maximum effect, E max. Plotted against dose on an ordinary axis, the response rises steeply at low doses and then flattens. So the same dose change gives a large increase in response at low doses, and the smallest gain near the maximum.",
    "card": [
     {
      "at": 0,
-     "m": "dose ↑ → concentration at receptor ↑ → response ↑, up to E<sub>max</sub>"
+     "m": "dose higher → concentration at the receptor higher → response higher, up to E<sub>max</sub>"
     },
     {
      "at": 1,
-     "m": "ordinary dose axis: steep, then flat"
+     "m": "E<sub>max</sub>: all receptors saturated"
     },
     {
      "at": 2,
-     "m": "smallest gain near the maximum"
+     "m": "past saturation: concentration still rises, response does not"
+    },
+    {
+     "at": 3,
+     "m": "ordinary dose axis: steep, then flat"
+    },
+    {
+     "at": 4,
+     "m": "same dose step: large gain low, smallest gain near E<sub>max</sub>"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Plotted against the log of the dose, the same data form a sigmoid, an S shaped curve, flat at the bottom, steep in the middle and flat at the top. The top of the S is the maximum, where the receptors are saturated. The middle of the S is close to a straight line, so there the effect is a straight line function of the log concentration: E equals m log C plus e, with m the slope and e a constant. A larger m means a larger change in effect for each tenfold change in concentration.",
    "slide": "pd:5",
-   "reading": null,
-   "text": "Plotted against log dose, the response is a sigmoid, an S shaped curve. The maximum is reached when all receptors are saturated. So a higher dose then raises the concentration without raising the response. The middle of the S is close to a straight line. Plotted as effect against log concentration, it is a straight line with slope m.",
    "card": [
     {
      "at": 0,
@@ -54,83 +65,108 @@
      "m": "top: all receptors saturated"
     },
     {
-     "at": 4,
-     "m": "middle: effect vs log C, straight, slope m"
-    }
-   ]
-  },
-  {
-   "slide": "pd:5",
-   "reading": null,
-   "text": "After an I V bolus, in that straight range, the effect falls in a straight line with time. E equals E zero minus k times m times t, divided by two point three. E is the effect at time t in hours, E zero the effect at time zero, k the first order elimination rate constant per hour, and m the slope of effect against log concentration. The two point three is there because the effect line uses base ten logarithms, and it is combined with the base ten I V bolus line, log C equals log C zero minus k t over two point three. A larger k or a larger m makes the effect fall faster. Here m is a slope, not a mass or a concentration.",
-   "card": [
-    {
-     "at": 1,
-     "m": "E = E<sub>0</sub> &minus; {{frac:kmt|2.3}}"
-    },
-    {
      "at": 2,
-     "m": "k in hr<sup>&minus;1</sup>, t in hr, m = slope of E vs log C"
+     "m": "middle: E = m log C + e, slope m"
     },
     {
      "at": 3,
-     "m": "E = m log C + e &nbsp; with &nbsp; log C = log C<sub>0</sub> &minus; {{frac:kt|2.3}}"
-    },
-    {
-     "at": 4,
-     "m": "k ↑ or m ↑ → effect falls faster"
-    },
-    {
-     "at": 5,
-     "m": "m: a slope, not a mass or a concentration"
+     "m": "m larger → more effect per tenfold change in C"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "pd:4",
-   "reading": null,
-   "text": "On a plasma level against time curve, three features of the effect are read against the minimum effective concentration, M E C, also written C eff. Onset is the time at which the rising level first reaches the M E C. Duration is how long the level stays at or above it, the time the drug is in its effective range. Intensity is how far the peak rises above the M E C. So intensity is a height above the M E C, and duration a length of time above it. Above the minimum toxic concentration, M T C, toxicity appears, and the range between the M E C and the M T C is the therapeutic window.",
+   "text": "After an I V bolus the concentration falls by the same fraction each hour, so its log falls in a straight line with time. In the straight range the effect is m times the log concentration plus a constant, so the effect also falls in a straight line, by the same amount each hour. The relation is E equals E zero minus k m t over two point three, where E zero is the effect at time zero, k the elimination rate constant per hour, and m the slope. k and m are both on the top, so faster elimination or a steeper slope makes the effect fall faster. The two point three is there because the effect line uses base ten logs.",
+   "slide": "pd:5",
    "card": [
     {
      "at": 0,
-     "m": "read against the MEC (C<sub>eff</sub>)"
+     "m": "log C = log C<sub>0</sub> − {{frac:kt|2.3}}"
     },
     {
      "at": 1,
-     "m": "onset: level first reaches the MEC"
+     "m": "E = m log C + e → a straight line in time"
     },
     {
      "at": 2,
-     "m": "duration (t<sub>eff</sub>): time at or above the MEC"
+     "m": "E = E<sub>0</sub> − {{frac:kmt|2.3}}"
+    },
+    {
+     "at": 2,
+     "m": "k in hr<sup>−1</sup>, t in hr, m = slope of E against log C"
     },
     {
      "at": 3,
-     "m": "intensity: height of the peak above the MEC"
+     "m": "k or m larger → effect falls faster"
+    },
+    {
+     "at": 4,
+     "m": "2.3: base-10 logs"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "On a plasma level against time curve, the effect is read against the minimum effective concentration, M E C or C eff, the lowest level at which it appears. Onset is the time at which the rising level first reaches the M E C. She said, when does the drug reach a therapeutic concentration? That's our onset. Duration is how long the level stays at or above the M E C, a time, and intensity is how far the peak rises above it, a difference of two concentrations. Above the minimum toxic concentration, M T C, toxicity appears, and the range from the M E C to the M T C is the therapeutic window.",
+   "slide": "pd:4",
+   "card": [
+    {
+     "at": 0,
+     "m": "read against the MEC (C<sub>eff</sub>), a concentration"
+    },
+    {
+     "at": 1,
+     "m": "onset: the level first reaches the MEC"
+    },
+    {
+     "at": 4,
+     "m": "duration (t<sub>eff</sub>): time at or above the MEC, in hr"
+    },
+    {
+     "at": 4,
+     "m": "intensity: peak concentration minus MEC, in mg/L"
     },
     {
      "at": 5,
      "m": "therapeutic window: MEC to MTC"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "In her items, the response is not proportional to the dose at every dose; it rises to a maximum, and a given dose change gains least near that maximum. It stops rising because all receptors are saturated, not because the concentration stops rising or elimination speeds up. Against log dose the curve is an S, and steep then flat is the ordinary dose axis. In the effect line m is a slope, not a mass or a concentration, and the effect falls in a straight line, not by a fixed fraction each hour. Absolute bioavailability is a P K comparison, not a use of exposure response information. Onset, intensity and duration depend on the dose and the pharmacokinetics, and objective two works this out for duration.",
    "slide": "pd:11",
-   "reading": null,
-   "text": "Her questions on this objective are concepts, not numbers. They ask the definition of pharmacodynamics and its other names, and the uses of exposure response information in drug approval. They ask how to read the plots: flattening toward the maximum on an ordinary dose axis, an S on a log dose axis, and onset, duration and intensity each measured against the M E C.",
    "card": [
     {
      "at": 0,
-     "m": "concept items, no numbers"
+     "m": "not proportional at every dose: up to a maximum"
+    },
+    {
+     "at": 0,
+     "m": "smallest gain: near the maximum"
     },
     {
      "at": 1,
-     "m": "definitions; uses in drug approval"
+     "m": "reason: receptors saturated"
     },
     {
      "at": 2,
-     "m": "ordinary axis: flattens; log axis: S; onset, duration, intensity vs MEC"
+     "m": "log axis: S. ordinary axis: steep, then flat"
+    },
+    {
+     "at": 3,
+     "m": "m: a slope. effect: straight line in time"
+    },
+    {
+     "at": 4,
+     "m": "absolute bioavailability: a PK comparison"
+    },
+    {
+     "at": 5,
+     "m": "onset, intensity, duration: depend on dose and PK → objective two"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

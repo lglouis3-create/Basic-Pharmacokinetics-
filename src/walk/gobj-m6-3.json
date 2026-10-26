@@ -1,194 +1,270 @@
 {
  "id": "gobj-m6-3",
- "title": "Concentrations after repeated IV infusions",
+ "title": "Repeated intermittent IV infusions",
  "segs": [
   {
+   "text": "Module six, objective three. Concentrations after repeated intermittent I V infusions. An intermittent infusion gives each dose at a constant rate over a set time, such as two hours, and then stops until the next dose. The reason is to prevent high concentrations and the side effects that go with them, since many drugs are better tolerated infused slowly than given as an I V bolus. In this objective R is the infusion rate, the dose divided by the infusion time, in milligrams per hour; the stem gives a dose and a duration, so R comes first. No new equation is needed.",
    "slide": "rep:21",
-   "reading": null,
-   "text": "Module six, objective three. Concentrations after repeated intermittent I V infusions. An intermittent I V infusion gives each dose slowly over a set time instead of all at once, which prevents high concentrations and the side effects that go with them. No new equation is needed. During each infusion the level rises by the single infusion equation from Module three. When it stops, the level falls by first order elimination, where a fixed fraction of the drug present is removed per unit time.",
    "card": [
     {
      "at": 2,
-     "m": "slow infusion: no high concentrations, fewer side effects"
-    },
-    {
-     "at": 4,
-     "m": "during: single-infusion equation, Module 3"
-    },
-    {
-     "at": 5,
-     "m": "after: first-order fall"
-    }
-   ]
-  },
-  {
-   "slide": "rep:22",
-   "reading": null,
-   "text": "The infusion rate, R, is the dose divided by the infusion time, in milligrams per hour. It always comes first, because the stem gives a dose and a duration while the equation needs a rate. During an infusion, C p equals R over V D times k, times one minus e to the minus k t. V D times k is the clearance in liters per hour, so R over V D k is in milligrams per liter. That is C s s, the plateau a continuous infusion at rate R would reach, and short infusions stop well below it. Here t is the time the pump has run, never the spacing between infusions.",
-   "card": [
-    {
-     "at": 0,
-     "m": "R = {{frac:dose|infusion time}} (mg/hr)"
-    },
-    {
-     "at": 2,
-     "m": "C<sub>p</sub> = {{frac:R|V<sub>D</sub>k}} (1 &minus; e<sup>&minus;kt</sup>)"
+     "m": "each dose at a constant rate over a set time, then off"
     },
     {
      "at": 3,
-     "m": "{{frac:mg/hr|L/hr}} = mg/L"
+     "m": "slow input: no transient high levels, fewer side effects"
     },
     {
      "at": 4,
-     "m": "C<sub>ss</sub> = {{frac:R|Cl}}"
+     "m": "R = {{frac:dose|infusion time}} (mg/hr): here R is the infusion rate"
     },
     {
      "at": 5,
-     "m": "t = infusion time only"
+     "m": "pump on: Module 3 infusion line; pump off: first-order fall"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "While the pump runs, drug enters at a constant rate, and the amount leaving per hour grows as the level grows, because elimination is first order. So the level climbs, more slowly as it goes, toward C s s, the steady state concentration a continuous infusion would reach, where rate in equals rate out. How far it gets depends on how long the pump runs compared with the half life, half way after one half life, so a short infusion stops well below C s s. A faster rate raises C s s and every level on the climb in proportion, without changing the time course. When the pump stops, nothing comes in, and the level falls by first order elimination from where it stopped.",
    "slide": "rep:22",
-   "reading": null,
-   "text": "The same drug at the same rate for the same duration reaches the same end of infusion concentration, C end, every time, and that value is the starting point for the fall. She said, So that C zero is gonna be the concentration at the end of the infusion, right? After an infusion stops, C equals C end times e to the minus k t, with t the time since that infusion ended, not since it started. Because elimination is first order, the contributions of separate infusions add, which is superposition. For two infusions, C equals C end e to the minus k t one, plus C end e to the minus k t two.",
    "card": [
     {
      "at": 0,
-     "m": "C<sub>end</sub> = the C<sub>0</sub> of the fall"
+     "m": "rate in constant; amount out per hr grows with C<sub>p</sub>"
     },
-    {
-     "at": 2,
-     "m": "C = C<sub>end</sub>e<sup>&minus;kt</sup>, t since that infusion ended"
-    },
-    {
-     "at": 3,
-     "m": "first order &rarr; contributions add"
-    },
-    {
-     "at": 4,
-     "m": "C = C<sub>end</sub>e<sup>&minus;kt<sub>1</sub></sup> + C<sub>end</sub>e<sup>&minus;kt<sub>2</sub></sup>"
-    }
-   ]
-  },
-  {
-   "slide": "rep:23",
-   "reading": null,
-   "text": "Her Example four. Three hundred milligrams is infused over two hours, and a second three hundred milligrams starts six hours after the first started, again over two hours. k is zero point one five per hour and V D is fifteen liters. Find the level at the end of the first infusion, and four hours after the second infusion stops. First, R is three hundred milligrams over two hours, one hundred fifty milligrams per hour. The clearance, V D k, is fifteen liters times zero point one five per hour, two point two five liters per hour. One hundred fifty over two point two five is sixty six point six seven milligrams per liter.",
-   "card": [
     {
      "at": 1,
-     "m": "300 mg over 2 hr; second 300 mg starts at 6 hr"
+     "m": "climb toward C<sub>ss</sub>, where rate in = rate out"
     },
     {
      "at": 2,
-     "m": "k = 0.15 hr<sup>&minus;1</sup>, V<sub>D</sub> = 15 L"
+     "m": "fraction of C<sub>ss</sub> reached = 1 − e<sup>−kt</sup>; 1 t<sub>½</sub> → ½; short infusion: C<sub>end</sub> ≪ C<sub>ss</sub>"
+    },
+    {
+     "at": 3,
+     "m": "R × 2 → C<sub>ss</sub> × 2, same time course"
     },
     {
      "at": 4,
+     "m": "pump off: first-order fall"
+    }
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "In symbols, during an infusion C p equals R over V D k, times one minus e to the minus k t, with t the time the pump has run. V D, the volume of distribution, times k is the clearance, Cl, the volume of plasma cleared per hour, so R over V D k is C s s. R is on top and clearance underneath, so a faster rate raises the level in proportion and a larger clearance lowers it. After the pump stops, C equals C end, the level at the end of the infusion, times e to the minus k t, with t counted from that end. She said, So that C zero is gonna be the concentration at the end of the infusion, right?",
+   "slide": "rep:22",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> = {{frac:R|V<sub>D</sub>k}} (1 − e<sup>−kt</sup>), t = the time the pump has run"
+    },
+    {
+     "at": 1,
+     "m": "V<sub>D</sub>k = Cl (L/hr); {{frac:mg/hr|L/hr}} = mg/L; C<sub>ss</sub> = {{frac:R|Cl}}"
+    },
+    {
+     "at": 2,
+     "m": "R larger → C<sub>p</sub> larger; Cl larger → C<sub>p</sub> smaller"
+    },
+    {
+     "at": 3,
+     "m": "C = C<sub>end</sub>e<sup>−kt</sup>, t since that infusion ended"
+    }
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The same drug at the same rate for the same duration ends at the same C end every time. Because elimination is first order, each infusion follows its own curve and the contributions add, which is superposition from objective one. She said, the concentrations from each administration of the dose will be additive over time. For two infusions, C equals C end e to the minus k t one, plus C end e to the minus k t two, with t one the time since the first infusion ended and t two the time since the second ended.",
+   "slide": "rep:25",
+   "card": [
+    {
+     "at": 0,
+     "m": "same R, same duration → same C<sub>end</sub>"
+    },
+    {
+     "at": 1,
+     "m": "first order → contributions add"
+    },
+    {
+     "at": 3,
+     "m": "C = C<sub>end</sub>e<sup>−kt<sub>1</sub></sup> + C<sub>end</sub>e<sup>−kt<sub>2</sub></sup>"
+    },
+    {
+     "at": 3,
+     "m": "t<sub>1</sub>, t<sub>2</sub>: each from the end of its own infusion"
+    }
+   ],
+   "fig": {
+    "key": "two_infusions_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Her Example four: three hundred milligrams over two hours, then a second three hundred milligrams over two hours starting six hours after the first started, with k zero point one five per hour and V D fifteen liters. She asks the level at the end of the first infusion, and four hours after the second infusion stops. Part a is the infusion line with t equal to the two hour infusion time. C s s would be sixty six point six seven milligrams per liter, but two hours is less than half the four point six two hour half life, so only about a quarter of it is reached: seventeen point two eight milligrams per liter. The second infusion is identical, so it also ends at seventeen point two eight.",
+   "slide": "rep:24",
+   "card": [
+    {
+     "at": 0,
+     "m": "300 mg over 2 hr; second 300 mg starts at 6 hr; k = 0.15 hr<sup>−1</sup>, V<sub>D</sub> = 15 L"
+    },
+    {
+     "at": 2,
      "m": "R = {{frac:300 mg|2 hr}} = 150 mg/hr"
     },
     {
-     "at": 5,
-     "m": "V<sub>D</sub>k = (15 L)(0.15 hr<sup>&minus;1</sup>) = 2.25 L/hr"
+     "at": 3,
+     "m": "V<sub>D</sub>k = (15 L)(0.15 hr<sup>−1</sup>) = 2.25 L/hr; C<sub>ss</sub> = {{frac:150 mg/hr|2.25 L/hr}} = 66.67 mg/L"
     },
     {
-     "at": 6,
-     "m": "{{frac:150 mg/hr|2.25 L/hr}} = 66.67 mg/L"
-    }
-   ]
-  },
-  {
-   "slide": "rep:24",
-   "reading": null,
-   "text": "Next, the fraction of that plateau reached in two hours, with t equal to the infusion time. One minus e to the minus zero point one five times two is one minus zero point seven four zero eight, which is zero point two five nine two. So at the end of the first infusion, C p is sixty six point six seven milligrams per liter times zero point two five nine two, which is seventeen point two eight milligrams per liter. That answers part a. The second infusion is identical, so it also ends at seventeen point two eight milligrams per liter.",
-   "card": [
-    {
-     "at": 1,
-     "m": "1 &minus; e<sup>&minus;(0.15)(2)</sup> = 1 &minus; 0.7408 = 0.2592"
+     "at": 3,
+     "m": "t<sub>½</sub> = {{frac:0.693|0.15 hr<sup>−1</sup>}} = 4.62 hr; 1 − e<sup>−(0.15)(2)</sup> = 1 − 0.7408 = 0.2592"
     },
     {
-     "at": 2,
-     "m": "C<sub>p</sub> = (66.67 mg/L)(0.2592) = <b>17.28 mg/L</b>"
+     "at": 3,
+     "m": "<b>C<sub>end</sub> = (66.67 mg/L)(0.2592) = 17.28 mg/L</b>"
     },
     {
      "at": 4,
      "m": "infusion 2 also ends at 17.28 mg/L"
     }
-   ]
+   ],
+   "fig": {
+    "key": "two_infusions_steps",
+    "at": [
+     [
+      3,
+      1
+     ]
+    ]
+   }
   },
   {
+   "text": "For part b, a number line of start and stop times gives each t. Infusion one runs from zero to two hours and infusion two from six to eight, so the time asked is twelve hours. The first infusion has been declining for ten hours and the second for four. The first leaves three point eight six milligrams per liter and the second nine point four eight, and their sum is thirteen point three four milligrams per liter. Her stated answer is thirteen point three three, and the difference is rounding. The second infusion gives most of the total because it has had less time to decline.",
    "slide": "rep:25",
-   "reading": null,
-   "text": "For part b, draw a number line of start and stop times. Infusion one runs from zero to two hours, and infusion two runs from six to eight hours. The time asked for is eight plus four, which is twelve hours. Give each infusion its own t, counted from the end of that infusion. For the first, twelve minus two is ten hours, and for the second, twelve minus eight is four hours.",
    "card": [
     {
      "at": 1,
-     "m": "infusion 1: 0 to 2 hr &nbsp; infusion 2: 6 to 8 hr"
+     "m": "infusion 1: 0 to 2 hr; infusion 2: 6 to 8 hr; asked: 8 + 4 = 12 hr"
     },
     {
      "at": 2,
-     "m": "asked: 8 + 4 = 12 hr"
+     "m": "t<sub>1</sub> = 12 − 2 = 10 hr; t<sub>2</sub> = 12 − 8 = 4 hr"
+    },
+    {
+     "at": 3,
+     "m": "17.28 e<sup>−(0.15)(10)</sup> = 17.28 × 0.2231 = 3.86 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "17.28 e<sup>−(0.15)(4)</sup> = 17.28 × 0.5488 = 9.48 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "<b>C = 3.86 + 9.48 = 13.34 mg/L</b>"
     },
     {
      "at": 4,
-     "m": "t<sub>1</sub> = 12 &minus; 2 = 10 hr &nbsp; t<sub>2</sub> = 12 &minus; 8 = 4 hr"
+     "m": "her answer: 13.33 mg/L, rounding"
     }
-   ]
+   ],
+   "fig": {
+    "key": "two_infusions_steps",
+    "at": [
+     [
+      3,
+      4
+     ]
+    ]
+   }
   },
   {
-   "slide": "rep:25",
-   "reading": null,
-   "text": "The first infusion leaves seventeen point two eight milligrams per liter times e to the minus zero point one five times ten. That is seventeen point two eight times zero point two two three one, or three point eight six milligrams per liter. The second leaves seventeen point two eight times e to the minus zero point one five times four. That is seventeen point two eight times zero point five four eight eight, or nine point four eight milligrams per liter. Adding them, three point eight six plus nine point four eight is thirteen point three four milligrams per liter. Her stated answer is thirteen point three three, and the difference is rounding.",
+   "text": "Her stems start the second infusion a stated number of hours after the first starts, so the spacing is start to start, while each decay time runs from the end of its own infusion. The usual trap is one t for both infusions; the second is putting the six hour spacing into the infusion line. The elimination parameter may come as k, as a half life, or as a clearance with a volume, so convert to k and R first. A quiz item asks the assumption behind intermittent infusions: the concentrations from repeated infusions are additive, and the option that infusion is the best way to reach high levels quickly is the opposite of its purpose.",
+   "slide": "rep:23",
    "card": [
     {
      "at": 0,
-     "m": "17.28 e<sup>&minus;(0.15)(10)</sup>"
+     "m": "spacing: start to start; each t: from the end of its own infusion"
     },
     {
      "at": 1,
-     "m": "= 17.28 &times; 0.2231 = 3.86 mg/L"
+     "m": "not one t for both; not the 6 hr spacing in the infusion line"
     },
     {
      "at": 2,
-     "m": "17.28 e<sup>&minus;(0.15)(4)</sup>"
+     "m": "k, t<sub>½</sub>, or Cl with V<sub>D</sub> → k and R first"
     },
     {
      "at": 3,
-     "m": "= 17.28 &times; 0.5488 = 9.48 mg/L"
-    },
-    {
-     "at": 4,
-     "m": "C = 3.86 + 9.48 = <b>13.34 mg/L</b>"
-    },
-    {
-     "at": 5,
-     "m": "her answer: 13.33 mg/L, rounding"
+     "m": "✓ additive; not the fastest way to high levels"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "This objective joins two earlier ones: the climb during each infusion is the Module three infusion line, and the adding of leftovers is the superposition of objective one. A closing part may ask what a continuous infusion at the same rate would reach, which is R over Cl, sixty six point six seven milligrams per liter here, far above what a two hour infusion reaches. The textbook adds that when infusions are repeated at a fixed interval until steady state, the accumulation factor from objective two, one over one minus e to the minus k tau, multiplies the peak of a single infusion to give the steady state peak.",
    "slide": "rep:26",
-   "reading": null,
-   "text": "How she tests it. Her stems give two infusions of the same dose and duration, the second starting a stated number of hours after the first starts. The elimination parameter arrives as k, as a half-life, or as a clearance with a volume, so convert to k and to R before anything else. The usual trap is using the same t for both infusions, when each t runs from the end of its own infusion. The second trap is putting the six hour spacing into the infusion equation, whose t is the infusion time only. A closing part can ask what a continuous infusion at the same rate would reach, which is R over Cl.",
    "card": [
     {
+     "at": 0,
+     "m": "Module 3 infusion line + superposition (objective 1)"
+    },
+    {
+     "at": 1,
+     "m": "continuous: C<sub>ss</sub> = {{frac:R|Cl}} = 66.67 mg/L ≫ 17.28 mg/L"
+    },
+    {
      "at": 2,
-     "m": "k, t&frac12;, or Cl with V<sub>D</sub> &rarr; k and R first"
-    },
-    {
-     "at": 3,
-     "m": "✗ same t for both infusions"
-    },
-    {
-     "at": 4,
-     "m": "✗ 6 hr spacing in the infusion equation"
-    },
-    {
-     "at": 5,
-     "m": "continuous: C<sub>ss</sub> = {{frac:R|Cl}}"
+     "m": "repeated to steady state: steady-state peak = single-infusion peak × {{frac:1|1 − e<sup>−kτ</sup>}} (textbook)"
     }
-   ]
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      1,
+      2
+     ]
+    ]
+   }
   }
  ]
 }

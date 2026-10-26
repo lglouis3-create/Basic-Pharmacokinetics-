@@ -3,108 +3,159 @@
  "title": "Concentrations in a two compartment model",
  "segs": [
   {
+   "text": "Module two, objective six. Predicting concentrations after an I V bolus in a two compartment model. The plasma concentration is the sum of two falling first order terms, a fast one for distribution and a slow one for elimination. A and B are their intercepts on the log concentration axis, in milligrams per liter, and alpha and beta are their slopes, in per hour. She said, the A or alpha and the B or beta, those are what we call our microconstants. She gives you these four numbers, or the equation that contains them, and you substitute; you do not derive them.",
    "slide": "ivb:21",
-   "reading": null,
-   "text": "Module two, objective six. Predicting drug concentration after an I V bolus in a multi compartment model. For a two compartment drug, the plasma concentration is the sum of two falling exponential terms. C p equals A e to the minus alpha t, plus B e to the minus beta t. The alpha term is the fast one, for distribution, and the beta term is the slow one, for elimination. Alpha is always the larger exponent, because distribution is faster than elimination, but the intercepts A and B can be either way round. At time zero both exponentials equal one, so C p zero equals A plus B. She gives you the four parameters, and you substitute them.",
    "card": [
     {
-     "at": 3,
-     "m": "C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup>"
+     "at": 2,
+     "m": "C<sub>p</sub> = distribution term + elimination term"
     },
     {
-     "at": 4,
-     "m": "a: distribution, fast; b: elimination, slow"
+     "at": 3,
+     "m": "A, B: intercepts, mg/L; a (alpha), b (beta): slopes, hr<sup>−1</sup>"
     },
     {
      "at": 5,
-     "m": "a > b always; A and B either way"
-    },
-    {
-     "at": 6,
-     "m": "t = 0: C<sub>p</sub><sup>0</sup> = A + B"
+     "m": "given: A, B, a, b, or the equation"
     }
-   ]
+   ],
+   "fig": {
+    "key": "twocpt_steps",
+    "at": [
+     [
+      2,
+      1
+     ]
+    ]
+   }
   },
   {
-   "slide": "ivb:22",
-   "reading": null,
-   "text": "Her deck practice uses theophylline: C p equals twelve e to the minus five point eight t, plus eighteen e to the minus zero point one six t. What is the plasma level three hours after an I V bolus dose? Read the parameters: A is twelve milligrams per liter, alpha is five point eight per hour, B is eighteen milligrams per liter, and beta is zero point one six per hour. Alpha is much larger than beta, as it must be. At time zero, twelve plus eighteen gives thirty milligrams per liter.",
+   "text": "Why does each term behave as it does? Late in the curve the plasma level falls on one straight line, the beta term alone, so its intercept is B and its slope beta, and the elimination half-life comes from beta alone. Early, the curve lies above that line, and the difference is the alpha term, with intercept A and slope alpha. Distribution is faster than elimination, so alpha is always the larger constant and the alpha term shrinks to almost nothing within the first hours; A and B can be either way round. Both intercepts are in proportion to the dose, so doubling the dose doubles A, B and every concentration, while alpha and beta do not change.",
+   "slide": "ivb:21",
+   "card": [
+    {
+     "at": 1,
+     "m": "late: Be<sup>−bt</sup> alone → beta half-life from b"
+    },
+    {
+     "at": 2,
+     "m": "early excess = Ae<sup>−at</sup>"
+    },
+    {
+     "at": 3,
+     "m": "a &gt; b always; A, B either way"
+    },
+    {
+     "at": 4,
+     "m": "dose × 2: A, B, every C<sub>p</sub> × 2; a, b unchanged"
+    }
+   ],
+   "fig": {
+    "key": "twocpt_steps",
+    "at": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The relation is C p equals A e to the minus alpha t plus B e to the minus beta t. At time zero both exponentials equal one, so C p zero equals A plus B. The beta half-life is zero point six nine three over beta, the first order half-life applied to the elimination phase; beta is on the bottom, so a smaller beta gives a longer half-life. Divide by beta directly. She said, Do not get all complicated. The overall rate constant k is a different number from beta, so zero point six nine three over k is not the beta half-life.",
+   "slide": "ivb:23",
    "card": [
     {
      "at": 0,
-     "m": "C<sub>p</sub> = 12e<sup>&minus;5.8t</sup> + 18e<sup>&minus;0.16t</sup>"
+     "m": "C<sub>p</sub> = Ae<sup>−at</sup> + Be<sup>−bt</sup>"
     },
-    {
-     "at": 2,
-     "m": "A = 12 mg/L, a = 5.8 hr<sup>&minus;1</sup>; B = 18 mg/L, b = 0.16 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 3,
-     "m": "5.8 ≫ 0.16 ✓"
-    },
-    {
-     "at": 4,
-     "m": "C<sub>p</sub><sup>0</sup> = 12 + 18 = <b>30 mg/L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:22",
-   "reading": null,
-   "text": "Now each term at three hours. The distribution term is twelve times e to the minus five point eight times three, which is twelve times e to the minus seventeen point four. That is effectively zero milligrams per liter. The elimination term is eighteen times e to the minus zero point one six times three, which is eighteen times e to the minus zero point four eight. That exponential is zero point six one eight eight, so the term is eleven point one four milligrams per liter. Adding the two terms, zero plus eleven point one four gives eleven point one four milligrams per liter.",
-   "card": [
     {
      "at": 1,
-     "m": "12 × e<sup>&minus;(5.8)(3)</sup> = 12 × e<sup>&minus;17.4</sup>"
+     "m": "t = 0: e<sup>0</sup> = 1 → C<sub>p</sub><sup>0</sup> = A + B"
     },
     {
      "at": 2,
-     "m": "≈ 0 mg/L"
-    },
-    {
-     "at": 3,
-     "m": "18 × e<sup>&minus;(0.16)(3)</sup> = 18 × e<sup>&minus;0.48</sup>"
-    },
-    {
-     "at": 4,
-     "m": "= 18 × 0.6188 = 11.14 mg/L"
+     "m": "beta half-life: t½ = {{frac:0.693|b}}; b ↓ → t½ ↑"
     },
     {
      "at": 5,
-     "m": "C<sub>p</sub> = 0 + 11.14 = <b>11.14 mg/L</b>"
+     "m": "wrong: {{frac:0.693|k}}; k is not b"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "ivb:23",
-   "reading": null,
-   "text": "The elimination half-life of a two compartment drug is the beta half-life, and it comes from beta alone. The beta half-life equals zero point six nine three divided by beta. Do not calculate k first; divide zero point six nine three by beta directly. For theophylline, zero point six nine three over zero point one six per hour gives four point three three hours. Per hour in the bottom leaves hours. Using alpha here is the usual mistake.",
+   "text": "Her practice problem gives theophylline as C p equals twelve e to the minus five point eight t, plus eighteen e to the minus zero point one six t, and asks the plasma level three hours after the dose. The first check is the order of the terms: five point eight is much larger than zero point one six, so the first term is distribution and the second elimination. At time zero the level is thirty milligrams per liter. The beta half-life is four point three three hours. By three hours the distribution term is effectively zero, so the level is the elimination term alone, eleven point one four milligrams per liter.",
+   "slide": "ivb:22",
    "card": [
     {
+     "at": 0,
+     "m": "C<sub>p</sub> = 12e<sup>−5.8t</sup> + 18e<sup>−0.16t</sup>"
+    },
+    {
      "at": 1,
-     "m": "t&frac12;<sub>&beta;</sub> = {{frac:0.693|b}}"
+     "m": "A = 12 mg/L, a = 5.8 hr<sup>−1</sup>; B = 18 mg/L, b = 0.16 hr<sup>−1</sup>; 5.8 ≫ 0.16 ✓"
     },
     {
      "at": 2,
-     "m": "✗ k first &nbsp; ✗ alpha"
+     "m": "C<sub>p</sub><sup>0</sup> = 12 + 18 = <b>30 mg/L</b>"
     },
     {
      "at": 3,
-     "m": "t&frac12;<sub>&beta;</sub> = {{frac:0.693|0.16 hr<sup>&minus;1</sup>}} = <b>4.33 hr</b>"
+     "m": "t½ = {{frac:0.693|0.16 hr<sup>−1</sup>}} = <b>4.33 hr</b>"
+    },
+    {
+     "at": 4,
+     "m": "12e<sup>−(5.8)(3)</sup> = 12e<sup>−17.4</sup> ≈ 0 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "18e<sup>−(0.16)(3)</sup> = 18 × 0.6188 = 11.14 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "<b>C<sub>p</sub> = 0 + 11.14 = 11.14 mg/L</b>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "twocpt_steps",
+    "at": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      4
+     ]
+    ]
+   }
   },
   {
+   "text": "The same four numbers give the rate constants of the model. k, the overall elimination rate constant, describes elimination from the central compartment. It is larger than beta, because in the elimination phase drug returning from the tissue enters the plasma, so the plasma level falls more slowly than k alone would make it. k equals alpha times beta times the sum A plus B, over the cross term, A times beta plus B times alpha. k two one, tissue to central, is the cross term over A plus B. k one two, central to tissue, is A times B times the square of beta minus alpha, over A plus B times the cross term.",
    "slide": "ivb:24",
-   "reading": null,
-   "text": "The same four numbers give the rate constants of the model, all in per hour. Each uses the cross term, A times beta plus B times alpha, in which each intercept is multiplied by the other phase's slope, so work it out once. The overall elimination constant k equals alpha times beta times A plus B, divided by the cross term. It is a different number from beta. k two one equals the cross term divided by A plus B. k one two equals A times B times the square of beta minus alpha, divided by A plus B times the cross term. All three are on the equation sheet.",
    "card": [
     {
      "at": 1,
-     "m": "cross term: Ab + Ba"
+     "m": "k: elimination from the central compartment, hr<sup>−1</sup>"
     },
     {
      "at": 2,
+     "m": "k &gt; b: drug returning from tissue slows the fall"
+    },
+    {
+     "at": 3,
+     "m": "cross term: Ab + Ba, each intercept × the other phase slope; work it out once"
+    },
+    {
+     "at": 3,
      "m": "k = {{frac:ab(A + B)|Ab + Ba}}"
     },
     {
@@ -113,117 +164,114 @@
     },
     {
      "at": 5,
-     "m": "k<sub>12</sub> = {{frac:AB(b &minus; a)<sup>2</sup>|(A + B)(Ab + Ba)}}"
+     "m": "k<sub>12</sub> = {{frac:AB(b − a)<sup>2</sup>|(A + B)(Ab + Ba)}}"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "The central volume, V p, is the dose divided by A plus B, which is D zero over C p zero, the same idea as V D in one compartment. At the same dose, a larger A plus B means a smaller V p. When a dose and an area under the curve are given instead, V p equals D zero over k times A U C. The tissue volume, V t, equals V p times k one two over k two one: the faster drug moves out to the tissue compared with back, the larger the tissue volume.",
    "slide": "ivb:25",
-   "reading": null,
-   "text": "The volumes come next. The central volume, V p, equals the dose D zero divided by A plus B. Milligrams over milligrams per liter leaves liters. When a dose and an area under the curve are given instead, V p equals D zero divided by k times A U C from zero to infinity. The tissue volume, V t, equals V p times k one two, divided by k two one.",
-   "card": [
-    {
-     "at": 1,
-     "m": "V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}}"
-    },
-    {
-     "at": 2,
-     "m": "{{frac:mg|mg/L}} = L"
-    },
-    {
-     "at": 3,
-     "m": "V<sub>p</sub> = {{frac:D<sub>0</sub>|k × AUC<sub>0</sub><sup>&infin;</sup>}}"
-    },
-    {
-     "at": 4,
-     "m": "V<sub>t</sub> = {{frac:V<sub>p</sub>k<sub>12</sub>|k<sub>21</sub>}}"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:21",
-   "reading": null,
-   "text": "Her in-class sheet: a two hundred fifty milligram bolus, A eight point four five and B five point three two milligrams per liter, alpha two point one eight and beta zero point one one four per hour. The beta half-life is zero point six nine three over beta, six point zero eight hours. C p zero is A plus B, thirteen point seven seven milligrams per liter. The four hour alpha term is eight point four five times e to the minus two point one eight times four, zero point zero zero one. The beta term is five point three two times e to the minus zero point one one four times four, three point three seven two milligrams per liter. Adding gives three point three seven milligrams per liter.",
    "card": [
     {
      "at": 0,
-     "m": "250 mg; A = 8.45, B = 5.32 mg/L; a = 2.18, b = 0.114 hr<sup>&minus;1</sup>"
+     "m": "V<sub>p</sub> = {{frac:D<sub>0</sub>|A + B}} = {{frac:D<sub>0</sub>|C<sub>p</sub><sup>0</sup>}}; {{frac:mg|mg/L}} = L"
     },
     {
      "at": 1,
-     "m": "t&frac12;<sub>&beta;</sub> = {{frac:0.693|0.114 hr<sup>&minus;1</sup>}} = <b>6.08 hr</b>"
+     "m": "A + B ↑, same D<sub>0</sub> → V<sub>p</sub> ↓"
     },
     {
      "at": 2,
+     "m": "V<sub>p</sub> = {{frac:D<sub>0</sub>|k × AUC<sub>0</sub><sup>∞</sup>}}"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>t</sub> = {{frac:V<sub>p</sub>k<sub>12</sub>|k<sub>21</sub>}}: k<sub>12</sub> ↑ → V<sub>t</sub> ↑"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her in class sheet gives a two hundred fifty milligram bolus, A eight point four five and B five point three two milligrams per liter, alpha two point one eight and beta zero point one one four per hour. The beta half-life is six point zero eight hours, and C p zero is thirteen point seven seven milligrams per liter. At four hours the alpha term is about one thousandth of a milligram per liter, so the level is nearly all beta term, three point three seven milligrams per liter. The central volume is eighteen point one six liters.",
+   "slide": "ivb:25",
+   "card": [
+    {
+     "at": 0,
+     "m": "250 mg; A = 8.45, B = 5.32 mg/L; a = 2.18, b = 0.114 hr<sup>−1</sup>; a ≫ b ✓"
+    },
+    {
+     "at": 1,
+     "m": "t½ = {{frac:0.693|0.114 hr<sup>−1</sup>}} = <b>6.08 hr</b>"
+    },
+    {
+     "at": 1,
      "m": "C<sub>p</sub><sup>0</sup> = 8.45 + 5.32 = <b>13.77 mg/L</b>"
     },
     {
+     "at": 2,
+     "m": "8.45e<sup>−(2.18)(4)</sup> + 5.32e<sup>−(0.114)(4)</sup> = 0.001 + 3.372 = <b>3.37 mg/L</b>"
+    },
+    {
      "at": 3,
-     "m": "8.45e<sup>&minus;(2.18)(4)</sup> = 0.001"
+     "m": "V<sub>p</sub> = {{frac:250 mg|13.77 mg/L}} = <b>18.16 L</b>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "For the rate constants, the cross term comes first, twelve point five six. Then k is zero point two seven two per hour, more than twice beta, which is zero point one one four per hour, so k and beta are clearly different numbers. k two one is zero point nine one two per hour, and k one two is one point one zero nine per hour.",
+   "slide": "ivb:24",
+   "card": [
+    {
+     "at": 0,
+     "m": "Ab + Ba = (8.45)(0.114) + (5.32)(2.18) = 0.9633 + 11.5976 = 12.5609"
+    },
+    {
+     "at": 1,
+     "m": "k = {{frac:(2.18)(0.114)(13.77)|12.5609}} = {{frac:3.4221|12.5609}} = <b>0.272 hr<sup>−1</sup></b>"
+    },
+    {
+     "at": 1,
+     "m": "k 0.272 vs b 0.114 hr<sup>−1</sup>: k is not b"
+    },
+    {
+     "at": 2,
+     "m": "k<sub>21</sub> = {{frac:12.5609|13.77}} = <b>0.912 hr<sup>−1</sup></b>"
+    },
+    {
+     "at": 2,
+     "m": "k<sub>12</sub> = {{frac:(8.45)(5.32)(0.114 − 2.18)<sup>2</sup>|(13.77)(12.5609)}} = {{frac:191.88|172.96}} = <b>1.109 hr<sup>−1</sup></b>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "She gives the equation, or A, B, alpha and beta, and does not say two compartment. Four parts recur in this order: the elimination half-life, the initial concentration, a concentration at a stated hour, and the central volume. The elimination half-life is always zero point six nine three over the smaller constant, beta; using alpha, or calculating k first, is the usual mistake. She said, It will be written as beta half-life, because I am going to ask you for either the beta half-life or the elimination half-life, so that there is no confusion. The overall elimination rate constant means k, not beta. When she lists A, B, alpha and beta instead of an equation, she adds k, k one two, k two one and the central volume.",
+   "slide": "ivb:23",
+   "card": [
+    {
+     "at": 1,
+     "m": "beta t½ → C<sub>p</sub><sup>0</sup> → C<sub>p</sub> at t → V<sub>p</sub>"
+    },
+    {
+     "at": 1,
+     "m": "her review: 15e<sup>−3.4t</sup> + 7e<sup>−0.12t</sup>, 500 mg: t½ = {{frac:0.693|0.12 hr<sup>−1</sup>}} = <b>5.8 hr</b>; V<sub>p</sub> = {{frac:500 mg|22 mg/L}} = <b>22.7 L</b>"
+    },
+    {
+     "at": 2,
+     "m": "beta half-life: smaller constant; wrong: a, or k first"
     },
     {
      "at": 4,
-     "m": "5.32e<sup>&minus;(0.114)(4)</sup> = 3.372 mg/L"
+     "m": "overall elimination rate constant = k, not b"
     },
     {
      "at": 5,
-     "m": "<b>C<sub>p</sub> = 0.001 + 3.372 = 3.37 mg/L</b> at 4 hr"
+     "m": "A, B, a, b listed → also k, k<sub>12</sub>, k<sub>21</sub>, V<sub>p</sub>"
     }
-   ]
-  },
-  {
-   "slide": "ivb:24",
-   "reading": null,
-   "text": "The central volume is two hundred fifty milligrams over thirteen point seven seven milligrams per liter, which is eighteen point one six liters. The cross term is eight point four five times zero point one one four, which is zero point nine six three three, plus five point three two times two point one eight, which is eleven point five nine seven six. Together that is twelve point five six zero nine. Then k is two point one eight times zero point one one four times thirteen point seven seven, which is three point four two two one, divided by twelve point five six zero nine. That gives k of zero point two seven two per hour.",
-   "card": [
-    {
-     "at": 0,
-     "m": "V<sub>p</sub> = {{frac:250 mg|13.77 mg/L}} = <b>18.16 L</b>"
-    },
-    {
-     "at": 1,
-     "m": "Ab + Ba = (8.45)(0.114) + (5.32)(2.18) = 0.9633 + 11.5976"
-    },
-    {
-     "at": 2,
-     "m": "= 12.5609"
-    },
-    {
-     "at": 3,
-     "m": "k = {{frac:(2.18)(0.114)(13.77)|12.5609}} = {{frac:3.4221|12.5609}}"
-    },
-    {
-     "at": 4,
-     "m": "<b>k = 0.272 hr<sup>&minus;1</sup></b>"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:24",
-   "reading": null,
-   "text": "k two one is twelve point five six zero nine over thirteen point seven seven, which is zero point nine one two per hour. For k one two, the top is eight point four five times five point three two times the square of zero point one one four minus two point one eight, which is one hundred ninety one point eight eight. The bottom is thirteen point seven seven times twelve point five six zero nine, which is one hundred seventy two point nine six. So k one two is one point one zero nine per hour. Her questions give only the equation or the four parameters, and ask, in order, the elimination half-life, the initial concentration, a concentration at a stated hour and the central volume.",
-   "card": [
-    {
-     "at": 0,
-     "m": "k<sub>21</sub> = {{frac:12.5609|13.77}} = <b>0.912 hr<sup>&minus;1</sup></b>"
-    },
-    {
-     "at": 1,
-     "m": "top: (8.45)(5.32)(0.114 &minus; 2.18)<sup>2</sup> = 191.88"
-    },
-    {
-     "at": 2,
-     "m": "bottom: (13.77)(12.5609) = 172.96"
-    },
-    {
-     "at": 3,
-     "m": "k<sub>12</sub> = {{frac:191.88|172.96}} = <b>1.109 hr<sup>&minus;1</sup></b>"
-    },
-    {
-     "at": 4,
-     "m": "t&frac12;<sub>&beta;</sub> → C<sub>p</sub><sup>0</sup> → C<sub>p</sub> at t → V<sub>p</sub>"
-    }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

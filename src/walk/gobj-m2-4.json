@@ -3,99 +3,178 @@
  "title": "One compartment versus two compartments",
  "segs": [
   {
+   "text": "Module two, objective four. One compartment versus two compartments. Both models describe a drug given by I V bolus. The difference is whether the drug spreads evenly through the body at once, which is one compartment, or reaches some tissues before others, which needs two or more. She said, if I tell you that we're giving an I V bolus dose, now what do I have to tell you? I have to tell you that it follows a one compartment model or a two compartment.",
    "slide": "ivb:14",
-   "reading": null,
-   "text": "Module two, objective four. Single versus multiple compartment models. Both models start with an I V bolus. The difference is whether the drug spreads evenly through the body at once, or reaches some tissues before others. Even spread at once is the one compartment model. Reaching some tissues first calls for two or more compartments.",
    "card": [
     {
      "at": 2,
      "m": "both: IV bolus"
     },
     {
+     "at": 3,
+     "m": "even spread at once → one compartment; some tissues first → two or more"
+    },
+    {
      "at": 4,
-     "m": "one compartment: even spread at once"
-    },
-    {
-     "at": 5,
-     "m": "two or more: some tissues reached first"
+     "m": "the model is stated or shown"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "ivb:20",
-   "reading": null,
-   "text": "You tell them apart on a plot of plasma concentration, C p, on a log scale against time. A first order decline is a straight line on that plot, so one compartment gives a single straight line. Two compartments give a steep early segment, the distribution phase, while drug is still moving into the tissues. It is followed by a straight, shallower segment, the elimination phase. By then the drug is evenly distributed, so its fall reflects elimination. In this module, her graphs use a log scale even when the axis is not labelled log.",
-   "card": [
-    {
-     "at": 1,
-     "m": "one compartment: one straight line on log C<sub>p</sub>"
-    },
-    {
-     "at": 2,
-     "m": "two compartments: steep distribution phase"
-    },
-    {
-     "at": 3,
-     "m": "then shallower straight elimination phase"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:21",
-   "reading": null,
-   "text": "The equations show the same difference. For one compartment, C p equals C p zero times e to the minus k t. One exponential term means one straight line on a log plot. For two compartments, C p equals A e to the minus alpha t, plus B e to the minus beta t. Two terms mean two phases. Here k, alpha and beta are rate constants in per hour, and C p zero, A and B are concentrations in milligrams per liter. Both lines are on the equation sheet.",
-   "card": [
-    {
-     "at": 1,
-     "m": "C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup> &nbsp; one term, one line"
-    },
-    {
-     "at": 3,
-     "m": "C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup> &nbsp; two terms, two phases"
-    },
-    {
-     "at": 5,
-     "m": "k, a, b in hr<sup>&minus;1</sup>; C<sub>p</sub><sup>0</sup>, A, B in mg/L"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:19",
-   "reading": null,
-   "text": "When data do not follow one compartment, a curve is fitted by the method of residuals, also called feathering or peeling. The extrapolated straight line is subtracted from the observed data to get the fast, alpha, phase. Feathering is conceptual only. She said, I want you to conceptually know what that is, but I'm not gonna ask you to do that. Instead she gives you A, B, alpha and beta, and asks what they represent and why they are used.",
+   "text": "With one compartment the drug is evenly spread from the start, so the only process lowering the plasma concentration, C p, is elimination. A fixed fraction leaves per hour, so on a log concentration axis the points fall on one straight line, with the same slope from the first sample to the last. Her graphs in this module use a log axis even when the axis is not labelled log. So a single straight line on a log axis after an I V bolus means one compartment.",
+   "slide": "ivb:13",
    "card": [
     {
      "at": 0,
-     "m": "method of residuals: feathering, peeling"
+     "m": "one compartment: only elimination lowers C<sub>p</sub>"
     },
     {
      "at": 1,
-     "m": "observed &minus; extrapolated line → fast alpha phase"
+     "m": "log C<sub>p</sub>: one straight line, one slope"
     },
     {
-     "at": 4,
-     "m": "given: A, B, alpha, beta"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:13",
-   "reading": null,
-   "text": "Her questions use this in two ways. One is a log scale graph after an I V bolus with the model withheld. A single straight line is one compartment, and a line with a steeper early segment is two compartments. The other is a stem that never says two compartment but gives a biexponential equation, or A, B, alpha and beta. Recognising the model is then the first step of the calculation. Without a graph, she has to tell you which model the drug follows. She said, if I tell you that we're giving an I V bolus dose, now what do I have to tell you? I have to tell you that it follows a one compartment model or a two compartment.",
-   "card": [
-    {
      "at": 2,
-     "m": "graph: one line → one compartment; steep start → two"
+     "m": "unlabelled axis: still a log scale"
     },
     {
      "at": 3,
-     "m": "stem: biexponential, or A, B, alpha, beta → two compartments"
+     "m": "one straight line → one compartment"
+    }
+   ],
+   "fig": {
+    "key": "bolus1_steps",
+    "at": [
+     [
+      1,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "text": "With two compartments the drug starts in the plasma and the tissues it reaches quickly, and part of it then moves out into the slower tissues while elimination goes on. So in the early period the plasma level falls for two reasons, distribution and elimination, and the fall is steep: this is the distribution phase. Once drug moves into the tissues as fast as it moves back, the plasma and tissue levels fall together and only elimination lowers them, so the curve becomes a straight, shallower line: the elimination phase. From then on the body behaves as one compartment. If the blood is sampled too late, the distribution phase can be missed entirely, and the curve looks like one compartment.",
+   "slide": "ivb:20",
+   "card": [
+    {
+     "at": 1,
+     "m": "early: distribution + elimination → steep fall, distribution phase"
+    },
+    {
+     "at": 2,
+     "m": "later: elimination only → straight, shallower line, elimination phase"
+    },
+    {
+     "at": 4,
+     "m": "sampled late: distribution phase missed, looks like one compartment"
+    }
+   ],
+   "fig": {
+    "key": "twocpt_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The equations say the same. One compartment: C p equals C p zero times e to the minus k t, one exponential term, so one straight line on a log axis. Two compartments: C p equals A e to the minus alpha t plus B e to the minus beta t, two exponential terms, so two phases. Alpha and beta are rate constants in per hour, and A and B are concentrations in milligrams per liter. The term with the larger constant, alpha, shrinks to almost nothing early, which is why the early segment is steep and the late segment follows the beta term alone. The more alpha and beta differ, the more the second compartment matters; when they are close, one compartment predicts nearly the same levels.",
+   "slide": "ivb:21",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>−kt</sup>: one term, one line"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = Ae<sup>−at</sup> + Be<sup>−bt</sup>: two terms, two phases"
+    },
+    {
+     "at": 3,
+     "m": "a (alpha), b (beta), k: hr<sup>−1</sup>; A, B, C<sub>p</sub><sup>0</sup>: mg/L"
+    },
+    {
+     "at": 4,
+     "m": "a ≫ b: the a term → 0 early; late curve = Be<sup>−bt</sup>"
     },
     {
      "at": 5,
-     "m": "no graph: the model is stated"
+     "m": "a and b far apart → two compartments matter; close → one compartment nearly the same"
     }
-   ]
+   ],
+   "fig": {
+    "key": "twocpt_steps",
+    "at": [
+     [
+      2,
+      1
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "When data do not follow one compartment, A, B, alpha and beta are found by the method of residuals, also called feathering or peeling. The straight late segment is extended back to time zero; its intercept is B and its slope gives beta. Subtracting that extended line from the observed early points leaves the residuals, which fall on a second, steeper line with intercept A and slope alpha. She said, I want you to conceptually know what that is, but I'm not gonna ask you to do that. She gives A, B, alpha and beta, and asks what they represent and why they are used.",
+   "slide": "ivb:19",
+   "card": [
+    {
+     "at": 1,
+     "m": "late line extended to t = 0: intercept B, slope b"
+    },
+    {
+     "at": 2,
+     "m": "observed − extended line = residuals: intercept A, slope a"
+    },
+    {
+     "at": 4,
+     "m": "given: A, B, a, b; asked: what they represent, why used"
+    }
+   ],
+   "fig": {
+    "key": "twocpt_steps",
+    "at": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Her questions use this in two ways. One is a log axis graph after an I V bolus with the model withheld: one straight line is one compartment, and a steep early segment followed by a straight line is two. The other is a stem that never says two compartment but gives a two term equation, or A, B, alpha and beta; recognising the model is the first step of the calculation. When she says only I V bolus, with no graph and no second term, she means one compartment, first order. The steep early segment is distribution, not faster elimination. Objective five explains why some drugs need the second compartment, and objective six calculates with it.",
+   "slide": "ivb:13",
+   "card": [
+    {
+     "at": 1,
+     "m": "graph: one line → one; steep start, then line → two"
+    },
+    {
+     "at": 2,
+     "m": "Ae<sup>−at</sup> + Be<sup>−bt</sup>, or A, B, a, b → two compartments"
+    },
+    {
+     "at": 3,
+     "m": "IV bolus only → one compartment, first order"
+    },
+    {
+     "at": 4,
+     "m": "steep start = distribution"
+    }
+   ],
+   "fig": null
   }
  ]
 }

@@ -3,9 +3,8 @@
  "title": "Kinetics after an oral dose",
  "segs": [
   {
+   "text": "Module five, objective one. The kinetics of a drug given outside the blood vessels. Extravascular means given outside the blood vessels; in this course that means by mouth, so the drug must be absorbed before it reaches the blood. She said, first order means that the rate depends on how much is there. An I V bolus puts all the drug in at once, an I V infusion puts it in at a constant, zero order rate, and an oral dose goes in by a first order process: first order in, first order out.",
    "slide": "oral:4",
-   "reading": null,
-   "text": "Module five, objective one. The kinetics of a drug after extravascular administration. Extravascular means the dose is given outside the blood vessels, and in this course that means by mouth, so the drug has to be absorbed before it reaches the blood. An I V bolus puts all the drug in at once, and an I V infusion puts it in at a constant, zero order rate. An oral dose goes in by a first order process instead: first order in, first order out.",
    "card": [
     {
      "at": 2,
@@ -13,75 +12,57 @@
     },
     {
      "at": 3,
+     "m": "first order: the rate depends on the amount present"
+    },
+    {
+     "at": 4,
      "m": "IV bolus: all at once &nbsp; IV infusion: zero order in"
     },
     {
      "at": 4,
      "m": "oral: first order in, first order out"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "oral:5",
-   "reading": null,
-   "text": "Three amounts, all in milligrams, follow the dose. D G I is the drug still in the gut waiting to be absorbed, D B is the drug in the body, spread through the volume of distribution V D, and D E is the drug already eliminated. The change in the amount in the body is the rate in minus the rate out. So d D B over d t equals d D G I over d t, the rate of absorption from the gut, minus d D E over d t, the rate of elimination. This line is not on the equation sheet.",
-   "card": [
-    {
-     "at": 1,
-     "m": "D<sub>GI</sub> → D<sub>B</sub> (in V<sub>D</sub>) → D<sub>E</sub>"
-    },
-    {
-     "at": 2,
-     "m": "change in body = rate in &minus; rate out"
-    },
-    {
-     "at": 3,
-     "m": "{{frac:dD<sub>B</sub>|dt}} = {{frac:dD<sub>GI</sub>|dt}} &minus; {{frac:dD<sub>E</sub>|dt}}"
-    }
-   ]
-  },
-  {
+   "text": "Three amounts follow the dose: D G I in the gut, D B in the body, and D E already eliminated. The amount absorbed per hour is k a, the absorption rate constant, times the amount in the gut, so as the gut empties, the rate in falls. The amount eliminated per hour is k, the elimination rate constant, times the amount in the body, so the rate out rises as the body fills. The change in the amount in the body is the rate in minus the rate out: d D B over d t equals d D G I over d t minus d D E over d t. The rate constants, fractions per hour, stay the same, while the rates, amounts per hour, change with the amounts.",
    "slide": "oral:7",
-   "reading": null,
-   "text": "In first order absorption, the rate of absorption is proportional to the amount of drug still in the gut, so a fixed fraction is absorbed per unit time. Before it reaches the body, the tablet has to disintegrate, dissolve, cross membranes and pass through the liver. All of those steps are rolled into one absorption rate constant, k a, with units of per hour. Usually only part of the dose arrives, because some of it is eliminated before it becomes available. The fraction that arrives is the bioavailability, F, between zero and one with no units, and for an I V dose F is taken as one. She said, when you see a capital F, You should think oral.",
    "card": [
     {
      "at": 0,
-     "m": "rate in proportional to D<sub>GI</sub>: fixed fraction per time"
+     "m": "D<sub>GI</sub> → D<sub>B</sub> → D<sub>E</sub> (mg)"
+    },
+    {
+     "at": 1,
+     "m": "rate in = k<sub>a</sub> × D<sub>GI</sub>: falls as the gut empties"
     },
     {
      "at": 2,
-     "m": "k<sub>a</sub>: all absorption steps, hr<sup>&minus;1</sup>"
+     "m": "rate out = k × D<sub>B</sub>: rises as D<sub>B</sub> rises"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:dD<sub>B</sub>|dt}} = {{frac:dD<sub>GI</sub>|dt}} − {{frac:dD<sub>E</sub>|dt}} &nbsp; (rate in − rate out)"
     },
     {
      "at": 4,
-     "m": "F: fraction that arrives, 0 to 1; IV: F = 1"
-    },
-    {
-     "at": 5,
-     "m": "capital F → oral"
+     "m": "rate (mg/hr) changes; rate constant (hr<sup>−1</sup>) does not"
     }
-   ]
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      1,
+      1
+     ]
+    ]
+   }
   },
   {
-   "slide": "oral:6",
-   "reading": null,
-   "text": "The absorption half-life is the time for half of the drug still to be absorbed to be absorbed, in hours. It follows the first order half-life relation: the absorption half-life equals zero point six nine three over k a. Stems usually give the absorption half-life, so it is turned into k a before any oral equation is used. This line is not on the equation sheet either.",
-   "card": [
-    {
-     "at": 1,
-     "m": "t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}"
-    },
-    {
-     "at": 2,
-     "m": "given t&frac12;<sub>a</sub> → k<sub>a</sub> first"
-    }
-   ]
-  },
-  {
+   "text": "Because the drug enters gradually while it is also being eliminated, the plasma curve starts at zero, rises to a peak and then falls. In the absorption phase, the rising part, the rate in is larger than the rate out, though both processes are going on. She said, hear me when I say both processes are going on. At the peak, where the level reaches C max at the time t max, the rate in equals the rate out, so for that moment the amount in the body does not change. Just after the peak, in the post absorption phase, some drug is still being absorbed, but the rate out is now larger. Once the gut is empty, only elimination is left, and that is the elimination phase.",
    "slide": "oral:8",
-   "reading": null,
-   "text": "Because the drug enters gradually while it is also being eliminated, the plasma curve starts at zero, rises to a clear peak and then falls. In the absorption phase, the rising part, more drug is going in than coming out. At the peak, C max at t max, the rate in equals the rate out. Just after the peak is the post absorption phase: elimination is now faster than absorption, although some drug is still being absorbed. Once all the drug has been absorbed, only elimination is left, and that is the elimination phase.",
    "card": [
     {
      "at": 0,
@@ -89,40 +70,115 @@
     },
     {
      "at": 1,
-     "m": "absorption phase: rate in &gt; rate out"
+     "m": "absorption phase: rate in &gt; rate out, both going on"
     },
     {
-     "at": 2,
+     "at": 3,
      "m": "peak (C<sub>max</sub> at t<sub>max</sub>): rate in = rate out"
     },
     {
+     "at": 4,
+     "m": "post-absorption phase: rate out &gt; rate in, still absorbing"
+    },
+    {
+     "at": 5,
+     "m": "elimination phase: rate out only"
+    }
+   ],
+   "fig": {
+    "key": "oral_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Before it reaches the body, the tablet has to disintegrate, dissolve, cross membranes and pass through the liver, and k a combines all of those steps in one first order constant, per hour. Usually only part of the dose arrives, because some of it is eliminated before it becomes available, and the fraction that arrives is F, the bioavailability, between zero and one with no units. For an I V dose F is taken as one. F and k a are independent: the textbook notes that a higher k a does not mean more drug is absorbed, only that it is absorbed faster. She said, when you see a capital F, You should think oral.",
+   "slide": "oral:7",
+   "card": [
+    {
+     "at": 0,
+     "m": "k<sub>a</sub>: all absorption steps in one constant, hr<sup>−1</sup>"
+    },
+    {
+     "at": 1,
+     "m": "F: fraction that arrives, 0 to 1"
+    },
+    {
+     "at": 2,
+     "m": "IV: F = 1"
+    },
+    {
      "at": 3,
-     "m": "post-absorption: rate out &gt; rate in, still absorbing"
+     "m": "k<sub>a</sub> up: faster, not more (F unchanged)"
     },
     {
      "at": 4,
-     "m": "elimination phase: rate out only"
+     "m": "capital F → oral"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "oral:22",
-   "reading": null,
-   "text": "How she tests it. She shows a curve and asks for the route. A clear peak, up and back down, means oral input, first order in and first order out. An I V bolus profile starts at its highest point and falls, and an I V infusion profile starts at zero and levels off to a plateau. Oral input is usually first order, not always: a modified release product that releases drug at a zero order rate gives a curve shaped like an I V infusion.",
+   "text": "The absorption half-life is the time for half of the drug still to be absorbed to be absorbed. It equals zero point six nine three over k a, so a larger k a gives a shorter absorption half-life. Stems usually give the absorption half-life, so it is turned into k a before any oral equation is used, and this line is not on the equation sheet. The textbook adds that absorption is generally complete after five to seven absorption half-lives.",
+   "slide": "oral:6",
    "card": [
     {
+     "at": 1,
+     "m": "t½<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}"
+    },
+    {
+     "at": 1,
+     "m": "k<sub>a</sub> up → t½<sub>a</sub> down"
+    },
+    {
      "at": 2,
+     "m": "given t½<sub>a</sub> → k<sub>a</sub> first; not on the sheet"
+    },
+    {
+     "at": 3,
+     "m": "absorption complete: 5 to 7 × t½<sub>a</sub>"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "She shows a curve and asks for the route. A curve that starts at zero, peaks and falls is oral; an I V bolus curve starts at its highest point; an I V infusion curve rises from zero to a plateau. She said, instantaneous in, first order out is our bolus, first order in, first order out is our oral. Oral input is usually first order, not always: a modified release product that releases drug at a constant rate gives a curve shaped like an infusion. Quiz three asked what is true at C max, and the key is that the rate of absorption equals the rate of elimination; the option that drug at the absorption site has become depleted describes the elimination phase.",
+   "slide": "oral:22",
+   "card": [
+    {
+     "at": 1,
      "m": "peak → oral"
     },
     {
+     "at": 1,
+     "m": "highest at the start → IV bolus &nbsp; plateau → IV infusion"
+    },
+    {
      "at": 3,
-     "m": "highest at start → IV bolus &nbsp; plateau → IV infusion"
+     "m": "modified release, zero order in → infusion shape"
     },
     {
      "at": 4,
-     "m": "modified release, zero order in → infusion shape"
+     "m": "Quiz 3: C<sub>max</sub> → <b>rate of absorption = rate of elimination</b>"
+    },
+    {
+     "at": 4,
+     "m": "✗ absorption site depleted: elimination phase"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

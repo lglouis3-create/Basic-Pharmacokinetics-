@@ -3,200 +3,228 @@
  "title": "Creatinine clearance and its significance",
  "segs": [
   {
+   "text": "Module four, objective three. Calculating creatinine clearance and what it means. The glomerular filtration rate, G F R, the volume of fluid the kidneys filter from the blood per unit time, shows how well a patient's kidneys are working. It is measured with a substance that is only filtered, neither secreted nor reabsorbed. Inulin is almost completely filtered, so it is the better marker, but it is not native to the body: it has to be given. Creatinine comes from the breakdown of muscle and is always in the blood, so creatinine clearance, C r C l, is the common clinical estimate of G F R. Creatinine is also secreted, which is why C r C l estimates G F R rather than measuring it.",
    "slide": "cl:16",
-   "reading": null,
-   "text": "Module four, objective three. Creatinine clearance and what it means. The glomerular filtration rate, G F R, tells you how well a patient's kidneys are working. It is measured with a substance eliminated primarily by filtration only, one that is neither reabsorbed nor secreted. Inulin is almost completely filtered, so it is the better marker, but it is not native to the body: it has to be given, and the testing is more involved. Creatinine comes from the breakdown of muscle and is already in the blood, so creatinine clearance, C r C l, is the common clinical estimate of G F R. Creatinine is also secreted, which is why C r C l estimates G F R rather than measuring it.",
    "card": [
     {
+     "at": 2,
+     "m": "GFR: the patient's renal function, mL/min"
+    },
+    {
      "at": 3,
-     "m": "GFR marker: filtered only, not reabsorbed, not secreted"
+     "m": "marker filtered only → its clearance = GFR"
     },
     {
      "at": 4,
-     "m": "inulin: almost completely filtered, must be given"
+     "m": "inulin: better marker, must be given"
     },
     {
      "at": 5,
-     "m": "creatinine: from muscle, already in the blood"
+     "m": "creatinine: from muscle, always present → CrCl"
     },
     {
      "at": 6,
-     "m": "CrCl estimates GFR: creatinine is also secreted"
+     "m": "also secreted → an estimate of GFR"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "The estimate uses serum creatinine, S C r, the creatinine concentration in the blood in milligrams per deciliter, together with age, sex and ideal body weight, I B W. A higher serum creatinine gives a lower estimate, in inverse proportion, so twice the serum creatinine gives half the estimate. An older patient gets a lower estimate. A taller patient has a larger I B W, which raises the estimate. A woman's estimate is multiplied by zero point eight five, which rests on the assumption that women are smaller and less muscular than men. Serum creatinine may not reflect renal function well in people with unusually low or unusually high muscle mass. A normal C r C l is one hundred twenty to one hundred thirty milliliters per minute.",
    "slide": "cl:17",
-   "reading": null,
-   "text": "C r C l is calculated with the Cockcroft-Gault equation, and one hundred twenty to one hundred thirty milliliters per minute is considered normal. C r C l equals one hundred forty minus age, times I B W, divided by seventy two times S C r, times zero point eight five if female. Age is in years, I B W is ideal body weight in kilograms, and S C r is serum creatinine in milligrams per deciliter. An older patient gets a lower estimate, because one hundred forty minus age gets smaller. A higher serum creatinine sits in the bottom of the fraction, so it also lowers the estimate. The zero point eight five factor rests on the assumption that women are smaller and less muscular than men.",
    "card": [
     {
      "at": 0,
-     "m": "normal: 120&ndash;130 mL/min"
+     "m": "inputs: S<sub>Cr</sub> (mg/dL), age (yr), sex, IBW (kg)"
     },
     {
      "at": 1,
-     "m": "CrCl = {{frac:(140 &minus; age) &times; IBW|72 &times; S<sub>Cr</sub>}} &nbsp; (&times; 0.85 if female)"
+     "m": "S<sub>Cr</sub> up → CrCl down; S<sub>Cr</sub> × 2 → CrCl × ½"
     },
     {
      "at": 2,
-     "m": "age in years, IBW in kg, S<sub>Cr</sub> in mg/dL"
+     "m": "age up → CrCl down"
     },
     {
      "at": 3,
-     "m": "older → lower CrCl"
+     "m": "taller → IBW up → CrCl up"
     },
     {
      "at": 4,
-     "m": "higher S<sub>Cr</sub> → lower CrCl"
+     "m": "female: × 0.85"
     },
     {
      "at": 5,
-     "m": "0.85: women smaller, less muscular"
-    }
-   ]
-  },
-  {
-   "slide": "cl:18",
-   "reading": null,
-   "text": "Ideal body weight, in kilograms, is calculated from sex and height. For a male, I B W equals fifty plus two point three times the inches over five feet. For a female, I B W equals forty five point five plus two point three times the inches over five feet. The inches over five feet are the height in inches minus sixty. Neither the I B W lines nor Cockcroft-Gault are on the equation sheet. The units do not cancel, since the algebra gives kilograms divided by milligrams per deciliter. She said, I also want you to recognize that the units of creatinine clearance should be in milliliters per minute So don't give me kilograms per milligram per deciliter.",
-   "card": [
-    {
-     "at": 1,
-     "m": "IBW (male) = 50 + 2.3 &times; (inches over 5 ft)"
-    },
-    {
-     "at": 2,
-     "m": "IBW (female) = 45.5 + 2.3 &times; (inches over 5 ft)"
-    },
-    {
-     "at": 3,
-     "m": "inches over 5 ft = height in inches &minus; 60"
-    },
-    {
-     "at": 4,
-     "m": "{{frac:kg|mg/dL}}: units do not cancel"
-    },
-    {
-     "at": 5,
-     "m": "reported in mL/min"
-    }
-   ]
-  },
-  {
-   "slide": "cl:18",
-   "reading": null,
-   "text": "When the height is given in centimeters, it is converted first. Height in inches equals height in centimeters divided by two point five four, because one inch is two point five four centimeters. A decimal height is read as written: sixty four point five inches is sixty four point five inches, not sixty four inches plus another five.",
-   "card": [
-    {
-     "at": 1,
-     "m": "height in inches = {{frac:height in cm|2.54}}"
-    },
-    {
-     "at": 2,
-     "m": "64.5 inches = 64.5 inches"
-    }
-   ]
-  },
-  {
-   "slide": "cl:19",
-   "reading": null,
-   "text": "Her slide example. Estimate, using the ideal body weight, the C r C l of a forty five year old female who weighs sixty one kilograms, has a serum creatinine of one point one milligrams per deciliter, and is one hundred sixty five centimeters tall. First the height: one hundred sixty five centimeters divided by two point five four is sixty four point nine six inches, which she rounds to sixty five inches. The inches over five feet are sixty five minus sixty, which is five inches. She is female, so I B W is forty five point five plus two point three times five. That is forty five point five plus eleven point five, which is fifty seven kilograms. The sixty one kilogram actual weight is not used.",
-   "card": [
-    {
-     "at": 1,
-     "m": "female, 45 yr, 61 kg, S<sub>Cr</sub> = 1.1 mg/dL, 165 cm"
-    },
-    {
-     "at": 2,
-     "m": "{{frac:165 cm|2.54}} = 64.96 → 65 inches"
-    },
-    {
-     "at": 3,
-     "m": "65 &minus; 60 = 5 inches"
-    },
-    {
-     "at": 4,
-     "m": "IBW = 45.5 + 2.3 &times; 5"
-    },
-    {
-     "at": 5,
-     "m": "= 45.5 + 11.5 = <b>57 kg</b>"
+     "m": "unusual muscle mass: S<sub>Cr</sub> misleading"
     },
     {
      "at": 6,
-     "m": "61 kg actual weight: not used"
+     "m": "normal: 120–130 mL/min"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "cl:19",
-   "reading": null,
-   "text": "Now Cockcroft-Gault. The top of the fraction is one hundred forty minus forty five, which is ninety five, times fifty seven kilograms, giving five thousand four hundred fifteen. The bottom is seventy two times one point one milligrams per deciliter, which is seventy nine point two. Five thousand four hundred fifteen divided by seventy nine point two is sixty eight point three seven. She is female, so that is multiplied by zero point eight five, which gives fifty eight point one milliliters per minute.",
+   "text": "The Cockcroft-Gault equation says this: C r C l equals one hundred forty minus age, times I B W, over seventy two times S C r, times zero point eight five if female. Age is subtracted on the top, so each added year makes the top smaller, and serum creatinine sits on the bottom, so a larger value makes the result smaller. I B W multiplies the top, so a larger ideal weight raises the result. The units do not cancel, since the algebra gives kilograms over milligrams per deciliter, but the answer is reported in milliliters per minute. She said, I also want you to recognize that the units of creatinine clearance should be in milliliters per minute.",
+   "slide": "cl:17",
    "card": [
     {
+     "at": 0,
+     "m": "CrCl = {{frac:(140 − age) × IBW|72 × S<sub>Cr</sub>}} &nbsp; (× 0.85 if female)"
+    },
+    {
      "at": 1,
-     "m": "top: (140 &minus; 45) &times; 57 kg = 95 &times; 57 = 5415"
+     "m": "age in (140 − age): top smaller &nbsp; S<sub>Cr</sub> on the bottom: result smaller"
     },
     {
      "at": 2,
-     "m": "bottom: 72 &times; 1.1 mg/dL = 79.2"
+     "m": "IBW on the top: result larger"
     },
     {
      "at": 3,
-     "m": "{{frac:5415|79.2}} = 68.37"
-    },
-    {
-     "at": 4,
-     "m": "68.37 &times; 0.85 = <b>58.1 mL/min</b>"
+     "m": "{{frac:kg|mg/dL}}: units do not cancel; report mL/min"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "cl:26",
-   "reading": null,
-   "text": "What the number means. Fifty eight point one milliliters per minute is below the normal one hundred twenty to one hundred thirty, so her renal function is reduced. A low C r C l means a drug eliminated by the kidney is excreted more slowly and may accumulate, so depending on the drug, its dose may need adjusting. In the same way, a C r C l of thirty milliliters per minute means a renally eliminated drug will be excreted more slowly and may accumulate. C r C l describes the patient's kidneys, not a particular drug. A drug's renal clearance, worked out in objective five from the fraction of the dose excreted unchanged, is a different number, and confusing the two is a trap she names herself.",
+   "text": "I B W, in kilograms, comes from sex and height, and in this course it is always the weight used. For a male, I B W equals fifty plus two point three times the inches over five feet, and for a female, forty five point five plus two point three times the inches over five feet. The inches over five feet are the height in inches minus sixty. A height in centimeters is divided by two point five four, because one inch is two point five four centimeters, and a decimal height such as sixty four point five inches is read as written. Neither these lines nor Cockcroft-Gault are on the equation sheet. She said, this is an equation that I want you to know, to memorize.",
+   "slide": "cl:18",
    "card": [
     {
+     "at": 0,
+     "m": "IBW always; actual weight not used"
+    },
+    {
      "at": 1,
-     "m": "58.1 &lt; 120&ndash;130 mL/min → reduced renal function"
+     "m": "IBW (male) = 50 + 2.3 × (inches over 5 ft)"
+    },
+    {
+     "at": 1,
+     "m": "IBW (female) = 45.5 + 2.3 × (inches over 5 ft)"
     },
     {
      "at": 2,
-     "m": "low CrCl → slower excretion, accumulation, dose adjustment"
+     "m": "inches over 5 ft = height in inches − 60"
     },
     {
-     "at": 4,
-     "m": "CrCl: the patient's kidneys"
+     "at": 3,
+     "m": "height in inches = {{frac:height in cm|2.54}}"
+    },
+    {
+     "at": 3,
+     "m": "64.5 inches = 64.5 inches"
     },
     {
      "at": 5,
-     "m": "Cl<sub>R</sub>: one drug, from f<sub>e</sub> &nbsp; ✗ confusing the two"
+     "m": "not on the sheet: memorize"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Her slide example asks for the C r C l, using the ideal body weight, of a forty five year old woman who weighs sixty one kilograms, has a serum creatinine of one point one milligrams per deciliter, and is one hundred sixty five centimeters tall. Cockcroft-Gault answers it, and it needs the I B W first, so the height goes to inches. She rounds sixty four point nine six inches to sixty five, which is five inches over five feet. With the female line, the I B W is fifty seven kilograms, and the sixty one kilogram actual weight is not used.",
    "slide": "cl:19",
-   "reading": null,
-   "text": "How she tests it. A one patient vignette gives age, sex, height, actual body weight and serum creatinine, with the answer in milliliters per minute. The height usually arrives in centimeters, so the conversion is part of the question, and the actual weight is there to be left alone. Sex decides two things: which I B W constant is used, fifty or forty five point five, and whether the zero point eight five factor applies. When she worked this example in class and a student answered fifty four, she said a fifty four meant something had been done wrong.",
    "card": [
     {
+     "at": 0,
+     "m": "female, 45 yr, 61 kg, S<sub>Cr</sub> = 1.1 mg/dL, 165 cm"
+    },
+    {
      "at": 1,
-     "m": "given: age, sex, height, actual weight, S<sub>Cr</sub>"
+     "m": "{{frac:165 cm|2.54}} = 64.96 → 65 inches"
     },
     {
      "at": 2,
-     "m": "cm → inches; actual weight not used"
+     "m": "65 − 60 = 5 inches"
     },
     {
      "at": 3,
-     "m": "sex: 50 or 45.5; &times; 0.85 or not"
+     "m": "IBW = 45.5 + 2.3 × 5 = 45.5 + 11.5 = <b>57 kg</b>"
+    },
+    {
+     "at": 3,
+     "m": "61 kg: not used"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Then the equation, with age forty five years, I B W fifty seven kilograms and serum creatinine one point one milligrams per deciliter. The fraction gives sixty eight point three seven, and because she is female, it is multiplied by zero point eight five. Her C r C l is fifty eight point one milliliters per minute. That is about half the normal one hundred twenty to one hundred thirty milliliters per minute, so her renal function is reduced. When she worked this example in class, a student answered fifty four, and she said fifty four meant something had been done wrong.",
+   "slide": "cl:19",
+   "card": [
+    {
+     "at": 0,
+     "m": "top: (140 − 45) × 57 = 95 × 57 = 5415"
+    },
+    {
+     "at": 0,
+     "m": "bottom: 72 × 1.1 = 79.2"
+    },
+    {
+     "at": 1,
+     "m": "{{frac:5415|79.2}} = 68.37"
+    },
+    {
+     "at": 1,
+     "m": "68.37 × 0.85 = <b>58.1 mL/min</b>"
+    },
+    {
+     "at": 3,
+     "m": "58.1 &lt; 120–130 mL/min → reduced renal function"
     },
     {
      "at": 4,
-     "m": "sex: 50 or 45.5; &times; 0.85 or not"
+     "m": "54: something done wrong"
     }
-   ]
+   ],
+   "fig": null
+  },
+  {
+   "text": "What the number means for a drug. A low C r C l means a drug eliminated by the kidney is excreted more slowly and may accumulate, so depending on the drug, its dose may need adjusting. She gave thirty and sixty milliliters per minute as examples of patients who will have trouble excreting such a drug. In a textbook example, renal function halves, so the drug's renal clearance halves from ten to five liters per hour, while its nonrenal clearance stays at five. Total clearance falls from fifteen to ten liters per hour, so the daily dose is lowered by a third to keep the same exposure.",
+   "slide": "cl:17",
+   "card": [
+    {
+     "at": 1,
+     "m": "CrCl low → renally eliminated drug excreted slower → may accumulate → adjust dose"
+    },
+    {
+     "at": 2,
+     "m": "e.g. CrCl 30 or 60 mL/min"
+    },
+    {
+     "at": 3,
+     "m": "e.g. (textbook) GFR halved: Cl<sub>R</sub> 10 → 5 L/hr, nonrenal 5 L/hr"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>T</sub> 15 → 10 L/hr: daily dose down ⅓ for the same AUC"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "How she tests it: a one patient vignette gives age, sex, height, often in centimeters, actual weight and serum creatinine, and the answer is in milliliters per minute. Sex decides two things, the I B W constant, fifty or forty five point five, and whether the zero point eight five applies. The trap she names herself is confusing the patient's creatinine clearance with a drug's renal clearance: C r C l describes the patient's kidneys, while a drug's renal clearance, from objective five, describes one drug and is compared with the average one hundred twenty milliliters per minute. Her review poll also keyed as false the claim that hepatic clearance is most readily approximated with creatinine clearance.",
+   "slide": "cl:26",
+   "card": [
+    {
+     "at": 0,
+     "m": "given: age, sex, height (cm), actual weight, S<sub>Cr</sub> → CrCl in mL/min"
+    },
+    {
+     "at": 1,
+     "m": "sex: 50 or 45.5; × 0.85 or not"
+    },
+    {
+     "at": 2,
+     "m": "CrCl: the patient's kidneys &nbsp; Cl<sub>R</sub>: one drug, compared with 120 mL/min"
+    },
+    {
+     "at": 3,
+     "m": "✗ Cl<sub>H</sub> ≈ CrCl: false"
+    }
+   ],
+   "fig": null
   }
  ]
 }

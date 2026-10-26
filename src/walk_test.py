@@ -77,10 +77,16 @@ def run(page, width):
             check(ok, f'{sid}: {len(figs)} parts show their step figure in full when stepped to, with her slide folded')
             i0, key0 = figs[0][0], figs[0][1]
             first = page.evaluate(f"GUIDE_WALK['{sid}'].segs[{i0}].f.at")
-            page.evaluate(f"gwGo('{sid}', {i0})"); page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
+            # the fake voice ends a sentence in 15 ms, so the part can be over before a check runs: record the highest
+            # step shown while this part plays
+            page.evaluate(f"""(() => {{ window.__maxst = 0; const f = document.querySelector('.gwpanel[data-gwp="{sid}"] .gwfig');
+              const rec = () => {{ if (GW && GW.i === {i0}) window.__maxst = Math.max(window.__maxst, [...f.querySelectorAll('.st')].findIndex(s => s.classList.contains('on')) + 1); }};
+              window.__rec = rec; window.__mo = new MutationObserver(rec); window.__mo.observe(f, {{subtree: true, childList: true, attributes: true, attributeFilter: ['class']}}); }})()""")
+            page.evaluate(f"gwGo('{sid}', {i0}); window.__rec()")
+            if not page.evaluate("GW && GW.playing"): page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
             page.wait_for_function(f"GW && (GW.i > {i0} || GW.k >= {first[-1][0]})", timeout=8000)
-            page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
-            st = page.evaluate(f"""(() => {{ const f = document.querySelector('.gwpanel[data-gwp="{sid}"] .gwfig'); return [...f.querySelectorAll('.st')].findIndex(s => s.classList.contains('on')) + 1; }})()""")
+            if page.evaluate("GW && GW.playing"): page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
+            st = page.evaluate("window.__mo.disconnect(), window.__maxst")
             check(st >= first[0][1], f'{sid}: playing builds the figure with the narration (step {st})')
         # play from part 0, let it advance, pause, hold, resume
         page.evaluate(f"gwGo('{sid}', 0)")

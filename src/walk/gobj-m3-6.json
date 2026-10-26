@@ -3,138 +3,213 @@
  "title": "Choosing an infusion rate",
  "segs": [
   {
+   "text": "Module three, objective six. Choosing the infusion rate that gives a desired steady state concentration. The infusion rate, R, is the amount of drug put in per hour; C s s is the plateau concentration, where the rate in equals the rate out; and the clearance is the volume of plasma emptied of drug per hour. The question is which R puts the plateau at a target level.",
    "slide": "inf:4",
-   "reading": null,
-   "text": "Module three, objective six. Choosing an infusion rate to reach a desired steady state concentration. To hit a target C s s, the steady state equation is rearranged for the infusion rate, R. C s s equals R over clearance, so R equals C s s times clearance. If only the half-life and volume are given, clearance is built first from the elimination rate constant k and the apparent volume of distribution, V D. So R also equals C s s times k times V D.",
    "card": [
     {
-     "at": 3,
-     "m": "C<sub>ss</sub> = {{frac:R|Cl}}"
+     "at": 2,
+     "m": "R: mg/hr"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>ss</sub>: the plateau, mg/L"
+    },
+    {
+     "at": 2,
+     "m": "Cl: L/hr"
     },
     {
      "at": 3,
+     "m": "target C<sub>ss</sub> → R = ?"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "At the plateau, the amount eliminated each hour is the clearance times the level, and it equals the amount going in. So the rate needed is the amount the patient eliminates each hour at the target level: R equals C s s times clearance. A higher target needs a proportionally higher rate, because at a higher level more drug leaves each hour. A patient with a lower clearance, as in renal failure, needs a proportionally lower rate for the same target, because less drug leaves each hour at that level. Once the clearance is known, V D, the apparent volume of distribution, adds nothing to this choice: the volume on its own decides the loading dose, not the rate.",
+   "slide": "inf:4",
+   "card": [
+    {
+     "at": 0,
+     "m": "steady state: R = Cl × C<sub>ss</sub>"
+    },
+    {
+     "at": 1,
      "m": "R = C<sub>ss</sub> × Cl"
     },
     {
-     "at": 5,
-     "m": "R = C<sub>ss</sub> × k × V<sub>D</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "inf:4",
-   "reading": null,
-   "text": "Milligrams per liter times liters per hour leaves milligrams per hour, an amount per time. If the stem gives a solution concentration, R is converted into milliliters per hour or milliliters per minute for the pump. Raising R raises C s s in proportion and shifts the whole curve upward, but the plateau still arrives at the same time. She said, changing the rate changes our steady state concentration. She said she repeated it five times on purpose.",
-   "card": [
-    {
-     "at": 0,
-     "m": "mg/L × L/hr = mg/hr"
-    },
-    {
-     "at": 1,
-     "m": "pump setting: mL/hr or mL/min"
-    },
-    {
      "at": 2,
-     "m": "R ↑ → C<sub>ss</sub> ↑, same time to plateau"
-    }
-   ]
-  },
-  {
-   "slide": "inf:8",
-   "reading": null,
-   "text": "Her slide Example two uses the drug from Example one: a half-life of six hours and a V D of thirty liters. The question asks what rate gives a C s s of twenty milligrams per liter. The relation needs clearance, so k comes first. k is zero point six nine three over six hours, which is zero point one one five five per hour. Clearance is zero point one one five five per hour times thirty liters, which is three point four six five liters per hour.",
-   "card": [
-    {
-     "at": 0,
-     "m": "t<sub>&frac12;</sub> = 6 hr, V<sub>D</sub> = 30 L"
-    },
-    {
-     "at": 1,
-     "m": "target C<sub>ss</sub> = 20 mg/L: R = ?"
+     "m": "target doubled → R doubled"
     },
     {
      "at": 3,
-     "m": "k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>&minus;1</sup>"
+     "m": "Cl falls → R falls in proportion"
+    },
+    {
+     "at": 3,
+     "m": "her Practice 4: Cl 11.55 → 8.55 L/hr, R 115.5 → 85.5 mg/hr"
     },
     {
      "at": 4,
-     "m": "Cl = 0.1155 hr<sup>&minus;1</sup> × 30 L = 3.465 L/hr"
+     "m": "V<sub>D</sub>: sets the loading dose, not R"
     }
-   ]
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      0,
+      2
+     ]
+    ]
+   }
   },
   {
-   "slide": "inf:8",
-   "reading": null,
-   "text": "Then the rate is twenty milligrams per liter times three point four six five liters per hour. The liters cancel, so R is sixty nine point three milligrams per hour. Check: sixty nine point three milligrams per hour divided by three point four six five liters per hour gives back twenty milligrams per liter. That is up from the fourteen point four three milligrams per liter that fifty milligrams per hour gives by the same division. While working this aloud she called the thirty liters the clearance; thirty liters is V D, and k times thirty liters gives the clearance.",
+   "text": "Changing R moves the plateau and nothing else. Raising R raises C s s in proportion, but the plateau still arrives at the same time, because that time depends only on the half-life. She said, All we're doing is shifting that curve upward. She also said, changing the rate changes our steady state concentration, and said she repeated it five times on purpose. In her review, fifty milligrams per hour gave about twelve milligrams per liter and one hundred gave twenty four, each reached in three to five half-lives.",
+   "slide": "inf:4",
+   "card": [
+    {
+     "at": 1,
+     "m": "R raised → C<sub>ss</sub> raised, same time to the plateau"
+    },
+    {
+     "at": 4,
+     "m": "her review: 50 → 100 mg/hr, C<sub>ss</sub> 12 → 24 mg/L, both in 3 to 5 half-lives"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "The equation sheet gives C s s equals R over clearance; rearranged, R equals C s s times clearance. C s s is on the top, so the rate rises with the target, and the clearance is on the top, so the rate rises with the clearance. When the stem gives a half-life and a volume, the clearance is k, the fraction eliminated per hour, times V D, so R equals C s s times k times V D; V D appears only as part of the clearance. Milligrams per liter times liters per hour leaves milligrams per hour, an amount per time. If the stem gives a solution concentration, R is converted to milliliters per hour or per minute for the pump.",
+   "slide": "inf:4",
    "card": [
     {
      "at": 0,
-     "m": "R = 20 mg/L × 3.465 L/hr"
+     "m": "C<sub>ss</sub> = {{frac:R|Cl}}"
+    },
+    {
+     "at": 0,
+     "m": "R = C<sub>ss</sub> × Cl"
     },
     {
      "at": 1,
-     "m": "<b>R = 69.3 mg/hr</b>"
+     "m": "R follows C<sub>ss</sub> and Cl"
     },
     {
      "at": 2,
-     "m": "{{frac:69.3 mg/hr|3.465 L/hr}} = 20 mg/L ✓"
+     "m": "R = C<sub>ss</sub> × k × V<sub>D</sub>, with k × V<sub>D</sub> = Cl"
     },
     {
      "at": 3,
-     "m": "{{frac:50 mg/hr|3.465 L/hr}} = 14.43 mg/L"
+     "m": "mg/L × L/hr = mg/hr"
+    },
+    {
+     "at": 4,
+     "m": "pump: mL/hr or mL/min"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "Her slide Example two uses the drug from Example one, with a half-life of six hours and a V D of thirty liters, and asks what rate gives a C s s of twenty milligrams per liter. R equals C s s times clearance answers it, and the stem gives no clearance, so k comes first. Twenty milligrams per liter times three point four six five liters per hour is sixty nine point three milligrams per hour. As a check, sixty nine point three over the clearance gives back twenty milligrams per liter. Fifty milligrams per hour gave fourteen point four three, and the rate and the level both rise by the same factor, one point three eight six, because they are in proportion.",
+   "slide": "inf:8",
+   "card": [
+    {
+     "at": 0,
+     "m": "t<sub>½</sub> = 6 hr, V<sub>D</sub> = 30 L; target C<sub>ss</sub> = 20 mg/L: R = ?"
+    },
+    {
+     "at": 1,
+     "m": "k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>−1</sup>"
+    },
+    {
+     "at": 1,
+     "m": "Cl = 0.1155 hr<sup>−1</sup> × 30 L = 3.465 L/hr"
+    },
+    {
+     "at": 2,
+     "m": "R = 20 mg/L × 3.465 L/hr = <b>69.3 mg/hr</b>"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:69.3 mg/hr|3.465 L/hr}} = 20 mg/L ✓"
+    },
+    {
+     "at": 4,
+     "m": "{{frac:69.3|50}} = {{frac:20|14.43}} = 1.386"
+    }
+   ],
+   "fig": {
+    "key": "two_rates_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "In her review the target is twenty four milligrams per liter, the half-life five hours and V D about twenty two liters. k is zero point one three eight six per hour, so R is twenty four times k times twenty two, seventy three point one eight milligrams per hour, which she gives as about seventy three. Her graded quiz asked for a rate to reach twenty three micrograms per milliliter with a V D of fifteen liters and a four hour half-life; micrograms per milliliter equal milligrams per liter, and the key is sixty milligrams per hour. The word recommend means round to a number a pump could take. The loading dose that goes with this rate, C s s times V D, is objective four.",
+   "slide": null,
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>ss</sub> = 24 mg/L, t<sub>½</sub> = 5 hr, V<sub>D</sub> ≈ 22 L"
+    },
+    {
+     "at": 1,
+     "m": "k = {{frac:0.693|5 hr}} = 0.1386 hr<sup>−1</sup>"
+    },
+    {
+     "at": 1,
+     "m": "R = 24 × 0.1386 × 22 = <b>73.18 mg/hr</b> ≈ 73 mg/hr"
+    },
+    {
+     "at": 2,
+     "m": "quiz: 23 mg/L × {{frac:0.693|4 hr}} × 15 L = 59.77 → <b>60 mg/hr</b>"
+    },
+    {
+     "at": 3,
+     "m": "recommend → a number a pump could take"
+    },
+    {
+     "at": 4,
+     "m": "→ D<sub>L</sub> = C<sub>ss</sub> × V<sub>D</sub> (obj. 4)"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "How she tests it: a target C s s and two of the parameters, the half-life or k, and V D or the clearance. With a solution concentration in the stem, a parallel part asks the rate in volume: zero point three five milliliters per minute in her Practice one, and one point three two milliliters per hour from one hundred twenty five milligram per milliliter vials in Practice two. The distractor she flags is that a different rate reaches steady state sooner. It does not, because the time depends only on the half-life, and the half-life depends on the clearance and V D, not on the rate. While working Example two aloud she called the thirty liters the clearance; thirty liters is V D.",
+   "slide": null,
+   "card": [
+    {
+     "at": 0,
+     "m": "target C<sub>ss</sub> + two parameters → R"
+    },
+    {
+     "at": 1,
+     "m": "volume rate: 0.35 mL/min; 1.32 mL/hr from 125 mg/mL"
+    },
+    {
+     "at": 2,
+     "m": "wrong: a new R reaches steady state sooner"
+    },
+    {
+     "at": 3,
+     "m": "time to steady state: t<sub>½</sub> only"
     },
     {
      "at": 4,
      "m": "30 L = V<sub>D</sub>, not Cl"
     }
-   ]
-  },
-  {
-   "slide": "inf:8",
-   "reading": null,
-   "text": "In one of her review problems the target is twenty four milligrams per liter, the half-life is five hours, and V D is about twenty two liters. k is zero point six nine three over five hours, zero point one three eight six per hour. So R is twenty four times zero point one three eight six times twenty two, which is seventy three point one eight milligrams per hour, and she gives it as about seventy three. The word recommend means round to a number a pump could take.",
-   "card": [
-    {
-     "at": 0,
-     "m": "C<sub>ss</sub> = 24 mg/L, t<sub>&frac12;</sub> = 5 hr, V<sub>D</sub> ≈ 22 L"
-    },
-    {
-     "at": 1,
-     "m": "k = {{frac:0.693|5 hr}} = 0.1386 hr<sup>&minus;1</sup>"
-    },
-    {
-     "at": 2,
-     "m": "R = 24 × 0.1386 × 22 = <b>73.18 mg/hr</b> ≈ 73 mg/hr"
-    },
-    {
-     "at": 3,
-     "m": "recommend → a number a pump could take"
-    }
-   ]
-  },
-  {
-   "slide": "inf:8",
-   "reading": null,
-   "text": "How she tests it. She gives a target C s s and two of the parameters, half-life or k, and V D or clearance, and asks what rate to recommend. With a solution concentration in the stem, a parallel part asks the rate in volume: zero point three five milliliters per minute in her Practice one, and one point three two milliliters per hour from one hundred twenty five milligram per milliliter vials in Practice two. The distractor she flags is that a different rate reaches steady state sooner. It does not, because that time depends only on the half-life.",
-   "card": [
-    {
-     "at": 1,
-     "m": "target C<sub>ss</sub> + two parameters → R"
-    },
-    {
-     "at": 2,
-     "m": "volume rate: 0.35 mL/min; &nbsp; 1.32 mL/hr from 125 mg/mL"
-    },
-    {
-     "at": 3,
-     "m": "✗ new R → steady state sooner"
-    },
-    {
-     "at": 4,
-     "m": "time to steady state: t<sub>&frac12;</sub> only"
-    }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

@@ -3,203 +3,283 @@
  "title": "Steady state during an infusion",
  "segs": [
   {
+   "text": "Module three, objective two. Steady state, and how it relates to continuous dosing. During an infusion, C p, the plasma concentration, climbs and then levels off. Steady state is that plateau: the rate of drug going in equals the rate going out, so the amount in the body stops changing, and the level there is C s s, the steady state concentration. R, the infusion rate, is an amount per time; the clearance is the volume of plasma emptied of drug per hour; k is the fraction of the drug present removed per hour; and the half-life is the time for the level to change by half.",
    "slide": "inf:4",
-   "reading": null,
-   "text": "Module three, objective two. Steady state, and how it relates to continuous dosing. Steady state is reached when the rate of drug going in equals the rate going out. So the plasma concentration, C p, stops rising and holds at a plateau, called C s s. Early in an infusion little drug is in the body, so little is eliminated. As C p rises, the amount eliminated per hour rises, until it matches the infusion rate, R.",
    "card": [
     {
      "at": 2,
-     "m": "steady state: rate in = rate out"
+     "m": "C<sub>p</sub>: climbs, then levels off"
     },
     {
      "at": 3,
-     "m": "C<sub>p</sub> stops rising → plateau, C<sub>ss</sub>"
+     "m": "steady state: rate in = rate out → C<sub>ss</sub>"
     },
     {
-     "at": 5,
-     "m": "amount out per hour rises until it equals R"
+     "at": 4,
+     "m": "R: mg/hr; Cl: L/hr; k: hr<sup>−1</sup>; t<sub>½</sub>: hr"
     }
-   ]
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      2
+     ]
+    ]
+   }
   },
   {
+   "text": "Why does the level stop rising? The amount eliminated each hour is the clearance times C p, so early in the infusion, with little drug in the body, little leaves. As C p rises, the amount leaving each hour rises with it, until it equals R. The approach is gradual: the curve comes closer and closer to C s s but in theory never reaches it, so in practice a level close to the plateau is called steady state.",
    "slide": "inf:4",
-   "reading": null,
-   "text": "The plateau has its own relation. C s s equals R divided by clearance, and clearance is k times V D, so C s s also equals R divided by k times V D. R is the drug put in per unit time, in milligrams per hour. Clearance is the volume of plasma cleared of drug per unit time, in liters per hour, so milligrams per hour divided by liters per hour leaves milligrams per liter. This line holds at steady state only. It contains no time, so it says nothing about when steady state arrives.",
    "card": [
     {
      "at": 1,
+     "m": "amount out per hour = Cl × C<sub>p</sub>: small at first"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> rises → amount out per hour rises, until it equals R"
+    },
+    {
+     "at": 3,
+     "m": "never reached exactly; close to C<sub>ss</sub> counts as steady state"
+    }
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "At the plateau, R equals the clearance times C s s, so C s s equals R over clearance. R is on the top, so a higher rate gives a proportionally higher plateau: twice the rate, twice C s s. Clearance is on the bottom, so a patient who clears less drug, for example in renal failure, has a higher plateau on the same rate. V D, the apparent volume of distribution, which relates the amount in the body to C p, is not in the clearance form, so with clearance fixed a larger volume does not change the height of the plateau. The line contains no time, so it says nothing about when the plateau arrives.",
+   "slide": "inf:4",
+   "card": [
+    {
+     "at": 0,
+     "m": "R = Cl × C<sub>ss</sub>"
+    },
+    {
+     "at": 0,
      "m": "C<sub>ss</sub> = {{frac:R|Cl}} = {{frac:R|kV<sub>D</sub>}}"
     },
     {
-     "at": 3,
-     "m": "{{frac:mg/hr|L/hr}} = mg/L"
-    },
-    {
-     "at": 5,
-     "m": "no t in it: steady state only"
-    }
-   ]
-  },
-  {
-   "slide": "inf:5",
-   "reading": null,
-   "text": "Before steady state, C p equals R over clearance, times one minus e to the minus k t. The first factor is C s s. The bracket, one minus e to the minus k t, is the fraction of C s s reached after infusing for time t, counted in hours from the start. Early on the bracket is a small fraction, and by about five half-lives it approaches one. The curve is asymptotic, so it gets closer and closer to C s s but in theory never reaches it exactly.",
-   "card": [
-    {
-     "at": 0,
-     "m": "C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)"
-    },
-    {
      "at": 1,
-     "m": "{{frac:R|Cl}} = C<sub>ss</sub>"
+     "m": "R doubled → C<sub>ss</sub> doubled; her review: 50 → 100 mg/hr, 12 → 24 mg/L"
     },
     {
      "at": 2,
-     "m": "(1 &minus; e<sup>&minus;kt</sup>) = fraction of C<sub>ss</sub> reached"
+     "m": "Cl falls → C<sub>ss</sub> rises at the same R"
+    },
+    {
+     "at": 2,
+     "m": "e.g. 115.5 mg/hr, Cl 11.55 → 8.55 L/hr: C<sub>ss</sub> 10 → 13.5 mg/L"
     },
     {
      "at": 3,
-     "m": "early: small fraction &nbsp; ~5 half-lives: → 1"
+     "m": "no V<sub>D</sub> in {{frac:R|Cl}}: V<sub>D</sub> does not set the height"
+    },
+    {
+     "at": 4,
+     "m": "no t: the height only"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "How soon the plateau arrives depends only on the half-life. The fraction of C s s reached after infusing for a time t is one minus e to the minus k t, which holds only k and t, so R cannot change the timing. After one half-life the level is half of C s s, after three it is eighty seven point five percent, and after five about ninety seven percent. She said, if I ask you how long it takes to get steady state following I V infusion, the simplest answer is three to five half-lives.",
+   "slide": "inf:5",
+   "card": [
+    {
+     "at": 1,
+     "m": "fraction of C<sub>ss</sub> reached = 1 − e<sup>−kt</sup>: only k and t"
+    },
+    {
+     "at": 2,
+     "m": "1 t<sub>½</sub> → 50%; 3 → 87.5%; 5 → 96.9%"
+    },
+    {
+     "at": 3,
+     "m": "<b>time to steady state: 3 to 5 half-lives</b>"
+    }
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The half-life itself depends on the patient: k is the clearance divided by V D, and the half-life is zero point six nine three over k. Clearance is on the bottom of the half-life, so a smaller clearance, as in renal failure, gives a longer half-life and a slower climb, and on the same rate a higher plateau. V D is on the top, so a larger volume with the same clearance also lengthens the half-life and the climb, while the height stays the same. R is in neither, so the rate changes the height of the plateau and never the time to reach it. She said, It does not change the time that it takes to get to that steady state concentration.",
    "slide": "inf:4",
-   "reading": null,
-   "text": "How long the approach takes depends only on the half-life, the time for the concentration to change by half, and so on the elimination rate constant k. k is the fraction of drug removed per hour, and it fixes the half-life: k equals zero point six nine three divided by the half-life. This line is not on the equation sheet. Her short answer for the time to reach steady state after an I V infusion is three to five half-lives. The rate R sets how high the plateau is, not how soon it arrives, so a faster infusion gives a higher C s s at the same time.",
    "card": [
     {
      "at": 0,
-     "m": "time to C<sub>ss</sub>: half-life only"
+     "m": "k = {{frac:Cl|V<sub>D</sub>}}; t<sub>½</sub> = {{frac:0.693|k}} = {{frac:0.693 V<sub>D</sub>|Cl}}"
     },
     {
      "at": 1,
-     "m": "k = {{frac:0.693|t<sub>&frac12;</sub>}}"
+     "m": "Cl falls: t<sub>½</sub> longer, slower climb, higher C<sub>ss</sub>"
+    },
+    {
+     "at": 2,
+     "m": "V<sub>D</sub> larger, Cl the same: t<sub>½</sub> longer, same C<sub>ss</sub>"
     },
     {
      "at": 3,
-     "m": "3 to 5 half-lives"
-    },
-    {
-     "at": 4,
-     "m": "R sets the height of the plateau, not the timing"
+     "m": "R: the height only, never the time"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "The equation for the climb puts both ideas in one line: C p equals R over clearance, times one minus e to the minus k t. The first factor is C s s, set by R and the clearance; the bracket is the fraction of C s s reached, set by k and t, with t counted from the start of the infusion. Early on the bracket is a small fraction, and near five half-lives it approaches one. Counted in half-lives, the fraction after n half-lives is one minus one half to the power n, so two half-lives give seventy five percent and four give ninety three point seven five percent. About three point three two half-lives reach ninety percent, and four point three two reach ninety five percent.",
    "slide": "inf:5",
-   "reading": null,
-   "text": "The fraction reached can be counted in half-lives: after n half-lives it is one minus zero point five to the power n. One half-life gives fifty percent, two give seventy five percent, and three give eighty seven point five percent. Four half-lives give ninety three point seven five percent, and ten give ninety nine point nine. About three point three two half-lives reach ninety percent, her own shortcut, and four point three two half-lives reach ninety five percent.",
    "card": [
     {
      "at": 0,
-     "m": "after n half-lives: 1 &minus; 0.5<sup>n</sup>"
+     "m": "C<sub>p</sub> = {{frac:R|Cl}}(1 − e<sup>−kt</sup>)"
     },
     {
      "at": 1,
-     "m": "1 → 50% &nbsp; 2 → 75% &nbsp; 3 → 87.5%"
+     "m": "{{frac:R|Cl}} = C<sub>ss</sub>: the height"
+    },
+    {
+     "at": 1,
+     "m": "(1 − e<sup>−kt</sup>): the fraction reached, the timing"
     },
     {
      "at": 2,
-     "m": "4 → 93.75% &nbsp; 10 → 99.9%"
+     "m": "early: small; near 5 half-lives: → 1"
     },
     {
      "at": 3,
-     "m": "3.32 → 90% &nbsp; 4.32 → 95%"
-    }
-   ]
-  },
-  {
-   "slide": "inf:11",
-   "reading": null,
-   "text": "Her slide Example four. The elimination rate constant is zero point one five per hour, and the question asks how long the infusion must run to reach ninety percent of steady state. Ninety percent is not a power of one half, so the bracket is solved with a natural log. Set the bracket equal to the fraction wanted: zero point nine equals one minus e to the minus zero point one five t. Isolate the exponential: e to the minus zero point one five t equals one minus zero point nine, which is zero point one.",
-   "card": [
-    {
-     "at": 1,
-     "m": "k = 0.15 hr<sup>&minus;1</sup>; &nbsp; 90% of C<sub>ss</sub>: t = ?"
+     "m": "after n half-lives: 1 − 0.5<sup>n</sup>"
     },
     {
      "at": 3,
-     "m": "0.9 = 1 &minus; e<sup>&minus;0.15t</sup>"
+     "m": "1 → 50%, 2 → 75%, 3 → 87.5%, 4 → 93.75%"
     },
     {
      "at": 4,
-     "m": "e<sup>&minus;0.15t</sup> = 1 &minus; 0.9 = 0.1"
+     "m": "3.32 half-lives → 90%; 4.32 → 95%"
     }
-   ]
+   ],
+   "fig": {
+    "key": "infusion_steps",
+    "at": [
+     [
+      2,
+      2
+     ]
+    ]
+   }
   },
   {
+   "text": "Her slide Example four asks how long an infusion must run to reach ninety percent of steady state, with k equal to zero point one five per hour. The bracket answers it, because it is the fraction reached, so it is set equal to zero point nine and solved for t. Ninety percent is not a power of one half, so the exponential is isolated and a natural log brings t down. The answer is fifteen point three five hours, which she states as about fifteen hours. As a check, the half-life is four point six two hours, so fifteen point three five hours is three point three two half-lives, her ninety percent shortcut.",
    "slide": "inf:11",
-   "reading": null,
-   "text": "Take the natural log of both sides: minus zero point one five t equals the natural log of zero point one, which is minus two point three zero two six. Divide both sides by minus zero point one five per hour. The minus signs cancel, and a number divided by per hour leaves hours, so t is fifteen point three five hours. She states it as about fifteen hours. Check: the half-life is zero point six nine three over zero point one five per hour, which is four point six two hours, and fifteen point three five hours is three point three two half-lives, matching her ninety percent shortcut.",
    "card": [
     {
      "at": 0,
-     "m": "&minus;0.15t = ln(0.1) = &minus;2.3026"
+     "m": "k = 0.15 hr<sup>−1</sup>; 90% of C<sub>ss</sub>: t = ?"
     },
     {
      "at": 1,
-     "m": "t = {{frac:&minus;2.3026|&minus;0.15 hr<sup>&minus;1</sup>}}"
+     "m": "0.9 = 1 − e<sup>−0.15t</sup>"
     },
     {
      "at": 2,
-     "m": "<b>t = 15.35 hr</b>"
+     "m": "e<sup>−0.15t</sup> = 1 − 0.9 = 0.1"
+    },
+    {
+     "at": 2,
+     "m": "−0.15t = ln 0.1 = −2.3026"
+    },
+    {
+     "at": 2,
+     "m": "t = {{frac:−2.3026|−0.15 hr<sup>−1</sup>}}"
     },
     {
      "at": 3,
-     "m": "≈ 15 hours"
+     "m": "<b>t = 15.35 hr ≈ 15 hr</b>"
     },
     {
      "at": 4,
-     "m": "t<sub>&frac12;</sub> = {{frac:0.693|0.15 hr<sup>&minus;1</sup>}} = 4.62 hr; &nbsp; 15.35 hr = 3.32 half-lives ✓"
+     "m": "t<sub>½</sub> = {{frac:0.693|0.15 hr<sup>−1</sup>}} = 4.62 hr; {{frac:15.35 hr|4.62 hr}} = 3.32 half-lives ✓"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "Her graded quiz asked, Which of the following results when the rate of infusion is increased? The keyed answer is that the steady state concentration increases; the options that the time to steady state increases or decreases are wrong, because the rate sets the height of the plateau and the half-life sets how soon it arrives. Asked how long to steady state, answer three to five half-lives; asked for a stated percentage, calculate it. A renal failure part does change the time, because the half-life is longer: in her Practice three the new steady state takes four point three two of the new half-lives for ninety five percent.",
    "slide": "inf:9",
-   "reading": null,
-   "text": "How she tests it. Asked how long it takes to reach steady state, the answer she wants is three to five half-lives. A statement that raising the infusion rate shortens the time to steady state is false, because that time depends on the half-life alone. A stated percentage needs a calculation instead. Fifty, seventy five or eighty seven point five percent means counting half-lives, and any other percentage means solving one minus e to the minus k t with a natural log.",
    "card": [
     {
+     "at": 0,
+     "m": "quiz: rate of infusion increased → ?"
+    },
+    {
      "at": 1,
-     "m": "time to steady state: 3 to 5 half-lives"
+     "m": "✓ C<sub>ss</sub> increases"
+    },
+    {
+     "at": 1,
+     "m": "wrong: the time to steady state increases or decreases"
     },
     {
      "at": 2,
-     "m": "✗ faster R → steady state sooner"
-    },
-    {
-     "at": 4,
-     "m": "50, 75, 87.5% → count half-lives; &nbsp; other % → ln"
-    }
-   ]
-  },
-  {
-   "slide": "inf:9",
-   "reading": null,
-   "text": "A concentration can be a percentage in disguise. In her Practice four the half-life is six hours, so k is zero point six nine three over six hours, zero point one one five five per hour. A level of five milligrams per liter against a C s s of ten milligrams per liter is fifty percent, so the time is one half-life, six hours. The next part asks for eighty percent, which is not a power of one half. So e to the minus k t equals zero point two, and t is the natural log of five divided by zero point one one five five per hour, thirteen point nine three hours.",
-   "card": [
-    {
-     "at": 1,
-     "m": "k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>&minus;1</sup>"
+     "m": "how long? 3 to 5 half-lives; a stated %: calculate"
     },
     {
      "at": 2,
+     "m": "50, 75, 87.5% → count half-lives; other % → ln"
+    },
+    {
+     "at": 3,
+     "m": "renal failure: 95% at 4.32 of the new, longer half-lives"
+    }
+   ],
+   "fig": null
+  },
+  {
+   "text": "A concentration in the stem can stand for a percentage of C s s. In her Practice four the half-life is six hours and C s s is ten milligrams per liter, so a level of five milligrams per liter is fifty percent, one half-life, six hours. Eighty percent is not a power of one half, so the log route gives thirteen point nine three hours. Objective six uses this plateau line to choose a rate, and objective five adds a loading dose to skip the wait.",
+   "slide": "inf:9",
+   "card": [
+    {
+     "at": 1,
+     "m": "k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>−1</sup>"
+    },
+    {
+     "at": 1,
      "m": "{{frac:5 mg/L|10 mg/L}} = 50% → <b>1 half-life = 6 hr</b>"
     },
     {
+     "at": 2,
+     "m": "e<sup>−kt</sup> = 0.2; t = {{frac:ln 5|0.1155 hr<sup>−1</sup>}} = <b>13.93 hr</b>"
+    },
+    {
      "at": 3,
-     "m": "80%: not a power of &frac12;"
-    },
-    {
-     "at": 4,
-     "m": "e<sup>&minus;kt</sup> = 0.2 &nbsp; t = {{frac:ln 5|0.1155 hr<sup>&minus;1</sup>}}"
-    },
-    {
-     "at": 4,
-     "m": "<b>t = 13.93 hr</b>"
+     "m": "→ R for a target (obj. 6); loading dose, no wait (obj. 5)"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

@@ -3021,7 +3021,7 @@ function shortfallNote(cov){
    a reload; everything weighted by the blueprint follows it at once. */
 function chooseExam(id){
   if(!COURSE.exams.some(e => e.id === id) || (EX && EX.running)) return;
-  DB.settings.exam = id; save();
+  DB.settings.exam = id; DB.settings.examAt = Date.now(); save();
   setActiveExam(id);
 }
 function examPicker(note){
@@ -3688,7 +3688,7 @@ function renderSettings(){
       try{
         const j = JSON.parse(r.result);
         if(!j.db || !j.db.concepts) throw new Error('not a progress file');
-        DB = Object.assign(BLANK(), j.db); save(); setActiveExam(DB.settings.exam || COURSE.activeExam);
+        DB = Object.assign(BLANK(), j.db); save(); setActiveExam(pickExam());
         alert('Progress loaded.'); renderSettings();
       }catch(err){ alert('That file could not be read as a progress export.'); }
     };
@@ -5301,6 +5301,23 @@ setInterval(tickTimers, 1000);                       // the stopwatch on every c
 document.addEventListener('click', xpickClick);   // Tell apart: Why? chips
 document.addEventListener('change', xselChange);  // Tell apart: Explain one   // Explain more: open the teaching section, keep the way back
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeZoom(); });
+/* A page left open keeps the copy it loaded. Every 15 minutes, and when the tab comes back, it reads version.json
+   beside it (written by build.py) and, when a newer copy is published, offers a reload. Progress is kept in the
+   browser, so reloading loses nothing; it waits while a paper is running. */
+function checkForUpdate(){
+  if(!/^https?:/.test(location.protocol) || typeof BUILD_AT === 'undefined' || document.getElementById('newver')) return;
+  fetch('version.json?t=' + Date.now(), {cache: 'no-store'}).then(r => r.ok ? r.json() : null).then(j => {
+    if(!j || !j.built || j.built <= BUILD_AT || document.getElementById('newver')) return;
+    const b = document.createElement('div'); b.id = 'newver'; b.setAttribute('role', 'status');
+    b.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--accent);border-radius:10px;padding:10px 14px;box-shadow:0 4px 18px rgba(0,0,0,.18)';
+    b.innerHTML = `<span>A newer version of the drill is published. Your progress is kept.</span><button type="button" class="btn small" data-newver>Reload</button>`;
+    b.querySelector('[data-newver]').onclick = () => { if(EX && EX.running && !confirm('A paper is running; it is saved and its clock keeps running. Reload now?')) return; location.reload(); };
+    document.body.appendChild(b);
+  }).catch(() => {});
+}
+setInterval(checkForUpdate, 15 * 60000);
+document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'visible') checkForUpdate(); });
+setTimeout(checkForUpdate, 5000);
 // the browser asks before a reload or close while a paper is running (the paper is saved, but the clock runs on)
 window.addEventListener('beforeunload', e => { if(EX && EX.running){ e.preventDefault(); e.returnValue = ''; } });
 // time on the question shown is banked before the tab goes to the background, where a phone may discard it

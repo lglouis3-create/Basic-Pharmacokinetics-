@@ -3,118 +3,155 @@
  "title": "The one-compartment model after an IV bolus",
  "segs": [
   {
+   "text": "Module two, objective one. The one compartment model after an I V bolus. An I V bolus is a whole dose injected into a vein at once, so all of the drug is in the body at time zero, with no absorption step. The one compartment open model treats the body as one uniform space that drug can enter and leave, which is what open means. The drug is assumed to spread through that space instantly and evenly, so the plasma concentration, C p, rises and falls with the drug in the whole body. She said, Assumptions, simplifications, this does not happen. In practice the spread takes a few minutes, the time the blood takes to circulate.",
    "slide": "ivb:3",
-   "reading": null,
-   "text": "Module two, objective one. The one compartment model after an I V bolus. An I V bolus is a whole dose injected into a vein at once, so all of the drug is in the body at time zero, and she calls it instantaneous input. The one compartment open model treats the body as one uniform space that drug can enter and leave, which is what open means. The drug spreads through it instantly and evenly, so the plasma concentration stands for the whole body.",
    "card": [
     {
      "at": 2,
-     "m": "IV bolus: whole dose at once, instantaneous input"
+     "m": "IV bolus: whole dose at t = 0, instantaneous input, no absorption rate constant"
     },
     {
      "at": 3,
-     "m": "one compartment, open: drug enters and leaves"
+     "m": "one compartment, open: one uniform space, drug enters and leaves"
     },
     {
      "at": 4,
-     "m": "C<sub>p</sub> stands for the whole body"
+     "m": "C<sub>p</sub> (mg/L): amount per volume of plasma; follows the drug in the whole body"
+    },
+    {
+     "at": 6,
+     "m": "instant spread: a model assumption; in the body, a few minutes"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "ivb:3",
-   "reading": null,
-   "text": "Elimination starts the moment the drug is in, and it is first order, so a fixed fraction of the drug leaves per unit time. These are simplifying assumptions that real bodies do not meet exactly, but they make the simplest model of distribution and elimination, and the rest of the course builds on it. So when a stem says the dose is an I V bolus, the expectation is first order.",
+   "text": "Elimination starts the moment the drug is in, and it is first order. First order means a fixed fraction of the drug present leaves per unit of time, so the amount removed per hour is largest at time zero, when the most drug is present, and becomes smaller as the drug falls. The fraction removed per hour stays the same throughout; that fraction is the elimination rate constant, k, in per hour. So the concentration starts at its highest value and falls quickly at first, then more slowly. On a log concentration axis the same values fall on a straight line, because equal times remove equal fractions. She said, If I tell you that it is an I V bolus dose that is administered, your expectation is first order.",
+   "slide": "ivb:4",
    "card": [
     {
-     "at": 0,
-     "m": "elimination: first order, from time zero"
+     "at": 1,
+     "m": "first order: fraction removed per hr constant; amount removed per hr falls as the amount falls"
     },
     {
      "at": 1,
-     "m": "simplest model of distribution and elimination"
+     "m": "e.g. k = 0.1 hr<sup>−1</sup>: 1000 mg → 100 mg/hr; 500 mg → 50 mg/hr"
     },
     {
      "at": 2,
-     "m": "IV bolus → first order"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:3",
-   "reading": null,
-   "text": "Two relations go with the model. C p equals D B over V D: milligrams over liters, so milligrams per liter. V D, the volume of distribution, is what links an amount to a concentration at any one time. At time zero after a bolus, D B, the amount of drug in the body, equals the dose, D zero. The overall elimination rate constant, k, equals k m plus k e, the rate constants for metabolism and excretion, all in per hour. A k with no subscript always means this overall constant.",
-   "card": [
-    {
-     "at": 1,
-     "m": "C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}"
-    },
-    {
-     "at": 1,
-     "m": "{{frac:mg|L}} = mg/L"
+     "m": "k: the fraction removed per unit time, hr<sup>−1</sup>"
     },
     {
      "at": 3,
+     "m": "C<sub>p</sub>: highest at t = 0, falls fast, then more slowly"
+    },
+    {
+     "at": 4,
+     "m": "log axis: equal times, equal fractions → straight line"
+    }
+   ],
+   "fig": {
+    "key": "bolus1_steps",
+    "at": [
+     [
+      4,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Two quantities set the plasma level after a bolus: the volume the drug is spread in, and how fast it is eliminated. The first is the volume of distribution, V D, which links the amount of drug in the body, D B, to the plasma concentration at the same moment. At time zero after a bolus, D B equals the dose, D zero. The same amount in a larger V D gives a lower concentration. The second is k, the overall elimination rate constant: the sum of k m for metabolism and k e for excretion; a k with no subscript always means this overall constant. If the patient cannot excrete the drug as before, k e falls, so k falls and the level falls more slowly.",
+   "slide": "ivb:3",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}} &nbsp; mg ÷ L = mg/L"
+    },
+    {
+     "at": 2,
      "m": "t = 0: D<sub>B</sub> = D<sub>0</sub>"
     },
     {
+     "at": 3,
+     "m": "same D<sub>B</sub>, larger V<sub>D</sub> → lower C<sub>p</sub>"
+    },
+    {
      "at": 4,
-     "m": "k = k<sub>m</sub> + k<sub>e</sub> (hr<sup>&minus;1</sup>)"
+     "m": "k = k<sub>m</sub> + k<sub>e</sub> (hr<sup>−1</sup>)"
+    },
+    {
+     "at": 5,
+     "m": "k<sub>e</sub> ↓ → k ↓ → slower fall"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "The model says the rate of loss is k times what is present: d C p by d t equals minus k C p. What is present is on the right side, so more drug gives a faster loss, and the minus sign says the level is falling. Integrated, this gives C p equals C p zero times e to the minus k t. At t equal to zero the exponential is one, so the curve starts at C p zero, the concentration at time zero, and a larger k gives a faster fall. In natural logs, l n C p equals minus k t plus l n C p zero, a straight line with slope minus k; she prefers the natural log forms, and the base ten form agrees.",
    "slide": "ivb:4",
-   "reading": null,
-   "text": "The model itself is first order: d D B by d t equals minus k D B, and d C p by d t equals minus k C p. The rate of loss is proportional to what is present, which is what first order means, and the minus sign says the amount is falling. The integrated result is C p equals C p zero times e to the minus k t, where C p zero is the concentration at time zero and t is the time since the dose.",
    "card": [
     {
      "at": 0,
-     "m": "{{frac:dD<sub>B</sub>|dt}} = &minus;kD<sub>B</sub> &nbsp; {{frac:dC<sub>p</sub>|dt}} = &minus;kC<sub>p</sub>"
+     "m": "{{frac:dC<sub>p</sub>|dt}} = −kC<sub>p</sub> &nbsp; {{frac:dD<sub>B</sub>|dt}} = −kD<sub>B</sub>"
     },
     {
      "at": 1,
-     "m": "rate of loss proportional to what is present"
+     "m": "more drug present → faster loss; minus sign: falling"
     },
     {
      "at": 2,
-     "m": "C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup>"
+     "m": "C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>−kt</sup>"
+    },
+    {
+     "at": 3,
+     "m": "t = 0: e<sup>0</sup> = 1 → C<sub>p</sub> = C<sub>p</sub><sup>0</sup>; larger k → faster fall"
+    },
+    {
+     "at": 4,
+     "m": "ln C<sub>p</sub> = −kt + ln C<sub>p</sub><sup>0</sup>: slope −k"
+    },
+    {
+     "at": 4,
+     "m": "log C<sub>p</sub> = −{{frac:kt|2.3}} + log C<sub>p</sub><sup>0</sup>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "bolus1_steps",
+    "at": [
+     [
+      4,
+      2
+     ]
+    ]
+   }
   },
   {
-   "slide": "ivb:4",
-   "reading": null,
-   "text": "The natural log of C p equals minus k t plus the natural log of C p zero. Log C p equals minus k t over two point three, plus log C p zero. She prefers the natural log form, but any of the three gets the same answer. So the concentration starts high and falls along an exponential curve, which becomes a straight line on a log scale.",
+   "text": "About half of her stems state the model as a condition, such as one compartment, first order elimination. In her data table problems she leaves it out, because working out the order from the data is the task. On a log concentration axis, a single straight line after an I V bolus means one compartment; a steep early segment means two, which is objective four. Bolus means all at once; a continuous input is an infusion. The k m here is a rate constant for metabolism, not the K M of module eight, which is a concentration. Before calculating, sketch a falling curve, so a later concentration can be checked to come out lower. Objective three uses this curve to find k, C zero, V D and clearance.",
+   "slide": "ivb:10",
    "card": [
     {
      "at": 0,
-     "m": "ln C<sub>p</sub> = &minus;kt + ln C<sub>p</sub><sup>0</sup>"
+     "m": "stated in about half of her stems: one-compartment, first-order elimination; one-compartment open model"
     },
     {
-     "at": 1,
-     "m": "log C<sub>p</sub> = &minus;{{frac:kt|2.3}} + log C<sub>p</sub><sup>0</sup>"
-    },
-    {
-     "at": 3,
-     "m": "exponential curve → straight line on a log scale"
-    }
-   ]
-  },
-  {
-   "slide": "ivb:10",
-   "reading": null,
-   "text": "The model is usually a condition in her stems rather than a question of its own, and it is examined inside the calculations of objective three. About half the time she states it outright, as one compartment, first order elimination, or as one compartment open model. In the data table problems she leaves it out, because working out the order from the data is the task. On a graph with a log concentration axis, a single straight line after an I V bolus means one compartment.",
-   "card": [
-    {
-     "at": 1,
-     "m": "stated: one-compartment, first-order elimination"
+     "at": 2,
+     "m": "log axis: one straight line → one compartment; steep start → two"
     },
     {
      "at": 3,
-     "m": "log axis, one straight line → one compartment"
+     "m": "bolus: all at once; infusion: continuous"
+    },
+    {
+     "at": 4,
+     "m": "k<sub>m</sub>: metabolism, hr<sup>−1</sup>; K<sub>M</sub> (module 8): a concentration"
+    },
+    {
+     "at": 5,
+     "m": "later C<sub>p</sub> &lt; earlier C<sub>p</sub> ✓"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }

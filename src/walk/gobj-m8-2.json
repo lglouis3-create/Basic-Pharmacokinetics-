@@ -3,184 +3,314 @@
  "title": "K M, C p and the order of elimination",
  "segs": [
   {
+   "text": "Module eight, objective two. How K M and C p decide the order of elimination. C p is the plasma concentration, the drug level, and the rate of a saturable elimination depends on C p and on two constants, V max and K M. V max, the maximum elimination rate, is a rate: an amount or concentration per unit of time. K M, the Michaelis constant, reflects the capacity of the enzyme system; it is a concentration, the level at which the elimination rate is half of V max. Both are constants for one drug in one patient and differ between patients.",
    "slide": "nonlin:7",
-   "reading": null,
-   "text": "Module eight, objective two. How K M and C p decide the order of saturable elimination. A saturable elimination follows Michaelis Menten kinetics: the rate depends on the plasma concentration, C p, and on two constants, V max and K M. V max is the maximum elimination rate, the fastest the body can eliminate the drug, so it is a rate, in concentration or amount per time. K M is the Michaelis constant, which reflects the capacity of the enzyme system. Its units are concentration, milligrams per liter, so it can be compared directly with C p. For a given drug in a given patient, V max and K M are constants, and they differ from one patient to another.",
    "card": [
     {
+     "at": 2,
+     "m": "C<sub>p</sub>: the plasma concentration, mg/L"
+    },
+    {
      "at": 3,
-     "m": "V<sub>max</sub>: maximum elimination rate (mg/day, mg/kg/day)"
+     "m": "V<sub>max</sub>: maximum elimination rate, a rate (mg/day, mg/kg/day)"
     },
     {
      "at": 4,
-     "m": "K<sub>M</sub>: Michaelis constant, enzyme capacity"
+     "m": "K<sub>M</sub>: Michaelis constant, a concentration (mg/L); at C<sub>p</sub> = K<sub>M</sub>, rate = ½ V<sub>max</sub>"
     },
     {
      "at": 5,
-     "m": "K<sub>M</sub> in mg/L → compare with C<sub>p</sub>"
-    },
-    {
-     "at": 6,
-     "m": "constant in one patient; differ between patients"
+     "m": "constants in one patient; differ between patients"
     }
-   ]
+   ],
+   "fig": {
+    "key": "nl_rate_steps",
+    "at": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   }
   },
   {
+   "text": "On a graph of elimination rate against C p, K M is marked on the concentration axis and V max on the rate axis. So C p is compared with K M, never with V max. She said, We can compare because they've got the same units. V max is a rate, so a level cannot be low or high relative to V max, even though its units on her slide, concentration per time, contain the word concentration.",
    "slide": "nonlin:8",
-   "reading": null,
-   "text": "The rate of elimination, the fall in C p with time, equals V max times C p, divided by K M plus C p. When C p is much less than K M, C p is negligible in the denominator. The rate is then V max over K M, a constant called k prime, times C p, so it depends on concentration and elimination looks first order. When C p is much greater than K M, K M is negligible and the concentrations cancel. The rate then equals V max, independent of concentration, so elimination is zero order.",
    "card": [
     {
      "at": 0,
-     "m": "&minus;{{frac:dC<sub>p</sub>|dt}} = {{frac:V<sub>max</sub>C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}"
+     "m": "K<sub>M</sub>: on the C<sub>p</sub> axis (mg/L); V<sub>max</sub>: on the rate axis (mg/kg/day)"
+    },
+    {
+     "at": 1,
+     "m": "<b>compare C<sub>p</sub> with K<sub>M</sub>: both mg/L</b>"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>max</sub>: concentration per time, a rate, not a level"
+    }
+   ],
+   "fig": {
+    "key": "nl_rate_steps",
+    "at": [
+     [
+      0,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The rate is the amount removed per unit of time, so depends on concentration means this amount changes with C p. Well below K M, the rate is a small part of V max, so the enzymes have spare capacity, and twice the level gives about twice the rate: the rate depends on concentration, first order. Well above K M, the enzymes are saturated: more drug raises the rate only a little, so it stays near V max, independent of concentration: zero order. She said, That's as fast as it can go. In between, the rate still rises with C p, but less than in proportion.",
+   "slide": "nonlin:8",
+   "card": [
+    {
+     "at": 0,
+     "m": "rate = amount removed per time"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: rate ∝ C<sub>p</sub>, depends on C<sub>p</sub> → first order"
+    },
+    {
+     "at": 1,
+     "m": "e.g. (K<sub>M</sub> 10, V<sub>max</sub> 12) C<sub>p</sub> 0.5 → 1 mg/L: rate 0.57 → 1.09 mg/kg/day (× 1.9)"
     },
     {
      "at": 2,
-     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: {{frac:V<sub>max</sub>|K<sub>M</sub>}}C<sub>p</sub> = k&prime;C<sub>p</sub> → first order"
+     "m": "C<sub>p</sub> ≫ K<sub>M</sub>: rate ≈ V<sub>max</sub>, independent of C<sub>p</sub> → zero order"
+    },
+    {
+     "at": 2,
+     "m": "e.g. C<sub>p</sub> 100 → 200 mg/L (beyond the graph): rate 10.9 → 11.4 mg/kg/day (× 1.05)"
     },
     {
      "at": 4,
-     "m": "C<sub>p</sub> ≫ K<sub>M</sub>: rate = V<sub>max</sub> → zero order"
+     "m": "e.g. her Solutions 2 (K<sub>M</sub> 9 mg/L, V<sub>max</sub> 500 mg/day): C<sub>p</sub> 6 → 21 mg/L (× 3.5), rate 200 → 350 mg/day (× 1.75)"
     }
-   ]
+   ],
+   "fig": {
+    "key": "nl_rate_steps",
+    "at": [
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      5
+     ]
+    ]
+   }
   },
   {
-   "slide": "nonlin:9",
-   "reading": null,
-   "text": "So as the dose is increased, elimination starts to lose its first order behaviour, and the drug accumulates because the body cannot go faster than V max. A higher V max, with K M the same, removes the drug faster. Her poll asked, true or false, whether drugs with Michaelis Menten saturation kinetics will often exhibit zero order kinetics at low concentrations and first order kinetics at high ones. She said, Should have been false, right? Low concentrations looks like first order, high concentrations looks like zero order, OK?",
+   "text": "The elimination rate, the fall in C p with time, equals V max times C p, divided by K M plus C p. C p on the top raises the rate, and C p on the bottom, added to K M, limits its rise; they can be added only because both are concentrations. When C p is much smaller than K M, the bottom stays about K M, so the rate is about V max over K M, a constant called k prime, times C p: first order. When C p is much larger than K M, the bottom is about C p, the C p on top and bottom cancel, and the rate is about V max: zero order.",
+   "slide": "nonlin:8",
    "card": [
     {
      "at": 0,
-     "m": "dose ↑ → capped at V<sub>max</sub> → accumulation"
+     "m": "−{{frac:dC<sub>p</sub>|dt}} = {{frac:V<sub>max</sub> C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}"
     },
     {
-     "at": 1,
-     "m": "V<sub>max</sub> ↑ (same K<sub>M</sub>) → faster removal"
+     "at": 0,
+     "m": "C<sub>p</sub> = K<sub>M</sub>: rate = {{frac:V<sub>max</sub> K<sub>M</sub>|2 K<sub>M</sub>}} = ½ V<sub>max</sub>"
     },
     {
      "at": 2,
-     "m": "poll: zero order at low C, first order at high C?"
+     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: rate ≈ {{frac:V<sub>max</sub>|K<sub>M</sub>}} C<sub>p</sub> = k′C<sub>p</sub> → first order"
     },
     {
      "at": 3,
-     "m": "<b>False</b>: low C first order, high C zero order"
+     "m": "C<sub>p</sub> ≫ K<sub>M</sub>: K<sub>M</sub> + C<sub>p</sub> ≈ C<sub>p</sub>, rate ≈ V<sub>max</sub> → zero order"
     }
-   ]
+   ],
+   "fig": {
+    "key": "nl_rate_steps",
+    "at": [
+     [
+      0,
+      6
+     ]
+    ]
+   }
   },
   {
+   "text": "Well below K M, the amount removed per day follows C p, but the fraction removed per day stays nearly constant, so the half life and the clearance do too, as in first order. The textbook puts it this way: in first order the rate is a function of the concentration, the half life is not; in zero order the half life depends on the concentration. As C p rises toward and above K M, the rate rises less than in proportion, so the fraction removed per day falls, the half life lengthens and the clearance falls. She said, Higher concentration, that half life starts to depend on concentration, looks like zero order.",
    "slide": "nonlin:17",
-   "reading": null,
-   "text": "Because C p is added to K M, the half life rises as C p rises. The half life equals V D, times zero point six nine three over V max, times K M plus C p. V D is in liters, V max in milligrams per day, and K M and C p in milligrams per liter, so the half life comes out in days. For a first order drug the half life is zero point six nine three over k, which does not depend on concentration.",
-   "card": [
-    {
-     "at": 1,
-     "m": "t<sub>&frac12;</sub> = V<sub>D</sub>({{frac:0.693|V<sub>max</sub>}})(K<sub>M</sub> + C<sub>p</sub>)"
-    },
-    {
-     "at": 2,
-     "m": "L × {{frac:1|mg/day}} × mg/L = day"
-    },
-    {
-     "at": 3,
-     "m": "first order: t<sub>&frac12;</sub> = {{frac:0.693|k}}, no C<sub>p</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "nonlin:18",
-   "reading": null,
-   "text": "The total body clearance, Cl T, equals V max divided by K M plus C p. C p is in the denominator, so clearance falls as the concentration rises. Milligrams per day divided by milligrams per liter gives liters per day. For a first order drug the clearance is k times V D, again with no concentration in it.",
    "card": [
     {
      "at": 0,
+     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: amount per time follows C<sub>p</sub>; fraction per time, t<sub>½</sub>, Cl nearly constant"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> ↑ toward K<sub>M</sub> and above: fraction per time ↓ → t<sub>½</sub> ↑, Cl<sub>T</sub> ↓"
+    }
+   ],
+   "fig": {
+    "key": "nl_frac_steps",
+    "at": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "text": "The half life equals V D, the volume of distribution, times zero point six nine three over V max, times K M plus C p. C p is on the top, added to K M, so a higher level gives a longer half life. The total body clearance, Cl T, equals V max divided by K M plus C p. C p is on the bottom, so the clearance falls as the level rises. V max is on the top of the clearance line and the bottom of the half life line, so a higher V max removes the drug faster.",
+   "slide": "nonlin:18",
+   "card": [
+    {
+     "at": 0,
+     "m": "t<sub>½</sub> = V<sub>D</sub>({{frac:0.693|V<sub>max</sub>}})(K<sub>M</sub> + C<sub>p</sub>)"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> ↑ → t<sub>½</sub> ↑"
+    },
+    {
+     "at": 2,
      "m": "Cl<sub>T</sub> = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>p</sub>}}"
     },
     {
-     "at": 1,
+     "at": 3,
      "m": "C<sub>p</sub> ↑ → Cl<sub>T</sub> ↓"
     },
     {
-     "at": 2,
-     "m": "{{frac:mg/day|mg/L}} = L/day"
-    },
-    {
-     "at": 3,
-     "m": "first order: Cl = kV<sub>D</sub>"
+     "at": 4,
+     "m": "V<sub>max</sub> ↑ (same K<sub>M</sub>): Cl<sub>T</sub> ↑, t<sub>½</sub> ↓; first order: t<sub>½</sub> = {{frac:0.693|k}}, Cl = kV<sub>D</sub>, no C<sub>p</sub>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "nl_frac_steps",
+    "at": [
+     [
+      1,
+      4
+     ]
+    ]
+   }
   },
   {
+   "text": "Her Solutions two asks the half life and the total body clearance at fifteen and at twenty one milligrams per liter. The two lines answer it, because each takes a stated level. The patient weighs seventy five kilograms, with a V D of zero point seven five liters per kilogram, converted to liters first, a K M of nine milligrams per liter and a V max of five hundred milligrams per day. At fifteen milligrams per liter, the half life is one point eight seven days and the clearance twenty point eight liters per day.",
    "slide": "nonlin:17",
-   "reading": null,
-   "text": "Her Solutions two. A seventy five kilogram patient has a V D of zero point seven five liters per kilogram, a K M of nine milligrams per liter and a V max of five hundred milligrams per day. She asks the half life and the total body clearance at fifteen and at twenty one milligrams per liter. First, V D in liters: zero point seven five liters per kilogram times seventy five kilograms is fifty six point two five liters. At fifteen milligrams per liter, K M plus C p is twenty four milligrams per liter. The half life is fifty six point two five liters, times zero point six nine three over five hundred milligrams per day, times twenty four, which gives one point eight seven days.",
    "card": [
     {
-     "at": 1,
-     "m": "V<sub>D</sub> 0.75 L/kg, K<sub>M</sub> 9 mg/L, V<sub>max</sub> 500 mg/day"
+     "at": 2,
+     "m": "75 kg; V<sub>D</sub> 0.75 L/kg, K<sub>M</sub> 9 mg/L, V<sub>max</sub> 500 mg/day"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "V<sub>D</sub> = 0.75 L/kg × 75 kg = 56.25 L"
     },
     {
-     "at": 4,
-     "m": "K<sub>M</sub> + C<sub>p</sub> = 9 + 15 = 24 mg/L"
+     "at": 3,
+     "m": "t<sub>½</sub> = (56.25 L)({{frac:0.693|500 mg/day}})(9 + 15 mg/L) = <b>1.87 days</b>"
     },
     {
-     "at": 5,
-     "m": "<b>t<sub>&frac12;</sub> = (56.25 L)({{frac:0.693|500 mg/day}})(24 mg/L) = 1.87 days</b>"
+     "at": 3,
+     "m": "Cl<sub>T</sub> = {{frac:500 mg/day|(9 + 15) mg/L}} = <b>20.8 L/day</b>"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "At twenty one milligrams per liter, the half life is two point three four days and the clearance sixteen point seven liters per day. The higher level gave the longer half life and the lower clearance, which answers her written question three. The elimination rate still rose, from three hundred twelve point five to three hundred fifty milligrams per day, but by a smaller fraction than the level rose, so the clearance, the rate divided by the level, fell. Milligrams per day over milligrams per liter leaves liters per day.",
    "slide": "nonlin:18",
-   "reading": null,
-   "text": "The clearance at fifteen is five hundred milligrams per day over twenty four milligrams per liter, twenty point eight liters per day. At twenty one milligrams per liter, K M plus C p is thirty milligrams per liter. The half life is fifty six point two five times zero point six nine three over five hundred, times thirty, which is two point three four days. The clearance is five hundred over thirty, sixteen point seven liters per day. So the higher concentration has the longer half life and the lower clearance, which answers her written question three.",
    "card": [
     {
      "at": 0,
-     "m": "<b>Cl<sub>T</sub> = {{frac:500 mg/day|24 mg/L}} = 20.8 L/day</b>"
+     "m": "t<sub>½</sub> = (56.25)({{frac:0.693|500}})(9 + 21) = <b>2.34 days</b>"
+    },
+    {
+     "at": 0,
+     "m": "Cl<sub>T</sub> = {{frac:500|9 + 21}} = <b>16.7 L/day</b>"
     },
     {
      "at": 1,
-     "m": "9 + 21 = 30 mg/L"
+     "m": "C<sub>p</sub> 15 → 21 mg/L: t<sub>½</sub> 1.87 → 2.34 days ↑, Cl<sub>T</sub> 20.8 → 16.7 L/day ↓"
     },
     {
      "at": 2,
-     "m": "<b>t<sub>&frac12;</sub> = (56.25)({{frac:0.693|500}})(30) = 2.34 days</b>"
+     "m": "rate {{frac:500 × 15|24}} = 312.5 → {{frac:500 × 21|30}} = 350 mg/day (× 1.12); C<sub>p</sub> × 1.4"
+    },
+    {
+     "at": 2,
+     "m": "Cl<sub>T</sub> = {{frac:rate|C<sub>p</sub>}}: {{frac:312.5|15}} = 20.8, {{frac:350|21}} = 16.7 L/day ✓"
     },
     {
      "at": 3,
-     "m": "<b>Cl<sub>T</sub> = {{frac:500|30}} = 16.7 L/day</b>"
-    },
-    {
-     "at": 4,
-     "m": "C<sub>p</sub> ↑: t<sub>&frac12;</sub> ↑, Cl<sub>T</sub> ↓"
+     "m": "{{frac:mg/day|mg/L}} = L/day; L × {{frac:1|mg/day}} × mg/L = day"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "nonlin:7",
-   "reading": null,
-   "text": "How she tests it. Definitions ask which term is the maximum elimination rate, V max, and which is the constant in concentration units that reflects enzyme capacity, K M. K M is not a rate. Her sheets ask the half life and the clearance at a stated level: fifteen milligrams per liter, or each dose's own steady state level. The unit checks are V D converted from liters per kilogram to liters first, the half life in days and the clearance in liters per day when V max is in milligrams per day.",
+   "text": "Her quiz paired low concentrations relative to V max or to K M with a rate that depends on, or is independent of, concentration. The key: at low concentrations relative to K M, the elimination rate depends on the concentration. Any option relative to V max is wrong, because V max is a rate. Depends on concentration names the rate, the amount removed per unit of time; reading it as the half life changing leads to the wrong answer, because well below K M the half life hardly changes with C p. Her poll, zero order at low concentrations and first order at high ones, is false.",
+   "slide": "nonlin:8",
    "card": [
     {
      "at": 1,
-     "m": "V<sub>max</sub>: rate; K<sub>M</sub>: concentration"
+     "m": "<b>C<sub>p</sub> low relative to K<sub>M</sub>: rate depends on C<sub>p</sub></b>"
     },
     {
      "at": 2,
-     "m": "✗ K<sub>M</sub> as a rate"
+     "m": "✗ relative to V<sub>max</sub>: a rate, not a level"
     },
     {
      "at": 3,
-     "m": "t<sub>&frac12;</sub>, Cl<sub>T</sub> at a stated C<sub>p</sub> (15 mg/L)"
+     "m": "depends on C<sub>p</sub>: the rate (amount per time); t<sub>½</sub> nearly constant well below K<sub>M</sub>"
     },
     {
      "at": 4,
-     "m": "t<sub>&frac12;</sub>, Cl<sub>T</sub> at a stated C<sub>p</sub> (15 mg/L, or each dose's C<sub>ss</sub>)"
+     "m": "poll: zero order at low C, first order at high C? <b>False</b>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "nl_rate_steps",
+    "at": [
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Definition items ask which term is the maximum elimination rate, V max, and which is the constant in concentration units that reflects enzyme capacity, K M; K M is not a rate. Her sheets ask the half life and the clearance at a stated level: fifteen milligrams per liter, or each dose's own steady state level. The unit checks are V D converted to liters first, the half life in days and the clearance in liters per day.",
+   "slide": "nonlin:7",
+   "card": [
+    {
+     "at": 0,
+     "m": "V<sub>max</sub>: rate; K<sub>M</sub>: concentration; ✗ K<sub>M</sub> as a rate"
+    },
+    {
+     "at": 1,
+     "m": "t<sub>½</sub>, Cl<sub>T</sub> at a stated C<sub>p</sub> (15 mg/L, or each dose's C<sub>ss</sub>)"
+    },
+    {
+     "at": 2,
+     "m": "V<sub>D</sub> in L; t<sub>½</sub> in days; Cl<sub>T</sub> in L/day"
+    }
+   ],
+   "fig": null
   }
  ]
 }

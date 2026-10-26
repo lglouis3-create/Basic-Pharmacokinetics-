@@ -1,201 +1,290 @@
 {
  "id": "gobj-m6-1",
- "title": "Superposition and its assumptions",
+ "title": "Superposition and accumulation",
  "segs": [
   {
+   "text": "Module six, objective one. Superposition, and why repeated doses build up. The dosing interval, tau, is the time between doses, so three times a day is a tau of eight hours. The peak is the highest plasma concentration, C p, in an interval, and the trough is the lowest, just before the next dose. Given at a fixed interval, each dose adds to what is left of the earlier ones, so the peaks and troughs climb to a plateau called steady state, marked by an infinity sign. First order elimination removes a fixed fraction of the drug present per unit of time, set by the rate constant k.",
    "slide": "rep:3",
-   "reading": null,
-   "text": "Module six, objective one. Superposition and its assumptions in multiple dose regimens. When the same dose is given at a fixed interval, tau, such as eight hours for three times a day, each new dose is added to what is left of the earlier doses, so the peaks and troughs climb. The peak is the highest concentration in an interval, and the trough is the lowest, just before the next dose. The climb stops at a plateau called steady state. Every dose then rises to the same peak and falls to the same trough, because the drug eliminated over one interval equals one dose.",
    "card": [
     {
      "at": 2,
-     "m": "&tau;: time between doses; TID &rarr; &tau; = 8 hr"
+     "m": "τ: the time between doses, hr; TID → τ = 8 hr"
     },
     {
      "at": 3,
-     "m": "peak = maximum &nbsp; trough = minimum, just before the next dose"
-    },
-    {
-     "at": 5,
-     "m": "steady state: eliminated per &tau; = one dose"
-    }
-   ]
-  },
-  {
-   "slide": "rep:3",
-   "reading": null,
-   "text": "Steady state is reached in three to five half-lives. That time depends on the half-life only, not on the dose, and the dose sets how high the plateau is. After the last dose, most of the drug is gone in another three to five half-lives. She said, not three to five doses, three to five half-lives. An infinity sign on a symbol means at steady state.",
-   "card": [
-    {
-     "at": 0,
-     "m": "steady state: 3 to 5 t&frac12;"
-    },
-    {
-     "at": 1,
-     "m": "independent of dose; dose sets the plateau height"
-    },
-    {
-     "at": 2,
-     "m": "after the last dose: most gone in 3 to 5 t&frac12;"
+     "m": "peak = highest C<sub>p</sub> in an interval; trough = lowest, just before the next dose"
     },
     {
      "at": 4,
-     "m": "&infin; = at steady state"
-    }
-   ]
-  },
-  {
-   "slide": "rep:4",
-   "reading": null,
-   "text": "Superposition says the concentration at any time is the sum of what is left of every dose given so far, each dose following its own single dose curve. It holds under two assumptions. First, elimination is first order, at a rate proportional to the amount present, with a constant k. Second, the pharmacokinetics after one dose are not altered by later doses, so the half-life and the clearance stay the same. Clearance is the volume of plasma cleared of drug per unit time. She said, First order kinetics equals linear pharmacokinetics.",
-   "card": [
-    {
-     "at": 0,
-     "m": "C = sum of what is left of each dose"
-    },
-    {
-     "at": 2,
-     "m": "1. first-order elimination"
-    },
-    {
-     "at": 3,
-     "m": "2. t&frac12; and Cl unchanged by later doses"
+     "m": "each dose adds to the leftover → climb → steady state (∞)"
     },
     {
      "at": 5,
+     "m": "first order: a fixed fraction of the drug present removed per hr; k in hr<sup>−1</sup>"
+    }
+   ],
+   "fig": {
+    "key": "md_bolus_steps",
+    "at": [
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Drug builds up when the next dose comes before the last one is completely eliminated; with a longer interval nothing is left over and nothing builds up. The climb stops because, with first order elimination, the fraction removed per interval stays the same while the amount removed grows with the amount in the body. When the amount removed over one interval equals one dose, every interval repeats. For I V bolus doses the peak minus the trough is then one dose: in amount, the dose itself, and in milligrams per liter, C zero, the concentration one dose produces on its own.",
+   "slide": "rep:3",
+   "card": [
+    {
+     "at": 0,
+     "m": "next dose before the last is eliminated → leftover + new dose → higher peak"
+    },
+    {
+     "at": 0,
+     "m": "interval longer than the time to eliminate a dose → no build-up"
+    },
+    {
+     "at": 1,
+     "m": "per interval: fraction removed constant; amount removed grows with the amount present"
+    },
+    {
+     "at": 2,
+     "m": "amount removed per τ = one dose → steady state"
+    },
+    {
+     "at": 3,
+     "m": "IV bolus at steady state: D<sub>max</sub><sup>∞</sup> − D<sub>min</sub><sup>∞</sup> = D<sub>0</sub>; C<sub>max</sub><sup>∞</sup> − C<sub>min</sub><sup>∞</sup> = C<sub>0</sub>"
+    }
+   ],
+   "fig": {
+    "key": "md_bolus_steps",
+    "at": [
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      4
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Steady state takes three to five half lives, the half life being the time for the level to fall by half. That time depends on the half life only: after n doses the level has reached one minus e to the minus n k tau of its plateau, which holds only k and n times tau, the length of n dosing intervals, and no dose. A larger dose raises the plateau in proportion but does not move the time. She said, not three to five doses, three to five half lives. After the last dose, most of the drug is gone in another three to five half lives.",
+   "slide": "rep:3",
+   "card": [
+    {
+     "at": 0,
+     "m": "steady state: 3 to 5 t<sub>½</sub>"
+    },
+    {
+     "at": 1,
+     "m": "fraction of the plateau after n doses = 1 − e<sup>−nkτ</sup>; nτ = n intervals (hr); no D<sub>0</sub>"
+    },
+    {
+     "at": 1,
+     "m": "e.g. 3.3 t<sub>½</sub>: 1 − 0.5<sup>3.3</sup> = 0.90; 5 t<sub>½</sub>: 1 − 0.5<sup>5</sup> = 0.97"
+    },
+    {
+     "at": 2,
+     "m": "dose × 2: plateau × 2, same time"
+    },
+    {
+     "at": 4,
+     "m": "after the last dose: most gone in 3 to 5 t<sub>½</sub>"
+    }
+   ],
+   "fig": {
+    "key": "md_bolus_steps",
+    "at": [
+     [
+      0,
+      4
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Superposition says C p at any time is the sum of what is left of every dose given so far, each following its own single dose curve. It assumes first order elimination, and pharmacokinetics after one dose that are not altered by later doses, so the half life and the clearance, the volume of plasma cleared of drug per unit of time, stay the same. Then each dose loses the same fraction per hour whatever else is present, so each leftover can be worked out on its own and the leftovers add. Saturation of a carrier, enzyme induction or inhibition, or a changing disease state break this. She said, First order kinetics equals linear pharmacokinetics.",
+   "slide": "rep:4",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> = the sum of what is left of each dose"
+    },
+    {
+     "at": 1,
+     "m": "assumes: 1. first-order elimination; 2. t<sub>½</sub> and Cl unchanged by later doses"
+    },
+    {
+     "at": 2,
+     "m": "same fraction lost per hr → each leftover on its own → leftovers add"
+    },
+    {
+     "at": 3,
+     "m": "fails: carrier saturation, induction or inhibition, changing pathophysiology"
+    },
+    {
+     "at": 4,
      "m": "first order = linear"
     }
-   ]
+   ],
+   "fig": {
+    "key": "md_bolus_steps",
+    "at": [
+     [
+      0,
+      2
+     ]
+    ]
+   }
   },
   {
-   "slide": "rep:4",
-   "reading": null,
-   "text": "So the single dose decline, C equals C zero e to the minus k t, applies after every dose, at steady state as well as after the first, and only the starting value is higher. C zero is the concentration just after a dose, k the elimination rate constant, and t the time since that dose. The average concentration at steady state is the area under the curve over one dosing interval at steady state, divided by tau. The area is in milligram hours per liter and tau in hours, so the average is in milligrams per liter. That area form is not on the equation sheet.",
+   "text": "In symbols, C equals C zero e to the minus k t applies after every dose, at steady state as after the first; only the starting value is higher. With t equal to tau, e to the minus k tau is the fraction of a dose left one interval later. The accumulation factor, r, one over one minus e to the minus k tau, is the steady state peak divided by the first dose peak. A shorter tau leaves more behind, so one minus e to the minus k tau, under the one, is smaller and r is larger. The dose is not in r, so doubling the dose doubles every level but leaves r unchanged.",
+   "slide": "mo:16",
    "card": [
     {
      "at": 0,
-     "m": "C = C<sub>0</sub>e<sup>&minus;kt</sup> after every dose"
+     "m": "C = C<sub>0</sub>e<sup>−kt</sup> after every dose"
+    },
+    {
+     "at": 1,
+     "m": "t = τ: e<sup>−kτ</sup> = fraction left after one interval"
     },
     {
      "at": 2,
-     "m": "C<sub>av</sub><sup>&infin;</sup> = {{frac:[AUC]<sub>t1</sub><sup>t2</sup>|&tau;}}"
+     "m": "r = {{frac:1|1 − e<sup>−kτ</sup>}} = {{frac:C<sub>max</sub><sup>∞</sup>|C<sub>0</sub>}}"
     },
     {
      "at": 3,
-     "m": "{{frac:mg&middot;hr/L|hr}} = mg/L"
-    }
-   ]
-  },
-  {
-   "slide": "rep:9",
-   "reading": null,
-   "text": "Her Example one regimen. The half-life is four hours, the volume of distribution, V D, is zero point two five liters per kilogram, and ten milligrams per kilogram is given by I V bolus every eight hours. What is the peak just after the second dose, and when is steady state reached? First, the peak after the first dose is the dose divided by V D. Ten milligrams per kilogram over zero point two five liters per kilogram is forty milligrams per liter, because the kilograms cancel.",
-   "card": [
-    {
-     "at": 1,
-     "m": "t&frac12; = 4 hr, V<sub>D</sub> = 0.25 L/kg, 10 mg/kg every 8 hr"
+     "m": "τ shorter → e<sup>−kτ</sup> larger → 1 − e<sup>−kτ</sup> smaller → r larger"
     },
     {
      "at": 3,
-     "m": "C<sub>0</sub> = {{frac:dose|V<sub>D</sub>}}"
+     "m": "τ = t<sub>½</sub>: r = {{frac:1|0.5}} = 2; e.g. τ = 2 t<sub>½</sub>: r = {{frac:1|0.75}} = 1.33"
     },
     {
      "at": 4,
-     "m": "C<sub>0</sub> = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L"
+     "m": "no D<sub>0</sub> in r: dose × 2, levels × 2, r unchanged"
     }
-   ]
+   ],
+   "fig": null
   },
   {
-   "slide": "rep:9",
-   "reading": null,
-   "text": "Now let the first dose fall for one interval. Eight hours is two half-lives, so it halves twice, from forty to twenty to ten milligrams per liter. The second dose adds its own forty milligrams per liter on top of what is left of the first, which is superposition. Forty plus ten gives fifty milligrams per liter just after the second dose. Time to steady state is three to five half-lives. Three times four hours is twelve hours, and five times four hours is twenty hours, so steady state is reached within twelve to twenty hours.",
+   "text": "Since each dose follows the same curve, the area under the curve, A U C, of the first dose from zero to infinity equals the area of one interval at steady state. The average at steady state is that one interval area divided by tau, in milligrams per liter. This area form is not on the equation sheet.",
+   "slide": "rep:4",
    "card": [
     {
+     "at": 0,
+     "m": "[AUC]<sub>0</sub><sup>∞</sup> of dose 1 = [AUC]<sub>t1</sub><sup>t2</sup> of one interval at steady state"
+    },
+    {
      "at": 1,
-     "m": "8 hr = 2 t&frac12;: 40 &rarr; 20 &rarr; 10 mg/L"
+     "m": "C<sub>av</sub><sup>∞</sup> = {{frac:[AUC]<sub>t1</sub><sup>t2</sup>|τ}}: {{frac:mg hr/L|hr}} = mg/L"
     },
     {
-     "at": 3,
-     "m": "40 + 10 = <b>50 mg/L</b> after dose 2"
-    },
-    {
-     "at": 5,
-     "m": "3 &times; 4 hr = 12 hr to 5 &times; 4 hr = 20 hr"
-    },
-    {
-     "at": 5,
-     "m": "<b>steady state within 12 to 20 hr</b>"
+     "at": 2,
+     "m": "not on the sheet"
     }
-   ]
+   ],
+   "fig": null
   },
   {
+   "text": "For her Example one regimen, a half life of four hours, a volume of distribution, V D, of zero point two five liters per kilogram, and ten milligrams per kilogram by I V bolus every eight hours, find the peak after the second dose and the time to steady state. By superposition, the second peak is a new C zero plus the quarter of the first dose left after two half lives: fifty milligrams per liter. Steady state comes in three to five half lives, twelve to twenty hours. At steady state the peak is one C zero plus a trough that is a quarter of the peak: fifty three point three milligrams per liter, a trough of thirteen point three, and a gap of forty, one dose's C zero.",
    "slide": "rep:11",
-   "reading": null,
-   "text": "The same reasoning gives the steady state peak. Call it P, the new dose's forty milligrams per liter plus the trough left from earlier doses. That trough is one quarter of the previous peak, because one interval is two half-lives of decline. So P equals forty plus zero point two five P. Solving, P is forty milligrams per liter divided by zero point seven five, which is fifty three point three milligrams per liter. The steady state trough is fifty three point three times zero point two five, which is thirteen point three milligrams per liter.",
-   "card": [
-    {
-     "at": 1,
-     "m": "P = 40 mg/L + trough"
-    },
-    {
-     "at": 2,
-     "m": "trough = 0.25 P"
-    },
-    {
-     "at": 3,
-     "m": "P = 40 + 0.25P"
-    },
-    {
-     "at": 4,
-     "m": "P = {{frac:40 mg/L|0.75}} = <b>53.3 mg/L</b>"
-    },
-    {
-     "at": 5,
-     "m": "trough = 53.3 &times; 0.25 = <b>13.3 mg/L</b>"
-    }
-   ]
-  },
-  {
-   "slide": "rep:3",
-   "reading": null,
-   "text": "From the textbook, the accumulation factor R equals one divided by one minus e to the minus k tau. It depends only on k and tau, not on the dose. R is two when tau equals one half-life, and on her accumulation figure it is close to one when tau is three half-lives or more. Doubling the dose doubles every level but leaves R unchanged. Accumulation happens because the next dose arrives before the last one is completely eliminated, and a longer interval than that gives none.",
    "card": [
     {
      "at": 0,
-     "m": "R = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}"
+     "m": "t<sub>½</sub> = 4 hr, V<sub>D</sub> = 0.25 L/kg, 10 mg/kg IV bolus every 8 hr"
     },
     {
      "at": 1,
-     "m": "k and &tau; only, no dose"
+     "m": "C<sub>0</sub> = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L; 8 hr = 2 t<sub>½</sub>: 40 → 20 → 10 mg/L"
+    },
+    {
+     "at": 1,
+     "m": "<b>peak 2 = 40 + 10 = 50 mg/L</b>"
     },
     {
      "at": 2,
-     "m": "&tau; = t&frac12; &rarr; R = 2; &tau; of 3 t&frac12; or more &rarr; R close to 1"
+     "m": "3 × 4 hr = 12 hr to 5 × 4 hr = 20 hr: <b>steady state within 12 to 20 hr</b>"
     },
     {
      "at": 3,
-     "m": "dose &times; 2: levels &times; 2, R unchanged"
+     "m": "P = 40 mg/L + 0.25P → P = {{frac:40 mg/L|0.75}} = <b>53.3 mg/L</b>"
+    },
+    {
+     "at": 3,
+     "m": "trough = 53.3 × 0.25 = <b>13.3 mg/L</b>; 53.3 − 13.3 = 40 mg/L = C<sub>0</sub> ✓"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:53.3|40}} = 1.33 = r for τ = 2 t<sub>½</sub>"
     }
-   ]
+   ],
+   "fig": {
+    "key": "md_bolus_steps",
+    "at": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      4
+     ]
+    ]
+   }
   },
   {
+   "text": "Her items test the wording. The second assumption is the one that names the half life and the clearance, and a review item states it as early doses having no effect on the pharmacokinetics of later doses, which is true. Steady state takes three to five half lives, not three to five doses, and does not depend on the dose. e to the minus k tau is what one dose leaves behind, while the accumulation factor is how many first dose peaks fit in the steady state peak. First order and linear mean the same, and objectives two and three build on superposition.",
    "slide": "rep:4",
-   "reading": null,
-   "text": "How she tests it. She asks for the two assumptions, first order elimination and pharmacokinetics unchanged by later doses, and the second is the one that names half-life and clearance. She asks how long steady state takes, and the answer is three to five half-lives, while three to five doses, or it depends on the dose, are the two wrong answers she argues against. First order and linear mean the same thing in her questions. The textbook lists what breaks superposition: changing pathophysiology in the patient, saturation of a drug carrier system, enzyme induction or inhibition, and nonlinear pharmacokinetics in general.",
    "card": [
     {
      "at": 1,
-     "m": "first order; t&frac12; and Cl unchanged"
+     "m": "✓ early doses do not change the PK of later doses (True)"
     },
     {
      "at": 2,
-     "m": "✓ 3 to 5 t&frac12; &nbsp; ✗ 3 to 5 doses &nbsp; ✗ depends on dose"
+     "m": "✓ 3 to 5 t<sub>½</sub>; not 3 to 5 doses; not dose-dependent"
+    },
+    {
+     "at": 3,
+     "m": "e<sup>−kτ</sup>: left after one τ; r = {{frac:C<sub>max</sub><sup>∞</sup>|C<sub>0</sub>}}"
     },
     {
      "at": 4,
-     "m": "breaks it: pathophysiology, carrier saturation, induction or inhibition, nonlinear PK"
+     "m": "first order = linear"
     }
-   ]
+   ],
+   "fig": null
   }
  ]
 }
