@@ -1,0 +1,108 @@
+{
+ "id": "gobj-m1-1",
+ "title": "Pharmacokinetics and related disciplines",
+ "segs": [
+  {
+   "slide": "intro:3",
+   "reading": null,
+   "text": "Module one, objective one. What pharmacokinetics is, and the disciplines around it. A drug's journey has two halves. Pharmaceutics covers the dosage form up to the point where the drug is dissolved. Pharmacokinetics, P K, covers everything after that: from drug in solution, into the systemic circulation, out to the tissues, through metabolism and excretion, and on to the pharmacologic effect.",
+   "card": [
+    {
+     "at": 3,
+     "m": "pharmaceutics: dosage form → drug in solution"
+    },
+    {
+     "at": 4,
+     "m": "pharmacokinetics: drug in solution → circulation, tissues, metabolism, excretion → effect"
+    }
+   ]
+  },
+  {
+   "slide": "intro:4",
+   "reading": null,
+   "text": "In short, P K is the study of A D M E: absorption, distribution, metabolism and excretion. Absorption is the passage of drug molecules from the administration site into the systemic circulation. Distribution is the reversible transfer of a drug to and from the site of measurement. Metabolism is the conversion of one chemical species to another, also called biotransformation. Excretion is the removal of intact drug or metabolite from the body. Other faculty add a letter, an L for liberation or a T for toxicology, but in this course it is these four.",
+   "card": [
+    {
+     "at": 0,
+     "m": "PK = ADME"
+    },
+    {
+     "at": 1,
+     "m": "absorption: site → systemic circulation &nbsp; distribution: reversible transfer"
+    },
+    {
+     "at": 3,
+     "m": "metabolism: biotransformation &nbsp; excretion: removal of drug or metabolite"
+    }
+   ]
+  },
+  {
+   "slide": "intro:6",
+   "reading": null,
+   "text": "Several neighbouring disciplines borrow P K methods for a particular purpose, such as treating patients, comparing population groups or judging safety. The first is biopharmaceutics. It is how the drug's physicochemical properties, the dosage form and the route of administration together affect the rate and extent of systemic absorption.",
+   "card": [
+    {
+     "at": 1,
+     "m": "biopharmaceutics"
+    },
+    {
+     "at": 2,
+     "m": "properties + dosage form + route → rate and extent of absorption"
+    }
+   ]
+  },
+  {
+   "slide": "intro:8",
+   "reading": null,
+   "text": "The others each have a one line definition. Clinical pharmacokinetics is applying pharmacokinetic methods to drug therapy. Population pharmacokinetics is the study of pharmacokinetic differences between population groups. Pharmacodynamics, P D, is the relationship between drug concentration at the site of action and the pharmacological response. Clinical toxicology is the study of adverse effects of drugs in the body. Toxicokinetics is applying pharmacokinetic principles to drug safety evaluation studies.",
+   "card": [
+    {
+     "at": 1,
+     "m": "clinical PK: drug therapy &nbsp; population PK: population groups"
+    },
+    {
+     "at": 3,
+     "m": "PD: concentration at site of action → response"
+    },
+    {
+     "at": 4,
+     "m": "clinical toxicology: adverse effects &nbsp; toxicokinetics: safety studies"
+    }
+   ]
+  },
+  {
+   "slide": "intro:8",
+   "reading": null,
+   "text": "The quickest way to separate P K from P D is what each one relates. P K links concentration to time, and P D links concentration to response. Put simply, pharmacodynamics is concentration and response, and pharmacokinetics is concentration and time.",
+   "card": [
+    {
+     "at": 1,
+     "m": "PK: concentration and time"
+    },
+    {
+     "at": 1,
+     "m": "PD: concentration and response"
+    }
+   ]
+  },
+  {
+   "slide": "intro:17",
+   "reading": null,
+   "text": "Her questions read out a definition almost word for word, and the options are bare discipline names, so you go from definition to name. In her own poll item, the stem gave the biopharmaceutics definition, and the options were biopharmaceutics, toxicology, pharmacodynamics and pharmacology. The answer was biopharmaceutics. A few students picked pharmacodynamics, but P D is about response, not absorption. Pharmacology is also a distractor, and it is not one of the disciplines this module defines. The key words decide it: absorption from dosage form and route means biopharmaceutics, response means P D, drug therapy means clinical P K, and safety studies means toxicokinetics.",
+   "card": [
+    {
+     "at": 2,
+     "m": "rate and extent of absorption → biopharmaceutics ✓"
+    },
+    {
+     "at": 3,
+     "m": "✗ pharmacodynamics: response, not absorption"
+    },
+    {
+     "at": 5,
+     "m": "absorption → biopharm &nbsp; response → PD &nbsp; drug therapy → clinical PK &nbsp; safety → toxicokinetics"
+    }
+   ]
+  }
+ ]
+}

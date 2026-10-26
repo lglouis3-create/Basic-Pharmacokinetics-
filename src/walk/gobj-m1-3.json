@@ -1,0 +1,131 @@
+{
+ "id": "gobj-m1-3",
+ "title": "Fundamental pharmacokinetic terms",
+ "segs": [
+  {
+   "slide": "intro:9",
+   "reading": null,
+   "text": "Module one, objective three. Fundamental pharmacokinetic terms. These are the working words of the whole course, and later modules use them without redefining them. After a dose, the plasma concentration, C p, rises from zero to a peak and then falls. The aim of dosing is to keep it above the level that works and below the level that harms.",
+   "card": [
+    {
+     "at": 3,
+     "m": "C<sub>p</sub>: zero → peak → falls"
+    },
+    {
+     "at": 4,
+     "m": "above the level that works, below the level that harms"
+    }
+   ]
+  },
+  {
+   "slide": "intro:9",
+   "reading": null,
+   "text": "The lower line on the concentration time curve is the minimum effective concentration, M E C. It is the concentration that must be met or exceeded for the desired pharmacologic response. The upper line is the minimum toxic concentration, M T C, the concentration above which adverse effects start, and what counts as toxic differs between drugs. A third term, the minimum inhibitory concentration, M I C, is used for antibiotics. It is the lowest concentration needed to kill or inhibit the bacteria.",
+   "card": [
+    {
+     "at": 0,
+     "m": "MEC: lower line, met or exceeded for response"
+    },
+    {
+     "at": 2,
+     "m": "MTC: upper line, adverse effects start"
+    },
+    {
+     "at": 3,
+     "m": "MIC: antibiotics, kill or inhibit bacteria"
+    }
+   ]
+  },
+  {
+   "slide": "intro:10",
+   "reading": null,
+   "text": "Her questions word the stem as the property and ask for the name, and every option is a real term from the same family. Her poll asked which concentration must be met or exceeded for the desired response. It offered steady state, minimum toxic, minimum effective and minimum inhibitory concentration. Steady state is the plateau concentration reached when the rate of drug going in equals the rate going out. The answer is minimum effective concentration.",
+   "card": [
+    {
+     "at": 1,
+     "m": "met or exceeded for the desired response?"
+    },
+    {
+     "at": 3,
+     "m": "✗ steady state &nbsp; ✗ MTC &nbsp; ✗ MIC"
+    },
+    {
+     "at": 4,
+     "m": "MEC ✓"
+    }
+   ]
+  },
+  {
+   "slide": "intro:5",
+   "reading": null,
+   "text": "Elimination is the irreversible loss of drug from the body by all routes, so metabolism and excretion are both forms of elimination. Disposition is everything that happens to a drug after it is absorbed into the systemic circulation, that is, distribution and elimination. So to tell the two apart, check whether distribution is included. If it is, the term is disposition.",
+   "card": [
+    {
+     "at": 0,
+     "m": "elimination = metabolism + excretion"
+    },
+    {
+     "at": 1,
+     "m": "disposition = distribution + elimination"
+    }
+   ]
+  },
+  {
+   "slide": "intro:5",
+   "reading": null,
+   "text": "The first pass effect is the rapid metabolism of an oral drug, mainly by the liver, before it reaches the general circulation. It lowers the bioavailability. Bioavailability, F, is a measure of the systemic availability of a drug. F is the fraction of the dose that reaches the plasma, and it has no units.",
+   "card": [
+    {
+     "at": 0,
+     "m": "first-pass: oral drug, liver, before general circulation"
+    },
+    {
+     "at": 1,
+     "m": "first-pass → lower F"
+    },
+    {
+     "at": 3,
+     "m": "F: fraction reaching plasma, no units"
+    }
+   ]
+  },
+  {
+   "slide": "intro:11",
+   "reading": null,
+   "text": "Drug levels are measured in a fluid sample. Whole blood is venous blood with an anticoagulant such as heparin or E D T A, and it contains all the cellular and protein elements. Serum is the liquid left after blood is allowed to clot and the clot is removed, so it has no cells, no fibrinogen and no other clotting factors. Plasma is the liquid supernatant after centrifuging non clotted, anticoagulated blood, so it has no cells but all the proteins, including albumin.",
+   "card": [
+    {
+     "at": 1,
+     "m": "whole blood: anticoagulant, all elements"
+    },
+    {
+     "at": 2,
+     "m": "serum: clotted, no cells, no fibrinogen"
+    },
+    {
+     "at": 3,
+     "m": "plasma: anticoagulated, centrifuged, all proteins"
+    }
+   ]
+  },
+  {
+   "slide": "intro:11",
+   "reading": null,
+   "text": "Serum or plasma is used most, because they contain fewer components for the drug to interact with than whole blood does. Her poll asked which sample is most commonly used for drug measurement: saliva, urine, whole blood, or serum or plasma. The answer is serum or plasma, even though all four are possible samples. C p is the drug concentration in plasma, C s in serum, and a plain C is unspecified, so take it as whichever fluid applies.",
+   "card": [
+    {
+     "at": 0,
+     "m": "serum or plasma: fewer components to interact with"
+    },
+    {
+     "at": 2,
+     "m": "most common sample: serum or plasma ✓"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>p</sub> plasma &nbsp; C<sub>s</sub> serum &nbsp; C unspecified (mg/L, mcg/mL)"
+    }
+   ]
+  }
+ ]
+}

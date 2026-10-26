@@ -10,7 +10,7 @@ The output filename is not written here: it is read out of course.js, which is
 the only file that knows which course this is.
 """
 import datetime
-import json, re, io, os, subprocess, sys, tempfile
+import glob, json, re, io, os, subprocess, sys, tempfile
 
 # The data files, in the order they are concatenated into the page.
 #
@@ -56,7 +56,8 @@ CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
                  'diagrams.js',   # the Diagrams tab: groups and how to read each graph
                  'glossary.js',   # the Terms tab: TERMS, one object per term
                  'readings.js',   # textbook chapter cards atop Guides (gen/readings.py)
-                 'sources.js']    # SOURCES + SOURCE_OF: original document and problem number per question (gen/sources.py)
+                 'sources.js',    # SOURCES + SOURCE_OF: original document and problem number per question (gen/sources.py)
+                 'guide_walk.js']  # GW_DECKS + GUIDE_WALK: narrated guide walkthroughs (gen_walk.py from walk/*.json)
 
 # Everything that has to parse before a build is allowed to proceed. Derived
 # from the two lists above rather than named again, so adding a file cannot
@@ -126,6 +127,10 @@ def main():
     titles_path = os.path.join(HERE, 'figtitles.json')
     figtitles = json.load(open(titles_path)) if os.path.exists(titles_path) else {}
     parts.append('const FIG_TITLES = ' + json.dumps(figtitles, ensure_ascii=False) + ';\n')
+    # The recorded walkthrough clips on hand (audio/gw-<section>-<part>.mp3 beside the
+    # built page); a part with no clip is read by the device voice.
+    clips = sorted(os.path.basename(p)[3:-4] for p in glob.glob(os.path.join(HERE, '..', 'audio', 'gw-*.mp3')))
+    parts.append('const GW_CLIPS = ' + json.dumps(clips) + ';\n')
     for f in DATA_FILES:
         parts.append(open(f, encoding='utf-8').read() + '\n')
     for f in CONTENT_FILES:

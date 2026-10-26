@@ -1,0 +1,109 @@
+{
+ "id": "gobj-m4-4",
+ "title": "Ionization and renal excretion",
+ "segs": [
+  {
+   "slide": "cl:22",
+   "reading": null,
+   "text": "Module four, objective four. How the degree of ionization affects renal excretion. After drug is filtered into the tubule, some of it can cross back into the blood, which is tubular reabsorption. For weak acids and weak bases, how much crosses back depends on two things: the p H of the urine, which is the fluid in the renal tubule, and the drug's p K a. The p K a is a property of the drug that, together with the p H, fixes how much of it is ionized.",
+   "card": [
+    {
+     "at": 2,
+     "m": "tubular reabsorption: tubule → blood"
+    },
+    {
+     "at": 3,
+     "m": "depends on: urine pH, drug pK<sub>a</sub>"
+    },
+    {
+     "at": 4,
+     "m": "pK<sub>a</sub> + pH → how much is ionized"
+    }
+   ]
+  },
+  {
+   "slide": "cl:22",
+   "reading": null,
+   "text": "A weak acid or weak base exists in two forms at once, ionized and nonionized. Only the nonionized form crosses membranes, so only that form is reabsorbed. The ionized form does not cross, so it stays in the urine. How the drug is split between the two forms at a given p H is the degree of ionization, and the urine p H compared with the drug's p K a sets that split.",
+   "card": [
+    {
+     "at": 1,
+     "m": "nonionized: crosses membranes, reabsorbed"
+    },
+    {
+     "at": 2,
+     "m": "ionized: stays in the urine"
+    },
+    {
+     "at": 3,
+     "m": "degree of ionization: the split at a given pH"
+    }
+   ]
+  },
+  {
+   "slide": "cl:22",
+   "reading": null,
+   "text": "The relation is written once for each kind of drug. For a weak acid, p H equals p K a plus the log of ionized over nonionized. For a weak base, p H equals p K a plus the log of nonionized over ionized. The two differ only in which way up the ratio is written: ionized on top for a weak acid, nonionized on top for a weak base. The ratio is an amount over an amount, so it has no units. Neither form is on the equation sheet.",
+   "card": [
+    {
+     "at": 1,
+     "m": "Weak acid: &nbsp; pH = pK<sub>a</sub> + log {{frac:ionized|nonionized}}"
+    },
+    {
+     "at": 2,
+     "m": "Weak base: &nbsp; pH = pK<sub>a</sub> + log {{frac:nonionized|ionized}}"
+    },
+    {
+     "at": 4,
+     "m": "ratio: no units"
+    }
+   ]
+  },
+  {
+   "slide": "cl:22",
+   "reading": null,
+   "text": "A weak acid is more ionized in alkaline urine, and a weak base is more ionized in acidic urine. More ionized drug stays in the tubule, so less is reabsorbed and renal clearance rises. Filtration itself is passive and does not depend on urine p H. Weak acids have p K a values of three to eight, and weak bases have p K a values of seven point five to ten point five. Those ranges overlap between seven point five and eight, so a p K a alone does not always settle whether the drug is treated as an acid or a base.",
+   "card": [
+    {
+     "at": 0,
+     "m": "weak acid: more ionized in alkaline urine &nbsp; weak base: more ionized in acidic urine"
+    },
+    {
+     "at": 1,
+     "m": "more ionized → less reabsorbed → Cl<sub>R</sub> rises"
+    },
+    {
+     "at": 2,
+     "m": "filtration: passive, not pH dependent"
+    },
+    {
+     "at": 3,
+     "m": "pK<sub>a</sub>: weak acids 3&ndash;8, weak bases 7.5&ndash;10.5"
+    },
+    {
+     "at": 4,
+     "m": "overlap: 7.5&ndash;8"
+    }
+   ]
+  },
+  {
+   "slide": "cl:26",
+   "reading": null,
+   "text": "Questions on this objective. It is asked as recall of the two factors that govern reabsorption, which are urine p H and the drug's p K a. Trap options swap in plasma p H or the filtration rate. The p K a ranges are asked too, and the usual trap swaps them, putting weak bases at three to eight.",
+   "card": [
+    {
+     "at": 1,
+     "m": "urine pH + drug pK<sub>a</sub>"
+    },
+    {
+     "at": 2,
+     "m": "✗ plasma pH &nbsp; ✗ filtration rate"
+    },
+    {
+     "at": 3,
+     "m": "✗ weak bases at 3&ndash;8"
+    }
+   ]
+  }
+ ]
+}

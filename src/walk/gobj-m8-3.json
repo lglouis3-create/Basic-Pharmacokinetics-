@@ -1,0 +1,184 @@
+{
+ "id": "gobj-m8-3",
+ "title": "Calculating V max and K M from two doses",
+ "segs": [
+  {
+   "slide": "nonlin:10",
+   "text": "Module eight, objective three. Calculating V max and K M after multiple dosing in a patient. V max and K M can be found in test tubes, in vitro, by plotting enzyme experiments. That is not something a clinician does. In a patient, in vivo, they are found from the patient's own drug levels.",
+   "card": [
+    {
+     "at": 2,
+     "m": "in vitro: test tubes, enzyme experiments"
+    },
+    {
+     "at": 4,
+     "m": "in vivo: the patient's own steady-state levels"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:11",
+   "text": "The relation is the dose rate line. R, the daily dose rate, equals V max times C s s, divided by K M plus C s s. To use it in a patient, the drug is given at one dose rate until steady state, and the level is measured. Then a second dose rate is given, and its steady state is measured. Both pairs come from one patient, so they share one V max and one K M. Each level has to be a steady state level, and for this kind of drug steady state takes much longer than for a linear drug: depending on the drug, two to three weeks, not three to five half-lives.",
+   "card": [
+    {
+     "at": 1,
+     "m": "R = {{frac:V<sub>max</sub> C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}"
+    },
+    {
+     "at": 2,
+     "m": "pair 1: R<sub>1</sub> with C<sub>1</sub>"
+    },
+    {
+     "at": 3,
+     "m": "pair 2: R<sub>2</sub> with C<sub>2</sub>"
+    },
+    {
+     "at": 4,
+     "m": "one patient: one V<sub>max</sub>, one K<sub>M</sub>"
+    },
+    {
+     "at": 5,
+     "m": "steady state: 2 to 3 weeks"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:13",
+   "text": "Writing the dose rate line once for each pair, and combining the two, gives K M directly. This is the direct method, and K M always comes first. K M equals R two minus R one, divided by R one over C one, minus R two over C two. Each of those ratios is a dose rate divided by its own concentration. The top is in milligrams per day, and the bottom is in milligrams per day per milligram per liter, so the rate units cancel and K M comes out in milligrams per liter. This line is on the equation sheet, page two, right column.",
+   "card": [
+    {
+     "at": 0,
+     "m": "R<sub>1</sub> = {{frac:V<sub>max</sub> C<sub>1</sub>|K<sub>M</sub> + C<sub>1</sub>}} &nbsp; R<sub>2</sub> = {{frac:V<sub>max</sub> C<sub>2</sub>|K<sub>M</sub> + C<sub>2</sub>}}"
+    },
+    {
+     "at": 2,
+     "m": "K<sub>M</sub> = {{frac:R<sub>2</sub> − R<sub>1</sub>|(R<sub>1</sub>/C<sub>1</sub>) − (R<sub>2</sub>/C<sub>2</sub>)}}"
+    },
+    {
+     "at": 4,
+     "m": "{{frac:mg/day|(mg/day) per (mg/L)}} = mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:14",
+   "text": "Her slide example. A seventy two kilogram patient on six milligrams per kilogram per day reached a steady state of ten milligrams per liter, lower than desired. On eight milligrams per kilogram per day, the steady state was twenty milligrams per liter, higher than desired. K M first. The first ratio is six over ten, which is zero point six. The second ratio is eight over twenty, which is zero point four. The top of the K M line is eight minus six, two milligrams per kilogram per day. The bottom is zero point six minus zero point four, which is zero point two. Two divided by zero point two gives a K M of ten milligrams per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "R<sub>1</sub> = 6 mg/kg/day → C<sub>1</sub> = 10 mg/L"
+    },
+    {
+     "at": 2,
+     "m": "R<sub>2</sub> = 8 mg/kg/day → C<sub>2</sub> = 20 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "{{frac:R<sub>1</sub>|C<sub>1</sub>}} = {{frac:6|10}} = 0.6"
+    },
+    {
+     "at": 5,
+     "m": "{{frac:R<sub>2</sub>|C<sub>2</sub>}} = {{frac:8|20}} = 0.4"
+    },
+    {
+     "at": 6,
+     "m": "K<sub>M</sub> = {{frac:8 − 6 mg/kg/day|0.6 − 0.4}}"
+    },
+    {
+     "at": 7,
+     "m": "= {{frac:2|0.2}}"
+    },
+    {
+     "at": 8,
+     "m": "<b>K<sub>M</sub> = 10 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:15",
+   "text": "With K M known, V max comes from either pair. V max equals R times K M plus C s s, divided by C s s. This line is not on the equation sheet. It is the sheet's dose rate line multiplied by K M plus C s s and divided by C s s.",
+   "card": [
+    {
+     "at": 1,
+     "m": "V<sub>max</sub> = {{frac:R (K<sub>M</sub> + C<sub>ss</sub>)|C<sub>ss</sub>}}"
+    },
+    {
+     "at": 3,
+     "m": "from R = {{frac:V<sub>max</sub> C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}: × (K<sub>M</sub> + C<sub>ss</sub>), ÷ C<sub>ss</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:15",
+   "text": "From the second pair: eight, times ten plus twenty, is two hundred forty, and two hundred forty divided by twenty gives twelve milligrams per kilogram per day. Check with the first pair: six, times ten plus ten, divided by ten, is also twelve, as it must be. She said: I wrote this twice because you should get the same answer regardless of which way you use it. The doses were per kilogram, so V max is per kilogram. The seventy two kilograms are used only when a dose for this patient is asked, in objective four.",
+   "card": [
+    {
+     "at": 0,
+     "m": "pair 2: {{frac:(8 mg/kg/day)(10 + 20 mg/L)|20 mg/L}} = {{frac:240|20}} = <b>12 mg/kg/day</b>"
+    },
+    {
+     "at": 1,
+     "m": "pair 1: {{frac:(6)(10 + 10)|10}} = 12 mg/kg/day ✓"
+    },
+    {
+     "at": 3,
+     "m": "per kilogram: V<sub>max</sub> in mg/kg/day"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:13",
+   "text": "Her Solutions one gives the same calculation in milligrams per day. Three hundred milligrams per day gave five point one milligrams per liter, and five hundred milligrams per day gave twenty milligrams per liter. The first ratio is three hundred over five point one, fifty eight point eight two. The second is five hundred over twenty, twenty five. The top is five hundred minus three hundred, two hundred, and the bottom is fifty eight point eight two minus twenty five, thirty three point eight two. So K M is five point nine one milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "300 mg/day → 5.1 mg/L; &nbsp; 500 mg/day → 20 mg/L"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:300|5.1}} = 58.82"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:500|20}} = 25"
+    },
+    {
+     "at": 4,
+     "m": "K<sub>M</sub> = {{frac:500 − 300|58.82 − 25}} = {{frac:200|33.82}}"
+    },
+    {
+     "at": 5,
+     "m": "<b>K<sub>M</sub> = 5.91 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:15",
+   "text": "Then V max is three hundred, times five point nine one three plus five point one, divided by five point one, which is six hundred forty seven point eight milligrams per day, with K M carried unrounded. Her sheet writes six hundred forty seven point eight three.",
+   "card": [
+    {
+     "at": 0,
+     "m": "V<sub>max</sub> = {{frac:(300 mg/day)(5.913 + 5.1)|5.1}} = <b>647.8 mg/day</b>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:13",
+   "text": "How she tests it. Her stem gives dose one and its steady state, then dose two and its steady state, and asks K M, then V max, as separate parts or as one part asking both. The doses can be per kilogram, as in the slide example, or per day, as on her sheets, where the weight serves only the volume of distribution. The usual errors: putting a rate unit on K M, subtracting the ratios the wrong way round, which makes K M negative, and pairing one dose rate with the other dose's concentration in the V max line. A concept question can ask what the direct method needs: two different dose rates in the same patient, and the steady state concentration each produced.",
+   "card": [
+    {
+     "at": 1,
+     "m": "dose 1 + C<sub>ss</sub> → dose 2 + C<sub>ss</sub> → K<sub>M</sub> → V<sub>max</sub>"
+    },
+    {
+     "at": 3,
+     "m": "✗ K<sub>M</sub> in mg/day &nbsp; ✗ ratios reversed (K<sub>M</sub> < 0) &nbsp; ✗ R<sub>1</sub> with C<sub>2</sub>"
+    },
+    {
+     "at": 4,
+     "m": "needs: two dose rates, same patient, each steady state"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "id": "gobj-m3-4",
+ "title": "Loading doses with an infusion",
+ "segs": [
+  {
+   "slide": "inf:15",
+   "reading": null,
+   "text": "Module three, objective four. Calculating loading doses to be used with an intravenous infusion. A loading dose, D L, is an I V bolus given at the same moment the infusion starts. Its size should equal the amount of drug the body holds at steady state. That amount is the target steady state concentration, C s s, times the apparent volume of distribution, V D.",
+   "card": [
+    {
+     "at": 2,
+     "m": "D<sub>L</sub>: I V bolus at the start of the infusion"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>L</sub> = amount in the body at steady state"
+    },
+    {
+     "at": 4,
+     "m": "= C<sub>ss</sub> × V<sub>D</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:15",
+   "reading": null,
+   "text": "So D L equals C s s times V D. Milligrams per liter times liters leaves milligrams, a dose. This route is used whenever a target C s s and a volume are given, and it does not depend on any rate. It is on the equation sheet, page one, directly under the R and k form. One unit to watch: one microgram per milliliter equals one milligram per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "D<sub>L</sub> = C<sub>ss</sub> × V<sub>D</sub>"
+    },
+    {
+     "at": 1,
+     "m": "mg/L × L = mg"
+    },
+    {
+     "at": 2,
+     "m": "no rate in it"
+    },
+    {
+     "at": 4,
+     "m": "1 mcg/mL = 1 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "inf:15",
+   "reading": null,
+   "text": "A second route divides the infusion rate R by the elimination rate constant k. D L equals R over k, and milligrams per hour divided by per hour leaves milligrams. It gives the right dose only if R was itself chosen to give the target C s s. A rate picked without that check gives a poor loading dose.",
+   "card": [
+    {
+     "at": 1,
+     "m": "D<sub>L</sub> = {{frac:R|k}}"
+    },
+    {
+     "at": 1,
+     "m": "{{frac:mg/hr|hr<sup>&minus;1</sup>}} = mg"
+    },
+    {
+     "at": 2,
+     "m": "only if R gives the target C<sub>ss</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:15",
+   "reading": null,
+   "text": "After it is given, the bolus part of the concentration falls by first order elimination while the infusion part rises, and the two are added. The bolus part is D L over V D, times e to the minus k t. The infusion part is R over k V D, times one minus e to the minus k t. Both parts are in milligrams per liter, and t is the time since the start of therapy, in hours. The equation sheet carries the two parts separately, as the first order C line and the infusion line, not as one line.",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> = bolus part + infusion part"
+    },
+    {
+     "at": 1,
+     "m": "bolus: {{frac:D<sub>L</sub>|V<sub>D</sub>}} e<sup>&minus;kt</sup>"
+    },
+    {
+     "at": 2,
+     "m": "infusion: {{frac:R|kV<sub>D</sub>}}(1 &minus; e<sup>&minus;kt</sup>)"
+    },
+    {
+     "at": 3,
+     "m": "t: from the start of therapy"
+    }
+   ]
+  },
+  {
+   "slide": "inf:17",
+   "reading": null,
+   "text": "Her slide Example seven. A physician wants to infuse at twenty milligrams per hour. The elimination rate constant is zero point one six per hour, and V D is ten liters. The question asks what loading dose reaches twelve point five micrograms per milliliter immediately. First route, rate over k: twenty milligrams per hour divided by zero point one six per hour. The hours cancel, and D L is one hundred twenty five milligrams.",
+   "card": [
+    {
+     "at": 1,
+     "m": "R = 20 mg/hr"
+    },
+    {
+     "at": 2,
+     "m": "k = 0.16 hr<sup>&minus;1</sup>, V<sub>D</sub> = 10 L"
+    },
+    {
+     "at": 3,
+     "m": "target 12.5 mcg/mL: D<sub>L</sub> = ?"
+    },
+    {
+     "at": 4,
+     "m": "D<sub>L</sub> = {{frac:20 mg/hr|0.16 hr<sup>&minus;1</sup>}}"
+    },
+    {
+     "at": 5,
+     "m": "<b>D<sub>L</sub> = 125 mg</b>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:17",
+   "reading": null,
+   "text": "Second route: twelve point five micrograms per milliliter is twelve point five milligrams per liter. So D L is twelve point five milligrams per liter times ten liters, again one hundred twenty five milligrams. The routes agree because this rate is the one that gives twelve point five milligrams per liter. C s s is twenty milligrams per hour divided by zero point one six per hour times ten liters, which is twelve point five milligrams per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "12.5 mcg/mL = 12.5 mg/L"
+    },
+    {
+     "at": 1,
+     "m": "D<sub>L</sub> = 12.5 mg/L × 10 L = <b>125 mg</b>"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>ss</sub> = {{frac:20 mg/hr|0.16 hr<sup>&minus;1</sup> × 10 L}} = 12.5 mg/L ✓"
+    }
+   ]
+  },
+  {
+   "slide": "inf:15",
+   "reading": null,
+   "text": "How she tests it. She asks for the loading dose and the infusion rate together, as one recommendation for one patient, in either order. Either route earns the answer, and she shows both, joined with or. In one of her review problems, a C s s of twenty four milligrams per liter and a V D of about twenty two liters give a D L of twenty four times twenty two, five hundred twenty eight milligrams. The answer is a dose, so it is in milligrams.",
+   "card": [
+    {
+     "at": 1,
+     "m": "D<sub>L</sub> and R together"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>L</sub> = 24 mg/L × 22 L = <b>528 mg</b>"
+    },
+    {
+     "at": 4,
+     "m": "a dose: mg"
+    }
+   ]
+  },
+  {
+   "slide": "inf:15",
+   "reading": null,
+   "text": "A renal failure part changes clearance and leaves V D alone, so R moves and D L does not. In her Practice four, R is one hundred fifteen point five, then eighty five point five milligrams per hour, and D L is one thousand milligrams both times. The trap is using D L equals R over k with a rate that was never matched to the target concentration.",
+   "card": [
+    {
+     "at": 0,
+     "m": "renal failure: Cl changes, V<sub>D</sub> does not"
+    },
+    {
+     "at": 1,
+     "m": "R: 115.5 → 85.5 mg/hr; &nbsp; D<sub>L</sub>: 1000 mg both times"
+    },
+    {
+     "at": 2,
+     "m": "✗ {{frac:R|k}} with an unmatched R"
+    }
+   ]
+  }
+ ]
+}

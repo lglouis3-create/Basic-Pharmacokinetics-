@@ -290,6 +290,7 @@ function poolFor(topicId, subId){
 const VIEWS = ['topics','quiz','gaps','exam','sheets','guide','tell','terms','diag','eq','ref','settings'];
 function show(v){
   VIEW = v;
+  if(typeof gwStop === 'function') gwStop();   // a walkthrough stops when the tab changes (the Guides tab is redrawn on every visit)
   { const lb = document.getElementById('lback'); if(lb) lb.remove(); }
   { const pane = document.getElementById('v-' + v);
     if(ANIM && !(pane && pane.contains(ANIM.b))){ clearInterval(ANIM.t); ANIM.b.textContent = '▶ Play all'; ANIM = null; } }
@@ -3498,6 +3499,7 @@ function renderGuide(){
   const el = $('#v-guide');
   renderDoc(el, refFigures(GUIDE_HTML), 'guide');
   mountReadings(el);
+  if(typeof gwBars === 'function') gwBars(el);   // the walkthrough player is defined with the boot code, after the views
 }
 
 /* ---------- Textbook chapters: one card per reading (readings.js, from gen/readings.py) ----------
@@ -5260,6 +5262,227 @@ window.addEventListener('beforeunload', e => { if(EX && EX.running){ e.preventDe
 // time on the question shown is banked before the tab goes to the background, where a phone may discard it
 document.addEventListener('visibilitychange', () => {
   if(document.visibilityState === 'hidden' && EX && EX.running){ if(EX.spent && EX.tIdx != null) examTick(EX.tIdx); saveExam(); }
+});
+/* ---------- Guide walkthroughs: a narrated walk through each objective guide, part by part ----------
+   guide_walk.js (gen_walk.py from walk/*.json) gives each section its parts; a part is spoken text, the
+   professor's slide it discusses, and the formula card lines that appear as their sentence is read. A recorded
+   clip per part (audio/gw-<section>-<i>.mp3, listed in GW_CLIPS by build.py) plays when there is one, else the
+   device voice reads the part sentence by sentence. The slide images sit in slides/ beside the built page. */
+const gwSents = t => String(t).split(/(?<=[.?!])\s+/);
+const gwSlideSrc = (d, n) => 'slides/' + d + '-' + String(n).padStart(2, '0') + '.jpg';
+const gwHas = id => typeof GUIDE_WALK !== 'undefined' && !!GUIDE_WALK[id];
+const gwRec = (id, i) => typeof GW_CLIPS !== 'undefined' && GW_CLIPS.includes(id + '-' + i);
+const gwSynth = () => typeof speechSynthesis !== 'undefined' ? speechSynthesis : null;
+const GW_POS_KEY = NS + ':gw-pos', GW_RATE_KEY = NS + ':gw-rate', GW_CONT_KEY = NS + ':gw-cont';
+const gwPosAll = () => { try { return JSON.parse(LS.get(GW_POS_KEY) || '{}') || {}; } catch(e){ return {}; } };
+// the part a section was left on, so it reopens there; cleared when the section is heard to the end
+const gwPos = id => { const v = gwPosAll()[id]; return Number.isInteger(v) && gwHas(id) && v < GUIDE_WALK[id].segs.length ? v : 0; };
+const gwPosSet = (id, i) => { const o = gwPosAll(); if(i) o[id] = i; else delete o[id]; LS.set(GW_POS_KEY, JSON.stringify(o)); };
+const gwRate = () => +(LS.get(GW_RATE_KEY) || 1) || 1;
+const gwCont = () => (LS.get(GW_CONT_KEY) || '1') === '1';
+let GW = null;      // {id, i, k: sentence, playing, run, audio, browse: 'deck:n' the listener moved to}
+let GW_AUDIO = null;
+
+function gwBars(root){
+  if(typeof GUIDE_WALK === 'undefined') return;
+  root.querySelectorAll('section.gobj[id]').forEach(s => {
+    const w = GUIDE_WALK[s.id]; if(!w || s.querySelector(':scope > .gwbar')) return;
+    const rec = w.segs.every((x, i) => gwRec(s.id, i)), at = gwPos(s.id);
+    const bar = document.createElement('div'); bar.className = 'gwbar';
+    bar.innerHTML = `<button type="button" class="btn" data-gwopen="${esc(s.id)}" aria-expanded="false">🎧 ${at ? 'Resume walkthrough at part ' + (at + 1) : 'Listen: walkthrough'}</button><span class="gwmeta">about ${w.mins} min · ${w.segs.length} parts · ${rec ? 'recorded narration' : 'device voice'}</span>`;
+    s.prepend(bar);
+  });
+}
+function gwPanelHTML(id){
+  const w = GUIDE_WALK[id], r = gwRate();
+  return `<div class="gwpanel" data-gwp="${esc(id)}">
+    <div class="gwctl"><button type="button" class="chip" data-gwstep="-1" aria-label="Previous part">◂</button><button type="button" class="btn" data-gwplay>▶ Play</button><button type="button" class="chip" data-gwstep="1" aria-label="Next part">▸</button>
+      <span class="gwmeta gwpos" aria-live="polite"></span>
+      <label class="gwmeta">Speed <select data-gwrate>${[0.8, 1, 1.25, 1.5, 1.75, 2].map(x => `<option value="${x}"${x === r ? ' selected' : ''}>${x}×</option>`).join('')}</select></label>
+      <label class="gwmeta"><input type="checkbox" data-gwcont${gwCont() ? ' checked' : ''}> Continue to the next section</label>
+      ${gwSynth() ? '' : '<span class="gwmeta gwnovoice">This browser has no built-in voice; the transcript, card and slides still step with ◂ ▸.</span>'}</div>
+    <div class="gwfill"><div></div></div>
+    <div class="gwbody">
+      <ol class="gwtx">${w.segs.map((x, i) => `<li data-gwi="${i}" value="${i + 1}" tabindex="0">${gwSents(x.t).map((t, k) => `<span class="gws" data-k="${k}">${esc(t)}</span>`).join(' ')}</li>`).join('')}</ol>
+      <div class="gwvis"><div class="gwcard"><h4>The math, as it is spoken</h4><ol></ol></div><figure class="gwslide"></figure></div>
+    </div></div>`;
+}
+// the slide beside the part: the one the listener browsed to, else the part's own, else the nearest earlier part's
+function gwSlideOf(id, i){
+  const segs = GUIDE_WALK[id].segs;
+  for(let k = i; k >= 0; k--) if(segs[k].s) return segs[k].s;
+  const f = segs.find(x => x.s); return f ? f.s : null;
+}
+function gwDraw(id){
+  const p = document.querySelector(`.gwpanel[data-gwp="${id}"]`); if(!p) return;
+  const w = GUIDE_WALK[id], g = GW && GW.id === id ? GW : {i: +p.dataset.at || 0, k: 0, playing: false};
+  const i = g.i, seg = w.segs[i], n = gwSents(seg.t).length, moved = p.dataset.at !== String(i);
+  p.dataset.at = i;
+  p.querySelectorAll('.gwtx li').forEach(li => { const on = +li.dataset.gwi === i; li.classList.toggle('on', on); on ? li.setAttribute('aria-current', 'true') : li.removeAttribute('aria-current'); });
+  p.querySelectorAll('.gwtx li.on .gws').forEach(sp => sp.classList.toggle('say', g.playing && +sp.dataset.k === g.k));
+  const ol = p.querySelector('.gwtx'), li = p.querySelector('.gwtx li.on');
+  if(moved && li && ol.scrollHeight > ol.clientHeight + 4) ol.scrollTop = li.offsetTop - ol.offsetTop - 8;
+  p.querySelector('.gwpos').textContent = `Part ${i + 1} of ${w.segs.length}`;
+  p.querySelector('.gwfill div').style.width = (100 * (i + (g.playing || g.started ? (g.k + 1) / n : 0)) / w.segs.length) + '%';
+  p.querySelector('[data-gwplay]').textContent = g.playing ? '❚❚ Pause' : (g.started ? '▶ Resume' : '▶ Play');
+  p.classList.toggle('playing', !!g.playing);
+  // the card: every line already spoken in this part; before Play, or when stepped to, the whole card
+  const card = seg.c || [], cd = p.querySelector('.gwcard'), upto = g.playing || g.started ? g.k : 1e9;
+  cd.hidden = !card.length;
+  cd.querySelector('ol').innerHTML = card.map(([at, m]) => `<li class="${at > upto ? 'wait' : at === upto && g.playing ? 'now' : ''}">${mathHTML(m)}</li>`).join('');
+  const sl = g.browse || gwSlideOf(id, i), f = p.querySelector('.gwslide');
+  if(!sl){ f.hidden = true; f.innerHTML = ''; f.dataset.sel = ''; return; }
+  f.hidden = false;
+  if(f.dataset.sel !== sl){
+    const [d, num] = sl.split(':'), dk = GW_DECKS[d], src = gwSlideSrc(d, +num);
+    f.dataset.sel = sl;
+    f.innerHTML = `<img src="${src}" alt="${esc(dk.name)}, slide ${num}" data-gwzoom title="Open the slide full size" onerror="this.closest('figure').classList.add('noimg')">
+      <figcaption><button type="button" class="chip" data-gwslide="-1" ${+num > 1 ? '' : 'disabled'} aria-label="Previous slide">‹ Slide</button><span>${esc(dk.name)} · slide ${num} of ${dk.n}${g.browse ? ' (browsing)' : ''}</span><button type="button" class="chip" data-gwslide="1" ${+num < dk.n ? '' : 'disabled'} aria-label="Next slide">Slide ›</button></figcaption>
+      <p class="gwnoimg">The slide images load on the class site.</p>`;
+  }
+}
+function gwStopSound(){
+  if(GW) GW.run++;
+  if(GW_AUDIO){ GW_AUDIO.onended = GW_AUDIO.onerror = GW_AUDIO.ontimeupdate = null; GW_AUDIO.pause(); }
+  const sy = gwSynth(); if(sy) sy.cancel();
+}
+function gwStop(){ if(!GW) return; const id = GW.id; gwStopSound(); GW = null; gwDraw(id); }
+function gwPause(){
+  if(!GW || !GW.playing) return; GW.playing = false; GW.run++;
+  if(GW.audio && GW_AUDIO) GW_AUDIO.pause();
+  const sy = gwSynth(); if(sy) sy.cancel();      // the device voice starts the sentence again on Resume
+  gwDraw(GW.id);
+}
+// play from part i (sentence k); a paused recorded part resumes where it stopped
+function gwPlay(id, i, k){
+  if(!gwHas(id)) return;
+  if(GW && GW.id === id && GW.i === i && k == null && !GW.playing){
+    GW.playing = true; GW.started = true;
+    if(GW.audio && GW_AUDIO && GW_AUDIO.src && !GW_AUDIO.ended && GW_AUDIO.currentTime > 0){ const run = ++GW.run; gwAudioWire(id, i, run); GW_AUDIO.playbackRate = gwRate(); GW_AUDIO.play().catch(() => {}); gwDraw(id); return; }
+    return gwRun(id, i, GW.k);
+  }
+  if(GW && GW.id !== id){ const old = GW.id; gwStopSound(); GW = null; gwDraw(old); }
+  else gwStopSound();
+  GW = {id, i, k: k || 0, playing: true, started: true, run: GW && GW.id === id ? GW.run : 0, browse: null};
+  gwPosSet(id, i);
+  gwRun(id, i, k || 0);
+}
+function gwRun(id, i, k){
+  const g = GW, run = ++g.run, seg = GUIDE_WALK[id].segs[i], ss = gwSents(seg.t);
+  g.i = i; g.k = k; g.browse = null; gwDraw(id); gwMedia(id, i);
+  const next = () => { if(GW !== g || run !== g.run) return; g.audio = false;
+    if(i + 1 < GUIDE_WALK[id].segs.length){ gwPosSet(id, i + 1); gwRun(id, i + 1, 0); } else gwEnd(id); };
+  if(gwRec(id, i) && !g.fell){
+    const a = GW_AUDIO || (GW_AUDIO = new Audio());
+    g.audio = true; a.src = 'audio/gw-' + id + '-' + i + '.mp3'; a.playbackRate = gwRate();
+    gwAudioWire(id, i, run, next);
+    a.play().catch(() => { if(GW === g && run === g.run){ g.fell = true; g.audio = false; gwRun(id, i, 0); } });
+    return;
+  }
+  g.fell = false;
+  const sy = gwSynth();
+  if(!sy){ gwRunWait(id, i, run, ss, next); return; }
+  const say = kk => {
+    if(GW !== g || run !== g.run || !g.playing) return;
+    g.k = kk; gwDraw(id);
+    const u = new SpeechSynthesisUtterance(ss[kk]); u.rate = gwRate(); u.lang = 'en-US';
+    u.onend = () => { if(GW !== g || run !== g.run || !g.playing) return; if(kk + 1 < ss.length) say(kk + 1); else next(); };
+    sy.speak(u);
+  };
+  sy.cancel(); say(k);
+}
+// no voice at all: the parts still advance at a reading pace, so the slides and card can be followed
+function gwRunWait(id, i, run, ss, next){
+  const g = GW; clearTimeout(g.t);
+  g.t = setTimeout(() => { if(GW !== g || run !== g.run || !g.playing) return; if(g.k + 1 < ss.length){ g.k++; gwDraw(id); gwRunWait(id, i, run, ss, next); } else next(); },
+    (800 + ss[g.k].split(/\s+/).length * 380) / gwRate());
+}
+// a recorded part: the sentence marked and the card lines follow the clip's position, by share of the characters
+function gwAudioWire(id, i, run, next){
+  const a = GW_AUDIO, g = GW, ss = gwSents(GUIDE_WALK[id].segs[i].t);
+  const ends = []; let c = 0; ss.forEach(s => { c += s.length; ends.push(c); });
+  a.ontimeupdate = () => { if(GW !== g || run !== g.run || !isFinite(a.duration) || !a.duration) return;
+    const at = c * a.currentTime / a.duration; let k = ends.findIndex(e => at < e); if(k < 0) k = ss.length - 1;
+    if(k !== g.k){ g.k = k; gwDraw(id); } };
+  if(next){ a.onended = next; a.onerror = () => { if(GW === g && run === g.run){ g.fell = true; g.audio = false; gwRun(id, i, 0); } }; }
+}
+// the last part ended: with "Continue" ticked, the next section with a walkthrough opens and plays
+function gwEnd(id){
+  gwStop(); gwPosSet(id, 0);
+  const p = document.querySelector(`.gwpanel[data-gwp="${id}"]`); if(p){ p.querySelector('.gwfill div').style.width = '100%'; p.querySelector('[data-gwplay]').textContent = '▶ Play'; }
+  if(!gwCont()) return;
+  const all = [...document.querySelectorAll('#v-guide section.gobj[id]')].filter(s => gwHas(s.id)), k = all.findIndex(s => s.id === id), nx = all[k + 1];
+  if(!nx) return;
+  gwClose(id); openAncestors(nx); gwOpen(nx.id, false); scrollToEl(nx.querySelector('.gwbar') || nx); gwPlay(nx.id, 0);
+}
+function gwOpen(id, play){
+  const s = document.getElementById(id), bar = s && s.querySelector(':scope > .gwbar'); if(!bar) return;
+  if(!s.querySelector('.gwpanel')){ bar.insertAdjacentHTML('afterend', gwPanelHTML(id)); bar.querySelector('[data-gwopen]').setAttribute('aria-expanded', 'true'); }
+  const p = s.querySelector('.gwpanel'); p.dataset.at = GW && GW.id === id ? GW.i : gwPos(id);
+  gwDraw(id);
+  if(play) gwPlay(id, +p.dataset.at);
+}
+function gwClose(id){
+  if(GW && GW.id === id) gwStop();
+  const s = document.getElementById(id); if(!s) return;
+  const p = s.querySelector('.gwpanel'); if(p) p.remove();
+  const b = s.querySelector('[data-gwopen]'); if(b){ b.setAttribute('aria-expanded', 'false'); const at = gwPos(id); b.textContent = '🎧 ' + (at ? 'Resume walkthrough at part ' + (at + 1) : 'Listen: walkthrough'); }
+}
+// move to part i without playing (the stepped-to part shows its whole card), or keep playing from there
+function gwGo(id, i){
+  const n = GUIDE_WALK[id].segs.length; i = Math.max(0, Math.min(n - 1, i));
+  if(GW && GW.id === id && GW.playing) return gwPlay(id, i, 0);
+  if(GW && GW.id !== id) gwStop();
+  gwStopSound(); GW = {id, i, k: 0, playing: false, started: false, run: GW ? GW.run : 0, browse: null};
+  gwPosSet(id, i); gwDraw(id);
+}
+// lock-screen and headset controls on phones
+function gwMedia(id, i){
+  if(!('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
+  try {
+    const w = GUIDE_WALK[id];
+    navigator.mediaSession.metadata = new MediaMetadata({title: w.title, artist: COURSE.short + ' guide walkthrough', album: 'Part ' + (i + 1) + ' of ' + w.segs.length});
+    navigator.mediaSession.setActionHandler('play', () => { if(GW) gwPlay(GW.id, GW.i); });
+    navigator.mediaSession.setActionHandler('pause', () => gwPause());
+    navigator.mediaSession.setActionHandler('nexttrack', () => { if(GW) gwGo(GW.id, GW.i + 1); });
+    navigator.mediaSession.setActionHandler('previoustrack', () => { if(GW) gwGo(GW.id, GW.i - 1); });
+  } catch(e){}
+}
+function gwZoom(src, alt){
+  const z = document.createElement('div'); z.className = 'gwzoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', alt);
+  z.innerHTML = `<img src="${esc(src)}" alt="${esc(alt)}"><button type="button" class="chip" aria-label="Close">✕ Close</button>`;
+  z.onclick = () => z.remove(); document.body.appendChild(z); z.querySelector('button').focus();
+}
+document.addEventListener('click', e => {
+  const o = e.target.closest('[data-gwopen]');
+  if(o){ const id = o.dataset.gwopen; if(document.querySelector(`.gwpanel[data-gwp="${id}"]`)) gwClose(id); else gwOpen(id, true); return; }
+  const p = e.target.closest('.gwpanel'); if(!p) return;
+  const id = p.dataset.gwp, at = GW && GW.id === id ? GW.i : +p.dataset.at || 0;
+  if(e.target.closest('[data-gwplay]')){ if(GW && GW.id === id && GW.playing) gwPause(); else gwPlay(id, at); return; }
+  const st = e.target.closest('[data-gwstep]'); if(st){ gwGo(id, at + +st.dataset.gwstep); return; }
+  const li = e.target.closest('.gwtx li'); if(li){ gwPlay(id, +li.dataset.gwi, 0); return; }
+  const sl = e.target.closest('[data-gwslide]');
+  if(sl){ const f = p.querySelector('.gwslide'), [d, n] = (f.dataset.sel || '').split(':'); if(!d) return;
+    const to = +n + +sl.dataset.gwslide; if(to < 1 || to > GW_DECKS[d].n) return;
+    if(!GW || GW.id !== id) GW = {id, i: at, k: 0, playing: false, started: false, run: 0};
+    GW.browse = d + ':' + to; gwDraw(id); return; }
+  const z = e.target.closest('[data-gwzoom]'); if(z){ gwZoom(z.getAttribute('src'), z.alt); }
+});
+document.addEventListener('keydown', e => {
+  const z = document.querySelector('.gwzoom'); if(z && e.key === 'Escape'){ z.remove(); return; }
+  const li = e.target.closest && e.target.closest('.gwtx li'); if(li && e.key === 'Enter'){ e.preventDefault(); li.click(); return; }
+  if(e.metaKey || e.ctrlKey || e.altKey || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+  // K or Space plays and pauses, the arrows move a part: inside a walkthrough, or anywhere on the Guides tab while one is open
+  let p = e.target.closest && e.target.closest('.gwpanel');
+  if(!p && VIEW === 'guide' && (e.target === document.body || e.target === document.documentElement)) p = document.querySelector('#v-guide .gwpanel' + (GW ? `[data-gwp="${GW.id}"]` : ''));
+  if(!p) return;
+  if(e.key === 'k' || e.key === 'K' || (e.key === ' ' && !/^(BUTTON|A)$/.test(e.target.tagName))){ e.preventDefault(); e.stopPropagation(); p.querySelector('[data-gwplay]').click(); }
+  else if(e.key === 'ArrowLeft' || e.key === 'ArrowRight'){ e.preventDefault(); e.stopPropagation(); p.querySelector(`[data-gwstep="${e.key === 'ArrowLeft' ? -1 : 1}"]`).click(); }
+}, true);
+document.addEventListener('change', e => {
+  if(e.target.matches('[data-gwrate]')){ LS.set(GW_RATE_KEY, e.target.value); document.querySelectorAll('[data-gwrate]').forEach(s => { s.value = e.target.value; });
+    if(GW && GW.playing){ if(GW.audio && GW_AUDIO) GW_AUDIO.playbackRate = gwRate(); else gwRun(GW.id, GW.i, GW.k); } }
+  if(e.target.matches('[data-gwcont]')){ LS.set(GW_CONT_KEY, e.target.checked ? '1' : '0'); document.querySelectorAll('[data-gwcont]').forEach(c => { c.checked = e.target.checked; }); }
 });
 /* Theme: System (no attribute), Light or Dark, kept per browser. */
 const THEME_KEY = NS + ':theme';

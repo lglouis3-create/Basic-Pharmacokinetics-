@@ -1,0 +1,38 @@
+{
+ "intro": {
+  "name": "Module 1: Introduction",
+  "n": 31
+ },
+ "ivb": {
+  "name": "Module 2: IV Bolus Administration",
+  "n": 31
+ },
+ "inf": {
+  "name": "Module 3: Intravenous Infusions",
+  "n": 20
+ },
+ "cl": {
+  "name": "Module 4: Clearance and Elimination",
+  "n": 26
+ },
+ "oral": {
+  "name": "Module 5: Pharmacokinetics of Oral Absorption",
+  "n": 24
+ },
+ "rep": {
+  "name": "Module 6: Repetitive IV Bolus and Intermittent IV Infusions",
+  "n": 27
+ },
+ "mo": {
+  "name": "Module 6a: Multiple Oral Doses",
+  "n": 21
+ },
+ "pd": {
+  "name": "Module 7b: Pharmacokinetics and Pharmacodynamics",
+  "n": 13
+ },
+ "nonlin": {
+  "name": "Module 8: Nonlinear Pharmacokinetics",
+  "n": 22
+ }
+}

@@ -1,0 +1,230 @@
+{
+ "id": "gobj-m7-4",
+ "title": "Estimating the bioavailability of a dose",
+ "segs": [
+  {
+   "text": "Module seven A, objective four. Estimating the bioavailability of a dose. The calculation is a ratio of areas under the curve, A U C, corrected for dose. F abs equals A U C p o over A U C I V, times D I V over D p o, where p o means oral and I V means intravenous. The areas are in matching units and the doses in milligrams, so F has no units. With equal doses the dose ratio is one, and only the area ratio is left.",
+   "slide": null,
+   "slidetitle": "Absolute Bioavailability",
+   "reading": null,
+   "card": [
+    {
+     "at": 3,
+     "m": "F<sub>abs</sub> = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}"
+    },
+    {
+     "at": 4,
+     "m": "AUC in (mg/L)hr, D in mg → F has no units"
+    },
+    {
+     "at": 5,
+     "m": "D<sub>IV</sub> = D<sub>po</sub> → F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}}"
+    }
+   ]
+  },
+  {
+   "text": "When the stem gives only the oral area, the I V area is built from clearance. Clearance, Cl, is the volume of plasma cleared of drug per hour. An I V dose equals clearance times its A U C, so A U C I V equals D I V over Cl. For a one compartment drug, clearance is k times V D, with k equal to zero point six nine three over the half-life. So a half-life and a volume of distribution are enough. Milligrams divided by liters per hour gives milligram hours per liter. This is the Module four line, Cl T equals F D zero over A U C, with F equal to one.",
+   "slide": null,
+   "slidetitle": "Absolute Bioavailability",
+   "reading": null,
+   "card": [
+    {
+     "at": 2,
+     "m": "D<sub>IV</sub> = Cl &times; AUC<sub>IV</sub>"
+    },
+    {
+     "at": 2,
+     "m": "AUC<sub>IV</sub> = {{frac:D<sub>IV</sub>|Cl}} = {{frac:D<sub>IV</sub>|k &times; V<sub>D</sub>}}"
+    },
+    {
+     "at": 3,
+     "m": "k = {{frac:0.693|t<sub>&frac12;</sub>}}"
+    },
+    {
+     "at": 5,
+     "m": "{{frac:mg|L/hr}} = (mg/L)hr"
+    },
+    {
+     "at": 6,
+     "m": "Cl<sub>T</sub> = {{frac:FD<sub>0</sub>|AUC}} with F = 1"
+    }
+   ]
+  },
+  {
+   "text": "The same relationship written for the oral dose is F abs times D p o equals Cl times A U C p o. The oral dose times F is the amount that actually entered the circulation. So F abs equals Cl times A U C p o, over D p o, and every unit cancels. If an oral dose is to match an I V dose in A U C, the two areas are set equal, and F becomes D I V over D p o. So the oral dose is the I V dose divided by F, which is larger than the I V dose.",
+   "slide": null,
+   "slidetitle": "Absolute Bioavailability",
+   "reading": null,
+   "card": [
+    {
+     "at": 0,
+     "m": "F<sub>abs</sub> &times; D<sub>po</sub> = Cl &times; AUC<sub>po</sub>"
+    },
+    {
+     "at": 2,
+     "m": "F<sub>abs</sub> = {{frac:Cl &times; AUC<sub>po</sub>|D<sub>po</sub>}}"
+    },
+    {
+     "at": 3,
+     "m": "AUC<sub>po</sub> = AUC<sub>IV</sub> → F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}}"
+    },
+    {
+     "at": 4,
+     "m": "D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}"
+    }
+   ]
+  },
+  {
+   "text": "Her in class activity, question one. A single five hundred milligram oral tablet of an antihypertensive drug gave an A U C of seventy milligram hours per liter. A five hundred milligram I V bolus of the same drug in the same volunteer had a half-life of three hours and a V D of twenty five liters. The question asks the absolute bioavailability of the tablet, and the expected A U C after a two hundred fifty milligram I V bolus. There is no I V area, so it is built first from clearance. k is zero point six nine three over three hours, which is zero point two three one per hour.",
+   "slide": null,
+   "slidetitle": "In-Class Activity",
+   "reading": null,
+   "card": [
+    {
+     "at": 1,
+     "m": "tablet: D<sub>po</sub> = 500 mg, AUC<sub>po</sub> = 70 (mg/L)hr"
+    },
+    {
+     "at": 2,
+     "m": "IV: D<sub>IV</sub> = 500 mg, t<sub>&frac12;</sub> = 3 hr, V<sub>D</sub> = 25 L"
+    },
+    {
+     "at": 5,
+     "m": "k = {{frac:0.693|3 hr}} = 0.231 hr<sup>&minus;1</sup>"
+    }
+   ]
+  },
+  {
+   "text": "The I V area is the five hundred milligram dose divided by twenty five liters times zero point two three one per hour. That gives eighty six point five eight milligram hours per liter. The doses are equal, so the dose ratio is one, and F is seventy over eighty six point five eight. That is zero point eight zero eight five, about eighty one percent. The units cancel, so F has none.",
+   "slide": null,
+   "slidetitle": "In-Class Activity",
+   "reading": null,
+   "card": [
+    {
+     "at": 0,
+     "m": "AUC<sub>IV</sub> = {{frac:500 mg|25 L &times; 0.231 hr<sup>&minus;1</sup>}}"
+    },
+    {
+     "at": 1,
+     "m": "= 86.58 (mg/L)hr"
+    },
+    {
+     "at": 2,
+     "m": "F = {{frac:70 (mg/L)hr|86.58 (mg/L)hr}} &times; 1"
+    },
+    {
+     "at": 3,
+     "m": "= 0.8085"
+    },
+    {
+     "at": 3,
+     "m": "<b>F = 0.8085, about 81%</b>"
+    }
+   ]
+  },
+  {
+   "text": "The other route gives the same F. Twenty five liters, times zero point two three one per hour, times seventy milligram hours per liter, divided by five hundred milligrams, is zero point eight zero eight five again. For the second part, kinetics are linear, so the A U C is proportional to dose. Two hundred fifty milligrams divided by twenty five liters times zero point two three one per hour gives forty three point two nine milligram hours per liter. That is half of eighty six point five eight, because half the dose gives half the area.",
+   "slide": null,
+   "slidetitle": "In-Class Activity",
+   "reading": null,
+   "card": [
+    {
+     "at": 1,
+     "m": "F = {{frac:(25 L)(0.231 hr<sup>&minus;1</sup>)(70 (mg/L)hr)|500 mg}} = 0.8085 ✓"
+    },
+    {
+     "at": 2,
+     "m": "linear: AUC proportional to dose"
+    },
+    {
+     "at": 3,
+     "m": "AUC = {{frac:250 mg|25 L &times; 0.231 hr<sup>&minus;1</sup>}} = <b>43.29 (mg/L)hr</b>"
+    },
+    {
+     "at": 4,
+     "m": "&frac12; dose → &frac12; AUC: 86.58 → 43.29"
+    }
+   ]
+  },
+  {
+   "text": "Question two. Ciprofloxacin has an oral immediate release bioavailability of seventy percent. What oral dose gives the same extent of absorption as a four hundred milligram I V bolus? Same extent means equal areas, so F equals D I V over D p o, and D p o equals D I V over F. Four hundred milligrams divided by zero point seven zero is five hundred seventy one point four three milligrams. That is not a real tablet, since the marketed strengths she looked up were two hundred fifty and five hundred milligrams. Rounded to a strength a tablet could have, she accepted five hundred seventy five or six hundred milligrams.",
+   "slide": null,
+   "slidetitle": "In-Class Activity",
+   "reading": null,
+   "card": [
+    {
+     "at": 1,
+     "m": "F = 0.70; D<sub>IV</sub> = 400 mg"
+    },
+    {
+     "at": 3,
+     "m": "equal AUCs → D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}"
+    },
+    {
+     "at": 4,
+     "m": "D<sub>po</sub> = {{frac:400 mg|0.70}} = 571.43 mg"
+    },
+    {
+     "at": 5,
+     "m": "marketed: 250 and 500 mg"
+    },
+    {
+     "at": 6,
+     "m": "<b>D<sub>po</sub> = 575 mg or 600 mg</b>"
+    }
+   ]
+  },
+  {
+   "text": "Question three. After a five hundred milligram I V bolus, C p equals fifty e to the minus zero point two t. Matching the I V bolus equation, C zero is fifty milligrams per liter, and k is zero point two per hour. V D is the dose over C zero, five hundred milligrams over fifty milligrams per liter, ten liters. Clearance is zero point two per hour times ten liters, two liters per hour. The I V area is five hundred milligrams over two liters per hour, two hundred fifty milligram hours per liter. The tablet, at the same dose, gave one hundred eighty eight milligram hours per liter, so F is one hundred eighty eight over two hundred fifty, zero point seven five two, seventy five percent.",
+   "slide": null,
+   "slidetitle": "In-Class Activity",
+   "reading": null,
+   "card": [
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = C<sub>0</sub>e<sup>&minus;kt</sup>: C<sub>p</sub> = 50e<sup>&minus;0.2t</sup> → C<sub>0</sub> = 50 mg/L, k = 0.2 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>D</sub> = {{frac:D<sub>0</sub>|C<sub>0</sub>}} = {{frac:500 mg|50 mg/L}} = 10 L"
+    },
+    {
+     "at": 4,
+     "m": "Cl = 0.2 hr<sup>&minus;1</sup> &times; 10 L = <b>2 L/hr</b>"
+    },
+    {
+     "at": 5,
+     "m": "AUC<sub>IV</sub> = {{frac:500 mg|2 L/hr}} = <b>250 (mg/L)hr</b>"
+    },
+    {
+     "at": 6,
+     "m": "F = {{frac:188|250}} = 0.752 = <b>75%</b>"
+    }
+   ]
+  },
+  {
+   "text": "Her poll: a five hundred milligram tablet with an A U C of one hundred fifteen milligram hours per liter, against a four hundred milligram I V bolus with an A U C of one hundred thirty two milligram hours per liter. F is one hundred fifteen over one hundred thirty two, times four hundred over five hundred, which is zero point six nine seven, so seventy percent. The I V area goes in the denominator and the I V dose in the numerator, and the inverted ratio is the usual wrong answer.",
+   "slide": null,
+   "slidetitle": "PollEv",
+   "reading": null,
+   "card": [
+    {
+     "at": 0,
+     "m": "tablet: 500 mg, 115 (mg/L)hr; IV: 400 mg, 132 (mg/L)hr"
+    },
+    {
+     "at": 1,
+     "m": "F = {{frac:115|132}} &times; {{frac:400|500}} = 0.697"
+    },
+    {
+     "at": 1,
+     "m": "<b>F = 70%</b>"
+    },
+    {
+     "at": 2,
+     "m": "✗ inverted ratio"
+    }
+   ]
+  }
+ ]
+}

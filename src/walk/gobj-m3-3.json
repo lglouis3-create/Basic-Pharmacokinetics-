@@ -1,0 +1,205 @@
+{
+ "id": "gobj-m3-3",
+ "title": "Calculating infusion parameters",
+ "segs": [
+  {
+   "slide": "inf:7",
+   "reading": null,
+   "text": "Module three, objective three. Determining optimum dosing for an infused drug by calculating pharmacokinetic parameters. Most infusion problems start by turning the stem's data into the parameters the equations need: the elimination rate constant k, the apparent volume of distribution V D, and the total body clearance. With those and the infusion rate R, every later part follows. That means the steady state concentration, the plasma concentration at a time, the time to a percentage, the loading dose and the pump rate. A loading dose is an I V bolus given as the infusion starts, sized to reach the target concentration at once.",
+   "card": [
+    {
+     "at": 2,
+     "m": "first: k, V<sub>D</sub>, Cl"
+    },
+    {
+     "at": 4,
+     "m": "then: C<sub>ss</sub>, C<sub>p</sub> at t, time to %, D<sub>L</sub>, pump rate"
+    },
+    {
+     "at": 5,
+     "m": "loading dose: I V bolus at the start"
+    }
+   ]
+  },
+  {
+   "slide": "inf:7",
+   "reading": null,
+   "text": "Clearance comes from k and the volume. Clearance equals k times V D, with k in per hour and V D in liters, so clearance comes out in liters per hour. This line is used whenever the stem gives a half-life or k and a volume, but the equation needs clearance. It is not on the equation sheet. When the stem gives the routes separately, total body clearance, Cl T, is renal clearance plus metabolic clearance. Her Practice four prints this sum in its stem: five plus six point five five is eleven point five five liters per hour.",
+   "card": [
+    {
+     "at": 1,
+     "m": "Cl = k × V<sub>D</sub>"
+    },
+    {
+     "at": 1,
+     "m": "hr<sup>&minus;1</sup> × L = L/hr"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>T</sub> = Cl<sub>renal</sub> + Cl<sub>metabolic</sub>"
+    },
+    {
+     "at": 5,
+     "m": "5 + 6.55 = <b>11.55 L/hr</b>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:9",
+   "reading": null,
+   "text": "The two infusion lines from objective two then apply. C s s equals R divided by clearance. C p equals C s s times one minus e to the minus k t, where t is the time since the infusion started, in hours. The bracket is the fraction of C s s reached after infusing for time t, so C p climbs from zero toward C s s.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>ss</sub> = {{frac:R|Cl}}"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = C<sub>ss</sub>(1 &minus; e<sup>&minus;kt</sup>)"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>p</sub>: 0 → C<sub>ss</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:7",
+   "reading": null,
+   "text": "Her slide Example one. Theophylline has a half-life of six hours and a V D of thirty liters, and it is infused at fifty milligrams per hour. The question asks the expected C s s. That needs clearance, and the stem gives only a half-life and a volume, so k comes first. k is zero point six nine three over six hours, which is zero point one one five five per hour. Clearance is zero point one one five five per hour times thirty liters, which is three point four six five liters per hour.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t<sub>&frac12;</sub> = 6 hr, V<sub>D</sub> = 30 L, R = 50 mg/hr"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>ss</sub> = ?"
+    },
+    {
+     "at": 4,
+     "m": "k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 5,
+     "m": "Cl = 0.1155 hr<sup>&minus;1</sup> × 30 L = 3.465 L/hr"
+    }
+   ]
+  },
+  {
+   "slide": "inf:7",
+   "reading": null,
+   "text": "Then divide the rate by clearance. C s s is fifty milligrams per hour divided by three point four six five liters per hour. The hours cancel, leaving fourteen point four three milligrams per liter, which she works with as fourteen point four. While working this example aloud she called the thirty liters the clearance. Thirty liters is V D, and k times thirty liters gives the clearance, three point four six five liters per hour.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>ss</sub> = {{frac:50 mg/hr|3.465 L/hr}}"
+    },
+    {
+     "at": 2,
+     "m": "<b>C<sub>ss</sub> = 14.43 mg/L</b>"
+    },
+    {
+     "at": 4,
+     "m": "30 L = V<sub>D</sub>, not Cl"
+    }
+   ]
+  },
+  {
+   "slide": "inf:11",
+   "reading": null,
+   "text": "Her slide Examples three and four use a second drug. Cl T is four point five liters per hour, k is zero point one five per hour, and the rate is fifty milligrams per hour. The questions ask C s s, then C p eight hours after the start. Here clearance is given, so C s s is fifty milligrams per hour divided by four point five liters per hour, which is eleven point one one milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "Cl<sub>T</sub> = 4.5 L/hr, k = 0.15 hr<sup>&minus;1</sup>, R = 50 mg/hr"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>ss</sub> = ? &nbsp; C<sub>p</sub> at 8 hr = ?"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>ss</sub> = {{frac:50 mg/hr|4.5 L/hr}} = <b>11.11 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:10",
+   "reading": null,
+   "text": "For C p at eight hours, first find the fraction of C s s reached. k times t is zero point one five per hour times eight hours, which is one point two, with no units left. One minus e to the minus one point two is zero point six nine eight eight. So C p is eleven point one one milligrams per liter times zero point six nine eight eight, which is seven point seven six milligrams per liter. She did not say this value aloud; it is computed from her R, Cl T and k.",
+   "card": [
+    {
+     "at": 1,
+     "m": "kt = (0.15 hr<sup>&minus;1</sup>)(8 hr) = 1.2"
+    },
+    {
+     "at": 2,
+     "m": "1 &minus; e<sup>&minus;1.2</sup> = 0.6988"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>p</sub> = 11.11 mg/L × 0.6988"
+    },
+    {
+     "at": 3,
+     "m": "<b>C<sub>p</sub> = 7.76 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": null,
+   "reading": null,
+   "text": "How she tests it. She builds one patient and chains six or seven parts from it, and later parts say at the rate you determined above, so an error in k early on carries into every later answer. Her stems begin with unit work. In her Practice one, one hundred ten pounds is fifty kilograms, since one kilogram is two point two pounds. Three liters per kilogram times fifty kilograms is a V D of one hundred fifty liters. A half-life of four hours gives k of zero point six nine three over four hours, zero point one seven three three per hour. Contrasting scenarios are set in capitals, with the loading dose against without the loading dose, so each part is checked for which one it means.",
+   "card": [
+    {
+     "at": 1,
+     "m": "one patient → 6 or 7 chained parts"
+    },
+    {
+     "at": 3,
+     "m": "110 lb ÷ 2.2 = 50 kg"
+    },
+    {
+     "at": 4,
+     "m": "3 L/kg × 50 kg = 150 L"
+    },
+    {
+     "at": 5,
+     "m": "k = {{frac:0.693|4 hr}} = 0.1733 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 6,
+     "m": "WITH vs WITHOUT THE LOADING DOSE"
+    }
+   ]
+  },
+  {
+   "slide": "inf:8",
+   "reading": null,
+   "text": "A renal failure part changes only clearance. In Practice four, Cl T falls from eleven point five five to eight point five five liters per hour. So k falls to zero point zero eight five five per hour, the new clearance divided by the unchanged V D. The rate for the same target C s s falls to C s s times the new clearance, eighty five point five milligrams per hour. Some stem data are never used, such as the sixty five kilogram body weight in Practice four. She computes to more precision than she reports and rounds to a practical value, for example fourteen point eight six milligrams per hour to fifteen.",
+   "card": [
+    {
+     "at": 1,
+     "m": "Cl<sub>T</sub>: 11.55 → 8.55 L/hr"
+    },
+    {
+     "at": 2,
+     "m": "k = {{frac:Cl|V<sub>D</sub>}} = 0.0855 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "R = C<sub>ss</sub> × Cl = <b>85.5 mg/hr</b>"
+    },
+    {
+     "at": 4,
+     "m": "65 kg: not used"
+    },
+    {
+     "at": 5,
+     "m": "14.86 → 15 mg/hr"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,213 @@
+{
+ "id": "gobj-m3-7",
+ "title": "Plasma concentration at any time",
+ "segs": [
+  {
+   "slide": "inf:9",
+   "reading": null,
+   "text": "Module three, objective seven. The plasma concentration at any time, during or after an infusion. C p follows a different equation in each phase: while the infusion runs it rises, and after it stops it falls. During the infusion, C p equals R over clearance, times one minus e to the minus k t, with t the time since the infusion started. Putting t equal to the infusion length gives the concentration at the moment the infusion stopped, called C peak.",
+   "card": [
+    {
+     "at": 2,
+     "m": "during: rises &nbsp; after: falls"
+    },
+    {
+     "at": 3,
+     "m": "during: C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)"
+    },
+    {
+     "at": 4,
+     "m": "t = infusion length → C<sub>peak</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:12",
+   "reading": null,
+   "text": "After cessation, which means stopping the infusion, no more drug goes in. It is only elimination, so C p decays by first order from C peak. C p equals C peak times e to the minus k t, where t is now the time since cessation. C peak plays the part of C zero, the starting concentration, in the I V bolus equation. Plotted as the natural log of C p against time, it is a straight falling line from the peak. She said, Think of that C peak as your C zero as your starting point.",
+   "card": [
+    {
+     "at": 1,
+     "m": "after: first-order decay from C<sub>peak</sub>"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = C<sub>peak</sub> e<sup>&minus;kt</sup>"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>peak</sub> plays C<sub>0</sub>"
+    },
+    {
+     "at": 4,
+     "m": "ln C<sub>p</sub> vs time: straight line down"
+    }
+   ]
+  },
+  {
+   "slide": "inf:12",
+   "reading": null,
+   "text": "C peak equals C s s only if the infusion ran long enough to reach steady state. Otherwise, C peak is computed first from the during infusion equation. That starting point is the key decision, and two adjacent parts of one practice set often differ only in that respect. When a time is a whole number of half-lives, halves can be counted instead of evaluating the exponential, and she shows both routes.",
+   "card": [
+    {
+     "at": 0,
+     "m": "steady state reached: C<sub>peak</sub> = C<sub>ss</sub>"
+    },
+    {
+     "at": 1,
+     "m": "not reached: C<sub>peak</sub> = C<sub>ss</sub>(1 &minus; e<sup>&minus;kt</sup>)"
+    },
+    {
+     "at": 3,
+     "m": "whole half-lives: count halves"
+    }
+   ]
+  },
+  {
+   "slide": "inf:14",
+   "reading": null,
+   "text": "Her slide Example six. One hundred fifty milligrams is infused over six hours, k is zero point two three one per hour, and the apparent volume of distribution, V D, is fifteen liters. The question asks C p three hours after cessation. The rate is one hundred fifty milligrams over six hours, twenty five milligrams per hour. Clearance is zero point two three one per hour times fifteen liters, three point four six five liters per hour. So C s s is twenty five milligrams per hour over three point four six five liters per hour, which is seven point two one five milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "150 mg over 6 hr; k = 0.231 hr<sup>&minus;1</sup>; V<sub>D</sub> = 15 L"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> 3 hr after cessation = ?"
+    },
+    {
+     "at": 3,
+     "m": "R = {{frac:150 mg|6 hr}} = 25 mg/hr"
+    },
+    {
+     "at": 4,
+     "m": "Cl = 0.231 hr<sup>&minus;1</sup> × 15 L = 3.465 L/hr"
+    },
+    {
+     "at": 5,
+     "m": "C<sub>ss</sub> = {{frac:25 mg/hr|3.465 L/hr}} = 7.215 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "inf:14",
+   "reading": null,
+   "text": "Did the infusion reach steady state? The half-life is zero point six nine three over zero point two three one per hour, which is three hours. So six hours of infusion is two half-lives, and steady state was not reached. C peak is seven point two one five times one minus e to the minus zero point two three one times six. That bracket is zero point seven four nine nine, so C peak is five point four one milligrams per liter, which is seventy five percent of C s s.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t<sub>&frac12;</sub> = {{frac:0.693|0.231 hr<sup>&minus;1</sup>}} = 3 hr"
+    },
+    {
+     "at": 2,
+     "m": "6 hr = 2 half-lives: not at steady state"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>peak</sub> = 7.215 mg/L × (1 &minus; e<sup>&minus;(0.231)(6)</sup>)"
+    },
+    {
+     "at": 4,
+     "m": "= 7.215 × 0.7499 = 5.41 mg/L, 75% of C<sub>ss</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:14",
+   "reading": null,
+   "text": "Then the concentration decays for three hours, which is one half-life. C p is five point four one milligrams per liter times e to the minus zero point two three one times three. That exponential is zero point five, so C p is two point seven one milligrams per liter. Her stated answer is two point seven milligrams per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "3 hr = 1 half-life"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = 5.41 mg/L × e<sup>&minus;(0.231)(3)</sup>"
+    },
+    {
+     "at": 2,
+     "m": "= 5.41 × 0.5 = 2.71 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "<b>C<sub>p</sub> ≈ 2.7 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:13",
+   "reading": null,
+   "text": "Her slide Example five. An infusion reached a C s s of fifteen milligrams per liter, the half-life is five hours, and the question asks C p twelve hours after cessation. The infusion reached steady state, so C peak is fifteen milligrams per liter. k is zero point six nine three over five hours, which is zero point one three eight six per hour. C p is fifteen milligrams per liter times e to the minus zero point one three eight six times twelve. That exponential is zero point one eight nine five, so C p is two point eight four milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>ss</sub> = 15 mg/L, t<sub>&frac12;</sub> = 5 hr; &nbsp; C<sub>p</sub> 12 hr after = ?"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>peak</sub> = C<sub>ss</sub> = 15 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "k = {{frac:0.693|5 hr}} = 0.1386 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>p</sub> = 15 mg/L × e<sup>&minus;(0.1386)(12)</sup>"
+    },
+    {
+     "at": 5,
+     "m": "= 15 × 0.1895 = <b>2.84 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:13",
+   "reading": null,
+   "text": "In class she changed twelve hours to ten, exactly two half-lives, and took one quarter of fifteen milligrams per liter, which is three point seven five milligrams per liter. That written answer belongs to ten hours, and for the twelve hours asked the answer is two point eight four. Counting halves also works in her Practice four, with a six hour half-life, k of zero point one one five five per hour, and a C s s of ten milligrams per liter. One hour after cessation C p is ten times e to the minus zero point one one five five, which is eight point nine one milligrams per liter. At six and twelve hours, one and two half-lives, it is five and two point five milligrams per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "10 hr = 2 half-lives: 0.25 × 15 mg/L = 3.75 mg/L"
+    },
+    {
+     "at": 1,
+     "m": "12 hr, as asked: 2.84 mg/L"
+    },
+    {
+     "at": 2,
+     "m": "t<sub>&frac12;</sub> = 6 hr, k = 0.1155 hr<sup>&minus;1</sup>, C<sub>ss</sub> = 10 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "1 hr: 10 × e<sup>&minus;0.1155</sup> = 8.91 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "6 hr: 5 mg/L &nbsp; 12 hr: 2.5 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "inf:12",
+   "reading": null,
+   "text": "How she tests it. Her stems ask for the concentration a stated number of hours after the cessation of the infusion, and say whether a loading dose was given. In one review problem an infusion aimed at a C s s of twenty four milligrams per liter is stopped after five hours, with a five hour half-life, so k is zero point one three eight six per hour. One half-life of infusion reaches fifty percent of C s s, not seventy five, so C peak is twelve milligrams per liter, not the eighteen a student started from. Three hours later it is twelve times e to the minus zero point one three eight six times three, which is seven point nine milligrams per liter.",
+   "card": [
+    {
+     "at": 2,
+     "m": "C<sub>ss</sub> = 24 mg/L; stopped at 5 hr; k = 0.1386 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "1 half-life → 50%: C<sub>peak</sub> = 12 mg/L &nbsp; ✗ 18 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>p</sub> = 12 mg/L × e<sup>&minus;(0.1386)(3)</sup> = <b>7.9 mg/L</b>"
+    }
+   ]
+  }
+ ]
+}

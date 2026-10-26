@@ -1,0 +1,101 @@
+{
+ "id": "gobj-m2-4",
+ "title": "One compartment versus two compartments",
+ "segs": [
+  {
+   "slide": "ivb:14",
+   "reading": null,
+   "text": "Module two, objective four. Single versus multiple compartment models. Both models start with an I V bolus. The difference is whether the drug spreads evenly through the body at once, or reaches some tissues before others. Even spread at once is the one compartment model. Reaching some tissues first calls for two or more compartments.",
+   "card": [
+    {
+     "at": 2,
+     "m": "both: IV bolus"
+    },
+    {
+     "at": 4,
+     "m": "one compartment: even spread at once"
+    },
+    {
+     "at": 5,
+     "m": "two or more: some tissues reached first"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:20",
+   "reading": null,
+   "text": "You tell them apart on a plot of plasma concentration, C p, on a log scale against time. A first order decline is a straight line on that plot, so one compartment gives a single straight line. Two compartments give a steep early segment, the distribution phase, while drug is still moving into the tissues. It is followed by a straight, shallower segment, the elimination phase. By then the drug is evenly distributed, so its fall reflects elimination. In this module, her graphs use a log scale even when the axis is not labelled log.",
+   "card": [
+    {
+     "at": 1,
+     "m": "one compartment: one straight line on log C<sub>p</sub>"
+    },
+    {
+     "at": 2,
+     "m": "two compartments: steep distribution phase"
+    },
+    {
+     "at": 3,
+     "m": "then shallower straight elimination phase"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:21",
+   "reading": null,
+   "text": "The equations show the same difference. For one compartment, C p equals C p zero times e to the minus k t. One exponential term means one straight line on a log plot. For two compartments, C p equals A e to the minus alpha t, plus B e to the minus beta t. Two terms mean two phases. Here k, alpha and beta are rate constants in per hour, and C p zero, A and B are concentrations in milligrams per liter. Both lines are on the equation sheet.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup> &nbsp; one term, one line"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>p</sub> = Ae<sup>&minus;at</sup> + Be<sup>&minus;bt</sup> &nbsp; two terms, two phases"
+    },
+    {
+     "at": 5,
+     "m": "k, a, b in hr<sup>&minus;1</sup>; C<sub>p</sub><sup>0</sup>, A, B in mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:19",
+   "reading": null,
+   "text": "When data do not follow one compartment, a curve is fitted by the method of residuals, also called feathering or peeling. The extrapolated straight line is subtracted from the observed data to get the fast, alpha, phase. Feathering is conceptual only. She said, I want you to conceptually know what that is, but I'm not gonna ask you to do that. Instead she gives you A, B, alpha and beta, and asks what they represent and why they are used.",
+   "card": [
+    {
+     "at": 0,
+     "m": "method of residuals: feathering, peeling"
+    },
+    {
+     "at": 1,
+     "m": "observed &minus; extrapolated line → fast alpha phase"
+    },
+    {
+     "at": 4,
+     "m": "given: A, B, alpha, beta"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:13",
+   "reading": null,
+   "text": "Her questions use this in two ways. One is a log scale graph after an I V bolus with the model withheld. A single straight line is one compartment, and a line with a steeper early segment is two compartments. The other is a stem that never says two compartment but gives a biexponential equation, or A, B, alpha and beta. Recognising the model is then the first step of the calculation. Without a graph, she has to tell you which model the drug follows. She said, if I tell you that we're giving an I V bolus dose, now what do I have to tell you? I have to tell you that it follows a one compartment model or a two compartment.",
+   "card": [
+    {
+     "at": 2,
+     "m": "graph: one line → one compartment; steep start → two"
+    },
+    {
+     "at": 3,
+     "m": "stem: biexponential, or A, B, alpha, beta → two compartments"
+    },
+    {
+     "at": 5,
+     "m": "no graph: the model is stated"
+    }
+   ]
+  }
+ ]
+}

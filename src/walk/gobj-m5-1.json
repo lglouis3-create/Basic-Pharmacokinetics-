@@ -1,0 +1,128 @@
+{
+ "id": "gobj-m5-1",
+ "title": "Kinetics after an oral dose",
+ "segs": [
+  {
+   "slide": "oral:4",
+   "reading": null,
+   "text": "Module five, objective one. The kinetics of a drug after extravascular administration. Extravascular means the dose is given outside the blood vessels, and in this course that means by mouth, so the drug has to be absorbed before it reaches the blood. An I V bolus puts all the drug in at once, and an I V infusion puts it in at a constant, zero order rate. An oral dose goes in by a first order process instead: first order in, first order out.",
+   "card": [
+    {
+     "at": 2,
+     "m": "extravascular: oral, absorbed first"
+    },
+    {
+     "at": 3,
+     "m": "IV bolus: all at once &nbsp; IV infusion: zero order in"
+    },
+    {
+     "at": 4,
+     "m": "oral: first order in, first order out"
+    }
+   ]
+  },
+  {
+   "slide": "oral:5",
+   "reading": null,
+   "text": "Three amounts, all in milligrams, follow the dose. D G I is the drug still in the gut waiting to be absorbed, D B is the drug in the body, spread through the volume of distribution V D, and D E is the drug already eliminated. The change in the amount in the body is the rate in minus the rate out. So d D B over d t equals d D G I over d t, the rate of absorption from the gut, minus d D E over d t, the rate of elimination. This line is not on the equation sheet.",
+   "card": [
+    {
+     "at": 1,
+     "m": "D<sub>GI</sub> → D<sub>B</sub> (in V<sub>D</sub>) → D<sub>E</sub>"
+    },
+    {
+     "at": 2,
+     "m": "change in body = rate in &minus; rate out"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:dD<sub>B</sub>|dt}} = {{frac:dD<sub>GI</sub>|dt}} &minus; {{frac:dD<sub>E</sub>|dt}}"
+    }
+   ]
+  },
+  {
+   "slide": "oral:7",
+   "reading": null,
+   "text": "In first order absorption, the rate of absorption is proportional to the amount of drug still in the gut, so a fixed fraction is absorbed per unit time. Before it reaches the body, the tablet has to disintegrate, dissolve, cross membranes and pass through the liver. All of those steps are rolled into one absorption rate constant, k a, with units of per hour. Usually only part of the dose arrives, because some of it is eliminated before it becomes available. The fraction that arrives is the bioavailability, F, between zero and one with no units, and for an I V dose F is taken as one. She said, when you see a capital F, You should think oral.",
+   "card": [
+    {
+     "at": 0,
+     "m": "rate in proportional to D<sub>GI</sub>: fixed fraction per time"
+    },
+    {
+     "at": 2,
+     "m": "k<sub>a</sub>: all absorption steps, hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 4,
+     "m": "F: fraction that arrives, 0 to 1; IV: F = 1"
+    },
+    {
+     "at": 5,
+     "m": "capital F → oral"
+    }
+   ]
+  },
+  {
+   "slide": "oral:6",
+   "reading": null,
+   "text": "The absorption half-life is the time for half of the drug still to be absorbed to be absorbed, in hours. It follows the first order half-life relation: the absorption half-life equals zero point six nine three over k a. Stems usually give the absorption half-life, so it is turned into k a before any oral equation is used. This line is not on the equation sheet either.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t&frac12;<sub>a</sub> = {{frac:0.693|k<sub>a</sub>}}"
+    },
+    {
+     "at": 2,
+     "m": "given t&frac12;<sub>a</sub> → k<sub>a</sub> first"
+    }
+   ]
+  },
+  {
+   "slide": "oral:8",
+   "reading": null,
+   "text": "Because the drug enters gradually while it is also being eliminated, the plasma curve starts at zero, rises to a clear peak and then falls. In the absorption phase, the rising part, more drug is going in than coming out. At the peak, C max at t max, the rate in equals the rate out. Just after the peak is the post absorption phase: elimination is now faster than absorption, although some drug is still being absorbed. Once all the drug has been absorbed, only elimination is left, and that is the elimination phase.",
+   "card": [
+    {
+     "at": 0,
+     "m": "starts at zero → peak → falls"
+    },
+    {
+     "at": 1,
+     "m": "absorption phase: rate in &gt; rate out"
+    },
+    {
+     "at": 2,
+     "m": "peak (C<sub>max</sub> at t<sub>max</sub>): rate in = rate out"
+    },
+    {
+     "at": 3,
+     "m": "post-absorption: rate out &gt; rate in, still absorbing"
+    },
+    {
+     "at": 4,
+     "m": "elimination phase: rate out only"
+    }
+   ]
+  },
+  {
+   "slide": "oral:22",
+   "reading": null,
+   "text": "How she tests it. She shows a curve and asks for the route. A clear peak, up and back down, means oral input, first order in and first order out. An I V bolus profile starts at its highest point and falls, and an I V infusion profile starts at zero and levels off to a plateau. Oral input is usually first order, not always: a modified release product that releases drug at a zero order rate gives a curve shaped like an I V infusion.",
+   "card": [
+    {
+     "at": 2,
+     "m": "peak → oral"
+    },
+    {
+     "at": 3,
+     "m": "highest at start → IV bolus &nbsp; plateau → IV infusion"
+    },
+    {
+     "at": 4,
+     "m": "modified release, zero order in → infusion shape"
+    }
+   ]
+  }
+ ]
+}

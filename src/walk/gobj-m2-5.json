@@ -1,0 +1,124 @@
+{
+ "id": "gobj-m2-5",
+ "title": "Why some drugs need two compartments",
+ "segs": [
+  {
+   "slide": "ivb:15",
+   "reading": null,
+   "text": "Module two, objective five. Why some drugs best fit a multi compartment model. Tissues receive different amounts of blood, so a drug reaches well perfused organs first and slowly perfused tissues later, before it is evenly spread through the body. The highly perfused group is the heart, brain, hepatic portal system, kidney and endocrine glands, nine percent of body weight. The slowly perfused group, bone, ligaments, tendons, cartilage, teeth and hair, is twenty two percent. The brain is listed as highly perfused, but she says it keeps drugs out and is usually not part of the distribution phase.",
+   "card": [
+    {
+     "at": 2,
+     "m": "perfusion differs → well perfused first, slow tissues later"
+    },
+    {
+     "at": 3,
+     "m": "highly perfused: heart, brain, hepatic-portal, kidney, endocrine, 9%"
+    },
+    {
+     "at": 4,
+     "m": "slowly perfused: bone, ligaments, tendons, cartilage, teeth, hair, 22%"
+    },
+    {
+     "at": 5,
+     "m": "brain: keeps drugs out, usually not in distribution phase"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:26",
+   "reading": null,
+   "text": "When drug reaches tissues at different rates, the plasma level after a single I V bolus does not fall as one straight line on a log plot. So one compartment no longer describes it, and a multi compartment model is used instead. Distribution has to be faster than elimination. Otherwise the drug would be eliminated before it reached concentrations high enough to work.",
+   "card": [
+    {
+     "at": 0,
+     "m": "log C<sub>p</sub> not one straight line"
+    },
+    {
+     "at": 1,
+     "m": "→ multi-compartment model"
+    },
+    {
+     "at": 2,
+     "m": "distribution faster than elimination"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:17",
+   "reading": null,
+   "text": "The two compartment model splits the body in two. The central compartment is plasma and the tissues drug reaches quickly, with its own amount D p, concentration C p and volume V p. The tissue compartment holds the more slowly reached tissues, with D t, C t and V t. Drug moves from central to tissue with the transfer constant k one two, and back with k two one, both in per hour. Drug goes in and is eliminated in the central compartment, with the elimination rate constant k.",
+   "card": [
+    {
+     "at": 1,
+     "m": "central: D<sub>p</sub>, C<sub>p</sub>, V<sub>p</sub>, plasma and fast tissues"
+    },
+    {
+     "at": 2,
+     "m": "tissue: D<sub>t</sub>, C<sub>t</sub>, V<sub>t</sub>"
+    },
+    {
+     "at": 3,
+     "m": "central → tissue: k<sub>12</sub>; tissue → central: k<sub>21</sub>"
+    },
+    {
+     "at": 4,
+     "m": "input and elimination k: central only"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:16",
+   "reading": null,
+   "text": "A two compartment model can be wired three ways: elimination from the central compartment, from the tissue, or from both. The course uses elimination from the central compartment only. So drug enters and leaves the body only through the central compartment.",
+   "card": [
+    {
+     "at": 0,
+     "m": "eliminated from central, from tissue, or from both"
+    },
+    {
+     "at": 1,
+     "m": "<b>course: elimination from central only</b>"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:17",
+   "reading": null,
+   "text": "The model diagram reads as two rate equations. The change in tissue concentration over time equals k one two times C p, minus k two one times C t. The tissue gains drug from plasma and loses it back. The change in plasma concentration equals k two one times C t, minus k one two times C p, minus k times C p. Plasma gains drug from tissue and loses it to tissue, and it also loses drug by elimination, which is the extra minus k C p. She does not ask you to solve these. Objective six has the equations you calculate with.",
+   "card": [
+    {
+     "at": 1,
+     "m": "{{frac:dC<sub>t</sub>|dt}} = k<sub>12</sub>C<sub>p</sub> &minus; k<sub>21</sub>C<sub>t</sub>"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:dC<sub>p</sub>|dt}} = k<sub>21</sub>C<sub>t</sub> &minus; k<sub>12</sub>C<sub>p</sub> &minus; kC<sub>p</sub>"
+    },
+    {
+     "at": 4,
+     "m": "&minus;kC<sub>p</sub>: elimination from plasma"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:21",
+   "reading": null,
+   "text": "She asks this objective as a reason in words, not a calculation: what A, B, alpha and beta represent, and why the model is used. A and B are the intercepts, in milligrams per liter, of the distribution and elimination phases of a two compartment curve. Alpha and beta are the slopes of those phases, in per hour. The curve of tissue against plasma concentrations is theoretical, because only plasma is sampled in practice.",
+   "card": [
+    {
+     "at": 1,
+     "m": "A, B: intercepts, mg/L"
+    },
+    {
+     "at": 2,
+     "m": "alpha, beta: slopes, hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "tissue curve: theoretical, only plasma sampled"
+    }
+   ]
+  }
+ ]
+}

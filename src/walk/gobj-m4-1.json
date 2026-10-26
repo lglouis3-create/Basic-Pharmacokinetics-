@@ -1,0 +1,117 @@
+{
+ "id": "gobj-m4-1",
+ "title": "Renal and hepatic routes of elimination",
+ "segs": [
+  {
+   "slide": "cl:3",
+   "reading": null,
+   "text": "Module four, objective one. The main routes of drug elimination, renal and hepatic. Elimination is the irreversible removal of drug from the body, by every route at once. Drug that moves into tissue and later comes back has only been distributed, not eliminated. There are two ways out. Excretion removes the drug intact, without changing it chemically. Biotransformation, also called drug metabolism, first converts the drug chemically into a metabolite, most often a compound the body can eliminate more readily than the parent drug.",
+   "card": [
+    {
+     "at": 2,
+     "m": "elimination: irreversible, all routes"
+    },
+    {
+     "at": 3,
+     "m": "distribution: drug comes back, not eliminated"
+    },
+    {
+     "at": 5,
+     "m": "excretion: drug removed intact"
+    },
+    {
+     "at": 6,
+     "m": "biotransformation: drug → metabolite"
+    }
+   ]
+  },
+  {
+   "slide": "cl:8",
+   "reading": null,
+   "text": "The kidney and the liver are the two major elimination organs. The kidney excretes drug into the urine, and the liver biotransforms it. Each route has its own clearance, the volume of plasma cleared of drug per unit time. The two add up to the total body clearance. Cl T equals Cl R plus Cl H, where Cl R is renal clearance and Cl H is hepatic clearance, also called metabolic clearance, all in liters per hour. A Cl written with no subscript means total body clearance. That sum is how the two routes appear in every calculation in this module.",
+   "card": [
+    {
+     "at": 1,
+     "m": "kidney: excretion &nbsp; liver: biotransformation"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>T</sub> = Cl<sub>R</sub> + Cl<sub>H</sub>"
+    },
+    {
+     "at": 5,
+     "m": "Cl with no subscript = Cl<sub>T</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "cl:11",
+   "reading": null,
+   "text": "Hepatic clearance is found by difference. The rate and extent of metabolism can rarely be measured directly, and the liver is not sampled, so hepatic clearance is what is left once renal clearance is taken from the total. Cl H equals Cl T minus Cl R. The second form uses f e, the fraction of the dose recovered unchanged in the urine, which has no units. One minus f e is the share of clearance that is not renal, so Cl H equals one minus f e, times Cl T. The two forms give the same answer, and both are on the equation sheet.",
+   "card": [
+    {
+     "at": 2,
+     "m": "Cl<sub>H</sub> = Cl<sub>T</sub> &minus; Cl<sub>R</sub>"
+    },
+    {
+     "at": 3,
+     "m": "f<sub>e</sub>: fraction excreted unchanged, no units"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>) &times; Cl<sub>T</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "cl:11",
+   "reading": null,
+   "text": "A worked example. A drug has a total body clearance of one point three liters per hour, and zero point six of the dose is excreted unchanged in the urine. Its hepatic clearance is asked, using the fraction excreted. First, the share that is not renal is one minus zero point six, which is zero point four. Then that share is applied to total clearance: zero point four times one point three liters per hour gives zero point five two liters per hour. Check by subtraction. Renal clearance is zero point six times one point three liters per hour, which is zero point seven eight liters per hour, and one point three minus zero point seven eight is again zero point five two liters per hour.",
+   "card": [
+    {
+     "at": 1,
+     "m": "Cl<sub>T</sub> = 1.3 L/hr, &nbsp; f<sub>e</sub> = 0.6"
+    },
+    {
+     "at": 3,
+     "m": "1 &minus; f<sub>e</sub> = 1 &minus; 0.6 = 0.4"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>H</sub> = (0.4)(1.3 L/hr) = <b>0.52 L/hr</b>"
+    },
+    {
+     "at": 6,
+     "m": "Cl<sub>R</sub> = (0.6)(1.3 L/hr) = 0.78 L/hr"
+    },
+    {
+     "at": 6,
+     "m": "1.3 L/hr &minus; 0.78 L/hr = 0.52 L/hr ✓"
+    }
+   ]
+  },
+  {
+   "slide": "cl:3",
+   "reading": null,
+   "text": "How she tests it. The routes are asked as vocabulary: a definition in the stem, and related words as options, such as elimination, excretion, biotransformation and distribution. Two features decide it: whether removal is irreversible, which distribution is not, and whether the drug is chemically changed, which is biotransformation, or removed intact, which is excretion. A usual trap swaps the organs, putting excretion in the liver and biotransformation in the kidney. Numerically, the two routes return in objective five, where hepatic clearance is whatever is left after renal clearance is subtracted.",
+   "card": [
+    {
+     "at": 1,
+     "m": "elimination, excretion, biotransformation, distribution"
+    },
+    {
+     "at": 2,
+     "m": "irreversible? &nbsp; chemically changed or intact?"
+    },
+    {
+     "at": 3,
+     "m": "✗ excretion in the liver, biotransformation in the kidney"
+    },
+    {
+     "at": 4,
+     "m": "objective 5: Cl<sub>H</sub> = Cl<sub>T</sub> &minus; Cl<sub>R</sub>"
+    }
+   ]
+  }
+ ]
+}

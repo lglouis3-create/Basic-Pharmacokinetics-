@@ -1,0 +1,136 @@
+{
+ "id": "gobj-m1-5",
+ "title": "Area under the curve by the trapezoidal rule",
+ "segs": [
+  {
+   "slide": "intro:26",
+   "reading": null,
+   "text": "Module one, objective five. The area under the curve, by the trapezoidal rule. Plot concentration against time, and the area under that curve, the A U C, tells you the extent of drug that is available for the body to use. Its units are concentration times time, for example microgram hours per milliliter. You rarely have an equation for the curve, only a table of measured points, so the trapezoidal rule estimates the area from those points.",
+   "card": [
+    {
+     "at": 2,
+     "m": "AUC: extent of drug available"
+    },
+    {
+     "at": 3,
+     "m": "units: concentration &times; time (mcg&middot;hr/mL)"
+    },
+    {
+     "at": 4,
+     "m": "table of points → trapezoidal rule"
+    }
+   ]
+  },
+  {
+   "slide": "intro:28",
+   "reading": null,
+   "text": "Join each pair of neighbouring points with a straight line. Each strip underneath is a trapezoid. Its area is the average of the two concentrations times the time between them: C n minus one plus C n, over two, times t n minus t n minus one. The two concentrations bound the segment, in micrograms per milliliter, and the width is in hours, so each strip comes out in microgram hours per milliliter. A U C total is the sum of the A U C of every segment, and the rule works for any concentration time table, from any route.",
+   "card": [
+    {
+     "at": 2,
+     "m": "AUC = {{frac:C<sub>n&minus;1</sub> + C<sub>n</sub>|2}} &times; (t<sub>n</sub> &minus; t<sub>n&minus;1</sub>)"
+    },
+    {
+     "at": 3,
+     "m": "mcg/mL &times; hr = mcg&middot;hr/mL"
+    },
+    {
+     "at": 4,
+     "m": "AUC<sub>total</sub> = sum of the segments"
+    }
+   ]
+  },
+  {
+   "slide": "intro:29",
+   "reading": null,
+   "text": "Her slide example. Plasma levels were thirty eight point nine, thirty point three, eighteen point four, eleven point one, six point seven seven and four point one zero micrograms per milliliter, at zero point five, one, two, three, four and five hours. What is the A U C from hours two to four? The first step is choosing the rows. Only the rows inside two to four hours count: two hours at eighteen point four, three hours at eleven point one, and four hours at six point seven seven. The zero point five hour row is before the interval and the five hour row is beyond it. That makes two segments, each one hour wide.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t: 0.5, 1, 2, 3, 4, 5 hr"
+    },
+    {
+     "at": 1,
+     "m": "C: 38.9, 30.3, 18.4, 11.1, 6.77, 4.10 mcg/mL"
+    },
+    {
+     "at": 2,
+     "m": "AUC from 2 to 4 hr?"
+    },
+    {
+     "at": 4,
+     "m": "2 hr: 18.4 &nbsp; 3 hr: 11.1 &nbsp; 4 hr: 6.77"
+    },
+    {
+     "at": 6,
+     "m": "two segments, 1 hr each"
+    }
+   ]
+  },
+  {
+   "slide": "intro:29",
+   "reading": null,
+   "text": "Segment two to three hours: eighteen point four plus eleven point one, over two, times one hour, is fourteen point seven five microgram hours per milliliter. Segment three to four hours: eleven point one plus six point seven seven, over two, times one hour, is eight point nine three five microgram hours per milliliter. Each strip is micrograms per milliliter times hours, so the units carry through the sum. Add them: fourteen point seven five plus eight point nine three five is twenty three point six eight five. So the A U C from two to four hours is twenty three point seven microgram hours per milliliter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "2 → 3 hr: {{frac:18.4 + 11.1|2}} &times; 1 hr = 14.75 mcg&middot;hr/mL"
+    },
+    {
+     "at": 1,
+     "m": "3 → 4 hr: {{frac:11.1 + 6.77|2}} &times; 1 hr = 8.935 mcg&middot;hr/mL"
+    },
+    {
+     "at": 3,
+     "m": "14.75 + 8.935 = 23.685"
+    },
+    {
+     "at": 4,
+     "m": "<b>AUC = 23.7 mcg&middot;hr/mL</b>"
+    }
+   ]
+  },
+  {
+   "slide": "intro:29",
+   "reading": null,
+   "text": "Her questions give a table and an interval named in hours. Use only the trapezoids between rows inside that interval, not the whole table and not an extrapolated tail. Check each width from the time column. Where sampling times are uneven, as from zero point five to one hour, a segment is half an hour wide, not one hour. She says the units aloud rather than printing them, so give them as concentration times time. A concept question asks what A U C tells you: the extent of drug available for the body to use.",
+   "card": [
+    {
+     "at": 1,
+     "m": "✗ whole table &nbsp; ✗ extrapolated tail"
+    },
+    {
+     "at": 3,
+     "m": "0.5 → 1 hr: width 0.5 hr"
+    },
+    {
+     "at": 4,
+     "m": "units: mcg&middot;hr/mL"
+    },
+    {
+     "at": 5,
+     "m": "AUC: extent of drug available"
+    }
+   ]
+  },
+  {
+   "slide": "intro:27",
+   "reading": null,
+   "text": "A U C comes back later in the course. Comparing oral and I V A U C gives bioavailability, F, the fraction of an oral dose that enters the plasma, with no units. F equals A U C oral over A U C I V. The equation sheet has it in the dose corrected form: F equals A U C p o over A U C I V, times D I V over D p o, where p o means by mouth and the two D terms are the I V and oral doses in milligrams. Clearance, the volume of plasma cleared of drug per unit time, also links the dose to the A U C.",
+   "card": [
+    {
+     "at": 2,
+     "m": "F = {{frac:AUC<sub>oral</sub>|AUC<sub>IV</sub>}}"
+    },
+    {
+     "at": 3,
+     "m": "F = {{frac:AUC<sub>po</sub>|AUC<sub>IV</sub>}} &times; {{frac:D<sub>IV</sub>|D<sub>po</sub>}}"
+    },
+    {
+     "at": 4,
+     "m": "clearance: links dose to AUC"
+    }
+   ]
+  }
+ ]
+}

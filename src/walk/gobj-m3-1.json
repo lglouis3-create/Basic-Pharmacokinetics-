@@ -1,0 +1,135 @@
+{
+ "id": "gobj-m3-1",
+ "title": "The pharmacokinetics of an IV infusion",
+ "segs": [
+  {
+   "slide": "inf:3",
+   "reading": null,
+   "text": "Module three, objective one. The pharmacokinetics of a drug given by I V infusion. An intravenous infusion runs drug into a vein at a constant rate for a set time, instead of giving it all at once as an I V bolus. The infusion rate, R, is the amount of drug put in per unit time, most often milligrams per hour. A constant rate of input is a zero order process, because it runs at the same rate whatever the concentration.",
+   "card": [
+    {
+     "at": 2,
+     "m": "infusion: constant rate, set time; bolus: all at once"
+    },
+    {
+     "at": 3,
+     "m": "R = amount per time, mg/hr"
+    },
+    {
+     "at": 4,
+     "m": "input: zero order"
+    }
+   ]
+  },
+  {
+   "slide": "inf:3",
+   "reading": null,
+   "text": "Elimination stays first order, exactly as after a bolus. A fixed fraction of the drug present leaves per unit time, set by the elimination rate constant k, in per hour. The drug has not changed, only the way it enters the body has. The plasma concentration, C p, starts at zero and rises toward a plateau called steady state. At steady state, the rate of drug going in equals the rate going out, and the plateau concentration is C s s, in milligrams per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "elimination: first order, k in hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>p</sub>: from zero, rising to a plateau"
+    },
+    {
+     "at": 4,
+     "m": "steady state: rate in = rate out → C<sub>ss</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:12",
+   "reading": null,
+   "text": "Cessation means stopping the continuous infusion. After it there is no more input, so C p falls by ordinary first order elimination, and drug only leaves the body. She said, Our input is zero order, constant in, first order out. When we stop the in, then it's just out. The words constant rate or continuous infusion signal this pattern: zero order input with first order elimination.",
+   "card": [
+    {
+     "at": 1,
+     "m": "after cessation: no input, first-order fall"
+    },
+    {
+     "at": 2,
+     "m": "zero order in, first order out"
+    },
+    {
+     "at": 4,
+     "m": "constant rate, continuous infusion → zero order in"
+    }
+   ]
+  },
+  {
+   "slide": "inf:19",
+   "reading": null,
+   "text": "The point of infusing is precise control of the plasma concentration. With the basic parameters, you can predict C p at any time during or after the infusion. This objective is the frame for every calculation in the module, so it shows up inside multi part problems. Her stems read as clinical requests in the second person, such as you are asked to recommend, with a patient vignette, an indication and a body weight.",
+   "card": [
+    {
+     "at": 0,
+     "m": "infusion: precise control of C<sub>p</sub>"
+    },
+    {
+     "at": 1,
+     "m": "predict C<sub>p</sub> during or after the infusion"
+    }
+   ]
+  },
+  {
+   "slide": "inf:3",
+   "reading": null,
+   "text": "Her practice problem: two hundred milligrams of an analgesic are dissolved in five hundred milliliters of five percent dextrose and infused over twenty four hours. Find the rate in milligrams per hour, and in milliliters per minute. The rate is the amount infused divided by the time it runs. So R equals two hundred milligrams over twenty four hours, which is eight point three three milligrams per hour.",
+   "card": [
+    {
+     "at": 0,
+     "m": "200 mg in 500 mL, over 24 hr"
+    },
+    {
+     "at": 2,
+     "m": "R = {{frac:amount|time}}"
+    },
+    {
+     "at": 3,
+     "m": "R = {{frac:200 mg|24 hr}} = <b>8.33 mg/hr</b>"
+    }
+   ]
+  },
+  {
+   "slide": "inf:3",
+   "reading": null,
+   "text": "For the pump, use the volume instead of the drug amount. Five hundred milliliters over twenty four hours is twenty point eight three milliliters per hour. Then convert hours to minutes by multiplying by one hour per sixty minutes. Hours cancel, and the result is zero point three four seven milliliters per minute, which she reports as zero point three five milliliters per minute. The compounding detail, two hundred milligrams in five hundred milliliters, is in her stem for this later part.",
+   "card": [
+    {
+     "at": 1,
+     "m": "{{frac:500 mL|24 hr}} = 20.83 mL/hr"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:500 mL|24 hr}} × {{frac:1 hr|60 min}}"
+    },
+    {
+     "at": 3,
+     "m": "= 0.347 mL/min → <b>0.35 mL/min</b>"
+    }
+   ]
+  },
+  {
+   "slide": null,
+   "reading": null,
+   "text": "Weight may come in pounds and V D, the apparent volume of distribution, in liters per kilogram, so convert before using them. V D is the volume that relates the amount of drug in the body to the plasma concentration. In her solution, one hundred ten pounds became fifty kilograms, because one kilogram is two point two pounds. Three liters per kilogram then became one hundred fifty liters, three liters per kilogram times fifty kilograms.",
+   "card": [
+    {
+     "at": 1,
+     "m": "V<sub>D</sub>: links amount in body to C<sub>p</sub>"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:110 lb|2.2 lb/kg}} = 50 kg"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>D</sub> = 3 L/kg × 50 kg = <b>150 L</b>"
+    }
+   ]
+  }
+ ]
+}

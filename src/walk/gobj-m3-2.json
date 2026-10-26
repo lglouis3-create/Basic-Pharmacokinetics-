@@ -1,0 +1,205 @@
+{
+ "id": "gobj-m3-2",
+ "title": "Steady state during an infusion",
+ "segs": [
+  {
+   "slide": "inf:4",
+   "reading": null,
+   "text": "Module three, objective two. Steady state, and how it relates to continuous dosing. Steady state is reached when the rate of drug going in equals the rate going out. So the plasma concentration, C p, stops rising and holds at a plateau, called C s s. Early in an infusion little drug is in the body, so little is eliminated. As C p rises, the amount eliminated per hour rises, until it matches the infusion rate, R.",
+   "card": [
+    {
+     "at": 2,
+     "m": "steady state: rate in = rate out"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>p</sub> stops rising → plateau, C<sub>ss</sub>"
+    },
+    {
+     "at": 5,
+     "m": "amount out per hour rises until it equals R"
+    }
+   ]
+  },
+  {
+   "slide": "inf:4",
+   "reading": null,
+   "text": "The plateau has its own relation. C s s equals R divided by clearance, and clearance is k times V D, so C s s also equals R divided by k times V D. R is the drug put in per unit time, in milligrams per hour. Clearance is the volume of plasma cleared of drug per unit time, in liters per hour, so milligrams per hour divided by liters per hour leaves milligrams per liter. This line holds at steady state only. It contains no time, so it says nothing about when steady state arrives.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>ss</sub> = {{frac:R|Cl}} = {{frac:R|kV<sub>D</sub>}}"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:mg/hr|L/hr}} = mg/L"
+    },
+    {
+     "at": 5,
+     "m": "no t in it: steady state only"
+    }
+   ]
+  },
+  {
+   "slide": "inf:5",
+   "reading": null,
+   "text": "Before steady state, C p equals R over clearance, times one minus e to the minus k t. The first factor is C s s. The bracket, one minus e to the minus k t, is the fraction of C s s reached after infusing for time t, counted in hours from the start. Early on the bracket is a small fraction, and by about five half-lives it approaches one. The curve is asymptotic, so it gets closer and closer to C s s but in theory never reaches it exactly.",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> = {{frac:R|Cl}}(1 &minus; e<sup>&minus;kt</sup>)"
+    },
+    {
+     "at": 1,
+     "m": "{{frac:R|Cl}} = C<sub>ss</sub>"
+    },
+    {
+     "at": 2,
+     "m": "(1 &minus; e<sup>&minus;kt</sup>) = fraction of C<sub>ss</sub> reached"
+    },
+    {
+     "at": 3,
+     "m": "early: small fraction &nbsp; ~5 half-lives: → 1"
+    }
+   ]
+  },
+  {
+   "slide": "inf:4",
+   "reading": null,
+   "text": "How long the approach takes depends only on the half-life, the time for the concentration to change by half, and so on the elimination rate constant k. k is the fraction of drug removed per hour, and it fixes the half-life: k equals zero point six nine three divided by the half-life. This line is not on the equation sheet. Her short answer for the time to reach steady state after an I V infusion is three to five half-lives. The rate R sets how high the plateau is, not how soon it arrives, so a faster infusion gives a higher C s s at the same time.",
+   "card": [
+    {
+     "at": 0,
+     "m": "time to C<sub>ss</sub>: half-life only"
+    },
+    {
+     "at": 1,
+     "m": "k = {{frac:0.693|t<sub>&frac12;</sub>}}"
+    },
+    {
+     "at": 3,
+     "m": "3 to 5 half-lives"
+    },
+    {
+     "at": 4,
+     "m": "R sets the height of the plateau, not the timing"
+    }
+   ]
+  },
+  {
+   "slide": "inf:5",
+   "reading": null,
+   "text": "The fraction reached can be counted in half-lives: after n half-lives it is one minus zero point five to the power n. One half-life gives fifty percent, two give seventy five percent, and three give eighty seven point five percent. Four half-lives give ninety three point seven five percent, and ten give ninety nine point nine. About three point three two half-lives reach ninety percent, her own shortcut, and four point three two half-lives reach ninety five percent.",
+   "card": [
+    {
+     "at": 0,
+     "m": "after n half-lives: 1 &minus; 0.5<sup>n</sup>"
+    },
+    {
+     "at": 1,
+     "m": "1 → 50% &nbsp; 2 → 75% &nbsp; 3 → 87.5%"
+    },
+    {
+     "at": 2,
+     "m": "4 → 93.75% &nbsp; 10 → 99.9%"
+    },
+    {
+     "at": 3,
+     "m": "3.32 → 90% &nbsp; 4.32 → 95%"
+    }
+   ]
+  },
+  {
+   "slide": "inf:11",
+   "reading": null,
+   "text": "Her slide Example four. The elimination rate constant is zero point one five per hour, and the question asks how long the infusion must run to reach ninety percent of steady state. Ninety percent is not a power of one half, so the bracket is solved with a natural log. Set the bracket equal to the fraction wanted: zero point nine equals one minus e to the minus zero point one five t. Isolate the exponential: e to the minus zero point one five t equals one minus zero point nine, which is zero point one.",
+   "card": [
+    {
+     "at": 1,
+     "m": "k = 0.15 hr<sup>&minus;1</sup>; &nbsp; 90% of C<sub>ss</sub>: t = ?"
+    },
+    {
+     "at": 3,
+     "m": "0.9 = 1 &minus; e<sup>&minus;0.15t</sup>"
+    },
+    {
+     "at": 4,
+     "m": "e<sup>&minus;0.15t</sup> = 1 &minus; 0.9 = 0.1"
+    }
+   ]
+  },
+  {
+   "slide": "inf:11",
+   "reading": null,
+   "text": "Take the natural log of both sides: minus zero point one five t equals the natural log of zero point one, which is minus two point three zero two six. Divide both sides by minus zero point one five per hour. The minus signs cancel, and a number divided by per hour leaves hours, so t is fifteen point three five hours. She states it as about fifteen hours. Check: the half-life is zero point six nine three over zero point one five per hour, which is four point six two hours, and fifteen point three five hours is three point three two half-lives, matching her ninety percent shortcut.",
+   "card": [
+    {
+     "at": 0,
+     "m": "&minus;0.15t = ln(0.1) = &minus;2.3026"
+    },
+    {
+     "at": 1,
+     "m": "t = {{frac:&minus;2.3026|&minus;0.15 hr<sup>&minus;1</sup>}}"
+    },
+    {
+     "at": 2,
+     "m": "<b>t = 15.35 hr</b>"
+    },
+    {
+     "at": 3,
+     "m": "≈ 15 hours"
+    },
+    {
+     "at": 4,
+     "m": "t<sub>&frac12;</sub> = {{frac:0.693|0.15 hr<sup>&minus;1</sup>}} = 4.62 hr; &nbsp; 15.35 hr = 3.32 half-lives ✓"
+    }
+   ]
+  },
+  {
+   "slide": "inf:9",
+   "reading": null,
+   "text": "How she tests it. Asked how long it takes to reach steady state, the answer she wants is three to five half-lives. A statement that raising the infusion rate shortens the time to steady state is false, because that time depends on the half-life alone. A stated percentage needs a calculation instead. Fifty, seventy five or eighty seven point five percent means counting half-lives, and any other percentage means solving one minus e to the minus k t with a natural log.",
+   "card": [
+    {
+     "at": 1,
+     "m": "time to steady state: 3 to 5 half-lives"
+    },
+    {
+     "at": 2,
+     "m": "✗ faster R → steady state sooner"
+    },
+    {
+     "at": 4,
+     "m": "50, 75, 87.5% → count half-lives; &nbsp; other % → ln"
+    }
+   ]
+  },
+  {
+   "slide": "inf:9",
+   "reading": null,
+   "text": "A concentration can be a percentage in disguise. In her Practice four the half-life is six hours, so k is zero point six nine three over six hours, zero point one one five five per hour. A level of five milligrams per liter against a C s s of ten milligrams per liter is fifty percent, so the time is one half-life, six hours. The next part asks for eighty percent, which is not a power of one half. So e to the minus k t equals zero point two, and t is the natural log of five divided by zero point one one five five per hour, thirteen point nine three hours.",
+   "card": [
+    {
+     "at": 1,
+     "m": "k = {{frac:0.693|6 hr}} = 0.1155 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:5 mg/L|10 mg/L}} = 50% → <b>1 half-life = 6 hr</b>"
+    },
+    {
+     "at": 3,
+     "m": "80%: not a power of &frac12;"
+    },
+    {
+     "at": 4,
+     "m": "e<sup>&minus;kt</sup> = 0.2 &nbsp; t = {{frac:ln 5|0.1155 hr<sup>&minus;1</sup>}}"
+    },
+    {
+     "at": 4,
+     "m": "<b>t = 13.93 hr</b>"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,93 @@
+{
+ "id": "gobj-m1-2",
+ "title": "Types of pharmacokinetic models",
+ "segs": [
+  {
+   "slide": "intro:13",
+   "reading": null,
+   "text": "Module one, objective two. The types of pharmacokinetic models. A pharmacokinetic model is a simplified description of the body that lets you predict drug levels and choose a dosing regimen. Models are also used to estimate accumulation, to link concentration to effect or toxicity, to compare formulations, and to explain how disease or drug interactions change P K. Comparing the rate or extent of availability between two formulations of a drug is called bioequivalence.",
+   "card": [
+    {
+     "at": 2,
+     "m": "model → predict drug levels, choose a dosing regimen"
+    },
+    {
+     "at": 4,
+     "m": "bioequivalence: rate or extent of availability, two formulations"
+    }
+   ]
+  },
+  {
+   "slide": "intro:14",
+   "reading": null,
+   "text": "There are two broad types. Physiologic models, also called perfusion or blood flow models, are built from known anatomic and physiologic data. Compartment models treat the body as one or more boxes that the drug moves between at set rate constants. Physiologic models need more input data than the course uses, so this course uses compartment models almost entirely, and physiologic appears mainly as a wrong answer choice.",
+   "card": [
+    {
+     "at": 1,
+     "m": "physiologic (perfusion): anatomy and blood flow"
+    },
+    {
+     "at": 2,
+     "m": "compartment: boxes joined by rate constants"
+    }
+   ]
+  },
+  {
+   "slide": "intro:15",
+   "reading": null,
+   "text": "The way a drug behaves in the body decides how many boxes are needed and how they are joined. In a mammillary model there is a central compartment one, and each other compartment is joined directly to it, for example two on one side and three on the other. Drug moves from one to two by k one two and back by k two one, and from one to three by k one three and back by k three one. A rate constant between compartments, such as k one two, is in reciprocal time, per hour.",
+   "card": [
+    {
+     "at": 1,
+     "m": "mammillary: every outer box joined to central 1"
+    },
+    {
+     "at": 2,
+     "m": "k<sub>12</sub>, k<sub>21</sub> &nbsp; k<sub>13</sub>, k<sub>31</sub>"
+    },
+    {
+     "at": 3,
+     "m": "k<sub>12</sub>: 1 → 2, in hr<sup>&minus;1</sup>"
+    }
+   ]
+  },
+  {
+   "slide": "intro:15",
+   "reading": null,
+   "text": "In a catenary model the compartments are joined in a chain, one to two to three. So drug reaches compartment three only by passing through two, by k one two and k two one, then k two three and k three two. Both models can have three compartments, so what separates them is how they are joined, not the count.",
+   "card": [
+    {
+     "at": 0,
+     "m": "catenary: 1 → 2 → 3"
+    },
+    {
+     "at": 1,
+     "m": "k<sub>12</sub>, k<sub>21</sub>, then k<sub>23</sub>, k<sub>32</sub>"
+    },
+    {
+     "at": 2,
+     "m": "mammillary vs catenary: how joined, not how many"
+    }
+   ]
+  },
+  {
+   "slide": "intro:15",
+   "reading": null,
+   "text": "Her questions ask by how the compartments are joined, not by how many there are. Her poll asked which model has compartments joined to one another like the compartments of a train, with the options catenary, mammillary and physiologic. The answer is catenary. The trap is mammillary, which also has three compartments. So ask whether every outer box connects to the centre, which is mammillary, or whether they form a chain, which is catenary. Physiologic appears only as a distractor in these wiring questions.",
+   "card": [
+    {
+     "at": 2,
+     "m": "joined like a train → catenary ✓"
+    },
+    {
+     "at": 3,
+     "m": "✗ mammillary: also three compartments"
+    },
+    {
+     "at": 4,
+     "m": "all to centre: mammillary &nbsp; chain: catenary"
+    }
+   ]
+  }
+ ]
+}

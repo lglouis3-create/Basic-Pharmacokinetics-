@@ -1,0 +1,120 @@
+{
+ "id": "gobj-m2-1",
+ "title": "The one-compartment model after an IV bolus",
+ "segs": [
+  {
+   "slide": "ivb:3",
+   "reading": null,
+   "text": "Module two, objective one. The one compartment model after an I V bolus. An I V bolus is a whole dose injected into a vein at once, so all of the drug is in the body at time zero, and she calls it instantaneous input. The one compartment open model treats the body as one uniform space that drug can enter and leave, which is what open means. The drug spreads through it instantly and evenly, so the plasma concentration stands for the whole body.",
+   "card": [
+    {
+     "at": 2,
+     "m": "IV bolus: whole dose at once, instantaneous input"
+    },
+    {
+     "at": 3,
+     "m": "one compartment, open: drug enters and leaves"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>p</sub> stands for the whole body"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:3",
+   "reading": null,
+   "text": "Elimination starts the moment the drug is in, and it is first order, so a fixed fraction of the drug leaves per unit time. These are simplifying assumptions that real bodies do not meet exactly, but they make the simplest model of distribution and elimination, and the rest of the course builds on it. So when a stem says the dose is an I V bolus, the expectation is first order.",
+   "card": [
+    {
+     "at": 0,
+     "m": "elimination: first order, from time zero"
+    },
+    {
+     "at": 1,
+     "m": "simplest model of distribution and elimination"
+    },
+    {
+     "at": 2,
+     "m": "IV bolus → first order"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:3",
+   "reading": null,
+   "text": "Two relations go with the model. C p equals D B over V D: milligrams over liters, so milligrams per liter. V D, the volume of distribution, is what links an amount to a concentration at any one time. At time zero after a bolus, D B, the amount of drug in the body, equals the dose, D zero. The overall elimination rate constant, k, equals k m plus k e, the rate constants for metabolism and excretion, all in per hour. A k with no subscript always means this overall constant.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}"
+    },
+    {
+     "at": 1,
+     "m": "{{frac:mg|L}} = mg/L"
+    },
+    {
+     "at": 3,
+     "m": "t = 0: D<sub>B</sub> = D<sub>0</sub>"
+    },
+    {
+     "at": 4,
+     "m": "k = k<sub>m</sub> + k<sub>e</sub> (hr<sup>&minus;1</sup>)"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:4",
+   "reading": null,
+   "text": "The model itself is first order: d D B by d t equals minus k D B, and d C p by d t equals minus k C p. The rate of loss is proportional to what is present, which is what first order means, and the minus sign says the amount is falling. The integrated result is C p equals C p zero times e to the minus k t, where C p zero is the concentration at time zero and t is the time since the dose.",
+   "card": [
+    {
+     "at": 0,
+     "m": "{{frac:dD<sub>B</sub>|dt}} = &minus;kD<sub>B</sub> &nbsp; {{frac:dC<sub>p</sub>|dt}} = &minus;kC<sub>p</sub>"
+    },
+    {
+     "at": 1,
+     "m": "rate of loss proportional to what is present"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = C<sub>p</sub><sup>0</sup>e<sup>&minus;kt</sup>"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:4",
+   "reading": null,
+   "text": "The natural log of C p equals minus k t plus the natural log of C p zero. Log C p equals minus k t over two point three, plus log C p zero. She prefers the natural log form, but any of the three gets the same answer. So the concentration starts high and falls along an exponential curve, which becomes a straight line on a log scale.",
+   "card": [
+    {
+     "at": 0,
+     "m": "ln C<sub>p</sub> = &minus;kt + ln C<sub>p</sub><sup>0</sup>"
+    },
+    {
+     "at": 1,
+     "m": "log C<sub>p</sub> = &minus;{{frac:kt|2.3}} + log C<sub>p</sub><sup>0</sup>"
+    },
+    {
+     "at": 3,
+     "m": "exponential curve → straight line on a log scale"
+    }
+   ]
+  },
+  {
+   "slide": "ivb:10",
+   "reading": null,
+   "text": "The model is usually a condition in her stems rather than a question of its own, and it is examined inside the calculations of objective three. About half the time she states it outright, as one compartment, first order elimination, or as one compartment open model. In the data table problems she leaves it out, because working out the order from the data is the task. On a graph with a log concentration axis, a single straight line after an I V bolus means one compartment.",
+   "card": [
+    {
+     "at": 1,
+     "m": "stated: one-compartment, first-order elimination"
+    },
+    {
+     "at": 3,
+     "m": "log axis, one straight line → one compartment"
+    }
+   ]
+  }
+ ]
+}

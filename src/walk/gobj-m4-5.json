@@ -1,0 +1,233 @@
+{
+ "id": "gobj-m4-5",
+ "title": "Total, renal and hepatic clearance",
+ "segs": [
+  {
+   "slide": "cl:5",
+   "reading": null,
+   "text": "Module four, objective five. Calculating total, renal and hepatic clearance. Clearance is the volume of fluid cleared of drug per unit time, such as liters per hour or milliliters per minute, for the whole body or for one organ. For a first order drug it is a constant. The rate of elimination, an amount per time, equals clearance times the plasma concentration, C p, and the volumes cancel. As the concentration falls the rate falls with it, but clearance stays the same. So a claim that clearance rises as concentration rises is false, because a change in concentration changes the elimination rate, not the clearance.",
+   "card": [
+    {
+     "at": 2,
+     "m": "Cl: volume cleared of drug per time"
+    },
+    {
+     "at": 3,
+     "m": "first order: Cl constant"
+    },
+    {
+     "at": 4,
+     "m": "Rate of elimination = Cl &times; C<sub>p</sub>"
+    },
+    {
+     "at": 5,
+     "m": "C<sub>p</sub> falls → rate falls, Cl constant"
+    },
+    {
+     "at": 6,
+     "m": "✗ Cl rises as C<sub>p</sub> rises"
+    }
+   ]
+  },
+  {
+   "slide": "cl:6",
+   "reading": null,
+   "text": "Her example. A drug has a total clearance of fifteen milliliters per minute, and the plasma concentration is five micrograms per milliliter. The elimination rate is fifteen milliliters per minute times five micrograms per milliliter. The milliliters cancel, giving seventy five micrograms per minute. The units can also be changed first. Fifteen milliliters per minute is zero point nine liters per hour, and five micrograms per milliliter is five milligrams per liter, since one milligram per liter equals one microgram per milliliter. Then zero point nine liters per hour times five milligrams per liter is four point five milligrams per hour.",
+   "card": [
+    {
+     "at": 1,
+     "m": "Cl<sub>T</sub> = 15 mL/min, &nbsp; C<sub>p</sub> = 5 mcg/mL"
+    },
+    {
+     "at": 2,
+     "m": "rate = (15 mL/min)(5 mcg/mL)"
+    },
+    {
+     "at": 3,
+     "m": "= <b>75 mcg/min</b>"
+    },
+    {
+     "at": 5,
+     "m": "15 mL/min = 0.9 L/hr; &nbsp; 5 mcg/mL = 5 mg/L"
+    },
+    {
+     "at": 6,
+     "m": "(0.9 L/hr)(5 mg/L) = <b>4.5 mg/hr</b>"
+    }
+   ]
+  },
+  {
+   "slide": "cl:7",
+   "reading": null,
+   "text": "Total clearance comes from either of two relations. From dose and exposure, Cl T equals F times D zero, divided by A U C, the area under the plasma concentration time curve. F is the bioavailability factor, with no units, and is taken as one for an I V dose; D zero is in milligrams and A U C in milligram hours per liter, so Cl T comes out in liters per hour. From the rate constant and the volume, Cl T equals k times V D, with k per hour and V D in liters, so again liters per hour.",
+   "card": [
+    {
+     "at": 1,
+     "m": "Cl<sub>T</sub> = {{frac:F &times; D<sub>0</sub>|AUC}}"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:mg|mg&middot;hr/L}} = L/hr &nbsp; (F = 1 for IV)"
+    },
+    {
+     "at": 3,
+     "m": "Cl<sub>T</sub> = k &times; V<sub>D</sub> &nbsp; (hr<sup>&minus;1</sup>)(L) = L/hr"
+    }
+   ]
+  },
+  {
+   "slide": "cl:10",
+   "reading": null,
+   "text": "Collecting urine gives the fraction of the dose excreted unchanged, f e. It equals the cumulative amount of unchanged drug in the urine, D u infinity, divided by F times D zero, and it also equals k e over k, so k e equals f e times k. Here k e is the excretion rate constant, the part of k due to urinary excretion of unchanged drug. She said, lowercase f e is our fraction excreted, capital F is our bioavailability factor. Renal clearance is that fraction of total clearance, so Cl R equals f e times Cl T, and hepatic clearance is the rest, one minus f e times Cl T, or Cl T minus Cl R.",
+   "card": [
+    {
+     "at": 1,
+     "m": "f<sub>e</sub> = {{frac:D<sub>u</sub><sup>&infin;</sup>|F &times; D<sub>0</sub>}} = {{frac:k<sub>e</sub>|k}}"
+    },
+    {
+     "at": 1,
+     "m": "k<sub>e</sub> = f<sub>e</sub> &times; k"
+    },
+    {
+     "at": 3,
+     "m": "f<sub>e</sub>: fraction excreted &nbsp; F: bioavailability"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>R</sub> = f<sub>e</sub> &times; Cl<sub>T</sub>"
+    },
+    {
+     "at": 4,
+     "m": "Cl<sub>H</sub> = (1 &minus; f<sub>e</sub>) &times; Cl<sub>T</sub> = Cl<sub>T</sub> &minus; Cl<sub>R</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "cl:12",
+   "reading": null,
+   "text": "Her slide example. Five hundred milligrams of a drug was given by rapid I V injection. The V D is fifteen liters and the elimination half-life is eight hours. Urine was collected for forty eight hours, and three hundred milligrams of unchanged drug was recovered. Asked are f e, k, k e, Cl T, Cl R and Cl H. The fraction f e comes first, because every later term uses it. With F equal to one for an I V dose, f e is three hundred milligrams over five hundred milligrams. The milligrams cancel, so f e is zero point six, with no units.",
+   "card": [
+    {
+     "at": 1,
+     "m": "D<sub>0</sub> = 500 mg IV, &nbsp; F = 1"
+    },
+    {
+     "at": 2,
+     "m": "V<sub>D</sub> = 15 L, &nbsp; t&frac12; = 8 hr"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>u</sub><sup>&infin;</sup> = 300 mg"
+    },
+    {
+     "at": 6,
+     "m": "f<sub>e</sub> = {{frac:300 mg|500 mg}}"
+    },
+    {
+     "at": 7,
+     "m": "<b>f<sub>e</sub> = 0.6</b>, no units"
+    }
+   ]
+  },
+  {
+   "slide": "cl:12",
+   "reading": null,
+   "text": "Next, k comes from the half-life, because the half-life equals zero point six nine three over k. Zero point six nine three divided by eight hours is zero point zero eight six six per hour. The excretion rate constant k e is f e times k: zero point six times zero point zero eight six six per hour is zero point zero five two per hour. Total clearance is k times V D: zero point zero eight six six per hour times fifteen liters is one point three liters per hour.",
+   "card": [
+    {
+     "at": 0,
+     "m": "t&frac12; = {{frac:0.693|k}}"
+    },
+    {
+     "at": 1,
+     "m": "k = {{frac:0.693|8 hr}} = <b>0.0866 hr<sup>&minus;1</sup></b>"
+    },
+    {
+     "at": 2,
+     "m": "k<sub>e</sub> = (0.6)(0.0866 hr<sup>&minus;1</sup>) = <b>0.052 hr<sup>&minus;1</sup></b>"
+    },
+    {
+     "at": 3,
+     "m": "Cl<sub>T</sub> = (0.0866 hr<sup>&minus;1</sup>)(15 L) = <b>1.3 L/hr</b>"
+    }
+   ]
+  },
+  {
+   "slide": "cl:12",
+   "reading": null,
+   "text": "Renal clearance is f e times Cl T: zero point six times one point three liters per hour is zero point seven eight liters per hour. Hepatic clearance is found by difference: one point three minus zero point seven eight liters per hour is zero point five two liters per hour. The forty eight hour collection time is not used; only the cumulative amount and the dose are. The traps are giving f e units, or putting the urinary fraction in place of capital F. On an I V problem F is one whatever the urine shows.",
+   "card": [
+    {
+     "at": 0,
+     "m": "Cl<sub>R</sub> = (0.6)(1.3 L/hr) = <b>0.78 L/hr</b>"
+    },
+    {
+     "at": 1,
+     "m": "Cl<sub>H</sub> = 1.3 L/hr &minus; 0.78 L/hr = <b>0.52 L/hr</b>"
+    },
+    {
+     "at": 2,
+     "m": "48 hr collection: not used"
+    },
+    {
+     "at": 3,
+     "m": "✗ units on f<sub>e</sub> &nbsp; ✗ f<sub>e</sub> in place of F"
+    }
+   ]
+  },
+  {
+   "slide": "cl:23",
+   "reading": null,
+   "text": "Clearance, half-life and volume are linked. Putting Cl T equals k times V D into the half-life equals zero point six nine three over k gives a second form: the half-life equals zero point six nine three times V D, divided by Cl T. V D and Cl T must share a volume unit, and the half-life then takes the time unit of Cl T. If the volume stays the same and clearance falls, as in renal failure, the half-life gets longer.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t&frac12; = {{frac:0.693|k}}, &nbsp; Cl<sub>T</sub> = k &times; V<sub>D</sub>"
+    },
+    {
+     "at": 1,
+     "m": "t&frac12; = {{frac:0.693 &times; V<sub>D</sub>|Cl<sub>T</sub>}}"
+    },
+    {
+     "at": 2,
+     "m": "V<sub>D</sub> and Cl<sub>T</sub>: same volume unit"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>D</sub> same, Cl<sub>T</sub> falls → t&frac12; longer"
+    }
+   ]
+  },
+  {
+   "slide": "cl:24",
+   "reading": null,
+   "text": "Her slide example. A new antibiotic is actively secreted by the kidney, and its V D is twenty five liters. Its clearance is seven hundred fifty milliliters per minute, falling to one hundred fifty milliliters per minute in partial renal failure. To match V D in liters, seven hundred fifty milliliters per minute is zero point seven five liters per minute. The usual half-life is zero point six nine three times twenty five liters, divided by zero point seven five liters per minute, which is twenty three point one minutes. In renal failure V D stays twenty five liters, and with zero point one five liters per minute the half-life is one hundred fifteen point five minutes. Clearance fell to one fifth, so the half-life became five times longer.",
+   "card": [
+    {
+     "at": 1,
+     "m": "V<sub>D</sub> = 25 L"
+    },
+    {
+     "at": 2,
+     "m": "Cl<sub>T</sub>: 750 mL/min → 150 mL/min"
+    },
+    {
+     "at": 3,
+     "m": "750 mL/min = 0.75 L/min"
+    },
+    {
+     "at": 4,
+     "m": "t&frac12; = {{frac:0.693 &times; 25 L|0.75 L/min}} = <b>23.1 min</b>"
+    },
+    {
+     "at": 5,
+     "m": "t&frac12; = {{frac:0.693 &times; 25 L|0.15 L/min}} = <b>115.5 min</b>"
+    },
+    {
+     "at": 6,
+     "m": "Cl<sub>T</sub> to one fifth → t&frac12; &times; 5"
+    }
+   ]
+  }
+ ]
+}
