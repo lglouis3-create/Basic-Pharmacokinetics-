@@ -3,6 +3,45 @@
    copy (https://drive.google.com/file/d/<id>/view). */
 const SOURCES = [
  {
+  "id": "quiz-1",
+  "title": "Quiz 1, Modules 1–2 (paper)",
+  "type": "quiz",
+  "module": 1,
+  "modules": [
+   1,
+   2
+  ],
+  "date": "2026-08-26",
+  "file": "Basic_Pharmacokinetics_Questions_1-8_plus_Quiz_1.pdf",
+  "drive": null,
+  "key": "instructor",
+  "note": "",
+  "chains": [],
+  "items": [
+   {
+    "q": "cq1-1",
+    "label": "Question 1"
+   },
+   {
+    "q": "cq1-2",
+    "label": "Question 2"
+   },
+   {
+    "q": "cq1-3a",
+    "label": "3a"
+   },
+   {
+    "q": "cq1-3b",
+    "label": "3b"
+   },
+   {
+    "q": "cq1-3c",
+    "label": "3c"
+   }
+  ],
+  "missing": "No Drive file id recorded for this PDF; her key is from the 08-26 transcript."
+ },
+ {
   "id": "quiz-2",
   "title": "Canvas Quiz 2, Modules 2–3 (graded)",
   "type": "quiz",
@@ -3200,6 +3239,26 @@ const SOURCES = [
  }
 ];
 const SOURCE_OF = {
+ "cq1-1": {
+  "src": "quiz-1",
+  "label": "Question 1"
+ },
+ "cq1-2": {
+  "src": "quiz-1",
+  "label": "Question 2"
+ },
+ "cq1-3a": {
+  "src": "quiz-1",
+  "label": "3a"
+ },
+ "cq1-3b": {
+  "src": "quiz-1",
+  "label": "3b"
+ },
+ "cq1-3c": {
+  "src": "quiz-1",
+  "label": "3c"
+ },
  "cq2-1": {
   "src": "quiz-2",
   "label": "Question 1"

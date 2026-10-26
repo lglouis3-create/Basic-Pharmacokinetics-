@@ -58,6 +58,11 @@ NO_QUIZ = ('No Drive file found: the graded Canvas screenshots are not in the co
 # photographed on a deck come before the deck itself.
 RULES = [
     # ---- quizzes (her graded Canvas sets; the screenshots show the student's answers)
+    # Quiz 1 (26 Aug): a paper quiz; the printed text is pages 9-10 of the Questions 1-8 file, and her
+    # answers are from her spoken review the same day (transcript 08-26). Items cq1-1, cq1-2, cq1-3a to 3c.
+    S('quiz-1', 'Quiz 1, Modules 1–2 (paper)', 'quiz', 'Basic_Pharmacokinetics_Questions_1-8_plus_Quiz_1.pdf',
+      None, 'instructor', [r'^Quiz 1\b'], date='2026-08-26',
+      missing='No Drive file id recorded for this PDF; her key is from the 08-26 transcript.'),
     S('quiz-2', 'Canvas Quiz 2, Modules 2–3 (graded)', 'quiz', 'Quiz2-Modules2-3-graded.pdf',
       None, 'student-work', [r'^Canvas Quiz 2\b'], missing=NO_QUIZ),
     S('quiz-3', 'Canvas Quiz 3, Modules 4–5 (graded)', 'quiz', 'Quiz3-Modules4-5-graded.pdf',
@@ -335,7 +340,7 @@ def main():
 
     assign = {}
     for qid in need:
-        m = re.match(r'cq(\d+)-\d+$', qid)       # a Canvas quiz item: its quiz, by id
+        m = re.match(r'cq(\d+)-\d+[a-z]?$', qid)       # a quiz item: its quiz, by id
         if m and ('quiz-' + m[1]) in {r['id'] for r in RULES}:
             assign[qid] = 'quiz-' + m[1]
             continue

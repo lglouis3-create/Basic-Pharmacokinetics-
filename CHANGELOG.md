@@ -3,6 +3,7 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- Quiz 1 (26 Aug, Modules 1–2): her five items with her answers from the review that day, plus a worksheet PDF.
 - Module 8 objective 3 walkthrough: why the order changes comes first, then the formula; compare a level only with KM.
 - Walkthrough transcripts show each symbol with what it stands for in brackets; the brackets are not read aloud.
 - Guides, Module 8 objective 3: a sample walkthrough in a new style, concept first, with figures built as it is read.

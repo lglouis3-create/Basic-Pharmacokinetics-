@@ -1,5 +1,5 @@
 /* ==========================================================================
-   HER GRADED CANVAS QUIZZES — Quiz 2 (Modules 2–3), Quiz 3 (Modules 4–5), Quiz 4 (Modules 6–7a)
+   HER QUIZZES — Quiz 1 (Modules 1–2, paper), Quiz 2 (Modules 2–3), Quiz 3 (Modules 4–5), Quiz 4 (Modules 6–7a)
    and Quiz 5 (Modules 7b and 8)
    ==========================================================================
    Sixteen items from Quizzes 2 and 3, ten from Quiz 4 (5 Oct 2026) and eight from Quiz 5
@@ -18,6 +18,130 @@
    verbatim with the recomputations.
    ========================================================================== */
 const Q_QUIZZES = [
+
+/* ---------------------------- Quiz 1: Modules 1–2 ------------------------ */
+/* Paper quiz, 26 Aug 2026 (Basic_Pharmacokinetics_Questions_1-8_plus_Quiz_1.pdf, pages 9–10). Two versions
+   went out with Q1 and Q2 flipped; these are the printed version. Her answers are from her spoken review the
+   same day (transcript 08-26), each recomputed from the stem. */
+
+{id:'cq1-1', multi:true, prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
+ topic:'orders', sub:'first', concept:'first-order-rate-depends', skill:'tell', dupOf:'m1-ord-c04',
+ source:'both',
+ stem:'Which of the following is true about a process in which the rate depends on the concentration? Select all that apply.',
+ options:[
+  {t:'The half-life depends on the concentration of the drug present.', correct:false,
+   why:'A half-life that changes with concentration belongs to zero order, where t½ = {{frac:C0|2k}}. A rate that depends on concentration is first order, and its half-life is 0.693 over k, the same at every level. She said: "if the rate depends on concentration, remember our half-life is independent".'},
+  {t:'The half-life is independent of concentration.', correct:true,
+   why:'A rate that depends on concentration is first order, and the first-order half-life is t½ = {{frac:0.693|k}}: neither term contains a concentration, so the time to halve is the same from any starting level. In her words, "our half-life is 0.693 over K, doesn\'t change".'},
+  {t:'The rate equation is dC/dt = −kC.', correct:true,
+   why:'dC/dt is the rate, and here it equals k times C, so the rate changes whenever the concentration changes: the definition of first order. As she put it, "DCDT is our rate, and this one says that the rate is equal to our K times concentration".'},
+  {t:'The rate equation is dC/dt = −k.', correct:false,
+   why:'No C appears on the right, so the rate stays the same whatever the concentration: that is the zero-order rate law, the answer to the flipped version of this item ("rate is independent of the concentration": A and D).'}],
+ teach:[
+  {h:'The idea', list:[
+   '"Depends on the concentration" describes the rate, the amount removed per unit of time. It changes with the level in first order: {{frac:dC|dt}} = −kC.',
+   'In the same first-order process the half-life and the fraction removed per unit of time do not change: t½ = {{frac:0.693|k}}.',
+   'Zero order is the mirror image: the rate is constant ({{frac:dC|dt}} = −k) and the half-life changes with the starting concentration (t½ = {{frac:C0|2k}}).',
+   'Options a and b contradict each other, so a select-all can never key both.']}],
+ cite:'Quiz 1 (26 Aug), question 1; her spoken review, transcript 08-26; Introduction.pdf, slides on first- and zero-order processes',
+ quote:'if the rate depends on concentration, remember our half-life is independent, our half-life is 0.693 over K, doesn\'t change'},
+
+{id:'cq1-2', prof:'Mosley', tier:'new', exam:1, module:1, lecture:'L01',
+ topic:'orders', sub:'zero', concept:'zero-order-defn', skill:'recall', dupOf:'m1-ord-c01',
+ source:'both',
+ stem:'Which of the following is true about a zero-order process?',
+ options:[
+  {t:'The elimination rate is at its highest when the amount of drug in the body is at its highest.', correct:false,
+   why:'This describes first order, where the rate is k times the amount, so the most drug gives the fastest loss. It is her key for the flipped version, which asked about a first-order process: "The rate is highest at the top of the curve when the concentration is highest".'},
+  {t:'The elimination rate is at its highest when the amount of drug in the body is at its lowest.', correct:false,
+   why:'Neither order behaves this way. In first order the rate falls as the amount falls; in zero order the rate does not change at all.'},
+  {t:'The elimination rate is independent of the amount of drug in the body.', correct:true,
+   why:'Zero order means {{frac:dC|dt}} = −k with no amount or concentration term, so the same quantity leaves in each unit of time however much drug is present. This is the flipped form of her first-order item, whose key was the rate being highest when the amount is highest.'},
+  {t:'The elimination rate increases as a function of time.', correct:false,
+   why:'In zero order the rate is constant over time, and in first order it falls over time as the amount falls. No elimination process in this course speeds up as time passes.'}],
+ teach:[
+  {h:'The idea', list:[
+   'Zero order: {{frac:dC|dt}} = −k. The same amount or concentration leaves per unit of time, independent of how much is present.',
+   'First order: {{frac:dC|dt}} = −kC. The rate is highest at the start, when the concentration is highest, and falls with it.',
+   'In zero order the fraction lost per hour grows as the amount shrinks; in first order the fraction stays fixed.']}],
+ cite:'Quiz 1 (26 Aug), question 2; her spoken review of the flipped version, transcript 08-26; Introduction.pdf slide 17',
+ quote:'The rate is highest at the top of the curve when the concentration is highest'},
+
+{id:'cq1-3a', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'first-order-halflife', skill:'krate',
+ source:'both',
+ stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. Blood samples were collected at various time intervals. The elimination of drug seems to follow a first-order model best described by the equation C = C₀e⁻ᵏᵗ. The plasma concentrations (Cp, mcg/mL) were: 0.5 hr, 112; 2 hr, 90.9; 4 hr, 68.9; 8 hr, 39.6; 16 hr, 13.1. What is the half-life of this agent in this patient?',
+ units:'hr', answer:5.006, tol:0.1,
+ steps:[
+  {k:'setup', t:'k = {{frac:ln(Cp1 ÷ Cp2)|t2 − t1}}, then t½ = {{frac:0.693|k}}',
+   why:'A first-order decline is a straight line of ln C against time with slope −k, so two points give k, and the half-life follows from k. The first and last points span the most time, which keeps rounding in the printed values from moving k.'},
+  {k:'algebra', t:'k = {{frac:ln(112 ÷ 13.1)|(16 − 0.5) hr}} = {{frac:ln 8.5496|15.5 hr}} = {{frac:2.1459|15.5 hr}} = 0.13844 hr⁻¹',
+   why:'The concentration units cancel inside the ratio, so the logarithm is a pure number; dividing by hours leaves reciprocal hours, the unit of a first-order rate constant.'},
+  {k:'algebra', t:'t½ = {{frac:0.693|0.13844 hr⁻¹}} = 5.006 hr',
+   why:'A pure number over reciprocal hours gives hours. Any other pair of points in the table gives 4.98 to 5.01 hr.'},
+  {k:'round', t:'t½ = 5.0 hr',
+   why:'The stem gives no rounding rule. She accepted 4.97 and said a value near 4.19 means "something\'s funky".'}],
+ setup:{eq:'first-ln', pre:[], why:'"single IV bolus dose" with "C = C₀e⁻ᵏᵗ" and a table of concentrations, so the one-compartment IV bolus block. Asked the half-life, so k from two points by the natural-log form, then t½ = {{frac:0.693|k}}.'},
+ asks:'thalf',
+ givens:[['weight', '165 lb', 'not needed for the half-life'], ['D0', '30 mg/kg', 'not needed for the half-life'], ['Cp at 0.5 hr', '112 mcg/mL', 'the earlier point of the pair'], ['Cp at 16 hr', '13.1 mcg/mL', 'the later point of the pair'], ['other points', '90.9, 68.9, 39.6', 'not needed: any pair gives about the same k']],
+ check:{t:'From 2 to 8 hr the level falls 90.9 → 39.6 mcg/mL, a little more than half in 6 hr, so the half-life is a little under 6 hr; from 8 to 16 hr it falls 39.6 → 13.1, about a third in 8 hr. 5.0 hr fits both.', lo:4, hi:6},
+ teach:[
+  {h:'The idea', list:[
+   'k comes from any two points: k = {{frac:ln(C1 ÷ C2)|t2 − t1}}, the earlier concentration on top so k is positive.',
+   't½ = {{frac:0.693|k}}, in hours when k is in hr⁻¹.',
+   'mcg/mL and mg/L are the same concentration.']}],
+ cite:'Quiz 1 (26 Aug), question 3a; her spoken review, transcript 08-26',
+ quote:'if you give me 4.97, now, if you give me 4.19, something\'s funky'},
+
+{id:'cq1-3b', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'vd-from-dose-c0', skill:'vddose',
+ source:'both',
+ stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. The elimination of drug follows C = C₀e⁻ᵏᵗ, and the plasma concentrations (Cp, mcg/mL) were: 0.5 hr, 112; 2 hr, 90.9; 4 hr, 68.9; 8 hr, 39.6; 16 hr, 13.1. What is the volume of distribution of this agent in this patient? (Part a: k = 0.13844 hr⁻¹.)',
+ units:'L', answer:18.75, tol:0.4,
+ steps:[
+  {k:'unit', t:'weight = {{frac:165 lb|2.2 lb/kg}} = 75 kg; D0 = (30 mg/kg)(75 kg) = 2250 mg',
+   why:'The dose is per kilogram, so the weight in kilograms comes first; the kilograms cancel and leave milligrams.'},
+  {k:'setup', t:'C0 = Cp·e^(+kt) = (112 mg/L) e^((0.13844)(0.5)) = (112)(1.0717) = 120.03 mg/L',
+   why:'The first sample was drawn at 0.5 hr, not at time zero, so it is run back half an hour along the same line. She said: "You can\'t use D0 and the concentration 30 minutes after the dose was given. So you gotta go back up and find C0."'},
+  {k:'algebra', t:'VD = {{frac:D0|C0}} = {{frac:2250 mg|120.03 mg/L}} = 18.75 L',
+   why:'An amount over a concentration leaves a volume: the milligrams cancel and the litre inverts.'},
+  {k:'round', t:'VD ≈ 18.8 L',
+   why:'Her answer was "18.8-ish". A C0 read from a fitted line through all five points (119.9 mg/L) gives 18.76 L, the same to one decimal place.'}],
+ setup:{eq:'cp-db-vd', pre:['first-ln'], why:'"single IV bolus dose" with a dose per kilogram and plasma levels, asked the "volume of distribution", so VD = {{frac:D0|C0}}. C0 is not in the table, so it is back-extrapolated with k from part a.'},
+ asks:'VD',
+ givens:[['weight', '165 lb', 'converted to 75 kg to scale the dose'], ['D0', '30 mg/kg', '2250 mg, the numerator'], ['Cp at 0.5 hr', '112 mcg/mL', 'run back to time zero to give C0'], ['k', '0.13844 hr⁻¹', 'from part a, for the back-extrapolation']],
+ check:{t:'2250 mg over 120.03 mg/L is just under 19 L, a quarter of the 75 kg body weight.', lo:15, hi:22},
+ teach:[
+  {h:'The idea', list:[
+   'VD = {{frac:D0|C0}} needs the concentration at time zero, never the first sample.',
+   'C0 = Cp·e^(+kt) runs a sample back to time zero.',
+   'A dose in mg/kg is multiplied by the weight in kg first.']}],
+ cite:'Quiz 1 (26 Aug), question 3b; her spoken review, transcript 08-26',
+ quote:'You can\'t use D0 and the concentration 30 minutes after the dose was given. So you gotta go back up and find C0'},
+
+{id:'cq1-3c', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
+ topic:'bolus1', sub:'calc', concept:'time-to-percent-first-order', skill:'krate',
+ source:'both',
+ stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. The elimination of drug follows C = C₀e⁻ᵏᵗ, and the plasma concentrations (Cp, mcg/mL) were: 0.5 hr, 112; 2 hr, 90.9; 4 hr, 68.9; 8 hr, 39.6; 16 hr, 13.1. How much time following administration of the dose is required for 75% of the dose to be eliminated? (Part a: t½ = 5.0 hr.)',
+ units:'hr', answer:10.0, tol:0.2,
+ steps:[
+  {k:'setup', t:'75% eliminated = 25% remaining = ½ × ½: two half-lives',
+   why:'Each half-life leaves half of what was there: 100% → 50% → 25%. Two halvings leave a quarter, which is 75% gone.'},
+  {k:'algebra', t:'t = 2 × 5.0 hr = 10 hr',
+   why:'Two half-lives of 5.0 hr. In her words: "75%, 2 half-lives. 2 times 5 gives us 10."'},
+  {k:'algebra', t:'check: t = {{frac:ln(C0 ÷ C)|k}} = {{frac:ln 4|0.13844 hr⁻¹}} = {{frac:1.3863|0.13844}} = 10.01 hr',
+   why:'C0 over C is 100 over 25, which is 4, so the natural-log form gives the same time.'}],
+ setup:{eq:'first-exp', pre:['thalf-first'], why:'"75% of the dose to be eliminated" after an IV bolus: the first-order line solved for t, or a count of half-lives because 25% remaining is exactly two halvings.'},
+ asks:'t',
+ givens:[['t½', '5.0 hr', 'from part a; two of them'], ['fraction eliminated', '75%', '25% remaining, two half-lives'], ['D0', '30 mg/kg', 'not needed once t½ is known']],
+ check:{t:'75% gone is two half-lives, and 87.5% would be three; 10 hr is two of 5 hr.', lo:9.5, hi:10.5},
+ teach:[
+  {h:'The idea', list:[
+   'Count halvings: 1 half-life 50% gone, 2 half-lives 75%, 3 half-lives 87.5%.',
+   'For other percentages use t = {{frac:ln(C0 ÷ C)|k}}.',
+   'The time does not depend on the dose, because the half-life does not.']}],
+ cite:'Quiz 1 (26 Aug), question 3c; her spoken review, transcript 08-26',
+ quote:'On this 1, 75%, 2 half-lives. 2 times 5 gives us 10.'},
 
 /* ---------------------------- Quiz 2: Modules 2–3 ------------------------ */
 
