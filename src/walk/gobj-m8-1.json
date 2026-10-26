@@ -1,0 +1,136 @@
+{
+ "id": "gobj-m8-1",
+ "title": "Linear versus nonlinear pharmacokinetics",
+ "segs": [
+  {
+   "slide": "nonlin:3",
+   "reading": null,
+   "text": "Module eight, objective one. Linear versus nonlinear pharmacokinetics. Most drugs are eliminated by a first order process, where the rate of elimination is faster when there is more drug in the body. That is linear pharmacokinetics, and it is what the course has used until now. In linear pharmacokinetics the parameters, such as the half life and the clearance, do not change when different or multiple doses are given. That is why a first dose can be carried forward to steady state by superposition.",
+   "card": [
+    {
+     "at": 2,
+     "m": "first order: more drug → faster elimination"
+    },
+    {
+     "at": 4,
+     "m": "linear: parameters (t<sub>&frac12;</sub>, Cl) unchanged with dose"
+    },
+    {
+     "at": 5,
+     "m": "→ superposition to steady state"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:3",
+   "reading": null,
+   "text": "In nonlinear pharmacokinetics, increased doses or chronic administration cause deviations from the profile seen with single doses. The half life and the clearance change, and a small change in dose can give a large change in concentration. The cause is saturation: an enzyme or carrier system that can only work so fast. Nonlinear processes can occur in absorption, distribution, metabolism or excretion, and this module deals with elimination. Phenytoin is the prototype nonlinear drug in this course.",
+   "card": [
+    {
+     "at": 0,
+     "m": "nonlinear: higher or repeated doses → deviation from single-dose profile"
+    },
+    {
+     "at": 1,
+     "m": "t<sub>&frac12;</sub> and Cl change; small dose change → large concentration change"
+    },
+    {
+     "at": 2,
+     "m": "cause: saturable enzyme or carrier"
+    },
+    {
+     "at": 4,
+     "m": "Ex. phenytoin"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:6",
+   "reading": null,
+   "text": "The signs of saturation kinetics. Elimination is nonlinear, and the half life changes as the dose increases. The A U C, the area under the concentration against time curve, is not proportional to the bioavailable dose. Other drugs needing the same enzyme or carrier system can affect the saturation. And the composition or ratio of the metabolites can change with the dose.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t<sub>&frac12;</sub> changes with dose"
+    },
+    {
+     "at": 2,
+     "m": "AUC not proportional to dose"
+    },
+    {
+     "at": 3,
+     "m": "competing drugs, same enzyme or carrier"
+    },
+    {
+     "at": 4,
+     "m": "metabolite ratio changes"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:4",
+   "reading": null,
+   "text": "Her first figure is a log plot of plasma level against time. Curve A is a high dose and curve B a low dose of the saturable drug, and curve C is a first order drug. Curve A bends before it becomes straight, while curve B is straight, like curve C. The terminal slopes of A and B are the same.",
+   "card": [
+    {
+     "at": 1,
+     "m": "A: high dose; B: low dose; C: first order"
+    },
+    {
+     "at": 2,
+     "m": "A bends, then straight; B straight like C"
+    },
+    {
+     "at": 3,
+     "m": "terminal slopes A = B"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:5",
+   "reading": null,
+   "text": "Her second figure plots A U C against dose. For a linear drug the A U C is proportional to the dose, a straight line. The saturable drug follows that line up to a certain dose and then rises above it, so the A U C is no longer directly proportional to the dose. The same thing shows at steady state in her slide example: a one third rise in dose rate, from six to eight milligrams per kilogram per day, doubles the steady state level from ten to twenty milligrams per liter. A linear drug would have gone only to thirteen point three milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "linear: AUC ∝ dose"
+    },
+    {
+     "at": 2,
+     "m": "saturable: above the line past a certain dose"
+    },
+    {
+     "at": 3,
+     "m": "6 → 8 mg/kg/day: C<sub>ss</sub> 10 → 20 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "linear: 10 × {{frac:8|6}} = 13.3 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:19",
+   "reading": null,
+   "text": "Her written question asks the difference between linear and nonlinear pharmacokinetics. The answer is the parameters: unchanged with dose in linear, changed by increased doses or chronic administration in nonlinear. The trap is to swap the words. Linear is not zero order, and nonlinear is not simply first order. A saturable drug behaves as first order at low concentrations and as zero order at high ones. The summary statement that clearance and half life are usually not constant within nonlinear pharmacokinetic processes is true.",
+   "card": [
+    {
+     "at": 1,
+     "m": "linear: parameters fixed; nonlinear: parameters change"
+    },
+    {
+     "at": 3,
+     "m": "✗ linear = zero order &nbsp; ✗ nonlinear = first order"
+    },
+    {
+     "at": 4,
+     "m": "saturable: first order at low C, zero order at high C"
+    },
+    {
+     "at": 5,
+     "m": "Cl and t<sub>&frac12;</sub> usually not constant: true"
+    }
+   ]
+  }
+ ]
+}

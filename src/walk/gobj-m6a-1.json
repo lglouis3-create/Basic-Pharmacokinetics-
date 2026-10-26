@@ -1,0 +1,253 @@
+{
+ "id": "gobj-m6a-1",
+ "title": "Concentrations after multiple oral doses",
+ "segs": [
+  {
+   "slide": "mo:3",
+   "reading": null,
+   "text": "Module six A, objective one. Concentrations after multiple oral doses. Each oral dose has to be absorbed first, so the level rises to a peak and then falls. When the next dose arrives before the last is gone, drug accumulates until every interval repeats, which is steady state. The single dose line from Module five is C p equals P, times e to the minus k t minus e to the minus k a t. The prefactor P is F times k a times D zero, over V D times k a minus k. The oral peak is not at the moment of dosing, so t max is found first. t max equals one over k a minus k, times the natural log of k a over k.",
+   "card": [
+    {
+     "at": 2,
+     "m": "oral: absorbed first → rise to a peak, then fall"
+    },
+    {
+     "at": 3,
+     "m": "accumulation → steady state (&infin;)"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>p</sub> = P (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)"
+    },
+    {
+     "at": 5,
+     "m": "P = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub>(k<sub>a</sub> &minus; k)}} &nbsp; (mg/L)"
+    },
+    {
+     "at": 6,
+     "m": "peak not at the moment of dosing → t<sub>max</sub> first"
+    },
+    {
+     "at": 7,
+     "m": "t<sub>max</sub> = {{frac:1|k<sub>a</sub> &minus; k}} ln({{frac:k<sub>a</sub>|k}})"
+    }
+   ]
+  },
+  {
+   "slide": "mo:5",
+   "reading": null,
+   "text": "Repeating the dose adds the dose number n and the dosing interval tau. With n equal to one, the extra fractions equal one and the single dose line is left. As n grows, they become two accumulation factors. r k equals one over one minus e to the minus k tau, and r a is the same with k a. Both are at least one, because e to the minus k tau is the fraction of a dose still in the body one interval later. At steady state, C p equals P, times r k e to the minus k t, minus r a e to the minus k a t, with t the time after the latest dose.",
+   "card": [
+    {
+     "at": 0,
+     "m": "new: n (dose number), &tau; (interval, hr)"
+    },
+    {
+     "at": 1,
+     "m": "n = 1 → single-dose line"
+    },
+    {
+     "at": 3,
+     "m": "r<sub>k</sub> = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} &nbsp; r<sub>a</sub> = {{frac:1|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}}"
+    },
+    {
+     "at": 4,
+     "m": "e<sup>&minus;k&tau;</sup>: fraction left after one interval; r ≥ 1"
+    },
+    {
+     "at": 5,
+     "m": "C<sub>p</sub><sup>&infin;</sup> = P (r<sub>k</sub> e<sup>&minus;kt</sup> &minus; r<sub>a</sub> e<sup>&minus;k<sub>a</sub>t</sup>)"
+    }
+   ]
+  },
+  {
+   "slide": "mo:7",
+   "reading": null,
+   "text": "The steady state peak needs its own time to peak. t max at steady state is the single dose t max with one more fraction inside the log: one minus e to the minus k tau, over one minus e to the minus k a tau. That correction is less than one, so t max at steady state is shorter than the first dose t max. It holds tau, so a new dosing interval means a new t max at steady state. Putting the first dose t max into the steady state peak is a trap she uses.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t<sub>max</sub><sup>&infin;</sup> = {{frac:1|k<sub>a</sub> &minus; k}} ln[ {{frac:k<sub>a</sub>|k}} × {{frac:1 &minus; e<sup>&minus;k&tau;</sup>|1 &minus; e<sup>&minus;k<sub>a</sub>&tau;</sup>}} ]"
+    },
+    {
+     "at": 2,
+     "m": "correction &lt; 1 → t<sub>max</sub><sup>&infin;</sup> &lt; t<sub>max</sub>"
+    },
+    {
+     "at": 3,
+     "m": "depends on k, k<sub>a</sub> and &tau;"
+    },
+    {
+     "at": 4,
+     "m": "✗ first-dose t<sub>max</sub> in C<sub>max</sub><sup>&infin;</sup>"
+    }
+   ]
+  },
+  {
+   "slide": "mo:6",
+   "reading": null,
+   "text": "The peak at steady state, C max, equals F D zero over V D, times r k, times e to the minus k t max at steady state. F D zero over V D is the absorbed dose spread through V D, and r k adds drug left from earlier doses. F and t max mark this as the oral line, not the repeated bolus peak. The trough, C min, is P times r k times e to the minus k tau, and it starts from P, not from F D zero over V D. The average, C avg, equals F D zero over Cl T times tau, with no t max and no accumulation factor.",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>max</sub><sup>&infin;</sup> = {{frac:F D<sub>0</sub>|V<sub>D</sub>}} × r<sub>k</sub> × e<sup>&minus;kt<sub>max</sub>&infin;</sup>"
+    },
+    {
+     "at": 2,
+     "m": "F and t<sub>max</sub><sup>&infin;</sup> mark the oral line"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>min</sub><sup>&infin;</sup> = P × r<sub>k</sub> × e<sup>&minus;k&tau;</sup> &nbsp; (P, not {{frac:F D<sub>0</sub>|V<sub>D</sub>}})"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>avg</sub><sup>&infin;</sup> = {{frac:F D<sub>0</sub>|Cl<sub>T</sub>&tau;}} = {{frac:F D<sub>0</sub>|V<sub>D</sub>k&tau;}}"
+    }
+   ]
+  },
+  {
+   "slide": "mo:8",
+   "reading": null,
+   "text": "Her Example one. A seventy five kilogram man takes two hundred fifty milligrams of tetracycline hydrochloride by mouth every eight hours. F is about seventy five percent, V D one point five liters per kilogram, the half life about ten hours, and k a zero point nine per hour. She asks the first dose peak, then the steady state peak, trough and average. Convert first. k is zero point six nine three over ten hours, zero point zero six nine three per hour. V D is one point five liters per kilogram times seventy five kilograms, one hundred twelve point five liters, because the kilograms cancel. F is zero point seven five and tau is eight hours.",
+   "card": [
+    {
+     "at": 1,
+     "m": "75 kg; 250 mg by mouth every 8 hr"
+    },
+    {
+     "at": 2,
+     "m": "F 75%, V<sub>D</sub> 1.5 L/kg, t<sub>&frac12;</sub> 10 hr, k<sub>a</sub> 0.9 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 5,
+     "m": "k = {{frac:0.693|10 hr}} = 0.0693 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 6,
+     "m": "V<sub>D</sub> = 1.5 L/kg × 75 kg = 112.5 L"
+    },
+    {
+     "at": 7,
+     "m": "F = 0.75, &tau; = 8 hr"
+    }
+   ]
+  },
+  {
+   "slide": "mo:8",
+   "reading": null,
+   "text": "First dose t max. k a minus k is zero point eight three zero seven per hour. k a over k is twelve point nine nine, and its natural log is two point five six four. Divided by zero point eight three zero seven, t max is three point zero nine hours, which she writes as three point one. The top of P is zero point seven five times zero point nine times two hundred fifty milligrams, one hundred sixty eight point seven five. The bottom is one hundred twelve point five liters times zero point eight three zero seven, ninety three point four five. The per hour units cancel, and P is one point eight zero six milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "k<sub>a</sub> &minus; k = 0.9 &minus; 0.0693 = 0.8307 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 2,
+     "m": "ln({{frac:0.9|0.0693}}) = ln(12.99) = 2.564"
+    },
+    {
+     "at": 3,
+     "m": "<b>t<sub>max</sub> = {{frac:2.564|0.8307}} = 3.09 hr</b>"
+    },
+    {
+     "at": 4,
+     "m": "P = {{frac:(0.75)(0.9)(250 mg)|(112.5 L)(0.8307)}}"
+    },
+    {
+     "at": 5,
+     "m": "= {{frac:168.75|93.45}}"
+    },
+    {
+     "at": 6,
+     "m": "<b>P = 1.806 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "mo:8",
+   "reading": null,
+   "text": "At three point zero nine hours, e to the minus k t is zero point eight zero seven, and e to the minus k a t is zero point zero six two. One point eight zero six times their difference, zero point seven four five, is one point three five milligrams per liter. For steady state, e to the minus k tau is zero point five seven four, so one minus it is zero point four two six and r k is two point three five. That is more than double, because less than one half life passes between doses. e to the minus k a tau is zero point zero zero zero seven, leaving zero point nine nine nine, so r a is one.",
+   "card": [
+    {
+     "at": 0,
+     "m": "e<sup>&minus;0.0693 × 3.09</sup> = 0.807; &nbsp; e<sup>&minus;0.9 × 3.09</sup> = 0.062"
+    },
+    {
+     "at": 1,
+     "m": "<b>C<sub>max</sub> = 1.806 × (0.807 &minus; 0.062) = 1.806 × 0.745 = 1.35 mg/L</b>"
+    },
+    {
+     "at": 2,
+     "m": "e<sup>&minus;0.0693 × 8</sup> = 0.574"
+    },
+    {
+     "at": 2,
+     "m": "1 &minus; 0.574 = 0.426 → r<sub>k</sub> = {{frac:1|0.426}} = 2.35"
+    },
+    {
+     "at": 4,
+     "m": "e<sup>&minus;0.9 × 8</sup> = 0.0007 → 1 &minus; 0.0007 = 0.999 → r<sub>a</sub> = 1.00"
+    }
+   ]
+  },
+  {
+   "slide": "mo:8",
+   "reading": null,
+   "text": "t max at steady state is the natural log of twelve point nine nine times zero point four two six over zero point nine nine nine, all over zero point eight three zero seven. That log is of five point five three nine, one point seven one two, so t max at steady state is two point zero six hours, about an hour earlier than the first dose. For C max at steady state, F D zero over V D is one point six six seven milligrams per liter. Times r k, two point three five, times e to the minus k times two point zero six, zero point eight six seven, that gives three point four zero milligrams per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "t<sub>max</sub><sup>&infin;</sup> = {{frac:1|0.8307}} ln[12.99 × {{frac:0.426|0.999}}]"
+    },
+    {
+     "at": 1,
+     "m": "ln(5.539) = 1.712"
+    },
+    {
+     "at": 1,
+     "m": "<b>t<sub>max</sub><sup>&infin;</sup> = {{frac:1.712|0.8307}} = 2.06 hr</b>"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:(0.75)(250 mg)|112.5 L}} = 1.667 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "<b>C<sub>max</sub><sup>&infin;</sup> = 1.667 × 2.35 × e<sup>&minus;0.0693 × 2.06</sup> = 1.667 × 2.35 × 0.867 = 3.40 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "mo:8",
+   "reading": null,
+   "text": "C min at steady state is one point eight zero six times two point three five times zero point five seven four, two point four four milligrams per liter. For C avg, the top is one hundred eighty seven point five milligrams. The bottom is one hundred twelve point five liters times zero point zero six nine three per hour times eight hours, sixty two point three seven liters, because the hours cancel. So C avg is three point zero one milligrams per liter. Check: the steady state peak is higher and earlier than the first dose peak, and even the trough is above it. The average is a time average, not the midpoint, and here sits above the midpoint, two point nine two milligrams per liter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "<b>C<sub>min</sub><sup>&infin;</sup> = 1.806 × 2.35 × 0.574 = 2.44 mg/L</b>"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>avg</sub><sup>&infin;</sup> = {{frac:(0.75)(250 mg)|(112.5 L)(0.0693 hr<sup>&minus;1</sup>)(8 hr)}}"
+    },
+    {
+     "at": 2,
+     "m": "= {{frac:187.5 mg|62.37 L}}"
+    },
+    {
+     "at": 3,
+     "m": "<b>C<sub>avg</sub><sup>&infin;</sup> = 3.01 mg/L</b>"
+    },
+    {
+     "at": 4,
+     "m": "3.40 &gt; 1.35 mg/L, 2.06 &lt; 3.09 hr; trough 2.44 &gt; 1.35 ✓"
+    },
+    {
+     "at": 5,
+     "m": "time average: 3.01 &gt; midpoint {{frac:3.40 + 2.44|2}} = 2.92 mg/L"
+    }
+   ]
+  }
+ ]
+}

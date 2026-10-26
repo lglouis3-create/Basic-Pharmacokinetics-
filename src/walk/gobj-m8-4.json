@@ -1,0 +1,186 @@
+{
+ "id": "gobj-m8-4",
+ "title": "Dosing a nonlinear drug such as phenytoin",
+ "segs": [
+  {
+   "slide": "nonlin:11",
+   "reading": null,
+   "text": "Module eight, objective four. Estimating the dose of a nonlinear drug such as phenytoin. At steady state the dose rate R equals the rate of saturable elimination at that level. So R equals V max times C s s, divided by K M plus C s s, and with V max and K M known, a target C s s gives the daily dose rate. R is a dose rate, an amount per unit time such as milligrams per day, so an answer of one thousand milligrams with no interval is not a regimen. K M and C s s are both in milligrams per liter and cancel, so R comes out in the units of V max.",
+   "card": [
+    {
+     "at": 2,
+     "m": "at steady state: dose rate = elimination rate"
+    },
+    {
+     "at": 3,
+     "m": "R = {{frac:V<sub>max</sub>C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}"
+    },
+    {
+     "at": 4,
+     "m": "R: amount per time (mg/day), not a single dose"
+    },
+    {
+     "at": 5,
+     "m": "{{frac:mg/L|mg/L}} cancel → R in units of V<sub>max</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:11",
+   "reading": null,
+   "text": "When V max is given per kilogram, R comes out per kilogram, and the weight then gives the patient's dose. Steady state takes two to three weeks for such a drug, so the C s s in these lines is a level reached much later than three to five half lives. Phenytoin is dosed carefully because it is nonlinear and has a narrow therapeutic window, about ten to twenty milligrams per liter. Levels are measured and the dose adjusted for the individual patient.",
+   "card": [
+    {
+     "at": 0,
+     "m": "V<sub>max</sub> per kg → R per kg → × weight"
+    },
+    {
+     "at": 1,
+     "m": "steady state: 2 to 3 weeks"
+    },
+    {
+     "at": 2,
+     "m": "phenytoin window: about 10 to 20 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:12",
+   "reading": null,
+   "text": "Her first slide example. K M is five milligrams per liter and V max is eight milligrams per kilogram per day. She asks the daily dose rate for an average plasma concentration of twenty four milligrams per liter in a sixty five kilogram patient. The top is eight milligrams per kilogram per day times twenty four milligrams per liter, one hundred ninety two. The bottom is five plus twenty four, twenty nine milligrams per liter. The milligrams per liter cancel, so R is one hundred ninety two over twenty nine, six point six two milligrams per kilogram per day. For the patient, six point six two times sixty five kilograms gives four hundred thirty milligrams per day.",
+   "card": [
+    {
+     "at": 1,
+     "m": "K<sub>M</sub> 5 mg/L, V<sub>max</sub> 8 mg/kg/day"
+    },
+    {
+     "at": 2,
+     "m": "target C<sub>ss</sub> 24 mg/L, 65 kg"
+    },
+    {
+     "at": 3,
+     "m": "R = {{frac:(8 mg/kg/day)(24 mg/L)|(5 + 24) mg/L}}"
+    },
+    {
+     "at": 4,
+     "m": "= {{frac:192|29}}"
+    },
+    {
+     "at": 5,
+     "m": "= 6.62 mg/kg/day"
+    },
+    {
+     "at": 6,
+     "m": "<b>6.62 mg/kg/day × 65 kg = 430 mg/day</b>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:12",
+   "reading": null,
+   "text": "The per kilogram rate is not the answer for a patient. She said, And if I'm your patient, please don't tell me six point six two milligrams per kilogram per day. Tell me how many, tell me what I need. A per kilogram V max needs the weight at the end. A per day V max does not, and the weight then serves only the volume of distribution.",
+   "card": [
+    {
+     "at": 0,
+     "m": "✗ per-kg rate left for a patient"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>max</sub> per kg: × weight at the end"
+    },
+    {
+     "at": 4,
+     "m": "V<sub>max</sub> per day: weight only for V<sub>D</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:11",
+   "reading": null,
+   "text": "Turned round, a new dose rate gives the steady state level it will produce. Multiply out: R times K M plus C s s equals V max times C s s. Gather the C s s terms: R times K M equals C s s times V max minus R. Divide, and C s s equals R times K M, over V max minus R. This line is not on the equation sheet. As R approaches V max the denominator shrinks, so a small increase in dose gives a large rise in C s s.",
+   "card": [
+    {
+     "at": 1,
+     "m": "R(K<sub>M</sub> + C<sub>ss</sub>) = V<sub>max</sub>C<sub>ss</sub>"
+    },
+    {
+     "at": 2,
+     "m": "RK<sub>M</sub> = C<sub>ss</sub>(V<sub>max</sub> &minus; R)"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>ss</sub> = {{frac:RK<sub>M</sub>|V<sub>max</sub> &minus; R}}"
+    },
+    {
+     "at": 4,
+     "m": "not on the sheet"
+    },
+    {
+     "at": 5,
+     "m": "R → V<sub>max</sub>: small dose ↑ → large C<sub>ss</sub> ↑"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:11",
+   "reading": null,
+   "text": "Her Solutions one uses the K M of five point nine one milligrams per liter and the V max of six hundred forty seven point eight three milligrams per day from objective three. First, the dose for fifteen milligrams per liter. R is six hundred forty seven point eight three times fifteen, over five point nine one plus fifteen. That gives four hundred sixty four point seven three milligrams per day, which she gave as four hundred sixty five milligrams per day. The weight is not needed, because V max is per day.",
+   "card": [
+    {
+     "at": 0,
+     "m": "K<sub>M</sub> 5.91 mg/L, V<sub>max</sub> 647.83 mg/day"
+    },
+    {
+     "at": 2,
+     "m": "R = {{frac:(647.83 mg/day)(15 mg/L)|(5.91 + 15) mg/L}}"
+    },
+    {
+     "at": 3,
+     "m": "<b>R = 464.73 ≈ 465 mg/day</b>"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:11",
+   "reading": null,
+   "text": "Then the steady state on four hundred fifty milligrams daily. C s s is four hundred fifty times five point nine one, over six hundred forty seven point eight three minus four hundred fifty. The top is two thousand six hundred fifty nine point five, and the bottom is one hundred ninety seven point eight three. The milligrams per day cancel, leaving thirteen point four four milligrams per liter, written thirteen point five on her sheet, or thirteen point four five with K M and V max unrounded. So four hundred fifty milligrams per day is about ninety seven percent of four hundred sixty five, but the level is thirteen point five instead of fifteen.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>ss</sub> = {{frac:(450 mg/day)(5.91 mg/L)|(647.83 &minus; 450) mg/day}}"
+    },
+    {
+     "at": 2,
+     "m": "= {{frac:2659.5|197.83}}"
+    },
+    {
+     "at": 3,
+     "m": "<b>C<sub>ss</sub> = 13.44 ≈ 13.5 mg/L</b>"
+    },
+    {
+     "at": 4,
+     "m": "450 ≈ 97% of 465 mg/day, but 13.5 mg/L, not 15"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:14",
+   "reading": null,
+   "text": "How she tests it. Every sheet asks a daily dose for fifteen milligrams per liter at steady state, then the steady state at another dose, such as eleven point five milligrams per liter on four hundred milligrams daily in her In Class Practice. She rounds to the nearest ten when the stem says so: in her slide Example two, five hundred eighteen point four milligrams per day becomes five hundred twenty. Otherwise she rounds to a dose that can be given. Concept items ask what R means, how long steady state takes, and what a small dose increase near saturation does: a disproportionately large rise in C s s.",
+   "card": [
+    {
+     "at": 1,
+     "m": "dose for C<sub>ss</sub> 15 mg/L → C<sub>ss</sub> at another dose (400 mg/day → 11.5 mg/L)"
+    },
+    {
+     "at": 2,
+     "m": "518.4 → 520 mg/day (nearest ten)"
+    },
+    {
+     "at": 4,
+     "m": "R = dose rate; 2 to 3 weeks; small dose ↑ → large C<sub>ss</sub> ↑"
+    }
+   ]
+  }
+ ]
+}

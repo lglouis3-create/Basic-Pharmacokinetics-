@@ -1,0 +1,182 @@
+{
+ "id": "gobj-m6a-2",
+ "title": "Changing the dose or the dosing interval",
+ "segs": [
+  {
+   "slide": "mo:11",
+   "reading": null,
+   "text": "Module six A, objective two. Changing the dose or the dosing interval. A dosage regimen is the dose size, D zero, plus the dosing interval, tau, the time between doses. These are the only two things a prescriber adjusts. Clearance, half life, the elimination rate constant and the volume of distribution belong to the drug and the patient, so a regimen does not change them. Changing the dose or the interval moves the steady state levels and the swing between peak and trough. Neither change alters how long steady state takes to reach, because the half life alone sets that.",
+   "card": [
+    {
+     "at": 2,
+     "m": "regimen = D<sub>0</sub> + &tau;"
+    },
+    {
+     "at": 4,
+     "m": "fixed by drug and patient: Cl<sub>T</sub>, t<sub>&frac12;</sub>, k, V<sub>D</sub>"
+    },
+    {
+     "at": 6,
+     "m": "time to steady state: t<sub>&frac12;</sub> alone"
+    }
+   ]
+  },
+  {
+   "slide": "mo:12",
+   "reading": null,
+   "text": "The average at steady state shows which way each change moves the level. C avg at steady state equals F D zero over Cl T times tau. D zero is on top, so a larger dose at the same interval raises the steady state level. Tau is underneath, so a longer interval at the same dose lowers it. The units are milligrams over liters per hour times hours, which leaves milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>avg</sub><sup>&infin;</sup> = {{frac:F D<sub>0</sub>|Cl<sub>T</sub>&tau;}}"
+    },
+    {
+     "at": 2,
+     "m": "D<sub>0</sub> ↑ → level ↑"
+    },
+    {
+     "at": 3,
+     "m": "&tau; ↑ → level ↓"
+    },
+    {
+     "at": 4,
+     "m": "{{frac:mg|(L/hr)(hr)}} = mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "mo:15",
+   "reading": null,
+   "text": "The interval also sits in the accumulation factor, r k, which equals one over one minus e to the minus k tau. e to the minus k tau is the fraction of a dose still in the body one interval later. A longer tau makes that fraction smaller, because more of each dose is eliminated before the next, so r k is smaller and less accumulates. The trough is the peak level carried down through the rest of the interval, so a longer tau lets it fall further and the swing gets larger. Tau is also inside t max at steady state, so a new interval means recalculating the steady state t max and peak. A new dose changes neither the first dose t max nor the steady state one.",
+   "card": [
+    {
+     "at": 0,
+     "m": "r<sub>k</sub> = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}"
+    },
+    {
+     "at": 2,
+     "m": "&tau; ↑ → e<sup>&minus;k&tau;</sup> ↓ → r<sub>k</sub> ↓"
+    },
+    {
+     "at": 3,
+     "m": "&tau; ↑ → trough falls further → swing ↑"
+    },
+    {
+     "at": 4,
+     "m": "new &tau; → new t<sub>max</sub><sup>&infin;</sup>, C<sub>max</sub><sup>&infin;</sup>"
+    },
+    {
+     "at": 5,
+     "m": "new D<sub>0</sub> → neither t<sub>max</sub> changes"
+    }
+   ]
+  },
+  {
+   "slide": "mo:15",
+   "reading": null,
+   "text": "Her question to the room. Five hundred milligrams every four hours is changed to five hundred milligrams every eight hours. What is the expectation at steady state? The dose stays the same, and the interval doubles. Tau is in the denominator of the average, so doubling tau halves the average, and the level goes down. Each dose now has eight hours instead of four to be eliminated, so the trough falls further below the peak. Every eight hours is three doses a day instead of six, which is easier to keep to. So the answer is a lower steady state concentration, a larger fluctuation, and better patient compliance.",
+   "card": [
+    {
+     "at": 1,
+     "m": "500 mg every 4 hr → 500 mg every 8 hr"
+    },
+    {
+     "at": 4,
+     "m": "2&tau; in {{frac:F D<sub>0</sub>|Cl<sub>T</sub>&tau;}} → average halved"
+    },
+    {
+     "at": 5,
+     "m": "8 hr to eliminate, not 4 → swing ↑"
+    },
+    {
+     "at": 6,
+     "m": "3 doses a day, not 6 → compliance ↑"
+    },
+    {
+     "at": 7,
+     "m": "<b>lower level, larger fluctuation, better compliance</b>"
+    }
+   ]
+  },
+  {
+   "slide": "mo:14",
+   "reading": null,
+   "text": "The same three questions apply to the dose. A larger dose at the same interval gives higher concentrations and a larger fluctuation, with usually no change in compliance. A smaller dose gives the reverse, and compliance again is unchanged. The trap is pairing a higher level with a smaller swing for a larger dose, because a larger dose raises both the level and the swing.",
+   "card": [
+    {
+     "at": 1,
+     "m": "dose ↑: level ↑, fluctuation ↑, compliance usually unchanged"
+    },
+    {
+     "at": 2,
+     "m": "dose ↓: the reverse"
+    },
+    {
+     "at": 3,
+     "m": "✗ larger dose with a smaller swing"
+    }
+   ]
+  },
+  {
+   "slide": "mo:18",
+   "reading": null,
+   "text": "For the interval, a longer one gives lower concentrations, a larger fluctuation and better compliance. A shorter one gives higher concentrations, a smaller fluctuation and worse compliance. Smaller fluctuation does not mean lower peaks or troughs, because with a shorter interval the peak, the trough and the average all rise, and the trough sits closer to the peak. Another trap is expecting a longer interval to raise the level because each dose has more time to be absorbed. Absorption is complete either way, and the extra time goes to elimination.",
+   "card": [
+    {
+     "at": 0,
+     "m": "&tau; ↑: level ↓, fluctuation ↑, compliance ↑"
+    },
+    {
+     "at": 1,
+     "m": "&tau; ↓: level ↑, fluctuation ↓, compliance ↓"
+    },
+    {
+     "at": 2,
+     "m": "&tau; ↓: C<sub>max</sub>, C<sub>min</sub>, C<sub>avg</sub> all ↑"
+    },
+    {
+     "at": 4,
+     "m": "✗ longer &tau; → more absorbed; extra time → elimination"
+    }
+   ]
+  },
+  {
+   "slide": "mo:17",
+   "reading": null,
+   "text": "Her figure gives equal doses every six hours and every eight hours, with k a and k the same. The six hour curve has the higher plateau, and both reach steady state in the same time, because the half life alone sets that. The six hour curve also swings less, because the next dose arrives before the three to five half lives the level would need to reach the bottom of the curve.",
+   "card": [
+    {
+     "at": 0,
+     "m": "equal doses: every 6 hr vs every 8 hr; same k<sub>a</sub>, k"
+    },
+    {
+     "at": 1,
+     "m": "6 hr: higher plateau; same time to steady state"
+    },
+    {
+     "at": 2,
+     "m": "next dose before 3 to 5 t<sub>&frac12;</sub> → smaller swing"
+    }
+   ]
+  },
+  {
+   "slide": "mo:19",
+   "reading": null,
+   "text": "The peak and the trough, not the average, are the values that must sit inside the therapeutic range. The interval and the tablet strength must also be ones a patient can use. So a calculated seventeen point two nine milligrams every three point seven two hours could be written as twenty milligrams every four hours. She said, Don't tell me seventeen point two nine milligrams for an oral dose.",
+   "card": [
+    {
+     "at": 0,
+     "m": "peak and trough inside the therapeutic range"
+    },
+    {
+     "at": 1,
+     "m": "usable interval and tablet strength"
+    },
+    {
+     "at": 2,
+     "m": "17.29 mg every 3.72 hr → e.g. <b>20 mg every 4 hr</b>"
+    }
+   ]
+  }
+ ]
+}

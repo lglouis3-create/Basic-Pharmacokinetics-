@@ -1,0 +1,136 @@
+{
+ "id": "gobj-m7b-1",
+ "title": "Response rises with dose, up to a maximum",
+ "segs": [
+  {
+   "slide": "pd:3",
+   "reading": null,
+   "text": "Module seven B, objective one. How the response rises with dose, up to a maximum. Pharmacodynamics, or P D, is the relationship between the drug concentration at the site of action, the receptor, and the pharmacologic response that is observed. The link between pharmacokinetics, or P K, and P D has other names: the exposure response, concentration response or concentration effect relationship. Exposure response information is used in drug approval to judge safety, efficacy and benefit risk, and to derive dosing information.",
+   "card": [
+    {
+     "at": 2,
+     "m": "PD: concentration at the receptor → observed response"
+    },
+    {
+     "at": 3,
+     "m": "PK–PD = exposure-response = concentration-response = concentration-effect"
+    },
+    {
+     "at": 4,
+     "m": "drug approval: safety, efficacy, benefit-risk, dosing"
+    }
+   ]
+  },
+  {
+   "slide": "pd:4",
+   "reading": null,
+   "text": "As the dose increases, the concentration at the receptor site increases, and the response increases, but only up to a maximum effect, E max. Plotted against dose on an ordinary axis, the response rises steeply at low doses and then flattens. So the same dose change gives a large increase in response at low doses, and the smallest gain near the maximum.",
+   "card": [
+    {
+     "at": 0,
+     "m": "dose ↑ → concentration at receptor ↑ → response ↑, up to E<sub>max</sub>"
+    },
+    {
+     "at": 1,
+     "m": "ordinary dose axis: steep, then flat"
+    },
+    {
+     "at": 2,
+     "m": "smallest gain near the maximum"
+    }
+   ]
+  },
+  {
+   "slide": "pd:5",
+   "reading": null,
+   "text": "Plotted against log dose, the response is a sigmoid, an S shaped curve. The maximum is reached when all receptors are saturated. So a higher dose then raises the concentration without raising the response. The middle of the S is close to a straight line. Plotted as effect against log concentration, it is a straight line with slope m.",
+   "card": [
+    {
+     "at": 0,
+     "m": "log dose axis: sigmoid (S) curve"
+    },
+    {
+     "at": 1,
+     "m": "top: all receptors saturated"
+    },
+    {
+     "at": 4,
+     "m": "middle: effect vs log C, straight, slope m"
+    }
+   ]
+  },
+  {
+   "slide": "pd:5",
+   "reading": null,
+   "text": "After an I V bolus, in that straight range, the effect falls in a straight line with time. E equals E zero minus k times m times t, divided by two point three. E is the effect at time t in hours, E zero the effect at time zero, k the first order elimination rate constant per hour, and m the slope of effect against log concentration. The two point three is there because the effect line uses base ten logarithms, and it is combined with the base ten I V bolus line, log C equals log C zero minus k t over two point three. A larger k or a larger m makes the effect fall faster. Here m is a slope, not a mass or a concentration.",
+   "card": [
+    {
+     "at": 1,
+     "m": "E = E<sub>0</sub> &minus; {{frac:kmt|2.3}}"
+    },
+    {
+     "at": 2,
+     "m": "k in hr<sup>&minus;1</sup>, t in hr, m = slope of E vs log C"
+    },
+    {
+     "at": 3,
+     "m": "E = m log C + e &nbsp; with &nbsp; log C = log C<sub>0</sub> &minus; {{frac:kt|2.3}}"
+    },
+    {
+     "at": 4,
+     "m": "k ↑ or m ↑ → effect falls faster"
+    },
+    {
+     "at": 5,
+     "m": "m: a slope, not a mass or a concentration"
+    }
+   ]
+  },
+  {
+   "slide": "pd:4",
+   "reading": null,
+   "text": "On a plasma level against time curve, three features of the effect are read against the minimum effective concentration, M E C, also written C eff. Onset is the time at which the rising level first reaches the M E C. Duration is how long the level stays at or above it, the time the drug is in its effective range. Intensity is how far the peak rises above the M E C. So intensity is a height above the M E C, and duration a length of time above it. Above the minimum toxic concentration, M T C, toxicity appears, and the range between the M E C and the M T C is the therapeutic window.",
+   "card": [
+    {
+     "at": 0,
+     "m": "read against the MEC (C<sub>eff</sub>)"
+    },
+    {
+     "at": 1,
+     "m": "onset: level first reaches the MEC"
+    },
+    {
+     "at": 2,
+     "m": "duration (t<sub>eff</sub>): time at or above the MEC"
+    },
+    {
+     "at": 3,
+     "m": "intensity: height of the peak above the MEC"
+    },
+    {
+     "at": 5,
+     "m": "therapeutic window: MEC to MTC"
+    }
+   ]
+  },
+  {
+   "slide": "pd:11",
+   "reading": null,
+   "text": "Her questions on this objective are concepts, not numbers. They ask the definition of pharmacodynamics and its other names, and the uses of exposure response information in drug approval. They ask how to read the plots: flattening toward the maximum on an ordinary dose axis, an S on a log dose axis, and onset, duration and intensity each measured against the M E C.",
+   "card": [
+    {
+     "at": 0,
+     "m": "concept items, no numbers"
+    },
+    {
+     "at": 1,
+     "m": "definitions; uses in drug approval"
+    },
+    {
+     "at": 2,
+     "m": "ordinary axis: flattens; log axis: S; onset, duration, intensity vs MEC"
+    }
+   ]
+  }
+ ]
+}
