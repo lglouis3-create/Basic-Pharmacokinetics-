@@ -5206,11 +5206,11 @@ function srcCardHTML(s){
   if(s.drive && s.key === 'student-work') h += `<p class="srcsub">Original: a completed copy, with the owner's working on it.</p>`;
   if(plan.main.length){
     h += `<div class="srcrow"><span class="srcrlab">${plan.mainChanged ? 'Worksheet, changed numbers' : 'Worksheet'}</span><span class="srcbtns">${
-      pdfLink(sheetPath(s, 'main', false), 'Worksheet (PDF)')}${pdfLink(sheetPath(s, 'main', true), 'Worksheet with solutions (PDF)')}<button class="btn small" data-srcgo="${esc(s.id)}" data-var="main">Practice in the drill</button></span></div>`;
+      pdfLink(sheetPath(s, 'main', false), 'Worksheet (PDF)')}${pdfLink(sheetPath(s, 'main', true), 'Worksheet with solutions (PDF)')}<button type="button" class="btn small" data-ink="${esc(s.id)}" data-var="main">✍️ Write on it</button><button class="btn small" data-srcgo="${esc(s.id)}" data-var="main">Practice in the drill</button></span></div>`;
   }else h += `<p class="srcsub">No worksheet: ${esc(s.missing || 'no questions from this document are in the drill yet.')}</p>`;
   if(plan.changed.length)
     h += `<div class="srcrow"><span class="srcrlab">Changed numbers (extra practice)</span><span class="srcbtns">${
-      pdfLink(sheetPath(s, 'changed', false), 'Worksheet (PDF)')}${pdfLink(sheetPath(s, 'changed', true), 'Worksheet with solutions (PDF)')}<button class="btn small" data-srcgo="${esc(s.id)}" data-var="changed">Practice in the drill</button></span></div>`;
+      pdfLink(sheetPath(s, 'changed', false), 'Worksheet (PDF)')}${pdfLink(sheetPath(s, 'changed', true), 'Worksheet with solutions (PDF)')}<button type="button" class="btn small" data-ink="${esc(s.id)}" data-var="changed">✍️ Write on it</button><button class="btn small" data-srcgo="${esc(s.id)}" data-var="changed">Practice in the drill</button></span></div>`;
   if(labels.length) h += `<p class="srcprobs"><span class="srcrlab">Problems</span> ${labels.map(esc).join(', ')}</p>`;
   if(s.note) h += `<p class="srcsub">${esc(s.note)}</p>`;
   return h + `</div>`;
@@ -5219,6 +5219,7 @@ function renderSheets(){
   const el = $('#v-sheets');
   let h = `<h2>Worksheets</h2>
     <p class="sub">Every document the drill's problems come from, by module and then by kind of activity. Each has a worksheet to print or write on (her problems, with room to work) and the same worksheet with solutions, as PDFs.</p>
+    <p class="srcnote">Write on it opens the worksheet here to write on with an Apple Pencil or a finger, with a large grid under each problem and More room when it runs out. The writing is kept in this browser on this device only; Save as PDF keeps a copy, or opens it in Goodnotes from the share sheet.</p>
     <p class="srcnote">Open original and Download original open the copy kept in the drill owner's Google Drive, so they work only for an account that folder is shared with. The originals are not copied onto this site, because the course materials may not be shared publicly; the worksheets below carry the same problems.</p>`;
   const mods = COURSE.topicsMenu.filter(m => m.module != null);
   mods.forEach(m => {
@@ -5236,6 +5237,7 @@ function renderSheets(){
   if(!SRC_LIST.length) h += `<div class="empty">No source documents are listed yet.</div>`;
   el.innerHTML = h;
   el.querySelectorAll('[data-srcgo]').forEach(b => b.onclick = () => startSheetSet(b.dataset.srcgo, b.dataset.var));
+  if(typeof inkMark === 'function') inkMark(el);   // Continue writing where ink is saved (the writing layer is defined with the boot code)
 }
 
 /* ==========================================================================
@@ -5483,6 +5485,205 @@ document.addEventListener('change', e => {
   if(e.target.matches('[data-gwrate]')){ LS.set(GW_RATE_KEY, e.target.value); document.querySelectorAll('[data-gwrate]').forEach(s => { s.value = e.target.value; });
     if(GW && GW.playing){ if(GW.audio && GW_AUDIO) GW_AUDIO.playbackRate = gwRate(); else gwRun(GW.id, GW.i, GW.k); } }
   if(e.target.matches('[data-gwcont]')){ LS.set(GW_CONT_KEY, e.target.checked ? '1' : '0'); document.querySelectorAll('[data-gwcont]').forEach(c => { c.checked = e.target.checked; }); }
+});
+/* ---------- Write on a worksheet: Apple Pencil or finger ink over the worksheet, in the page ----------
+   The worksheet opens over the app as its print markup (sheetHTML), with larger work areas than the PDF and a
+   "More room" button under each problem. Each problem part and the name line carry their own drawing layer, and a
+   stroke is stored in that part's coordinates as fractions of its width, so the ink stays on its problem when room
+   is added above it or the iPad is turned. Ink is kept in this browser (localStorage); Save as PDF prints the
+   worksheet with the ink on it. Once a Pencil touches the page, fingers scroll and only the Pencil writes. */
+const INK_KEY = (id, v) => NS + ':ink:' + id + ':' + v;
+const INK_COLORS = [['#111111', 'Black'], ['#1E56C8', 'Blue'], ['#C62828', 'Red']];
+const INK_ROOM = 240;      // px added by one tap on More room
+let INK = null;            // {id, variant, data:{parts:{key:[stroke]}, room:{key:px}}, tool, color, size, pencil, undo:[], redo:[]}
+const inkLoad = (id, v) => { try { const d = JSON.parse(LS.get(INK_KEY(id, v)) || 'null'); if(d && d.parts) return {parts: d.parts, room: d.room || {}}; } catch(e){} return {parts: {}, room: {}}; };
+const inkCount = (id, v) => { const d = inkLoad(id, v); return Object.values(d.parts).reduce((n, a) => n + a.length, 0); };
+function inkSave(){
+  if(!INK) return;
+  const ok = LS.set(INK_KEY(INK.id, INK.variant), JSON.stringify({v: 1, parts: INK.data.parts, room: INK.data.room}));
+  const w = document.querySelector('#ink .inkwarn'); if(w) w.hidden = ok && LS.available;
+}
+// the Write on it buttons on the Worksheets tab say Continue writing when ink is saved
+function inkMark(root){
+  root.querySelectorAll('[data-ink]').forEach(b => { const n = inkCount(b.dataset.ink, b.dataset.var); b.textContent = n ? '✍️ Continue writing' : '✍️ Write on it'; });
+}
+function inkOpen(id, variant){
+  const s = SRC_BY[id]; if(!s) return;
+  if(typeof gwStop === 'function') gwStop();
+  const prefs = (() => { try { return JSON.parse(LS.get(NS + ':ink-prefs') || '{}'); } catch(e){ return {}; } })();
+  INK = {id, variant, data: inkLoad(id, variant), tool: 'pen', color: prefs.color || INK_COLORS[0][0], size: prefs.size || 2,
+         pencil: 'pencil' in prefs ? !!prefs.pencil : matchMedia('(pointer: coarse)').matches, undo: [], redo: [], scrollY: scrollY};
+  const mode = variant === 'changed' ? 'changed-worksheet' : 'worksheet', solMode = variant === 'changed' ? 'changed-solutions' : 'solutions';
+  const sol = (sheetHTML(id, solMode).match(/<section class="wssol">[\s\S]*<\/section>/) || [''])[0];
+  const ov = document.createElement('div'); ov.id = 'ink'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Write on ' + s.title);
+  ov.innerHTML = `<div class="inkbar" role="toolbar" aria-label="Writing tools">
+      <button type="button" class="btn small" data-inkdone>✓ Done</button>
+      <span class="inkgrp">${INK_COLORS.map(([c, n]) => `<button type="button" class="inkc" data-inkcolor="${c}" aria-label="${n} pen" style="--c:${c}"></button>`).join('')}</span>
+      <span class="inkgrp"><button type="button" class="chip" data-inktool="pen">✏️ Pen</button><button type="button" class="chip" data-inktool="hl">🖍 Highlight</button><button type="button" class="chip" data-inktool="erase">⌫ Eraser</button></span>
+      <span class="inkgrp"><button type="button" class="chip" data-inksize="1.5">Fine</button><button type="button" class="chip" data-inksize="2.5">Medium</button><button type="button" class="chip" data-inksize="4">Bold</button></span>
+      <span class="inkgrp"><button type="button" class="chip" data-inkundo aria-label="Undo">↶ Undo</button><button type="button" class="chip" data-inkredo aria-label="Redo">↷ Redo</button></span>
+      <span class="inkgrp"><button type="button" class="chip" data-inkpencil aria-pressed="false">Pencil only</button><button type="button" class="chip" data-inksol aria-expanded="false">Show solutions</button><button type="button" class="chip" data-inkpdf>Save as PDF</button><button type="button" class="chip" data-inkclear>Clear page</button></span>
+      <span class="inkwarn" hidden>This browser is not saving: the writing lasts only until the page closes. Save as PDF to keep it.</span>
+    </div>
+    <div class="inkpaper">${sheetHTML(id, mode)}<div class="inksol" hidden>${sol}</div></div>`;
+  document.body.appendChild(ov); document.body.classList.add('inking');
+  ov.tabIndex = -1;
+  // a drawing layer on the name line and on every problem, with More room under each problem's work area
+  const doc = ov.querySelector('.wsdoc');
+  const regions = [[doc.querySelector('.wshead'), 'head'], ...[...doc.querySelectorAll('.wspart')].map(p => [p, p.dataset.qid])];
+  regions.forEach(([el, key]) => {
+    if(!el) return;
+    el.classList.add('inkreg'); el.dataset.ink = key;
+    const w = el.querySelector('.wswork');
+    if(w){ w.style.height = (inkBase(w) + (INK.data.room[key] || 0)) + 'px';
+      el.insertAdjacentHTML('afterend', `<div class="inkroom" data-inkfor="${esc(key)}"><button type="button" class="chip" data-inkroom="1">＋ More room</button><button type="button" class="chip" data-inkroom="-1"${INK.data.room[key] ? '' : ' hidden'}>− Less room</button></div>`); }
+    const c = document.createElement('canvas'); c.className = 'inkcv'; el.appendChild(c);
+    inkWire(c, el, key);
+  });
+  inkTools(); inkSave();
+  const ro = new ResizeObserver(es => es.forEach(e => inkSize(e.target)));
+  regions.forEach(([el]) => el && ro.observe(el)); INK.ro = ro;
+  ov.scrollTop = 0; ov.focus && ov.focus();
+}
+const inkBase = w => w.classList.contains('short') ? 200 : 480;   // on screen: a calculation gets 480 px to work in, a short answer 200
+function inkSize(el){
+  const c = el.querySelector(':scope > canvas.inkcv'); if(!c) return;
+  const r = el.getBoundingClientRect(), dpr = Math.min(3, devicePixelRatio || 1);
+  c.style.width = r.width + 'px'; c.style.height = r.height + 'px';
+  c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr);
+  inkDraw(el);
+}
+function inkDraw(el){
+  const c = el.querySelector(':scope > canvas.inkcv'); if(!c || !INK) return;
+  const g = c.getContext('2d'), W = c.width;
+  g.clearRect(0, 0, c.width, c.height);
+  (INK.data.parts[el.dataset.ink] || []).forEach(s => inkStroke(g, s, W));
+  if(INK.live && INK.live.el === el && INK.live.s) inkStroke(g, INK.live.s, W);   // (an eraser drag has no stroke of its own)
+}
+// one stroke: points stored as fractions of the part's width, drawn through midpoints so the line is smooth
+function inkStroke(g, s, W){
+  const p = s.p; if(p.length < 2) return;
+  g.save(); g.lineCap = g.lineJoin = 'round'; g.strokeStyle = s.c;
+  g.globalAlpha = s.t === 'hl' ? 0.32 : 1; g.lineWidth = s.w * W;
+  g.beginPath(); g.moveTo(p[0] * W, p[1] * W);
+  if(p.length === 2){ g.lineTo(p[0] * W + 0.01, p[1] * W); }
+  for(let i = 2; i < p.length - 2; i += 2){ const mx = (p[i] + p[i + 2]) / 2, my = (p[i + 1] + p[i + 3]) / 2; g.quadraticCurveTo(p[i] * W, p[i + 1] * W, mx * W, my * W); }
+  if(p.length > 2) g.lineTo(p[p.length - 2] * W, p[p.length - 1] * W);
+  g.stroke(); g.restore();
+}
+const inkCapture = (c, e) => { try { c.setPointerCapture(e.pointerId); } catch(err){} };   // a pointer that is already gone cannot be captured
+function inkWire(c, el, key){
+  const pt = e => { const r = c.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.width]; };
+  let scroll = null; const touches = new Set();
+  c.addEventListener('pointerdown', e => {
+    if(!INK) return;
+    if(e.pointerType === 'touch'){ touches.add(e.pointerId);
+      if(touches.size > 1 && !INK.pencil){ if(INK.live && INK.live.el === el){ INK.live = null; inkDraw(el); } scroll = {y: e.clientY, id: e.pointerId}; inkCapture(c, e); return; } }   // two fingers scroll
+    if(e.pointerType === 'pen' && !INK.pencil){ INK.pencil = true; inkPrefs(); inkTools(); }
+    if(INK.pencil && e.pointerType === 'touch'){ scroll = {y: e.clientY, id: e.pointerId}; inkCapture(c, e); return; }   // a finger scrolls
+    e.preventDefault(); inkCapture(c, e);
+    const [x, y] = pt(e);
+    if(INK.tool === 'erase'){ INK.live = {el, erase: true}; inkErase(el, key, x, y); return; }
+    const W = 1 / c.getBoundingClientRect().width;
+    INK.live = {el, s: {t: INK.tool, c: INK.color, w: (INK.tool === 'hl' ? INK.size * 6 : INK.size) * W, p: [+x.toFixed(4), +y.toFixed(4)]}};
+  });
+  c.addEventListener('pointermove', e => {
+    if(scroll && e.pointerId === scroll.id){ const ov = document.getElementById('ink'); ov.scrollTop -= e.clientY - scroll.y; scroll.y = e.clientY; return; }
+    if(!INK || !INK.live || INK.live.el !== el) return;
+    e.preventDefault();
+    const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+    if(INK.live.erase){ evs.forEach(ev => { const [x, y] = pt(ev); inkErase(el, key, x, y); }); return; }
+    const p = INK.live.s.p;
+    evs.forEach(ev => { const [x, y] = pt(ev), lx = p[p.length - 2], ly = p[p.length - 1];
+      if(Math.hypot(x - lx, y - ly) > 0.0015) p.push(+x.toFixed(4), +y.toFixed(4)); });
+    inkDraw(el);
+  });
+  const end = e => {
+    touches.delete(e.pointerId);
+    if(scroll && e.pointerId === scroll.id){ scroll = null; return; }
+    if(!INK || !INK.live || INK.live.el !== el) return;
+    const lv = INK.live; INK.live = null;
+    if(lv.s){ (INK.data.parts[key] ||= []).push(lv.s); INK.undo.push({k: 'add', key, s: lv.s}); INK.redo = []; inkSave(); }
+    inkDraw(el); inkTools();
+  };
+  c.addEventListener('pointerup', end); c.addEventListener('pointercancel', end);
+}
+// the stroke eraser: touching a stroke removes the whole stroke
+function inkErase(el, key, x, y){
+  const list = INK.data.parts[key] || [], W = el.getBoundingClientRect().width, tol = 10 / W;
+  const hit = list.filter(s => { for(let i = 0; i < s.p.length; i += 2) if(Math.hypot(s.p[i] - x, s.p[i + 1] - y) < tol + s.w / 2) return true; return false; });
+  if(!hit.length) return;
+  INK.data.parts[key] = list.filter(s => !hit.includes(s));
+  INK.undo.push({k: 'del', key, s: hit}); INK.redo = []; inkSave(); inkDraw(el); inkTools();
+}
+function inkUndo(redo){
+  const from = redo ? INK.redo : INK.undo, to = redo ? INK.undo : INK.redo, op = from.pop(); if(!op) return;
+  if(op.k === 'clear') INK.data.parts = redo ? {} : JSON.parse(op.prev);
+  else {
+    const arr = INK.data.parts[op.key] ||= [], add = (op.k === 'add') === !!redo, ss = Array.isArray(op.s) ? op.s : [op.s];
+    if(add) arr.push(...ss); else INK.data.parts[op.key] = arr.filter(s => !ss.includes(s));
+  }
+  to.push(op); inkSave(); document.querySelectorAll('#ink .inkreg').forEach(inkDraw); inkTools();
+}
+function inkPrefs(){ LS.set(NS + ':ink-prefs', JSON.stringify({color: INK.color, size: INK.size, pencil: INK.pencil})); }
+function inkTools(){
+  const ov = document.getElementById('ink'); if(!ov || !INK) return;
+  ov.querySelectorAll('[data-inkcolor]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.inkcolor === INK.color && INK.tool !== 'erase')));
+  ov.querySelectorAll('[data-inktool]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.inktool === INK.tool)));
+  ov.querySelectorAll('[data-inksize]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.inksize === INK.size)));
+  ov.querySelector('[data-inkpencil]').setAttribute('aria-pressed', String(INK.pencil));
+  ov.querySelector('[data-inkundo]').disabled = !INK.undo.length; ov.querySelector('[data-inkredo]').disabled = !INK.redo.length;
+}
+function inkClose(){
+  if(!INK) return;
+  inkSave(); if(INK.ro) INK.ro.disconnect();
+  const y = INK.scrollY, id = INK.id; INK = null;
+  const ov = document.getElementById('ink'); if(ov) ov.remove();
+  document.body.classList.remove('inking');
+  const tab = document.getElementById('v-sheets'); if(tab) inkMark(tab);
+  scrollTo(0, y); const card = document.getElementById('src-' + id); if(card){ const b = card.querySelector('[data-ink]'); if(b) b.focus({preventScroll: true}); }
+}
+// Save as PDF: the canvases are swapped for pictures of themselves, so the ink prints with the worksheet
+// (the pictures show only in print, so they can stay until the next Save as PDF or until the worksheet closes)
+function inkPrint(){
+  const ov = document.getElementById('ink'); if(!ov) return;
+  ov.querySelectorAll('img.inkimg').forEach(i => i.remove());
+  ov.querySelectorAll('canvas.inkcv').forEach(c => { const im = new Image(); im.className = 'inkimg'; im.alt = ''; im.src = c.toDataURL('image/png'); c.after(im); });
+  // the page prints at its width on screen, scaled to the paper, so text and ink keep their places
+  const pp = ov.querySelector('.inkpaper'), w = pp.getBoundingClientRect().width;
+  pp.style.setProperty('--inkpw', w + 'px'); pp.style.setProperty('--inkzoom', String(Math.min(1, 700 / w)));
+  setTimeout(() => print(), 60);
+}
+document.addEventListener('click', e => {
+  const o = e.target.closest('[data-ink][data-var]');
+  if(o && !o.closest('#ink')){ inkOpen(o.dataset.ink, o.dataset.var); return; }
+  if(!e.target.closest('#ink') || !INK) return;
+  const b = e.target.closest('button'); if(!b) return;
+  if(b.matches('[data-inkdone]')) return inkClose();
+  if(b.dataset.inkcolor){ INK.color = b.dataset.inkcolor; if(INK.tool === 'erase') INK.tool = 'pen'; inkPrefs(); return inkTools(); }
+  if(b.dataset.inktool){ INK.tool = b.dataset.inktool; return inkTools(); }
+  if(b.dataset.inksize){ INK.size = +b.dataset.inksize; inkPrefs(); return inkTools(); }
+  if(b.matches('[data-inkundo]')) return inkUndo(false);
+  if(b.matches('[data-inkredo]')) return inkUndo(true);
+  if(b.matches('[data-inkpencil]')){ INK.pencil = !INK.pencil; inkPrefs(); return inkTools(); }
+  if(b.matches('[data-inksol]')){ const s = document.querySelector('#ink .inksol'); s.hidden = !s.hidden; b.setAttribute('aria-expanded', String(!s.hidden)); b.textContent = s.hidden ? 'Show solutions' : 'Hide solutions'; return; }
+  if(b.matches('[data-inkpdf]')) return inkPrint();
+  if(b.matches('[data-inkclear]')){
+    if(!confirm('Clear all the writing on this worksheet?')) return;
+    INK.undo.push({k: 'clear', key: '_', prev: JSON.stringify(INK.data.parts)}); INK.redo = []; INK.data.parts = {};
+    inkSave(); document.querySelectorAll('#ink .inkreg').forEach(inkDraw); return inkTools();
+  }
+  if(b.dataset.inkroom){
+    const box = b.closest('.inkroom'), reg = box.previousElementSibling, key = box.dataset.inkfor, w = reg.querySelector('.wswork');
+    INK.data.room[key] = Math.max(0, (INK.data.room[key] || 0) + INK_ROOM * +b.dataset.inkroom);
+    w.style.height = (inkBase(w) + INK.data.room[key]) + 'px';
+    box.querySelector('[data-inkroom="-1"]').hidden = !INK.data.room[key];
+    inkSave();
+  }
+});
+document.addEventListener('keydown', e => {
+  if(!INK || !(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== 'z') return;
+  e.preventDefault(); inkUndo(e.shiftKey);
 });
 /* Theme: System (no attribute), Light or Dark, kept per browser. */
 const THEME_KEY = NS + ':theme';

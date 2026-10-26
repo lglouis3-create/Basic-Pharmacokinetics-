@@ -2,7 +2,11 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
-## 2026-10-26 (narrated guide walkthroughs)
+## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- Worksheets: Write on it opens a worksheet to write on with an Apple Pencil or a finger.
+- Each calculation gets a large grid to work in, and More room adds space under any problem.
+- Pen colours, highlighter, eraser, undo; Save as PDF keeps the worksheet with your writing on it.
+- Writing is kept in this browser on this device; once a Pencil is used, a finger scrolls instead of writing.
 - Guides: every objective has a narrated walkthrough. Press Listen at the top of a section.
 - The transcript marks the sentence being read, and her slide for that part is shown beside it.
 - Calculations: a formula card builds line by line with the narration, relation first, then numbers, then the result.
