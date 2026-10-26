@@ -247,7 +247,7 @@
    "fig": null
   },
   {
-   "text": "She gives the equation, or A, B, alpha and beta, and does not say two compartment. Four parts recur in this order: the elimination half-life, the initial concentration, a concentration at a stated hour, and the central volume. The elimination half-life is always zero point six nine three over the smaller constant, beta; using alpha, or calculating k first, is the usual mistake. She said, It will be written as beta half-life, because I am going to ask you for either the beta half-life or the elimination half-life, so that there is no confusion. The overall elimination rate constant means k, not beta. When she lists A, B, alpha and beta instead of an equation, she adds k, k one two, k two one and the central volume.",
+   "text": "She gives the equation, or A, B, alpha and beta, and does not say two compartment. Four parts recur in this order: the elimination half-life, the initial concentration, a concentration at a stated hour, and the central volume. The elimination half-life is always zero point six nine three over the smaller constant, beta; using alpha, or calculating k first, is the usual mistake. She said, It will be written as beta half-life, because I am going to ask you for either the beta half-life or the elimination half-life, so that there is no confusion. The overall elimination rate constant means k, not beta. Only her in-class sheet adds k, k one two and k two one to those four.",
    "slide": "ivb:23",
    "card": [
     {
@@ -268,7 +268,7 @@
     },
     {
      "at": 5,
-     "m": "A, B, a, b listed → also k, k<sub>12</sub>, k<sub>21</sub>, V<sub>p</sub>"
+     "m": "in-class sheet only: also k, k<sub>12</sub>, k<sub>21</sub>"
     }
    ],
    "fig": null
