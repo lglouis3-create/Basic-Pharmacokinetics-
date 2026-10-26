@@ -5269,7 +5269,9 @@ document.addEventListener('visibilitychange', () => {
    guide_walk.js (gen_walk.py from walk/*.json) gives each section its parts; a part is spoken text, the
    professor's slide it discusses, and the formula card lines that appear as their sentence is read. A recorded
    clip per part (audio/gw-<section>-<i>.mp3, listed in GW_CLIPS by build.py) plays when there is one, else the
-   device voice reads the part sentence by sentence. The slide images sit in slides/ beside the built page. */
+   device voice reads the part sentence by sentence. The slide images sit in slides/ beside the built page.
+   The transcript on screen is the part's d when it has one: the same sentences with symbols for the spoken letters
+   and what each stands for in brackets (gen_walk.py GLOSS); t is what is read aloud. */
 const gwSents = t => String(t).split(/(?<=[.?!])\s+/);
 const gwSlideSrc = (d, n) => 'slides/' + d + '-' + String(n).padStart(2, '0') + '.jpg';
 const gwHas = id => typeof GUIDE_WALK !== 'undefined' && !!GUIDE_WALK[id];
@@ -5305,7 +5307,7 @@ function gwPanelHTML(id){
       ${gwSynth() ? '' : '<span class="gwmeta gwnovoice">This browser has no built-in voice; the transcript, card and slides still step with ◂ ▸.</span>'}</div>
     <div class="gwfill"><div></div></div>
     <div class="gwbody"><figure class="stepfig gwfig" hidden title="Tap to enlarge"></figure>
-      <ol class="gwtx">${w.segs.map((x, i) => `<li data-gwi="${i}" value="${i + 1}" tabindex="0">${gwSents(x.t).map((t, k) => `<span class="gws" data-k="${k}">${esc(t)}</span>`).join(' ')}</li>`).join('')}</ol>
+      <ol class="gwtx">${w.segs.map((x, i) => `<li data-gwi="${i}" value="${i + 1}" tabindex="0">${(x.d ? gwSents(x.d) : gwSents(x.t).map(esc)).map((t, k) => `<span class="gws" data-k="${k}">${t}</span>`).join(' ')}</li>`).join('')}</ol>
       <div class="gwvis"><div class="gwcard"><h4>The math, as it is spoken</h4><ol></ol></div><figure class="gwslide"></figure></div>
     </div></div>`;
 }

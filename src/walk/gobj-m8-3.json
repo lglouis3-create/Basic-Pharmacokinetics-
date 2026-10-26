@@ -3,8 +3,34 @@
  "title": "Finding V max and K M in a patient",
  "segs": [
   {
+   "text": "Module eight, objective three. Finding V max and K M in a patient. C p is the plasma concentration, the drug level. The enzymes that eliminate the drug can only work so fast, and V max is the fastest elimination rate they can reach: a rate, an amount per time. K M is a concentration: the drug level at which the elimination rate is half of V max. Since both are concentrations, a drug level is called low or high only by comparing it with K M. Both are constants in one patient but differ between patients, so they are found from that patient's own steady state levels. In her slide example, K M is ten milligrams per liter and V max is twelve milligrams per kilogram per day.",
    "slide": "nonlin:7",
-   "text": "Module eight, objective three. Finding V max and K M in a patient. C p is the plasma concentration, the drug level. V max is the fastest the body can eliminate the drug, an amount or concentration per time, such as milligrams per kilogram per day. K M reflects the capacity of the enzyme system, and it is a concentration, so it can be compared directly with C p. Both are constants for one patient but differ from one patient to another, so for dosing they are found from the patient's own steady state levels, not from test tubes. In her slide example, the values found are a K M of ten milligrams per liter and a V max of twelve milligrams per kilogram per day.",
+   "card": [
+    {
+     "at": 2,
+     "m": "C<sub>p</sub>: the plasma concentration, mg/L"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>max</sub>: the fastest elimination rate, a rate, e.g. mg/kg/day"
+    },
+    {
+     "at": 4,
+     "m": "K<sub>M</sub>: the concentration at which rate = ½ V<sub>max</sub>, mg/L ({{frac:V<sub>max</sub> K<sub>M</sub>|K<sub>M</sub> + K<sub>M</sub>}} = ½ V<sub>max</sub>)"
+    },
+    {
+     "at": 5,
+     "m": "compare C<sub>p</sub> with K<sub>M</sub> (both mg/L)"
+    },
+    {
+     "at": 6,
+     "m": "constants in one patient, different between patients"
+    },
+    {
+     "at": 7,
+     "m": "her example: K<sub>M</sub> 10 mg/L, V<sub>max</sub> 12 mg/kg/day"
+    }
+   ],
    "fig": {
     "key": "nl_rate_steps",
     "at": [
@@ -15,44 +41,87 @@
      [
       3,
       2
+     ],
+     [
+      4,
+      3
      ]
     ]
-   },
+   }
+  },
+  {
+   "text": "Why does the order change with the level? The elimination rate is the amount removed per unit of time, and the phrase, depends on concentration, means that this amount changes when the level changes. Well below K M, most of the enzyme capacity is unused, so twice the level gives about twice the rate: first order. Well above K M, the enzymes are saturated and already work close to V max, and more drug cannot make them work faster, so the rate stays near V max whatever the level: independent of concentration, zero order. Low and high always mean relative to K M, never relative to V max. In first order the half life stays constant: the amount removed changes with the level, the fraction removed does not.",
+   "slide": "nonlin:8",
    "card": [
     {
+     "at": 1,
+     "m": "rate = amount removed per time"
+    },
+    {
      "at": 2,
-     "m": "C<sub>p</sub>: the plasma concentration, mg/L"
+     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: twice C<sub>p</sub>, about twice the rate → first order"
+    },
+    {
+     "at": 2,
+     "m": "e.g. C<sub>p</sub> 0.5 → 1 mg/L: rate 0.57 → 1.09 mg/kg/day (× 1.9)"
     },
     {
      "at": 3,
-     "m": "V<sub>max</sub>: the fastest elimination rate, e.g. mg/kg/day"
+     "m": "C<sub>p</sub> ≫ K<sub>M</sub>: saturated, rate ≈ V<sub>max</sub> → zero order"
+    },
+    {
+     "at": 3,
+     "m": "e.g. C<sub>p</sub> 100 → 200 mg/L: rate 10.9 → 11.4 mg/kg/day (× 1.05)"
     },
     {
      "at": 4,
-     "m": "K<sub>M</sub>: a concentration, mg/L, compared with C<sub>p</sub>"
+     "m": "<b>low or high: compared with K<sub>M</sub> (mg/L). V<sub>max</sub> is a rate (mg/kg/day), never compared with a level.</b>"
     },
     {
      "at": 5,
-     "m": "constants in one patient, different between patients"
-    },
-    {
-     "at": 6,
-     "m": "her example: K<sub>M</sub> 10 mg/L, V<sub>max</sub> 12 mg/kg/day"
+     "m": "first order: the amount removed per time changes with C<sub>p</sub>; the fraction and t<sub>½</sub> do not"
     }
-   ]
+   ],
+   "fig": {
+    "key": "nl_rate_steps",
+    "at": [
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      5
+     ]
+    ]
+   }
   },
   {
+   "text": "In the formula, the elimination rate equals V max times C p, divided by K M plus C p. C p on the top raises the rate as the level rises, and C p on the bottom, added to K M, limits how far the rate can rise. When C p is much smaller than K M, adding it hardly changes the bottom, which stays about K M, so the rate is V max over K M times C p: a constant times the level, the form of first order. When C p is much larger than K M, the bottom is about C p, the C p on the top and the bottom cancel, and the rate is about V max, the form of zero order.",
    "slide": "nonlin:8",
-   "text": "The elimination rate equals V max times C p, divided by K M plus C p. When C p equals K M, the bottom is twice K M, so the rate is exactly half of V max. When C p is much smaller than K M, adding C p hardly changes the bottom, so the rate is close to V max over K M, times C p, and doubling the level nearly doubles the rate: first order. When C p is much larger than K M, the bottom is close to C p, so the C p on the top and the bottom cancel and the rate stays close to V max. Doubling the level then barely changes the rate: zero order.",
+   "card": [
+    {
+     "at": 0,
+     "m": "rate = {{frac:V<sub>max</sub> C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: K<sub>M</sub> + C<sub>p</sub> ≈ K<sub>M</sub> (e.g. 10 + 0.5 = 10.5 ≈ 10)"
+    },
+    {
+     "at": 2,
+     "m": "rate ≈ {{frac:V<sub>max</sub>|K<sub>M</sub>}} C<sub>p</sub>: a constant × C<sub>p</sub>, like first order"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>p</sub> ≫ K<sub>M</sub>: K<sub>M</sub> + C<sub>p</sub> ≈ C<sub>p</sub>, so rate ≈ V<sub>max</sub>, a constant, like zero order"
+    }
+   ],
    "fig": {
     "key": "nl_rate_steps",
     "at": [
      [
       0,
-      2
-     ],
-     [
-      1,
       3
      ],
      [
@@ -64,33 +133,7 @@
       5
      ]
     ]
-   },
-   "card": [
-    {
-     "at": 0,
-     "m": "rate = {{frac:V<sub>max</sub> C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}"
-    },
-    {
-     "at": 1,
-     "m": "C<sub>p</sub> = K<sub>M</sub>: rate = {{frac:V<sub>max</sub> K<sub>M</sub>|2 K<sub>M</sub>}} = ½ V<sub>max</sub>"
-    },
-    {
-     "at": 2,
-     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: rate ≈ {{frac:V<sub>max</sub>|K<sub>M</sub>}} C<sub>p</sub>"
-    },
-    {
-     "at": 2,
-     "m": "e.g. C<sub>p</sub> 0.5 → 1 mg/L: {{frac:12 × 0.5|10 + 0.5}} = 0.57 → {{frac:12 × 1|10 + 1}} = 1.09, nearly double"
-    },
-    {
-     "at": 3,
-     "m": "C<sub>p</sub> ≫ K<sub>M</sub>: rate ≈ V<sub>max</sub>"
-    },
-    {
-     "at": 4,
-     "m": "e.g. C<sub>p</sub> 100 → 200 mg/L: {{frac:12 × 100|10 + 100}} = 10.9 → {{frac:12 × 200|10 + 200}} = 11.4, barely changes"
-    }
-   ]
+   }
   },
   {
    "slide": "nonlin:11",
