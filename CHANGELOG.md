@@ -3,6 +3,9 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- Reload keeps your place: the tab, open sections, the line on screen, a drill's question, a paused walkthrough.
+- Module 8 rate figure: KM is read on the Cp axis (10 mg/L) and half of Vmax on the rate axis (6 mg/kg/day).
+- Exam sim: a slot for the most likely Exam 3 paper; the set-up drill never shows the right line twice.
 - Walkthroughs: every part is now read in a recorded voice; the device voice is the fallback.
 - Walkthroughs: a part paused and resumed now moves on to the next part when it ends.
 - Worksheets: seven more daily practice sheets from Modules 1 to 3, 51 questions with her keys.

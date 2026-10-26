@@ -528,8 +528,8 @@ def main():
         page.evaluate("() => document.getElementById('exAgain').click()")
         page.reload(); page.wait_for_function("typeof VIEW !== 'undefined' && !!VIEW"); page.wait_for_timeout(300)
         cleared = page.evaluate("() => ({ex: EX, saved: LS.get(EXKEY()), view: VIEW})")
-        check(cleared['ex'] is None and cleared['saved'] is None and cleared['view'] == 'topics',
-              '"New paper" clears the saved paper', str(cleared))
+        check(cleared['ex'] is None and cleared['saved'] is None and cleared['view'] == 'exam',
+              '"New paper" clears the saved paper, and a reload keeps the Exam tab', str(cleared))
         page.evaluate("['guide','ref','tell','diag'].forEach(p => LS.set(FOLD_KEY + p, 'open'))")
 
         # The app is opened from disk, where a browser can give the page an

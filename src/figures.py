@@ -1614,7 +1614,8 @@ def nlr_s3(pl):
     pl.vline(NL_KM, 6); pl.parts.append(f'<line x1="{pl.L}" y1="{pl.py(6):.1f}" x2="{pl.px(NL_KM):.1f}" y2="{pl.py(6):.1f}" '
                                        f'stroke="{DIM}" stroke-width="1.5" stroke-dasharray="5 4"/>')
     pl.points([NL_KM], [6], color=AMBER)
-    pl.text(11.2, 5.0, 'KM 10: rate = half of Vmax = 6', size=18)
+    pl.text(11.0, 5.3, '← half of Vmax: 6 mg/kg/day', size=17, color=AMBER)
+    pl.text(10.8, 0.45, 'KM = 10 mg/L (the Cp below that point)', size=17)
 
 
 def nlr_s4(pl):
@@ -1643,7 +1644,7 @@ def nlr_s6(pl):
 stepped('nl_rate_steps', 'Elimination rate against plasma concentration for a saturable drug', nlr_plot(), [
     ('The curve', 'How fast the drug is eliminated at each plasma level, for her slide Example drug.', nlr_s1),
     ('Vmax', 'The rate rises with Cp but cannot pass Vmax, 12 mg/kg/day.', nlr_s2),
-    ('KM', 'At Cp = KM = 10 mg/L the rate is {{frac:12 × 10|10 + 10}} = 6, half of Vmax.', nlr_s3),
+    ('KM', 'KM is a concentration, so it is read on the Cp axis. Start at half of Vmax on the rate axis, 12 ÷ 2 = 6 mg/kg/day, go across to the curve and straight down: the Cp there, 10 mg/L, is KM. Check: {{frac:12 × 10|10 + 10}} = 6.', nlr_s3),
     ('Well below KM', 'The rate rises in proportion to Cp: twice the level, about twice the rate. It depends on concentration: first order.', nlr_s4),
     ('Well above KM', 'The rate stays near Vmax whatever the level. It is independent of concentration: zero order.', nlr_s5),
     ('The formula', 'rate = {{frac:Vmax Cp|KM + Cp}}. Cp ≪ KM: rate ≈ {{frac:Vmax|KM}} Cp = 1.2 Cp, first order. Cp ≫ KM: rate ≈ Vmax, zero order. Her example: KM 10 mg/L, Vmax 12 mg/kg/day; at steady state the daily dose rate equals this elimination rate.', nlr_s5f),

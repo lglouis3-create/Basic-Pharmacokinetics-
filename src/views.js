@@ -4777,7 +4777,7 @@ const SU_SAME = [['first-exp', 'first-ln', 'first-log', 'cp-after-stop'], ['fe',
   .concat(SHEET_LINES.filter(l => l.eq && l.alsoEq).map(l => [l.eq, ...l.alsoEq]));
 const suSame = id => new Set(SU_SAME.filter(g => g.includes(id)).flat());
 function suOptions(q){
-  const e = EQ_BY_ID[q.setup.eq], used = new Set([...suSame(q.setup.eq), ...(q.setup.pre || [])]);
+  const e = EQ_BY_ID[q.setup.eq], used = new Set([q.setup.eq, ...suSame(q.setup.eq), ...(q.setup.pre || [])]);   // the right line never comes back as a distractor
   const pick = (cands, n, out) => { for(const c of shuffle(cands.slice())){ if(out.length >= n) break; if(!used.has(c.id) && !out.includes(c)) out.push(c); } };
   const out = [];
   pick(EQUATIONS.filter(x => x.module === e.module), 3, out);
@@ -5342,7 +5342,7 @@ function checkForUpdate(){
     const b = document.createElement('div'); b.id = 'newver'; b.setAttribute('role', 'status');
     b.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--accent);border-radius:10px;padding:10px 14px;box-shadow:0 4px 18px rgba(0,0,0,.18)';
     b.innerHTML = `<span>A newer version of the drill is published. Your progress is kept.</span><button type="button" class="btn small" data-newver>Reload</button>`;
-    b.querySelector('[data-newver]').onclick = () => { if(EX && EX.running && !confirm('A paper is running; it is saved and its clock keeps running. Reload now?')) return; location.reload(); };
+    b.querySelector('[data-newver]').onclick = () => { if(EX && EX.running && !confirm('A paper is running; it is saved and its clock keeps running. Reload now?')) return; placeSave(); location.reload(); };
     document.body.appendChild(b);
   }).catch(() => {});
 }
@@ -5479,6 +5479,9 @@ function gwRun(id, i, k){
   if(gwRec(id, i) && !g.fell){
     const a = GW_AUDIO || (GW_AUDIO = new Audio());
     g.audio = true; a.src = 'audio/gw-' + id + '-' + i + '.mp3'; a.playbackRate = gwRate();
+    if(GW_SEEK && GW_SEEK.id === id && GW_SEEK.i === i && GW_SEEK.t > 1){ const t = GW_SEEK.t - 1;
+      a.addEventListener('loadedmetadata', () => { try { a.currentTime = t; } catch(e){} }, {once: true}); }
+    GW_SEEK = null;
     gwAudioWire(id, i, run, next);
     a.play().catch(() => { if(GW === g && run === g.run){ g.fell = true; g.audio = false; gwRun(id, i, 0); } });
     return;
@@ -5828,4 +5831,111 @@ function applyTheme(t){
   if(ts){ ts.value = saved; ts.onchange = () => { LS.set(THEME_KEY, ts.value); applyTheme(ts.value); }; }
 }
 askProfile();
-{ const ex = restoreExam(); show(ex === 'running' || ex === 'expired' ? 'exam' : 'topics'); }
+/* ---------- Keeping the place across a reload ----------
+   A reload (Reload for a newer version, the browser's own, or a phone that drops a background tab) comes back to
+   the same tab, module page, open sections and line at the top of the screen; a drill on the same question; and a
+   walkthrough at the same part and point in its clip, paused, because a browser starts sound only from a tap, so
+   ▶ Resume continues it. Kept in sessionStorage: it belongs to this browser tab and goes when the tab is closed. */
+const PLACE_KEY = NS + ':place', PLACE_MAX = 12 * 3600000;
+const SS = {get(k){ try { return sessionStorage.getItem(k); } catch(e){ return null; } },
+            set(k, v){ try { sessionStorage.setItem(k, v); } catch(e){} }};
+const PLACE_SEL = '[id], h2, h3, h4, summary, p, li, tr, figure, .card, .opt';
+const placeText = el => (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+let PLACE_READY = false, PLACE_T = 0, PLACE_MOVED = false, GW_SEEK = null;
+// the first element whose top edge is on screen, named by its id or by its text and which copy of that text it is
+function placeAnchor(pane){
+  for(const el of pane.querySelectorAll(PLACE_SEL)){
+    const r = el.getBoundingClientRect(); if(!r.height || r.top < 0) continue;
+    if(el.id) return {id: el.id, off: r.top};
+    const txt = placeText(el); if(!txt) continue;
+    return {tag: el.tagName, txt, n: [...pane.querySelectorAll(el.tagName)].filter(x => placeText(x) === txt).indexOf(el), off: r.top};
+  }
+  return null;
+}
+// every fold in a pane with a key that survives a redraw: its summary text and which copy of that text it is
+function detKeys(pane){
+  const seen = {};
+  return [...pane.querySelectorAll('details')].map(d => { const sm = d.querySelector(':scope > summary'), t = sm ? placeText(sm) : '';
+    seen[t] = (seen[t] || 0) + 1; return [d, t + '#' + seen[t]]; });
+}
+// a drill as plain data: questions and problem sets by id, everything else as it is
+function quizSnap(){
+  const o = {};
+  for(const [k, v] of Object.entries(Q)){
+    if(v == null || /^(string|number|boolean)$/.test(typeof v)) o[k] = v;
+    else if(Array.isArray(v) && v.length && v.every(x => x && typeof x === 'object' && x.id && byId(x.id) === x)) o[k] = {__ids: v.map(x => x.id)};
+    else if(Array.isArray(v) && v.every(x => x == null || typeof x !== 'object')) o[k] = v;
+    else if(typeof v === 'object' && v.id && byId(v.id) === v) o[k] = {__q: v.id};
+    else if(typeof v === 'object' && v.id && typeof CHAINS !== 'undefined' && CHAINS.find(c => c.id === v.id) === v) o[k] = {__chain: v.id};
+  }
+  return o;
+}
+function quizFrom(o){
+  const q = {};
+  for(const [k, v] of Object.entries(o || {})){
+    if(v && v.__ids) q[k] = v.__ids.map(byId).filter(Boolean);
+    else if(v && v.__q) q[k] = byId(v.__q);
+    else if(v && v.__chain) q[k] = CHAINS.find(c => c.id === v.__chain);
+    else q[k] = v;
+  }
+  return q.pool && q.pool.length && q.current ? q : null;
+}
+function placeSave(){
+  if(!PLACE_READY || !VIEW) return;
+  const pane = document.getElementById('v-' + VIEW); if(!pane) return;
+  const pl = {v: VIEW, at: Date.now(), y: window.scrollY, a: placeAnchor(pane), open: detKeys(pane).filter(([d]) => d.open).map(([, k]) => k)};
+  if(VIEW === 'topics') pl.modpage = MODPAGE;
+  if(VIEW === 'quiz' && Q && Q.current) pl.quiz = quizSnap();
+  if(VIEW === 'guide'){
+    pl.gwp = [...pane.querySelectorAll('.gwpanel')].map(p => [p.dataset.gwp, +p.dataset.at || 0]);
+    if(GW && gwHas(GW.id)) pl.gw = {id: GW.id, i: GW.i, k: GW.k || 0, t: GW.audio && GW_AUDIO ? GW_AUDIO.currentTime : 0};
+  }
+  SS.set(PLACE_KEY, JSON.stringify(pl));
+}
+const placeSoon = () => { clearTimeout(PLACE_T); PLACE_T = setTimeout(placeSave, 400); };
+function placeLoad(){
+  try { const pl = JSON.parse(SS.get(PLACE_KEY) || 'null'); return pl && VIEWS.includes(pl.v) && Date.now() - pl.at < PLACE_MAX ? pl : null; }
+  catch(e){ return null; }
+}
+// put the saved line back at the same height on screen; again once images have loaded, unless the reader has moved
+function placeScroll(pl){
+  const pane = document.getElementById('v-' + pl.v), a = pl.a; let el = null;
+  if(a && a.id) el = document.getElementById(a.id);
+  else if(a) el = [...pane.querySelectorAll(a.tag)].filter(x => placeText(x) === a.txt)[a.n] || null;
+  window.scrollTo(0, el && pane.contains(el) ? Math.max(0, el.getBoundingClientRect().top + window.scrollY - a.off) : pl.y || 0);
+}
+function placeRestore(pl){
+  try {
+    if(pl.v === 'quiz'){ Q = quizFrom(pl.quiz); if(!Q) pl.v = 'topics'; }
+    if(pl.v === 'topics') MODPAGE = pl.modpage || null;
+    show(pl.v);
+    const pane = document.getElementById('v-' + pl.v), open = new Set(pl.open || []);
+    detKeys(pane).forEach(([d, k]) => { if(d.open !== open.has(k)) d.open = open.has(k); });
+    if(pl.v === 'guide'){
+      (pl.gwp || []).forEach(([id, at]) => { const sec = document.getElementById(id);
+        if(!sec || !gwHas(id) || sec.querySelector('.gwpanel')) return;
+        openAncestors(sec); gwPosSet(id, Math.min(at, GUIDE_WALK[id].segs.length - 1)); gwOpen(id, false); });
+      const g = pl.gw;
+      if(g && gwHas(g.id) && g.i < GUIDE_WALK[g.id].segs.length && document.querySelector(`.gwpanel[data-gwp="${g.id}"]`)){
+        GW = {id: g.id, i: g.i, k: g.k || 0, playing: false, started: true, run: 0, browse: null};
+        GW_SEEK = {id: g.id, i: g.i, t: g.t || 0};
+        gwDraw(g.id);
+      }
+    }
+    placeScroll(pl);
+    [350, 1200].forEach(ms => setTimeout(() => { if(!PLACE_MOVED && VIEW === pl.v) placeScroll(pl); }, ms));
+    return true;
+  } catch(e){ Q = null; MODPAGE = null; return false; }
+}
+try { history.scrollRestoration = 'manual'; } catch(e){}
+window.addEventListener('scroll', placeSoon, {passive: true});
+document.addEventListener('toggle', placeSoon, true);
+document.addEventListener('click', placeSoon);
+['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(t => window.addEventListener(t, () => { PLACE_MOVED = true; }, {passive: true, capture: true}));
+document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden') placeSave(); });
+window.addEventListener('pagehide', placeSave);
+setInterval(() => { if(GW && GW.playing) placeSave(); }, 5000);
+{ const ex = restoreExam(), pl = placeLoad();
+  if(ex === 'running' || ex === 'expired'){ show('exam'); if(pl && pl.v === 'exam') placeScroll(pl); }
+  else if(!(pl && placeRestore(pl))) show('topics');
+  PLACE_READY = true; }
