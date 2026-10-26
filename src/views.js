@@ -1937,7 +1937,7 @@ function progressSection(){
   if(papers.length){
     h += `<table class="gap"><thead><tr><th>Practice paper</th><th>When</th><th>Score</th><th style="width:40%">Result</th></tr></thead><tbody>`;
     for(const x of papers){
-      const ex = COURSE.exams.find(e => e.id === x.exam) || (COURSE.quizzes || []).find(z => z.id === x.exam);
+      const ex = paperOf(x.exam);
       const pc = x.total ? Math.round(100 * x.right / x.total) : 0;
       h += `<tr><td>${esc(ex ? ex.name + (ex.modules ? ' practice' : '') : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td>
         <td><div class="bar"><i style="width:${pc}%;background:${pctCol(pc)}"></i></div><span style="font-size:12px;color:var(--text-dim)">${pc}%</span></td></tr>`;
@@ -3036,7 +3036,7 @@ function examHistory(){
   if(!papers.length) return '';
   let h = `<h3>Your papers so far</h3><div class="tw"><table class="gap"><thead><tr><th>Paper</th><th>When</th><th>Score</th><th>Blank</th><th style="width:36%">Result</th></tr></thead><tbody>`;
   for(const x of papers.slice(0, 12)){
-    const ex = COURSE.exams.find(e => e.id === x.exam) || (COURSE.quizzes || []).find(z => z.id === x.exam);
+    const ex = paperOf(x.exam);
     const pc = x.total ? Math.round(100 * x.right / x.total) : 0;
     h += `<tr><td>${esc(ex ? ex.name + (ex.modules ? ' practice' : '') : 'Paper')}</td><td>${esc(fmtWhen(x.at))}</td><td>${x.right} / ${x.total}</td><td>${x.blank || 0}</td>
       <td><div class="bar"><i style="width:${pc}%;background:${pctCol(pc)}"></i></div><span style="font-size:12px;color:var(--text-dim)">${pc}%</span></td></tr>`;
@@ -3071,8 +3071,10 @@ function renderExam(){
   <p class="laywrap">${layoutToggle()}</p>
   <p><button class="btn" id="startExam">Start the ${EXAM.minutes}-minute paper${
     nPaper < EXAM.questions ? ` (${nPaper} questions available)` : ''}</button></p>
+  ${likelyHTML()}
   ${examHistory()}`;
   $('#startExam').onclick = beginExam;
+  const lk = $('#startLikely'); if(lk) lk.onclick = beginLikely;
   el.querySelectorAll('.chip[data-exam]').forEach(b => b.onclick = () => { chooseExam(+b.dataset.exam); renderExam(); });
 }
 /* A question marked dupOf:'x' tests the same fact as question x, so a paper
@@ -3149,6 +3151,29 @@ function startClock(){
   }, 1000);
   EX.timer = tick;
 }
+/* The most likely paper for this exam (likely.js): a fixed set of 40 chosen by
+   the evidence of what she asks, with the forecast table that explains it. */
+const likelyOn = () => typeof LIKELY !== 'undefined' && LIKELY.exam === EXAM.id && LIKELY.ids.some(id => byId(id));
+function likelyHTML(){
+  if(!likelyOn()) return '';
+  const qs = LIKELY.ids.map(byId).filter(Boolean), nc = qs.filter(q => kindOf(q) === 'calc').length;
+  const rows = (LIKELY.forecast || []).map(f => `<tr><td>${rich(f.topic)}</td><td>${rich(f.wording)}</td><td>${esc(f.format)}</td><td>${esc(String(f.count))}</td><td>${rich(f.evidence)}</td></tr>`).join('');
+  return `<h3>${esc(LIKELY.title)}</h3>
+  <p class="likelynote">${rich(LIKELY.note)} ${qs.length} questions: ${qs.length - nc} multiple choice and ${nc} calculations.</p>
+  <p><button class="btn" id="startLikely">Start the ${esc(LIKELY.title.toLowerCase())} paper (${EXAM.minutes} minutes)</button></p>
+  ${rows ? `<details class="likelyfc"><summary>What she is most likely to ask, and the evidence</summary>
+    <div class="tw"><table class="gap"><thead><tr><th>Topic</th><th>Her likely wording</th><th>Format</th><th>Items</th><th>Evidence</th></tr></thead><tbody>${rows}</tbody></table></div></details>` : ''}`;
+}
+function beginLikely(){
+  if(EX && EX.running){ renderExamQ(); return; }
+  const qs = LIKELY.ids.map(byId).filter(Boolean);
+  startPaper(qs, EXAM.minutes, {paper: LIKELY.id, title: LIKELY.title, sata: {per: [], drawn: qs.filter(isMulti).length},
+                                coverage: {drawn: 0, missing: 0, short: [], shares: []}});
+  renderExamQ();
+}
+// the exam, quiz or fixed paper a saved paper id names
+const paperOf = id => COURSE.exams.find(e => e.id === id) || (COURSE.quizzes || []).find(z => z.id === id)
+  || (typeof LIKELY !== 'undefined' && id === LIKELY.id ? {name: LIKELY.title} : null);
 function beginExam(){
   const shares = poolShares();
   const sata = sataShares(shares);

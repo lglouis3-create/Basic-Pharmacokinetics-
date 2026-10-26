@@ -57,7 +57,8 @@ CONTENT_FILES = ['equations.js',   # declares EQUATIONS for the equation drill
                  'glossary.js',   # the Terms tab: TERMS, one object per term
                  'readings.js',   # textbook chapter cards atop Guides (gen/readings.py)
                  'sources.js',    # SOURCES + SOURCE_OF: original document and problem number per question (gen/sources.py)
-                 'guide_walk.js']  # GW_DECKS + GUIDE_WALK: narrated guide walkthroughs (gen_walk.py from walk/*.json)
+                 'guide_walk.js',
+                 'likely.js']     # LIKELY: the most likely Exam 3 paper and the forecast behind it  # GW_DECKS + GUIDE_WALK: narrated guide walkthroughs (gen_walk.py from walk/*.json)
 
 # Everything that has to parse before a build is allowed to proceed. Derived
 # from the two lists above rather than named again, so adding a file cannot

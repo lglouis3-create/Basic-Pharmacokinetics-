@@ -42,7 +42,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,whySentences,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB,sheetHTML,sheetFiles,sheetPlan,sharedLead,dropCarry,fromLineHTML,SRC_LIST,SRC_OF,setNumbers};\n";
+code += "\nglobalThis.__X={TERMS:typeof TERMS==='undefined'?[]:TERMS,TERM_QS:typeof TERM_QS==='undefined'?[]:TERM_QS,byId,EXTRAS:typeof EXTRAS==='undefined'?[]:EXTRAS,COURSE,EXAM,POOLS,TOTAL_MARKS,matchesPoolFilter,sataShares,poolDrawable,QUESTIONS,TOPICS,IMAGES,record,pickNext,st,score,drawN,drawMixed,EXAM_SATA,askProfile,markGuessed,setMissKind,isMulti,isMC,qType,gradeMulti,gradeNumeric,missDiagnosis,ASKS,tolOf,parseNum,originOf,gradeMatch,gradeAnswer,correctSet,poolOf,poolKey,poolQuestions,poolShares,markWeight,skillOf,SKILLS,MISS_KINDS,blueprintCoverage,setActiveExam,CHAINS,CHAIN_OF,kindOf,ofKind,startChain,EQUATIONS,EQ_MUST,normEq,eqPlain,eqAccepts,eqCorrect,eqTokens,eqEquiv,eqRhs,eqTrayPieces,eqTileText,eqNorm,eqLayout,paperOrder,whySentences,CHAIN_OF,eqExamples,eqHowHTML,mathHTML,prettyMath,teachParts,FRAC_RE,SHEET_LINES,SHEET_MISSING,SHEET_COLS,suPoolAll,suOptions,conceptLog,conceptRecord,conceptStats,conceptDue,conceptTitle,statusLine,DAYS,CRAM,MASTER_BOX,READINGS:typeof READINGS==='undefined'?[]:READINGS,readingsHTML,rdCardHTML,rdLead,getDB:()=>DB,sheetHTML,sheetFiles,sheetPlan,sharedLead,dropCarry,fromLineHTML,SRC_LIST,SRC_OF,setNumbers,LIKELY:typeof LIKELY==='undefined'?null:LIKELY,isMulti};\n";
 try { vm.runInContext(code, sandbox); }
 catch (e) { console.error('FAIL: script threw at load — ' + e.message + '\n' + e.stack); process.exit(1); }
 
@@ -1175,6 +1175,26 @@ console.log('\n=== Worksheets: print markup per source (views.js sheetHTML) ==='
   const ids = Object.keys(X.SRC_OF), noLine = ids.filter(id => { const q = X.byId(id); return q && !/From: .+Worksheet<\/a>/.test(X.fromLineHTML(q)); });
   if (noLine.length) bad(`${noLine.length} question(s) with a source and no From line: ${noLine.slice(0, 5).join(', ')}`);
   else console.log(`  ok    ${ids.length} questions name their source and link its worksheet`);
+})();
+
+// The most likely paper: every id real and different, never two wordings of one fact, the exam's size and split.
+(() => {
+  const L = X.LIKELY; if (!L || !L.ids.length) return;
+  console.log('\n=== Most likely paper ===');
+  const qs = L.ids.map(id => X.byId(id)), missing = L.ids.filter((id, i) => !qs[i]);
+  if (missing.length) { bad(`likely paper names ids not in the bank: ${missing.join(', ')}`); return; }
+  const dup = L.ids.filter((id, i) => L.ids.indexOf(id) !== i);
+  if (dup.length) bad(`likely paper repeats ${dup.join(', ')}`);
+  const root = q => { let r = q; const seen = new Set(); while (r.dupOf && !seen.has(r.id)) { seen.add(r.id); const p = X.byId(r.dupOf); if (!p) break; r = p; } return r.id; };
+  const roots = {}; qs.forEach(q => (roots[root(q)] ||= []).push(q.id));
+  const twins = Object.values(roots).filter(a => a.length > 1);
+  if (twins.length) bad(`likely paper carries two wordings of one fact: ${twins.map(a => a.join(' & ')).join('; ')}`);
+  const ex = X.COURSE.exams.find(e => e.id === L.exam), calc = qs.filter(q => X.kindOf(q) === 'calc').length;
+  if (ex && qs.length !== ex.questions) bad(`likely paper has ${qs.length} questions; the exam has ${ex.questions}`);
+  const nw = qs.filter(q => q.module === 8 || q.module === 9).length;
+  if (!dup.length && !twins.length && (!ex || qs.length === ex.questions))
+    console.log(`  ok    ${qs.length} questions, all different: ${qs.length - calc} concept and ${calc} calculation, ${nw} on Modules 7b and 8`);
+  (L.forecast || []).forEach(f => { if (!f.topic || !f.evidence || !f.wording) bad(`forecast row without topic, evidence or wording: ${JSON.stringify(f).slice(0, 80)}`); });
 })();
 
 console.log(`\n${fails ? 'FAILURES: '+fails : 'All checks passed'}${warns ? '  (warnings: '+warns+')' : ''}\n`);
