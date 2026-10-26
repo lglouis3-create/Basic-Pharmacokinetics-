@@ -80,7 +80,7 @@
    "fig": null
   },
   {
-   "text": "Stated as a rule, reabsorption occurs if the renal clearance is less than the clearance by filtration. She allows a margin around the reference. She said, I'm saying one hundred twenty. If it's one hundred nineteen, one hundred twenty one let's call that filtration. If it's two hundred fifty, then let's assume that we've got some active secretion going on. A renal clearance given in liters per hour is converted first, since one hundred twenty milliliters per minute is seven point two liters per hour.",
+   "text": "Stated as a rule, reabsorption occurs if the renal clearance is less than the clearance by filtration. She allows a margin around the filtration value of one hundred twenty milliliters per minute. She said, I'm saying one hundred twenty. If it's one hundred nineteen, one hundred twenty one let's call that filtration. If it's two hundred fifty, then let's assume that we've got some active secretion going on. A renal clearance given in liters per hour has to be put in the same units before the comparison: one hundred twenty milliliters per minute is seven point two liters per hour.",
    "slide": "cl:21",
    "card": [
     {
@@ -103,7 +103,7 @@
    "fig": null
   },
   {
-   "text": "In her Module six practice set, a drug has a total body clearance of fifty two point nine five and a renal clearance of thirty four point seven two milliliters per minute per seventy kilograms, and the probable mechanism of renal clearance is asked. The mechanism is read from renal clearance alone, so the total is set aside, and both values are already in milliliters per minute. Thirty four point seven two is well below one hundred twenty, so the kidney clears less plasma of this drug than filtration alone would. Some filtered drug must be returning to the blood, and the mechanism is glomerular filtration with tubular reabsorption.",
+   "text": "In her Module six practice set, a drug has a total body clearance of fifty two point nine five and a renal clearance of thirty four point seven two, both in milliliters per minute per seventy kilograms, and the probable mechanism of renal clearance is asked. The mechanism is read from renal clearance alone, so the total is set aside, and the renal clearance is already in milliliters per minute. A renal clearance of thirty four point seven two milliliters per minute is well below the filtration rate of one hundred twenty milliliters per minute, so the kidney clears less plasma of this drug than filtration alone would. Some filtered drug must be returning to the blood, and the mechanism is glomerular filtration with tubular reabsorption.",
    "slide": "cl:21",
    "card": [
     {

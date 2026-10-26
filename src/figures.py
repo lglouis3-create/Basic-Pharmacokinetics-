@@ -53,7 +53,7 @@ class Plot:
     """A single panel with linear x and either a linear or a decade y axis."""
 
     def __init__(self, xmax, yticks, log=False, xlabel='Time (hours)',
-                 ylabel='Plasma drug concentration', xticks=None,
+                 ylabel='Plasma drug concentration (mg/L)', xticks=None,
                  w=W, h=H, l=L, r=R, t=T, b=B, fs=1.55, numbers=True):
         self.numbers = numbers            # False draws the shape with unnumbered axes
         self.xmax, self.log, self.yticks = xmax, log, yticks
@@ -215,7 +215,7 @@ fig('ord_linear_curve', 'Concentration against time on an evenly spaced axis, fa
 
 # Her own semi-logarithmic slide, redrawn: the axis steps by a factor of ten and
 # is not labelled "log". Introduction.pdf slide 21 supplies the points.
-p = Plot(6, [1, 10, 100, 1000], log=True)
+p = Plot(6, [1, 10, 100, 1000], log=True, ylabel='Plasma drug concentration (µg/mL)')   # her slide's unit
 xs = [0, 1, 2, 3, 4, 5, 6]
 ys = [200, 93, 44, 21, 10, 4.9, 2.3]
 p.frame(xs).curve(lambda t: 200 * math.exp(-math.log(200 / 2.3) / 6 * t))
@@ -345,9 +345,9 @@ tangent(p, 200, math.log(2) / KEL, AMBER)
 tangent(p, 100, 0, BLUE)
 p.label(9.4, 62, '200 mg dose', color=AMBER, swatch=True)
 p.label(9.4, 34, '100 mg dose', color=BLUE, swatch=True)
-p.label(2.9, 176, '40 mg/hr leaving')
-p.label(4.5, 108, '20 mg/hr leaving')
-p.label(2.5, 74, '20 mg/hr leaving')
+p.text(2.9, 176, '40 mg/hr leaving', size=14)
+p.text(4.5, 108, '20 mg/hr leaving', size=14)
+p.text(1.3, 82, '20 mg/hr leaving', size=14)   # just above the 100 mg curve: at 2.5, 74 the 200 mg curve and its segment ran through it
 p.parts.append(f'<text x="96" y="30" font-size="17.5" font-weight="600" fill="{INK}">'
                f'The same drug at two doses</text>')
 p.parts.append(f'<text x="96" y="52" font-size="15.5" fill="{DIM}">Each dotted segment is how fast '
@@ -396,7 +396,7 @@ for i, (title, args, caption) in enumerate(PANEL):
         f'<text x="90" y="68" font-size="15" fill="{INK}">'
         f'C\u2098\u2090\u2093 {cmax:.1f} mg/L (was {base_cmax:.1f}) \u00b7 '
         f't\u2098\u2090\u2093 {tmax:.1f} hr (was {base_tmax:.1f}) \u00b7 '
-        f'AUC {auc:g} (was {base_auc:g})</text>')
+        f'AUC {auc:g} mg·hr/L (was {base_auc:g})</text>')
     inner = '\n'.join(pan.parts)
     parts.append(f'<g transform="translate(0,{i*PH_})">{inner}</g>')
 body = '\n'.join(parts)
@@ -469,20 +469,23 @@ def kk_panel(which):
         pan.text(2.2, 5.3, f'gained {gained:.1f}', size=15, weight='600')
         pan.text(12.6, 4.3, f'total lost later: {gained:.1f}', size=15, weight='600')
         pan.vline(cross, base(cross), color=DIM, dash='3 4')
-        pan.text(cross, 0.35, f'cross at {cross:.1f} hr', size=14, color=DIM, anchor='middle')
+        pan.text(cross + 0.25, 0.35, f'cross at {cross:.1f} hr', size=14, color=DIM)   # beside its dotted line, not across it
     pan.curve(base, color=color, dash='9 6')
     pan.curve(raised, color=color)
     for fn, tmax, cmax, _ in (lo, hi):
         pan.points([tmax], [cmax], color=color)
     name = 'k' if which == 'k' else 'kₐ'
-    pan.label(lo[1] + 0.4, lo[2], f'{name} 0.2', dy=-10)
+    if which == 'k':
+        pan.label(lo[1] + 0.4, lo[2], f'{name} 0.2', dy=-10)
+    else:   # under its own dashed curve: above that peak the solid kₐ 0.5 curve runs through the label
+        pan.label(lo[1] - 1.9, lo[2] - 1.0, f'{name} 0.2')
     pan.label(hi[1] + 0.4, hi[2], f'{name} 0.5', dy=-10)
     if which == 'k':
         heading(pan, 'k raised 0.2 → 0.5 /hr (kₐ held at 0.1)',
-                f'AUC {lo[3]:.0f} → {hi[3]:.0f}: the shaded area is lost.', big=1.1)
+                f'AUC {lo[3]:.0f} → {hi[3]:.0f} µg·hr/mL: the shaded area is lost.', big=1.1)
     else:
         heading(pan, 'kₐ raised 0.2 → 0.5 /hr (k held at 0.1)',
-                f'AUC {lo[3]:.0f} → {hi[3]:.0f}: area gained early = area lost late.', big=1.1)
+                f'AUC {lo[3]:.0f} → {hi[3]:.0f} µg·hr/mL: area gained early = area lost late.', big=1.1)
     return pan, (lo, hi)
 
 
@@ -507,8 +510,8 @@ ff.text(18, 7.5, 'the tail', size=16, color=DIM, anchor='middle', weight='600')
 ff.curve(ir, color=BLUE, x0=0.02)
 ff.curve(er, color=AMBER, x0=0.02)
 ff.text(1.3, ir(1.3), 'Immediate release', size=16, weight='600', dy=-12)
-ff.text(2.4, er(2.4), 'Extended release', size=16, weight='600', dy=28)
-ff.text(12.6, ir(16.5), 'steep: falls with k', size=16, color=BLUE, dy=-8)
+ff.text(1.2, 0.45, 'Extended release', size=16, weight='600')   # under its own curve; at 2.4 the immediate-release line ran through it
+ff.text(17.0, ir(18.6), 'steep: falls with k', size=16, color=BLUE, anchor='end')   # below its line, not across it
 ff.text(12.8, er(12.8), 'shallow: falls with kₐ', size=16, color=AMBER, dy=-14)
 heading(ff, 'One drug, two products: same k', 'The tail falls at the smaller of kₐ and k.', big=1.1)
 ff.parts.append(f'<text x="18" y="96" font-size="17" fill="{DIM}">'
@@ -560,12 +563,13 @@ pn.parts.append(f'<polyline points="{" ".join(_pts)}" fill="none" stroke="{BLUE}
                 f'stroke-linecap="round" stroke-linejoin="round"/>')
 pn.vline(12, 60)
 pn.points([6, 7.2, 8], [10, 15, 20])
-pn.text(6.15, 10, '6 → 10', size=14, dy=20)
-pn.text(7.05, 15, '7.2 → 15', size=14, anchor='end', dy=-2)
-pn.text(8.15, 20, '8 → 20', size=14, dy=4)
-pn.text(11.85, 55, 'Vmax 12', size=14, color=DIM, anchor='end')
+# each pair: the dose rate (across) gives the level (up), each with its unit
+pn.text(6.15, 10, '6 mg/kg/day → 10 mg/L', size=14, dy=20)
+pn.text(7.05, 15, '7.2 mg/kg/day → 15 mg/L', size=14, anchor='end', dy=-2)
+pn.text(8.15, 20, '8 mg/kg/day → 20 mg/L', size=14, dy=4)
+pn.text(11.85, 26, 'Vmax 12 mg/kg/day', size=14, color=DIM, anchor='end')   # beside its dashed line, below where the curve passes
 pn.label(0.4, 52, 'saturable drug', color=BLUE, swatch=True)
-pn.label(0.4, 44, 'linear, in proportion to R from 6 → 10', color=AMBER, swatch=True)
+pn.label(0.4, 44, 'a linear drug: level in proportion to R', color=AMBER, swatch=True)
 FIGS['nl_css_rate'] = ('Steady-state concentration against daily dose rate for a saturable drug, against a straight line for a linear one',
                        pn.svg('Css rising steeply as the dose rate nears Vmax'))
 
@@ -624,7 +628,7 @@ md.curve(lambda t: MC0 * math.exp(-MK * t), color=AMBER, dash='6 5', n=320)
 md.curve(md_curve, color=BLUE, n=1400)
 md.points([0, 8], [40.0, 10.0], color=AMBER)
 md.text(0.9, 42.5, '40', size=14)
-md.text(9.0, 7.0, '10', size=14)
+md.text(7.6, 6.0, '10', size=14, anchor='end')   # left of and below its point: the dashed first-dose curve ran through 9.0, 7.0
 md.text(63, 55.3, 'Cmax 53.3', size=14, anchor='end')
 md.text(63, 35.3, 'midpoint 33.3', size=14, color=DIM, anchor='end')
 md.text(63, 24.2, 'Cavg 28.9', size=14, color=AMBER, anchor='end')
@@ -654,7 +658,7 @@ def ss_panel(title, line, c0, tau, xs):
     p.hline(cmax, color=BLUE); p.hline(cmin, color=BLUE); p.hline(cav, color=AMBER)
     p.curve(lambda t: cmax * math.exp(-MK * (t % tau)), color=BLUE, n=900)
     p.text(15.8, cmax + 4, f'Cmax {cmax:.1f}', size=20, anchor='end', weight='600')
-    p.text(15.8, cav + 4, f'Cavg {cav:.1f}', size=20, color=AMBER, anchor='end', weight='600')
+    p.text(15.8, cav + 7, f'Cavg {cav:.1f}', size=20, color=AMBER, anchor='end', weight='600')   # clear of the falling curve in the 4-hour panel
     p.text(15.8, cmin - 9.5, f'Cmin {cmin:.1f}', size=20, anchor='end', weight='600')
     heading(p, title, line, big=1.2)
     return p
@@ -701,11 +705,12 @@ ti.vline(12, both(12))
 ti.points([2, 8, 12], [inf1(2), both(8), both(12)], color=BLUE)
 ti.text(2.2, inf1(2) + 1.4, '17.28', size=14)
 ti.text(8.2, both(8) + 1.4, '%.2f' % both(8), size=14)
-ti.text(12.2, both(12) + 1.4, '%.2f at 12 hr' % both(12), size=14)
-ti.text(12.15, inf2(12) - 1.3, 'second: %.2f' % inf2(12), size=13, color=AMBER)
-ti.text(12.15, inf1(12) - 1.3, 'first: %.2f' % inf1(12), size=13, color=AMBER)
+ti.text(12.2, both(12) + 2.6, '%.2f mg/L' % both(12), size=14); ti.text(12.2, both(12) + 1.0, 'at 12 hr', size=14)
+# left of the 12 hr line, below each curve: to the right of it each curve ran through its own label
+ti.text(11.85, inf2(12) - 1.6, 'second: %.2f mg/L' % inf2(12), size=13, color=AMBER, anchor='end')
+ti.text(11.85, inf1(12) - 1.6, 'first: %.2f mg/L' % inf1(12), size=13, color=AMBER, anchor='end')
 ti.text(1.0, 1.0, 'infusion 1', size=13, color=DIM)
-ti.text(6.1, 1.0, 'infusion 2', size=13, color=DIM)
+ti.text(6.3, 1.0, 'infusion 2', size=13, color=DIM)
 ti.label(0.3, 28.6, 'plasma concentration, the sum', color=BLUE, swatch=True)
 ti.label(0.3, 26.4, 'each infusion on its own', color=AMBER, swatch=True)
 heading(ti, 'Two 2-hour infusions of 300 mg, starting at 0 and 6 hours',
@@ -808,7 +813,7 @@ def md_s5(pl):
           [f'{pl.px(48 + 16 * j / 120 + 1e-6):.1f},{pl.py(md_curve(48 + 16 * j / 120 + 1e-6)):.1f}' for j in range(121)]
     pl.parts.append(f'<polyline points="{" ".join(pts)}" fill="none" stroke="{BLUE}" stroke-width="2" '
                     f'stroke-linecap="round" stroke-linejoin="round"/>')
-    pl.text(56, 8.0, 'no seventh dose', size=14, color=DIM, anchor='middle')
+    pl.text(53, 16.5, 'no seventh dose', size=14, color=DIM, anchor='middle')   # above the fall after 48 hr, not across it
 
 
 ms = Plot(64, [0, 10, 20, 30, 40, 50, 60], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
@@ -854,7 +859,7 @@ def ti_s2(pl):
 
 def ti_s3(pl):
     ti_s1(pl); seg(pl, 2, 6, inf1); pl.xband(6, 8)
-    pl.text(6.1, 1.0, 'infusion 2', size=13, color=DIM)
+    pl.text(6.3, 1.0, 'infusion 2', size=13, color=DIM)
     seg(pl, 6, 8, inf1, color=AMBER, dash='6 5'); seg(pl, 6, 8, inf2, color=AMBER, dash='2 5'); seg(pl, 6, 8, both)
     pl.points([8], [both(8)]); pl.text(8.2, both(8) + 1.4, '%.2f' % both(8), size=14)
     pl.label(0.3, 28.6, 'plasma concentration, the sum', color=BLUE, swatch=True)
@@ -865,9 +870,9 @@ def ti_s4(pl):
     ti_s3(pl)
     seg(pl, 8, 14, inf1, color=AMBER, dash='6 5'); seg(pl, 8, 14, inf2, color=AMBER, dash='2 5'); seg(pl, 8, 14, both)
     pl.vline(12, both(12)); pl.points([12], [both(12)])
-    pl.text(12.2, both(12) + 1.4, '%.2f at 12 hr' % both(12), size=14)
-    pl.text(12.15, inf2(12) - 1.3, 'second: %.2f' % inf2(12), size=13, color=AMBER)
-    pl.text(12.15, inf1(12) - 1.3, 'first: %.2f' % inf1(12), size=13, color=AMBER)
+    pl.text(12.2, both(12) + 2.6, '%.2f mg/L' % both(12), size=14); pl.text(12.2, both(12) + 1.0, 'at 12 hr', size=14)
+    pl.text(11.85, inf2(12) - 1.6, 'second: %.2f mg/L' % inf2(12), size=13, color=AMBER, anchor='end')
+    pl.text(11.85, inf1(12) - 1.6, 'first: %.2f mg/L' % inf1(12), size=13, color=AMBER, anchor='end')
 
 
 ts = Plot(14, [0, 5, 10, 15, 20, 25, 30], xlabel='Time (hours)', ylabel='Concentration (mg/L)',
@@ -940,7 +945,7 @@ def b1_s3(pl):
     b1_s2(pl)
     seg(pl, 0.0, 3.0, b1line, color=BLUE, dash='6 5')
     pl.points([0], [3.89], color=AMBER)
-    pl.text(0.12, 3.89, 'C0 = 3.89', size=14, dy=-10)
+    pl.text(0.12, 3.89, 'C0 = 3.89 mg/L', size=14, dy=-10)
 
 
 def b1_s4(pl):
@@ -951,9 +956,11 @@ def b1_s4(pl):
 
 def b1_s5(pl):
     b1_s3(pl)
-    seg(pl, 3.0, 7.6, b1line, color=BLUE, dash='6 5')
-    pl.vline(7.6, b1line(7.6)); pl.points([7.6], [b1line(7.6)])
-    pl.text(5.1, 0.17, 'ten half-lives: 0.1% left', size=13, color=DIM)
+    # The line leaves this axis at 0.1 mg/L, ln(3.89 / 0.1) / 0.91 = 4.0 hr. At 7.6 hr it is 3.89 x 0.5^10 = 0.004
+    # mg/L, far below the axis, so it is not drawn along the floor nor marked there as if it were 0.1 mg/L.
+    seg(pl, 3.0, math.log(3.89 / 0.1) / 0.91, b1line, color=BLUE, dash='6 5')
+    pl.text(4.4, 0.2, '7.6 hr, ten half-lives: 0.1% of C0 left,', size=13, color=DIM)
+    pl.text(4.4, 0.145, 'about 0.004 mg/L, below this axis', size=13, color=DIM)
     pl.points([3.0], [0.25], color=AMBER); pl.text(3.4, 0.55, '3 hr: 3.2 mg in the body', size=13)
 
 
@@ -993,7 +1000,7 @@ heading(ins, 'An infusion at 44.35 mg/hr: t½ 5 hr, VD 16 L',
 
 def in_s1(pl):
     seg(pl, 0, 3, inf_on)
-    pl.points([3], [inf_on(3)]); pl.text(3.3, inf_on(3), '%.1f at 3 hr' % inf_on(3), size=14, dy=-6)
+    pl.points([3], [inf_on(3)]); pl.text(3.3, inf_on(3), '%.1f mg/L at 3 hr' % inf_on(3), size=14, dy=-6)
 
 
 def in_s2(pl):
@@ -1001,14 +1008,14 @@ def in_s2(pl):
     pl.hline(ICSS, color=DIM); pl.text(0.4, ICSS + 0.8, 'Css = 20 mg/L', size=14, color=DIM)
     for n, t in ((1, 5), (3, 15), (5, 25)):
         pl.points([t], [inf_on(t)])
-        pl.text(t + 0.4, inf_on(t) - 1.4, '%d t½: %.1f' % (n, inf_on(t)), size=13)
+        pl.text(t + 0.4, inf_on(t) - 1.4, '%d t½: %.1f mg/L' % (n, inf_on(t)), size=13)
 
 
 def in_s3(pl):
     in_s2(pl)
     seg(pl, 3, 14, inf_stop3, color=AMBER, dash='6 5')
     pl.points([3, 7], [inf_on(3), inf_stop3(7)], color=AMBER)
-    pl.text(7.3, inf_stop3(7), '%.1f, 4 hr after stopping at 3 hr' % inf_stop3(7), size=13, color=AMBER, dy=6)
+    pl.text(7.3, inf_stop3(7), '%.1f mg/L, 4 hr after stopping at 3 hr' % inf_stop3(7), size=13, color=AMBER, dy=-8)
 
 
 stepped('infusion_steps', 'IV infusion: the climb to steady state, and the fall when it stops', ins, [
@@ -1018,7 +1025,7 @@ stepped('infusion_steps', 'IV infusion: the climb to steady state, and the fall 
         'VD, the apparent volume of distribution, is 16 L. Three hours in: C = {{frac:R|VD × k}}(1 − e^(−kt)) = {{frac:44.35|16 × 0.1386}}(1 − e^(−0.1386 × 3)) = %.1f mg/L, her part 3.' % inf_on(3)), in_s1),
     ('the climb to steady state', lines(
         'Css, the steady-state concentration, is where rate in equals rate out: Css = {{frac:R|k × VD}} = {{frac:44.35|0.1386 × 16}} = %.0f mg/L.' % ICSS,
-        'The climb is set by the half-life alone. After 1 half-life (5 hr) the level is half of Css, %.1f; after 3 half-lives (15 hr) 87.5%%, %.1f; after 5 half-lives (25 hr) 96.9%%, %.1f.' % (inf_on(5), inf_on(15), inf_on(25)),
+        'The climb is set by the half-life alone. After 1 half-life (5 hr) the level is half of Css, %.1f mg/L; after 3 half-lives (15 hr) 87.5%%, %.1f mg/L; after 5 half-lives (25 hr) 96.9%%, %.1f mg/L.' % (inf_on(5), inf_on(15), inf_on(25)),
         'A faster rate would raise the plateau, not shorten the climb.'), in_s2),
     ('if it stops at 3 hr', lines(
         'Her part 4: the infusion is switched off at 3 hr, at %.1f mg/L. Nothing comes in, so the level falls by first-order elimination alone.' % inf_on(3),
@@ -1041,13 +1048,13 @@ heading(lds, 'A 320 mg loading dose with the 44.35 mg/hr infusion',
 
 def ld_s1(pl):
     seg(pl, 0, 24, ld_bolus, color=AMBER, dash='6 5')
-    pl.points([3], [ld_bolus(3)], color=AMBER); pl.text(3.3, ld_bolus(3), 'bolus part: %.1f at 3 hr' % ld_bolus(3), size=13, color=AMBER, dy=-6)
+    pl.points([3], [ld_bolus(3)], color=AMBER); pl.text(3.3, ld_bolus(3) + 1.4, 'bolus part: %.1f mg/L' % ld_bolus(3), size=13, color=AMBER)   # the heading gives 3 hours
 
 
 def ld_s2(pl):
     ld_s1(pl)
     seg(pl, 0, 24, inf_on, color=AMBER, dash='2 5')
-    pl.points([3], [inf_on(3)], color=AMBER); pl.text(3.3, inf_on(3), 'infusion part: %.1f at 3 hr' % inf_on(3), size=13, color=AMBER, dy=12)
+    pl.points([3], [inf_on(3)], color=AMBER); pl.text(3.3, inf_on(3), 'infusion part: %.1f mg/L' % inf_on(3), size=13, color=AMBER, dy=30)
 
 
 def ld_s3(pl):
@@ -1060,7 +1067,7 @@ def ld_s4(pl):
     seg(pl, 0, 24, ld_sum, color=BLUE)
     seg(pl, 0, 24, inf_on, color=AMBER, dash='2 5')
     pl.points([16.6], [inf_on(16.6)], color=AMBER)
-    pl.text(10.0, inf_on(16.6) - 2.6, 'infusion alone: 90% of Css only at 16.6 hr', size=13, color=AMBER)
+    pl.text(12.8, 15.2, 'infusion alone: 90% of Css only at 16.6 hr', size=13, color=AMBER)
 
 
 stepped('loading_steps', 'Loading dose with an infusion: why the level is flat from the start', lds, [
@@ -1096,28 +1103,30 @@ heading(ors, 'A single 500 mg oral dose: her Example 1',
 
 def or_s1(pl):
     seg(pl, 0, OTMAX, oral1)
-    pl.text(0.3, 9.0, 'absorption faster than elimination: the level rises', size=13, color=DIM)
+    pl.text(0.25, 14.0, 'absorption faster than elimination: the level rises', size=13, color=DIM)   # above the curve and the tmax line
 
 
 def or_s2(pl):
     or_s1(pl)
     pl.points([OTMAX], [OCMAX]); pl.vline(OTMAX, OCMAX)
-    pl.text(OTMAX + 0.25, OCMAX + 0.3, 'Cmax %.2f at tmax %.0f hr' % (OCMAX, OTMAX), size=14)
+    pl.text(OTMAX + 0.25, OCMAX + 0.3, 'Cmax %.2f mg/L at tmax %.0f hr' % (OCMAX, OTMAX), size=14)
 
 
 def or_s3(pl):
     or_s2(pl)
     seg(pl, OTMAX, 12, oral1)
-    pl.points([8], [oral1(8)]); pl.text(8.3, oral1(8) + 0.4, '%.2f at 8 hr' % oral1(8), size=13)
+    pl.points([8], [oral1(8)]); pl.text(8.3, oral1(8) + 0.4, '%.2f mg/L at 8 hr' % oral1(8), size=13)
     pl.text(6.0, 7.4, 'elimination faster than absorption: the level falls', size=13, color=DIM)
 
 
 def or_s4(pl):
     seg(pl, 0, 12, oral1)
-    seg(pl, 0, 12, lambda t: OA * math.exp(-OK * t), color=AMBER, dash='6 5')
-    seg(pl, 0, 3.5, lambda t: OA * math.exp(-OKA * t), color=AMBER, dash='2 5')
-    pl.text(0.2, 13.9, '25.76 e^(−kt), the elimination term', size=13, color=AMBER)
-    pl.text(1.1, 1.0, '25.76 e^(−ka t), the absorption term', size=13, color=AMBER)
+    # Each term starts at 25.76 mg/L, above this 15 mg/L axis; each is drawn from where it comes down to 15,
+    # so neither runs up through the heading.
+    seg(pl, math.log(OA / 15) / OK, 12, lambda t: OA * math.exp(-OK * t), color=AMBER, dash='6 5')
+    seg(pl, math.log(OA / 15) / OKA, 3.5, lambda t: OA * math.exp(-OKA * t), color=AMBER, dash='2 5')
+    pl.text(3.4, 12.6, '25.76 e^(−kt), the elimination term', size=13, color=AMBER)
+    pl.text(3.65, 1.0, '25.76 e^(−ka t), the absorption term', size=13, color=AMBER)
     pl.text(6.0, 11.0, 'the curve is the difference of the two', size=13, color=DIM)
 
 
@@ -1134,7 +1143,7 @@ stepped('oral_steps', 'A single oral dose, from her Example 1 to the peak and be
         'Once the absorption site is empty the fall is elimination alone, with the slope k.'), or_s3),
     ('the two terms behind the curve', lines(
         'The equation is a difference of two exponentials with the same front factor, {{frac:F ka D0|VD (ka − k)}} = %.2f mg/L.' % OA,
-        'The elimination term, 25.76 e^(−kt), falls slowly; the absorption term, 25.76 e^(−ka t), falls fast. The curve is the first minus the second.',
+        'The elimination term, 25.76 e^(−kt), falls slowly; the absorption term, 25.76 e^(−ka t), falls fast. Both start at 25.76 mg/L at time zero, above the top of this axis. The curve is the first minus the second.',
         'The front factor is not C0 (the time-zero concentration an IV bolus of the same amount would give): no concentration on an oral curve is ever as high as it.'), or_s4),
 ], footer='5---Pharmacokinetics-of-Oral-Absorption.pdf, slide "Example 1"; transcript 09-21')
 
@@ -1162,14 +1171,16 @@ heading(mos, '250 mg tetracycline every 8 hours: her Example 1',
 
 def mo_s1(pl):
     seg(pl, 0, 8, m_one)
-    pl.points([MT1], [m_one(MT1)]); pl.text(MT1 + 0.6, m_one(MT1) + 0.12, 'dose 1: Cmax %.2f at %.1f hr' % (m_one(MT1), MT1), size=13)
+    pl.points([MT1], [m_one(MT1)]); pl.text(MT1 + 0.6, m_one(MT1) + 0.12, 'dose 1: Cmax %.2f mg/L at %.1f hr' % (m_one(MT1), MT1), size=13)
 
 
 def mo_s2(pl):
-    mo_s1(pl)
+    # the dose 1 label stays in step 1: here the rise of dose 2 at 8 hr would run through it
+    seg(pl, 0, 8, m_one); pl.points([MT1], [m_one(MT1)])
     seg(pl, 8, 16, m_tot)
     seg(pl, 8, 16, lambda t: m_one(t), color=AMBER, dash='6 5')
-    pl.text(16.6, 0.45, 'dose 2 on top of what is left', size=13, color=DIM)
+    pl.label(26, 0.45, 'the first dose alone', color=AMBER, swatch=True)
+    pl.text(11.6, 2.32, 'dose 2 on top of what is left', size=13, color=DIM)
 
 
 def mo_s3(pl):
@@ -1184,7 +1195,7 @@ def mo_s4(pl):
     seg(pl, 72, 80, m_tot)
     pl.hline(MCMAXSS, color=BLUE); pl.hline(MCMINSS, color=BLUE); pl.hline(MCAVG, color=AMBER)
     pl.text(79, MCMAXSS + 0.12, 'Cmax∞ %.2f' % MCMAXSS, size=13, anchor='end')
-    pl.text(79, MCAVG - 0.2, 'Cavg∞ %.2f' % MCAVG, size=13, anchor='end', color=AMBER)
+    pl.text(0.8, MCAVG - 0.2, 'Cavg∞ %.2f' % MCAVG, size=13, color=AMBER)   # at the left end: on the right the curve crosses this line
     pl.text(79, MCMINSS - 0.2, 'Cmin∞ %.2f' % MCMINSS, size=13, anchor='end')
 
 
@@ -1222,21 +1233,23 @@ heading(tws, 'Theophylline after an IV bolus: her practice slide',
 
 def tw_s1(pl):
     seg(pl, 0, 8, two_all)
-    pl.points([0], [two_all(0)]); pl.text(0.15, 30, 'C0 = 12 + 18 = 30', size=14, dy=-8)
+    pl.points([0], [two_all(0)]); pl.text(0.15, 30, 'C0 = 12 + 18 = 30 mg/L', size=14, dy=-8)
     pl.text(0.5, 60, 'steep at first, then one straight line', size=13, color=DIM)
 
 
 def tw_s2(pl):
     tw_s1(pl)
     seg(pl, 0, 8, two_b, color=AMBER, dash='6 5')
-    pl.points([0], [TB], color=AMBER); pl.text(0.15, TB, 'B = 18', size=14, color=AMBER, dy=14)
-    pl.text(4.2, two_b(4.2), 'slope β = 0.16 hr⁻¹', size=13, color=AMBER, dy=-10)
+    # B is named on its line: beside the intercept the curve and the line both ran through the label
+    pl.points([0], [TB], color=AMBER)
+    pl.text(2.2, two_b(2.2), 'terminal line: B = 18 mg/L at t = 0, slope β = 0.16 hr⁻¹', size=13, color=AMBER, dy=-10)
 
 
 def tw_s3(pl):
     tw_s2(pl)
-    seg(pl, 0, 1.0, two_a, color=AMBER, dash='2 5')
-    pl.points([0], [TA], color=AMBER); pl.text(0.15, TA, 'A = 12', size=14, color=AMBER, dy=14)
+    # the residual term reaches the 1 mg/L floor of this axis at ln 12 / 5.8 = 0.43 hr; it is not drawn along the floor
+    seg(pl, 0, math.log(TA) / TAL, two_a, color=AMBER, dash='2 5')
+    pl.points([0], [TA], color=AMBER); pl.text(0.15, TA, 'A = 12 mg/L', size=14, color=AMBER, dy=14)
     pl.text(1.1, 2.5, 'residuals: curve minus the line, slope α = 5.8 hr⁻¹', size=13, color=AMBER)
 
 
@@ -1244,7 +1257,7 @@ def tw_s4(pl):
     seg(pl, 0, 8, two_all)
     seg(pl, 0, 8, two_b, color=AMBER, dash='6 5')
     pl.vline(3, two_all(3)); pl.points([3], [two_all(3)])
-    pl.text(3.15, two_all(3), '%.2f at 3 hr' % two_all(3), size=14, dy=-8)
+    pl.text(3.15, two_all(3), '%.2f mg/L at 3 hr' % two_all(3), size=14, dy=-8)
 
 
 stepped('twocpt_steps', 'Two-compartment IV bolus: reading A, B, α and β off her theophylline curve', tws, [
@@ -1348,7 +1361,7 @@ def m8_intermit(pan):
         return r / MK8 * (1 - math.exp(-MK8 * dur)) * math.exp(-MK8 * (t - start - dur))
     pan.curve(lambda t: one(t, 0) + one(t, gap) + one(t, 2 * gap), color=BLUE, n=1200)
     pan.text(2.2, 7.4, 'rises while infusing', size=15, color=DIM)
-    pan.text(4.2, 3.6, 'falls between', size=15, color=DIM)
+    pan.text(2.9, 5.2, 'falls between', size=15, color=DIM)   # above the fall; at 4.2, 3.6 the next rise ran through it
 
 
 def m8_mdoral(pan):
@@ -1418,7 +1431,7 @@ for n in range(1, 5):
     hl2.text(n, 100 * (1 - 0.5 ** n), '%g' % (100 * (1 - 0.5 ** n)), size=13, anchor='middle', dy=18)
 for n, pct, anc, dy in ((3.3, 90, 'end', -10), (4.32, 95, 'start', 22), (6.6, 99, 'start', -8)):
     hl2.vline(n, pct, color=AMBER); hl2.points([n], [pct], color=AMBER)
-    hl2.text(n + (0.12 if anc == 'start' else -0.12), pct, f'{pct}% at {n:g} half-lives', size=13, color=AMBER, anchor=anc, dy=dy)
+    hl2.text(n + (0.08 if anc == 'start' else -0.08), pct, f'{pct}% at {n:g} half-lives', size=12.5, color=AMBER, anchor=anc, dy=dy)   # at 13 the 6.6 line ran through the end of the 95% label
 stack('halflife_ladder', 'The half-life ladder: what is left after each half-life, and how close a regimen is to steady state',
       [hl1, hl2], HL_W, HL_H)
 
@@ -1440,7 +1453,7 @@ for x in (0.5, 1, 2, 3, 4):
     elif x == 3:
         af.text(x, accum(x), 'R = %.2f' % accum(x), size=14, anchor='middle', dy=-24)
     elif x == 1:
-        af.text(x + 0.1, accum(x), 'R = %.2f' % accum(x), size=14, dy=20)
+        af.text(x - 0.06, accum(x), 'R = %.2f' % accum(x), size=14, anchor='end', dy=20)   # left of the curve, which ran through x + 0.1
     else:
         af.text(x + 0.08, accum(x), 'R = %.2f' % accum(x), size=14, dy=-6 if x > 0.5 else 4)
 af.hline(2, color=AMBER)
@@ -1606,7 +1619,7 @@ def nlr_s1(pl):
 
 def nlr_s2(pl):
     nlr_s1(pl); pl.hline(NL_VM, color=AMBER)
-    pl.text(59, 12.5, 'Vmax 12: the fastest it can go', size=18, color=AMBER, anchor='end')
+    pl.text(59, 12.5, 'Vmax 12 mg/kg/day: the fastest it can go', size=18, color=AMBER, anchor='end')
 
 
 def nlr_s3(pl):
@@ -1637,8 +1650,14 @@ def nlr_s5f(pl):
 
 
 def nlr_s6(pl):
-    nlr_s5f(pl); pl.points([20], [8], color=AMBER)
-    pl.text(21.2, 7.0, 'Cp 20: rate 8 = two thirds of Vmax', size=18)
+    # read as in step 3: a dashed line across to the rate axis and the rate beside the point; the Cp is
+    # named just above the point, since a line down to the Cp axis would strike the half-of-Vmax and KM labels
+    nlr_s5f(pl)
+    pl.parts.append(f'<line x1="{pl.L}" y1="{pl.py(8):.1f}" x2="{pl.px(20):.1f}" y2="{pl.py(8):.1f}" '
+                    f'stroke="{DIM}" stroke-width="1.5" stroke-dasharray="5 4"/>')
+    pl.points([20], [8], color=AMBER)
+    pl.text(21.0, 7.3, '← two thirds of Vmax: 8 mg/kg/day', size=17, color=AMBER)
+    pl.text(19.0, 8.75, 'Cp = 20 mg/L', size=17, anchor='middle')   # straight above the point
 
 
 stepped('nl_rate_steps', 'Elimination rate against plasma concentration for a saturable drug', nlr_plot(), [
@@ -1648,13 +1667,13 @@ stepped('nl_rate_steps', 'Elimination rate against plasma concentration for a sa
     ('Well below KM', 'The rate rises in proportion to Cp: twice the level, about twice the rate. It depends on concentration: first order.', nlr_s4),
     ('Well above KM', 'The rate stays near Vmax whatever the level. It is independent of concentration: zero order.', nlr_s5),
     ('The formula', 'rate = {{frac:Vmax Cp|KM + Cp}}. Cp ≪ KM: rate ≈ {{frac:Vmax|KM}} Cp = 1.2 Cp, first order. Cp ≫ KM: rate ≈ Vmax, zero order. Her example: KM 10 mg/L, Vmax 12 mg/kg/day; at steady state the daily dose rate equals this elimination rate.', nlr_s5f),
-    ('Her two levels', 'Cp 10 gives 6 and Cp 20 gives {{frac:12 × 20|10 + 20}} = 8 mg/kg/day: her two dose rates.', nlr_s6),
+    ('Her two levels', 'Cp 10 mg/L gives a rate of 6 mg/kg/day, and Cp 20 mg/L gives {{frac:12 × 20|10 + 20}} = 8 mg/kg/day: her two dose rates. Each Cp is read on the Cp axis and each rate on the rate axis.', nlr_s6),
 ], footer='8 - Nonlinear PK.pdf, slide "Example" (KM and Vmax from her working); rate law from slide "Saturable-Enzymatic Elimination Processes"')
 
 
 # ---- Module 1, step by step: her two tables, first order against zero order ----
 # Her practice set (guide 1.4): first order k 0.0866 hr^-1, C0 350 (294.3 ... 5.5 at 2-48 hr);
-# zero order k 6 per hr, C0 350 (338 ... 62 at the same times). 12->24 hr loses 123.8 - 43.8 = 80.0 and
+# zero order k 6 mg/mL per hr, C0 350 mg/mL (338 ... 62 at the same times; this table is in mg/mL, the other in mg/L). 12->24 hr loses 123.8 - 43.8 = 80.0 and
 # 24->36 hr 43.8 - 15.5 = 28.3, ratio 2.83 both; zero order loses 72 each 12 hr (35% of 206, 54% of 134).
 # Half-lives: first order 0.693/0.0866 = 8.0 hr at any level; zero order C0/2k = 350/12 = 29.2 hr, 175/12 = 14.6 hr.
 ORD_T = [2, 6, 12, 24, 36, 48]
@@ -1668,40 +1687,44 @@ def ord_plot():
 
 
 def ord_s1(pl):
+    # The two tables are in different units (mg/L and mg/mL), so each label names its table's unit.
+    # Every label sits where no curve or line of this or a later step crosses it.
     pl.curve(lambda t: 350 * math.exp(-0.0866 * t)); pl.points(ORD_T, ORD_F)
-    pl.text(9, 230, 'first-order table: a curve', size=18, color=BLUE)
+    pl.text(47, 306, 'first-order table (mg/L): a curve', size=18, color=BLUE, anchor='end')
 
 
 def ord_s2(pl):
     ord_s1(pl)
     pl.vline(12, 123.8, color=BLUE); pl.vline(24, 43.8, color=BLUE); pl.vline(36, 15.5, color=BLUE)
-    pl.text(13, 95, '12 to 24 hr: 80.0 lost', size=17); pl.text(25, 60, '24 to 36 hr: 28.3 lost', size=17)
-    pl.text(25, 34, 'same ratio, 2.83: same fraction', size=17)
+    pl.text(12.5, 140, '12 to 24 hr: 80.0 mg/L lost', size=17); pl.text(24.6, 66, '24 to 36 hr: 28.3 mg/L lost', size=17)
+    pl.text(25, 47, 'same ratio, 2.83: same fraction', size=17)
 
 
 def ord_s3(pl):
     ord_s2(pl); pl.curve(lambda t: 350 - 6 * t, color=AMBER); pl.points(ORD_T, ORD_Z, color=AMBER)
-    pl.text(47, 330, 'zero-order table: a straight line', size=18, color=AMBER, anchor='end')
+    pl.text(47, 330, 'zero-order table (mg/mL): a straight line', size=18, color=AMBER, anchor='end')
 
 
 def ord_s4(pl):
     ord_s3(pl)
-    pl.text(30, 205, '72 lost every 12 hr: 35% of 206, then 54% of 134', size=17, color=AMBER, anchor='middle')
+    pl.text(47.5, 270, '72 mg/mL lost every 12 hr:', size=17, color=AMBER, anchor='end')
+    pl.text(47.5, 250, '35% of 206, then 54% of 134', size=17, color=AMBER, anchor='end')
 
 
 def ord_s5(pl):
     ord_s4(pl); pl.hline(175, color=DIM)
     pl.points([8, 29.2], [175, 175], color=INK)
-    pl.text(8.6, 186, 'first order: half gone at 8 hr, from any level', size=16)
-    pl.text(47, 150, 'zero order: 29.2 hr from 350, 14.6 hr from 175', size=16, anchor='end')
+    pl.text(8.6, 202, 'first order: half gone', size=15); pl.text(8.6, 183.5, 'in 8 hr, from any level', size=15)
+    pl.text(47.5, 222, 'zero order: half gone in 29.2 hr', size=15, anchor='end')
+    pl.text(47.5, 203, 'from 350, in 14.6 hr from 175', size=15, anchor='end')
 
 
 stepped('orders_steps', 'Her two tables: first order against zero order', ord_plot(), [
-    ('First order', 'Her first-order table: 294.3, 208.1, 123.8, 43.8, 15.5, 5.5 at 2 to 48 hr, on C = 350e^(−0.0866t).', ord_s1),
-    ('Same fraction', 'Equal time spans lose a smaller amount each time (80.0, then 28.3) but the same fraction: {{frac:123.8|43.8}} = {{frac:43.8|15.5}} = 2.83.', ord_s2),
-    ('Zero order', 'Her zero-order table: 338, 314, 278, 206, 134, 62 at the same times, on C = 350 − 6t.', ord_s3),
-    ('Same amount', 'Equal time spans lose the same amount (72 every 12 hr), so the fraction grows: 35%, then 54%.', ord_s4),
-    ('Half-lives', 'First order: t½ = {{frac:0.693|k}} = 8.0 hr from any level. Zero order: t½ = {{frac:C0|2k}} = 29.2 hr from 350, 14.6 hr from 175.', ord_s5),
+    ('First order', 'Her first-order table: 294.3, 208.1, 123.8, 43.8, 15.5 and 5.5 mg/L at 2 to 48 hr, on C = 350e^(−0.0866t).', ord_s1),
+    ('Same fraction', 'Equal time spans lose a smaller amount each time (80.0 mg/L, then 28.3 mg/L) but the same fraction: {{frac:123.8|43.8}} = {{frac:43.8|15.5}} = 2.83.', ord_s2),
+    ('Zero order', 'Her zero-order table is in mg/mL, not mg/L: 338, 314, 278, 206, 134 and 62 mg/mL at the same times, on C = 350 − 6t. The two tables share one axis so that their shapes can be compared.', ord_s3),
+    ('Same amount', 'Equal time spans lose the same amount (72 mg/mL every 12 hr), so the fraction grows: 35%, then 54%.', ord_s4),
+    ('Half-lives', 'First order: t½ = {{frac:0.693|k}} = 8.0 hr from any level. Zero order: t½ = {{frac:C0|2k}} = {{frac:350 mg/mL|2 × 6 mg/mL per hr}} = 29.2 hr from 350 mg/mL, and 14.6 hr from 175 mg/mL.', ord_s5),
 ], footer='Her Module 1 practice tables and keys (guide, objective 4)')
 
 
@@ -1719,7 +1742,7 @@ def ir_plot():
 
 def ir_s1(pl):
     pl.curve(ir_c(50)); pl.hline(14.43, color=BLUE)
-    pl.text(35, 13.0, '50 mg/hr → Css 14.4 mg/L', size=18, color=BLUE, anchor='end')
+    pl.text(35, 11.4, '50 mg/hr → Css 14.4 mg/L', size=18, color=BLUE, anchor='end')   # below the curve, which ran through 13.0
 
 
 def ir_s2(pl):
@@ -1755,7 +1778,7 @@ def rn_plot():
 
 def rn_s1(pl):
     pl.curve(rn_c(115.5, 11.55)); pl.hline(10, color=BLUE)
-    pl.points([25.9], [9.5]); pl.text(47, 8.6, 'normal: 10 mg/L, 95% at 25.9 hr', size=17, color=BLUE, anchor='end')
+    pl.points([25.9], [9.5]); pl.text(47, 10.45, 'normal: 10 mg/L, 95% at 25.9 hr', size=17, color=BLUE, anchor='end')   # above its plateau line
 
 
 def rn_s2(pl):
@@ -1766,7 +1789,7 @@ def rn_s2(pl):
 def rn_s3(pl):
     rn_s2(pl); pl.curve(rn_c(85.5, 8.55), color=INK, dash='6 5'); pl.points([35.0], [9.5], color=INK)
     pl.text(47, 5.6, 'rate lowered to 85.5 mg/hr: 10 mg/L, 95% at 35.0 hr', size=16, anchor='end')
-    pl.text(47, 2.6, 'loading dose 10 × 100 = 1000 mg either way', size=16, anchor='end')
+    pl.text(47, 2.6, 'loading dose 10 mg/L × 100 L = 1000 mg either way', size=16, anchor='end')
 
 
 stepped('renal_steps', 'Renal failure on an infusion: a higher plateau, then a lower rate, and a longer climb', rn_plot(), [
@@ -1790,12 +1813,12 @@ def lm_plot():
 
 
 def lm_s1(pl):
-    pl.curve(lm_c(288)); pl.text(23, 26.0, 'loading dose 288 mg: flat at 24 mg/L from the start', size=17, color=BLUE, anchor='end')
+    pl.curve(lm_c(288)); pl.text(0.5, 22.2, 'loading dose 288 mg: flat at 24 mg/L', size=17, color=BLUE)   # below its line: the 388 mg curve crosses the space above it
 
 
 def lm_s2(pl):
     lm_s1(pl); pl.curve(lm_c(388), color=AMBER); pl.points([0, 2], [388 / 12, lm_c(388)(2)], color=AMBER)
-    pl.text(1, 33.6, '388 mg: starts at 32.3, falls to the plateau', size=17, color=AMBER)
+    pl.text(1, 33.6, '388 mg: starts at 32.3 mg/L, falls to the plateau', size=17, color=AMBER)
 
 
 def lm_s3(pl):
@@ -1805,7 +1828,7 @@ def lm_s3(pl):
 
 stepped('loading_miss_steps', 'Loading dose with an infusion: right, too large, or none', lm_plot(), [
     ('Right size', 'Her Example 8: R 50 mg/hr, k 0.17325 hr⁻¹, VD 12 L, Css 24 mg/L. DL = Css × VD = 288 mg: the level is flat from the start.', lm_s1),
-    ('Too large', '388 mg starts the level at {{frac:388|12}} = 32.3 mg/L (29.9 at 2 hr); it falls to the plateau the infusion sets.', lm_s2),
+    ('Too large', '388 mg starts the level at {{frac:388|12}} = 32.3 mg/L (29.9 mg/L at 2 hr); it falls to the plateau the infusion sets.', lm_s2),
     ('None', 'With no loading dose the level climbs from zero: 12 mg/L at 4 hr, 90% of the plateau at 13.3 hr.', lm_s3),
 ], footer='Infusion deck, her Example 8 and her rework with 388 mg')
 
@@ -1823,22 +1846,24 @@ def th_plot():
 
 
 def th_s1(pl):
-    pl.hline(20, color=AMBER); pl.text(13.8, 22, 'MEC 20 mg/L', size=17, color=AMBER, anchor='end')
+    # The dose lines are parallel on this log axis, so a label between two of them is crossed by the upper
+    # one. The three dose labels stand as a key at the top right, above every line, in the lines' order.
+    pl.hline(20, color=AMBER); pl.text(0.3, 21.5, 'MEC 20 mg/L', size=17, color=AMBER)
 
 
 def th_s2(pl):
     th_s1(pl); pl.curve(lambda t: 80 * math.exp(-TH_K * t)); pl.points([0, 4, 8], [80, 40, 20])
-    pl.text(0.3, 92, '1 g: 80 → 40 → 20, two halvings, 8 hr', size=17, color=BLUE)
+    pl.text(13.8, 110, '1 g: 80 → 40 → 20 mg/L, two halvings, 8 hr', size=17, color=BLUE, anchor='end')
 
 
 def th_s3(pl):
     th_s2(pl); pl.curve(lambda t: 40 * math.exp(-TH_K * t), color=INK, dash='6 5'); pl.points([4], [20], color=INK)
-    pl.text(0.3, 30, '500 mg: 40 → 20, one halving, 4 hr', size=17)
+    pl.text(13.8, 90, '500 mg: 40 → 20 mg/L, one halving, 4 hr', size=17, anchor='end')
 
 
 def th_s4(pl):
     th_s3(pl); pl.curve(lambda t: 160 * math.exp(-TH_K * t), color=AMBER); pl.points([0, 12], [160, 20], color=AMBER)
-    pl.text(13.8, 120, '2 g: 160 → 20, three halvings, 12 hr (not 16)', size=17, color=AMBER, anchor='end')
+    pl.text(13.8, 135, '2 g: 160 → 20 mg/L, three halvings, 12 hr (not 16)', size=17, color=AMBER, anchor='end')
 
 
 stepped('teff_halvings_steps', 'Duration of action: count the halvings from C0 down to the MEC', th_plot(), [
@@ -1872,7 +1897,8 @@ def nlf_s1(pl):
 
 def nlf_s2(pl):
     nlf_s1(pl); pl.points([6, 15, 21], [nl_frac(6), nl_frac(15), nl_frac(21)], color=AMBER)
-    pl.text(6.6, 0.64, 'Cp 6: 0.59', size=17); pl.text(15.6, 0.415, 'Cp 15: 0.37', size=17); pl.text(21.6, 0.25, 'Cp 21: 0.30', size=17)
+    pl.text(6.6, 0.64, 'Cp 6 mg/L: 0.59 per day', size=17); pl.text(15.6, 0.415, 'Cp 15 mg/L: 0.37 per day', size=17)
+    pl.text(29.5, 0.335, 'Cp 21 mg/L: 0.30 per day', size=17, anchor='end')   # above the curve, which ran through 21.6, 0.25
 
 
 def nlf_s3(pl):
@@ -1882,7 +1908,7 @@ def nlf_s3(pl):
 
 def nlf_s4(pl):
     nlf_s3(pl)
-    pl.text(29, 0.06, 't½ = 0.693 ÷ fraction: 1.17, 1.87, 2.34 days', size=17, anchor='end')
+    pl.text(29, 0.06, 't½ = 0.693 ÷ fraction: 1.17, 1.87, 2.34 days at Cp 6, 15, 21 mg/L', size=17, anchor='end')
 
 
 stepped('nl_frac_steps', 'Fraction of the drug removed per day against plasma concentration', nlf_plot(), [
@@ -1907,22 +1933,22 @@ def ncs_s1(pl):
     rmax = NL_VM * 60 / 70
     pts = ' '.join(f'{pl.px(r):.1f},{pl.py(r * NL_KM / (NL_VM - r)):.1f}' for r in (rmax * i / 260 for i in range(261)))
     pl.parts.append(f'<polyline points="{pts}" fill="none" stroke="{BLUE}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
-    pl.vline(NL_VM, 60); pl.text(11.85, 56, 'Vmax 12', size=18, color=DIM, anchor='end')
+    pl.vline(NL_VM, 60); pl.text(11.85, 31, 'Vmax', size=18, color=DIM, anchor='end'); pl.text(11.85, 26.5, '12 mg/kg/day', size=18, color=DIM, anchor='end')   # two lines fit between the curve and its dashed line
     pl.label(0.4, 52, 'her saturable drug: Css = R KM / (Vmax - R)', color=BLUE, swatch=True)
 
 
 def ncs_s2(pl):
-    ncs_s1(pl); pl.points([6], [10]); pl.text(6.2, 10, '6 → 10', size=18, dy=20)
+    ncs_s1(pl); pl.points([6], [10]); pl.text(6.2, 10, '6 mg/kg/day → 10 mg/L', size=18, dy=20)
 
 
 def ncs_s3(pl):
     ncs_s2(pl); pl.curve(lambda r: 10 / 6 * r, color=AMBER, dash='6 5')
-    pl.points([8], [10 * 8 / 6], color=AMBER); pl.text(8.25, 13.3, 'linear: 13.3', size=18, color=AMBER, dy=12)
+    pl.points([8], [10 * 8 / 6], color=AMBER); pl.text(8.25, 13.3, 'linear: 13.3 mg/L', size=18, color=AMBER, dy=12)
     pl.label(0.4, 44, 'a linear drug: level in proportion to R', color=AMBER, swatch=True)
 
 
 def ncs_s4(pl):
-    ncs_s3(pl); pl.points([8], [20]); pl.text(7.9, 20, '8 → 20', size=18, anchor='end', dy=-6)
+    ncs_s3(pl); pl.points([8], [20]); pl.text(7.9, 20, '8 mg/kg/day → 20 mg/L', size=18, anchor='end', dy=-10)
 
 
 stepped('nl_css_steps', 'Steady-state level against daily dose rate: a saturable drug against a linear one', ncs_plot(), [

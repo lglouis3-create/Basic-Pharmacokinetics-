@@ -80,7 +80,7 @@
    "fig": null
   },
   {
-   "text": "Collecting urine until drug no longer appears gives the cumulative amount excreted unchanged, D u infinity. Divided by the dose that reached the body, F times D zero, it gives f e, the fraction excreted unchanged, which has no units. f e is also the kidney's share of the elimination rate constant: it equals k e over k, where k e is the excretion rate constant, so k e equals f e times k. The kidney's share of the clearance is the same fraction, so Cl R equals f e times Cl T, and hepatic clearance, Cl H, is the rest, one minus f e times Cl T, or Cl T minus Cl R. She said, lowercase f e is our fraction excreted, capital F is our bioavailability factor.",
+   "text": "Collecting urine until drug no longer appears gives the cumulative amount excreted unchanged, D u infinity. Divided by the dose that reached the body, F times D zero, it gives f e, the fraction excreted unchanged, which has no units. f e is also the kidney's share of the elimination rate constant: it equals k e over k, where k e is the excretion rate constant, so k e equals f e times k. The kidney's share of the clearance is the same fraction, so Cl R equals f e times Cl T, and hepatic clearance, Cl H, is the rest: one minus f e, times Cl T, or Cl T minus Cl R. She said, lowercase f e is our fraction excreted, capital F is our bioavailability factor.",
    "slide": "cl:10",
    "card": [
     {
@@ -115,7 +115,7 @@
    "fig": null
   },
   {
-   "text": "Her slide example: five hundred milligrams of a drug was given by rapid I V injection, the V D is fifteen liters, and the elimination half-life is eight hours. Urine was collected for forty eight hours, and three hundred milligrams of unchanged drug was recovered. Asked are f e, k, k e, Cl T, Cl R and Cl H, and f e comes first because every later term uses it. F is one for an I V dose, so f e is three hundred over five hundred milligrams, zero point six, with no units. The forty eight hours are not in the arithmetic, but they matter: forty eight hours is six half-lives, long enough that the amount collected counts as all the drug the kidney will excrete.",
+   "text": "Her slide example: five hundred milligrams of a drug was given by rapid I V injection, the V D is fifteen liters, and the elimination half-life is eight hours. Urine was collected for forty eight hours, and three hundred milligrams of unchanged drug was recovered. Asked are f e, k, k e, Cl T, Cl R and Cl H, and f e comes first because k e, Cl R and Cl H all use it. F is one for an I V dose, so f e is three hundred over five hundred milligrams, zero point six, with no units. The forty eight hours are not in the arithmetic, but forty eight hours is six half-lives, long enough that the amount collected counts as all the drug the kidney will excrete.",
    "slide": "cl:12",
    "card": [
     {
@@ -138,7 +138,7 @@
    "fig": null
   },
   {
-   "text": "Next, k comes from the half-life, because the half-life equals zero point six nine three over k. k e is f e times k, the part of k due to the kidney, and Cl T is k times V D, one point three liters per hour. Cl R is f e times Cl T, zero point seven eight liters per hour, and Cl H, by difference, is zero point five two liters per hour. So of the one point three liters of plasma cleared of drug each hour, the kidney clears six tenths and the liver four tenths.",
+   "text": "Next, k comes from the half-life, which equals zero point six nine three over k, so k is zero point six nine three over eight hours, zero point zero eight six six per hour. k e, the part of k due to the kidney, is f e times k, zero point zero five two per hour. Cl T is k times the fifteen liter V D, one point three liters per hour. Cl R is f e times Cl T, zero point seven eight liters per hour, and Cl H, by difference, is zero point five two liters per hour. So of the one point three liters of plasma cleared of drug each hour, the kidney clears six tenths and the liver four tenths.",
    "slide": "cl:12",
    "card": [
     {
@@ -150,19 +150,19 @@
      "m": "k<sub>e</sub> = (0.6)(0.0866 hr<sup>−1</sup>) = <b>0.052 hr<sup>−1</sup></b>"
     },
     {
-     "at": 1,
+     "at": 2,
      "m": "Cl<sub>T</sub> = (0.0866 hr<sup>−1</sup>)(15 L) = <b>1.3 L/hr</b>"
     },
     {
-     "at": 2,
+     "at": 3,
      "m": "Cl<sub>R</sub> = (0.6)(1.3 L/hr) = <b>0.78 L/hr</b>"
     },
     {
-     "at": 2,
+     "at": 3,
      "m": "Cl<sub>H</sub> = 1.3 L/hr − 0.78 L/hr = <b>0.52 L/hr</b>"
     },
     {
-     "at": 3,
+     "at": 4,
      "m": "kidney 0.78 + liver 0.52 = 1.3 L/hr"
     }
    ],
@@ -196,7 +196,7 @@
    "fig": null
   },
   {
-   "text": "Her slide example: a new antibiotic, actively secreted by the kidney, has a V D of twenty five liters and a clearance of seven hundred fifty milliliters per minute, falling to one hundred fifty in partial renal failure. The half-life line answers both questions, because V D stays the same while clearance changes. The usual half-life is twenty three point one minutes, and in renal failure it is one hundred fifteen point five minutes. Clearance fell to one fifth, so the half-life became five times longer.",
+   "text": "Her slide example: a new antibiotic, actively secreted by the kidney, has a V D of twenty five liters and a clearance of seven hundred fifty milliliters per minute, falling to one hundred fifty milliliters per minute in partial renal failure. The slide asks the usual half-life and the half-life in partial renal failure. The line, half-life equals zero point six nine three times V D over Cl T, answers both, because V D stays at twenty five liters while clearance changes. The usual half-life is twenty three point one minutes, and in renal failure it is one hundred fifteen point five minutes. Clearance fell to one fifth, so the half-life became five times longer.",
    "slide": "cl:24",
    "card": [
     {
@@ -208,15 +208,15 @@
      "m": "750 mL/min = 0.75 L/min"
     },
     {
-     "at": 2,
+     "at": 3,
      "m": "t½ = {{frac:0.693 × 25 L|0.75 L/min}} = <b>23.1 min</b>"
     },
     {
-     "at": 2,
+     "at": 3,
      "m": "t½ = {{frac:0.693 × 25 L|0.15 L/min}} = <b>115.5 min</b>"
     },
     {
-     "at": 3,
+     "at": 4,
      "m": "Cl<sub>T</sub> × ⅕ → t½ × 5"
     }
    ],

@@ -22,7 +22,7 @@
    "fig": null
   },
   {
-   "text": "A weak acid or weak base exists in two forms at once, ionized and nonionized. Only the nonionized form is lipid soluble enough to cross membranes, so only it is reabsorbed; the ionized form stays in the urine. The split between the two forms at a given p H is the degree of ionization. A weak acid is more ionized in alkaline urine, and a weak base is more ionized in acidic urine. So when the urine becomes more alkaline, more of a weak acid stays ionized in the tubule, less is reabsorbed, and its renal clearance rises. The same chain runs for a weak base in more acidic urine. Filtration does not change, because it is passive and does not depend on urine p H.",
+   "text": "A weak acid or weak base exists in two forms at once, ionized and nonionized. Only the nonionized form is lipid soluble enough to cross membranes and be reabsorbed; the ionized form stays in the urine. The split between the two forms at a given p H is the degree of ionization. A weak acid is more ionized in alkaline urine, and a weak base is more ionized in acidic urine. So in more alkaline urine, more of a weak acid stays ionized in the tubule, less is reabsorbed, and its renal clearance rises. In more acidic urine, more of a weak base stays ionized, less is reabsorbed, and its renal clearance rises. Filtration does not change, because it is passive and does not depend on urine p H.",
    "slide": "cl:22",
    "card": [
     {
@@ -47,7 +47,7 @@
     },
     {
      "at": 5,
-     "m": "weak base, urine more acidic → same chain"
+     "m": "weak base, urine more acidic → more ionized → less reabsorbed → Cl<sub>R</sub> up"
     },
     {
      "at": 6,
@@ -57,38 +57,38 @@
    "fig": null
   },
   {
-   "text": "The relation is written once for each kind of drug. For a weak acid, p H equals p K a plus the log of ionized over nonionized; for a weak base, the ratio is nonionized over ionized. When the urine p H equals the p K a, the log is zero, so the two forms are present in equal amounts. For a weak acid, each unit the p H rises above the p K a multiplies the ratio of ionized to nonionized drug by ten. For a weak base the ratio is turned over, so each unit the p H falls below the p K a multiplies the ratio of ionized to nonionized drug by ten. Neither line is on the equation sheet.",
+   "text": "For a weak acid, p H equals p K a plus the log of ionized over nonionized; for a weak base, the ratio is nonionized over ionized. When the urine p H equals the p K a, the log is zero, so ionized and nonionized drug are present in equal amounts. For a weak acid, each unit the p H rises above the p K a multiplies the ratio of ionized to nonionized drug by ten. For a weak base the ratio is turned over, so each unit the p H falls below the p K a multiplies the ratio of ionized to nonionized drug by ten. Neither line is on the equation sheet.",
    "slide": "cl:22",
    "card": [
     {
-     "at": 1,
+     "at": 0,
      "m": "weak acid: pH = pK<sub>a</sub> + log {{frac:ionized|nonionized}}"
     },
     {
-     "at": 1,
+     "at": 0,
      "m": "weak base: pH = pK<sub>a</sub> + log {{frac:nonionized|ionized}}"
     },
     {
-     "at": 2,
+     "at": 1,
      "m": "pH = pK<sub>a</sub>: log = 0, ionized = nonionized"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "e.g. weak acid, pK<sub>a</sub> 5: pH 5 → 1 : 1, pH 6 → 10 : 1, pH 7 → 100 : 1 (ionized : nonionized)"
     },
     {
-     "at": 4,
+     "at": 3,
      "m": "e.g. weak base, pK<sub>a</sub> 9: pH 8 → 10 : 1, pH 7 → 100 : 1 (ionized : nonionized)"
     },
     {
-     "at": 5,
+     "at": 4,
      "m": "ratio of amounts: no units; not on the sheet"
     }
    ],
    "fig": null
   },
   {
-   "text": "Weak acids have p K a values of three to eight, and weak bases seven point five to ten point five. The ranges overlap between seven point five and eight, so a p K a alone does not always settle whether a drug is treated as an acid or a base. A drug's p K a is fixed, so in one patient it is the urine p H that changes the split between the two forms.",
+   "text": "Weak acids have p K a values of three to eight, and weak bases seven point five to ten point five. The ranges overlap between seven point five and eight, so a p K a alone does not always settle whether a drug is treated as an acid or a base. A drug's p K a is fixed, so in one patient it is the urine p H that changes the split between ionized and nonionized drug.",
    "slide": "cl:22",
    "card": [
     {
@@ -107,7 +107,7 @@
    "fig": null
   },
   {
-   "text": "The two factors that govern reabsorption are the urine p H and the drug's p K a. Plasma p H and the filtration rate are not among them: it is the p H of the fluid in the tubule that matters, and filtration does not depend on it. Another trap swaps the ranges, putting weak bases at three to eight. A third mixes up the forms: the nonionized form is reabsorbed, and the ionized form is excreted. This is one reason why, in objective two, a drug's renal clearance can fall below G F R: reabsorption returns part of the filtered drug to the blood.",
+   "text": "The two factors that govern reabsorption are the urine p H and the drug's p K a. A trap option names plasma p H or the filtration rate, but it is the p H of the fluid in the tubule that matters, and filtration does not depend on it. Another trap swaps the p K a ranges, putting weak bases at three to eight. A third mixes up the forms: the nonionized form is reabsorbed, and the ionized form is excreted. Reabsorption of the nonionized form is one reason why, in objective two, a drug's renal clearance can fall below G F R: it returns part of the filtered drug to the blood.",
    "slide": "cl:26",
    "card": [
     {

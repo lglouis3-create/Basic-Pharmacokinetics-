@@ -26,7 +26,7 @@
    "fig": null
   },
   {
-   "text": "The equation is built as drug in minus drug out. Inside its bracket are two exponentials that start equal, so at time zero the bracket is zero and the oral curve starts at zero concentration. k a is the larger constant, so the absorption term shrinks fast and the elimination term, with k, shrinks slowly. Early on the difference between them grows, which is the rise; once the absorption term is nearly gone, the curve follows the elimination term alone, which is the slow fall.",
+   "text": "She describes the single oral dose equation for C p as drug in minus drug out. Inside its bracket are two exponentials that start equal, so at time zero the bracket is zero and the oral curve starts at zero concentration. k a is the larger constant, so the absorption term, e to the minus k a t, shrinks fast, and the elimination term, e to the minus k t, shrinks slowly. Early on the difference between them grows, which is the rise; once the absorption term is nearly gone, the curve follows the elimination term alone, which is the slow fall.",
    "slide": "oral:10",
    "card": [
     {
@@ -107,7 +107,7 @@
    "fig": null
   },
   {
-   "text": "In her problems the equation often arrives with the fraction already worked out as one leading number, P, in milligrams per liter, and a question asks for a parameter inside it. Her slide Example two gives C p equals seventy five e to the minus zero point two two t, minus seventy five e to the minus two point seven five t. She expects the larger exponent to be read as k a, and the textbook explains why: most oral drugs have shorter absorption half-lives than elimination half-lives. To find V D, P is set equal to the fraction and the line is rearranged: V D equals F times k a times D zero, over P times k a minus k.",
+   "text": "In her problems the single oral dose equation often comes with the fraction in front of the bracket worked out as a leading number, P, in milligrams per liter, and a question asks for a parameter inside that fraction. Her slide Example two gives C p equals seventy five e to the minus zero point two two t, minus seventy five e to the minus two point seven five t. She expects the larger exponent to be read as k a, and the textbook explains why: most oral drugs have shorter absorption half-lives than elimination half-lives. To find V D, P is set equal to the fraction and the line is rearranged: V D equals F times k a times D zero, over P times k a minus k.",
    "slide": "oral:15",
    "card": [
     {
@@ -134,7 +134,7 @@
    "fig": null
   },
   {
-   "text": "Her in class practice two: a seven hundred fifty milligram oral dose, eighty four percent bioavailable, gives C p equals twenty three point two times the bracket of e to the minus zero point one eight two t and e to the minus zero point eight seven two t, and V D and the half-life of elimination are asked. The exponents give k a, zero point eight seven two per hour, and k, zero point one eight two per hour. V D is asked with P, F and the dose given, so the rearranged line answers it, and V D is thirty four point three liters. So each milligram per liter in the plasma corresponds to about thirty four milligrams of drug in the body.",
+   "text": "Her in class practice two: a seven hundred fifty milligram oral dose, eighty four percent bioavailable, gives C p equals twenty three point two times, e to the minus zero point one eight two t, minus e to the minus zero point eight seven two t, and V D and the half-life of elimination are asked. The exponents give k a, zero point eight seven two per hour, and k, zero point one eight two per hour. With twenty three point two as P, the leading number, V D equals F times k a times D zero, over P times k a minus k: thirty four point three liters. So each milligram per liter in the plasma corresponds to about thirty four milligrams of drug in the body.",
    "slide": "oral:10",
    "card": [
     {
@@ -165,7 +165,7 @@
    "fig": null
   },
   {
-   "text": "The second answer is the half-life, and with no qualifier that means the elimination half-life, so it uses k, the smaller exponent. She said, If it's just T one half, then your assumption is that I'm looking for the half-life of elimination. The half-life equals zero point six nine three over k, a line she says is never on the equation sheet, and here it is three point eight hours.",
+   "text": "The second question in her in class practice two asks the half-life, and with no qualifier that means the elimination half-life, so it uses k, the smaller exponent, zero point one eight two per hour. She said, If it's just T one half, then your assumption is that I'm looking for the half-life of elimination. The half-life equals zero point six nine three over k, a line she says is never on the equation sheet, and here it is three point eight hours.",
    "slide": "oral:15",
    "card": [
     {
@@ -184,7 +184,7 @@
    "fig": null
   },
   {
-   "text": "In her slide Example two, five hundred milligrams at eighty seven percent bioavailability gives a V D of six point three liters. Quiz three gave thirty times the bracket of e to the minus zero point one three three t and e to the minus zero point nine three four t, a five hundred milligram dose and eighty two percent bioavailability, and keyed fifteen point nine liters. Dividing the dose by thirty, as if thirty were C zero, gives sixteen point seven, close enough to look right, and that is the trap. The other traps are leaving out V D and losing the k a minus k term when rearranging.",
+   "text": "In her slide Example two, with a leading number of seventy five, five hundred milligrams at eighty seven percent bioavailability gives a V D of six point three liters. Quiz three gave thirty times, e to the minus zero point one three three t, minus e to the minus zero point nine three four t, a five hundred milligram dose and eighty two percent bioavailability, and keyed fifteen point nine liters. Dividing the dose by thirty, as if thirty were C zero, gives sixteen point seven liters, close enough to fifteen point nine to look right, and that is the trap. The other traps are leaving out V D and losing the k a minus k term when rearranging.",
    "slide": "oral:15",
    "card": [
     {

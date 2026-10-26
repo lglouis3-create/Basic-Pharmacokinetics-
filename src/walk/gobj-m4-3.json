@@ -30,7 +30,7 @@
    "fig": null
   },
   {
-   "text": "The estimate uses serum creatinine, S C r, the creatinine concentration in the blood in milligrams per deciliter, together with age, sex and ideal body weight, I B W. A higher serum creatinine gives a lower estimate, in inverse proportion, so twice the serum creatinine gives half the estimate. An older patient gets a lower estimate. A taller patient has a larger I B W, which raises the estimate. A woman's estimate is multiplied by zero point eight five, which rests on the assumption that women are smaller and less muscular than men. Serum creatinine may not reflect renal function well in people with unusually low or unusually high muscle mass. A normal C r C l is one hundred twenty to one hundred thirty milliliters per minute.",
+   "text": "The creatinine clearance estimate uses serum creatinine, S C r, the creatinine concentration in the blood in milligrams per deciliter, together with age, sex and ideal body weight, I B W. A higher serum creatinine gives a lower estimate, in inverse proportion, so twice the serum creatinine gives half the estimate. An older patient gets a lower estimate. A taller patient has a larger I B W, which raises the estimate. A woman's estimate is multiplied by zero point eight five, which rests on the assumption that women are smaller and less muscular than men. Serum creatinine may not reflect renal function well in people with unusually low or unusually high muscle mass. A normal C r C l is one hundred twenty to one hundred thirty milliliters per minute.",
    "slide": "cl:17",
    "card": [
     {
@@ -123,7 +123,7 @@
    "fig": null
   },
   {
-   "text": "Her slide example asks for the C r C l, using the ideal body weight, of a forty five year old woman who weighs sixty one kilograms, has a serum creatinine of one point one milligrams per deciliter, and is one hundred sixty five centimeters tall. Cockcroft-Gault answers it, and it needs the I B W first, so the height goes to inches. She rounds sixty four point nine six inches to sixty five, which is five inches over five feet. With the female line, the I B W is fifty seven kilograms, and the sixty one kilogram actual weight is not used.",
+   "text": "Her slide example asks for the C r C l, using the ideal body weight, of a forty five year old woman who weighs sixty one kilograms, has a serum creatinine of one point one milligrams per deciliter, and is one hundred sixty five centimeters tall. Cockcroft-Gault answers it, and it needs the I B W first, so the height goes to inches: one hundred sixty five centimeters divided by two point five four is sixty four point nine six inches, which she rounds to sixty five, five inches over five feet. With the female line, forty five point five plus two point three times five, the I B W is fifty seven kilograms, and the sixty one kilogram actual weight is not used.",
    "slide": "cl:19",
    "card": [
     {
@@ -135,53 +135,53 @@
      "m": "{{frac:165 cm|2.54}} = 64.96 → 65 inches"
     },
     {
-     "at": 2,
+     "at": 1,
      "m": "65 − 60 = 5 inches"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "IBW = 45.5 + 2.3 × 5 = 45.5 + 11.5 = <b>57 kg</b>"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "61 kg: not used"
     }
    ],
    "fig": null
   },
   {
-   "text": "Then the equation, with age forty five years, I B W fifty seven kilograms and serum creatinine one point one milligrams per deciliter. The fraction gives sixty eight point three seven, and because she is female, it is multiplied by zero point eight five. Her C r C l is fifty eight point one milliliters per minute. That is about half the normal one hundred twenty to one hundred thirty milliliters per minute, so her renal function is reduced. When she worked this example in class, a student answered fifty four, and she said fifty four meant something had been done wrong.",
+   "text": "In her slide example, Cockcroft-Gault takes the woman's age, forty five years, I B W, fifty seven kilograms, and serum creatinine, one point one milligrams per deciliter. The top, one hundred forty minus forty five, times fifty seven, is five thousand four hundred fifteen; the bottom, seventy two times one point one, is seventy nine point two. Their ratio is sixty eight point three seven, multiplied by zero point eight five because she is female. Her C r C l is fifty eight point one milliliters per minute. That is about half the normal one hundred twenty to one hundred thirty milliliters per minute, so her renal function is reduced. Working this example in class, a student answered fifty four, and she said that meant something had been done wrong.",
    "slide": "cl:19",
    "card": [
     {
-     "at": 0,
+     "at": 1,
      "m": "top: (140 − 45) × 57 = 95 × 57 = 5415"
     },
     {
-     "at": 0,
+     "at": 1,
      "m": "bottom: 72 × 1.1 = 79.2"
     },
     {
-     "at": 1,
+     "at": 2,
      "m": "{{frac:5415|79.2}} = 68.37"
     },
     {
-     "at": 1,
+     "at": 3,
      "m": "68.37 × 0.85 = <b>58.1 mL/min</b>"
     },
     {
-     "at": 3,
+     "at": 4,
      "m": "58.1 &lt; 120–130 mL/min → reduced renal function"
     },
     {
-     "at": 4,
+     "at": 5,
      "m": "54: something done wrong"
     }
    ],
    "fig": null
   },
   {
-   "text": "What the number means for a drug. A low C r C l means a drug eliminated by the kidney is excreted more slowly and may accumulate, so depending on the drug, its dose may need adjusting. She gave thirty and sixty milliliters per minute as examples of patients who will have trouble excreting such a drug. In a textbook example, renal function halves, so the drug's renal clearance halves from ten to five liters per hour, while its nonrenal clearance stays at five. Total clearance falls from fifteen to ten liters per hour, so the daily dose is lowered by a third to keep the same exposure.",
+   "text": "What a patient's C r C l means for a drug. A low C r C l means a drug eliminated by the kidney is excreted more slowly and may accumulate, so depending on the drug, its dose may need adjusting. She named patients with a C r C l of thirty or sixty milliliters per minute as ones who will have trouble excreting such a drug. In a textbook example, renal function halves, so the drug's renal clearance halves from ten to five liters per hour, while its nonrenal clearance stays at five. Total clearance falls from fifteen to ten liters per hour, so the daily dose is lowered by a third to keep the same exposure.",
    "slide": "cl:17",
    "card": [
     {

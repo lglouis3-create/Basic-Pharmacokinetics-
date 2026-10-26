@@ -161,7 +161,7 @@ def clips(browser, url):
       const want = Object.entries(GUIDE_WALK).reduce((t, [, w]) => t + w.segs.length, 0);
       return [GW_CLIPS.length, want, r.filter(Boolean)]; }""")
     check(n and not bad, f'every recorded clip is served ({n} of {want} parts recorded; the rest use the device voice)', ', '.join(bad[:5]))
-    sid = 'gobj-m8-3'
+    sid = page.evaluate("Object.keys(GUIDE_WALK).find(id => gwRec(id, 0) && gwRec(id, 1))")   # a section whose first two parts are recorded
     page.evaluate(f"LS.set(FOLD_KEY+'guide','open'); show('guide'); openAncestors(document.getElementById('{sid}'))")
     page.click(f'#{sid} [data-gwopen]'); page.wait_for_selector(f'.gwpanel[data-gwp="{sid}"]')
     page.evaluate(f"gwGo('{sid}', 0)")

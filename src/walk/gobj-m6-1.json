@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "Drug builds up when the next dose comes before the last one is completely eliminated; with a longer interval nothing is left over and nothing builds up. The climb stops because, with first order elimination, the fraction removed per interval stays the same while the amount removed grows with the amount in the body. When the amount removed over one interval equals one dose, every interval repeats. For I V bolus doses the peak minus the trough is then one dose: in amount, the dose itself, and in milligrams per liter, C zero, the concentration one dose produces on its own.",
+   "text": "Drug builds up when the next dose comes before the last one is completely eliminated; with an interval long enough for each dose to be completely eliminated, nothing is left over and nothing builds up. The climb stops because, with first order elimination, the fraction removed per interval stays the same while the amount removed grows with the amount in the body. When the amount removed over one interval equals one dose, every interval repeats. For I V bolus doses the peak minus the trough is then one dose: in amount, the dose itself, and in milligrams per liter, C zero, the concentration one dose produces on its own.",
    "slide": "rep:3",
    "card": [
     {
@@ -124,7 +124,7 @@
    }
   },
   {
-   "text": "Superposition says C p at any time is the sum of what is left of every dose given so far, each following its own single dose curve. It assumes first order elimination, and pharmacokinetics after one dose that are not altered by later doses, so the half life and the clearance, the volume of plasma cleared of drug per unit of time, stay the same. Then each dose loses the same fraction per hour whatever else is present, so each leftover can be worked out on its own and the leftovers add. Saturation of a carrier, enzyme induction or inhibition, or a changing disease state break this. She said, First order kinetics equals linear pharmacokinetics.",
+   "text": "Superposition says C p at any time is the sum of what is left of every dose given so far, each following its own single dose curve. It assumes first order elimination, and pharmacokinetics after one dose that are not altered by later doses, so the half life and the clearance, the volume of plasma cleared of drug per unit of time, stay the same. Then each dose loses the same fraction per hour whatever else is present, so each leftover can be worked out on its own and the leftovers add. Saturation of a carrier, enzyme induction or inhibition, or a changing disease state break superposition. She said, First order kinetics equals linear pharmacokinetics.",
    "slide": "rep:4",
    "card": [
     {
@@ -209,7 +209,7 @@
    "fig": null
   },
   {
-   "text": "For her Example one regimen, a half life of four hours, a volume of distribution, V D, of zero point two five liters per kilogram, and ten milligrams per kilogram by I V bolus every eight hours, find the peak after the second dose and the time to steady state. By superposition, the second peak is a new C zero plus the quarter of the first dose left after two half lives: fifty milligrams per liter. Steady state comes in three to five half lives, twelve to twenty hours. At steady state the peak is one C zero plus a trough that is a quarter of the peak: fifty three point three milligrams per liter, a trough of thirteen point three, and a gap of forty, one dose's C zero.",
+   "text": "For her Example one regimen, a half life of four hours, a volume of distribution of zero point two five liters per kilogram, and ten milligrams per kilogram by I V bolus every eight hours, find the peak after the second dose and the time to steady state. By superposition, the second peak is the second dose's forty plus the ten milligrams per liter left of the first after eight hours, two half lives: fifty milligrams per liter. Steady state comes in three to five half lives, twelve to twenty hours. At steady state the peak is one dose's forty plus the trough, a quarter of the peak, so forty is three quarters of the peak: fifty three point three milligrams per liter, and the trough is thirteen point three.",
    "slide": "rep:11",
    "card": [
     {
@@ -264,7 +264,7 @@
    }
   },
   {
-   "text": "Her items test the wording. The second assumption is the one that names the half life and the clearance, and a review item states it as early doses having no effect on the pharmacokinetics of later doses, which is true. Steady state takes three to five half lives, not three to five doses, and does not depend on the dose. e to the minus k tau is what one dose leaves behind, while the accumulation factor is how many first dose peaks fit in the steady state peak. First order and linear mean the same, and objectives two and three build on superposition.",
+   "text": "Her items test the wording. Of the two assumptions of superposition, the second is the one that names the half life and the clearance, and a review item states it as early doses having no effect on the pharmacokinetics of later doses, which is true. Steady state takes three to five half lives, not three to five doses, and does not depend on the dose. e to the minus k tau is the fraction of one dose left after one interval, while the accumulation factor is the steady state peak divided by the first dose peak. First order and linear mean the same, and objectives two and three build on superposition.",
    "slide": "rep:4",
    "card": [
     {

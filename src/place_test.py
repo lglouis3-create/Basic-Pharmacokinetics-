@@ -44,7 +44,7 @@ def same_line(page, before, label):
 def run(page, width):
     print(f'\n=== reloads at {width} px ===')
     # 1. a recorded walkthrough part, playing, then the page is reloaded
-    sid = 'gobj-m8-3'
+    sid = page.evaluate("Object.keys(GUIDE_WALK).find(id => gwRec(id, 1))")   # a section whose part 2 is recorded
     page.evaluate(f"LS.set(FOLD_KEY + 'guide', 'open'); show('guide'); openAncestors(document.getElementById('{sid}'))")
     page.click(f'#{sid} [data-gwopen]'); page.wait_for_selector(f'.gwpanel[data-gwp="{sid}"]')
     page.evaluate(f"gwGo('{sid}', 1)")

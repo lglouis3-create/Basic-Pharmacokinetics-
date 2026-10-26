@@ -84,7 +84,7 @@
    "fig": null
   },
   {
-   "text": "Raise k with k a unchanged, and the drug leaves faster, so C max is lower, t max is earlier, and A U C falls. A U C falls because clearance equals k times V D, so a larger k is a larger clearance. She said, if we change the K, we are effectively changing the clearance. The trap is to expect a later peak with faster elimination, but t max falls when either constant rises. Swapping the two constants gives the same t max but a different A U C, because k has changed.",
+   "text": "Raise k with k a unchanged, and the drug leaves faster, so C max is lower, t max is earlier, and A U C falls. A U C falls because clearance equals k times V D, so a larger k is a larger clearance. She said, if we change the K, we are effectively changing the clearance. The trap is to expect a later peak with faster elimination, but t max falls when either constant rises. Swapping the values of k a and k gives the same t max, but the pair with the larger k has the larger clearance, and so the smaller A U C.",
    "slide": "oral:19",
    "card": [
     {
@@ -111,7 +111,7 @@
    "fig": null
   },
   {
-   "text": "Two terms say which process is slower. Disposition rate limiting, the usual case, means the absorption half-life is much shorter than the elimination half-life, so k a is much larger than k. Absorption rate limiting means the absorption half-life is much longer than the elimination half-life. She once said distribution limited for the usual case, but the term to use is disposition rate limiting. The textbook notes that in an extended release product absorption is slower than elimination, so the last, falling part of the curve shows absorption, not elimination, which is called flip flop, and the true k then needs I V data.",
+   "text": "Two terms say which process is slower. Disposition rate limiting, the usual case, means the absorption half-life is much shorter than the elimination half-life, so k a is much larger than k. Absorption rate limiting means the absorption half-life is much longer than the elimination half-life. She once said distribution limited for the usual case, but the term to use is disposition rate limiting. The textbook notes that in an extended release product absorption is slower than elimination, so the rate constant read from the last, falling part of the curve represents absorption, not elimination; this is called flip flop, and the true k then has to come from I V data.",
    "slide": "oral:20",
    "card": [
     {
@@ -134,7 +134,7 @@
    "fig": null
   },
   {
-   "text": "Her slide Example two asks which case an antibiotic is. Its exponents give k a, two point seven five, and k, zero point two two per hour. The absorption half-life is zero point two five two hours and the elimination half-life three point one five hours, so absorption is twelve point five times faster. The drug is disposition rate limiting, the usual case. A question may give two exponents to compare directly: with e to the minus zero point one eight against e to the minus zero point eight seven, absorption is much faster than elimination.",
+   "text": "Her slide Example two asks which case an antibiotic is. Its exponents give k a, two point seven five, and k, zero point two two per hour. The absorption half-life is zero point two five two hours and the elimination half-life three point one five hours, twelve point five times longer, so absorption is twelve point five times faster than elimination. The drug is disposition rate limiting, the usual case. A question may give two exponents to compare directly: with e to the minus zero point one eight against e to the minus zero point eight seven, the larger, zero point eight seven, is k a, so absorption is much faster than elimination.",
    "slide": "oral:15",
    "card": [
     {

@@ -49,7 +49,7 @@
    "fig": null
   },
   {
-   "text": "Each route has its own clearance, the volume of plasma cleared of drug per unit time. Each organ's elimination rate is its clearance times the same plasma concentration, so the rates add, and so do the clearances, to the total body clearance. Cl T equals Cl R plus Cl H, where Cl R is renal clearance and Cl H is hepatic clearance, also called metabolic clearance. A Cl written with no subscript means total body clearance. Because the parts add, a fall in one route lowers the total only by that route's share. In a textbook example, renal clearance is ten and nonrenal five liters per hour; when renal function halves, the total falls from fifteen to ten liters per hour, by one third, not by one half.",
+   "text": "Each route has its own clearance, the volume of plasma cleared of drug per unit time. Each organ's elimination rate is its clearance times the same plasma concentration, so when the two rates are added, the total body clearance is the sum of the two clearances. Cl T equals Cl R plus Cl H: renal clearance plus hepatic clearance, also called metabolic clearance. A Cl written with no subscript means total body clearance. So when one clearance falls, the total falls by a smaller fraction than that clearance: in a textbook example, renal clearance is ten and nonrenal clearance five liters per hour, and when renal function halves, renal clearance falls to five, so the total falls from fifteen to ten liters per hour, by one third, not one half.",
    "slide": "cl:8",
    "card": [
     {
@@ -73,14 +73,14 @@
      "m": "one route falls → Cl<sub>T</sub> falls by that route's share only"
     },
     {
-     "at": 5,
+     "at": 4,
      "m": "e.g. (textbook) Cl<sub>R</sub> 10 → 5 L/hr, nonrenal 5 L/hr: Cl<sub>T</sub> 15 → <b>10 L/hr</b>, down ⅓"
     }
    ],
    "fig": null
   },
   {
-   "text": "Hepatic clearance is found by difference. The rate and extent of metabolism can rarely be measured directly, and the liver is not sampled, so hepatic clearance is what is left once renal clearance is taken from the total. The second form uses f e, the fraction of the dose recovered unchanged in the urine, which has no units. f e is the kidney's share of the clearance, so one minus f e is the share that is not renal. Cl H equals one minus f e, times Cl T. The larger f e is, the smaller the hepatic part, and the two forms give the same answer.",
+   "text": "Hepatic clearance is found by difference. The rate and extent of metabolism can rarely be measured directly, and the liver is not sampled, so hepatic clearance is what is left once renal clearance is taken from the total: Cl H equals Cl T minus Cl R. A second form uses f e, the fraction of the dose recovered unchanged in the urine, which has no units. f e is the kidney's share of the clearance, so one minus f e is the share that is not renal. Cl H equals one minus f e, times Cl T. The larger f e is, the smaller the hepatic part, and the two forms give the same answer.",
    "slide": "cl:11",
    "card": [
     {
@@ -107,7 +107,7 @@
    "fig": null
   },
   {
-   "text": "In the worked example, a drug has a total body clearance of one point three liters per hour, and six tenths of the dose is excreted unchanged in the urine. Hepatic clearance is asked, and the form with f e answers it, because f e and the total are both given. Hepatic clearance comes out at zero point five two liters per hour. As a check, renal clearance is zero point seven eight liters per hour, and the total minus that gives the same zero point five two. So the liver accounts for four tenths of this drug's clearance, and the kidney for six tenths.",
+   "text": "In the worked example, a drug's total body clearance is one point three liters per hour, and six tenths of the dose is excreted unchanged in the urine. Hepatic clearance is asked, and since f e and the total are both given, the line Cl H equals one minus f e, times Cl T, answers it. One minus f e is zero point four, and zero point four times one point three liters per hour is zero point five two liters per hour. As a check, renal clearance is zero point seven eight liters per hour, and one point three minus zero point seven eight gives the same zero point five two. So the liver accounts for four tenths of this drug's clearance, and the kidney for six tenths.",
    "slide": "cl:11",
    "card": [
     {
@@ -138,7 +138,7 @@
    "fig": null
   },
   {
-   "text": "In her quizzes the routes are asked as vocabulary. Quiz three asked which term describes the process by which drug is chemically converted in the body, and the key is biotransformation, not distribution, excretion or absorption. Two features decide such items: whether the removal is irreversible, which distribution is not, and whether the drug is chemically changed or removed intact. A usual trap swaps the organs, putting excretion in the liver and biotransformation in the kidney. Her review poll stated that hepatic clearance is most readily approximated with creatinine clearance, and the key is false: creatinine clearance estimates the patient's kidney function, and hepatic clearance is total minus renal. Objective five uses these same lines to split a total clearance into its renal and hepatic parts.",
+   "text": "In her quizzes the routes are asked as vocabulary. Quiz three asked which term describes the process by which drug is chemically converted in the body, and the key is biotransformation, not distribution, excretion or absorption. Two features decide such items: whether the removal is irreversible, which distribution is not, and whether the drug is chemically changed or removed intact. A usual trap swaps the organs, putting excretion in the liver and biotransformation in the kidney. Her review poll stated that hepatic clearance is most readily approximated with creatinine clearance, and the key is false: creatinine clearance estimates the patient's kidney function, and hepatic clearance is total minus renal. Objective five calculates the renal and hepatic parts of a total clearance.",
    "slide": "cl:25",
    "card": [
     {

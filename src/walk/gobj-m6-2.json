@@ -104,7 +104,7 @@
    }
   },
   {
-   "text": "Next, the average at steady state. The fall is exponential, steeper while the level is high, so the curve spends more of each interval at lower levels and the average sits below the midpoint of peak and trough. She said, I want you to realize that the average is not the max plus the min divided by two. C average at steady state equals F D zero over Cl T tau, where Cl T, the total clearance, the volume of plasma cleared per unit of time, equals V D times k. F, the fraction of the dose reaching the circulation, is one for I V dosing. The dose is on top, so a larger dose raises the average; a longer tau or a larger clearance, underneath, lowers it.",
+   "text": "Next, the steady state average. The concentration falls exponentially between doses, faster while it is high, so for more than half of each interval it is below the midpoint of peak and trough, and the average is below that midpoint. She said, I want you to realize that the average is not the max plus the min divided by two. C average at steady state equals F D zero over Cl T tau, where Cl T, the total clearance, the volume of plasma cleared per unit of time, equals V D times k. F, the fraction of the dose reaching the circulation, is one for I V dosing. The dose is on top, so a larger dose raises the average; a longer tau or a larger clearance, underneath, lowers it.",
    "slide": "rep:8",
    "card": [
     {
@@ -135,7 +135,7 @@
    }
   },
   {
-   "text": "Her Example one: an antibiotic with a half life of about four hours and a V D of twenty five percent of body weight is given at ten milligrams per kilogram every eight hours by I V bolus to a sixty five kilogram female. She asks the maximum, minimum and average at steady state, which the three steady state lines give. Dose and volume go on the same basis first, so V D is zero point two five liters per kilogram and C zero is forty milligrams per liter. From the half life, a quarter of each dose is left after one interval.",
+   "text": "Her Example one: an antibiotic with a half life of about four hours and a V D of twenty five percent of body weight is given at ten milligrams per kilogram every eight hours by I V bolus to a sixty five kilogram female. She asks the maximum, minimum and average at steady state. Dose and volume go on the same basis first: twenty five percent of body weight is zero point two five liters per kilogram, so C zero, ten milligrams per kilogram over zero point two five liters per kilogram, is forty milligrams per liter. The eight hour interval is two half lives of four hours, so a quarter of each dose is left when the next is given.",
    "slide": "rep:9",
    "card": [
     {
@@ -162,7 +162,7 @@
    "fig": null
   },
   {
-   "text": "The steady state peak is fifty three point three milligrams per liter, above the first dose peak of forty, as her check requires. She said, if you got a value less than forty milligrams per liter, you've done something wrong. The trough, a quarter of the peak, is thirteen point three milligrams per liter, and the gap is forty, one dose's C zero. The average is twenty eight point nine milligrams per liter, below the midpoint of thirty three point three, as the exponential fall predicts.",
+   "text": "In her Example one, the steady state peak is forty milligrams per liter divided by one minus zero point two five, fifty three point three milligrams per liter, above the first dose peak of forty, as her check requires. She said, if you got a value less than forty milligrams per liter, you've done something wrong. The trough, a quarter of the peak, is thirteen point three milligrams per liter, and peak minus trough is forty, one dose's C zero. The average, C zero over k tau, forty divided by one point three eight six, is twenty eight point nine milligrams per liter, below the midpoint of peak and trough, thirty three point three, as the exponential fall predicts.",
    "slide": "rep:11",
    "card": [
     {
@@ -193,7 +193,7 @@
    }
   },
   {
-   "text": "Before steady state, a dose number, n, tracks the climb. With f the fraction left after one interval, just after dose n the body holds one plus f plus f squared, up to f to the n minus one, doses: the build up. In symbols, C p equals D zero over V D, times the build up, one minus e to the minus n k tau over one minus e to the minus k tau, times e to the minus k t, with t the time since dose n, not since the first dose. As n grows, e to the minus n k tau shrinks toward zero, the build up becomes r, and this becomes the steady state line.",
+   "text": "Before steady state, a dose number, n, tracks the climb. With f the fraction left after one interval, just after dose n the body holds one plus f plus f squared, up to f to the n minus one, doses: the build up. In symbols, C p equals D zero over V D, times the build up, one minus e to the minus n k tau over one minus e to the minus k tau, times e to the minus k t, with t the time since dose n, not since the first dose. As n grows, e to the minus n k tau shrinks toward zero, the build up becomes the accumulation factor r, and the equation becomes the steady state line.",
    "slide": "rep:14",
    "card": [
     {
@@ -228,7 +228,7 @@
    }
   },
   {
-   "text": "Her Example two asks the level three hours after the second dose of the same regimen. Two doses is not steady state, so the n dose line answers it, with n equal to two and t equal to three hours. The build up after two doses is one point two five, so the second peak is fifty milligrams per liter, as superposition gave in objective one. Three hours of decline from there leaves twenty nine point seven milligrams per liter.",
+   "text": "Her Example two asks the level three hours after the second dose of the Example one regimen. Two doses is not steady state, so the n dose line answers it, with n equal to two and t equal to three hours. The build up after two doses is one dose plus the quarter left of the first, one point two five, so the second peak is one point two five times one dose's forty milligrams per liter, fifty milligrams per liter, as superposition gave in objective one. Three hours of decline multiplies fifty by e to the minus zero point one seven three three times three, zero point five nine four five, which leaves twenty nine point seven milligrams per liter.",
    "slide": "rep:16",
    "card": [
     {
@@ -259,7 +259,7 @@
    }
   },
   {
-   "text": "Within a steady state interval, and after the last dose, C p is C max at steady state times e to the minus k t; she prefers this route to searching the sheet. In her final review poll, with three hundred milligrams every twelve hours, a four hour half life and a V D of sixteen liters, the key is twenty one point four milligrams per liter, while eighteen point seven is the first dose C zero, the answer without accumulation. A review item asks when the minimum occurs: at the end of the dosing interval, not in three to five half lives, which is the time to steady state. T I D, three times a day, must become a tau of eight hours.",
+   "text": "Within a steady state interval, and after the last dose, C p is C max at steady state times e to the minus k t, t hours after the latest dose; she prefers this to searching the sheet. Her final review poll asked the steady state peak for three hundred milligrams every twelve hours, a four hour half life and a V D of sixteen liters. Its key is twenty one point four milligrams per liter; eighteen point seven, the first dose peak, is the answer without accumulation. A review item asks when the minimum occurs: at the end of the dosing interval, not in three to five half lives, the time to steady state. T I D, three times a day, must become a tau of eight hours.",
    "slide": "rep:19",
    "card": [
     {
@@ -271,15 +271,15 @@
      "m": "300 mg every 12 hr, t<sub>½</sub> 4 hr, V<sub>D</sub> 16 L: C<sub>0</sub> = 18.75 mg/L"
     },
     {
-     "at": 1,
+     "at": 2,
      "m": "r = {{frac:1|1 − 0.125}} = 1.143 → <b>C<sub>max</sub><sup>∞</sup> = 21.4 mg/L</b>, not 18.7"
     },
     {
-     "at": 2,
+     "at": 3,
      "m": "C<sub>min</sub><sup>∞</sup>: end of τ, not 3 to 5 t<sub>½</sub>"
     },
     {
-     "at": 3,
+     "at": 4,
      "m": "TID → τ = 8 hr; dose and V<sub>D</sub> on the same basis"
     }
    ],

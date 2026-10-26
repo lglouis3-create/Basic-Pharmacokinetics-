@@ -26,7 +26,7 @@
    "fig": null
   },
   {
-   "text": "While the pump runs, drug enters at a constant rate, and the amount leaving per hour grows as the level grows, because elimination is first order. So the level climbs, more slowly as it goes, toward C s s, the steady state concentration a continuous infusion would reach, where rate in equals rate out. How far it gets depends on how long the pump runs compared with the half life, half way after one half life, so a short infusion stops well below C s s. A faster rate raises C s s and every level on the climb in proportion, without changing the time course. When the pump stops, nothing comes in, and the level falls by first order elimination from where it stopped.",
+   "text": "While the pump runs, drug enters at a constant rate, and the amount leaving per hour grows as the level grows, because elimination is first order. So the level climbs, more slowly as it goes, toward C s s, the steady state concentration a continuous infusion would reach, where rate in equals rate out. The fraction of C s s reached depends on how long the pump runs compared with the half life: half of it after one half life, so a short infusion stops well below C s s. A faster rate raises C s s and every level on the climb in proportion, without changing the time course. When the pump stops, nothing comes in, and the level falls by first order elimination from where it stopped.",
    "slide": "rep:22",
    "card": [
     {
@@ -100,7 +100,7 @@
    }
   },
   {
-   "text": "The same drug at the same rate for the same duration ends at the same C end every time. Because elimination is first order, each infusion follows its own curve and the contributions add, which is superposition from objective one. She said, the concentrations from each administration of the dose will be additive over time. For two infusions, C equals C end e to the minus k t one, plus C end e to the minus k t two, with t one the time since the first infusion ended and t two the time since the second ended.",
+   "text": "The same drug at the same rate for the same duration reaches the same end of infusion concentration, C end, every time. Because elimination is first order, each infusion follows its own curve and the contributions add, which is superposition from objective one. She said, the concentrations from each administration of the dose will be additive over time. For two infusions, C equals C end e to the minus k t one, plus C end e to the minus k t two, with t one the time since the first infusion ended and t two the time since the second ended.",
    "slide": "rep:25",
    "card": [
     {
@@ -139,7 +139,7 @@
    }
   },
   {
-   "text": "Her Example four: three hundred milligrams over two hours, then a second three hundred milligrams over two hours starting six hours after the first started, with k zero point one five per hour and V D fifteen liters. She asks the level at the end of the first infusion, and four hours after the second infusion stops. Part a is the infusion line with t equal to the two hour infusion time. C s s would be sixty six point six seven milligrams per liter, but two hours is less than half the four point six two hour half life, so only about a quarter of it is reached: seventeen point two eight milligrams per liter. The second infusion is identical, so it also ends at seventeen point two eight.",
+   "text": "Her Example four: three hundred milligrams over two hours, twice, the second starting six hours after the first started; k is zero point one five per hour, V D fifteen liters. She asks the level at the end of the first infusion and four hours after the second stops. Part a uses the infusion line with t equal to the two hour infusion time, R one hundred fifty milligrams per hour and C s s sixty six point six seven milligrams per liter. Two hours is under one four point six two hour half life, so under half of C s s is reached: zero point two five nine two of it, seventeen point two eight milligrams per liter. The identical second infusion also ends at seventeen point two eight.",
    "slide": "rep:24",
    "card": [
     {
@@ -151,7 +151,7 @@
      "m": "R = {{frac:300 mg|2 hr}} = 150 mg/hr"
     },
     {
-     "at": 3,
+     "at": 2,
      "m": "V<sub>D</sub>k = (15 L)(0.15 hr<sup>−1</sup>) = 2.25 L/hr; C<sub>ss</sub> = {{frac:150 mg/hr|2.25 L/hr}} = 66.67 mg/L"
     },
     {
@@ -178,7 +178,7 @@
    }
   },
   {
-   "text": "For part b, a number line of start and stop times gives each t. Infusion one runs from zero to two hours and infusion two from six to eight, so the time asked is twelve hours. The first infusion has been declining for ten hours and the second for four. The first leaves three point eight six milligrams per liter and the second nine point four eight, and their sum is thirteen point three four milligrams per liter. Her stated answer is thirteen point three three, and the difference is rounding. The second infusion gives most of the total because it has had less time to decline.",
+   "text": "For part b, a number line of start and stop times gives each infusion's decay time, the hours since that infusion ended. Infusion one runs from zero to two hours and infusion two from six to eight, so four hours after the second stops is twelve hours. The first infusion has been declining for ten hours and the second for four. The first leaves three point eight six milligrams per liter and the second nine point four eight, and their sum is thirteen point three four milligrams per liter. Her stated answer is thirteen point three three, and the difference is rounding. The second infusion gives most of the total because it has had less time to decline.",
    "slide": "rep:25",
    "card": [
     {
@@ -217,7 +217,7 @@
    }
   },
   {
-   "text": "Her stems start the second infusion a stated number of hours after the first starts, so the spacing is start to start, while each decay time runs from the end of its own infusion. The usual trap is one t for both infusions; the second is putting the six hour spacing into the infusion line. The elimination parameter may come as k, as a half life, or as a clearance with a volume, so convert to k and R first. A quiz item asks the assumption behind intermittent infusions: the concentrations from repeated infusions are additive, and the option that infusion is the best way to reach high levels quickly is the opposite of its purpose.",
+   "text": "Her stems start the second infusion a stated number of hours after the first starts, so the spacing is start to start, while each decay time runs from the end of its own infusion. The usual trap is one decay time for both infusions; a second trap puts the six hour spacing of Example four into the infusion line in place of the infusion time. The elimination parameter may come as k, as a half life, or as a clearance with a volume, so convert to k and R first. A quiz item asks the assumption behind intermittent infusions: the concentrations from repeated infusions are additive, and the option that infusion is the best way to reach high levels quickly is the opposite of its purpose.",
    "slide": "rep:23",
    "card": [
     {
@@ -240,7 +240,7 @@
    "fig": null
   },
   {
-   "text": "This objective joins two earlier ones: the climb during each infusion is the Module three infusion line, and the adding of leftovers is the superposition of objective one. A closing part may ask what a continuous infusion at the same rate would reach, which is R over Cl, sixty six point six seven milligrams per liter here, far above what a two hour infusion reaches. The textbook adds that when infusions are repeated at a fixed interval until steady state, the accumulation factor from objective two, one over one minus e to the minus k tau, multiplies the peak of a single infusion to give the steady state peak.",
+   "text": "This objective joins two earlier ones: the climb during each infusion is the Module three infusion line, and the adding of leftovers is the superposition of objective one. A closing part may ask what a continuous infusion at the same rate would reach, which is R over Cl: sixty six point six seven milligrams per liter in Example four, nearly four times the seventeen point two eight its two hour infusion reaches. The textbook adds that when infusions are repeated at a fixed interval until steady state, the accumulation factor from objective two, one over one minus e to the minus k tau, multiplies the peak of a single infusion to give the steady state peak.",
    "slide": "rep:26",
    "card": [
     {

@@ -1412,9 +1412,9 @@ const GUIDE_HTML = `
 <li>Glomerular filtration: drug passes from the blood across the glomerulus into the tubule by passive diffusion, which needs no energy. In normal kidneys it averages 120 mL/min.</li>
 <li>Active tubular secretion: a transporter uses energy to move drug from the blood into the urine, so it removes drug on top of what filtration removes.</li>
 <li>Tubular reabsorption: some drug moves from the urine in the tubule back into the blood, so it takes away from what was removed.</li>
-<li>Because of this, a drug's renal clearance (Cl<sub>R</sub>) compared with 120 mL/min tells you which processes are at work.</li>
+<li>Because filtration and secretion add drug to the urine and reabsorption returns drug to the blood, a drug's renal clearance (Cl<sub>R</sub>) compared with the filtration rate of 120 mL/min shows which processes are at work.</li>
 <li class="tbk"><b>From the textbook.</b> Only unbound drug is filtered. The amount filtered each minute is the unbound plasma concentration times GFR; drug bound to plasma protein stays in the blood.</li>
-<li class="tbk"><b>From the textbook.</b> The reference is inulin, which is filtered only. A clearance ratio below 1 points to partial reabsorption, 1 to filtration only, and above 1 to active secretion.</li>
+<li class="tbk"><b>From the textbook.</b> The reference is inulin, which is filtered only. The clearance ratio, the drug's clearance divided by the inulin clearance, points to partial reabsorption below 1, filtration only at 1, and active secretion above 1.</li>
 <li class="tbk"><b>From the textbook.</b> Secretion uses a transporter, so at high concentrations it saturates and renal clearance falls toward the filtration rate.</li>
 </ul>
 
@@ -1465,7 +1465,7 @@ const GUIDE_HTML = `
 <ul class="tlist">
 <li>The stem gives a renal clearance and the answer is the process, with 120 mL/min as the reference on both sides. The item tests direction, not arithmetic.</li>
 <li>She allows a margin: a value within a unit or two of 120 (119 or 121) counts as filtration, while 250 or her 350 mL/min counts as secretion.</li>
-<li>Usual trap: reading a value below 120 as reduced filtration. Within this rule, a value below the filtration rate points to drug returning to the blood.</li>
+<li>Usual trap: reading a drug's renal clearance below 120 mL/min as reduced filtration. By the rule above, a renal clearance below the filtration rate means some filtered drug is returning to the blood.</li>
 <li>Her 19 Oct review poll: a renal clearance of 45 mL/min, with the options filtered and actively secreted, filtered and reabsorbed, and some evidence of renal impairment. Her key: filtered and reabsorbed.</li>
 <li>A drug's renal clearance below 120 mL/min describes how the kidney handles that drug; the patient's renal function is judged from creatinine clearance (objective 3). Exam 2 review item 7 gives 300 mL/min: filtration with active secretion.</li>
 <li>Second trap: comparing a renal clearance in L/hr with 120 mL/min without converting.</li>
@@ -1489,7 +1489,7 @@ const GUIDE_HTML = `
 <h4>In plain words</h4>
 <ul class="tlist">
 <li>The glomerular filtration rate (GFR) tells you how well a patient's kidneys are working.</li>
-<li>It is measured with a substance eliminated primarily by filtration only (passing from the blood across the glomerulus into the kidney tubule).</li>
+<li>GFR is measured with a substance eliminated primarily by filtration only (passing from the blood across the glomerulus into the kidney tubule).</li>
 <li>That substance is neither reabsorbed (moved from the tubule back into the blood) nor secreted (actively moved from the blood into the urine).</li>
 <li>Inulin is almost completely filtered, so it is the better marker. It is not native to the body, though: it has to be given, and the testing is a more involved process.</li>
 <li>Creatinine comes from the breakdown of muscle and is already in the blood, so creatinine clearance (CrCl) is the common clinical estimate of GFR. Creatinine is also secreted, which is why CrCl estimates GFR rather than measuring it.</li>
@@ -1567,8 +1567,8 @@ const GUIDE_HTML = `
 <li>The height arrives in centimetres (165 cm in her lecture example) or in feet and inches (5 ft 8 in on her Exam 2 review), so finding the inches over 5 ft is part of the question. The actual weight, in kg or lb, is not used.</li>
 <li>Sex decides two things: which IBW constant is used (50 or 45.5) and whether the 0.85 factor applies.</li>
 <li>When she worked this example in class and a student answered 54, she said 54 meant something had been done wrong.</li>
-<li>A second part asks what the number means, read against 120&ndash;130 mL/min. For example, a CrCl of 30 mL/min means a renally eliminated drug will be excreted more slowly and may accumulate.</li>
-<li>Trap she names herself: confusing a drug's renal clearance with the patient's creatinine clearance. Read what each question is asking.</li>
+<li>A second part asks what the patient's CrCl means, read against 120&ndash;130 mL/min. For example, a CrCl of 30 mL/min means a renally eliminated drug will be excreted more slowly and may accumulate.</li>
+<li>Trap she names herself: confusing a drug's renal clearance with the patient's creatinine clearance. CrCl describes the patient's kidneys; a drug's renal clearance describes how the kidney handles that one drug.</li>
 <li>She named Cockcroft-Gault and the IBW formulas as equations to know without the sheet on 14 Sep and again on 19 Oct, and said the same calculation appears on the benchmark.</li>
 </ul>
 
@@ -1612,7 +1612,7 @@ const GUIDE_HTML = `
 <div class="geqline">Weak base: &nbsp; pH = pK<sub>a</sub> + log {{frac:nonionized|ionized}}</div>
 <ul class="tlist">
 <li>pH is the pH of the tubular fluid; pK<sub>a</sub> is the drug's; "ionized" and "nonionized" are the amounts of drug in each form, so their ratio has no units.</li>
-<li>The two forms differ only in which way up the ratio is written: ionized on top for a weak acid, nonionized on top for a weak base.</li>
+<li>The two equations differ only in which way up the ratio is written: ionized on top for a weak acid, nonionized on top for a weak base.</li>
 <li>When to use it: to work out the degree of ionization at the tubular pH, and from it whether reabsorption will be high or low.</li>
 <li>The pK<sub>a</sub> ranges overlap between 7.5 and 8, so a pK<sub>a</sub> alone does not always settle whether the drug is treated as an acid or a base.</li>
 <li>On the equation sheet: no. Neither form is among the lines the sheet carries.</li>
@@ -1729,7 +1729,7 @@ const GUIDE_HTML = `
 <li>Renal clearance: Cl<sub>R</sub> = f<sub>e</sub> &times; Cl<sub>T</sub> = (0.6)(1.3 L/hr) = 0.78 L/hr</li>
 <li>Hepatic clearance by difference: Cl<sub>H</sub> = 1.3 L/hr &minus; 0.78 L/hr = 0.52 L/hr</li>
 </ol>
-<p class="prose">Answers: <b>f<sub>e</sub> = 0.6; k = 0.0866 hr<sup>&minus;1</sup>; k<sub>e</sub> = 0.052 hr<sup>&minus;1</sup>; Cl<sub>T</sub> = 1.3 L/hr; Cl<sub>R</sub> = 0.78 L/hr; Cl<sub>H</sub> = 0.52 L/hr</b>. The 48 hours are not in the arithmetic, but they make the amount collected count as the total the kidney excretes.</p>
+<p class="prose">Answers: <b>f<sub>e</sub> = 0.6; k = 0.0866 hr<sup>&minus;1</sup>; k<sub>e</sub> = 0.052 hr<sup>&minus;1</sup>; Cl<sub>T</sub> = 1.3 L/hr; Cl<sub>R</sub> = 0.78 L/hr; Cl<sub>H</sub> = 0.52 L/hr</b>. The 48 hours are not in the arithmetic, but 48 hours is six 8-hour half-lives, more than the three to four half-lives the textbook asks for, so the amount collected counts as the total the kidney excretes.</p>
 <ul class="tlist">
 <li>A second example sets the half-life against clearance.</li>
 <li>A new antibiotic is actively secreted by the kidney; V<sub>D</sub> is 25 L.</li>
@@ -1746,7 +1746,7 @@ const GUIDE_HTML = `
 <h4>How she tests it</h4>
 <ul class="tlist">
 <li>One stem with a dose, a V<sub>D</sub>, a half-life and a urine recovery, followed by a list of terms to calculate: f<sub>e</sub>, k, k<sub>e</sub>, Cl<sub>T</sub>, Cl<sub>R</sub> and Cl<sub>H</sub>.</li>
-<li>f<sub>e</sub> is asked first because every later term uses it. The urine collection time is given but only the cumulative amount and the dose are used.</li>
+<li>f<sub>e</sub> is asked first because k<sub>e</sub>, Cl<sub>R</sub> and Cl<sub>H</sub> all use it; k and Cl<sub>T</sub> come from the half-life and V<sub>D</sub> alone. The urine collection time is given but only the cumulative amount and the dose are used.</li>
 <li>Traps: giving f<sub>e</sub> units, or putting the urinary fraction in place of capital F. On an IV problem F is 1 whatever the urine shows.</li>
 <li>Another trap is a true/false item claiming clearance rises as concentration rises. A change in concentration changes the elimination rate, not the clearance.</li>
 <li>Unit changes are part of the question: 15 mL/min is 0.9 L/hr, and with 5 mcg/mL (5 mg/L) the rate is 4.5 mg/hr.</li>
@@ -1790,7 +1790,7 @@ const GUIDE_HTML = `
 <li>Because the drug enters gradually while it is also being eliminated, the plasma curve starts at zero, rises to a clear peak and then falls. That peaked shape is how you recognise oral input.</li>
 <li>Before it reaches the body the tablet has to disintegrate, dissolve, cross membranes and pass through the liver. All of those steps are rolled into one absorption rate constant, k<sub>a</sub>.</li>
 <li>Usually only part of the dose arrives, because some of it is eliminated before it becomes available. The fraction that arrives is F; for an IV dose F is taken as 1.</li>
-<li class="tbk"><b>From the textbook.</b> At the peak the rate of absorption equals the rate of elimination. After t<sub>max</sub> elimination outpaces absorption even though drug remains at the site; once the site is empty only elimination is left.</li>
+<li class="tbk"><b>From the textbook.</b> At the peak the rate of absorption equals the rate of elimination. After t<sub>max</sub> elimination is faster than absorption even though drug remains at the absorption site; once that site is empty only elimination is left.</li>
 <li class="tbk"><b>From the textbook.</b> Absorption often does not start at once, because of dissolution, stomach emptying and gut motility. The delay before it begins is the lag time.</li>
 <li class="tbk"><b>From the textbook.</b> Absorption turns zero order when a transporter saturates, so a drug can be first order at low doses and zero order at high ones.</li>
 </ul>
@@ -1859,7 +1859,7 @@ const GUIDE_HTML = `
 <ul class="tlist">
 <li>One equation gives the plasma concentration (C<sub>p</sub>) at any time after a single oral dose, as long as you know F, the dose, V<sub>D</sub>, k<sub>a</sub> and k.</li>
 <li>F is the fraction of the dose absorbed, V<sub>D</sub> the volume of distribution, k<sub>a</sub> the absorption rate constant and k the elimination rate constant.</li>
-<li>Inside the bracket, e<sup>&minus;kt</sup> is drug going out, and the bracket as a whole is drug in minus drug out.</li>
+<li>Inside the bracket, e<sup>&minus;kt</sup> is the elimination term and e<sup>&minus;k<sub>a</sub>t</sup> the absorption term; she calls the bracket as a whole drug in minus drug out.</li>
 <li>At time zero the bracket is e<sup>0</sup> &minus; e<sup>0</sup> = 0, so the oral curve starts at zero concentration and has to rise.</li>
 <li>The fraction in front is not C<sub>0</sub> (a starting concentration). It lumps F, the dose, k<sub>a</sub>, V<sub>D</sub> and the difference of the rate constants into one number.</li>
 <li>In her problems the equation often arrives with that fraction already worked out, for example C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup>, and you work backwards to a parameter hidden inside it.</li>
@@ -2027,10 +2027,10 @@ const GUIDE_HTML = `
 <li>Raise the dose: C<sub>max</sub> and AUC rise in proportion, and t<sub>max</sub> stays put. The rates rise because there is more drug, but the rate constants k and k<sub>a</sub> do not change.</li>
 <li>Raise k<sub>a</sub> with k unchanged: the drug gets in faster, so C<sub>max</sub> is higher and t<sub>max</sub> earlier. AUC is relatively unchanged because clearance has not changed.</li>
 <li>Raise k with k<sub>a</sub> unchanged: the drug leaves faster, so C<sub>max</sub> is lower and t<sub>max</sub> earlier. AUC falls, because changing k changes the clearance.</li>
-<li>Two terms say which process is slower. Disposition rate limiting (the usual case) has the shorter absorption half-life; absorption rate limiting has the longer one.</li>
+<li>Two terms say which process is slower. Disposition rate limiting (the usual case) has an absorption half-life much shorter than the elimination half-life; absorption rate limiting has one much longer than the elimination half-life.</li>
 <li class="tbk"><b>From the textbook.</b> Her "textbook table" (dose 100 mg, V 10 L, F 1): with k held at 0.1 hr<sup>&minus;1</sup>, raising k<sub>a</sub> from 0.2 to 0.6 hr<sup>&minus;1</sup> moves t<sub>max</sub> from 6.93 to 3.58 hr and C<sub>max</sub> from 5.00 to 6.99 mcg/mL; AUC stays 100 mcg&middot;hr/mL.</li>
 <li class="tbk"><b>From the textbook.</b> With k<sub>a</sub> held at 0.3 hr<sup>&minus;1</sup>, raising k from 0.1 to 0.5 hr<sup>&minus;1</sup> moves t<sub>max</sub> from 5.49 to 2.55 hr, lowers C<sub>max</sub> from 5.77 to 2.79 mcg/mL and cuts AUC from 100 to 20 mcg&middot;hr/mL.</li>
-<li class="tbk"><b>From the textbook.</b> In an extended-release product absorption is slower than elimination, so the tail of the curve shows absorption, not elimination (flip-flop). The true k then needs IV data.</li>
+<li class="tbk"><b>From the textbook.</b> In an extended-release product absorption is slower than elimination, so the rate constant read from the last, falling part of the curve represents absorption, not elimination (flip-flop). The true k then needs IV data.</li>
 </ul>
 
 <h4>Terms to know</h4>
@@ -2086,8 +2086,8 @@ const GUIDE_HTML = `
 <li>Exam 2 review item 6, select all that apply, after a 2-fold increase in oral dose: six options pair an increase and a decrease for AUC, C<sub>max</sub> and t<sub>max</sub>. The answers are increased AUC and increased C<sub>max</sub>.</li>
 <li>Quiz 3 asked it as a statement: the time to the maximum concentration depends on the rate constants for absorption and elimination. Its wrong options tie t<sub>max</sub> to the dose.</li>
 <li>One parameter changes, and she asks about C<sub>max</sub>, t<sub>max</sub> and AUC in that order. In earlier modules the same shape was free response, such as the change in half-life if the dose were doubled.</li>
-<li>The rate-limiting question gives two exponents to compare rather than two half-lives. With e<sup>&minus;0.18</sup> against e<sup>&minus;0.87</sup>, absorption is much faster than elimination.</li>
-<li>Trap: the AUC result for a change in k<sub>a</sub> cannot be read off the slide figure; it comes from the textbook table. Hold the spoken statement that AUC is relatively unchanged.</li>
+<li>The rate-limiting question gives two exponents to compare rather than two half-lives. With e<sup>&minus;0.18</sup> against e<sup>&minus;0.87</sup>, the larger exponent, 0.87, is k<sub>a</sub>, so absorption is much faster than elimination.</li>
+<li>Trap: the AUC result for a change in k<sub>a</sub> cannot be read off the slide figure; it comes from the textbook table. Her spoken statement is that AUC is relatively unchanged.</li>
 <li>She once said "distribution limited" for the usual case; the slide's term, disposition rate limiting, is the one to use.</li>
 <li>The figures on the k<sub>a</sub> and k slide hold the dose at 100 mg and V<sub>D</sub> at 10 L, with the unchanged constant at 0.1 hr<sup>&minus;1</sup>; the k values compared are 0.5, 0.3 and 0.2 hr<sup>&minus;1</sup>.</li>
 <li>The significance slide lists why k<sub>a</sub>, t<sub>max</sub> and C<sub>max</sub> matter: multiple-dose design (peaks and troughs), bioequivalence, choice of route and dosage form, onset of action, and correlation with effect.</li>
@@ -2123,7 +2123,7 @@ const GUIDE_HTML = `
 <li>Superposition says the concentration at any time is the sum of what is left of every dose given so far, each dose following its own single-dose curve.</li>
 <li>It holds under two assumptions: elimination is first order, and the pharmacokinetics after one dose are not altered by later doses, so the half-life and clearance (the volume of plasma cleared of drug per unit time) stay the same.</li>
 <li class="tbk"><b>From the textbook.</b> Accumulation happens when the next dose arrives before the last one is completely eliminated. An interval longer than that gives no accumulation.</li>
-<li class="tbk"><b>From the textbook.</b> R = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}} depends only on k and &tau;, not on the dose. The time to steady state depends on the half-life alone; the dose sets how high the plateau is.</li>
+<li class="tbk"><b>From the textbook.</b> The accumulation factor, R = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}, depends only on k and &tau;, not on the dose. The time to steady state depends on the half-life alone; the dose sets how high the plateau is.</li>
 </ul>
 
 <h4>Terms to know</h4>
@@ -2201,7 +2201,7 @@ const GUIDE_HTML = `
 <ul class="tlist">
 <li>After one IV bolus, the drug falls by first-order elimination; the fraction still in the body when the next dose is due is e<sup>&minus;k&tau;</sup>.</li>
 <li>Here k is the elimination rate constant (hr<sup>&minus;1</sup>) and &tau; the dosing interval, the time between doses (hr).</li>
-<li>That leftover is why drug accumulates. At steady state every peak equals the first-dose peak multiplied by an accumulation factor that holds only k and &tau;.</li>
+<li>The fraction of each dose still in the body when the next dose is given is why drug accumulates. At steady state every peak equals the first-dose peak multiplied by an accumulation factor that holds only k and &tau;.</li>
 <li>The steady-state trough is one interval of decline after the steady-state peak, so it is at the end of the dosing interval.</li>
 <li>The average at steady state is not the midpoint of peak and trough, because the decline is exponential; it comes from the dose, the clearance and the interval.</li>
 <li>Before steady state, a dose-number term n tracks how far the climb has gone. After the last dose, the level simply falls from the last peak.</li>
@@ -2326,7 +2326,7 @@ const GUIDE_HTML = `
 <li>One patient vignette asked in parts: first-dose peak, first-dose trough, steady-state maximum, minimum and average, then a time before steady state and a time after the last dose.</li>
 <li>Dose and volume come per kilogram, or scaled from a per-70-kg or per-100-kg value, so the first step is putting both on the same basis.</li>
 <li>Frequency is given as TID (three times a day) or BID (twice a day); convert it to the interval &tau; (TID is 8 hr) before using any equation.</li>
-<li>Her check on the steady-state peak: it must be above the first-dose peak (40 mg/L in Example 1). A smaller value means the accumulation factor was multiplied in the wrong direction.</li>
+<li>Her check on the steady-state peak: it must be above the first-dose peak (40 mg/L in Example 1). A smaller value means C<sub>0</sub> was multiplied by (1 &minus; e<sup>&minus;k&tau;</sup>) instead of divided by it.</li>
 <li>The trough, and any time after the last dose, are C = C<sub>0</sub>e<sup>&minus;kt</sup> started from the steady-state peak. She prefers this route to searching the sheet for the matching line.</li>
 <li>In the n-dose line, n is the dose number and t the hours since that dose; in Example 2, n = 2 and t = 3.</li>
 <li>Multiple-IV-Bolus-Practice-1 runs the same battery on 1 g every 8 hours to a 65-kg patient. Keyed: t&frac12; 4 hr, first-dose C<sub>max</sub> 58.72 and C<sub>min</sub> 14.69 mg/L.</li>
