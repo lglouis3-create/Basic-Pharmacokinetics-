@@ -1,0 +1,174 @@
+{
+ "id": "gobj-m5-2",
+ "title": "Plasma concentration after a single oral dose",
+ "segs": [
+  {
+   "slide": "oral:10",
+   "reading": null,
+   "text": "Module five, objective two. Plasma concentration after a single oral dose. One equation gives the plasma concentration, C p, at any time after a single oral dose, as long as you know F, the dose, V D, k a and k. F is the fraction of the dose absorbed, V D the volume of distribution, k a the absorption rate constant, and k the elimination rate constant. C p comes out in milligrams per liter, the dose is in milligrams, V D is in liters, both rate constants are per hour, and t is the hours since the dose. It applies to a single oral dose in one compartment, with first order absorption and first order elimination, and it is on the equation sheet, page one.",
+   "card": [
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}} &times; (e<sup>&minus;kt</sup> &minus; e<sup>&minus;k<sub>a</sub>t</sup>)"
+    },
+    {
+     "at": 3,
+     "m": "F: fraction absorbed &nbsp; V<sub>D</sub>: volume of distribution"
+    },
+    {
+     "at": 3,
+     "m": "k<sub>a</sub>: absorption &nbsp; k: elimination"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>p</sub> mg/L, D<sub>0</sub> mg, V<sub>D</sub> L, k<sub>a</sub> and k hr<sup>&minus;1</sup>, t hr"
+    }
+   ]
+  },
+  {
+   "slide": "oral:10",
+   "reading": null,
+   "text": "Inside the bracket, e to the minus k t is drug going out, and the bracket as a whole is drug in minus drug out. At time zero the bracket is e to the zero minus e to the zero, which is zero, so the oral curve starts at zero concentration and has to rise. The fraction in front is not C zero, a starting concentration. It lumps F, the dose, k a, V D and the difference of the rate constants into one number. She said, this big portion right here does not represent C zero.",
+   "card": [
+    {
+     "at": 0,
+     "m": "bracket = drug in &minus; drug out"
+    },
+    {
+     "at": 1,
+     "m": "t = 0: e<sup>0</sup> &minus; e<sup>0</sup> = 0, so the curve starts at zero"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}} is not C<sub>0</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "oral:15",
+   "reading": null,
+   "text": "In her problems the equation often arrives with that fraction already worked out as one leading number, P, in milligrams per liter. Her slide Example two gives C p equals seventy five e to the minus zero point two two t, minus seventy five e to the minus two point seven five t, so P is seventy five. The larger exponent is k a, two point seven five per hour, and the smaller is k, zero point two two per hour. To find V D, set P equal to the fraction and rearrange. V D equals F times k a times the dose, divided by P times k a minus k. That line is the page one equation rearranged, and V D comes out in liters.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = 75e<sup>&minus;0.22t</sup> &minus; 75e<sup>&minus;2.75t</sup> &nbsp; P = 75"
+    },
+    {
+     "at": 2,
+     "m": "larger: k<sub>a</sub> = 2.75 hr<sup>&minus;1</sup> &nbsp; smaller: k = 0.22 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "P = {{frac:F k<sub>a</sub> D<sub>0</sub>|V<sub>D</sub> (k<sub>a</sub> &minus; k)}}"
+    },
+    {
+     "at": 4,
+     "m": "V<sub>D</sub> = {{frac:F k<sub>a</sub> D<sub>0</sub>|P (k<sub>a</sub> &minus; k)}}"
+    }
+   ]
+  },
+  {
+   "slide": "oral:10",
+   "reading": null,
+   "text": "Her in class practice two. A seven hundred fifty milligram oral dose, eighty four percent bioavailable, gives C p equals twenty three point two, times e to the minus zero point one eight two t minus e to the minus zero point eight seven two t, in milligrams per liter with t in hours. Find V D and the half-life of elimination. First read the rate constants off the exponents. The larger is k a, zero point eight seven two per hour, and the smaller is k, zero point one eight two per hour. The eighty four percent is used as a decimal, so F is zero point eight four.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = 23.2(e<sup>&minus;0.182t</sup> &minus; e<sup>&minus;0.872t</sup>) mg/L &nbsp; D<sub>0</sub> = 750 mg"
+    },
+    {
+     "at": 2,
+     "m": "find: V<sub>D</sub> and t&frac12;"
+    },
+    {
+     "at": 4,
+     "m": "k<sub>a</sub> = 0.872 hr<sup>&minus;1</sup> &nbsp; k = 0.182 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 5,
+     "m": "F = 84% = 0.84"
+    }
+   ]
+  },
+  {
+   "slide": "oral:10",
+   "reading": null,
+   "text": "Set the leading number equal to the fraction. Twenty three point two milligrams per liter equals zero point eight four, times seven hundred fifty milligrams, times zero point eight seven two per hour, all divided by V D times zero point eight seven two minus zero point one eight two per hour. That difference is zero point six nine zero per hour. Rearrange so V D stands alone, with twenty three point two moving to the bottom.",
+   "card": [
+    {
+     "at": 1,
+     "m": "23.2 mg/L = {{frac:(0.84)(750 mg)(0.872 hr<sup>&minus;1</sup>)|V<sub>D</sub> (0.872 &minus; 0.182) hr<sup>&minus;1</sup>}}"
+    },
+    {
+     "at": 2,
+     "m": "0.872 &minus; 0.182 = 0.690 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>D</sub> = {{frac:(0.84)(750 mg)(0.872 hr<sup>&minus;1</sup>)|(23.2 mg/L)(0.690 hr<sup>&minus;1</sup>)}}"
+    }
+   ]
+  },
+  {
+   "slide": "oral:10",
+   "reading": null,
+   "text": "The top is zero point eight four times seven hundred fifty milligrams times zero point eight seven two per hour, which is five hundred forty nine point three six. The bottom is twenty three point two milligrams per liter times zero point six nine zero per hour, which is sixteen point zero zero eight. The per hour cancels, and milligrams divided by milligrams per liter leaves liters. Five hundred forty nine point three six divided by sixteen point zero zero eight is thirty four point three two liters, which she reports as thirty four point three liters.",
+   "card": [
+    {
+     "at": 1,
+     "m": "V<sub>D</sub> = {{frac:549.36|16.008}} L"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:mg|mg/L}} = L"
+    },
+    {
+     "at": 3,
+     "m": "= 34.32 L &rarr; <b>V<sub>D</sub> = 34.3 L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "oral:15",
+   "reading": null,
+   "text": "The second answer is the half-life. With no qualifier, half-life means the elimination half-life, so it uses k, the smaller exponent. t half equals zero point six nine three divided by k. She says this one is never on the equation sheet. Zero point six nine three divided by zero point one eight two per hour is three point eight hours, because one over per hour leaves hours.",
+   "card": [
+    {
+     "at": 1,
+     "m": "no qualifier: elimination half-life, use k"
+    },
+    {
+     "at": 2,
+     "m": "t&frac12; = {{frac:0.693|k}}"
+    },
+    {
+     "at": 4,
+     "m": "t&frac12; = {{frac:0.693|0.182 hr<sup>&minus;1</sup>}} = <b>3.8 hr</b>"
+    }
+   ]
+  },
+  {
+   "slide": "oral:15",
+   "reading": null,
+   "text": "How she tests it. She gives the two exponential equation with the fraction already worked out and asks for something inside it, most often V D, with F and the dose supplied. She expects you to pick the larger exponent as k a without being told. Units are fixed in a sentence of the stem, such as assume units of micrograms per milliliter for C p and hours for time, and milligrams per liter is numerically the same. In her slide Example two, five hundred milligrams at eighty seven percent bioavailability gives a V D of six point three liters. The usual traps are reading the leading number as C zero, leaving out V D, and losing the k a minus k term.",
+   "card": [
+    {
+     "at": 2,
+     "m": "larger exponent = k<sub>a</sub>"
+    },
+    {
+     "at": 3,
+     "m": "mg/L = mcg/mL"
+    },
+    {
+     "at": 4,
+     "m": "Example 2: D<sub>0</sub> = 500 mg, F = 0.87 &rarr; V<sub>D</sub> = 6.3 L"
+    },
+    {
+     "at": 5,
+     "m": "✗ P read as C<sub>0</sub> &nbsp; ✗ V<sub>D</sub> left out &nbsp; ✗ (k<sub>a</sub> &minus; k) lost"
+    }
+   ]
+  }
+ ]
+}

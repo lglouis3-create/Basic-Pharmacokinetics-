@@ -1,0 +1,225 @@
+{
+ "id": "gobj-m6-2",
+ "title": "Concentrations after multiple IV bolus doses",
+ "segs": [
+  {
+   "slide": "rep:6",
+   "reading": null,
+   "text": "Module six, objective two. Concentrations at any time after multiple I V bolus doses. After one I V bolus, the drug falls by first order elimination. The fraction still in the body when the next dose is due is e to the minus k tau, with k the elimination rate constant and tau the dosing interval, the time between doses. So the amount left one interval after a dose, D B, is the dose, D zero, times e to the minus k tau. That leftover is why drug accumulates. Tau is the interval, not the frequency, so three times a day, T I D, is a tau of eight hours.",
+   "card": [
+    {
+     "at": 3,
+     "m": "fraction left after &tau;: e<sup>&minus;k&tau;</sup>"
+    },
+    {
+     "at": 4,
+     "m": "D<sub>B</sub> = D<sub>0</sub>e<sup>&minus;k&tau;</sup>"
+    },
+    {
+     "at": 6,
+     "m": "TID &rarr; &tau; = 8 hr"
+    }
+   ]
+  },
+  {
+   "slide": "rep:8",
+   "reading": null,
+   "text": "At steady state, every peak equals the first dose peak times an accumulation factor, r, that holds only k and tau. r equals one divided by one minus e to the minus k tau, and k tau has no units. A shorter interval makes it larger, and the dose does not change it. The first dose peak, C zero, is the dose divided by V D. So C max at steady state is C zero over one minus e to the minus k tau, and it must come out higher than C zero. The trough at steady state is one interval of decline later, so C min equals C max times e to the minus k tau.",
+   "card": [
+    {
+     "at": 1,
+     "m": "r = {{frac:1|1 &minus; e<sup>&minus;k&tau;</sup>}}"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>0</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}}"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>max</sub><sup>&infin;</sup> = {{frac:C<sub>0</sub>|1 &minus; e<sup>&minus;k&tau;</sup>}}, higher than C<sub>0</sub>"
+    },
+    {
+     "at": 5,
+     "m": "C<sub>min</sub><sup>&infin;</sup> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;k&tau;</sup>"
+    }
+   ]
+  },
+  {
+   "slide": "rep:8",
+   "reading": null,
+   "text": "The average at steady state is not the midpoint of peak and trough, because the decline is exponential. She said, I want you to realize that the average is not the max plus the min divided by two. C average at steady state equals F times the dose, divided by V D times k times tau. Since total clearance, Cl T, is V D times k, that is also F times the dose over Cl T times tau. F is one for I V dosing, and no exponential or accumulation factor is needed. The amount forms, D max, D min and D average, divided by V D give the matching concentrations.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>avg</sub><sup>&infin;</sup> is not {{frac:max + min|2}}"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>avg</sub><sup>&infin;</sup> = {{frac:FD<sub>0</sub>|V<sub>D</sub>k&tau;}}"
+    },
+    {
+     "at": 3,
+     "m": "= {{frac:FD<sub>0</sub>|Cl<sub>T</sub>&tau;}}"
+    },
+    {
+     "at": 4,
+     "m": "IV: F = 1"
+    },
+    {
+     "at": 5,
+     "m": "C = {{frac:D|V<sub>D</sub>}} for max, min and avg"
+    }
+   ]
+  },
+  {
+   "slide": "rep:9",
+   "reading": null,
+   "text": "Her Example one. An antibiotic has a half-life of about four hours and a V D of twenty five percent of body weight. Ten milligrams per kilogram is given every eight hours by I V bolus to a sixty five kilogram female. Find the maximum, minimum and average at steady state. With one liter taken as one kilogram of body weight, V D is zero point two five liters per kilogram. C zero is ten milligrams per kilogram over zero point two five liters per kilogram, forty milligrams per liter, because the kilograms cancel.",
+   "card": [
+    {
+     "at": 1,
+     "m": "t&frac12; = 4 hr, V<sub>D</sub> = 25% of body weight"
+    },
+    {
+     "at": 2,
+     "m": "10 mg/kg every 8 hr, 65 kg"
+    },
+    {
+     "at": 4,
+     "m": "V<sub>D</sub> = 0.25 L/kg"
+    },
+    {
+     "at": 5,
+     "m": "C<sub>0</sub> = {{frac:10 mg/kg|0.25 L/kg}} = 40 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "rep:11",
+   "reading": null,
+   "text": "Next, k is zero point six nine three over four hours, which is zero point one seven three three per hour. k tau is zero point one seven three three per hour times eight hours, which is one point three eight six, with no units. e to the minus one point three eight six is zero point two five, so a quarter of each dose is left after one interval. The steady state peak is forty milligrams per liter over one minus zero point two five. That is forty over zero point seven five, fifty three point three milligrams per liter, above the first dose peak of forty, as her check requires.",
+   "card": [
+    {
+     "at": 0,
+     "m": "k = {{frac:0.693|4 hr}} = 0.1733 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 1,
+     "m": "k&tau; = (0.1733 hr<sup>&minus;1</sup>)(8 hr) = 1.386"
+    },
+    {
+     "at": 2,
+     "m": "e<sup>&minus;1.386</sup> = 0.25"
+    },
+    {
+     "at": 3,
+     "m": "C<sub>max</sub><sup>&infin;</sup> = {{frac:40 mg/L|1 &minus; 0.25}}"
+    },
+    {
+     "at": 4,
+     "m": "= {{frac:40 mg/L|0.75}} = <b>53.3 mg/L</b> ✓ above 40"
+    }
+   ]
+  },
+  {
+   "slide": "rep:13",
+   "reading": null,
+   "text": "The steady state trough is one interval later. Fifty three point three milligrams per liter times zero point two five is thirteen point three milligrams per liter. For the average, F is one, the dose over V D is forty milligrams per liter, and k tau is one point three eight six. Forty divided by one point three eight six is twenty eight point nine milligrams per liter. That is below the midpoint of peak and trough, thirty three point three milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>min</sub><sup>&infin;</sup> = (53.3 mg/L)(0.25) = <b>13.3 mg/L</b>"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>avg</sub><sup>&infin;</sup> = {{frac:(1)(40 mg/L)|1.386}}"
+    },
+    {
+     "at": 3,
+     "m": "<b>C<sub>avg</sub><sup>&infin;</sup> = 28.9 mg/L</b>"
+    },
+    {
+     "at": 4,
+     "m": "midpoint 33.3 mg/L, not the average"
+    }
+   ]
+  },
+  {
+   "slide": "rep:14",
+   "reading": null,
+   "text": "Before steady state, a dose number, n, tracks how far the climb has gone. The level after n doses is the dose over V D, times the build up after n doses, times the decay since dose n. The build up is one minus e to the minus n k tau, over one minus e to the minus k tau. The decay is e to the minus k t, with t the time since dose n, not since the first dose. With f the fraction left after one interval, the body just after dose n holds one plus f plus f squared, up to f to the n minus one doses, and that sum is the build up. As n grows, the build up becomes r.",
+   "card": [
+    {
+     "at": 1,
+     "m": "C<sub>p</sub> = {{frac:D<sub>0</sub>|V<sub>D</sub>}} &times; build-up &times; decay"
+    },
+    {
+     "at": 2,
+     "m": "build-up = {{frac:1 &minus; e<sup>&minus;nk&tau;</sup>|1 &minus; e<sup>&minus;k&tau;</sup>}}"
+    },
+    {
+     "at": 3,
+     "m": "decay = e<sup>&minus;kt</sup>, t since dose n"
+    },
+    {
+     "at": 4,
+     "m": "1 + f + f<sup>2</sup> + &hellip; + f<sup>n&minus;1</sup> = {{frac:1 &minus; f<sup>n</sup>|1 &minus; f}}"
+    },
+    {
+     "at": 5,
+     "m": "n large: build-up &rarr; r"
+    }
+   ]
+  },
+  {
+   "slide": "rep:16",
+   "reading": null,
+   "text": "Her Example two asks the level three hours after the second dose. Two doses is not steady state, so n is two, t is three hours, and the first part is forty milligrams per liter. The build up is one minus e to the minus two times one point three eight six, over one minus zero point two five. That is one minus zero point zero six two five, over zero point seven five, which is one point two five. The decay is e to the minus zero point one seven three three times three, or zero point five nine four five. Forty times one point two five times zero point five nine four five is twenty nine point seven milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "n = 2, t = 3 hr, {{frac:D<sub>0</sub>|V<sub>D</sub>}} = 40 mg/L"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:1 &minus; e<sup>&minus;2(1.386)</sup>|1 &minus; 0.25}}"
+    },
+    {
+     "at": 3,
+     "m": "= {{frac:1 &minus; 0.0625|0.75}} = 1.25"
+    },
+    {
+     "at": 4,
+     "m": "e<sup>&minus;(0.1733)(3)</sup> = e<sup>&minus;0.520</sup> = 0.5945"
+    },
+    {
+     "at": 5,
+     "m": "C<sub>p</sub> = (40 mg/L)(1.25)(0.5945) = <b>29.7 mg/L</b>"
+    }
+   ]
+  },
+  {
+   "slide": "rep:17",
+   "reading": null,
+   "text": "Within a steady state interval, and after the last dose, the level just falls from the steady state peak, so C p equals C max at steady state times e to the minus k t. She prefers this route, C zero e to the minus k t started from the steady state peak, to searching the sheet for a matching line. Her vignettes run from the first dose to steady state, a time before it and a time after the last dose. Dose and volume may come per kilogram or scaled from a per seventy kilogram value, so put both on the same basis first.",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;kt</sup>"
+    },
+    {
+     "at": 1,
+     "m": "start from C<sub>max</sub><sup>&infin;</sup>, then C = C<sub>0</sub>e<sup>&minus;kt</sup>"
+    },
+    {
+     "at": 2,
+     "m": "first dose &rarr; steady state &rarr; n doses &rarr; after the last dose"
+    },
+    {
+     "at": 3,
+     "m": "dose and V<sub>D</sub> on the same basis"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,217 @@
+{
+ "id": "gobj-m5-4",
+ "title": "Changing parameters after an oral dose",
+ "segs": [
+  {
+   "slide": "oral:18",
+   "reading": null,
+   "text": "Module five, objective four. Changing one parameter after an oral dose. The question is what happens to C max, t max and A U C, the area under the curve, when one parameter changes, and the answers are directions, not numbers. Two relations give every direction. A U C equals F times the dose divided by clearance, and clearance equals k times V D. k a appears in neither line, which is why changing k a leaves A U C about the same. t max equals the natural log of k a over k, divided by k a minus k. Only k a and k appear, with no dose, F or V D, so a dose change cannot move t max.",
+   "card": [
+    {
+     "at": 2,
+     "m": "one change &rarr; C<sub>max</sub>, t<sub>max</sub>, AUC: up, down or unchanged"
+    },
+    {
+     "at": 4,
+     "m": "AUC = {{frac:F D<sub>0</sub>|Cl}} &nbsp; Cl = k &times; V<sub>D</sub>"
+    },
+    {
+     "at": 5,
+     "m": "no k<sub>a</sub> in AUC"
+    },
+    {
+     "at": 6,
+     "m": "t<sub>max</sub> = {{frac:ln(k<sub>a</sub> &divide; k)|k<sub>a</sub> &minus; k}}"
+    },
+    {
+     "at": 7,
+     "m": "no D<sub>0</sub>, F or V<sub>D</sub> in t<sub>max</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "oral:18",
+   "reading": null,
+   "text": "Raise the dose, and C max and A U C rise in proportion, while t max stays put. The rates rise because there is more drug, but the rate constants k and k a do not change. Her own question is, if the dose is increased, what happens to t max? Her answer is nothing, because t max is independent of dose.",
+   "card": [
+    {
+     "at": 0,
+     "m": "dose up: C<sub>max</sub> and AUC up in proportion, t<sub>max</sub> unchanged"
+    },
+    {
+     "at": 1,
+     "m": "rates up; k and k<sub>a</sub> unchanged"
+    },
+    {
+     "at": 3,
+     "m": "t<sub>max</sub> independent of dose"
+    }
+   ]
+  },
+  {
+   "slide": "oral:13",
+   "reading": null,
+   "text": "Her slide Example one puts numbers on it. V D is twenty two liters, the absorption half-life forty five minutes, the elimination half-life three hours, and F is eighty five percent. For one five hundred milligram dose, t max is two hours and C max is twelve point one seven milligrams per liter, from objective three. Double the dose to one thousand milligrams. t max uses only k a and k, so it stays at two hours. The dose sits only in the fraction in front, so C max doubles. Twelve point one seven milligrams per liter, times one thousand over five hundred milligrams, is twenty four point three four milligrams per liter. A U C doubles as well.",
+   "card": [
+    {
+     "at": 2,
+     "m": "500 mg: t<sub>max</sub> = 2 hr, C<sub>max</sub> = 12.17 mg/L"
+    },
+    {
+     "at": 3,
+     "m": "D<sub>0</sub>: 500 &rarr; 1000 mg"
+    },
+    {
+     "at": 4,
+     "m": "t<sub>max</sub> = <b>2 hr</b>, unchanged"
+    },
+    {
+     "at": 6,
+     "m": "C<sub>max</sub> = (12.17 mg/L)({{frac:1000 mg|500 mg}}) = <b>24.34 mg/L</b>"
+    },
+    {
+     "at": 7,
+     "m": "AUC doubles"
+    }
+   ]
+  },
+  {
+   "slide": "oral:19",
+   "reading": null,
+   "text": "Raise k a with k unchanged. The drug gets in faster, so C max is higher and t max earlier. A U C is relatively unchanged, because clearance has not changed. Her textbook table holds the dose at one hundred milligrams, V at ten liters, F at one, and k at zero point one per hour. Raising k a from zero point two to zero point six per hour moves t max from six point nine three to three point five eight hours. C max goes from five point zero zero to six point nine nine micrograms per milliliter, and A U C stays one hundred microgram hours per milliliter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "k<sub>a</sub> up, k fixed"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>max</sub> up, t<sub>max</sub> earlier"
+    },
+    {
+     "at": 2,
+     "m": "AUC about unchanged: Cl unchanged"
+    },
+    {
+     "at": 4,
+     "m": "k<sub>a</sub> 0.2 &rarr; 0.6 hr<sup>&minus;1</sup>: t<sub>max</sub> 6.93 &rarr; 3.58 hr"
+    },
+    {
+     "at": 5,
+     "m": "C<sub>max</sub> 5.00 &rarr; 6.99 mcg/mL; AUC 100 mcg&middot;hr/mL both"
+    }
+   ]
+  },
+  {
+   "slide": "oral:19",
+   "reading": null,
+   "text": "That A U C result cannot be read off the curves. She said, looking at the curve, you might not be able to really ascertain, but this comes from your textbook, and this is tabulated, and the A U C is relatively unchanged. So the trap is to read a change in A U C from the figure, when the table says it holds.",
+   "card": [
+    {
+     "at": 1,
+     "m": "k<sub>a</sub> change: AUC from the table, not the figure"
+    },
+    {
+     "at": 2,
+     "m": "✗ AUC changes with k<sub>a</sub>"
+    }
+   ]
+  },
+  {
+   "slide": "oral:19",
+   "reading": null,
+   "text": "Raise k with k a unchanged. The drug leaves faster, so C max is lower and t max earlier. A U C falls, because changing k changes the clearance. In the textbook table, with k a held at zero point three per hour, raising k from zero point one to zero point five per hour moves t max from five point four nine to two point five five hours. C max falls from five point seven seven to two point seven nine micrograms per milliliter, and A U C from one hundred to twenty microgram hours per milliliter.",
+   "card": [
+    {
+     "at": 0,
+     "m": "k up, k<sub>a</sub> fixed"
+    },
+    {
+     "at": 1,
+     "m": "C<sub>max</sub> down, t<sub>max</sub> earlier"
+    },
+    {
+     "at": 2,
+     "m": "AUC down: Cl = k &times; V<sub>D</sub> up"
+    },
+    {
+     "at": 3,
+     "m": "k 0.1 &rarr; 0.5 hr<sup>&minus;1</sup>: t<sub>max</sub> 5.49 &rarr; 2.55 hr"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>max</sub> 5.77 &rarr; 2.79 mcg/mL; AUC 100 &rarr; 20 mcg&middot;hr/mL"
+    }
+   ]
+  },
+  {
+   "slide": "oral:20",
+   "reading": null,
+   "text": "Two terms say which process is slower. Disposition rate limiting, the usual case, means the absorption half-life is much shorter than the elimination half-life, so k a is much larger than k. Absorption rate limiting means the absorption half-life is much longer than the elimination half-life. She once said distribution limited for the usual case, but the term to use is disposition rate limiting. From the textbook, in an extended release product absorption is slower than elimination, so the tail of the curve shows absorption, not elimination, which is called flip flop.",
+   "card": [
+    {
+     "at": 1,
+     "m": "disposition rate limiting: t&frac12;<sub>a</sub> much shorter, k<sub>a</sub> much larger than k"
+    },
+    {
+     "at": 2,
+     "m": "absorption rate limiting: t&frac12;<sub>a</sub> much longer"
+    },
+    {
+     "at": 3,
+     "m": "✗ distribution limited"
+    },
+    {
+     "at": 4,
+     "m": "flip-flop: the tail shows absorption"
+    }
+   ]
+  },
+  {
+   "slide": "oral:15",
+   "reading": null,
+   "text": "Her slide Example two asks which case an antibiotic is. From its exponents, k a is two point seven five per hour and k is zero point two two per hour. The absorption half-life is zero point six nine three over two point seven five per hour, which is zero point two five two hours. The elimination half-life is zero point six nine three over zero point two two per hour, which is three point one five hours. Three point one five hours over zero point two five two hours is twelve point five, so absorption is twelve point five times faster. The drug is disposition rate limiting, the usual case.",
+   "card": [
+    {
+     "at": 1,
+     "m": "k<sub>a</sub> = 2.75 hr<sup>&minus;1</sup> &nbsp; k = 0.22 hr<sup>&minus;1</sup>"
+    },
+    {
+     "at": 2,
+     "m": "t&frac12;<sub>a</sub> = {{frac:0.693|2.75 hr<sup>&minus;1</sup>}} = 0.252 hr"
+    },
+    {
+     "at": 3,
+     "m": "t&frac12; = {{frac:0.693|0.22 hr<sup>&minus;1</sup>}} = 3.15 hr"
+    },
+    {
+     "at": 4,
+     "m": "{{frac:3.15 hr|0.252 hr}} = 12.5"
+    },
+    {
+     "at": 5,
+     "m": "<b>disposition rate limiting</b>"
+    }
+   ]
+  },
+  {
+   "slide": "oral:21",
+   "reading": null,
+   "text": "How she tests it. One parameter changes, and she asks about C max, t max and A U C, in that order. The rate limiting question gives two exponents to compare rather than two half-lives, and with e to the minus zero point one eight against e to the minus zero point eight seven, absorption is much faster than elimination. k a, t max and C max matter for designing multiple dose regimens, for bioequivalence, for choosing the route and dosage form, for the onset of action, and for correlating with the effect.",
+   "card": [
+    {
+     "at": 1,
+     "m": "order: C<sub>max</sub>, t<sub>max</sub>, AUC"
+    },
+    {
+     "at": 2,
+     "m": "e<sup>&minus;0.18</sup> vs e<sup>&minus;0.87</sup>: absorption faster"
+    },
+    {
+     "at": 3,
+     "m": "uses: regimens, bioequivalence, route and form, onset, effect"
+    }
+   ]
+  }
+ ]
+}

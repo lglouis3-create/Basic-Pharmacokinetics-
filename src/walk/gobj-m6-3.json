@@ -1,0 +1,194 @@
+{
+ "id": "gobj-m6-3",
+ "title": "Concentrations after repeated IV infusions",
+ "segs": [
+  {
+   "slide": "rep:21",
+   "reading": null,
+   "text": "Module six, objective three. Concentrations after repeated intermittent I V infusions. An intermittent I V infusion gives each dose slowly over a set time instead of all at once, which prevents high concentrations and the side effects that go with them. No new equation is needed. During each infusion the level rises by the single infusion equation from Module three. When it stops, the level falls by first order elimination, where a fixed fraction of the drug present is removed per unit time.",
+   "card": [
+    {
+     "at": 2,
+     "m": "slow infusion: no high concentrations, fewer side effects"
+    },
+    {
+     "at": 4,
+     "m": "during: single-infusion equation, Module 3"
+    },
+    {
+     "at": 5,
+     "m": "after: first-order fall"
+    }
+   ]
+  },
+  {
+   "slide": "rep:22",
+   "reading": null,
+   "text": "The infusion rate, R, is the dose divided by the infusion time, in milligrams per hour. It always comes first, because the stem gives a dose and a duration while the equation needs a rate. During an infusion, C p equals R over V D times k, times one minus e to the minus k t. V D times k is the clearance in liters per hour, so R over V D k is in milligrams per liter. That is C s s, the plateau a continuous infusion at rate R would reach, and short infusions stop well below it. Here t is the time the pump has run, never the spacing between infusions.",
+   "card": [
+    {
+     "at": 0,
+     "m": "R = {{frac:dose|infusion time}} (mg/hr)"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = {{frac:R|V<sub>D</sub>k}} (1 &minus; e<sup>&minus;kt</sup>)"
+    },
+    {
+     "at": 3,
+     "m": "{{frac:mg/hr|L/hr}} = mg/L"
+    },
+    {
+     "at": 4,
+     "m": "C<sub>ss</sub> = {{frac:R|Cl}}"
+    },
+    {
+     "at": 5,
+     "m": "t = infusion time only"
+    }
+   ]
+  },
+  {
+   "slide": "rep:22",
+   "reading": null,
+   "text": "The same drug at the same rate for the same duration reaches the same end of infusion concentration, C end, every time, and that value is the starting point for the fall. She said, So that C zero is gonna be the concentration at the end of the infusion, right? After an infusion stops, C equals C end times e to the minus k t, with t the time since that infusion ended, not since it started. Because elimination is first order, the contributions of separate infusions add, which is superposition. For two infusions, C equals C end e to the minus k t one, plus C end e to the minus k t two.",
+   "card": [
+    {
+     "at": 0,
+     "m": "C<sub>end</sub> = the C<sub>0</sub> of the fall"
+    },
+    {
+     "at": 2,
+     "m": "C = C<sub>end</sub>e<sup>&minus;kt</sup>, t since that infusion ended"
+    },
+    {
+     "at": 3,
+     "m": "first order &rarr; contributions add"
+    },
+    {
+     "at": 4,
+     "m": "C = C<sub>end</sub>e<sup>&minus;kt<sub>1</sub></sup> + C<sub>end</sub>e<sup>&minus;kt<sub>2</sub></sup>"
+    }
+   ]
+  },
+  {
+   "slide": "rep:23",
+   "reading": null,
+   "text": "Her Example four. Three hundred milligrams is infused over two hours, and a second three hundred milligrams starts six hours after the first started, again over two hours. k is zero point one five per hour and V D is fifteen liters. Find the level at the end of the first infusion, and four hours after the second infusion stops. First, R is three hundred milligrams over two hours, one hundred fifty milligrams per hour. The clearance, V D k, is fifteen liters times zero point one five per hour, two point two five liters per hour. One hundred fifty over two point two five is sixty six point six seven milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "300 mg over 2 hr; second 300 mg starts at 6 hr"
+    },
+    {
+     "at": 2,
+     "m": "k = 0.15 hr<sup>&minus;1</sup>, V<sub>D</sub> = 15 L"
+    },
+    {
+     "at": 4,
+     "m": "R = {{frac:300 mg|2 hr}} = 150 mg/hr"
+    },
+    {
+     "at": 5,
+     "m": "V<sub>D</sub>k = (15 L)(0.15 hr<sup>&minus;1</sup>) = 2.25 L/hr"
+    },
+    {
+     "at": 6,
+     "m": "{{frac:150 mg/hr|2.25 L/hr}} = 66.67 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "rep:24",
+   "reading": null,
+   "text": "Next, the fraction of that plateau reached in two hours, with t equal to the infusion time. One minus e to the minus zero point one five times two is one minus zero point seven four zero eight, which is zero point two five nine two. So at the end of the first infusion, C p is sixty six point six seven milligrams per liter times zero point two five nine two, which is seventeen point two eight milligrams per liter. That answers part a. The second infusion is identical, so it also ends at seventeen point two eight milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "1 &minus; e<sup>&minus;(0.15)(2)</sup> = 1 &minus; 0.7408 = 0.2592"
+    },
+    {
+     "at": 2,
+     "m": "C<sub>p</sub> = (66.67 mg/L)(0.2592) = <b>17.28 mg/L</b>"
+    },
+    {
+     "at": 4,
+     "m": "infusion 2 also ends at 17.28 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "rep:25",
+   "reading": null,
+   "text": "For part b, draw a number line of start and stop times. Infusion one runs from zero to two hours, and infusion two runs from six to eight hours. The time asked for is eight plus four, which is twelve hours. Give each infusion its own t, counted from the end of that infusion. For the first, twelve minus two is ten hours, and for the second, twelve minus eight is four hours.",
+   "card": [
+    {
+     "at": 1,
+     "m": "infusion 1: 0 to 2 hr &nbsp; infusion 2: 6 to 8 hr"
+    },
+    {
+     "at": 2,
+     "m": "asked: 8 + 4 = 12 hr"
+    },
+    {
+     "at": 4,
+     "m": "t<sub>1</sub> = 12 &minus; 2 = 10 hr &nbsp; t<sub>2</sub> = 12 &minus; 8 = 4 hr"
+    }
+   ]
+  },
+  {
+   "slide": "rep:25",
+   "reading": null,
+   "text": "The first infusion leaves seventeen point two eight milligrams per liter times e to the minus zero point one five times ten. That is seventeen point two eight times zero point two two three one, or three point eight six milligrams per liter. The second leaves seventeen point two eight times e to the minus zero point one five times four. That is seventeen point two eight times zero point five four eight eight, or nine point four eight milligrams per liter. Adding them, three point eight six plus nine point four eight is thirteen point three four milligrams per liter. Her stated answer is thirteen point three three, and the difference is rounding.",
+   "card": [
+    {
+     "at": 0,
+     "m": "17.28 e<sup>&minus;(0.15)(10)</sup>"
+    },
+    {
+     "at": 1,
+     "m": "= 17.28 &times; 0.2231 = 3.86 mg/L"
+    },
+    {
+     "at": 2,
+     "m": "17.28 e<sup>&minus;(0.15)(4)</sup>"
+    },
+    {
+     "at": 3,
+     "m": "= 17.28 &times; 0.5488 = 9.48 mg/L"
+    },
+    {
+     "at": 4,
+     "m": "C = 3.86 + 9.48 = <b>13.34 mg/L</b>"
+    },
+    {
+     "at": 5,
+     "m": "her answer: 13.33 mg/L, rounding"
+    }
+   ]
+  },
+  {
+   "slide": "rep:26",
+   "reading": null,
+   "text": "How she tests it. Her stems give two infusions of the same dose and duration, the second starting a stated number of hours after the first starts. The elimination parameter arrives as k, as a half-life, or as a clearance with a volume, so convert to k and to R before anything else. The usual trap is using the same t for both infusions, when each t runs from the end of its own infusion. The second trap is putting the six hour spacing into the infusion equation, whose t is the infusion time only. A closing part can ask what a continuous infusion at the same rate would reach, which is R over Cl.",
+   "card": [
+    {
+     "at": 2,
+     "m": "k, t&frac12;, or Cl with V<sub>D</sub> &rarr; k and R first"
+    },
+    {
+     "at": 3,
+     "m": "✗ same t for both infusions"
+    },
+    {
+     "at": 4,
+     "m": "✗ 6 hr spacing in the infusion equation"
+    },
+    {
+     "at": 5,
+     "m": "continuous: C<sub>ss</sub> = {{frac:R|Cl}}"
+    }
+   ]
+  }
+ ]
+}
