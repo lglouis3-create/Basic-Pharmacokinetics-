@@ -155,26 +155,27 @@ const COURSE = {
      ]},
 
     {id: 3,
-     name: 'Final Exam',
+     name: 'Exam 3 (final)',
      date: '2026-10-27',
-     when: '2026-10-27T07:50',   // transcript 10-19: "right now, we are still scheduled for 7:50" unless she announces otherwise
+     when: '2026-10-27T08:00',   // her announcement, relayed 26 Oct: "Exam 3 will start at 8:00 a.m. on Tuesday, October 27"
      questions: 40,          // transcript 10-14: "same format, 40 questions"
      minutes: 120,           // syllabus and transcript 10-14: "the full 2 hours"
      sata: 4,                // ASSUMED, as for Exams 1 and 2.
-     blurb: 'Tue 27 October, 7:50, unless she announces a change in person or on Canvas. ' +
+     blurb: 'Tue 27 October, 8:00 a.m. ' +
             'Cumulative: 40 questions, 20 multiple choice and 20 fill in the blank, with 25% on ' +
             'the two lectures after Exam 2, PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct). ' +
             'Know total clearance, ideal body weight and Cockcroft-Gault without the equation sheet. ' +
             'Wed 21 October, 8:30 to 9:30: an optional question session. How the other 30 questions ' +
             'divide between Exam 1 and Exam 2 material is not published; this drill splits them evenly.',
      facts: [
-       ['When', 'Tue 27 October, 7:50 for the full 2 hours. It stays 7:50 unless she announces a change in person or on Canvas'],
+       ['When', 'Tue 27 October, starting at 8:00 a.m. (her announcement of 26 October; earlier she had said 7:50 and the full 2 hours)'],
+       ['After it', 'Exam review: Thu 29 October, 8:15 to 8:45 a.m., in the P2 classroom'],
        ['Before it', 'Wed 21 October, 8:30 to 9:30: an optional session with no slides; she answers questions and asks some'],
        ['Not on the sheet', 'Total clearance, ideal body weight and Cockcroft-Gault: "we\'re only gonna use the ideal body weight"'],
        ['What she expects', 'Zero and first order; k, t½, VD and Cp; total, renal and hepatic clearance; steady-state peaks, troughs, averages and tmax; Cp against time for each route; bioavailability; linear and nonlinear; AUC; duration of action and the times to steady state, to the peak and to elimination; Cp after IV bolus, IV infusion and extravascular doses'],
        ['Weight', '33% of the course grade'],
-       ['Shape', '40 questions: 20 multiple choice and 20 fill in the blank, the same format as Exams 1 and 2'],
-       ['New material', '25%, about 10 questions, on PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct): "25% new stuff, but the new isn\'t even really new"'],
+       ['Shape', '40 questions, "similar in format to the two previous exams": 20 multiple choice and 20 fill in the blank'],
+       ['New material', '25%, 10 of the 40 questions, "material that you have not been tested on before": PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct). On 14 Oct: "25% new stuff, but the new isn\'t even really new"'],
        ['The rest', 'Cumulative: Modules 1 to 7a. The split between Exam 1 and Exam 2 material is not published; this drill uses 15 and 15'],
      ],
      pools: [
