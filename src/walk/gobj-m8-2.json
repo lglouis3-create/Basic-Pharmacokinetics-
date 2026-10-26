@@ -162,7 +162,7 @@
   {
    "slide": "nonlin:7",
    "reading": null,
-   "text": "How she tests it. Definitions ask which term is the maximum elimination rate, V max, and which is the constant in concentration units that reflects enzyme capacity, K M. K M is not a rate. Every sheet asks the half life and the clearance when the plasma concentration is fifteen milligrams per liter, and either measured steady state level could be asked instead. The unit checks are V D converted from liters per kilogram to liters first, the half life in days and the clearance in liters per day when V max is in milligrams per day.",
+   "text": "How she tests it. Definitions ask which term is the maximum elimination rate, V max, and which is the constant in concentration units that reflects enzyme capacity, K M. K M is not a rate. Her sheets ask the half life and the clearance at a stated level: fifteen milligrams per liter, or each dose's own steady state level. The unit checks are V D converted from liters per kilogram to liters first, the half life in days and the clearance in liters per day when V max is in milligrams per day.",
    "card": [
     {
      "at": 1,
@@ -178,7 +178,7 @@
     },
     {
      "at": 4,
-     "m": "V<sub>D</sub> in L first; t<sub>&frac12;</sub> in days, Cl<sub>T</sub> in L/day"
+     "m": "t<sub>&frac12;</sub>, Cl<sub>T</sub> at a stated C<sub>p</sub> (15 mg/L, or each dose's C<sub>ss</sub>)"
     }
    ]
   }

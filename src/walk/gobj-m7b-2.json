@@ -74,7 +74,7 @@
   {
    "slide": "pd:10",
    "reading": null,
-   "text": "Liver or kidney disease that lowers elimination prolongs the half life. The drug is retained longer, so the duration of activity increases, and so does the possibility of toxicity. With the dose, the gain shrinks: plotted against dose, t eff rises steeply at low doses and then flattens, because each further increase in dose adds less duration.",
+   "text": "Liver or kidney disease that lowers elimination prolongs the half life. The drug is retained longer, so the duration of activity increases, and so does the possibility of toxicity. With the dose, the gain shrinks: plotted against dose, t eff rises steeply at low doses and then flattens, because each added milligram adds less duration: only a doubling adds one more half life.",
    "card": [
     {
      "at": 0,
@@ -86,7 +86,7 @@
     },
     {
      "at": 2,
-     "m": "t<sub>eff</sub> vs dose: steep, then flat"
+     "m": "t<sub>eff</sub> vs dose: steep, then flat; each doubling adds one t<sub>&frac12;</sub>"
     }
    ]
   },

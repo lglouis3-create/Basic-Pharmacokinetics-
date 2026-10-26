@@ -63,7 +63,7 @@
   {
    "slide": "mo:7",
    "reading": null,
-   "text": "The steady state peak needs its own time to peak. t max at steady state is the single dose t max with one more fraction inside the log: one minus e to the minus k tau, over one minus e to the minus k a tau. That correction is less than one, so t max at steady state is shorter than the first dose t max. It holds tau, so a new dosing interval means a new t max at steady state. Putting the first dose t max into the steady state peak is a trap she uses.",
+   "text": "The steady state peak needs its own time to peak. t max at steady state is the single dose t max with one more fraction inside the log: one minus e to the minus k tau, over one minus e to the minus k a tau. That correction is less than one, so t max at steady state is shorter than the first dose t max. It holds tau, so a new dosing interval means a new t max at steady state. Putting the first dose t max into the steady state peak is a trap to avoid.",
    "card": [
     {
      "at": 1,

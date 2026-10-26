@@ -5,7 +5,7 @@
   {
    "slide": "ivb:5",
    "reading": null,
-   "text": "Module two, objective two. Two key parameters, volume of distribution and clearance. The apparent volume of distribution, V D, is the volume the dose would have to dissolve in to give the concentration measured in plasma. It is not a real body space, which is why it is called apparent. It is a proportionality constant between the amount of drug in the body and the plasma concentration. So V D equals D B, the amount in the body, divided by C p, the plasma concentration at the same time. For a bolus, the amount in the body at time zero is the dose, so V D also equals D zero over C zero, which finds V D from a dose and an initial concentration.",
+   "text": "Module two, objective two. Two key parameters, volume of distribution and clearance. The apparent volume of distribution, V D, is the volume the amount of drug in the body would have to dissolve in to give the concentration measured in plasma. It is not a real body space, which is why it is called apparent. It is a proportionality constant between the amount of drug in the body and the plasma concentration. So V D equals D B, the amount in the body, divided by C p, the plasma concentration at the same time. For a bolus, the amount in the body at time zero is the dose, so V D also equals D zero over C zero, which finds V D from a dose and an initial concentration.",
    "card": [
     {
      "at": 2,

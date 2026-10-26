@@ -155,7 +155,7 @@
   {
    "slide": "cl:12",
    "reading": null,
-   "text": "Renal clearance is f e times Cl T: zero point six times one point three liters per hour is zero point seven eight liters per hour. Hepatic clearance is found by difference: one point three minus zero point seven eight liters per hour is zero point five two liters per hour. The forty eight hour collection time is not used; only the cumulative amount and the dose are. The traps are giving f e units, or putting the urinary fraction in place of capital F. On an I V problem F is one whatever the urine shows.",
+   "text": "Renal clearance is f e times Cl T: zero point six times one point three liters per hour is zero point seven eight liters per hour. Hepatic clearance is found by difference: one point three minus zero point seven eight liters per hour is zero point five two liters per hour. The forty eight hours are not in the arithmetic, but they matter: they are long enough that the amount collected counts as all the drug the kidney will ever excrete. The traps are giving f e units, or putting the urinary fraction in place of capital F. On an I V problem F is one whatever the urine shows.",
    "card": [
     {
      "at": 0,
@@ -167,7 +167,7 @@
     },
     {
      "at": 2,
-     "m": "48 hr collection: not used"
+     "m": "48 hr collection: long enough to count as the total excreted"
     },
     {
      "at": 3,

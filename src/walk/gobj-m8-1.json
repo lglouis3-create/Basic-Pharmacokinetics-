@@ -112,7 +112,7 @@
   {
    "slide": "nonlin:19",
    "reading": null,
-   "text": "Her written question asks the difference between linear and nonlinear pharmacokinetics. The answer is the parameters: unchanged with dose in linear, changed by increased doses or chronic administration in nonlinear. The trap is to swap the words. Linear is not zero order, and nonlinear is not simply first order. A saturable drug behaves as first order at low concentrations and as zero order at high ones. The summary statement that clearance and half life are usually not constant within nonlinear pharmacokinetic processes is true.",
+   "text": "Her written question asks the difference between linear and nonlinear pharmacokinetics. The answer is the parameters: unchanged with dose in linear, changed by increased doses or chronic administration in nonlinear. The trap is to swap the words. Linear is not zero order, and nonlinear is not simply first order. A saturable drug behaves as first order at concentrations well below K M and as zero order well above it. The summary statement that clearance and half life are usually not constant within nonlinear pharmacokinetic processes is true.",
    "card": [
     {
      "at": 1,
@@ -124,7 +124,7 @@
     },
     {
      "at": 4,
-     "m": "saturable: first order at low C, zero order at high C"
+     "m": "saturable: first order well below K<sub>M</sub>, zero order well above"
     },
     {
      "at": 5,

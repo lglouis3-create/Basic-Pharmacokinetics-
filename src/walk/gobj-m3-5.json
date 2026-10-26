@@ -24,7 +24,7 @@
   {
    "slide": "inf:16",
    "reading": null,
-   "text": "When D L is chosen correctly, the falling bolus curve and the rising infusion curve add to a flat line at C s s throughout therapy. Adding the concentrations from the bolus and the infusion at the same time to get the total is called superposition. Too large a loading dose gives a peak above the plateau that falls back to it. Too small a loading dose gives a dip below the plateau that climbs up to it. The plateau itself is set by the infusion.",
+   "text": "When D L is chosen correctly, the falling bolus curve and the rising infusion curve add to a flat line at C s s throughout therapy. Adding the concentrations from the bolus and the infusion at the same time to get the total is called superposition. Too large a loading dose starts the level above the plateau, and it falls to it. Too small a loading dose starts the level below the plateau, and it rises to it. The plateau itself is set by the infusion.",
    "card": [
     {
      "at": 0,
@@ -36,11 +36,11 @@
     },
     {
      "at": 2,
-     "m": "D<sub>L</sub> too large: peak above, falls back"
+     "m": "D<sub>L</sub> too large: starts above, falls to C<sub>ss</sub>"
     },
     {
      "at": 3,
-     "m": "D<sub>L</sub> too small: dip below, climbs up"
+     "m": "D<sub>L</sub> too small: starts below, rises to C<sub>ss</sub>"
     },
     {
      "at": 4,

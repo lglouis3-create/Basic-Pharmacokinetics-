@@ -5,11 +5,11 @@
   {
    "slide": "intro:9",
    "reading": null,
-   "text": "Module one, objective three. Fundamental pharmacokinetic terms. These are the working words of the whole course, and later modules use them without redefining them. After a dose, the plasma concentration, C p, rises from zero to a peak and then falls. The aim of dosing is to keep it above the level that works and below the level that harms.",
+   "text": "Module one, objective three. Fundamental pharmacokinetic terms. These are the working words of the whole course, and later modules use them without redefining them. After an oral dose, the plasma concentration, C p, rises from zero to a peak and then falls; after an I V bolus it is highest at time zero and only falls. The aim of dosing is to keep it above the level that works and below the level that harms.",
    "card": [
     {
      "at": 3,
-     "m": "C<sub>p</sub>: zero → peak → falls"
+     "m": "oral: C<sub>p</sub> zero → peak → falls; IV bolus: highest at time zero"
     },
     {
      "at": 4,

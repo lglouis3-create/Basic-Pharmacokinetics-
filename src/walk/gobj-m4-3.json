@@ -178,7 +178,7 @@
   {
    "slide": "cl:19",
    "reading": null,
-   "text": "How she tests it. A one patient vignette gives age, sex, height, actual body weight and serum creatinine, with the answer in milliliters per minute. The height usually arrives in centimeters, so the conversion is part of the question, and the actual weight is there to be left alone. Sex decides two things: which I B W constant is used, fifty or forty five point five, and whether the zero point eight five factor applies. When she worked this example, answers of one hundred four and fifty four milliliters per minute came back, and she said fifty four meant something had been done wrong.",
+   "text": "How she tests it. A one patient vignette gives age, sex, height, actual body weight and serum creatinine, with the answer in milliliters per minute. The height usually arrives in centimeters, so the conversion is part of the question, and the actual weight is there to be left alone. Sex decides two things: which I B W constant is used, fifty or forty five point five, and whether the zero point eight five factor applies. When she worked this example in class and a student answered fifty four, she said a fifty four meant something had been done wrong.",
    "card": [
     {
      "at": 1,
@@ -194,7 +194,7 @@
     },
     {
      "at": 4,
-     "m": "✗ 104 mL/min &nbsp; ✗ 54 mL/min"
+     "m": "sex: 50 or 45.5; &times; 0.85 or not"
     }
    ]
   }

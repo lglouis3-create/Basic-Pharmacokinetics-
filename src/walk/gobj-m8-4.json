@@ -166,7 +166,7 @@
   {
    "slide": "nonlin:14",
    "reading": null,
-   "text": "How she tests it. Every sheet asks a daily dose for fifteen milligrams per liter at steady state, then the steady state at another dose, such as eleven point five milligrams per liter on four hundred milligrams daily in her In Class Practice. She rounds to the nearest ten when the stem says so: in her slide Example two, five hundred eighteen point four milligrams per day becomes five hundred twenty. Otherwise she rounds to a dose that can be given. Concept items ask what R means, how long steady state takes, and what a small dose increase near saturation does: a disproportionately large rise in C s s.",
+   "text": "How she tests it. Most sheets ask a daily dose for fifteen milligrams per liter at steady state, and some then ask the steady state at another dose, such as eleven point five milligrams per liter on four hundred milligrams daily in her In Class Practice. On her slide Example two she rounded five hundred eighteen point four milligrams per day to five hundred twenty, and said a stem may ask for the nearest ten. Otherwise she rounds to a dose that can be given. Concept items ask what R means, how long steady state takes, and what a small dose increase near saturation does: a disproportionately large rise in C s s.",
    "card": [
     {
      "at": 1,
@@ -178,7 +178,7 @@
     },
     {
      "at": 4,
-     "m": "R = dose rate; 2 to 3 weeks; small dose ↑ → large C<sub>ss</sub> ↑"
+     "m": "518.4 → 520 mg/day on her slide; a stem may ask the nearest ten"
     }
    ]
   }

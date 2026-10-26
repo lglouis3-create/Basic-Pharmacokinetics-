@@ -136,7 +136,7 @@ const GUIDE_HTML = `
 <h4>In plain words</h4>
 <ul class="tlist">
 <li>These are the working words of the whole course. Later modules use them without redefining them, so learn the exact meaning now.</li>
-<li>After a dose, the plasma concentration (C<sub>p</sub>) rises from zero to a peak and then falls. The aim of dosing is to keep it above the level that works and below the level that harms.</li>
+<li>After an oral dose, the plasma concentration (C<sub>p</sub>) rises from zero to a peak and then falls; after an IV bolus it is highest at time zero and only falls. The aim of dosing is to keep it above the level that works and below the level that harms.</li>
 <li>Drug levels are measured in a fluid sample. Serum or plasma is used most, because they contain fewer components for the drug to interact with than whole blood does.</li>
 <li>Elimination covers both metabolism and excretion; disposition covers distribution plus elimination.</li>
 </ul>
@@ -443,7 +443,7 @@ const GUIDE_HTML = `
 
 <h4>In plain words</h4>
 <ul class="tlist">
-<li>The volume of distribution (V<sub>D</sub>) is the volume the dose would have to dissolve in to give the concentration measured in plasma. It is not a real body space, which is why it is called "apparent".</li>
+<li>The volume of distribution (V<sub>D</sub>) is the volume the amount of drug in the body would have to dissolve in to give the concentration measured in plasma. It is not a real body space, which is why it is called "apparent".</li>
 <li>A drug that leaves the blood for the tissues has a low plasma concentration and so a large V<sub>D</sub>; a drug held in the blood, for example by binding to plasma proteins, has a small V<sub>D</sub>.</li>
 <li>Clearance (Cl) is the volume of plasma cleared of drug per unit time. It measures elimination without saying how the drug is removed.</li>
 <li>Both are constants for a given drug in a given patient, so changing the dose or the concentration does not change them.</li>
@@ -1128,7 +1128,7 @@ const GUIDE_HTML = `
 <li>An infusion alone takes 3 to 5 half-lives to approach its steady-state concentration (C<sub>ss</sub>), so the patient sits below the target for that time.</li>
 <li>A loading dose (D<sub>L</sub>) puts in, at once, the amount of drug that would otherwise take 3 to 5 half-lives to build up, so C<sub>ss</sub> is reached almost immediately.</li>
 <li>When D<sub>L</sub> is chosen correctly, the falling bolus curve and the rising infusion curve add to a flat line at C<sub>ss</sub> throughout therapy.</li>
-<li>Too large a loading dose gives a peak above the plateau that falls back to it; too small gives a dip below it that climbs up. The plateau itself is set by the infusion.</li>
+<li>Too large a loading dose starts the level above the plateau, and it falls to it; too small starts it below, and it rises to it. The plateau itself is set by the infusion.</li>
 </ul>
 
 <h4>Terms to know</h4>
@@ -1521,7 +1521,7 @@ const GUIDE_HTML = `
 <li>A one-patient vignette giving age, sex, height, actual body weight and serum creatinine, with the answer in mL/min.</li>
 <li>The height usually arrives in centimetres, so the conversion is part of the question. The actual weight is there to be left alone.</li>
 <li>Sex decides two things: which IBW constant is used (50 or 45.5) and whether the 0.85 factor applies.</li>
-<li>When she worked this example in class, students reported 104 and 54 mL/min; she said 54 meant something had been done wrong.</li>
+<li>When she worked this example in class and a student answered 54, she said 54 meant something had been done wrong.</li>
 <li>A second part asks what the number means, read against 120&ndash;130 mL/min. For example, a CrCl of 30 mL/min means a renally eliminated drug will be excreted more slowly and may accumulate.</li>
 <li>Trap she names herself: confusing a drug's renal clearance with the patient's creatinine clearance. Read what each question is asking.</li>
 <li>She also asks which relationships must come from memory: Cockcroft-Gault and the IBW formulas. She said the same calculation appears on the benchmark.</li>
@@ -1683,7 +1683,7 @@ const GUIDE_HTML = `
 <li>Renal clearance: Cl<sub>R</sub> = f<sub>e</sub> &times; Cl<sub>T</sub> = (0.6)(1.3 L/hr) = 0.78 L/hr</li>
 <li>Hepatic clearance by difference: Cl<sub>H</sub> = 1.3 L/hr &minus; 0.78 L/hr = 0.52 L/hr</li>
 </ol>
-<p class="prose">Answers: <b>f<sub>e</sub> = 0.6; k = 0.0866 hr<sup>&minus;1</sup>; k<sub>e</sub> = 0.052 hr<sup>&minus;1</sup>; Cl<sub>T</sub> = 1.3 L/hr; Cl<sub>R</sub> = 0.78 L/hr; Cl<sub>H</sub> = 0.52 L/hr</b>. The 48-hour collection time is not used.</p>
+<p class="prose">Answers: <b>f<sub>e</sub> = 0.6; k = 0.0866 hr<sup>&minus;1</sup>; k<sub>e</sub> = 0.052 hr<sup>&minus;1</sup>; Cl<sub>T</sub> = 1.3 L/hr; Cl<sub>R</sub> = 0.78 L/hr; Cl<sub>H</sub> = 0.52 L/hr</b>. The 48 hours are not in the arithmetic, but they make the amount collected count as the total the kidney excretes.</p>
 <ul class="tlist">
 <li>A second example sets the half-life against clearance.</li>
 <li>A new antibiotic is actively secreted by the kidney; V<sub>D</sub> is 25 L.</li>
@@ -2615,7 +2615,7 @@ const GUIDE_HTML = `
 <ul class="tlist">
 <li>r<sub>k</sub> is the accumulation factor, the number of times the steady-state level exceeds the first-dose level; e<sup>&minus;k&tau;</sup> is the fraction of a dose still in the body one interval later.</li>
 <li>A longer &tau; makes e<sup>&minus;k&tau;</sup> smaller: more of each dose is eliminated before the next, so r<sub>k</sub> is smaller and less accumulates.</li>
-<li>The trough is the peak level carried down through the rest of the interval, so a longer &tau; lets it fall further and the swing gets larger.</li>
+<li>The trough is the peak level carried down through the rest of the interval, so a longer &tau; leaves it a smaller fraction of the peak: a larger fluctuation.</li>
 <li>&tau; is also inside t<sub>max</sub><sup>&infin;</sup> (the time from a dose to the peak at steady state), so a new interval means recalculating t<sub>max</sub><sup>&infin;</sup> and C<sub>max</sub><sup>&infin;</sup> (the steady-state peak). A new dose changes neither t<sub>max</sub>.</li>
 <li>On the equation sheet: yes, inside the steady-state lines.</li>
 </ul>
@@ -2626,7 +2626,7 @@ const GUIDE_HTML = `
 <ol class="gsteps">
 <li>Find what changed: the dose stays at 500 mg; the interval doubles from 4 to 8 hr.</li>
 <li>Steady-state level: &tau; is in the denominator of {{frac:F D<sub>0</sub>|Cl<sub>T</sub>&tau;}}, so doubling &tau; halves the average. The level goes down.</li>
-<li>Fluctuation: each dose now has 8 hr instead of 4 hr to be eliminated, so the trough falls further below the peak. The swing gets larger.</li>
+<li>Fluctuation: each dose now has 8 hr instead of 4 hr to be eliminated, so the trough falls to a smaller fraction of the peak. The fluctuation gets larger.</li>
 <li>Compliance: every 8 hours is 3 doses a day instead of 6, which is easier to keep to.</li>
 <li>Answer: <b>lower steady-state concentration, larger peak-to-trough fluctuation, better patient compliance</b>. The part she confirmed in class was the lower steady-state concentration.</li>
 <li>Second case, stating a regimen: a calculation gives 17.29 mg every 3.72 hours. Write it as a strength and interval the patient can use, such as <b>20 mg every 4 hours</b>.</li>
@@ -2637,7 +2637,7 @@ const GUIDE_HTML = `
 <li>One parameter is changed and the other held, then three things are asked in her order: the steady-state concentration, the fluctuation between peak and trough, and patient compliance. The answers are directions, not numbers.</li>
 <li>Larger dose, same interval: higher concentrations, larger fluctuation, usually no change in compliance. Smaller dose: the reverse, compliance again unchanged.</li>
 <li>Longer interval, same dose: lower concentrations, larger fluctuation, better compliance. Shorter interval: higher concentrations, smaller fluctuation, worse compliance.</li>
-<li>A shorter interval shrinks the swing because the next dose arrives before the 3 to 5 half-lives the level would need to reach the bottom of the curve.</li>
+<li>A shorter interval shrinks the fluctuation because less of each dose is eliminated before the next arrives, so the trough sits closer to the peak. With equal doses the gap in mg/L between peak and trough stays about one dose's worth (40 mg/L in her Example 1 at both intervals).</li>
 <li>"Smaller fluctuation" does not mean lower peaks or troughs: with a shorter interval C<sub>max</sub>, C<sub>min</sub> and C<sub>avg</sub> all rise, and the trough sits closer to the peak. In her Example 1 the trough is a quarter of the peak every 8 hours and half of it every 4 hours.</li>
 <li>"Larger fluctuation" from a larger dose is the gap in mg/L: doubling her Example 1 dose doubles it from 40 to 80 mg/L, while the trough stays a quarter of the peak.</li>
 </ul>
@@ -2803,7 +2803,7 @@ const GUIDE_HTML = `
 
 <h4>In plain words</h4>
 <ul class="tlist">
-<li>Bioavailability can be low for reasons in the product, reasons on the way into the circulation, and reasons in the patient. The list on the slide has nine entries.</li>
+<li>The factors that change bioavailability, most often lowering it, sit in the product, on the way into the circulation, and in the patient. The list on the slide has nine entries.</li>
 <li>The product: physicochemical properties of the drug and the formulation, drug stability and pH effects, and prodrugs (a drug given in an inactive form that the body must convert to the active drug).</li>
 <li>On the way in: pre-systemic and first-pass metabolism, which is the liver acting on an oral dose before it reaches the systemic circulation.</li>
 <li>Also on the way in: food effects, drug-drug interactions and efflux transporters (membrane proteins that pump absorbed drug back out of the cell).</li>
@@ -2816,7 +2816,7 @@ const GUIDE_HTML = `
 <dl class="gterms">
 <dt>First-pass metabolism (first-pass effect)</dt><dd>Metabolism of an oral dose, mainly by the liver, before the drug reaches the systemic circulation; it lowers F.</dd>
 <dt>Pre-systemic metabolism</dt><dd>Any metabolism that happens before the drug reaches the systemic circulation; listed together with first-pass metabolism.</dd>
-<dt>Bioavailability factor (F)</dt><dd>The fraction of a dose that reaches the systemic circulation, no units; F = 1 for an IV dose. A low F is the sign that one of these factors is at work.</dd>
+<dt>Bioavailability factor (F)</dt><dd>The fraction of a dose that reaches the systemic circulation, no units; F = 1 for an IV dose. These factors change F, most often lowering it.</dd>
 </dl>
 
 <h4>Worked example</h4>
@@ -2924,7 +2924,7 @@ const GUIDE_HTML = `
 <ol class="gsteps">
 <li>Same extent means equal AUCs, so F = {{frac:D<sub>IV</sub>|D<sub>po</sub>}} and D<sub>po</sub> = {{frac:D<sub>IV</sub>|F}}.</li>
 <li>D<sub>po</sub> = {{frac:400 mg|0.70}} = 571.43 mg.</li>
-<li>Round to a strength a tablet could have: she accepted <b>575 mg or 600 mg</b>. The marketed strengths she looked up were 250 and 500 mg, so 571.43 mg is not a real tablet.</li>
+<li>Round to a strength a tablet could have: she wrote <b>575 mg or 600 mg or 570 mg</b> beside her working. The marketed strengths she looked up were 250 and 500 mg, so 571.43 mg is not a real tablet. In her final review (19 Oct) a similar item asked for the nearest 5 mg, and her key there was 570 mg.</li>
 </ol>
 <p class="prose">Question 3: after a 500 mg IV bolus, C<sub>p</sub> = 50e<sup>&minus;0.2t</sup>. (a) The clearance? (b) The AUC of this dose? (c) The oral bioavailability of a 500 mg tablet whose AUC is 188 mg&middot;hr/L?</p>
 <ol class="gsteps">
@@ -3029,7 +3029,7 @@ const GUIDE_HTML = `
 <li>The dose sits inside the logarithm. Doubling the dose adds {{frac:ln 2|k}} = {{frac:0.693|k}}, which is one half-life, to t<sub>eff</sub>. It does not double t<sub>eff</sub>. Four times the dose adds two half-lives.</li>
 <li>The half-life multiplies the whole expression. Doubling the half-life at the same dose doubles t<sub>eff</sub>.</li>
 <li>Liver or kidney disease that lowers elimination prolongs the half-life. The drug is retained longer, the duration of activity increases, and so does the possibility of toxicity.</li>
-<li>Plotted against dose, t<sub>eff</sub> rises steeply at low doses and then flattens: each further increase in dose adds less duration.</li>
+<li>Plotted against dose, t<sub>eff</sub> rises steeply at low doses and then flattens: each added milligram adds less duration, and each doubling adds one half-life.</li>
 <li>Turned round, the dose for a target duration is D<sub>0</sub> = C<sub>eff</sub>V<sub>D</sub>e<sup>kt<sub>eff</sub></sup>. The target time is in an exponent, so doubling a long duration needs a very large dose.</li>
 </ul>
 
@@ -3155,7 +3155,7 @@ const GUIDE_HTML = `
 <li>A select-all on the signs of saturation kinetics from the slide: half-life changing with dose, AUC out of proportion, competing drugs, metabolite ratio.</li>
 <li>The figure of curves A, B and C: which is the first-order drug, which is the low dose, and that the terminal slopes of A and B match.</li>
 <li>The AUC against dose figure: the saturable curve leaves the straight line above a certain dose.</li>
-<li>The trap is to swap the words: linear is not zero order, and nonlinear is not simply first order. A saturable drug behaves as first order at low concentrations and as zero order at high ones (objective 2).</li>
+<li>The trap is to swap the words: linear is not zero order, and nonlinear is not simply first order. A saturable drug behaves as first order at concentrations well below K<sub>M</sub> and as zero order well above it (objective 2). Low and high are always relative to K<sub>M</sub>, never to V<sub>max</sub>.</li>
 <li>The summary statement "Clearance and half-life are usually not constant within nonlinear pharmacokinetics processes" is a true/false candidate: true.</li>
 </ul>
 <p class="gsrc">Sources: 8 - Nonlinear PK.pdf, slides "Linear vs. Nonlinear Pharmacokinetics" (her note "most drugs follow this", "Ex. phenytoin"), the plasma level-time and AUC-versus-dose figure slides with her notes, "Saturation Kinetics" and "Summary"; Nonlinear-Solutions-2.pdf question 2; transcript 10-14.</p>
@@ -3227,7 +3227,7 @@ const GUIDE_HTML = `
 <li>Her poll, true or false: "Drugs that display Michaelis-Menten saturation kinetics will often exhibit zero-order kinetics at low concentrations and first-order kinetics at high concentrations." Her key: <b>False</b>.</li>
 <li>Her written question 3 on Solutions 2: "What changes in t&frac12; and ClT are usually observed with increased concentrations of drugs that exhibit nonlinear pharmacokinetics?" t<sub>&frac12;</sub> increases and Cl<sub>T</sub> decreases.</li>
 <li>Definitions: which term is the maximum elimination rate (V<sub>max</sub>) and which the constant in concentration units that reflects enzyme capacity (K<sub>M</sub>). K<sub>M</sub> is not a rate.</li>
-<li>Every sheet asks the half-life and the clearance "when the plasma concentration is 15 mg/L"; Solutions 2 also asks them at 21 mg/L. Either measured steady-state level could be asked instead, and each gives a slightly different value.</li>
+<li>Her sheets ask the half-life and the clearance at a stated level: "when the plasma concentration is 15 mg/L" (Solutions 1 and 2; Solutions 2 also at 21 mg/L), or at each measured dose's own steady state ("while he is taking 300 mg/day", Solutions 3 and 4).</li>
 <li>Units she checks: V<sub>D</sub> converted from L/kg to L first; t<sub>&frac12;</sub> in days and Cl<sub>T</sub> in L/day when V<sub>max</sub> is in mg/day.</li>
 </ul>
 
@@ -3362,8 +3362,8 @@ const GUIDE_HTML = `
 
 <h4>How she tests it</h4>
 <ul class="tlist">
-<li>Every sheet asks a daily dose for 15 mg/L at steady state, then the steady state at a third dose (400 mg daily on the In-Class Practice: 11.5 mg/L).</li>
-<li>Rounding: to the nearest ten when the stem says so (her slide Example 2: 518.4 mg/day becomes 520 mg/day); otherwise to a dose that can be given (465, 460, 315 mg/day). She accepts the unrounded number in this course.</li>
+<li>Most sheets ask a daily dose for 15 mg/L at steady state; some then ask the steady state at a third dose (400 mg daily on the In-Class Practice: 11.5 mg/L).</li>
+<li>Rounding: on her slide Example 2 she rounded 518.4 mg/day to 520 mg/day and said a stem may ask for the nearest ten; otherwise to a dose that can be given (465, 460, 315 mg/day). She accepts the unrounded number in this course.</li>
 <li>A per-kilogram V<sub>max</sub> needs the weight at the end; a per-day V<sub>max</sub> does not, and the weight then serves only V<sub>D</sub>.</li>
 <li>The answer is a rate in mg/day. A bare amount, or a per-kilogram rate left for a patient, is the error she named.</li>
 <li>Concept items: what R means (the dose rate), how long steady state takes (2 to 3 weeks), and the result of a small dose increase near saturation (a disproportionately large rise in C<sub>ss</sub>).</li>
