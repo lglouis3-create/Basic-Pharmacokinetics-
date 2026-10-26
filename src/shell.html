@@ -295,8 +295,8 @@ h3{font-size:16px;margin:22px 0 8px}
 .sata{margin:0 0 10px;font-size:13px;color:var(--text-dim);padding:7px 11px;background:var(--surface);
   border-left:3px solid var(--accent);border-radius:0 6px 6px 0}
 .opt.multi .k{font-size:17px;line-height:1;background:transparent;border-color:var(--line)}
-.opt.multi.on{border-color:var(--accent);background:var(--accent-bg)}
-.opt.multi.on .k{color:var(--accent);border-color:var(--accent)}
+.opt.multi.on,.opt.on{border-color:var(--accent);background:var(--accent-bg)}
+.opt.multi.on .k,.opt.on .k{color:var(--accent);border-color:var(--accent)}
 .opt.multi.pick-ok .k,.opt.multi.reveal-ok .k{background:var(--ok);color:#fff}
 .opt.multi.pick-bad .k{background:var(--bad);color:#fff}
 .tag.sata{color:#7A46B0;border-color:#DCC7EA;background:#F8F2FB}
@@ -1359,7 +1359,7 @@ const ASKS = {
   nhalf:    ['n',        'a count of half-lives'],
   C0:       ['C0',       'the concentration at time zero: for an IV bolus the dose spread through the volume of distribution, for a solution its starting concentration'],
   Cp:       ['Cp',       'the plasma concentration at a stated time'],
-  Css:      ['Css',      'the steady-state concentration of a constant infusion, where rate in equals rate out'],
+  Css:      ['Css',      'the steady-state concentration: the plateau where rate in equals rate out (a constant infusion, or a daily dose rate of a nonlinear drug)'],
   Cmax:     ['Cmax',     'the peak concentration after one dose'],
   Cmin:     ['Cmin',     'the lowest concentration after one dose, just before the next'],
   Cmaxss:   ['Cmax∞',    'the peak concentration at steady state, just after a dose'],
@@ -1374,7 +1374,7 @@ const ASKS = {
   DB:       ['DB',       'the amount of drug in the body at a stated time'],
   Davgss:   ['Davg∞',    'the average amount of drug in the body over one dosing interval at steady state'],
   Du:       ['Du',       'the amount of unchanged drug recovered in the urine'],
-  R:        ['R',        'the infusion rate: amount delivered per unit time'],
+  R:        ['R',        'the infusion rate or daily dose rate: amount delivered per unit time'],
   rate:     ['dDB/dt',   'the rate of elimination: amount removed per unit time at a stated concentration'],
   VD:       ['VD',       'the apparent volume of distribution: the volume that relates amount in the body to plasma concentration'],
   Vp:       ['Vp',       'the volume of the central compartment'],

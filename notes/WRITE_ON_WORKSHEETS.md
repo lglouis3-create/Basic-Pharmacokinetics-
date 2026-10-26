@@ -10,7 +10,8 @@ Added 2026-10-26, at the student's request ("write on them ... on an iPad", "eno
 - Ink: one canvas per problem part and one on the name line. A stroke is stored in that part's coordinates as
   fractions of its width, so it stays on its problem when room is added above it or the iPad turns. Pen in black,
   blue or red, three widths, highlighter, stroke eraser, undo and redo (also Cmd or Ctrl Z), Clear page (undoable).
-- Pencil: on a touch screen, Pencil only is on by default: the Pencil writes and a finger scrolls. With it off, a
+- Pencil: a finger writes until an Apple Pencil touches the page; then Pencil only turns on, the Pencil writes and a
+  finger scrolls (the choice is remembered). With it off, a
   finger writes and two fingers scroll.
 - Storage: localStorage key `<ns>:ink:<source id>:<main|changed>`, this browser on this device only. A warning
   shows if the browser is not saving (private window, blocked site data).
@@ -21,3 +22,7 @@ Added 2026-10-26, at the student's request ("write on them ... on an iPad", "eno
 - Test: `src/ink_test.py` (Chromium, 820 and 390 px).
 - Not tested on a physical iPad from this environment: Pencil pressure is not used (strokes have one width), and
   the Pencil and finger handling was checked with synthetic pen and touch pointer events.
+- Scratch paper (added 2026-10-26): a Scratch paper button beside the answer box of every calculation question in
+  Quiz and Exam sim opens the same writing layer over the question's stem, with one 720 px work area and no
+  solutions. Practice scratch is kept per question (`<ns>:ink:q:<id>:scratch`); an exam paper's scratch is keyed to
+  the paper (`:exam:<end time>`) and cleared when the next paper starts; the time left shows in its toolbar.

@@ -597,7 +597,9 @@ function renderTopics(){
     const pool = examQuestions(id);
     if(!pool.length && !g.mods.some(m => modulePool(m.module).length)) continue;
     const nums = g.mods.map(m => m.module);
-    const span = nums.length > 1 ? `Modules ${nums[0]}–${nums[nums.length - 1]}` : nums.length ? `Module ${nums[0]}` : '';
+    const span = nums.length > 1 ? `Modules ${modShort(nums[0])}–${modShort(nums[nums.length - 1])}` : nums.length ? `Module ${modShort(nums[0])}` : '';
+    // a cumulative paper (pools drawn from earlier exams): this group holds only its new modules
+    const cumul = !!(ex && (ex.pools || []).some(p => p.filter && p.filter.exam));
     const day = ex && (ex.when || ex.date) ? new Date(ex.when || ex.date + 'T12:00').toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric'}) : '';
     const when = ex ? [day, examCountdown(ex)].filter(Boolean).join(' · ') : '';
     h += `<details class="examgrp" data-examgrp="${id}"${examGroupOpen(id) ? ' open' : ''}><summary>
@@ -606,7 +608,7 @@ function renderTopics(){
       </summary><div class="egbody">`;
     for(const m of g.mods) h += moduleCard(m);
     if(pool.length && !stepwiseOnly){
-      h += `<div class="module recapcard"><div class="mrow"><span class="mname">Review all of ${esc(ex ? ex.name : 'this exam')}<small>${splitNote(pool)}${span ? ' · ' + esc(span) + ' together' : ''}</small></span></div>
+      h += `<div class="module recapcard"><div class="mrow"><span class="mname">${cumul ? 'Review all the new material for ' : 'Review all of '}${esc(ex ? ex.name : 'this exam')}<small>${splitNote(pool)}${span ? ' · ' + esc(span) + ' together' : ''}</small></span></div>
         <div class="mfoot">${examRows(pool, id)}
         <div class="subrow"><span class="sname"><b>Straight pass</b>
           <small>Every question once, shuffled, nothing held back by scheduling</small></span>
@@ -1503,7 +1505,7 @@ function renderExamAll(){
     else if(kind === 'match') h += matchSelects(q, EX.picks[i], false, false);
     else EX.orders[i].forEach((oi, n) => {
       const sel = multi ? EX.picks[i].includes(oi) : EX.picks[i] === oi;
-      h += `<button class="opt${multi ? ' multi' : ''}${sel ? (multi ? ' on' : ' pick-ok') : ''}" data-o="${oi}" aria-pressed="${sel}">
+      h += `<button class="opt${multi ? ' multi' : ''}${sel ? ' on' : ''}" data-o="${oi}" aria-pressed="${sel}">
         <span class="k">${multi ? (sel ? '☑' : '☐') : LETTERS[n]}</span><span>${rich(q.options[oi].t)}</span></button>`;
     });
     h += `</div></div>`;
@@ -1519,7 +1521,7 @@ function renderExamAll(){
       if(multi){ const p = EX.picks[i]; EX.picks[i] = p.includes(oi) ? p.filter(x => x !== oi) : [...p, oi]; }
       else EX.picks[i] = oi;
       card.querySelectorAll('.opt').forEach(o => { const v = +o.dataset.o, sel = multi ? EX.picks[i].includes(v) : EX.picks[i] === v;
-        o.className = 'opt' + (multi ? ' multi' : '') + (sel ? (multi ? ' on' : ' pick-ok') : ''); o.setAttribute('aria-pressed', sel);
+        o.className = 'opt' + (multi ? ' multi' : '') + (sel ? ' on' : ''); o.setAttribute('aria-pressed', sel);
         if(multi) o.querySelector('.k').textContent = sel ? '☑' : '☐'; });
       prog(); saveExam();
     });
@@ -1527,7 +1529,7 @@ function renderExamAll(){
     card.querySelectorAll('.matchgrid select').forEach(sel => sel.onchange = () => {
       const p = Object.assign({}, EX.picks[i]); if(sel.value) p[sel.dataset.l] = sel.value; else delete p[sel.dataset.l]; EX.picks[i] = p; prog(); saveExam(); });
   });
-  $('#exEnd').onclick = () => { if(confirm('Submit the paper and see your score?')) finishExam(); };
+  $('#exEnd').onclick = () => { if(examConfirmSubmit()) finishExam(); };
 }
 
 /* The answer controls for one question: number box, matching selects, or
@@ -1794,9 +1796,11 @@ function submitMulti(){
 }
 function submitNumeric(){
   if(Q.revealed) return;
-  markDone(Q.current.id);
   const ni = $('#v-quiz #numIn');
   if(ni) Q.picked = ni.value;
+  // an empty box: ask before showing the answer and counting a miss
+  if(ni && !String(ni.value).trim() && !confirm('No number entered. Show the answer and count this one as missed?')){ ni.focus(); return; }
+  markDone(Q.current.id);
   Q.revealed = true; Q.guessedLogged = false;
   Q.took = Date.now() - (Q.startedAt || Date.now());
   record(Q.current, gradeNumeric(Q.current, Q.picked) ? 'correct' : 'wrong',
@@ -3196,13 +3200,14 @@ function renderExamQ(){
   }else{
     order.forEach((oi,n)=>{
       const sel = multi ? EX.picks[EX.i].includes(oi) : EX.picks[EX.i] === oi;
-      h += `<button class="opt${multi?' multi':''}${sel?(multi?' on':' pick-ok'):''}" data-o="${oi}" aria-pressed="${sel}">
+      h += `<button class="opt${multi?' multi':''}${sel?' on':''}" data-o="${oi}" aria-pressed="${sel}">
         <span class="k">${multi ? (sel ? '☑' : '☐') : LETTERS[n]}</span><span>${rich(q.options[oi].t)}</span></button>`;
     });
   }
   h += `</div><div class="qfoot">
     <button class="btn ghost" id="exPrev"${EX.i===0?' disabled':''}>Back</button>
-    <button class="btn" id="exNext">${EX.i===EX.qs.length-1?'Review':'Next'}</button>
+    ${EX.i===EX.qs.length-1 ? '' : '<button class="btn" id="exNext">Next</button>'}
+    <select id="exJump" aria-label="Go to a question">${EX.qs.map((x, k) => `<option value="${k}"${k===EX.i?' selected':''}>${examBlank(x, EX.picks[k]) ? '○' : '●'} Question ${k + 1}</option>`).join('')}</select>
     <span class="spacer" style="flex:1"></span>
     <button class="btn ghost" id="exEnd">Submit paper</button>
   </div></div>`;
@@ -3220,11 +3225,18 @@ function renderExamQ(){
     EX.picks[EX.i] = p; saveExam();
   });
   $('#exPrev').onclick = ()=>{ if(EX.i>0){EX.i--; renderExamQ();} };
-  $('#exNext').onclick = ()=>{ if(EX.i<EX.qs.length-1){EX.i++; renderExamQ();} else finishExam(); };
-  $('#exEnd').onclick  = ()=>{ if(confirm('Submit the paper and see your score?')) finishExam(); };
+  const nx = $('#exNext'); if(nx) nx.onclick = ()=>{ if(EX.i<EX.qs.length-1){EX.i++; renderExamQ();} };
+  $('#exJump').onchange = e => { EX.i = +e.target.value; renderExamQ(); };
+  $('#exEnd').onclick  = ()=>{ if(examConfirmSubmit()) finishExam(); };
 }
 /* One place decides whether an exam answer was right, for both grading and the
    review page. */
+// submitting asks first, and says how many questions are still blank (○ in the Go to list)
+function examConfirmSubmit(){
+  const blank = EX.qs.filter((q, i) => examBlank(q, EX.picks[i])).length;
+  return confirm(blank ? `${blank} of ${EX.qs.length} questions are still blank. Submit the paper anyway and see your score?`
+                       : 'Submit the paper and see your score?');
+}
 function examRight(q, p){ return !isBlank(q, p) && gradeAnswer(q, p); }
 const examBlank = (q, p) => isBlank(q, p);
 function finishExam(){
@@ -4646,13 +4658,15 @@ function suStart(scope){
 const PLAN_MODELS = [
   ['kin', 'Any route: order of elimination, half-life, AUC'], ['bolus1', 'Single IV bolus, one compartment'], ['bolus2', 'Single IV bolus, two compartments'],
   ['infusion', 'Constant IV infusion'], ['clearance', 'Any route: clearance and renal function'], ['oral', 'Single oral dose'],
-  ['multi', 'Repeated IV bolus'], ['intermit', 'Intermittent IV infusions'], ['multoral', 'Multiple oral doses'], ['bioavail', 'Bioavailability: two routes or two products compared']];
+  ['multi', 'Repeated IV bolus'], ['intermit', 'Intermittent IV infusions'], ['multoral', 'Multiple oral doses'], ['bioavail', 'Bioavailability: two routes or two products compared'],
+  ['pkpd', 'PK-PD: duration of action after an IV bolus'], ['nonlin', 'Nonlinear (Michaelis-Menten): KM, Vmax, dose rate and Css']];
 const PLAN_NAME = Object.fromEntries(PLAN_MODELS);
-const PLAN_TOPIC = {orders: 'kin', auc: 'kin', bolus1: 'bolus1', bolus2: 'bolus2', infusion: 'infusion', clearance: 'clearance', oral: 'oral', multi: 'multi', intermit: 'intermit', multoral: 'multoral', bioavail: 'bioavail'};
+const PLAN_TOPIC = {orders: 'kin', auc: 'kin', bolus1: 'bolus1', bolus2: 'bolus2', infusion: 'infusion', clearance: 'clearance', oral: 'oral', multi: 'multi', intermit: 'intermit', multoral: 'multoral', bioavail: 'bioavail', pkpd: 'pkpd', nonlin: 'nonlin'};
 function planModels(q){
   const main = PLAN_TOPIC[q.topic] || 'kin', acc = new Set([main]);
   if(main === 'kin' || main === 'clearance'){ const s = String(q.stem).toLowerCase();
     if(/bolus/.test(s)) acc.add('bolus1'); if(/infus/.test(s)) acc.add('infusion'); if(/\boral|tablet|capsule/.test(s)) acc.add('oral'); }
+  if(main === 'pkpd' && /bolus/i.test(String(q.stem))) acc.add('bolus1');
   return {main, acc};
 }
 const planNeeded = q => (q.givens || []).map((g, i) => /^not needed/i.test(g[2] || '') ? null : i).filter(i => i !== null);
@@ -5406,7 +5420,12 @@ function gwRun(id, i, k){
     g.k = kk; gwDraw(id);
     const u = new SpeechSynthesisUtterance(ss[kk]); u.rate = gwRate(); u.lang = 'en-US';
     u.onend = () => { if(GW !== g || run !== g.run || !g.playing) return; if(kk + 1 < ss.length) say(kk + 1); else next(); };
+    // a device voice that errors or never starts: the part goes on at reading pace instead of stalling
+    let started = false; u.onstart = () => { started = true; };
+    const fallback = () => { if(GW !== g || run !== g.run || !g.playing) return; clearTimeout(g.wd); g.k = kk; gwRunWait(id, i, run, ss, next); };
+    u.onerror = e => { if(e && e.error === 'interrupted') return; fallback(); };
     sy.speak(u);
+    clearTimeout(g.wd); g.wd = setTimeout(() => { if(GW !== g || run !== g.run || !g.playing || g.k !== kk) return; if(!started && !sy.speaking){ sy.cancel(); fallback(); } }, 4000);
   };
   sy.cancel(); say(k);
 }
@@ -5543,7 +5562,7 @@ function inkOpen(id, variant){
   if(typeof gwStop === 'function') gwStop();
   const prefs = (() => { try { return JSON.parse(LS.get(NS + ':ink-prefs') || '{}'); } catch(e){ return {}; } })();
   INK = {id, variant, data: inkLoad(id, variant), tool: 'pen', color: prefs.color || INK_COLORS[0][0], size: prefs.size || 2,
-         pencil: 'pencil' in prefs ? !!prefs.pencil : matchMedia('(pointer: coarse)').matches, undo: [], redo: [], scrollY: scrollY};
+         pencil: 'pencil' in prefs ? !!prefs.pencil : false, undo: [], redo: [], scrollY: scrollY};   // a finger writes until a Pencil touches the page
   const mode = variant === 'changed' ? 'changed-worksheet' : 'worksheet', solMode = variant === 'changed' ? 'changed-solutions' : 'solutions';
   const sol = q ? '' : (sheetHTML(id, solMode).match(/<section class="wssol">[\s\S]*<\/section>/) || [''])[0];
   const ov = document.createElement('div'); ov.id = 'ink'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Write on ' + s.title);

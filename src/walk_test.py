@@ -164,6 +164,21 @@ def main():
             run(page, width)
             check(not errs, f'no page or console errors at {width} px', '; '.join(errs[:3]))
             page.close()
+        # a device whose voice never starts or ends: the part still moves on at reading pace
+        page = browser.new_page(viewport={'width': 820, 'height': 1000})
+        page.add_init_script(FAKE_VOICE.replace("setTimeout(() => { if(!u._x && u.onend) u.onend(); }, 15);", ""))
+        page.goto(url); page.wait_for_timeout(1200)
+        sid = 'gobj-m8-3'
+        page.evaluate(f"LS.set(FOLD_KEY+'guide','open'); show('guide'); openAncestors(document.getElementById('{sid}'))")
+        page.click(f'#{sid} [data-gwopen]'); page.wait_for_selector(f'.gwpanel[data-gwp="{sid}"]')
+        page.evaluate(f"gwGo('{sid}', 0)")
+        if not page.evaluate("GW && GW.playing"): page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
+        try:
+            page.wait_for_function("GW && GW.k > 0", timeout=12000); moved = True
+        except Exception:
+            moved = False
+        check(moved, 'with a voice that never speaks, the walkthrough moves on at reading pace', page.evaluate("GW && [GW.i, GW.k]"))
+        page.close()
         browser.close()
     srv.shutdown()
     print(f'\n{len(fails)} failure(s)' if fails else '\nall walkthrough checks passed')

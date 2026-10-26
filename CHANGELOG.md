@@ -5,6 +5,12 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
 - Guides and walkthroughs: corrections checked against the textbook and her transcripts.
 - Scratch paper: calculation questions in Quiz and Exam sim open a page to write on.
+- Exam sim: a Go to list of every question; submitting from any question asks first and counts the blanks.
+- Exam sim: a picked option is marked in blue, not the green that means correct.
+- Quiz: Check on an empty calculation asks before showing the answer.
+- Writing: a finger writes until an Apple Pencil touches the page, then the finger scrolls.
+- Plan the problem: PK-PD and nonlinear models added.
+- Walkthroughs: with no device voice they move on at reading pace.
 - Exam 3 (final): starts 8:00 a.m. Tue 27 Oct, per her announcement; 40 questions, 25% not tested before.
 - Exam review: Thu 29 Oct, 8:15 to 8:45 a.m., P2 classroom.
 - Quiz 1 (26 Aug, Modules 1–2): her five items with her answers from the review that day, plus a worksheet PDF.

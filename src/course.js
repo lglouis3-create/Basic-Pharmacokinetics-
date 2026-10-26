@@ -165,12 +165,11 @@ const COURSE = {
             'Cumulative: 40 questions, 20 multiple choice and 20 fill in the blank, with 25% on ' +
             'the two lectures after Exam 2, PK-PD (12 Oct) and nonlinear pharmacokinetics (14 Oct). ' +
             'Know total clearance, ideal body weight and Cockcroft-Gault without the equation sheet. ' +
-            'Wed 21 October, 8:30 to 9:30: an optional question session. How the other 30 questions ' +
+            'How the other 30 questions ' +
             'divide between Exam 1 and Exam 2 material is not published; this drill splits them evenly.',
      facts: [
-       ['When', 'Tue 27 October, starting at 8:00 a.m. (her announcement of 26 October; earlier she had said 7:50 and the full 2 hours)'],
+       ['When', 'Tue 27 October, starting at 8:00 a.m. (her announcement of 26 October)'],
        ['After it', 'Exam review: Thu 29 October, 8:15 to 8:45 a.m., in the P2 classroom'],
-       ['Before it', 'Wed 21 October, 8:30 to 9:30: an optional session with no slides; she answers questions and asks some'],
        ['Not on the sheet', 'Total clearance, ideal body weight and Cockcroft-Gault: "we\'re only gonna use the ideal body weight"'],
        ['What she expects', 'Zero and first order; k, t½, VD and Cp; total, renal and hepatic clearance; steady-state peaks, troughs, averages and tmax; Cp against time for each route; bioavailability; linear and nonlinear; AUC; duration of action and the times to steady state, to the peak and to elimination; Cp after IV bolus, IV infusion and extravascular doses'],
        ['Weight', '33% of the course grade'],
