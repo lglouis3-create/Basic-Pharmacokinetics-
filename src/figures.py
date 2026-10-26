@@ -1650,6 +1650,247 @@ stepped('nl_rate_steps', 'Elimination rate against plasma concentration for a sa
 ], footer='8 - Nonlinear PK.pdf, slide "Example" (KM and Vmax from her working); rate law from slide "Saturable-Enzymatic Elimination Processes"')
 
 
+# ---- Module 1, step by step: her two tables, first order against zero order ----
+# Her practice set (guide 1.4): first order k 0.0866 hr^-1, C0 350 (294.3 ... 5.5 at 2-48 hr);
+# zero order k 6 per hr, C0 350 (338 ... 62 at the same times). 12->24 hr loses 123.8 - 43.8 = 80.0 and
+# 24->36 hr 43.8 - 15.5 = 28.3, ratio 2.83 both; zero order loses 72 each 12 hr (35% of 206, 54% of 134).
+# Half-lives: first order 0.693/0.0866 = 8.0 hr at any level; zero order C0/2k = 350/12 = 29.2 hr, 175/12 = 14.6 hr.
+ORD_T = [2, 6, 12, 24, 36, 48]
+ORD_F = [294.3, 208.1, 123.8, 43.8, 15.5, 5.5]
+ORD_Z = [338, 314, 278, 206, 134, 62]
+
+
+def ord_plot():
+    p = Plot(48, [0, 50, 100, 150, 200, 250, 300, 350], xlabel='Time (hours)', ylabel='Concentration (her tables)')
+    return p.frame([0, 6, 12, 18, 24, 30, 36, 42, 48])
+
+
+def ord_s1(pl):
+    pl.curve(lambda t: 350 * math.exp(-0.0866 * t)); pl.points(ORD_T, ORD_F)
+    pl.text(9, 230, 'first-order table: a curve', size=18, color=BLUE)
+
+
+def ord_s2(pl):
+    ord_s1(pl)
+    pl.vline(12, 123.8, color=BLUE); pl.vline(24, 43.8, color=BLUE); pl.vline(36, 15.5, color=BLUE)
+    pl.text(13, 95, '12 to 24 hr: 80.0 lost', size=17); pl.text(25, 60, '24 to 36 hr: 28.3 lost', size=17)
+    pl.text(25, 34, 'same ratio, 2.83: same fraction', size=17)
+
+
+def ord_s3(pl):
+    ord_s2(pl); pl.curve(lambda t: 350 - 6 * t, color=AMBER); pl.points(ORD_T, ORD_Z, color=AMBER)
+    pl.text(47, 330, 'zero-order table: a straight line', size=18, color=AMBER, anchor='end')
+
+
+def ord_s4(pl):
+    ord_s3(pl)
+    pl.text(30, 205, '72 lost every 12 hr: 35% of 206, then 54% of 134', size=17, color=AMBER, anchor='middle')
+
+
+def ord_s5(pl):
+    ord_s4(pl); pl.hline(175, color=DIM)
+    pl.points([8, 29.2], [175, 175], color=INK)
+    pl.text(8.6, 186, 'first order: half gone at 8 hr, from any level', size=16)
+    pl.text(47, 150, 'zero order: 29.2 hr from 350, 14.6 hr from 175', size=16, anchor='end')
+
+
+stepped('orders_steps', 'Her two tables: first order against zero order', ord_plot(), [
+    ('First order', 'Her first-order table: 294.3, 208.1, 123.8, 43.8, 15.5, 5.5 at 2 to 48 hr, on C = 350e^(−0.0866t).', ord_s1),
+    ('Same fraction', 'Equal time spans lose a smaller amount each time (80.0, then 28.3) but the same fraction: {{frac:123.8|43.8}} = {{frac:43.8|15.5}} = 2.83.', ord_s2),
+    ('Zero order', 'Her zero-order table: 338, 314, 278, 206, 134, 62 at the same times, on C = 350 − 6t.', ord_s3),
+    ('Same amount', 'Equal time spans lose the same amount (72 every 12 hr), so the fraction grows: 35%, then 54%.', ord_s4),
+    ('Half-lives', 'First order: t½ = {{frac:0.693|k}} = 8.0 hr from any level. Zero order: t½ = {{frac:C0|2k}} = 29.2 hr from 350, 14.6 hr from 175.', ord_s5),
+], footer='Her Module 1 practice tables and keys (guide, objective 4)')
+
+
+# ---- Module 3, step by step: two infusion rates, one drug ------------------------
+# Her Examples 1 and 2: t1/2 6 hr, VD 30 L, so k = 0.1155 hr^-1 and Cl = 3.465 L/hr.
+# 50 mg/hr: Css = 50/3.465 = 14.43 mg/L; 69.3 mg/hr: 20 mg/L. At 6 hr each is at half its plateau.
+IR_K, IR_CL = 0.1155, 3.465
+ir_c = lambda R: (lambda t: R / IR_CL * (1 - math.exp(-IR_K * t)))
+
+
+def ir_plot():
+    p = Plot(36, [0, 5, 10, 15, 20, 25], ylabel='Plasma concentration (mg/L)')
+    return p.frame([0, 6, 12, 18, 24, 30, 36])
+
+
+def ir_s1(pl):
+    pl.curve(ir_c(50)); pl.hline(14.43, color=BLUE)
+    pl.text(35, 13.0, '50 mg/hr → Css 14.4 mg/L', size=18, color=BLUE, anchor='end')
+
+
+def ir_s2(pl):
+    ir_s1(pl); pl.curve(ir_c(69.3), color=AMBER); pl.hline(20, color=AMBER)
+    pl.text(35, 21.0, '69.3 mg/hr → Css 20 mg/L', size=18, color=AMBER, anchor='end')
+
+
+def ir_s3(pl):
+    ir_s2(pl); pl.xband(18, 30)
+    pl.points([6, 6], [ir_c(50)(6), ir_c(69.3)(6)], color=INK)
+    pl.text(6.5, 4.6, '6 hr: half of each plateau', size=17)
+    pl.text(24, 2.0, '3 to 5 half-lives', size=17, anchor='middle')
+
+
+stepped('two_rates_steps', 'Two infusion rates of one drug: the plateau moves, the time to reach it does not', ir_plot(), [
+    ('50 mg/hr', 'Her drug: t½ 6 hr, VD 30 L, so Cl = 3.465 L/hr. Css = {{frac:R|Cl}} = {{frac:50|3.465}} = 14.4 mg/L.', ir_s1),
+    ('69.3 mg/hr', 'A higher rate: Css = {{frac:69.3|3.465}} = 20 mg/L. The plateau rises in proportion to the rate.', ir_s2),
+    ('Same time', 'Both reach half their plateau at 6 hr (one half-life) and are close to it after 3 to 5 half-lives, 18 to 30 hr.', ir_s3),
+], footer='Infusion deck, her Examples 1 and 2')
+
+
+# ---- Module 3, step by step: renal failure on the same infusion -----------------
+# Her Practice 4: VD 100 L. Before: Cl 11.55 L/hr (k 0.1155, t1/2 6 hr), R 115.5 mg/hr, Css 10 mg/L.
+# Renal failure: Cl 8.55 L/hr (k 0.0855, t1/2 8.1 hr): same rate gives 115.5/8.55 = 13.5 mg/L;
+# R 85.5 mg/hr restores 10 mg/L. 95% of the plateau: ln 20 / k = 25.9 hr before, 35.0 hr after.
+rn_c = lambda R, cl: (lambda t: R / cl * (1 - math.exp(-cl / 100 * t)))
+
+
+def rn_plot():
+    p = Plot(48, [0, 3, 6, 9, 12, 15], ylabel='Plasma concentration (mg/L)')
+    return p.frame([0, 6, 12, 18, 24, 30, 36, 42, 48])
+
+
+def rn_s1(pl):
+    pl.curve(rn_c(115.5, 11.55)); pl.hline(10, color=BLUE)
+    pl.points([25.9], [9.5]); pl.text(47, 8.6, 'normal: 10 mg/L, 95% at 25.9 hr', size=17, color=BLUE, anchor='end')
+
+
+def rn_s2(pl):
+    rn_s1(pl); pl.curve(rn_c(115.5, 8.55), color=AMBER); pl.hline(13.51, color=AMBER)
+    pl.text(47, 14.1, 'renal failure, same rate: 13.5 mg/L', size=17, color=AMBER, anchor='end')
+
+
+def rn_s3(pl):
+    rn_s2(pl); pl.curve(rn_c(85.5, 8.55), color=INK, dash='6 5'); pl.points([35.0], [9.5], color=INK)
+    pl.text(47, 5.6, 'rate lowered to 85.5 mg/hr: 10 mg/L, 95% at 35.0 hr', size=16, anchor='end')
+    pl.text(47, 2.6, 'loading dose 10 × 100 = 1000 mg either way', size=16, anchor='end')
+
+
+stepped('renal_steps', 'Renal failure on an infusion: a higher plateau, then a lower rate, and a longer climb', rn_plot(), [
+    ('Normal', 'Her Practice 4: VD 100 L, Cl 11.55 L/hr (t½ 6 hr). R 115.5 mg/hr gives Css = {{frac:115.5|11.55}} = 10 mg/L, 95% of it at 25.9 hr.', rn_s1),
+    ('Same rate', 'Clearance falls to 8.55 L/hr. The same rate now climbs to {{frac:115.5|8.55}} = 13.5 mg/L.', rn_s2),
+    ('New rate', 'R = Css × Cl = 10 × 8.55 = 85.5 mg/hr restores 10 mg/L, but t½ is now 8.1 hr, so 95% takes 35.0 hr. D<sub>L</sub> = Css × VD has no Cl: 1000 mg either way.', rn_s3),
+], footer='Infusion practice 4 and her key')
+
+
+# ---- Module 3, step by step: a loading dose that is right, too large, or absent --
+# Her Example 8: R 50 mg/hr, k 0.17325 hr^-1, VD 12 L, so Cl 2.079 L/hr and Css 24.05 mg/L.
+# DL 288 mg starts at 24.0 mg/L (flat); 388 mg starts at 32.3 mg/L, 29.9 mg/L at 2 hr, then falls to the plateau;
+# no loading dose: 12.0 mg/L at 4 hr, 90% of the plateau at ln 10 / k = 13.3 hr.
+LM_K, LM_V, LM_SS = 0.17325, 12.0, 50 / (0.17325 * 12)
+lm_c = lambda DL: (lambda t: DL / LM_V * math.exp(-LM_K * t) + LM_SS * (1 - math.exp(-LM_K * t)))
+
+
+def lm_plot():
+    p = Plot(24, [0, 5, 10, 15, 20, 25, 30, 35], ylabel='Plasma concentration (mg/L)')
+    return p.frame([0, 4, 8, 12, 16, 20, 24])
+
+
+def lm_s1(pl):
+    pl.curve(lm_c(288)); pl.text(23, 26.0, 'D_L 288 mg: flat at 24 mg/L from the start', size=17, color=BLUE, anchor='end')
+
+
+def lm_s2(pl):
+    lm_s1(pl); pl.curve(lm_c(388), color=AMBER); pl.points([0, 2], [388 / 12, lm_c(388)(2)], color=AMBER)
+    pl.text(1, 33.6, '388 mg: starts at 32.3, falls to the plateau', size=17, color=AMBER)
+
+
+def lm_s3(pl):
+    lm_s2(pl); pl.curve(lm_c(0), color=INK, dash='6 5'); pl.points([4], [lm_c(0)(4)], color=INK)
+    pl.text(5, 9.0, 'no loading dose: 12 mg/L at 4 hr, 90% at 13.3 hr', size=16)
+
+
+stepped('loading_miss_steps', 'Loading dose with an infusion: right, too large, or none', lm_plot(), [
+    ('Right size', 'Her Example 8: R 50 mg/hr, k 0.17325 hr⁻¹, VD 12 L, Css 24 mg/L. D<sub>L</sub> = Css × VD = 288 mg: the level is flat from the start.', lm_s1),
+    ('Too large', '388 mg starts the level at {{frac:388|12}} = 32.3 mg/L (29.9 at 2 hr); it falls to the plateau the infusion sets.', lm_s2),
+    ('None', 'With no loading dose the level climbs from zero: 12 mg/L at 4 hr, 90% of the plateau at 13.3 hr.', lm_s3),
+], footer='Infusion deck, her Example 8 and her rework with 388 mg')
+
+
+# ---- Module 7b, step by step: duration of action by halvings (her 10/19 poll) ------
+# VD 12.5 L, t1/2 4 hr, MEC 20 mg/L. 1 g: C0 = 1000/12.5 = 80 mg/L, 80 -> 40 -> 20 is two half-lives, 8 hr.
+# 500 mg: C0 40 mg/L, one half-life, 4 hr. 2 g: C0 160 mg/L, three half-lives, 12 hr: doubling the dose
+# from 1 g adds one half-life (4 hr); it does not double t_eff.
+TH_K = 0.693 / 4
+
+
+def th_plot():
+    p = Plot(14, [10, 20, 40, 80, 160], log=True, ylabel='Plasma concentration (mg/L), log scale')
+    return p.frame([0, 2, 4, 6, 8, 10, 12, 14])
+
+
+def th_s1(pl):
+    pl.hline(20, color=AMBER); pl.text(13.8, 22, 'MEC 20 mg/L', size=17, color=AMBER, anchor='end')
+
+
+def th_s2(pl):
+    th_s1(pl); pl.curve(lambda t: 80 * math.exp(-TH_K * t)); pl.points([0, 4, 8], [80, 40, 20])
+    pl.text(0.3, 92, '1 g: 80 → 40 → 20, two halvings, 8 hr', size=17, color=BLUE)
+
+
+def th_s3(pl):
+    th_s2(pl); pl.curve(lambda t: 40 * math.exp(-TH_K * t), color=INK, dash='6 5'); pl.points([4], [20], color=INK)
+    pl.text(0.3, 30, '500 mg: 40 → 20, one halving, 4 hr', size=17)
+
+
+def th_s4(pl):
+    th_s3(pl); pl.curve(lambda t: 160 * math.exp(-TH_K * t), color=AMBER); pl.points([0, 12], [160, 20], color=AMBER)
+    pl.text(13.8, 120, '2 g: 160 → 20, three halvings, 12 hr (not 16)', size=17, color=AMBER, anchor='end')
+
+
+stepped('teff_halvings_steps', 'Duration of action: count the halvings from C0 down to the MEC', th_plot(), [
+    ('The MEC', 'Her 10/19 poll: VD 12.5 L, t½ 4 hr, minimum effective concentration 20 mg/L.', th_s1),
+    ('1 g', 'C0 = {{frac:1000 mg|12.5 L}} = 80 mg/L. 80 → 40 → 20 is two half-lives: t<sub>eff</sub> = 8 hr.', th_s2),
+    ('500 mg', 'C0 = 40 mg/L, exactly twice the MEC: one half-life, 4 hr. Halving the dose halved the duration only here.', th_s3),
+    ('2 g', 'C0 = 160 mg/L: three half-lives, 12 hr. Doubling the dose adds one half-life; it does not double t<sub>eff</sub>.', th_s4),
+], footer='Final exam review poll (19 Oct) and her key; the 2 g line is the same relation carried one dose further')
+
+
+# ---- Module 8, step by step: the fraction removed per day falls as Cp rises ----
+# Her Solutions 2 patient: KM 9 mg/L, Vmax 500 mg/day, VD 0.75 L/kg x 75 kg = 56.25 L.
+# Clearance = Vmax / (KM + Cp) (her sheet line), so the fraction removed per day is Cl / VD:
+# Cp 6: 500/15/56.25 = 0.593; Cp 15: 500/24/56.25 = 0.370; Cp 21: 500/30/56.25 = 0.296 per day,
+# and t1/2 = 0.693 / fraction = 1.17, 1.87 (her key) and 2.34 days (her key). Near Cp 0 the fraction
+# is Vmax / (KM VD) = 500 / (9 x 56.25) = 0.988 per day, the constant a first-order drug would keep.
+NF_VM, NF_KM, NF_VD = 500.0, 9.0, 56.25
+nl_frac = lambda c: NF_VM / (NF_KM + c) / NF_VD
+
+
+def nlf_plot():
+    p = Plot(30, [0, 0.2, 0.4, 0.6, 0.8, 1.0], xlabel='Plasma concentration, Cp (mg/L)',
+             ylabel='Fraction removed per day')
+    return p.frame([0, 5, 10, 15, 20, 25, 30])
+
+
+def nlf_s1(pl):
+    pl.curve(nl_frac)
+    pl.text(29, 0.17, 'saturable drug: fraction = Cl / VD', size=18, color=BLUE, anchor='end')
+
+
+def nlf_s2(pl):
+    nlf_s1(pl); pl.points([6, 15, 21], [nl_frac(6), nl_frac(15), nl_frac(21)], color=AMBER)
+    pl.text(6.6, 0.64, 'Cp 6: 0.59', size=17); pl.text(15.6, 0.415, 'Cp 15: 0.37', size=17); pl.text(21.6, 0.25, 'Cp 21: 0.30', size=17)
+
+
+def nlf_s3(pl):
+    nlf_s2(pl); pl.curve(lambda c: nl_frac(0), color=DIM, dash='6 5')
+    pl.text(29, 0.93, 'first-order drug: the same fraction at every level', size=17, color=DIM, anchor='end')
+
+
+def nlf_s4(pl):
+    nlf_s3(pl)
+    pl.text(29, 0.06, 't½ = 0.693 ÷ fraction: 1.17, 1.87, 2.34 days', size=17, anchor='end')
+
+
+stepped('nl_frac_steps', 'Fraction of the drug removed per day against plasma concentration', nlf_plot(), [
+    ('The curve', 'Her Solutions 2 patient (KM 9 mg/L, Vmax 500 mg/day, VD 56.25 L): fraction removed per day = {{frac:Vmax|(KM + Cp) VD}}.', nlf_s1),
+    ('Three levels', 'Cp 6, 15 and 21 mg/L: the level rises 3.5-fold, the rate only from 200 to 350 mg/day, so the fraction falls from 0.59 to 0.30 per day.', nlf_s2),
+    ('First order', 'A first-order drug removes the same fraction at every level; this one does so only well below KM (0.99 per day near Cp 0).', nlf_s3),
+    ('Half-life', 't½ = {{frac:0.693|fraction}}: 1.17, 1.87 and 2.34 days. Her keys: 1.87 days at 15 mg/L and 2.34 days at 21 mg/L.', nlf_s4),
+], footer='Nonlinear-Solutions-2.pdf (KM, Vmax, VD and her half-lives); Cl = Vmax/(KM + Cp) from her equation sheet, page 2')
+
+
 # ---- Module 8, step by step: steady-state level against daily dose rate -------
 # Css = R KM / (Vmax - R) from her dose-rate line; 6 -> 10 and 8 -> 20 mg/L are
 # her pairs. A linear drug from the first pair: Css in proportion to R, so 8
