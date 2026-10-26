@@ -785,7 +785,14 @@ input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);bord
 .laytogrow{margin:0 0 8px}
 /* ---------- Worksheets tab ---------- */
 .srcnote{font-size:13.5px;color:var(--text-dim);border-left:3px solid var(--line);padding:4px 10px;margin:0 0 14px}
-.srcmod{margin:0 0 22px}
+.srcmod{margin:0 0 10px;scroll-margin-top:110px}
+.srcjump{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.srcgrp{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);margin:0 0 8px;padding:0 12px}
+.srcgrp>summary{cursor:pointer;padding:12px 0;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;list-style-position:outside}
+.srcgrp>summary small{color:var(--text-dim);font-size:13px}
+.srcgrp[open]{padding-bottom:10px}
+.srcgrp.srcafter{background:var(--accent-bg)}
+.wsdoc .wsmod{display:inline-block;font-size:9pt;font-weight:600;color:#335;border:1px solid #99a;border-radius:3px;padding:0 4px;margin-right:4px}
 .srcmod h3{margin:18px 0 6px}
 .srcmod h4{margin:12px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
 .srccard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;margin:0 0 8px;min-width:0}

@@ -266,7 +266,12 @@ def main():
         page.wait_for_function("typeof renderSheets === 'function'")
         page.click('#nav button[data-v="sheets"]')
         page.wait_for_timeout(200)
-        hrefs = page.eval_on_selector_all('#v-sheets a[href]', 'as => as.map(a => [a.getAttribute("href"), a.target])')
+        # the module groups start folded; open them all so every button can be pressed
+        page.evaluate("document.querySelectorAll('#v-sheets details').forEach(d => d.open = true)")
+        jumps = page.eval_on_selector_all('#v-sheets .srcjump a', 'as => as.map(a => a.getAttribute("href"))')
+        jbad = [j for j in jumps if not page.evaluate(f"!!document.querySelector('{j}')")]
+        check(jumps and not jbad, f'every module jump lands on its module ({len(jumps)})', '; '.join(jbad))
+        hrefs = page.eval_on_selector_all('#v-sheets .srccard a[href]', 'as => as.map(a => [a.getAttribute("href"), a.target])')
         bad = []
         for h, tgt in hrefs:
             if h.startswith('https://drive.google.com/'):
@@ -307,6 +312,7 @@ def main():
                 pg.wait_for_timeout(400)
                 pg.click('#nav button[data-v="sheets"]')
                 pg.wait_for_timeout(200)
+                pg.evaluate("document.querySelectorAll('#v-sheets details').forEach(d => d.open = true)")
                 over = pg.evaluate('document.documentElement.scrollWidth - window.innerWidth')
                 txt = pg.inner_text('#v-sheets')
                 cards = pg.eval_on_selector_all('.srccard', 'cs => cs.length')

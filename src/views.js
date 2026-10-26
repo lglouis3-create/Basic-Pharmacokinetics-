@@ -5001,13 +5001,20 @@ const SRC_BY = Object.fromEntries(SRC_LIST.map(s => [s.id, s]));
 const SRC_TYPES = [['daily-practice', 'Daily practice sheets'], ['in-class', 'In-class activities'], ['homework', 'Homework'],
   ['quiz', 'Canvas quizzes'], ['review', 'Review sets'], ['example', 'Lecture slides: worked examples'], ['lecture-slides', 'Lecture slides']];
 const SRC_TYPE_ONE = {'daily-practice': 'Daily practice sheet', 'in-class': 'In-class activity', homework: 'Homework',
-  quiz: 'Canvas quiz', review: 'Review set', example: 'Lecture slides, worked examples', 'lecture-slides': 'Lecture slides'};
+  quiz: 'Quiz', review: 'Review set', example: 'Lecture slides, worked examples', 'lecture-slides': 'Lecture slides'};
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 /* An ISO date as "12 Oct 2026"; a blank date stays blank and is shown as "No date". */
 const srcDate = d => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ''); return m ? `${+m[3]} ${MONTHS[+m[2] - 1]} ${m[1]}` : ''; };
 const driveView = id => `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
 const driveDown = id => `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
 const srcModName = m => (COURSE.topicsMenu.find(t => t.module === m) || {}).name || ('Module ' + modShort(m));
+// the modules in teaching order (7b, numbered 9, comes before 8), and the modules a source covers, in that order
+const SRC_MOD_ORDER = COURSE.topicsMenu.filter(t => t.module != null).map(t => t.module);
+const srcMods = s => { const ms = (s.modules && s.modules.length ? s.modules : [s.module]); return SRC_MOD_ORDER.filter(m => ms.includes(m)); };
+const srcModSpan = s => { const ms = srcMods(s); return ms.length > 1 ? `Modules ${modShort(ms[0])}–${modShort(ms[ms.length - 1])}` : 'Module ' + modShort(ms[0] != null ? ms[0] : s.module); };
+// homework, quizzes and reviews span modules: they are listed after the last module they cover, each problem tagged
+const SRC_SPANNING = ['homework', 'quiz', 'review'];
+const srcSpans = s => SRC_SPANNING.includes(s.type);
 const sheetPath = (s, variant, sol) =>
   `sheets/module-${modShort(s.module).toLowerCase()}/${s.id}-${variant === 'changed' ? 'changed-' : ''}${sol ? 'solutions' : 'worksheet'}.pdf`;
 
@@ -5113,10 +5120,10 @@ function solvedBy(q, s){
 const SOLVED_LABEL = {her: 'Her key', drill: 'Worked by the drill'};
 const imgHTML = key => key && IMAGES[key] ? `<img class="wsimg" src="${IMAGES[key]}" alt="Figure for this problem">` : '';
 
-function sheetPartHTML(q, label, text, withImg){
+function sheetPartHTML(q, label, text, withImg, tag){
   const calc = isCalcPart(q), kind = qType(q);
   let h = `<div class="wspart${calc ? ' calc' : ''}" data-qid="${esc(q.id)}" data-label="${esc(label)}">
-    <div class="wsq${label.length > 10 ? ' stack' : ''}"><span class="wslab">${esc(label)}</span><div class="wstext">${stemHTML(text)}</div></div>`;
+    <div class="wsq${label.length > 10 ? ' stack' : ''}"><span class="wslab">${esc(label)}</span><div class="wstext">${tag ? `<span class="wsmod">${esc(tag)}</span> ` : ''}${stemHTML(text)}</div></div>`;
   if(withImg) h += imgHTML(q.img);
   if(kind === 'match'){
     h += `<div class="wsmatch"><ol class="wsleft">${(q.left || []).map(l => `<li>${rich(l)} <span class="wsblank">________</span></li>`).join('')}</ol>
@@ -5157,7 +5164,7 @@ function sheetHTML(sourceId, mode){
   const date = srcDate(s.date);
   let h = `<article class="wsdoc" data-src="${esc(s.id)}" data-mode="${esc(mode)}"><div class="wshead">
     <h1>${esc(s.title.replace(/\s*\(solutions\)\s*$/i, ''))}${variant === 'changed' ? ' — changed numbers (extra practice)' : ''}</h1>
-    <p class="wsmeta">${esc(srcModName(s.module))} · ${esc(SRC_TYPE_ONE[s.type] || s.type)} · ${date ? esc(date) : 'No date'}</p>
+    <p class="wsmeta">${esc(srcSpans(s) ? srcModSpan(s) : srcModName(s.module))} · ${esc(SRC_TYPE_ONE[s.type] || s.type)} · ${date ? esc(date) : 'No date'}</p>
     ${changedNums ? `<p class="wsmeta">The numbers on this sheet are changed from her sheet.</p>` : ''}
     <p class="wsname"><span>Name <i></i></span><span>Date <i></i></span></p></div>`;
   const parts = [];
@@ -5173,7 +5180,7 @@ function sheetHTML(sourceId, mode){
     qs.forEach((q, i) => {
       const label = srcLabel(q.id) || String(i + 1);
       const text = dropMarker(stems[i].slice(cut).trim(), label);
-      h += sheetPartHTML(q, label, text, !sharedImg && !!q.img);
+      h += sheetPartHTML(q, label, text, !sharedImg && !!q.img, srcSpans(s) && q.module != null ? 'Module ' + modShort(q.module) : '');
       parts.push([q, label]);
     });
     h += `</section>`;
@@ -5215,8 +5222,9 @@ function startSheetSet(id, variant){
 const pdfLink = (href, text) => `<a class="btn small ghost" href="${esc(href)}" target="_blank" rel="noopener">${text}</a>`;
 function srcCardHTML(s){
   const plan = sheetPlan(s), date = srcDate(s.date);
-  const labels = [...new Set(plan.main.concat(plan.changed).flatMap(g => g.ids.map(srcLabel)))];
-  let h = `<div class="srccard" id="src-${esc(s.id)}"><div class="srctop"><b>${esc(s.title)}</b><small>${date ? esc(date) : 'No date'}</small></div>`;
+  const span = srcSpans(s), ids = [...new Set(plan.main.concat(plan.changed).flatMap(g => g.ids))];
+  const labels = [...new Set(ids.map(id => { const l = srcLabel(id), q = byId(id); return span && l && q && q.module != null ? `${l} (M${modShort(q.module)})` : l; }))];
+  let h = `<div class="srccard" id="src-${esc(s.id)}"><div class="srctop"><b>${esc(s.title)}</b><small>${[span ? 'Covers ' + srcModSpan(s) : '', date || 'No date'].filter(Boolean).map(esc).join(' · ')}</small></div>`;
   h += `<div class="srcrow"><span class="srcrlab">Original</span><span class="srcbtns">`;
   if(s.drive) h += pdfLink(driveView(s.drive.id), 'Open original') + pdfLink(driveDown(s.drive.id), 'Download original');
   else h += `<span class="srcmiss">${esc(s.missing || 'No original on file.')}</span>`;
@@ -5233,28 +5241,52 @@ function srcCardHTML(s){
   if(s.note) h += `<p class="srcsub">${esc(s.note)}</p>`;
   return h + `</div>`;
 }
+const SRC_OPEN = new Set();
 function renderSheets(){
   const el = $('#v-sheets');
   let h = `<h2>Worksheets</h2>
-    <p class="sub">Every document the drill's problems come from, by module and then by kind of activity. Each has a worksheet to print or write on (her problems, with room to work) and the same worksheet with solutions, as PDFs.</p>
+    <p class="sub">Each module holds its in-class activities, lecture examples and daily practice. Homework, quizzes and reviews follow the last module they cover, with each problem tagged by its module. Every document has a worksheet to print or write on (her problems, with room to work) and the same worksheet with solutions, as PDFs.</p>
     <p class="srcnote">Write on it opens the worksheet here to write on with an Apple Pencil or a finger, with a large grid under each problem and More room when it runs out. The writing is kept in this browser on this device only; Save as PDF keeps a copy, or opens it in Goodnotes from the share sheet.</p>
     <p class="srcnote">Open original and Download original open the copy kept in the drill owner's Google Drive, so they work only for an account that folder is shared with. The originals are not copied onto this site, because the course materials may not be shared publicly; the worksheets below carry the same problems.</p>`;
-  const mods = COURSE.topicsMenu.filter(m => m.module != null);
+  const mods = COURSE.topicsMenu.filter(m => m.module != null), pos = m => SRC_MOD_ORDER.indexOf(m);
+  const MOD_KINDS = [['in-class', 'In-class activities'], ['example', 'Lecture examples'], ['daily-practice', 'Daily practice'], ['lecture-slides', 'Lecture slides']];
+  const SPAN_KINDS = [['homework', 'Homework'], ['quiz', 'Quizzes'], ['review', 'Review sets']];
+  const ONE = {'in-class': ['in-class activity', 'in-class activities'], example: ['set of lecture examples', 'sets of lecture examples'],
+    'daily-practice': ['daily practice sheet', 'daily practice sheets'], 'lecture-slides': ['slide set', 'slide sets'],
+    homework: ['homework', 'homework sets'], quiz: ['quiz', 'quizzes'], review: ['review set', 'review sets']};
+  const tally = (list, kinds) => kinds.map(([t]) => [t, list.filter(s => s.type === t).length]).filter(([, n]) => n).map(([t, n]) => `${n} ${ONE[t][n === 1 ? 0 : 1]}`).join(' · ');
+  const lastOf = s => srcMods(s).reduce((a, m) => pos(m) > pos(a) ? m : a, srcMods(s)[0] != null ? srcMods(s)[0] : s.module);
+  const count = (n, one) => `${n} ${one}${n === 1 ? '' : 's'}`;
+  h += `<p class="srcjump">${mods.filter(m => SRC_LIST.some(s => s.module === m.module || (srcSpans(s) && lastOf(s) === m.module)))
+    .map(m => `<a class="chip" href="#srcm-${m.module}">Module ${esc(modShort(m.module))}</a>`).join('')}</p>`;
   mods.forEach(m => {
-    const here = SRC_LIST.filter(s => s.module === m.module);
-    if(!here.length) return;
-    h += `<section class="srcmod"><h3>${esc(m.name)}</h3>`;
-    SRC_TYPES.forEach(([t, name]) => {
-      const list = here.filter(s => s.type === t);
-      if(list.length) h += `<h4>${esc(name)}</h4>${list.map(srcCardHTML).join('')}`;
-    });
+    const here = SRC_LIST.filter(s => !srcSpans(s) && s.module === m.module);
+    const after = SRC_LIST.filter(s => srcSpans(s) && lastOf(s) === m.module);
+    if(!here.length && !after.length) return;
+    h += `<section class="srcmod" id="srcm-${m.module}">`;
+    if(here.length){
+      const sum = tally(here, MOD_KINDS);
+      h += `<details class="srcgrp"${SRC_OPEN.has('m' + m.module) ? ' open' : ''} data-srcgrp="m${m.module}"><summary><b>${esc(m.name)}</b><small>${esc(sum)}</small></summary>`;
+      MOD_KINDS.forEach(([t, name]) => { const list = here.filter(s => s.type === t); if(list.length) h += `<h4>${esc(name)}</h4>${list.map(srcCardHTML).join('')}`; });
+      h += `</details>`;
+    }
+    if(after.length){
+      const sum = tally(after, SPAN_KINDS);
+      h += `<details class="srcgrp srcafter"${SRC_OPEN.has('a' + m.module) ? ' open' : ''} data-srcgrp="a${m.module}"><summary><b>Homework, quizzes and reviews through Module ${esc(modShort(m.module))}</b><small>${esc(sum)}</small></summary>`;
+      SPAN_KINDS.forEach(([t, name]) => { const list = after.filter(s => s.type === t); if(list.length) h += `<h4>${esc(name)}</h4>${list.map(srcCardHTML).join('')}`; });
+      h += `</details>`;
+    }
     h += `</section>`;
   });
-  const lost = SRC_LIST.filter(s => !mods.some(m => m.module === s.module));
+  const lost = SRC_LIST.filter(s => srcSpans(s) ? !mods.some(m => m.module === lastOf(s)) : !mods.some(m => m.module === s.module));
   if(lost.length) h += `<section class="srcmod"><h3>Other</h3>${lost.map(srcCardHTML).join('')}</section>`;
   if(!SRC_LIST.length) h += `<div class="empty">No source documents are listed yet.</div>`;
   el.innerHTML = h;
   el.querySelectorAll('[data-srcgo]').forEach(b => b.onclick = () => startSheetSet(b.dataset.srcgo, b.dataset.var));
+  // which groups are open is kept for the session, so coming back to the tab keeps the place
+  el.querySelectorAll('details[data-srcgrp]').forEach(d => d.ontoggle = () => { d.open ? SRC_OPEN.add(d.dataset.srcgrp) : SRC_OPEN.delete(d.dataset.srcgrp); });
+  el.querySelectorAll('.srcjump a').forEach(a => a.onclick = e => { const t = document.querySelector(a.getAttribute('href')); if(!t) return; e.preventDefault();
+    t.querySelectorAll('details').forEach(d => { d.open = true; SRC_OPEN.add(d.dataset.srcgrp); }); t.scrollIntoView({block: 'start'}); });
   if(typeof inkMark === 'function') inkMark(el);   // Continue writing where ink is saved (the writing layer is defined with the boot code)
 }
 

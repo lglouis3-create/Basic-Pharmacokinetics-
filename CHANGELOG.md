@@ -5,6 +5,8 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
 - Guides and walkthroughs: corrections checked against the textbook and her transcripts.
 - Scratch paper: calculation questions in Quiz and Exam sim open a page to write on.
+- Worksheets: grouped by module; homework and quizzes follow the modules they cover.
+- Worksheets: each homework, quiz and review problem is tagged with its module, on the page and in the PDF.
 - Exam sim: a Go to list of every question; submitting from any question asks first and counts the blanks.
 - Exam sim: a picked option is marked in blue, not the green that means correct.
 - Quiz: Check on an empty calculation asks before showing the answer.

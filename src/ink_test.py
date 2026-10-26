@@ -42,7 +42,7 @@ def run(browser, width, height):
     page.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
     page.add_init_script("window.prompt = () => 'InkTest'; window.confirm = () => true; window.print = () => { window.__printed = (window.__printed || 0) + 1; };")
     page.goto(PAGE); page.wait_for_timeout(900)
-    page.evaluate("Object.keys(localStorage).filter(k => k.includes(':ink')).forEach(k => localStorage.removeItem(k)); show('sheets')")
+    page.evaluate("Object.keys(localStorage).filter(k => k.includes(':ink')).forEach(k => localStorage.removeItem(k)); show('sheets'); document.querySelectorAll('#v-sheets details').forEach(d => d.open = true)")
     page.wait_for_timeout(300)
     n = page.evaluate("document.querySelectorAll('#v-sheets [data-ink][data-var]').length")
     check(n > 0, f'every worksheet card has Write on it ({n} buttons)')
@@ -123,7 +123,7 @@ def run(browser, width, height):
     page.click('#ink [data-inkdone]')
     lab = page.inner_text(btn)
     check(not page.evaluate("!!document.getElementById('ink')") and 'Continue' in lab, f'Done closes it and the card says {lab.strip()!r}')
-    page.reload(); page.wait_for_timeout(900); page.evaluate("show('sheets')"); page.wait_for_timeout(300)
+    page.reload(); page.wait_for_timeout(900); page.evaluate("show('sheets'); document.querySelectorAll('#v-sheets details').forEach(d => d.open = true)"); page.wait_for_timeout(300)
     page.locator(btn).scroll_into_view_if_needed(); page.click(btn); page.wait_for_selector('#ink .inkpaper .wsdoc')
     back = page.evaluate(f"""(() => {{ const c = document.querySelector('{calc} > canvas.inkcv'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
         let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 0) n++;
