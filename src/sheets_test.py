@@ -315,7 +315,7 @@ def main():
                 pg.evaluate("document.querySelectorAll('#v-sheets details').forEach(d => d.open = true)")
                 over = pg.evaluate('document.documentElement.scrollWidth - window.innerWidth')
                 txt = pg.inner_text('#v-sheets')
-                cards = pg.eval_on_selector_all('.srccard', 'cs => cs.length')
+                cards = pg.eval_on_selector_all('.srccard', 'cs => new Set(cs.map(c => c.dataset.src)).size')   # a document covering several modules shows in each
                 check(not errs and over <= 0 and not re.search(r'\bundefined\b|\bNaN\b', txt) and cards == len(sources),
                       f'{w} px {scheme}: {cards} cards, no error, no sideways scroll, no undefined/NaN',
                       f'errors {errs[:2]}, overflow {over}px, cards {cards}/{len(sources)}')

@@ -5015,6 +5015,7 @@ const srcModSpan = s => { const ms = srcMods(s); return ms.length > 1 ? `Modules
 // homework, quizzes and reviews span modules: they are listed after the last module they cover, each problem tagged
 const SRC_SPANNING = ['homework', 'quiz', 'review'];
 const srcSpans = s => SRC_SPANNING.includes(s.type);
+const srcHome = s => srcMods(s).reduce((a, m) => SRC_MOD_ORDER.indexOf(m) > SRC_MOD_ORDER.indexOf(a) ? m : a, srcMods(s)[0] != null ? srcMods(s)[0] : s.module);
 const sheetPath = (s, variant, sol) =>
   `sheets/module-${modShort(s.module).toLowerCase()}/${s.id}-${variant === 'changed' ? 'changed-' : ''}${sol ? 'solutions' : 'worksheet'}.pdf`;
 
@@ -5220,11 +5221,16 @@ function startSheetSet(id, variant){
   show('quiz');
 }
 const pdfLink = (href, text) => `<a class="btn small ghost" href="${esc(href)}" target="_blank" rel="noopener">${text}</a>`;
-function srcCardHTML(s){
+// m: the module folder the card is shown in. A homework, quiz or review shows in every module it covers, with that
+// module's problems named; its home copy (the last module it covers) carries the id that links and focus use.
+function srcCardHTML(s, m){
   const plan = sheetPlan(s), date = srcDate(s.date);
   const span = srcSpans(s), ids = [...new Set(plan.main.concat(plan.changed).flatMap(g => g.ids))];
   const labels = [...new Set(ids.map(id => { const l = srcLabel(id), q = byId(id); return span && l && q && q.module != null ? `${l} (M${modShort(q.module)})` : l; }))];
-  let h = `<div class="srccard" id="src-${esc(s.id)}"><div class="srctop"><b>${esc(s.title)}</b><small>${[span ? 'Covers ' + srcModSpan(s) : '', date || 'No date'].filter(Boolean).map(esc).join(' · ')}</small></div>`;
+  const home = !span || m == null || m === srcHome(s);
+  const mine = span && m != null ? [...new Set(ids.filter(id => { const q = byId(id); return q && q.module === m; }).map(srcLabel).filter(Boolean))] : [];
+  let h = `<div class="srccard" data-src="${esc(s.id)}"${home ? ` id="src-${esc(s.id)}"` : ''}><div class="srctop"><b>${esc(s.title)}</b><small>${[span ? 'Covers ' + srcModSpan(s) : '', date || 'No date'].filter(Boolean).map(esc).join(' · ')}</small></div>`;
+  if(mine.length && srcMods(s).length > 1) h += `<p class="srcprobs srcmine"><span class="srcrlab">Module ${esc(modShort(m))} here</span> ${mine.map(esc).join(', ')}</p>`;
   h += `<div class="srcrow"><span class="srcrlab">Original</span><span class="srcbtns">`;
   if(s.drive) h += pdfLink(driveView(s.drive.id), 'Open original') + pdfLink(driveDown(s.drive.id), 'Download original');
   else h += `<span class="srcmiss">${esc(s.missing || 'No original on file.')}</span>`;
@@ -5245,41 +5251,27 @@ const SRC_OPEN = new Set();
 function renderSheets(){
   const el = $('#v-sheets');
   let h = `<h2>Worksheets</h2>
-    <p class="sub">Each module holds its in-class activities, lecture examples and daily practice. Homework, quizzes and reviews follow the last module they cover, with each problem tagged by its module. Every document has a worksheet to print or write on (her problems, with room to work) and the same worksheet with solutions, as PDFs.</p>
+    <p class="sub">Each module folder holds its in-class activities, lecture examples, daily practice, homework and quizzes. A homework, quiz or review that covers more than one module is in each of those folders, with this module's problems named and every problem tagged by its module. Every document has a worksheet to print or write on (her problems, with room to work) and the same worksheet with solutions, as PDFs.</p>
     <p class="srcnote">Write on it opens the worksheet here to write on with an Apple Pencil or a finger, with a large grid under each problem and More room when it runs out. The writing is kept in this browser on this device only; Save as PDF keeps a copy, or opens it in Goodnotes from the share sheet.</p>
     <p class="srcnote">Open original and Download original open the copy kept in the drill owner's Google Drive, so they work only for an account that folder is shared with. The originals are not copied onto this site, because the course materials may not be shared publicly; the worksheets below carry the same problems.</p>`;
-  const mods = COURSE.topicsMenu.filter(m => m.module != null), pos = m => SRC_MOD_ORDER.indexOf(m);
-  const MOD_KINDS = [['in-class', 'In-class activities'], ['example', 'Lecture examples'], ['daily-practice', 'Daily practice'], ['lecture-slides', 'Lecture slides']];
-  const SPAN_KINDS = [['homework', 'Homework'], ['quiz', 'Quizzes'], ['review', 'Review sets']];
+  const mods = COURSE.topicsMenu.filter(m => m.module != null);
+  const KINDS = [['in-class', 'In-class activities'], ['example', 'Lecture examples'], ['daily-practice', 'Daily practice'], ['lecture-slides', 'Lecture slides'],
+    ['homework', 'Homework'], ['quiz', 'Quizzes'], ['review', 'Review sets']];
   const ONE = {'in-class': ['in-class activity', 'in-class activities'], example: ['set of lecture examples', 'sets of lecture examples'],
     'daily-practice': ['daily practice sheet', 'daily practice sheets'], 'lecture-slides': ['slide set', 'slide sets'],
     homework: ['homework', 'homework sets'], quiz: ['quiz', 'quizzes'], review: ['review set', 'review sets']};
-  const tally = (list, kinds) => kinds.map(([t]) => [t, list.filter(s => s.type === t).length]).filter(([, n]) => n).map(([t, n]) => `${n} ${ONE[t][n === 1 ? 0 : 1]}`).join(' · ');
-  const lastOf = s => srcMods(s).reduce((a, m) => pos(m) > pos(a) ? m : a, srcMods(s)[0] != null ? srcMods(s)[0] : s.module);
-  const count = (n, one) => `${n} ${one}${n === 1 ? '' : 's'}`;
-  h += `<p class="srcjump">${mods.filter(m => SRC_LIST.some(s => s.module === m.module || (srcSpans(s) && lastOf(s) === m.module)))
-    .map(m => `<a class="chip" href="#srcm-${m.module}">Module ${esc(modShort(m.module))}</a>`).join('')}</p>`;
+  const tally = list => KINDS.map(([t]) => [t, list.filter(s => s.type === t).length]).filter(([, n]) => n).map(([t, n]) => `${n} ${ONE[t][n === 1 ? 0 : 1]}`).join(' · ');
+  const inMod = m => SRC_LIST.filter(s => srcSpans(s) ? srcMods(s).includes(m) : s.module === m);
+  h += `<p class="srcjump">${mods.filter(m => inMod(m.module).length).map(m => `<a class="chip" href="#srcm-${m.module}">Module ${esc(modShort(m.module))}</a>`).join('')}</p>`;
   mods.forEach(m => {
-    const here = SRC_LIST.filter(s => !srcSpans(s) && s.module === m.module);
-    const after = SRC_LIST.filter(s => srcSpans(s) && lastOf(s) === m.module);
-    if(!here.length && !after.length) return;
-    h += `<section class="srcmod" id="srcm-${m.module}">`;
-    if(here.length){
-      const sum = tally(here, MOD_KINDS);
-      h += `<details class="srcgrp"${SRC_OPEN.has('m' + m.module) ? ' open' : ''} data-srcgrp="m${m.module}"><summary><b>${esc(m.name)}</b><small>${esc(sum)}</small></summary>`;
-      MOD_KINDS.forEach(([t, name]) => { const list = here.filter(s => s.type === t); if(list.length) h += `<h4>${esc(name)}</h4>${list.map(srcCardHTML).join('')}`; });
-      h += `</details>`;
-    }
-    if(after.length){
-      const sum = tally(after, SPAN_KINDS);
-      h += `<details class="srcgrp srcafter"${SRC_OPEN.has('a' + m.module) ? ' open' : ''} data-srcgrp="a${m.module}"><summary><b>Homework, quizzes and reviews through Module ${esc(modShort(m.module))}</b><small>${esc(sum)}</small></summary>`;
-      SPAN_KINDS.forEach(([t, name]) => { const list = after.filter(s => s.type === t); if(list.length) h += `<h4>${esc(name)}</h4>${list.map(srcCardHTML).join('')}`; });
-      h += `</details>`;
-    }
-    h += `</section>`;
+    const here = inMod(m.module);
+    if(!here.length) return;
+    h += `<section class="srcmod" id="srcm-${m.module}"><details class="srcgrp"${SRC_OPEN.has('m' + m.module) ? ' open' : ''} data-srcgrp="m${m.module}"><summary><b>${esc(m.name)}</b><small>${esc(tally(here))}</small></summary>`;
+    KINDS.forEach(([t, name]) => { const list = here.filter(s => s.type === t); if(list.length) h += `<h4>${esc(name)}</h4>${list.map(s => srcCardHTML(s, m.module)).join('')}`; });
+    h += `</details></section>`;
   });
-  const lost = SRC_LIST.filter(s => srcSpans(s) ? !mods.some(m => m.module === lastOf(s)) : !mods.some(m => m.module === s.module));
-  if(lost.length) h += `<section class="srcmod"><h3>Other</h3>${lost.map(srcCardHTML).join('')}</section>`;
+  const lost = SRC_LIST.filter(s => !mods.some(m => inMod(m.module).includes(s)));
+  if(lost.length) h += `<section class="srcmod"><h3>Other</h3>${lost.map(s => srcCardHTML(s)).join('')}</section>`;
   if(!SRC_LIST.length) h += `<div class="empty">No source documents are listed yet.</div>`;
   el.innerHTML = h;
   el.querySelectorAll('[data-srcgo]').forEach(b => b.onclick = () => startSheetSet(b.dataset.srcgo, b.dataset.var));
@@ -5721,12 +5713,14 @@ function inkTools(){
 function inkClose(){
   if(!INK) return;
   inkSave(); if(INK.ro) INK.ro.disconnect(); if(INK.clock) clearInterval(INK.clock);
-  const y = INK.scrollY, id = INK.id; INK = null;
+  const y = INK.scrollY, id = INK.id, opener = INK.opener; INK = null;
   const ov = document.getElementById('ink'); if(ov) ov.remove();
   document.body.classList.remove('inking');
   const tab = document.getElementById('v-sheets'); if(tab) inkMark(tab);
-  scrollTo(0, y); const card = document.getElementById('src-' + id); if(card){ const b = card.querySelector('[data-ink]'); if(b) b.focus({preventScroll: true}); }
-  else { const b = [...document.querySelectorAll('.inkscratch')].find(x => x.dataset.ink === id && x.offsetParent); if(b) b.focus({preventScroll: true}); }
+  scrollTo(0, y);
+  // back to the button that opened it (the worksheet tab redraws its cards, so find the same one again if it was replaced)
+  const b = opener && opener.isConnected ? opener : [...document.querySelectorAll(`[data-ink="${CSS.escape(id)}"]`)].find(x => x.offsetParent);
+  if(b) b.focus({preventScroll: true});
 }
 // Save as PDF: the canvases are swapped for pictures of themselves, so the ink prints with the worksheet
 // (the pictures show only in print, so they can stay until the next Save as PDF or until the worksheet closes)
@@ -5741,7 +5735,7 @@ function inkPrint(){
 }
 document.addEventListener('click', e => {
   const o = e.target.closest('[data-ink][data-var]');
-  if(o && !o.closest('#ink')){ inkOpen(o.dataset.ink, o.dataset.var); return; }
+  if(o && !o.closest('#ink')){ inkOpen(o.dataset.ink, o.dataset.var); if(INK) INK.opener = o; return; }
   if(!e.target.closest('#ink') || !INK) return;
   const b = e.target.closest('button'); if(!b) return;
   if(b.matches('[data-inkdone]')) return inkClose();
