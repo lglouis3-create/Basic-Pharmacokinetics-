@@ -172,7 +172,7 @@
    "fig": null
   },
   {
-   "text": "Question two: ciprofloxacin has an oral immediate release F of seventy percent, and the oral dose with the same extent as a four hundred milligram I V bolus is asked. Four hundred milligrams over zero point seven zero is five hundred seventy one point four three milligrams, not a real tablet, since the strengths she looked up were two hundred fifty and five hundred. She wrote five hundred seventy five, six hundred or five hundred seventy beside it, and when a stem asks for the nearest five, five hundred seventy is the answer, as in her review. The stem decides the rounding, and a strength that exists is used only when it gives none.",
+   "text": "Question two: ciprofloxacin has an oral immediate release F of seventy percent, and the oral dose with the same extent as a four hundred milligram I V bolus is asked. Four hundred milligrams over zero point seven zero is five hundred seventy one point four three milligrams, not a real tablet, since the strengths she looked up were two hundred fifty and five hundred. She wrote five hundred seventy five, six hundred or five hundred seventy beside it, and when a stem asks for the nearest five, five hundred seventy is the answer, as in her review. The rounding instruction in the stem comes first, and a tablet strength that exists is used only when the stem gives no rounding instruction.",
    "slide": "ba:6",
    "card": [
     {
@@ -199,7 +199,7 @@
    "fig": null
   },
   {
-   "text": "Her poll is the model item: a five hundred milligram tablet with an area of one hundred fifteen milligram hours per liter, against a four hundred milligram I V bolus with one hundred thirty two. With the I V area underneath and the I V dose on top, F is zero point six nine seven, seventy percent. Inverting the dose ratio gives one point zero eight nine, and the area ratio alone zero point eight seven one; both are wrong. When a stem has two different doses, F uses the oral dose that made the oral area, and the equivalent dose divides the I V dose being replaced.",
+   "text": "Her poll is the model item: a five hundred milligram tablet with an area of one hundred fifteen milligram hours per liter, against a four hundred milligram I V bolus with one hundred thirty two. With the I V area underneath and the I V dose on top, F is zero point six nine seven, seventy percent. Inverting the dose ratio gives one point zero eight nine, and the area ratio alone zero point eight seven one; both are wrong. When a stem has two different doses, as in her Exam two review, F uses the oral dose that made the oral area, five hundred milligrams, and the equivalent oral dose is the replaced I V dose, nine hundred milligrams, divided by F: twelve hundred milligrams.",
    "slide": "ba:6",
    "card": [
     {

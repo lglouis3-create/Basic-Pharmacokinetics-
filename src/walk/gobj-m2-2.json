@@ -57,7 +57,7 @@
    "fig": null
   },
   {
-   "text": "The relation is V D equals D B over C p. Turned around, C zero equals D zero over V D: V D is on the bottom, so at the same dose a larger V D gives a lower starting concentration. Her lecture example puts one hundred milligrams into volumes of one, ten and one hundred liters, which give one hundred, ten and one milligram per liter. The amount is the same, but these would be three different drugs, and the larger the V D, the lower the plasma concentration. The amount in the body is known only at time zero, when it is the dose, so V D is found as D zero over C zero, never as the dose over a later concentration.",
+   "text": "The relation is V D equals D B, the amount in the body, over C p. Turned around, C zero, the concentration at time zero, equals the dose, D zero, over V D: V D is on the bottom, so at the same dose a larger V D gives a lower starting concentration. Her lecture example puts one hundred milligrams into volumes of one, ten and one hundred liters, which give one hundred, ten and one milligram per liter. The amount is the same, but these would be three different drugs. The amount in the body is known only at time zero, when it is the dose, so V D is found as D zero over C zero, never as the dose over a later concentration.",
    "slide": "ivb:5",
    "card": [
     {
@@ -84,7 +84,7 @@
    "fig": null
   },
   {
-   "text": "What sets clearance is the ability of the eliminating organs to remove the drug, and what sets V D is how the drug distributes; the elimination rate constant k follows from these two. Clearance is a fixed volume of plasma cleared per hour. A larger or smaller V D does not change that volume per hour, but it changes the fraction of the drug that the volume holds. Only drug that is not bound to plasma proteins can be cleared; bound drug is part of the measured concentration but is not removed. The amount removed per hour, an amount per time, is clearance times the concentration, so it falls as the level falls, while clearance stays the same.",
+   "text": "What sets clearance is the ability of the eliminating organs to remove the drug, and what sets V D is how the drug distributes; the elimination rate constant k follows from these two. Clearance is a fixed volume of plasma cleared per hour. A larger V D leaves the liters cleared each hour unchanged, but those liters then hold a smaller fraction of the drug in the body, so a smaller fraction is removed each hour. Only drug that is not bound to plasma proteins can be cleared; bound drug is part of the measured concentration but is not removed. The amount removed per hour, an amount per time, is clearance times the concentration, so it falls as the level falls, while clearance stays the same.",
    "slide": "ivb:9",
    "card": [
     {
@@ -146,7 +146,7 @@
    "fig": null
   },
   {
-   "text": "The second form is Cl T equals D zero over A U C, the area under the plasma concentration time curve from zero to infinity. The dose is on the top and A U C on the bottom, and clearance does not change with the dose, so doubling the dose doubles the A U C. That is her second reason to value clearance, after its constancy: it links the dose directly to the area under the curve, which measures the extent of drug available to the body. Milligrams over milligram hours per liter leaves liters per hour. On the equation sheet the form has F, the fraction absorbed, on the top, and F is one for an I V dose.",
+   "text": "A second equation for clearance is Cl T equals D zero, the dose, over A U C, the area under the plasma concentration time curve from zero to infinity. The dose is on the top and A U C on the bottom, and clearance does not change with the dose, so doubling the dose doubles the A U C. That is her second reason to value clearance, after its constancy: it links the dose directly to the area under the curve, which measures the extent of drug available to the body. Milligrams over milligram hours per liter leaves liters per hour. On the equation sheet the form has F, the fraction absorbed, on the top, and F is one for an I V dose.",
    "slide": "ivb:8",
    "card": [
     {
@@ -169,7 +169,7 @@
    "fig": null
   },
   {
-   "text": "Her questions test this constancy. When the I V bolus dose increases, only the plasma concentration increases; clearance, half-life and V D stay the same. If the dose is doubled, the half-life and the clearance do not change and the initial concentration doubles. The statement that clearance increases as concentration increases is false: the amount removed per hour rises with the concentration, but clearance does not. In a poll, the parameter that describes elimination as a volume of fluid cleared of drug per unit time is clearance, not biotransformation, elimination rate or excretion.",
+   "text": "Her questions test which parameters stay the same when the dose or the concentration changes. When the I V bolus dose increases, only the plasma concentration increases; clearance, half-life and V D stay the same. If the dose is doubled, the half-life and the clearance do not change and the initial concentration doubles. The statement that clearance increases as concentration increases is false: the amount removed per hour rises with the concentration, but clearance does not. In a poll, the parameter that describes elimination as a volume of fluid cleared of drug per unit time is clearance, not biotransformation, elimination rate or excretion.",
    "slide": "inf:1",
    "card": [
     {

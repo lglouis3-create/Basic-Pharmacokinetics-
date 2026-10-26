@@ -69,7 +69,7 @@
    }
   },
   {
-   "text": "The loading dose follows the volume and the target. A larger V D needs a larger dose to bring the larger volume to the same target, and a higher target needs a proportionally larger dose. Clearance is not in it, so when renal failure lowers the clearance, the rate must fall but the loading dose stays the same: in her Practice four it is one thousand milligrams both times. The loading dose does not move the plateau either, because the plateau is R over clearance: in question five of her in-class set, a seven hundred fifty milligram loading dose with seventy five milligrams per hour still gives thirty six point one milligrams per liter.",
+   "text": "The size of the loading dose is set by V D and the target concentration. A larger V D needs a larger dose to bring the larger volume to the same target, and a higher target needs a proportionally larger dose. Clearance is not in it, so when renal failure lowers the clearance, the rate must fall but the loading dose stays the same: in her Practice four it is one thousand milligrams both times. The loading dose does not move the plateau either, because the plateau is R over clearance: in question five of her in-class set, a seven hundred fifty milligram loading dose with seventy five milligrams per hour gives the same plateau as no loading dose, thirty six point one milligrams per liter.",
    "slide": "inf:15",
    "card": [
     {
@@ -197,7 +197,7 @@
    "fig": null
   },
   {
-   "text": "How she tests it: she asks for the loading dose and the infusion rate together and accepts either route, joined with or. A loading dose is a dose, so the answer is in milligrams; she said, it's a dose, so we're looking for milligrams. In her review a C s s of twenty four milligrams per liter and a V D of about twenty two liters give five hundred twenty eight milligrams. In her in-class set the stem's five hundred milligram loading dose is deliberately not the right one; the right one is thirty six point one times twelve, four hundred thirty three milligrams. The trap is R over k with a rate that was never matched to the target.",
+   "text": "How she tests it: she asks for the loading dose and the infusion rate together and accepts either route, joined with or. A loading dose is a dose, so the answer is in milligrams; she said, it's a dose, so we're looking for milligrams. In her review a C s s of twenty four milligrams per liter and a V D of about twenty two liters give five hundred twenty eight milligrams. In her in-class set the stem's five hundred milligram loading dose is deliberately not the right one; the right one is thirty six point one milligrams per liter times twelve liters, four hundred thirty three milligrams. The trap is R over k with a rate that was never matched to the target.",
    "slide": null,
    "card": [
     {

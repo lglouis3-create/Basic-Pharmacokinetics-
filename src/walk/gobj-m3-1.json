@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "She said, the only thing that's changing here is the input. At the start no drug is in the body, so C p, the plasma concentration, is zero and almost nothing leaves. The amount leaving each hour is k times the amount in the body, so it grows as drug builds up. While R is larger than the amount leaving each hour, drug accumulates and C p rises. The rise slows as the amount leaving each hour approaches R, and when the two are equal the level stops changing: this plateau is steady state, and its level is C s s, the steady state concentration.",
+   "text": "Comparing an infusion with an I V bolus, she said, the only thing that's changing here is the input. At the start no drug is in the body, so C p, the plasma concentration, is zero and almost nothing leaves. The amount leaving each hour is k times the amount in the body, so it grows as drug builds up. While R is larger than the amount leaving each hour, drug accumulates and C p rises. The rise slows as the amount leaving each hour approaches R, and when the two are equal the level stops changing: this plateau is steady state, and its level is C s s, the steady state concentration.",
    "slide": "inf:3",
    "card": [
     {
@@ -169,7 +169,7 @@
    "fig": null
   },
   {
-   "text": "Three rates in this module have three different units, and mixing them up is the common error. R is how much drug goes in each hour, in milligrams per hour; k is what fraction of the drug present leaves each hour, in per hour; and the clearance is how many liters of plasma are emptied of drug each hour, in liters per hour. A zero order input does not make a zero order drug: in her review poll the infusion was the zero order input, and elimination was first order after a bolus, an oral dose and an infusion alike. The words constant rate or continuous infusion signal this pattern.",
+   "text": "Three rates in this module have three different units, and mixing them up is the common error. R is how much drug goes in each hour, in milligrams per hour; k is what fraction of the drug present leaves each hour, in per hour; and the clearance is how many liters of plasma are emptied of drug each hour, in liters per hour. A zero order input does not make elimination zero order: in her review poll the infusion was the zero order input, and elimination was first order after a bolus, an oral dose and an infusion alike. The words constant rate or continuous infusion signal zero order input with first order elimination.",
    "slide": null,
    "card": [
     {

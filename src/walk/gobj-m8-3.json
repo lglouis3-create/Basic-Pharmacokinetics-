@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "Why does the order of elimination, first or zero, change with the level? The rate is the amount removed per unit of time; depends on concentration means this amount changes with the level, even if the fraction removed does not. Well below K M, the rate is a small part of V max, so the enzymes have spare capacity, and twice the level gives about twice the rate: first order. Well above K M, the enzymes are saturated: more drug raises the rate only a little, so it stays near V max: zero order. Low and high always mean relative to K M, a concentration, never relative to V max, which is a rate. The half life is nearly constant well below K M and lengthens as the level rises.",
+   "text": "Why does the order of elimination change with the level? The elimination rate is the amount removed per unit of time; it depends on concentration when this amount changes with the level, even if the fraction removed does not. Well below K M, the rate is a small part of V max, so the enzymes have spare capacity, and twice the level gives about twice the rate: first order. Well above K M, the enzymes are saturated: more drug raises the rate only a little, so it stays near V max: zero order. Low and high always mean relative to K M, a concentration, never to V max, a rate. The half life is nearly constant well below K M and lengthens as the level rises.",
    "slide": "nonlin:8",
    "card": [
     {
@@ -137,7 +137,7 @@
   },
   {
    "slide": "nonlin:11",
-   "text": "At steady state the drug going in each day equals the drug eliminated each day, so the daily dose rate R equals the elimination rate, and the level is C s s, the steady state concentration. This gives the dose rate equation: R equals V max times C s s, over K M plus C s s. Well below K M, C s s rises nearly in proportion to R. As R nears V max, the elimination rate is close to V max, so C s s has to climb steeply, and a small change in dose gives a large change in concentration. For a drug like this, steady state takes two to three weeks, not three to five half lives.",
+   "text": "At steady state the drug going in each day equals the drug eliminated each day, so the daily dose rate R equals the elimination rate, and the level is C s s, the steady state concentration. This gives the dose rate equation: R equals V max times C s s, over K M plus C s s. Well below K M, C s s rises nearly in proportion to R. As R nears V max, the enzymes are close to saturated and the elimination rate rises only a little as the level rises, so a small rise in dose needs a large rise in C s s. For a drug like this, steady state takes two to three weeks, not three to five half lives.",
    "fig": {
     "key": "nl_css_steps",
     "at": [
@@ -172,7 +172,7 @@
   },
   {
    "slide": "nonlin:14",
-   "text": "Her slide example shows this in a seventy two kilogram patient. A pair is one dose rate and the steady state level it produced. On six milligrams per kilogram per day the level was ten milligrams per liter. A linear drug keeps the level in proportion to the dose, so eight would have given about thirteen. Instead, eight milligrams per kilogram per day gave twenty: one third more dose doubled the level, because elimination was saturating.",
+   "text": "Her slide example, a seventy two kilogram patient, shows what saturation does to the steady state level. A pair is one daily dose rate and the steady state level it produced. On six milligrams per kilogram per day, the steady state level was ten milligrams per liter. Raising the dose rate to eight milligrams per kilogram per day is one third more, so for a linear drug the level would also rise by one third, to about thirteen milligrams per liter. Instead it rose to twenty milligrams per liter, double, because the enzymes were close to saturated: to remove eight instead of six milligrams per kilogram each day, the level had to climb much higher.",
    "fig": {
     "key": "nl_css_steps",
     "at": [
@@ -211,7 +211,7 @@
   },
   {
    "slide": "nonlin:13",
-   "text": "One pair is not enough, because the dose rate equation has two unknowns, V max and K M. Two pairs from the same patient share one V max and one K M. Solving each pair's equation for V max and setting the two equal removes V max and leaves K M, which is why K M comes first. This is the direct method. K M equals the difference R two minus R one, divided by the difference between R one over C one and R two over C two.",
+   "text": "One pair cannot give V max and K M, because the dose rate equation has two unknowns, V max and K M. Two pairs from the same patient share one V max and one K M. Solving each pair's equation for V max and setting the two equal removes V max and leaves K M, which is why K M comes first. This is the direct method. With R one and C one the first pair's dose rate and steady state level, and R two and C two the second pair's, K M equals the difference R two minus R one, divided by the difference between R one over C one and R two over C two.",
    "fig": {
     "key": "nl_css_steps",
     "at": [
@@ -238,7 +238,7 @@
   },
   {
    "slide": "nonlin:13",
-   "text": "Pair one is the lower dose rate. Each ratio on the bottom, a dose rate divided by its own level, is the patient's clearance per kilogram at that level, V max over K M plus C s s, from objective two. Clearance falls as the level rises, so the lower dose has the larger ratio. The top takes the higher dose rate minus the lower, and the bottom takes the lower dose's ratio minus the higher dose's, so both differences are positive and so is K M. The units leave a concentration. For her pairs the ratios are zero point six and zero point four, and K M is ten milligrams per liter.",
+   "text": "In the K M equation, pair one is the lower dose rate. Each ratio on the bottom, a dose rate over its own level, is the patient's clearance per kilogram at that level. Clearance falls as the level rises, so the lower dose has the larger ratio. The top takes the higher dose rate minus the lower, and the bottom the lower dose's ratio minus the higher dose's, so both differences are positive and so is K M. Dose rate units on the top, divided by dose rate units per milligram per liter on the bottom, leave milligrams per liter. Her ratios are six over ten, zero point six, and eight over twenty, zero point four, so K M is two over zero point two, ten milligrams per liter.",
    "card": [
     {
      "at": 1,
@@ -286,7 +286,7 @@
   },
   {
    "slide": "nonlin:15",
-   "text": "Reading the results back shows why a dose change matters so much. At ten milligrams per liter the level equals K M, so the elimination rate is half of V max: six, the dose rate she gave. At twenty, the rate is eight, two thirds of V max. So the closer the daily dose comes to V max, the larger the rise in level for each added milligram, and objective four uses K M and V max, not a simple proportion, to choose a new dose.",
+   "text": "Putting K M, ten milligrams per liter, and V max, twelve milligrams per kilogram per day, back into the dose rate equation shows why a dose change matters so much. At a steady state level of ten milligrams per liter, the level equals K M, so the elimination rate is half of V max, six milligrams per kilogram per day, the first dose rate she gave. At twenty milligrams per liter, the elimination rate is eight milligrams per kilogram per day, two thirds of V max. So the closer the daily dose comes to V max, the larger the rise in level for each added milligram per kilogram per day, and objective four uses K M and V max, not a simple proportion, to choose a new dose.",
    "fig": {
     "key": "nl_rate_steps",
     "at": [
@@ -313,7 +313,7 @@
   },
   {
    "slide": "nonlin:15",
-   "text": "The usual errors come from the same lines. K M is a concentration, so a rate unit on K M is wrong. A level called low relative to V max is wrong in any option, because V max is a rate, read on the rate axis, and a level is compared only with K M, on the concentration axis. Subtracting the ratios in the wrong order makes K M negative. In the V max line, one pair's dose rate goes with that same pair's level, never with the other pair's level. The seventy two kilograms are used only when a dose for this patient is asked, in objective four.",
+   "text": "The usual errors in this objective come from the K M line and the V max line. K M is a concentration, so a rate unit on K M is wrong. A level called low relative to V max is wrong in any option, because V max is a rate, read on the rate axis, and a level is compared only with K M, on the concentration axis. Subtracting the ratios in the wrong order makes K M negative. In the V max line, one pair's dose rate goes with that same pair's level, never with the other pair's level. The seventy two kilograms are used only when a dose for this patient is asked, in objective four.",
    "card": [
     {
      "at": 1,

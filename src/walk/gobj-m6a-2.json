@@ -22,7 +22,7 @@
    "fig": null
   },
   {
-   "text": "The average level follows the dosing rate, the dose divided by the interval. Over one interval the body clears a volume equal to the clearance times tau, and the absorbed dose spread through that volume is the average. In symbols, C average at steady state equals F D zero over Cl T tau, with F the fraction of the dose that reaches the circulation. D zero is on top, so a larger dose at the same interval raises the average in proportion. Tau is underneath, so a longer interval at the same dose lowers it, because each dose has to cover more hours.",
+   "text": "The average steady state level is proportional to the dosing rate, the dose divided by the interval. Over one interval the body clears a volume equal to the clearance times tau, and the absorbed dose spread through that volume is the average. In symbols, C average at steady state equals F D zero over Cl T tau, with F the fraction of the dose that reaches the circulation. D zero is on top, so a larger dose at the same interval raises the average in proportion. Tau is underneath, so a longer interval at the same dose lowers it, because each dose has to cover more hours.",
    "slide": "mo:13",
    "card": [
     {
@@ -49,7 +49,7 @@
    "fig": null
   },
   {
-   "text": "The interval also sets how far the level falls between doses. For repeated I V bolus doses the trough is the peak times e to the minus k tau, the fraction of a dose left one interval later. A longer interval lets more of each dose be eliminated, so the trough is a smaller fraction of the peak: the larger fluctuation she lists for a longer interval. With equal bolus doses the peak minus trough gap in milligrams per liter is one dose's C zero at any interval: forty in her repeated I V bolus Example one every eight hours and every four, while the trough is a quarter of the peak every eight hours and half of it every four.",
+   "text": "The dosing interval also sets how far the level falls between doses. For repeated I V bolus doses the trough is the peak times e to the minus k tau, the fraction of a dose left one interval later. A longer interval lets more of each dose be eliminated, so the trough is a smaller fraction of the peak: the larger fluctuation she lists for a longer interval. With equal bolus doses the gap between peak and trough is one dose's C zero at any interval: forty milligrams per liter in her Module six repeated I V bolus Example one, both every eight hours and every four, while the trough is a quarter of the peak every eight hours and half of it every four.",
    "slide": "rep:12",
    "card": [
     {
@@ -95,7 +95,7 @@
    "fig": null
   },
   {
-   "text": "A larger dose at the same interval raises every level in proportion: the peak, the trough and the average. So the gap between peak and trough in milligrams per liter grows with the dose, and that is the larger fluctuation she lists for a larger dose. Doubling that bolus dose doubles the gap from forty to eighty milligrams per liter, while the trough stays a quarter of the peak. She said, if we increase the dose, we expect increased concentration and increased fluctuation between peaks and troughs. Compliance usually does not change, and neither does t max.",
+   "text": "A larger dose at the same interval raises every level in proportion: the peak, the trough and the average. So the gap between peak and trough in milligrams per liter grows with the dose, and that is the larger fluctuation she lists for a larger dose. In her repeated I V bolus Example one every eight hours, doubling the dose doubles the gap from forty to eighty milligrams per liter, while the trough stays a quarter of the peak. She said, if we increase the dose, we expect increased concentration and increased fluctuation between peaks and troughs. Compliance usually does not change, and neither does t max.",
    "slide": "mo:13",
    "card": [
     {

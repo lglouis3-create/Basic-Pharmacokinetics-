@@ -127,7 +127,7 @@
    }
   },
   {
-   "text": "Her first practice problem gives two hundred milligrams by I V bolus to an eighty kilogram man, fifteen milligrams per liter at six hours, and a V D of ten percent of body weight. It asks the amount in the body at twelve hours and the half-life. The dose is an amount and the six hour value is a concentration, so one must be converted before k can be found. V D converts the concentration: V D is eight liters, and the amount in the body at six hours is one hundred twenty milligrams.",
+   "text": "Her first practice problem gives two hundred milligrams by I V bolus to an eighty kilogram man, fifteen milligrams per liter at six hours, and a V D of ten percent of body weight. It asks the amount in the body at twelve hours and the half-life. The dose is an amount and the six hour value is a concentration, so one must be converted before k can be found. V D converts the concentration: ten percent of eighty kilograms, taking one liter as one kilogram, is eight liters, and eight liters times fifteen milligrams per liter is one hundred twenty milligrams in the body at six hours.",
    "slide": "ivb:7",
    "card": [
     {
@@ -216,7 +216,7 @@
    "fig": null
   },
   {
-   "text": "Her questions run as one patient and a series of small parts, and on the exam an earlier part cannot be revisited. Weight in pounds with a milligram per kilogram dose tests the two point two conversion, and every later part depends on it. Fifteen minutes is zero point two five hours. Ninety nine point nine percent eliminated means ten half-lives, because each half-life halves what is left. Keep k to three or four decimal places until the end, write a zero before a leading decimal point, and give units. The usual error is dividing the dose by a concentration to get k; convert one of them first.",
+   "text": "Her questions run as one patient and a series of small parts, and on the exam an earlier part cannot be revisited. Weight in pounds with a milligram per kilogram dose tests the conversion of two point two pounds per kilogram, and every later part depends on it. Fifteen minutes is zero point two five hours. Ninety nine point nine percent eliminated means ten half-lives, because each half-life halves what is left. Keep k to three or four decimal places until the end, write a zero before a leading decimal point, and give units. The usual error is dividing the dose by a concentration to get k; convert one of them first.",
    "slide": "ivb:10",
    "card": [
     {

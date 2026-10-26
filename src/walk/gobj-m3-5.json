@@ -96,7 +96,7 @@
    }
   },
   {
-   "text": "The sum says the same: C p equals D L over V D times e to the minus k t, plus C s s times one minus e to the minus k t, where k is the fraction eliminated per hour. Rearranged, C p equals C s s plus the difference between the starting level, D L over V D, and C s s, times e to the minus k t. If the starting level equals C s s, the difference is zero and C p is C s s at every time. If it is larger, the difference is positive and shrinks by first order, so the level falls to the plateau; if it is smaller, the difference is negative and the level rises to it.",
+   "text": "C p is the bolus part plus the infusion part: D L over V D times e to the minus k t, plus C s s times one minus e to the minus k t, with k the fraction eliminated per hour. Rearranged, C p equals C s s plus the difference between the starting level, D L over V D, and C s s, times e to the minus k t. If the starting level equals C s s, the difference is zero and C p is C s s at every time. If it is larger, the difference is positive and shrinks by first order, so the level falls to the plateau; if it is smaller, the difference is negative and the level rises to it.",
    "slide": "inf:16",
    "card": [
     {
@@ -158,7 +158,7 @@
    "fig": null
   },
   {
-   "text": "Their sum is twenty four milligrams per liter at two hours, the same as the plateau. Four hours is one half-life, so the bolus part is half of twenty four and the infusion part half of the plateau, and the sum is again twenty four. It stays flat because the dose matches the amount held at steady state: R over k is two hundred eighty eight point six milligrams. She said, We want the loading dose to look like the amount of drug that's in the body at steady state. In class she reworked this example with three hundred eighty eight milligrams and got about thirty milligrams per liter at two hours against a plateau of twenty four: the level started above the plateau and was falling to it.",
+   "text": "In Example eight, bolus part plus infusion part is twenty four milligrams per liter at two hours, the same as the plateau. Four hours is one half-life, so the bolus part is half of twenty four and the infusion part half of the plateau, and the sum is again twenty four. It stays flat because the dose matches the amount held at steady state: R over k is two hundred eighty eight point six milligrams. She said, We want the loading dose to look like the amount of drug that's in the body at steady state. In class she reworked it with three hundred eighty eight milligrams: the level started above the plateau of twenty four and was about thirty milligrams per liter at two hours, still falling toward it.",
    "slide": "inf:18",
    "card": [
     {

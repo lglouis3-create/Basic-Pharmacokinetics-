@@ -53,7 +53,7 @@
    "fig": null
   },
   {
-   "text": "Plotted against the log of the dose, the same data form a sigmoid, an S shaped curve, flat at the bottom, steep in the middle and flat at the top. The top of the S is the maximum, where the receptors are saturated. The middle of the S is close to a straight line, so there the effect is a straight line function of the log concentration: E equals m log C plus e, with m the slope and e a constant. A larger m means a larger change in effect for each tenfold change in concentration.",
+   "text": "Plotted against the log of the dose, the dose response data form a sigmoid, an S shaped curve, flat at the bottom, steep in the middle and flat at the top. The top of the S is the maximum, where the receptors are saturated. The middle of the S is close to a straight line, so there the effect, E, is a straight line function of the log of the concentration, C: E equals m log C plus e, with m the slope and e a constant. A larger m means a larger change in effect for each tenfold change in concentration.",
    "slide": "pd:5",
    "card": [
     {
@@ -76,7 +76,7 @@
    "fig": null
   },
   {
-   "text": "After an I V bolus the concentration falls by the same fraction each hour, so its log falls in a straight line with time. In the straight range the effect is m times the log concentration plus a constant, so the effect also falls in a straight line, by the same amount each hour. The relation is E equals E zero minus k m t over two point three, where E zero is the effect at time zero, k the elimination rate constant per hour, and m the slope. k and m are both on the top, so faster elimination or a steeper slope makes the effect fall faster. The two point three is there because the effect line uses base ten logs.",
+   "text": "After an I V bolus the concentration falls by the same fraction each hour, so its log falls in a straight line. In the straight middle of the S curve, the effect is m log C plus a constant, so it also falls in a straight line, the same amount each hour. The relation is E equals E zero minus k m t over two point three, where E is the effect at t hours, E zero the effect at time zero, k the elimination rate constant per hour, and m the slope. k and m are both on the top, so faster elimination or a steeper slope makes the effect fall by more each hour. The two point three is there because the effect line uses base ten logs.",
    "slide": "pd:5",
    "card": [
     {
@@ -134,7 +134,7 @@
    "fig": null
   },
   {
-   "text": "In her items, the response is not proportional to the dose at every dose; it rises to a maximum, and a given dose change gains least near that maximum. It stops rising because all receptors are saturated, not because the concentration stops rising or elimination speeds up. Against log dose the curve is an S, and steep then flat is the ordinary dose axis. In the effect line m is a slope, not a mass or a concentration, and the effect falls in a straight line, not by a fixed fraction each hour. Absolute bioavailability is a P K comparison, not a use of exposure response information. Onset, intensity and duration depend on the dose and the pharmacokinetics, and objective two works this out for duration.",
+   "text": "In the concept items, the response is not proportional to the dose; it rises to a maximum, and the same added dose gives the smallest gain near that maximum. The response stops rising because all receptors are saturated, not because the concentration stops rising or elimination speeds up. Against log dose the curve is an S; rising steeply and then flattening is the shape against dose on an ordinary axis. In the effect line, m is a slope, not a mass or a concentration, and the effect falls in a straight line, not by a fixed fraction each hour. Absolute bioavailability is a P K comparison, not a use of exposure response information. Onset, intensity and duration depend on the dose and the pharmacokinetics; objective two works out duration.",
    "slide": "pd:11",
    "card": [
     {

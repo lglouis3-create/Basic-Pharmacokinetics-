@@ -111,7 +111,7 @@
    "fig": null
   },
   {
-   "text": "Her slide Example two uses the drug from Example one, with a half-life of six hours and a V D of thirty liters, and asks what rate gives a C s s of twenty milligrams per liter. R equals C s s times clearance answers it, and the stem gives no clearance, so k comes first. Twenty milligrams per liter times three point four six five liters per hour is sixty nine point three milligrams per hour. As a check, sixty nine point three over the clearance gives back twenty milligrams per liter. Fifty milligrams per hour gave fourteen point four three, and the rate and the level both rise by the same factor, one point three eight six, because they are in proportion.",
+   "text": "Her slide Example two asks the rate that gives a C s s of twenty milligrams per liter for the Example one drug: half-life six hours, V D thirty liters. R equals C s s times clearance, and the stem gives no clearance, so it is built as k times thirty liters. Twenty milligrams per liter times that clearance, three point four six five liters per hour, is sixty nine point three milligrams per hour. As a check, sixty nine point three over the clearance gives back twenty milligrams per liter. In Example one, fifty milligrams per hour gave fourteen point four three milligrams per liter; rate and level are in proportion, so between the two examples both rose by the same factor, one point three eight six.",
    "slide": "inf:8",
    "card": [
     {

@@ -26,7 +26,7 @@
    "fig": null
   },
   {
-   "text": "Both compare extent, so both compare areas under the curve, A U C. The I V dose is usually smaller than the oral dose, so each area is divided by its own dose, and F is the oral area per milligram over the I V area per milligram. So a larger oral area at the same doses gives a larger F. A larger oral dose that gives the same area gives a smaller F, because each milligram delivered less.",
+   "text": "Absolute and relative bioavailability both compare extent, so both compare areas under the curve, A U C. The I V dose is usually smaller than the oral dose, so each area is divided by its own dose, and F is the oral area per milligram over the I V area per milligram. So a larger oral area at the same doses gives a larger F. A larger oral dose that gives the same area gives a smaller F, because each milligram delivered less.",
    "slide": "ba:6",
    "card": [
     {
@@ -157,7 +157,7 @@
    "fig": null
   },
   {
-   "text": "The stem may only ask the oral bioavailability, or the bioavailability compared to another product. An I V comparator makes it absolute, and two products, neither of them I V, make it relative. Inverting the ratios is the usual wrong answer; for her first problem it gives one point eight two, and an absolute F above one shows the inversion. Asked in class which F can be greater than one, her answer was relative. The one point zero three shows similar extent, not bioequivalence, because no peak times were given, and the peak time is the rate in objective one. Absolute F is what turns an I V dose into an oral dose with the same area, in objective four, and she said she would focus more on absolute bioavailability.",
+   "text": "The stem may only ask the oral bioavailability, or the bioavailability compared to another product. An I V comparator makes it absolute, and two products, neither of them I V, make it relative. Inverting the ratios is the usual wrong answer; for her first problem it gives one point eight two, and an absolute F above one shows the inversion. Asked in class which F can exceed one, she answered relative. The relative F of one point zero three shows similar extent, not bioequivalence, because no peak times were given, and the peak time is the rate in objective one. Absolute F is what turns an I V dose into an oral dose with the same area, in objective four, and she said she would focus more on absolute bioavailability.",
    "slide": "ba:9",
    "card": [
     {

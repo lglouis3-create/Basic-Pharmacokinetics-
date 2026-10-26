@@ -26,7 +26,7 @@
    "fig": null
   },
   {
-   "text": "At steady state the drug going in each day equals the drug eliminated each day, so R equals the elimination rate at that level. The elimination rate rises with the level but never past V max, so a higher target level needs a higher R, and R must stay below V max. At a daily dose at or above V max, elimination never catches up, because the elimination rate stays below V max at every level, so the level keeps rising and no steady state is reached. Close to V max, a small rise in R gives a large rise in C s s. Steady state takes two to three weeks for such a drug, not three to five half lives.",
+   "text": "At steady state the drug going in each day equals the drug eliminated each day, so R equals the elimination rate at that level. The elimination rate rises with the level but never past V max, so a higher target level needs a higher R, and R must stay below V max. At a daily dose at or above V max, drug goes in faster than it is removed at every level, so the level keeps rising and no steady state is reached. Close to V max, the elimination rate rises only a little as the level rises, so a small rise in R needs a large rise in C s s. Steady state takes two to three weeks for such a drug, not three to five half lives.",
    "slide": "nonlin:11",
    "card": [
     {
@@ -61,7 +61,7 @@
    }
   },
   {
-   "text": "The dose rate equation says this: R equals V max times C s s, divided by K M plus C s s. C s s on the top raises R, and C s s on the bottom, added to K M, keeps R below V max however high the target. The milligrams per liter on the top and the bottom cancel, so R comes out in the units of V max. When V max is per kilogram, R comes out per kilogram, and the weight then gives the patient's dose.",
+   "text": "In symbols, the dose rate equation is R equals V max times C s s, divided by K M plus C s s. C s s on the top raises R, and C s s on the bottom, added to K M, keeps R below V max however high the target. The milligrams per liter on the top and the bottom cancel, so R comes out in the units of V max. When V max is per kilogram, R comes out per kilogram, and multiplying by the patient's weight gives the patient's daily dose.",
    "slide": "nonlin:11",
    "card": [
     {
@@ -96,7 +96,7 @@
    }
   },
   {
-   "text": "Turned around, the same equation gives the level a chosen dose rate will produce: C s s equals R times K M, divided by V max minus R. She worked this on the board from the R equation; it is not on the equation sheet. R is on the top and is also subtracted from V max on the bottom, so as R approaches V max the bottom shrinks and C s s climbs steeply. In her slide example, six milligrams per kilogram per day gave ten milligrams per liter, and eight gave twenty, not the thirteen a linear drug would give.",
+   "text": "Turned around, the dose rate equation gives the level a chosen dose rate will produce: C s s equals R times K M, divided by V max minus R. She worked this on the board from the R equation; it is not on the equation sheet. R is on the top and is also subtracted from V max on the bottom, so as R approaches V max the bottom shrinks and C s s climbs steeply. In her slide example, with K M ten milligrams per liter and V max twelve milligrams per kilogram per day, six milligrams per kilogram per day gives ten milligrams per liter, and eight gives twenty milligrams per liter, not the thirteen milligrams per liter a linear drug would give.",
    "slide": "nonlin:11",
    "card": [
     {
@@ -162,7 +162,7 @@
    "fig": null
   },
   {
-   "text": "The per kilogram rate is not the answer for a patient. She said, And if I'm your patient, please don't tell me six point six two milligrams per kilogram per day. Tell me how many, tell me what I need. A per kilogram V max needs the weight at the end; a per day V max does not, and the weight then serves only the volume of distribution. An amount with no time is not a dose rate either. She said, I don't wanna just see one thousand milligrams.",
+   "text": "A dose rate left per kilogram is not the answer for a patient. She said, And if I'm your patient, please don't tell me six point six two milligrams per kilogram per day. Tell me how many, tell me what I need. A per kilogram V max needs the patient's weight at the end; a per day V max does not, and the weight is then used only to turn the volume of distribution from liters per kilogram into liters. An amount with no time is not a dose rate either. She said, I don't wanna just see one thousand milligrams.",
    "slide": "nonlin:12",
    "card": [
     {
@@ -181,7 +181,7 @@
    "fig": null
   },
   {
-   "text": "Her second slide example continues objective three: with K M ten milligrams per liter and V max twelve milligrams per kilogram per day, the dose rate for fifteen milligrams per liter in the seventy two kilogram patient. R is seven point two milligrams per kilogram per day, or five hundred eighteen point four milligrams per day, which she rounded to five hundred twenty on her slide. A check: fifteen lies between her two measured levels, ten and twenty, so R must lie between their dose rates, six and eight, and it does.",
+   "text": "Her second slide example continues the patient of objective three: with K M ten milligrams per liter and V max twelve milligrams per kilogram per day, she asks the dose rate for fifteen milligrams per liter in the seventy two kilogram patient. R is seven point two milligrams per kilogram per day, or five hundred eighteen point four milligrams per day, which she rounded to five hundred twenty on her slide. A check: fifteen milligrams per liter lies between her two measured levels, ten and twenty milligrams per liter, so R must lie between the dose rates that produced them, six and eight milligrams per kilogram per day, and seven point two does.",
    "slide": "nonlin:15",
    "card": [
     {
@@ -212,7 +212,7 @@
    }
   },
   {
-   "text": "Her Solutions one uses the K M of five point nine one milligrams per liter and the V max of six hundred forty seven point eight three milligrams per day from objective three. First, the dose for fifteen milligrams per liter, from the R equation: four hundred sixty four point seven three milligrams per day, which she gave as four hundred sixty five. The weight is not needed, because V max is per day. Then the level on four hundred fifty milligrams daily, from the turned around equation because the dose is now fixed: thirteen point four four milligrams per liter, written thirteen point five on her sheet.",
+   "text": "Her Solutions one uses the K M of five point nine one milligrams per liter and the V max of six hundred forty seven point eight three milligrams per day from objective three. First, the dose for fifteen milligrams per liter, from the R equation: four hundred sixty four point seven three milligrams per day, which she gave as four hundred sixty five. The weight is not needed, because V max is per day. Then the level on four hundred fifty milligrams daily, from the C s s equation, R times K M over V max minus R, because the dose is now fixed: thirteen point four four milligrams per liter, written thirteen point five on her sheet.",
    "slide": "nonlin:11",
    "card": [
     {
@@ -239,15 +239,15 @@
    "fig": null
   },
   {
-   "text": "So four hundred fifty milligrams per day is about ninety seven percent of four hundred sixty five, yet the level is thirteen point five instead of fifteen, a tenth lower. Near saturation, the level changes by a larger fraction than the dose, whether the dose goes up or down. That is why levels are measured and the dose adjusted for the individual patient.",
+   "text": "In her Solutions one, four hundred fifty milligrams per day is about ninety seven percent of four hundred sixty five milligrams per day, the dose that gives fifteen milligrams per liter. For a linear drug the level would also be about ninety seven percent of fifteen, about fourteen point five milligrams per liter, but here it is thirteen point five milligrams per liter, a tenth lower than fifteen. Near saturation, the level changes by a larger fraction than the dose, whether the dose goes up or down, because the elimination rate changes only a little when the level changes. That is why levels are measured and the dose adjusted for the individual patient.",
    "slide": "nonlin:11",
    "card": [
     {
-     "at": 0,
+     "at": 1,
      "m": "{{frac:450|465}} ≈ 0.97, but {{frac:13.5|15}} = 0.90"
     },
     {
-     "at": 1,
+     "at": 2,
      "m": "near V<sub>max</sub>: C<sub>ss</sub> changes by a larger fraction than R"
     }
    ],
@@ -255,7 +255,7 @@
     "key": "nl_css_steps",
     "at": [
      [
-      1,
+      2,
       1
      ]
     ]

@@ -88,7 +88,7 @@
    "fig": null
   },
   {
-   "text": "So the key decision is the starting point of the fall. If the infusion ran to steady state, C peak is C s s; if it ran for a stated shorter time, C peak must first be computed from the rising equation. Two adjacent parts of one practice set often differ only in this, so the infusion length in each part decides the starting point. When a time is a whole number of half-lives, halves can be counted instead of evaluating the exponential, and she shows both routes.",
+   "text": "After cessation, the key decision is C peak, the level the fall starts from. If the infusion ran to steady state, C peak is C s s; if it ran for a stated shorter time, C peak must first be computed from the rising equation. Two adjacent parts of one practice set often differ only in this, so the infusion length in each part decides the starting point. When a time is a whole number of half-lives, halves can be counted instead of evaluating the exponential, and she shows both routes.",
    "slide": "inf:12",
    "card": [
     {
@@ -107,7 +107,7 @@
    "fig": null
   },
   {
-   "text": "Her slide Example six: one hundred fifty milligrams is infused over six hours, k is zero point two three one per hour, V D, the apparent volume of distribution, is fifteen liters, and the question asks C p three hours after cessation. The fall needs a starting point, so the first question is whether six hours reached steady state. The rate is twenty five milligrams per hour, the clearance three point four six five liters per hour, and C s s seven point two one five milligrams per liter. The half-life is three hours, so six hours is only two half-lives, seventy five percent of the way.",
+   "text": "Her slide Example six: one hundred fifty milligrams is infused over six hours, k is zero point two three one per hour, V D, the apparent volume of distribution, is fifteen liters, and the question asks C p three hours after cessation. The fall needs a starting point, so the first question is whether six hours reached steady state. The rate is twenty five milligrams per hour, the clearance three point four six five liters per hour, and C s s seven point two one five milligrams per liter. The half-life is three hours, so six hours of infusion is only two half-lives, which reach seventy five percent of C s s.",
    "slide": "inf:14",
    "card": [
     {
@@ -138,7 +138,7 @@
    "fig": null
   },
   {
-   "text": "C peak is C s s times the fraction reached at six hours: five point four one milligrams per liter, seventy five percent of C s s. Three hours after cessation is one more half-life, so the level halves to two point seven one milligrams per liter, her stated two point seven. Assuming steady state instead would start the fall at seven point two one five and give about three point six milligrams per liter, which is wrong because six hours is only two half-lives.",
+   "text": "In her Example six, C peak is C s s, seven point two one five milligrams per liter, times the fraction reached at six hours: five point four one milligrams per liter, seventy five percent of C s s. Three hours after cessation is one more half-life, so the level halves to two point seven one milligrams per liter, her stated two point seven. Assuming steady state instead would start the fall at seven point two one five and give about three point six milligrams per liter, which is wrong because six hours is only two half-lives.",
    "slide": "inf:14",
    "card": [
     {
@@ -188,7 +188,7 @@
    "fig": null
   },
   {
-   "text": "How she tests it: her stems give a number of hours after the cessation of the infusion and say whether a loading dose was given. In her review an infusion aimed at twenty four milligrams per liter stopped after five hours, with a five hour half-life. A student started the fall from eighteen; one half-life of infusion reaches fifty percent, not seventy five, so C peak is twelve, and three hours later the level is seven point nine milligrams per liter. The two equations count time differently: t in the rising one counts from the start, and t in the falling one counts from cessation.",
+   "text": "How she tests it: her stems give a number of hours after the cessation of the infusion and say whether a loading dose was given. In her review an infusion aimed at twenty four milligrams per liter stopped after five hours, with a five hour half-life. A student started the fall from eighteen milligrams per liter; one half-life of infusion reaches fifty percent of C s s, not seventy five, so C peak is twelve milligrams per liter, and three hours later the level is seven point nine milligrams per liter. The two equations count time differently: t in the rising one counts from the start, and t in the falling one counts from cessation.",
    "slide": null,
    "card": [
     {
@@ -211,7 +211,7 @@
    "fig": null
   },
   {
-   "text": "Her later review chained one more case. A two hour infusion of fifty milligrams per hour, with a three hour half-life and a V D of eighteen liters, ends at four point four five milligrams per liter. A second, identical infusion starts six hours after the first began, and the question asks the level four hours after it stops, twelve hours from the start. The first infusion's level falls from its own end. The second climbs exactly as the first did, on top of what is left of the first. At twelve hours the first has been falling for ten hours and the second for four, and the two levels add; her answer was two point two milligrams per liter.",
+   "text": "Her later review chained one more case. A two hour infusion of fifty milligrams per hour, with a three hour half-life and a V D of eighteen liters, ends at four point four five milligrams per liter. A second, identical infusion starts six hours after the first began, and the question asks the level four hours after it stops, twelve hours from the start. The first infusion's level falls from the moment it ends, at two hours. The second climbs exactly as the first did, on top of what is left of the first. At twelve hours the first has been falling for ten hours and the second for four, and the two levels add; her answer was two point two milligrams per liter.",
    "slide": null,
    "card": [
     {

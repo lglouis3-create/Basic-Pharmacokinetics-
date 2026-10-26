@@ -22,7 +22,7 @@
    "fig": null
   },
   {
-   "text": "Most drugs are eliminated by a first order process, which is linear. The amount removed per unit of time is proportional to the amount present, so the fraction removed per unit of time stays the same at every level. That is why the half life and the clearance are the same at every dose. So twice the dose gives twice the level at every time and twice the A U C, the area under the curve of level against time, and a first dose can be carried forward to steady state by superposition.",
+   "text": "Most drugs are eliminated by a first order process, which is linear. The amount removed per unit of time is proportional to the amount present, so the fraction removed per unit of time stays the same at every level. Because that fraction is fixed, the half life and the clearance are the same at every dose. So twice the dose gives twice the level at every time and twice the A U C, the area under the curve of level against time, and repeated doses can be predicted from the first dose by superposition: each new dose adds its own curve to what is left of the earlier ones.",
    "slide": "nonlin:5",
    "card": [
     {
@@ -92,7 +92,7 @@
    }
   },
   {
-   "text": "As the dose rises into saturation, the amount removed per day still rises, but less than in proportion to the level, so the fraction removed per day falls. So the half life lengthens and the clearance falls as the dose increases. More of each dose is retained, so the A U C rises above the proportional straight line once the dose passes a certain point. Saturation can occur in absorption, distribution, metabolism or excretion, and this module deals with elimination.",
+   "text": "When a higher dose raises the level toward saturation of the enzymes, the amount removed per day still rises, but by a smaller fraction than the level rises, so the fraction of the drug in the body removed each day falls. With a smaller fraction removed each day, the half life lengthens and the clearance falls as the dose increases. More of each dose stays in the body, so on her plot of A U C against dose, curve A, the saturable drug, follows the straight line of a drug whose A U C is proportional to dose, curve C, up to a certain dose and then rises above it. Saturation can occur in absorption, distribution, metabolism or excretion, and this module deals with elimination.",
    "slide": "nonlin:5",
    "card": [
     {
@@ -115,7 +115,7 @@
    "fig": null
   },
   {
-   "text": "On her log plot of level against time, curves A and B are one saturable drug at a high and a low dose, and curve C is a first order drug. B is straight like C, because at levels well below K M elimination is first order. A starts where elimination is saturated, so a smaller fraction is removed each hour and the line bends. Once A has fallen far enough it becomes straight, with the same terminal slope as B.",
+   "text": "On her log plot of level against time, curves A and B are one saturable drug given as a single I V bolus at a high and a low dose, and curve C is a different drug with first order elimination. B is a straight line like C, because at levels well below K M elimination is first order. A starts at levels where the enzymes are saturated, so at first a smaller fraction is removed each hour and A falls less steeply than B; as the level falls, the fraction removed each hour rises and A curves downward. Once A has fallen to levels well below K M it becomes straight, with the same terminal slope as B.",
    "slide": "nonlin:4",
    "card": [
     {
@@ -185,26 +185,26 @@
    }
   },
   {
-   "text": "Her written question asks the difference between linear and nonlinear pharmacokinetics, and the answer is the parameters: unchanged with dose, or changed by increased doses or chronic administration. Her signs of saturation are the half life changing with dose and the A U C out of proportion, plus two more: other drugs needing the same enzyme or carrier can change the saturation, and the ratio of the metabolites can change with dose. In her quiz the true statement was that the half life changes as the dose is increased; parameters that do not change, superposition, or an A U C in proportion describe a linear drug.",
+   "text": "Her written question asks the difference between linear and nonlinear pharmacokinetics. The answer is the parameters: in linear pharmacokinetics they do not change with dose, and in nonlinear pharmacokinetics increased doses or chronic administration change them. Her signs of saturation are a half life that changes with dose and an A U C that is not in proportion to the dose, plus two more: other drugs needing the same enzyme or carrier can change the saturation, and the ratio of the metabolites can change with dose. In her quiz the true statement was that the half life changes as the dose is increased; parameters that do not change, superposition, and an A U C in proportion to the dose each describe a linear drug.",
    "slide": "nonlin:6",
    "card": [
     {
-     "at": 0,
+     "at": 1,
      "m": "linear: parameters fixed; nonlinear: parameters change"
     },
     {
-     "at": 1,
+     "at": 2,
      "m": "signs: t<sub>½</sub> changes, AUC out of proportion, competing drugs, metabolite ratio changes"
     },
     {
-     "at": 2,
+     "at": 3,
      "m": "<b>nonlinear: t<sub>½</sub> changes as dose ↑</b>; ✗ fixed parameters, superposition, AUC ∝ dose"
     }
    ],
    "fig": null
   },
   {
-   "text": "Her poll said a saturable drug often shows zero order at low concentrations and first order at high ones; the key is false, because it is the other way round. Low and high mean relative to K M, a concentration, never relative to V max, which is a rate. The trap is to swap the words: linear is not zero order, and nonlinear is not simply first order. The summary statement that clearance and half life are usually not constant in nonlinear processes is true. Objective two explains the order with K M and C p.",
+   "text": "Her poll said a saturable drug often shows zero order kinetics at low concentrations and first order kinetics at high ones; her key is false, because the orders are the other way round: first order at concentrations well below K M and zero order well above K M. Low and high mean relative to K M, a concentration, never relative to V max, which is a rate. A second trap is to mix up the names: linear pharmacokinetics means first order elimination, not zero order, and a nonlinear drug is first order only at levels well below K M. The summary statement that clearance and half life are usually not constant in nonlinear processes is true. Objective two explains why the order changes with the level.",
    "slide": "nonlin:19",
    "card": [
     {

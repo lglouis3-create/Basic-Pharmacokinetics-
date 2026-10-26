@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "At the plateau, R equals the clearance times C s s, so C s s equals R over clearance. R is on the top, so a higher rate gives a proportionally higher plateau: twice the rate, twice C s s. Clearance is on the bottom, so a patient who clears less drug, for example in renal failure, has a higher plateau on the same rate. V D, the apparent volume of distribution, which relates the amount in the body to C p, is not in the clearance form, so with clearance fixed a larger volume does not change the height of the plateau. The line contains no time, so it says nothing about when the plateau arrives.",
+   "text": "At the plateau, R equals the clearance times C s s, so C s s equals R over clearance. R is on the top, so a higher rate gives a proportionally higher plateau: twice the rate, twice C s s. Clearance is on the bottom, so a patient who clears less drug, for example in renal failure, has a higher plateau on the same rate. V D, the apparent volume of distribution, which relates the amount in the body to C p, is not in R over clearance, so with clearance fixed a larger volume does not change the height of the plateau. C s s equals R over clearance contains no time, so it says nothing about when the plateau arrives.",
    "slide": "inf:4",
    "card": [
     {
@@ -127,7 +127,7 @@
    }
   },
   {
-   "text": "The half-life itself depends on the patient: k is the clearance divided by V D, and the half-life is zero point six nine three over k. Clearance is on the bottom of the half-life, so a smaller clearance, as in renal failure, gives a longer half-life and a slower climb, and on the same rate a higher plateau. V D is on the top, so a larger volume with the same clearance also lengthens the half-life and the climb, while the height stays the same. R is in neither, so the rate changes the height of the plateau and never the time to reach it. She said, It does not change the time that it takes to get to that steady state concentration.",
+   "text": "The half-life depends on the patient: k is the clearance divided by V D, so the half-life, zero point six nine three over k, equals zero point six nine three times V D over the clearance. Clearance is on the bottom, so a smaller clearance, as in renal failure, gives a longer half-life and a slower climb, and on the same rate a higher plateau. V D is on the top, so a larger volume with the same clearance also lengthens the half-life and the climb, while the height stays the same. R is in neither, so the rate changes the height of the plateau and never the time to reach it. She said, It does not change the time that it takes to get to that steady state concentration.",
    "slide": "inf:4",
    "card": [
     {
@@ -150,7 +150,7 @@
    "fig": null
   },
   {
-   "text": "The equation for the climb puts both ideas in one line: C p equals R over clearance, times one minus e to the minus k t. The first factor is C s s, set by R and the clearance; the bracket is the fraction of C s s reached, set by k and t, with t counted from the start of the infusion. Early on the bracket is a small fraction, and near five half-lives it approaches one. Counted in half-lives, the fraction after n half-lives is one minus one half to the power n, so two half-lives give seventy five percent and four give ninety three point seven five percent. About three point three two half-lives reach ninety percent, and four point three two reach ninety five percent.",
+   "text": "The equation for the rise holds both the height and the timing: C p equals R over clearance, times one minus e to the minus k t. The first factor is C s s, set by R and the clearance; the bracket is the fraction of C s s reached, set by k and t, with t counted from the start of the infusion. Early on the bracket is a small fraction, and near five half-lives it approaches one. Counted in half-lives, the fraction after n half-lives is one minus one half to the power n, so two half-lives give seventy five percent and four give ninety three point seven five percent. About three point three two half-lives reach ninety percent, and four point three two reach ninety five percent.",
    "slide": "inf:5",
    "card": [
     {
@@ -193,7 +193,7 @@
    }
   },
   {
-   "text": "Her slide Example four asks how long an infusion must run to reach ninety percent of steady state, with k equal to zero point one five per hour. The bracket answers it, because it is the fraction reached, so it is set equal to zero point nine and solved for t. Ninety percent is not a power of one half, so the exponential is isolated and a natural log brings t down. The answer is fifteen point three five hours, which she states as about fifteen hours. As a check, the half-life is four point six two hours, so fifteen point three five hours is three point three two half-lives, her ninety percent shortcut.",
+   "text": "Her slide Example four asks how long an infusion must run to reach ninety percent of steady state, with k equal to zero point one five per hour. The fraction of C s s reached, one minus e to the minus k t, answers it, so it is set equal to zero point nine and solved for t. The ten percent of C s s not yet reached is not a power of one half, so the exponential is isolated and t is found with a natural log. The answer is fifteen point three five hours, which she states as about fifteen hours. As a check, the half-life is four point six two hours, so fifteen point three five hours is three point three two half-lives, her ninety percent shortcut.",
    "slide": "inf:11",
    "card": [
     {
@@ -259,7 +259,7 @@
    "fig": null
   },
   {
-   "text": "A concentration in the stem can stand for a percentage of C s s. In her Practice four the half-life is six hours and C s s is ten milligrams per liter, so a level of five milligrams per liter is fifty percent, one half-life, six hours. Eighty percent is not a power of one half, so the log route gives thirteen point nine three hours. Objective six uses this plateau line to choose a rate, and objective five adds a loading dose to skip the wait.",
+   "text": "A concentration in the stem can stand for a percentage of C s s. In her Practice four the half-life is six hours and C s s is ten milligrams per liter, so a level of five milligrams per liter is fifty percent, one half-life, six hours. Eighty percent of C s s leaves twenty percent not yet reached, which is not a power of one half, so the log route gives thirteen point nine three hours. Objective six uses this plateau line to choose a rate, and objective five adds a loading dose to skip the wait.",
    "slide": "inf:9",
    "card": [
     {

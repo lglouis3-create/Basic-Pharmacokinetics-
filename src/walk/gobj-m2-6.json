@@ -139,7 +139,7 @@
    }
   },
   {
-   "text": "The same four numbers give the rate constants of the model. k, the overall elimination rate constant, describes elimination from the central compartment. It is larger than beta, because in the elimination phase drug returning from the tissue enters the plasma, so the plasma level falls more slowly than k alone would make it. k equals alpha times beta times the sum A plus B, over the cross term, A times beta plus B times alpha. k two one, tissue to central, is the cross term over A plus B. k one two, central to tissue, is A times B times the square of beta minus alpha, over A plus B times the cross term.",
+   "text": "A, B, alpha and beta also give the rate constants of the two compartment model. k, the overall elimination rate constant, describes elimination from the central compartment. It is larger than beta, because in the elimination phase drug returning from the tissue enters the plasma, so the plasma level falls more slowly than k alone would make it. k equals alpha times beta times the sum A plus B, over the cross term, A times beta plus B times alpha. k two one, tissue to central, is the cross term over A plus B. k one two, central to tissue, is A times B times the square of beta minus alpha, over A plus B times the cross term.",
    "slide": "ivb:24",
    "card": [
     {
@@ -220,7 +220,7 @@
    "fig": null
   },
   {
-   "text": "For the rate constants, the cross term comes first, twelve point five six. Then k is zero point two seven two per hour, more than twice beta, which is zero point one one four per hour, so k and beta are clearly different numbers. k two one is zero point nine one two per hour, and k one two is one point one zero nine per hour.",
+   "text": "In her in class sheet, with A eight point four five and B five point three two milligrams per liter, alpha two point one eight and beta zero point one one four per hour, the rate constants start from the cross term, A times beta plus B times alpha, which is twelve point five six. Then k is zero point two seven two per hour, more than twice beta, which is zero point one one four per hour, so k and beta are clearly different numbers. k two one is zero point nine one two per hour, and k one two is one point one zero nine per hour.",
    "slide": "ivb:24",
    "card": [
     {

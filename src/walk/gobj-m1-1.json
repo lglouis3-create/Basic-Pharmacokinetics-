@@ -57,7 +57,7 @@
    "fig": null
   },
   {
-   "text": "The quickest way to separate P K from pharmacodynamics, P D, is what each one relates. P K follows concentration against time: after a dose, how the drug level changes from hour to hour. P D is the relationship between drug concentration at the site of action and the pharmacological response, so it follows concentration against response. The textbook gives the direction: higher doses produce higher drug concentrations, more drug at the receptor site and a more intense effect, up to a maximum effect. So the response rises with concentration but not in proportion without limit. She said, Pharmacokinetics, we're looking at concentration and time. Pharmacodynamics, we're looking at concentration and effect.",
+   "text": "The quickest way to separate P K from pharmacodynamics, P D, is what each one relates. P K follows concentration against time: after a dose, how the drug level changes from hour to hour. P D is the relationship between drug concentration at the site of action and the pharmacological response, so it follows concentration against response. The textbook gives the direction: higher doses produce higher drug concentrations, more drug at the receptor site and a more intense effect, up to a maximum effect. So the effect rises as the concentration rises, but not in proportion to it, because the effect cannot rise above that maximum. She said, Pharmacokinetics, we're looking at concentration and time. Pharmacodynamics, we're looking at concentration and effect.",
    "slide": "intro:8",
    "card": [
     {
@@ -74,7 +74,7 @@
     },
     {
      "at": 4,
-     "m": "effect: not proportional to concentration without limit"
+     "m": "effect rises with concentration, but not in proportion: it stops at the maximum"
     }
    ],
    "fig": null
@@ -99,7 +99,7 @@
    "fig": null
   },
   {
-   "text": "The others each have a one line definition. Clinical pharmacokinetics is applying pharmacokinetic methods to drug therapy. Population pharmacokinetics is the study of pharmacokinetic differences between population groups, such as older adults, children, pregnant women, immunocompromised patients and patients with a disease. Clinical toxicology is the study of adverse effects of drugs and toxic substances in the body. Toxicokinetics is applying pharmacokinetic principles to drug safety evaluation studies.",
+   "text": "The other disciplines related to P K each have a one line definition. Clinical pharmacokinetics is applying pharmacokinetic methods to drug therapy. Population pharmacokinetics is the study of pharmacokinetic differences between population groups, such as older adults, children, pregnant women, immunocompromised patients and patients with a disease. Clinical toxicology is the study of adverse effects of drugs and toxic substances in the body. Toxicokinetics is applying pharmacokinetic principles to drug safety evaluation studies.",
    "slide": "intro:8",
    "card": [
     {

@@ -53,7 +53,7 @@
    "fig": null
   },
   {
-   "text": "The A U C of one segment equals C n minus one plus C n, over two, times t n minus t n minus one. The two concentrations are added and divided by two, so that two is not hours; it averages the heights at the two ends of the strip. The time difference is the width, read from the time column, so a wider strip or higher concentrations give a larger area. A concentration in micrograms per milliliter times a width in hours gives microgram hours per milliliter. A U C total is the sum of the A U C of every segment.",
+   "text": "The A U C of one segment equals C n minus one plus C n, over two, times t n minus t n minus one, where C n minus one and C n are the concentrations at the two ends of the segment. Adding the two concentrations and dividing by two averages those two heights, so the two is a plain number, not hours. The time difference is the width, read from the time column, so a wider strip or higher concentrations give a larger area. A concentration in micrograms per milliliter times a width in hours gives microgram hours per milliliter. A U C total is the sum of the A U C of every segment.",
    "slide": "intro:28",
    "card": [
     {
@@ -123,7 +123,7 @@
    }
   },
   {
-   "text": "The strip from two to three hours is fourteen point seven five microgram hours per milliliter. The strip from three to four hours is eight point nine three five, smaller because the concentrations are lower over the same width. Added, they give twenty three point seven microgram hours per milliliter. That is the extent of drug available between two and four hours only; the earlier and later stretches of the curve would add more area.",
+   "text": "In her slide example, the strip from two to three hours has an area of eighteen point four plus eleven point one micrograms per milliliter, over two, times one hour: fourteen point seven five microgram hours per milliliter. The strip from three to four hours, from eleven point one to six point seven seven micrograms per milliliter, has an area of eight point nine three five microgram hours per milliliter, smaller because the concentrations are lower over the same width. The two areas add to twenty three point seven microgram hours per milliliter. This A U C is the extent of drug available between two and four hours only; the parts of the curve before two hours and after four hours would add more area.",
    "slide": "intro:29",
    "card": [
     {
@@ -166,7 +166,7 @@
    }
   },
   {
-   "text": "Her questions give a table and an interval named in hours. Use only the trapezoids between rows inside that interval, not the whole table and not an extrapolated tail. Check each width from the time column: where sampling times are uneven, as from half an hour to one hour, a segment is half an hour wide, not one hour. When a student asked whether the two on the bottom is hours, she said, No, two is not hours. Give the units as concentration times time, microgram hours per milliliter. A concept question asks what A U C tells you: the extent of drug available, how much, while how fast shows in the peak concentration, C max, and the time of the peak, t max.",
+   "text": "Her questions give a table and an interval named in hours. Use only the trapezoids between rows inside that interval, not the whole table and not an extrapolated tail. Check each width from the time column: where sampling times are uneven, as from half an hour to one hour, a segment is half an hour wide, not one hour. When a student asked whether the two on the bottom of the trapezoid formula is hours, she said, No, two is not hours. Give the units as concentration times time, microgram hours per milliliter. A concept question asks what A U C tells you: the extent of drug available, how much, while how fast shows in the peak concentration, C max, and the time of the peak, t max.",
    "slide": "intro:29",
    "card": [
     {

@@ -80,7 +80,7 @@
    "fig": null
   },
   {
-   "text": "t eff comes from the I V bolus line, C equals C zero e to the minus k t, with C set to C eff and solved for t. In natural logs, t eff is the natural log of C zero over C eff, divided by k. With the half life, t eff is one point four four, which is one over zero point six nine three, times t half times the natural log of D zero over V D times C eff. The dose is inside the log, so doubling it adds the natural log of two over k, one half life, while the half life multiplies everything, so t eff is in proportion to it. The base ten form gives a slightly smaller number.",
+   "text": "t eff is when the I V bolus line, C zero e to the minus k t, reaches C eff. In natural logs, t eff is the natural log of C zero over C eff, divided by k. With the half life, t eff is one point four four, one over zero point six nine three, times t half times the natural log of D zero over V D times C eff. The dose is inside the log, so doubling it adds the natural log of two over k, one half life, while the half life multiplies everything, so t eff is in proportion to it. The base ten form gives slightly less than the natural log form, because its two point three rounds two point three zero three.",
    "slide": "pd:6",
    "card": [
     {
@@ -111,7 +111,7 @@
    "fig": null
   },
   {
-   "text": "Her review poll gave a one gram I V bolus, a V D of twelve point five liters, a half life of four hours and an M E C of twenty milligrams per liter. C zero is eighty milligrams per liter, which halves to forty and then to twenty, two halvings, so t eff is eight hours, her key. With five hundred milligrams, C zero is forty, one halving, four hours. Halving the dose halved the duration here only because forty is exactly twice the M E C, so the shorter duration was itself one half life. Doubling still added one half life, so the statement that doubling the dose doubles t eff is still false, as her key says.",
+   "text": "Her review poll: a one gram I V bolus, a V D of twelve point five liters, a half life of four hours and an M E C of twenty milligrams per liter. C zero is eighty milligrams per liter, which halves to forty and then to twenty, two halvings, so t eff is eight hours, her key. With five hundred milligrams, C zero is forty milligrams per liter, one halving, four hours, her key. Halving the dose halved the duration only because forty is exactly twice the M E C. A two gram dose, which she did not ask, would start at one hundred sixty milligrams per liter, three halvings, twelve hours, not sixteen, so doubling the dose does not double t eff, as her poll key says.",
    "slide": "pd:12",
    "card": [
     {
@@ -166,7 +166,7 @@
    }
   },
   {
-   "text": "Her slide practice problem gives an antibiotic an M E C of zero point two micrograms per milliliter, the same number in milligrams per liter, a V D of twenty four liters and a k of zero point one five per hour. For a two hundred fifty milligram dose, k is given, so the natural log form is quickest. C zero is about fifty two times the M E C, and t eff is twenty six point three five hours. Five hundred milligrams gives thirty point nine seven hours, four point six two hours more, which is one half life, and one thousand milligrams adds a second, to about thirty five point six hours.",
+   "text": "Her slide practice problem gives an antibiotic an M E C of zero point two micrograms per milliliter, the same number in milligrams per liter, a V D of twenty four liters and a k of zero point one five per hour. For a two hundred fifty milligram dose, k is given, so the natural log form is quickest. C zero is ten point four two milligrams per liter, about fifty two times the M E C, and t eff is twenty six point three five hours. Five hundred milligrams gives thirty point nine seven hours, four point six two hours more, which is one half life, and one thousand milligrams adds a second half life, to about thirty five point six hours.",
    "slide": "pd:7",
    "card": [
     {
@@ -193,7 +193,7 @@
    "fig": null
   },
   {
-   "text": "Her follow up asks the dose that doubles t eff, to fifty two point seven hours. Turned around, the dose for a target duration is D zero equals C eff times V D times e to the plus k t eff. The exponent is positive because the dose must be larger than C eff times V D, the amount that would give exactly the M E C at the start. The target time is in the exponent, so each added half life of duration doubles the dose. The answer is about thirteen grams, fifty two times the dose for twice the duration; doubling the half life would do the same at two hundred fifty milligrams.",
+   "text": "Her follow up on the slide problem asks the dose that doubles t eff, from twenty six point three five to fifty two point seven hours. Solved for the dose, D zero equals C eff times V D times e to the plus k t eff. The exponent is positive because the dose must be larger than C eff times V D, four point eight milligrams, the amount that would give exactly the M E C at the start. The target time is in the exponent, so each added half life of duration doubles the dose. The answer is about thirteen grams, fifty two times the two hundred fifty milligram dose, for twice the duration; doubling the half life at two hundred fifty milligrams would also double t eff.",
    "slide": "pd:7",
    "card": [
     {
@@ -247,7 +247,7 @@
    "fig": null
   },
   {
-   "text": "Her poll asked, true or false, whether doubling the I V bolus dose of a linear, first order drug gives a two fold increase in the duration of activity, and her key is false. On her quiz, doubling the dose adds one half life to the duration; it doubles neither the duration nor the half life. C zero does double with the dose; only the duration gains less. Other wrong answers she sees: changing the number when converting the M E C, e to the minus k t in the dose line, and a base ten log in the natural log form.",
+   "text": "Her poll asked, true or false, whether doubling the I V bolus dose of a linear, first order drug gives a two fold increase in the duration of activity, and her key is false. On her quiz, doubling the dose adds one half life to the duration; it doubles neither the duration nor the half life. C zero does double with the dose, but because the dose is inside the log, the duration rises by only one half life. Other wrong answers she sees: changing the number when converting the M E C from micrograms per milliliter to milligrams per liter, e to the minus k t instead of e to the plus k t in the dose equation, and a base ten log in the natural log form.",
    "slide": "pd:12",
    "card": [
     {

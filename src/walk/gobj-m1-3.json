@@ -26,7 +26,7 @@
    "fig": null
   },
   {
-   "text": "The lower line is the minimum effective concentration, M E C, the concentration that must be met or exceeded for the desired pharmacologic response. The upper line is the minimum toxic concentration, M T C, above which adverse effects start. So a level below the M E C gives no desired response, a level above the M T C gives adverse effects, and the range between them is the therapeutic window. The effect starts when the rising curve reaches the M E C and lasts until the falling curve drops back to it. A third term, the minimum inhibitory concentration, M I C, is used for antibiotics: the lowest concentration needed to kill or inhibit the bacteria.",
+   "text": "On her plot of drug concentration against time, the lower of the two dashed lines is the minimum effective concentration, M E C, the concentration that must be met or exceeded for the desired pharmacologic response. The upper line is the minimum toxic concentration, M T C, above which adverse effects start. So a level below the M E C gives no desired response, a level above the M T C gives adverse effects, and the range between them is the therapeutic window. The effect starts when the rising curve reaches the M E C and lasts until the falling curve drops back to it. A third term, the minimum inhibitory concentration, M I C, is used for antibiotics: the lowest concentration needed to kill or inhibit the bacteria.",
    "slide": "intro:9",
    "card": [
     {
@@ -80,7 +80,7 @@
    "fig": null
   },
   {
-   "text": "Bioavailability, F, is a measure of the systemic availability of a drug: the fraction of the dose that reaches the plasma, a number with no units. The more of an oral dose the liver metabolizes on this first pass, the less of it reaches the circulation, so F is lower. In her example, a thousand milligram tablet with only five hundred milligrams available for the body to use has an F of one half. F returns in objective five, where it comes from comparing areas under the curve.",
+   "text": "Bioavailability, F, is a measure of the systemic availability of a drug: the fraction of the dose that reaches the plasma, a number with no units. The more of an oral dose the liver metabolizes before the drug reaches the general circulation, which is the first pass effect, the less of the dose reaches the plasma, so F is lower. In her example, a thousand milligram tablet with only five hundred milligrams available for the body to use has an F of one half. F returns in objective five, where it comes from comparing areas under the curve.",
    "slide": "intro:5",
    "card": [
     {

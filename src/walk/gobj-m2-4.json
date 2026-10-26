@@ -84,7 +84,7 @@
    }
   },
   {
-   "text": "The equations say the same. One compartment: C p equals C p zero times e to the minus k t, one exponential term, so one straight line on a log axis. Two compartments: C p equals A e to the minus alpha t plus B e to the minus beta t, two exponential terms, so two phases. Alpha and beta are rate constants in per hour, and A and B are concentrations in milligrams per liter. The term with the larger constant, alpha, shrinks to almost nothing early, which is why the early segment is steep and the late segment follows the beta term alone. The more alpha and beta differ, the more the second compartment matters; when they are close, one compartment predicts nearly the same levels.",
+   "text": "The two equations show the same difference. One compartment: C p equals C p zero times e to the minus k t, one exponential term, so one straight line on a log axis. Two compartments: C p equals A e to the minus alpha t plus B e to the minus beta t, two exponential terms, so two phases. Alpha and beta are rate constants in per hour, and A and B are concentrations in milligrams per liter. The term with the larger constant, alpha, shrinks to almost nothing early, so the early segment is steep and the late segment follows the beta term alone. The more alpha and beta differ, the more the second compartment matters; when they are close, one compartment predicts nearly the same levels.",
    "slide": "ivb:21",
    "card": [
     {
@@ -154,7 +154,7 @@
    }
   },
   {
-   "text": "Her questions use this in two ways. One is a log axis graph after an I V bolus with the model withheld: one straight line is one compartment, and a steep early segment followed by a straight line is two. The other is a stem that never says two compartment but gives a two term equation, or A, B, alpha and beta; recognising the model is the first step of the calculation. When she says only I V bolus, with no graph and no second term, she means one compartment, first order. The steep early segment is distribution, not faster elimination. Objective five explains why some drugs need the second compartment, and objective six calculates with it.",
+   "text": "Her questions test the one versus two compartment difference in two ways. One is a log axis graph after an I V bolus with the model withheld: one straight line is one compartment, and a steep early segment followed by a straight line is two. The other is a stem that never says two compartment but gives a two term equation, or A, B, alpha and beta; recognising the model is the first step of the calculation. When she says only I V bolus, with no graph and no second term, she means one compartment, first order. The steep early segment is distribution, not faster elimination. Objective five explains why some drugs need the second compartment, and objective six calculates with it.",
    "slide": "ivb:13",
    "card": [
     {

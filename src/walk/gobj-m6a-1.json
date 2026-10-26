@@ -3,7 +3,7 @@
  "title": "Concentrations after multiple oral doses",
  "segs": [
   {
-   "text": "Module six A, objective one. Concentrations after multiple oral doses. Extravascular means outside a blood vessel, here by mouth, so each dose is absorbed before it reaches the plasma, and the level rises to a peak and then falls. F, the bioavailability, is the fraction of the dose, D zero, that reaches the circulation; k a is the absorption rate constant and k the elimination rate constant. The peak comes when absorption has slowed to match elimination, so t max is found before C max. She said, max for an oral dose, you have to find t max before you can find C max.",
+   "text": "Module six A, objective one. Concentrations after multiple oral doses. Extravascular means outside a blood vessel, here by mouth, so each dose is absorbed before it reaches the plasma, and the level rises to a peak and then falls. F, the bioavailability, is the fraction of the dose, D zero, that reaches the circulation; k a is the absorption rate constant and k the elimination rate constant. The peak comes at t max, when the absorption rate has fallen to equal the elimination rate, and C max is the level at that time, so t max is found before C max. She said, max for an oral dose, you have to find t max before you can find C max.",
    "slide": "mo:3",
    "card": [
     {
@@ -112,7 +112,7 @@
    }
   },
   {
-   "text": "In symbols, repeated doses add two accumulation factors: r k, one over one minus e to the minus k tau, and r a, the same with k a. e to the minus k tau is the fraction of a dose left one interval later, so both are at least one, and a longer tau makes them smaller.",
+   "text": "In symbols, repeated doses add two accumulation factors, with tau the dosing interval, the time between doses: r k equals one over one minus e to the minus k tau, and r a is the same with k a in place of k. e to the minus k tau is the fraction of a dose left one interval later, so one minus it is less than one and both factors are at least one. A longer tau leaves a smaller fraction, so it makes both factors smaller.",
    "slide": "mo:5",
    "card": [
     {
@@ -193,7 +193,7 @@
    "fig": null
   },
   {
-   "text": "Her Example one: a seventy five kilogram man takes two hundred fifty milligrams of tetracycline by mouth every eight hours, with F about seventy five percent, V D one point five liters per kilogram, a half life of about ten hours and k a zero point nine per hour. She asks the first dose peak, then the steady state peak, trough and average. After converting k, V D and F, the first dose t max is three point zero nine hours, which she writes as three point one. P is one point eight zero six milligrams per liter, and the first dose peak is one point three five, below P because P multiplies a bracket smaller than one.",
+   "text": "Her Example one: a seventy five kilogram man takes two hundred fifty milligrams of tetracycline by mouth every eight hours, with F about seventy five percent, V D one point five liters per kilogram, a half life of about ten hours and k a zero point nine per hour. She asks the first dose peak, then the steady state peak, trough and average. Converted, k is zero point zero six nine three per hour and V D one hundred twelve point five liters; the first dose t max is three point zero nine hours, written three point one. P is one point eight zero six milligrams per liter, and the first dose peak is one point three five milligrams per liter, below P, because P multiplies a bracket below one.",
    "slide": "mo:8",
    "card": [
     {
@@ -228,7 +228,7 @@
    }
   },
   {
-   "text": "For steady state, about fifty seven percent of each dose is left after eight hours, so r k is two point three five, because less than one half life passes between doses. Almost nothing is left unabsorbed after eight hours, so r a is one. t max at steady state is two point zero six hours, about an hour earlier than after the first dose. The steady state peak is three point four zero milligrams per liter.",
+   "text": "For steady state, eight hours is less than one ten hour half life, so about fifty seven percent of each dose is still in the body when the next dose is given, and r k, one over one minus zero point five seven four, is two point three five. Almost nothing is left unabsorbed after eight hours, so r a is one. t max at steady state is two point zero six hours, about an hour earlier than after the first dose. The steady state peak is three point four zero milligrams per liter.",
    "slide": "mo:8",
    "card": [
     {
@@ -267,7 +267,7 @@
    }
   },
   {
-   "text": "The steady state trough is two point four four milligrams per liter, and the average, the absorbed dose over the volume cleared in one interval, is three point zero one. The pattern checks: the steady state peak is higher than the first dose peak and comes earlier, and even the trough is above the first dose peak. The average is a time average, above the midpoint of peak and trough for this oral regimen, while for her I V bolus example it sat below.",
+   "text": "The steady state trough is two point four four milligrams per liter, and the average, the absorbed dose over the volume cleared in one interval, is three point zero one milligrams per liter. The pattern checks: the steady state peak is higher than the first dose peak and comes earlier, and even the trough is above the first dose peak. The average is an average over time, not the midpoint of peak and trough: here it is above the midpoint, two point nine two milligrams per liter, while for her repeated I V bolus example it was below the midpoint.",
    "slide": "mo:8",
    "card": [
     {
@@ -302,7 +302,7 @@
    }
   },
   {
-   "text": "Her traps are about which line to use: the steady state peak needs t max at steady state, not the first dose t max, and the trough starts from P. A quiz item asks when the steady state maximum occurs; the key, two point six hours, uses only k, k a and tau, not F, V D, the dose or the weight. Another asks what a larger oral dose changes: a higher steady state C max, not a later t max.",
+   "text": "Her traps are about which line to use: the steady state peak needs t max at steady state, not the first dose t max, and the trough line starts from P, the first dose prefactor, not from F D zero over V D. A quiz item asks when the steady state maximum occurs; the key, two point six hours, uses only k, k a and tau, not F, V D, the dose or the weight. Another asks what a larger oral dose changes: a higher steady state C max, not a later t max.",
    "slide": "mo:6",
    "card": [
     {

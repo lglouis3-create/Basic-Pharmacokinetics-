@@ -53,7 +53,7 @@
    "fig": null
   },
   {
-   "text": "Distribution has to be faster than elimination for these drugs. If elimination were fast relative to distribution, the drug would be removed before it built up in the tissues, and it would not reach concentrations high enough to work. She said, If the elimination phase is significantly fast relative to the distribution phase, then you're not going to build up appreciable levels. On the plasma curve this is why the early segment is steeper than the late one: alpha, the slope of the distribution phase, is larger than beta, the slope of the elimination phase.",
+   "text": "For a drug that fits a two compartment model, distribution has to be faster than elimination. If elimination were fast relative to distribution, the drug would be removed before it built up in the tissues, and it would not reach concentrations high enough to work. She said, If the elimination phase is significantly fast relative to the distribution phase, then you're not going to build up appreciable levels. On the plasma curve this is why the early segment is steeper than the late one: alpha, the slope of the distribution phase, is larger than beta, the slope of the elimination phase.",
    "slide": "ivb:20",
    "card": [
     {

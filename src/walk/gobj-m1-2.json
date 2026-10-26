@@ -22,7 +22,7 @@
    "fig": null
   },
   {
-   "text": "There are two broad types. Physiologic models, also called perfusion or blood flow models, are built from known anatomic and physiologic data, such as each tissue's blood flow and its drug concentration. Tissue samples are not available from human patients, so these models need more data than is usually on hand, and this course uses them mainly as a wrong answer choice. Compartment models treat the body as one or more boxes that the drug moves between at set rate constants. A compartment is not a real organ; it is a group of tissues with similar blood flow and drug affinity, and its concentration is an average for that group.",
+   "text": "Pharmacokinetic models are of two broad types. Physiologic models, also called perfusion or blood flow models, are built from known anatomic and physiologic data, such as each tissue's blood flow and its drug concentration. Tissue samples are not available from human patients, so these models need more data than is usually on hand, and this course uses them mainly as a wrong answer choice. Compartment models treat the body as one or more boxes that the drug moves between at set rate constants. A compartment is not a real organ; it is a group of tissues with similar blood flow and drug affinity, and its concentration is an average for that group.",
    "slide": "intro:14",
    "card": [
     {
@@ -45,7 +45,7 @@
    "fig": null
   },
   {
-   "text": "How many boxes a model needs depends on how the drug behaves. The simplest is one compartment: the drug enters it, by injection or by absorption, and leaves it by the rate constant k. If the drug behaves differently in some tissues than in others, one box no longer fits the data, and a second compartment is added. Each added box brings more rate constants to estimate, and the textbook notes that as the number of parameters rises, the data needed rise with it. That is why this course keeps to one and two compartments, the models Module two compares.",
+   "text": "How many compartments, or boxes, a compartment model needs depends on how the drug behaves in the body. The simplest is one compartment: the drug enters it, by injection or by absorption, and leaves it by the elimination rate constant, k. If the drug behaves differently in some tissues than in others, one compartment no longer fits the data, and a second compartment is added. Each added compartment brings more rate constants to estimate, and the textbook notes that as the number of parameters rises, the data needed rise with it. That is why this course keeps to one and two compartments, the models Module two compares.",
    "slide": "intro:16",
    "card": [
     {
@@ -95,7 +95,7 @@
    "fig": null
   },
   {
-   "text": "In a catenary model the compartments are joined in a chain, one to two to three. Drug reaches compartment three only by passing through two, by k one two and k two one, then k two three and k three two. Both models can have three compartments, so what separates them is how they are joined, not how many there are.",
+   "text": "In a catenary model the compartments are joined in a chain, one to two to three. Drug reaches compartment three only by passing through two, by k one two and k two one, then k two three and k three two. The mammillary and the catenary model can both have three compartments, so what separates them is how the compartments are joined, not how many there are.",
    "slide": "intro:15",
    "card": [
     {

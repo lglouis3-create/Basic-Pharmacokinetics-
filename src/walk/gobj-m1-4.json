@@ -61,7 +61,7 @@
    "fig": null
   },
   {
-   "text": "In a first order process the same fraction is lost every hour, so more drug is lost per hour when more drug is present. The rate is fastest at the top of the curve, where the concentration is highest, and slows as the concentration falls. In her practice table the ratio was the same over two equal spans, yet the loss fell from eighty to about twenty eight milligrams per liter. On linear axes this is a curve, and on a semilog axis it is a straight line. Halving is always the same fraction, so it always takes the same time: the half-life is constant.",
+   "text": "In a first order process the same fraction is lost every hour, so more drug is lost per hour when more drug is present. The rate is fastest at the top of the curve, where the concentration is highest, and slows as the concentration falls. In her practice table, from twelve to twenty four hours and again from twenty four to thirty six hours, the earlier level divided by the later one was two point eight three, yet the loss fell from eighty to about twenty eight milligrams per liter. On linear axes this is a curve, and on a semilog axis it is a straight line. Halving is always the same fraction, so it always takes the same time: the half-life is constant.",
    "slide": "intro:21",
    "card": [
     {
@@ -146,7 +146,7 @@
    "fig": null
   },
   {
-   "text": "Her practice set gives six concentrations over forty eight hours and asks for k, C zero, the half-life and the time to ninety percent decomposed. The order comes first: equal ratios over equal time spans mean a fixed fraction lost, first order, and equal differences per hour mean zero order. Here the ratio is two point eight three over both twelve hour spans, so the table is first order. k comes from the natural log of C at two points, because the natural log of C falls along a straight line whose slope is minus k; the six and twenty four hour points give zero point zero eight six six per hour.",
+   "text": "Her practice set gives six concentrations over forty eight hours and asks for k, C zero, the half-life and the time to ninety percent decomposed. The order comes first: equal ratios over equal time spans mean a fixed fraction lost, first order, and equal differences per hour mean zero order. Here the earlier level divided by the later one is two point eight three from twelve to twenty four hours and again from twenty four to thirty six, so the table is first order. k comes from the natural log of C at two points, because the natural log of C falls along a straight line whose slope is minus k; the six and twenty four hour points give zero point zero eight six six per hour.",
    "slide": "intro:21",
    "card": [
     {
@@ -193,7 +193,7 @@
    }
   },
   {
-   "text": "C zero comes from working back from the twelve hour point with a plus sign, because it must exceed every later level: three hundred fifty milligrams per liter. The half-life, zero point six nine three over k, is eight hours. For ninety percent decomposed, ten percent remains, so C zero cancels and the time is the natural log of ten over k, twenty six point six hours. When the percent remaining is a power of one half, she counts half-lives instead: with a half-life of eight hours, losing eighty seven point five percent of seven hundred fifty milligrams leaves one eighth, which takes three half-lives, twenty four hours, whatever the starting amount.",
+   "text": "C zero is the twelve hour level times e to the plus k t; the exponent is positive because C zero must exceed every later level, and the result is three hundred fifty milligrams per liter. The half-life, zero point six nine three over k, is eight hours. For ninety percent decomposed, ten percent remains, so C zero cancels and the time is the natural log of ten over k, twenty six point six hours. When the percent remaining is a power of one half, she counts half-lives instead: with a half-life of eight hours, losing eighty seven point five percent of seven hundred fifty milligrams leaves one eighth, which takes three half-lives, twenty four hours, whatever the starting amount.",
    "slide": "intro:22",
    "card": [
     {
@@ -228,7 +228,7 @@
    "fig": null
   },
   {
-   "text": "The same stem with a zero order table falls from three hundred thirty eight to sixty two milligrams per milliliter. The losses are twenty four in four hours and thirty six in six hours, both six per hour, so it is zero order. k is the fall in concentration over the time it took, six milligrams per milliliter per hour, and working back two hours gives C zero, three hundred fifty milligrams per milliliter. The half-life, C zero over two k, is twenty nine point two hours, and ninety percent decomposed takes fifty two point five hours.",
+   "text": "Her practice set also has a zero order table: from two to forty eight hours the level falls from three hundred thirty eight to sixty two milligrams per milliliter. From two to six hours the level falls by twenty four milligrams per milliliter, and from six to twelve hours by thirty six, both six milligrams per milliliter per hour, so the table is zero order. k is the fall in concentration over the time it took, six milligrams per milliliter per hour, and working back two hours adds twelve milligrams per milliliter to three hundred thirty eight, which gives C zero, three hundred fifty milligrams per milliliter. The half-life, C zero over two k, is twenty nine point two hours, and ninety percent decomposed takes fifty two point five hours.",
    "slide": "intro:20",
    "card": [
     {
@@ -283,7 +283,7 @@
    }
   },
   {
-   "text": "Her Quiz one items test exactly this. A rate that depends on concentration means first order: the half-life is independent of concentration, and d C by d t equals minus k C. A rate independent of concentration means zero order: the half-life depends on concentration, and d C by d t equals minus k. Her zero order item is keyed as a rate independent of the amount in the body; for first order she said, The rate is highest at the top of the curve when the concentration is highest. In her poll on first order, thirty eight percent chose the key, a constant half-life, and forty four percent chose units of k of concentration per time, which are zero order units.",
+   "text": "Her Quiz one items match each order to its rate and its half-life. A rate that depends on concentration means first order: the half-life is independent of concentration, and d C by d t equals minus k C. A rate independent of concentration means zero order: the half-life depends on concentration, and d C by d t equals minus k. Her zero order item is keyed as a rate independent of the amount in the body; for first order she said, The rate is highest at the top of the curve when the concentration is highest. In her poll on first order, thirty eight percent chose the key, a constant half-life, and forty four percent chose units of k of concentration per time, which are zero order units.",
    "slide": "intro:22",
    "card": [
     {
@@ -310,7 +310,7 @@
    "fig": null
   },
   {
-   "text": "An axis marked one, ten, one hundred, one thousand is a log scale even when it is not labelled, so a straight line on it means first order. She said, I expect you to give me half-life in units of time. Working back to C zero uses a plus sign, and k is kept to three or four decimal places. Both orders return in Module eight: some drugs are eliminated by first order at drug levels well below a concentration called K M, and near zero order well above it.",
+   "text": "An axis marked one, ten, one hundred, one thousand is a log scale even when it is not labelled, so a straight line on it means first order. She said, I expect you to give me half-life in units of time. Working back to C zero, the k t term carries a plus sign, because C zero is higher than every later level, and k is kept to three or four decimal places. Both orders return in Module eight: some drugs are eliminated by first order at drug levels well below a concentration called K M, and near zero order well above it.",
    "slide": "intro:24",
    "card": [
     {

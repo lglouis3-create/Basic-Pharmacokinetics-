@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "On a graph of elimination rate against C p, K M is marked on the concentration axis and V max on the rate axis. So C p is compared with K M, never with V max. She said, We can compare because they've got the same units. V max is a rate, so a level cannot be low or high relative to V max, even though its units on her slide, concentration per time, contain the word concentration.",
+   "text": "On a graph of elimination rate against C p, K M is marked on the concentration axis and V max on the rate axis. So C p, a concentration in milligrams per liter, is compared with K M, also in milligrams per liter, never with V max. She said, We can compare because they've got the same units. V max is a rate, so a level cannot be low or high relative to V max, even though the units of V max on her slide, concentration per time, contain the word concentration.",
    "slide": "nonlin:8",
    "card": [
     {
@@ -69,7 +69,7 @@
    }
   },
   {
-   "text": "The rate is the amount removed per unit of time, so depends on concentration means this amount changes with C p. Well below K M, the rate is a small part of V max, so the enzymes have spare capacity, and twice the level gives about twice the rate: the rate depends on concentration, first order. Well above K M, the enzymes are saturated: more drug raises the rate only a little, so it stays near V max, independent of concentration: zero order. She said, That's as fast as it can go. In between, the rate still rises with C p, but less than in proportion.",
+   "text": "The elimination rate is the amount of drug removed per unit of time, so when her quiz says the rate depends on concentration, it means this amount changes when C p changes. Well below K M, the rate is a small part of V max, so the enzymes have spare capacity, and twice the level gives about twice the rate: the rate depends on concentration, first order. Well above K M, the enzymes are saturated: more drug raises the rate only a little, so it stays near V max, independent of concentration: zero order. She said, That's as fast as it can go. In between, the rate still rises with C p, but by a smaller fraction than C p rises.",
    "slide": "nonlin:8",
    "card": [
     {
@@ -112,7 +112,7 @@
    }
   },
   {
-   "text": "The elimination rate, the fall in C p with time, equals V max times C p, divided by K M plus C p. C p on the top raises the rate, and C p on the bottom, added to K M, limits its rise; they can be added only because both are concentrations. When C p is much smaller than K M, the bottom stays about K M, so the rate is about V max over K M, a constant called k prime, times C p: first order. When C p is much larger than K M, the bottom is about C p, the C p on top and bottom cancel, and the rate is about V max: zero order.",
+   "text": "The elimination rate, the fall in C p with time, equals V max times C p, divided by K M plus C p. C p on the top raises the rate, and C p on the bottom, added to K M, limits its rise; the two can be added because both are concentrations. When C p is much smaller than K M, the bottom stays about K M, so the rate is about k prime times C p, where k prime, V max over K M, is a constant: first order. When C p is much larger than K M, the bottom is about C p, the C p on top and bottom cancel, and the rate is about V max: zero order.",
    "slide": "nonlin:8",
    "card": [
     {
@@ -143,7 +143,7 @@
    }
   },
   {
-   "text": "Well below K M, the amount removed per day follows C p, but the fraction removed per day stays nearly constant, so the half life and the clearance do too, as in first order. The textbook puts it this way: in first order the rate is a function of the concentration, the half life is not; in zero order the half life depends on the concentration. As C p rises toward and above K M, the rate rises less than in proportion, so the fraction removed per day falls, the half life lengthens and the clearance falls. She said, Higher concentration, that half life starts to depend on concentration, looks like zero order.",
+   "text": "Well below K M, the amount removed per day rises in proportion to C p, so the fraction removed per day stays nearly constant, and so do the half life and the clearance, as in first order. The textbook puts it this way: in first order the rate is a function of the concentration, the half life is not; in zero order the half life depends on the concentration. As C p rises toward and above K M, the amount removed per day rises by a smaller fraction than C p, so the fraction removed per day falls, the half life lengthens and the clearance falls. She said, Higher concentration, that half life starts to depend on concentration, looks like zero order.",
    "slide": "nonlin:17",
    "card": [
     {
@@ -170,7 +170,7 @@
    }
   },
   {
-   "text": "The half life equals V D, the volume of distribution, times zero point six nine three over V max, times K M plus C p. C p is on the top, added to K M, so a higher level gives a longer half life. The total body clearance, Cl T, equals V max divided by K M plus C p. C p is on the bottom, so the clearance falls as the level rises. V max is on the top of the clearance line and the bottom of the half life line, so a higher V max removes the drug faster.",
+   "text": "The half life equals V D, the volume of distribution, times zero point six nine three over V max, times K M plus C p. C p is on the top, added to K M, so a higher level gives a longer half life. The total body clearance, Cl T, equals V max divided by K M plus C p. C p is on the bottom, so the clearance falls as the level rises. V max is on the top of the clearance line and on the bottom of the half life line, so with the same K M, a higher V max gives a higher clearance and a shorter half life, and the drug is removed faster.",
    "slide": "nonlin:18",
    "card": [
     {
@@ -205,7 +205,7 @@
    }
   },
   {
-   "text": "Her Solutions two asks the half life and the total body clearance at fifteen and at twenty one milligrams per liter. The two lines answer it, because each takes a stated level. The patient weighs seventy five kilograms, with a V D of zero point seven five liters per kilogram, converted to liters first, a K M of nine milligrams per liter and a V max of five hundred milligrams per day. At fifteen milligrams per liter, the half life is one point eight seven days and the clearance twenty point eight liters per day.",
+   "text": "Her Solutions two asks the half life and the total body clearance at fifteen and at twenty one milligrams per liter. The half life line and the clearance line answer it, because each takes a stated plasma level. The patient weighs seventy five kilograms, with a V D of zero point seven five liters per kilogram, which she converts first to fifty six point two five liters, a K M of nine milligrams per liter and a V max of five hundred milligrams per day. At fifteen milligrams per liter, the half life is one point eight seven days and the clearance twenty point eight liters per day.",
    "slide": "nonlin:17",
    "card": [
     {
@@ -228,7 +228,7 @@
    "fig": null
   },
   {
-   "text": "At twenty one milligrams per liter, the half life is two point three four days and the clearance sixteen point seven liters per day. The higher level gave the longer half life and the lower clearance, which answers her written question three. The elimination rate still rose, from three hundred twelve point five to three hundred fifty milligrams per day, but by a smaller fraction than the level rose, so the clearance, the rate divided by the level, fell. Milligrams per day over milligrams per liter leaves liters per day.",
+   "text": "For the same Solutions two patient at twenty one milligrams per liter, the half life is two point three four days and the clearance sixteen point seven liters per day. So from fifteen to twenty one milligrams per liter the half life rose from one point eight seven days and the clearance fell from twenty point eight liters per day, which answers her written question three: at higher concentrations the half life increases and the clearance decreases. The elimination rate still rose, from three hundred twelve point five to three hundred fifty milligrams per day, twelve percent, while the level rose forty percent, so the clearance, the rate divided by the level, fell. Milligrams per day divided by milligrams per liter leaves liters per day.",
    "slide": "nonlin:18",
    "card": [
     {
@@ -259,7 +259,7 @@
    "fig": null
   },
   {
-   "text": "Her quiz paired low concentrations relative to V max or to K M with a rate that depends on, or is independent of, concentration. The key: at low concentrations relative to K M, the elimination rate depends on the concentration. Any option relative to V max is wrong, because V max is a rate. Depends on concentration names the rate, the amount removed per unit of time; reading it as the half life changing leads to the wrong answer, because well below K M the half life hardly changes with C p. Her poll, zero order at low concentrations and first order at high ones, is false.",
+   "text": "Her quiz question five asked which statement is true for a nonlinear drug; each option paired low concentrations, relative to V max or to K M, with an elimination rate that depends on the concentration or is independent of it. The key: at low concentrations relative to K M, the elimination rate depends on the concentration. Any option relative to V max is wrong, because V max is a rate. In the key, depends on the concentration describes the elimination rate, the amount removed per unit of time, not the half life, which hardly changes with C p well below K M. Her poll statement, zero order at low concentrations and first order at high ones, is false.",
    "slide": "nonlin:8",
    "card": [
     {
