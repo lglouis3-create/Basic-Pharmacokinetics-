@@ -68,6 +68,602 @@ T_KHALF = [{'h': 'Half-lives from rate constants', 'list': [
 T_C0IV = [{'h': 'The same dose as an IV bolus', 'list': [
     'C0 = {{frac:D0|VD}}, with the whole dose: an IV dose is 100% available, so no F.']}]
 
+# ================================================================ Exam 1 sheets
+# Module 1 (kinetic orders), Module 2 (IV bolus, one and two compartments) and
+# Module 3 (IV infusions): the daily practice sheets STYLE.md transcribes with
+# her keys. Where a bank question in q1/q2/q3 already asks the same part, the
+# part here carries dupOf that question, so an exam paper never holds both.
+T1_HALVES = [{'h': 'Counting half-lives', 'list': [
+    'Each half-life of a first-order process leaves half of what was there: 50%, 25%, 12.5% and 6.25% remain after 1, 2, 3 and 4 half-lives.',
+    't = {{frac:ln(C0 ÷ C)|k}} with k = {{frac:0.693|t½}} gives the count of half-lives as {{frac:ln(C0 ÷ C)|0.693}}.',
+    'The starting concentration cancels in the ratio, so the count holds for any dose.',
+    '99.9% decomposed leaves 0.1%, one part in 1000: ten half-lives.']}]
+T1_TFRAC = [{'h': 'Time for a percent to decompose, first order', 'list': [
+    'Turn the percent decomposed into what remains: 30% decomposed leaves 70%.',
+    'A = A0 e^(−kt), so t = {{frac:ln(A0 ÷ A)|k}}, with k = {{frac:0.693|t½}}.',
+    'A0/A is a pure number, so the time is the same for any starting amount.',
+    'Less than 50% decomposed takes less than one half-life.']}]
+T1_ZEROVOL = [{'h': 'Volume from a zero-order starting concentration', 'list': [
+    'Zero order: C = C0 − kt, a straight line, so k = −slope = {{frac:C1 − C2|t2 − t1}}.',
+    'C0 = C + kt: add back what was lost by time t.',
+    'The whole dose was dissolved at time zero, so C0 = {{frac:dose|volume}} and volume = {{frac:dose|C0}}.',
+    'mg ÷ (mg/mL) = mL.']}]
+T1_ORDER = [{'h': 'Deciding the order from a table', 'list': [
+    'Zero order: the same amount is lost in each equal time interval; the amount against time is a straight line.',
+    'First order: the same fraction is lost in each equal interval; ln(amount) against time is a straight line.',
+    'Compare differences and ratios over intervals of equal length.']}]
+T1_K0 = [{'h': 'Zero-order rate constant from two points', 'list': [
+    'k = −slope = −{{frac:ΔY|ΔX}} = {{frac:A1 − A2|t2 − t1}}.',
+    'The unit is an amount per unit time, here mg/min, because a zero-order process loses a fixed amount each minute.',
+    'Her key takes the 20 and 60 minute points.']}]
+T1_THZERO = [{'h': 'Zero-order half-life', 'list': [
+    't½ = {{frac:A0|2k}}: half of the starting amount, removed at k per unit time.',
+    'When the table does not start at time zero, find A0 first: A0 = A + kt.',
+    'A zero-order half-life depends on the starting amount; a first-order half-life does not.']}]
+T1_PAIRED = [{'h': 'One pair of points, read under both orders', 'list': [
+    'First order: k = {{frac:ln C1 − ln C2|t2 − t1}}, then t½ = {{frac:0.693|k}}.',
+    'Zero order: k = {{frac:C1 − C2|t2 − t1}}, then t½ = {{frac:C0|2k}}.',
+    'The same two measurements give different half-lives under the two orders, so the stated order decides which line is used.']}]
+T2_C0 = [{'h': 'Initial concentration after an IV bolus', 'list': [
+    'C0 = {{frac:D0|VD}}: the whole dose spread through the volume of distribution.',
+    'A volume given as a percentage of body weight is read as L per kg: 20% is 0.2 L/kg.',
+    'mL/kg ÷ 1000 = L/kg; pounds ÷ 2.2 = kilograms.',
+    'With the dose in mg/kg and VD in L/kg the kilograms cancel and C0 comes out in mg/L.']}]
+T2_K = [{'h': 'Rate constant from the half-life', 'list': [
+    't½ = {{frac:0.693|k}}, so k = {{frac:0.693|t½}}.',
+    'A half-life in hours gives k in hr⁻¹.',
+    'k and t½ are constants of the drug in the patient; the dose does not change them.']}]
+T2_CL = [{'h': 'Total clearance from half-life and volume', 'list': [
+    'ClT = k × VD, with k = {{frac:0.693|t½}}.',
+    'A volume per kilogram or a percentage of body weight is multiplied by the weight in kg first.',
+    'hr⁻¹ × L = L/hr: the volume of plasma cleared of drug each hour.']}]
+T2_CT = [{'h': 'Concentration at a time after an IV bolus', 'list': [
+    'C = C0 e^(−kt); e^(−kt) is the fraction of C0 left at time t.',
+    'k = {{frac:0.693|t½}}; kt has no units.',
+    'At whole numbers of half-lives the fraction left is (½)^n: 25% after two, 12.5% after three.']}]
+T2_AMT = [{'h': 'Amount in the body after an IV bolus', 'list': [
+    'DB = D0 e^(−kt): the amount falls first order, like the concentration.',
+    'A dose in mg/kg times the weight in kg gives the dose in mg; pounds ÷ 2.2 = kg.',
+    'At whole numbers of half-lives the fraction left is (½)^n: one eighth after three.']}]
+T2_PCT = [{'h': 'Percent of a dose eliminated', 'list': [
+    'Percent remaining = 100 e^(−kt) = 100 (½)^n, with n = {{frac:t|t½}} half-lives.',
+    'Percent eliminated = 100% − percent remaining.',
+    'After 1, 2, 3 and 4 half-lives: 50%, 75%, 87.5% and 93.75% eliminated.',
+    'The percent depends on k and t only, not on the dose or the volume.']}]
+T2_DOSE = [{'h': 'What a larger dose changes, first order', 'list': [
+    'k, t½, VD and ClT are constants of the drug in the patient: a different dose does not change them.',
+    'Amounts and concentrations are proportional to the dose: C0 = {{frac:D0|VD}}, so twice the dose gives twice C0.',
+    'The rate of elimination in mg/hr, ClT × Cp, doubles with the dose; clearance in L/hr does not.']}]
+T2_BIEXP = [{'h': 'Two-compartment parameters', 'list': [
+    'Cp = A e^(−αt) + B e^(−βt); α, the larger exponent, is distribution; β, the smaller, is elimination.',
+    't½β = {{frac:0.693|β}} is the elimination half-life.',
+    'At t = 0 both exponentials equal 1, so C0 = A + B.',
+    'Volume of the central compartment: Vc = {{frac:D0|A + B}}.',
+    'Once the α term is negligible, only B e^(−βt) is left.']}]
+T3_R = [{'h': 'Infusion rate', 'list': [
+    'R = {{frac:D0|t inf}}: the dose delivered evenly over the infusion time, in mg/hr.',
+    'The same division with the solution volume gives a volume rate, mL/hr; ÷ 60 gives mL/min.']}]
+T3_CPINF = [{'h': 'Concentration during an infusion', 'list': [
+    'Cp = {{frac:R|kVD}}(1 − e^(−kt)), t counted from the start of the infusion.',
+    '{{frac:R|kVD}} = {{frac:R|ClT}} is Css, the plateau; (1 − e^(−kt)) is the fraction of it reached by time t.',
+    'mg/hr ÷ L/hr = mg/L.',
+    'One half-life reaches 50% of Css, two reach 75%, three reach 87.5%.']}]
+T3_DBINF = [{'h': 'Amount in the body during an infusion', 'list': [
+    'Cp = {{frac:R|kVD}}(1 − e^(−kt)) during the infusion.',
+    'DB = Cp × VD; mg/L × L = mg.',
+    'The same amount is {{frac:R|k}}(1 − e^(−kt)): the plateau amount times the fraction reached.']}]
+T3_CSS = [{'h': 'Steady state of an infusion', 'list': [
+    'At steady state rate in = rate out: R = ClT × Css, so Css = {{frac:R|ClT}} = {{frac:R|kVD}}.',
+    'For a target, R = Css × ClT; mg/L × L/hr = mg/hr.',
+    'Css depends on the rate and the clearance only; a loading dose does not change it.',
+    'mcg/mL and mg/L are the same concentration.']}]
+T3_DL = [{'h': 'Loading dose with an infusion', 'list': [
+    'DL = Css × VD = {{frac:R|k}}: the amount the body holds at the plateau, given at once.',
+    'mg/hr ÷ hr⁻¹ = mg.',
+    'The two routes agree when the rate was chosen for that Css.']}]
+T3_SOLN = [{'h': 'Volume of solution for a dose', 'list': [
+    'Concentration = {{frac:amount|volume}}, so volume = {{frac:amount|concentration}}.',
+    'mg ÷ (mg/mL) = mL.',
+    'A rate in mg/hr becomes mL/hr the same way: divide by the mg/mL of the solution.']}]
+T3_SOLN2 = [{'h': 'Making up the infusion solution', 'list': [
+    'Volume = solution rate × infusion time; the minutes and hours must match.',
+    'Amount of drug = drug rate × infusion time; mg/hr × hr = mg.',
+    'Concentration of the solution = {{frac:amount|volume}}, in mg/mL.']}]
+T3_STOP = [{'h': 'After the infusion stops', 'list': [
+    'Cp = Cstop e^(−kt), with t counted from the end of the infusion.',
+    'After a loading dose, or after about five half-lives of infusion, Cstop is Css.',
+    'Each half-life halves the level: 50%, 25%, 12.5% remain after 1, 2, 3.']}]
+T3_TIME = [{'h': 'Time to a fraction of Css without a loading dose', 'list': [
+    'The fraction of Css reached is f = 1 − e^(−kt), so t = {{frac:−ln(1 − f)|k}}.',
+    '50% takes one half-life, 75% two, 90% 3.32 and 95% 4.32.',
+    'The time depends on k only, not on the rate or the target.']}]
+T3_ADD = [{'h': 'Rate and loading dose from separate clearances', 'list': [
+    'ClT = ClR + ClM: add the renal and metabolic clearances first.',
+    'R = Css × ClT; mg/L × L/hr = mg/hr.',
+    'DL = {{frac:R|k}} = Css × VD, with k = {{frac:0.693|t½}}; mg/hr ÷ hr⁻¹ = mg.']}]
+T3_VD = [{'h': 'Volume from clearance and k', 'list': [
+    'ClT = k × VD, so VD = {{frac:ClT|k}}.',
+    '(L/hr) ÷ hr⁻¹ = L.',
+    'k = {{frac:0.693|t½}}; with separate clearances, ClT = ClR + ClM first.']}]
+T3_RENAL = [{'h': 'Renal failure on an infusion', 'list': [
+    'ClT = ClR + ClM: only the renal part falls.',
+    'R = Css × ClT: a lower clearance needs a lower rate for the same Css.',
+    'k = {{frac:ClT|VD}} falls too, so the half-life lengthens and Css takes longer to reach.',
+    'DL = Css × VD depends on the volume alone, so with VD unchanged the loading dose is unchanged.']}]
+
+IM2 = 'IntroductionandMathReview2Solutions.pdf'
+IM3 = 'IntroductionandMathReview3Solutions.pdf'
+IB3 = 'IV-Bolus-Practice-3---Solutions.pdf'
+IB4 = 'IV-Bolus-Practice-4---Solutions.pdf'
+IN1 = 'IV-Infusions-Practice-1-Solutions.pdf'
+IN2 = 'IV-Infusions-Practice-2-Solutions.pdf'
+IN4 = 'IV-Infusions-Practice-4-Solutions.pdf'
+M1 = dict(module=1, lecture='L01', topic='orders', exam=1)
+M2A = dict(module=2, lecture='L02', topic='bolus1', exam=1)
+M2B = dict(module=2, lecture='L03', topic='bolus2', exam=1)
+M3 = dict(module=3, lecture='L04', topic='infusion', exam=1)
+
+# ------------------------------------------- Introduction and Math Review 2
+X21 = '1. How many half-lives (t½) would it take for 99.9% of any initial concentration of a drug to decompose? Assume first-order kinetics.'
+X22 = '2. If the half-life for decomposition of a drug is 12 hours, how long will it take for 125 mg of the drug to decompose by 30%? Assume first-order kinetics and constant temperature.'
+X23 = '3. Exactly 300 mg of a drug are dissolved into an unknown volume of distilled water. After complete dissolution of the drug, 1.0-mL samples were removed and assayed for the drug. The following results were obtained:\n\nTime (hr) | Concentration (mg/mL)\n0.5 | 0.45\n2.0 | 0.3\n\nAssuming zero-order decomposition of the drug, what was the original volume of water in which the drug was dissolved?'
+q = [
+ num('ws1-2-1', asks='nhalf', stem=X21, units='half-lives', ans=10, calc=ln(1000) / 0.693, **M1, sub='half', skill='krate', concept='halflife-counting', dupOf='m1-ord-n16',
+     steps=[('setup', '99.9% decomposed leaves 0.1% remaining: C0 = 100, C = 0.1', 'The first-order equation works with what remains, so the 99.9% decomposed becomes the 0.1% left. Any starting value gives the same count; 100 lets the percentages be read directly.'),
+            ('setup', 't = {{frac:ln(C0 ÷ C)|k}}, with k = {{frac:0.693|t½}}', 'C = C0 e^(−kt) solved for t gives ln(C0/C) over k. Putting 0.693/t½ in place of k writes the time as a multiple of t½, which is what the question asks for.'),
+            ('algebra', 'ln(100 ÷ 0.1) = ln(1000) = 6.908; {{frac:6.908|0.693}} = 9.97, so t = 9.97 t½', 'C0 over C is a ratio of two concentrations, so the units cancel and its logarithm is a pure number; dividing by 0.693 counts the half-lives.'),
+            ('round', 't = 10 half-lives', 'Her key takes 9.97 as 10 and confirms it with her table of halvings: after 10 half-lives 0.1% remains, so 99.9% has decomposed, whatever the starting concentration.')],
+     teach=T1_HALVES, note='Her key gives 9.97 t½ from the equation and 10 half-lives from her table; both are accepted.',
+     setup=dict(eq='first-exp', pre=['thalf-first'], why='The stem says "first-order kinetics" and asks "How many half-lives" for "99.9%" to decompose, so the first-order decline line solved for t. C/C0 is known and t in half-lives is asked: C = C0 e^(−kt) gives t = ln(C0/C)/k. Hinge: k = 0.693/t½, because the answer is a multiple of t½.'),
+     givens=[['fraction', '99.9%', 'decomposed, so 0.1% remains: C0/C = 1000']],
+     check=dict(t='Ten halvings leave about one thousandth, 0.1%, so 99.9% has decomposed after about ten half-lives; 9.97 rounds to 10.', lo=9, hi=10), cite=f'{IM2}, problem 1'),
+ num('ws1-2-2', asks='t', stem=X22, units='hr', ans=6.2, calc=ln(125 / 87.5) / (0.693 / 12), **M1, sub='first', skill='conctime', concept='time-to-percent-first-order',
+     steps=[('setup', 'k = {{frac:0.693|12 hr}} = 0.05775 hr⁻¹', 'k = 0.693/t½: 0.693 is a pure number, so dividing by hours leaves reciprocal hours, the unit of a first-order rate constant.'),
+            ('algebra', '30% of 125 mg decomposed leaves (0.7)(125 mg) = 87.5 mg', 'The equation works with the amount remaining: 30% gone leaves 70% of the 125 mg.'),
+            ('setup', 'A = A0 e^(−kt), so t = {{frac:ln(A0 ÷ A)|k}}', 'Taking the natural log of the first-order equation and solving for t gives the time for the amount to fall from A0 to A.'),
+            ('algebra', 't = {{frac:ln(125 ÷ 87.5)|0.05775 hr⁻¹}} = {{frac:0.3567|0.05775 hr⁻¹}} = 6.18 hr', 'The milligrams cancel inside the logarithm, leaving a pure number, 0.3567; dividing it by reciprocal hours leaves hours.'),
+            ('round', 't = 6.2 hr', 'Her key reports 6.2 hr, to one decimal place. Less than one 12-hour half-life has passed, as it must when less than half of the drug has decomposed.')],
+     teach=T1_TFRAC, note='Her key rounds k to 0.058 hr⁻¹. Dividing by 0.058 gives 6.15 hr; the unrounded k, 0.05775 hr⁻¹, gives 6.18 hr, her 6.2 hr. Both are accepted.',
+     setup=dict(eq='amount-exp', pre=['thalf-first'], why='The stem gives a "half-life" and asks "how long" for 125 mg to "decompose by 30%" under "first-order kinetics", so the first-order decline line written in amount and solved for t. A0, A and k are the inputs: A = A0 e^(−kt) gives t = ln(A0/A)/k. Hinge: k = 0.693/t½ first.'),
+     givens=[['t½', '12 hours', 'gives k = {{frac:0.693|12}} = 0.05775 hr⁻¹'], ['A0', '125 mg', 'the starting amount, top of the log ratio'], ['decomposed', '30%', 'leaves 70%: A = 87.5 mg'], ['temperature', 'constant', 'not needed: it keeps k fixed']],
+     check=dict(t='Less than half has decomposed, so the time is less than one half-life, 12 hours; 30% is a little over half of the 50% one half-life removes, so about 6 hours fits.', lo=0, hi=12), cite=f'{IM2}, problem 2'),
+ num('ws1-2-3', asks='volume', stem=X23, units='mL', ans=600, calc=300 / (0.3 + (0.45 - 0.3) / (2.0 - 0.5) * 2.0), **M1, sub='zero', skill='vddose', concept='volume-from-c0', dupOf='m1-ord-n11',
+     steps=[('setup', 'k = −{{frac:ΔY|ΔX}} = −{{frac:(0.3 − 0.45) mg/mL|(2 − 0.5) hr}} = 0.1 mg/mL/hr', 'Zero order is a straight line, C = C0 − kt, so k is the slope with the sign reversed. mg/mL over hours gives mg/mL/hr: a fixed concentration lost each hour.'),
+            ('algebra', 'A0 = 0.3 mg/mL + (0.1 mg/mL/hr)(2 hr) = 0.5 mg/mL', 'C0 = C + kt adds back what was lost in the 2 hours before the second sample. The hours cancel in (mg/mL/hr)(hr), so both terms are in mg/mL and add.'),
+            ('setup', '{{frac:300 mg|X mL}} = 0.5 mg/mL', 'At time zero all 300 mg was in solution, so concentration = amount over volume, the line Cp = DB/VD, fixes the unknown volume X.'),
+            ('algebra', 'X = {{frac:300 mg|0.5 mg/mL}} = 600 mL', 'mg divided by mg/mL leaves mL. The volume is larger than 300 mL because the starting concentration is below 1 mg/mL.')],
+     teach=T1_ZEROVOL,
+     setup=dict(eq='cp-db-vd', pre=['zero-line'], why='The stem says "Assuming zero-order decomposition" and asks "the original volume of water" for 300 mg dissolved, so the amount, concentration and volume line. Dose and C0 are the inputs, the volume is asked: Cp = DB/VD rearranged to V = dose/C0. Hinge: C0 from the zero-order line C = C0 − kt, with k from the two samples.'),
+     givens=[['dose', '300 mg', 'the numerator of V = {{frac:dose|C0}}'], ['sample', '1.0-mL', 'not needed: the size of each sample'], ['C at 0.5 hr', '0.45 mg/mL', 'the earlier point of the slope'], ['C at 2.0 hr', '0.3 mg/mL', 'the later point; C0 = 0.3 + k × 2']],
+     check=dict(t="Losing 0.1 mg/mL each hour, the solution held 0.5 mg/mL at time zero, so 300 mg sits in 600 mL. C0 is above the 0.45 mg/mL measured at 0.5 hours, so the volume is below 300 mg ÷ 0.45 mg/mL.", lo=0, hi=667), cite=f'{IM2}, problem 3')]
+chain('ws1-p2', src='practice', module=1, name='Introduction and Math Review Practice 2', setup='Half-lives for 99.9% to decompose, the time for 125 mg to lose 30% (t½ 12 hr), and the volume 300 mg was dissolved in (zero order); problems 1–3', parts=q)
+
+# ------------------------------------------- Introduction and Math Review 3
+X31 = '1. The table below shows the decomposition of a drug as a function of time.\n\nTime (minute) | Drug A (mg)\n10 | 97.0\n20 | 89.0\n40 | 73.0\n60 | 57.0\n90 | 34.0\n120 | 10.0\n130 | 2.5\n\n'
+X32 = '2. A solution of a drug was freshly prepared at a concentration of 500 mg/mL. After 60 days at 25°C, the drug concentration in the solution was 150 mg/mL.'
+G31 = [['A at 20 min', '89.0', 'mg; the start of a 20-minute interval'], ['A at 40 min', '73.0', 'mg; the end of one interval and the start of the next'], ['A at 60 min', '57.0', 'mg; the end of the second interval']]
+q = [
+ mc('ws1-3-1a', stem=X31 + 'a. How would you classify the decrease in the amount of drug A?', **M1, sub='decide', skill='order', concept='order-from-data', dupOf='m1-ord-c07',
+    options=[('Zero-order', True, 'The drug is decreasing at a constant amount per unit time: 16.0 mg in each 20 minutes from 20 to 60 minutes. Equal amounts lost in equal times is zero order.'),
+             ('First-order', False, 'First order loses the same fraction in equal times. Over the two 20-minute intervals the ratio grows from {{frac:89.0|73.0}} = 1.219 to {{frac:73.0|57.0}} = 1.281, so the fraction lost is not constant.'),
+             ('Neither order fits the data', False, 'The uneven spacing of the times does not prevent a decision: over equal 20-minute intervals the amount falls by the same 16.0 mg, which is zero order.')],
+    steps=[('setup', 'Equal intervals: 20 to 40 min and 40 to 60 min, 20 minutes each', 'The order is read from how the amount falls over equal time intervals: equal differences mean zero order, equal ratios mean first order.'),
+           ('algebra', '89.0 − 73.0 = 16.0 mg; 73.0 − 57.0 = 16.0 mg', 'The same 16.0 mg is lost in each 20-minute interval: a constant amount per unit time, the zero-order pattern.'),
+           ('algebra', '{{frac:89.0|73.0}} = 1.219; {{frac:73.0|57.0}} = 1.281', 'The two ratios differ, so the fraction lost per interval is not constant and the decline is not first order.')],
+    givens=[["A at 20 min", "89.0", "mg; the start of a 20-minute interval"], ["A at 40 min", "73.0", "mg; the end of one interval and the start of the next"], ["A at 60 min", "57.0", "mg; the end of the second interval"], ["A at 10, 90, 120, 130 min", "97.0, 34.0, 10.0, 2.5", "mg; not needed: the two 20-minute intervals decide the order"]],
+    check=dict(t='A zero-order amount falls along a straight line: 16.0 mg every 20 minutes here. The ratios 1.219 and 1.281 differ, so ln(amount) against time would curve, which rules out first order.'),
+    teach=T1_ORDER, audit='Her sheet offers two choices, zero-order and first-order; the third option comes from m1-ord-c07, because every multiple-choice item has three.', cite=f'{IM3}, problem 1a'),
+ num('ws1-3-1b', asks='k0', stem=X31 + 'b. What is the rate constant for the decrease in drug? (Part a: zero-order.)', units='mg/min', ans=0.8, tol=0.05, calc=(89.0 - 57.0) / (60 - 20), **M1, sub='decide', skill='krate', concept='zero-order-k-from-table',
+     steps=[('setup', 'k = −slope of the line = −{{frac:ΔY|ΔX}}', 'Zero order: A = A0 − kt is a straight line in the amount, so the rate constant is the slope with the sign reversed.'),
+            ('algebra', 'k = −{{frac:(57 − 89) mg|(60 − 20) min}} = {{frac:32 mg|40 min}} = 0.8 mg/min', 'Her key takes the 20 and 60 minute points. mg over min gives mg/min: a fixed 0.8 mg of drug A is lost each minute, an amount per time because the order is zero.')],
+     teach=T1_K0,
+     setup=dict(eq='zero-line', pre=[], why='The table gives the amount of drug A against time and the decrease is zero order, so the zero-order line A = A0 − kt. Two points from the table are the inputs and k is asked: k is the slope with the sign reversed. No hinge.'),
+     givens=[["A at 20 min", "89.0", "mg; the first point of her slope"], ["A at 40 min", "73.0", "mg; on the same line: 16.0 mg lost in each 20 minutes"], ["A at 60 min", "57.0", "mg; the second point: 32 mg lost in 40 minutes"], ["A at 10, 90, 120, 130 min", "97.0, 34.0, 10.0, 2.5", "mg; any two rows give 0.75 to 0.8 mg/min"]],
+     check=dict(t='From 20 to 60 minutes the amount falls from 89.0 to 57.0 mg, a little under 1 mg each minute; 0.8 mg/min fits, and at that rate 40 minutes removes 32 mg.', lo=0), note='Any two rows of the table give a slope between 0.75 and 0.8 mg/min, and any of them is accepted; her key uses the 20- and 60-minute rows.', cite=f'{IM3}, problem 1b'),
+ num('ws1-3-1c', asks='thalf', stem=X31 + 'c. What is the half-life of drug decomposition? (Part b: k = 0.8 mg/min.)', units='min', ans=65.6, calc=(73.0 + 0.8 * 40) / (2 * 0.8), **M1, sub='half', skill='krate', concept='zero-order-halflife', dupOf='m1-ord-n08',
+     steps=[('setup', 'A0 = A + kt', 'A = A0 − kt rearranged: the amount at time zero is a later amount plus what was lost in between, k × t, because a zero-order process loses a fixed amount each minute.'),
+            ('algebra', 'A0 = 73 mg + (0.8 mg/min)(40 min) = 105 mg', 'Her key uses the 40-minute point. The minutes cancel in (mg/min)(min), so 32 mg is added to 73 mg: drug A started at 105 mg.'),
+            ('setup', 't½ = {{frac:A0|2k}}', 'Half of A0 must be lost at k mg each minute, so the time is A0/2 divided by k. A zero-order half-life depends on the starting amount.'),
+            ('algebra', 't½ = {{frac:105 mg|2(0.8 mg/min)}} = 65.6 min', 'mg over mg/min leaves minutes: {{frac:105|1.6}} = 65.625 min, reported as 65.6 min.')],
+     teach=T1_THZERO,
+     setup=dict(eq='thalf-zero', pre=['zero-line'], why='The stem asks "the half-life of drug decomposition" for the zero-order decrease, with k from part b, so the zero-order half-life line. A0 and k are the inputs, t½ is asked: t½ = A0/2k. Hinge: A0 = A + kt from the zero-order line, because the table does not give the amount at time zero.'),
+     givens=[["k", "0.8 mg/min", "adds back 0.8 × 40 = 32 mg, then sits in the 2k denominator"], ["A at 40 min", "73.0", "mg; the measured amount from which A0 is recovered"], ["A at 10, 20, 60, 90, 120, 130 min", "97.0, 89.0, 57.0, 34.0, 10.0, 2.5", "mg; any one row gives A0 between 105 and 106.5 mg"]],
+     check=dict(t='Drug A started at 105 mg; at 60 minutes the table still shows 57.0 mg, just over half of 105 mg, so the half-life is a little over 60 minutes, and 65.6 min fits.', lo=60), cite=f'{IM3}, problem 1c'),
+ num('ws1-3-2a', asks='thalf', stem=X32 + ' a. Assuming first-order kinetics, when will the drug decline to one-half of the original concentration?', units='days', ans=34.5, calc=0.693 / (ln(500 / 150) / 60), **M1, sub='half', skill='krate', concept='paired-order-halflife',
+     steps=[('setup', 'k = −{{frac:ΔY|ΔX}} = −{{frac:ln(150) − ln(500)|60 days}}', 'First order: ln C = ln C0 − kt is a straight line, so k is minus the slope of ln C against time, from the two concentrations 60 days apart.'),
+            ('algebra', 'k = {{frac:ln(500 ÷ 150)|60 days}} = {{frac:1.204|60 days}} = 0.02007 day⁻¹', 'The log of a ratio of two concentrations in mg/mL is a pure number, 1.204, so dividing by days leaves day⁻¹. Her key rounds k to 0.02 day⁻¹.'),
+            ('algebra', 't½ = {{frac:0.693|0.02007 day⁻¹}} = 34.5 days', 't½ = 0.693/k: a pure number divided by day⁻¹ gives days. Carried unrounded, k gives 34.54 days, her 34.5.')],
+     teach=T1_PAIRED, note='Her key prints k = 0.02 day⁻¹ and t½ = 34.5 days. 0.693 divided by the rounded 0.02 is 34.65 days; her 34.5 follows from the unrounded k, 0.02007 day⁻¹. Both are accepted.',
+     setup=dict(eq='thalf-first', pre=['first-ln'], why='The stem says "Assuming first-order kinetics" and asks when the drug will "decline to one-half of the original concentration", so the first-order half-life line. k is the input, t½ is asked: t½ = 0.693/k. Hinge: k from ln C = ln C0 − kt with the two concentrations 60 days apart.'),
+     givens=[['C0', '500 mg/mL', 'the starting concentration, top of the ratio'], ['C', '150 mg/mL', 'after 60 days, bottom of the ratio'], ['t', '60 days', 'the denominator of k'], ['temperature', '25°C', 'not needed: held constant']],
+     check=dict(t='After 60 days 150 of the 500 mg/mL remains, less than half but more than a quarter, so 60 days is between one and two half-lives and t½ lies between half of 60 days and 60 days; 34.5 days fits.', lo=30, hi=60), cite=f'{IM3}, problem 2a'),
+ num('ws1-3-2b', asks='thalf', stem=X32 + ' b. Assuming zero-order kinetics, when will the drug decline to one-half of the original concentration?', units='days', ans=42.9, calc=500 / (2 * (500 - 150) / 60), **M1, sub='half', skill='krate', concept='paired-order-halflife',
+     steps=[('setup', 'k = −{{frac:ΔY|ΔX}} = −{{frac:(150 − 500) mg/mL|60 days}}', 'Zero order: C = C0 − kt is a straight line in the concentration itself, so k is minus the slope of C against time.'),
+            ('algebra', 'k = {{frac:350 mg/mL|60 days}} = 5.83 mg/mL/day', 'mg/mL over days leaves mg/mL/day: a fixed concentration lost each day, the zero-order unit.'),
+            ('algebra', 't½ = {{frac:C0|2k}} = {{frac:500 mg/mL|2(5.83 mg/mL/day)}} = 42.9 days', 'The mg/mL cancel and days are left. The zero-order half-life uses the starting concentration, 500 mg/mL, because half of it must be lost at a fixed 5.83 mg/mL each day.')],
+     teach=T1_PAIRED,
+     setup=dict(eq='thalf-zero', pre=['zero-line'], why='The stem says "Assuming zero-order kinetics" and asks when the drug will "decline to one-half of the original concentration", so the zero-order half-life line. C0 and k are the inputs, t½ is asked: t½ = C0/2k. Hinge: k from C = C0 − kt with the two concentrations 60 days apart.'),
+     givens=[['C0', '500 mg/mL', 'the starting concentration, the numerator of t½'], ['C', '150 mg/mL', 'after 60 days: 350 mg/mL lost'], ['t', '60 days', 'the denominator of k'], ['temperature', '25°C', 'not needed: held constant']],
+     check=dict(t='Losing 5.83 mg/mL each day, the drug loses half of 500 mg/mL in a little over six weeks, so 42.9 days fits; it must be under the 60 days after which 150 mg/mL, less than half, remained.', lo=0, hi=60), cite=f'{IM3}, problem 2b')]
+chain('ws1-p3', src='practice', module=1, name='Introduction and Math Review Practice 3', setup='Drug A by the minute (the order, k and the half-life), then 500 to 150 mg/mL in 60 days read as first and as zero order; parts 1a–2b', parts=q)
+
+# ------------------------------------------------------- IV Bolus Practice 3
+B31 = '1. A 187-pound male patient received a 15 mg/kg dose of a drug by rapid IV injection. The drug is characterized by half-life of 4 hours and an apparent volume of distribution that is 20% of body weight. Determine the:'
+B32 = '2. A 300-mg IV bolus dose of a drug was administered to six healthy volunteers. The parameters below best describe the pharmacokinetics of the drug.\n\nA = 10.21 mg/L, B = 8.53 mg/L, α = 3.14 hr⁻¹, β = 0.198 hr⁻¹\n\n'
+w3 = 187 / 2.2; k3 = 0.693 / 4
+G32 = [['D0', '300-mg', 'not needed'], ['A', '10.21 mg/L', 'not needed'], ['B', '8.53 mg/L', 'not needed'], ['α', '3.14 hr⁻¹', 'not needed: the distribution phase'], ['β', '0.198 hr⁻¹', 'not needed']]
+def g32(**roles):
+    return [[s, v, roles.get(s, r)] for s, v, r in G32]
+q = [
+ num('ws2-3-1a', asks='C0', stem=B31 + ' a. Initial concentration of drug in the plasma', units='mg/L', ans=75, calc=(15 * w3) / (0.2 * w3), **M2A, sub='calc', skill='vddose', concept='c0-from-dose-vd',
+     steps=[('unit', 'VD = 20% of body weight = 0.2 L/kg', 'A volume given as a percentage of body weight is read as litres per kilogram, taking 1 kg as 1 L: 20% is 0.2 L/kg.'),
+            ('setup', 'C0 = {{frac:D0|VD}}', 'Right after an IV bolus the whole dose is in the body, so the concentration at time zero is the dose divided by the volume of distribution.'),
+            ('algebra', 'C0 = {{frac:15 mg/kg|0.2 L/kg}} = 75 mg/L', 'Dose and volume are both per kilogram, so the kilograms cancel and mg/L is left; the 187-pound weight is not needed for C0.')],
+     teach=T2_C0,
+     setup=dict(eq='cp-db-vd', pre=[], why='The stem says "rapid IV injection" with a "15 mg/kg dose" and a volume "20% of body weight", and asks the "Initial concentration", so the amount, concentration and volume line at time zero. D0 and VD are the inputs, C0 is asked: Cp = DB/VD with DB = D0. No hinge.'),
+     givens=[['weight', '187-pound', 'not needed: the per-kilogram dose and volume cancel it'], ['D0', '15 mg/kg', 'the numerator of C0'], ['t½', '4 hours', 'not needed for C0'], ['VD', '20% of body weight', '0.2 L/kg, the denominator']],
+     check=dict(t='Each kilogram holds 15 mg of drug in 0.2 L, so each litre holds five times 15 mg, 75 mg; the weight cancels and does not change C0.', lo=0), cite=f'{IB3}, problem 1, part a'),
+ num('ws2-3-1b', asks='k', stem=B31 + ' b. Elimination rate constant', units='hr⁻¹', ans=0.1733, calc=0.693 / 4, **M2A, sub='calc', skill='krate', concept='k-from-thalf',
+     steps=[('setup', 'k = {{frac:0.693|t½}}', 't½ = 0.693/k rearranged for k: the first-order rate constant is 0.693 divided by the half-life.'),
+            ('algebra', 'k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹', '0.693 is a pure number, so dividing by hours leaves reciprocal hours, the unit of a first-order rate constant. Her key gives k to four decimal places.')],
+     teach=T2_K,
+     setup=dict(eq='thalf-first', pre=[], why='The stem gives a "half-life of 4 hours" and asks the "Elimination rate constant", so the first-order half-life line. t½ is the input, k is asked: t½ = 0.693/k rearranged to k = 0.693/t½. No hinge.'),
+     givens=[['weight', '187-pound', 'not needed for k'], ['D0', '15 mg/kg', 'not needed: k does not depend on the dose'], ['t½', '4 hours', 'the denominator of {{frac:0.693|t½}}'], ['VD', '20% of body weight', 'not needed for k']],
+     check=dict(t='0.693 over 4 is a little under a fifth, so k near 0.17 hr⁻¹ fits, and 0.1733 hr⁻¹ does. A half-life in hours gives a rate constant in hr⁻¹.', lo=0, hi=1), cite=f'{IB3}, problem 1, part b'),
+ num('ws2-3-1c', asks='ClT', stem=B31 + ' c. Total body clearance', units='L/hr', ans=2.95, calc=0.2 * w3 * k3, **M2A, sub='calc', skill='clearance', concept='cl-from-k-vd', dupOf='m2-n-cl2',
+     steps=[('unit', 'W = {{frac:187 lb|2.2 lb/kg}} = 85 kg', 'Pounds to kilograms: dividing by 2.2 lb per kg cancels the pounds and leaves kilograms.'),
+            ('algebra', 'VD = (0.2 L/kg)(85 kg) = 17 L', '20% of body weight is 0.2 L per kg; multiplying by the weight cancels the kilograms and leaves an absolute volume in litres.'),
+            ('setup', 'ClT = k × VD, with k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹', 'Clearance is the elimination rate constant times the volume of distribution, so both are needed in absolute units.'),
+            ('algebra', 'ClT = (17 L)(0.1733 hr⁻¹) = 2.95 L/hr', 'L × hr⁻¹ = L/hr, a volume of plasma cleared of drug each hour. Her key does not show the 17 L; it is 85 kg × 0.2 L/kg.')],
+     teach=T2_CL,
+     setup=dict(eq='cl-k-vd', pre=['thalf-first'], why='The stem asks the "Total body clearance" and gives a "half-life" and a volume "20% of body weight", so the clearance line. k and VD are the inputs, ClT is asked: Cl = k × VD. Hinges: k = 0.693/t½, and VD from the weight in kg, because the line wants k and an absolute volume.'),
+     givens=[['weight', '187-pound', '{{frac:187|2.2}} = 85 kg'], ['D0', '15 mg/kg', 'not needed: clearance does not depend on the dose'], ['t½', '4 hours', 'gives k = {{frac:0.693|4}} = 0.1733 hr⁻¹'], ['VD', '20% of body weight', '0.2 L/kg times 85 kg gives 17 L']],
+     check=dict(t='About a sixth of the 17 L volume is cleared each hour (k = 0.1733 hr⁻¹), a little under 3 L/hr; 2.95 L/hr fits.', lo=0, hi=17), cite=f'{IB3}, problem 1, part c'),
+ num('ws2-3-1d', asks='Cp', stem=B31 + ' d. Concentration of drug in the plasma 8 hours after administration of the dose (Part a: C0 = 75 mg/L.)', units='mg/L', ans=18.75, calc=75 * e(-k3 * 8), **M2A, sub='calc', skill='conctime', concept='cp-at-time',
+     steps=[('setup', 'C = C0 e^(−kt), with k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹', 'After an IV bolus the concentration falls first order from C0, so C0 is multiplied by e^(−kt), the fraction left at time t.'),
+            ('algebra', 'C8 = (75 mg/L) e^(−(0.1733)(8)) = (75 mg/L)(0.25) = 18.75 mg/L', 'kt = (0.1733 hr⁻¹)(8 hr) = 1.386: the hours cancel, so the exponent is a pure number, and e^(−1.386) = 0.25 is the fraction of C0 left.'),
+            ('algebra', '8 hr is 2 half-lives: 25% remains, (0.25)(75 mg/L) = 18.75 mg/L', 'Her key also counts half-lives: two halvings leave a quarter of the 75 mg/L, the same 18.75 mg/L.')],
+     teach=T2_CT,
+     setup=dict(eq='first-exp', pre=['thalf-first', 'cp-db-vd'], why='The stem says "rapid IV injection" and asks the "Concentration of drug in the plasma 8 hours after" the dose, so the one-compartment first-order decline. C0, k and t are the inputs, Cp is asked: C = C0 e^(−kt). Hinges: k = 0.693/t½, and C0 = D0/VD from part a.'),
+     givens=[['weight', '187-pound', 'not needed: C0 is per kilogram over per kilogram'], ['D0', '15 mg/kg', 'gave C0 in part a'], ['t½', '4 hours', 'k = 0.1733 hr⁻¹; 8 hours is two half-lives'], ['VD', '20% of body weight', 'gave C0 in part a'], ['t', '8 hours', 'the exponent kt'], ['C0', '75 mg/L', 'multiplied by e^(−kt)']],
+     check=dict(t='Eight hours is two half-lives of 4 hours, so the 75 mg/L halves twice and a quarter of it, 18.75 mg/L, remains.', lo=0, hi=75), cite=f'{IB3}, problem 1, part d'),
+ num('ws2-3-1e', asks='DB', stem=B31 + ' e. Amount of drug in the body 12 hours after administration of the dose', units='mg', ans=159.35, calc=15 * w3 * e(-k3 * 12), **M2A, sub='calc', skill='conctime', concept='amount-at-time',
+     steps=[('unit', 'D0 = (15 mg/kg)({{frac:187 lb|2.2 lb/kg}}) = (15 mg/kg)(85 kg) = 1275 mg', 'The dose per kilogram times the weight in kilograms: the kilograms cancel and the whole dose in mg is left.'),
+            ('setup', 'DB = D0 e^(−kt), with k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹', 'The amount in the body falls first order, like the concentration, so the dose is multiplied by the fraction left at time t.'),
+            ('algebra', 'D12 = (1275 mg) e^(−(0.1733)(12)) = 159.35 mg', 'kt = (0.1733 hr⁻¹)(12 hr) = 2.08 has no units, and e^(−2.08) = 0.125 of the dose remains, so the answer keeps the unit of the dose, mg.'),
+            ('algebra', '12 hr is 3 half-lives: 12.5% remains, (0.125)(1275 mg) = 159.375 mg', 'Her key also counts half-lives: three halvings leave one eighth of the dose. Both routes give about 159.4 mg.')],
+     teach=T2_AMT, note='Her key gives 159.375 mg by counting three half-lives and 159.35 mg from the exponential with k = 0.1733 hr⁻¹; both are accepted.',
+     setup=dict(eq='amount-exp', pre=['thalf-first'], why='The stem says "rapid IV injection" and asks the "Amount of drug in the body 12 hours after" the dose, so the first-order decline written in amount. D0, k and t are the inputs, DB is asked: D = D0 e^(−kt). Hinges: D0 from 15 mg/kg times the weight in kg, and k = 0.693/t½.'),
+     givens=[['weight', '187-pound', '{{frac:187|2.2}} = 85 kg'], ['D0', '15 mg/kg', 'times 85 kg gives the whole dose, 1275 mg'], ['t½', '4 hours', 'k = 0.1733 hr⁻¹; 12 hours is three half-lives'], ['VD', '20% of body weight', 'not needed: an amount, not a concentration'], ['t', '12 hours', 'the exponent kt']],
+     check=dict(t='Twelve hours is three half-lives of 4 hours, so one eighth of the 1275 mg dose remains, about 159 mg.', lo=0, hi=1275), cite=f'{IB3}, problem 1, part e'),
+ num('ws2-3-2a', asks='thalf', stem=B32 + 'a. What is the elimination half-life in these volunteers?', units='hr', ans=3.5, calc=0.693 / 0.198, **M2B, sub='calc', skill='multicpt', concept='beta-halflife-calc', dupOf='m2-n-tb1',
+     steps=[('setup', 't½β = {{frac:0.693|β}}', 'β, the smaller of the two exponents, is the slope of the terminal phase, which is elimination; the elimination half-life comes from β alone.'),
+            ('algebra', 't½β = {{frac:0.693|0.198 hr⁻¹}} = 3.5 hr', 'A pure number over hr⁻¹ leaves hours. α = 3.14 hr⁻¹ belongs to the fast distribution phase and is not used.')],
+     teach=T2_BIEXP,
+     setup=dict(eq='thalf-beta', pre=[], why='The stem gives "A", "B", "α" and "β" for an "IV bolus dose" and asks "the elimination half-life", so the two-compartment block. β is the input, t½ is asked: t½β = 0.693/β directly. No hinge.'),
+     givens=g32(β='the denominator of {{frac:0.693|β}}'),
+     check=dict(t='β = 0.198 hr⁻¹ is about a fifth, so the half-life is about 0.693 × 5, 3.5 hr; a half-life from α = 3.14 hr⁻¹ would be a fraction of an hour.', lo=0), cite=f'{IB3}, problem 2, part a'),
+ num('ws2-3-2b', asks='C0', stem=B32 + 'b. What is the initial concentration of drug in the plasma in these volunteers?', units='mg/L', ans=18.74, calc=10.21 + 8.53, **M2B, sub='calc', skill='multicpt', concept='c0-a-plus-b', dupOf='m2-n-c0ab',
+     steps=[('setup', 'C0 = A + B', 'At t = 0 both exponentials in Cp = A e^(−αt) + B e^(−βt) equal 1, so the initial concentration is the sum of the two intercepts.'),
+            ('algebra', 'C0 = (10.21 + 8.53) mg/L = 18.74 mg/L', 'A and B are both in mg/L, so they add directly and the sum is a concentration in mg/L.')],
+     teach=T2_BIEXP,
+     setup=dict(eq='c0-ab', pre=[], why='The stem gives the intercepts "A" and "B" of an "IV bolus dose" and asks "the initial concentration of drug in the plasma", so the two-compartment block. A and B are the inputs, C0 is asked: Cp0 = A + B directly. No hinge.'),
+     givens=g32(A='added', B='added', D0='not needed: the intercepts already include the dose'),
+     check=dict(t='C0 is the sum of the two intercepts, so it is larger than either: 10.21 + 8.53 = 18.74 mg/L.', lo=10.21), cite=f'{IB3}, problem 2, part b'),
+ num('ws2-3-2c', asks='Cp', stem=B32 + 'c. What is the concentration of drug in the plasma 4 hours after administration of the dose?', units='mg/L', ans=3.86, calc=10.21 * e(-3.14 * 4) + 8.53 * e(-0.198 * 4), **M2B, sub='calc', skill='conctime', concept='biexp-conc-at-t',
+     steps=[('setup', 'Cp = A e^(−αt) + B e^(−βt)', 'The two-compartment equation: each intercept falls with its own rate constant, and the concentration is the sum of the two terms.'),
+            ('algebra', 'C4 = (10.21 mg/L) e^(−(3.14)(4)) + (8.53 mg/L) e^(−(0.198)(4))', 'Each exponent is hr⁻¹ times hr, a pure number: 12.56 for the distribution term and 0.792 for the elimination term.'),
+            ('algebra', 'C4 = 0.00004 mg/L + (8.53 mg/L)(0.4529) = 3.86 mg/L', 'e^(−12.56) is so small that the A term adds almost nothing; by 4 hours distribution is over and only the β term remains.')],
+     teach=T2_BIEXP,
+     setup=dict(eq='biexp', pre=[], why='The stem gives "A", "B", "α" and "β" and asks "the concentration of drug in the plasma 4 hours after" the dose, so the two-compartment line itself. A, B, α, β and t are the inputs, Cp is asked: Cp = A e^(−αt) + B e^(−βt). No hinge.'),
+     givens=g32(A='the distribution term, nearly gone by 4 hours', B='the elimination term, almost all of Cp at 4 hours', α='αt = 12.56, so e^(−αt) is negligible', β='βt = 0.792') + [['t', '4 hours', 'the time in both exponents']],
+     check=dict(t='By 4 hours the α term, with α = 3.14 hr⁻¹, has fallen to almost nothing, so Cp is about B e^(−βt): 8.53 mg/L times a little under a half, 3.86 mg/L.', lo=0, hi=8.53), cite=f'{IB3}, problem 2, part c'),
+ num('ws2-3-2d', asks='Vp', stem=B32 + 'd. What is the volume of distribution of the central compartment?', units='L', ans=16, calc=300 / (10.21 + 8.53), **M2B, sub='calc', skill='multicpt', concept='vp-from-intercepts', dupOf='m2-n-vp1',
+     steps=[('setup', 'Vc = {{frac:D0|A + B}}', 'At time zero the whole dose is in the central compartment at the concentration A + B, so the dose over that concentration is the central volume.'),
+            ('algebra', 'A + B = (10.21 + 8.53) mg/L = 18.74 mg/L, so Vc = {{frac:300 mg|18.74 mg/L}} = 16 L', 'mg over mg/L leaves litres: {{frac:300|18.74}} = 16.01 L, which her key reports as 16 L.')],
+     teach=T2_BIEXP,
+     setup=dict(eq='vp-ab', pre=[], why='The stem gives a "300-mg IV bolus dose" with intercepts "A" and "B" and asks "the volume of distribution of the central compartment", so the two-compartment block. D0, A and B are the inputs, Vc is asked: Vp = D0/(A + B) directly. No hinge.'),
+     givens=g32(D0='the numerator', A='part of A + B = 18.74 mg/L', B='part of A + B'),
+     check=dict(t='300 mg over about 19 mg/L is a little over 15 L; 16 L fits, and it must be smaller than the 300 L that 1 mg/L would give.', lo=0), cite=f'{IB3}, problem 2, part d')]
+chain('ws2-p3', src='practice', module=2, name='IV Bolus Practice 3', setup='187-lb man, 15 mg/kg by rapid IV injection, t½ 4 hr, VD 20% of body weight (parts 1a–1e); then a 300-mg two-compartment bolus, A 10.21 and B 8.53 mg/L, α 3.14 and β 0.198 hr⁻¹ (parts 2a–2d)', parts=q)
+
+# ------------------------------------------------------- IV Bolus Practice 4
+B41 = '1. A drug that follows one-compartment, first-order elimination has an elimination half-life of 6 hours and apparent volume of distribution VD of 400 mL/kg has been administered as a single 600-mg dose is given to an adult female patient (62 kg) by rapid IV injection.'
+B42 = '2. The pharmacokinetics of an antibiotic administered by IV bolus injection is best described by the equation below. (Concentration is given in mcg/mL and time in hours)\n\nCp = 18.35e^(−4.8t) + 12.63e^(−0.09t)\n\n'
+k4 = 0.693 / 6; v4 = 0.4 * 62
+N42 = 'Her sheet prints the second term as 12.63e^−0.09, without t; her part c evaluates e^−0.09(4), so the term is 12.63e^(−0.09t).'
+G42 = [['A', '18.35', 'not needed'], ['α', '4.8', 'not needed: the distribution exponent'], ['B', '12.63', 'not needed'], ['β', '0.09', 'not needed'], ['units', 'mcg/mL and hours', 'β is in hr⁻¹; 1 mcg/mL = 1 mg/L']]
+def g42(**roles):
+    return [[s, v, roles.get(s, r)] for s, v, r in G42]
+q = [
+ num('ws2-4-1a', asks='C0', stem=B41 + ' a. What is the expected initial concentration of the drug in the plasma?', units='mg/L', ans=24.19, calc=600 / v4, **M2A, sub='calc', skill='vddose', concept='c0-from-dose-vd',
+     steps=[('unit', 'VD = (400 mL/kg)({{frac:1 L|1000 mL}})(62 kg) = (0.4 L/kg)(62 kg) = 24.8 L', 'mL/kg to L/kg divides by 1000; multiplying by the 62 kg weight cancels the kilograms and leaves litres.'),
+            ('setup', 'C0 = {{frac:D0|VD}}', 'Right after a rapid IV injection the whole dose is in the volume of distribution, so the concentration at time zero is dose over volume.'),
+            ('algebra', 'C0 = {{frac:600 mg|24.8 L}} = 24.19 mg/L', 'mg over L leaves mg/L: 24.19 mg of drug in each litre of the 24.8 L volume.')],
+     teach=T2_C0,
+     setup=dict(eq='cp-db-vd', pre=[], why='The stem says "single 600-mg dose" by "rapid IV injection" with "VD of 400 mL/kg" and asks "the expected initial concentration", so the amount, concentration and volume line at time zero. D0 and VD are the inputs, C0 is asked: Cp = DB/VD with DB = D0. No hinge.'),
+     givens=[['t½', '6 hours', 'not needed for C0'], ['VD', '400 mL/kg', '0.4 L/kg × 62 kg = 24.8 L, the denominator'], ['D0', '600-mg', 'the numerator'], ['weight', '62 kg', 'scales the volume']],
+     check=dict(t='Each litre of the 24.8 L holds a little over 24 mg, because 24.8 × 24 is just under 600 mg; 24.19 mg/L fits.', lo=0), cite=f'{IB4}, problem 1, part a'),
+ num('ws2-4-1b', asks='pct', stem=B41 + ' b. What percent of the dose is eliminated in 24 hours?', units='%', ans=93.75, calc=100 - 100 * e(-k4 * 24), **M2A, sub='calc', skill='krate', concept='percent-eliminated',
+     steps=[('setup', '24 hr ÷ 6 hr = 4 half-lives', 'The half-life is 6 hours, so 24 hours holds four of them; the hours cancel and a count is left.'),
+            ('setup', '% remaining = 100 e^(−kt), with k = {{frac:0.693|6 hr}} = 0.1155 hr⁻¹', 'First-order loss: the fraction of the dose left after t is e^(−kt), so 100 e^(−kt) is the percent remaining.'),
+            ('algebra', '100 e^(−(0.1155)(24)) = 100 e^(−2.772) = 6.25% remaining', 'kt = (0.1155 hr⁻¹)(24 hr) = 2.772 has no units. Four halvings leave one sixteenth of the dose, 6.25%.'),
+            ('algebra', '100% − 6.25% = 93.75% eliminated', 'What has been eliminated is what no longer remains: 93.75% of the dose in 24 hours.')],
+     teach=T2_PCT, note='Her key prints the last line as "100% − 9.25%"; her line above gives 6.25% remaining, and 100 − 6.25 = 93.75, her answer.',
+     setup=dict(eq='amount-exp', pre=['thalf-first'], why='The stem says "first-order elimination" and asks "What percent of the dose is eliminated in 24 hours", so the first-order decline written in amount. k and t are the inputs: the percent remaining is 100 e^(−kt), and the percent eliminated is the rest. Hinge: k = 0.693/t½.'),
+     givens=[['t½', '6 hours', '24 hours is four half-lives; k = 0.1155 hr⁻¹'], ['VD', '400 mL/kg', 'not needed: a percent of the dose'], ['D0', '600-mg', 'not needed: the percent is the same for any dose'], ['weight', '62 kg', 'not needed'], ['t', '24 hours', 'four half-lives']],
+     check=dict(t='Each 6-hour half-life removes half of what is left: 50%, 75%, 87.5%, then 93.75% after the fourth, at 24 hours.', lo=0, hi=100), cite=f'{IB4}, problem 1, part b'),
+ num('ws2-4-1c', asks='Cp', stem=B41 + ' c. What is the expected plasma drug concentration (Cp) at 12 hours after administration of the dose? (Part a: C0 = 24.19 mg/L.)', units='mg/L', ans=6.05, calc=600 / v4 * e(-k4 * 12), **M2A, sub='calc', skill='conctime', concept='cp-at-time',
+     steps=[('setup', 'C = C0 e^(−kt), with k = {{frac:0.693|6 hr}} = 0.1155 hr⁻¹', 'After an IV bolus the concentration declines first order from C0, so C0 is multiplied by the fraction left at time t.'),
+            ('algebra', 'C12 = (24.19 mg/L) e^(−(0.1155)(12)) = (24.19 mg/L)(0.25) = 6.05 mg/L', 'kt = (0.1155 hr⁻¹)(12 hr) = 1.386, a pure number; e^(−1.386) = 0.25, so the answer keeps the mg/L of C0.'),
+            ('algebra', '12 hr is 2 half-lives: 25% remains, (0.25)(24.19 mg/L) = 6.05 mg/L', 'Her key also counts half-lives: two halvings leave a quarter of C0.')],
+     teach=T2_CT,
+     setup=dict(eq='first-exp', pre=['thalf-first', 'cp-db-vd'], why='The stem says "rapid IV injection" and asks "the expected plasma drug concentration (Cp) at 12 hours", so the one-compartment first-order decline. C0, k and t are the inputs, Cp is asked: C = C0 e^(−kt). Hinges: k = 0.693/t½, and C0 = D0/VD from part a.'),
+     givens=[['t½', '6 hours', 'k = 0.1155 hr⁻¹; 12 hours is two half-lives'], ['VD', '400 mL/kg', 'gave C0 in part a'], ['D0', '600-mg', 'gave C0 in part a'], ['weight', '62 kg', 'gave VD = 24.8 L in part a'], ['t', '12 hours', 'the exponent kt'], ['C0', '24.19 mg/L', 'multiplied by e^(−kt)']],
+     check=dict(t='Twelve hours is two half-lives of 6 hours, so a quarter of 24.19 mg/L remains, a little over 6 mg/L; 6.05 mg/L fits.', lo=0, hi=24.19), cite=f'{IB4}, problem 1, part c'),
+ mc('ws2-4-1d', stem=B41 + ' d. If the dose were doubled, what is the expected change in the half-life of elimination?', **M2A, sub='model', skill='apply', concept='thalf-dose-independent',
+    options=[('No change; the half-life is constant for a first-order process', True, 'No change in half-life: half-life is constant for first-order processes. t½ = 0.693/k, and k is a property of the drug in this patient, not of the dose.'),
+             ('The half-life doubles', False, 'This reads a larger amount as taking longer to halve. In a first-order process the amount eliminated per hour doubles with the amount present, so halving takes the same 6 hours.'),
+             ('The half-life halves', False, 'This reads a larger dose as being eliminated faster. The rate of elimination in mg/hr doubles, but so does the amount to remove, so the time to remove half is unchanged.'),
+             ('The half-life increases, but by less than double', False, 'A partial change would mean elimination depends on the dose, which is the saturable (nonlinear) case. The stem states first-order elimination, so k and t½ do not depend on the dose.')],
+    steps=[('setup', 't½ = {{frac:0.693|k}} = {{frac:0.693|0.1155 hr⁻¹}} = 6 hr for either dose', 'The half-life depends only on k, and the dose does not appear in it, so 600 mg and 1200 mg have the same 6-hour half-life.')],
+    givens=[["t½", "6 hours", "unchanged: {{frac:0.693|k}} has no dose in it"], ["D0", "600-mg", "doubled; it does not enter k or t½"], ["VD", "400 mL/kg", "not needed: the volume does not enter t½"], ["weight", "62 kg", "not needed"]],
+    check=dict(t='For a first-order drug k, t½, VD and clearance are constants of the drug in the patient; only amounts and concentrations scale with the dose.'),
+    teach=T2_DOSE, cite=f'{IB4}, problem 1, part d'),
+ mc('ws2-4-1e', stem=B41 + ' e. If the dose were doubled, what is the expected change in the clearance?', **M2A, sub='cl', skill='apply', concept='cl-constant',
+    options=[('No change; clearance is constant for a first-order process', True, 'No change in clearance: clearance is constant for first-order processes. ClT = k × VD, and neither k nor VD depends on the dose.'),
+             ('Clearance doubles', False, 'This confuses clearance with the rate of elimination. Twice the dose gives twice the concentration and twice the mg/hr removed, but the volume of plasma cleared each hour, ClT, is unchanged.'),
+             ('Clearance halves', False, 'This reads a larger dose as lowering clearance. Clearance falls with the dose only when elimination is saturable; with first-order elimination it stays at k × VD.'),
+             ('Clearance increases by a factor of 4', False, 'Nothing in ClT = k × VD scales with the dose, let alone with its square. Both factors are constants of the drug in the patient.')],
+    steps=[('algebra', 'ClT = k × VD = (0.1155 hr⁻¹)(24.8 L) = 2.86 L/hr for either dose', 'Neither factor contains the dose: hr⁻¹ times L gives L/hr, the same volume of plasma cleared each hour for 600 mg or 1200 mg.')],
+    givens=[["t½", "6 hours", "k = 0.1155 hr⁻¹, a constant"], ["VD", "400 mL/kg", "24.8 L for 62 kg, a constant"], ["D0", "600-mg", "doubled; it does not enter ClT"], ["weight", "62 kg", "times 0.4 L/kg gives the 24.8 L in ClT"]],
+    check=dict(t='Clearance is a volume per hour, k × VD, and neither factor changes with the dose; the mg removed per hour, ClT × Cp, is what doubles.'),
+    teach=T2_DOSE, cite=f'{IB4}, problem 1, part e'),
+ mc('ws2-4-1f', stem=B41 + ' f. If the dose were doubled, what is the expected change in the initial plasma concentration? (Part a: C0 = 24.19 mg/L.)', **M2A, sub='vd', skill='apply', concept='c0-proportional-to-dose',
+    options=[('It increases by a factor of 2', True, 'Expect the initial concentration to increase by a factor of 2. C0 = D0/VD with VD unchanged, so 1200 mg gives 48.387 mg/L, twice 24.19 mg/L.'),
+             ('No change', False, 'This applies the no-change answers for half-life and clearance to C0. Those are constants of the drug; C0 is an amount over a volume, so it scales with the dose.'),
+             ('It increases by a factor of 4', False, 'Doubling only the numerator of C0 = D0/VD doubles C0. A factor of 4 would need the volume to halve as well, and VD does not change with the dose.'),
+             ('It halves', False, 'This puts the dose in the denominator. C0 = D0/VD has the dose on top, so a larger dose gives a higher initial concentration.')],
+    steps=[('setup', 'C0 = {{frac:D0|VD}}, with VD = (0.4 L/kg)(62 kg) = 24.8 L unchanged', 'The initial concentration is dose over volume; the volume is a property of the drug in the patient and stays at 24.8 L.'),
+           ('algebra', 'C0 = {{frac:1200 mg|24.8 L}} = 48.387 mg/L', 'mg over L gives mg/L. 48.387 mg/L is twice the 24.19 mg/L of part a.')],
+    givens=[["VD", "400 mL/kg", "24.8 L, unchanged"], ["D0", "600-mg", "doubled, the numerator of the new C0"], ["C0", "24.19 mg/L", "the value that doubles"], ["t½", "6 hours", "not needed: C0 comes before any elimination"], ["weight", "62 kg", "times 0.4 L/kg gives VD = 24.8 L"]],
+    check=dict(t='C0 is proportional to the dose when VD is fixed, so the new C0, 48.387 mg/L, is twice the 24.19 mg/L of part a.'),
+    teach=T2_DOSE, cite=f'{IB4}, problem 1, part f'),
+ num('ws2-4-2a', asks='thalf', stem=B42 + 'a. What is the elimination half-life of this drug?', units='hr', ans=7.7, calc=0.693 / 0.09, **M2B, sub='calc', skill='multicpt', concept='beta-halflife-calc',
+     steps=[('setup', 'Cp = A e^(−αt) + B e^(−βt): α = 4.8 hr⁻¹, β = 0.09 hr⁻¹', 'The two exponents are read from the equation; the smaller, 0.09 hr⁻¹, is β, the elimination rate constant of the terminal phase.'),
+            ('algebra', 't½β = {{frac:0.693|0.09 hr⁻¹}} = 7.7 hr', 'A pure number over hr⁻¹ leaves hours. α = 4.8 hr⁻¹ describes distribution and is not used.')],
+     teach=T2_BIEXP, note=N42,
+     setup=dict(eq='thalf-beta', pre=[], why='The stem gives "the equation" for an "IV bolus injection" with two exponentials and asks "the elimination half-life", so the two-compartment block. β, the smaller exponent, is the input, t½ is asked: t½β = 0.693/β directly. No hinge.'),
+     givens=g42(β='the denominator of {{frac:0.693|β}}'),
+     check=dict(t='β = 0.09 hr⁻¹ is a slow rate, so the half-life is several hours: 0.693 over 0.09 is 7.7 hr. A half-life from α = 4.8 hr⁻¹ would be minutes.', lo=0), cite=f'{IB4}, problem 2, part a'),
+ num('ws2-4-2b', asks='C0', stem=B42 + 'b. What is the initial plasma concentration of this drug?', units='mcg/mL', ans=30.98, calc=18.35 + 12.63, **M2B, sub='calc', skill='multicpt', concept='c0-a-plus-b',
+     steps=[('setup', 'C0 = A + B', 'At t = 0 both exponentials equal 1, so the initial concentration is the sum of the two coefficients.'),
+            ('algebra', 'C0 = (18.35 + 12.63) mcg/mL = 30.98 mcg/mL', 'Both coefficients are in mcg/mL, so they add. Her key labels the result 30.98 mg/L, the same value, because 1 mcg/mL = 1 mg/L.')],
+     teach=T2_BIEXP,
+     setup=dict(eq='c0-ab', pre=[], why='The stem gives "the equation" for an "IV bolus injection" with coefficients 18.35 and 12.63 and asks "the initial plasma concentration", so the two-compartment block. A and B are the inputs, C0 is asked: Cp0 = A + B directly. No hinge.'),
+     givens=g42(A='added', B='added', α='not needed: e^0 = 1', β='not needed: e^0 = 1'),
+     check=dict(t='C0 is the sum of the two coefficients, so it exceeds each: 18.35 + 12.63 = 30.98 mcg/mL.', lo=18.35), cite=f'{IB4}, problem 2, part b'),
+ num('ws2-4-2c', asks='Cp', stem=B42 + 'c. What is the concentration of drug in the plasma 4 hours after administration of the dose?', units='mcg/mL', ans=8.812, calc=18.35 * e(-4.8 * 4) + 12.63 * e(-0.09 * 4), **M2B, sub='calc', skill='conctime', concept='biexp-conc-at-t',
+     steps=[('setup', 'Cp = A e^(−αt) + B e^(−βt), at t = 4 hr', 'The two-compartment equation is evaluated at 4 hours; each exponent is hr⁻¹ times hr, a pure number.'),
+            ('algebra', 'C4 = (18.35 mcg/mL) e^(−(4.8)(4)) + (12.63 mcg/mL) e^(−(0.09)(4)) = (18.35 mcg/mL) e^(−19.2) + (12.63 mcg/mL) e^(−0.36)', 'The distribution exponent is 19.2 and the elimination exponent 0.36.'),
+            ('algebra', 'C4 = 0.0000001 mcg/mL + (12.63 mcg/mL)(0.6977) = 8.812 mcg/mL', 'e^(−19.2) is negligible, so by 4 hours only the β term remains. Her key labels the 8.812 in mg/L, the same value as mcg/mL.')],
+     teach=T2_BIEXP, note=N42,
+     setup=dict(eq='biexp', pre=[], why='The stem gives "the equation" Cp = A e^(−αt) + B e^(−βt) with its numbers and asks "the concentration of drug in the plasma 4 hours after" the dose, so the two-compartment line itself, evaluated at t = 4 hr. No hinge.'),
+     givens=g42(A='the distribution term, negligible by 4 hours', α='αt = 19.2', B='the elimination term, almost all of Cp at 4 hours', β='βt = 0.36') + [['t', '4 hours', 'the time in both exponents']],
+     check=dict(t='By 4 hours the 4.8 hr⁻¹ term is negligible, so Cp is about 12.63 times e^(−0.36), a little over two thirds of 12.63: 8.812 mcg/mL.', lo=0, hi=12.63), cite=f'{IB4}, problem 2, part c')]
+chain('ws2-p4', src='practice', module=2, name='IV Bolus Practice 4', setup='600 mg by rapid IV injection to a 62-kg woman, t½ 6 hr, VD 400 mL/kg, and what doubling the dose changes (parts 1a–1f); then Cp = 18.35e^(−4.8t) + 12.63e^(−0.09t) (parts 2a–2c)', parts=q)
+
+# --------------------------------------------------- IV Infusions Practice 1
+N1 = 'Continuous intravenous infusion of a potent analgesic is recommended for a patient with inoperable colon cancer and a body weight of 110 pounds. The dose is prepared by dissolving 200 mg of the drug in 500 mL of 5% dextrose. The drug is to be infused over 24 hours. The drug has a half-life of 4 hours and an apparent volume of distribution of 3 L/kg. Calculate the following:'
+r1 = 200 / 24; k1 = 0.693 / 4; v1 = 3 * 110 / 2.2; css1 = r1 / (k1 * v1)
+RA = ' (Part a: R = 8.33 mg/hr.)'
+q = [
+ num('ws3-1a', asks='R', stem=N1 + ' a. Rate of drug infusion in mg/hr', units='mg/hr', ans=8.33, calc=r1, **M3, sub='rate', skill='infusion', concept='rate-from-dose-time',
+     steps=[('setup', 'R = {{frac:D0|t inf}}', 'A constant infusion delivers the dose evenly over the infusion time, so the rate is dose over time.'),
+            ('algebra', 'R = {{frac:200 mg|24 hr}} = 8.33 mg/hr', 'mg over hr gives mg/hr, the amount entering the body each hour. The 500 mL of dextrose is the volume the drug is dissolved in and does not change the rate in mg.')],
+     teach=T3_R,
+     setup=dict(eq='r-dose-time', pre=[], why='The stem says the 200 mg "is to be infused over 24 hours" and asks the "Rate of drug infusion in mg/hr", so the infusion-rate line. D0 and the infusion time are the inputs, R is asked: R = D0/tinf directly. No hinge.'),
+     givens=[["weight", "110 pounds", "not needed for the rate"], ["D0", "200 mg", "the numerator"], ["volume", "500 mL", "not needed for mg/hr; used in part e"], ["t inf", "24 hours", "the denominator"], ["t½", "4 hours", "not needed for the rate"], ["VD", "3 L/kg", "not needed for the rate"], ["dextrose", "5%", "not needed: the diluent the dose is dissolved in"]],
+     check=dict(t='200 mg over a full day is a little over 8 mg each hour; 8.33 mg/hr fits.', lo=0, hi=200), cite=f'{IN1}, part a'),
+ num('ws3-1b', asks='Cp', stem=N1 + ' b. Plasma concentration 6 hours after the start of the infusion' + RA, units='mg/L', ans=0.207, calc=css1 * (1 - e(-k1 * 6)), **M3, sub='pre', skill='conctime', concept='cp-before-steady-state',
+     steps=[('unit', 'W = {{frac:110 lb|2.2 lb/kg}} = 50 kg; VD = (3 L/kg)(50 kg) = 150 L', 'Pounds over lb/kg leaves kilograms, and L/kg times kg leaves litres.'),
+            ('setup', 'Cp = {{frac:R|kVD}}(1 − e^(−kt)), with k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹', 'During a constant infusion the level rises toward the plateau R/(kVD); (1 − e^(−kt)) is the fraction of the plateau reached by time t.'),
+            ('algebra', 'C6 = {{frac:8.33 mg/hr|(150 L)(0.1733 hr⁻¹)}}(1 − e^(−(0.1733)(6))) = (0.3204 mg/L)(0.6465) = 0.207 mg/L', 'L × hr⁻¹ = L/hr, and mg/hr over L/hr gives mg/L, the plateau. kt has no units; 64.65% of the plateau is reached at 6 hours.')],
+     teach=T3_CPINF,
+     setup=dict(eq='cp-infusing', pre=['thalf-first', 'r-dose-time'], why='The stem says "Continuous intravenous infusion" and asks the "Plasma concentration 6 hours after the start", while the infusion still runs, so the during-infusion line. R, k, VD and t are the inputs, Cp is asked: Cp = (R/Cl)(1 − e^(−kt)) with Cl = kVD. Hinges: k = 0.693/t½, and VD from the weight.'),
+     givens=[["weight", "110 pounds", "{{frac:110|2.2}} = 50 kg"], ["D0", "200 mg", "gave R in part a"], ["volume", "500 mL", "not needed for a plasma concentration"], ["t inf", "24 hours", "gave R; the infusion still runs at 6 hours"], ["t½", "4 hours", "k = {{frac:0.693|4}} = 0.1733 hr⁻¹"], ["VD", "3 L/kg", "times 50 kg gives 150 L"], ["R", "8.33 mg/hr", "the numerator of the plateau"], ["t", "6 hours", "the exponent kt"], ["dextrose", "5%", "not needed: the diluent the dose is dissolved in"]],
+     check=dict(t='Six hours is one and a half half-lives, so the level is between half and three quarters of the 0.3204 mg/L plateau: 0.207 mg/L fits.', lo=0, hi=0.3204), cite=f'{IN1}, part b'),
+ num('ws3-1c', asks='DB', stem=N1 + ' c. Total amount of drug in the body 12 hours after the start of the infusion' + RA, units='mg', ans=42, calc=r1 / k1 * (1 - e(-k1 * 12)), **M3, sub='pre', skill='conctime', concept='amount-during-infusion',
+     steps=[('setup', 'Cp = {{frac:R|kVD}}(1 − e^(−kt)), then DB = Cp × VD', 'The concentration at 12 hours comes from the during-infusion line; the amount in the body is that concentration times the volume of distribution.'),
+            ('algebra', 'C12 = {{frac:8.33 mg/hr|(150 L)(0.1733 hr⁻¹)}}(1 − e^(−(0.1733)(12))) = (0.3204 mg/L)(0.875) = 0.28 mg/L', 'mg/hr over L/hr gives mg/L. Twelve hours is three half-lives, so 87.5% of the plateau is reached.'),
+            ('algebra', 'D12 = (0.28 mg/L)(150 L) = 42 mg', 'mg/L times L cancels the litres and leaves mg, the amount of drug in the body at 12 hours.')],
+     teach=T3_DBINF, note='Carried unrounded, the amount is 42.1 mg; her key rounds the concentration to 0.28 mg/L first and gets 42 mg. Both are accepted.',
+     setup=dict(eq='cp-db-vd', pre=['cp-infusing', 'thalf-first'], why='The stem asks the "Total amount of drug in the body 12 hours after the start" of the infusion, so an amount from a concentration: DB = Cp × VD. Hinge: Cp at 12 hours from the during-infusion line, Cp = (R/Cl)(1 − e^(−kt)), with k = 0.693/t½ and VD from the weight.'),
+     givens=[["weight", "110 pounds", "{{frac:110|2.2}} = 50 kg"], ["D0", "200 mg", "gave R in part a"], ["volume", "500 mL", "not needed"], ["t inf", "24 hours", "the infusion still runs at 12 hours"], ["t½", "4 hours", "k = 0.1733 hr⁻¹; 12 hours is three half-lives"], ["VD", "3 L/kg", "times 50 kg gives 150 L"], ["R", "8.33 mg/hr", "the numerator of the plateau"], ["t", "12 hours", "the exponent kt"], ["dextrose", "5%", "not needed: the diluent the dose is dissolved in"]],
+     check=dict(t='Twelve hours is three half-lives, so the body holds 87.5% of the amount it would hold at the plateau, 0.3204 mg/L in 150 L; 42 mg fits.', lo=0, hi=200), cite=f'{IN1}, part c'),
+ num('ws3-1d', asks='Css', stem=N1 + ' d. Steady-state plasma concentration' + RA, units='mg/L', ans=0.32, calc=css1, **M3, sub='css', skill='infusion', concept='css-from-rate',
+     steps=[('setup', 'Css = {{frac:R|kVD}} = {{frac:R|ClT}}', 'At steady state the rate in equals the rate out, R = ClT × Css, so the plateau is the infusion rate over clearance, ClT = kVD.'),
+            ('algebra', 'Css = {{frac:8.33 mg/hr|(0.1733 hr⁻¹)(150 L)}} = 0.32 mg/L', 'hr⁻¹ × L = L/hr, here (0.1733)(150) = 26 L/hr, and mg/hr over L/hr leaves mg/L: the hours cancel.')],
+     teach=T3_CSS,
+     setup=dict(eq='css', pre=['thalf-first', 'cl-k-vd'], why='The stem asks the "Steady-state plasma concentration" of the "Continuous intravenous infusion", so the steady-state line. R and ClT are the inputs, Css is asked: Css = R/Cl. Hinges: k = 0.693/t½ and ClT = kVD, with VD from 3 L/kg and the weight.'),
+     givens=[["weight", "110 pounds", "{{frac:110|2.2}} = 50 kg"], ["D0", "200 mg", "gave R in part a"], ["volume", "500 mL", "not needed"], ["t inf", "24 hours", "gave R"], ["t½", "4 hours", "k = {{frac:0.693|4}} = 0.1733 hr⁻¹"], ["VD", "3 L/kg", "times 50 kg gives 150 L"], ["R", "8.33 mg/hr", "the numerator of Css"], ["dextrose", "5%", "not needed: the diluent the dose is dissolved in"]],
+     check=dict(t='The plateau is the rate over clearance, 8.33 mg/hr over (0.1733)(150) L/hr, about a third of a mg in each litre; 0.32 mg/L fits.', lo=0), cite=f'{IN1}, part d'),
+ num('ws3-1e', asks='R', stem=N1 + ' e. Rate of drug infusion in mL/min', units='mL/min', ans=0.35, calc=500 / 24 / 60, **M3, sub='rate', skill='infusion', concept='rate-in-ml-per-min',
+     steps=[('setup', 'Rate = {{frac:volume|time}}', 'The 500 mL of solution runs in evenly over 24 hours, so the volume rate is the volume over the infusion time.'),
+            ('unit', 'Rate = ({{frac:500 mL|24 hr}})({{frac:1 hr|60 min}}) = 0.35 mL/min', 'mL/hr times hr/min: the hours cancel and mL/min is left. {{frac:500|1440}} = 0.347 mL/min, reported as 0.35.')],
+     teach=T3_R,
+     setup=dict(eq='r-dose-time', pre=[], why='The stem says 200 mg is dissolved "in 500 mL" to be "infused over 24 hours" and asks the "Rate of drug infusion in mL/min", so the infusion-rate line written in volume. The volume and the time are the inputs: R = D0/tinf with mL in place of mg. No hinge.'),
+     givens=[["volume", "500 mL", "the numerator"], ["t inf", "24 hours", "times 60 minutes, the denominator"], ["D0", "200 mg", "not needed: a volume rate is asked"], ["weight", "110 pounds", "not needed"], ["t½", "4 hours", "not needed"], ["VD", "3 L/kg", "not needed"], ["dextrose", "5%", "not needed: the diluent the dose is dissolved in"]],
+     check=dict(t='500 mL over 24 hours is about 21 mL each hour, a third of a mL each minute; 0.35 mL/min fits.', lo=0), cite=f'{IN1}, part e'),
+ num('ws3-1f', asks='DL', stem=N1 + ' f. An IV bolus loading dose' + RA, units='mg', ans=48, calc=r1 / k1, **M3, sub='load', skill='loading', concept='loading-dose-calc',
+     steps=[('setup', 'DL = {{frac:R|k}}', 'A loading dose puts the plateau amount in the body at once; that amount is the infusion rate over the elimination rate constant, which equals Css × VD.'),
+            ('algebra', 'DL = {{frac:8.33 mg/hr|0.1733 hr⁻¹}} = 48 mg', 'mg/hr over hr⁻¹: the hours cancel and mg is left. {{frac:8.33|0.1733}} = 48.07, reported as 48 mg.')],
+     teach=T3_DL, note='With the unrounded rate, 8.333 mg/hr, the loading dose is 48.1 mg, which is also Css × VD = (0.3207 mg/L)(150 L); her key gives 48 mg. Both are accepted.',
+     setup=dict(eq='dl-rk', pre=['thalf-first'], why='The stem asks "An IV bolus loading dose" for the infusion at the rate from part a, so the loading-dose line. R and k are the inputs, DL is asked: DL = R/k. Hinge: k = 0.693/t½, because the line wants k.'),
+     givens=[["weight", "110 pounds", "not needed: R over k needs no volume"], ["D0", "200 mg", "gave R in part a"], ["t½", "4 hours", "k = {{frac:0.693|4}} = 0.1733 hr⁻¹, the denominator"], ["VD", "3 L/kg", "not needed by R over k; Css × VD gives the same"], ["R", "8.33 mg/hr", "the numerator"], ["volume", "500 mL", "not needed for the loading dose"], ["t inf", "24 hours", "gave R in part a"], ["dextrose", "5%", "not needed: the diluent the dose is dissolved in"]],
+     check=dict(t='The loading dose is the amount the body holds at the plateau: 8.33 mg/hr over 0.1733 hr⁻¹, about 48 mg, a quarter of the 200 mg infused over 24 hours.', lo=0, hi=200), cite=f'{IN1}, part f'),
+ num('ws3-1g', asks='Cp', stem=N1 + ' g. Plasma concentration 12 hours after the cessation of the infusion (Part d: Css = 0.32 mg/L.)', units='mg/L', ans=0.04, calc=css1 * (1 - e(-k1 * 24)) * e(-k1 * 12), **M3, sub='stop', skill='conctime', concept='post-cessation-decay',
+     steps=[('setup', 'Cp = Css e^(−kt), with t counted from the end of the infusion', 'After 24 hours, six half-lives, the infusion has brought the level to its plateau; once it stops nothing enters, and the level falls first order from there.'),
+            ('algebra', 'C12 = (0.32 mg/L) e^(−(0.1733)(12)) = (0.32 mg/L)(0.125) = 0.04 mg/L', 'kt = 2.08 has no units, so the answer keeps the mg/L of Css; e^(−2.08) = 0.125 is the fraction left.'),
+            ('algebra', '12 hr is 3 half-lives: 12.5% remains, (0.125)(0.32 mg/L) = 0.04 mg/L', 'Her key also counts half-lives: at 12 hours, three half-lives, 12.5% of the starting concentration remains.')],
+     teach=T3_STOP, note='Her key starts the decline from Css, 0.32 mg/L. After 24 hours the infusion has reached 98.4% of Css, 0.3157 mg/L, which gives 0.0395 mg/L at 12 hours; both round to 0.04 mg/L and both are accepted.',
+     setup=dict(eq='cp-after-stop', pre=['css', 'thalf-first'], why='The stem asks the "Plasma concentration 12 hours after the cessation of the infusion", so the after-the-infusion line. The level when the infusion stopped, k and t are the inputs, Cp is asked: Cp = Cpeak e^(−kt). Hinges: Cpeak is Css after 24 hours of infusion, and k = 0.693/t½.'),
+     givens=[["t inf", "24 hours", "six half-lives: the level is at its plateau when the infusion stops"], ["t½", "4 hours", "k = 0.1733 hr⁻¹; 12 hours is three half-lives"], ["Css", "0.32 mg/L", "the starting concentration of the decline"], ["t", "12 hours", "after the cessation: the exponent kt"], ["weight", "110 pounds", "not needed: Css is given"], ["VD", "3 L/kg", "not needed: Css is given"], ["D0", "200 mg", "gave R and Css; not needed once Css is given"], ["volume", "500 mL", "not needed"], ["dextrose", "5%", "not needed: the diluent the dose is dissolved in"]],
+     check=dict(t='Twelve hours is three half-lives of 4 hours, so one eighth of the 0.32 mg/L remains: 0.04 mg/L.', lo=0, hi=0.32), cite=f'{IN1}, part g')]
+chain('ws3-p1', src='practice', module=3, name='IV Infusions Practice 1', setup='An analgesic, 200 mg in 500 mL over 24 hours, 110-lb patient, t½ 4 hr, VD 3 L/kg; parts a–g', parts=q)
+
+# --------------------------------------------------- IV Infusions Practice 2
+N2 = 'An antibiotic drug is to be given to an adult male patient (162 lb, 58 years old) by IV infusion. The drug is supplied in sterile vials containing 30 mL of the antibiotic solution at a concentration of 125 mg/mL. Assume the drug follows the pharmacokinetics of a one-compartment open model. The apparent volume of distribution of this drug is 0.5 L/kg, and the elimination half-life is 3.1 hours.'
+k2 = 0.693 / 3.1; v2 = 0.5 * 162 / 2.2
+q = [
+ num('ws3-2a', asks='R', stem=N2 + ' a. What rate in milliliters per hour would you infuse this this drug to obtain a steady-state concentration of 20 mcg/mL in this patient?', units='mL/hr', ans=1.32, calc=20 * v2 * k2 / 125, **M3, sub='rate', skill='infusion', concept='rate-for-target-css',
+     steps=[('unit', 'W = {{frac:162 lb|2.2 lb/kg}} = 73.64 kg; Css = 20 mcg/mL = 20 mg/L', 'Pounds over lb/kg leaves kilograms. 1 mcg/mL is 1 mg/L, so the target is 20 mg/L.'),
+            ('setup', 'R = Css × ClT = Css × VD × k', 'At steady state the rate in equals the rate out, so the rate that holds 20 mg/L is the target times clearance, ClT = VD × k.'),
+            ('algebra', 'R = (20 mg/L)(0.5 L/kg)(73.64 kg)({{frac:0.693|3.1 hr}}) = 164.6 mg/hr', 'L/kg × kg = L and L × hr⁻¹ = L/hr; mg/L × L/hr leaves mg/hr. The clearance is 8.23 L/hr.'),
+            ('unit', 'R = (164.6 mg/hr)({{frac:1 mL|125 mg}}) = 1.32 mL/hr', 'Each mL of solution holds 125 mg, so dividing by 125 mg/mL cancels the mg and leaves mL/hr: 1.317 mL/hr, reported as 1.32.')],
+     teach=T3_CSS,
+     setup=dict(eq='css', pre=['thalf-first', 'cl-k-vd'], why='The stem asks "What rate" by "IV infusion" will "obtain a steady-state concentration of 20 mcg/mL", so the steady-state line. Css and ClT are the inputs, R is asked: Css = R/Cl rearranged to R = Css × ClT. Hinges: k = 0.693/t½ and ClT = kVD, then mg/hr to mL/hr with the 125 mg/mL solution.'),
+     givens=[['weight', '162 lb', '{{frac:162|2.2}} = 73.64 kg'], ['age', '58 years old', 'not needed'], ['vial', '30 mL', 'not needed for the rate'], ['concentration', '125 mg/mL', 'converts mg/hr to mL/hr'], ['VD', '0.5 L/kg', 'times 73.64 kg gives 36.82 L'], ['t½', '3.1 hours', 'k = {{frac:0.693|3.1}} = 0.2235 hr⁻¹'], ['Css', '20 mcg/mL', 'the target, 20 mg/L']],
+     check=dict(t='Clearance is about 8 L/hr, so 164.6 mg must enter each hour to hold 20 mg/L; at 125 mg in each mL that is a little over 1 mL/hr, and 1.32 mL/hr fits.', lo=0), cite=f'{IN2}, part a'),
+ num('ws3-2b', asks='DL', stem=N2 + ' b. What loading dose would you suggest? (Part a: R = 165 mg/hr, which is 1.32 mL/hr, for a steady-state concentration of 20 mcg/mL.)', units='mg', ans=738, calc=20 * v2, **M3, sub='load', skill='loading', concept='loading-dose-calc',
+     steps=[('setup', 'DL = {{frac:R|k}}, with k = {{frac:0.693|3.1 hr}} = 0.2235 hr⁻¹', 'A loading dose puts the steady-state amount in the body at once; that amount is the infusion rate over the elimination rate constant.'),
+            ('algebra', 'DL = {{frac:165 mg/hr|0.2235 hr⁻¹}} = 738 mg', 'mg/hr over hr⁻¹: the hours cancel and mg is left. Her key rounds the rate from part a to 165 mg/hr first.'),
+            ('algebra', 'Check: DL = Css × VD = (20 mg/L)(0.5 L/kg)(73.64 kg) = 736 mg', 'mg/L × L leaves mg. The 2 mg difference comes only from rounding the rate to 165 mg/hr.')],
+     teach=T3_DL, note='Css × VD gives 736 mg; her key divides the rate rounded to 165 mg/hr by k and gets 738 mg. Both are accepted.',
+     setup=dict(eq='dl-rk', pre=['thalf-first', 'css'], why='The stem asks "What loading dose would you suggest" with the infusion rate from part a, so the loading-dose line. R and k are the inputs, DL is asked: DL = R/k. Hinge: k = 0.693/t½. DL = Css × VD gives the same dose.'),
+     givens=[["weight", "162 lb", "{{frac:162|2.2}} = 73.64 kg, for Css × VD"], ["vial", "30 mL", "not needed"], ["concentration", "125 mg/mL", "not needed until part c"], ["VD", "0.5 L/kg", "Css × VD gives the same dose"], ["t½", "3.1 hours", "k = 0.2235 hr⁻¹, the denominator"], ["R", "165 mg/hr", "the numerator"], ["age", "58 years old", "not needed"], ["R", "1.32 mL/hr", "the same rate in mL/hr; not needed for DL"], ["Css", "20 mcg/mL", "Css × VD gives 736 mg, the dose before her rounding"]],
+     check=dict(t='The loading dose is the amount the body holds at the target, 20 mg/L times 0.5 L/kg times 73.64 kg, 736 mg; 738 mg from the rounded rate fits.', lo=0), cite=f'{IN2}, part b'),
+ num('ws3-2c', asks='volume', stem=N2 + ' c. How many milliters of the antibiotic solution are required for the loading dose? (Part b: DL = 738 mg.)', units='mL', ans=5.9, calc=738 / 125, **M3, sub='load', skill='loading', concept='loading-dose-volume',
+     steps=[('setup', 'Volume = {{frac:amount|concentration}}', 'Concentration is amount over volume, so the volume of solution that holds the loading dose is the dose over the concentration of the vial.'),
+            ('algebra', 'Volume = (738 mg)({{frac:1 mL|125 mg}}) = 5.9 mL', 'mg × mL/mg: the mg cancel and mL is left. {{frac:738|125}} = 5.904 mL, reported as 5.9 mL; one 30 mL vial is enough.')],
+     teach=T3_SOLN,
+     setup=dict(eq='cp-db-vd', pre=['dl-rk'], why='The stem asks "How many milliters of the antibiotic solution" hold the loading dose, so concentration = amount/volume, the line Cp = DB/VD applied to the vial. DL and the 125 mg/mL are the inputs, the volume is asked. Hinge: DL from part b.'),
+     givens=[["concentration", "125 mg/mL", "the denominator"], ["vial", "30 mL", "one vial holds more than enough"], ["DL", "738 mg", "the amount to draw up"], ["weight", "162 lb", "not needed: DL is given"], ["age", "58 years old", "not needed"], ["VD", "0.5 L/kg", "not needed: DL is given"], ["t½", "3.1 hours", "not needed: DL is given"]],
+     check=dict(t='125 mg in each mL, so 738 mg is a little under 6 mL; 5.9 mL fits and is less than one 30 mL vial.', lo=0, hi=30), cite=f'{IN2}, part c'),
+ num('ws3-2d', asks='Cp', stem=N2 + ' d. What is the expected concentration of drug in the plasma at the end of a 6 hour infusion without a loading dose? (Part a: the rate holds Css at 20 mcg/mL.)', units='mg/L', ans=14.77, calc=20 * (1 - e(-k2 * 6)), **M3, sub='pre', skill='conctime', concept='cp-before-steady-state',
+     steps=[('setup', 'Cp = Css(1 − e^(−kt)), with k = {{frac:0.693|3.1 hr}} = 0.2235 hr⁻¹', 'Without a loading dose the level rises from zero toward Css; (1 − e^(−kt)) is the fraction of Css reached after t hours of infusion.'),
+            ('algebra', 'C6 = (20 mg/L)(1 − e^(−(0.2235)(6))) = (20 mg/L)(0.7384) = 14.77 mg/L', 'kt = 1.341 has no units, so the answer keeps the mg/L of Css. Six hours is just under two half-lives, so 73.84% of Css is reached.')],
+     teach=T3_CPINF,
+     setup=dict(eq='cp-infusing', pre=['thalf-first', 'css'], why='The stem asks the concentration "at the end of a 6 hour infusion without a loading dose", so the during-infusion line. Css, k and t are the inputs, Cp is asked: Cp = (R/Cl)(1 − e^(−kt)) with R/Cl = Css = 20 mg/L. Hinge: k = 0.693/t½.'),
+     givens=[["weight", "162 lb", "not needed: Css is the target"], ["t½", "3.1 hours", "k = {{frac:0.693|3.1}} = 0.2235 hr⁻¹"], ["Css", "20 mcg/mL", "the plateau, 20 mg/L"], ["t", "6 hour", "the length of the infusion"], ["age", "58 years old", "not needed"], ["vial", "30 mL", "not needed"], ["concentration", "125 mg/mL", "not needed"], ["VD", "0.5 L/kg", "not needed: Css is the plateau"]],
+     check=dict(t='Six hours is just under two half-lives of 3.1 hours, so the level is a little under three quarters of 20 mg/L: 14.77 mg/L fits.', lo=0, hi=20), cite=f'{IN2}, part d'),
+ num('ws3-2e', asks='Cp', stem=N2 + ' e. What is the concentration of drug in the plasma 12 hours after the cessation of the 6-hour infusion (no loading dose)? (Part d: Cp = 14.77 mg/L at the end of the infusion.)', units='mg/L', ans=1.01, calc=14.77 * e(-k2 * 12), **M3, sub='stop', skill='conctime', concept='post-cessation-decay',
+     steps=[('setup', 'Cp = Cstop e^(−kt), with k = {{frac:0.693|3.1 hr}} = 0.2235 hr⁻¹', 'Once the infusion stops nothing enters, so the level falls first order from the end-of-infusion concentration; t counts from the stop.'),
+            ('algebra', 'C12 = (14.77 mg/L) e^(−(0.2235)(12)) = (14.77 mg/L)(0.06842) = 1.01 mg/L', 'kt = 2.682 has no units; e^(−2.682) = 0.06842, so about 7% of the end-of-infusion level remains.')],
+     teach=T3_STOP,
+     setup=dict(eq='cp-after-stop', pre=['thalf-first', 'cp-infusing'], why='The stem asks the concentration "12 hours after the cessation of the 6-hour infusion", so the after-the-infusion line. The end-of-infusion level, k and t are the inputs, Cp is asked: Cp = Cpeak e^(−kt). Hinges: Cpeak from part d, and k = 0.693/t½.'),
+     givens=[["t½", "3.1 hours", "k = {{frac:0.693|3.1}} = 0.2235 hr⁻¹"], ["infusion", "6-hour", "ended at 14.77 mg/L"], ["Cstop", "14.77 mg/L", "the starting point of the decline"], ["t", "12 hours", "after the cessation: the exponent kt"], ["weight", "162 lb", "not needed"], ["age", "58 years old", "not needed"], ["vial", "30 mL", "not needed"], ["concentration", "125 mg/mL", "not needed"], ["VD", "0.5 L/kg", "not needed: the decline needs only k"]],
+     check=dict(t='Twelve hours is nearly four half-lives of 3.1 hours, so a little more than one sixteenth of 14.77 mg/L remains, about 1 mg/L; 1.01 mg/L fits.', lo=0, hi=14.77), cite=f'{IN2}, part e'),
+ num('ws3-2f', asks='t', stem=N2 + ' f. If an appropriate loading dose were administered with the simultaneous IV infusion, how much time after the cessation of the infusion would be required for the concentration to reach 5 mcg/mL? (Part a: Css = 20 mcg/mL.)', units='hr', ans=6.2, calc=ln(20 / 5) / k2, **M3, sub='stop', skill='conctime', concept='time-after-stop',
+     steps=[('setup', 'With the loading dose the level is Css, 20 mg/L, when the infusion stops; then Cp = Css e^(−kt)', 'An appropriate loading dose holds the level at Css from the start, so the decline begins at 20 mg/L.'),
+            ('algebra', 't = {{frac:ln(20 ÷ 5)|0.2235 hr⁻¹}} = {{frac:1.386|0.2235 hr⁻¹}} = 6.2 hr', 'The mg/L cancel inside the log, leaving a pure number; dividing by hr⁻¹ gives hours. k = 0.693/3.1 hr = 0.2235 hr⁻¹.'),
+            ('algebra', '{{frac:20|5}} = 4, two halvings: 2(3.1 hr) = 6.2 hr', 'Her key also counts half-lives: falling to a quarter takes two halvings of 3.1 hours.')],
+     teach=T3_STOP,
+     setup=dict(eq='cp-after-stop', pre=['thalf-first', 'dl-css-vd'], why='The stem asks "how much time after the cessation of the infusion" for the level "to reach 5 mcg/mL" with "an appropriate loading dose", so the after-the-infusion line solved for t: Cp = Cpeak e^(−kt) gives t = ln(Cpeak/Cp)/k. Hinge: Cpeak = Css, 20 mg/L.'),
+     givens=[["t½", "3.1 hours", "k = 0.2235 hr⁻¹; two half-lives take the level to a quarter"], ["Css", "20 mcg/mL", "the level when the infusion stops"], ["target", "5 mcg/mL", "a quarter of 20"], ["weight", "162 lb", "not needed"], ["age", "58 years old", "not needed"], ["vial", "30 mL", "not needed"], ["concentration", "125 mg/mL", "not needed"], ["VD", "0.5 L/kg", "not needed: the decline needs only k"]],
+     check=dict(t='From 20 to 5 mg/L is a fall to a quarter, two half-lives of 3.1 hours: 6.2 hr.', lo=0), cite=f'{IN2}, part f')]
+chain('ws3-p2', src='practice', module=3, name='IV Infusions Practice 2', setup='An antibiotic from 125 mg/mL vials for a 162-lb man, VD 0.5 L/kg, t½ 3.1 hr, target 20 mcg/mL; parts a–f', parts=q)
+
+# --------------------------------------------------- IV Infusions Practice 4
+N4 = 'The therapeutic plasma level of a drug is 4 to 15 mg/L. You would like to immediately attain a steady-state concentration level of 10 mg/L and maintain this concentration over 12 hours. The drug has a half-life of 6 hours and renal and metabolic clearances of 5 and 6.55 L/hr, respectively (total body clearance = renal clearance + metabolic clearance). The patient\'s body weight is 65 kg.'
+NA = ' a. Determine an IV bolus loading dose and infusion rate to achieve the desired steady-state plasma level of 10 mg/L.'
+NB = ' b. Calculate the volume and concentration of the infusion solution if the rate of input of the solution is 1 mL/min.'
+NF = ' f. Calculate the concentration of drug in the plasma at 1, 6 and 12 hours following the cessation of the infusion at the steady-state level of 10 mg/L.'
+NG = ' g. If the patient develops acute renal failure and the renal clearance is reduced to 2 L/hr, what IV bolus loading dose and infusion rate would you recommend to achieve the steady-state level of 10 mg/L? Assume metabolic clearance and the apparent volume of distribution remain constant.'
+cl4 = 5 + 6.55; k4i = 0.693 / 6
+G4 = [['window', '4 to 15 mg/L', 'not needed: the target 10 mg/L is stated'], ['Css', '10 mg/L', 'the target'], ['duration', '12 hours', 'not needed'], ['t½', '6 hours', 'k = {{frac:0.693|6}} = 0.1155 hr⁻¹'], ['ClR', '5', 'in L/hr, part of ClT'], ['ClM', '6.55 L/hr', 'ClT = 5 + 6.55 = 11.55 L/hr'], ['weight', '65 kg', 'not needed']]
+def g4(drop=(), **roles):
+    return [[s, v, roles.get(s, r)] for s, v, r in G4 if s not in drop]
+F4 = lambda h: [('setup', 'Cp = Css e^(−kt), with k = {{frac:0.693|6 hr}} = 0.1155 hr⁻¹', 'After the infusion stops the level falls first order from the steady-state 10 mg/L; t is counted from the stop.')]
+q = [
+ num('ws3-4a1', asks='R', stem=N4 + NA + ' (Answer here: the infusion rate.)', units='mg/hr', ans=115.5, calc=10 * cl4, **M3, sub='rate', skill='infusion', concept='rate-for-target-css',
+     steps=[('algebra', 'ClT = ClR + ClM = (5 + 6.55) L/hr = 11.55 L/hr', 'The stem states that total body clearance is renal plus metabolic clearance; both are in L/hr, so they add.'),
+            ('setup', 'R = Css × ClT', 'At steady state the rate in equals the rate out, ClT × Css, so the rate that holds 10 mg/L is the target times clearance.'),
+            ('algebra', 'R = (10 mg/L)(11.55 L/hr) = 115.5 mg/hr', 'mg/L × L/hr: the litres cancel and mg/hr is left, the amount infused each hour.')],
+     teach=T3_ADD,
+     setup=dict(eq='css', pre=['clt-sum'], why='The stem asks an "infusion rate to achieve the desired steady-state plasma level of 10 mg/L", so the steady-state line. Css and ClT are the inputs, R is asked: Css = R/Cl rearranged to R = Css × ClT. Hinge: ClT = ClR + ClM, the sum the stem states.'),
+     givens=g4(Css='the target, times ClT', **{'t½': 'not needed for the rate'}),
+     check=dict(t='10 mg/L held against a clearance of 11.55 L/hr needs 10 × 11.55 mg each hour, 115.5 mg/hr.', lo=0), cite=f'{IN4}, part a'),
+ num('ws3-4a2', asks='DL', stem=N4 + NA + ' (Answer here: the IV bolus loading dose.)', units='mg', ans=1000, calc=10 * cl4 / k4i, **M3, sub='load', skill='loading', concept='loading-dose-calc', dupOf='inf-n18',
+     steps=[('algebra', 'R = (10 mg/L)(11.55 L/hr) = 115.5 mg/hr, with ClT = 5 + 6.55 = 11.55 L/hr', 'Total clearance is the sum of the renal and metabolic clearances, and the rate that holds 10 mg/L is the target times that clearance.'),
+            ('setup', 'DL = {{frac:R|k}}, with k = {{frac:0.693|6 hr}} = 0.1155 hr⁻¹', 'A loading dose puts the steady-state amount in the body at once, and that amount is the rate over the elimination rate constant.'),
+            ('algebra', 'DL = {{frac:115.5 mg/hr|0.1155 hr⁻¹}} = 1000 mg', 'mg/hr over hr⁻¹: the hours cancel and mg is left. It equals Css × VD, (10 mg/L)(100 L).')],
+     teach=T3_ADD,
+     setup=dict(eq='dl-rk', pre=['clt-sum', 'css', 'thalf-first'], why='The stem asks "an IV bolus loading dose" to "immediately attain" 10 mg/L, so the loading-dose line. R and k are the inputs, DL is asked: DL = R/k. Hinges: ClT = ClR + ClM, then R = Css × ClT, and k = 0.693/t½.'),
+     givens=g4(Css='times ClT gives R', **{'t½': 'k = {{frac:0.693|6}} = 0.1155 hr⁻¹, the denominator'}),
+     check=dict(t='The volume is ClT over k, 11.55 over 0.1155, 100 L, and 10 mg/L in 100 L is 1000 mg.', lo=0), cite=f'{IN4}, part a'),
+ num('ws3-4b1', asks='volume', stem=N4 + NB + ' (Answer here: the volume.)', units='mL', ans=720, calc=12 * 60 * 1, **M3, sub='rate', skill='infusion', concept='infusion-volume',
+     steps=[('setup', 'Volume = rate × time, over the 12 hours the concentration is maintained', 'A solution running in at 1 mL each minute for 12 hours delivers the rate times the time.'),
+            ('unit', 'Volume = (12 hr)({{frac:60 min|1 hr}})(1 mL/min) = 720 mL', 'Hours to minutes is × 60, so the minutes cancel against mL/min and mL is left.')],
+     teach=T3_SOLN2,
+     setup=dict(eq='r-dose-time', pre=[], why='The stem asks "the volume" of "the infusion solution" at "1 mL/min" over the "12 hours", so the infusion-rate line written in volume. The rate and the time are the inputs: R = D0/tinf rearranged to amount = R × tinf, in mL. No hinge.'),
+     givens=[["duration", "12 hours", "times 60 minutes, the infusion time"], ["rate", "1 mL/min", "the volume delivered each minute"], ["Css", "10 mg/L", "not needed for the volume"], ["ClR", "5", "not needed for the volume"], ["ClM", "6.55 L/hr", "not needed for the volume"], ["window", "4 to 15 mg/L", "not needed"], ["t½", "6 hours", "not needed for the volume"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='12 hours is 720 minutes, and at 1 mL each minute the solution volume is 720 mL.', lo=0), cite=f'{IN4}, part b'),
+ num('ws3-4b2', asks='C0', stem=N4 + NB + ' (Answer here: the concentration.)', units='mg/mL', ans=1.925, calc=10 * cl4 * 12 / 720, **M3, sub='rate', skill='infusion', concept='infusion-concentration',
+     steps=[('algebra', 'R = (10 mg/L)(11.55 L/hr) = 115.5 mg/hr, with ClT = 5 + 6.55 = 11.55 L/hr', 'The drug rate that holds 10 mg/L is the target times total clearance; the litres cancel and mg/hr is left.'),
+            ('algebra', 'Volume = (12 hr)({{frac:60 min|1 hr}})(1 mL/min) = 720 mL', 'The solution volume delivered at 1 mL/min over the 12 hours.'),
+            ('algebra', 'Concentration = {{frac:(115.5 mg/hr)(12 hr)|720 mL}} = {{frac:1386 mg|720 mL}} = 1.925 mg/mL', 'mg/hr × hr leaves the 1386 mg given in 12 hours; dividing by the 720 mL it is dissolved in gives mg/mL.')],
+     teach=T3_SOLN2,
+     setup=dict(eq='cp-db-vd', pre=['clt-sum', 'css', 'r-dose-time'], why='The stem asks "the concentration of the infusion solution", so concentration = amount/volume, the line Cp = DB/VD applied to the infusion solution. The amount for 12 hours and the volume are the inputs. Hinges: R = Css × ClT with ClT = ClR + ClM, and the 720 mL volume.'),
+     givens=[["duration", "12 hours", "the infusion time"], ["rate", "1 mL/min", "gives the 720 mL volume"], ["Css", "10 mg/L", "times ClT gives the drug rate"], ["ClR", "5", "in L/hr, part of ClT"], ["ClM", "6.55 L/hr", "ClT = 5 + 6.55 = 11.55 L/hr"], ["window", "4 to 15 mg/L", "not needed"], ["t½", "6 hours", "not needed for the concentration"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='The solution runs in at 60 mL each hour and must contain the 115.5 mg given each hour, so about 1.9 mg in each mL; 1.925 mg/mL fits.', lo=0), cite=f'{IN4}, part b'),
+ num('ws3-4c', asks='VD', stem=N4 + ' c. What is the apparent volume of distribution?', units='L', ans=100, calc=cl4 / k4i, **M3, sub='css', skill='vddose', concept='vd-from-cl-k',
+     steps=[('setup', 'ClT = k × VD, so VD = {{frac:ClT|k}}', 'Clearance is the rate constant times the volume of distribution; dividing clearance by k gives the volume.'),
+            ('algebra', 'VD = {{frac:11.55 L/hr|0.1155 hr⁻¹}} = 100 L', 'L/hr over hr⁻¹: the hours cancel and litres are left. ClT = 5 + 6.55 = 11.55 L/hr and k = {{frac:0.693|6 hr}} = 0.1155 hr⁻¹.')],
+     teach=T3_VD,
+     setup=dict(eq='cl-k-vd', pre=['clt-sum', 'thalf-first'], why='The stem asks "the apparent volume of distribution" and gives the clearances and the half-life, so the clearance line. ClT and k are the inputs, VD is asked: Cl = k × VD rearranged to VD = ClT/k. Hinges: ClT = ClR + ClM, and k = 0.693/t½.'),
+     givens=[["Css", "10 mg/L", "not needed for VD"], ["t½", "6 hours", "k = {{frac:0.693|6}} = 0.1155 hr⁻¹"], ["ClR", "5", "in L/hr, part of ClT"], ["ClM", "6.55 L/hr", "ClT = 5 + 6.55 = 11.55 L/hr"], ["weight", "65 kg", "not needed: VD comes from ClT and k"], ["window", "4 to 15 mg/L", "not needed"], ["duration", "12 hours", "not needed"]],
+     check=dict(t='VD × k must give back the clearance: 100 L × 0.1155 hr⁻¹ = 11.55 L/hr, the sum of 5 and 6.55 L/hr.', lo=0), cite=f'{IN4}, part c'),
+ num('ws3-4d', asks='t', stem=N4 + ' d. If there were no loading dose, how much time would be required to reach the 5 mg/L level?', units='hr', ans=6, calc=ln(2) / k4i, **M3, sub='time', skill='infusion', concept='time-to-fraction-of-css',
+     steps=[('setup', 'Cp = Css(1 − e^(−kt)): 5 mg/L = (10 mg/L)(1 − e^(−(0.1155)t))', 'Without a loading dose the level rises from zero toward Css = 10 mg/L; 5 mg/L is 50% of Css.'),
+            ('algebra', '0.5 = 1 − e^(−(0.1155)t), so e^(−(0.1155)t) = 0.5', 'Dividing both sides by 10 mg/L cancels the units and leaves the fraction of Css reached.'),
+            ('algebra', 't = {{frac:ln 2|0.1155 hr⁻¹}} = 6 hr', 'A pure number over hr⁻¹ gives hours, with k = {{frac:0.693|6 hr}} = 0.1155 hr⁻¹: half of Css is reached in one half-life, 6 hours.')],
+     teach=T3_TIME,
+     setup=dict(eq='cp-infusing', pre=['thalf-first', 'css'], why='The stem says "no loading dose" and asks "how much time" to "reach the 5 mg/L level", so the during-infusion line solved for t. Cp, Css and k are the inputs: Cp = Css(1 − e^(−kt)) gives t = −ln(1 − Cp/Css)/k. Hinge: k = 0.693/t½.'),
+     givens=[["Css", "10 mg/L", "the plateau; 5 mg/L is half of it"], ["target", "5 mg/L", "50% of Css"], ["t½", "6 hours", "k = {{frac:0.693|6}} = 0.1155 hr⁻¹"], ["ClR", "5", "not needed for the time"], ["ClM", "6.55 L/hr", "not needed for the time"], ["window", "4 to 15 mg/L", "not needed"], ["duration", "12 hours", "not needed"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='Half of Css is reached after one half-life whatever the rate, so 5 mg/L, half of 10 mg/L, takes 6 hours.', lo=0), cite=f'{IN4}, part d'),
+ num('ws3-4e', asks='t', stem=N4 + ' e. If there were no loading dose, how much time would be required to reach 80% of the steady-state plasma concentration?', units='hr', ans=13.93, calc=-ln(0.2) / k4i, **M3, sub='time', skill='infusion', concept='time-to-percent-css',
+     steps=[('setup', '0.8 = 1 − e^(−kt), with k = {{frac:0.693|6 hr}} = 0.1155 hr⁻¹', 'Without a loading dose the fraction of Css reached at time t is 1 − e^(−kt).'),
+            ('algebra', 'e^(−(0.1155)t) = 0.2, so t = {{frac:−ln 0.2|0.1155 hr⁻¹}} = {{frac:1.609|0.1155 hr⁻¹}} = 13.93 hr', 'The log of a pure number over hr⁻¹ gives hours: just over two half-lives, since 75% takes two.')],
+     teach=T3_TIME,
+     setup=dict(eq='cp-infusing', pre=['thalf-first'], why='The stem says "no loading dose" and asks "how much time" to "reach 80% of the steady-state plasma concentration", so the during-infusion line solved for t. The fraction 0.8 and k are the inputs: 0.8 = 1 − e^(−kt) gives t = −ln(0.2)/k. Hinge: k = 0.693/t½.'),
+     givens=[["t½", "6 hours", "k = {{frac:0.693|6}} = 0.1155 hr⁻¹"], ["fraction", "80%", "f = 0.8, so e^(−kt) = 0.2"], ["Css", "10 mg/L", "not needed: only the fraction matters"], ["window", "4 to 15 mg/L", "not needed"], ["duration", "12 hours", "not needed"], ["ClR", "5", "not needed: only k matters"], ["ClM", "6.55 L/hr", "not needed"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='75% of Css takes two half-lives, 12 hours, and 87.5% takes three, 18 hours; 80% lies between, a little after 12 hours, and 13.93 hr fits.', lo=12, hi=18), cite=f'{IN4}, part e'),
+ num('ws3-4f1', asks='Cp', stem=N4 + NF + ' (Answer here: 1 hour after.)', units='mg/L', ans=8.91, calc=10 * e(-k4i * 1), **M3, sub='stop', skill='conctime', concept='post-cessation-decay',
+     steps=F4(1) + [('algebra', 'C1 = (10 mg/L) e^(−(0.1155)(1)) = 8.91 mg/L', 'kt = 0.1155 has no units, so the answer keeps mg/L; e^(−0.1155) = 0.891 of Css remains after 1 hour.')],
+     teach=T3_STOP,
+     setup=dict(eq='cp-after-stop', pre=['thalf-first'], why='The stem asks the concentration "following the cessation of the infusion at the steady-state level of 10 mg/L", so the after-the-infusion line. Css, k and t are the inputs, Cp is asked: Cp = Cpeak e^(−kt) with Cpeak = 10 mg/L. Hinge: k = 0.693/t½.'),
+     givens=[["Css", "10 mg/L", "the level when the infusion stops"], ["t½", "6 hours", "k = {{frac:0.693|6}} = 0.1155 hr⁻¹"], ["t", "1, 6 and 12 hours", "after the cessation: the exponent kt"], ["window", "4 to 15 mg/L", "not needed for the number"], ["ClR", "5", "not needed: Css is given"], ["ClM", "6.55 L/hr", "not needed"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='One hour is a sixth of a half-life, so a little over a tenth of the 10 mg/L is lost: 8.91 mg/L fits.', lo=5, hi=10), cite=f'{IN4}, part f'),
+ num('ws3-4f2', asks='Cp', stem=N4 + NF + ' (Answer here: 6 hours after.)', units='mg/L', ans=5, calc=10 * e(-k4i * 6), **M3, sub='stop', skill='conctime', concept='post-cessation-decay',
+     steps=F4(6) + [('algebra', 'C6 = (10 mg/L) e^(−(0.1155)(6)) = 5 mg/L', 'kt = 0.693 has no units: 6 hours is one half-life, so half of the 10 mg/L remains.')],
+     teach=T3_STOP,
+     setup=dict(eq='cp-after-stop', pre=['thalf-first'], why='The stem asks the concentration "following the cessation of the infusion at the steady-state level of 10 mg/L", so the after-the-infusion line. Css, k and t are the inputs, Cp is asked: Cp = Cpeak e^(−kt) with Cpeak = 10 mg/L. Hinge: k = 0.693/t½.'),
+     givens=[["Css", "10 mg/L", "the level when the infusion stops"], ["t½", "6 hours", "k = {{frac:0.693|6}} = 0.1155 hr⁻¹"], ["t", "1, 6 and 12 hours", "after the cessation: the exponent kt"], ["window", "4 to 15 mg/L", "not needed for the number"], ["ClR", "5", "not needed: Css is given"], ["ClM", "6.55 L/hr", "not needed"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='Six hours is one half-life, so half of 10 mg/L, 5 mg/L, remains.', lo=0, hi=10), cite=f'{IN4}, part f'),
+ num('ws3-4f3', asks='Cp', stem=N4 + NF + ' (Answer here: 12 hours after.)', units='mg/L', ans=2.5, calc=10 * e(-k4i * 12), **M3, sub='stop', skill='conctime', concept='post-cessation-decay',
+     steps=F4(12) + [('algebra', 'C12 = (10 mg/L) e^(−(0.1155)(12)) = 2.5 mg/L', 'kt = 1.386 has no units: two half-lives leave a quarter of the 10 mg/L.')],
+     teach=T3_STOP,
+     setup=dict(eq='cp-after-stop', pre=['thalf-first'], why='The stem asks the concentration "following the cessation of the infusion at the steady-state level of 10 mg/L", so the after-the-infusion line. Css, k and t are the inputs, Cp is asked: Cp = Cpeak e^(−kt) with Cpeak = 10 mg/L. Hinge: k = 0.693/t½.'),
+     givens=[["Css", "10 mg/L", "the level when the infusion stops"], ["t½", "6 hours", "k = {{frac:0.693|6}} = 0.1155 hr⁻¹"], ["t", "1, 6 and 12 hours", "after the cessation: the exponent kt"], ["window", "4 to 15 mg/L", "not needed for the number"], ["ClR", "5", "not needed: Css is given"], ["ClM", "6.55 L/hr", "not needed"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='Twelve hours is two half-lives, so a quarter of 10 mg/L remains: 2.5 mg/L.', lo=0, hi=10), cite=f'{IN4}, part f'),
+ num('ws3-4g1', asks='R', stem=N4 + NG + ' (Answer here: the infusion rate.)', units='mg/hr', ans=85.5, calc=10 * (2 + 6.55), **M3, sub='rate', skill='infusion', concept='rate-in-renal-failure',
+     steps=[('algebra', 'ClT = (2 + 6.55) L/hr = 8.55 L/hr', 'Total clearance is renal plus metabolic; only the renal part falls, to 2 L/hr, and the metabolic 6.55 L/hr is unchanged.'),
+            ('algebra', 'R = (10 mg/L)(8.55 L/hr) = 85.5 mg/hr', 'R = Css × ClT: mg/L × L/hr leaves mg/hr. The lower clearance needs a lower rate to hold the same 10 mg/L.')],
+     teach=T3_RENAL,
+     setup=dict(eq='css', pre=['clt-sum'], why='The stem says "the renal clearance is reduced to 2 L/hr" and asks the "infusion rate" for "the steady-state level of 10 mg/L", so the steady-state line. Css and the new ClT are the inputs, R is asked: R = Css × ClT. Hinge: ClT = ClR + ClM with the new renal clearance.'),
+     givens=[["ClR new", "2 L/hr", "replaces the 5 L/hr"], ["ClM", "6.55 L/hr", "unchanged: ClT = 2 + 6.55 = 8.55 L/hr"], ["Css", "10 mg/L", "the same target"], ["ClR", "5", "not needed: replaced"], ["t½", "6 hours", "not needed for the rate"], ["window", "4 to 15 mg/L", "not needed"], ["duration", "12 hours", "not needed"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='The rate is the target times the new clearance: 10 × 8.55 = 85.5 mg/hr, lower than before because less drug is cleared each hour.', lo=0), cite=f'{IN4}, part g'),
+ num('ws3-4g2', asks='DL', stem=N4 + NG + ' (Answer here: the IV bolus loading dose.) (Part c: VD = 100 L.)', units='mg', ans=1000, calc=10 * cl4 / k4i, **M3, sub='load', skill='loading', concept='loading-dose-renal-failure',
+     steps=[('algebra', 'ClT = (2 + 6.55) L/hr = 8.55 L/hr; k = {{frac:ClT|VD}} = {{frac:8.55 L/hr|100 L}} = 0.0855 hr⁻¹', 'The volume is unchanged at 100 L, so the lower clearance means a smaller k: the litres cancel and hr⁻¹ is left.'),
+            ('algebra', 'R = (10 mg/L)(8.55 L/hr) = 85.5 mg/hr', 'The rate that holds 10 mg/L with the new clearance: mg/L × L/hr leaves mg/hr.'),
+            ('algebra', 'DL = {{frac:R|k}} = {{frac:85.5 mg/hr|0.0855 hr⁻¹}} = 1000 mg', 'mg/hr over hr⁻¹ leaves mg. It equals Css × VD, (10 mg/L)(100 L): the loading dose depends on the volume, which has not changed.')],
+     teach=T3_RENAL,
+     setup=dict(eq='dl-rk', pre=['clt-sum', 'cl-k-vd', 'css'], why='The stem asks the "IV bolus loading dose" after "acute renal failure" with "the apparent volume of distribution" constant, so the loading-dose line. R and the new k are the inputs, DL is asked: DL = R/k. Hinges: ClT = ClR + ClM, k = ClT/VD with VD = 100 L, and R = Css × ClT.'),
+     givens=[["ClR new", "2 L/hr", "replaces 5 L/hr: ClT = 2 + 6.55 = 8.55 L/hr"], ["ClM", "6.55 L/hr", "unchanged"], ["VD", "100 L", "unchanged"], ["Css", "10 mg/L", "the same target"], ["t½", "6 hours", "not needed: the old half-life no longer applies"], ["window", "4 to 15 mg/L", "not needed"], ["duration", "12 hours", "not needed"], ["ClR old", "5", "not needed: replaced by 2 L/hr"], ["weight", "65 kg", "not needed"]],
+     check=dict(t='The loading dose is 10 mg/L times the unchanged 100 L, so it stays at 1000 mg, the same as before the renal failure; only the rate falls.', lo=0), cite=f'{IN4}, part g')]
+chain('ws3-p4', src='practice', module=3, name='IV Infusions Practice 4', setup='Target 10 mg/L at once, held 12 hours; t½ 6 hr, renal and metabolic clearances 5 and 6.55 L/hr; then acute renal failure, renal clearance 2 L/hr; parts a–g', parts=q)
+
 CL1 = 'Clearance--26-Elimination-Practice-1-Solutions.pdf'
 CL2 = 'Clearance--26-Elimination-Practice-2-Solutions.pdf'
 CL3 = 'Clearance--26-Elimination-Practice-3-Solutions-281-29.pdf'
@@ -900,10 +1496,13 @@ chain('ws7-3', src='practice', module=7, name='BA-BE Practice 3', setup='1000 mg
 HEADER = '''/* ==========================================================================
    WORKSHEETS: HER DAILY PRACTICE SHEETS
    ==========================================================================
-   Clearance & Elimination Practice 1–4, Single Oral Practice 1–3, Multiple
-   IV Bolus Practice 2–4, Multiple IV Infusion & Oral Practice 1–3 and BA-BE
-   Practice 1–3, each stem as she printed it and each line of working from
-   her solution key, every part of every sheet.
+   Introduction and Math Review Practice 2–3, IV Bolus Practice 3–4, IV
+   Infusions Practice 1, 2 and 4, Clearance & Elimination Practice 1–4,
+   Single Oral Practice 1–3, Multiple IV Bolus Practice 2–4, Multiple IV
+   Infusion & Oral Practice 1–3 and BA-BE Practice 1–3, each stem as she
+   printed it and each line of working from her solution key, every part of
+   every sheet. A part a bank question in q1/q2/q3 already asks carries dupOf
+   that question, so an exam paper never holds both wordings.
    Written by src/gen/ws_practice.py (run it, not this file), which recomputes every answer from the
    stem and fails if the keyed value is outside the tolerance. Where her key's
    last digit comes from an unrounded intermediate, `note` says so and the

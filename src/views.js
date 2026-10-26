@@ -5438,7 +5438,7 @@ function gwPlay(id, i, k){
   if(!gwHas(id)) return;
   if(GW && GW.id === id && GW.i === i && k == null && !GW.playing){
     GW.playing = true; GW.started = true;
-    if(GW.audio && GW_AUDIO && GW_AUDIO.src && !GW_AUDIO.ended && GW_AUDIO.currentTime > 0){ const run = ++GW.run; gwAudioWire(id, i, run); GW_AUDIO.playbackRate = gwRate(); GW_AUDIO.play().catch(() => {}); gwDraw(id); return; }
+    if(GW.audio && GW_AUDIO && GW_AUDIO.src && !GW_AUDIO.ended && GW_AUDIO.currentTime > 0){ const run = ++GW.run; gwAudioWire(id, i, run, gwNext(id, i, GW, run)); GW_AUDIO.playbackRate = gwRate(); GW_AUDIO.play().catch(() => {}); gwDraw(id); return; }
     return gwRun(id, i, GW.k);
   }
   if(GW && GW.id !== id){ const old = GW.id; gwStopSound(); GW = null; gwDraw(old); }
@@ -5450,8 +5450,7 @@ function gwPlay(id, i, k){
 function gwRun(id, i, k){
   const g = GW, run = ++g.run, seg = GUIDE_WALK[id].segs[i], ss = gwSents(seg.t);
   g.i = i; g.k = k; g.browse = null; gwDraw(id); gwMedia(id, i);
-  const next = () => { if(GW !== g || run !== g.run) return; g.audio = false;
-    if(i + 1 < GUIDE_WALK[id].segs.length){ gwPosSet(id, i + 1); gwRun(id, i + 1, 0); } else gwEnd(id); };
+  const next = gwNext(id, i, g, run);
   if(gwRec(id, i) && !g.fell){
     const a = GW_AUDIO || (GW_AUDIO = new Audio());
     g.audio = true; a.src = 'audio/gw-' + id + '-' + i + '.mp3'; a.playbackRate = gwRate();
@@ -5476,6 +5475,11 @@ function gwRun(id, i, k){
   };
   sy.cancel(); say(k);
 }
+// part i is finished: the next part plays, or the walkthrough ends; a later run (pause, a step, a new part) voids it
+function gwNext(id, i, g, run){
+  return () => { if(GW !== g || run !== g.run) return; g.audio = false;
+    if(i + 1 < GUIDE_WALK[id].segs.length){ gwPosSet(id, i + 1); gwRun(id, i + 1, 0); } else gwEnd(id); };
+}
 // no voice at all: the parts still advance at a reading pace, so the slides and card can be followed
 function gwRunWait(id, i, run, ss, next){
   const g = GW; clearTimeout(g.t);
@@ -5489,7 +5493,7 @@ function gwAudioWire(id, i, run, next){
   a.ontimeupdate = () => { if(GW !== g || run !== g.run || !isFinite(a.duration) || !a.duration) return;
     const at = c * a.currentTime / a.duration; let k = ends.findIndex(e => at < e); if(k < 0) k = ss.length - 1;
     if(k !== g.k){ g.k = k; gwDraw(id); } };
-  if(next){ a.onended = next; a.onerror = () => { if(GW === g && run === g.run){ g.fell = true; g.audio = false; gwRun(id, i, 0); } }; }
+  a.onended = next; a.onerror = () => { if(GW === g && run === g.run){ g.fell = true; g.audio = false; gwRun(id, i, 0); } };
 }
 // the last part ended: with "Continue" ticked, the next section with a walkthrough opens and plays
 function gwEnd(id){

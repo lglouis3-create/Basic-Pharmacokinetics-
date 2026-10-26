@@ -67,14 +67,16 @@ Last updated 2026-10-26.
   renal_steps, loading_miss_steps, teff_halvings_steps, nl_frac_steps.
 - Guide corrections that came out of the review: Example 2 Cmax is 55.4 mg/L on the solved page (the 53.4 note
   was an OCR misread, removed); the 3.72 hr interval and the 17.29 mg dose are two separate examples of hers.
-- Recording estimate on these scripts: 180,584 characters, about 180,566 credits (ElevenLabs priced a 609-character
-  part at 608.94 credits, 11.07 cents), about 3,283 cents. Not recorded; waiting for approval.
+- Recorded 26 Oct after approval: all 321 parts, voice jNB0TWZK9LKlBbU54wMW, eleven_v4, one generation each, no
+  failures or repeats (ledgers in the session scratchpad rec/ledger-<group>.jsonl). 180,566 credits by the ledgers,
+  the same as the estimate; at 11.07 cents per 608.94 credits, about 3,282.5 cents. Encoded to audio/ at 64 kbps
+  mono: 321 clips, 198.1 minutes, 92 MB; every clip's words per second falls inside 1.6 to 3.6, and every clip's
+  text equals its part's current text. walk_test.py checks that every part has a served clip and that a played
+  part plays its clip, pauses and resumes in place, moves the marked sentence, and starts the next part's clip.
+- A script change after this makes that part's clip read the old words: re-record the changed part (its text no
+  longer equals rec/parts.json) or delete its clip so the device voice reads it.
 
 ## Open
-- Recording: not done. Estimate 159,586 characters; at the Intro Pharmacology walkthrough rate (1,850.92 cents for
-  101,801 credits) about 2,901.55 cents, assuming one credit per character. Planned voice: the one used there
-  (jNB0TWZK9LKlBbU54wMW, eleven_v4), to be confirmed. Record only after approval; one clip per part,
-  audio/gw-<section id>-<part index>.mp3; check each downloads and its length fits its word count.
 - Equation sheet (BasicPharmacokineticsEquations.pdf, uploaded 10/26): every sentence in the scripts that says
   whether a relation is on the sheet was checked against its two pages and matches. The guide's "the only half-life
   line the sheet prints" (gobj-m8-2) is also correct: the nonlinear t1/2 on page 2 is the only one.

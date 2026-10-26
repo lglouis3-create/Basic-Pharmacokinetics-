@@ -5,8 +5,10 @@ The built page is served from the repository root, so the slide images load from
 class site. The device voice is replaced by a stand-in that finishes each sentence after a few milliseconds, so
 the parts advance on their own. For every section with a walkthrough: it opens, every slide its parts name
 loads, stepping a part moves the slide with it, playing advances the parts, pause holds the position and resume
-continues from it, the position survives closing the panel, and the page never scrolls sideways. Any page or
-console error fails the run.
+continues from it, the position survives closing the panel, and the page never scrolls sideways. These runs empty
+GW_CLIPS so every part takes the device-voice path. A separate run keeps the recorded clips: every listed clip is
+served, a played part loads its own clip and moves the marked sentence with the clip's position, pause and resume
+keep the clip's place, and the clip's end starts the next part's clip. Any page or console error fails the run.
 
     python3 walk_test.py
 """
@@ -146,6 +148,54 @@ def run(page, width):
     check(page.evaluate("GW === null"), 'changing tabs stops the walkthrough')
 
 
+def clips(browser, url):
+    print('\n=== recorded clips ===')
+    page = browser.new_page(viewport={'width': 820, 'height': 1000})
+    errs = []
+    page.on('pageerror', lambda e: errs.append(str(e)))
+    page.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
+    page.add_init_script(FAKE_VOICE)
+    page.goto(url); page.wait_for_timeout(1200)
+    n, want, bad = page.evaluate("""async () => { const r = await Promise.all(GW_CLIPS.map(c => fetch('audio/gw-' + c + '.mp3', {method: 'HEAD'})
+        .then(x => x.ok ? null : c, () => c)));
+      const want = Object.entries(GUIDE_WALK).reduce((t, [, w]) => t + w.segs.length, 0);
+      return [GW_CLIPS.length, want, r.filter(Boolean)]; }""")
+    check(n == want and not bad, f'every walkthrough part has a recorded clip and every clip is served ({n} of {want})', ', '.join(bad[:5]))
+    sid = 'gobj-m8-3'
+    page.evaluate(f"LS.set(FOLD_KEY+'guide','open'); show('guide'); openAncestors(document.getElementById('{sid}'))")
+    page.click(f'#{sid} [data-gwopen]'); page.wait_for_selector(f'.gwpanel[data-gwp="{sid}"]')
+    page.evaluate(f"gwGo('{sid}', 0)")
+    if not page.evaluate("GW && GW.playing"): page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
+    try:
+        page.wait_for_function("GW_AUDIO && GW_AUDIO.currentTime > 0.5", timeout=15000); played = True
+    except Exception:
+        played = False
+    st = page.evaluate("[GW.audio, GW_AUDIO.src.split('/').pop(), speechSynthesis.q.length, GW_AUDIO.duration]")
+    check(played and st[0] and st[1] == f'gw-{sid}-0.mp3' and st[2] == 0,
+          'playing a part plays its recorded clip, not the device voice', str(st))
+    page.evaluate("gwPause()"); t0 = page.evaluate("GW_AUDIO.currentTime"); page.wait_for_timeout(600)
+    t1 = page.evaluate("GW_AUDIO.currentTime")
+    page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]'); page.wait_for_timeout(800)
+    t2 = page.evaluate("[GW_AUDIO.currentTime, GW.playing, GW.i]")
+    check(abs(t1 - t0) < 0.05 and t2[1] and t2[2] == 0 and t2[0] > t1, 'pause holds the clip and resume continues it', f'{t0} {t1} {t2}')
+    last = page.evaluate(f"gwSents(GUIDE_WALK['{sid}'].segs[0].t).length - 1")
+    page.evaluate("GW_AUDIO.currentTime = GW_AUDIO.duration * 0.98")
+    try:
+        page.wait_for_function(f"GW.k === {last}", timeout=5000); marked = True
+    except Exception:
+        marked = False
+    check(marked, 'the marked sentence follows the clip to its last sentence', page.evaluate("[GW.i, GW.k]"))
+    try:
+        page.wait_for_function(f"GW.i === 1 && GW_AUDIO.src.endsWith('gw-{sid}-1.mp3') && GW_AUDIO.currentTime > 0.2", timeout=15000); nxt = True
+    except Exception:
+        nxt = False
+    check(nxt, "the clip's end starts the next part's clip", page.evaluate("[GW.i, GW_AUDIO.src.split('/').pop()]"))
+    page.evaluate("show('topics')")
+    check(page.evaluate("GW === null && GW_AUDIO.paused"), 'changing tabs stops the clip')
+    check(not errs, 'no page or console errors with the recorded clips', '; '.join(errs[:3]))
+    page.close()
+
+
 def main():
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *a): pass
@@ -167,6 +217,7 @@ def main():
             page.on('response', lambda r: errs.append(f'{r.status} {r.url}') if r.status >= 400 else None)
             page.add_init_script(FAKE_VOICE)
             page.goto(url); page.wait_for_timeout(1200)
+            page.evaluate("GW_CLIPS.length = 0")   # the device-voice path; the recorded clips are checked below
             run(page, width)
             check(not errs, f'no page or console errors at {width} px', '; '.join(errs[:3]))
             page.close()
@@ -174,6 +225,7 @@ def main():
         page = browser.new_page(viewport={'width': 820, 'height': 1000})
         page.add_init_script(FAKE_VOICE.replace("setTimeout(() => { if(!u._x && u.onend) u.onend(); }, 15);", ""))
         page.goto(url); page.wait_for_timeout(1200)
+        page.evaluate("GW_CLIPS.length = 0")
         sid = 'gobj-m8-3'
         page.evaluate(f"LS.set(FOLD_KEY+'guide','open'); show('guide'); openAncestors(document.getElementById('{sid}'))")
         page.click(f'#{sid} [data-gwopen]'); page.wait_for_selector(f'.gwpanel[data-gwp="{sid}"]')
@@ -185,6 +237,7 @@ def main():
             moved = False
         check(moved, 'with a voice that never speaks, the walkthrough moves on at reading pace', page.evaluate("GW && [GW.i, GW.k]"))
         page.close()
+        clips(browser, url)
         browser.close()
     srv.shutdown()
     print(f'\n{len(fails)} failure(s)' if fails else '\nall walkthrough checks passed')

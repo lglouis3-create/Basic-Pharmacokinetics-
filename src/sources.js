@@ -1532,6 +1532,82 @@ const SOURCES = [
   "missing": ""
  },
  {
+  "id": "dp-m1-2",
+  "title": "Introduction and Math Review Practice 2",
+  "type": "daily-practice",
+  "module": 1,
+  "modules": [
+   1
+  ],
+  "date": "",
+  "file": "IntroductionandMathReview2Solutions.pdf",
+  "drive": {
+   "id": "1VHeVbKAesccZnWTKcl5lAiojxINqNlTn"
+  },
+  "key": "instructor",
+  "note": "",
+  "chains": [
+   "ws1-p2"
+  ],
+  "items": [
+   {
+    "q": "ws1-2-1",
+    "label": "Problem 1"
+   },
+   {
+    "q": "ws1-2-2",
+    "label": "Problem 2"
+   },
+   {
+    "q": "ws1-2-3",
+    "label": "Problem 3"
+   }
+  ],
+  "missing": ""
+ },
+ {
+  "id": "dp-m1-3",
+  "title": "Introduction and Math Review Practice 3",
+  "type": "daily-practice",
+  "module": 1,
+  "modules": [
+   1
+  ],
+  "date": "",
+  "file": "IntroductionandMathReview3Solutions.pdf",
+  "drive": {
+   "id": "1VaCRh7QJL99hZk-14N8uVsiXcJMEYLNy"
+  },
+  "key": "instructor",
+  "note": "",
+  "chains": [
+   "ws1-p3"
+  ],
+  "items": [
+   {
+    "q": "ws1-3-1a",
+    "label": "1a"
+   },
+   {
+    "q": "ws1-3-1b",
+    "label": "1b"
+   },
+   {
+    "q": "ws1-3-1c",
+    "label": "1c"
+   },
+   {
+    "q": "ws1-3-2a",
+    "label": "2a"
+   },
+   {
+    "q": "ws1-3-2b",
+    "label": "2b"
+   }
+  ],
+  "missing": ""
+ },
+ {
   "id": "dp-m2-1",
   "title": "IV Bolus Practice 1",
   "type": "daily-practice",
@@ -1640,6 +1716,218 @@ const SOURCES = [
   "missing": ""
  },
  {
+  "id": "dp-m2-3",
+  "title": "IV Bolus Practice 3",
+  "type": "daily-practice",
+  "module": 2,
+  "modules": [
+   2
+  ],
+  "date": "",
+  "file": "IV-Bolus-Practice-3---Solutions.pdf",
+  "drive": {
+   "id": "1jYwTG-Zde3uguySNZHrCei8Y2ZJzcdXQ"
+  },
+  "key": "instructor",
+  "note": "",
+  "chains": [
+   "ws2-p3"
+  ],
+  "items": [
+   {
+    "q": "ws2-3-1a",
+    "label": "1a"
+   },
+   {
+    "q": "ws2-3-1b",
+    "label": "1b"
+   },
+   {
+    "q": "ws2-3-1c",
+    "label": "1c"
+   },
+   {
+    "q": "ws2-3-1d",
+    "label": "1d"
+   },
+   {
+    "q": "ws2-3-1e",
+    "label": "1e"
+   },
+   {
+    "q": "ws2-3-2a",
+    "label": "2a"
+   },
+   {
+    "q": "ws2-3-2b",
+    "label": "2b"
+   },
+   {
+    "q": "ws2-3-2c",
+    "label": "2c"
+   },
+   {
+    "q": "ws2-3-2d",
+    "label": "2d"
+   }
+  ],
+  "missing": ""
+ },
+ {
+  "id": "dp-m2-4",
+  "title": "IV Bolus Practice 4",
+  "type": "daily-practice",
+  "module": 2,
+  "modules": [
+   2
+  ],
+  "date": "",
+  "file": "IV-Bolus-Practice-4---Solutions.pdf",
+  "drive": {
+   "id": "1T6Pz7QWkkCkHIjgTxWleictgVCBdjXLv"
+  },
+  "key": "instructor",
+  "note": "",
+  "chains": [
+   "ws2-p4"
+  ],
+  "items": [
+   {
+    "q": "ws2-4-1a",
+    "label": "1a"
+   },
+   {
+    "q": "ws2-4-1b",
+    "label": "1b"
+   },
+   {
+    "q": "ws2-4-1c",
+    "label": "1c"
+   },
+   {
+    "q": "ws2-4-1d",
+    "label": "1d"
+   },
+   {
+    "q": "ws2-4-1e",
+    "label": "1e"
+   },
+   {
+    "q": "ws2-4-1f",
+    "label": "1f"
+   },
+   {
+    "q": "ws2-4-2a",
+    "label": "2a"
+   },
+   {
+    "q": "ws2-4-2b",
+    "label": "2b"
+   },
+   {
+    "q": "ws2-4-2c",
+    "label": "2c"
+   }
+  ],
+  "missing": ""
+ },
+ {
+  "id": "dp-m3-1",
+  "title": "IV Infusions Practice 1",
+  "type": "daily-practice",
+  "module": 3,
+  "modules": [
+   3
+  ],
+  "date": "",
+  "file": "IV-Infusions-Practice-1-Solutions.pdf",
+  "drive": {
+   "id": "1iL-4kQfyiRpM9XVKVj7-DY0wmnIdNE4K"
+  },
+  "key": "instructor",
+  "note": "",
+  "chains": [
+   "ws3-p1"
+  ],
+  "items": [
+   {
+    "q": "ws3-1a",
+    "label": "a"
+   },
+   {
+    "q": "ws3-1b",
+    "label": "b"
+   },
+   {
+    "q": "ws3-1c",
+    "label": "c"
+   },
+   {
+    "q": "ws3-1d",
+    "label": "d"
+   },
+   {
+    "q": "ws3-1e",
+    "label": "e"
+   },
+   {
+    "q": "ws3-1f",
+    "label": "f"
+   },
+   {
+    "q": "ws3-1g",
+    "label": "g"
+   }
+  ],
+  "missing": ""
+ },
+ {
+  "id": "dp-m3-2",
+  "title": "IV Infusions Practice 2",
+  "type": "daily-practice",
+  "module": 3,
+  "modules": [
+   3
+  ],
+  "date": "",
+  "file": "IV-Infusions-Practice-2-Solutions.pdf",
+  "drive": {
+   "id": "1Cff1VlQ5DnbKzYK8k4NwlLXPG-8mjSgi"
+  },
+  "key": "instructor",
+  "note": "",
+  "chains": [
+   "ws3-p2"
+  ],
+  "items": [
+   {
+    "q": "ws3-2a",
+    "label": "a"
+   },
+   {
+    "q": "ws3-2b",
+    "label": "b"
+   },
+   {
+    "q": "ws3-2c",
+    "label": "c"
+   },
+   {
+    "q": "ws3-2d",
+    "label": "d"
+   },
+   {
+    "q": "ws3-2e",
+    "label": "e"
+   },
+   {
+    "q": "ws3-2f",
+    "label": "f"
+   }
+  ],
+  "missing": ""
+ },
+ {
   "id": "dp-m3-3",
   "title": "IV Infusions Practice 3",
   "type": "daily-practice",
@@ -1665,6 +1953,76 @@ const SOURCES = [
    {
     "q": "inf-n16",
     "label": "a"
+   }
+  ],
+  "missing": ""
+ },
+ {
+  "id": "dp-m3-4",
+  "title": "IV Infusions Practice 4",
+  "type": "daily-practice",
+  "module": 3,
+  "modules": [
+   3
+  ],
+  "date": "",
+  "file": "IV-Infusions-Practice-4-Solutions.pdf",
+  "drive": {
+   "id": "1lZQDtVkxF3KSeZiyR5hyuvXMUOTwQ6-P"
+  },
+  "key": "instructor",
+  "note": "",
+  "chains": [
+   "ws3-p4"
+  ],
+  "items": [
+   {
+    "q": "ws3-4a1",
+    "label": "a"
+   },
+   {
+    "q": "ws3-4a2",
+    "label": "a"
+   },
+   {
+    "q": "ws3-4b1",
+    "label": "b"
+   },
+   {
+    "q": "ws3-4b2",
+    "label": "b"
+   },
+   {
+    "q": "ws3-4c",
+    "label": "c"
+   },
+   {
+    "q": "ws3-4d",
+    "label": "d"
+   },
+   {
+    "q": "ws3-4e",
+    "label": "e"
+   },
+   {
+    "q": "ws3-4f1",
+    "label": "f"
+   },
+   {
+    "q": "ws3-4f2",
+    "label": "f"
+   },
+   {
+    "q": "ws3-4f3",
+    "label": "f"
+   },
+   {
+    "q": "ws3-4g1",
+    "label": "g"
+   },
+   {
+    "q": "ws3-4g2",
+    "label": "g"
    }
   ],
   "missing": ""
@@ -4279,6 +4637,38 @@ const SOURCE_OF = {
   "src": "dp-m1-1",
   "label": "2 (final part, unnumbered)"
  },
+ "ws1-2-1": {
+  "src": "dp-m1-2",
+  "label": "Problem 1"
+ },
+ "ws1-2-2": {
+  "src": "dp-m1-2",
+  "label": "Problem 2"
+ },
+ "ws1-2-3": {
+  "src": "dp-m1-2",
+  "label": "Problem 3"
+ },
+ "ws1-3-1a": {
+  "src": "dp-m1-3",
+  "label": "1a"
+ },
+ "ws1-3-1b": {
+  "src": "dp-m1-3",
+  "label": "1b"
+ },
+ "ws1-3-1c": {
+  "src": "dp-m1-3",
+  "label": "1c"
+ },
+ "ws1-3-2a": {
+  "src": "dp-m1-3",
+  "label": "2a"
+ },
+ "ws1-3-2b": {
+  "src": "dp-m1-3",
+  "label": "2b"
+ },
  "m2-n-k1": {
   "src": "dp-m2-1",
   "label": "a"
@@ -4343,6 +4733,130 @@ const SOURCE_OF = {
   "src": "dp-m2-2",
   "label": "h"
  },
+ "ws2-3-1a": {
+  "src": "dp-m2-3",
+  "label": "1a"
+ },
+ "ws2-3-1b": {
+  "src": "dp-m2-3",
+  "label": "1b"
+ },
+ "ws2-3-1c": {
+  "src": "dp-m2-3",
+  "label": "1c"
+ },
+ "ws2-3-1d": {
+  "src": "dp-m2-3",
+  "label": "1d"
+ },
+ "ws2-3-1e": {
+  "src": "dp-m2-3",
+  "label": "1e"
+ },
+ "ws2-3-2a": {
+  "src": "dp-m2-3",
+  "label": "2a"
+ },
+ "ws2-3-2b": {
+  "src": "dp-m2-3",
+  "label": "2b"
+ },
+ "ws2-3-2c": {
+  "src": "dp-m2-3",
+  "label": "2c"
+ },
+ "ws2-3-2d": {
+  "src": "dp-m2-3",
+  "label": "2d"
+ },
+ "ws2-4-1a": {
+  "src": "dp-m2-4",
+  "label": "1a"
+ },
+ "ws2-4-1b": {
+  "src": "dp-m2-4",
+  "label": "1b"
+ },
+ "ws2-4-1c": {
+  "src": "dp-m2-4",
+  "label": "1c"
+ },
+ "ws2-4-1d": {
+  "src": "dp-m2-4",
+  "label": "1d"
+ },
+ "ws2-4-1e": {
+  "src": "dp-m2-4",
+  "label": "1e"
+ },
+ "ws2-4-1f": {
+  "src": "dp-m2-4",
+  "label": "1f"
+ },
+ "ws2-4-2a": {
+  "src": "dp-m2-4",
+  "label": "2a"
+ },
+ "ws2-4-2b": {
+  "src": "dp-m2-4",
+  "label": "2b"
+ },
+ "ws2-4-2c": {
+  "src": "dp-m2-4",
+  "label": "2c"
+ },
+ "ws3-1a": {
+  "src": "dp-m3-1",
+  "label": "a"
+ },
+ "ws3-1b": {
+  "src": "dp-m3-1",
+  "label": "b"
+ },
+ "ws3-1c": {
+  "src": "dp-m3-1",
+  "label": "c"
+ },
+ "ws3-1d": {
+  "src": "dp-m3-1",
+  "label": "d"
+ },
+ "ws3-1e": {
+  "src": "dp-m3-1",
+  "label": "e"
+ },
+ "ws3-1f": {
+  "src": "dp-m3-1",
+  "label": "f"
+ },
+ "ws3-1g": {
+  "src": "dp-m3-1",
+  "label": "g"
+ },
+ "ws3-2a": {
+  "src": "dp-m3-2",
+  "label": "a"
+ },
+ "ws3-2b": {
+  "src": "dp-m3-2",
+  "label": "b"
+ },
+ "ws3-2c": {
+  "src": "dp-m3-2",
+  "label": "c"
+ },
+ "ws3-2d": {
+  "src": "dp-m3-2",
+  "label": "d"
+ },
+ "ws3-2e": {
+  "src": "dp-m3-2",
+  "label": "e"
+ },
+ "ws3-2f": {
+  "src": "dp-m3-2",
+  "label": "f"
+ },
  "inf-n17": {
   "src": "dp-m3-3",
   "label": "b"
@@ -4350,6 +4864,54 @@ const SOURCE_OF = {
  "inf-n16": {
   "src": "dp-m3-3",
   "label": "a"
+ },
+ "ws3-4a1": {
+  "src": "dp-m3-4",
+  "label": "a"
+ },
+ "ws3-4a2": {
+  "src": "dp-m3-4",
+  "label": "a"
+ },
+ "ws3-4b1": {
+  "src": "dp-m3-4",
+  "label": "b"
+ },
+ "ws3-4b2": {
+  "src": "dp-m3-4",
+  "label": "b"
+ },
+ "ws3-4c": {
+  "src": "dp-m3-4",
+  "label": "c"
+ },
+ "ws3-4d": {
+  "src": "dp-m3-4",
+  "label": "d"
+ },
+ "ws3-4e": {
+  "src": "dp-m3-4",
+  "label": "e"
+ },
+ "ws3-4f1": {
+  "src": "dp-m3-4",
+  "label": "f"
+ },
+ "ws3-4f2": {
+  "src": "dp-m3-4",
+  "label": "f"
+ },
+ "ws3-4f3": {
+  "src": "dp-m3-4",
+  "label": "f"
+ },
+ "ws3-4g1": {
+  "src": "dp-m3-4",
+  "label": "g"
+ },
+ "ws3-4g2": {
+  "src": "dp-m3-4",
+  "label": "g"
  },
  "ws4-1-crcl": {
   "src": "dp-m4-1",
