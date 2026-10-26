@@ -41,6 +41,9 @@ DATA_FILES = ['course.js',
               'q15_module7b.js',   # Module 7b: PK-PD relationship (pushes its topic into TOPICS)
               'q16_module8.js',    # Module 8: nonlinear pharmacokinetics (pushes its topic into TOPICS)
               'q17_final_review.js',  # her final exam review, 19 Oct, verbatim polls (appends to CHAINS)
+              'q18_new_a.js',      # Exam 3 additions, Modules 1-3: her traps the bank did not yet ask
+              'q18_new_b.js',      # Exam 3 additions, Modules 4-6
+              'q18_new_c.js',      # Exam 3 additions, Modules 7a, 7b and 8: her traps the bank did not yet ask
               'q11_extra.js',      # extra practice written for this drill: EXTRAS, never in QUESTIONS
               'qz_all.js']       # must stay last: builds QUESTIONS
 

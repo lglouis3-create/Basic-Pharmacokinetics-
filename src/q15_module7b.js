@@ -307,7 +307,7 @@ const Q_MODULE7B = [
 
 {id:'pd-c14', prof:'Mosley', tier:'new', exam:3, module:9, lecture:'L11', dupOf:'pd-c13',
  topic:'pkpd', sub:'teff', concept:'dose-double-teff', skill:'apply', source:'slide',
- stem:'What is the expected change in the duration of activity (teff) when the single IV bolus dose of a drug with first-order elimination is doubled?',
+ stem:'What is the expected change in the duration of activity (teff) when the single IV bolus dose of a drug that displays linear, first-order pharmacokinetics is doubled?',
  options:[
   {t:'teff rises by one half-life', correct:true,
    why:'teff = {{frac:ln C0 − ln Ceff|k}}. Doubling D0 doubles C0 and adds ln 2 to the top, so teff rises by {{frac:0.693|k}}, exactly one t½. Each further doubling of the dose adds one more half-life.'},

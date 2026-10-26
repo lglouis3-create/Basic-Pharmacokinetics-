@@ -35,7 +35,7 @@ const Q_REVIEW = [
   {k:'algebra', t:'CrCl = 108.09 × 0.85 = 91.88 mL/min',
    why:'The female correction comes last. The result is reported in mL/min, the unit of the 120 to 130 mL/min normal range, although the units of the inputs do not cancel to it.'},
   {k:'round', t:'CrCl = 91.9 mL/min',
-   why:'91.88 to one decimal place. It is below the 120 to 130 mL/min she calls normal, so this patient has some loss of renal function.'}],
+   why:'91.88 to one decimal place; her own key is about 92 mL/min. It is below the 120 to 130 mL/min she calls normal, so this patient has some loss of renal function.'}],
  setup:{eq:'crcl', pre:['ibw-female'], why:'"Using the patient\'s ideal body weight, estimate the creatinine clearance": Cockcroft-Gault with IBW, female form. Height gives IBW first; the 154 lb is a distractor.'},
  asks:'CrCl',
  givens:[['age', '45-year-old', '140 − 45 = 95 in the numerator'], ['sex', 'female', 'IBW constant 45.5 and the 0.85 factor'], ['weight', '154 lb', 'not needed: the stem asks for ideal body weight'], ['SCr', '0.78 mg/dL', '72 × 0.78 = 56.16 in the denominator'], ['height', '5\'8"', '8 inches over 5 ft, so IBW = 63.9 kg']],

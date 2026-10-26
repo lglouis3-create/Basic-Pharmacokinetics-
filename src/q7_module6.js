@@ -302,7 +302,7 @@ const Q_MODULE6 = [
  source:'both',
  stem:'After a single IV bolus, DB = D0e^(-kτ). What does DB/D0 = e^(-kτ) represent?',
  options:[
-  {t:'The fraction of the dose still in the body after one interval', correct:true,
+  {t:'The fraction of the dose left after one interval', correct:true,
    why:'DB is the amount in the body at time τ and D0 is the dose, so their ratio is the fraction of the dose left when the next dose is due. With a half-life of 4 hours and τ = 8 hours it is e^(-1.386) = 0.25, a quarter of the dose.'},
   {t:'The fraction of the dose eliminated in one interval',
    why:'That is 1 − e^(-kτ), the other part of the dose. Reading the remaining fraction as the eliminated one reverses every steady-state result that is built from it.'},
@@ -363,7 +363,7 @@ const Q_MODULE6 = [
  cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Amount of Drug in the Body at Steady-State Following Repeated IV Bolus Injections"; 09.23 lecture',
  quote:'the min occurs at the end of the dosing interval'},
 
-{id:'m6-c14', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07', lowYield:true,
+{id:'m6-c14', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L07',
  topic:'multi', sub:'ssbolus', concept:'cavg-not-midpoint', skill:'tell',
  source:'both',
  stem:'At steady state Cmax∞ is 53.3 mg/L and Cmin∞ is 13.3 mg/L. How does Cavg∞ compare with (53.3 + 13.3)/2 = 33.3 mg/L?',

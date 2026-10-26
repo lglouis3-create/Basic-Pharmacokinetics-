@@ -30,5 +30,8 @@ const QUESTIONS = [].concat(
   Q_REVIEW,    // Her Exam 2 in-class review, word for word            (Exam 2)
   Q_MODULE7B,  // Module 7b — PK-PD relationship                        (Final)
   Q_MODULE8,   // Module 8 — Nonlinear pharmacokinetics                (Final)
-  Q_FINALREVIEW // Her final exam review, 19 Oct, word for word        (all three exams)
+  Q_FINALREVIEW,// Her final exam review, 19 Oct, word for word        (all three exams)
+  Q_NEW_A,     // Exam 3 additions: her traps in Modules 1-3            (Exam 1)
+  Q_NEW_B,     // Exam 3 additions: her traps in Modules 4-6            (Exam 2)
+  Q_NEW_C      // Exam 3 additions: her traps in Modules 7a, 7b and 8   (Exams 2, 3)
 );

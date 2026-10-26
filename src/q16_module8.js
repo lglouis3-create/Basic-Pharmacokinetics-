@@ -235,7 +235,7 @@ const Q_MODULE8 = [
  givens:[['KM', '6.43 mg/L', 'from question 2'], ['R2', '450 mg', 'the dose used'], ['C2', '20 mg/L', 'its own steady state'], ['R1, C1', '350 mg, 9.2 mg/L', 'the check pair']],
  check:{t:'Vmax must exceed 450 mg/day, the higher dose, because that dose reached a steady state: 595 mg/day.', lo:450},
  teach:[NL_DIRECT],
- note:'Her answer was given as 505 mg/day, which does not follow from the stem: both dose and concentration pairs give 594.7 mg/day, so 595 mg/day is keyed.',
+ note:'Both dose and concentration pairs give 594.7 mg/day, so 595 mg/day is keyed.',
  cite:NL_IC + ', question 3; ' + NL_DECK + ', slide 15'},
 
 {id:'nl-ic4a', type:'numeric', prof:'Mosley', tier:'new', exam:3, module:8, lecture:'L12',
@@ -1239,7 +1239,7 @@ const Q_MODULE8 = [
  topic:'nonlin', sub:'kmcp', concept:'nl-low-conc', skill:'apply', source:'both',
  stem:'Which of the following is true regarding the rate of elimination of a saturable drug when the plasma concentration (Cp) is much less than the Michaelis constant (KM)?',
  options:[
-  {t:'It equals {{frac:Vmax|KM}} × Cp = k′Cp, so elimination looks first order', correct:true,
+  {t:'It equals {{frac:Vmax|KM}} × Cp, so elimination looks first order', correct:true,
    why:'With Cp much less than KM, Cp is negligible in KM + Cp, leaving {{frac:Vmax|KM}} × Cp. Vmax and KM are both constants, so their ratio is a constant k′, and a rate proportional to Cp is first order.'},
   {t:'It equals Vmax, so elimination is zero order',
    why:'Choosing this applies the high-concentration limit at the wrong end. The rate equals Vmax only when Cp is much greater than KM and KM drops out.'},

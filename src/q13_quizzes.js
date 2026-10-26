@@ -70,7 +70,7 @@ const Q_QUIZZES = [
 {id:'cq1-3a', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
  topic:'bolus1', sub:'calc', concept:'first-order-halflife', skill:'krate',
  source:'both',
- stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. Blood samples were collected at various time intervals. The elimination of drug seems to follow a first-order model best described by the equation C = C₀e⁻ᵏᵗ. The plasma concentrations (Cp, mcg/mL) were: 0.5 hr, 112; 2 hr, 90.9; 4 hr, 68.9; 8 hr, 39.6; 16 hr, 13.1. What is the half-life of this agent in this patient?',
+ stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. Blood samples were collected at various time intervals. The elimination of drug seems to follow a first-order model best described by the equation C = C₀e⁻ᵏᵗ. The concentration of the drug (Cp) was determined in the plasma fraction of each blood sample and the following data were obtained:\n\nt (hr) | Cp (mcg/mL)\n0.5 | 112\n2 | 90.9\n4 | 68.9\n8 | 39.6\n16 | 13.1\n\nWhat is the half-life of this agent in this patient?',
  units:'hr', answer:5.006, tol:0.1,
  steps:[
   {k:'setup', t:'k = {{frac:ln(Cp1 ÷ Cp2)|t2 − t1}}, then t½ = {{frac:0.693|k}}',
@@ -96,7 +96,7 @@ const Q_QUIZZES = [
 {id:'cq1-3b', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
  topic:'bolus1', sub:'calc', concept:'vd-from-dose-c0', skill:'vddose',
  source:'both',
- stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. The elimination of drug follows C = C₀e⁻ᵏᵗ, and the plasma concentrations (Cp, mcg/mL) were: 0.5 hr, 112; 2 hr, 90.9; 4 hr, 68.9; 8 hr, 39.6; 16 hr, 13.1. What is the volume of distribution of this agent in this patient? (Part a: k = 0.13844 hr⁻¹.)',
+ stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. Blood samples were collected at various time intervals. The elimination of drug seems to follow a first-order model best described by the equation C = C₀e⁻ᵏᵗ. The concentration of the drug (Cp) was determined in the plasma fraction of each blood sample and the following data were obtained:\n\nt (hr) | Cp (mcg/mL)\n0.5 | 112\n2 | 90.9\n4 | 68.9\n8 | 39.6\n16 | 13.1\n\nWhat is the volume of distribution of this agent in this patient? (Part a: k = 0.13844 hr⁻¹.)',
  units:'L', answer:18.75, tol:0.4,
  steps:[
   {k:'unit', t:'weight = {{frac:165 lb|2.2 lb/kg}} = 75 kg; D0 = (30 mg/kg)(75 kg) = 2250 mg',
@@ -122,7 +122,7 @@ const Q_QUIZZES = [
 {id:'cq1-3c', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
  topic:'bolus1', sub:'calc', concept:'time-to-percent-first-order', skill:'krate',
  source:'both',
- stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. The elimination of drug follows C = C₀e⁻ᵏᵗ, and the plasma concentrations (Cp, mcg/mL) were: 0.5 hr, 112; 2 hr, 90.9; 4 hr, 68.9; 8 hr, 39.6; 16 hr, 13.1. How much time following administration of the dose is required for 75% of the dose to be eliminated? (Part a: t½ = 5.0 hr.)',
+ stem:'A 165-lb patient received a single IV bolus dose of an antibacterial agent at a level of 30 mg/kg. Blood samples were collected at various time intervals. The elimination of drug seems to follow a first-order model best described by the equation C = C₀e⁻ᵏᵗ. The concentration of the drug (Cp) was determined in the plasma fraction of each blood sample and the following data were obtained:\n\nt (hr) | Cp (mcg/mL)\n0.5 | 112\n2 | 90.9\n4 | 68.9\n8 | 39.6\n16 | 13.1\n\nHow much time following administration of the dose is required for 75% of the dose to be eliminated? (Part a: t½ = 5.0 hr.)',
  units:'hr', answer:10.0, tol:0.2,
  steps:[
   {k:'setup', t:'75% eliminated = 25% remaining = ½ × ½: two half-lives',
@@ -178,7 +178,7 @@ const Q_QUIZZES = [
  setup:{eq:'thalf-beta', pre:[], why:'"IV bolus dose" with A, B, α and β names the two-compartment block of Module 2. β is given and the "elimination half-life" is asked, so t½β = {{frac:0.693|β}}. No hinge; the dose, A, B and α are not used.'},
  asks:'thalf',
  givens:[['D0', '250-mg IV bolus', 'not needed: half-life does not depend on the dose'], ['n', 'six healthy volunteers', 'not needed'], ['A', '10.16 mg/L', 'not needed: intercepts do not set the half-life'], ['B', '5.65 mg/L', 'not needed'], ['α', '3.59 hr⁻¹', 'not needed: the distribution phase is not the elimination half-life'], ['β', '0.15 hr⁻¹', 'the denominator of {{frac:0.693|β}}']],
- check:{t:'β = 0.15 hr⁻¹ removes about 15% an hour, so halving takes between 4 and 5 hours: {{frac:0.693|0.15}} = 4.62 hr. The elimination half-life uses the smaller exponent, β.', lo:0},
+ check:{t:'β = 0.15 hr⁻¹ removes about 14% an hour, so halving takes between 4 and 5 hours: {{frac:0.693|0.15}} = 4.62 hr. The elimination half-life uses the smaller exponent, β.', lo:0},
  teach:[
   {h:'The idea', list:[
    'A two-compartment item gives A, B, α and β and never names the model; the pairing of two intercepts with two rate constants is the signal.',
@@ -224,7 +224,7 @@ const Q_QUIZZES = [
    why:'Picking this reads the half-life as something a dose can shorten. The half-life is a property of the drug and the patient, set by k = {{frac:Cl|VD}}, where k is the elimination rate constant. No dose changes k, Cl or VD; a loading dose only changes how soon the target concentration is reached.'}],
  teach:[
   {h:'The idea', list:[
-   'The time to steady state is set by the half-life alone: about five half-lives, whatever the rate.',
+   'The time to steady state is set by the half-life alone: three to five half-lives, whatever the rate.',
    'When that wait is too long, a loading dose DL = Css × VD supplies the steady-state amount at once.',
    'DL = Css × VD because Cp = {{frac:DB|VD}}: the amount in the body at the plateau is the target concentration times the volume it spreads through.',
    'With the right loading dose the level stays flat at Css: the bolus part falls as C0e^(−kt) while the infusion part rises as Css(1 − e^(−kt)), and the two add to Css at every time.']}],
@@ -269,7 +269,7 @@ const Q_QUIZZES = [
  teach:[
   {h:'The idea', list:[
    'The infusion rate sets the level: Css = {{frac:R|Cl}}.',
-   'The half-life sets the time: about five half-lives to steady state, independent of the rate.',
+   'The half-life sets the time: three to five half-lives to steady state, independent of the rate.',
    'The fraction of Css reached at time t is 1 − e^(−kt), which holds k and t only: 50 per cent after one half-life, 90 at 3.3 half-lives (slide "Drug Concentration Prior to Reaching Steady-State").']}],
  cite:'Canvas Quiz 2 (Modules 2–3), question 6; 3IntravenousInfusions.pdf, slide "Drug Concentration at Steady-State"'},
 
@@ -306,7 +306,7 @@ const Q_QUIZZES = [
  steps:[
   {k:'setup', t:'Css = {{frac:R|Cl}} = {{frac:R|k × VD}}',
    why:'At steady state the infusion rate R equals the elimination rate, which is clearance Cl times the steady-state concentration Css, so Css = {{frac:R|Cl}}. Clearance is not given, so it is built as Cl = k × VD, where k is the elimination rate constant and VD the apparent volume of distribution.'},
-  {k:'unit', t:'154 {{frac:lb|2.2}} = 70 kg; VD = 0.21 L/kg × 70 kg = 14.7 L',
+  {k:'unit', t:'{{frac:154 lb|2.2 lb/kg}} = 70 kg; VD = 0.21 L/kg × 70 kg = 14.7 L',
    why:'The volume is given per kilogram and the weight in pounds, so the weight is converted first and then scaled. Age and sex are stated and not used.'},
   {k:'algebra', t:'k = {{frac:0.693|4 hr}} = 0.1733 hr⁻¹; Cl = 0.1733 × 14.7 L = 2.547 L/hr',
    why:'The first-order relation t½ = {{frac:0.693|k}} rearranges to k = {{frac:0.693|t½}}: 0.693 divided by 4 hr gives 0.1733 hr⁻¹, the fraction removed each hour. Clearance is then k × VD with the 14.7 L from the unit step: 0.1733 hr⁻¹ × 14.7 L = 2.547 L/hr, since hr⁻¹ times L is L/hr.'},
@@ -725,7 +725,7 @@ const Q_QUIZZES = [
   {t:'Relative Bioavailability', correct:false,
    why:'Picking this reads the IV comparison as a comparison between two ordinary products. Relative bioavailability compares two formulations or routes against a reference that is not the IV dose, such as a tablet against an oral solution. The stem sets the extravascular dose against the same drug given intravenously, which makes the comparison absolute.'},
   {t:'Drug Product Performance', correct:false,
-   why:'Picking this takes the broad opening term for the specific comparison. Drug product performance is the release of the drug from the product and its subsequent absorption, and it describes one product on its own. The stem describes a ratio between an extravascular route and the IV route, which is absolute bioavailability.'}],
+   why:'Picking this takes the broad opening term for the specific comparison. Drug product performance is the release of the drug substance from the drug product leading to bioavailability, and it describes one product on its own. The stem describes a ratio between an extravascular route and the IV route, which is absolute bioavailability.'}],
  teach:[
   {h:'The idea', list:[
    'Absolute: against IV. Relative: against another product or route. Bioequivalence: two products of the same drug compared in both rate and extent.',

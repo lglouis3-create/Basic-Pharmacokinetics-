@@ -114,7 +114,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'The first of a series of intravenous (IV) infusions ends. What governs the plasma concentration from that moment until the next infusion begins?',
  options:[
-  {t:'First-order elimination from the end-of-infusion concentration', correct:true,
+  {t:'First-order decline from the end level', correct:true,
    why:'With the input stopped, only elimination is left, and it is first order. The concentration falls as C = C0e^(-kt) with the end-of-infusion value as C0, which is why that value has to be found first.'},
   {t:'Zero-order decline at the infusion rate',
    why:'This reverses input and output. Once the infusion stops the input plays no further part, and the body removes a constant fraction per hour, not a constant amount.'},
@@ -157,7 +157,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'Two identical intravenous (IV) infusions of the same drug are given 6 hours apart. Why can the plasma concentration at a later time be found by adding what is left of each?',
  options:[
-  {t:'Elimination is first order, so each infusion\'s drug is handled independently', correct:true,
+  {t:'Elimination is first order', correct:true,
    why:'With first-order, linear kinetics a constant fraction is removed per hour whatever else is present, so the first infusion declines the same way whether or not a second is given. Each infusion is its own curve, and the curves add: superposition.'},
   {t:'Both infusions are zero-order inputs',
    why:'Choosing this attaches the additivity to the input. A zero-order input sets how drug goes in; the curves can be added because the output is first order and unchanged by the amount present.'},
@@ -506,7 +506,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'The time to peak after a single oral dose depends on k and ka. What does the time to peak at steady state, tmax∞, depend on?',
  options:[
-  {t:'k, ka and the dosing interval τ', correct:true,
+  {t:'k, ka and τ', correct:true,
    why:'The steady-state expression has τ inside the logarithm, because drug left from earlier doses changes when the rising and falling rates balance. Change how often the drug is given, and tmax∞ must be recalculated.'},
   {t:'k and ka only',
    why:'Choosing this carries the single-dose result over unchanged. The τ terms in tmax∞ are the whole difference between the two equations.'},
@@ -693,7 +693,7 @@ const Q_MODULE6B = [
  source:'both',
  stem:'The dosing interval of an oral regimen is shortened from 8 hours to 4 hours, same dose. Why does the fluctuation between peak and trough decrease?',
  options:[
-  {t:'Less time passes between doses, so the level falls less', correct:true,
+  {t:'Less time passes for the level to fall', correct:true,
    why:'The trough is where the next dose interrupts the decline. With 4 hours instead of 8, the decline stops earlier, so the trough sits closer to the peak, a larger fraction of it, even though both peak and trough are higher.'},
   {t:'Less drug accumulates, so the peaks are lower',
    why:'This has accumulation backwards. A shorter interval leaves more of each dose behind when the next arrives, so more accumulates and the peaks are higher; the swing shrinks because the troughs rise by a larger fraction than the peaks.'},
@@ -733,7 +733,7 @@ const Q_MODULE6B = [
  cite:'6a---Multiple-Oral-Doses.pdf, slide "Altering Dosing Interval, third slide"; Chapter 9, Multiple-Dosage Regimens, section Drug Accumulation',
  quote:'Equal doses of drug were given every 6 hours (upper curve) and every 8 hours (lower curve). ka and k remain constant.'},
 
-{id:'m6b-c18', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09', lowYield:true,
+{id:'m6b-c18', prof:'Mosley', tier:'new', exam:2, module:6, lecture:'L09',
  topic:'multoral', sub:'oparam', concept:'clinical-rounding', skill:'apply',
  source:'transcript',
  stem:'A calculation gives a dosing interval of 3.72 hours and an oral dose of 17.29 mg. How should the regimen be written for the patient?',

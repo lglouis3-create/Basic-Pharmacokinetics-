@@ -966,7 +966,8 @@ stepped('bolus1_steps', 'One-compartment IV bolus, from her data to every answer
         'The half-life, the time for the concentration to halve: t½ = {{frac:0.693|%.2f hr⁻¹}} = %.2f hr.' % (B1K, B1T12)), b1_s2),
     ('back to time zero', lines(
         'C0 is the concentration the dose would give at time zero, before any elimination. It is read by extending the line back to t = 0.',
-        'From her 2.5-hr point: C0 = 0.40 × e^(0.91 × 2.5) = %.2f mg/L.' % B1C0), b1_s3),
+        'From her 2.5-hr point: C0 = 0.40 × e^(0.91 × 2.5) = %.2f mg/L.' % B1C0,
+        'Her part d, 15 minutes after the dose: 15 min = 0.25 hr, so C = 3.89 × e^(−0.91 × 0.25) = 3.1 mg/L.'), b1_s3),
     ('volume and clearance', lines(
         'VD, the apparent volume of distribution, is the dose over C0: VD = {{frac:50 mg|3.89 mg/L}} = %.2f L.' % B1VD,
         'ClT, total body clearance, is the volume cleared of drug per hour: ClT = k × VD = 0.91 × 12.85 = %.1f L/hr.' % B1CL), b1_s4),
@@ -1197,7 +1198,7 @@ stepped('md_oral_steps', 'Multiple oral doses, dose by dose: her tetracycline ex
         'So the second peak is higher than the first, and the level just before dose 3 is higher than it was before dose 2.'), mo_s2),
     ('the climb', lines(
         'Every dose adds the same curve to a larger remainder. The half-life is 10 hr, so the climb is over within 3 to 5 half-lives, 30 to 50 hours.',
-        'τ is the dosing interval, 8 hr. The accumulation factor {{frac:1|1 − e^(−kτ)}} = {{frac:1|1 − e^(−0.0693 × 8)}} = %.2f says how much higher the steady-state peak sits than the first-dose peak.' % MACC), mo_s3),
+        'τ is the dosing interval, 8 hr. The accumulation factor {{frac:1|1 − e^(−kτ)}} = {{frac:1|1 − e^(−0.0693 × 8)}} = %.2f says how much higher the steady-state trough sits than the level at the end of the first interval (2.44 against 1.04 mg/L). The peak rises a little more, 1.35 to 3.40 mg/L, because at steady state it also comes earlier in the interval.' % MACC), mo_s3),
     ('steady state', lines(
         'At steady state (∞ marks it) the peak comes earlier in the interval. tmax∞ = {{frac:1|ka − k}} ln[{{frac:ka(1 − e^(−kτ))|k(1 − e^(−ka τ))}}] = %.2f hr after a dose, her answer, against %.1f hr for the first dose.' % (MTSS, MT1),
         'Cmax∞ = {{frac:F D0|VD}}({{frac:1|1 − e^(−kτ)}})e^(−k tmax∞) = %.2f mg/L. Cmin∞, at the end of the interval, = {{frac:ka F D0|VD (ka − k)}}({{frac:1|1 − e^(−kτ)}})e^(−kτ) = %.2f mg/L. Cavg∞ = {{frac:F D0|VD k τ}} = %.2f mg/L.' % (MCMAXSS, MCMINSS, MCAVG),
@@ -1770,7 +1771,7 @@ def rn_s3(pl):
 stepped('renal_steps', 'Renal failure on an infusion: a higher plateau, then a lower rate, and a longer climb', rn_plot(), [
     ('Normal', 'Her Practice 4: VD 100 L, Cl 11.55 L/hr (t½ 6 hr). R 115.5 mg/hr gives Css = {{frac:115.5|11.55}} = 10 mg/L, 95% of it at 25.9 hr.', rn_s1),
     ('Same rate', 'Clearance falls to 8.55 L/hr. The same rate now climbs to {{frac:115.5|8.55}} = 13.5 mg/L.', rn_s2),
-    ('New rate', 'R = Css × Cl = 10 × 8.55 = 85.5 mg/hr restores 10 mg/L, but t½ is now 8.1 hr, so 95% takes 35.0 hr. D<sub>L</sub> = Css × VD has no Cl: 1000 mg either way.', rn_s3),
+    ('New rate', 'R = Css × Cl = 10 × 8.55 = 85.5 mg/hr restores 10 mg/L, but t½ is now 8.1 hr, so 95% takes 35.0 hr. DL = Css × VD has no Cl: 1000 mg either way.', rn_s3),
 ], footer='Infusion practice 4 and her key')
 
 
@@ -1788,7 +1789,7 @@ def lm_plot():
 
 
 def lm_s1(pl):
-    pl.curve(lm_c(288)); pl.text(23, 26.0, 'D_L 288 mg: flat at 24 mg/L from the start', size=17, color=BLUE, anchor='end')
+    pl.curve(lm_c(288)); pl.text(23, 26.0, 'loading dose 288 mg: flat at 24 mg/L from the start', size=17, color=BLUE, anchor='end')
 
 
 def lm_s2(pl):
@@ -1802,7 +1803,7 @@ def lm_s3(pl):
 
 
 stepped('loading_miss_steps', 'Loading dose with an infusion: right, too large, or none', lm_plot(), [
-    ('Right size', 'Her Example 8: R 50 mg/hr, k 0.17325 hr⁻¹, VD 12 L, Css 24 mg/L. D<sub>L</sub> = Css × VD = 288 mg: the level is flat from the start.', lm_s1),
+    ('Right size', 'Her Example 8: R 50 mg/hr, k 0.17325 hr⁻¹, VD 12 L, Css 24 mg/L. DL = Css × VD = 288 mg: the level is flat from the start.', lm_s1),
     ('Too large', '388 mg starts the level at {{frac:388|12}} = 32.3 mg/L (29.9 at 2 hr); it falls to the plateau the infusion sets.', lm_s2),
     ('None', 'With no loading dose the level climbs from zero: 12 mg/L at 4 hr, 90% of the plateau at 13.3 hr.', lm_s3),
 ], footer='Infusion deck, her Example 8 and her rework with 388 mg')
@@ -1841,9 +1842,9 @@ def th_s4(pl):
 
 stepped('teff_halvings_steps', 'Duration of action: count the halvings from C0 down to the MEC', th_plot(), [
     ('The MEC', 'Her 10/19 poll: VD 12.5 L, t½ 4 hr, minimum effective concentration 20 mg/L.', th_s1),
-    ('1 g', 'C0 = {{frac:1000 mg|12.5 L}} = 80 mg/L. 80 → 40 → 20 is two half-lives: t<sub>eff</sub> = 8 hr.', th_s2),
+    ('1 g', 'C0 = {{frac:1000 mg|12.5 L}} = 80 mg/L. 80 → 40 → 20 is two half-lives: teff = 8 hr.', th_s2),
     ('500 mg', 'C0 = 40 mg/L, exactly twice the MEC: one half-life, 4 hr. Halving the dose halved the duration only here.', th_s3),
-    ('2 g', 'C0 = 160 mg/L: three half-lives, 12 hr. Doubling the dose adds one half-life; it does not double t<sub>eff</sub>.', th_s4),
+    ('2 g', 'C0 = 160 mg/L: three half-lives, 12 hr. Doubling the dose adds one half-life; it does not double teff.', th_s4),
 ], footer='Final exam review poll (19 Oct) and her key; the 2 g line is the same relation carried one dose further')
 
 

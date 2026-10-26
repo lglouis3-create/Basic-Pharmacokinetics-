@@ -1947,12 +1947,36 @@ const SOURCES = [
   ],
   "items": [
    {
+    "q": "inf-n16",
+    "label": "a"
+   },
+   {
     "q": "inf-n17",
     "label": "b"
    },
    {
-    "q": "inf-n16",
-    "label": "a"
+    "q": "x3-a-p3c",
+    "label": "c"
+   },
+   {
+    "q": "x3-a-p3e",
+    "label": "e"
+   },
+   {
+    "q": "x3-a-p3f",
+    "label": "f"
+   },
+   {
+    "q": "x3-a-p3g",
+    "label": "g"
+   },
+   {
+    "q": "x3-a-p3i-r",
+    "label": "i"
+   },
+   {
+    "q": "x3-a-p3i-l",
+    "label": "i"
    }
   ],
   "missing": ""
@@ -4857,13 +4881,37 @@ const SOURCE_OF = {
   "src": "dp-m3-2",
   "label": "f"
  },
+ "inf-n16": {
+  "src": "dp-m3-3",
+  "label": "a"
+ },
  "inf-n17": {
   "src": "dp-m3-3",
   "label": "b"
  },
- "inf-n16": {
+ "x3-a-p3c": {
   "src": "dp-m3-3",
-  "label": "a"
+  "label": "c"
+ },
+ "x3-a-p3e": {
+  "src": "dp-m3-3",
+  "label": "e"
+ },
+ "x3-a-p3f": {
+  "src": "dp-m3-3",
+  "label": "f"
+ },
+ "x3-a-p3g": {
+  "src": "dp-m3-3",
+  "label": "g"
+ },
+ "x3-a-p3i-r": {
+  "src": "dp-m3-3",
+  "label": "i"
+ },
+ "x3-a-p3i-l": {
+  "src": "dp-m3-3",
+  "label": "i"
  },
  "ws3-4a1": {
   "src": "dp-m3-4",

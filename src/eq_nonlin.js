@@ -20,7 +20,7 @@ EQUATIONS.push(
  also:['-dCp/dt = VmaxCp/(KM + Cp)', 'rate = Vmax*Cp/(KM + Cp)'],
  lures:['K<sub>M</sub>C<sub>p</sub>', '(V<sub>max</sub> + C<sub>p</sub>)', '&times;'],
  symbols:[['&minus;dC<sub>p</sub>/dt', 'the rate of elimination: the fall in plasma concentration per unit time'],
-          ['V<sub>max</sub>', 'the maximum elimination rate, in units of concentration per time'],
+          ['V<sub>max</sub>', 'the maximum elimination rate, in units of concentration per time in this rate law; in the dose-rate lines on the sheet it is an amount per time, mg/day or mg/kg/day, the units of R'],
           ['K<sub>M</sub>', 'the Michaelis constant, reflecting the capacity of the enzyme system, in units of concentration'],
           ['C<sub>p</sub>', 'the plasma concentration, mg/L']],
  holds:'A saturable, enzyme-mediated elimination process. When C<sub>p</sub> is much greater than K<sub>M</sub>, K<sub>M</sub> drops out and the rate equals V<sub>max</sub>: zero order. When C<sub>p</sub> is much less than K<sub>M</sub>, the rate is {{frac:V<sub>max</sub>|K<sub>M</sub>}} &times; C<sub>p</sub> = k&prime;C<sub>p</sub>: first order.',

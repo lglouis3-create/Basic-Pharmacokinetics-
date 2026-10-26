@@ -30,7 +30,7 @@ const Q_MODULE2 = [
   {h:'The idea', list:[
     'The one-compartment open model makes two simplifications, both at time zero.',
     'Instantaneous input: the amount in the body at time zero is the whole dose.',
-    'Instantaneous, uniform distribution: one measured plasma concentration describes the whole body. Blood takes a few minutes to circulate, so this holds in the model, not in the patient.',
+    'Instantaneous, uniform distribution: one measured plasma concentration describes the whole body. This is a simplification: it holds in the model, not in the patient.',
     '"Open" means drug can leave, and it starts leaving from that same instant.',
     'So C0 = {{frac:D0|VD}} (D0 is the dose, VD the apparent volume of distribution), and C = C0e^(−kt) only falls from there.']},
   {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "One-Compartment Open Model: IV Bolus Administration".'}],
@@ -41,7 +41,7 @@ const Q_MODULE2 = [
 {id:'m2-mod-2', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02', multi:true,
  topic:'bolus1', sub:'model', concept:'onecpt-assumptions', skill:'recall',
  source:'both', dupOf:'m2-mod-1',
- stem:'Select every statement that the one-compartment open model for intravenous bolus administration assumes. Select all that apply.',
+ stem:'Which of the following does the one-compartment open model for intravenous bolus administration assume? Select all that apply.',
  options:[
   {t:'The body behaves as a single uniform compartment', correct:true,
    why:'The body acts like a single, uniform compartment, which is what allows one plasma concentration to stand for the whole body. Uniform is the operative word: no region holds a different concentration from any other.'},
@@ -269,7 +269,7 @@ const Q_MODULE2 = [
 {id:'m2-n-k1', type:'numeric', prof:'Mosley', tier:'new', exam:1, module:2, lecture:'L02',
  topic:'bolus1', sub:'calc', concept:'k-from-two-points', skill:'krate',
  source:'slide',
- stem:'The data below are plasma concentrations of a new drug at different time points after an intravenous bolus injection of 50 mg to a 70-kg patient. Time (hr) and plasma concentration (mg/L): 0.5 and 2.52; 1.0 and 1.59; 1.5 and 1.00; 2.0 and 0.64; 2.5 and 0.40; 3.0 and 0.25. Using the 1.0 hr and 2.0 hr points, what is the elimination rate constant?',
+ stem:'The data presented in the table below are plasma concentrations of a new drug at different time points after an intravenous bolus injection of 50 mg to a 70-kg patient.\n\nTime (hr) | Plasma concentration (mg/L)\n0.5 | 2.52\n1.0 | 1.59\n1.5 | 1.00\n2.0 | 0.64\n2.5 | 0.40\n3.0 | 0.25\n\nWhat is the elimination rate constant?',
  units:'hr⁻¹',
  answer:0.9100,
  tol:0.04,
@@ -414,7 +414,7 @@ const Q_MODULE2 = [
  tol:0.3,
  steps:[
   {k:'setup', t:'ClT = k · VD',
-   why:'Total body clearance is the product of the overall elimination rate constant and the volume of distribution. This relationship is one of the two she says will not be supplied on the equation sheet, so it has to be recalled. Both factors are constants, which is why their product is constant too.'},
+   why:'Total body clearance is the product of the overall elimination rate constant and the volume of distribution. This relationship is not supplied on the equation sheet, so it has to be recalled. Both factors are constants, which is why their product is constant too.'},
   {k:'algebra', t:'ClT = (12.85 L)(0.91 hr⁻¹) = 11.6935 L/hr',
    why:'Litres multiplied by reciprocal hours gives litres per hour, which is the unit a clearance must carry. A result in plain litres would mean the rate constant had been left out and a volume of distribution reported instead.'},
   {k:'round', t:'ClT = 11.694 L/hr, reported as 11.7 L/hr',
@@ -527,7 +527,7 @@ const Q_MODULE2 = [
  answer:2.95,
  tol:0.08,
  steps:[
-  {k:'unit', t:'187 {{frac:lb|2.2}} lb/kg = 85.0 kg',
+  {k:'unit', t:'{{frac:187 lb|2.2 lb/kg}} = 85.0 kg',
    why:'Body weight in pharmacokinetics is always in kilograms, so a weight stated in pounds is converted before anything else is done with it. She divides by 2.2 and does not show the step, but every absolute quantity in this problem depends on it.'},
   {k:'setup', t:'ClT = k · VD, so the half-life has to become a rate constant and the percentage of body weight has to become an absolute volume before the two can be multiplied',
    why:'Total body clearance is k multiplied by VD, and neither is given directly: the stem gives a half-life and a percentage. Naming the relation first shows which two quantities have to be built. Dr. Mosley leaves this relation off the exam equation sheet, so it has to be known.'},
@@ -609,7 +609,7 @@ const Q_MODULE2 = [
     'If everything equilibrates fast enough to look instantaneous, one compartment is enough.',
     'If some tissues take up drug measurably more slowly, the plasma concentration falls steeply at first as drug moves into them, then more gently once that distribution is complete.',
     'Two compartments are needed to describe those two slopes; on a semi-logarithmic plot one straight line means one compartment and a bend means two.',
-    'Perfusion is blood supply: the most perfused organs, heart, brain, liver and kidney, take up the drug first.']},
+    'Perfusion is blood supply: the most perfused organs, such as the heart, liver and kidney, take up the drug first; the brain is highly perfused but sits behind the blood–brain barrier.']},
   {h:'Where to read more', t:'2IVBolusAdministration.pdf, slide "One- versus Two-Compartment Models".'}],
  teachImg:'slide_2IVBolusAdministra_p14',
  cite:'2IVBolusAdministration.pdf, slide "One- versus Two-Compartment Models"',
@@ -645,7 +645,7 @@ const Q_MODULE2 = [
  stem:'Which tissue group is the most highly perfused?',
  options:[
   {t:'Heart, brain, hepatic-portal system, kidney and endocrine glands', correct:true,
-   why:'These are the highly perfused organs. They are the smallest share of body weight of the four groups while receiving the largest share of cardiac output, which is why drug reaches them first and why they dominate the early distribution phase.'},
+   why:'These are the highly perfused organs. They are the smallest share of body weight of the four groups, 9%, and the most highly perfused, which is why drug reaches most of them first and why they dominate the early distribution phase.'},
   {t:'Skin and muscle',
    why:'Picking this reads bulk as blood supply. Skin and muscle are half the body weight and sit between the highly and the slowly perfused groups; their blood flow per gram is well below that of heart, brain, liver and kidney. Their mass, not their perfusion, makes drug moving into them visible on the plasma curve.'},
   {t:'Adipose tissue and marrow',

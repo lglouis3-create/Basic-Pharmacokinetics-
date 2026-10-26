@@ -63,7 +63,7 @@ const EQUATIONS = [
    'Put that in: ln {{frac:C<sub>0</sub>|2}} = ln C<sub>0</sub> &minus; kt&frac12;, which leaves ln 2 = kt&frac12;.',
    'ln 2 = 0.693, so t&frac12; = {{frac:0.693|k}} and, turned round, k = {{frac:0.693|t&frac12;}}.'],
  use:'Any time a stem gives a half-life and the line wants k, or asks for a half-life from k. She said to know it.',
- cite:'Introduction.pdf slide 19; she names it three times as not on the sheet'},
+ cite:'Introduction.pdf slide 19; she names it four times as not on the sheet (08-19, 08-24, 08-26, 09-09)'},
 
 {id:'cl-k-vd', module:2, name:'Clearance from k and volume of distribution', must:true, sheet:'no',
  lhs:'Cl', tokens:['k', '&times;', 'V<sub>D</sub>'], typed:'Cl = k*VD',
@@ -76,7 +76,7 @@ const EQUATIONS = [
    'Printed: C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}, so D<sub>B</sub> = V<sub>D</sub> &times; C<sub>p</sub> and rate = k &times; V<sub>D</sub> &times; C<sub>p</sub>.',
    'Set the two rates equal and cancel C<sub>p</sub>: Cl = k &times; V<sub>D</sub>.'],
  use:'When a stem gives clearance and volume and the line wants k, as k = {{frac:Cl|V<sub>D</sub>}}, or gives k and volume and asks for clearance. She said to know it.',
- cite:'2IVBolusAdministration.pdf, slide "Clearance"; she names it as not on the sheet'},
+ cite:'2IVBolusAdministration.pdf, slide "Clearance"; she names it as not on the sheet (08-24, and as total clearance in the 19 Oct final review)'},
 
 {id:'cp-db-vd', module:2, name:'Concentration, amount and volume', must:true, sheet:'yes',
  lhs:'C<sub>p</sub>', tokens:['D<sub>B</sub>', '/', 'V<sub>D</sub>'], disp:'{{frac:D<sub>B</sub>|V<sub>D</sub>}}', typed:'Cp = DB/VD',
@@ -99,8 +99,8 @@ const EQUATIONS = [
  derive:['Not printed and not reached from a printed line: she requires it from memory.',
    'Work out the ideal body weight first, from the height and sex.',
    'Put age, IBW and the serum creatinine SCr into the line; the result is in mL/min.'],
- use:'When a stem gives age, height, sex and serum creatinine and asks for creatinine clearance, or needs it to judge kidney function.',
- cite:'4---Clearance-and-Elimination.pdf slide 2; "this one is not there. You need to know this one."'},
+ use:'When a stem gives age, height, sex and serum creatinine and asks for creatinine clearance, or needs it to judge kidney function. The weight is the ideal body weight even when an actual weight is given: &ldquo;we&rsquo;re only gonna use the ideal body weight&rdquo; (19 Oct).',
+ cite:'4---Clearance-and-Elimination.pdf, slides "Creatinine Clearance/GFR" and "Creatinine Clearance"; "this one is not there. You need to know this one." (09-14)'},
 
 {id:'ibw-male', module:4, name:'Ideal body weight, male', must:true, sheet:'no',
  lhs:'IBW<sub>male</sub>', tokens:['50', '+', '2.3', '&times;', '(inches over 5 ft)'],
@@ -113,7 +113,7 @@ const EQUATIONS = [
    'Turn the height into inches over 5 ft: 5 ft is 60 inches, so take 60 from the height in inches (1 inch = 2.54 cm).',
    'IBW = 50 kg plus 2.3 kg for each inch over 5 ft.'],
  use:'For a man, inside the Cockcroft-Gault line; the actual body weight is not used there.',
- cite:'4---Clearance-and-Elimination.pdf slide 2; "again, you need to know this one."'},
+ cite:'4---Clearance-and-Elimination.pdf, slide "Creatinine Clearance"; "again, you need to know this one." (09-14); "we\'re only gonna use the ideal body weight" (19 Oct)'},
 
 {id:'ibw-female', module:4, name:'Ideal body weight, female', must:true, sheet:'no',
  lhs:'IBW<sub>female</sub>', tokens:['45.5', '+', '2.3', '&times;', '(inches over 5 ft)'],
@@ -126,7 +126,7 @@ const EQUATIONS = [
    'Turn the height into inches over 5 ft, as for a man.',
    'IBW = 45.5 kg plus 2.3 kg for each inch over 5 ft.'],
  use:'For a woman, inside the Cockcroft-Gault line; the actual body weight is not used there.',
- cite:'4---Clearance-and-Elimination.pdf slide 2'},
+ cite:'4---Clearance-and-Elimination.pdf, slide "Creatinine Clearance"'},
 
 /* ───────── Module 1 ───────── */
 {id:'zero-line', module:1, name:'Zero-order decline', sheet:'yes',
@@ -305,7 +305,7 @@ const EQUATIONS = [
  symbols:[['k<sub>21</sub>', 'transfer rate constant for drug moving from the tissue compartment back to the central compartment, hr⁻¹'],
           ['A, B', 'the intercepts on the concentration axis of the two straight lines of the semi-log plot, concentration units'],
           ['a, b', 'alpha and beta, the slopes of those two lines, hr⁻¹']],
- holds:'Two-compartment IV bolus. It is the reciprocal arrangement of the overall elimination constant equation, k = {{frac:(A + B)ab|Ab + Ba}}, which is the pair most often swapped.',
+ holds:'Two-compartment IV bolus. Its two sums sit the other way up from those in the overall elimination constant, k = {{frac:(A + B)ab|Ab + Ba}}, and k carries the extra factor ab, so k &times; k<sub>21</sub> = ab.',
  cite:'2IVBolusAdministration.pdf, slide "Rate Constants"; equation sheet'},
 
 {id:'vp-ab', module:2, name:'Central compartment volume from the intercepts', sheet:'yes',
@@ -425,7 +425,7 @@ const EQUATIONS = [
  symbols:[['Cl<sub>T</sub>', 'total body clearance, the volume of plasma cleared of drug per unit time by every route, L/hr'],
           ['Cl<sub>R</sub>', 'renal clearance, the part done by the kidney, L/hr'], ['Cl<sub>H</sub>', 'hepatic clearance, the part done by the liver, L/hr']],
  holds:'Clearances add. Hepatic clearance is obtained by subtraction, because the liver is not sampled directly.',
- cite:'4---Clearance-and-Elimination.pdf; equation sheet page 1, last line'},
+ cite:'4---Clearance-and-Elimination.pdf; equation sheet page 1, right column, third line'},
 
 {id:'fe', module:4, name:'Fraction excreted unchanged', sheet:'yes',
  lhs:'f<sub>e</sub>', tokens:['D<sub>u</sub>', '/', 'FD<sub>0</sub>'], disp:'{{frac:D<sub>u</sub>|FD<sub>0</sub>}}', typed:'fe = Du/(F*D0)',
@@ -664,7 +664,7 @@ const EQUATIONS = [
  symbols:[['t<sub>max</sub><sup>&infin;</sup>', 'the time after a dose at which the concentration peaks, once repeated oral dosing has reached steady state, hr'],
           ['k<sub>a</sub>, k', 'the absorption rate constant and the elimination rate constant, hr⁻¹'], ['&tau;', 'dosing interval, hr'], ['&infin;', 'at steady state']],
  holds:'Multiple oral doses at steady state, the plateau reached when each dose adds back what was lost over the interval. It holds k, ka and &tau;; the single-dose tmax holds only k and ka, so a new interval means a new tmax. Generally shorter than the first-dose tmax.',
- cite:'6a---Multiple-Oral-Doses.pdf, slide "Time to Peak at Steady State"; "on your equation sheet ... the bottom of the right hand column"'},
+ cite:'6a---Multiple-Oral-Doses.pdf, slide "Time to Peak at Steady State"; she placed it "on your equation sheet ... the bottom of the right hand column" (09-28); on the printed sheet it is page 2, left column, fourth line'},
 
 {id:'cmax-ss-oral', module:6, name:'Maximum concentration at steady state, oral', sheet:'yes',
  lhs:'C<sub>max</sub><sup>&infin;</sup>',

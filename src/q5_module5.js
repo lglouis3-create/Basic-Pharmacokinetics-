@@ -179,13 +179,13 @@ const Q_MODULE5 = [
  source:'both',
  stem:'Which of the following is true regarding the post-absorption phase following oral administration?',
  options:[
-  {t:'the elimination rate is greater than the absorption rate, with drug still to be absorbed', correct:true,
+  {t:'the rate of drug elimination is faster than the rate of drug absorption', correct:true,
    why:'After the peak the falling amount left in the gut can no longer keep pace with elimination, so the concentration declines, but absorption has not stopped. Both processes are still running, which is why this phase is named separately from the one that follows.'},
-  {t:'the absorption rate is greater than the elimination rate',
+  {t:'the rate of drug absorption is faster than the rate of drug elimination',
    why:'Picking this reads the post-absorption phase as the rising limb. Absorption faster than elimination describes the absorption phase before the peak: more drug arrives from the gastrointestinal tract each hour than is removed, so the amount in the body grows. After the peak the comparison runs the other way, with elimination the faster process.'},
-  {t:'the absorption rate equals the elimination rate',
+  {t:'the rate of drug absorption equals the rate of drug elimination',
    why:'Picking this takes the peak for a phase. Equal rates hold at one instant only, tmax (the time of the peak), where the concentration stops rising because absorption and elimination balance. The post-absorption phase is the stretch after that instant, during which elimination is the faster of the two processes while absorption continues.'},
-  {t:'absorption is complete and only elimination is occurring',
+  {t:'drug at the absorption site has become depleted',
    why:'Picking this names the phase after the one asked for. Absorption complete with elimination alone is the elimination phase, governed by k (the elimination rate constant) only. In the post-absorption phase drug is still being absorbed from the gut, so ka (the absorption rate constant) and k are both still at work.'}],
  teach:[
   {h:'The phases in order', list:['Before the peak (absorption phase): absorption outruns elimination.', 'At the peak: the two rates are equal.', 'After the peak (post-absorption phase): elimination is the faster of the two, while absorption continues.', 'Once absorption is complete (complete elimination phase): the curve is pure elimination, governed by k (the elimination rate constant) alone.']}],
@@ -295,7 +295,7 @@ const Q_MODULE5 = [
  source:'both',
  stem:'Which of the following results if the oral dose of a drug is increased, with everything else unchanged?',
  options:[
-  {t:'a proportional increase in the area under the curve', correct:true,
+  {t:'a proportional increase in AUC', correct:true,
    why:'The area is the integral of a curve that has been scaled by a constant, so it scales by that same constant. Total exposure therefore rises in step with the dose. Clearance has not changed, which is the other way of stating the same result.'},
   {t:'a later time to peak',
    why:'This treats the peak as a target to be filled, so a larger dose should take longer to reach it. The time to peak is fixed by ka and k alone, and the dose changes neither; both rates rise in proportion with the larger amount, so they cross at the same moment.'},

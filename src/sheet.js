@@ -247,9 +247,9 @@ const SHEET_LINES = [
 
 /* The lines she said she does not supply, to print beside the map. */
 const SHEET_MISSING = [
- {module: 1, html: 't&frac12; = {{frac:0.693|k}}', eq: 'thalf-first', model: 'First order, any route', asks: 't½ and k', when: 'Every half-life question; k from a half-life.'},
- {module: 2, html: 'Cl = k &times; V<sub>D</sub>', eq: 'cl-k-vd', model: 'Any route', asks: 'Clearance', when: 'Clearance from k and volume, and the other way round.'},
- {module: 4, html: 'CrCl = {{frac:(140 &minus; age)(weight)|72 &times; S<sub>Cr</sub>}} (&times; 0.85 for a woman)', eq: 'crcl', model: 'Renal function', asks: 'CrCl', when: 'Creatinine clearance, in mL/min.'},
- {module: 4, html: 'IBW (male) = 50 kg + 2.3 kg per inch over 5 ft', eq: 'ibw-male', model: 'Renal function', asks: 'CrCl', when: 'The weight that goes into Cockcroft-Gault.'},
- {module: 4, html: 'IBW (female) = 45.5 kg + 2.3 kg per inch over 5 ft', eq: 'ibw-female', model: 'Renal function', asks: 'CrCl', when: 'The weight that goes into Cockcroft-Gault.'},
+ {module: 1, html: 't&frac12; = {{frac:0.693|k}}', eq: 'thalf-first', model: 'First order, any route', asks: 't½ and k', when: 'Every half-life question; k from a half-life.', need: 'k in hr<sup>&minus;1</sup>; the answer is a time in hr, never hr<sup>&minus;1</sup>.'},
+ {module: 2, html: 'Cl = k &times; V<sub>D</sub>', eq: 'cl-k-vd', model: 'Any route', asks: 'Clearance', when: 'Total clearance from k and volume, and k from clearance and volume. She named total clearance again in the 19 Oct final review as not on the sheet.', need: 'k in hr<sup>&minus;1</sup> and V<sub>D</sub> in L give Cl in L/hr.'},
+ {module: 4, html: 'CrCl = {{frac:(140 &minus; age)(IBW)|72 &times; S<sub>Cr</sub>}} (&times; 0.85 for a woman)', eq: 'crcl', model: 'Renal function', asks: 'CrCl', when: 'Creatinine clearance, the estimate of renal function, reported in mL/min. The weight is always the ideal body weight: &ldquo;we&rsquo;re only gonna use the ideal body weight&rdquo; (19 Oct).', need: 'Age in years, IBW in kg (from the IBW lines below), S<sub>Cr</sub> in mg/dL.'},
+ {module: 4, html: 'IBW (male) = 50 kg + 2.3 kg per inch over 5 ft', eq: 'ibw-male', model: 'Renal function', asks: 'CrCl', when: 'The weight that goes into Cockcroft-Gault.', need: 'Height in inches (a height in cm divided by 2.54); 5 ft is 60 inches, so the inches over 5 ft are the height in inches minus 60. The result is in kg.'},
+ {module: 4, html: 'IBW (female) = 45.5 kg + 2.3 kg per inch over 5 ft', eq: 'ibw-female', model: 'Renal function', asks: 'CrCl', when: 'The weight that goes into Cockcroft-Gault.', need: 'Height in inches (a height in cm divided by 2.54); 5 ft is 60 inches, so the inches over 5 ft are the height in inches minus 60. The result is in kg.'},
 ];

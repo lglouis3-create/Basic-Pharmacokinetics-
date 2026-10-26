@@ -29,9 +29,10 @@ const REFERENCE_HTML = `
 
 <h3>Not on the exam equation sheet</h3>
 <ul class="tlist">
-<li>Dr. Mosley supplies a paper equation sheet and the same equations inside ExamSoft: <i>"We will have equations for exams. I will put, give you a paper copy and equations will also be in ExamSoft for you, OK? So, the equations are there. You've got to think about which one do I want to apply in this application."</i></li>
-<li>She named five things she does not put on the sheet.</li>
-<li>She expects you to know these five without the sheet.</li>
+<li>Dr. Mosley supplies a paper equation sheet and the same equations inside ExamSoft: <i>"We will have equations for exams. I will put, give you a paper copy and equations will also be in ExamSoft for you, OK? So, the equations are there. You've got to think about which one do I want to apply in this application."</i> (08-17)</li>
+<li>She named five relations to know without the sheet. The sheet does not print four of them: first-order half-life, clearance from k and V<sub>D</sub> (her &ldquo;total clearance&rdquo;), Cockcroft-Gault and ideal body weight.</li>
+<li>The fifth, C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}, is printed on page 1 of the sheet, and she still expects it known.</li>
+<li>In the 19 Oct final review she named three of them again for Exam 3: total clearance, ideal body weight and Cockcroft-Gault (their rows below give her words).</li>
 </ul>
 
 <table class="reftab"><thead><tr>
@@ -49,8 +50,8 @@ const REFERENCE_HTML = `
 <li>V<sub>max</sub> and K<sub>M</sub> are the two constants of nonlinear elimination, Module 8.</li>
 </ul></td></tr>
 
-<tr><td><b>Clearance from k and V<sub>D</sub></b>, clearance (Cl) being the volume of plasma cleared of drug per unit time<br>Cl = k &times; V<sub>D</sub></td>
-<td><i>"this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd."</i> (08-24)</td>
+<tr><td><b>Total clearance from k and V<sub>D</sub></b>, clearance (Cl) being the volume of plasma cleared of drug per unit time<br>Cl = k &times; V<sub>D</sub>; Cl in L/hr when k is in hr<sup>&minus;1</sup> and V<sub>D</sub> in L</td>
+<td><i>"this is another one that it will not be on your equation sheet cause I want you to take this one with you to your grave along with the half-life equation. Clearance is equal to k times vd."</i> (08-24). Restated in the 19 Oct final review: <i>"Total clearance, and I think that is one of the equations that I expect you to know. It's not on your equation sheet, but you know it, right?"</i></td>
 <td><ul class="tlist">
 <li>Needed for total body clearance, for the infusion rate R = C<sub>ss</sub>&middot;Cl, and for every split of a total clearance into its renal (kidney) and hepatic (liver) parts.</li>
 <li>R is the constant rate of drug input, in amount per time; C<sub>ss</sub> the steady-state concentration, the plateau where rate in equals rate out.</li>
@@ -71,9 +72,9 @@ const REFERENCE_HTML = `
 <td><i>"this is an equation that I want you to know, to memorize. I've given you the equation sheet, this one is not there. You need to know this one, OK."</i> (09-14)</td>
 <td>Module 4. Her answer must come out in mL/min: <i>"don't give me kilograms per milligram per deciliter. Milliliters per minute."</i> The equation sheet does not carry it.</td></tr>
 
-<tr><td><b>Ideal body weight</b><br>male: 50 + 2.3 &times; (inches over 5 ft)<br>female: 45.5 + 2.3 &times; (inches over 5 ft)</td>
-<td><i>"the ideal body weight, again, you need to know this one."</i> (09-14)</td>
-<td>Module 4, as the IBW that feeds Cockcroft-Gault. She keeps the arithmetic simple on purpose: <i>"All of our patients are going to be 5 ft tall. And all, and we're just gonna use ideal body weight."</i> The equation sheet does not carry it.</td></tr>
+<tr><td><b>Ideal body weight</b>, IBW, in kg<br>male: 50 + 2.3 &times; (inches over 5 ft)<br>female: 45.5 + 2.3 &times; (inches over 5 ft)<br>inches over 5 ft = height in inches &minus; 60; a height in cm is divided by 2.54 first</td>
+<td><i>"the ideal body weight, again, you need to know this one."</i> (09-14). In the 19 Oct final review: <i>"remember in this class, we're only gonna use the ideal body weight, so that means that I expect you to know the ideal body weight equation as well as the Cockroth Gault."</i></td>
+<td>Module 4, as the IBW that feeds Cockcroft-Gault, in place of the patient's actual weight. She keeps the arithmetic simple on purpose: <i>"That's why all of our patients are gonna be 5 ft, between 5 and 6 ft. We're keeping it simple, right?"</i> and <i>"we're just gonna use ideal body weight."</i> (09-14). The equation sheet does not carry it.</td></tr>
 </tbody></table>
 
 <div class="note"><b>Four more lines on the equation sheet (Basic-Pharmacokinetics-Equations.pdf).</b>
@@ -105,7 +106,7 @@ const REFERENCE_HTML = `
 <h3>Units, and the conversions this course keeps needing</h3>
 <p>Two of her standing deductions are about units, not pharmacokinetics:</p>
 <ul class="tlist">
-<li>Units: <i>"If there are units. Then you should give me units. OK, don't just give me a number. Because a milligram is very different than a microgram."</i></li>
+<li>Units: <i>"If there are units. Then you should give me units. OK, don't just give me a number. Because a milligram is very different than a microgram."</i> (08-17)</li>
 <li>Leading decimals: <i>"There should never be a leading decimal &hellip; If you give me that as your final answer, you will lose half the points for this answer."</i></li>
 </ul>
 
@@ -460,7 +461,7 @@ const REFERENCE_HTML = `
 </ul></td>
 <td><ul class="tlist">
 <li>CrCl for a patient vignette, then whether the patient's renal function is reduced.</li>
-<li>Her worked example: a 45-year-old female, 165 cm (65 inches, so IBW = 45.5 + 2.3 &times; 5 = 57 kg), S<sub>Cr</sub> 1.1 mg/dL gives {{frac:(140 &minus; 45)(57)|72 &times; 1.1}} &times; 0.85 = 58 mL/min.</li>
+<li>Her worked example: a 45-year-old female, 165 cm ({{frac:165 cm|2.54 cm per inch}} = 64.96 inches, taken as 65, so 5 inches over 5 ft and IBW = 45.5 + 2.3 &times; 5 = 57 kg), S<sub>Cr</sub> 1.1 mg/dL gives {{frac:(140 &minus; 45)(57)|72 &times; 1.1}} &times; 0.85 = 58 mL/min.</li>
 <li>The stated actual weight of 61 kg is deliberately unused.</li>
 </ul></td>
 <td>No &mdash; named by her.</td></tr>
@@ -899,7 +900,7 @@ const REFERENCE_HTML = `
 <th style="width:30%">Equation, as she writes it</th><th style="width:20%">Symbols and units</th><th style="width:20%">Applies when</th><th style="width:18%">Usually asked for</th><th style="width:12%">On the sheet</th></tr></thead><tbody>
 
 <tr><td><b>&minus;{{frac:dC<sub>p</sub>|dt}} = {{frac:V<sub>max</sub>C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}</b></td>
-<td>C<sub>p</sub> the plasma concentration (mg/L); V<sub>max</sub> the maximum elimination rate; K<sub>M</sub> the Michaelis constant (mg/L)</td>
+<td>C<sub>p</sub> the plasma concentration (mg/L); V<sub>max</sub> the maximum elimination rate, in concentration per time in this rate law; K<sub>M</sub> the Michaelis constant (mg/L). In the dose-rate lines below V<sub>max</sub> is an amount per time, mg/day or mg/kg/day, the units of R.</td>
 <td>Any saturable elimination. C<sub>p</sub> much greater than K<sub>M</sub>: rate = V<sub>max</sub>, zero order. C<sub>p</sub> much less than K<sub>M</sub>: rate = {{frac:V<sub>max</sub>|K<sub>M</sub>}}C<sub>p</sub>, first order.</td>
 <td>The order at high and at low concentration; her poll keys the reversed statement False.</td>
 <td>No. The dose-rate line is built from it.</td></tr>
@@ -998,7 +999,7 @@ const REFERENCE_HTML = `
 
 <ul class="tlist">
 <li>Nothing on this page is a statement about what the paper will ask.</li>
-<li>The five entries in the first table are the ones Dr. Mosley said out loud she does not supply.</li>
+<li>The five entries in the first table are the ones Dr. Mosley said out loud to know without the sheet; the sheet prints one of them, C<sub>p</sub> = {{frac:D<sub>B</sub>|V<sub>D</sub>}}, and does not print the other four.</li>
 <li>Everything else here reports what the two rendered pages of the equation sheet do and do not carry.</li>
 </ul>
 `;

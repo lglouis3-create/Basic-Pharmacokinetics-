@@ -181,7 +181,7 @@ const Q_MODULE3 = [
  teachImg:'slide_3IntravenousInfusi_p9',
  cite:'3IntravenousInfusions.pdf, slide "Drug Concentration Prior to Reaching Steady-State"; 09-02 lecture',
  quote:'one half-life. Gets us maybe 50% of the steady-state concentration',
- note:'Four half-lives gives 93.75 per cent, since 1 − {{frac:1|16}} = 0.9375. The lecture gave the figure as 93.25 per cent; 93.75 is the correct arithmetic.',
+ note:'Four half-lives gives 93.75 per cent, since 1 − {{frac:1|16}} = 0.9375.',
  audit:'The captions record the four-half-life figure as "93.25" in the 09-02 lecture and "93" in the 09-09 review; one minus one sixteenth is 93.75 per cent. The four-half-life row is left out for that reason.'},
 
 {id:'inf-c8', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
@@ -276,7 +276,7 @@ const Q_MODULE3 = [
 {id:'inf-c12', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04', multi:true,
  topic:'infusion', sub:'load', concept:'loading-dose-properties', skill:'apply',
  source:'both',
- stem:'A loading dose is given at the same time as a continuous infusion is started. Select every statement that is true. Select all that apply.',
+ stem:'Which of the following is true about a loading dose given at the same time as a continuous infusion is started? Select all that apply.',
  options:[
   {t:'An appropriate loading dose can be calculated as R divided by k', correct:true,
    why:'Infusion rate divided by elimination rate constant is the amount the infusion would eventually hold in the body at steady state. It is right provided the rate was chosen to hit the intended concentration; an arbitrary rate gives a loading dose matched to that arbitrary plateau instead of the target.'},
@@ -366,7 +366,7 @@ const Q_MODULE3 = [
  cite:'3IntravenousInfusions.pdf, slide "Intravenous Infusion"; 09-02 lecture',
  quote:'IV infusion, we’re starting low and we’re building.'},
 
-{id:'inf-c16', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04', lowYield:true,
+{id:'inf-c16', prof:'Mosley', tier:'new', exam:1, module:3, lecture:'L04',
  topic:'infusion', sub:'basics', concept:'bolus-dose-dependence', skill:'apply',
  source:'slide',
  stem:'Which of the following would you expect to increase with an increase in an intravenous bolus dose?',
@@ -1028,7 +1028,7 @@ const Q_MODULE3 = [
  tol:0.2,
  steps:[
   {k:'setup', t:'Cp = ({{frac:R|Cl}})(1 − e^(−kt))',
-   why:'With no loading dose the concentration starts at zero and climbs towards the plateau, and the bracket is the fraction of the plateau reached after t hours. The plateau itself, R over clearance, is the ceiling the climb is heading for and not the answer to this question.'},
+   why:'With no loading dose the concentration starts at zero and climbs towards the plateau, and the bracket is the fraction of the plateau reached after t hours. The plateau itself, R over clearance, is the level the concentration approaches and not the answer to this question.'},
   {k:'algebra', t:'k = {{frac:0.693|5 hr}} = 0.1386 hr⁻¹, and Cl = (0.1386 hr⁻¹)(16 L) = 2.218 L/hr',
    why:'The plateau needs a clearance and the exponent needs a rate constant, so both come from the half-life and the volume before anything is substituted.'},
   {k:'algebra', t:'{{frac:R|Cl}} = {{frac:44.35 mg/hr|2.218 L/hr}} = 20 mg/L, the plateau this infusion is climbing to',

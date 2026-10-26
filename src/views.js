@@ -3439,7 +3439,7 @@ function stackTables(root){
 const examOf = mod => (COURSE.lectures.find(l => l.module === mod) || {}).exam;
 const FOLD_KEY = NS + ':fold:';
 const foldState = prefix => LS.get(FOLD_KEY + prefix) || 'closed';
-const examLabel = e => e === 'both' ? 'Both exams' : (COURSE.exams.find(x => x.id === +e) || {}).name || ('Exam ' + e);
+const examLabel = e => e === 'both' ? 'All exams' : (COURSE.exams.find(x => x.id === +e) || {}).name || ('Exam ' + e);
 function openAncestors(t){
   for(let d = t.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true;
 }
