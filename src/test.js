@@ -1189,11 +1189,11 @@ console.log('\n=== Worksheets: print markup per source (views.js sheetHTML) ==='
   const roots = {}; qs.forEach(q => (roots[root(q)] ||= []).push(q.id));
   const twins = Object.values(roots).filter(a => a.length > 1);
   if (twins.length) bad(`likely paper carries two wordings of one fact: ${twins.map(a => a.join(' & ')).join('; ')}`);
-  const ex = X.COURSE.exams.find(e => e.id === L.exam), calc = qs.filter(q => X.kindOf(q) === 'calc').length;
+  const ex = X.COURSE.exams.find(e => e.id === L.exam), calc = qs.filter(q => X.qType(q) === 'numeric').length;
   if (ex && qs.length !== ex.questions) bad(`likely paper has ${qs.length} questions; the exam has ${ex.questions}`);
   const nw = qs.filter(q => q.module === 8 || q.module === 9).length;
   if (!dup.length && !twins.length && (!ex || qs.length === ex.questions))
-    console.log(`  ok    ${qs.length} questions, all different: ${qs.length - calc} concept and ${calc} calculation, ${nw} on Modules 7b and 8`);
+    console.log(`  ok    ${qs.length} questions, all different: ${qs.length - calc} multiple choice and ${calc} fill in the blank, ${nw} on Modules 7b and 8`);
   (L.forecast || []).forEach(f => { if (!f.topic || !f.evidence || !f.wording) bad(`forecast row without topic, evidence or wording: ${JSON.stringify(f).slice(0, 80)}`); });
 })();
 

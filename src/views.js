@@ -3156,13 +3156,13 @@ function startClock(){
 const likelyOn = () => typeof LIKELY !== 'undefined' && LIKELY.exam === EXAM.id && LIKELY.ids.some(id => byId(id));
 function likelyHTML(){
   if(!likelyOn()) return '';
-  const qs = LIKELY.ids.map(byId).filter(Boolean), nc = qs.filter(q => kindOf(q) === 'calc').length;
-  const rows = (LIKELY.forecast || []).map(f => `<tr><td>${rich(f.topic)}</td><td>${rich(f.wording)}</td><td>${esc(f.format)}</td><td>${esc(String(f.count))}</td><td>${rich(f.evidence)}</td></tr>`).join('');
+  const qs = LIKELY.ids.map(byId).filter(Boolean), nc = qs.filter(q => qType(q) === 'numeric').length;
+  const rows = (LIKELY.forecast || []).map(f => `<li style="margin:0 0 12px"><b>${rich(f.topic)}</b> <span style="color:var(--text-dim);font-size:13px">· ${esc(f.format)} · about ${esc(String(f.count))} on the paper</span>
+    <div style="font-style:italic;margin:3px 0">“${rich(f.wording)}”</div><div style="color:var(--text-dim);font-size:13px">Evidence: ${rich(f.evidence)}</div></li>`).join('');
   return `<h3>${esc(LIKELY.title)}</h3>
-  <p class="likelynote">${rich(LIKELY.note)} ${qs.length} questions: ${qs.length - nc} multiple choice and ${nc} calculations.</p>
-  <p><button class="btn" id="startLikely">Start the ${esc(LIKELY.title.toLowerCase())} paper (${EXAM.minutes} minutes)</button></p>
-  ${rows ? `<details class="likelyfc"><summary>What she is most likely to ask, and the evidence</summary>
-    <div class="tw"><table class="gap"><thead><tr><th>Topic</th><th>Her likely wording</th><th>Format</th><th>Items</th><th>Evidence</th></tr></thead><tbody>${rows}</tbody></table></div></details>` : ''}`;
+  <p class="likelynote">${rich(LIKELY.note)} ${qs.length} questions: ${qs.length - nc} multiple choice and ${nc} fill in the blank.</p>
+  <p><button class="btn" id="startLikely">Start this paper (${EXAM.minutes} minutes)</button></p>
+  ${rows ? `<details class="likelyfc"><summary>What she is most likely to ask, her wording, and the evidence</summary><ol style="padding-left:20px;margin-top:10px">${rows}</ol></details>` : ''}`;
 }
 function beginLikely(){
   if(EX && EX.running){ renderExamQ(); return; }
