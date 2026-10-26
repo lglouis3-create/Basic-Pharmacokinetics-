@@ -4,8 +4,7 @@
  "segs": [
   {
    "text": "Module seven A, objective four. Estimating the bioavailability of a dose. The calculation is a ratio of areas under the curve, A U C, corrected for dose. F abs equals A U C p o over A U C I V, times D I V over D p o, where p o means oral and I V means intravenous. The areas are in matching units and the doses in milligrams, so F has no units. With equal doses the dose ratio is one, and only the area ratio is left.",
-   "slide": null,
-   "slidetitle": "Absolute Bioavailability",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -24,8 +23,7 @@
   },
   {
    "text": "When the stem gives only the oral area, the I V area is built from clearance. Clearance, Cl, is the volume of plasma cleared of drug per hour. An I V dose equals clearance times its A U C, so A U C I V equals D I V over Cl. For a one compartment drug, clearance is k times V D, with k equal to zero point six nine three over the half-life. So a half-life and a volume of distribution are enough. Milligrams divided by liters per hour gives milligram hours per liter. This is the Module four line, Cl T equals F D zero over A U C, with F equal to one.",
-   "slide": null,
-   "slidetitle": "Absolute Bioavailability",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -52,8 +50,7 @@
   },
   {
    "text": "The same relationship written for the oral dose is F abs times D p o equals Cl times A U C p o. The oral dose times F is the amount that actually entered the circulation. So F abs equals Cl times A U C p o, over D p o, and every unit cancels. If an oral dose is to match an I V dose in A U C, the two areas are set equal, and F becomes D I V over D p o. So the oral dose is the I V dose divided by F, which is larger than the I V dose.",
-   "slide": null,
-   "slidetitle": "Absolute Bioavailability",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -76,8 +73,7 @@
   },
   {
    "text": "Her in class activity, question one. A single five hundred milligram oral tablet of an antihypertensive drug gave an A U C of seventy milligram hours per liter. A five hundred milligram I V bolus of the same drug in the same volunteer had a half-life of three hours and a V D of twenty five liters. The question asks the absolute bioavailability of the tablet, and the expected A U C after a two hundred fifty milligram I V bolus. There is no I V area, so it is built first from clearance. k is zero point six nine three over three hours, which is zero point two three one per hour.",
-   "slide": null,
-   "slidetitle": "In-Class Activity",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -96,8 +92,7 @@
   },
   {
    "text": "The I V area is the five hundred milligram dose divided by twenty five liters times zero point two three one per hour. That gives eighty six point five eight milligram hours per liter. The doses are equal, so the dose ratio is one, and F is seventy over eighty six point five eight. That is zero point eight zero eight five, about eighty one percent. The units cancel, so F has none.",
-   "slide": null,
-   "slidetitle": "In-Class Activity",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -124,8 +119,7 @@
   },
   {
    "text": "The other route gives the same F. Twenty five liters, times zero point two three one per hour, times seventy milligram hours per liter, divided by five hundred milligrams, is zero point eight zero eight five again. For the second part, kinetics are linear, so the A U C is proportional to dose. Two hundred fifty milligrams divided by twenty five liters times zero point two three one per hour gives forty three point two nine milligram hours per liter. That is half of eighty six point five eight, because half the dose gives half the area.",
-   "slide": null,
-   "slidetitle": "In-Class Activity",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -148,8 +142,7 @@
   },
   {
    "text": "Question two. Ciprofloxacin has an oral immediate release bioavailability of seventy percent. What oral dose gives the same extent of absorption as a four hundred milligram I V bolus? Same extent means equal areas, so F equals D I V over D p o, and D p o equals D I V over F. Four hundred milligrams divided by zero point seven zero is five hundred seventy one point four three milligrams. That is not a real tablet, since the marketed strengths she looked up were two hundred fifty and five hundred milligrams. Rounded to a strength a tablet could have, she accepted five hundred seventy five or six hundred milligrams.",
-   "slide": null,
-   "slidetitle": "In-Class Activity",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -176,8 +169,7 @@
   },
   {
    "text": "Question three. After a five hundred milligram I V bolus, C p equals fifty e to the minus zero point two t. Matching the I V bolus equation, C zero is fifty milligrams per liter, and k is zero point two per hour. V D is the dose over C zero, five hundred milligrams over fifty milligrams per liter, ten liters. Clearance is zero point two per hour times ten liters, two liters per hour. The I V area is five hundred milligrams over two liters per hour, two hundred fifty milligram hours per liter. The tablet, at the same dose, gave one hundred eighty eight milligram hours per liter, so F is one hundred eighty eight over two hundred fifty, zero point seven five two, seventy five percent.",
-   "slide": null,
-   "slidetitle": "In-Class Activity",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -204,8 +196,7 @@
   },
   {
    "text": "Her poll: a five hundred milligram tablet with an A U C of one hundred fifteen milligram hours per liter, against a four hundred milligram I V bolus with an A U C of one hundred thirty two milligram hours per liter. F is one hundred fifteen over one hundred thirty two, times four hundred over five hundred, which is zero point six nine seven, so seventy percent. The I V area goes in the denominator and the I V dose in the numerator, and the inverted ratio is the usual wrong answer.",
-   "slide": null,
-   "slidetitle": "PollEv",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {

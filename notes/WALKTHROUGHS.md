@@ -6,8 +6,8 @@ Last updated 2026-10-26.
 - 42 walkthroughs, one per guide section (`src/walk/gobj-*.json`), 313 parts, 29,751 words, 159,586 characters.
   `src/gen_walk.py` validates them and writes `src/guide_walk.js` (GW_DECKS, GUIDE_WALK); build.py embeds it and
   lists `audio/gw-<section>-<part>.mp3` as GW_CLIPS.
-- Slides: `slides/<deck>-NN.jpg`, 215 pages from nine decks (PyMuPDF, 1280 px wide, JPEG quality 70), deck names and
-  counts in `src/walk/decks.json`. Decks: intro, ivb, inf, cl, oral, rep, mo, pd, nonlin. These are the annotated
+- Slides: `slides/<deck>-NN.jpg`, 234 pages from ten decks (PyMuPDF, 1280 px wide, JPEG quality 70), deck names and
+  counts in `src/walk/decks.json`. Decks: intro, ivb, inf, cl, oral, rep, mo, ba (7a, uploaded 10/26), pd, nonlin. These are the annotated
   copies from the course Drive; every page was looked at and none carries a name. The student's own note pages
   (grid paper, photographed worksheets, blank) stay in the deck so page numbers match hers, and gen_walk.py refuses
   a part that points at one (NOTE_PAGES).
@@ -30,11 +30,11 @@ Last updated 2026-10-26.
   section; the guide was not changed.
 
 ## Open
-- Module 7a deck (7a---Bioavailability-and-Bioequivalence.pdf, 17.7 MB) is over the Drive connector's 10 MB limit.
-  The four gobj-m7-* scripts have "slide": null and a "slidetitle" on each part; fill the slides when the deck arrives.
 - Recording: not done. Estimate 159,586 characters; at the Intro Pharmacology walkthrough rate (1,850.92 cents for
   101,801 credits) about 2,901.55 cents, assuming one credit per character. Planned voice: the one used there
   (jNB0TWZK9LKlBbU54wMW, eleven_v4), to be confirmed. Record only after approval; one clip per part,
   audio/gw-<section id>-<part index>.mp3; check each downloads and its length fits its word count.
-- Equation sheet PDF not found in Drive; the sheet-location sentences come from the guide text.
+- Equation sheet (BasicPharmacokineticsEquations.pdf, uploaded 10/26): every sentence in the scripts that says
+  whether a relation is on the sheet was checked against its two pages and matches. The guide's "the only half-life
+  line the sheet prints" (gobj-m8-2) is also correct: the nonlinear t1/2 on page 2 is the only one.
 - "Listen to the working" button on calculation questions: proposed, not built.

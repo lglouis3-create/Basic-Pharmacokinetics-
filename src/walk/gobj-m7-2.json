@@ -4,8 +4,7 @@
  "segs": [
   {
    "text": "Module seven A, objective two. Relative against absolute bioavailability. F, the bioavailability factor, is the fraction of the dose that reaches the systemic circulation. Absolute bioavailability compares the drug given by an extravascular route, oral in this lecture, with the same drug given intravenously, I V. Extravascular means any route other than directly into the blood. The I V dose is all in the blood, so its F is one and it is the standard. Relative bioavailability compares two formulations of the same drug, such as a tablet against an oral solution, or a new product against the originator. Neither is I V, so the reference product is the standard.",
-   "slide": null,
-   "slidetitle": "Absolute Bioavailability",
+   "slide": "ba:5",
    "reading": null,
    "card": [
     {
@@ -28,8 +27,7 @@
   },
   {
    "text": "Both are a ratio of areas under the curve, A U C, corrected for dose. For absolute bioavailability, F abs equals A U C p o over A U C I V, times D I V over D p o, where p o means oral. The areas are in the same units, so they cancel, and the doses are in milligrams, so they cancel too. F abs has no units. The product being asked about goes on top, and the I V area goes in the denominator, so the I V dose goes on top of the dose ratio. She said, I want you to remember that the I V A U C is going to be in the denominator, right? That is what you are comparing it to.",
-   "slide": null,
-   "slidetitle": "Absolute Bioavailability",
+   "slide": "ba:6",
    "reading": null,
    "card": [
     {
@@ -48,8 +46,7 @@
   },
   {
    "text": "For relative bioavailability, F rel equals A U C A over A U C B, times D B over D A. A is the product being compared, the test. B is the reference or comparator, and its A U C goes in the denominator. A stem that says compared to the oral solution puts the oral solution in the denominator as B. An absolute F cannot be above one, because an oral dose cannot deliver more than the same dose given I V. A relative F can be above one when the test product does better than the reference, as with an old standard such as Bayer aspirin that a newer product can beat.",
-   "slide": null,
-   "slidetitle": "Relative Bioavailability",
+   "slide": "ba:9",
    "reading": null,
    "card": [
     {
@@ -76,8 +73,7 @@
   },
   {
    "text": "Her first practice problem used six volunteers. A two hundred fifty milligram oral tablet gave an average A U C of one hundred one point five microgram hours per milliliter. A one hundred milligram I V bolus gave an average A U C of seventy three point eight microgram hours per milliliter. The question asks the absolute bioavailability of the tablet. It is absolute because the comparator is I V. So the I V area goes underneath and the I V dose goes on top: one hundred one point five over seventy three point eight, times one hundred milligrams over two hundred fifty milligrams.",
-   "slide": null,
-   "slidetitle": "Practice Problem",
+   "slide": "ba:7",
    "reading": null,
    "card": [
     {
@@ -100,8 +96,7 @@
   },
   {
    "text": "The area ratio is one point three seven five, and the dose ratio is zero point four. One point three seven five times zero point four is zero point five five zero one, which she rounds to zero point five five, or fifty five percent. The units cancel, so F has none. Inverting the ratios gives one point eight two instead of zero point five five, and an absolute F above one is not possible.",
-   "slide": null,
-   "slidetitle": "Practice Problem",
+   "slide": "ba:7",
    "reading": null,
    "card": [
     {
@@ -124,8 +119,7 @@
   },
   {
    "text": "Her second practice problem compares the same two hundred fifty milligram tablet with five milliliters of an oral solution holding two hundred fifty milligrams, with an average A U C of ninety eight point seven six microgram hours per milliliter. The question asks the relative bioavailability of the tablet compared to the oral solution. It is relative because both products are oral. The solution is the comparator, so it is B, and its area goes underneath. F rel equals one hundred one point five over ninety eight point seven six, times two hundred fifty milligrams over two hundred fifty milligrams. The doses are equal, so the dose ratio is one. F rel is one point zero two seven seven, rounded to one point zero three.",
-   "slide": null,
-   "slidetitle": "Practice Problem",
+   "slide": "ba:10",
    "reading": null,
    "card": [
     {
@@ -152,8 +146,7 @@
   },
   {
    "text": "Read the two answers together. The tablet delivers fifty five percent of what the I V dose delivers, and about three percent more than the solution. A relative F above one is allowed, and an absolute F above one is not. What the one point zero three does not say: the tablet and the solution have similar extent, but nothing here gives their peak times, so bioequivalence is not established. The stem names the comparison. The word absolute, or an I V dose, means absolute, and compared to the oral solution, or two oral products, means relative.",
-   "slide": null,
-   "slidetitle": "Relative Bioavailability",
+   "slide": "ba:9",
    "reading": null,
    "card": [
     {

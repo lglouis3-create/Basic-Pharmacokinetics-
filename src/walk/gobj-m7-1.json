@@ -4,8 +4,7 @@
  "segs": [
   {
    "text": "Module seven A, objective one. Drug product performance, bioavailability, and bioequivalence. A tablet or capsule only works if the drug leaves the dosage form. Drug product performance is that release step: the drug substance coming out of the product so that it can be absorbed. That release is what leads to the bioavailability of the drug substance.",
-   "slide": null,
-   "slidetitle": "Drug Product Performance",
+   "slide": "ba:3",
    "reading": null,
    "card": [
     {
@@ -20,8 +19,7 @@
   },
   {
    "text": "Bioavailability is the rate and extent to which the active ingredient is absorbed from the product and becomes available at the site of action. Extent is measured by the area under the curve, A U C. Rate is measured by the time of the peak, t max. Most of this course uses bioavailability as a fraction, F, the share of a dose that reaches the systemic circulation. F has no units, and F is one for an intravenous dose. That fraction is the extent half of the definition.",
-   "slide": null,
-   "slidetitle": "Bioavailability",
+   "slide": "ba:4",
    "reading": null,
    "card": [
     {
@@ -44,8 +42,7 @@
   },
   {
    "text": "Bioequivalence compares the same active ingredient from two products. The test product is the one under study, and the reference product is the standard or originator product it is compared with. They are bioequivalent when there is no significant difference in the rate and extent to which the active ingredient becomes available at the site of action, at the same molar dose, under similar conditions. The words that carry the meaning are absence of a significant difference, same molar dose, and rate and extent. She said, It's the absence of a significant difference. So they don't have to be exactly the same, but they just can't be too different.",
-   "slide": null,
-   "slidetitle": "Bioequivalence",
+   "slide": "ba:12",
    "reading": null,
    "card": [
     {
@@ -68,8 +65,7 @@
   },
   {
    "text": "Her slide example puts three formulations of one drug, A, B and C, on one plasma level against time plot. A and B have the same A U C, and C has half the A U C of A. The question is which pairs are bioequivalent. Compare extent first: A and B enclose the same area, and C encloses half the area of A. Then compare rate: A and C peak at the same time, and B peaks later than A.",
-   "slide": null,
-   "slidetitle": "Bioequivalence Example",
+   "slide": "ba:13",
    "reading": null,
    "card": [
     {
@@ -92,8 +88,7 @@
   },
   {
    "text": "A against B: same extent, different rate, so they are not bioequivalent. A against C: same rate, different extent, so not bioequivalent either. So none of A, B and C is bioequivalent to another. A fourth curve drawn close to A, peaking at about the same time with about the same area, is the one she called bioequivalent, because it is similar in both, not identical in either. The area answers extent, the peak time answers rate, and bioequivalence needs both to match.",
-   "slide": null,
-   "slidetitle": "Bioequivalence Example",
+   "slide": "ba:13",
    "reading": null,
    "card": [
     {
@@ -116,8 +111,7 @@
   },
   {
    "text": "Because bioequivalence needs rate as well as extent, two products with the same A U C are not shown to be bioequivalent until their peak times are also shown to be similar. She said, these two have similar F's, but you don't know if they're bioequivalent because you don't know about the, the rate. A relative bioavailability study compares two formulations of the same drug by their A U Cs, which is extent. A bioequivalence study is a specialized relative bioavailability study that compares rate as well.",
-   "slide": null,
-   "slidetitle": "Bioequivalence",
+   "slide": "ba:12",
    "reading": null,
    "card": [
     {

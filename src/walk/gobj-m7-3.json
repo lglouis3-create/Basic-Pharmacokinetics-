@@ -4,8 +4,7 @@
  "segs": [
   {
    "text": "Module seven A, objective three. Factors that can influence bioavailability. F is the fraction of a dose that reaches the systemic circulation, with no units, and it is one for an I V dose. A low F is the sign that one of these factors is at work. Bioavailability can be low for reasons in the product, reasons on the way into the circulation, and reasons in the patient. Her list has nine entries.",
-   "slide": null,
-   "slidetitle": "Factors Influencing Bioavailability",
+   "slide": "ba:14",
    "reading": null,
    "card": [
     {
@@ -24,8 +23,7 @@
   },
   {
    "text": "First, the product: the physicochemical properties of the drug and the formulation, drug stability and p H effects, and prodrugs. A prodrug is a drug given in an inactive form that the body must convert to the active drug. She singled out the ones that come to mind most often: the physical and chemical properties of the drug itself, what p H does to it once it is in the body, first pass metabolism, and stability.",
-   "slide": null,
-   "slidetitle": "Factors Influencing Bioavailability",
+   "slide": "ba:14",
    "reading": null,
    "card": [
     {
@@ -48,8 +46,7 @@
   },
   {
    "text": "Next, on the way in: pre systemic and first pass metabolism. Pre systemic metabolism is any metabolism that happens before the drug reaches the systemic circulation. First pass metabolism is metabolism of an oral dose, mainly by the liver, before the drug reaches the systemic circulation, so it lowers F. Also on the way in are food effects, drug drug interactions, and efflux transporters, which are membrane proteins that pump absorbed drug back out of the cell.",
-   "slide": null,
-   "slidetitle": "Factors Influencing Bioavailability",
+   "slide": "ba:14",
    "reading": null,
    "card": [
     {
@@ -68,8 +65,7 @@
   },
   {
    "text": "Last, the patient: age and disease state. She said, Yeah, because our bodies change as we age, and yes, everything slows down. Her summary ties the list together. Low bioavailability has a variety of causes, including formulation factors and the first pass effect, and it bears on the drug's safety and efficacy.",
-   "slide": null,
-   "slidetitle": "Summary",
+   "slide": "ba:15",
    "reading": null,
    "card": [
     {
@@ -88,8 +84,7 @@
   },
   {
    "text": "Her reading of the first practice problem from objective two shows what a low F means. A two hundred fifty milligram oral tablet gave an A U C of one hundred one point five microgram hours per milliliter, against a one hundred milligram I V bolus with an A U C of seventy three point eight microgram hours per milliliter. So the tablet's F is one hundred one point five over seventy three point eight, times one hundred milligrams over two hundred fifty milligrams, which is zero point five five.",
-   "slide": null,
-   "slidetitle": "Factors Influencing Bioavailability",
+   "slide": "ba:7",
    "reading": null,
    "card": [
     {
@@ -104,8 +99,7 @@
   },
   {
    "text": "What does that number mean for a one thousand milligram tablet? The amount available from the tablet is zero point five five times one thousand milligrams, five hundred fifty milligrams. The same one thousand milligrams given I V has an F of one, so all one thousand milligrams is available for the body to use. In the oral problems so far in the course, F was about zero point seven, zero point eight or zero point nine. At zero point five five almost half the dose is lost, so whether oral is the best way to give this drug is open to question. A low F is read as drug lost to one of these factors, and it raises the oral dose needed to match an I V dose.",
-   "slide": null,
-   "slidetitle": "Factors Influencing Bioavailability",
+   "slide": "ba:7",
    "reading": null,
    "card": [
     {

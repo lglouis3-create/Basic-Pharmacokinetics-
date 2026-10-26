@@ -10,7 +10,8 @@ WALK = os.path.join(HERE, 'walk')
 # pages of the student's own notes in the annotated decks (grid paper, photographed worksheets, blank pages):
 # kept in the deck so page numbers match her slide numbers, never the slide a part discusses
 NOTE_PAGES = set('''intro:12 intro:18 intro:25 intro:30 ivb:27 ivb:28 ivb:29 ivb:30 ivb:31 inf:20 cl:13 oral:14
-  oral:16 oral:24 rep:10 rep:27 mo:9 pd:8 pd:13 nonlin:16 nonlin:20 nonlin:21 nonlin:22'''.split())
+  oral:16 oral:24 rep:10 rep:27 mo:9 pd:8 pd:13 nonlin:16 nonlin:20 nonlin:21 nonlin:22
+  ba:8 ba:11 ba:17 ba:18 ba:19'''.split())
 SENTS = re.compile(r'(?<=[.?!])\s+')
 BAD = re.compile(r'[()\[\]/\\%=<>+*^≥≤→±μ"“”&#{}|]')
 

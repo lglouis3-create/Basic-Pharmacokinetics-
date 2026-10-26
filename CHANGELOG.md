@@ -8,7 +8,7 @@ Newest first. The build embeds this file; Topics shows what is new since your la
 - Calculations: a formula card builds line by line with the narration, relation first, then numbers, then the result.
 - Browse her deck from the slide, tap it to open it full size, change the speed, or continue to the next section.
 - A walkthrough reopens at the part you stopped on. Keys: K or Space to play or pause, arrows for the part.
-- The device voice reads it for now; Module 7a plays without slides until its deck is added.
+- The device voice reads it for now. Module 7a now shows her slides too.
 
 ## 2026-10-21 (final exam review)
 - Final exam review (19 Oct): 21 questions, her polls word for word with her keys, as one set under Module 8.
