@@ -2255,8 +2255,8 @@ function renderGaps(){
       }
       h += `<div class="missq">
         <div class="mstem">${stemHTML(q.stem)}</div>
-        <div class="mmeta" style="color:var(--ok);margin-bottom:4px">Answer: ${esc(correctTxt)}</div>
-        ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${esc(pickedTxt)}</div>` : ''}
+        <div class="mmeta" style="color:var(--ok);margin-bottom:4px">Answer: ${rich(correctTxt)}</div>
+        ${pickedTxt ? `<div class="mmeta" style="color:var(--bad);margin-bottom:4px">You entered: ${rich(pickedTxt)}</div>` : ''}
         ${last && last.missKind ? `<div class="mmeta" style="color:var(--warn);margin-bottom:4px">Named as ${esc(an((MISS_LABEL[last.missKind]||'').toLowerCase()))} miss${last.missSuggest && last.missSuggest !== last.missKind ? `; the number itself pointed to ${esc((MISS_LABEL[last.missSuggest]||'').toLowerCase())}` : ''}</div>` : ''}
         <div class="mmeta">${esc(q.cite)} · missed ${s2.wrong||1}× · ${s2.box>=MASTER_BOX?'now mastered':'still in review'}${last && last.ms && qType(q)==='numeric' ? ` · took ${fmtClock(last.ms)}` : ''}</div>
         ${qType(q)==='numeric' && q.setup && EQ_BY_ID[q.setup.eq] ? `<div class="mmeta mline">Line that solves it: ${eqShow(EQ_BY_ID[q.setup.eq])}${suScopePool(String(q.module)).length

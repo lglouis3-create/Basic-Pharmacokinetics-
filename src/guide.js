@@ -3146,7 +3146,7 @@ const GUIDE_HTML = `
 </dl>
 
 <h4>Picture it</h4>
-{{fig:nl_css_rate|Steady-state concentration against daily dose rate for her slide Example (K<sub>M</sub> 10 mg/L, V<sub>max</sub> 12 mg/kg/day). The dashed line, from the 6 mg/kg/day pair, is what a linear drug would do; the saturable drug rises above it and climbs steeply as the rate nears V<sub>max</sub>.}}
+{{fig:nl_css_rate|Steady-state concentration against daily dose rate for her slide Example (KM 10 mg/L, Vmax 12 mg/kg/day). The dashed line, from the 6 mg/kg/day pair, is what a linear drug would do; the saturable drug rises above it and climbs steeply as the rate nears Vmax.}}
 <p class="prose">A one-third rise in dose rate, 6 to 8 mg/kg/day, doubles the steady-state level from 10 to 20 mg/L. A linear drug would have gone only to 13.3 mg/L.</p>
 
 <h4>How she tests it</h4>

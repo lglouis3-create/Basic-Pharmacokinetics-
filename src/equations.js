@@ -597,7 +597,7 @@ const EQUATIONS = [
    'After the last dose nothing more is added, so the level falls by first order from that peak, as in the printed C = C<sub>0</sub>e<sup>&minus;kt</sup>.',
    'With the peak as the start: C<sub>p</sub> = C<sub>max</sub><sup>&infin;</sup>e<sup>&minus;kt</sup>, with t counted from the last dose.'],
  use:'When a stem asks for the level some hours after the last dose at steady state. If it gives the peak, start there; if not, find the peak first from the printed line.',
- cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections" (the C<sub>p</sub> line with its first two factors read as the peak)'},
+ cite:'6---Repetitive-IV-Bolus-and-Intermittent-IV-Infusions.pdf, slide "Concentration of Drug in the Body at Steady-State Following Repeated IV Bolus Injections" (the Cp line with its first two factors read as the peak)'},
 
 {id:'cavg-ss', module:6, name:'Average concentration at steady state, IV or oral', sheet:'yes',
  lhs:'C<sub>avg</sub><sup>&infin;</sup>', tokens:['FD<sub>0</sub>', '/', 'Cl<sub>T</sub>&tau;'],

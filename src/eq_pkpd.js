@@ -72,7 +72,7 @@ EQUATIONS.push(
  also:['teff = 1.44 t1/2 ln(D0/(VD Ceff))', 'teff = t1/2*ln(D0/(VD*Ceff))/0.693', 'teff = 1.44*thalf*ln(D0/(VD*Ceff))'],
  lures:['0.693', 'k', 'log(D<sub>0</sub>/(V<sub>D</sub>C<sub>eff</sub>))', 'ln(V<sub>D</sub>C<sub>eff</sub>/D<sub>0</sub>)'],
  symbols:[['t<sub>eff</sub>', 'duration of activity: the time the plasma level stays at or above C<sub>eff</sub> after a single IV bolus, hr'],
-          ['1.44', '{{frac:1|0.693}}, from k = {{frac:0.693|t<sub>1/2</sub>}}'],
+          ['1.44', '1 ÷ 0.693, from k = 0.693 ÷ t<sub>1/2</sub>'],
           ['t<sub>1/2</sub>', 'elimination half-life, hr'], ['D<sub>0</sub>', 'the IV bolus dose, mg'],
           ['V<sub>D</sub>', 'apparent volume of distribution, L'],
           ['C<sub>eff</sub>', 'minimum effective concentration (MEC): the lowest plasma level that gives the effect']],

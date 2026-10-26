@@ -974,7 +974,7 @@ CHAINS.push(
  {id:'pd-inclass-1', src:'inclass', module:9, name:'In-Class Activity PK-PD, problem 1: a 250 mg IV bolus',
   setup:'t&frac12; 3 hr, V<sub>D</sub> 25 L, MEC 1.2 mcg/mL: the duration of action, then the dose for 12 hours',
   parts:['pd-ic1a', 'pd-ic1b']},
- {id:'pd-inclass-2', src:'inclass', module:9, name:'In-Class Activity PK-PD, problem 2: C<sub>p</sub> = 50e<sup>&minus;0.2t</sup>',
+ {id:'pd-inclass-2', src:'inclass', module:9, name:'In-Class Activity PK-PD, problem 2: Cp = 50e^(\u22120.2t)',
   setup:'500 mg IV bolus, MEC 5 mcg/mL: the duration of action, the dose that doubles it, and the change at 250 mg',
   parts:['pd-ic2a', 'pd-ic2b', 'pd-ic2c']},
  {id:'pd-practice-1', src:'practice', module:9, name:'PK-PD Practice 1: an antibiotic at 500 mg and 2000 mg',
