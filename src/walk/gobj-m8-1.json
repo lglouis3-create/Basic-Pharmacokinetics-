@@ -138,20 +138,24 @@
    "fig": null
   },
   {
-   "text": "The same shows at steady state in her slide example. Six milligrams per kilogram per day gave a steady state level of ten milligrams per liter. A linear drug keeps the level in proportion to the dose rate, so eight would have given about thirteen. Instead, eight milligrams per kilogram per day gave twenty: one third more dose doubled the level, because elimination was saturating. She said, Small changes in dose will lead to big changes in concentration.",
+   "text": "Her slide example shows what this does at steady state, where the daily dose rate equals the elimination rate. At six milligrams per kilogram per day, the steady state level was ten milligrams per liter. Raising the dose rate to eight is one third more, so for a linear drug the level would also rise by one third, to about thirteen milligrams per liter. Instead it rose to twenty milligrams per liter, double, because the enzymes were close to saturated: to remove eight instead of six milligrams per kilogram each day, the level had to climb much higher. She said, Small changes in dose will lead to big changes in concentration.",
    "slide": "nonlin:14",
    "card": [
+    {
+     "at": 0,
+     "m": "steady state: dose rate = elimination rate"
+    },
     {
      "at": 1,
      "m": "6 mg/kg/day → C<sub>ss</sub> 10 mg/L"
     },
     {
      "at": 2,
-     "m": "linear: 10 × {{frac:8|6}} = 13.3 mg/L"
+     "m": "dose rate × {{frac:8|6}} = × 1.33; linear: 10 mg/L × 1.33 = 13.3 mg/L"
     },
     {
      "at": 3,
-     "m": "<b>8 mg/kg/day → 20 mg/L: dose × 1.33, level × 2</b>"
+     "m": "<b>8 mg/kg/day → 20 mg/L: dose rate × 1.33, level × 2</b>"
     },
     {
      "at": 4,
