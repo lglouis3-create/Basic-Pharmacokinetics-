@@ -18,6 +18,7 @@ BAD = re.compile(r'[()\[\]/\\%=<>+*^≥≤→±μ"“”&#{}|]')
 
 def main():
     decks = json.load(open(os.path.join(WALK, 'decks.json')))
+    stepfigs = json.load(open(os.path.join(HERE, 'steps.json')))
     guide = open(os.path.join(HERE, 'guide.js'), encoding='utf-8').read()
     order = re.findall(r'<section class="gobj" id="(gobj-[^"]+)">', guide)
     errs, walk = [], {}
@@ -50,6 +51,18 @@ def main():
                 card.append([at, m])
             seg = {'t': t, 's': sl}
             if card: seg['c'] = card
+            fg = s.get('fig')
+            if fg:
+                # a step figure built as the part is read: [[sentence index, step number from 1], ...]
+                key, at = fg.get('key'), fg.get('at') or []
+                if key not in stepfigs: errs.append(f'{where}: no step figure {key!r} in steps.json')
+                else:
+                    nst, prev = len(stepfigs[key]['steps']), (-1, 0)
+                    for a, st in at:
+                        if not (0 <= a < ns and 1 <= st <= nst) or (a, st) < prev: errs.append(f'{where}: figure step {[a, st]} out of range or order')
+                        prev = (a, st)
+                    if not at: errs.append(f'{where}: figure {key} has no steps')
+                seg['f'] = {'k': key, 'at': at}
             segs.append(seg)
         if not 3 <= len(segs) <= 9: errs.append(f'{sid}: {len(segs)} parts (3 to 9)')
         words = sum(len(x['t'].split()) for x in segs)

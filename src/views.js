@@ -5304,7 +5304,7 @@ function gwPanelHTML(id){
       <label class="gwmeta"><input type="checkbox" data-gwcont${gwCont() ? ' checked' : ''}> Continue to the next section</label>
       ${gwSynth() ? '' : '<span class="gwmeta gwnovoice">This browser has no built-in voice; the transcript, card and slides still step with ◂ ▸.</span>'}</div>
     <div class="gwfill"><div></div></div>
-    <div class="gwbody">
+    <div class="gwbody"><figure class="stepfig gwfig" hidden title="Tap to enlarge"></figure>
       <ol class="gwtx">${w.segs.map((x, i) => `<li data-gwi="${i}" value="${i + 1}" tabindex="0">${gwSents(x.t).map((t, k) => `<span class="gws" data-k="${k}">${esc(t)}</span>`).join(' ')}</li>`).join('')}</ol>
       <div class="gwvis"><div class="gwcard"><h4>The math, as it is spoken</h4><ol></ol></div><figure class="gwslide"></figure></div>
     </div></div>`;
@@ -5332,6 +5332,16 @@ function gwDraw(id){
   const card = seg.c || [], cd = p.querySelector('.gwcard'), upto = g.playing || g.started ? g.k : 1e9;
   cd.hidden = !card.length;
   cd.querySelector('ol').innerHTML = card.map(([at, m]) => `<li class="${at > upto ? 'wait' : at === upto && g.playing ? 'now' : ''}">${mathHTML(m)}</li>`).join('');
+  // the part's figure, built a step at a time as its sentences are read (all of it before Play or when stepped to)
+  const fg = p.querySelector('.gwfig'), fx = seg.f;
+  if(!fx || typeof STEPFIGS === 'undefined' || !STEPFIGS[fx.k]){ fg.hidden = true; fg.innerHTML = ''; fg.dataset.k = ''; }
+  else {
+    fg.hidden = false;
+    if(fg.dataset.k !== fx.k){ fg.innerHTML = `<div class="stsvg">${STEPFIGS[fx.k].svg}</div><figcaption>${esc(STEPFIGS[fx.k].title)}</figcaption>`; fg.dataset.k = fx.k; fg.dataset.step = ''; }
+    const live = g.playing || g.started, hit = fx.at.filter(([a]) => !live || a <= g.k), to = (hit.length ? hit[hit.length - 1][1] : fx.at[0][1]) - 1;
+    if(fg.dataset.step !== String(to)){ const from = fg.dataset.step === '' ? null : +fg.dataset.step; fg.querySelectorAll('.st').forEach((s, j) => s.classList.toggle('on', j === from)); stepTo(fg, from, to); fg.dataset.step = String(to); }
+  }
+  p.classList.toggle('gwhasfig', !fg.hidden);
   const sl = g.browse || gwSlideOf(id, i), f = p.querySelector('.gwslide');
   if(!sl){ f.hidden = true; f.innerHTML = ''; f.dataset.sel = ''; return; }
   f.hidden = false;
@@ -5339,6 +5349,7 @@ function gwDraw(id){
     const [d, num] = sl.split(':'), dk = GW_DECKS[d], src = gwSlideSrc(d, +num);
     f.dataset.sel = sl;
     f.innerHTML = `<img src="${src}" alt="${esc(dk.name)}, slide ${num}" data-gwzoom title="Open the slide full size" onerror="this.closest('figure').classList.add('noimg')">
+      <button type="button" class="chip gwslideopen" data-gwslideopen aria-expanded="false">Her slide: ${esc(dk.name)} · slide ${num} ▸</button>
       <figcaption><button type="button" class="chip" data-gwslide="-1" ${+num > 1 ? '' : 'disabled'} aria-label="Previous slide">‹ Slide</button><span>${esc(dk.name)} · slide ${num} of ${dk.n}${g.browse ? ' (browsing)' : ''}</span><button type="button" class="chip" data-gwslide="1" ${+num < dk.n ? '' : 'disabled'} aria-label="Next slide">Slide ›</button></figcaption>
       <p class="gwnoimg">The slide images load on the class site.</p>`;
   }
@@ -5468,6 +5479,10 @@ document.addEventListener('click', e => {
     const to = +n + +sl.dataset.gwslide; if(to < 1 || to > GW_DECKS[d].n) return;
     if(!GW || GW.id !== id) GW = {id, i: at, k: 0, playing: false, started: false, run: 0};
     GW.browse = d + ':' + to; gwDraw(id); return; }
+  const fz = e.target.closest('.gwfig .stsvg');
+  if(fz){ const z = document.createElement('div'); z.className = 'gwzoom gwzoomfig'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', 'Enlarged figure');
+    z.innerHTML = `<div class="stepfig">${fz.outerHTML}</div><button type="button" class="chip" aria-label="Close">✕ Close</button>`; z.onclick = () => z.remove(); document.body.appendChild(z); z.querySelector('button').focus(); return; }
+  const so = e.target.closest('[data-gwslideopen]'); if(so){ const on = !p.classList.contains('gwslideshown'); p.classList.toggle('gwslideshown', on); so.setAttribute('aria-expanded', String(on)); return; }
   const z = e.target.closest('[data-gwzoom]'); if(z){ gwZoom(z.getAttribute('src'), z.alt); }
 });
 document.addEventListener('keydown', e => {

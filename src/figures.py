@@ -1582,6 +1582,111 @@ fig('unit_cancel', 'Units cancelling in five equations: the unit left over is th
     f'<svg xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 {UW} {UH}" width="{UW}" height="{UH}" role="img" '
     f'aria-label="Units cancelling"><title>Units cancelling</title>' + '\n'.join(up) + '</svg>')
 
+# ---- Module 8, step by step: elimination rate against concentration ---------
+# Her slide Example (8 - Nonlinear PK.pdf): KM 10 mg/L, Vmax 12 mg/kg/day. At
+# steady state the daily dose rate equals the elimination rate, so the y axis is
+# both. Rate = Vmax C / (KM + C) (objective 2); below KM it is close to
+# (Vmax/KM) C = 1.2 C, first order; far above KM it is close to Vmax, zero order.
+# Her two levels: 12 x 10 / 20 = 6 (half of Vmax) and 12 x 20 / 30 = 8 (two
+# thirds of Vmax), her two dose rates.
+NL_VM, NL_KM = 12.0, 10.0
+nl_rate = lambda c: NL_VM * c / (NL_KM + c)
+
+
+def nlr_plot():
+    p = Plot(60, [0, 2, 4, 6, 8, 10, 12, 14], xlabel='Plasma concentration, Cp (mg/L)',
+             ylabel='Elimination rate (mg/kg/day)')
+    return p.frame([0, 10, 20, 30, 40, 50, 60])
+
+
+def nlr_s1(pl):
+    pl.curve(nl_rate)
+    pl.text(22, 2.2, 'rate = Vmax Cp / (KM + Cp)', size=19, color=BLUE)
+
+
+def nlr_s2(pl):
+    nlr_s1(pl); pl.hline(NL_VM, color=AMBER)
+    pl.text(59, 12.5, 'Vmax 12: the fastest it can go', size=18, color=AMBER, anchor='end')
+
+
+def nlr_s3(pl):
+    nlr_s2(pl)
+    pl.vline(NL_KM, 6); pl.parts.append(f'<line x1="{pl.L}" y1="{pl.py(6):.1f}" x2="{pl.px(NL_KM):.1f}" y2="{pl.py(6):.1f}" '
+                                       f'stroke="{DIM}" stroke-width="1.5" stroke-dasharray="5 4"/>')
+    pl.points([NL_KM], [6], color=AMBER)
+    pl.text(11.2, 5.0, 'KM 10: rate = half of Vmax = 6', size=18)
+
+
+def nlr_s4(pl):
+    nlr_s3(pl); pl.xband(0, 4, fill='#EAF0F9')
+    pts = ' '.join(f'{pl.px(c):.1f},{pl.py(1.2 * c):.1f}' for c in (0, 7))
+    pl.parts.append(f'<polyline points="{pts}" fill="none" stroke="{BLUE}" stroke-width="1.5" stroke-dasharray="3 4"/>')
+    pl.text(4.6, 13.5, 'below KM: rate close to (Vmax/KM) Cp, first order', size=17)
+
+
+def nlr_s5(pl):
+    nlr_s4(pl); pl.xband(40, 60, fill='#FDF3E2')
+    pl.text(50, 5.4, 'far above KM:', size=17, anchor='middle')
+    pl.text(50, 4.4, 'rate close to Vmax,', size=17, anchor='middle')
+    pl.text(50, 3.4, 'zero order', size=17, anchor='middle')
+
+
+def nlr_s6(pl):
+    nlr_s5(pl); pl.points([20], [8], color=AMBER)
+    pl.text(21.2, 7.0, 'Cp 20: rate 8 = two thirds of Vmax', size=18)
+
+
+stepped('nl_rate_steps', 'Elimination rate against plasma concentration for a saturable drug', nlr_plot(), [
+    ('The curve', 'Her slide Example: KM 10 mg/L, Vmax 12 mg/kg/day. At steady state the daily dose rate equals this elimination rate.', nlr_s1),
+    ('Vmax', 'The rate rises with Cp but cannot pass Vmax, 12 mg/kg/day.', nlr_s2),
+    ('KM', 'At Cp = KM = 10 mg/L the rate is {{frac:12 × 10|10 + 10}} = 6, half of Vmax.', nlr_s3),
+    ('Below KM', 'With Cp much less than KM, Cp is negligible in the denominator: rate ≈ {{frac:Vmax|KM}} Cp = 1.2 Cp, first order.', nlr_s4),
+    ('Far above KM', 'With Cp much greater than KM, KM is negligible: rate ≈ Vmax, zero order.', nlr_s5),
+    ('Her two levels', 'Cp 10 gives 6 and Cp 20 gives {{frac:12 × 20|10 + 20}} = 8 mg/kg/day: her two dose rates.', nlr_s6),
+], footer='8 - Nonlinear PK.pdf, slide "Example" (KM and Vmax from her working); rate law from slide "Saturable-Enzymatic Elimination Processes"')
+
+
+# ---- Module 8, step by step: steady-state level against daily dose rate -------
+# Css = R KM / (Vmax - R) from her dose-rate line; 6 -> 10 and 8 -> 20 mg/L are
+# her pairs. A linear drug from the first pair: Css in proportion to R, so 8
+# mg/kg/day would give 10 x 8 / 6 = 13.3 mg/L.
+def ncs_plot():
+    p = Plot(12, [0, 10, 20, 30, 40, 50, 60], xlabel='Daily dose rate, R (mg/kg/day)',
+             ylabel='Steady-state concentration (mg/L)')
+    return p.frame([0, 2, 4, 6, 8, 10, 12])
+
+
+def ncs_s1(pl):
+    pl.points([6], [10]); pl.text(6.2, 10, '6 → 10', size=18, dy=18)
+
+
+def ncs_s2(pl):
+    ncs_s1(pl); pl.curve(lambda r: 10 / 6 * r, color=AMBER, dash='6 5')
+    pl.points([8], [10 * 8 / 6], color=AMBER); pl.text(8.25, 13.3, 'linear: 13.3', size=18, color=AMBER, dy=10)
+    pl.label(0.4, 52, 'a linear drug: level in proportion to R', color=AMBER, swatch=True)
+
+
+def ncs_s3(pl):
+    ncs_s2(pl); pl.points([8], [20]); pl.text(7.9, 20, '8 → 20', size=18, anchor='end', dy=-6)
+
+
+def ncs_s4(pl):
+    ncs_s3(pl)
+    rmax = NL_VM * 60 / 70
+    pts = ' '.join(f'{pl.px(r):.1f},{pl.py(r * NL_KM / (NL_VM - r)):.1f}' for r in (rmax * i / 260 for i in range(261)))
+    pl.parts.append(f'<polyline points="{pts}" fill="none" stroke="{BLUE}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+    pl.vline(NL_VM, 60); pl.text(11.85, 56, 'Vmax 12', size=18, color=DIM, anchor='end')
+    pl.label(0.4, 44, 'her saturable drug', color=BLUE, swatch=True)
+
+
+stepped('nl_css_steps', 'Steady-state level against daily dose rate: a saturable drug against a linear one', ncs_plot(), [
+    ('First pair', 'Her slide Example: 6 mg/kg/day gave a steady state of 10 mg/L.', ncs_s1),
+    ('If it were linear', 'A linear drug keeps the level in proportion to the dose rate: 8 mg/kg/day would give {{frac:10 × 8|6}} = 13.3 mg/L.', ncs_s2),
+    ('Second pair', '8 mg/kg/day, one third more, gave 20 mg/L: the level doubled.', ncs_s3),
+    ('The saturable curve', 'Css = {{frac:R KM|Vmax − R}} through both pairs; the level climbs steeply as R nears Vmax, 12 mg/kg/day.', ncs_s4),
+], footer='8 - Nonlinear PK.pdf, slide "Example" and her working')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dir', help='also write each figure as a .svg file to look at')

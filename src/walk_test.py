@@ -64,6 +64,24 @@ def run(page, width):
             exp = s or page.evaluate(f"gwSlideOf('{sid}', {i})")
             if got[0] != i or got[3] != i or got[1] != exp: follow = False
         check(follow, f'{sid}: stepping through {len(segs)} parts moves the transcript and the slide with each part')
+        # parts with a step figure: stepped to, the figure shows its last step; the slide folds behind a button
+        figs = page.evaluate(f"GUIDE_WALK['{sid}'].segs.map((x, i) => x.f ? [i, x.f.k, x.f.at[x.f.at.length - 1][1]] : null).filter(Boolean)")
+        if figs:
+            ok = True
+            for i, key, last in figs:
+                page.evaluate(f"gwGo('{sid}', {i})")
+                got = page.evaluate(f"""(() => {{ const p = document.querySelector('.gwpanel[data-gwp="{sid}"]'), f = p.querySelector('.gwfig');
+                  const on = [...f.querySelectorAll('.st')].findIndex(s => s.classList.contains('on'));
+                  return [f.hidden, f.dataset.k, on + 1, p.classList.contains('gwhasfig'), getComputedStyle(p.querySelector('.gwslide img') || document.body).display]; }})()""")
+                if got != [False, key, last, True, 'none']: ok = False; print('       ', i, got)
+            check(ok, f'{sid}: {len(figs)} parts show their step figure in full when stepped to, with her slide folded')
+            i0, key0 = figs[0][0], figs[0][1]
+            first = page.evaluate(f"GUIDE_WALK['{sid}'].segs[{i0}].f.at")
+            page.evaluate(f"gwGo('{sid}', {i0})"); page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
+            page.wait_for_function(f"GW && (GW.i > {i0} || GW.k >= {first[-1][0]})", timeout=8000)
+            page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
+            st = page.evaluate(f"""(() => {{ const f = document.querySelector('.gwpanel[data-gwp="{sid}"] .gwfig'); return [...f.querySelectorAll('.st')].findIndex(s => s.classList.contains('on')) + 1; }})()""")
+            check(st >= first[0][1], f'{sid}: playing builds the figure with the narration (step {st})')
         # play from part 0, let it advance, pause, hold, resume
         page.evaluate(f"gwGo('{sid}', 0)")
         page.click(f'.gwpanel[data-gwp="{sid}"] [data-gwplay]')
