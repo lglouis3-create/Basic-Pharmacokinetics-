@@ -35,7 +35,10 @@ DECK_DIRS = ["decks", "."]
 # citation's spelling of a filename differs from the file's real name, or map a
 # name to None to say "this deck exists but is not on hand, do not report it".
 #   "introduction.pdf": "Introduction.pdf",
-ALIASES = {}
+ALIASES = {
+    # "8 - Nonlinear PK.pdf" has spaces, so the filename pattern reads only its last word
+    "pk.pdf": "8 - Nonlinear PK.pdf",
+}
 
 # Lecture number -> file, for citations that say "Lecture #3" rather than
 # naming the PDF. Keys are strings.
