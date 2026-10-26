@@ -1657,33 +1657,32 @@ def ncs_plot():
 
 
 def ncs_s1(pl):
-    pl.points([6], [10]); pl.text(6.2, 10, '6 → 10', size=18, dy=18)
-
-
-def ncs_s2(pl):
-    ncs_s1(pl); pl.curve(lambda r: 10 / 6 * r, color=AMBER, dash='6 5')
-    pl.points([8], [10 * 8 / 6], color=AMBER); pl.text(8.25, 13.3, 'linear: 13.3', size=18, color=AMBER, dy=10)
-    pl.label(0.4, 52, 'a linear drug: level in proportion to R', color=AMBER, swatch=True)
-
-
-def ncs_s3(pl):
-    ncs_s2(pl); pl.points([8], [20]); pl.text(7.9, 20, '8 → 20', size=18, anchor='end', dy=-6)
-
-
-def ncs_s4(pl):
-    ncs_s3(pl)
     rmax = NL_VM * 60 / 70
     pts = ' '.join(f'{pl.px(r):.1f},{pl.py(r * NL_KM / (NL_VM - r)):.1f}' for r in (rmax * i / 260 for i in range(261)))
     pl.parts.append(f'<polyline points="{pts}" fill="none" stroke="{BLUE}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
     pl.vline(NL_VM, 60); pl.text(11.85, 56, 'Vmax 12', size=18, color=DIM, anchor='end')
-    pl.label(0.4, 44, 'her saturable drug', color=BLUE, swatch=True)
+    pl.label(0.4, 52, 'her saturable drug: Css = R KM / (Vmax - R)', color=BLUE, swatch=True)
+
+
+def ncs_s2(pl):
+    ncs_s1(pl); pl.points([6], [10]); pl.text(6.2, 10, '6 → 10', size=18, dy=20)
+
+
+def ncs_s3(pl):
+    ncs_s2(pl); pl.curve(lambda r: 10 / 6 * r, color=AMBER, dash='6 5')
+    pl.points([8], [10 * 8 / 6], color=AMBER); pl.text(8.25, 13.3, 'linear: 13.3', size=18, color=AMBER, dy=12)
+    pl.label(0.4, 44, 'a linear drug: level in proportion to R', color=AMBER, swatch=True)
+
+
+def ncs_s4(pl):
+    ncs_s3(pl); pl.points([8], [20]); pl.text(7.9, 20, '8 → 20', size=18, anchor='end', dy=-6)
 
 
 stepped('nl_css_steps', 'Steady-state level against daily dose rate: a saturable drug against a linear one', ncs_plot(), [
-    ('First pair', 'Her slide Example: 6 mg/kg/day gave a steady state of 10 mg/L.', ncs_s1),
-    ('If it were linear', 'A linear drug keeps the level in proportion to the dose rate: 8 mg/kg/day would give {{frac:10 × 8|6}} = 13.3 mg/L.', ncs_s2),
-    ('Second pair', '8 mg/kg/day, one third more, gave 20 mg/L: the level doubled.', ncs_s3),
-    ('The saturable curve', 'Css = {{frac:R KM|Vmax − R}} through both pairs; the level climbs steeply as R nears Vmax, 12 mg/kg/day.', ncs_s4),
+    ('The curve', 'Css = {{frac:R KM|Vmax − R}} with her KM 10 mg/L and Vmax 12 mg/kg/day: the level climbs steeply as R nears Vmax.', ncs_s1),
+    ('First pair', 'Her slide Example: 6 mg/kg/day gave a steady state of 10 mg/L.', ncs_s2),
+    ('If it were linear', 'A linear drug keeps the level in proportion to the dose rate: 8 mg/kg/day would give {{frac:10 × 8|6}} = 13.3 mg/L.', ncs_s3),
+    ('Second pair', '8 mg/kg/day, one third more, gave 20 mg/L: the level doubled.', ncs_s4),
 ], footer='8 - Nonlinear PK.pdf, slide "Example" and her working')
 
 

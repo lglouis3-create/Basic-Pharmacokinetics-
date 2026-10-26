@@ -29,6 +29,17 @@ Last updated 2026-10-26.
   the guide and q8_module6b.js use 2.915, the midpoint of 3.39 and 2.44 (t max rounded to 2.1 hr). Both are in the
   section; the guide was not changed.
 
+## Sample in the new style (2026-10-26)
+- The student asked for concept-first narration with visuals: the formula and its working on the card, the
+  speech on what the relation says, what each variable is, what happens as one rises or falls, and links to other
+  objectives. gobj-m8-3 is rewritten that way (9 parts, 911 words) with two step figures from figures.py
+  (nl_rate_steps, nl_css_steps; also on the Diagrams tab). A part can carry "fig": {"key", "at": [[sentence,
+  step]]}; the figure spans the panel, builds with the narration, and her slide folds behind a button.
+- New source rule for this style: a statement comes from any guide section of the module, or follows directly from
+  the algebra of a relation the guide gives (recomputed by the reviewer); illustrative values are marked "e.g.".
+- Two review rounds: v2 found 25 issues (one wrong statement, the rest clarity and sync), v3 confirmed 22 fixed and
+  found 12 more; all applied. The other 41 sections are still in the first style until the student decides.
+
 ## Open
 - Recording: not done. Estimate 159,586 characters; at the Intro Pharmacology walkthrough rate (1,850.92 cents for
   101,801 credits) about 2,901.55 cents, assuming one credit per character. Planned voice: the one used there

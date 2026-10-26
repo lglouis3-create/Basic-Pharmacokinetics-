@@ -3,6 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- Guides, Module 8 objective 3: a sample walkthrough in a new style, concept first, with figures built as it is read.
+- Diagrams: two step-by-step Module 8 figures, elimination rate against Cp and steady state against dose rate.
 - Worksheets: Write on it opens a worksheet to write on with an Apple Pencil or a finger.
 - Each calculation gets a large grid to work in, and More room adds space under any problem.
 - Pen colours, highlighter, eraser, undo; Save as PDF keeps the worksheet with your writing on it.

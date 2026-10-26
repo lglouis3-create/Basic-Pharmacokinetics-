@@ -4,51 +4,59 @@
  "segs": [
   {
    "slide": "nonlin:7",
-   "text": "Module eight, objective three. Finding V max and K M in a patient. V max is the fastest the body can eliminate the drug, a rate in milligrams per day or milligrams per kilogram per day. K M reflects the capacity of the enzyme system. It is a concentration, so it can be compared directly with the drug level, and on the elimination curve it is the level at which the rate is half of V max. Both can be measured in test tubes, but a patient's own values come from that patient's steady state levels, and objective four uses them to choose the dose.",
+   "text": "Module eight, objective three. Finding V max and K M in a patient. C p is the plasma concentration, the drug level. V max is the fastest the body can eliminate the drug, an amount or concentration per time, such as milligrams per kilogram per day. K M reflects the capacity of the enzyme system, and it is a concentration, so it can be compared directly with C p. Both are constants for one patient but differ from one patient to another, so for dosing they are found from the patient's own steady state levels, not from test tubes. In her slide example, the values found are a K M of ten milligrams per liter and a V max of twelve milligrams per kilogram per day.",
    "fig": {
     "key": "nl_rate_steps",
     "at": [
      [
-      0,
+      2,
       1
      ],
      [
-      2,
+      3,
       2
-     ],
-     [
-      4,
-      3
      ]
     ]
    },
    "card": [
     {
      "at": 2,
-     "m": "V<sub>max</sub>: the fastest elimination rate, mg/day or mg/kg/day"
+     "m": "C<sub>p</sub>: the plasma concentration, mg/L"
     },
     {
      "at": 3,
-     "m": "K<sub>M</sub>: a concentration, mg/L"
+     "m": "V<sub>max</sub>: the fastest elimination rate, e.g. mg/kg/day"
     },
     {
      "at": 4,
-     "m": "at C<sub>p</sub> = K<sub>M</sub>: rate = ½ V<sub>max</sub>"
+     "m": "K<sub>M</sub>: a concentration, mg/L, compared with C<sub>p</sub>"
+    },
+    {
+     "at": 5,
+     "m": "constants in one patient, different between patients"
+    },
+    {
+     "at": 6,
+     "m": "her example: K<sub>M</sub> 10 mg/L, V<sub>max</sub> 12 mg/kg/day"
     }
    ]
   },
   {
    "slide": "nonlin:8",
-   "text": "The rate at which the body eliminates the drug equals V max times C p, divided by K M plus C p. When C p is much smaller than K M, C p hardly changes the bottom of the fraction, so the rate is V max over K M, times C p. The rate then rises in proportion to the level, which is first order. When C p is much larger than K M, K M hardly matters, the levels cancel, and the rate stays close to V max whatever the level. That is zero order.",
+   "text": "The elimination rate equals V max times C p, divided by K M plus C p. When C p equals K M, the bottom is twice K M, so the rate is exactly half of V max. When C p is much smaller than K M, adding C p hardly changes the bottom, so the rate is close to V max over K M, times C p, and doubling the level nearly doubles the rate: first order. When C p is much larger than K M, the bottom is close to C p, so the C p on the top and the bottom cancel and the rate stays close to V max. Doubling the level then barely changes the rate: zero order.",
    "fig": {
     "key": "nl_rate_steps",
     "at": [
      [
       0,
-      3
+      2
      ],
      [
       1,
+      3
+     ],
+     [
+      2,
       4
      ],
      [
@@ -64,11 +72,15 @@
     },
     {
      "at": 1,
+     "m": "C<sub>p</sub> = K<sub>M</sub>: rate = {{frac:V<sub>max</sub> K<sub>M</sub>|2 K<sub>M</sub>}} = ½ V<sub>max</sub>"
+    },
+    {
+     "at": 2,
      "m": "C<sub>p</sub> ≪ K<sub>M</sub>: rate ≈ {{frac:V<sub>max</sub>|K<sub>M</sub>}} C<sub>p</sub>"
     },
     {
      "at": 2,
-     "m": "example, C<sub>p</sub> 1 mg/L: {{frac:12 × 1|10 + 1}} = 1.09, close to 1.2 × 1: first order"
+     "m": "e.g. C<sub>p</sub> 0.5 → 1 mg/L: {{frac:12 × 0.5|10 + 0.5}} = 0.57 → {{frac:12 × 1|10 + 1}} = 1.09, nearly double"
     },
     {
      "at": 3,
@@ -76,67 +88,53 @@
     },
     {
      "at": 4,
-     "m": "example, C<sub>p</sub> 100 mg/L: {{frac:12 × 100|10 + 100}} = 10.9, close to 12: zero order"
+     "m": "e.g. C<sub>p</sub> 100 → 200 mg/L: {{frac:12 × 100|10 + 100}} = 10.9 → {{frac:12 × 200|10 + 200}} = 11.4, barely changes"
     }
    ]
   },
   {
    "slide": "nonlin:11",
-   "text": "At steady state the dose going in each day equals the drug eliminated each day. So the daily dose rate R equals the elimination rate at the steady state level, C s s: R equals V max times C s s, over K M plus C s s. Read along the curve, a higher dose rate needs a higher level before the body eliminates it all. Below K M the level rises in step with the dose. As the dose rate nears V max the curve flattens, so the level has to climb steeply, and a small change in dose gives a large change in concentration.",
+   "text": "At steady state the drug going in each day equals the drug eliminated each day, so the daily dose rate R equals the elimination rate, and the level is C s s, the steady state concentration. This gives the dose rate equation: R equals V max times C s s, over K M plus C s s. Well below K M, C s s rises nearly in proportion to R. As R nears V max, the elimination rate is close to V max, so C s s has to climb steeply, and a small change in dose gives a large change in concentration. For a drug like this, steady state takes two to three weeks, not three to five half lives.",
    "fig": {
-    "key": "nl_rate_steps",
+    "key": "nl_css_steps",
     "at": [
      [
-      0,
-      5
+      2,
+      1
      ]
     ]
    },
    "card": [
     {
      "at": 0,
-     "m": "steady state: rate in = rate out"
+     "m": "steady state: rate in = rate out, so R = elimination rate"
     },
     {
      "at": 1,
      "m": "R = {{frac:V<sub>max</sub> C<sub>ss</sub>|K<sub>M</sub> + C<sub>ss</sub>}}"
     },
     {
-     "at": 4,
-     "m": "R near V<sub>max</sub>: a small rise in R, a large rise in C<sub>ss</sub>"
-    }
-   ]
-  },
-  {
-   "slide": "nonlin:13",
-   "text": "One measured level is not enough, because the line has two unknowns, V max and K M. So the patient gets two different dose rates, each held until its steady state is measured. For a drug like this, that takes two to three weeks, not three to five half lives. Both pairs come from the same patient, so they share one V max and one K M, and combining the two lines gives K M first. Each term in the K M line is a dose rate divided by its own level, so K M comes out in milligrams per liter.",
-   "card": [
-    {
      "at": 1,
-     "m": "pair 1: R<sub>1</sub> → C<sub>1</sub> &nbsp; pair 2: R<sub>2</sub> → C<sub>2</sub>"
-    },
-    {
-     "at": 2,
-     "m": "each steady state: 2 to 3 weeks"
+     "m": "turned around: C<sub>ss</sub> = {{frac:R K<sub>M</sub>|V<sub>max</sub> − R}}"
     },
     {
      "at": 3,
-     "m": "K<sub>M</sub> = {{frac:R<sub>2</sub> − R<sub>1</sub>|(R<sub>1</sub>/C<sub>1</sub>) − (R<sub>2</sub>/C<sub>2</sub>)}}"
+     "m": "R near V<sub>max</sub>: a small rise in R, a large rise in C<sub>ss</sub>"
     },
     {
      "at": 4,
-     "m": "{{frac:mg/day|(mg/day) per (mg/L)}} = mg/L"
+     "m": "steady state: 2 to 3 weeks"
     }
    ]
   },
   {
    "slide": "nonlin:14",
-   "text": "Her slide example shows the effect. Six milligrams per kilogram per day gave a steady state of ten milligrams per liter. A linear drug keeps the level in proportion to the dose, so eight milligrams per kilogram per day would have given about thirteen. Instead, eight gave twenty: one third more dose doubled the level. The pair gives a K M of ten milligrams per liter, and either pair then gives a V max of twelve milligrams per kilogram per day.",
+   "text": "Her slide example shows this in a seventy two kilogram patient. A pair is one dose rate and the steady state level it produced. On six milligrams per kilogram per day the level was ten milligrams per liter. A linear drug keeps the level in proportion to the dose, so eight would have given about thirteen. Instead, eight milligrams per kilogram per day gave twenty: one third more dose doubled the level, because elimination was saturating.",
    "fig": {
     "key": "nl_css_steps",
     "at": [
      [
-      1,
+      0,
       1
      ],
      [
@@ -155,34 +153,97 @@
    },
    "card": [
     {
-     "at": 1,
-     "m": "R<sub>1</sub> = 6 mg/kg/day → C<sub>1</sub> = 10 mg/L"
-    },
-    {
      "at": 2,
-     "m": "linear: {{frac:10 × 8|6}} = 13.3 mg/L"
+     "m": "pair 1: R<sub>1</sub> = 6 mg/kg/day → C<sub>1</sub> = 10 mg/L"
     },
     {
      "at": 3,
-     "m": "R<sub>2</sub> = 8 mg/kg/day → C<sub>2</sub> = 20 mg/L"
+     "m": "linear: {{frac:10 × 8|6}} = 13.3 mg/L"
     },
     {
      "at": 4,
-     "m": "{{frac:R<sub>1</sub>|C<sub>1</sub>}} = {{frac:6|10}} = 0.6 &nbsp; {{frac:R<sub>2</sub>|C<sub>2</sub>}} = {{frac:8|20}} = 0.4"
+     "m": "pair 2: R<sub>2</sub> = 8 mg/kg/day → C<sub>2</sub> = 20 mg/L"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:13",
+   "text": "One pair is not enough, because the dose rate equation has two unknowns, V max and K M. Two pairs from the same patient share one V max and one K M. Solving each pair's equation for V max and setting the two equal removes V max and leaves K M, which is why K M comes first. This is the direct method. K M equals the difference R two minus R one, divided by the difference between R one over C one and R two over C two.",
+   "fig": {
+    "key": "nl_css_steps",
+    "at": [
+     [
+      0,
+      4
+     ]
+    ]
+   },
+   "card": [
+    {
+     "at": 1,
+     "m": "two pairs, one patient: one V<sub>max</sub>, one K<sub>M</sub>"
+    },
+    {
+     "at": 2,
+     "m": "V<sub>max</sub> = {{frac:R<sub>1</sub>|C<sub>1</sub>}}K<sub>M</sub> + R<sub>1</sub> = {{frac:R<sub>2</sub>|C<sub>2</sub>}}K<sub>M</sub> + R<sub>2</sub>"
     },
     {
      "at": 4,
+     "m": "K<sub>M</sub> = {{frac:R<sub>2</sub> − R<sub>1</sub>|(R<sub>1</sub>/C<sub>1</sub>) − (R<sub>2</sub>/C<sub>2</sub>)}}"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:13",
+   "text": "Pair one is the lower dose rate. Each ratio on the bottom, a dose rate divided by its own level, is the patient's clearance at that level, V max over K M plus C s s, from objective two. Clearance falls as the level rises, so the lower dose has the larger ratio. The top takes the higher dose rate minus the lower, and the bottom takes the lower dose's ratio minus the higher dose's, so both differences are positive and so is K M. The units leave a concentration. For her pairs the ratios are zero point six and zero point four, and K M is ten milligrams per liter.",
+   "card": [
+    {
+     "at": 1,
+     "m": "{{frac:R|C<sub>ss</sub>}} = {{frac:V<sub>max</sub>|K<sub>M</sub> + C<sub>ss</sub>}} = Cl<sub>T</sub>, clearance"
+    },
+    {
+     "at": 2,
+     "m": "{{frac:6|10}} = 0.6 &gt; {{frac:8|20}} = 0.4"
+    },
+    {
+     "at": 3,
+     "m": "top 8 − 6 &gt; 0, bottom 0.6 − 0.4 &gt; 0"
+    },
+    {
+     "at": 4,
+     "m": "{{frac:mg/kg/day|(mg/kg/day) per (mg/L)}} = mg/L"
+    },
+    {
+     "at": 5,
      "m": "<b>K<sub>M</sub> = {{frac:8 − 6|0.6 − 0.4}} = {{frac:2|0.2}} = 10 mg/L</b>"
-    },
-    {
-     "at": 4,
-     "m": "<b>V<sub>max</sub> = {{frac:(8)(10 + 20)|20}} = {{frac:240|20}} = 12 mg/kg/day</b>"
     }
    ]
   },
   {
    "slide": "nonlin:15",
-   "text": "Reading the results back against the curve ties them to the formula. At ten milligrams per liter the level equals K M, so the elimination rate is half of V max, six, the dose rate she gave. At twenty, the rate is eight, two thirds of V max. So the closer the daily dose comes to V max, the more steeply the level climbs. She said, I wrote this twice because you should get the same answer regardless of which way you use it.",
+   "text": "With K M known, V max comes from the dose rate equation rearranged: V max equals R times the sum K M plus C s s, all divided by C s s, with one pair's R and that same pair's level. From the second pair, eight times thirty, over twenty, is twelve milligrams per kilogram per day. The first pair, six times twenty over ten, also gives twelve. V max takes the units of the dose rate, so here it is per kilogram. She said, I wrote this twice because you should get the same answer regardless of which way you use it.",
+   "card": [
+    {
+     "at": 0,
+     "m": "V<sub>max</sub> = {{frac:R (K<sub>M</sub> + C<sub>ss</sub>)|C<sub>ss</sub>}}"
+    },
+    {
+     "at": 1,
+     "m": "<b>pair 2: {{frac:(8)(10 + 20)|20}} = {{frac:240|20}} = 12 mg/kg/day</b>"
+    },
+    {
+     "at": 2,
+     "m": "pair 1: {{frac:(6)(10 + 10)|10}} = 12 ✓"
+    },
+    {
+     "at": 3,
+     "m": "V<sub>max</sub> in the units of R: mg/kg/day"
+    }
+   ]
+  },
+  {
+   "slide": "nonlin:15",
+   "text": "Reading the results back shows why a dose change matters so much. At ten milligrams per liter the level equals K M, so the elimination rate is half of V max: six, the dose rate she gave. At twenty, the rate is eight, two thirds of V max. So the closer the daily dose comes to V max, the larger the rise in level for each added milligram, and objective four uses K M and V max, not a simple proportion, to choose a new dose.",
    "fig": {
     "key": "nl_rate_steps",
     "at": [
@@ -191,7 +252,7 @@
       5
      ],
      [
-      1,
+      2,
       6
      ]
     ]
@@ -199,21 +260,17 @@
    "card": [
     {
      "at": 1,
-     "m": "C<sub>ss</sub> 10 = K<sub>M</sub>: R = {{frac:12 × 10|10 + 10}} = 6 = ½ V<sub>max</sub>"
+     "m": "C<sub>ss</sub> = 10 mg/L = K<sub>M</sub>: R = {{frac:12 × 10|10 + 10}} = 6 = ½ V<sub>max</sub>"
     },
     {
      "at": 2,
-     "m": "C<sub>ss</sub> 20: R = {{frac:12 × 20|10 + 20}} = 8 = ⅔ V<sub>max</sub>"
-    },
-    {
-     "at": 4,
-     "m": "V<sub>max</sub> from pair 1: {{frac:(6)(10 + 10)|10}} = 12 ✓"
+     "m": "C<sub>ss</sub> = 20 mg/L: R = {{frac:12 × 20|10 + 20}} = 8 = ⅔ V<sub>max</sub>"
     }
    ]
   },
   {
    "slide": "nonlin:15",
-   "text": "The usual errors come from the same lines. K M is a concentration, so a rate unit on K M is wrong. Subtracting the ratios in the wrong order makes K M negative. And V max must use one pair's dose rate with that same pair's level, never one dose with the other dose's level. The seventy two kilogram weight is used only when a dose for this patient is asked, in objective four.",
+   "text": "The usual errors come from the same lines. K M is a concentration, so a rate unit on K M is wrong. Subtracting the ratios in the wrong order makes K M negative. In the V max line, one pair's dose rate goes with that same pair's level, never with the other pair's level. The seventy two kilograms are used only when a dose for this patient is asked, in objective four.",
    "card": [
     {
      "at": 1,
