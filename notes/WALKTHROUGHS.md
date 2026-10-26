@@ -40,6 +40,22 @@ Last updated 2026-10-26.
 - Two review rounds: v2 found 25 issues (one wrong statement, the rest clarity and sync), v3 confirmed 22 fixed and
   found 12 more; all applied. The other 41 sections are still in the first style until the student decides.
 
+## Second revision of the sample (2026-10-26, later)
+- The student found the formula-first part confusing and had missed the Quiz 5 item that compares a level with
+  Vmax. gobj-m8-3 now has 10 parts: part 1 says why the rate is first order well below KM and zero order well
+  above it, and what "depends on concentration" means (the amount removed per time, not the fraction); part 2
+  then shows how the formula says it. The card states that a level is compared only with KM, never with Vmax.
+- nl_rate_steps now builds the behaviour first and shows the formula in its own step 6 (7 steps).
+- gen_walk.py GLOSS: the spoken letters ("C p") are shown on screen as the symbol, with what it stands for in
+  brackets at its first use in a part (field d); the brackets are not read, so they add nothing to recording.
+- Sources for the "why": guide 8.1 (saturation, "can only work so fast") and 8.2; Ch 2 PDF p. 19 ("the rate of
+  the process is a function of the drug concentration, the t1/2 is not"); Ch 16 PDF p. 5 (transporters saturate).
+  "Spare capacity" below KM rests on general enzyme kinetics and on rate/Vmax = Cp/(KM + Cp), about 5% at
+  Cp 0.5 mg/L. Chapter 18 itself could not be read (the Drive PDFs return no text).
+- Reviewer round v4: 12 findings, all applied.
+- Reading and transcript notes for every module, for the rewrite of the other 41 sections, are in the session
+  scratchpad (gw/readnotes/*.md); the writer brief is rewritten concept first (gw/BRIEF.md).
+
 ## Open
 - Recording: not done. Estimate 159,586 characters; at the Intro Pharmacology walkthrough rate (1,850.92 cents for
   101,801 credits) about 2,901.55 cents, assuming one credit per character. Planned voice: the one used there

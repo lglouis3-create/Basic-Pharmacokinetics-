@@ -1186,8 +1186,8 @@ Ranked by how often it is the thing asked for across these files:
 Two sets in one file. Pages 1–8 are screenshots of a graded Canvas quiz, one
 question per page, 12.5 points each, with the keyed answer shown as marked
 correct (numeric items show the key beside a stated margin of error). Pages
-9–10 are the printed text of Quiz 1; **no key is present for Quiz 1** and none
-has been supplied here.
+9–10 are the printed text of Quiz 1; no key is printed in the file. She went
+over the quiz aloud on 26 Aug (transcript 08-26), which gives the key below.
 
 ### Canvas graded set, questions 1–8 (12.5 pts each, keys as marked)
 
@@ -1250,7 +1250,14 @@ Key: **60** (margin of error ±2%). Recomputed: R = Css·k·V_D = 23 mg/L × (0.
 
 Key: **14.9** (margin of error ±2%). Recomputed: 154 lb / 2.2 = 70 kg; V_D = 0.21 × 70 = 14.7 L; k = 0.693/4 = 0.17325 hr⁻¹; Cl = 2.5468 L/hr; Css = 38 / 2.5468 = 14.92 → 14.9 mg/L. Age and sex are stated and not used.
 
-### Quiz 1 (printed text; no key in the file)
+### Quiz 1 (printed text; key from her spoken review, transcript 08-26)
+
+Two versions were handed out with Q1 and Q2 flipped. She worked the other
+version first ("rate is independent of the concentration": A and D; "first-order
+process": A), then said of this one: "on this version, it's flipped. This one,
+the rate depends on concentration. That means it's first order ... our
+half-life is independent, our half-life is 0.693 over K, doesn't change. And our
+rate equation DCDT is equal to minus" (cut off in the transcript).
 
 **Quiz 1, Q1 — select all that apply.**
 > Which of the following is true about a process in which the rate depends on the concentration? (Select all that apply)
@@ -1280,6 +1287,14 @@ Key: **14.9** (margin of error ±2%). Recomputed: 154 lb / 2.2 = 70 kg; V_D = 0.
 > a. What is the half-life of this agent in this patient?
 > b. What is the volume of distribution of this agent in this patient?
 > c. How much time following administration of the dose is required for 75% of the dose to be eliminated?
+
+**Key for this version (her spoken review, 08-26), with the recompute.**
+- Q1: **b and c** (first order: half-life independent of concentration; dC/dt = −kC). Her words above.
+- Q2: **c**, the zero-order rate independent of the amount. She keyed only the first-order version aloud (A, "the rate is highest at the top of the curve"); c is the same item flipped, by her own statement that the versions are flipped.
+- Q3a: about **5 hr**. "If you give me 4.97, now, if you give me 4.19, something's funky." *Recompute:* least-squares slope of ln Cp on t, k = 0.13841 hr⁻¹, t½ = 0.693/0.13841 = 5.007 hr; any two points give 4.98 to 5.01 hr.
+- Q3b: **18.8 L**. "And on this 1, 18.8-ish." *Recompute:* 165/2.2 = 75 kg; dose 30 × 75 = 2250 mg; back-extrapolated C₀ = 119.92 mg/L; V_D = 2250/119.92 = 18.76 L.
+- Q3c: **10 hr**. "On this 1, 75%, 2 half-lives. 2 times 5 gives us 10." *Recompute:* ln 4/0.13841 = 10.02 hr.
+- The other version's Q3 (her words): C₀ "85 mg per liter", V_D "15-ish liters", 87.5% eliminated in 9 hr (three half-lives of 3 hr).
 
 ### Quiz 3, Modules 4–5 (graded Canvas set; file `Quiz3-Modules4-5-graded.pdf`, supplied 4 Oct as "Module 4-5 Practice Questions")
 

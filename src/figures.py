@@ -1601,7 +1601,6 @@ def nlr_plot():
 
 def nlr_s1(pl):
     pl.curve(nl_rate)
-    pl.text(22, 2.2, 'rate = Vmax Cp / (KM + Cp)', size=19, color=BLUE)
 
 
 def nlr_s2(pl):
@@ -1621,27 +1620,32 @@ def nlr_s4(pl):
     nlr_s3(pl); pl.xband(0, 4, fill='#EAF0F9')
     pts = ' '.join(f'{pl.px(c):.1f},{pl.py(1.2 * c):.1f}' for c in (0, 7))
     pl.parts.append(f'<polyline points="{pts}" fill="none" stroke="{BLUE}" stroke-width="1.5" stroke-dasharray="3 4"/>')
-    pl.text(4.6, 13.5, 'below KM: rate close to (Vmax/KM) Cp, first order', size=17)
+    pl.text(4.6, 13.5, 'well below KM: twice Cp, about twice the rate (first order)', size=17)
 
 
 def nlr_s5(pl):
     nlr_s4(pl); pl.xband(40, 60, fill='#FDF3E2')
-    pl.text(50, 5.4, 'far above KM:', size=17, anchor='middle')
-    pl.text(50, 4.4, 'rate close to Vmax,', size=17, anchor='middle')
-    pl.text(50, 3.4, 'zero order', size=17, anchor='middle')
+    pl.text(50, 5.4, 'well above KM:', size=17, anchor='middle')
+    pl.text(50, 4.4, 'rate stays near Vmax', size=17, anchor='middle')
+    pl.text(50, 3.4, '(zero order)', size=17, anchor='middle')
+
+
+def nlr_s5f(pl):
+    nlr_s5(pl); pl.text(22, 2.2, 'rate = Vmax Cp / (KM + Cp)', size=19, color=BLUE)
 
 
 def nlr_s6(pl):
-    nlr_s5(pl); pl.points([20], [8], color=AMBER)
+    nlr_s5f(pl); pl.points([20], [8], color=AMBER)
     pl.text(21.2, 7.0, 'Cp 20: rate 8 = two thirds of Vmax', size=18)
 
 
 stepped('nl_rate_steps', 'Elimination rate against plasma concentration for a saturable drug', nlr_plot(), [
-    ('The curve', 'Her slide Example: KM 10 mg/L, Vmax 12 mg/kg/day. At steady state the daily dose rate equals this elimination rate.', nlr_s1),
+    ('The curve', 'How fast the drug is eliminated at each plasma level, for her slide Example drug.', nlr_s1),
     ('Vmax', 'The rate rises with Cp but cannot pass Vmax, 12 mg/kg/day.', nlr_s2),
     ('KM', 'At Cp = KM = 10 mg/L the rate is {{frac:12 × 10|10 + 10}} = 6, half of Vmax.', nlr_s3),
-    ('Below KM', 'With Cp much less than KM, Cp is negligible in the denominator: rate ≈ {{frac:Vmax|KM}} Cp = 1.2 Cp, first order.', nlr_s4),
-    ('Far above KM', 'With Cp much greater than KM, KM is negligible: rate ≈ Vmax, zero order.', nlr_s5),
+    ('Well below KM', 'The rate rises in proportion to Cp: twice the level, about twice the rate. It depends on concentration: first order.', nlr_s4),
+    ('Well above KM', 'The rate stays near Vmax whatever the level. It is independent of concentration: zero order.', nlr_s5),
+    ('The formula', 'rate = {{frac:Vmax Cp|KM + Cp}}. Cp ≪ KM: rate ≈ {{frac:Vmax|KM}} Cp = 1.2 Cp, first order. Cp ≫ KM: rate ≈ Vmax, zero order. Her example: KM 10 mg/L, Vmax 12 mg/kg/day; at steady state the daily dose rate equals this elimination rate.', nlr_s5f),
     ('Her two levels', 'Cp 10 gives 6 and Cp 20 gives {{frac:12 × 20|10 + 20}} = 8 mg/kg/day: her two dose rates.', nlr_s6),
 ], footer='8 - Nonlinear PK.pdf, slide "Example" (KM and Vmax from her working); rate law from slide "Saturable-Enzymatic Elimination Processes"')
 

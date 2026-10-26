@@ -3,7 +3,7 @@
  "title": "Finding V max and K M in a patient",
  "segs": [
   {
-   "text": "Module eight, objective three. Finding V max and K M in a patient. C p is the plasma concentration, the drug level. The enzymes that eliminate the drug can only work so fast, and V max is the fastest elimination rate they can reach: a rate, an amount per time. K M is a concentration: the drug level at which the elimination rate is half of V max. Since both are concentrations, a drug level is called low or high only by comparing it with K M. Both are constants in one patient but differ between patients, so they are found from that patient's own steady state levels. In her slide example, K M is ten milligrams per liter and V max is twelve milligrams per kilogram per day.",
+   "text": "Module eight, objective three. Finding V max and K M in a patient. C p is the plasma concentration, the drug level. The enzymes that eliminate the drug can only work so fast; V max, the fastest rate they reach, is a rate: an amount or concentration per unit of time. K M is the drug level at which the elimination rate is half of V max. Since C p and K M are both concentrations, a level is low or high only when compared with K M. V max and K M are constant in one patient but differ between patients. In her slide example, K M is ten milligrams per liter and V max is twelve milligrams per kilogram per day.",
    "slide": "nonlin:7",
    "card": [
     {
@@ -16,7 +16,7 @@
     },
     {
      "at": 4,
-     "m": "K<sub>M</sub>: the concentration at which rate = ½ V<sub>max</sub>, mg/L ({{frac:V<sub>max</sub> K<sub>M</sub>|K<sub>M</sub> + K<sub>M</sub>}} = ½ V<sub>max</sub>)"
+     "m": "K<sub>M</sub>: the concentration at which rate = ½ V<sub>max</sub>, mg/L"
     },
     {
      "at": 5,
@@ -50,12 +50,12 @@
    }
   },
   {
-   "text": "Why does the order change with the level? The elimination rate is the amount removed per unit of time, and the phrase, depends on concentration, means that this amount changes when the level changes. Well below K M, most of the enzyme capacity is unused, so twice the level gives about twice the rate: first order. Well above K M, the enzymes are saturated and already work close to V max, and more drug cannot make them work faster, so the rate stays near V max whatever the level: independent of concentration, zero order. Low and high always mean relative to K M, never relative to V max. In first order the half life stays constant: the amount removed changes with the level, the fraction removed does not.",
+   "text": "Why does the order of elimination, first or zero, change with the level? The rate is the amount removed per unit of time; depends on concentration means this amount changes with the level, even if the fraction removed does not. Well below K M, the rate is a small part of V max, so the enzymes have spare capacity, and twice the level gives about twice the rate: first order. Well above K M, the enzymes are saturated: more drug raises the rate only a little, so it stays near V max: zero order. Low and high always mean relative to K M, a concentration, never relative to V max, which is a rate. The half life is nearly constant well below K M and lengthens as the level rises.",
    "slide": "nonlin:8",
    "card": [
     {
      "at": 1,
-     "m": "rate = amount removed per time"
+     "m": "rate = amount removed per time; depends on concentration = this amount changes with C<sub>p</sub>"
     },
     {
      "at": 2,
@@ -63,7 +63,7 @@
     },
     {
      "at": 2,
-     "m": "e.g. C<sub>p</sub> 0.5 → 1 mg/L: rate 0.57 → 1.09 mg/kg/day (× 1.9)"
+     "m": "e.g. (K<sub>M</sub> 10, V<sub>max</sub> 12) C<sub>p</sub> 0.5 → 1 mg/L: rate 0.57 → 1.09 mg/kg/day (× 1.9); 0.57 is about 5% of V<sub>max</sub>"
     },
     {
      "at": 3,
@@ -71,7 +71,7 @@
     },
     {
      "at": 3,
-     "m": "e.g. C<sub>p</sub> 100 → 200 mg/L: rate 10.9 → 11.4 mg/kg/day (× 1.05)"
+     "m": "e.g. C<sub>p</sub> 100 → 200 mg/L (beyond the graph): rate 10.9 → 11.4 mg/kg/day (× 1.05)"
     },
     {
      "at": 4,
@@ -79,7 +79,7 @@
     },
     {
      "at": 5,
-     "m": "first order: the amount removed per time changes with C<sub>p</sub>; the fraction and t<sub>½</sub> do not"
+     "m": "C<sub>p</sub> ≪ K<sub>M</sub>: the amount removed per time follows C<sub>p</sub>; the fraction and t<sub>½</sub> stay nearly constant. t<sub>½</sub> lengthens as C<sub>p</sub> rises."
     }
    ],
    "fig": {
@@ -97,12 +97,16 @@
    }
   },
   {
-   "text": "In the formula, the elimination rate equals V max times C p, divided by K M plus C p. C p on the top raises the rate as the level rises, and C p on the bottom, added to K M, limits how far the rate can rise. When C p is much smaller than K M, adding it hardly changes the bottom, which stays about K M, so the rate is V max over K M times C p: a constant times the level, the form of first order. When C p is much larger than K M, the bottom is about C p, the C p on the top and the bottom cancel, and the rate is about V max, the form of zero order.",
+   "text": "The elimination rate equals V max times C p, divided by K M plus C p. C p on the top raises the rate, and C p on the bottom, added to K M, limits how far it can rise. When C p is much smaller than K M, adding it hardly changes the bottom, which stays about K M, so the rate is about V max over K M times C p: a constant times the level, which is why twice the level gave about twice the rate. When C p is much larger than K M, the bottom is about C p, the C p on the top and the bottom cancel, and the rate is about V max whatever the level: zero order.",
    "slide": "nonlin:8",
    "card": [
     {
      "at": 0,
      "m": "rate = {{frac:V<sub>max</sub> C<sub>p</sub>|K<sub>M</sub> + C<sub>p</sub>}}"
+    },
+    {
+     "at": 0,
+     "m": "C<sub>p</sub> = K<sub>M</sub>: rate = {{frac:V<sub>max</sub> K<sub>M</sub>|2 K<sub>M</sub>}} = ½ V<sub>max</sub>"
     },
     {
      "at": 2,
@@ -122,15 +126,7 @@
     "at": [
      [
       0,
-      3
-     ],
-     [
-      2,
-      4
-     ],
-     [
-      3,
-      5
+      6
      ]
     ]
    }
@@ -292,11 +288,11 @@
     "at": [
      [
       0,
-      5
+      6
      ],
      [
       2,
-      6
+      7
      ]
     ]
    },
