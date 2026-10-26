@@ -1972,6 +1972,8 @@ function renderGaps(){
     <div><b>${m.mastered}</b><span>of ${m.total} concepts on long review</span></div>
   </div>
   <p class="sub">A concept goes on long review after three correct answers on separate review days, so that number stays low in the first week however well you score. The accuracy figures move at once. Mastered, under Concepts below, has its own rule.</p>`;
+  h += `<label class="wkswitch" style="display:flex;gap:8px;align-items:flex-start;margin:6px 0 14px;font-size:14.5px"><input type="checkbox" id="wkhi"${weakOn() ? ' checked' : ''} style="margin-top:3px">
+    <span><b>Mark my weak spots where I study.</b> Guides, Tell apart, Diagrams, Worksheets, Terms, Reference and Equations mark what a concept you missed or guessed rests on, with the question and a Redrill. A mark goes when you next answer that concept right.</span></label>`;
 
   const plan = reviewPlan(), cg = conceptGroups();
   h += sessionCard() + conceptSection(cg) + plan.html;
@@ -2271,6 +2273,7 @@ function renderGaps(){
   }
   h = h.replace(/<table class="gap">([\s\S]*?)<\/table>/g, '<div class="tw"><table class="gap">$1</table></div>');
   el.innerHTML = h;
+  { const wk = el.querySelector('#wkhi'); if(wk) wk.onchange = () => { DB.settings.weakHi = wk.checked; save(); }; }
   el.querySelectorAll('.tw').forEach(w => w.classList.toggle('wide', w.scrollWidth > w.clientWidth + 4));
   wireReviewPlan(el, plan);
   wireConcepts(el, cg);
@@ -5313,6 +5316,135 @@ function renderSheets(){
   if(typeof inkMark === 'function') inkMark(el);   // Continue writing where ink is saved (the writing layer is defined with the boot code)
 }
 
+/* ---------- Weak spots, marked where they are studied ----------
+   A concept is weak while it is open: missed or guessed and not answered right since (box 0), the rule Weak spots
+   uses for "missed or guessed, still open". Each study tab marks what such a concept rests on: Guides the objective
+   it belongs to; Equations and the sheet map the line its calculation needs; Diagrams its figure; Worksheets its sheet
+   and problem; Terms its terms; Tell apart and Reference the lines of its module that use those terms. Each mark says
+   which question was missed and how, with a Redrill; the mark goes when the concept is next answered right. The
+   switch is in Weak spots (DB.settings.weakHi, on unless turned off). Styles are added here, not in the sheet CSS. */
+const weakOn = () => !(DB.settings && DB.settings.weakHi === false);
+const WK_MAX_LINES = 14;   // lines marked per tab, so a mark points rather than colours the page
+const wkEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const WK_TERM = (typeof TERMS === 'undefined' ? [] : TERMS).map(t => {
+  const ab = (/\(([^)]+)\)\s*$/.exec(t.term) || [])[1];
+  return {t, name: new RegExp('\\b' + wkEsc(termName(t)) + '\\b', 'i'), ab: ab && ab.length > 1 && !/\s/.test(ab) ? new RegExp('\\b' + wkEsc(ab) + '\\b') : null};
+});
+const wkHit = (w, s) => w.name.test(s) || (w.ab && w.ab.test(s));
+// the guide section of an objective: n '6a.1' is gobj-m6a-1, '7a.2' is gobj-m7-2, '7b.1' is gobj-m7b-1
+const wkGid = o => { const p = String(o.n).split('.'); return p.length > 1 ? 'gobj-m' + (p[0] === '7a' ? '7' : p[0]) + '-' + p[1] : 'gobj-m' + o.module + '-' + o.n; };
+function weakModel(){
+  if(!weakOn() || !DB.answers || !DB.answers.length) return null;
+  const isOpen = c => { const s = DB.concepts[c]; return !!(s && s.seen && (s.wrong || s.guessed) && s.box === 0); };
+  const last = {};
+  for(const a of DB.answers) if(a.result !== 'correct' && isOpen(a.concept)) last[a.qid] = a;
+  const tq = typeof TERM_QS === 'undefined' ? [] : TERM_QS;
+  const items = Object.entries(last).map(([id, a]) => ({q: byId(id) || tq.find(x => x.id === id), a})).filter(x => x.q);
+  if(!items.length) return null;
+  const W = {items, guide: new Map(), eq: new Map(), fig: new Map(), src: new Map(), term: new Map(), words: []};
+  const add = (m, k, it) => { if(!k) return; if(!m.has(k)) m.set(k, []); m.get(k).push(it); };
+  for(const it of items){
+    const q = it.q;
+    if(q.termId) add(W.term, q.termId, it);
+    if(typeof OBJECTIVES !== 'undefined') OBJECTIVES.filter(o => o.module === q.module && o.subs.includes(subKey(q))).forEach(o => add(W.guide, wkGid(o), it));
+    if(q.setup && q.setup.eq) add(W.eq, q.setup.eq, it);
+    add(W.fig, q.fg, it); if(q.img && q.img !== q.fg) add(W.fig, q.img, it);
+    const so = SRC_OF[q.id]; if(so) add(W.src, so.src, it);
+    const text = [q.stem, ...(q.options || []).filter(o => o.correct).map(o => o.t), conceptTitle(q.concept)].join(' ');
+    WK_TERM.filter(w => w.t.module === q.module && wkHit(w, text)).forEach(w => { add(W.term, w.t.id, it); W.words.push({w, module: q.module, it}); });
+  }
+  return W;
+}
+// one line per concept: its name, missed or guessed, and the kind of slip when a calculation was missed
+function weakNote(list, what){
+  const by = new Map(); list.forEach(it => by.set(it.q.concept, it));
+  const what1 = q => { if(q.termId && TERM_BY[q.termId]) return 'Term: ' + termName(TERM_BY[q.termId]);
+    const t = String(q.stem || '').replace(/\s+/g, ' ').replace(/\(Part [^)]*\)/g, '').trim(); return '“' + (t.length > 110 ? t.slice(0, 107).replace(/\s+\S*$/, '') + '…' : t) + '”'; };
+  const lines = [...by.values()].map(it => `<li>${rich(what1(it.q))} ${it.a.result === 'guessed' ? 'guessed' : 'missed'}${
+    it.a.missKind && MISS_LABEL[it.a.missKind] ? ' (' + esc(MISS_LABEL[it.a.missKind].toLowerCase()) + ')' : ''}</li>`).join('');
+  return `<div class="wknote" role="note"><b>Weak spot</b> · ${what}<ul>${lines}</ul><button type="button" class="chip" data-wkdrill="${esc([...by.keys()].join('|'))}">Redrill ${by.size === 1 ? 'it' : 'these ' + by.size}</button> <span class="wkhint">The mark goes when you next answer ${by.size === 1 ? 'it' : 'each'} right.</span></div>`;
+}
+function weakStyle(){
+  if(document.getElementById('wkstyle')) return;
+  const s = document.createElement('style'); s.id = 'wkstyle';
+  s.textContent = `.wk{box-shadow:inset 4px 0 0 var(--warn);background:linear-gradient(90deg,var(--warn-bg),transparent 70%);border-radius:6px}
+.wkl{background:var(--warn-bg);box-shadow:inset 3px 0 0 var(--warn);border-radius:4px}
+tr.wkl>td,tr.wkl>th{background:var(--warn-bg)!important}tr.wkl>:first-child{box-shadow:inset 3px 0 0 var(--warn)}
+.wknote{margin:8px 0 10px;padding:9px 12px;border:1px solid var(--warn);border-radius:8px;background:var(--warn-bg);font-size:14px}
+.wknote ul{margin:4px 0 6px 18px;padding:0}.wknote .wkhint{font-size:12.5px;color:var(--text-dim)}
+.wkdot{margin-left:8px;font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap}`;
+  document.head.appendChild(s);
+}
+// a fold that holds a mark says so on its closed summary
+function wkDot(el){
+  for(let d = el.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')){
+    const sm = d.querySelector(':scope > summary'); if(sm && !sm.querySelector('.wkdot')) sm.insertAdjacentHTML('beforeend', '<span class="wkdot">● weak spot</span>');
+  }
+}
+function weakMark(view){
+  const pane = document.getElementById('v-' + view); if(!pane || !pane.querySelectorAll) return;
+  pane.querySelectorAll('.wknote, .wkdot').forEach(n => n.remove());
+  pane.querySelectorAll('.wk, .wkl').forEach(n => n.classList.remove('wk', 'wkl'));
+  const W = weakModel(); if(!W) return;
+  weakStyle();
+  const card = (el, list, what, where) => { if(!el) return; el.classList.add('wk'); (where || (x => x.insertAdjacentHTML('afterbegin', x)))(weakNote(list, what)); wkDot(el); };
+  const lines = (scope, words, max) => {
+    let n = 0;
+    for(const el of scope.querySelectorAll('tr, li, p')){
+      if(n >= max) break;
+      if(el.closest('.wknote, .wkl, nav, .refnav-wrap, .gwpanel') || el.querySelector('.wkl')) continue;
+      const txt = el.textContent || '';
+      if(txt.length > 600 || !words.some(x => wkHit(x.w, txt))) continue;
+      el.classList.add('wkl'); el.title = 'Uses a term from a question you missed'; wkDot(el); n++;
+    }
+    return n;
+  };
+  if(view === 'guide'){
+    for(const [gid, list] of W.guide){
+      const sec = pane.querySelector('#' + CSS.escape(gid)); if(!sec) continue;
+      sec.classList.add('wk'); wkDot(sec);
+      const bar = sec.querySelector(':scope > .gwbar'), html = weakNote(list, 'questions on this objective you missed or guessed');
+      bar ? bar.insertAdjacentHTML('afterend', html) : sec.insertAdjacentHTML('afterbegin', html);
+      lines(sec, W.words.filter(x => list.includes(x.it)), 6);
+    }
+  }else if(view === 'tell' || view === 'ref'){
+    const modOf = el => { const d = el.closest('details.dmod'); const m = d && /Module\s+(\d+[ab]?)/.exec(d.querySelector(':scope > summary').textContent || ''); return m ? m[1] : null; };
+    let n = 0;
+    // pair and table rows first, then lines of text
+    for(const el of [...pane.querySelectorAll('tbody tr'), ...pane.querySelectorAll('li, p')]){
+      if(n >= WK_MAX_LINES) break;
+      if(el.closest('.wknote, .wkl, nav, .refnav-wrap') || el.querySelector('.wkl')) continue;
+      const m = modOf(el), txt = el.textContent || ''; if(txt.length > (el.tagName === 'TR' ? 1500 : 600)) continue;
+      const ws = W.words.filter(x => !m || modShort(x.module) === m);
+      if(!ws.some(x => wkHit(x.w, txt))) continue;
+      el.classList.add('wkl'); el.title = 'Uses a term from a question you missed'; wkDot(el); n++;
+    }
+    if(view === 'ref') pane.querySelectorAll('li.smline').forEach(li => { const b = li.querySelector('[data-sheetdrill]');
+      if(b && W.eq.has(b.dataset.sheetdrill)){ li.classList.add('wkl'); li.title = 'The line a calculation you missed needs'; wkDot(li); n++; } });
+    const h2 = pane.querySelector('h2');
+    if(n && h2) h2.insertAdjacentHTML('afterend', weakNote(W.items, `${n} line${n === 1 ? '' : 's'} below use the terms or lines of questions you missed or guessed`));
+  }else if(view === 'diag'){
+    for(const [k, list] of W.fig){ const d = pane.querySelector('#dg-' + CSS.escape(k));
+      if(d) card(d, list, 'a question you missed reads this figure', h => d.querySelector(':scope > summary').insertAdjacentHTML('afterend', h)); }
+    // and the figures of a missed question's module that its terms name
+    let n = 0;
+    for(const d of pane.querySelectorAll('details.dgfig')){
+      if(n >= 6) break; if(d.classList.contains('wk')) continue;
+      const sm = d.querySelector(':scope > summary'), m = /Modules?\s+(\d+[ab]?)/.exec(sm ? sm.textContent : ''), txt = d.textContent || '';
+      if(W.words.some(x => (!m || modShort(x.module) === m[1]) && wkHit(x.w, txt))){ d.classList.add('wkl'); d.title = 'Uses a term from a question you missed'; wkDot(d); n++; }
+    }
+  }else if(view === 'sheets'){
+    for(const [s, list] of W.src){ const c = pane.querySelector(`.srccard[data-src="${CSS.escape(s)}"]`);
+      const labs = [...new Set(list.map(it => srcLabel(it.q.id)).filter(Boolean))];
+      if(c) card(c, list, `missed on this sheet${labs.length ? ': ' + esc(labs.join(', ')) : ''}`, h => c.querySelector('.srctop').insertAdjacentHTML('afterend', h)); }
+  }else if(view === 'terms'){
+    for(const [tid, list] of W.term){ const c = pane.querySelector('#term-' + CSS.escape(tid));
+      if(c) card(c, list, 'a question you missed uses this term', h => c.querySelector('.dghead').insertAdjacentHTML('afterend', h)); }
+  }else if(view === 'eq'){
+    for(const [eid, list] of W.eq){ const inp = pane.querySelector(`input[data-eq="${CSS.escape(eid)}"]`), row = inp && inp.closest('.eqrow');
+      if(row){ row.classList.add('wkl'); row.title = 'The line a calculation you missed needs'; wkDot(row); } }
+  }
+}
 /* ==========================================================================
    BOOT
    ========================================================================== */
@@ -5831,6 +5963,14 @@ function applyTheme(t){
   if(ts){ ts.value = saved; ts.onchange = () => { LS.set(THEME_KEY, ts.value); applyTheme(ts.value); }; }
 }
 askProfile();
+// every study tab is marked after it draws, whatever redrew it
+[['renderGuide', 'guide'], ['renderTell', 'tell'], ['renderRef', 'ref'], ['renderDiagrams', 'diag'], ['renderSheets', 'sheets'], ['renderTerms', 'terms'], ['renderEq', 'eq']]
+  .forEach(([fn, v]) => { const f = window[fn]; if(typeof f === 'function') window[fn] = function(){ const r = f.apply(this, arguments); try { weakMark(v); } catch(e){} return r; }; });
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-wkdrill]'); if(!b) return;
+  const cs = new Set(b.dataset.wkdrill.split('|')), pool = [...cs].flatMap(conceptQs).filter(q => !q.lowYield || cs.size);
+  if(pool.length) startPool([...new Set(pool)], 'Weak spot redrill');
+});
 /* ---------- Keeping the place across a reload ----------
    A reload (Reload for a newer version, the browser's own, or a phone that drops a background tab) comes back to
    the same tab, module page, open sections and line at the top of the screen; a drill on the same question; and a

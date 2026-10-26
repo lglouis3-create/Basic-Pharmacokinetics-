@@ -3,6 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- Weak spots are marked where you study: Guides, Tell apart, Diagrams, Worksheets, Terms, Reference, Equations.
+- Each mark quotes the question missed, with Redrill; it goes when you next answer it right. Switch in Weak spots.
 - Reload keeps your place: the tab, open sections, the line on screen, a drill's question, a paused walkthrough.
 - Module 8 rate figure: KM is read on the Cp axis (10 mg/L) and half of Vmax on the rate axis (6 mg/kg/day).
 - Exam sim: Most likely Exam 3, 40 of her items by the evidence of what she asks, with that evidence listed.
