@@ -1410,7 +1410,7 @@ function allCardHTML(q, n, total){
   const st = allCardState(q), kind = qType(q), multi = isMulti(q);
   const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
   const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain, givensOpen: !!st.givensOpen, guessed: !!st.guessed};
-  let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}${starTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
+  let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}${starTag(q)}${noteChip(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
       kind !== 'numeric' ? '' : st.revealed ? (st.took != null ? timerHTML(null, st.took) : '')
         : st.startedAt ? timerHTML(st.startedAt)
         : '<button type="button" class="qtimer qtstart" data-timerstart="1" title="Time this calculation; skip it and the answer is not timed">⏱ Start timer</button>'}${
@@ -1503,7 +1503,7 @@ function renderExamAll(){
   EX.qs.forEach((q, i) => {
     const kind = qType(q), multi = isMulti(q);
     h += `<div class="qcard allcard" data-ei="${i}"><div class="qhead">${profTag(q.prof)}<span>Question ${i + 1} of ${EX.qs.length}</span>${
-      multi ? '<span class="tag sata">select all that apply</span>' : ''}</div><div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
+      multi ? '<span class="tag sata">select all that apply</span>' : ''}${exFlagChip(i)}${noteChip(q)}</div><div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
     if(kind === 'numeric') h += numericInput(q, EX.picks[i], false, '', 'exam');
     else if(kind === 'match') h += matchSelects(q, EX.picks[i], false, false);
@@ -1707,7 +1707,7 @@ function renderQuiz(){
   const ok = Q.revealed ? (Q.overrode || gradeAnswer(q, Q.picked)) : false;
 
   let h = `<div class="sessline">${drillBackHTML(Q.from, 'quiz', '← Back to Topics')}${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
-    ${profTag(q.prof)}${originTag(q)}${starTag(q)}
+    ${profTag(q.prof)}${originTag(q)}${starTag(q)}${noteChip(q)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
     ${qType(q) === 'numeric' ? timerHTML(Q.startedAt, Q.revealed ? Q.took : null) : ''}
@@ -1978,6 +1978,12 @@ function renderGaps(){
   <p class="sub">A concept goes on long review after three correct answers on separate review days, so that number stays low in the first week however well you score. The accuracy figures move at once. Mastered, under Concepts below, has its own rule.</p>`;
   h += `<label class="wkswitch" style="display:flex;gap:8px;align-items:flex-start;margin:6px 0 14px;font-size:14.5px"><input type="checkbox" id="wkhi"${weakOn() ? ' checked' : ''} style="margin-top:3px">
     <span><b>Mark my weak spots where I study.</b> Guides, Tell apart, Diagrams, Worksheets, Terms, Reference and Equations mark what a concept you missed or guessed rests on, with the question and a Redrill. A mark goes when you next answer that concept right.</span></label>`;
+  { const ids = Object.keys(NOTES()).filter(id => byId(id) && (NOTES()[id].t || '').trim());
+    h += `<h3>My questions${ids.length ? ' (' + ids.length + ')' : ''}</h3>` + (ids.length
+      ? `<p class="sub">What you wrote on questions with ✎ Note. Copy them, with each question, your answer, her key and the working, to paste into an AI, or download them to bring to her review.</p>
+        <p style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small" id="notesCopy">Copy for AI</button><button class="btn small ghost" id="notesDown">Download (.md)</button><button class="btn small ghost" id="notesDrill">Drill these ${ids.length}</button></p>
+        <ol style="padding-left:20px">${ids.map(id => { const q = byId(id), t = plain(q.stem); return `<li style="margin:0 0 10px"><span style="color:var(--text-dim);font-size:13px">Module ${esc(modShort(q.module))} · ${esc(t.length > 110 ? t.slice(0, 107).replace(/\s+\S*$/, '') + '…' : t)}</span><br>${esc(NOTES()[id].t.trim())}</li>`; }).join('')}</ol>`
+      : `<p class="sub">Tap ✎ Note on any question, in a drill, on a paper or on its results, to write what you are thinking or want to ask. Your notes collect here, ready to copy for an AI.</p>`); }
 
   const plan = reviewPlan(), cg = conceptGroups();
   h += sessionCard() + conceptSection(cg) + plan.html;
@@ -2278,6 +2284,14 @@ function renderGaps(){
   h = h.replace(/<table class="gap">([\s\S]*?)<\/table>/g, '<div class="tw"><table class="gap">$1</table></div>');
   el.innerHTML = h;
   { const wk = el.querySelector('#wkhi'); if(wk) wk.onchange = () => { DB.settings.weakHi = wk.checked; save(); }; }
+  { const md = () => notesMarkdown(), ids = () => Object.keys(NOTES()).filter(id => byId(id) && (NOTES()[id].t || '').trim());
+    const c = el.querySelector('#notesCopy'), d = el.querySelector('#notesDown'), r = el.querySelector('#notesDrill');
+    if(c) c.onclick = () => { const t = md(), done = () => { c.textContent = 'Copied ✓'; setTimeout(() => c.textContent = 'Copy for AI', 2000); };
+      const old = () => { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch(e){} ta.remove(); };
+      if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, old); else old(); };
+    if(d) d.onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([md()], {type: 'text/markdown'}));
+      a.download = 'PHAR4221-my-questions.md'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
+    if(r) r.onclick = () => startSweepOf(ids().map(byId), 'My questions'); }
   el.querySelectorAll('.tw').forEach(w => w.classList.toggle('wide', w.scrollWidth > w.clientWidth + 4));
   wireReviewPlan(el, plan);
   wireConcepts(el, cg);
@@ -2947,7 +2961,7 @@ let EX = null;
    is submitted when it is restored. A submitted paper stays saved, result
    page and all, until "New paper". */
 const EXKEY = () => NS + ':exam:' + PROFILE;
-const EX_KEEP = ['qs', 'i', 'spent', 'picks', 'running', 'done', 'ends', 'orders',
+const EX_KEEP = ['qs', 'i', 'spent', 'picks', 'flags', 'running', 'done', 'ends', 'orders',
                  'paper', 'title', 'sata', 'coverage', 'logQn', 'rightOv'];
 function saveExam(){
   if(!EX || !PROFILE) return;
@@ -2978,7 +2992,7 @@ function loadExam(){
     : Array.isArray(o) && o.length === q.options.length && o.slice().sort((a, b) => a - b).every((v, k) => v === k);
   if(!qs.every((q, k) => perm(x.orders[k], q))) return null;
   return Object.assign(x, {from: 'exam', qs, i: Math.max(0, Math.min(n - 1, Math.floor(+x.i) || 0)),
-    spent: arr(x.spent) ? x.spent.map(v => +v || 0) : qs.map(() => 0), tIdx: null, tMark: 0,
+    spent: arr(x.spent) ? x.spent.map(v => +v || 0) : qs.map(() => 0), flags: arr(x.flags) ? x.flags.map(Boolean) : qs.map(() => false), tIdx: null, tMark: 0,
     ends: +x.ends, running: !!x.running && !x.done, done: !!x.done});
 }
 /* Start-up: bring back this profile's paper. Returns 'running', 'expired'
@@ -3141,7 +3155,7 @@ function paperOrder(qs){
 function startPaper(qs, minutes, extra){
   qs = paperOrder(qs);
   EX = Object.assign({from: VIEW, qs, i:0, spent: qs.map(() => 0), tIdx: null, tMark: 0,
-        picks: qs.map(q => isMulti(q) ? [] : qType(q)==='match' ? {} : qType(q)==='numeric' ? '' : null),
+        picks: qs.map(q => isMulti(q) ? [] : qType(q)==='match' ? {} : qType(q)==='numeric' ? '' : null), flags: qs.map(() => false),
         running:true, done:false,
         ends: Date.now() + minutes*60000,
         orders: qs.map(q => isMC(q) ? shuffle(q.options.map((o,k)=>k)) : [])}, extra || {});
@@ -3223,7 +3237,7 @@ function renderExamQ(){
   ${EX.i === 0 ? shortfallNote(EX.coverage) : ''}
   <div class="qcard"><div class="qhead">${profTag(q.prof)}${multi ? '<span class="tag sata">select all that apply</span>' : ''}${
     kind==='numeric' ? '<span class="tag">calculation</span>' : ''}${
-    kind==='match' ? '<span class="tag">matching</span>' : ''}<span class="spacer"></span>
+    kind==='match' ? '<span class="tag">matching</span>' : ''}${exFlagChip(EX.i)}${noteChip(q)}<span class="spacer"></span>
     ${kind === 'numeric' && EX.spent ? timerHTML(Date.now() - EX.spent[EX.i]) : ''}
     <span>no feedback until you submit</span></div>
   <div class="qbody"><div class="stem">${stemHTML(q.stem)}</div>`;
@@ -3242,7 +3256,7 @@ function renderExamQ(){
   h += `</div><div class="qfoot">
     <button class="btn ghost" id="exPrev"${EX.i===0?' disabled':''}>Back</button>
     ${EX.i===EX.qs.length-1 ? '' : '<button class="btn" id="exNext">Next</button>'}
-    <select id="exJump" aria-label="Go to a question">${EX.qs.map((x, k) => `<option value="${k}"${k===EX.i?' selected':''}>${examBlank(x, EX.picks[k]) ? '○' : '●'} Question ${k + 1}</option>`).join('')}</select>
+    <select id="exJump" aria-label="Go to a question">${EX.qs.map((x, k) => `<option value="${k}"${k===EX.i?' selected':''}>${EX.flags && EX.flags[k] ? '⚑ ' : ''}${examBlank(x, EX.picks[k]) ? '○' : '●'} Question ${k + 1}</option>`).join('')}</select>
     <span class="spacer" style="flex:1"></span>
     <button class="btn ghost" id="exEnd">Submit paper</button>
   </div></div>`;
@@ -3268,9 +3282,10 @@ function renderExamQ(){
    review page. */
 // submitting asks first, and says how many questions are still blank (○ in the Go to list)
 function examConfirmSubmit(){
-  const blank = EX.qs.filter((q, i) => examBlank(q, EX.picks[i])).length;
-  return confirm(blank ? `${blank} of ${EX.qs.length} questions are still blank. Submit the paper anyway and see your score?`
-                       : 'Submit the paper and see your score?');
+  const blank = EX.qs.filter((q, i) => examBlank(q, EX.picks[i])).length, fl = (EX.flags || []).filter(Boolean).length;
+  const flagged = fl ? ` ${fl} ${fl === 1 ? 'is' : 'are'} flagged for review (⚑ in the Go to list).` : '';
+  return confirm(blank ? `${blank} of ${EX.qs.length} questions are still blank.${flagged} Submit the paper anyway and see your score?`
+                       : (fl ? `${flagged.trim()} Submit the paper and see your score?` : 'Submit the paper and see your score?'));
 }
 function examRight(q, p){ return !isBlank(q, p) && gradeAnswer(q, p); }
 const examBlank = (q, p) => isBlank(q, p);
@@ -3331,13 +3346,14 @@ function renderExamResult(){
   ${shortfallNote(EX.coverage)}
   <p><button class="btn" id="exAgain">New paper</button>
      <button class="btn ghost" onclick="show('gaps')">See weak spots</button></p>
+  ${(EX.flags || []).some(Boolean) ? `<p class="sub">You flagged ${EX.flags.map((f, k) => f ? 'Q' + (k + 1) : '').filter(Boolean).join(', ')}; each is marked ⚑ below.</p>` : ''}
   <h3>Every question, with the reasoning</h3>`;
   EX.qs.forEach((q,i)=>{
     const p = EX.picks[i], ok = examRight(q, p) || overrode(i), blankQ = examBlank(q, p);
     const kind = qType(q), multi = isMulti(q);
     const chosen = oi => multi ? (p || []).includes(oi) : oi === p;
     h += `<div class="qcard" style="margin-bottom:12px"><div class="qhead">
-      ${profTag(q.prof)}<span>Q${i+1}</span>${originTag(q)}${starTag(q)}${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
+      ${profTag(q.prof)}<span>Q${i+1}</span>${originTag(q)}${starTag(q)}${EX.flags && EX.flags[i] ? '<span class="tag">⚑ flagged</span>' : ''}${noteChip(q)}${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
       <span style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'correct':(blankQ?'blank':'missed')}</span>
       </div><div class="qbody"><div class="stem" style="font-size:15.5px">${stemHTML(q.stem)}</div>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -5452,6 +5468,50 @@ function weakMark(view){
       if(row){ row.classList.add('wkl'); row.title = 'The line a calculation you missed needs'; wkDot(row); } }
   }
 }
+/* ---------- Notes on questions, and flags on a paper ----------
+   A note is what the student was thinking or wants to ask about a question, written on it in a drill, on a paper or
+   on the review after it. Notes are kept with the progress in this browser (DB.notes: id -> {t, at}) and listed under
+   Weak spots, where they copy or download as one text with each question, the answer given, her key and the
+   working, to paste into an AI or bring to her review. A paper still running leaves its keys out. A flag marks a
+   question on a paper to come back to: ⚑ in the Go to list, counted on Submit, shown on the results. */
+const NOTES = () => (DB.notes ||= {});
+const noteChip = q => q ? `<button type="button" class="chip" data-noteq="${esc(q.id)}" aria-expanded="false" title="Write what you are thinking or want to ask">${NOTES()[q.id] ? '✎ My note' : '✎ Note'}</button>` : '';
+const noteBoxHTML = id => `<div class="notebox" style="margin:6px 0 10px"><label style="display:block;font-size:13.5px;font-weight:600;margin-bottom:4px" for="nt-${esc(id)}">What I'm thinking, or what I want to ask</label>
+  <textarea id="nt-${esc(id)}" data-notetext="${esc(id)}" rows="3" style="width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:inherit">${esc((NOTES()[id] || {}).t || '')}</textarea>
+  <small style="color:var(--text-dim)">Saved in this browser with your progress. Weak spots → My questions copies them, with the question and the key, for an AI.</small></div>`;
+const exFlagChip = i => `<button type="button" class="chip" data-exflag="${i}" aria-pressed="${!!(EX.flags && EX.flags[i])}">${EX.flags && EX.flags[i] ? '⚑ Flagged' : '⚐ Flag'}</button>`;
+// the answer last given to a question, as text, and whether it was right
+function noteMyAnswer(q){
+  const a = (DB.answers || []).filter(x => x.qid === q.id).pop(); if(!a) return null;
+  const p = a.picked, kind = qType(q);
+  let txt;
+  if(p === undefined || p === null || (kind === 'numeric' && String(p).trim() === '')) txt = 'left blank';
+  else if(kind === 'numeric') txt = String(p) + (q.units ? ' ' + q.units : '');
+  else if(kind === 'match') txt = Object.entries(p || {}).map(([l, r]) => `${l} → ${r}`).join('; ');
+  else txt = [].concat(p).map(i => q.options && q.options[i] ? q.options[i].t : '').filter(Boolean).join('; ');
+  return {txt, result: a.result === 'correct' ? 'right' : a.result === 'guessed' ? 'guessed' : 'missed'};
+}
+const plain = s => String(s || '').replace(/\{\{frac:([^|}]*)\|([^}]*)\}\}/g, '($1)/($2)').replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, ' ').trim();
+// every noted question as one Markdown text, with a request at the top for whoever reads it
+function notesMarkdown(){
+  const ids = Object.keys(NOTES()).filter(id => byId(id) && (NOTES()[id].t || '').trim());
+  const running = id => EX && EX.running && EX.qs.some(q => q.id === id);
+  let md = `# My questions: ${COURSE.title || 'PHAR 4221'}\n\nI am studying for ${EXAM.name} with Dr. Mosley. Under each question below I wrote what I was thinking or what I want to ask. For each one, answer my question, say where my reasoning went wrong if it did, and show the working step by step with units, the way her equation sheet writes the relations.\n`;
+  ids.forEach((id, n) => {
+    const q = byId(id), mine = noteMyAnswer(q), kind = qType(q);
+    md += `\n## ${n + 1}. Module ${modShort(q.module)}${q.cite ? ' (' + plain(q.cite).slice(0, 90) + ')' : ''}\n\n**Question:** ${plain(q.stem)}\n`;
+    if(isMC(q)) md += '\n' + q.options.map((o, k) => `${LETTERS[k]}. ${plain(o.t)}`).join('\n') + '\n';
+    if(mine) md += `\n**My answer:** ${plain(mine.txt)} (${mine.result})\n`;
+    if(running(id)) md += `\n**Her key:** left out until the paper is submitted\n`;
+    else {
+      md += `\n**Her key:** ${plain(answerRead(q))}\n`;
+      if(kind === 'numeric' && q.steps) md += `\n**Working in the drill:**\n${q.steps.map(s => `- ${plain(s.t)}`).join('\n')}\n`;
+      else if(isMC(q)){ const c = q.options.filter(o => o.correct).map(o => plain(o.why)).filter(Boolean); if(c.length) md += `\n**Why the key is right:** ${c.join(' ')}\n`; }
+    }
+    md += `\n**What I'm thinking / my question:** ${NOTES()[id].t.trim()}\n`;
+  });
+  return md;
+}
 /* ==========================================================================
    BOOT
    ========================================================================== */
@@ -5984,6 +6044,29 @@ document.addEventListener('click', e => {
   const head = b.closest('.qhead'), open = head && head.nextElementSibling && head.nextElementSibling.classList.contains('starwhy');
   if(open){ head.nextElementSibling.remove(); b.setAttribute('aria-expanded', 'false'); return; }
   if(head){ head.insertAdjacentHTML('afterend', `<div class="starwhy" style="margin:6px 0 10px;padding:8px 12px;border-left:3px solid var(--warn);background:var(--warn-bg);border-radius:0 6px 6px 0;font-size:13.5px"><b>Likely on Exam 3:</b> ${rich(starOf(byId(b.dataset.starwhy)))}</div>`); b.setAttribute('aria-expanded', 'true'); }
+});
+// ✎ Note opens a box under the question's header; what is typed is saved as it is typed
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-noteq]'); if(!b) return;
+  const head = b.closest('.qhead'), nx = head && head.nextElementSibling;
+  if(nx && nx.classList.contains('notebox')){ nx.remove(); b.setAttribute('aria-expanded', 'false'); return; }
+  if(head){ head.insertAdjacentHTML('afterend', noteBoxHTML(b.dataset.noteq)); b.setAttribute('aria-expanded', 'true');
+    const ta = head.nextElementSibling.querySelector('textarea'); if(ta) ta.focus(); }
+});
+document.addEventListener('input', e => {
+  const ta = e.target.closest && e.target.closest('[data-notetext]'); if(!ta) return;
+  const id = ta.dataset.notetext, t = ta.value;
+  if(t.trim()) NOTES()[id] = {t, at: Date.now()}; else delete NOTES()[id];
+  document.querySelectorAll(`[data-noteq="${CSS.escape(id)}"]`).forEach(c => c.textContent = t.trim() ? '✎ My note' : '✎ Note');
+  save();
+});
+// ⚐ Flag on a paper, in either layout
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-exflag]'); if(!b || !EX || !EX.running) return;
+  const i = +b.dataset.exflag; EX.flags ||= EX.qs.map(() => false); EX.flags[i] = !EX.flags[i];
+  b.setAttribute('aria-pressed', String(EX.flags[i])); b.textContent = EX.flags[i] ? '⚑ Flagged' : '⚐ Flag';
+  const o = document.querySelector(`#exJump option[value="${i}"]`); if(o) o.textContent = o.textContent.replace(/^⚑ /, '') .replace(/^/, EX.flags[i] ? '⚑ ' : '');
+  saveExam();
 });
 /* ---------- Keeping the place across a reload ----------
    A reload (Reload for a newer version, the browser's own, or a phone that drops a background tab) comes back to

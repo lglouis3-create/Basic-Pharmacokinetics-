@@ -3,6 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- ✎ Note on any question, also on a paper; Weak spots → My questions copies them with the key for an AI.
+- Exam sim: ⚐ Flag a question; ⚑ shows in Go to, on Submit and on the results.
 - Walkthroughs: the 143 rewritten parts are recorded again; every part plays in the recorded voice.
 - ★ likely: 197 questions her review, quizzes, polls, homework and lectures point to; tap ★ for the reason.
 - Topics: drill only the ★ questions; worksheets star the likely problem numbers.
