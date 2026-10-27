@@ -73,6 +73,10 @@ Last updated 2026-10-26.
   mono: 321 clips, 198.1 minutes, 92 MB; every clip's words per second falls inside 1.6 to 3.6, and every clip's
   text equals its part's current text. walk_test.py checks that every part has a served clip and that a played
   part plays its clip, pauses and resumes in place, moves the marked sentence, and starts the next part's clip.
+- Re-recorded 27 Oct after approval: 143 parts whose words changed in the final review and the clarity pass (same
+  voice and model, one generation each, no failures or repeats; ledgers rec/ledger-r2*.jsonl, first-run ledgers and
+  the replaced raw files kept in rec/v1/). 88,939 credits by the ledgers, about 1,616.8 cents. All 321 parts have a
+  clip again (208.4 minutes); every clip's text equals its part's current text and every speaking rate is in range.
 - A script change after this makes that part's clip read the old words: re-record the changed part (its text no
   longer equals rec/parts.json) or delete its clip so the device voice reads it.
 
