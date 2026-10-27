@@ -571,6 +571,9 @@ function renderTopics(){
     <div class="subrow"><span class="sname"><b>Exam-weighted pass — ${wp.length} ${noun}</b>
       <small>The pools sampled in the blueprint's own proportion. Shuffled, each once.</small></span>
       <button id="sweepWeighted">Start</button></div>
+    ${typeof LIKELY_STARS !== 'undefined' ? `<div class="subrow"><span class="sname"><b>★ Likely on Exam 3 — ${QUESTIONS.filter(starOf).length} questions</b>
+      <small>The questions her final review, quizzes, polls, homework and lectures point to; each says why under its ★. Shuffled, each once.</small></span>
+      <button id="sweepLikely">Start</button></div>` : ''}
     ${byKind ? '' : `<div class="subrow"><span class="sname"><b>All ${nAll} questions, one pass</b>
       <small>Everything in the bank, shuffled, each asked once, nothing held back by scheduling</small></span>
       <button id="sweepAll" class="ghost">Start</button></div>`}
@@ -661,6 +664,7 @@ function renderTopics(){
       d._touched = true; LS.set(EXAMGRP_KEY + d.dataset.examgrp, d.open ? 'open' : 'closed');
     }); });
 
+  { const b = el.querySelector('#sweepLikely'); if(b) b.onclick = () => startSweepOf(QUESTIONS.filter(starOf), '★ Likely on Exam 3'); }
   el.querySelectorAll('.chip[data-f]').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });
@@ -1406,7 +1410,7 @@ function allCardHTML(q, n, total){
   const st = allCardState(q), kind = qType(q), multi = isMulti(q);
   const ok = st.revealed ? (st.overrode || gradeAnswer(q, st.picked)) : false;
   const cst = {picked: st.picked, order: st.order, revealed: st.revealed, missKind: st.missKind, ok, overrode: st.overrode, inChain: !!Q.chain, givensOpen: !!st.givensOpen, guessed: !!st.guessed};
-  let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
+  let h = `<div class="qcard allcard" data-qid="${esc(q.id)}"><div class="qhead">${profTag(q.prof)}${originTag(q)}${starTag(q)}<span>${n} of ${total}</span><span class="spacer"></span>${
       kind !== 'numeric' ? '' : st.revealed ? (st.took != null ? timerHTML(null, st.took) : '')
         : st.startedAt ? timerHTML(st.startedAt)
         : '<button type="button" class="qtimer qtstart" data-timerstart="1" title="Time this calculation; skip it and the answer is not timed">⏱ Start timer</button>'}${
@@ -1703,7 +1707,7 @@ function renderQuiz(){
   const ok = Q.revealed ? (Q.overrode || gradeAnswer(q, Q.picked)) : false;
 
   let h = `<div class="sessline">${drillBackHTML(Q.from, 'quiz', '← Back to Topics')}${sessStrip()}${layoutToggle()}</div><div class="qcard"><div class="qhead">
-    ${profTag(q.prof)}${originTag(q)}
+    ${profTag(q.prof)}${originTag(q)}${starTag(q)}
     <span>${esc(Q.label)}</span>
     <span class="spacer"></span>
     ${qType(q) === 'numeric' ? timerHTML(Q.startedAt, Q.revealed ? Q.took : null) : ''}
@@ -3154,6 +3158,9 @@ function startClock(){
   }, 1000);
   EX.timer = tick;
 }
+// ★ on a question the evidence says is likely on Exam 3 (likely.js), with the topic and the evidence on hover or tap
+const starOf = q => typeof LIKELY_STARS !== 'undefined' && q && LIKELY_STARS[q.id] || '';
+const starTag = q => starOf(q) ? `<button type="button" class="tag" data-starwhy="${esc(q.id)}" aria-expanded="false" style="background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn);cursor:pointer;font:inherit" title="Why it is likely on Exam 3">★ likely</button>` : '';
 /* The most likely paper for this exam (likely.js): a fixed set of 40 chosen by
    the evidence of what she asks, with the forecast table that explains it. */
 const likelyOn = () => typeof LIKELY !== 'undefined' && LIKELY.exam === EXAM.id && LIKELY.ids.some(id => byId(id));
@@ -3330,7 +3337,7 @@ function renderExamResult(){
     const kind = qType(q), multi = isMulti(q);
     const chosen = oi => multi ? (p || []).includes(oi) : oi === p;
     h += `<div class="qcard" style="margin-bottom:12px"><div class="qhead">
-      ${profTag(q.prof)}<span>Q${i+1}</span>${originTag(q)}${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
+      ${profTag(q.prof)}<span>Q${i+1}</span>${originTag(q)}${starTag(q)}${multi ? '<span class="tag sata">select all</span>' : ''}<span class="spacer"></span>
       <span style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'correct':(blankQ?'blank':'missed')}</span>
       </div><div class="qbody"><div class="stem" style="font-size:15.5px">${stemHTML(q.stem)}</div>`;
     if(q.img && IMAGES[q.img]) h += `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">`;
@@ -5252,7 +5259,7 @@ const pdfLink = (href, text) => `<a class="btn small ghost" href="${esc(href)}" 
 function srcCardHTML(s){
   const plan = sheetPlan(s), date = srcDate(s.date);
   const span = srcSpans(s), ids = [...new Set(plan.main.concat(plan.changed).flatMap(g => g.ids))];
-  const labels = [...new Set(ids.map(id => { const l = srcLabel(id), q = byId(id); return span && l && q && q.module != null ? `${l} (M${modShort(q.module)})` : l; }))];
+  const labels = [...new Set(ids.map(id => { const l = srcLabel(id), q = byId(id); const t = span && l && q && q.module != null ? `${l} (M${modShort(q.module)})` : l; return t && starOf(q) ? t + ' ★' : t; }))];
   let h = `<div class="srccard" data-src="${esc(s.id)}" id="src-${esc(s.id)}"><div class="srctop"><b>${esc(s.title)}</b><small>${[span ? 'Covers ' + srcModSpan(s) : '', date || 'No date'].filter(Boolean).map(esc).join(' · ')}</small></div>`;
   h += `<div class="srcrow"><span class="srcrlab">Original</span><span class="srcbtns">`;
   if(s.drive) h += pdfLink(driveView(s.drive.id), 'Open original') + pdfLink(driveDown(s.drive.id), 'Download original');
@@ -5266,7 +5273,7 @@ function srcCardHTML(s){
   if(plan.changed.length)
     h += `<div class="srcrow"><span class="srcrlab">Changed numbers (extra practice)</span><span class="srcbtns">${
       pdfLink(sheetPath(s, 'changed', false), 'Worksheet (PDF)')}${pdfLink(sheetPath(s, 'changed', true), 'Worksheet with solutions (PDF)')}<button type="button" class="btn small" data-ink="${esc(s.id)}" data-var="changed">✍️ Write on it</button><button class="btn small" data-srcgo="${esc(s.id)}" data-var="changed">Practice in the drill</button></span></div>`;
-  if(labels.length) h += `<p class="srcprobs"><span class="srcrlab">Problems</span> ${labels.map(esc).join(', ')}</p>`;
+  if(labels.length) h += `<p class="srcprobs"><span class="srcrlab">Problems</span> ${labels.map(esc).join(', ')}${labels.some(l => / ★$/.test(l)) ? ' <small>(★ likely on Exam 3)</small>' : ''}</p>`;
   if(s.note) h += `<p class="srcsub">${esc(s.note)}</p>`;
   return h + `</div>`;
 }
@@ -5970,6 +5977,13 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-wkdrill]'); if(!b) return;
   const cs = new Set(b.dataset.wkdrill.split('|')), pool = [...cs].flatMap(conceptQs).filter(q => !q.lowYield || cs.size);
   if(pool.length) startPool([...new Set(pool)], 'Weak spot redrill');
+});
+// tapping ★ likely shows, under the question's header, the topic it belongs to and the evidence that she asks it
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-starwhy]'); if(!b) return;
+  const head = b.closest('.qhead'), open = head && head.nextElementSibling && head.nextElementSibling.classList.contains('starwhy');
+  if(open){ head.nextElementSibling.remove(); b.setAttribute('aria-expanded', 'false'); return; }
+  if(head){ head.insertAdjacentHTML('afterend', `<div class="starwhy" style="margin:6px 0 10px;padding:8px 12px;border-left:3px solid var(--warn);background:var(--warn-bg);border-radius:0 6px 6px 0;font-size:13.5px"><b>Likely on Exam 3:</b> ${rich(starOf(byId(b.dataset.starwhy)))}</div>`); b.setAttribute('aria-expanded', 'true'); }
 });
 /* ---------- Keeping the place across a reload ----------
    A reload (Reload for a newer version, the browser's own, or a phone that drops a background tab) comes back to

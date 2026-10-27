@@ -3,6 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
+- ★ likely: 197 questions her review, quizzes, polls, homework and lectures point to; tap ★ for the reason.
+- Topics: drill only the ★ questions; worksheets star the likely problem numbers.
 - Figures: every value names its axis and unit; no line runs through a label; two lines no longer run along the floor.
 - Walkthroughs and guides: 140 parts and 68 lines rewritten so each stands alone, with units and the reason.
 - Weak spots are marked where you study: Guides, Tell apart, Diagrams, Worksheets, Terms, Reference, Equations.
