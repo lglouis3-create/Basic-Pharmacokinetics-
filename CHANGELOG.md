@@ -3,6 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-27 (writing as on GoodNotes)
+- Module colours, as on the equation sheet, on every module title and section; never on a question.
+- Equation sheet: Module 7b and Module 8 lines have their own colours; the dark-theme badges read clearly.
 - Writing: a Pencil or finger held on the page no longer selects text or opens a menu.
 - Writing: hold still half a second at the end of a stroke to snap it: a straight line, an ellipse or a box.
 - Writing: a snapped line's end follows the Pencil until you lift it; Hold to snap turns snapping off.

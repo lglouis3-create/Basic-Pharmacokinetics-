@@ -4512,7 +4512,7 @@ function eqMarkRight(){
    print reproduces the sheet itself, two columns a page, colour-coded and
    labelled with the dosing model. */
 const SHEET_MOD_NAME = m => m === 0 ? 'Not lectured yet' : 'Module ' + modShort(m);
-const SHEET_MODS = [1, 2, 3, 4, 5, 6, 7, 0];
+const SHEET_MODS = [1, 2, 3, 4, 5, 6, 7, 9, 8, 0].filter(m => SHEET_LINES.some(l => l.module === m));   // in course order, 7b before 8
 const SHEET_ORDER_KEY = NS + ':sheetorder';
 const sheetOrder = () => LS.get(SHEET_ORDER_KEY) || 'print';
 const SHEET_ASK_ORDER = ['C at a time', 'C0, VD or the amount', 'Cmax at steady state', 'Cmin at steady state', 'Cavg at steady state', 'tmax and Cmax',
@@ -5547,6 +5547,41 @@ function renderNotes(){
   el.querySelectorAll('[data-notedrill]').forEach(b => b.onclick = () => startPool([byId(b.dataset.notedrill)], 'My note'));
   el.querySelectorAll('[data-notedel]').forEach(b => b.onclick = () => { if(!confirm('Delete this note?')) return; delete NOTES()[b.dataset.notedel]; save(); renderNotes(); });
 }
+/* Module colours (the equation sheet's) on every title that names one module: a square before the title, and a bar
+   down the side of that module's section. Never on a question, whose module would tell the answer's topic. The
+   sheet's shell styles hold Modules 1 to 7a; Module 7b (module 9) and Module 8 are added here, with dark text on the
+   sheet's badges in the dark theme. */
+const MOD_COLORS = {9: ['#65730A', '#EEF2DA', '#B7C95B', '#283011'], 8: ['#8A6D00', '#F6F0D8', '#E3C24F', '#332B10']};   // light colour and tint, dark colour and tint
+function modStyle(){
+  const rule = (sel, c, bg) => `${sel}{--mc:${c};--mcbg:${bg}}`;
+  const dark = pre => Object.entries(MOD_COLORS).map(([m, v]) => rule(`${pre} .m${m}`, v[2], v[3])).join('') + `${pre} .smbadge{color:#111}`;
+  return Object.entries(MOD_COLORS).map(([m, v]) => rule(`.m${m}`, v[0], v[1])).join('') +
+    `@media (prefers-color-scheme: dark){${dark(':root:not([data-theme="light"])')}}` + dark(':root[data-theme="dark"]') +
+    '.mc::before{content:"";display:inline-block;width:.7em;height:.7em;border-radius:3px;background:var(--mc);margin-right:.42em;vertical-align:-.03em}' +
+    'details.mbar,.module.mbar{border-left:5px solid var(--mc)}';
+}
+const MOD_TITLES = 'summary h2, summary h3, summary b, .mname, .srctop > b, nav.refnav a, .chip, .dghead > span, small, #v-topics h2';
+const MOD_NOT = '.smkey, .smbadge, .smline, .spline, .qhead, .stem, .opts, .notebox';
+// the module a title names ("Module 3 - ...", "Module 7b, objective 2"), or null; "Modules 2 to 6" names none
+function modOfTitle(t){
+  const m = /^Module\s+(\d+)([ab])?(?!\w)/.exec(t || ''); if(!m) return null;
+  const hit = COURSE.topicsMenu.find(x => modShort(x.module) === m[1] + (m[2] || ''));
+  return hit ? hit.module : COURSE.topicsMenu.some(x => x.module === +m[1]) ? +m[1] : null;
+}
+const ownText = el => [...el.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join('').trim();
+function modTint(root, sel = MOD_TITLES){
+  if(!root) return 0;
+  let n = 0;
+  root.querySelectorAll(sel).forEach(el => {
+    if(el.classList.contains('mc') || el.closest(MOD_NOT)) return;
+    const t = ownText(el); if(el.tagName === 'SMALL' && t.length > 14) return;   // a short "Module 3" label, not a sentence
+    const m = modOfTitle(t); if(m == null) return;
+    el.classList.add('mc', 'm' + m); n++;
+    if(el.matches('summary h2, summary .mname, summary > b, .module .mname')){
+      const box = el.closest('details, .module'); if(box && !box.classList.contains('mbar')) box.classList.add('mbar', 'm' + m); }
+  });
+  return n;
+}
 /* ==========================================================================
    BOOT
    ========================================================================== */
@@ -6134,6 +6169,15 @@ function applyTheme(t){
   if(ts){ ts.value = saved; ts.onchange = () => { LS.set(THEME_KEY, ts.value); applyTheme(ts.value); }; }
 }
 askProfile();
+// module colours: each study tab's titles are tinted whenever the tab draws; a paper and a drill are left alone, and
+// the Exam sim tab tints only its blueprint table, the Notes tab only its module chips
+{ const st = document.createElement('style'); st.id = 'modstyle'; st.textContent = modStyle(); document.head.appendChild(st);
+  const only = {exam: 'table.gap td:first-child', notes: '.chip'};
+  ['topics', 'gaps', 'notes', 'exam', 'sheets', 'guide', 'tell', 'terms', 'diag', 'eq', 'ref'].forEach(v => {
+    const pane = document.getElementById('v-' + v); if(!pane) return;
+    let raf = 0; const run = () => { raf = 0; modTint(pane, only[v]); };
+    new MutationObserver(() => { if(!raf) raf = requestAnimationFrame(run); }).observe(pane, {childList: true, subtree: true});
+    run(); }); }
 // every study tab is marked after it draws, whatever redrew it
 [['renderGuide', 'guide'], ['renderTell', 'tell'], ['renderRef', 'ref'], ['renderDiagrams', 'diag'], ['renderSheets', 'sheets'], ['renderTerms', 'terms'], ['renderEq', 'eq']]
   .forEach(([fn, v]) => { const f = window[fn]; if(typeof f === 'function') window[fn] = function(){ const r = f.apply(this, arguments); try { weakMark(v); } catch(e){} return r; }; });
