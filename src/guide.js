@@ -1624,11 +1624,13 @@ const GUIDE_HTML = `
 <li>The 09-14 recording ends while she is introducing this slide, so there is no worked example, poll or practice problem on it in any source.</li>
 <li>She asked the room what effect urine pH has on filtration and on active secretion. On filtration her last words were that it is passive ("as we've decided"); the secretion question was not answered before the recording ended.</li>
 <li>The objective is printed on both the objectives slide and the summary slide, so it can still be examined; the format is unknown.</li>
+<li>Her 5 Oct Exam 2 review names the question: <q>what happens if we adjust the, the pH of the urine, what happens to the rate at which we expect the drug to be excreted from the body.</q></li>
+<li>The four cases: a weak acid is excreted more in alkaline urine and less in acidic urine; a weak base is excreted more in acidic urine and less in alkaline urine. The drill asks three of them (x3-b-urineph, x3-b-urphbase, x3-b-urphacid); Tell apart, Clearance and the kidney, has them side by side.</li>
 <li>The drill asks it as recall: the two factors that govern reabsorption (urine pH and the drug's pK<sub>a</sub>). Trap options swap in plasma pH or the filtration rate.</li>
 <li>The drill also asks the pK<sub>a</sub> ranges. The usual trap swaps them, putting weak bases at 3 to 8.</li>
 </ul>
 
-<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slide 20 (PDF page 22) and slide 25; transcript 09-14 (recording ends on this slide); drill items m4-io-1, m4-io-2.</p>
+<p class="gsrc">Sources: 4---Clearance-and-Elimination.pdf slide 20 (PDF page 22) and slide 25; transcripts 09-14 (recording ends on this slide) and 10-05 (Exam 2 review); drill items m4-io-1, m4-io-2, x3-b-urineph, x3-b-urphbase, x3-b-urphacid.</p>
 </section>
 
 <section class="gobj" id="gobj-m4-5">

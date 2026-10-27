@@ -544,6 +544,7 @@ const TELL_HTML = `
 <tr><td>Filtration, active secretion, reabsorption <button type="button" class="chip xwhy" data-xpick="kidney:three-processes">Why?</button></td><td>Cl<sub>R</sub> near 120 mL/min: filtration; above: secretion too; below: reabsorption</td></tr>
 <tr><td>Creatinine vs inulin for measuring GFR (glomerular filtration rate) <button type="button" class="chip xwhy" data-xpick="kidney:creat-inulin">Why?</button></td><td>Inulin: given, almost fully filtered. Creatinine: already present, also secreted</td></tr>
 <tr><td>Capital F vs lower-case f<sub>e</sub> <button type="button" class="chip xwhy" data-xpick="kidney:f-fe">Why?</button></td><td>F: fraction reaching systemic circulation; f<sub>e</sub>: fraction unchanged in urine</td></tr>
+<tr><td>Weak acid vs weak base: which urine pH raises excretion <button type="button" class="chip xwhy" data-xpick="kidney:urine-ph">Why?</button></td><td>Acid: alkaline urine. Base: acidic urine. Ionized drug stays in the urine</td></tr>
 </tbody></table>
 <div class="xpick"><label><b>Explain one:</b> <select data-xsel="kidney"><option value="">Choose a pair</option>
 <option value="cl-split">Total, renal, hepatic clearance, and fe</option>
@@ -552,6 +553,7 @@ const TELL_HTML = `
 <option value="three-processes">Filtration, active secretion, reabsorption</option>
 <option value="creat-inulin">Creatinine vs inulin for measuring GFR</option>
 <option value="f-fe">Capital F vs lower-case fe</option>
+<option value="urine-ph">Weak acid vs weak base: which urine pH raises excretion</option>
 </select></label><div class="xout" data-xout="kidney"></div></div>
 <template data-x="kidney:cl-split"><div class="xexp"><h4>Total, renal and hepatic clearance, and f<sub>e</sub></h4>
 <p><b>In one line:</b> They differ in which organ is clearing the drug, and in whether the number is a clearance at all.</p>
@@ -594,6 +596,17 @@ const TELL_HTML = `
 <p class="xtrap">It is also why Cockcroft-Gault, the equation that estimates creatinine clearance from age, ideal body weight, serum creatinine and sex, carries assumptions she names.</p>
 <p class="xtrap">The assumptions: the 0.85 female factor, and that a serum creatinine may not represent renal function in a person with unusually low or unusually high muscle mass.</p>
 <p class="gsrc">Source: 4---Clearance-and-Elimination.pdf slide 14; transcript 09-14</p></div></template>
+<template data-x="kidney:urine-ph"><div class="xexp"><h4>Weak acid vs weak base: which urine pH raises excretion</h4>
+<p><b>In one line:</b> Only the nonionized form crosses back into the blood, so the urine pH that ionizes the drug raises its excretion.</p>
+<dl><dt>Weak acid (pK<sub>a</sub> 3 to 8)</dt><dd>pH = pK<sub>a</sub> + log{{frac:ionized|nonionized}}: as the urine pH rises, the ionized share grows.</dd>
+<dd>Alkaline urine: more ionized, less reabsorbed, more excreted. Acidic urine: more nonionized, more reabsorbed, less excreted.</dd>
+<dt>Weak base (pK<sub>a</sub> 7.5 to 10.5)</dt><dd>pH = pK<sub>a</sub> + log{{frac:nonionized|ionized}}: as the urine pH falls, the ionized share grows.</dd>
+<dd>Acidic urine: more ionized, less reabsorbed, more excreted. Alkaline urine: more nonionized, more reabsorbed, less excreted.</dd>
+<dt>The quick test</dt><dd>A drug in urine of its own kind (an acid in acidic urine, a base in alkaline urine) is mostly nonionized and reabsorbed; in urine of the opposite kind it is ionized and excreted.</dd>
+<dt>Where the pH acts</dt><dd>On reabsorption only. Filtration is passive and does not depend on the urine pH.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> Her 5 Oct review names the question: <i>"what happens if we adjust the pH of the urine, what happens to the rate at which we expect the drug to be excreted from the body."</i></p>
+<p class="xtrap">The wrong pick applies the weak-acid direction to a weak base, or places the pH effect at filtration.</p>
+<p class="gsrc">Source: 4---Clearance-and-Elimination.pdf slides 20 and 25; transcript 10-05. The directions follow from her two equations and from the nonionized form being the one reabsorbed (Shargel Ch 15, learning question 9).</p></div></template>
 <template data-x="kidney:f-fe"><div class="xexp"><h4>Capital F vs lower-case f<sub>e</sub></h4>
 <p><b>In one line:</b> They differ in what fraction of what. Both are dimensionless, so units do not distinguish them.</p>
 <dl><dt>Capital F</dt><dd>The bioavailability factor: the fraction of the dose that reaches systemic circulation. It is taken as 1 for an intravenous (IV) dose.</dd>
@@ -706,14 +719,28 @@ const TELL_HTML = `
 <tr><td>Absorption vs elimination half-life <button type="button" class="chip xwhy" data-xpick="oral:two-half-lives">Why?</button></td><td>{{frac:0.693|k<sub>a</sub>}}; usually given in minutes</td><td>{{frac:0.693|k}}; usually in hours; a bare t&frac12; means this one</td></tr>
 <tr><td>Absorption phase vs C<sub>max</sub> vs after the peak <button type="button" class="chip xwhy" data-xpick="oral:phases">Why?</button></td><td>Rising: the absorption rate is greater than the elimination rate</td><td>At C<sub>max</sub> the two rates are equal; after it elimination is faster</td></tr>
 <tr><td>t<sub>max</sub> vs C<sub>max</sub> <button type="button" class="chip xwhy" data-xpick="oral:tmax-cmax">Why?</button></td><td>Only k<sub>a</sub> and k; the dose does not move it</td><td>Contains the dose, F and V<sub>D</sub>; moves in proportion to the dose</td></tr>
+<tr><td>Raising k<sub>a</sub> vs raising k <button type="button" class="chip xwhy" data-xpick="oral:ka-k">Why?</button></td><td>C<sub>max</sub> up, t<sub>max</sub> earlier, AUC about the same</td><td>C<sub>max</sub> down, t<sub>max</sub> earlier, AUC down</td></tr>
 <tr><td>Disposition vs absorption rate limiting <button type="button" class="chip xwhy" data-xpick="oral:rate-limiting">Why?</button></td><td>Absorption half-life much shorter; terminal slope reflects k</td><td>Absorption half-life much longer; terminal slope reflects k<sub>a</sub></td></tr>
 </tbody></table>
 <div class="xpick"><label><b>Explain one:</b> <select data-xsel="oral"><option value="">Choose a pair</option>
 <option value="two-half-lives">Absorption vs elimination half-life</option>
 <option value="phases">Absorption phase vs Cmax vs after the peak</option>
 <option value="tmax-cmax">tmax vs Cmax</option>
+<option value="ka-k">Raising ka vs raising k</option>
 <option value="rate-limiting">Disposition vs absorption rate limiting</option>
 </select></label><div class="xout" data-xout="oral"></div></div>
+<template data-x="oral:ka-k"><div class="xexp"><h4>Raising k<sub>a</sub> vs raising k, after a single oral dose</h4>
+<p><b>In one line:</b> Both move the peak earlier; only raising k, which raises the clearance, lowers the AUC.</p>
+<dl><dt>Raising k<sub>a</sub>, k unchanged</dt><dd>The drug gets in faster, so C<sub>max</sub> (the peak concentration) is higher and t<sub>max</sub> (the time of the peak) earlier.</dd>
+<dd>AUC (the area under the curve) stays about the same, because the clearance has not changed.</dd>
+<dt>Raising k, k<sub>a</sub> unchanged</dt><dd>The drug leaves faster, so C<sub>max</sub> is lower and t<sub>max</sub> earlier.</dd>
+<dd>AUC falls, because Cl = k &times; V<sub>D</sub> rises and AUC = {{frac:FD<sub>0</sub>|Cl}}.</dd>
+<dt>Raising the dose</dt><dd>C<sub>max</sub> and AUC rise in proportion to the dose; t<sub>max</sub> does not move, because it holds only k<sub>a</sub> and k.</dd>
+<dt>Her textbook table</dt><dd>Dose 100 mg, V<sub>D</sub> 10 L: with k at 0.1 hr<sup>&minus;1</sup>, k<sub>a</sub> 0.2 to 0.6 hr<sup>&minus;1</sup> moves t<sub>max</sub> from 6.93 to 3.58 hr, C<sub>max</sub> from 5.00 to 6.99 mcg/mL, AUC stays 100 mcg&middot;hr/mL.</dd>
+<dd>With k<sub>a</sub> at 0.3 hr<sup>&minus;1</sup>, k 0.1 to 0.5 hr<sup>&minus;1</sup> moves t<sub>max</sub> from 5.49 to 2.55 hr, C<sub>max</sub> from 5.77 to 2.79 mcg/mL, AUC from 100 to 20 mcg&middot;hr/mL.</dd></dl>
+<p class="xtrap"><b>How she tests it:</b> As directions, not numbers: which of C<sub>max</sub>, t<sub>max</sub> and AUC rise, fall or stay when one rate constant changes (drill items m5-c23 and m5-c24).</p>
+<p class="xtrap">The wrong pick moves t<sub>max</sub> later when k rises, or lowers the AUC when only k<sub>a</sub> rises.</p>
+<p class="gsrc">Source: 5---Pharmacokinetics-of-Oral-Absorption.pdf slides "Changing Dose" and "Effect of ka and k on Cmax, tmax, and AUC"; transcript 09-21; the numbers are her textbook table as the Module 5 objective 4 guide gives them.</p></div></template>
 <template data-x="oral:rate-limiting"><div class="xexp"><h4>Disposition rate limiting vs absorption rate limiting</h4>
 <p><b>In one line:</b> Which half-life is the longer one decides which rate constant the terminal slope reflects.</p>
 <dl><dt>Disposition rate limiting</dt><dd>The absorption half-life (the time for the amount still to be absorbed to fall by half) is much shorter than the elimination half-life (the time for the concentration to fall by half).</dd>

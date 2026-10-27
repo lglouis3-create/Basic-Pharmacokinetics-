@@ -83,6 +83,50 @@ const Q_NEW_B = [
  audit:'Her slide 20 gives the two factors (tubular pH and pKa) and the pKa ranges; her 5 Oct Exam 2 objectives name the question; the 14 Sep lecture ends on this slide before the direction is stated. Direction (weak acid, alkaline urine, more ionized, not lipid soluble, less reabsorbed, more excreted) from Shargel Ch 15, learning question 9 answer (ciprofloxacin). No item of hers on this objective exists.',
  cite:'4---Clearance-and-Elimination.pdf, slide 20 "Effect of Urine pH on the Reabsorption of Weakly Acidic and Basic Drugs"; Exam 2 objectives (10.05 lecture); Shargel Ch 15, learning question 9'},
 
+/* ---------------- Module 4: urine pH, the weak base and the other direction ---------------- */
+{id:'x3-b-urphbase', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05', dupOf:'x3-b-urineph',
+ topic:'clearance', sub:'ionization', concept:'urine-ph-reabsorption', skill:'apply', source:'both',
+ stem:'A weakly basic drug is filtered at the glomerulus and partly reabsorbed from the renal tubule. Which of the following would be expected if the urine is made more acidic?',
+ options:[
+  {t:'Increased renal excretion of the drug', correct:true,
+   why:'For a weak base, pH = pKa + log{{frac:nonionized|ionized}}, so a lower urine pH leaves a larger share of the drug ionized. The ionized form does not cross the tubule wall back into the blood, so less is reabsorbed and more leaves in the urine.'},
+  {t:'Decreased renal excretion of the drug',
+   why:'Picking this applies the weak-acid direction to a weak base. Acidic urine leaves more of a weak acid nonionized and reabsorbed, but it ionizes a weak base, so for a base reabsorption falls and excretion rises.'},
+  {t:'No change in renal excretion of the drug',
+   why:'Picking this treats renal excretion as filtration alone. The reabsorption of weak acids and weak bases depends on the pH of the fluid in the renal tubule and on the pKa of the drug, so a drug that is partly reabsorbed responds to a change in urine pH.'},
+  {t:'Increased glomerular filtration of the drug',
+   why:'Picking this places the pH effect at the glomerulus. Filtration is passive diffusion across the glomerulus and does not depend on how much of the drug is ionized in the urine. Urine pH acts on reabsorption, the step after filtration.'}],
+ teach:[
+  {h:'Urine pH and tubular reabsorption', list:[
+   'Only the nonionized form of a weak acid or weak base crosses from the tubule back into the blood.',
+   'Weak base (pKa 7.5 to 10.5): acidic urine ionizes more of it, so less is reabsorbed and more is excreted; alkaline urine does the opposite.',
+   'Weak acid (pKa 3 to 8): alkaline urine ionizes more of it, so less is reabsorbed and more is excreted; acidic urine does the opposite.',
+   'Weak acid: pH = pKa + log{{frac:ionized|nonionized}}. Weak base: pH = pKa + log{{frac:nonionized|ionized}}.']}],
+ quote:'We talked about that that matters when we\'re looking at tubular reabsorption and what happens if we adjust the, the pH of the urine, what happens to the rate at which we expect the drug to be excreted from the body.',
+ audit:'Built on x3-b-urineph with the drug made a weak base. Her slide 20 prints the weak-base form, pH = pKa + log(nonionized/ionized); a lower pH therefore means a larger ionized share. That the nonionized form is the one reabsorbed is the premise x3-b-urineph takes from Shargel Ch 15, learning question 9. No item of hers on this objective exists.',
+ cite:'4---Clearance-and-Elimination.pdf, slide 20 "Effect of Urine pH on the Reabsorption of Weakly Acidic and Basic Drugs"; Exam 2 objectives (10.05 lecture); Shargel Ch 15, learning question 9'},
+
+{id:'x3-b-urphacid', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05', dupOf:'x3-b-urineph',
+ topic:'clearance', sub:'ionization', concept:'urine-ph-reabsorption', skill:'apply', source:'both',
+ stem:'A weakly acidic drug is filtered at the glomerulus and partly reabsorbed from the renal tubule. Which of the following would be expected if the urine is made more acidic?',
+ options:[
+  {t:'Decreased renal excretion of the drug', correct:true,
+   why:'For a weak acid, pH = pKa + log{{frac:ionized|nonionized}}, so a lower urine pH leaves a larger share of the drug nonionized. The nonionized form crosses back into the blood, so more is reabsorbed and less leaves in the urine.'},
+  {t:'Increased renal excretion of the drug',
+   why:'Picking this applies the weak-base direction to a weak acid. Acidic urine ionizes a weak base and raises its excretion, but it keeps a weak acid nonionized, so for an acid reabsorption rises and excretion falls.'},
+  {t:'No change in renal excretion of the drug',
+   why:'Picking this treats renal excretion as filtration alone. The reabsorption of weak acids and weak bases depends on the pH of the fluid in the renal tubule and on the pKa of the drug, so a drug that is partly reabsorbed responds to a change in urine pH.'},
+  {t:'Decreased glomerular filtration of the drug',
+   why:'Picking this places the pH effect at the glomerulus. Filtration is passive diffusion across the glomerulus and does not depend on how much of the drug is ionized in the urine. Urine pH acts on reabsorption, the step after filtration.'}],
+ teach:[
+  {h:'Urine pH and tubular reabsorption', list:[
+   'Only the nonionized form of a weak acid or weak base crosses from the tubule back into the blood.',
+   'A drug in urine of its own kind (an acid in acidic urine, a base in alkaline urine) is mostly nonionized and reabsorbed; in urine of the opposite kind it is ionized and excreted.',
+   'Weak acid: pH = pKa + log{{frac:ionized|nonionized}}. Weak base: pH = pKa + log{{frac:nonionized|ionized}}.']}],
+ quote:'We talked about that that matters when we\'re looking at tubular reabsorption and what happens if we adjust the, the pH of the urine, what happens to the rate at which we expect the drug to be excreted from the body.',
+ audit:'Built on x3-b-urineph with the urine made acidic instead of alkaline. Her slide 20 prints the weak-acid form, pH = pKa + log(ionized/nonionized); a lower pH therefore means a larger nonionized share. That the nonionized form is the one reabsorbed is the premise x3-b-urineph takes from Shargel Ch 15, learning question 9. No item of hers on this objective exists.',
+ cite:'4---Clearance-and-Elimination.pdf, slide 20 "Effect of Urine pH on the Reabsorption of Weakly Acidic and Basic Drugs"; Exam 2 objectives (10.05 lecture); Shargel Ch 15, learning question 9'},
+
 /* ---------------- Module 4: the 0.85 in Cockcroft-Gault ---------------- */
 {id:'x3-b-cg085', prof:'Mosley', tier:'new', exam:2, module:4, lecture:'L05',
  topic:'clearance', sub:'crclcalc', concept:'female-factor', skill:'recall', source:'both',

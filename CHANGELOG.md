@@ -3,6 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-27 (writing as on GoodNotes)
+- Tell apart: which urine pH raises a weak acid's or weak base's excretion; raising ka vs raising k.
+- Module 4: two questions on urine pH with a weak base and with acidic urine; her 5 Oct cue in the guide.
 - 🔊 Hear why on all 197 ★ questions: the reasoning read aloud under the explanation, with Read along.
 - Variables quiz (Terms, Quiz me; Equations): which symbol her question asks for, and what each symbol means.
 - Exam sim: a third clip joins the ones that rotate after a submitted paper.
