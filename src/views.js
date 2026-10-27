@@ -572,9 +572,10 @@ function renderTopics(){
     <div class="subrow"><span class="sname"><b>Exam-weighted pass — ${wp.length} ${noun}</b>
       <small>The pools sampled in the blueprint's own proportion. Shuffled, each once.</small></span>
       <button id="sweepWeighted">Start</button></div>
-    ${typeof LIKELY_STARS !== 'undefined' ? `<div class="subrow"><span class="sname"><b>★ Likely on Exam 3 — ${QUESTIONS.filter(starOf).length} questions</b>
-      <small>The questions her final review, quizzes, polls, homework and lectures point to; each says why under its ★. Shuffled, each once.</small></span>
-      <button id="sweepLikely">Start</button></div>` : ''}
+    ${typeof LIKELY_STARS !== 'undefined' ? (() => { const st = QUESTIONS.filter(starOf), n = k => st.filter(q => kindOf(q) === k).length;
+      return `<div class="subrow"><span class="sname"><b>★ Likely on Exam 3 — ${st.length} questions</b>
+      <small>The questions her final review, quizzes, polls, homework and lectures point to; each says why under its ★. Shuffled, each once. Pick all of them, the ${n('concept')} concepts or the ${n('calc')} calculations.</small></span>
+      <span class="btns"><button id="sweepLikely" data-likelykind="all">All ${st.length}</button><button data-likelykind="concept" class="ghost">Concepts ${n('concept')}</button><button data-likelykind="calc" class="ghost">Calculations ${n('calc')}</button></span></div>`; })() : ''}
     ${byKind ? '' : `<div class="subrow"><span class="sname"><b>All ${nAll} questions, one pass</b>
       <small>Everything in the bank, shuffled, each asked once, nothing held back by scheduling</small></span>
       <button id="sweepAll" class="ghost">Start</button></div>`}
@@ -665,7 +666,8 @@ function renderTopics(){
       d._touched = true; LS.set(EXAMGRP_KEY + d.dataset.examgrp, d.open ? 'open' : 'closed');
     }); });
 
-  { const b = el.querySelector('#sweepLikely'); if(b) b.onclick = () => startSweepOf(QUESTIONS.filter(starOf), '★ Likely on Exam 3'); }
+  el.querySelectorAll('[data-likelykind]').forEach(b => b.onclick = () => { const k = b.dataset.likelykind;
+    startSweepOf(QUESTIONS.filter(q => starOf(q) && (k === 'all' || kindOf(q) === k)), '★ Likely on Exam 3' + (k === 'all' ? '' : ' — ' + KIND_LABEL[k].toLowerCase())); });
   el.querySelectorAll('.chip[data-f]').forEach(b => b.onclick = () => {
     FILTER[b.dataset.f] = b.dataset.v; renderTopics();
   });

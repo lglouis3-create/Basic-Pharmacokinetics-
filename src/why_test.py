@@ -99,6 +99,16 @@ def run(page, width):
     page.wait_for_timeout(300)
     got = page.evaluate("document.querySelectorAll('#v-exam [data-hearwhy]').length")
     check(n > 0 and got == n, f"a submitted paper offers Hear why on each of its ★ questions ({got} of {n})")
+    # the ★ drill on Topics: all, the concepts only, or the calculations only
+    page.evaluate("MODPAGE = null; show('topics')"); page.wait_for_timeout(200)
+    got = {}
+    for k in ('all', 'concept', 'calc'):
+        page.evaluate("show('topics')"); page.wait_for_timeout(150)
+        page.click(f'#v-topics [data-likelykind="{k}"]'); page.wait_for_timeout(200)
+        got[k] = page.evaluate(f"[VIEW, Q.pool.length, Q.pool.every(q => starOf(q) && ('{k}' === 'all' || kindOf(q) === '{k}'))]")
+    want = page.evaluate("(() => { const s = QUESTIONS.filter(starOf); return [s.length, s.filter(q => kindOf(q) === 'concept').length, s.filter(q => kindOf(q) === 'calc').length]; })()")
+    check([got[k][1] for k in ('all', 'concept', 'calc')] == want and all(g[0] == 'quiz' and g[2] for g in got.values()) and want[1] + want[2] == want[0],
+          f"the ★ drill starts all {want[0]}, the {want[1]} concepts or the {want[2]} calculations {got}")
     sw = page.evaluate("document.documentElement.scrollWidth - innerWidth")
     check(sw <= 1, f'no sideways scroll ({sw})')
 
