@@ -10,7 +10,7 @@ example. Every problem set has a Start button somewhere.
 
     python3 review_test.py
 """
-import os, pathlib, sys
+import os, pathlib, re, sys
 REPO = pathlib.Path(__file__).resolve().parent.parent
 from playwright.sync_api import sync_playwright
 
@@ -280,7 +280,17 @@ with sync_playwright() as p:
     pg.click('#v-ref [data-sheetorder="model"]'); pg.wait_for_timeout(200)
     ok('By dosing model groups them by model and the choice is remembered', pg.locator('#v-ref .sheetmap .smcol').count() >= 15 and pg.evaluate("localStorage.getItem(SHEET_ORDER_KEY)") == 'model')
     pg.click('#v-ref [data-sheetorder="print"]'); pg.wait_for_timeout(200)
-    ok('the printable sheet reproduces the two pages in two columns with a model tag on every line', pg.evaluate("(() => { const d = document.createElement('div'); d.innerHTML = sheetPrintHTML(); return d.querySelectorAll('.sppage').length === 2 && d.querySelectorAll('.spcol').length === 4 && d.querySelectorAll('.spline').length === 57 && d.querySelectorAll('.sptag').length === 57; })()"))
+    ok('the printable sheet follows her two pages: two columns a page, her 52 lines in her order, coloured by module, and the 5 she said to know, dashed', pg.evaluate("""(() => { const d = document.createElement('div'); d.innerHTML = sheetPrintHTML();
+        const cols = [...d.querySelectorAll('.sp2col')], txt = el => el.textContent.replace(/\\s+/g, '');
+        const want = [1, 2, 3, 4].map(c => SHEET_LINES.filter(l => l.c === c).map(l => { const x = document.createElement('div'); x.innerHTML = mathHTML(l.html); return txt(x); }));
+        const got = cols.map(c => [...c.querySelectorAll('.sp2blk:not(.sp2not) .sp2l')].map(txt));
+        return d.querySelectorAll('.sp2page').length === 2 && cols.length === 4 && JSON.stringify(got) === JSON.stringify(want)
+          && d.querySelectorAll('.sp2not .sp2l').length === SHEET_MISSING.length && [...d.querySelectorAll('.sp2blk')].every(b => /\\bm\\d\\b/.test(b.className)); })()"""))
+    pg.add_init_script("window.print = () => {}"); pg.evaluate("window.print = () => {}; sheetPrint('sheet')"); pg.emulate_media(media='print')
+    pdf = pg.pdf(format='Letter', print_background=True, margin={'top': '10mm', 'bottom': '10mm', 'left': '10mm', 'right': '10mm'}); pg.emulate_media(media='screen')
+    n = len(re.findall(rb'/Type\s*/Page[^s]', pdf))
+    ok(f'printed, the colour-coded sheet is two Letter pages, as hers is ({n})', n == 2)
+    pg.evaluate("document.body.classList.remove('print-sheet2'); const s = document.getElementById('sheetprint'); if(s) s.remove()")
     pg.click('#v-ref .sheetmap [data-sheetdrill="css"]'); pg.wait_for_timeout(200)
     ok('Drill this line starts the typing drill on that one line', pg.evaluate("VIEW === 'eq' && EQ && EQ.queue.length === 1 && EQ.queue[0] === 'css' && EQ.mode === 'type'"))
     pg.evaluate("EQ = null; SU = null; startPool(QUESTIONS.filter(q => q.id === 'inf-n5'), 'x'); show('quiz')"); pg.wait_for_timeout(150)

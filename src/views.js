@@ -4657,26 +4657,47 @@ function sheetMapHTML(){
 /* The map's body without its heading: foldDoc has moved the <h3> into the
    section's summary, so an order change redraws only what sits under it. */
 const sheetMapBody = () => sheetMapHTML().replace(/^<section class="sheetmap">/, '').replace(/<h3>[^<]*<\/h3>/, '').replace(/<\/section>$/, '');
-/* The sheet itself, reproduced for print: two pages, each in two columns,
-   the lines in the order the PDF prints them, each line coloured by module
-   and labelled with its dosing model. Built only when printed. */
+/* The sheet itself, reproduced for print in the layout of her two-page PDF (BasicPharmacokineticsEquations.pdf):
+   its title, two columns a page, every line in the order and column she prints it, set in a serif face as hers is.
+   Each run of lines from one module sits on that module's colour with a small module tag, and the relations she
+   said to know that the sheet does not print fill the empty part of page 2, each boxed with a dashed edge. Built
+   only when printed; the styles are SHEET_PRINT_CSS, added at boot. */
 function sheetPrintHTML(){
-  const col = (pg, title) => `<div class="spcol"><div class="spcolhead">${esc(title)}</div>${SHEET_LINES.filter(l => l.c === pg).map(l =>
-    `<div class="spline m${l.module}"><span class="speq">${mathHTML(l.html)}</span><span class="sptag">${esc(l.model)}</span></div>`).join('')}</div>`;
-  const legend = `<div class="splegend">${SHEET_MODS.map(m => `<span class="smkey m${m}"><i></i>${esc(SHEET_MOD_NAME(m))}</span>`).join('')}</div>`;
-  return `<div class="sheetprint">
-    <div class="sppage"><div class="sptitle">Basic Pharmacokinetics Equations <small>colour-coded by module, labelled by dosing model · page 1</small></div>${legend}
-      <div class="spcols">${col(1, 'left column')}${col(2, 'right column')}</div></div>
-    <div class="sppage"><div class="sptitle">Basic Pharmacokinetics Equations <small>page 2</small></div>${legend}
-      <div class="spcols">${col(3, 'left column')}${col(4, 'right column')}</div>
-      <div class="spmissing"><div class="spcolhead">Not printed on her sheet: the lines she said to know</div>${SHEET_MISSING.map(l =>
-        `<div class="spline m${l.module}"><span class="speq">${mathHTML(l.html)}</span><span class="sptag">${esc(l.model)}</span></div>`).join('')}</div></div>
-  </div>`;
+  const tag = m => `<span class="sp2mod">M${esc(modShort(m))}</span>`;
+  const blocks = lines => { const out = [];
+    lines.forEach(l => { const b = out[out.length - 1]; if(b && b.m === l.module) b.ls.push(l); else out.push({m: l.module, ls: [l]}); });
+    return out.map(b => `<div class="sp2blk m${b.m}">${tag(b.m)}${b.ls.map(l => `<div class="sp2l">${mathHTML(l.html)}</div>`).join('')}</div>`).join(''); };
+  const col = pg => blocks(SHEET_LINES.filter(l => l.c === pg));
+  const legend = `<div class="sp2legend">${SHEET_MODS.map(m => `<span class="smkey m${m}"><i></i>${esc(SHEET_MOD_NAME(m))}</span>`).join('')}<span class="sp2key"><i></i>Not printed on her sheet</span></div>`;
+  const miss = `<div class="sp2misshead">Not printed on her sheet: the relations she said to know</div>${SHEET_MISSING.map(l =>
+    `<div class="sp2blk sp2not m${l.module}">${tag(l.module)}<div class="sp2l">${mathHTML(l.html)}</div></div>`).join('')}`;
+  const page = (n, left, right) => `<div class="sp2page"><div class="sp2title">Basic Pharmacokinetics Equations</div>${legend}
+    <div class="sp2cols"><div class="sp2col">${left}</div><div class="sp2col">${right}</div></div>
+    <div class="sp2foot">Her equation sheet, page ${n} of 2, in her order; colour shows the module</div></div>`;
+  return `<div class="sheetprint sp2">${page(1, col(1), col(2))}${page(2, col(3), col(4) + miss)}</div>`;
 }
+const SHEET_PRINT_CSS = '.sp2page{break-after:page;padding:0 2mm;font-family:"Times New Roman",Times,serif;color:#111}.sp2page:last-child{break-after:auto}' +
+  '.sp2title{text-align:center;font:700 12.5pt Calibri,Carlito,"Segoe UI",Arial,sans-serif;margin:0 0 1.5mm}' +
+  '.sp2legend{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 5px;margin:0 0 2.5mm;font-family:Arial,sans-serif}' +
+  '.sp2legend .smkey{font-size:7pt;padding:0 5px 0 2px;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+  '.sp2key{font-size:7pt;display:inline-flex;align-items:center;gap:4px;color:#444}.sp2key i{width:9px;height:9px;border:1.5px dashed #555;border-radius:2px;display:inline-block}' +
+  '.sp2cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 8mm;align-items:start}' +
+  '.sp2blk{position:relative;border-left:3px solid var(--mc);background:var(--mcbg);padding:.3mm 8mm .3mm 2.5mm;margin:0 0 1mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+  '.sp2l{font-size:10.5pt;line-height:1.12;margin:1mm 0;white-space:nowrap;overflow:hidden;break-inside:avoid}.sp2l .frac{vertical-align:middle}' +
+  '.sp2mod{position:absolute;right:1.5mm;top:.6mm;font:700 6.5pt Arial,sans-serif;color:var(--mc)}' +
+  '.sp2not{border:1.5px dashed var(--mc);border-left:3px solid var(--mc);break-inside:avoid}' +
+  '.sp2misshead{font:700 7.5pt Arial,sans-serif;color:#333;margin:4mm 0 1.2mm}' +
+  '.sp2foot{font:6.5pt Arial,sans-serif;color:#777;text-align:center;margin-top:1.5mm}' +
+  // printing: only the sheet is laid out, on white, so no blank or grey pages follow it
+  '@media print{body.print-sheet2{background:#fff!important}body.print-sheet2>*:not(#sheetprint){display:none!important}body.print-sheet2 #sheetprint{position:static!important}}';
 function sheetPrint(what){
   const cls = what === 'sheet' ? 'print-sheet2' : 'print-sheet';
   let node = null;
-  if(what === 'sheet'){ node = document.createElement('div'); node.id = 'sheetprint'; node.innerHTML = sheetPrintHTML(); document.body.appendChild(node); }
+  if(what === 'sheet'){ node = document.createElement('div'); node.id = 'sheetprint'; node.innerHTML = sheetPrintHTML(); document.body.appendChild(node);
+    // a line too long for its column is set smaller, as her sheet sets its longest lines, rather than wrapped
+    node.style.cssText = 'display:block;position:absolute;left:-9999px;top:0;width:190mm;visibility:hidden';
+    node.querySelectorAll('.sp2l').forEach(l => { let f = 10.5; while(l.scrollWidth > l.clientWidth + 1 && f > 6.5){ f -= 0.5; l.style.fontSize = f + 'pt'; } });
+    node.style.cssText = ''; }
   document.body.classList.add(cls);
   const done = () => { document.body.classList.remove(cls); if(node) node.remove(); };
   /* the print DOM stays until the dialog closes; only a browser with no
@@ -6313,7 +6334,7 @@ function applyTheme(t){
 askProfile();
 // module colours: each study tab's titles are tinted whenever the tab draws; a paper and a drill are left alone, and
 // the Exam sim tab tints only its blueprint table, the Notes tab only its module chips
-{ const st = document.createElement('style'); st.id = 'modstyle'; st.textContent = modStyle() + WHY_CSS; document.head.appendChild(st);
+{ const st = document.createElement('style'); st.id = 'modstyle'; st.textContent = modStyle() + WHY_CSS + SHEET_PRINT_CSS; document.head.appendChild(st);
   const only = {exam: 'table.gap td:first-child', notes: '.chip'};
   ['topics', 'gaps', 'notes', 'exam', 'sheets', 'guide', 'tell', 'terms', 'diag', 'eq', 'ref'].forEach(v => {
     const pane = document.getElementById('v-' + v); if(!pane) return;
