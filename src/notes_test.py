@@ -57,17 +57,22 @@ def run(page, width):
     check(r[0] == 3 and r[1], 'the results mark the 3 flagged questions and list them', str(r))
     md = page.evaluate("notesMarkdown()")
     check('left out until' not in md and md.count('**Her key:**') == 2 and 'Not sure which line' in md and 'Why is Vmax' in md, 'after Submit the export carries both notes with their keys')
-    # Weak spots: the list, Copy and Download
+    # the Notes tab: the cards, Copy, Download, editing and deleting
     page.evaluate("DB.settings.layout = 'one'; show('gaps')"); page.wait_for_timeout(200)
-    check(page.evaluate("document.querySelector('#v-gaps').innerText.includes('My questions (2)')"), 'Weak spots lists the 2 notes')
+    check(page.evaluate("document.querySelector('#v-gaps').innerText.includes('You have 2 notes')"), 'Weak spots points to the 2 notes')
+    page.evaluate("show('notes')"); page.wait_for_timeout(200)
+    check(page.evaluate("document.querySelectorAll('#v-notes [data-noteid]').length") == 2, 'the Notes tab shows a card for each note')
     page.click('#notesCopy'); page.wait_for_timeout(300)
     check(page.evaluate("document.querySelector('#notesCopy').textContent") == 'Copied ✓', 'Copy for AI copies them')
     with page.expect_download() as d:
         page.click('#notesDown')
     check(d.value.suggested_filename == 'PHAR4221-my-questions.md', 'Download saves a Markdown file', d.value.suggested_filename)
+    page.fill('#v-notes textarea[data-notetext="cq5-5"]', 'Edited in the Notes tab.'); page.wait_for_timeout(300)
+    check(page.evaluate("DB.notes['cq5-5'].t") == 'Edited in the Notes tab.', 'a note edits in the Notes tab')
+    page.evaluate("window.confirm = () => true"); page.click('#v-notes [data-notedel="cq5-5"]'); page.wait_for_timeout(200)
+    check(page.evaluate("!DB.notes['cq5-5'] && document.querySelectorAll('#v-notes [data-noteid]').length === 1"), 'Delete note removes it')
     page.click('#notesDrill'); page.wait_for_timeout(200)
-    check(page.evaluate("VIEW === 'quiz' && Q.pool.length === 2"), 'Drill these drills the noted questions')
-
+    check(page.evaluate("VIEW === 'quiz' && Q.pool.length === 1"), 'Drill these drills the noted questions')
 
 def main():
     class Quiet(http.server.SimpleHTTPRequestHandler):

@@ -287,7 +287,7 @@ function poolFor(topicId, subId){
     matchesFilter(q));
 }
 
-const VIEWS = ['topics','quiz','gaps','exam','sheets','guide','tell','terms','diag','eq','ref','settings'];
+const VIEWS = ['topics','quiz','gaps','notes','exam','sheets','guide','tell','terms','diag','eq','ref','settings'];
 function show(v){
   VIEW = v;
   if(typeof gwStop === 'function') gwStop();   // a walkthrough stops when the tab changes (the Guides tab is redrawn on every visit)
@@ -298,7 +298,7 @@ function show(v){
   VIEWS.forEach(k => document.getElementById('v-'+k).classList.toggle('hide', k!==v));
   window.scrollTo(0,0);
   ({topics:renderTopics, quiz:renderQuiz, gaps:renderGaps, exam:renderExam,
-    sheets:renderSheets, guide:renderGuide, tell:renderTell, terms:renderTerms, diag:renderDiagrams, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
+    sheets:renderSheets, notes:renderNotes, guide:renderGuide, tell:renderTell, terms:renderTerms, diag:renderDiagrams, eq:renderEq, ref:renderRef, settings:renderSettings}[v])();
 }
 
 /* ==========================================================================
@@ -1978,12 +1978,8 @@ function renderGaps(){
   <p class="sub">A concept goes on long review after three correct answers on separate review days, so that number stays low in the first week however well you score. The accuracy figures move at once. Mastered, under Concepts below, has its own rule.</p>`;
   h += `<label class="wkswitch" style="display:flex;gap:8px;align-items:flex-start;margin:6px 0 14px;font-size:14.5px"><input type="checkbox" id="wkhi"${weakOn() ? ' checked' : ''} style="margin-top:3px">
     <span><b>Mark my weak spots where I study.</b> Guides, Tell apart, Diagrams, Worksheets, Terms, Reference and Equations mark what a concept you missed or guessed rests on, with the question and a Redrill. A mark goes when you next answer that concept right.</span></label>`;
-  { const ids = Object.keys(NOTES()).filter(id => byId(id) && (NOTES()[id].t || '').trim());
-    h += `<h3>My questions${ids.length ? ' (' + ids.length + ')' : ''}</h3>` + (ids.length
-      ? `<p class="sub">What you wrote on questions with ✎ Note. Copy them, with each question, your answer, her key and the working, to paste into an AI, or download them to bring to her review.</p>
-        <p style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small" id="notesCopy">Copy for AI</button><button class="btn small ghost" id="notesDown">Download (.md)</button><button class="btn small ghost" id="notesDrill">Drill these ${ids.length}</button></p>
-        <ol style="padding-left:20px">${ids.map(id => { const q = byId(id), t = plain(q.stem); return `<li style="margin:0 0 10px"><span style="color:var(--text-dim);font-size:13px">Module ${esc(modShort(q.module))} · ${esc(t.length > 110 ? t.slice(0, 107).replace(/\s+\S*$/, '') + '…' : t)}</span><br>${esc(NOTES()[id].t.trim())}</li>`; }).join('')}</ol>`
-      : `<p class="sub">Tap ✎ Note on any question, in a drill, on a paper or on its results, to write what you are thinking or want to ask. Your notes collect here, ready to copy for an AI.</p>`); }
+  { const n = Object.keys(NOTES()).filter(id => byId(id) && (NOTES()[id].t || '').trim()).length;
+    h += `<p class="sub" style="margin:0 0 14px">${n ? `✎ You have ${n} note${n === 1 ? '' : 's'} on questions.` : '✎ Notes you write on questions collect in the Notes tab.'} <button type="button" class="btn small ghost" onclick="show('notes')">Open Notes</button></p>`; }
 
   const plan = reviewPlan(), cg = conceptGroups();
   h += sessionCard() + conceptSection(cg) + plan.html;
@@ -2284,14 +2280,6 @@ function renderGaps(){
   h = h.replace(/<table class="gap">([\s\S]*?)<\/table>/g, '<div class="tw"><table class="gap">$1</table></div>');
   el.innerHTML = h;
   { const wk = el.querySelector('#wkhi'); if(wk) wk.onchange = () => { DB.settings.weakHi = wk.checked; save(); }; }
-  { const md = () => notesMarkdown(), ids = () => Object.keys(NOTES()).filter(id => byId(id) && (NOTES()[id].t || '').trim());
-    const c = el.querySelector('#notesCopy'), d = el.querySelector('#notesDown'), r = el.querySelector('#notesDrill');
-    if(c) c.onclick = () => { const t = md(), done = () => { c.textContent = 'Copied ✓'; setTimeout(() => c.textContent = 'Copy for AI', 2000); };
-      const old = () => { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch(e){} ta.remove(); };
-      if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, old); else old(); };
-    if(d) d.onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([md()], {type: 'text/markdown'}));
-      a.download = 'PHAR4221-my-questions.md'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
-    if(r) r.onclick = () => startSweepOf(ids().map(byId), 'My questions'); }
   el.querySelectorAll('.tw').forEach(w => w.classList.toggle('wide', w.scrollWidth > w.clientWidth + 4));
   wireReviewPlan(el, plan);
   wireConcepts(el, cg);
@@ -5476,9 +5464,9 @@ function weakMark(view){
    question on a paper to come back to: ⚑ in the Go to list, counted on Submit, shown on the results. */
 const NOTES = () => (DB.notes ||= {});
 const noteChip = q => q ? `<button type="button" class="chip" data-noteq="${esc(q.id)}" aria-expanded="false" title="Write what you are thinking or want to ask">${NOTES()[q.id] ? '✎ My note' : '✎ Note'}</button>` : '';
-const noteBoxHTML = id => `<div class="notebox" style="margin:6px 0 10px"><label style="display:block;font-size:13.5px;font-weight:600;margin-bottom:4px" for="nt-${esc(id)}">What I'm thinking, or what I want to ask</label>
+const noteBoxHTML = (id, inTab) => `<div class="notebox" style="margin:6px 0 10px"><label style="display:block;font-size:13.5px;font-weight:600;margin-bottom:4px" for="nt-${esc(id)}">What I'm thinking, or what I want to ask</label>
   <textarea id="nt-${esc(id)}" data-notetext="${esc(id)}" rows="3" style="width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:inherit">${esc((NOTES()[id] || {}).t || '')}</textarea>
-  <small style="color:var(--text-dim)">Saved in this browser with your progress. Weak spots → My questions copies them, with the question and the key, for an AI.</small></div>`;
+  ${inTab ? '' : '<small style="color:var(--text-dim)">Saved in this browser with your progress. The Notes tab lists every note and copies them, with the question and the key, for an AI.</small>'}</div>`;
 const exFlagChip = i => `<button type="button" class="chip" data-exflag="${i}" aria-pressed="${!!(EX.flags && EX.flags[i])}">${EX.flags && EX.flags[i] ? '⚑ Flagged' : '⚐ Flag'}</button>`;
 // the answer last given to a question, as text, and whether it was right
 function noteMyAnswer(q){
@@ -5511,6 +5499,53 @@ function notesMarkdown(){
     md += `\n**What I'm thinking / my question:** ${NOTES()[id].t.trim()}\n`;
   });
   return md;
+}
+/* The Notes tab: every question carrying a note, newest first, to read, edit, drill or delete, with the whole set
+   copied for an AI or downloaded as one Markdown text. Her key and the working are folded under each question, and
+   left out for a question on a paper still running. */
+let NOTES_MOD = 'all';
+function renderNotes(){
+  const el = $('#v-notes');
+  const all = Object.keys(NOTES()).filter(id => byId(id) && (NOTES()[id].t || '').trim()).sort((a, b) => (NOTES()[b].at || 0) - (NOTES()[a].at || 0));
+  const mods = [...new Set(all.map(id => byId(id).module))].sort((a, b) => a - b);
+  if(NOTES_MOD !== 'all' && !mods.includes(NOTES_MOD)) NOTES_MOD = 'all';
+  const ids = all.filter(id => NOTES_MOD === 'all' || byId(id).module === NOTES_MOD);
+  const running = id => EX && EX.running && EX.qs.some(q => q.id === id);
+  let h = `<h2>Notes</h2><p class="sub">Every question you wrote on with ✎ Note: what you were thinking or want to ask. Edit a note here; empty it to remove it. Copy for AI gives each question with your answer, her key and the working, ready to paste into an AI or bring to her review.</p>`;
+  if(!all.length){
+    el.innerHTML = h + `<div class="empty">No notes yet. Tap ✎ Note on any question, in a drill, on an Exam sim paper or on its results, and write what you are thinking. Your notes collect here.</div>`;
+    return;
+  }
+  h += `<p style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small" id="notesCopy">Copy for AI (${all.length})</button><button class="btn small ghost" id="notesDown">Download (.md)</button><button class="btn small ghost" id="notesDrill">Drill these ${ids.length}</button></p>`;
+  if(mods.length > 1) h += `<div class="filters"><div class="frow"><label>Module</label>${['all', ...mods].map(m => `<button class="chip" data-notesmod="${m}" aria-pressed="${NOTES_MOD === m}">${m === 'all' ? 'All' : 'Module ' + esc(modShort(m))}</button>`).join('')}</div></div>`;
+  h += ids.map(id => {
+    const q = byId(id), mine = noteMyAnswer(q), kind = qType(q), when = NOTES()[id].at ? fmtWhen(NOTES()[id].at) : '';
+    let key = '';
+    if(running(id)) key = `<p class="sub">Her key is hidden until the paper this question is on is submitted.</p>`;
+    else {
+      const work = kind === 'numeric' && q.steps ? `<ol>${q.steps.map(s => `<li>${mathHTML(prettyMath(esc(s.t)))}</li>`).join('')}</ol>`
+        : isMC(q) ? q.options.filter(o => o.correct).map(o => `<p>${rich(o.why || '')}</p>`).join('') : '';
+      key = `<details style="margin:6px 0"><summary>Her key and the working</summary><p><b>Key:</b> ${rich(answerRead(q))}</p>${work}</details>`;
+    }
+    return `<div class="qcard" data-noteid="${esc(id)}" style="margin-bottom:14px"><div class="qhead"><span class="tag">Module ${esc(modShort(q.module))}</span>${originTag(q)}${starTag(q)}<span class="spacer"></span><span style="font-size:12.5px;color:var(--text-dim)">${esc(when)}</span></div>
+      <div class="qbody"><div class="stem" style="font-size:15.5px">${stemHTML(q.stem)}</div>
+      ${q.img && IMAGES[q.img] ? `<img class="qimg" src="${IMAGES[q.img]}" alt="Figure for this question">` : ''}
+      ${isMC(q) ? `<ol type="A" style="margin:6px 0 8px 20px;padding:0">${q.options.map(o => `<li>${rich(o.t)}</li>`).join('')}</ol>` : ''}
+      ${mine ? `<p style="margin:4px 0"><b>Your answer:</b> ${rich(mine.txt)} <span style="color:${mine.result === 'right' ? 'var(--ok)' : 'var(--bad)'}">(${mine.result})</span></p>` : '<p class="sub" style="margin:4px 0">Not answered yet.</p>'}
+      ${key}${noteBoxHTML(id, true)}
+      <p style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 0"><button type="button" class="btn small ghost" data-notedrill="${esc(id)}">Drill this question</button><button type="button" class="btn small ghost" data-notedel="${esc(id)}">Delete note</button></p></div></div>`;
+  }).join('');
+  el.innerHTML = h;
+  const c = el.querySelector('#notesCopy'), d = el.querySelector('#notesDown'), r = el.querySelector('#notesDrill');
+  c.onclick = () => { const t = notesMarkdown(), done = () => { c.textContent = 'Copied ✓'; setTimeout(() => c.textContent = `Copy for AI (${all.length})`, 2000); };
+    const old = () => { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch(e){} ta.remove(); };
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, old); else old(); };
+  d.onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([notesMarkdown()], {type: 'text/markdown'}));
+    a.download = 'PHAR4221-my-questions.md'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
+  r.onclick = () => startSweepOf(ids.map(byId), 'My notes');
+  el.querySelectorAll('[data-notesmod]').forEach(b => b.onclick = () => { NOTES_MOD = b.dataset.notesmod === 'all' ? 'all' : +b.dataset.notesmod; renderNotes(); });
+  el.querySelectorAll('[data-notedrill]').forEach(b => b.onclick = () => startPool([byId(b.dataset.notedrill)], 'My note'));
+  el.querySelectorAll('[data-notedel]').forEach(b => b.onclick = () => { if(!confirm('Delete this note?')) return; delete NOTES()[b.dataset.notedel]; save(); renderNotes(); });
 }
 /* ==========================================================================
    BOOT
