@@ -3296,16 +3296,16 @@ function finishExam(){
   save(); saveExam();
   renderExamResult();
 }
-/* After a paper is submitted the result page offers a short clip, one of
-   the two beside the page chosen at random. Nothing plays on its own: the
+/* After a paper is submitted the result page offers a clip, one of
+   the three beside the page chosen at random. Nothing plays on its own: the
    student presses the offer, which is the tap that lets the clip play with
    sound, or ignores it. An offline copy of the page has no media folder:
    then the video errors and the box goes away by itself. Settings can hide
    the offer. */
-const CHEER = ['media/cheer-1.mp4', 'media/cheer-2.mp4'];
+const CHEER = ['media/cheer-1.mp4', 'media/cheer-2.mp4', 'media/cheer-3.mp4'];
 const cheerPick = () => CHEER[Math.floor(Math.random() * CHEER.length)];
 const cheerOfferHTML = () => DB.settings.cheer === false ? ''
-  : `<div class="cheeroffer"><span>Paper done. A few seconds of motivation, if you want it:</span>
+  : `<div class="cheeroffer"><span>Paper done. A clip for motivation, if you want it:</span>
      <button class="btn small" id="cheerGo">Press me</button></div>`;
 function celebrate(){
   if(document.getElementById('cheer')) return;
@@ -3658,10 +3658,10 @@ function renderSettings(){
 
   <h3>After a paper</h3>
   <div class="filters">
-    <div class="frow"><label>Short video</label>
+    <div class="frow"><label>Video</label>
       <button class="chip" data-cheer="on" aria-pressed="${DB.settings.cheer !== false}">On</button>
       <button class="chip" data-cheer="off" aria-pressed="${DB.settings.cheer === false}">Off</button></div>
-    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">After a paper the result page offers a short clip to press, one of two. Off hides the offer.</p>
+    <p style="font-size:13.5px;color:var(--text-dim);margin:4px 0 0">After a paper the result page offers a clip to press, one of three. Off hides the offer.</p>
   </div>
 
   <h3>Move your progress between devices</h3>

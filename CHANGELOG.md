@@ -3,6 +3,7 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-27 (writing as on GoodNotes)
+- Exam sim: a third clip joins the ones that rotate after a submitted paper.
 - Module colours, as on the equation sheet, on every module title and section; never on a question.
 - Equation sheet: Module 7b and Module 8 lines have their own colours; the dark-theme badges read clearly.
 - Writing: a Pencil or finger held on the page no longer selects text or opens a menu.

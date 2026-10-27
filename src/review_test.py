@@ -325,9 +325,9 @@ with sync_playwright() as p:
     ok('a submitted paper offers the clip and does not play it on its own', pg.locator('#cheerGo').count() == 1 and pg.locator('#cheer').count() == 0)
     # the headless browser cannot decode the clip, so the box is read in the same tick it opens
     src = pg.evaluate("(() => { document.getElementById('cheerGo').click(); const v = document.querySelector('#cheer video'); return v ? v.getAttribute('src') : null; })()")
-    ok('pressing the offer opens the box with one of the two clips', src in ('media/cheer-1.mp4', 'media/cheer-2.mp4'))
+    ok('pressing the offer opens the box with one of the three clips', src in ('media/cheer-1.mp4', 'media/cheer-2.mp4', 'media/cheer-3.mp4'))
     ok('Close removes it', pg.evaluate("(() => { const b = document.getElementById('cheer'); if(b) b.remove(); celebrate(); document.getElementById('cheerClose').click(); return !document.getElementById('cheer'); })()"))
-    ok('two clips are on offer and both files are in the repository', pg.evaluate("CHEER.length") == 2 and all((REPO / p).exists() for p in pg.evaluate("CHEER")))
+    ok('three clips are on offer and every file is in the repository', pg.evaluate("CHEER.length") == 3 and all((REPO / p).exists() for p in pg.evaluate("CHEER")))
     pg.evaluate("DB.settings.cheer = false; save(); const b = document.getElementById('cheer'); if(b) b.remove(); renderExamResult()"); pg.wait_for_timeout(100)
     ok('with the setting off there is no offer', pg.locator('#cheerGo').count() == 0 and pg.locator('#cheer').count() == 0)
     pg.evaluate("DB.settings.cheer = true; save()")
