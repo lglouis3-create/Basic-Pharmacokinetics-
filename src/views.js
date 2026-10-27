@@ -5875,7 +5875,7 @@ function inkOpen(id, variant){
   if(typeof gwStop === 'function') gwStop();
   const prefs = (() => { try { return JSON.parse(LS.get(NS + ':ink-prefs') || '{}'); } catch(e){ return {}; } })();
   INK = {id, variant, data: inkLoad(id, variant), tool: 'pen', color: prefs.color || INK_COLORS[0][0], size: prefs.size || 2,
-         pencil: 'pencil' in prefs ? !!prefs.pencil : false, undo: [], redo: [], scrollY: scrollY};   // a finger writes until a Pencil touches the page
+         pencil: 'pencil' in prefs ? !!prefs.pencil : false, shapes: 'shapes' in prefs ? !!prefs.shapes : true, undo: [], redo: [], scrollY: scrollY};   // a finger writes until a Pencil touches the page
   const mode = variant === 'changed' ? 'changed-worksheet' : 'worksheet', solMode = variant === 'changed' ? 'changed-solutions' : 'solutions';
   const sol = q ? '' : (sheetHTML(id, solMode).match(/<section class="wssol">[\s\S]*<\/section>/) || [''])[0];
   const ov = document.createElement('div'); ov.id = 'ink'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Write on ' + s.title);
@@ -5885,11 +5885,17 @@ function inkOpen(id, variant){
       <span class="inkgrp"><button type="button" class="chip" data-inktool="pen">✏️ Pen</button><button type="button" class="chip" data-inktool="hl">🖍 Highlight</button><button type="button" class="chip" data-inktool="erase">⌫ Eraser</button></span>
       <span class="inkgrp"><button type="button" class="chip" data-inksize="1.5">Fine</button><button type="button" class="chip" data-inksize="2.5">Medium</button><button type="button" class="chip" data-inksize="4">Bold</button></span>
       <span class="inkgrp"><button type="button" class="chip" data-inkundo aria-label="Undo">↶ Undo</button><button type="button" class="chip" data-inkredo aria-label="Redo">↷ Redo</button></span>
-      <span class="inkgrp"><button type="button" class="chip" data-inkpencil aria-pressed="false">Pencil only</button>${q ? '' : '<button type="button" class="chip" data-inksol aria-expanded="false">Show solutions</button>'}<button type="button" class="chip" data-inkpdf>Save as PDF</button><button type="button" class="chip" data-inkclear>Clear page</button></span>
+      <span class="inkgrp"><button type="button" class="chip" data-inkpencil aria-pressed="false">Pencil only</button><button type="button" class="chip" data-inkshapes aria-pressed="true" title="Draw a line, a circle or a box and hold the Pencil still at the end: it snaps to a straight line or a clean shape. Two fingers tapped together undo.">Hold to snap</button>${q ? '' : '<button type="button" class="chip" data-inksol aria-expanded="false">Show solutions</button>'}<button type="button" class="chip" data-inkpdf>Save as PDF</button><button type="button" class="chip" data-inkclear>Clear page</button></span>
       <span class="inkwarn" hidden>This browser is not saving: the writing lasts only until the page closes. Save as PDF to keep it.</span>
     </div>
     <div class="inkpaper">${q ? inkQuestionHTML(q) : sheetHTML(id, mode)}<div class="inksol" hidden>${sol}</div></div>`;
   document.body.appendChild(ov); document.body.classList.add('inking');
+  if(!document.getElementById('inkstyle')){ const st = document.createElement('style'); st.id = 'inkstyle';
+    st.textContent = '#ink,#ink *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}#ink textarea,#ink input{-webkit-user-select:text;user-select:text}';
+    document.head.appendChild(st); }
+  // a Pencil or finger held on the page selects nothing and opens no menu: the page is for writing
+  ov.addEventListener('selectstart', e => { if(!(e.target.closest && e.target.closest('textarea, input'))) e.preventDefault(); });
+  ov.addEventListener('contextmenu', e => e.preventDefault());
   ov.tabIndex = -1;
   // a drawing layer on the name line and on every problem, with More room under each problem's work area
   const doc = ov.querySelector('.wsdoc');
@@ -5922,7 +5928,9 @@ function inkDraw(el){
   const c = el.querySelector(':scope > canvas.inkcv'); if(!c || !INK) return;
   const g = c.getContext('2d'), W = c.width;
   g.clearRect(0, 0, c.width, c.height);
-  (INK.data.parts[el.dataset.ink] || []).forEach(s => inkStroke(g, s, W));
+  const ss = INK.data.parts[el.dataset.ink] || [];
+  ss.forEach(s => { if(s.t === 'hl') inkStroke(g, s, W); });   // highlighter first, so it sits under the writing
+  ss.forEach(s => { if(s.t !== 'hl') inkStroke(g, s, W); });
   if(INK.live && INK.live.el === el && INK.live.s) inkStroke(g, INK.live.s, W);   // (an eraser drag has no stroke of its own)
 }
 // one stroke: points stored as fractions of the part's width, drawn through midpoints so the line is smooth
@@ -5931,42 +5939,91 @@ function inkStroke(g, s, W){
   g.save(); g.lineCap = g.lineJoin = 'round'; g.strokeStyle = s.c;
   g.globalAlpha = s.t === 'hl' ? 0.32 : 1; g.lineWidth = s.w * W;
   g.beginPath(); g.moveTo(p[0] * W, p[1] * W);
+  if(s.k === 'poly'){ for(let i = 2; i < p.length; i += 2) g.lineTo(p[i] * W, p[i + 1] * W); g.stroke(); g.restore(); return; }   // a snapped box keeps its corners
   if(p.length === 2){ g.lineTo(p[0] * W + 0.01, p[1] * W); }
   for(let i = 2; i < p.length - 2; i += 2){ const mx = (p[i] + p[i + 2]) / 2, my = (p[i + 1] + p[i + 3]) / 2; g.quadraticCurveTo(p[i] * W, p[i + 1] * W, mx * W, my * W); }
   if(p.length > 2) g.lineTo(p[p.length - 2] * W, p[p.length - 1] * W);
   g.stroke(); g.restore();
 }
+/* Hold to snap, as on GoodNotes: a stroke held still at its end for INK_HOLD ms becomes a straight line when it
+   runs close to straight (its end then follows the Pencil until it lifts), or, when it closes back on itself, an
+   ellipse or a box, whichever fits its points better. A highlighter only straightens. */
+const INK_HOLD = 500, INK_STILL = 5;   // ms held, and px of jitter that still counts as held
+function inkRecognize(p, Wpx, tool){
+  const n = p.length / 2; if(n < 4) return null;
+  const X = i => p[2 * i] * Wpx, Y = i => p[2 * i + 1] * Wpx;
+  let len = 0, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  for(let i = 0; i < n; i++){ const x = X(i), y = Y(i); if(i) len += Math.hypot(x - X(i - 1), y - Y(i - 1));
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y); }
+  if(len < 24) return null;
+  const x0 = X(0), y0 = Y(0), x1 = X(n - 1), y1 = Y(n - 1), d = Math.hypot(x1 - x0, y1 - y0);
+  if(d > 0.8 * len){
+    let dev = 0; for(let i = 1; i < n - 1; i++) dev = Math.max(dev, Math.abs((x1 - x0) * (y0 - Y(i)) - (x0 - X(i)) * (y1 - y0)) / d);
+    return dev < Math.max(6, 0.06 * d) ? {kind: 'line', p: [p[0], p[1], p[2 * n - 2], p[2 * n - 1]]} : null;
+  }
+  if(tool === 'hl') return null;
+  const w = maxX - minX, h = maxY - minY;
+  if(Math.min(w, h) < 16 || d > 0.3 * Math.max(w, h)) return null;
+  const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, rx = w / 2, ry = h / 2;
+  let ee = 0, er = 0;
+  for(let i = 0; i < n; i++){ const x = X(i), y = Y(i);
+    ee += Math.abs(Math.hypot((x - cx) / rx, (y - cy) / ry) - 1);
+    er += Math.min(Math.abs(x - minX), Math.abs(x - maxX), Math.abs(y - minY), Math.abs(y - maxY)) / Math.min(rx, ry); }
+  ee /= n; er /= n;
+  const f = v => +(v / Wpx).toFixed(4);
+  if(er < ee && er < 0.12) return {kind: 'shape', k: 'poly', p: [minX, minY, maxX, minY, maxX, maxY, minX, maxY, minX, minY].map(f)};
+  if(ee < 0.15){ const q = []; for(let k = 0; k <= 72; k++){ const a = 2 * Math.PI * k / 72; q.push(f(cx + rx * Math.cos(a)), f(cy + ry * Math.sin(a))); } return {kind: 'shape', p: q}; }
+  return null;
+}
+function inkSnap(el){
+  const lv = INK && INK.live; if(!lv || lv.el !== el || !lv.s || lv.snap || !INK.shapes) return;
+  const r = inkRecognize(lv.s.p, el.getBoundingClientRect().width, lv.s.t); if(!r) return;
+  lv.s.p = r.p; if(r.k) lv.s.k = r.k; lv.snap = r.kind; inkDraw(el);
+}
 const inkCapture = (c, e) => { try { c.setPointerCapture(e.pointerId); } catch(err){} };   // a pointer that is already gone cannot be captured
 function inkWire(c, el, key){
   const pt = e => { const r = c.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.width]; };
-  let scroll = null; const touches = new Set();
+  let scroll = null, tap = null, pen = false; const touches = new Set(), starts = new Map();
+  ['touchstart', 'touchmove'].forEach(t => c.addEventListener(t, e => { if(e.cancelable) e.preventDefault(); }, {passive: false}));   // no selection, magnifier or callout from the browser
+  const hold = () => { clearTimeout(c._hold); c._hold = setTimeout(() => inkSnap(el), INK_HOLD); };
   c.addEventListener('pointerdown', e => {
     if(!INK) return;
-    if(e.pointerType === 'touch'){ touches.add(e.pointerId);
+    if(e.pointerType === 'touch'){ touches.add(e.pointerId); starts.set(e.pointerId, [e.clientX, e.clientY]);
+      if(touches.size === 2) tap = pen ? null : {t: Date.now(), moved: false}; else if(touches.size > 2) tap = null;   // (a hand resting while the Pencil writes is no tap)
       if(touches.size > 1 && !INK.pencil){ if(INK.live && INK.live.el === el){ INK.live = null; inkDraw(el); } scroll = {y: e.clientY, id: e.pointerId}; inkCapture(c, e); return; } }   // two fingers scroll
-    if(e.pointerType === 'pen' && !INK.pencil){ INK.pencil = true; inkPrefs(); inkTools(); }
+    if(e.pointerType === 'pen'){ pen = true; if(!INK.pencil){ INK.pencil = true; inkPrefs(); inkTools(); } }
     if(INK.pencil && e.pointerType === 'touch'){ scroll = {y: e.clientY, id: e.pointerId}; inkCapture(c, e); return; }   // a finger scrolls
     e.preventDefault(); inkCapture(c, e);
     const [x, y] = pt(e);
-    if(INK.tool === 'erase'){ INK.live = {el, erase: true}; inkErase(el, key, x, y); return; }
+    if(INK.tool === 'erase'){ INK.live = {el, id: e.pointerId, erase: true}; inkErase(el, key, x, y); return; }
     const W = 1 / c.getBoundingClientRect().width;
-    INK.live = {el, s: {t: INK.tool, c: INK.color, w: (INK.tool === 'hl' ? INK.size * 6 : INK.size) * W, p: [+x.toFixed(4), +y.toFixed(4)]}};
+    INK.live = {el, id: e.pointerId, s: {t: INK.tool, c: INK.color, w: (INK.tool === 'hl' ? INK.size * 6 : INK.size) * W, p: [+x.toFixed(4), +y.toFixed(4)]}, still: [e.clientX, e.clientY]};
+    hold();
   });
   c.addEventListener('pointermove', e => {
+    if(tap && starts.has(e.pointerId)){ const [sx, sy] = starts.get(e.pointerId); if(Math.hypot(e.clientX - sx, e.clientY - sy) > 12) tap.moved = true; }
     if(scroll && e.pointerId === scroll.id){ const ov = document.getElementById('ink'); ov.scrollTop -= e.clientY - scroll.y; scroll.y = e.clientY; return; }
-    if(!INK || !INK.live || INK.live.el !== el) return;
+    if(!INK || !INK.live || INK.live.el !== el || INK.live.id !== e.pointerId) return;   // only the pointer that began the stroke draws it
     e.preventDefault();
-    const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+    const co = e.getCoalescedEvents ? e.getCoalescedEvents() : [], evs = co.length ? co : [e];   // a browser may return no coalesced events
     if(INK.live.erase){ evs.forEach(ev => { const [x, y] = pt(ev); inkErase(el, key, x, y); }); return; }
+    const lv = INK.live, last = evs[evs.length - 1];
+    if(lv.snap === 'line'){ const [x, y] = pt(last); lv.s.p.splice(2, 2, +x.toFixed(4), +y.toFixed(4)); inkDraw(el); return; }   // a snapped line: its end follows the Pencil
+    if(lv.snap) return;   // a snapped shape stays as it is until the Pencil lifts
+    if(Math.hypot(last.clientX - lv.still[0], last.clientY - lv.still[1]) > INK_STILL){ lv.still = [last.clientX, last.clientY]; hold(); }
     const p = INK.live.s.p;
     evs.forEach(ev => { const [x, y] = pt(ev), lx = p[p.length - 2], ly = p[p.length - 1];
       if(Math.hypot(x - lx, y - ly) > 0.0015) p.push(+x.toFixed(4), +y.toFixed(4)); });
     inkDraw(el);
   });
   const end = e => {
-    touches.delete(e.pointerId);
+    clearTimeout(c._hold);
+    touches.delete(e.pointerId); starts.delete(e.pointerId);
+    if(e.pointerType === 'pen') pen = false;
+    if(e.type === 'pointercancel') tap = null;   // a touch the system took back, such as a rejected palm
+    if(tap && !touches.size){ const quick = !tap.moved && Date.now() - tap.t < 350; tap = null; if(quick && INK){ scroll = null; INK.live = null; inkUndo(false); return; } }   // two fingers tapped together: undo
     if(scroll && e.pointerId === scroll.id){ scroll = null; return; }
-    if(!INK || !INK.live || INK.live.el !== el) return;
+    if(!INK || !INK.live || INK.live.el !== el || INK.live.id !== e.pointerId) return;   // a finger lifting does not end the Pencil's stroke
     const lv = INK.live; INK.live = null;
     if(lv.s){ (INK.data.parts[key] ||= []).push(lv.s); INK.undo.push({k: 'add', key, s: lv.s}); INK.redo = []; inkSave(); }
     inkDraw(el); inkTools();
@@ -5974,9 +6031,19 @@ function inkWire(c, el, key){
   c.addEventListener('pointerup', end); c.addEventListener('pointercancel', end);
 }
 // the stroke eraser: touching a stroke removes the whole stroke
+// is (x, y) within r of the path through the points p? Measured to each segment, so a snapped line or box, which
+// keeps only its ends or corners, is hit along its whole length
+function inkNear(p, x, y, r){
+  for(let i = 0; i < p.length; i += 2){
+    const ax = p[i], ay = p[i + 1], bx = i + 2 < p.length ? p[i + 2] : ax, by = i + 2 < p.length ? p[i + 3] : ay;
+    const dx = bx - ax, dy = by - ay, L = dx * dx + dy * dy, t = L ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / L)) : 0;
+    if(Math.hypot(ax + t * dx - x, ay + t * dy - y) < r) return true;
+  }
+  return false;
+}
 function inkErase(el, key, x, y){
   const list = INK.data.parts[key] || [], W = el.getBoundingClientRect().width, tol = 10 / W;
-  const hit = list.filter(s => { for(let i = 0; i < s.p.length; i += 2) if(Math.hypot(s.p[i] - x, s.p[i + 1] - y) < tol + s.w / 2) return true; return false; });
+  const hit = list.filter(s => inkNear(s.p, x, y, tol + s.w / 2));
   if(!hit.length) return;
   INK.data.parts[key] = list.filter(s => !hit.includes(s));
   INK.undo.push({k: 'del', key, s: hit}); INK.redo = []; inkSave(); inkDraw(el); inkTools();
@@ -5990,13 +6057,14 @@ function inkUndo(redo){
   }
   to.push(op); inkSave(); document.querySelectorAll('#ink .inkreg').forEach(inkDraw); inkTools();
 }
-function inkPrefs(){ LS.set(NS + ':ink-prefs', JSON.stringify({color: INK.color, size: INK.size, pencil: INK.pencil})); }
+function inkPrefs(){ LS.set(NS + ':ink-prefs', JSON.stringify({color: INK.color, size: INK.size, pencil: INK.pencil, shapes: INK.shapes})); }
 function inkTools(){
   const ov = document.getElementById('ink'); if(!ov || !INK) return;
   ov.querySelectorAll('[data-inkcolor]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.inkcolor === INK.color && INK.tool !== 'erase')));
   ov.querySelectorAll('[data-inktool]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.inktool === INK.tool)));
   ov.querySelectorAll('[data-inksize]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.inksize === INK.size)));
   ov.querySelector('[data-inkpencil]').setAttribute('aria-pressed', String(INK.pencil));
+  ov.querySelector('[data-inkshapes]').setAttribute('aria-pressed', String(INK.shapes));
   ov.querySelector('[data-inkundo]').disabled = !INK.undo.length; ov.querySelector('[data-inkredo]').disabled = !INK.redo.length;
 }
 function inkClose(){
@@ -6034,6 +6102,7 @@ document.addEventListener('click', e => {
   if(b.matches('[data-inkundo]')) return inkUndo(false);
   if(b.matches('[data-inkredo]')) return inkUndo(true);
   if(b.matches('[data-inkpencil]')){ INK.pencil = !INK.pencil; inkPrefs(); return inkTools(); }
+  if(b.matches('[data-inkshapes]')){ INK.shapes = !INK.shapes; inkPrefs(); return inkTools(); }
   if(b.matches('[data-inksol]')){ const s = document.querySelector('#ink .inksol'); s.hidden = !s.hidden; b.setAttribute('aria-expanded', String(!s.hidden)); b.textContent = s.hidden ? 'Show solutions' : 'Hide solutions'; return; }
   if(b.matches('[data-inkpdf]')) return inkPrint();
   if(b.matches('[data-inkclear]')){

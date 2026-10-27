@@ -2,6 +2,15 @@
 
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
+## 2026-10-27 (writing as on GoodNotes)
+- Writing: a Pencil or finger held on the page no longer selects text or opens a menu.
+- Writing: hold still half a second at the end of a stroke to snap it: a straight line, an ellipse or a box.
+- Writing: a snapped line's end follows the Pencil until you lift it; Hold to snap turns snapping off.
+- Writing: the highlighter goes under the writing and straightens when held.
+- Writing: two fingers tapped together undo.
+- Writing: the eraser removes a straight line or box touched anywhere along it.
+- Writing: a hand lifting while the Pencil writes no longer ends the stroke.
+
 ## 2026-10-26 (narrated guide walkthroughs; write on worksheets)
 - ✎ Note on any question, also on a paper; the Notes tab lists them to edit, drill, copy for an AI or download.
 - Exam sim: ⚐ Flag a question; ⚑ shows in Go to, on Submit and on the results.

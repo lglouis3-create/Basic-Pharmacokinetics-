@@ -8,11 +8,16 @@ Clear page work; once a Pencil touches, a finger scrolls instead of writing; the
 after a reload; Save as PDF prints the worksheet alone with the ink on it; Show solutions opens the solutions;
 the page never scrolls sideways and nothing logs an error. Then scratch paper: a calculation question in a quiz
 and on an exam paper opens its stem over a 720 px work area with no solutions; the writing is kept for the quiz,
-and a new exam paper starts with clean scratch paper.
+and a new exam paper starts with clean scratch paper. Last, the GoodNotes-style gestures on scratch paper, with Pencil
+events: a near-straight stroke held still for half a second snaps to a straight line whose end follows the Pencil
+until it lifts, a closed loop snaps to an ellipse and a box to a box, a scribble and a stroke that is not held stay
+as drawn, Hold to snap off stops all of it, the highlighter straightens but does not make shapes and sits under the
+writing, two fingers tapped together undo while a two-finger scroll does not, and nothing on the page can be
+selected or opens a menu.
 
     python3 ink_test.py
 """
-import os, re, sys
+import math, os, re, sys
 from playwright.sync_api import sync_playwright
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -190,6 +195,129 @@ def scratch(browser, width, height):
     page.close()
 
 
+PEN = """async ([path, hold, extra, tool]) => {
+  const el = document.querySelector('#ink .wspart[data-ink="work"]'), c = el.querySelector(':scope > canvas.inkcv'), r = c.getBoundingClientRect();
+  if (tool) document.querySelector(`#ink [data-inktool="${tool}"]`).click();
+  const ev = (type, x, y) => c.dispatchEvent(new PointerEvent(type, {pointerType: 'pen', clientX: r.left + x, clientY: r.top + y, pointerId: 31, bubbles: true, cancelable: true, isPrimary: true}));
+  const before = (INK.data.parts.work || []).length;
+  ev('pointerdown', path[0][0], path[0][1]);
+  for (const [x, y] of path.slice(1)) ev('pointermove', x, y);
+  if (hold) await new Promise(f => setTimeout(f, hold));
+  const snap = INK.live && INK.live.snap || null;
+  for (const [x, y] of extra) ev('pointermove', x, y);
+  const last = (extra.length ? extra : path)[(extra.length ? extra : path).length - 1];
+  ev('pointerup', last[0], last[1]);
+  if (tool) document.querySelector('#ink [data-inktool="pen"]').click();
+  const list = INK.data.parts.work || [], s = list[list.length - 1];
+  return {added: list.length - before, snap, n: s.p.length / 2, k: s.k || null, t: s.t, p: s.p.map(v => Math.round(v * r.width))};
+}"""
+TOUCH = """async ([moveBy, how]) => {
+  const c = document.querySelector('#ink .wspart[data-ink="work"] > canvas.inkcv'), r = c.getBoundingClientRect();
+  const ev = (type, x, y, id, t) => c.dispatchEvent(new PointerEvent(type, {pointerType: t || 'touch', clientX: r.left + x, clientY: r.top + y, pointerId: id, bubbles: true, cancelable: true}));
+  const before = (INK.data.parts.work || []).length;
+  if (how === 'pen') { ev('pointerdown', 40, 560, 51, 'pen'); ev('pointermove', 70, 565, 51, 'pen'); }
+  ev('pointerdown', 80, 300, 41); ev('pointerdown', 160, 300, 42);
+  if (moveBy) { ev('pointermove', 160, 300 - moveBy / 2, 42); ev('pointermove', 160, 300 - moveBy, 42); }
+  if (how === 'pen') ev('pointermove', 100, 570, 51, 'pen');
+  await new Promise(f => setTimeout(f, 60));
+  const up = how === 'cancel' ? 'pointercancel' : 'pointerup';
+  ev(up, 80, 300, 41); ev(up, 160, 300 - moveBy, 42);
+  const mid = (INK.data.parts.work || []).length;
+  if (how === 'pen') { ev('pointermove', 130, 575, 51, 'pen'); ev('pointerup', 130, 575, 51, 'pen'); }
+  const list = INK.data.parts.work || [], s = list[list.length - 1];
+  return [before, mid, list.length, how === 'pen' ? Math.round(s.p[s.p.length - 2] * r.width) : null];
+}"""
+
+
+def wobbly(x0, y0, x1, y1, n=30, amp=2.0):
+    d = math.hypot(x1 - x0, y1 - y0); ux, uy = (x1 - x0) / d, (y1 - y0) / d
+    return [[x0 + (x1 - x0) * i / n - uy * amp * math.sin(i * 1.3), y0 + (y1 - y0) * i / n + ux * amp * math.sin(i * 1.3)] for i in range(n + 1)]
+
+
+def snaps(browser, width, height):
+    print(f'\n=== hold to snap and two-finger undo at {width} px ===')
+    page = browser.new_page(viewport={'width': width, 'height': height})
+    errs = []
+    page.on('pageerror', lambda e: errs.append(str(e)))
+    page.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
+    page.add_init_script("window.prompt = () => 'InkTest'; window.confirm = () => true; window.print = () => {};")
+    page.goto(PAGE); page.wait_for_timeout(900)
+    page.evaluate("Object.keys(localStorage).filter(k => k.includes(':ink')).forEach(k => localStorage.removeItem(k)); localStorage.removeItem(NS + ':ink-prefs')")
+    page.evaluate("(() => { const q = QUESTIONS.find(q => qType(q) === 'numeric'); show('quiz'); startSweepOf([q], 'one', 'filtered'); })()")
+    page.wait_for_timeout(300); page.click('#v-quiz .inkscratch'); page.wait_for_selector('#ink .inkpaper .wsdoc')
+    page.evaluate("document.querySelector('#ink .wspart[data-ink=\"work\"] .wswork').scrollIntoView({block: 'center'})")
+    cw = page.evaluate("document.querySelector('#ink .wspart[data-ink=\"work\"] > canvas.inkcv').getBoundingClientRect().width")
+    xr = min(cw - 30, 330)
+    check(page.evaluate("INK.shapes === true && document.querySelector('#ink [data-inkshapes]').getAttribute('aria-pressed') === 'true'"), 'Hold to snap is on by default')
+    # a line drawn and held: straight, and its end follows the Pencil until it lifts
+    ln = wobbly(30, 220, xr, 280)
+    r = page.evaluate(PEN, [ln, 700, [], None])
+    check(r['added'] == 1 and r['snap'] == 'line' and r['n'] == 2 and abs(r['p'][0] - 30) <= 1 and abs(r['p'][1] - 220) <= 1,
+          f"a near-straight stroke held still becomes a straight line from where it started ({r['snap']}, {r['n']} points, {r['p'][:4]})")
+    r = page.evaluate(PEN, [ln, 700, [[xr - 20, 330], [xr - 40, 360]], None])
+    check(r['n'] == 2 and abs(r['p'][2] - (xr - 40)) <= 1 and abs(r['p'][3] - 360) <= 1, f"after the snap the line's end follows the Pencil ({r['p']})")
+    r = page.evaluate(PEN, [ln, 0, [], None])
+    check(r['snap'] is None and r['n'] > 10, f"the same stroke lifted at once stays as drawn ({r['n']} points)")
+    # closed shapes
+    cx, cy, rad = min(cw / 2, 170), 420, 60
+    loop = [[cx + (rad + 3 * math.sin(5 * a)) * math.cos(a), cy + (rad + 3 * math.sin(5 * a)) * 0.8 * math.sin(a)] for a in [2 * math.pi * i / 40 + 0.05 for i in range(42)]]
+    r = page.evaluate(PEN, [loop, 700, [], None])
+    check(r['snap'] == 'shape' and r['n'] == 73 and r['k'] is None, f"a closed loop held still becomes an ellipse ({r['snap']}, {r['n']} points)")
+    bx0, by0, bx1, by1 = 40, 520, min(cw - 40, 220), 600
+    box = [[bx0 + (bx1 - bx0) * i / 10, by0 + (i % 2)] for i in range(11)] + [[bx1 - (i % 2), by0 + (by1 - by0) * i / 8] for i in range(1, 9)] + \
+          [[bx1 - (bx1 - bx0) * i / 10, by1 - (i % 2)] for i in range(1, 11)] + [[bx0 + (i % 2), by1 - (by1 - by0) * i / 8] for i in range(1, 8)]
+    r = page.evaluate(PEN, [box, 700, [], None])
+    check(r['snap'] == 'shape' and r['k'] == 'poly' and r['n'] == 5 and r['p'][:4] == [bx0, by0, round(bx1), by0],
+          f"a box held still becomes a box with square corners ({r['snap']}, {r['k']}, {r['p']})")
+    zig = [[40 + 12 * i, 650 + (30 if i % 2 else 0)] for i in range(12)]
+    r = page.evaluate(PEN, [zig, 700, [], None])
+    check(r['snap'] is None and r['n'] == 12, f"a scribble held still stays as drawn ({r['n']} points)")
+    # Hold to snap off
+    page.click('#ink [data-inkshapes]')
+    off = page.evaluate("[INK.shapes, document.querySelector('#ink [data-inkshapes]').getAttribute('aria-pressed'), JSON.parse(localStorage.getItem(NS + ':ink-prefs')).shapes]")
+    r = page.evaluate(PEN, [ln, 700, [], None])
+    check(off == [False, 'false', False] and r['snap'] is None and r['n'] > 10, f"Hold to snap off: the held line stays as drawn, and the choice is saved ({off}, {r['n']} points)")
+    page.click('#ink [data-inkshapes]')
+    # the highlighter straightens, makes no shapes, and sits under the writing
+    r = page.evaluate(PEN, [ln, 700, [], 'hl'])
+    check(r['t'] == 'hl' and r['snap'] == 'line' and r['n'] == 2, f"a held highlighter stroke straightens ({r['t']}, {r['snap']})")
+    r = page.evaluate(PEN, [loop, 700, [], 'hl'])
+    check(r['t'] == 'hl' and r['snap'] is None and r['n'] > 20, f"a highlighter loop does not become a shape ({r['n']} points)")
+    page.click('#ink [data-inksize="4"]'); page.click('#ink [data-inkcolor="#111111"]')
+    page.evaluate(PEN, [[[30, 700], [80, 700], [130, 700], [180, 700]], 0, [], None])
+    page.click('#ink [data-inkcolor="#C62828"]')
+    page.evaluate(PEN, [[[105, 660], [105, 690], [105, 710], [105, 740]], 0, [], 'hl'])
+    px = page.evaluate("""(() => { const c = document.querySelector('#ink .wspart[data-ink="work"] > canvas.inkcv'), k = c.width / c.getBoundingClientRect().width;
+        const at = (x, y) => [...c.getContext('2d').getImageData(Math.round(x * k), Math.round(y * k), 1, 1).data];
+        return [at(105, 700), at(105, 670)]; })()""")
+    check(px[0][3] == 255 and all(abs(a - 17) <= 6 for a in px[0][:3]) and px[1][0] > px[1][1] + 40,
+          f"a red highlighter drawn after black writing crosses it in red and the writing shows on top (crossing, highlighter alone: {px})")
+    # two fingers tapped together undo; a two-finger scroll does not
+    t = page.evaluate(TOUCH, [0, 'tap'])
+    check(t[2] == t[0] - 1, f'two fingers tapped together undo the last stroke ({t})')
+    t = page.evaluate(TOUCH, [80, 'tap'])
+    check(t[2] == t[0], f'two fingers that move scroll and undo nothing ({t})')
+    t = page.evaluate(TOUCH, [0, 'cancel'])
+    check(t[2] == t[0], f'two touches the system cancels, such as a rejected palm, undo nothing ({t})')
+    t = page.evaluate(TOUCH, [0, 'pen'])
+    check(t[1] == t[0] and t[2] == t[0] + 1 and t[3] == 130,
+          f"a hand that touches and lifts while the Pencil writes undoes nothing and does not end the Pencil's stroke ({t})")
+    # the eraser removes a snapped line touched in its middle, far from both ends
+    r = page.evaluate(PEN, [wobbly(30, 790, xr, 810), 700, [], None]); mx, my = (r['p'][0] + r['p'][2]) / 2, (r['p'][1] + r['p'][3]) / 2
+    n0 = page.evaluate("(INK.data.parts.work || []).length")
+    page.evaluate(PEN, [[[mx, my - 4], [mx, my], [mx, my + 4]], 0, [], 'erase'])
+    n1 = page.evaluate("(INK.data.parts.work || []).length")
+    check(r['n'] == 2 and n1 == n0 - 1, f'the eraser removes a straight line touched in its middle ({n0} → {n1})')
+    # nothing on the page is selected or opens a menu
+    sel = page.evaluate("""(() => { const q = document.querySelector('#ink .wsq'), c = document.querySelector('#ink .wspart[data-ink="work"] > canvas.inkcv');
+        const fire = (el, type) => { const e = new Event(type, {bubbles: true, cancelable: true}); el.dispatchEvent(e); return e.defaultPrevented; };
+        return [getComputedStyle(q).userSelect, fire(q, 'selectstart'), fire(q, 'contextmenu'), fire(c, 'touchstart')]; })()""")
+    check(sel == ['none', True, True, True], f'the page cannot be selected, a long press opens no menu, and a touch on the canvas starts no browser gesture ({sel})')
+    page.click('#ink [data-inkdone]')
+    check(not errs, f'no page or console errors at {width} px', '; '.join(errs[:3]))
+    page.close()
+
+
 def main():
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -197,6 +325,8 @@ def main():
         run(browser, 390, 844)
         scratch(browser, 820, 1180)
         scratch(browser, 390, 844)
+        snaps(browser, 820, 1180)
+        snaps(browser, 390, 844)
         browser.close()
     print(f'\n{len(fails)} failure(s)' if fails else '\nall writing checks passed')
     sys.exit(1 if fails else 0)
