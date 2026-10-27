@@ -91,7 +91,13 @@ Last updated 2026-10-26.
   decimal is one of the question's own numbers, and every calculation speaks its keyed answer.
 - Played by the device voice; a recorded clip, audio/why-<id>.mp3, plays instead once it exists (WHY_CLIPS from
   build.py). 193,555 characters in all: at the 27 Oct rate (1,616.8 cents for 88,948 characters) a recording would
-  be about 3,518 cents and about 209 minutes. Not recorded: waiting for approval.
+  be about 3,518 cents and about 209 minutes.
+- Recorded 27 Oct after approval (same voice and model as the walkthroughs, one generation each; ledgers
+  recwhy/ledger-w*.jsonl in the scratchpad): 166 of 197 scripts, 162,675 credits by the ledgers (about 2,957.2
+  cents at the same rate), 173.8 minutes, every speaking rate inside 1.6 to 3.6 words a second. The account then
+  ran out of credits ("exceeds your quota of 1231000"): 18 generations failed uncharged and 13 were not started. The
+  31 scripts without a clip (30,864 characters) are read by the device voice; each still has its one retry.
+- A clip must match its script: change a t in why/why.json and its clip has to be recorded again or deleted.
 - x3-c-05: her quote gives 6.62 mg/kg/day while the question's own per-kilogram value is 6.43; the script quotes her
   word for word because the quote's point (give a dose, not a per-kilogram rate) stands.
 

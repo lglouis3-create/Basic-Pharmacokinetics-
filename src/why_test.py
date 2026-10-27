@@ -7,16 +7,17 @@ answered, Hear why sits under the explanation and Read along holds the same word
 sentence by sentence, in order, to the end; Pause stops the voice and Resume goes on from that sentence; moving to
 the next question or another tab stops it; a question with no script has no button; with no device voice the words
 open instead; a clip listed as recorded that fails to load falls back to the voice; and a submitted Exam sim paper
-offers Hear why on its ★ questions. Any page or console error fails the run.
+offers Hear why on its ★ questions. A script with a recorded clip (audio/why-<id>.mp3, served as on the class site)
+plays the clip and not the device voice. Any page or console error fails the run.
 
     python3 why_test.py
 """
-import os, re, sys
+import functools, http.server, os, re, sys, threading
 from playwright.sync_api import sync_playwright
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
 NAME = re.search(r"""\boutput\s*:\s*['"]([^'"]+)['"]""", open(os.path.join(HERE, 'course.js')).read()).group(1)
-URL = 'file://' + os.path.join(os.path.dirname(HERE), NAME)
 fails = []
 
 VOICE = """
@@ -45,6 +46,21 @@ def check(ok, label, detail=''):
 def run(page, width):
     print(f'\n=== Hear why at {width} px ===')
     page.evaluate(DRIVE)
+    # a recorded clip plays from audio/ (the site's copy), not the device voice
+    rec = page.evaluate("WHY_CLIPS.find(id => LIKELY_WHY[id] && qType(byId(id)) === 'mc' && !isMulti(byId(id))) || null")
+    if rec:
+        page.evaluate(f"driveTo(byId('{rec}')); answerRight(); __said = []; document.querySelector('#v-quiz [data-hearwhy]').click()")
+        try:
+            page.wait_for_function("WHY && WHY.audio && WHY_AUDIO && WHY_AUDIO.currentTime > 1", timeout=20000); ok = True
+        except Exception:
+            ok = False
+        meta = page.evaluate("document.querySelector('#v-quiz .whymeta').textContent")
+        check(ok and meta == 'recorded narration' and page.evaluate("__said.length") == 0 and page.evaluate("WHY_AUDIO.src").endswith(f'audio/why-{rec}.mp3'),
+              f'{rec}: a recorded script plays its clip in the narrator voice, not the device voice ({meta})')
+        page.evaluate("whyStop()")
+    n = page.evaluate("WHY_CLIPS.length")
+    print(f'  ..   {n} scripts have a recorded clip; the voice checks below set them aside')
+    page.evaluate("window.__clips = WHY_CLIPS.splice(0)")
     cov = page.evaluate("""(() => { const s = Object.keys(LIKELY_STARS), w = Object.keys(LIKELY_WHY);
       return [s.length, w.length, s.filter(i => !LIKELY_WHY[i]).length, w.filter(i => !LIKELY_STARS[i]).length]; })()""")
     check(cov[0] == cov[1] and cov[2] == 0 and cov[3] == 0, f'every ★ question has a script and no other question does {cov}')
@@ -81,13 +97,14 @@ def run(page, width):
     page.evaluate(f"driveTo(byId('{qid}')); answerRight(); __hold = true; document.querySelector('#v-quiz [data-hearwhy]').click(); show('topics')")
     check(page.evaluate("WHY === null"), 'leaving the tab stops it')
     # a clip listed as recorded that cannot load: the voice reads instead
+    page.route(f'**/audio/why-{qid}.mp3', lambda r: r.abort())   # the clip cannot load, whether or not it exists
     page.evaluate(f"__hold = false; __said = []; WHY_CLIPS.push('{qid}'); show('quiz'); driveTo(byId('{qid}')); answerRight(); document.querySelector('#v-quiz [data-hearwhy]').click()")
     try:
         page.wait_for_function("__said.length > 0", timeout=10000); fell = True
     except Exception:
         fell = False
     check(fell, 'a recorded clip that fails to load falls back to the device voice')
-    page.evaluate(f"whyStop(); WHY_CLIPS.splice(WHY_CLIPS.indexOf('{qid}'), 1)")
+    page.evaluate(f"whyStop(); WHY_CLIPS.splice(WHY_CLIPS.indexOf('{qid}'), 1)"); page.unroute(f'**/audio/why-{qid}.mp3')
     # no device voice: the words open
     page.evaluate(f"window.__keep = window.speechSynthesis; window.speechSynthesis = undefined; driveTo(byId('{qid}')); answerRight(); document.querySelector('#v-quiz [data-hearwhy]').click()")
     check(page.evaluate("!!document.querySelector('#v-quiz .whytx').open && WHY === null"), 'with no device voice the words open instead')
@@ -109,24 +126,34 @@ def run(page, width):
     want = page.evaluate("(() => { const s = QUESTIONS.filter(starOf); return [s.length, s.filter(q => kindOf(q) === 'concept').length, s.filter(q => kindOf(q) === 'calc').length]; })()")
     check([got[k][1] for k in ('all', 'concept', 'calc')] == want and all(g[0] == 'quiz' and g[2] for g in got.values()) and want[1] + want[2] == want[0],
           f"the ★ drill starts all {want[0]}, the {want[1]} concepts or the {want[2]} calculations {got}")
+    page.evaluate("WHY_CLIPS.push(...__clips)")
     sw = page.evaluate("document.documentElement.scrollWidth - innerWidth")
     check(sw <= 1, f'no sideways scroll ({sw})')
 
 
 def main():
+    class Quiet(http.server.SimpleHTTPRequestHandler):
+        def log_message(self, *a): pass
+        def do_GET(self):
+            if self.path == '/favicon.ico': self.send_response(204); self.end_headers(); return
+            super().do_GET()
+    srv = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(Quiet, directory=ROOT))
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    URL = f'http://127.0.0.1:{srv.server_address[1]}/{NAME}'
     with sync_playwright() as p:
         browser = p.chromium.launch()
         for width in (390, 1200):
             page = browser.new_page(viewport={'width': width, 'height': 860})
             errs = []
             page.on('pageerror', lambda e: errs.append(str(e)))
-            page.on('console', lambda m: errs.append(m.text + ' ' + (m.location or {}).get('url', '')) if m.type == 'error' and '/audio/why-' not in (m.location or {}).get('url', '') else None)   # the missing clip the fallback check asks for
+            page.on('console', lambda m: errs.append(m.text + ' ' + (m.location or {}).get('url', '')) if m.type == 'error' and '/audio/why-' not in (m.location or {}).get('url', '') and 'ERR_FAILED' not in m.text else None)   # the clip the fallback check blocks
             page.add_init_script(VOICE)
             page.goto(URL); page.wait_for_timeout(1200)
             run(page, width)
             check(not errs, f'no page or console errors at {width} px', '; '.join(errs[:3]))
             page.close()
         browser.close()
+    srv.shutdown()
     print(f'\n{len(fails)} failure(s)' if fails else '\nall Hear why checks passed')
     sys.exit(1 if fails else 0)
 

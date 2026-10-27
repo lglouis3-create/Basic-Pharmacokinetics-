@@ -3,6 +3,7 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-27 (writing as on GoodNotes)
+- Hear why: 166 of the 197 scripts now play in the narrator voice; the rest use the device voice for now.
 - Topics: the ★ Likely drill runs all of them, the concepts only or the calculations only.
 - Tell apart: which urine pH raises a weak acid's or weak base's excretion; raising ka vs raising k.
 - Module 4: two questions on urine pH with a weak base and with acidic urine; her 5 Oct cue in the guide.
