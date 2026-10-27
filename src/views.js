@@ -291,6 +291,7 @@ const VIEWS = ['topics','quiz','gaps','notes','exam','sheets','guide','tell','te
 function show(v){
   VIEW = v;
   if(typeof gwStop === 'function') gwStop();   // a walkthrough stops when the tab changes (the Guides tab is redrawn on every visit)
+  whyStop();
   { const lb = document.getElementById('lback'); if(lb) lb.remove(); }
   { const pane = document.getElementById('v-' + v);
     if(ANIM && !(pane && pane.contains(ANIM.b))){ clearInterval(ANIM.t); ANIM.b.textContent = '▶ Play all'; ANIM = null; } }
@@ -1065,6 +1066,83 @@ function termQuestions(){
   return out;
 }
 const TERM_QS = termQuestions();
+/* The variables quiz: what each symbol in her problems stands for (ASKS, shell.html). Three kinds of question per
+   symbol: which quantity one of her own stems asks for (the stem's question sentence, from each calculation in the
+   bank that asks for it and does not name the symbol), what the symbol means, and which symbol a meaning belongs
+   to. The wrong options come from the same family of symbols first (the concentrations, the rate constants, the
+   times ...), so the choice is between neighbours. They drill like the term questions, as concept var:<key>. */
+const VAR_FAMILY = {k: 'rate constants', ka: 'rate constants', k0: 'rate constants', ke: 'rate constants', alpha: 'rate constants', beta: 'rate constants', k12: 'rate constants', k21: 'rate constants',
+  thalf: 'times', thalfa: 'times', tmax: 'times', tmaxss: 'times', tau: 'times', nhalf: 'times', t: 'times',
+  C0: 'concentrations', Cp: 'concentrations', Css: 'concentrations', Cmax: 'concentrations', Cmin: 'concentrations', Cmaxss: 'concentrations', Cminss: 'concentrations', Cavgss: 'concentrations', Cpn: 'concentrations', Km: 'concentrations', EC50: 'concentrations',
+  D0: 'doses and amounts', DL: 'doses and amounts', Dpo: 'doses and amounts', DB: 'doses and amounts', Davgss: 'doses and amounts', Du: 'doses and amounts',
+  R: 'rates in and out', rate: 'rates in and out', Vmax: 'rates in and out',
+  VD: 'volumes and clearances', Vp: 'volumes and clearances', Vt: 'volumes and clearances', ClT: 'volumes and clearances', ClR: 'volumes and clearances', ClH: 'volumes and clearances', CrCl: 'volumes and clearances', IBW: 'volumes and clearances',
+  F: 'fractions, exposure and effect', Frel: 'fractions, exposure and effect', fe: 'fractions, exposure and effect', AUC: 'fractions, exposure and effect', AUCtau: 'fractions, exposure and effect', Emax: 'fractions, exposure and effect', E: 'fractions, exposure and effect'};
+const VAR_GROUPS = [...new Set(Object.values(VAR_FAMILY))];
+// the sentence of a stem that asks: its last question, else its last sentence that says what to find
+function askSentence(stem){
+  const ss = String(stem || '').split(/\n+/).filter(l => !/\|/.test(l))   // a table row is never the question
+    .flatMap(l => l.replace(/\s+/g, ' ').split(/(?<=[.?!])\s+(?=[A-Z(])/)).map(x => x.trim()).filter(Boolean);
+  const q = ss.filter(x => /\?$/.test(x)); if(q.length) return q[q.length - 1];
+  const d = ss.filter(x => /^(calculate|determine|find|estimate|what|how|compute)\b/i.test(x)); return d.length ? d[d.length - 1] : null;
+}
+// does the sentence name the symbol or its usual name, so the question would answer itself?
+const VAR_NAMES = {thalf: ['half-life', 'half life'], thalfa: ['half-life', 'half life'], Km: ['Km', 'KM', 'Michaelis'], VD: ['Vd', 'volume of distribution'], tau: ['tau', 'dosing interval'],
+  ClT: ['clearance'], ClR: ['renal clearance'], ClH: ['hepatic clearance'], CrCl: ['creatinine clearance'], IBW: ['ideal body weight'], AUC: ['area under'], AUCtau: ['area under'],
+  DL: ['loading dose'], Vmax: ['Vmax'], ka: ['absorption rate constant'], k: ['elimination rate constant'], k0: ['zero-order rate constant'], fe: ['fraction excreted'],
+  F: ['bioavailability'], Frel: ['relative bioavailability'], tmax: ['tmax'], Emax: ['Emax', 'maximum effect'], EC50: ['EC50'], Css: ['Css', 'steady-state concentration', 'steady state concentration']};
+const varEsc = n => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+// the sentence names the symbol, its usual name, or any symbol of its family as a word of its own ("the rate constant k")
+const namesSym = (k, s) => [ASKS[k][0].replace(/∞/g, ''), ...(VAR_NAMES[k] || [])].some(n => n.length > 1 && new RegExp('(^|[^A-Za-z])' + varEsc(n) + '(?![a-z])', 'i').test(s))
+  || Object.keys(VAR_FAMILY).filter(x => VAR_FAMILY[x] === VAR_FAMILY[k] && ASKS[x]).some(x => new RegExp('(^|[^A-Za-z0-9])' + varEsc(ASKS[x][0].replace(/∞/g, '')) + '(?![A-Za-z0-9])').test(s));
+// two symbols her wording alone cannot tell apart are never each other's wrong option
+const VAR_TWINS = {Cp: ['Cpn'], Cpn: ['Cp']};
+function varOptions(k, n, label){
+  const ok = x => x !== k && ASKS[x] && !(VAR_TWINS[k] || []).includes(x);
+  const fam = Object.keys(VAR_FAMILY).filter(x => ok(x) && VAR_FAMILY[x] === VAR_FAMILY[k]), rest = Object.keys(VAR_FAMILY).filter(x => ok(x) && VAR_FAMILY[x] !== VAR_FAMILY[k]);
+  return [k, ...shuffle(fam).concat(shuffle(rest)).slice(0, n - 1)].map(x => ({k: x, t: label(x)}));
+}
+function varQuestions(){
+  if(typeof ASKS === 'undefined') return [];
+  const out = [], seen = new Set(), sym = x => ASKS[x][0], mean = x => ASKS[x][1];
+  const nums = QUESTIONS.filter(q => qType(q) === 'numeric' && q.asks && VAR_FAMILY[q.asks] && !q.lowYield);
+  const ord = m => m === 9 ? 7.5 : m;
+  for(const k of Object.keys(VAR_FAMILY)){
+    if(!ASKS[k]) continue;
+    const mine = nums.filter(q => q.asks === k), first = mine.slice().sort((a, b) => ord(a.module) - ord(b.module))[0];
+    const base = {prof: 'Mosley', tier: 'new', module: first ? first.module : 1, exam: first ? first.exam : 1,
+      topic: 'terms', sub: 'Variables: ' + VAR_FAMILY[k], concept: 'var:' + k, skill: 'term', source: 'slide', varKey: k,
+      cite: 'The symbols of her equation sheet: Reference, and What is asked in the Plan drill',
+      teach: [{h: sym(k), list: [sym(k) + ' is ' + mean(k) + '.']}]};
+    const why = (x, ok) => ok ? `${sym(x)} is ${mean(x)}.` : `${sym(x)} is ${mean(x)}; the one asked for is ${sym(k)}.`;
+    const top = `var-${k}-means`;
+    out.push(Object.assign({}, base, {id: top, stem: `What does ${sym(k)} stand for in her problems?`,
+      options: shuffle(varOptions(k, 4, mean).map(o => ({t: o.t, correct: o.k === k, why: o.k === k ? why(k, true) : `That describes ${sym(o.k)}, not ${sym(k)}.`})))}));
+    out.push(Object.assign({}, base, {id: `var-${k}-symbol`, dupOf: top, stem: `Which symbol is ${mean(k)}?`,
+      options: shuffle(varOptions(k, 5, sym).map(o => ({t: o.t, correct: o.k === k, why: why(o.k, o.k === k)})))}));
+    for(const q of mine){
+      const a = askSentence(q.stem);
+      if(!a || a.split(/\s+/).length < 5 || /the following|as follows|:\s*\S{0,3}\.?$/i.test(a) || namesSym(k, a)) continue;   // a part header ("Calculate the following: f.") says nothing
+      const key = k + '|' + a.toLowerCase(); if(seen.has(key)) continue; seen.add(key);
+      out.push(Object.assign({}, base, {id: `var-${k}-ask-${q.id}`, dupOf: top, module: q.module, exam: q.exam, cite: q.cite, fromQ: q.id,
+        stem: `Which quantity is this question asking for? “${a}”`,
+        options: shuffle(varOptions(k, 5, sym).map(o => ({t: o.t, correct: o.k === k, why: why(o.k, o.k === k)})))}));
+    }
+  }
+  return out;
+}
+const VAR_QS = varQuestions();
+// the variables block under Quiz me (Terms) and its button on Equations: all symbols, or one family
+function varQuizHTML(){
+  if(!VAR_QS.length) return '';
+  const asks = VAR_QS.filter(q => q.fromQ).length;
+  return `<h3 id="varquiz">Variables: what is the question asking for?</h3>
+    <p class="sub">${asks} question sentences from her own calculation stems, each asking which symbol it wants, and two questions per symbol on what it means. The wrong choices are its neighbours: the other concentrations, rate constants or times.</p>
+    <div class="topic plain"><div class="subs">${['all', ...VAR_GROUPS].map(g => {
+      const pool = VAR_QS.filter(q => g === 'all' || q.sub === 'Variables: ' + g);
+      return rowHTML(g === 'all' ? 'All variables' : esc(g.charAt(0).toUpperCase() + g.slice(1)), `${pool.length} questions`, null, `<button data-varquiz="${esc(g)}">Start</button>`); }).join('')}</div></div>`;
+}
+const varQuiz = g => startPool(VAR_QS.filter(q => g === 'all' || q.sub === 'Variables: ' + g), g === 'all' ? 'Variables' : 'Variables — ' + g);
 const TERM_GROUPS = [...new Set(TERMS.map(t => t.group))];
 const LETTERS_AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const termLetter = t => (termName(t).match(/[A-Za-z]/) || ['#'])[0].toUpperCase();
@@ -1141,7 +1219,8 @@ function renderTerms(){
     h += `<p class="sub">Three questions per term: which term a situation describes, what a term means, and which term a definition belongs to.</p>
       <div class="topic plain"><div class="subs">${['all', ...TERM_GROUPS].map(g => {
         const pool = TERM_QS.filter(q => g === 'all' || q.sub === g);
-        return rowHTML(g === 'all' ? 'All terms' : esc(g), `${pool.length} questions`, null, `<button data-tquiz="${esc(g)}">Start</button>`); }).join('')}</div></div>`;
+        return rowHTML(g === 'all' ? 'All terms' : esc(g), `${pool.length} questions`, null, `<button data-tquiz="${esc(g)}">Start</button>`); }).join('')}</div></div>
+      ${varQuizHTML()}`;
   }
   el.innerHTML = h;
   el.querySelectorAll('[data-tmode]').forEach(b => b.onclick = () => { TV.mode = b.dataset.tmode; renderTerms(); });
@@ -1258,8 +1337,8 @@ function spotlight(target, terms){
 }
 function explainHTML(q){
   const ls = linksFor(q), terms = spotTerms(q);
-  return ls.length ? `<div class="explainmore"><span>Explain more:</span>${ls.map(([v, a, t]) =>
-    `<button type="button" class="chip" data-jump="${v}:${a}" data-terms="${esc(terms.join(' '))}">${esc(t)}</button>`).join('')}</div>` : '';
+  return whyBtnHTML(q) + (ls.length ? `<div class="explainmore"><span>Explain more:</span>${ls.map(([v, a, t]) =>
+    `<button type="button" class="chip" data-jump="${v}:${a}" data-terms="${esc(terms.join(' '))}">${esc(t)}</button>`).join('')}</div>` : '');
 }
 /* The miss-kind buttons, with what the wrong number itself points to shown
    above them and the kind it points to marked as suggested. */
@@ -2448,7 +2527,7 @@ let CQ = null;   // concept -> its questions: the bank, the extra practice and t
 function conceptQs(c){
   if(!CQ){
     CQ = {};
-    QUESTIONS.concat(typeof EXTRAS === 'undefined' ? [] : EXTRAS, typeof TERM_QS === 'undefined' ? [] : TERM_QS)
+    QUESTIONS.concat(typeof EXTRAS === 'undefined' ? [] : EXTRAS, typeof TERM_QS === 'undefined' ? [] : TERM_QS, typeof VAR_QS === 'undefined' ? [] : VAR_QS)
       .forEach(q => (CQ[q.concept] ||= []).push(q));
   }
   return CQ[c] || [];
@@ -4089,6 +4168,9 @@ function eqPickerHTML(){
     <div class="subrow"><span class="sname"><b>Both, alternating</b>
       <small>Builds first, then types the same equation, which is the order that makes typing possible</small></span>
       <button data-start="mix"${chosen.size ? '' : ' disabled'} class="ghost">Start</button></div>
+    ${VAR_QS.length ? `<div class="subrow"><span class="sname"><b>What each variable means</b>
+      <small>Her question sentences: which symbol is asked for; and what each symbol stands for. Also under Terms, Quiz me</small></span>
+      <button data-varquiz="all" class="ghost">Start</button></div>` : ''}
   </div></div>`;
   h += suCardHTML();
 
@@ -5582,6 +5664,63 @@ function modTint(root, sel = MOD_TITLES){
   });
   return n;
 }
+/* Hear why: the spoken reasoning of a ★ question (LIKELY_WHY, likely_why.js), under its explanation once it is
+   answered and on a paper's results. Its recorded clip (audio/why-<id>.mp3, listed in WHY_CLIPS by build.py) plays
+   when there is one, else the device voice reads it sentence by sentence, at the walkthroughs' speed. Read along
+   shows the same words. It stops when the question or the tab is left, or a walkthrough starts. */
+const whyHas = id => typeof LIKELY_WHY !== 'undefined' && !!LIKELY_WHY[id];
+const whyRec = id => typeof WHY_CLIPS !== 'undefined' && WHY_CLIPS.includes(id);
+let WHY = null, WHY_AUDIO = null;   // WHY: {id, run, playing, started, k, audio, voice, fell}
+const whyBtnHTML = q => whyHas(q.id) ? `<div class="whybar"><button type="button" class="btn small whybtn" data-hearwhy="${esc(q.id)}" aria-pressed="false">🔊 Hear why</button><span class="whymeta">${whyRec(q.id) ? 'recorded narration' : 'device voice'}</span><details class="whytx"><summary>Read along</summary><p>${esc(LIKELY_WHY[q.id])}</p></details></div>` : '';
+function whyDraw(){
+  document.querySelectorAll('[data-hearwhy]').forEach(b => { const mine = WHY && WHY.id === b.dataset.hearwhy, on = mine && WHY.playing;
+    b.textContent = on ? '❚❚ Pause' : mine && WHY.started ? '🔊 Resume' : '🔊 Hear why'; b.setAttribute('aria-pressed', String(!!on)); });
+}
+function whyStop(){
+  if(!WHY) return; const w = WHY; w.run++; w.playing = false; WHY = null;
+  if(WHY_AUDIO){ WHY_AUDIO.onended = WHY_AUDIO.onerror = WHY_AUDIO.ontimeupdate = null; WHY_AUDIO.pause(); }
+  if(w.voice){ const sy = gwSynth(); if(sy) sy.cancel(); }
+  whyDraw();
+}
+function whyToggle(id){
+  if(WHY && WHY.id === id){
+    const w = WHY;
+    if(w.playing){ w.playing = false; w.run++; if(w.audio && WHY_AUDIO) WHY_AUDIO.pause(); else { const sy = gwSynth(); if(sy) sy.cancel(); } return whyDraw(); }
+    w.playing = true;
+    if(w.audio && WHY_AUDIO && WHY_AUDIO.currentTime > 0 && !WHY_AUDIO.ended){ WHY_AUDIO.playbackRate = gwRate(); WHY_AUDIO.play().catch(() => {}); return whyDraw(); }
+    return whyRun(w.k);   // the device voice starts the sentence again
+  }
+  whyStop(); if(typeof gwStop === 'function') gwStop();
+  WHY = {id, run: 0, playing: true, started: true, k: 0};
+  whyRun(0);
+}
+function whyRun(k){
+  const w = WHY, run = ++w.run, ss = gwSents(LIKELY_WHY[w.id]);
+  const gone = () => WHY !== w || run !== w.run || !w.playing, here = () => !!document.querySelector(`[data-hearwhy="${w.id}"]`);
+  const end = () => { if(WHY !== w || run !== w.run) return; WHY = null; whyDraw(); };
+  whyDraw();
+  if(whyRec(w.id) && !w.fell){
+    const a = WHY_AUDIO || (WHY_AUDIO = new Audio()), fall = () => { if(gone()) return; w.fell = true; w.audio = false; whyRun(0); };
+    w.audio = true; a.src = 'audio/why-' + w.id + '.mp3'; a.playbackRate = gwRate();
+    a.onended = end; a.onerror = fall; a.ontimeupdate = () => { if(!gone() && !here()) whyStop(); };
+    a.play().catch(fall);
+    return;
+  }
+  const sy = gwSynth();
+  if(!sy){ WHY = null; whyDraw(); document.querySelectorAll(`[data-hearwhy="${w.id}"]`).forEach(b => { const d = b.parentElement.querySelector('.whytx'); if(d) d.open = true; }); return; }   // no voice: the words open instead
+  w.voice = true;
+  const say = kk => {
+    if(gone()) return; if(!here()) return whyStop();
+    w.k = kk;
+    const u = new SpeechSynthesisUtterance(ss[kk]); u.rate = gwRate(); u.lang = 'en-US';
+    u.onend = () => { if(gone()) return; kk + 1 < ss.length ? say(kk + 1) : end(); };
+    u.onerror = e => { if(e && e.error === 'interrupted') return; end(); };
+    sy.speak(u);
+  };
+  sy.cancel(); say(k);
+}
+const WHY_CSS = '.whybar{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:12px 0 6px}.whymeta{font-size:12.5px;color:var(--text-dim)}' +
+  '.whytx{flex-basis:100%}.whytx summary{cursor:pointer;font-size:13px;color:var(--text-dim)}.whytx p{font-size:14.5px;line-height:1.55;margin:6px 0 0}';
 /* ==========================================================================
    BOOT
    ========================================================================== */
@@ -5735,6 +5874,7 @@ function gwPlay(id, i, k){
     if(GW.audio && GW_AUDIO && GW_AUDIO.src && !GW_AUDIO.ended && GW_AUDIO.currentTime > 0){ const run = ++GW.run; gwAudioWire(id, i, run, gwNext(id, i, GW, run)); GW_AUDIO.playbackRate = gwRate(); GW_AUDIO.play().catch(() => {}); gwDraw(id); return; }
     return gwRun(id, i, GW.k);
   }
+  whyStop();
   if(GW && GW.id !== id){ const old = GW.id; gwStopSound(); GW = null; gwDraw(old); }
   else gwStopSound();
   GW = {id, i, k: k || 0, playing: true, started: true, run: GW && GW.id === id ? GW.run : 0, browse: null};
@@ -6171,7 +6311,7 @@ function applyTheme(t){
 askProfile();
 // module colours: each study tab's titles are tinted whenever the tab draws; a paper and a drill are left alone, and
 // the Exam sim tab tints only its blueprint table, the Notes tab only its module chips
-{ const st = document.createElement('style'); st.id = 'modstyle'; st.textContent = modStyle(); document.head.appendChild(st);
+{ const st = document.createElement('style'); st.id = 'modstyle'; st.textContent = modStyle() + WHY_CSS; document.head.appendChild(st);
   const only = {exam: 'table.gap td:first-child', notes: '.chip'};
   ['topics', 'gaps', 'notes', 'exam', 'sheets', 'guide', 'tell', 'terms', 'diag', 'eq', 'ref'].forEach(v => {
     const pane = document.getElementById('v-' + v); if(!pane) return;
@@ -6181,6 +6321,8 @@ askProfile();
 // every study tab is marked after it draws, whatever redrew it
 [['renderGuide', 'guide'], ['renderTell', 'tell'], ['renderRef', 'ref'], ['renderDiagrams', 'diag'], ['renderSheets', 'sheets'], ['renderTerms', 'terms'], ['renderEq', 'eq']]
   .forEach(([fn, v]) => { const f = window[fn]; if(typeof f === 'function') window[fn] = function(){ const r = f.apply(this, arguments); try { weakMark(v); } catch(e){} return r; }; });
+document.addEventListener('click', e => { const b = e.target.closest('[data-hearwhy]'); if(b) whyToggle(b.dataset.hearwhy); });
+document.addEventListener('click', e => { const b = e.target.closest('[data-varquiz]'); if(b) varQuiz(b.dataset.varquiz); });
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-wkdrill]'); if(!b) return;
   const cs = new Set(b.dataset.wkdrill.split('|')), pool = [...cs].flatMap(conceptQs).filter(q => !q.lowYield || cs.size);

@@ -86,7 +86,7 @@ def main():
         page.goto('file://' + page_path)
         page.wait_for_function("typeof sheetHTML === 'function'")
         files = page.evaluate('sheetFiles()')
-        style = page.evaluate("[...document.querySelectorAll('style')].map(s => s.textContent).join('')")
+        style = page.evaluate("[...document.querySelectorAll('style:not([id])')].map(s => s.textContent).join('')")   # the page's own stylesheet; the styles the app adds at run time (module colours, writing, weak spots) have an id and style no sheet markup
         meta = {f['src']: page.evaluate("id => { const s = SRC_BY[id]; return {title: s.title}; }", f['src'])
                 for f in files}
         page.emulate_media(media='print', color_scheme='light')

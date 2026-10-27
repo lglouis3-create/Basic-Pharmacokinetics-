@@ -154,7 +154,7 @@ def main():
         files = page.evaluate('sheetFiles()')
         sources = page.evaluate("SRC_LIST.map(s => ({id: s.id, title: s.title, type: s.type, drive: s.drive, missing: s.missing, n: (s.items || []).length, variants: sheetVariants(s), changedSets: sheetPlan(s).changed.length}))")
         from_links = page.evaluate("Object.keys(SRC_OF).map(id => { const q = byId(id); return q ? [id, fromLineHTML(q)] : [id, '']; })")
-        style = page.evaluate("[...document.querySelectorAll('style')].map(s => s.textContent).join('')")
+        style = page.evaluate("[...document.querySelectorAll('style:not([id])')].map(s => s.textContent).join('')")   # the page's own stylesheet; the styles the app adds at run time (module colours, writing, weak spots) have an id and style no sheet markup
         page.emulate_media(media='print', color_scheme='light')
 
         print('\n=== Every source has its PDFs ===')

@@ -3,6 +3,8 @@
 Newest first. The build embeds this file; Topics shows what is new since your last visit, and Settings shows all of it. Keep each bullet to one short line.
 
 ## 2026-10-27 (writing as on GoodNotes)
+- 🔊 Hear why on all 197 ★ questions: the reasoning read aloud under the explanation, with Read along.
+- Variables quiz (Terms, Quiz me; Equations): which symbol her question asks for, and what each symbol means.
 - Exam sim: a third clip joins the ones that rotate after a submitted paper.
 - Module colours, as on the equation sheet, on every module title and section; never on a question.
 - Equation sheet: Module 7b and Module 8 lines have their own colours; the dark-theme badges read clearly.

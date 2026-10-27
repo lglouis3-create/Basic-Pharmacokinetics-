@@ -80,6 +80,21 @@ Last updated 2026-10-26.
 - A script change after this makes that part's clip read the old words: re-record the changed part (its text no
   longer equals rec/parts.json) or delete its clip so the device voice reads it.
 
+## Hear why (27 Oct)
+- 197 spoken scripts, one per ★ question (LIKELY_STARS), in src/why/why.json; gen/likely_why.py writes
+  src/likely_why.js and refuses digits, symbols, ids that are not ★ questions, and lengths outside 45 to 200 words.
+- Written by five agents from each question's own fields only (stem, options and their whys, teach, steps, givens,
+  check, quote), then checked by five other agents against the same fields. The verifiers found no wrong keyed
+  answer, no wrong distractor and no misquote; they fixed spoken grouping in equations (said as "the sum of K M and
+  C p", "the quantity one minus ..."), missing units, a sign flip (cq1-1), an unsupported cause (ws5-3-4, pd-ic1a)
+  and undefined terms. A checker (scratchpad why/check.py) confirmed every spoken number above twelve and every
+  decimal is one of the question's own numbers, and every calculation speaks its keyed answer.
+- Played by the device voice; a recorded clip, audio/why-<id>.mp3, plays instead once it exists (WHY_CLIPS from
+  build.py). 193,555 characters in all: at the 27 Oct rate (1,616.8 cents for 88,948 characters) a recording would
+  be about 3,518 cents and about 209 minutes. Not recorded: waiting for approval.
+- x3-c-05: her quote gives 6.62 mg/kg/day while the question's own per-kilogram value is 6.43; the script quotes her
+  word for word because the quote's point (give a dose, not a per-kilogram rate) stands.
+
 ## Open
 - Equation sheet (BasicPharmacokineticsEquations.pdf, uploaded 10/26): every sentence in the scripts that says
   whether a relation is on the sheet was checked against its two pages and matches. The guide's "the only half-life

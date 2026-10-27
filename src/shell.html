@@ -1687,7 +1687,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const LETTERS = 'ABCDEFGHIJ';
 /* Extra practice lives outside QUESTIONS (no exam draw, no module counts), but
    an answer to one is still looked up by id in the quiz and in Weak spots. */
-const byId = id => QUESTIONS.find(q=>q.id===id) || (typeof EXTRAS === 'undefined' ? undefined : EXTRAS.find(q=>q.id===id)) || (typeof TERM_QS === 'undefined' ? undefined : TERM_QS.find(q=>q.id===id));
+const byId = id => QUESTIONS.find(q=>q.id===id) || (typeof EXTRAS === 'undefined' ? undefined : EXTRAS.find(q=>q.id===id)) || (typeof TERM_QS === 'undefined' ? undefined : TERM_QS.find(q=>q.id===id)) || (typeof VAR_QS === 'undefined' ? undefined : VAR_QS.find(q=>q.id===id));
 const shuffle = a => { for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; };
 
 function conceptsIn(pool){ return [...new Set(pool.map(q=>q.concept))]; }
@@ -1725,7 +1725,7 @@ function originOf(q){
   const c = q.cite || '', id = q.id || '';
   if(/^cq/.test(id)) return 'Canvas quiz';
   if(/^fr-/.test(id)) return 'Final exam review';
-  if(/^x/.test(id) || q.extra) return 'Extra practice';
+  if(/^x/.test(id) || q.extra || /^var-/.test(id)) return 'Extra practice';   // (a variables question is built here, from her stems and sheet)
   if(/^hw/.test(id) || /Homework/i.test(c)) return 'Homework';
   if(/In-Class/i.test(c)) return 'In-class activity';
   if(/^ws/.test(id) || /Solutions\.pdf|Daily Practice|Practice-\d/i.test(c)) return 'Daily practice sheet';
